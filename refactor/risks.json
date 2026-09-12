@@ -3863,7 +3863,11 @@
       "evidence": [
         "refactor/baselines/thumbnail-contract.md",
         "refactor/baselines/thumbnail-release.json",
-        "refactor/scripts/thumbnail-contract.test.mjs"
+        "refactor/scripts/thumbnail-contract.test.mjs",
+        "refactor/baselines/thumbnail-behavior-validation.json",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
+        "test/thumbnail.test.js",
+        "test/browser/thumbnail-tool.spec.js"
       ]
     },
     {
@@ -3875,13 +3879,17 @@
         "PKG-TOOL-THUMB-03",
         "PKG-TOOL-THUMB-05"
       ],
-      "compatibleResolution": "Drop and duplicate-destroy defects are reproduced; reproduce source-observed extraction/timer/blob/input ownership gaps before fixes, then introduce owned cleanup without changing public shape.",
+      "compatibleResolution": "36 frozen behavior tests reproduce timer/input/source/callback ownership gaps and historical error ordering. Actual Chromium/Firefox native Blob callbacks prove late update and URL leaks after destroy. Task 03 must add corrected candidate regressions and owned cleanup; 05 retains real integration acceptance.",
       "closureCriteria": "Deterministic old failure/candidate success for replacement, error and destruction plus real media/browser resource validation.",
       "status": "open",
       "evidence": [
         "refactor/baselines/thumbnail-contract.md",
         "refactor/baselines/thumbnail-release.json",
-        "refactor/scripts/thumbnail-contract.test.mjs"
+        "refactor/scripts/thumbnail-contract.test.mjs",
+        "refactor/baselines/thumbnail-behavior-validation.json",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
+        "test/thumbnail.test.js",
+        "test/browser/thumbnail-tool.spec.js"
       ]
     },
     {
@@ -3900,6 +3908,24 @@
         "refactor/baselines/thumbnail-release.json",
         "refactor/scripts/thumbnail-contract.test.mjs"
       ]
+    },
+    {
+      "id": "THUMB-MEDIA-01",
+      "title": "Windows WebKit native Blob URLs cannot load tested MP4 media despite successful HTTP controls",
+      "status": "open",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-TOOL-THUMB-05",
+        "PKG-TOOL-THUMB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/thumbnail-behavior-validation.json",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
+        "test/thumbnail.test.js",
+        "test/browser/thumbnail-tool.spec.js"
+      ],
+      "compatibleResolution": "Preserve independent HTTP/Blob capability controls; obtain actual supported WebKit/Safari file extraction evidence before release acceptance. Do not count the 12 unavailable controls as successful thumbnail generation or silently replace local files with HTTP media.",
+      "closureCriteria": "Actual generated PNG/extraction and lifecycle proof in supported Safari/WebKit environments, or explicit supported-environment decision with migration documentation; Windows limitation stays identifiable."
     }
   ]
 }

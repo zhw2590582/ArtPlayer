@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-02 完成：抽帧、失败与资源基线
+
+新增36项历史抽帧/生命周期测试，与26项契约共同通过；普通CI已接入新测试。
+真实浏览器39项记录分为24个Chromium/Firefox工具场景、12个Windows WebKit
+Blob不可用对照、3个原生媒体对照。验证实际PNG像素/重复生成/正常URL清理，并复现
+迟到原生Blob回调在destroy后继续update和泄漏、替换文件URL泄漏、drop监听缺失。
+原生HTTP能播放而Blob失败，未将WebKit对照冒称抽帧成功；原始失败报告完整保留。
+完整CI1606、330生产TS检查通过。生产源码未改，03负责资源修复/拆分，04负责TS，
+05/06保留WebKit/Safari实际文件抽帧和分发验收。见[变更](changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md)
+与[验证](baselines/thumbnail-behavior-validation.json)。222项：111 done、10 doing、101 todo。
+
+
 ## PKG-TOOL-THUMB-01 完成：历史契约与发布证据
 
 冻结11条HTTP观察、12个工作区及8个历史Git输入；恢复3.5.31 CDN主文件并逐字节

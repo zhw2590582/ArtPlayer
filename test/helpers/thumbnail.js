@@ -12,6 +12,8 @@ export function thumbnailHistorical() {
 export function thumbnailEnvironment(implementation, script = false) {
   const operations = []
   const timers = new Map()
+  const blobs = []
+  const controls = { deferBlobs: false }
   let nextTimer = 0
   let nextUrl = 0
   const context2D = Object.fromEntries(['fillRect', 'fillText', 'drawImage'].map(name => [name, (...args) => operations.push({ name, args })]))
@@ -60,7 +62,12 @@ export function thumbnailEnvironment(implementation, script = false) {
     removeEventListener(name, callback) { this.handlers.get(name)?.delete(callback) }
     getContext() { return context2D }
     click() { operations.push({ name: 'click', download: this.download, href: this.href }) }
-    toBlob(callback) { callback({ kind: 'image/png' }) }
+    toBlob(callback) {
+      if (controls.deferBlobs)
+        blobs.push(callback)
+      else
+        callback({ kind: 'image/png' })
+    }
   }
   const body = new Element('body')
   const module = { exports: {} }
@@ -69,6 +76,8 @@ export function thumbnailEnvironment(implementation, script = false) {
     document: { body, createElement: tag => new Element(tag) },
     URL: {
       createObjectURL(value) {
+        if (value == null)
+          throw new TypeError('Blob required')
         const url = `blob:thumbnail-${++nextUrl}`
         operations.push({ name: 'createURL', value, url })
         return url
@@ -91,5 +100,5 @@ export function thumbnailEnvironment(implementation, script = false) {
   vm.runInNewContext(implementation.code, box)
   const exported = script ? box.ArtplayerToolThumbnail : module.exports
   const Factory = exported.default || exported
-  return { box, Element, body, Factory, exported, operations, context2D, timers }
+  return { box, Element, body, Factory, exported, operations, context2D, timers, blobs, controls }
 }

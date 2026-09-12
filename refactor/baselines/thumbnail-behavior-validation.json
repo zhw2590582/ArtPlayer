@@ -1,0 +1,3240 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-TOOL-THUMB-02",
+  "verifiedAt": "2026-09-12T19:29:08.765Z",
+  "startedFrom": "0338e0b8b1d9814ebe1628c7b55d08003ffa6347",
+  "node": {
+    "version": "v24.21.0",
+    "contract": 26,
+    "behavior": 36,
+    "total": 62,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "total": 39,
+    "actualToolScenarios": 24,
+    "blobUnavailableControls": 12,
+    "nativeMediaControls": 3,
+    "retries": 0,
+    "skips": 0,
+    "cases": [
+      {
+        "title": "thumbnail-native.spec.js / Thumbnail native HTTP and Blob media controls",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 238,
+        "kind": "native-media-control",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-native-media-controls",
+            "data": [
+              {
+                "url": "/test/pattern.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 8,
+                "width": 320
+              },
+              {
+                "url": "/test/pattern.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 8,
+                "width": 320
+              },
+              {
+                "url": "/test/thumbnail-pattern.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 24,
+                "width": 320
+              },
+              {
+                "url": "/test/thumbnail-pattern.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 24,
+                "width": 320
+              },
+              {
+                "url": "/assets/sample/video.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 90.046009,
+                "width": 640
+              },
+              {
+                "url": "/assets/sample/video.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 90.046009,
+                "width": 640
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-native.spec.js / Thumbnail native HTTP and Blob media controls",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1796,
+        "kind": "native-media-control",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-native-media-controls",
+            "data": [
+              {
+                "url": "/test/pattern.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 8,
+                "width": 320
+              },
+              {
+                "url": "/test/pattern.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 8,
+                "width": 320
+              },
+              {
+                "url": "/test/thumbnail-pattern.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 24,
+                "width": 320
+              },
+              {
+                "url": "/test/thumbnail-pattern.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 24,
+                "width": 320
+              },
+              {
+                "url": "/assets/sample/video.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 90.045986,
+                "width": 640
+              },
+              {
+                "url": "/assets/sample/video.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 90.045986,
+                "width": 640
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-native.spec.js / Thumbnail native HTTP and Blob media controls",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 2020,
+        "kind": "native-media-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-native-media-controls",
+            "data": [
+              {
+                "url": "/test/pattern.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 3,
+                "error": 0,
+                "duration": 8,
+                "width": 320
+              },
+              {
+                "url": "/test/pattern.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "error",
+                "readyState": 0,
+                "error": 4,
+                "duration": null,
+                "width": 0
+              },
+              {
+                "url": "/test/thumbnail-pattern.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 4,
+                "error": 0,
+                "duration": 24,
+                "width": 320
+              },
+              {
+                "url": "/test/thumbnail-pattern.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "error",
+                "readyState": 0,
+                "error": 4,
+                "duration": null,
+                "width": 0
+              },
+              {
+                "url": "/assets/sample/video.mp4",
+                "type": "video/mp4",
+                "transport": "http",
+                "outcome": "loaded",
+                "readyState": 2,
+                "error": 0,
+                "duration": 90.094,
+                "width": 640
+              },
+              {
+                "url": "/assets/sample/video.mp4",
+                "type": "video/mp4",
+                "transport": "blob",
+                "outcome": "error",
+                "readyState": 0,
+                "error": 4,
+                "duration": null,
+                "width": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 8134,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-extraction",
+            "data": {
+              "width": 240,
+              "height": 150,
+              "sourceWidth": 320,
+              "sourceHeight": 180,
+              "cellHeight": 30,
+              "mime": "image/png",
+              "bytes": 26427,
+              "nonBlack": 2400,
+              "initialEvents": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "events": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "destroy",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "first": "blob:http://127.0.0.1:8084/b2227f84-f711-4487-9f9b-23f616f414e2",
+              "second": "blob:http://127.0.0.1:8084/2420188c-dffc-4162-832f-8bcea9e55ace",
+              "created": [
+                "blob:http://127.0.0.1:8084/6dce1c0e-3645-4f6b-992d-655352a2d65f",
+                "blob:http://127.0.0.1:8084/8e34dc09-2c83-471f-8a22-1337fd6958ed",
+                "blob:http://127.0.0.1:8084/84026ebe-842f-4853-bf78-f302fe754cac",
+                "blob:http://127.0.0.1:8084/4dc807ea-8b39-4fb5-93ed-d1a080562429",
+                "blob:http://127.0.0.1:8084/6fb3f973-d450-463c-a1dc-3cd967271b22",
+                "blob:http://127.0.0.1:8084/285ed7b2-0e24-478e-b671-220c2d1ba53f",
+                "blob:http://127.0.0.1:8084/5ac65382-a9b2-43dc-9c2d-c4a05c51dff6",
+                "blob:http://127.0.0.1:8084/b7540f20-33c8-4133-a4e8-2d7dd7ed9e4c",
+                "blob:http://127.0.0.1:8084/cc33c15a-4a2c-4f0e-88fc-57ad23621526",
+                "blob:http://127.0.0.1:8084/3547aa42-e731-4628-b11c-d21abb5fb460",
+                "blob:http://127.0.0.1:8084/b2227f84-f711-4487-9f9b-23f616f414e2",
+                "blob:http://127.0.0.1:8084/3f2869e5-2430-49df-87e0-a350d762be18",
+                "blob:http://127.0.0.1:8084/7a806c72-b0df-4145-9f46-e378d5760ead",
+                "blob:http://127.0.0.1:8084/8a16b215-4b0f-4593-b2db-0351031a14d5",
+                "blob:http://127.0.0.1:8084/6f8ecfdb-789a-4c73-8270-035b7afdf673",
+                "blob:http://127.0.0.1:8084/0ce17b14-78c6-43ce-85ae-929a95c91e79",
+                "blob:http://127.0.0.1:8084/5a454408-673e-43cb-bd1a-750e649c96c0",
+                "blob:http://127.0.0.1:8084/cb6fbc2f-7410-4856-a6e5-551d9991df65",
+                "blob:http://127.0.0.1:8084/f4c31648-4300-4ac4-863d-46ddf8afc2cd",
+                "blob:http://127.0.0.1:8084/1a564c5d-0166-4ed7-bf7e-d440245eed76",
+                "blob:http://127.0.0.1:8084/2420188c-dffc-4162-832f-8bcea9e55ace"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/8e34dc09-2c83-471f-8a22-1337fd6958ed",
+                "blob:http://127.0.0.1:8084/84026ebe-842f-4853-bf78-f302fe754cac",
+                "blob:http://127.0.0.1:8084/4dc807ea-8b39-4fb5-93ed-d1a080562429",
+                "blob:http://127.0.0.1:8084/6fb3f973-d450-463c-a1dc-3cd967271b22",
+                "blob:http://127.0.0.1:8084/285ed7b2-0e24-478e-b671-220c2d1ba53f",
+                "blob:http://127.0.0.1:8084/5ac65382-a9b2-43dc-9c2d-c4a05c51dff6",
+                "blob:http://127.0.0.1:8084/b7540f20-33c8-4133-a4e8-2d7dd7ed9e4c",
+                "blob:http://127.0.0.1:8084/cc33c15a-4a2c-4f0e-88fc-57ad23621526",
+                "blob:http://127.0.0.1:8084/3547aa42-e731-4628-b11c-d21abb5fb460",
+                "blob:http://127.0.0.1:8084/b2227f84-f711-4487-9f9b-23f616f414e2",
+                "blob:http://127.0.0.1:8084/3f2869e5-2430-49df-87e0-a350d762be18",
+                "blob:http://127.0.0.1:8084/7a806c72-b0df-4145-9f46-e378d5760ead",
+                "blob:http://127.0.0.1:8084/8a16b215-4b0f-4593-b2db-0351031a14d5",
+                "blob:http://127.0.0.1:8084/6f8ecfdb-789a-4c73-8270-035b7afdf673",
+                "blob:http://127.0.0.1:8084/0ce17b14-78c6-43ce-85ae-929a95c91e79",
+                "blob:http://127.0.0.1:8084/5a454408-673e-43cb-bd1a-750e649c96c0",
+                "blob:http://127.0.0.1:8084/cb6fbc2f-7410-4856-a6e5-551d9991df65",
+                "blob:http://127.0.0.1:8084/f4c31648-4300-4ac4-863d-46ddf8afc2cd",
+                "blob:http://127.0.0.1:8084/1a564c5d-0166-4ed7-bf7e-d440245eed76",
+                "blob:http://127.0.0.1:8084/6dce1c0e-3645-4f6b-992d-655352a2d65f",
+                "blob:http://127.0.0.1:8084/2420188c-dffc-4162-832f-8bcea9e55ace"
+              ],
+              "connected": false
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 300,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 274,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-media-failure",
+            "data": {
+              "failed": {
+                "code": 4,
+                "toolErrors": 0,
+                "first": "blob:http://127.0.0.1:8084/ef0b028f-a71f-4d93-a1c4-b59d04ef3cd8"
+              },
+              "result": {
+                "value": "C:\\fakepath\\thumbnail-pattern.mp4",
+                "created": [
+                  "blob:http://127.0.0.1:8084/ef0b028f-a71f-4d93-a1c4-b59d04ef3cd8",
+                  "blob:http://127.0.0.1:8084/541314bd-d6a8-4125-bc5d-a1f3ac95b03a"
+                ],
+                "revoked": [
+                  "blob:http://127.0.0.1:8084/541314bd-d6a8-4125-bc5d-a1f3ac95b03a"
+                ],
+                "repeated": "NotFoundError"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 621,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-late-native-blob",
+            "data": {
+              "count": 1,
+              "created": [
+                "blob:http://127.0.0.1:8084/54f01da3-122b-4890-a630-a052719f5c07",
+                "blob:http://127.0.0.1:8084/7b48eb43-f87e-4f49-9f71-6b8e415bc174"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/54f01da3-122b-4890-a630-a052719f5c07"
+              ],
+              "pendingState": "pending",
+              "events": [
+                "file",
+                "canvas",
+                "video",
+                "destroy",
+                "update"
+              ],
+              "connected": false,
+              "bytes": 7540
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 9361,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-extraction",
+            "data": {
+              "width": 240,
+              "height": 150,
+              "sourceWidth": 320,
+              "sourceHeight": 180,
+              "cellHeight": 30,
+              "mime": "image/png",
+              "bytes": 20020,
+              "nonBlack": 2400,
+              "initialEvents": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "events": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "destroy",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "first": "blob:http://127.0.0.1:8084/574464ab-e4f5-42e4-ab4e-7de0f4ff39e0",
+              "second": "blob:http://127.0.0.1:8084/805082a4-dd92-4d1c-aadc-ea4558b091b0",
+              "created": [
+                "blob:http://127.0.0.1:8084/7368ea83-ce42-409a-b060-cabf4d775f11",
+                "blob:http://127.0.0.1:8084/dba49a4a-dad5-413c-bb38-aec47cd49f37",
+                "blob:http://127.0.0.1:8084/81d2c431-6175-41d1-a2bd-7ce7cea893ef",
+                "blob:http://127.0.0.1:8084/68efa570-379b-4f5b-b6e3-5ba142373e19",
+                "blob:http://127.0.0.1:8084/4e9771dc-b366-4500-a056-122c2bc14104",
+                "blob:http://127.0.0.1:8084/59d18d4a-6ee4-442d-b8fa-87cef9409b10",
+                "blob:http://127.0.0.1:8084/d6ef92ba-2d02-432e-bee4-fb0e3f1b057c",
+                "blob:http://127.0.0.1:8084/24349f4b-a197-4b12-9244-7ead753ce735",
+                "blob:http://127.0.0.1:8084/60266ef1-f847-48f5-a778-b2c39d80f716",
+                "blob:http://127.0.0.1:8084/7f1d6bf6-e454-4657-b5f0-f1fb4c5c69ac",
+                "blob:http://127.0.0.1:8084/574464ab-e4f5-42e4-ab4e-7de0f4ff39e0",
+                "blob:http://127.0.0.1:8084/e0c4d831-985a-499d-b90d-e53ee29eb198",
+                "blob:http://127.0.0.1:8084/d1445c7c-fe79-4948-aae0-d4911f340ff1",
+                "blob:http://127.0.0.1:8084/c8b12ed1-20cd-404b-86f3-746bcc47a7db",
+                "blob:http://127.0.0.1:8084/6d22c856-c1b9-449a-86bf-f6913e620554",
+                "blob:http://127.0.0.1:8084/adda5cce-c6a8-4995-a600-2f24e05b1146",
+                "blob:http://127.0.0.1:8084/c510d367-0d97-4c87-a4be-711d58475bee",
+                "blob:http://127.0.0.1:8084/33e1115d-0025-44f7-9128-d68b98b305f6",
+                "blob:http://127.0.0.1:8084/c287c0f0-269a-449c-a6b9-e3ff091c172d",
+                "blob:http://127.0.0.1:8084/9d303573-c390-498a-a6a0-01b613cf7a02",
+                "blob:http://127.0.0.1:8084/805082a4-dd92-4d1c-aadc-ea4558b091b0"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/dba49a4a-dad5-413c-bb38-aec47cd49f37",
+                "blob:http://127.0.0.1:8084/81d2c431-6175-41d1-a2bd-7ce7cea893ef",
+                "blob:http://127.0.0.1:8084/68efa570-379b-4f5b-b6e3-5ba142373e19",
+                "blob:http://127.0.0.1:8084/4e9771dc-b366-4500-a056-122c2bc14104",
+                "blob:http://127.0.0.1:8084/59d18d4a-6ee4-442d-b8fa-87cef9409b10",
+                "blob:http://127.0.0.1:8084/d6ef92ba-2d02-432e-bee4-fb0e3f1b057c",
+                "blob:http://127.0.0.1:8084/24349f4b-a197-4b12-9244-7ead753ce735",
+                "blob:http://127.0.0.1:8084/60266ef1-f847-48f5-a778-b2c39d80f716",
+                "blob:http://127.0.0.1:8084/7f1d6bf6-e454-4657-b5f0-f1fb4c5c69ac",
+                "blob:http://127.0.0.1:8084/574464ab-e4f5-42e4-ab4e-7de0f4ff39e0",
+                "blob:http://127.0.0.1:8084/e0c4d831-985a-499d-b90d-e53ee29eb198",
+                "blob:http://127.0.0.1:8084/d1445c7c-fe79-4948-aae0-d4911f340ff1",
+                "blob:http://127.0.0.1:8084/c8b12ed1-20cd-404b-86f3-746bcc47a7db",
+                "blob:http://127.0.0.1:8084/6d22c856-c1b9-449a-86bf-f6913e620554",
+                "blob:http://127.0.0.1:8084/adda5cce-c6a8-4995-a600-2f24e05b1146",
+                "blob:http://127.0.0.1:8084/c510d367-0d97-4c87-a4be-711d58475bee",
+                "blob:http://127.0.0.1:8084/33e1115d-0025-44f7-9128-d68b98b305f6",
+                "blob:http://127.0.0.1:8084/c287c0f0-269a-449c-a6b9-e3ff091c172d",
+                "blob:http://127.0.0.1:8084/9d303573-c390-498a-a6a0-01b613cf7a02",
+                "blob:http://127.0.0.1:8084/7368ea83-ce42-409a-b060-cabf4d775f11",
+                "blob:http://127.0.0.1:8084/805082a4-dd92-4d1c-aadc-ea4558b091b0"
+              ],
+              "connected": false
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 405,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 546,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-media-failure",
+            "data": {
+              "failed": {
+                "code": 4,
+                "toolErrors": 0,
+                "first": "blob:http://127.0.0.1:8084/c3ddd37c-ab5a-41a6-93e0-ebee99230050"
+              },
+              "result": {
+                "value": "C:\\fakepath\\thumbnail-pattern.mp4",
+                "created": [
+                  "blob:http://127.0.0.1:8084/c3ddd37c-ab5a-41a6-93e0-ebee99230050",
+                  "blob:http://127.0.0.1:8084/7206d5b4-42b6-4d9e-a223-1e4db95f54f3"
+                ],
+                "revoked": [
+                  "blob:http://127.0.0.1:8084/7206d5b4-42b6-4d9e-a223-1e4db95f54f3"
+                ],
+                "repeated": "NotFoundError"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 970,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-late-native-blob",
+            "data": {
+              "count": 1,
+              "created": [
+                "blob:http://127.0.0.1:8084/af1a6dde-b583-49be-b07d-e17e09232fd8",
+                "blob:http://127.0.0.1:8084/ea4b476b-b733-40a4-b7a1-1cb45218974f"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/af1a6dde-b583-49be-b07d-e17e09232fd8"
+              ],
+              "pendingState": "pending",
+              "events": [
+                "file",
+                "canvas",
+                "video",
+                "destroy",
+                "update"
+              ],
+              "connected": false,
+              "bytes": 4980
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1360,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1363,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1362,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool cdn-3.5.31 / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1498,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "cdn-3.5.31",
+              "sha256": "27fdc506c9b228c40df39f8508b3a42c145571c06c0b9cc60327a007a2064c87",
+              "recoveredIndividualFile": true,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 454,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-extraction",
+            "data": {
+              "width": 240,
+              "height": 210,
+              "sourceWidth": 320,
+              "sourceHeight": 180,
+              "cellHeight": 45,
+              "mime": "image/png",
+              "bytes": 44055,
+              "nonBlack": 3600,
+              "initialEvents": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "events": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "destroy",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "first": "blob:http://127.0.0.1:8084/472fe49a-ca12-4408-b260-311273dde475",
+              "second": "blob:http://127.0.0.1:8084/6b030fe7-2e0b-4219-b5e7-4a0782448d64",
+              "created": [
+                "blob:http://127.0.0.1:8084/884dbedd-b255-49c1-a1ff-e8400386c783",
+                "blob:http://127.0.0.1:8084/16551af9-c444-47cf-9bc8-7a49537da241",
+                "blob:http://127.0.0.1:8084/e1525c61-36fa-41ec-ae98-4657581721e0",
+                "blob:http://127.0.0.1:8084/c27eec2c-ee95-407e-8a81-8cc60ffdf7d3",
+                "blob:http://127.0.0.1:8084/e5ebde5d-4a7e-4fd9-a6bb-c592c4192c52",
+                "blob:http://127.0.0.1:8084/0b4bcba2-4e9c-405c-a666-3ebc0d8d8b57",
+                "blob:http://127.0.0.1:8084/665b6dda-07b8-42fa-ab98-3a8d63a9f395",
+                "blob:http://127.0.0.1:8084/39a6de8f-f028-4ee5-94df-77007632429f",
+                "blob:http://127.0.0.1:8084/16abed7d-454c-4391-a8c3-d42cc1db9452",
+                "blob:http://127.0.0.1:8084/97719189-add3-4b86-a37e-932bcd21bb7c",
+                "blob:http://127.0.0.1:8084/472fe49a-ca12-4408-b260-311273dde475",
+                "blob:http://127.0.0.1:8084/ca0e888e-8ed3-4cba-8520-3598e4a96c74",
+                "blob:http://127.0.0.1:8084/1a63c3bb-135f-405b-aeda-3eb90547954b",
+                "blob:http://127.0.0.1:8084/a29f8760-e79f-4e7d-b937-92ff7dff2c8b",
+                "blob:http://127.0.0.1:8084/312a731d-79a1-45c6-a7d4-af1470c863e3",
+                "blob:http://127.0.0.1:8084/b12fe140-dc82-44b8-a9d1-8ee258a5db98",
+                "blob:http://127.0.0.1:8084/e6d660fa-fb69-44dd-9518-e30278443176",
+                "blob:http://127.0.0.1:8084/cd404be0-6c37-4983-b8ff-b6e1c1d2589b",
+                "blob:http://127.0.0.1:8084/b8aceb8e-fe92-4bd8-9afa-6ad08a66c28b",
+                "blob:http://127.0.0.1:8084/12d50133-b418-49d1-93cc-a8230e796df8",
+                "blob:http://127.0.0.1:8084/6b030fe7-2e0b-4219-b5e7-4a0782448d64"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/16551af9-c444-47cf-9bc8-7a49537da241",
+                "blob:http://127.0.0.1:8084/e1525c61-36fa-41ec-ae98-4657581721e0",
+                "blob:http://127.0.0.1:8084/c27eec2c-ee95-407e-8a81-8cc60ffdf7d3",
+                "blob:http://127.0.0.1:8084/e5ebde5d-4a7e-4fd9-a6bb-c592c4192c52",
+                "blob:http://127.0.0.1:8084/0b4bcba2-4e9c-405c-a666-3ebc0d8d8b57",
+                "blob:http://127.0.0.1:8084/665b6dda-07b8-42fa-ab98-3a8d63a9f395",
+                "blob:http://127.0.0.1:8084/39a6de8f-f028-4ee5-94df-77007632429f",
+                "blob:http://127.0.0.1:8084/16abed7d-454c-4391-a8c3-d42cc1db9452",
+                "blob:http://127.0.0.1:8084/97719189-add3-4b86-a37e-932bcd21bb7c",
+                "blob:http://127.0.0.1:8084/472fe49a-ca12-4408-b260-311273dde475",
+                "blob:http://127.0.0.1:8084/ca0e888e-8ed3-4cba-8520-3598e4a96c74",
+                "blob:http://127.0.0.1:8084/1a63c3bb-135f-405b-aeda-3eb90547954b",
+                "blob:http://127.0.0.1:8084/a29f8760-e79f-4e7d-b937-92ff7dff2c8b",
+                "blob:http://127.0.0.1:8084/312a731d-79a1-45c6-a7d4-af1470c863e3",
+                "blob:http://127.0.0.1:8084/b12fe140-dc82-44b8-a9d1-8ee258a5db98",
+                "blob:http://127.0.0.1:8084/e6d660fa-fb69-44dd-9518-e30278443176",
+                "blob:http://127.0.0.1:8084/cd404be0-6c37-4983-b8ff-b6e1c1d2589b",
+                "blob:http://127.0.0.1:8084/b8aceb8e-fe92-4bd8-9afa-6ad08a66c28b",
+                "blob:http://127.0.0.1:8084/12d50133-b418-49d1-93cc-a8230e796df8",
+                "blob:http://127.0.0.1:8084/884dbedd-b255-49c1-a1ff-e8400386c783",
+                "blob:http://127.0.0.1:8084/6b030fe7-2e0b-4219-b5e7-4a0782448d64"
+              ],
+              "connected": false
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 204,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 231,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-media-failure",
+            "data": {
+              "failed": {
+                "code": 4,
+                "toolErrors": 0,
+                "first": "blob:http://127.0.0.1:8084/ee4ce199-882b-48c2-876c-977ecaca8f2d"
+              },
+              "result": {
+                "value": "",
+                "created": [
+                  "blob:http://127.0.0.1:8084/ee4ce199-882b-48c2-876c-977ecaca8f2d",
+                  "blob:http://127.0.0.1:8084/40f2175e-e95f-4cdd-8e78-961b61f248a1"
+                ],
+                "revoked": [
+                  "blob:http://127.0.0.1:8084/40f2175e-e95f-4cdd-8e78-961b61f248a1"
+                ],
+                "repeated": "NotFoundError"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 358,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-late-native-blob",
+            "data": {
+              "count": 1,
+              "created": [
+                "blob:http://127.0.0.1:8084/d0c25798-c6b6-49fd-9d4d-b3d15260a676",
+                "blob:http://127.0.0.1:8084/36f7bdb2-be69-49d6-9af9-5df9bdad9196"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/d0c25798-c6b6-49fd-9d4d-b3d15260a676"
+              ],
+              "pendingState": "pending",
+              "events": [
+                "file",
+                "video",
+                "canvas",
+                "destroy",
+                "update"
+              ],
+              "connected": false,
+              "bytes": 9120
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1435,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-extraction",
+            "data": {
+              "width": 240,
+              "height": 210,
+              "sourceWidth": 320,
+              "sourceHeight": 180,
+              "cellHeight": 45,
+              "mime": "image/png",
+              "bytes": 38895,
+              "nonBlack": 3600,
+              "initialEvents": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "events": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "destroy",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "first": "blob:http://127.0.0.1:8084/937734cc-5671-41d6-8d8d-ace72ab77a10",
+              "second": "blob:http://127.0.0.1:8084/b35fc20d-fde8-44e3-8f8b-ab229d9ce767",
+              "created": [
+                "blob:http://127.0.0.1:8084/c3718396-afea-456c-995e-ceab12733d79",
+                "blob:http://127.0.0.1:8084/98b5e0ec-2d18-4558-b0aa-2f521c7690ea",
+                "blob:http://127.0.0.1:8084/f4837a95-fe6e-49e6-adc0-1259bf6c7d23",
+                "blob:http://127.0.0.1:8084/2c83bf25-1364-47e8-91db-9dd73e6f5654",
+                "blob:http://127.0.0.1:8084/597487c7-bc41-4165-b377-abf993c48bc7",
+                "blob:http://127.0.0.1:8084/586c64a9-2241-4f1d-9b34-6cfe63fe1395",
+                "blob:http://127.0.0.1:8084/0d5eb020-9141-48fa-ad4f-4bc99a615d69",
+                "blob:http://127.0.0.1:8084/d8d87788-ad22-49c9-bc29-087f3fe4ffbf",
+                "blob:http://127.0.0.1:8084/acd39be0-7044-4c60-9ebb-4eab6e0bb2dc",
+                "blob:http://127.0.0.1:8084/5d051c19-7f8c-4aee-9c6c-06e879ac786a",
+                "blob:http://127.0.0.1:8084/937734cc-5671-41d6-8d8d-ace72ab77a10",
+                "blob:http://127.0.0.1:8084/101cb0bc-fbe7-429d-b2fa-9ac9865e0247",
+                "blob:http://127.0.0.1:8084/4e7e21fb-fbd6-4b9a-b9d2-7a658651d97e",
+                "blob:http://127.0.0.1:8084/ffcba3d4-f0be-42ec-9093-3e87362ee0af",
+                "blob:http://127.0.0.1:8084/109e9124-0b19-42b5-8440-56813f82b073",
+                "blob:http://127.0.0.1:8084/ffb0470d-17c2-45d6-83ce-0629f594a0d5",
+                "blob:http://127.0.0.1:8084/ad9e5caf-7b48-495a-96bf-ff4e54a24723",
+                "blob:http://127.0.0.1:8084/a6f53dd5-e931-4f67-a629-efb688568cbf",
+                "blob:http://127.0.0.1:8084/c20a84fc-12e7-4ccb-a2a4-a532bb6631df",
+                "blob:http://127.0.0.1:8084/54f228e7-c8fc-4530-93c1-8d9fbd9108c4",
+                "blob:http://127.0.0.1:8084/b35fc20d-fde8-44e3-8f8b-ab229d9ce767"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/98b5e0ec-2d18-4558-b0aa-2f521c7690ea",
+                "blob:http://127.0.0.1:8084/f4837a95-fe6e-49e6-adc0-1259bf6c7d23",
+                "blob:http://127.0.0.1:8084/2c83bf25-1364-47e8-91db-9dd73e6f5654",
+                "blob:http://127.0.0.1:8084/597487c7-bc41-4165-b377-abf993c48bc7",
+                "blob:http://127.0.0.1:8084/586c64a9-2241-4f1d-9b34-6cfe63fe1395",
+                "blob:http://127.0.0.1:8084/0d5eb020-9141-48fa-ad4f-4bc99a615d69",
+                "blob:http://127.0.0.1:8084/d8d87788-ad22-49c9-bc29-087f3fe4ffbf",
+                "blob:http://127.0.0.1:8084/acd39be0-7044-4c60-9ebb-4eab6e0bb2dc",
+                "blob:http://127.0.0.1:8084/5d051c19-7f8c-4aee-9c6c-06e879ac786a",
+                "blob:http://127.0.0.1:8084/937734cc-5671-41d6-8d8d-ace72ab77a10",
+                "blob:http://127.0.0.1:8084/101cb0bc-fbe7-429d-b2fa-9ac9865e0247",
+                "blob:http://127.0.0.1:8084/4e7e21fb-fbd6-4b9a-b9d2-7a658651d97e",
+                "blob:http://127.0.0.1:8084/ffcba3d4-f0be-42ec-9093-3e87362ee0af",
+                "blob:http://127.0.0.1:8084/109e9124-0b19-42b5-8440-56813f82b073",
+                "blob:http://127.0.0.1:8084/ffb0470d-17c2-45d6-83ce-0629f594a0d5",
+                "blob:http://127.0.0.1:8084/ad9e5caf-7b48-495a-96bf-ff4e54a24723",
+                "blob:http://127.0.0.1:8084/a6f53dd5-e931-4f67-a629-efb688568cbf",
+                "blob:http://127.0.0.1:8084/c20a84fc-12e7-4ccb-a2a4-a532bb6631df",
+                "blob:http://127.0.0.1:8084/54f228e7-c8fc-4530-93c1-8d9fbd9108c4",
+                "blob:http://127.0.0.1:8084/c3718396-afea-456c-995e-ceab12733d79",
+                "blob:http://127.0.0.1:8084/b35fc20d-fde8-44e3-8f8b-ab229d9ce767"
+              ],
+              "connected": false
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1700,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 447,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-media-failure",
+            "data": {
+              "failed": {
+                "code": 4,
+                "toolErrors": 0,
+                "first": "blob:http://127.0.0.1:8084/ae4dc9a0-6104-4d07-9a63-3dd86bab207f"
+              },
+              "result": {
+                "value": "",
+                "created": [
+                  "blob:http://127.0.0.1:8084/ae4dc9a0-6104-4d07-9a63-3dd86bab207f",
+                  "blob:http://127.0.0.1:8084/6693fd23-10a5-48ac-b17b-b6dd670088fd"
+                ],
+                "revoked": [
+                  "blob:http://127.0.0.1:8084/6693fd23-10a5-48ac-b17b-b6dd670088fd"
+                ],
+                "repeated": "NotFoundError"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 540,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-late-native-blob",
+            "data": {
+              "count": 1,
+              "created": [
+                "blob:http://127.0.0.1:8084/685bc7a7-b15c-4523-871f-9505e1d350f7",
+                "blob:http://127.0.0.1:8084/42185e62-a95f-4dab-bf01-19e8a94c09b0"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/685bc7a7-b15c-4523-871f-9505e1d350f7"
+              ],
+              "pendingState": "pending",
+              "events": [
+                "file",
+                "video",
+                "canvas",
+                "destroy",
+                "update"
+              ],
+              "connected": false,
+              "bytes": 6496
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1451,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1453,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1472,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.js / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1326,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 515,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-extraction",
+            "data": {
+              "width": 240,
+              "height": 210,
+              "sourceWidth": 320,
+              "sourceHeight": 180,
+              "cellHeight": 45,
+              "mime": "image/png",
+              "bytes": 44055,
+              "nonBlack": 3600,
+              "initialEvents": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "events": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "destroy",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "first": "blob:http://127.0.0.1:8084/8881bb84-7566-4c48-a8ee-36b7e6860de3",
+              "second": "blob:http://127.0.0.1:8084/50b18ac6-aacd-4ac7-b9ce-656e01555936",
+              "created": [
+                "blob:http://127.0.0.1:8084/3026db06-715d-4a40-a59b-7ce85196dfde",
+                "blob:http://127.0.0.1:8084/5d300d52-58fb-4bba-8d6f-0d78a41d3d77",
+                "blob:http://127.0.0.1:8084/07fbb260-c51e-4191-93c4-b78d993a0457",
+                "blob:http://127.0.0.1:8084/285e3005-4edc-4b8c-a9a1-d050fc7ed913",
+                "blob:http://127.0.0.1:8084/076a89cc-406f-49c0-baae-9155eaf8d89e",
+                "blob:http://127.0.0.1:8084/8b303fab-c98e-4b43-acd6-d0d68969ed1b",
+                "blob:http://127.0.0.1:8084/1d214799-0001-4c69-bf92-bedaeb743c92",
+                "blob:http://127.0.0.1:8084/bb187cdc-1731-4b0c-a950-e8f7852de2ba",
+                "blob:http://127.0.0.1:8084/36fb498c-3edd-48ce-9fef-333c6ba49341",
+                "blob:http://127.0.0.1:8084/a57e43f1-1218-4669-a0f5-56f592f2ee71",
+                "blob:http://127.0.0.1:8084/8881bb84-7566-4c48-a8ee-36b7e6860de3",
+                "blob:http://127.0.0.1:8084/8422a5f9-b181-4c2a-b2ed-85077a48b4c4",
+                "blob:http://127.0.0.1:8084/01e82a80-5ffe-4804-b617-cda28632cace",
+                "blob:http://127.0.0.1:8084/72908550-4188-44f6-9a42-c00ddd16f30f",
+                "blob:http://127.0.0.1:8084/d02aab10-7594-4563-a818-cddeb21c9471",
+                "blob:http://127.0.0.1:8084/99f23171-20e5-4e7d-8b25-605ee9acdf17",
+                "blob:http://127.0.0.1:8084/00f8e4d9-f3d6-4ff0-998a-c273c2db240e",
+                "blob:http://127.0.0.1:8084/a8c4846c-efc7-4878-9c01-a9ee941ebb52",
+                "blob:http://127.0.0.1:8084/54c6591c-800e-4680-9860-2f1d224526f2",
+                "blob:http://127.0.0.1:8084/5533f4bc-b91f-41f4-bde3-ab53910a5595",
+                "blob:http://127.0.0.1:8084/50b18ac6-aacd-4ac7-b9ce-656e01555936"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/5d300d52-58fb-4bba-8d6f-0d78a41d3d77",
+                "blob:http://127.0.0.1:8084/07fbb260-c51e-4191-93c4-b78d993a0457",
+                "blob:http://127.0.0.1:8084/285e3005-4edc-4b8c-a9a1-d050fc7ed913",
+                "blob:http://127.0.0.1:8084/076a89cc-406f-49c0-baae-9155eaf8d89e",
+                "blob:http://127.0.0.1:8084/8b303fab-c98e-4b43-acd6-d0d68969ed1b",
+                "blob:http://127.0.0.1:8084/1d214799-0001-4c69-bf92-bedaeb743c92",
+                "blob:http://127.0.0.1:8084/bb187cdc-1731-4b0c-a950-e8f7852de2ba",
+                "blob:http://127.0.0.1:8084/36fb498c-3edd-48ce-9fef-333c6ba49341",
+                "blob:http://127.0.0.1:8084/a57e43f1-1218-4669-a0f5-56f592f2ee71",
+                "blob:http://127.0.0.1:8084/8881bb84-7566-4c48-a8ee-36b7e6860de3",
+                "blob:http://127.0.0.1:8084/8422a5f9-b181-4c2a-b2ed-85077a48b4c4",
+                "blob:http://127.0.0.1:8084/01e82a80-5ffe-4804-b617-cda28632cace",
+                "blob:http://127.0.0.1:8084/72908550-4188-44f6-9a42-c00ddd16f30f",
+                "blob:http://127.0.0.1:8084/d02aab10-7594-4563-a818-cddeb21c9471",
+                "blob:http://127.0.0.1:8084/99f23171-20e5-4e7d-8b25-605ee9acdf17",
+                "blob:http://127.0.0.1:8084/00f8e4d9-f3d6-4ff0-998a-c273c2db240e",
+                "blob:http://127.0.0.1:8084/a8c4846c-efc7-4878-9c01-a9ee941ebb52",
+                "blob:http://127.0.0.1:8084/54c6591c-800e-4680-9860-2f1d224526f2",
+                "blob:http://127.0.0.1:8084/5533f4bc-b91f-41f4-bde3-ab53910a5595",
+                "blob:http://127.0.0.1:8084/3026db06-715d-4a40-a59b-7ce85196dfde",
+                "blob:http://127.0.0.1:8084/50b18ac6-aacd-4ac7-b9ce-656e01555936"
+              ],
+              "connected": false
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 204,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 251,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-media-failure",
+            "data": {
+              "failed": {
+                "code": 4,
+                "toolErrors": 0,
+                "first": "blob:http://127.0.0.1:8084/ae674dfa-6146-4655-98b0-4e36161a913e"
+              },
+              "result": {
+                "value": "",
+                "created": [
+                  "blob:http://127.0.0.1:8084/ae674dfa-6146-4655-98b0-4e36161a913e",
+                  "blob:http://127.0.0.1:8084/7eab0002-8887-4854-adfe-3c93d8c40e5e"
+                ],
+                "revoked": [
+                  "blob:http://127.0.0.1:8084/7eab0002-8887-4854-adfe-3c93d8c40e5e"
+                ],
+                "repeated": "NotFoundError"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 353,
+        "kind": "actual-tool-scenario",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-late-native-blob",
+            "data": {
+              "count": 1,
+              "created": [
+                "blob:http://127.0.0.1:8084/6a37f6f8-760c-440c-a331-7043d202d968",
+                "blob:http://127.0.0.1:8084/62dcbc6e-5ad6-4a29-8de3-8974943d0f8c"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/6a37f6f8-760c-440c-a331-7043d202d968"
+              ],
+              "pendingState": "pending",
+              "events": [
+                "file",
+                "video",
+                "canvas",
+                "destroy",
+                "update"
+              ],
+              "connected": false,
+              "bytes": 9120
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1518,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-extraction",
+            "data": {
+              "width": 240,
+              "height": 210,
+              "sourceWidth": 320,
+              "sourceHeight": 180,
+              "cellHeight": 45,
+              "mime": "image/png",
+              "bytes": 38895,
+              "nonBlack": 3600,
+              "initialEvents": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "events": [
+                {
+                  "event": "file",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "video",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "canvas",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "update",
+                  "progress": 0.1,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.2,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.3,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.4,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.5,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.6,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.7,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.8,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 0.9,
+                  "processing": true
+                },
+                {
+                  "event": "update",
+                  "progress": 1,
+                  "processing": true
+                },
+                {
+                  "event": "done",
+                  "progress": null,
+                  "processing": false
+                },
+                {
+                  "event": "destroy",
+                  "progress": null,
+                  "processing": false
+                }
+              ],
+              "first": "blob:http://127.0.0.1:8084/408690a5-94ae-4818-85fa-59330dded1a5",
+              "second": "blob:http://127.0.0.1:8084/46b0dc47-5275-4deb-9b6e-5b8d33a1678d",
+              "created": [
+                "blob:http://127.0.0.1:8084/e12c84d4-2234-4419-8907-80be255127f8",
+                "blob:http://127.0.0.1:8084/341934b1-a3a0-4c0b-84f0-be9ec3f0fc4a",
+                "blob:http://127.0.0.1:8084/8ee58f72-146a-48a8-9f29-46deaf42299b",
+                "blob:http://127.0.0.1:8084/88791c79-ecc9-462c-948a-8e7c5c979459",
+                "blob:http://127.0.0.1:8084/8d61481f-0e22-4faa-85f9-8e58d35a6ccb",
+                "blob:http://127.0.0.1:8084/72854226-0dc3-49e0-acca-916fca1aadf8",
+                "blob:http://127.0.0.1:8084/dc4eb49b-8f62-4927-9d85-26fd1c9faf64",
+                "blob:http://127.0.0.1:8084/610e38db-af43-4bf2-bacf-5988365625e1",
+                "blob:http://127.0.0.1:8084/a20987d2-f04d-4f29-83c0-9beb88db4e33",
+                "blob:http://127.0.0.1:8084/519481bb-203f-4001-9b04-6faa22b9989f",
+                "blob:http://127.0.0.1:8084/408690a5-94ae-4818-85fa-59330dded1a5",
+                "blob:http://127.0.0.1:8084/e0521ed2-8b3c-46c9-b9d9-d67a403dd6bb",
+                "blob:http://127.0.0.1:8084/59b80836-5a12-489a-ab74-6fa4462f494d",
+                "blob:http://127.0.0.1:8084/eeb76df6-4286-4cf4-8877-def8a43ab20e",
+                "blob:http://127.0.0.1:8084/1ebf77b9-8d71-46c2-b776-d5dd7ad4749a",
+                "blob:http://127.0.0.1:8084/4433bccd-049d-473c-b8bb-c7c74c6cd636",
+                "blob:http://127.0.0.1:8084/da7c83ed-e22e-4ff7-80c4-caba6c020898",
+                "blob:http://127.0.0.1:8084/d0ee04cc-6130-4057-9ff1-75622e46f388",
+                "blob:http://127.0.0.1:8084/8575a8c8-1140-4843-8595-4db989ee7691",
+                "blob:http://127.0.0.1:8084/f76d4bf0-bae7-4cbd-b4f9-5cee7dd1cc6b",
+                "blob:http://127.0.0.1:8084/46b0dc47-5275-4deb-9b6e-5b8d33a1678d"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/341934b1-a3a0-4c0b-84f0-be9ec3f0fc4a",
+                "blob:http://127.0.0.1:8084/8ee58f72-146a-48a8-9f29-46deaf42299b",
+                "blob:http://127.0.0.1:8084/88791c79-ecc9-462c-948a-8e7c5c979459",
+                "blob:http://127.0.0.1:8084/8d61481f-0e22-4faa-85f9-8e58d35a6ccb",
+                "blob:http://127.0.0.1:8084/72854226-0dc3-49e0-acca-916fca1aadf8",
+                "blob:http://127.0.0.1:8084/dc4eb49b-8f62-4927-9d85-26fd1c9faf64",
+                "blob:http://127.0.0.1:8084/610e38db-af43-4bf2-bacf-5988365625e1",
+                "blob:http://127.0.0.1:8084/a20987d2-f04d-4f29-83c0-9beb88db4e33",
+                "blob:http://127.0.0.1:8084/519481bb-203f-4001-9b04-6faa22b9989f",
+                "blob:http://127.0.0.1:8084/408690a5-94ae-4818-85fa-59330dded1a5",
+                "blob:http://127.0.0.1:8084/e0521ed2-8b3c-46c9-b9d9-d67a403dd6bb",
+                "blob:http://127.0.0.1:8084/59b80836-5a12-489a-ab74-6fa4462f494d",
+                "blob:http://127.0.0.1:8084/eeb76df6-4286-4cf4-8877-def8a43ab20e",
+                "blob:http://127.0.0.1:8084/1ebf77b9-8d71-46c2-b776-d5dd7ad4749a",
+                "blob:http://127.0.0.1:8084/4433bccd-049d-473c-b8bb-c7c74c6cd636",
+                "blob:http://127.0.0.1:8084/da7c83ed-e22e-4ff7-80c4-caba6c020898",
+                "blob:http://127.0.0.1:8084/d0ee04cc-6130-4057-9ff1-75622e46f388",
+                "blob:http://127.0.0.1:8084/8575a8c8-1140-4843-8595-4db989ee7691",
+                "blob:http://127.0.0.1:8084/f76d4bf0-bae7-4cbd-b4f9-5cee7dd1cc6b",
+                "blob:http://127.0.0.1:8084/e12c84d4-2234-4419-8907-80be255127f8",
+                "blob:http://127.0.0.1:8084/46b0dc47-5275-4deb-9b6e-5b8d33a1678d"
+              ],
+              "connected": false
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 452,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 623,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-media-failure",
+            "data": {
+              "failed": {
+                "code": 4,
+                "toolErrors": 0,
+                "first": "blob:http://127.0.0.1:8084/0e3206bc-185a-4f10-94a6-d5d1fe922e90"
+              },
+              "result": {
+                "value": "",
+                "created": [
+                  "blob:http://127.0.0.1:8084/0e3206bc-185a-4f10-94a6-d5d1fe922e90",
+                  "blob:http://127.0.0.1:8084/3fc61d14-e357-460b-a58d-81f17c0d39ae"
+                ],
+                "revoked": [
+                  "blob:http://127.0.0.1:8084/3fc61d14-e357-460b-a58d-81f17c0d39ae"
+                ],
+                "repeated": "NotFoundError"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1385,
+        "kind": "actual-tool-scenario",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-late-native-blob",
+            "data": {
+              "count": 1,
+              "created": [
+                "blob:http://127.0.0.1:8084/15301fa5-719e-42ec-8cbc-925b159ae1e4",
+                "blob:http://127.0.0.1:8084/90128236-e178-404c-9e14-ba17ff758bbb"
+              ],
+              "revoked": [
+                "blob:http://127.0.0.1:8084/15301fa5-719e-42ec-8cbc-925b159ae1e4"
+              ],
+              "pendingState": "pending",
+              "events": [
+                "file",
+                "video",
+                "canvas",
+                "destroy",
+                "update"
+              ],
+              "connected": false,
+              "bytes": 6496
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / native file selection, seek extraction, PNG pixels and repeat generation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1437,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / DOM drop dispatch exposes missing listener while callable ondrop works",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1453,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / corrupt media, replacement URLs and repeated destroy reproduce baseline gaps",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1314,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "title": "thumbnail-tool.spec.js / Thumbnail tool workspace.legacy.js / native PNG callback delivered after destroy still emits update and creates a URL",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "durationMs": 1170,
+        "kind": "blob-unavailable-control",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "measurements": [
+          {
+            "name": "thumbnail-runtime",
+            "data": {
+              "name": "workspace.legacy.js",
+              "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+              "recoveredIndividualFile": false,
+              "originalNpmArchive": false,
+              "media": "test\\browser\\media\\thumbnail-pattern.mp4"
+            }
+          },
+          {
+            "name": "thumbnail-blob-unavailable",
+            "data": {
+              "native": {
+                "http": "loaded",
+                "error": 4,
+                "blob": "error"
+              },
+              "tool": {
+                "errors": 0,
+                "processing": false,
+                "duration": null
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "file": "test/helpers/thumbnail.js",
+      "sha256": "d198f7c17f7acfbf9f064a2154ed7350ea00c63b69e6f827f63e6a5c72b27bd2"
+    },
+    {
+      "file": "test/thumbnail.test.js",
+      "sha256": "530c0fc158ca5699d445cc90553d26852cb48b474db3deb7b2b873314d391ad9"
+    },
+    {
+      "file": "test/browser/thumbnail-tool.spec.js",
+      "sha256": "eea72bd3858bfb1c59ef9ed5d1bf78adc49ed05ecd25cc2c5b56e56a940bd3ac"
+    },
+    {
+      "file": "test/browser/thumbnail-native.spec.js",
+      "sha256": "50d2724c4903c2281cf7a5fa8577e4a8174742ac30b48cd3c679eaecc2d27f3e"
+    },
+    {
+      "file": "test/browser/server.mjs",
+      "sha256": "b7813692efd0e98ca41dab5e625ac2949b609c7796f3e0930919bcee03d0e9d7"
+    },
+    {
+      "file": "test/browser/media/thumbnail-pattern.mp4",
+      "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c"
+    },
+    {
+      "file": "refactor/baselines/thumbnail-release.json",
+      "sha256": "ad02af2abdb3185598b76a0c617eb5a5ffc89f89a7ef6f01ba8f3db0a87012be"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/thumbnail02-node.log",
+      "sha256": "ec272411952d927eb0e553d2003321fcf0430f28b8c4d68eb0a5e6d5e6d03d12"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-browser.log",
+      "sha256": "1cc065d63c5a17250db490ae74942cc69e42f647ad9be46db94d8cecc258fdc4"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-browser.json",
+      "sha256": "bbe41949c562439cbf7ecf5d34cc5703ed1094777ee059db051e0d7e38e0a805"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-browser-probe.json",
+      "sha256": "7544b076a5fb818e5f1b66f95fd43513ef03bfa3bcd6503a824ed537e9567448"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-browser-probe2.json",
+      "sha256": "969f553a1d9fc06e4fc20cd63de7fa01d2c2d2a6e54c50d7ff4f2184d395647e"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-native-probe.json",
+      "sha256": "5bd329b2083262fa188aa083e13cfd349ef55c50d2bcded95831fdd338234afe"
+    },
+    {
+      "file": "refactor/.cache/thumbnail02-ci.log",
+      "sha256": "196228d966b5841d52ea92a9fe01a5d92a254b9ea70e9ce842ac627b5ae35349"
+    }
+  ],
+  "archivedResults": [
+    "refactor/.cache/thumbnail02-browser-results",
+    "refactor/.cache/thumbnail02-browser-probe-results",
+    "refactor/.cache/thumbnail02-browser-probe2-results",
+    "refactor/.cache/thumbnail02-native-probe-results"
+  ],
+  "limitations": [
+    "Historical behavior only; resource fixes remain in 03.",
+    "Windows WebKit native Blob media error 4 is reproduced independently; 12 controls are not successful extraction.",
+    "Synthetic DOM drop dispatch with real File is not physical OS drag/drop.",
+    "No new coverage measurement, production build, hosted CI or npm publication."
+  ],
+  "ci": {
+    "exitCode": 0,
+    "unit": 1401,
+    "engineering": 14,
+    "baseline": 191,
+    "total": 1606,
+    "productionTs": 330
+  }
+}
