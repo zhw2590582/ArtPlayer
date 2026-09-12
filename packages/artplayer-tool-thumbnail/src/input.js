@@ -1,3 +1,4 @@
+import { cancellation, stateFor } from './lifecycle'
 import { clamp } from './utils'
 
 const inputs = new WeakMap()
@@ -44,6 +45,9 @@ function connect(record, callbacks) {
 }
 
 export function setupInput(tool, patch) {
+  const state = stateFor(tool)
+  const epoch = ++state.inputEpoch
+  const current = () => !state.closed && state.inputEpoch === epoch
   const option = Object.assign({}, tool.option, patch)
   const target = option.fileInput
   tool.errorHandle(target instanceof Element, 'The \'fileInput\' is not a Element')
@@ -52,10 +56,13 @@ export function setupInput(tool, patch) {
   option.number = clamp(option.number, 10, 1000)
   option.width = clamp(option.width, 10, 1000)
   option.column = clamp(option.column, 1, 1000)
+  if (!current())
+    throw cancellation('input setup superseded')
 
   const previous = inputs.get(tool)
   if (previous && (target === previous.input || target === previous.wrapper)) {
     option.fileInput = previous.input
+    tool.option = option
     return option
   }
   const record = { input: target, wrapper: null, position: '', listeners: [], callbacks: previous?.callbacks || null }
@@ -69,8 +76,12 @@ export function setupInput(tool, patch) {
       target.style.position = 'relative'
       target.appendChild(record.input)
     }
+    if (!current())
+      throw cancellation('input setup superseded')
     if (record.callbacks)
       connect(record, record.callbacks)
+    if (!current())
+      throw cancellation('input setup superseded')
   }
   catch (error) {
     try {

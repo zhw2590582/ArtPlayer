@@ -3853,9 +3853,8 @@
       "title": "Thumbnail recovered 3.5.31 and workspace 4.4.0 have conflicting height and event timing defaults",
       "confirmation": "reproduced",
       "owners": [
-        "PKG-TOOL-THUMB-02",
-        "PKG-TOOL-THUMB-03",
-        "PKG-TOOL-THUMB-04"
+        "PKG-TOOL-THUMB-04",
+        "PKG-TOOL-THUMB-05"
       ],
       "compatibleResolution": "Freeze both implementations and derive a concrete compatibility policy before changing defaults; no silent claim that identical calls have identical historical semantics.",
       "closureCriteria": "Explicit documented compatibility decision, old/candidate tests and migration examples covering delay, height, input reset and readiness.",
@@ -3867,7 +3866,8 @@
         "refactor/baselines/thumbnail-behavior-validation.json",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
         "test/thumbnail.test.js",
-        "test/browser/thumbnail-tool.spec.js"
+        "test/browser/thumbnail-tool.spec.js",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md"
       ]
     },
     {
@@ -3879,7 +3879,7 @@
         "PKG-TOOL-THUMB-03",
         "PKG-TOOL-THUMB-05"
       ],
-      "compatibleResolution": "03 input checkpoint fixes registered drop, input/wrapper ownership, failed setup/construction cleanup, repeated destroy and temporary download anchors. Candidate input regressions contrast 12 old failures; source/main/legacy verify preserved shape. Pending extraction callbacks, source URL replacement, cancellation and failure reentrancy remain open for the rest of 03 and real integration in 05.",
+      "compatibleResolution": "03 splits input/sheet/source/extraction/lifecycle and fixes reproduced cancellation, Blob URL ownership, native errors, callback failure/reentrancy and decoder reset. Keep risk open for 04 strict types and 05 complete core/Safari integration; Windows WebKit Blob-unavailable controls do not prove extraction.",
       "closureCriteria": "Deterministic old failure/candidate success for replacement, error and destruction plus real media/browser resource validation.",
       "status": "open",
       "evidence": [
@@ -3894,7 +3894,10 @@
         "packages/artplayer-tool-thumbnail/ARCHITECTURE.md",
         "test/thumbnail-input.test.js",
         "test/browser/thumbnail-input.spec.js",
-        "refactor/baselines/thumbnail-input-checkpoint.json"
+        "refactor/baselines/thumbnail-input-checkpoint.json",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md",
+        "test/thumbnail-lifecycle.test.js",
+        "refactor/baselines/thumbnail-lifecycle-validation.json"
       ]
     },
     {

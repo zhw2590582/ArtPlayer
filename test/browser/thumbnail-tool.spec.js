@@ -8,7 +8,7 @@ import { expect, test } from './fixtures.js'
 
 const sample = fileURLToPath(new URL('./media/thumbnail-pattern.mp4', import.meta.url))
 
-async function capabilityControl(page, testInfo) {
+async function capabilityControl(page, testInfo, lifecycle) {
   const native = await page.evaluate(() => window.thumbnailNative)
   if (native.blob === 'loaded')
     return false
@@ -21,13 +21,13 @@ async function capabilityControl(page, testInfo) {
     tool.destroy()
     return state
   })
-  expect(state).toEqual({ errors: 0, processing: false, duration: null })
+  expect(state).toEqual({ errors: lifecycle ? 1 : 0, processing: false, duration: null })
   testInfo.annotations.push({ type: 'capability-control', description: 'Native HTTP succeeds but native Blob and tool Blob return media error 4. Extraction scenario unavailable; no successful extraction claimed.' })
   await testInfo.attach('thumbnail-blob-unavailable', { contentType: 'application/json', body: JSON.stringify({ native, tool: state }) })
   return true
 }
 
-const implementations = [...thumbnailHistorical(), { ...await thumbnailCandidate(), inputOwnership: true }]
+const implementations = [...thumbnailHistorical(), { ...await thumbnailCandidate(), inputOwnership: true, lifecycle: true }]
 for (const implementation of implementations) {
   test.describe(`Thumbnail tool ${implementation.name}`, () => {
     test.beforeEach(async ({ page }, testInfo) => {
@@ -85,7 +85,7 @@ for (const implementation of implementations) {
 
     test('native file selection, seek extraction, PNG pixels and repeat generation', async ({ page }, testInfo) => {
       test.setTimeout(60000)
-      if (await capabilityControl(page, testInfo))
+      if (await capabilityControl(page, testInfo, implementation.lifecycle))
         return
       await page.locator('#input').setInputFiles(sample)
       await expect.poll(() => page.evaluate(() => tool.video.readyState)).toBeGreaterThanOrEqual(2)
@@ -111,8 +111,10 @@ for (const implementation of implementations) {
         const initialEvents = observed.slice()
         await tool.start()
         const second = tool.thumbnailUrl
+        const sourceWidth = tool.video.videoWidth
+        const sourceHeight = tool.video.videoHeight
         tool.destroy()
-        return { width: image.width, height: image.height, sourceWidth: tool.video.videoWidth, sourceHeight: tool.video.videoHeight, cellHeight: tool.option.height, mime: blob.type, bytes: blob.size, nonBlack, initialEvents, events: observed, first, second, created, revoked, connected: tool.video.isConnected }
+        return { width: image.width, height: image.height, sourceWidth, sourceHeight, cellHeight: tool.option.height, mime: blob.type, bytes: blob.size, nonBlack, initialEvents, events: observed, first, second, created, revoked, connected: tool.video.isConnected, retiredReadyState: tool.video.readyState, retiredSrc: tool.video.getAttribute('src') }
       })
       expect(result.width).toBe(240)
       expect(result.cellHeight).toBe(implementation.legacy ? 30 : result.sourceHeight / result.sourceWidth * 80)
@@ -125,11 +127,15 @@ for (const implementation of implementations) {
       expect(result.first).not.toBe(result.second)
       expect([...result.created].sort()).toEqual([...result.revoked].sort())
       expect(result.connected).toBe(false)
+      if (implementation.lifecycle) {
+        expect(result.retiredReadyState).toBe(0)
+        expect(result.retiredSrc).toBe(null)
+      }
       await testInfo.attach('thumbnail-extraction', { contentType: 'application/json', body: JSON.stringify(result) })
     })
 
     test(`DOM drop dispatch ${implementation.inputOwnership ? 'uses the registered handler' : 'exposes missing listener'} while callable ondrop works`, async ({ page }, testInfo) => {
-      if (await capabilityControl(page, testInfo))
+      if (await capabilityControl(page, testInfo, implementation.lifecycle))
         return
       const result = await page.evaluate(async () => {
         const bytes = await (await fetch('/test/thumbnail-pattern.mp4')).blob()
@@ -149,12 +155,12 @@ for (const implementation of implementations) {
     })
 
     test('corrupt media, replacement URLs and repeated destroy reproduce baseline gaps', async ({ page }, testInfo) => {
-      if (await capabilityControl(page, testInfo))
+      if (await capabilityControl(page, testInfo, implementation.lifecycle))
         return
       await page.locator('#input').setInputFiles({ name: 'corrupt.mp4', mimeType: 'video/mp4', buffer: Buffer.from('not a media container') })
       await expect.poll(() => page.evaluate(() => tool.video.error?.code || 0)).toBeGreaterThan(0)
       const failed = await page.evaluate(() => ({ code: tool.video.error.code, toolErrors: observed.filter(item => item.event === 'error').length, first: tool.videoUrl }))
-      expect(failed.toolErrors).toBe(0)
+      expect(failed.toolErrors).toBe(implementation.lifecycle ? 1 : 0)
       await page.locator('#input').setInputFiles(sample)
       await expect.poll(() => page.evaluate(() => tool.video.readyState)).toBeGreaterThanOrEqual(2)
       const result = await page.evaluate(() => {
@@ -168,15 +174,15 @@ for (const implementation of implementations) {
         return { value, created, revoked, repeated }
       })
       expect(result.created).toHaveLength(2)
-      expect(result.revoked).toEqual([result.created[1]])
-      expect(result.revoked).not.toContain(failed.first)
+      expect(result.revoked).toEqual(implementation.lifecycle ? result.created : [result.created[1]])
+      expect(result.revoked.includes(failed.first)).toBe(!!implementation.lifecycle)
       expect(result.repeated).toBe(implementation.inputOwnership ? undefined : 'NotFoundError')
       expect(result.value === '').toBe(!implementation.legacy)
       await testInfo.attach('thumbnail-media-failure', { contentType: 'application/json', body: JSON.stringify({ failed, result }) })
     })
 
-    test('native PNG callback delivered after destroy still emits update and creates a URL', async ({ page }, testInfo) => {
-      if (await capabilityControl(page, testInfo))
+    test(`native PNG callback delivered after destroy ${implementation.lifecycle ? 'is ignored after cancellation' : 'still emits update and creates a URL'}`, async ({ page }, testInfo) => {
+      if (await capabilityControl(page, testInfo, implementation.lifecycle))
         return
       await page.locator('#input').setInputFiles(sample)
       await expect.poll(() => page.evaluate(() => tool.video.readyState)).toBeGreaterThanOrEqual(2)
@@ -204,13 +210,69 @@ for (const implementation of implementations) {
         return { count, created, revoked, pendingState, events: observed.map(item => item.event), connected: tool.video.isConnected, bytes: nativeBlob.size }
       })
       expect(result.bytes).toBeGreaterThan(100)
-      expect(result.created).toHaveLength(result.count + 1)
-      expect(result.revoked).not.toContain(result.created.at(-1))
-      expect(result.events.indexOf('update')).toBeGreaterThan(result.events.indexOf('destroy'))
-      expect(result.pendingState).toBe('pending')
+      expect(result.created).toHaveLength(result.count + (implementation.lifecycle ? 0 : 1))
+      if (implementation.lifecycle) {
+        expect(result.revoked).toContain(result.created.at(-1))
+        expect(result.events).not.toContain('update')
+      }
+      else {
+        expect(result.revoked).not.toContain(result.created.at(-1))
+        expect(result.events.indexOf('update')).toBeGreaterThan(result.events.indexOf('destroy'))
+      }
+      expect(result.pendingState).toBe(implementation.lifecycle ? 'rejected' : 'pending')
       expect(result.connected).toBe(false)
       await testInfo.attach('thumbnail-late-native-blob', { contentType: 'application/json', body: JSON.stringify(result) })
     })
+
+    if (implementation.lifecycle) {
+      test('source replacement cancels held native encoding and completes only the latest job', async ({ page }, testInfo) => {
+        if (await capabilityControl(page, testInfo, true))
+          return
+        await page.locator('#input').setInputFiles(sample)
+        await expect.poll(() => page.evaluate(() => tool.video.readyState)).toBeGreaterThanOrEqual(2)
+        await page.evaluate(() => {
+          const original = HTMLCanvasElement.prototype.toBlob
+          let first = true
+          HTMLCanvasElement.prototype.toBlob = function (callback, ...args) {
+            if (first) {
+              first = false
+              original.call(this, (blob) => {
+                window.firstEncodedBytes = blob.size
+                window.releaseFirst = () => callback(blob)
+              }, ...args)
+            }
+            else {
+              original.call(this, callback, ...args)
+            }
+          }
+          window.oldState = 'pending'
+          window.updateSources = []
+          tool.on('update', () => window.updateSources.push(tool.videoUrl))
+          tool.start().then(() => {
+            window.oldState = 'resolved'
+          }, (error) => {
+            window.oldState = error.name
+          })
+        })
+        await expect.poll(() => page.evaluate(() => typeof window.releaseFirst)).toBe('function')
+        await page.locator('#input').setInputFiles(sample)
+        const result = await page.evaluate(async () => {
+          const source = tool.videoUrl
+          const next = tool.start()
+          window.releaseFirst()
+          await next
+          tool.destroy()
+          return { oldState: window.oldState, firstEncodedBytes: window.firstEncodedBytes, source, updateSources: window.updateSources, created, revoked, events: observed.map(item => item.event), connected: tool.video.isConnected }
+        })
+        expect(result.oldState).toBe('AbortError')
+        expect(result.firstEncodedBytes).toBeGreaterThan(100)
+        expect(result.updateSources).toEqual(Array.from({ length: 10 }).fill(result.source))
+        expect(result.events.filter(event => event === 'done')).toHaveLength(1)
+        expect([...result.created].sort()).toEqual([...result.revoked].sort())
+        expect(result.connected).toBe(false)
+        await testInfo.attach('thumbnail-native-source-cancellation', { contentType: 'application/json', body: JSON.stringify(result) })
+      })
+    }
   })
 }
 /* global created, revoked, ArtplayerToolThumbnail, tool, observed, releaseBlob, pendingState, nativeBlob */

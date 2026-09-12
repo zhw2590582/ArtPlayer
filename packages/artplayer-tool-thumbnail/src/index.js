@@ -1,9 +1,9 @@
 import Emitter from './emitter'
+import { startExtraction } from './extraction'
 import { connectInput, releaseInput, setupInput } from './input'
+import { cleanupAll, closeState, releaseMedia, stateFor } from './lifecycle'
 import { createSheet, downloadSheet, screenshotPoints } from './sheet'
-import { clamp, runPromisesInSeries, sleep } from './utils'
-
-const destroyed = new WeakSet()
+import { loadSource } from './source'
 
 export default class ArtplayerToolThumbnail extends Emitter {
   constructor(option = {}) {
@@ -13,19 +13,20 @@ export default class ArtplayerToolThumbnail extends Emitter {
     try {
       this.setup(Object.assign({}, ArtplayerToolThumbnail.DEFAULTS, option))
       this.video = ArtplayerToolThumbnail.creatVideo()
+      stateFor(this).video = this.video
       this.duration = 0
       this.inputChange = this.inputChange.bind(this)
       this.ondrop = this.ondrop.bind(this)
       connectInput(this, ArtplayerToolThumbnail.ondragover)
     }
     catch (error) {
+      closeState(this, 'construction failed')
       try {
         releaseInput(this)
       }
       catch {}
       try {
-        if (this.video?.parentNode)
-          this.video.parentNode.removeChild(this.video)
+        releaseMedia(this)
       }
       catch {}
       throw error
@@ -48,7 +49,7 @@ export default class ArtplayerToolThumbnail extends Emitter {
   }
 
   ondrop(event) {
-    if (destroyed.has(this))
+    if (stateFor(this).closed)
       return
     event.preventDefault()
     const file = event.dataTransfer.files[0]
@@ -56,8 +57,8 @@ export default class ArtplayerToolThumbnail extends Emitter {
   }
 
   setup(option = {}) {
-    if (!destroyed.has(this))
-      this.option = setupInput(this, option)
+    if (!stateFor(this).closed)
+      setupInput(this, option)
     return this
   }
 
@@ -80,7 +81,7 @@ export default class ArtplayerToolThumbnail extends Emitter {
   }
 
   inputChange(event) {
-    if (destroyed.has(this))
+    if (stateFor(this).closed)
       return
     const file = this.option.fileInput.files[0]
     this.loadVideo(file)
@@ -88,67 +89,11 @@ export default class ArtplayerToolThumbnail extends Emitter {
   }
 
   loadVideo(file) {
-    if (file && !destroyed.has(this)) {
-      const canPlayType = this.video.canPlayType(file.type)
-      this.errorHandle(
-        canPlayType === 'maybe' || canPlayType === 'probably',
-        `Playback of this file format is not supported: ${file.type}`,
-      )
-      const videoUrl = URL.createObjectURL(file)
-      this.videoUrl = videoUrl
-      this.file = file
-      this.emit('file', this.file)
-      this.video.src = videoUrl
-      this.emit('video', this.video)
-    }
+    loadSource(this, file)
   }
 
   start() {
-    if (!this.video.duration)
-      return sleep(1000).then(() => this.start())
-    const { width, number, begin, end } = this.option
-    const height = (this.video.videoHeight / this.video.videoWidth) * width
-    this.option.height = height
-    this.option.begin = clamp(begin, 0, this.video.duration)
-    this.option.end = clamp(end || this.video.duration, begin, this.video.duration)
-    this.errorHandle(this.option.end > this.option.begin, `End time must be greater than the start time`)
-    this.duration = this.option.end - this.option.begin
-    this.density = number / this.duration
-    this.errorHandle(this.file && this.video, 'Please select the video file first')
-    this.errorHandle(!this.processing, 'There is currently a task in progress, please wait a moment...')
-    this.errorHandle(this.density <= 1, `The preview density cannot be greater than 1, but got ${this.density}`)
-    const screenshotDate = this.creatScreenshotDate()
-    const canvas = this.creatCanvas()
-    const context2D = canvas.getContext('2d')
-    this.emit('canvas', canvas)
-    const promiseList = screenshotDate.map((item, index) => () => {
-      return new Promise((resolve) => {
-        this.video.oncanplay = () => {
-          context2D.drawImage(this.video, item.x, item.y, width, height)
-          canvas.toBlob((blob) => {
-            if (this.thumbnailUrl) {
-              URL.revokeObjectURL(this.thumbnailUrl)
-            }
-            this.thumbnailUrl = URL.createObjectURL(blob)
-            this.emit('update', this.thumbnailUrl, (index + 1) / number)
-            this.video.oncanplay = null
-            resolve()
-          })
-        }
-        this.video.currentTime = item.time
-      })
-    })
-    this.processing = true
-    return runPromisesInSeries(promiseList)
-      .then(() => {
-        this.processing = false
-        this.emit('done')
-      })
-      .catch((err) => {
-        this.processing = false
-        this.emit('error', err.message)
-        throw err
-      })
+    return startExtraction(this)
   }
 
   creatScreenshotDate() {
@@ -160,6 +105,8 @@ export default class ArtplayerToolThumbnail extends Emitter {
   }
 
   download() {
+    if (stateFor(this).closed)
+      return this
     this.errorHandle(
       this.file && this.thumbnailUrl,
       'Download does not seem to be ready, please create preview first',
@@ -178,23 +125,12 @@ export default class ArtplayerToolThumbnail extends Emitter {
   }
 
   destroy() {
-    if (destroyed.has(this))
+    if (!closeState(this))
       return
-    destroyed.add(this)
-    let failure
-    for (const cleanup of [
+    cleanupAll([
       () => releaseInput(this),
-      () => this.video.parentNode?.removeChild(this.video),
-      () => this.videoUrl && URL.revokeObjectURL(this.videoUrl),
-      () => this.thumbnailUrl && URL.revokeObjectURL(this.thumbnailUrl),
+      () => releaseMedia(this),
       () => this.emit('destroy'),
-    ]) {
-      try {
-        cleanup()
-      }
-      catch (error) { failure ||= error }
-    }
-    if (failure)
-      throw failure
+    ])
   }
 }

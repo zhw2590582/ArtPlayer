@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-03 完成：抽帧任务与媒体资源所有权
+
+增加lifecycle/source/extraction模块，保留公开类形状与工作区默认行为。元数据等待、
+逐帧回调和URL归属明确；切源/destroy立即取消旧Promise，迟到PNG不能再update或创建URL。
+修复原生错误、null Blob、监听器异常和重入；保留首次选文件前start等待。销毁暂停/清空
+src/load重置媒体，即使部分清理抛错也继续。源码仍为JS，04负责严格TS/声明与来源审查。
+新26项生命周期断言在冻结旧版2通过/24失败；连同输入测试，源码/main/legacy各40通过。
+三份浏览器各57通过：34真实工具场景、3输入场景、17Blob不可用对照、3原生媒体对照。
+实际切源期间持有原生PNG回调验证仅新任务完成，销毁后readyState=0且无src。
+完整CI1646、330生产TS、3导入及候选ESM导入通过。类型/默认历史差异及Safari/分发风险
+仍open。见[变更](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md)与
+[验证](baselines/thumbnail-lifecycle-validation.json)。222项：112 done、10 doing、100 todo。
+
+
 ## PKG-TOOL-THUMB-03 输入与导出源码检查点（doing）
 
 生产入口拆出input/sheet模块，修复drop注册、输入切换与wrapper所有权、构造/安装失败

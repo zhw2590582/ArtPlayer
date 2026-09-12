@@ -3785,13 +3785,15 @@
         "PKG-TOOL-THUMB-02",
         "CORE-01"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "输入、抽帧队列、网格导出、URL/监听清理分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": [
         "changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md",
-        "baselines/thumbnail-input-checkpoint.json"
+        "baselines/thumbnail-input-checkpoint.json",
+        "changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md",
+        "baselines/thumbnail-lifecycle-validation.json"
       ]
     },
     {
