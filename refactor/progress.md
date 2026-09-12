@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-MB-08检查点：入口TS与兼容媒体声明（doing）
+
+全包34个自有生产模块已转TS，入口/Canvas桥/生命周期/清理分离。默认工厂仍可选Option、
+同步初始化与精确Canvas结果；新增可选媒体/HLS/RAF类型，修复旧legacy及NodeNext ESM解析。
+15条入口断言旧main6通过/9失败，候选专项241及main/legacy各217通过。最终120浏览器
+全部通过，含12原生Canvas/新旧核心场景及29能力对照；旧main相同12入口场景全部失败。
+实际安装17组类型/导出矩阵通过，候选7组各拒绝15非法用法；整工厂按冻结声明双向赋值。
+完整CI1402项及44重复契约通过，324生产TS。源码/产物/浏览器/安装包哈希已核验。
+见[变更](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md)与[证据](baselines/mb-entry-checkpoint.json)。
+222项：104 done、8 doing、110 todo。本地检查点提交，不计任务完成。
+下一步：修复受控canDecode=false时video-only输入及替换无可用sink却发布就绪；
+该问题旧/候选均已复现。MB-08、能力风险及后续分发/许可/设备门槛仍未关闭。
+
 ## PKG-MB-07完成：HLS配对、选择意图与UI拓扑
 
 m3u8实际迁移为四个TS模块，包内30生产TS，仅剩index.js待MB-08。

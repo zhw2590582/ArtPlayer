@@ -21,8 +21,38 @@ var __privateWrapper = (obj, member, setter, getter) => ({
   }
 });
 var _closed, _closed2, _generation, _contexts, _nodes, _pump, _playTask, _playing, _loading, _onError, _AudioEngine_instances, load_fn, startPump_fn, play_fn, _generation2, _iteration, _loading2, _createSink, _usedSink, _destroyed, _preparing, _poster, _renderer, _onError2, _VideoEngine_instances, current_fn, context_fn, report_fn, release_fn, draw_fn, load_fn2, reset_fn, _playback;
-const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
-const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
+function bridgeCanvas(canvas, shim) {
+  const methods = /* @__PURE__ */ new Map();
+  const native = canvas;
+  const members = shim;
+  for (const name in canvas) {
+    if (typeof native[name] === "function") {
+      const method = native[name];
+      methods.set(name, method.bind(canvas));
+    }
+  }
+  const names = /* @__PURE__ */ new Set([
+    ...Object.getOwnPropertyNames(shim),
+    ...Object.getOwnPropertyNames(Object.getPrototypeOf(shim))
+  ]);
+  for (const name of names) {
+    if (name === "constructor" || name in canvas)
+      continue;
+    Object.defineProperty(canvas, name, {
+      get() {
+        const value = members[name];
+        return typeof value === "function" ? value.bind(shim) : value;
+      },
+      set(value) {
+        members[name] = value;
+      },
+      configurable: true,
+      enumerable: true
+    });
+  }
+  for (const [name, method] of methods)
+    native[name] = (...args) => method(...args);
+}
 function releaseAll(actions) {
   const failures = [];
   for (const action of actions) {
@@ -35,6 +65,8 @@ function releaseAll(actions) {
   if (failures.length)
     throw failures[0];
 }
+const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
+const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
 function createMenu(art, name, icon) {
   const owned = { control: false, setting: false };
   let model = null;
@@ -218,12 +250,49 @@ function setupM3u8Controls({ art, shim, option }) {
       console.warn("MediaBunny HLS listener cleanup:", error);
     }
   }
-  art.on("video:loadedmetadata", refresh);
-  art.on("restart", refresh);
-  art.on("video:loadstart", invalidate);
-  art.on("video:error", invalidate);
-  art.on("destroy", destroy);
-  return { update };
+  try {
+    art.on("video:loadedmetadata", refresh);
+    art.on("restart", refresh);
+    art.on("video:loadstart", invalidate);
+    art.on("video:error", invalidate);
+    art.on("destroy", destroy);
+  } catch (error) {
+    destroy();
+    throw error;
+  }
+  return { update, destroy };
+}
+function entryLifecycle(art, canvas, shim, option) {
+  let closed = false;
+  let controls;
+  function resize() {
+    if (closed || !art.template?.$player || art.option.autoSize)
+      return;
+    Object.assign(canvas.style, { width: "100%", height: "100%", objectFit: "contain" });
+  }
+  function destroy() {
+    if (closed)
+      return;
+    closed = true;
+    releaseAll([
+      () => controls?.destroy(),
+      () => {
+        if (art.mediabunny === shim)
+          delete art.mediabunny;
+      },
+      () => shim.destroy(),
+      () => art.off?.("resize", resize),
+      () => art.off?.("video:loadedmetadata", resize),
+      () => art.off?.("destroy", destroy)
+    ]);
+  }
+  function install() {
+    art.on("resize", resize);
+    art.on("video:loadedmetadata", resize);
+    controls = setupM3u8Controls({ art, shim, option });
+    art.on("destroy", destroy);
+  }
+  return { install, destroy };
 }
 class EventTarget {
   constructor() {
@@ -26143,68 +26212,28 @@ class VideoShim {
   }
 }
 function artplayerProxyMediabunny(option = {}) {
-  return (art) => {
-    const { constructor } = art;
-    const { createElement } = constructor.utils;
+  return (player) => {
+    const art = player;
+    const { createElement } = art.constructor.utils;
     const canvas = createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const shim = new VideoShim({
-      art,
-      canvas,
-      ctx,
-      option
-    });
-    art.mediabunny = shim;
-    const originalCanvasMethods = {};
-    for (const prop in canvas) {
-      if (typeof canvas[prop] === "function") {
-        originalCanvasMethods[prop] = canvas[prop].bind(canvas);
+    const shim = new VideoShim({ art, canvas, ctx: canvas.getContext("2d"), option });
+    const lifecycle = entryLifecycle(art, canvas, shim, option);
+    try {
+      art.mediabunny = shim;
+      bridgeCanvas(canvas, shim);
+      lifecycle.install();
+    } catch (error) {
+      try {
+        lifecycle.destroy();
+      } catch (failure) {
+        console.warn("MediaBunny entry setup cleanup:", failure);
       }
+      throw error;
     }
-    const propertyNames = /* @__PURE__ */ new Set([
-      ...Object.getOwnPropertyNames(shim),
-      ...Object.getOwnPropertyNames(Object.getPrototypeOf(shim))
-    ]);
-    for (const prop of propertyNames) {
-      if (prop === "constructor")
-        continue;
-      if (!(prop in canvas)) {
-        Object.defineProperty(canvas, prop, {
-          get() {
-            const value = shim[prop];
-            return typeof value === "function" ? value.bind(shim) : value;
-          },
-          set(v) {
-            shim[prop] = v;
-          },
-          configurable: true,
-          enumerable: true
-        });
-      }
-    }
-    for (const prop in originalCanvasMethods) {
-      canvas[prop] = (...args) => originalCanvasMethods[prop](...args);
-    }
-    function resize() {
-      const player = art.template?.$player;
-      if (!player || art.option.autoSize)
-        return;
-      Object.assign(canvas.style, {
-        width: "100%",
-        height: "100%",
-        objectFit: "contain"
-      });
-    }
-    art.on("resize", resize);
-    art.on("video:loadedmetadata", resize);
-    setupM3u8Controls({ art, shim, option });
-    art.on("destroy", () => {
-      delete art.mediabunny;
-      shim.destroy();
-    });
     return canvas;
   };
 }
+Object.defineProperty(artplayerProxyMediabunny, "default", { value: artplayerProxyMediabunny, writable: true, configurable: true });
 export {
   artplayerProxyMediabunny as default
 };

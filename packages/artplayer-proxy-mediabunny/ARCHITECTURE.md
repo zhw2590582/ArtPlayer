@@ -1,14 +1,19 @@
 # MediaBunny proxy maintenance
 
-The public entry is `src/index.js`: an optional-options factory returns the existing
+The public entry is `src/index.ts`: an optional-options factory returns the existing
 ArtPlayer proxy callback and an HTMLCanvasElement. Public declarations remain in
-`types/artplayer-proxy-mediabunny.d.ts`. The input migration does not change those
-declarations, the factory signature, canvas forwarding, or package entrypoints.
+`types/artplayer-proxy-mediabunny.d.ts`, with a separate ESM declaration entry.
+The exact optional factory and HTMLCanvasElement result remain unchanged. The media
+view in `types/media.d.ts` is opt-in and checked against the real VideoShim class.
 
 ## Current module map
 
 | Module | Responsibility |
 | --- | --- |
+| `index.ts` | Optional factory, Canvas construction, alias installation and setup rollback |
+| `canvas-bridge.ts` | Historical own/direct-prototype forwarding and native Canvas receiver binding |
+| `entry-lifecycle.ts` | Entry resize/metadata/destroy subscriptions, alias ownership and shim cleanup |
+| `cleanup.ts` | Attempt every release and preserve the first failure |
 | `input.ts` | String/Blob/ReadableStream normalization, SDK Source/SourceRef pass-through, HLS detection and Input construction |
 | `media.ts` | Internal SDK-backed media and track-mode types; not public consumer types |
 | `tracks.ts` | Primary video and pairable audio selection, metadata/computed/live duration |
@@ -38,11 +43,20 @@ declarations, the factory signature, canvas forwarding, or package entrypoints.
 | `m3u8-menu.ts` | Owned control/setting surfaces and stale callback guards |
 | `m3u8-types.ts` | Narrow internal UI/shim contracts without changing public factory declarations |
 
-The thirty production TypeScript modules use strict checking with `skipLibCheck: false`
+The thirty-four production TypeScript modules use strict checking with `skipLibCheck: false`
 and no ambient Node types. The coordinator and both decoder engines are checked
 implementations; there are no remaining adjacent JavaScript declaration bridges.
-Only the public factory remains JavaScript, scheduled in PKG-MB-08.
-Do not describe the whole package as migrated yet.
+All owned production JavaScript has been migrated. This source milestone does not complete
+PKG-MB-08: unsupported decoder fallback/readiness still needs its remaining review.
+
+The entry preserves native Canvas method priority, detached createElement invocation,
+two reads of enumerable native method accessors, direct-prototype forwarding, bound shim
+methods and strict assignment errors for getter-only properties. Avoid replacing these
+with generic Reflect forwarding or a broad HTMLVideoElement cast. Entry bookkeeping stays
+off the canvas surface. Destroy unregisters its callbacks and only removes art.mediabunny
+when the alias still belongs to that entry. A custom historical host without off keeps inert
+callbacks; a real Artplayer host removes them. Partial setup attempts all cleanup while
+preserving the original setup error. HLS cleanup cannot strand the remaining entry resources.
 
 The shim keeps its existing own-property order and direct prototype surface because
 the entry copies those descriptors onto the canvas. Resource bookkeeping lives in a
@@ -228,13 +242,39 @@ resolution selects `@types/dom-webcodecs@0.1.19` for both dependency paths; the 
 itself is unchanged. This is a build-time declaration correction, not a browser polyfill.
 The package typecheck adds ESNext.Disposable for SDK declarations while keeping the
 ES2020 target; production source does not use `using` or require Symbol.dispose.
-Public consumer declarations do not import these SDK types; preserve that boundary
-until the separate consumer-compatibility task verifies any proposed change.
+Public declarations do not import SDK types or modern DOM VideoFrame callback names.
+The optional media view names the synthetic frame metadata directly; SDK track objects
+are unknown until consumers narrow them using their own SDK version. `VideoShim implements
+MediaBunnyShim` checks that this view matches implementation rather than masking JS with
+an adjacent declaration. Explicit getter return types retain coercive unknown setters
+internally while giving consumers numeric/boolean reads.
+
+Default Result remains exactly HTMLCanvasElement, allowing callers to substitute a plain
+canvas initializer or an entire historical factory. MediaBunnyCanvas combines the opt-in
+media view with native Canvas methods winning collisions. MediaBunnyPlayer has an optional
+mediabunny alias because it is absent before initialization and after destruction; there
+is no global augmentation of Artplayer. Named exports are types only.
+
+The .d.mts wrapper fixes NodeNext ESM default resolution. CommonJS keeps the historical
+default declaration facade, and typesVersions resolves /legacy in TS 4.3/classic Node
+resolution. Runtime remains directly callable and adds a nonenumerable, writable default
+self alias for the 1.0.0 CommonJS usage. That property is deliberately not mandatory on
+the default factory type. Whole-factory assignments are tested bidirectionally against
+both frozen published declarations, in an actual isolated install as well as workspace
+consumers. Do not switch to export= or a required default member without those checks.
+
+`canPlayType()` still always returns maybe; buffered/played/seekable and RAF metadata remain
+synthetic. None is proof that a codec or browser can play the input. Missing Web Audio or
+WebCodecs in Windows WebKit remains an unsupported-capability control. Existing but
+undecodable tracks can still take historical clock-only fallback; remaining MB-08 work
+must distinguish valid audio-only/video-only playback from false readiness with no usable
+decoder, including selection replacement. Native/long-play/device acceptance remains MB-09.
 
 ## Validation and remaining work
 
 ```sh
 yarn test:mediabunny
+yarn test:mediabunny-types-package
 node node_modules/typescript/bin/tsc -p packages/artplayer-proxy-mediabunny/tsconfig.json
 yarn build artplayer-proxy-mediabunny
 yarn test:browser test/browser/mediabunny-inputs.spec.js test/browser/mediabunny.spec.js test/browser/mediabunny-load.spec.js
@@ -242,6 +282,7 @@ yarn test:browser test/browser/mediabunny-shim.spec.js
 yarn test:browser test/browser/mediabunny-video.spec.js
 yarn test:browser test/browser/mediabunny-audio.spec.js
 yarn test:browser test/browser/mediabunny-hls.spec.js
+yarn test:browser test/browser/mediabunny-entry.spec.js
 ```
 
 Node tests use actual SDK parsing and controlled lifecycle interleavings. Browser tests

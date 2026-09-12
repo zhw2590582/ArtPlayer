@@ -1,3 +1,4 @@
+import type { MediaBunnyShim, SyntheticFrameCallback } from '../types/artplayer-proxy-mediabunny'
 import type { EngineOptions, EnginePort, ProxyOptions, ShimHost } from './engine-types'
 import type { MediaListener } from './EventTarget'
 import EventTarget from './EventTarget'
@@ -5,7 +6,7 @@ import MediaBunnyEngine from './MediaBunnyEngine.js'
 import { cancelFrame, closeFrames, requestFrame } from './shim-frames'
 import { clampVolume, timeRanges } from './shim-values'
 
-export default class VideoShim {
+export default class VideoShim implements MediaBunnyShim {
   declare art: ShimHost
   declare canvas: HTMLCanvasElement
   declare option: ProxyOptions
@@ -82,7 +83,7 @@ export default class VideoShim {
   }
 
   // Time
-  get currentTime() {
+  get currentTime(): number {
     return this.engine.currentTime
   }
 
@@ -143,7 +144,7 @@ export default class VideoShim {
   }
 
   // Playback rate
-  get playbackRate() {
+  get playbackRate(): number {
     return this._playbackRate
   }
 
@@ -158,7 +159,7 @@ export default class VideoShim {
   }
 
   // Volume
-  get volume() {
+  get volume(): number {
     return this._volume
   }
 
@@ -169,7 +170,7 @@ export default class VideoShim {
     this.events.emit('volumechange')
   }
 
-  get muted() {
+  get muted(): boolean {
     return this._muted
   }
 
@@ -223,56 +224,56 @@ export default class VideoShim {
     this.option.poster = v
   }
 
-  get autoplay() {
+  get autoplay(): boolean {
     return this.option.autoplay || false
   }
 
   set autoplay(v: unknown) {}
 
-  get loop() {
+  get loop(): boolean {
     return this.option.loop || false
   }
 
   set loop(v: unknown) {}
 
-  get controls() {
+  get controls(): boolean {
     return false
   }
 
   set controls(v: unknown) {}
 
-  get playsInline() {
+  get playsInline(): boolean {
     return true
   }
 
   set playsInline(v: unknown) {}
 
-  get crossOrigin() {
+  get crossOrigin(): string {
     return this.option.crossOrigin || ''
   }
 
   set crossOrigin(v: unknown) {}
 
-  get preload() {
+  get preload(): string {
     return 'auto'
   }
 
   set preload(v: unknown) {}
 
-  get defaultMuted() {
+  get defaultMuted(): boolean {
     return false
   }
 
   set defaultMuted(v: unknown) {}
 
-  get defaultPlaybackRate() {
+  get defaultPlaybackRate(): number {
     return 1
   }
 
   set defaultPlaybackRate(v: unknown) {}
 
   // Methods
-  canPlayType(_type: string) {
+  canPlayType(_type: string): 'maybe' {
     return 'maybe'
   }
 
@@ -280,7 +281,7 @@ export default class VideoShim {
     return this.canvas.getBoundingClientRect()
   }
 
-  requestVideoFrameCallback(callback: VideoFrameRequestCallback): number {
+  requestVideoFrameCallback(callback: SyntheticFrameCallback): number {
     return requestFrame(this, callback)
   }
 

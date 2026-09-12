@@ -19,14 +19,24 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/artplayer-proxy-mediabunny.d.ts",
-      "import": "./dist/artplayer-proxy-mediabunny.mjs",
-      "require": "./dist/artplayer-proxy-mediabunny.js"
+      "import": {
+        "types": "./types/artplayer-proxy-mediabunny.d.mts",
+        "default": "./dist/artplayer-proxy-mediabunny.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer-proxy-mediabunny.d.ts",
+        "default": "./dist/artplayer-proxy-mediabunny.js"
+      }
     },
     "./legacy": {
-      "types": "./types/artplayer-proxy-mediabunny.d.ts",
-      "import": "./dist/artplayer-proxy-mediabunny.legacy.js",
-      "require": "./dist/artplayer-proxy-mediabunny.legacy.js"
+      "import": {
+        "types": "./types/artplayer-proxy-mediabunny.d.mts",
+        "default": "./dist/artplayer-proxy-mediabunny.legacy.js"
+      },
+      "require": {
+        "types": "./types/artplayer-proxy-mediabunny.d.ts",
+        "default": "./dist/artplayer-proxy-mediabunny.legacy.js"
+      }
     }
   },
   "main": "./dist/artplayer-proxy-mediabunny.js",
@@ -34,6 +44,11 @@
   "types": "./types/artplayer-proxy-mediabunny.d.ts",
   "legacy": "./dist/artplayer-proxy-mediabunny.legacy.js",
   "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": ["types/artplayer-proxy-mediabunny.d.ts"]
+    }
+  },
   "dependencies": {
     "mediabunny": "^1.43.1"
   }

@@ -1,0 +1,12 @@
+{
+  "task": "PKG-MB-08",
+  "sourceCommit": "8a2b56e829a3fa9af5e440a11cede8d1775ded10",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/index.js": "4e1be8937908ff6e6ef8a4e863e22b4468312cf31d66ac299322e475757773bb",
+    "packages/artplayer-proxy-mediabunny/src/VideoShim.ts": "1fef3028a3937182c31503129655efdb88118ea0f6d3be96e9be99dcbcc5fdc7",
+    "packages/artplayer-proxy-mediabunny/src/engine-types.ts": "6714070f954f7345f33cd93655facc6aa94fd34fa1be0375361962d54fa6e180",
+    "packages/artplayer-proxy-mediabunny/types/artplayer-proxy-mediabunny.d.ts": "af2083224d0760752d83eb2ac86b1dea5586455b81d47e4ba70f9f6a874a75d8",
+    "packages/artplayer-proxy-mediabunny/package.json": "96b09ce19ea7914485aa9780329a0cfc43b18e38232ea1dd92d2e6dc27310055",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e"
+  }
+}

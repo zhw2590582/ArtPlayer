@@ -1,3 +1,4 @@
+import type { SyntheticFrameCallback } from '../types/artplayer-proxy-mediabunny'
 import type { EnginePort } from './engine-types'
 
 interface FrameOwner {
@@ -20,7 +21,7 @@ function state(owner: FrameOwner): FrameState {
   return value
 }
 
-export function requestFrame(owner: FrameOwner, callback: VideoFrameRequestCallback): number {
+export function requestFrame(owner: FrameOwner, callback: SyntheticFrameCallback): number {
   const resource = state(owner)
   if (resource.closed)
     return 0

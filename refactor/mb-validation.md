@@ -80,3 +80,14 @@ main/legacy各159通过。最终78浏览器含16新增原生音频场景及8新�
 11通过/32失败，候选专项226及main/legacy各202通过。最终108浏览器含20新增原生HLS
 新旧核心/UI/SDK场景与10新增能力对照。旧main同30项14通过/16失败，未把能力缺失计作播放。
 全部报告/results已归档；完整CI1387项及44重复契约通过，320生产TS；完成后立即专用提交，MB-LIFE-01剩余组合/长播范围仍open。
+
+## PKG-MB-08 入口与声明检查点（doing）
+
+index实际迁移，入口/Canvas桥/生命周期/清理拆为四模块，全包34生产TS。
+精确默认Canvas和整工厂保留；可选shim/HLS/RAF视图、ESM声明及旧legacy解析已验证。
+15条新断言旧main6通过/9失败，候选专项241及main/legacy各217通过。新增12真实Canvas/
+新旧核心场景通过，旧main同12项失败；最终8文件120浏览器通过，其中29能力对照不计作播放。
+实际打包安装17类型矩阵通过，候选7组各拒绝15非法用法；旧NodeNext失败保留负例。
+见[变更](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md)和[证据](baselines/mb-entry-checkpoint.json)。
+完整CI1402项及44重复契约通过，324生产TS。受控canDecode=false已复现旧/候选
+video-only输入及替换无sink仍readyState=4；任务保持doing，下一步修复该能力边界。

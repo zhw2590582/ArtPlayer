@@ -257,11 +257,11 @@ test('MediaBunny HLS control update reentry cannot write later settings or audio
 test('MediaBunny HLS destruction removes its refresh listeners and preserves proxy teardown', async () => {
   const env = environment()
   await env.refresh()
-  const metadataBefore = env.handlers.get('video:loadedmetadata').length
+  const metadataListener = env.handlers.get('video:loadedmetadata').at(-1)
   env.art.emit('destroy')
   assert.equal(env.canvas.engine.destroyed, true)
   assert.equal(env.art.mediabunny, undefined)
-  assert.equal(env.handlers.get('video:loadedmetadata').length, metadataBefore - 1)
+  assert.equal(env.handlers.get('video:loadedmetadata').includes(metadataListener), false)
   assert.equal(env.handlers.get('restart')?.length || 0, 0)
 })
 
@@ -402,7 +402,7 @@ test('MediaBunny HLS failing listener removal still attempts remaining removals 
       throw new Error('off failed')
   }
   env.art.emit('destroy')
-  assert.equal(removed.length, 5)
+  assert.deepEqual(removed.slice(0, 5), ['video:loadedmetadata', 'restart', 'video:loadstart', 'video:error', 'destroy'])
   assert.equal(env.canvas.engine.destroyed, true)
   assert.equal(env.warnings.length, 1)
 })

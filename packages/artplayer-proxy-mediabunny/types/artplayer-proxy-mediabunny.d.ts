@@ -1,6 +1,6 @@
 import type Artplayer from 'artplayer'
 
-interface Option {
+export interface Option {
   m3u8?: {
     quality?: {
       control?: boolean
@@ -101,7 +101,9 @@ interface Option {
   crossOrigin?: string
 }
 
-type Result = HTMLCanvasElement
+export type Result = HTMLCanvasElement
+
+export type { HlsAudio, HlsLevel, HlsState, MediaBunnyCanvas, MediaBunnyPlayer, MediaBunnyShim, MediaListener, SyntheticFrameCallback, SyntheticFrameMetadata } from './media'
 
 declare const artplayerProxyMediabunny: (option?: Option) => (art: Artplayer) => Result
 

@@ -1,16 +1,5 @@
 import type { DisplayConfig, Label, MenuHost, MenuModel, SelectorItem } from './m3u8-types'
-
-export function releaseAll(actions: (() => void)[]): void {
-  const failures: unknown[] = []
-  for (const action of actions) {
-    try {
-      action()
-    }
-    catch (error) { failures.push(error) }
-  }
-  if (failures.length)
-    throw failures[0]
-}
+import { releaseAll } from './cleanup'
 
 export default function createMenu(art: MenuHost, name: string, icon: string) {
   const owned = { control: false, setting: false }

@@ -1,7 +1,8 @@
 import type { Label, SelectorItem, SetupOptions } from './m3u8-types'
 import $audio from '../../artplayer-plugin-hls-control/src/audio.svg?raw'
 import $quality from '../../artplayer-plugin-hls-control/src/quality.svg?raw'
-import createMenu, { releaseAll } from './m3u8-menu'
+import { releaseAll } from './cleanup'
+import createMenu from './m3u8-menu'
 import { audioModel, qualityModel } from './m3u8-model'
 
 export function setupM3u8Controls({ art, shim, option }: SetupOptions) {
@@ -95,10 +96,16 @@ export function setupM3u8Controls({ art, shim, option }: SetupOptions) {
     }
     catch (error) { console.warn('MediaBunny HLS listener cleanup:', error) }
   }
-  art.on('video:loadedmetadata', refresh)
-  art.on('restart', refresh)
-  art.on('video:loadstart', invalidate)
-  art.on('video:error', invalidate)
-  art.on('destroy', destroy)
-  return { update }
+  try {
+    art.on('video:loadedmetadata', refresh)
+    art.on('restart', refresh)
+    art.on('video:loadstart', invalidate)
+    art.on('video:error', invalidate)
+    art.on('destroy', destroy)
+  }
+  catch (error) {
+    destroy()
+    throw error
+  }
+  return { update, destroy }
 }
