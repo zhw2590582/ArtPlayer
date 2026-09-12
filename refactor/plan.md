@@ -538,5 +538,5 @@
 - PKG-TOOL-THUMB-01: [记录](baselines/thumbnail-release.json) [记录](baselines/thumbnail-contract.md) [记录](changes/2026-09-13-PKG-TOOL-THUMB-01-contract.md) [记录](baselines/thumbnail-contract-validation.json)
 - PKG-TOOL-THUMB-02: [记录](baselines/thumbnail-behavior-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md)
 - PKG-TOOL-THUMB-03: [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md) [记录](baselines/thumbnail-input-checkpoint.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md) [记录](baselines/thumbnail-lifecycle-validation.json)
-- PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json)
+- PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

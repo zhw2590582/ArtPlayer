@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-04 公开类型与真实安装检查点（doing）
+
+补齐class/namespace及d.cts/d.mts，修复root ESM并保留直接CJS构造器，新增legacy类型路径。
+仓库外实际安装验证7种候选编译模式、52项反例和全部文件；冻结Git夹具保留5种缺声明/
+入口失败对照。明确该夹具不是原始npm包。完整MIT通知在实际tarball验证，相关来源风险关闭。
+完整build:ts发现并修复MediaBunny辅助类型被误当独立插件的既有问题；原不支持runtime
+re-export的错误提示在首次CI发现变化后恢复，未削弱测试。三浏览器真实Monaco通过，
+同时消费核心/Thumbnail/MediaBunny类型并执行工具构造/清理。最终CI1658、339生产TS、
+3导入通过；main/legacy各49项，运行文件和源码UMD与上个检查点完全一致，171项抽帧证据
+按哈希复用并明确没有重跑。用户默认行为策略问题仍待答复，04不标完成；05/06继续设备/
+完整demo/core与历史CSS分发。见[变更](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md)
+和[验证](baselines/thumbnail-public-types-validation.json)。222项：112 done、11 doing、99 todo。
+
+
 ## PKG-TOOL-THUMB-04 运行时 TS 与 emitter 来源检查点（doing）
 
 8个运行时模块已迁为严格TS，新增类型模块明确option/事件/帧/job/资源状态；declare保留

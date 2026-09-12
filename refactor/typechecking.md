@@ -99,3 +99,19 @@ Audio Track 的自有源码由 packages/artplayer-plugin-audio-track/tsconfig.js
 详见包内 ARCHITECTURE.md；不能将部分参数直接覆盖默认签名而破坏旧推断。
 
 新迁移包复制分包配置并按实际运行环境调整，加入特有正反例；编译器入口自动发现包配置。TS 构建入口与声明生成由 ENG-06/07 和各包迁移处理；不能只增加一个空 config 就宣布包迁移完成。所有生产变更仍按每任务独立提交和包内架构文档规则交付。
+
+## Thumbnail 与完整编辑器声明生成
+
+Thumbnail 的 public d.ts 是 CommonJS class/namespace，d.cts/d.mts 共享其构造器身份。
+源码和声明双向检查；自定义事件可推导调用方元组，任意回调抛出的 message 保持 unknown。
+`yarn test:thumbnail-types-package` 在仓库外安装实际 Yarn tarball，检查当前/旧 TS、
+无 interop 的 CommonJS、root/legacy 导入、全部文件指纹和许可。旧 Git 夹具的 ESM/声明
+失败保留为对照，不声称它是原始 npm 包。完整默认兼容策略仍由 THUMB-COMPAT-01 决定。
+
+`yarn build:ts` 只枚举与包名对应的公开声明入口，辅助类型不作为独立全局导入。
+语义生成器支持 CommonJS 类、函数及 callable const；显式的相对 type re-export
+只接受调用方提供且完整匹配导出列表的本地类型源。MediaBunny 的 media.d.ts 使用此路径
+合入主编辑器声明，避免生成无效 media 全局或遗留失效的相对 import。
+`refactor/scripts/thumbnail-types.test.mjs` 覆盖该历史失败与旧/新编译器；
+`test/browser/thumbnail-editor-types.spec.js` 使用真实 Monaco worker 验证核心、工具与
+MediaBunny 声明并执行工具构造/清理。媒体解码和完整 demo 组合仍须独立验证。

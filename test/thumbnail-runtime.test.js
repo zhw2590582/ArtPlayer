@@ -129,3 +129,24 @@ test('Thumbnail typed facade retains synchronous validation, option mutation and
   assert.equal(tool.errorHandle(true, 'unused'), undefined)
   tool.destroy()
 })
+
+test('Thumbnail error event preserves arbitrary thrown message values and Promise rejection identity', async () => {
+  for (const failure of [{ message: 7 }, { message: { detail: 'failure' } }, 3, null]) {
+    const { tool } = create(candidate)
+    tool.setup({ number: 10 })
+    tool.file = { name: 'sample.mp4' }
+    tool.video.duration = 100
+    const errors = []
+    tool.on('error', value => errors.push(value))
+    tool.on('update', () => {
+      throw failure
+    })
+    const pending = tool.start()
+    await Promise.resolve()
+    tool.video.oncanplay()
+    await assert.rejects(pending, error => error === failure)
+    assert.deepEqual(errors, [failure?.message])
+    assert.equal(tool.processing, false)
+    tool.destroy()
+  }
+})

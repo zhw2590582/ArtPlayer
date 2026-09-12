@@ -11,7 +11,7 @@ tool.once('file', function (file) {
   this.name = file.name
 }, { name: '' })
 tool.on('error', (message) => {
-  const value: string | undefined = message
+  const value: unknown = message
   void value
 })
 tool.on('custom', (...payload) => {
@@ -19,6 +19,7 @@ tool.on('custom', (...payload) => {
   void values
 })
 tool.emit(Symbol('extension'), 'value')
+tool.on('custom-number', (value: number) => value.toFixed())
 const pending: Promise<void> = tool.start()
 const point: { time: number, x: number, y: number } | undefined = tool.creatScreenshotDate()[0]
 const canvas: HTMLCanvasElement = tool.creatCanvas()

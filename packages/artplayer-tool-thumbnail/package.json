@@ -19,11 +19,40 @@
     "player"
   ],
   "exports": {
-    "import": "./dist/artplayer-tool-thumbnail.esm.js",
-    "require": "./dist/artplayer-tool-thumbnail.js",
-    "default": "./dist/artplayer-tool-thumbnail.js"
+    ".": {
+      "import": {
+        "types": "./types/artplayer-tool-thumbnail.d.mts",
+        "default": "./dist/artplayer-tool-thumbnail.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer-tool-thumbnail.d.cts",
+        "default": "./dist/artplayer-tool-thumbnail.js"
+      },
+      "default": "./dist/artplayer-tool-thumbnail.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-tool-thumbnail.d.cts",
+      "import": "./dist/artplayer-tool-thumbnail.legacy.js",
+      "require": "./dist/artplayer-tool-thumbnail.legacy.js",
+      "default": "./dist/artplayer-tool-thumbnail.legacy.js"
+    }
   },
-  "module": "dist/artplayer-tool-thumbnail.esm.js",
-  "types": "types/artplayer-tool-thumbnail.d.ts",
-  "browserslist": "last 1 Chrome version"
+  "main": "./dist/artplayer-tool-thumbnail.js",
+  "module": "./dist/artplayer-tool-thumbnail.mjs",
+  "types": "./types/artplayer-tool-thumbnail.d.ts",
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-tool-thumbnail.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "ARCHITECTURE.md",
+    "README.md",
+    "THIRD_PARTY_NOTICES",
+    "dist",
+    "types"
+  ]
 }

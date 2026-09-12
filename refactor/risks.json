@@ -370,10 +370,12 @@
         "refactor/baselines/distribution.json",
         "refactor/baselines/thumbnail-contract.md",
         "refactor/baselines/thumbnail-release.json",
-        "refactor/scripts/thumbnail-contract.test.mjs"
+        "refactor/scripts/thumbnail-contract.test.mjs",
+        "refactor/baselines/thumbnail-public-types-validation.json"
       ],
       "compatibleResolution": "Recovered 3.5.31 has main and a CSS entry; baseline workspace lacks main and points to missing .esm.js/types. Recoverable CDN main is verified against Git, not an original tarball. Preserve supported paths, decide historical CSS disposition, add real declarations and verify isolated installs in 04/06.",
-      "closureCriteria": "隔离打包消费者能加载所有原承诺路径，dist 不作为源码直接手改。"
+      "closureCriteria": "隔离打包消费者能加载所有原承诺路径，dist 不作为源码直接手改。",
+      "workspaceState": "Current root ESM, direct CJS, legacy and declarations pass isolated installs. Missing historical .esm.js was replaced by the real root .mjs entry. Historical 3.5.31 CSS path/disposition and complete original promised-path review remain 06; item stays open."
     },
     {
       "id": "BASE-PERF-01",
@@ -3867,8 +3869,10 @@
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
         "test/thumbnail.test.js",
         "test/browser/thumbnail-tool.spec.js",
-        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md"
-      ]
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md"
+      ],
+      "workspaceState": "Explicit user question pending: prefer published 3.5.31 defaults with opt-in 4.4 behavior, or accept the documented old-version differences and retain 4.4 defaults. No answer inferred; runtime unchanged."
     },
     {
       "id": "THUMB-LIFE-01",
@@ -3910,12 +3914,20 @@
       ],
       "compatibleResolution": "Historical release declares tiny-emitter; review local emitter provenance/license before TS migration. Keep recovered individual CDN files distinct from full npm archive evidence.",
       "closureCriteria": "Reviewed emitter attribution and license ledger plus explicit historical artifact recovery limits and complete candidate tarball evidence.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/thumbnail-contract.md",
         "refactor/baselines/thumbnail-release.json",
-        "refactor/scripts/thumbnail-contract.test.mjs"
-      ]
+        "refactor/scripts/thumbnail-contract.test.mjs",
+        "refactor/baselines/thumbnail-public-types-validation.json"
+      ],
+      "resolutionEvidence": [
+        "refactor/baselines/thumbnail-public-types-validation.json",
+        "refactor/baselines/thumbnail-vendor/sources.json",
+        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES"
+      ],
+      "resolutionRationale": "Fixed 2.1.0 upstream comparison and local adaptation reviewed; complete MIT notice verified in every standalone bundle and every byte of the actual installed candidate pack. Exact original copied revision and complete historical npm archive remain unknown and are explicitly bounded, not claimed recovered. Historical CSS/paths remain independently open under BASE-DIST-01.",
+      "workspaceState": "Current candidate source/bundle/packed attribution verified; repeat installed artifact verification when release contents change."
     },
     {
       "id": "THUMB-MEDIA-01",
@@ -3939,7 +3951,7 @@
       "id": "VENDOR-09",
       "title": "Thumbnail tiny-emitter 改写来源与最终分发许可",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-TOOL-THUMB-04",
         "PKG-TOOL-THUMB-06"
@@ -3948,11 +3960,18 @@
         "refactor/baselines/thumbnail-vendor/sources.json",
         "packages/artplayer-tool-thumbnail/src/emitter.ts",
         "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES",
-        "test/thumbnail-vendor.test.js"
+        "test/thumbnail-vendor.test.js",
+        "refactor/baselines/thumbnail-public-types-validation.json"
       ],
       "compatibleResolution": "Preserve original attribution, typed local dispatch compatibility and complete MIT notice in source/package/standalone bundles.",
       "closureCriteria": "Pinned upstream reference and local adaptation reviewed; all bundle and actual packed distribution notices verified. Do not claim the exact original copied revision or a recovered complete historical archive.",
-      "workspaceState": "TS adaptation and pinned 2.1.0 source/license references recorded; normal build includes package notices. Final installed/packed distribution evidence remains with 04/06."
+      "workspaceState": "Current candidate source/bundle/packed attribution verified; repeat installed artifact verification when release contents change.",
+      "resolutionEvidence": [
+        "refactor/baselines/thumbnail-public-types-validation.json",
+        "refactor/baselines/thumbnail-vendor/sources.json",
+        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES"
+      ],
+      "resolutionRationale": "Fixed 2.1.0 upstream comparison and local adaptation reviewed; complete MIT notice verified in every standalone bundle and every byte of the actual installed candidate pack. Exact original copied revision and complete historical npm archive remain unknown and are explicitly bounded, not claimed recovered. Historical CSS/paths remain independently open under BASE-DIST-01."
     }
   ]
 }

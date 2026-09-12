@@ -179,6 +179,6 @@
 | IFRAME-DIST-01 | open / 已复现 | Iframe tool name is unavailable at registry observation and old archive includes distinct helper exports | PKG-IFRAME-04, PKG-IFRAME-06 |
 | THUMB-COMPAT-01 | open / 已复现 | Thumbnail recovered 3.5.31 and workspace 4.4.0 have conflicting height and event timing defaults | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05 |
 | THUMB-LIFE-01 | open / 已复现 | Thumbnail drop binding and repeated destroy fail; pending work and replacement resource ownership need repair | PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-05 |
-| THUMB-PROVENANCE-01 | open / 源码/产物事实 | Thumbnail local emitter attribution and historical distribution completeness remain unverified | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
+| THUMB-PROVENANCE-01 | resolved / 源码/产物事实 | Thumbnail local emitter attribution and historical distribution completeness remain unverified | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
 | THUMB-MEDIA-01 | open / 已复现 | Windows WebKit native Blob URLs cannot load tested MP4 media despite successful HTTP controls | PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
-| VENDOR-09 | open / 源码/产物事实 | Thumbnail tiny-emitter 改写来源与最终分发许可 | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
+| VENDOR-09 | resolved / 源码/产物事实 | Thumbnail tiny-emitter 改写来源与最终分发许可 | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |

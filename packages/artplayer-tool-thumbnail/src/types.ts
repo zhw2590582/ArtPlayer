@@ -23,14 +23,14 @@ export interface ScreenshotPoint {
   y: number
 }
 
-export interface ThumbnailEvents extends Record<PropertyKey, unknown[]> {
+export interface ThumbnailEvents {
   file: [file: File]
   video: [video: HTMLVideoElement]
   canvas: [canvas: HTMLCanvasElement]
   update: [url: string, progress: number]
   done: []
   download: [name: string]
-  error: [message: string | undefined]
+  error: [message: unknown]
   destroy: []
 }
 

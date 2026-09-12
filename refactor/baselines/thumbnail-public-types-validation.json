@@ -1,0 +1,1402 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-TOOL-THUMB-04",
+  "status": "doing",
+  "verifiedAt": "2026-09-12T21:15:08.029Z",
+  "startedFrom": "15485b6420dece2b04503bd4fa99a9da0f9c8ba0",
+  "nodeVersion": "v24.21.0",
+  "ci": {
+    "total": 1658,
+    "unit": 1450,
+    "engineering": 14,
+    "baseline": 194,
+    "productionTs": 339,
+    "imports": 3,
+    "note": "Initial CI rejected a changed error message for unsupported runtime re-exports. The old message contract was restored without weakening its test; final CI passed. Existing core editor lint/Yarn deprecation warnings remain."
+  },
+  "types": {
+    "installed": {
+      "task": "PKG-TOOL-THUMB-04",
+      "scope": "Frozen Git input fixture and candidate Yarn pack installed outside workspace. The frozen fixture is not an original npm archive; no recovered 3.5.31 complete archive is claimed. Candidate root/legacy runtime, offline frozen install, all files and strict consumers verified.",
+      "packages": [
+        {
+          "label": "workspace-fixture",
+          "name": "artplayer-tool-thumbnail",
+          "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\thumbnail-package-types-hpUFnp\\workspace-fixture.tgz",
+          "sha256": "4a6e6a6e2aac84e4c2cd30b0d46630b85b5c83a0ad3fbdb67ae82564922eaf48",
+          "manifest": {
+            "name": "artplayer-tool-thumbnail",
+            "version": "4.4.0",
+            "description": "Thumbnail tool for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              "import": "./dist/artplayer-tool-thumbnail.esm.js",
+              "require": "./dist/artplayer-tool-thumbnail.js",
+              "default": "./dist/artplayer-tool-thumbnail.js"
+            },
+            "module": "dist/artplayer-tool-thumbnail.esm.js",
+            "types": "types/artplayer-tool-thumbnail.d.ts",
+            "browserslist": "last 1 Chrome version"
+          },
+          "files": {
+            "package/README.md": "91477fe542a44713089e384308ae6f311f887cfe63aafe1483b778a37acfa458",
+            "package/dist/artplayer-tool-thumbnail.js": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+            "package/dist/artplayer-tool-thumbnail.legacy.js": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98",
+            "package/dist/artplayer-tool-thumbnail.mjs": "4d46df8cccdc92d18efc6f12abedf85e8881737023f4ead28697c8b1e85eead1",
+            "package/package.json": "9f4f9c6628ee48068f380bc52f4058c1f6aac31c20de6ed069a2c96ba635e23f",
+            "package/src/emitter.js": "5aa71e4317037c06b94e259beed2e964bbbb7117edbe78d29cc941c4916fd2ff",
+            "package/src/index.js": "67bc1b6a58faf11b14c8d410ae829edd64b84dc9e7b4b388b2e2dd60788bcbe4",
+            "package/src/utils.js": "dc19fe2f338df7058084eb2301d37db59ec4c914a85ba819a856d270c1267105"
+          }
+        },
+        {
+          "label": "candidate",
+          "name": "artplayer-tool-thumbnail",
+          "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\thumbnail-package-types-hpUFnp\\candidate.tgz",
+          "sha256": "4db7de60d7b3f5d1a520579b0d29a399aeb8c987d0a4b061770b8717f86e0148",
+          "manifest": {
+            "name": "artplayer-tool-thumbnail",
+            "version": "4.4.0",
+            "description": "Thumbnail tool for ArtPlayer",
+            "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+            "license": "MIT",
+            "legacy": "dist/artplayer-tool-thumbnail.legacy.js",
+            "homepage": "https://artplayer.org",
+            "repository": {
+              "type": "git",
+              "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+            },
+            "bugs": {
+              "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+            },
+            "keywords": [
+              "html5",
+              "video",
+              "player"
+            ],
+            "exports": {
+              ".": {
+                "import": {
+                  "types": "./types/artplayer-tool-thumbnail.d.mts",
+                  "default": "./dist/artplayer-tool-thumbnail.mjs"
+                },
+                "require": {
+                  "types": "./types/artplayer-tool-thumbnail.d.cts",
+                  "default": "./dist/artplayer-tool-thumbnail.js"
+                },
+                "default": "./dist/artplayer-tool-thumbnail.js"
+              },
+              "./legacy": {
+                "types": "./types/artplayer-tool-thumbnail.d.cts",
+                "import": "./dist/artplayer-tool-thumbnail.legacy.js",
+                "require": "./dist/artplayer-tool-thumbnail.legacy.js",
+                "default": "./dist/artplayer-tool-thumbnail.legacy.js"
+              }
+            },
+            "main": "./dist/artplayer-tool-thumbnail.js",
+            "module": "./dist/artplayer-tool-thumbnail.mjs",
+            "types": "./types/artplayer-tool-thumbnail.d.ts",
+            "browserslist": "last 1 Chrome version",
+            "typesVersions": {
+              "*": {
+                "legacy": [
+                  "types/artplayer-tool-thumbnail.d.ts"
+                ]
+              }
+            },
+            "files": [
+              "ARCHITECTURE.md",
+              "README.md",
+              "THIRD_PARTY_NOTICES",
+              "dist",
+              "types"
+            ]
+          },
+          "files": {
+            "package/ARCHITECTURE.md": "3c9de50e9e8b9e43fa0212fd4f0ce2a5693ac74a649e461cb1f19e9c591c3827",
+            "package/README.md": "24ed417415653307342281e31f6bf507c5d27f1cd8ab0be81af11ca50e1f3950",
+            "package/THIRD_PARTY_NOTICES": "7bea0832808c3d37b5a79f2ed6c65ef2ebdf7dbcbba124c469ebb90e2ec7c013",
+            "package/dist/artplayer-tool-thumbnail.js": "714bac5f2065557e005a91226511cc7a7356c4a9edb354adc21fffab495fd96b",
+            "package/dist/artplayer-tool-thumbnail.legacy.js": "563b28e23ccff86cbb9f954b45882b48e90eb31e0827c84eee071577b5e04ec6",
+            "package/dist/artplayer-tool-thumbnail.mjs": "bd23f573a91932b27d05fcd87197d0b0b188e250247c727edb0b48a17bd820ad",
+            "package/package.json": "dafbe13cddee908b2932ab2f529b0eef86ad9d9de8f7ab7585ed073c221cdbe1",
+            "package/types/README.md": "5a6071256c2d810ca77d6022bf81479ec3d48666977fa0706444f9a514834215",
+            "package/types/artplayer-tool-thumbnail.d.cts": "f0573326178b57a6e22a08b53247eb15ef4d20a1652e40d0cae638ac7aaf8092",
+            "package/types/artplayer-tool-thumbnail.d.mts": "e96e0123bff89e109a00c1c169da99741c8bf66d3f4fd53b8e8ecf7c3f440533",
+            "package/types/artplayer-tool-thumbnail.d.ts": "ec2a39f3e2ac5ef1717d4da56546486c614a9bb6291c14c05723c1990546e79f"
+          }
+        }
+      ],
+      "matrix": [
+        {
+          "package": "workspace-fixture",
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "diagnostics": [
+            {
+              "code": 2307,
+              "message": "Cannot find module 'artplayer-tool-thumbnail' or its corresponding type declarations."
+            }
+          ],
+          "negative": []
+        },
+        {
+          "package": "workspace-fixture",
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "diagnostics": [
+            {
+              "code": 7016,
+              "message": "Could not find a declaration file for module 'artplayer-tool-thumbnail'. '<consumer>/node_modules/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/artplayer-tool-thumbnail` if it exists or add a new declaration (.d.ts) file containing `declare module 'artplayer-tool-thumbnail';`"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "package": "workspace-fixture",
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "diagnostics": [
+            {
+              "code": 7016,
+              "message": "Could not find a declaration file for module 'artplayer-tool-thumbnail'. '<consumer>/node_modules/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/artplayer-tool-thumbnail` if it exists or add a new declaration (.d.ts) file containing `declare module 'artplayer-tool-thumbnail';`"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "package": "workspace-fixture",
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "diagnostics": [
+            {
+              "code": 7016,
+              "message": "Could not find a declaration file for module 'artplayer-tool-thumbnail'. '<consumer>/node_modules/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/artplayer-tool-thumbnail` if it exists or add a new declaration (.d.ts) file containing `declare module 'artplayer-tool-thumbnail';`"
+            }
+          ],
+          "negative": []
+        },
+        {
+          "package": "workspace-fixture",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "diagnostics": [
+            {
+              "code": 2307,
+              "message": "Cannot find module 'artplayer-tool-thumbnail' or its corresponding type declarations."
+            }
+          ],
+          "negative": []
+        },
+        {
+          "package": "candidate",
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'number'."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'Element'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+            },
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            },
+            {
+              "code": 2322,
+              "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+            },
+            {
+              "code": 2554,
+              "message": "Expected 1 arguments, but got 2."
+            }
+          ]
+        },
+        {
+          "package": "candidate",
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'number'."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'Element'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+            },
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            },
+            {
+              "code": 2322,
+              "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+            },
+            {
+              "code": 2554,
+              "message": "Expected 1 arguments, but got 2."
+            }
+          ]
+        },
+        {
+          "package": "candidate",
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'number'."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'Element'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+            },
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            },
+            {
+              "code": 2322,
+              "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+            },
+            {
+              "code": 2554,
+              "message": "Expected 1 arguments, but got 2."
+            }
+          ]
+        },
+        {
+          "package": "candidate",
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'number'."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'Element'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+            },
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            },
+            {
+              "code": 2322,
+              "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+            },
+            {
+              "code": 2554,
+              "message": "Expected 1 arguments, but got 2."
+            }
+          ]
+        },
+        {
+          "package": "candidate",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'number | undefined'."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'string' is not assignable to type 'Element | undefined'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '\"video.mp4\"' is not assignable to parameter of type 'File | null | undefined'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': height, playsInline, poster, videoHeight, and 285 more."
+            },
+            {
+              "code": 2322,
+              "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+            },
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            },
+            {
+              "code": 2322,
+              "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+            },
+            {
+              "code": 2345,
+              "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+            },
+            {
+              "code": 2554,
+              "message": "Expected 1 arguments, but got 2."
+            }
+          ]
+        },
+        {
+          "package": "candidate",
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs-no-interop",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            }
+          ]
+        },
+        {
+          "package": "candidate",
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs-no-interop",
+          "diagnostics": [],
+          "negative": [
+            {
+              "code": 2551,
+              "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+            }
+          ]
+        }
+      ],
+      "runtime": [
+        {
+          "package": "workspace-fixture",
+          "commonjs": "function",
+          "esm": "ERR_MODULE_NOT_FOUND",
+          "typesMissing": true
+        },
+        {
+          "package": "candidate",
+          "commonjs": "function",
+          "esm": "function",
+          "legacy": "function",
+          "ssrImport": true
+        }
+      ]
+    },
+    "successfulCandidateModes": 7,
+    "rejectedCandidateCases": 52,
+    "frozenMissingEntryModes": 5,
+    "mutuallyAssignableSourceAndPublicConstructors": true,
+    "publicEditorAndGeneratorTests": 3
+  },
+  "runtime": {
+    "mainTests": 49,
+    "legacyTests": 49,
+    "sourceCoveredByCi": true,
+    "reusedExtractionEvidence": {
+      "file": "refactor/baselines/thumbnail-runtime-types-validation.json",
+      "sha256": "8d509900d264a70b91359bca1e35f05b8c295f1a01064405d550d92bfb2735cc",
+      "reason": "Source UMD and all three runtime bundles are byte-identical to the previous verified checkpoint; its 171 extraction/input/native-control cases are reused, not reported as a new run.",
+      "sourceSha256": "27a78a64342d575260f332e19be15018282e7ced2ec81fa73f37e58237f72db0",
+      "cases": 171,
+      "perRun": {
+        "actualTool": 34,
+        "input": 3,
+        "blobUnavailable": 17,
+        "nativeControl": 3
+      }
+    }
+  },
+  "browser": {
+    "freshCases": 3,
+    "retries": 0,
+    "skips": 0,
+    "cases": [
+      {
+        "title": "Monaco consumes Thumbnail global declarations and runs the actual typed constructor and cleanup",
+        "project": "chromium",
+        "durationMs": 1282,
+        "environment": {
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/published-4.5.5/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "4.5.5",
+                  "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                "bytes": 153582
+              },
+              "/published-5.1.7/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.1.7",
+                  "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                "bytes": 155940
+              },
+              "/published-4.5.9/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "4.5.9",
+                  "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                "bytes": 156408
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/thumbnail-pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/thumbnail-pattern.mp4"
+                },
+                "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                "bytes": 752916
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/test/iframe-boundary-child.html": {
+                "source": {
+                  "kind": "iframe-fixture",
+                  "file": "test/browser/iframe-boundary-child.html"
+                },
+                "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                "bytes": 1451
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          },
+          "state": {
+            "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+            "media": null
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        "evidence": {
+          "candidate": "candidate-source",
+          "sha256": "27a78a64342d575260f332e19be15018282e7ced2ec81fa73f37e58237f72db0",
+          "declarations": {
+            "artplayer": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+            "artplayer-tool-thumbnail": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6",
+            "artplayer-proxy-mediabunny": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e"
+          },
+          "result": {
+            "syntax": [],
+            "semantic": [],
+            "declaration": [],
+            "invalid": [
+              2322
+            ],
+            "executed": true,
+            "actual": {
+              "last": 7,
+              "connected": false,
+              "inputConnected": false,
+              "processing": false
+            }
+          },
+          "scope": "Real local Monaco worker, typed constructor/custom event and native DOM cleanup; MediaBunny relative type bundle also compiles. This does not test file decoding or the complete demo/player integration."
+        }
+      },
+      {
+        "title": "Monaco consumes Thumbnail global declarations and runs the actual typed constructor and cleanup",
+        "project": "firefox",
+        "durationMs": 2601,
+        "environment": {
+          "browser": "155.0",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/published-4.5.5/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "4.5.5",
+                  "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                "bytes": 153582
+              },
+              "/published-5.1.7/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.1.7",
+                  "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                "bytes": 155940
+              },
+              "/published-4.5.9/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "4.5.9",
+                  "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                "bytes": 156408
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/thumbnail-pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/thumbnail-pattern.mp4"
+                },
+                "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                "bytes": 752916
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/test/iframe-boundary-child.html": {
+                "source": {
+                  "kind": "iframe-fixture",
+                  "file": "test/browser/iframe-boundary-child.html"
+                },
+                "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                "bytes": 1451
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          },
+          "state": {
+            "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+            "media": null
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        "evidence": {
+          "candidate": "candidate-source",
+          "sha256": "27a78a64342d575260f332e19be15018282e7ced2ec81fa73f37e58237f72db0",
+          "declarations": {
+            "artplayer": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+            "artplayer-tool-thumbnail": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6",
+            "artplayer-proxy-mediabunny": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e"
+          },
+          "result": {
+            "syntax": [],
+            "semantic": [],
+            "declaration": [],
+            "invalid": [
+              2322
+            ],
+            "executed": true,
+            "actual": {
+              "last": 7,
+              "connected": false,
+              "inputConnected": false,
+              "processing": false
+            }
+          },
+          "scope": "Real local Monaco worker, typed constructor/custom event and native DOM cleanup; MediaBunny relative type bundle also compiles. This does not test file decoding or the complete demo/player integration."
+        }
+      },
+      {
+        "title": "Monaco consumes Thumbnail global declarations and runs the actual typed constructor and cleanup",
+        "project": "webkit",
+        "durationMs": 1845,
+        "environment": {
+          "browser": "26.6",
+          "platform": "win32",
+          "manifest": {
+            "kind": "artplayer-browser-test",
+            "resources": {
+              "/candidate/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073
+              },
+              "/compiled/artplayer.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/uncompiled/artplayer/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer\\src\\index.ts"
+                },
+                "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+                "bytes": 378073,
+                "aliasOf": "/candidate/artplayer.js"
+              },
+              "/candidate/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529
+              },
+              "/compiled/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/uncompiled/artplayer-plugin-chapter/index.js": {
+                "source": {
+                  "kind": "workspace-build",
+                  "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                },
+                "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                "bytes": 8529,
+                "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+              },
+              "/published/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.4.0",
+                  "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                "bytes": 134037
+              },
+              "/published/artplayer-plugin-chapter.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "1.1.0",
+                  "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                  "member": "package/dist/artplayer-plugin-chapter.js"
+                },
+                "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                "bytes": 4973
+              },
+              "/test/pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.mp4"
+                },
+                "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                "bytes": 251538
+              },
+              "/test/pattern.webm": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/pattern.webm"
+                },
+                "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                "bytes": 162073
+              },
+              "/published-4.5.5/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "4.5.5",
+                  "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                "bytes": 153582
+              },
+              "/published-5.1.7/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "5.1.7",
+                  "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                "bytes": 155940
+              },
+              "/published-4.5.9/artplayer.js": {
+                "source": {
+                  "kind": "npm-release",
+                  "version": "4.5.9",
+                  "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                  "member": "package/dist/artplayer.js"
+                },
+                "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                "bytes": 156408
+              },
+              "/test/audio-tone.m4a": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/audio-tone.m4a"
+                },
+                "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                "bytes": 132436
+              },
+              "/test/thumbnail-pattern.mp4": {
+                "source": {
+                  "kind": "generated-media",
+                  "file": "test/browser/media/thumbnail-pattern.mp4"
+                },
+                "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                "bytes": 752916
+              },
+              "/test/declaration-cues.vtt": {
+                "source": {
+                  "kind": "test-subtitles",
+                  "file": "test/browser/media/declaration-cues.vtt"
+                },
+                "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                "bytes": 54
+              },
+              "/test/thumbnail-grid.svg": {
+                "source": {
+                  "kind": "test-thumbnail-grid",
+                  "file": "test/browser/media/thumbnail-grid.svg"
+                },
+                "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                "bytes": 14969
+              },
+              "/test/legacy-safe-area.js": {
+                "source": {
+                  "kind": "frozen-own-source",
+                  "file": "test/helpers/legacy-safe-area.js",
+                  "commit": "ccf77c4e"
+                },
+                "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                "bytes": 795
+              },
+              "/test/iframe-boundary-child.html": {
+                "source": {
+                  "kind": "iframe-fixture",
+                  "file": "test/browser/iframe-boundary-child.html"
+                },
+                "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                "bytes": 1451
+              },
+              "/assets/sample/video.mp4": {
+                "source": {
+                  "kind": "docs-media",
+                  "file": "docs/assets/sample/video.mp4"
+                },
+                "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                "bytes": 5818706
+              },
+              "/test/performance.js": {
+                "source": {
+                  "kind": "adapted-baseline-fixture",
+                  "file": "refactor/fixtures/performance.js"
+                },
+                "sha256": "2318f39bdb5f3a3348d755cb4335907ae4adc944be3a435839c1bba201e81500",
+                "bytes": 8994
+              }
+            }
+          },
+          "state": {
+            "url": "http://127.0.0.1:8084/test/player.html?core=candidate&chapter=published",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+            "media": null
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": []
+        },
+        "evidence": {
+          "candidate": "candidate-source",
+          "sha256": "27a78a64342d575260f332e19be15018282e7ced2ec81fa73f37e58237f72db0",
+          "declarations": {
+            "artplayer": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+            "artplayer-tool-thumbnail": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6",
+            "artplayer-proxy-mediabunny": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e"
+          },
+          "result": {
+            "syntax": [],
+            "semantic": [],
+            "declaration": [],
+            "invalid": [
+              2322
+            ],
+            "executed": true,
+            "actual": {
+              "last": 7,
+              "connected": false,
+              "inputConnected": false,
+              "processing": false
+            }
+          },
+          "scope": "Real local Monaco worker, typed constructor/custom event and native DOM cleanup; MediaBunny relative type bundle also compiles. This does not test file decoding or the complete demo/player integration."
+        }
+      }
+    ],
+    "report": {
+      "file": "refactor/.cache/thumbnail04-public-browser-editor-verified.json",
+      "sha256": "3d7646df461cef319fe2a02ec58e9f1fab13157ab22f2161dd90db333dddc635"
+    }
+  },
+  "files": [
+    {
+      "file": "package.json",
+      "sha256": "523c4ffc4016c78a694306b833a3832bf815268452863ff23f766b7fc1f58148"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/package.json",
+      "sha256": "dafbe13cddee908b2932ab2f529b0eef86ad9d9de8f7ab7585ed073c221cdbe1"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/tsconfig.json",
+      "sha256": "712a3fa32ed57692d16bf854a0e77ffaecd04236efa0f557905aab7291e0aef6"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/ARCHITECTURE.md",
+      "sha256": "3c9de50e9e8b9e43fa0212fd4f0ce2a5693ac74a649e461cb1f19e9c591c3827"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/emitter.ts",
+      "sha256": "bd4d5472361edd2e31a6ae1aecce01e310e4086edebe434733d0f5b5eea37a0b"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/extraction.ts",
+      "sha256": "9464d34523291be3c46babd8753dbb7e8f881c5956adf4831f3c8a60d969362c"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/index.ts",
+      "sha256": "24713364030cfca8201bb564794b612047a517cb9b233889b71bd8b9e14c49a9"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/input.ts",
+      "sha256": "cafbef270a2c4edbbf2ac3814a9fccf95d805b7158ffd25a42ebc211bf1834ce"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/lifecycle.ts",
+      "sha256": "3c30d5ad20d89abe80a39abb95270e340c47534e11065047ab191bd5fbecec4a"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/sheet.ts",
+      "sha256": "af423e53fbd6aec2c54ae74410cf84f99eb8c125605b064aaf6fa1f0bb8f0d45"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/source.ts",
+      "sha256": "e10348712f5edbdfe1012a527f7c6af83f44f9a7e1dee69a6353c4c095458e54"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/types.ts",
+      "sha256": "15d97bf41d87c4ccb7cf290e663b73390ed5bf40196adfda9bee1faa1b082196"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/src/utils.ts",
+      "sha256": "90d2e1195f7de6c4a5930172baf23b95c2de1cc729375b0d29e30fe43e4dfd13"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/types/artplayer-tool-thumbnail.d.cts",
+      "sha256": "f0573326178b57a6e22a08b53247eb15ef4d20a1652e40d0cae638ac7aaf8092"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/types/artplayer-tool-thumbnail.d.mts",
+      "sha256": "e96e0123bff89e109a00c1c169da99741c8bf66d3f4fd53b8e8ecf7c3f440533"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/types/artplayer-tool-thumbnail.d.ts",
+      "sha256": "ec2a39f3e2ac5ef1717d4da56546486c614a9bb6291c14c05723c1990546e79f"
+    },
+    {
+      "file": "packages/artplayer-tool-thumbnail/types/README.md",
+      "sha256": "5a6071256c2d810ca77d6022bf81479ec3d48666977fa0706444f9a514834215"
+    },
+    {
+      "file": "scripts/build-ts.js",
+      "sha256": "c755ed9d9a54ba7071628ee2e731d95b6995bbe88073703d8156cf3691117500"
+    },
+    {
+      "file": "scripts/plugin-editor-types.mjs",
+      "sha256": "429c304ce7c801836a311e76e85f2e6dc0328d599103e39d071a915164b94102"
+    },
+    {
+      "file": "docs/assets/js/common.js",
+      "sha256": "cc9f7d780cf4f0ffb9aaee75da69e2b2b062f3bac07b4ffc9a75956b2e7cd7af"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-tool-thumbnail.d.ts",
+      "sha256": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-proxy-mediabunny.d.ts",
+      "sha256": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e"
+    },
+    {
+      "file": "test/types/thumbnail.ts",
+      "sha256": "2377b1bbba1ffb05e1bfd06804ffeb131f427cb49d2eb944ab662b4aefe7b069"
+    },
+    {
+      "file": "test/types/thumbnail-commonjs.cts",
+      "sha256": "127f6db8d359cb15229bffb75c19226dad719b67972420a906c5aa18aaba82f1"
+    },
+    {
+      "file": "test/types/thumbnail-source.ts",
+      "sha256": "549a2f3cb6423c4aa5421b9d69998000160f2b95af6a578b76f4326cbc192dd8"
+    },
+    {
+      "file": "test/types/thumbnail-runtime.ts",
+      "sha256": "503eb377cfe9e5fb80a58d639ac969675c9a5557b988c8c8aaf979882262db6b"
+    },
+    {
+      "file": "test/thumbnail-runtime.test.js",
+      "sha256": "b8541ad8073e247becb3b90cb7eab517785dea5e1bbf5c06132796f8148c6a96"
+    },
+    {
+      "file": "test/browser/thumbnail-editor-types.spec.js",
+      "sha256": "12c944134e503f46a773a5c97daa6995a7ec365d0a9185a1b9c830c63bdd8d8c"
+    },
+    {
+      "file": "refactor/scripts/thumbnail-types.test.mjs",
+      "sha256": "9e08630089e98b9788394ec7caf86df2cae37a0dc62e20a6c47cc4ce1d9ed4ad"
+    },
+    {
+      "file": "refactor/scripts/thumbnail-package-types.mjs",
+      "sha256": "27318713c7ba77b0a373c29a60f102fbb43629f787d508ee83d7f0720fbe8fe3"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/thumbnail04-public-build.log",
+      "sha256": "0481bea935ef9cedb4d723a007575bc9c1b983ac946882ae7f76334781bf3906"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-tests.log",
+      "sha256": "cbe66fd52705f9d7061512886b19101a9b4366cee86aa7ca5e16539d10d1b5ce"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-main.log",
+      "sha256": "a036db25776bbe8fae5ed6473575ab8a45a47443ccd4769e5117d1bdedc86be8"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-legacy.log",
+      "sha256": "e819d85dda750cb2aae6d63c6bb3ec5ea31020294a1f8ab849a43f8da65fd4ea"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-artifact-equality.log",
+      "sha256": "b2ff5513f5067e6cc09b3f7cbeecc6a147a5df1951ca09cd6c26a4b8b3331228"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-imports.log",
+      "sha256": "9a1fe3591675662de2364903e3f0386bce90cc5130c20675077b0229e13fa6a8"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-editor-all.log",
+      "sha256": "5727a795a48aae880eb50c01965893a8a73575ec62b7e0ff99ef613a94dfd67c"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-editor-fixed.log",
+      "sha256": "5e5c5768e305d7490dfc98ad3cb4e3f5bc2f8ae53f3249c648ca75d54eb494a1"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-editor-final.log",
+      "sha256": "aba170fe5dc80e9e85832db17ce1b7200a1be4b1fd7fbbab274f02dd5847b47d"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-editor-regression.log",
+      "sha256": "c91b19426f83656d05337691f7ba6a6ad8a489b7d2d39629e4062ab8680d05d8"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-ci.log",
+      "sha256": "3d6eba9a12d6bf2649030929ce8172e6b7af80351f058635dafd2f1208759c5c"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-ci-final.log",
+      "sha256": "a79a4b105451adcdbcc8134ba56caf48d4b9b45546a849c14d2fa58366460377"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-installed-verified.log",
+      "sha256": "7deac209c7fe18366712c9636d267f80cfc86763227079ba374851116fce0955"
+    },
+    {
+      "file": "refactor/.cache/thumbnail04-public-browser-editor-verified.log",
+      "sha256": "17650904514f7ab9f2a7477679419091d823a089ab4d49e85816b02d10c6e848"
+    }
+  ],
+  "supersededPackages": [
+    "refactor/.cache/thumbnail-package-types-vdlxV8/report.json",
+    "refactor/.cache/thumbnail-package-types-pTZL6D/report.json"
+  ],
+  "limitations": [
+    "User choice between published 3.5.31 and workspace 4.4.0 defaults remains pending; no behavior choice inferred.",
+    "Recovered old inputs are not a complete original npm archive; historical CSS path still needs disposition.",
+    "Native Windows WebKit Blob limitation and complete demo/core/device integration remain 05/06.",
+    "No new extraction run, thumbnail coverage percentage, hosted CI, version bump, push, tag or npm publication."
+  ]
+}

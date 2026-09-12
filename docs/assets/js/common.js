@@ -70,6 +70,7 @@
       './assets/ts/artplayer-proxy-canvas.d.ts',
       './assets/ts/artplayer-proxy-mediabunny.d.ts',
       './assets/ts/artplayer-tool-iframe.d.ts',
+      './assets/ts/artplayer-tool-thumbnail.d.ts',
       './assets/ts/artplayer.d.ts',
       './assets/ts/artplayer-i18n.d.ts',
     ]

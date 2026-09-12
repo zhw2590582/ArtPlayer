@@ -1,8 +1,9 @@
 # Thumbnail tool maintenance map
 
 The runtime responsibilities were separated under PKG-TOOL-THUMB-03 and are now
-strict TypeScript under PKG-TOOL-THUMB-04. Published declarations and installed
-entrypoint checks are still in progress; runtime migration is not release readiness.
+strict TypeScript under PKG-TOOL-THUMB-04. Public declarations and isolated installed
+entrypoints now have checks; the historical default-policy decision and final
+integration/release gates remain open.
 
 | File | Responsibility |
 | --- | --- |
@@ -15,6 +16,7 @@ entrypoint checks are still in progress; runtime migration is not release readin
 | src/emitter.ts | Typed local adaptation of tiny-emitter; preserves on/once/emit/off behavior |
 | src/utils.ts | Pure clamp and filename helpers; unused sleep/serial helpers removed |
 | src/types.ts | Internal option, frame, event tuple, job and lifecycle contracts; no runtime output |
+| types/artplayer-tool-thumbnail.d.ts | Public class/namespace; d.cts/d.mts wrappers share its identity |
 
 The entry delegates to input/source/extraction/sheet. Helpers import its type only;
 the imports are erased and do not create a runtime dependency on the entry.
@@ -100,7 +102,8 @@ Safari/WebKit evidence in 05. The independent tool example is
 callback failures, reentrancy and private resources. Browser tests hold real PNG
 callbacks and replace a selected file during encoding; only the latest job may
 complete. Continue published declarations and installed consumers in 04; preserve
-old tests and the default delay/height boundary.
+old tests and the default delay/height boundary. The [public type guide](types/README.md)
+documents declaration ownership, module entries, events and installed consumers.
 See [task plan](../../refactor/plan.md) and [risk ledger](../../refactor/risks.json).
 
 ## Type and provenance boundaries
@@ -110,9 +113,12 @@ strict, noUncheckedIndexedAccess, noImplicitOverride, skipLibCheck=false and no
 ambient Node/test globals. Public fields use declare so TypeScript does not add
 early undefined properties or change constructor property order. File/URL/density
 fields retain their absence until the corresponding operation publishes them.
-Unknown option fields remain unknown, and custom string/number/symbol events keep
-an open payload boundary; built-in events have precise tuples. This source typing
-is not yet the missing public npm declaration entrypoint.
+Unknown option fields remain unknown. Custom string/number/symbol events infer
+caller-defined callback tuples; built-in events have precise tuples. Their
+heterogeneous registry erases tuple types at storage and applies a local assertion
+when dispatching. Public and source constructors are checked in both directions.
+Error payloads remain unknown because callbacks can throw arbitrary message
+values. This does not change runtime error delivery.
 
 Assertions are limited to existing runtime boundaries: a temporary empty option
 object before setup validation; the input/wrapper conversion; event target and
@@ -129,7 +135,8 @@ The emitter structurally corresponds to tiny-emitter 2.1.0, which the recovered
 The pinned [reference files](../../refactor/baselines/thumbnail-vendor/sources.json)
 and [MIT notice](THIRD_PARTY_NOTICES) retain upstream attribution. The repository
 build includes the complete notice in main, legacy and ESM bundle headers.
-Final packed contents remain a distribution gate. Do not replace this local
+Current packed contents include the complete notice and no implementation source;
+new release candidates must repeat the installed check. Do not replace this local
 emitter with the core emitter as part of a type-only change: dispatch semantics
 and historical prototype-key handling need their own behavior review.
 

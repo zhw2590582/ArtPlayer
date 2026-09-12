@@ -75,7 +75,7 @@ function createJob(tool: ArtplayerToolThumbnail, state: LifecycleState) {
     }
     if (report) {
       try {
-        tool.emit('error', (error as { message?: string } | null | undefined)?.message)
+        tool.emit('error', (error as { message?: unknown } | null | undefined)?.message)
       }
       catch (listenerError) {
         error = listenerError
@@ -94,7 +94,7 @@ function createJob(tool: ArtplayerToolThumbnail, state: LifecycleState) {
     catch (error) {
       let failure = error
       try {
-        tool.emit('error', (error as { message?: string } | null | undefined)?.message)
+        tool.emit('error', (error as { message?: unknown } | null | undefined)?.message)
       }
       catch (listenerError) {
         failure = listenerError

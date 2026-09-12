@@ -20,8 +20,9 @@ function parsePluginInfo(pluginPath) {
   const file = path.basename(pluginPath)
   const baseName = file.replace('.d.ts', '')
 
-  const name = baseName === 'artplayer-tool-iframe'
-    ? 'ArtplayerToolIframe'
+  const classNames = { 'artplayer-tool-iframe': 'ArtplayerToolIframe', 'artplayer-tool-thumbnail': 'ArtplayerToolThumbnail' }
+  const name = classNames[baseName]
+    ? classNames[baseName]
     : baseName
         .split('-')
         .map((word, index) =>
@@ -40,9 +41,9 @@ fs.writeFileSync(artplayerTSoutput, code.trim())
 console.log(`✨ Built ${artplayerTSoutput}`);
 
 (async function () {
-  const available = glob.sync('packages/artplayer-*-*/types/*.d.ts')
-  const selected = process.argv.slice(2)
   const packageOf = file => path.basename(path.dirname(path.dirname(file)))
+  const available = glob.sync('packages/artplayer-*-*/types/*.d.ts').filter(file => path.basename(file) === `${packageOf(file)}.d.ts`)
+  const selected = process.argv.slice(2)
   for (const name of selected)
     assert(available.some(file => packageOf(file) === name), `Unknown declaration package: ${name}`)
   const pluginsTS = selected.length ? available.filter(file => selected.includes(packageOf(file))) : available
@@ -52,9 +53,10 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
     const source = String(fs.readFileSync(type))
-    const semanticPlugin = ['artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds', 'artplayerPluginAmbilight', 'artplayerProxyCanvas', 'artplayerPluginDocumentPip', 'ArtplayerToolIframe'].includes(name)
+    const semanticPlugin = ['artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds', 'artplayerPluginAmbilight', 'artplayerProxyCanvas', 'artplayerProxyMediabunny', 'artplayerPluginDocumentPip', 'ArtplayerToolIframe', 'ArtplayerToolThumbnail'].includes(name)
+    const localTypes = name === 'artplayerProxyMediabunny' ? { './media': fs.readFileSync(path.join(path.dirname(type), 'media.d.ts'), 'utf8') } : {}
     const code = semanticPlugin
-      ? generatePluginEditorDeclaration(source, name)
+      ? generatePluginEditorDeclaration(source, name, localTypes)
       : `${source.replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`
     if (semanticPlugin) {
       const core = fs.readFileSync(artplayerTSoutput, 'utf8')

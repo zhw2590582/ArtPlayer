@@ -4,10 +4,32 @@ import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 
 // Migrate each package explicitly; unknown imports/exports must not disappear silently.
-export function generatePluginEditorDeclaration(code, name) {
+export function generatePluginEditorDeclaration(code, name, localTypes = {}) {
   assert(/^[a-z_$][\w$]*$/i.test(name), 'Invalid plugin global')
-  const source = ts.createSourceFile('plugin.d.ts', code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
+  let source = ts.createSourceFile('plugin.d.ts', code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
   assert.equal(source.parseDiagnostics.length, 0, 'Invalid plugin declaration syntax')
+  const expanded = []
+  for (const node of source.statements) {
+    if (!ts.isExportDeclaration(node) || !node.moduleSpecifier) {
+      expanded.push(node)
+      continue
+    }
+    assert(node.isTypeOnly, 'Unsupported plugin editor declaration: runtime re-export')
+    const dependency = localTypes[node.moduleSpecifier.text]
+    assert(typeof dependency === 'string' && node.exportClause && ts.isNamedExports(node.exportClause), 'Unsupported editor type re-export')
+    const names = node.exportClause.elements.map((item) => {
+      assert(!item.propertyName, 'Renamed editor type re-export is unsupported')
+      return item.name.text
+    })
+    const types = ts.createSourceFile('dependency.d.ts', dependency, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
+    assert.equal(types.parseDiagnostics.length, 0)
+    const definitions = types.statements.filter(item => !ts.isImportDeclaration(item))
+    assert(definitions.every(item => ts.isInterfaceDeclaration(item) || ts.isTypeAliasDeclaration(item)), 'Editor dependencies must contain only types')
+    assert.deepEqual(definitions.map(item => item.name.text).sort(), names.sort(), 'Editor re-export must explicitly cover its local type definitions')
+    expanded.push(...types.statements)
+  }
+  // Reparse combined statements so comments and text positions belong to one file.
+  source = ts.createSourceFile('plugin.d.ts', expanded.map(node => ts.createPrinter().printNode(ts.EmitHint.Unspecified, node, node.getSourceFile())).join('\n'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
   if (source.statements.some(node => ts.isExportAssignment(node) && node.isExportEquals))
     return generateCommonJSPluginEditor(source, name)
   const factory = ts.factory
@@ -25,6 +47,13 @@ export function generatePluginEditorDeclaration(code, name) {
     if (ts.isExportAssignment(node)) {
       assert(!node.isExportEquals && ts.isIdentifier(node.expression) && node.expression.text === name, 'Unexpected plugin default export')
       exported = true
+      continue
+    }
+    if (ts.isVariableStatement(node)) {
+      const values = node.declarationList.declarations
+      assert(values.length === 1 && values[0].name.text === name && ts.isFunctionTypeNode(values[0].type), 'Unexpected plugin callable variable')
+      definitions.push(factory.replaceModifiers(node, [factory.createModifier(ts.SyntaxKind.ExportKeyword)]))
+      callable = true
       continue
     }
     assert(ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node), 'Unsupported plugin editor declaration')
@@ -67,6 +96,7 @@ function generateCommonJSPluginEditor(source, name) {
   let callable = false
   let exported = false
   let global = false
+  let classExport = false
   for (const node of source.statements) {
     if (ts.isImportDeclaration(node)) {
       assert(node.importClause?.isTypeOnly && !node.importClause.namedBindings && node.importClause.name?.text === 'Artplayer' && node.moduleSpecifier.text === 'artplayer', 'Unsupported CommonJS plugin editor import')
@@ -76,6 +106,11 @@ function generateCommonJSPluginEditor(source, name) {
       assert.equal(node.name.text, name, 'Unexpected plugin namespace')
       assert(node.body && ts.isModuleBlock(node.body) && node.body.statements.every(item => ts.isInterfaceDeclaration(item) || ts.isTypeAliasDeclaration(item)), 'Editor namespace must contain only public type declarations')
       namespace = true
+    }
+    else if (ts.isClassDeclaration(node)) {
+      assert.equal(node.name?.text, name, 'Unexpected CommonJS editor class')
+      callable = true
+      classExport = true
     }
     else if (ts.isVariableStatement(node)) {
       const definitions = node.declarationList.declarations
@@ -101,7 +136,8 @@ function generateCommonJSPluginEditor(source, name) {
   }
   assert(namespace && callable && exported && global, 'Incomplete CommonJS plugin editor declaration')
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed })
-  return `// Generated from the package public declaration by yarn build:ts. Do not edit.\n/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */\n${statements.map(node => printer.printNode(ts.EmitHint.Unspecified, node, source)).join('\n')}\n`
+  const bridge = classExport ? '' : '/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */\n'
+  return `// Generated from the package public declaration by yarn build:ts. Do not edit.\n${bridge}${statements.map(node => printer.printNode(ts.EmitHint.Unspecified, node, source)).join('\n')}\n`
 }
 
 export function checkPluginEditorDeclaration(code, core, consumer = '', compiler = ts) {
