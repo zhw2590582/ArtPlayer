@@ -3610,11 +3610,13 @@
       "owners": [
         "PKG-FACTORY-01"
       ],
-      "compatibleResolution": "Preserve historical complete factory assignments while modeling actual export variants explicitly; do not equate unchanged Parameters with complete callable compatibility.",
+      "compatibleResolution": "Preserve historical complete factory assignments while modeling actual export variants explicitly; do not equate unchanged Parameters with complete callable compatibility. The 72-case proposal matrix demonstrates that required or optional self.default and pure export-default/export-equals shapes each preserve different historical consumers; the proposed latest-release type baseline is awaiting explicit user acceptance.",
       "closureCriteria": "Both historical and candidate replacement fixtures, all supported export/declaration paths and installed consumers verified; unresolved variant conflicts require an explicit decision rather than silent narrowing.",
       "evidence": [
         "refactor/baselines/factory-assignment-gaps.json",
-        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md"
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/factory-compatibility-proposals.json",
+        "refactor/factory-compatibility-decision.md"
       ]
     }
   ]

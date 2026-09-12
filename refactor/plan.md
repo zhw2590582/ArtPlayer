@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 119 / doing 6 / blocked 0 / done 97 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 118 / doing 7 / blocked 0 / done 97 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -412,7 +412,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-FACTORY-01 | artplayer-proxy-canvas, artplayer-plugin-ambilight<br>修复已迁移工厂的反向赋值兼容 | PKG-CANVAS-04, PKG-AMBILIGHT-04, PKG-DPIP-04 | 复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档 | 默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用 | H | todo |
+| PKG-FACTORY-01 | artplayer-proxy-canvas, artplayer-plugin-ambilight<br>修复已迁移工厂的反向赋值兼容 | PKG-CANVAS-04, PKG-AMBILIGHT-04, PKG-DPIP-04 | 复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档 | 默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用 | H | doing |
 
 ## 完成证据与阻塞
 
@@ -520,4 +520,4 @@
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-04: [记录](changes/2026-09-12-PKG-CANVAS-04-types.md) [记录](baselines/canvas-types-validation.json) [记录](canvas-validation.md)
-- PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json)
+- PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

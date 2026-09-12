@@ -4290,12 +4290,15 @@
         "PKG-AMBILIGHT-04",
         "PKG-DPIP-04"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档",
       "acceptance": "默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用",
       "evidence": [
-        "baselines/factory-assignment-gaps.json"
+        "baselines/factory-assignment-gaps.json",
+        "baselines/factory-compatibility-proposals.json",
+        "factory-compatibility-decision.md",
+        "changes/2026-09-12-PKG-FACTORY-01-decision.md"
       ]
     }
   ]

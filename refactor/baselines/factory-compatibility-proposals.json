@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-FACTORY-01",
+  "status": "decision-pending",
+  "parentCommit": "ef976136a1bef37baab806c37d92cb9d50ddaae5",
+  "command": "node --test refactor/scripts/factory-assignability.test.mjs",
+  "scope": "72 exact compiler cases: 2 packages, 2 compilers, 2 published declarations and 4 structural proposals, 3 consumer usages. CommonJS Node resolution, strict and skipLibCheck=false. An additional test isolates the optional-overload regression. This is a decision checkpoint, not a package or release acceptance.",
+  "recommendation": "Use published 1.1.0 default factory types and explicit runtime views; preserve JS callable and self.default exports. Requires explicit acceptance of the 1.0.0 TypeScript import-equals direct-call migration.",
+  "proposals": [
+    {
+      "name": "artplayer-proxy-canvas",
+      "declaration": "import type Artplayer from 'artplayer';\ntype Option = (ctx: CanvasRenderingContext2D, video: HTMLVideoElement) => void;\ntype Result = HTMLCanvasElement;\ntype Callable = (option?: Option) => (art: Artplayer) => Result;\ndeclare const plugin: Callable; export default plugin;"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "declaration": "import type Artplayer from 'artplayer';\ntype Option = { blur?: string; opacity?: number; frequency?: number; zIndex?: number; duration?: number };\ntype Result = { name: 'artplayerPluginAmbilight'; start: () => void; stop: () => void };\ntype Callable = (option: Option) => (art: Artplayer) => Result;\ndeclare const plugin: Callable; export default plugin;"
+    }
+  ],
+  "records": [
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "published-1.0.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "published-1.0.0",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "published-1.0.0",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type '(option: Option) => (art: Artplayer) => HTMLCanvasElement'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "published-1.1.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "published-1.1.0",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "published-1.1.0",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "required-default",
+      "usage": "factory-replacement",
+      "diagnostics": [
+        {
+          "code": 2741,
+          "message": "Property 'default' is missing in type '(_option?: Parameters<typeof plugin>[0]) => (_art: Artplayer) => HTMLCanvasElement' but required in type 'Factory'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "required-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "required-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "optional-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "optional-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "optional-default",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2722,
+          "message": "Cannot invoke an object which is possibly 'undefined'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "latest-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "latest-default",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "latest-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "callable-export-equals",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "callable-export-equals",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "5.9.3",
+      "shape": "callable-export-equals",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type 'Callable'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "published-1.0.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "published-1.0.0",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "published-1.0.0",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type '(option: Option) => (art: Artplayer) => HTMLCanvasElement'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "published-1.1.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "published-1.1.0",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "published-1.1.0",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "required-default",
+      "usage": "factory-replacement",
+      "diagnostics": [
+        {
+          "code": 2741,
+          "message": "Property 'default' is missing in type '(_option?: Parameters<typeof plugin>[0]) => (_art: Artplayer) => HTMLCanvasElement' but required in type 'Factory'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "required-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "required-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "optional-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "optional-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "optional-default",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2722,
+          "message": "Cannot invoke an object which is possibly 'undefined'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "latest-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "latest-default",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "latest-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "callable-export-equals",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "callable-export-equals",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "compiler": "4.3.5",
+      "shape": "callable-export-equals",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type 'Callable'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "published-1.0.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "published-1.0.0",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "published-1.0.0",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type '(option: Option) => (art: Artplayer) => Result'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "published-1.1.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "published-1.1.0",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "published-1.1.0",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "required-default",
+      "usage": "factory-replacement",
+      "diagnostics": [
+        {
+          "code": 2741,
+          "message": "Property 'default' is missing in type '(_option: Option) => (_art: Artplayer) => { name: \"artplayerPluginAmbilight\"; start(): void; stop(): void; }' but required in type 'Factory'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "required-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "required-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "optional-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "optional-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "optional-default",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2722,
+          "message": "Cannot invoke an object which is possibly 'undefined'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "latest-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "latest-default",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "latest-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "callable-export-equals",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "callable-export-equals",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "5.9.3",
+      "shape": "callable-export-equals",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type 'Callable'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "published-1.0.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "published-1.0.0",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "published-1.0.0",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type '(option: Option) => (art: Artplayer) => Result'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "published-1.1.0",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "published-1.1.0",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "published-1.1.0",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "required-default",
+      "usage": "factory-replacement",
+      "diagnostics": [
+        {
+          "code": 2741,
+          "message": "Property 'default' is missing in type '(_option: Option) => (_art: Artplayer) => { name: \"artplayerPluginAmbilight\"; start(): void; stop(): void; }' but required in type 'Factory'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "required-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "required-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "optional-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "optional-default",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "optional-default",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2722,
+          "message": "Cannot invoke an object which is possibly 'undefined'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "latest-default",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "latest-default",
+      "usage": "require-call",
+      "diagnostics": [
+        {
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"D:/github/ArtPlayer/test/types/factory-history\")' has no call signatures."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "latest-default",
+      "usage": "require-default",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "callable-export-equals",
+      "usage": "factory-replacement",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "callable-export-equals",
+      "usage": "require-call",
+      "diagnostics": []
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "compiler": "4.3.5",
+      "shape": "callable-export-equals",
+      "usage": "require-default",
+      "diagnostics": [
+        {
+          "code": 2339,
+          "message": "Property 'default' does not exist on type 'Callable'."
+        }
+      ]
+    }
+  ]
+}

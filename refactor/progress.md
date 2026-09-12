@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前检查点：PKG-FACTORY-01 类型兼容决策
+
+Canvas/Ambilight 的工厂替换问题已增加72场景编译对照，以及可选重载的独立反例。
+推荐恢复已发布1.1.0默认工厂形状，保留JS导出，具体1.0.0 TypeScript迁移影响见
+[待确认决策](factory-compatibility-decision.md)。生产声明尚未修改；风险保持open，
+本任务doing，不计入完成。当前222项：97 done、7 doing、118 todo。
+此提交仅保存可复现测试、提案与证据；后续仍须实施、安装消费和产物验证。
+
 ## 最新完成：Document PiP-04 类型、工厂赋值与导出兼容
 
 默认工厂完整保留旧必填签名与可替换性；Result保持void/可写字段，显式RuntimeFactory
