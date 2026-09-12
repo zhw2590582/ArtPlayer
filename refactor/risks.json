@@ -3255,7 +3255,7 @@
     {
       "id": "AMBILIGHT-LIFE-01",
       "title": "Ambilight sampling and RAF/DOM ownership lack terminal/error handling",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "owners": [
         "PKG-AMBILIGHT-02",
         "PKG-AMBILIGHT-03",
@@ -3267,8 +3267,12 @@
       "evidence": [
         "refactor/baselines/ambilight-contract.md",
         "refactor/baselines/ambilight-release.json",
-        "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md"
-      ]
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-02-tests.md",
+        "refactor/baselines/ambilight-behavior-validation.json",
+        "refactor/ambilight-validation.md"
+      ],
+      "workspaceState": "30 Node historical tests reproduce RAF id zero, terminal/escaped method, sampling/context, reentrant stop/destroy and setup rollback failures. Native browser sampling of a cross-origin video throws SecurityError and stays tainted after same-origin source recovery. No production fixes in this task."
     },
     {
       "id": "AMBILIGHT-TYPE-01",

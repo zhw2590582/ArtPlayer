@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-02",
+  "status": "done",
+  "sourceCommit": "06032a6906aa2a5c59e421cd8076d70daf5f4801",
+  "checks": [
+    {
+      "command": "node --test test/ambilight.test.js",
+      "result": "pass",
+      "tests": 30,
+      "scope": "Three frozen implementations; normal control/parameter semantics and historical failure assertions",
+      "log": "refactor/.cache/ambilight02-tests.log"
+    },
+    {
+      "command": "playwright test test/browser/ambilight.spec.js",
+      "result": "pass",
+      "tests": 54,
+      "projects": [
+        "chromium",
+        "firefox",
+        "webkit"
+      ],
+      "coreSources": [
+        "npm 5.1.7",
+        "npm 5.4.0",
+        "candidate source"
+      ],
+      "skipped": 0,
+      "scope": "Native video/Canvas/RAF, local source switch, retained DOM and actual cross-origin taint; fresh native canvas reads recovered video while old plugin canvas still fails",
+      "report": "refactor/.cache/ambilight02-final-results/report.json",
+      "archivedResults": "refactor/.cache/ambilight02-final-results/results",
+      "originalResultsPrefix": "refactor/.cache/browser/results",
+      "stats": {
+        "startTime": "2026-09-12T03:03:56.604Z",
+        "duration": 68280.7,
+        "expected": 54,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "command": "eslint test/ambilight.test.js test/browser/ambilight.spec.js --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 862,
+        "engineering": 14,
+        "baseline": 79,
+        "mainTotal": 955,
+        "repeatedContractExecutions": 44
+      },
+      "log": "refactor/.cache/ambilight02-ci.log"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "test/ambilight.test.js",
+      "sha256LF": "886a617d1ddb800c9fd639e3a125b9d1788e67a287900b7d6fbf8f6324774c47"
+    },
+    {
+      "file": "test/browser/ambilight.spec.js",
+      "sha256LF": "5035a3a38460d56747b3786299672e4dbde6543bd384fb3c7112e522dd2add7f"
+    },
+    {
+      "file": "test/helpers/ambilight.js",
+      "sha256LF": "7775f147355d2aa08615a82079760924ae151beb7d9bdc94cccfd8195f5b19d8"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "0d2d5c253b72588e48fe6e68ad7069b70945d8a6bcd6866bbca4516e8299721a"
+    },
+    {
+      "file": "test/browser/server.mjs",
+      "sha256LF": "af513e1e64f875668b6a7cbd060276d85d930e0cc1715577e97907cc26c3b58d"
+    },
+    {
+      "file": "refactor/baselines/ambilight-release.json",
+      "sha256LF": "6acbea40a26397ffa36549fbecb1a12c057cfb3fc932f7cb83181ad5fa37bd2f"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/ambilight02-tests.log",
+      "sha256": "f90963c42d07326e72767e81a9a446891b234ce8e6295192a7bef57ca3be03bf"
+    },
+    {
+      "file": "refactor/.cache/ambilight02-browser-final.log",
+      "sha256": "4f1f4ea230fc667f48a1de5a0890abd2f4945342f2760952e1f50d3847e1083b"
+    },
+    {
+      "file": "refactor/.cache/ambilight02-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/ambilight02-ci.log",
+      "sha256": "b265745fbf3347d3c31c94e4a48a2e6006027afeb2239758f68a6976c553d8bd"
+    }
+  ],
+  "browserReportSha256": "7bd351759c2003cdc6c4d52dee7bdb4ec24f647ae19a91fa4e6f974b5edcd1c7",
+  "limitations": [
+    "These are historical observations; candidate fixes remain PKG-AMBILIGHT-03",
+    "Controlled zero dimensions prove missing guards, not a specific native exception",
+    "No physical devices, canvas proxy support claim, full consumer type or final packed plugin acceptance"
+  ]
+}

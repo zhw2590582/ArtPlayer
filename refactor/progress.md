@@ -1,5 +1,14 @@
 # 进度与证据
 
+## 最新完成：Ambilight-02 行为与失败回归
+
+30项Node复现RAF id零、异常后卡住、销毁/重入/晚注册和初始化回滚问题。54项三引擎/
+三核心真实媒体验证通过；原生跨域Canvas污染在同源恢复后仍持续，新Canvas能取色的
+独立对照排除媒体未恢复误判。核心来源为实际npm5.1.7/5.4.0及候选；无skip。主CI955项
+通过，另44项重复观察；03将拆TS并修复，尚未改生产源码。当前220项：86 done、
+6 doing、128 todo。见 [实施记录](changes/2026-09-12-PKG-AMBILIGHT-02-tests.md)
+和 [验证证据](baselines/ambilight-behavior-validation.json)。
+
 ## 最新完成：Ambilight-01 实际发布契约
 
 冻结npm1.0.0/1.1.0共12成员及工作区源码/声明/demo；真实执行旧CJS.default、新CJS/
