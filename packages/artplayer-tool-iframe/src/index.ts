@@ -1,9 +1,19 @@
+import type { Callbacks, Packet } from './requests'
+import { cancelRequests, postRequest } from './requests'
+
 export default class ArtplayerToolIframe {
+  declare url: string
+  declare $iframe: HTMLIFrameElement
+  declare promises: Record<number, Callbacks>
+  declare injected: boolean
+  declare destroyed: boolean
+  declare messageCallback: ((...args: any[]) => any) | null
+
   static get iframe() {
     return window.top !== window
   }
 
-  static postMessage({ type, data, id = 0 }) {
+  static postMessage({ type, data, id = 0 }: Packet) {
     if (!ArtplayerToolIframe.iframe) {
       throw new Error('The "ArtplayerToolIframe.postMessage" method can only be used in iframe')
     }
@@ -18,7 +28,7 @@ export default class ArtplayerToolIframe {
     )
   }
 
-  static async onMessage(event) {
+  static async onMessage(event: MessageEvent<Packet>) {
     if (!ArtplayerToolIframe.iframe) {
       throw new Error('The "ArtplayerToolIframe.onMessage" method can only be used in iframe')
     }
@@ -40,7 +50,7 @@ export default class ArtplayerToolIframe {
           }
         }
         catch (error) {
-          ArtplayerToolIframe.postMessage({ type: 'error', data: error.message, id })
+          ArtplayerToolIframe.postMessage({ type: 'error', data: (error as { message: string }).message, id })
           throw error
         }
         break
@@ -58,7 +68,7 @@ export default class ArtplayerToolIframe {
     window.addEventListener('message', ArtplayerToolIframe.onMessage)
   }
 
-  constructor({ iframe, url }) {
+  constructor({ iframe, url }: { iframe: HTMLIFrameElement, url: string }) {
     if (iframe instanceof HTMLIFrameElement === false) {
       throw new TypeError('"option.iframe" needs to be a HTMLIFrameElement')
     }
@@ -78,7 +88,10 @@ export default class ArtplayerToolIframe {
     this.$iframe.src = this.url
   }
 
-  onMessage(event) {
+  onMessage(event: MessageEvent<Packet>) {
+    if (this.destroyed)
+      return
+
     const { type, data, id } = event.data
 
     switch (type) {
@@ -89,12 +102,12 @@ export default class ArtplayerToolIframe {
         break
     }
 
-    if (this.promises[id]) {
+    if (id !== undefined && Object.prototype.hasOwnProperty.call(this.promises, id) && this.promises[id]) {
       if (type === 'error') {
-        this.promises[id].reject(new Error(data))
+        this.promises[id]!.reject(new Error(data))
       }
       else {
-        this.promises[id].resove(data)
+        this.promises[id]!.resove(data)
       }
       delete this.promises[id]
     }
@@ -104,34 +117,11 @@ export default class ArtplayerToolIframe {
     }
   }
 
-  postMessage({ type, data }) {
-    return new Promise((resove, reject) => {
-      (function loop() {
-        if (this.destroyed) {
-          reject(new Error('The instance has been destroyed'))
-        }
-        else {
-          if (this.injected) {
-            const id = Date.now()
-            this.promises[id] = { resove, reject }
-            this.$iframe.contentWindow.postMessage(
-              {
-                type,
-                data,
-                id,
-              },
-              '*',
-            )
-          }
-          else {
-            setTimeout(loop.bind(this), 200)
-          }
-        }
-      }).call(this)
-    })
+  postMessage(message: Packet): Promise<any> {
+    return postRequest(this, message)
   }
 
-  commit(callback) {
+  commit<T extends (...args: any[]) => any>(callback: T): Promise<ReturnType<T>> {
     if (typeof callback !== 'function') {
       throw new TypeError('"commit.callback" needs to be a function')
     }
@@ -140,7 +130,7 @@ export default class ArtplayerToolIframe {
     return this.postMessage({ type: 'commit', data: bodyString })
   }
 
-  message(callback) {
+  message(callback: (...args: any[]) => any) {
     if (typeof callback !== 'function') {
       throw new TypeError('"message.callback" needs to be a function')
     }
@@ -150,5 +140,6 @@ export default class ArtplayerToolIframe {
   destroy() {
     this.destroyed = true
     window.removeEventListener('message', this.onMessage)
+    cancelRequests(this)
   }
 }

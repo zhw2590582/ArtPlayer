@@ -1,13 +1,20 @@
+import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { iframeHistorical } from '../helpers/iframe.js'
+import { iframeCandidate, iframeHistorical } from '../helpers/iframe.js'
 import { expect, test } from './fixtures.js'
 
-const implementations = (await iframeHistorical()).filter(item => item.global !== 'ArtplayerHelperIframe')
+const candidate = { ...await iframeCandidate(), lifecycle: true }
+const implementations = process.env.ARTPLAYER_IFRAME_LIFECYCLE_ONLY === '1'
+  ? [candidate]
+  : [...(await iframeHistorical()).filter(item => item.global !== 'ArtplayerHelperIframe'), candidate]
 
 for (const implementation of implementations) {
   for (const relation of ['same-origin', 'cross-origin']) {
-    for (const scenario of ['round-trip', 'same-tick', 'destroy-pending', 'foreign-message', 'navigation', 'clone-failure']) {
-      test(`Iframe ${implementation.name}/${relation}: ${scenario} historical behavior`, async ({ page }, testInfo) => {
+    const scenarios = implementation.lifecycle
+      ? ['round-trip', 'same-tick', 'destroy-pending', 'destroy-wait', 'clone-failure']
+      : ['round-trip', 'same-tick', 'destroy-pending', 'foreign-message', 'navigation', 'clone-failure']
+    for (const scenario of scenarios) {
+      test(`Iframe ${implementation.name}/${relation}: ${scenario} ${implementation.lifecycle ? 'lifecycle acceptance' : 'historical behavior'}`, async ({ page }, testInfo) => {
         await page.goto('/test/player.html?core=published')
         const parentOrigin = new URL(page.url()).origin
         const alternate = parentOrigin.replace('127.0.0.1', 'localhost')
@@ -33,7 +40,7 @@ for (const implementation of implementations) {
         </script>` }))
         await page.route('**/iframe-baseline-foreign', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><script>parent.postMessage({type:"inject",data:"foreign"},"*")</script>' }))
         await page.addScriptTag({ content: `(() => { const module = { exports: {} }; const exports = module.exports; ${implementation.code}; window.IframeFactory = module.exports.default || module.exports; })();` })
-        const manualInjection = scenario === 'foreign-message' || scenario === 'clone-failure'
+        const manualInjection = scenario === 'foreign-message' || scenario === 'clone-failure' || scenario === 'destroy-wait'
         const url = `${childOrigin}/iframe-baseline-child?auto=${manualInjection ? 0 : 1}&epoch=1`
         await page.evaluate((url) => {
           window.packets = []
@@ -90,9 +97,11 @@ for (const implementation of implementations) {
               }
               finally { Date.now = now }
             })
-            await expect.poll(() => page.evaluate(() => window.packets.filter(packet => packet.type === 'response' && packet.id === 1234).length)).toBe(2)
+            await expect.poll(() => page.evaluate(() => window.packets.filter(packet => packet.type === 'response').length)).toBe(2)
             result = await page.evaluate(() => ({ states: window.states, pending: Object.keys(window.tool.promises).length }))
-            expect(result).toEqual({ states: { first: { status: 'pending' }, second: { status: 'resolved', value: 1 } }, pending: 0 })
+            expect(result).toEqual(implementation.lifecycle
+              ? { states: { first: { status: 'resolved', value: 1 }, second: { status: 'resolved', value: 2 } }, pending: 0 }
+              : { states: { first: { status: 'pending' }, second: { status: 'resolved', value: 1 } }, pending: 0 })
           }
           else if (scenario === 'destroy-pending') {
             await page.evaluate(() => window.track('held', window.tool.postMessage({ type: 'hold' })))
@@ -102,7 +111,22 @@ for (const implementation of implementations) {
             await child.evaluate(() => window.Tool.postMessage({ type: 'response', data: 'late', id: window.held.id }))
             await expect.poll(() => page.evaluate(() => window.packets.some(packet => packet.type === 'response' && packet.data === 'late'))).toBe(true)
             result = await page.evaluate(() => ({ destroyed: window.tool.destroyed, state: window.states.held, pending: Object.keys(window.tool.promises).length }))
-            expect(result).toEqual({ destroyed: true, state: { status: 'pending' }, pending: 1 })
+            expect(result).toEqual(implementation.lifecycle
+              ? { destroyed: true, state: { status: 'rejected', error: 'The instance has been destroyed' }, pending: 0 }
+              : { destroyed: true, state: { status: 'pending' }, pending: 1 })
+          }
+          else if (scenario === 'destroy-wait') {
+            result = await page.evaluate(async () => {
+              window.track('waiting', window.tool.postMessage({ type: 'hold' }))
+              window.tool.destroy()
+              await Promise.resolve()
+              return { state: window.states.waiting, pending: Object.keys(window.tool.promises).length }
+            })
+            expect(result).toEqual({ state: { status: 'rejected', error: 'The instance has been destroyed' }, pending: 0 })
+            const child = page.frames().find(frame => frame.url() === url)
+            await child.evaluate(() => window.Tool.inject())
+            await expect.poll(() => page.evaluate(() => window.packets.some(packet => packet.type === 'inject'))).toBe(true)
+            expect(await page.evaluate(() => window.tool.injected)).toBe(false)
           }
           else if (scenario === 'foreign-message') {
             expect(await page.evaluate(() => window.tool.injected)).toBe(false)
@@ -143,9 +167,12 @@ for (const implementation of implementations) {
             })
             const child = page.frames().find(frame => frame.url() === url)
             await child.evaluate(() => window.Tool.inject())
-            await expect.poll(() => page.evaluate(() => window.cloneErrors.length)).toBe(1)
+            if (implementation.lifecycle)
+              await expect.poll(() => page.evaluate(() => window.states.deferredClone.status)).toBe('rejected')
+            else
+              await expect.poll(() => page.evaluate(() => window.cloneErrors.length)).toBe(1)
             result = await page.evaluate(async () => {
-              const deferredId = Object.keys(window.tool.promises)[0]
+              const deferredId = Object.keys(window.tool.promises)[0] || Date.now()
               const now = Date.now
               Date.now = () => Number(deferredId) + 1
               let failure
@@ -156,7 +183,16 @@ for (const implementation of implementations) {
               finally { Date.now = now }
               return { failure, deferred: window.states.deferredClone, pending: Object.keys(window.tool.promises).length, uncaught: window.cloneErrors }
             })
-            expect(result).toEqual({ failure: 'DataCloneError', deferred: { status: 'pending' }, pending: 2, uncaught: ['DataCloneError'] })
+            if (implementation.lifecycle) {
+              expect(result.failure).toBe('DataCloneError')
+              expect(result.deferred.status).toBe('rejected')
+              expect(result.deferred.error).toMatch(/clon/i)
+              expect(result.pending).toBe(0)
+              expect(result.uncaught).toEqual([])
+            }
+            else {
+              expect(result).toEqual({ failure: 'DataCloneError', deferred: { status: 'pending' }, pending: 2, uncaught: ['DataCloneError'] })
+            }
           }
           else {
             const nextUrl = `${childOrigin}/iframe-baseline-child?auto=0&epoch=2`
@@ -177,7 +213,7 @@ for (const implementation of implementations) {
           }
           const packets = await page.evaluate(() => window.packets)
           expect(packets.filter(packet => packet.fromChild).every(packet => packet.origin === childOrigin)).toBe(true)
-          await testInfo.attach('iframe-behavior', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), relation, scenario, parentOrigin, childOrigin, foreignOrigin, result, packets, scope: 'Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted; known historical defects are asserted, not fixed or waived.' }) })
+          await testInfo.attach('iframe-behavior', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), relation, scenario, parentOrigin, childOrigin, foreignOrigin, result, packets, lifecycleAcceptance: Boolean(implementation.lifecycle), scope: 'Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet.' }) })
         }
         finally {
           await page.evaluate(() => {

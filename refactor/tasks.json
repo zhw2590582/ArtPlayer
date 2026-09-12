@@ -3656,11 +3656,14 @@
         "CORE-02",
         "BASE-07"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md",
+        "baselines/iframe-requests-checkpoint.json"
+      ]
     },
     {
       "id": "PKG-IFRAME-04",

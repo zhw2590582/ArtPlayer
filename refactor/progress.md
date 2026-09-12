@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-IFRAME-03 请求资源与TS入口检查点（doing）
+
+入口和请求管理拆为2个严格TS模块，保留7个公开字段及resove/回调/消息协议。
+修复ID冲突/回拨、跨实例串线、销毁悬挂、轮询发送错误和公开回调的资源泄漏。
+同16断言旧版5通过/11失败，候选源码/main/legacy各16通过；旧版真实Chromium
+候选断言2通过/8失败。最终main浏览器174（历史144+候选30）、legacy候选30通过，
+完整CI1505与44重复契约、3导入/SSR文件通过，326生产TS。审查发现并修复空记录
+兼容回归；一次Windows复制失败经正常重建恢复，全部旧/失败/最终报告保留。
+见[变更](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md)和
+[验证](baselines/iframe-requests-checkpoint.json)。222项：107 done、10 doing、105 todo。
+本地检查点提交；IFRAME-03和三个风险仍未关闭。下一步导航/重新注入、构造失败清理、
+畸形消息与独立来源信任策略，随后04处理公开声明与旧helper/分发兼容。
+
 ## PKG-IFRAME-02 完成：历史生命周期与真实窗口缺陷复现
 
 52项Node和144项Chromium/Firefox/WebKit真实窗口检查通过，覆盖4份历史产物、同源/跨源。

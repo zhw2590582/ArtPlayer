@@ -3775,14 +3775,16 @@
       ],
       "status": "open",
       "confirmation": "reproduced",
-      "compatibleResolution": "Reproduce same-tick request collision, pending injection, response errors and destroy behavior before changing internal ownership; preserve public promises[id].resove.",
+      "compatibleResolution": "Request ownership checkpoint fixes timestamp collisions, polling/send failures and terminal destruction while preserving public resove/registry/envelopes. Navigation/reinjection and setup failure cleanup remain for PKG-IFRAME-03; keep open until complete actual iframe lifecycle acceptance.",
       "closureCriteria": "Old behavior and candidate fixes have deterministic race/resource tests plus actual iframe integration.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
         "refactor/baselines/iframe-release.json",
         "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md",
         "refactor/baselines/iframe-behavior-validation.json",
-        "refactor/changes/2026-09-12-PKG-IFRAME-02-behavior.md"
+        "refactor/changes/2026-09-12-PKG-IFRAME-02-behavior.md",
+        "refactor/changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md",
+        "refactor/baselines/iframe-requests-checkpoint.json"
       ]
     },
     {

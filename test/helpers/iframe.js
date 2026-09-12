@@ -1,6 +1,15 @@
+import fs from 'node:fs'
+import process from 'node:process'
 import vm from 'node:vm'
 import { verifyIframeContract } from '../../refactor/scripts/iframe-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { compilePackage } from './load.js'
+
+export async function iframeCandidate() {
+  if (process.env.ARTPLAYER_IFRAME_BASELINE === '1')
+    return (await iframeHistorical()).find(item => item.name === 'workspace.js')
+  return { name: process.env.ARTPLAYER_IFRAME_ARTIFACT ? 'candidate-artifact' : 'candidate-source', global: 'ArtplayerToolIframe', namespace: false, code: process.env.ARTPLAYER_IFRAME_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_IFRAME_ARTIFACT, 'utf8') : await compilePackage('artplayer-tool-iframe', 'umd') }
+}
 
 export async function iframeHistorical() {
   const { baseline, archive, sources } = await verifyIframeContract()

@@ -1,0 +1,3049 @@
+{
+  "task": "PKG-IFRAME-03",
+  "status": "doing",
+  "checkpoint": "verified-request-ownership",
+  "sourceSha256LF": {
+    "package.json": "71ab122e3c1eea872920b1269d72c7112de5d9871b260c13b9015295f55c67aa",
+    "packages/artplayer-tool-iframe/src/index.ts": "a698c3cf690c4fcfb508cd4fc89a0c3e439a87e8312108a4f863a1cb5c9deb67",
+    "packages/artplayer-tool-iframe/src/requests.ts": "f84dceace6b0c88cc2d1e8545cf0017960b0bcb58093909447f5861b0557abe6",
+    "packages/artplayer-tool-iframe/tsconfig.json": "712a3fa32ed57692d16bf854a0e77ffaecd04236efa0f557905aab7291e0aef6",
+    "packages/artplayer-tool-iframe/types/artplayer-tool-iframe.d.ts": "4f02aa22a6b373393ead533ae3421ad5acf0de7116057f351021c72d3448bd1e",
+    "packages/artplayer-tool-iframe/README.md": "7d862afc9e3177e33cb04ba51695883ae5b412a77d27551232dce60bddf8f146",
+    "packages/artplayer-tool-iframe/ARCHITECTURE.md": "635e3be6814d5e0e3fd07201fa213c5d48e23f6749239d8fbbd10e7ec1ab1483",
+    "test/iframe-lifecycle.test.js": "96273d46077c28069504643a989a4d628e875c9aa49fb62e28ac160f7e7aaae1",
+    "test/browser/iframe.spec.js": "50add3cec28e94947ac48466860056cb43b9f47b0d08ded816124805567484d0",
+    "test/helpers/iframe.js": "0aae4805e1bfa8d6cddf1e558daa080fc67f7af8f10b92bc5e8df0d4d28f63f0"
+  },
+  "artifacts": {
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.js": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.legacy.js": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+    "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.mjs": "1690846fea7a1b13cc0eac2a91bdce72f7dd6029535678b60b3584714cd0900c"
+  },
+  "historical": {
+    "node": {
+      "tests": 16,
+      "passed": 5,
+      "failed": 11,
+      "log": "refactor/.cache/iframe03-before-node.log"
+    },
+    "browser": {
+      "tests": 10,
+      "passed": 2,
+      "failed": 8,
+      "report": "refactor/.cache/iframe03-before-results/report.json",
+      "results": "refactor/.cache/iframe03-before-results/results"
+    },
+    "emptyRegistryComparison": "refactor/.cache/iframe03-empty-record-before.log"
+  },
+  "node": [
+    {
+      "kind": "source",
+      "tests": 16,
+      "passed": 16,
+      "log": "refactor/.cache/iframe03-source-node-final.log"
+    },
+    {
+      "kind": "main",
+      "tests": 16,
+      "passed": 16,
+      "log": "refactor/.cache/iframe03-main-node-final.log"
+    },
+    {
+      "kind": "legacy",
+      "tests": 16,
+      "passed": 16,
+      "log": "refactor/.cache/iframe03-legacy-node-final.log"
+    }
+  ],
+  "browser": [
+    {
+      "kind": "main",
+      "total": 174,
+      "candidateLifecycle": 30,
+      "historicalAssertions": 144,
+      "report": "refactor/.cache/iframe03-final-main-results/report.json",
+      "sha256": "9941c27277b5e4614df64fc44daa193841143066b2ab62d4d833e9054e9964bc",
+      "results": "refactor/.cache/iframe03-final-main-results/results",
+      "records": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227465525,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227465526,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227465536,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227465537,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227465834,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227465834,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Failed to execute 'postMessage' on 'Window': () => 'not cloneable' could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227466161,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227466162,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227466174,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227466175,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227466469,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227466469,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Failed to execute 'postMessage' on 'Window': () => 'not cloneable' could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227483728,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227483729,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227483739,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227483740,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227484296,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227484296,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Function object could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227485008,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227485009,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227485019,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227485020,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227485716,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227485716,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Function object could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227504497,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227504511,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227504557,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227504587,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227505258,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227505258,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "same-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "The object can not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227505888,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227505904,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227505951,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227505981,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227506637,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227506637,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "307c84030a0c9eff44437b2b9a8af58f06c3350bc97a4c318aca831263028624",
+          "relation": "cross-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "The object can not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        }
+      ]
+    },
+    {
+      "kind": "legacy",
+      "total": 30,
+      "candidateLifecycle": 30,
+      "historicalAssertions": 0,
+      "report": "refactor/.cache/iframe03-final-legacy-results/report.json",
+      "sha256": "b9d4bea4bf5a3f9f15d3cf603cd79835c6bfaaec64427a16da7af863585506f7",
+      "results": "refactor/.cache/iframe03-final-legacy-results/results",
+      "records": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227562622,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227562623,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227562634,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227562635,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227562622,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227562622,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Failed to execute 'postMessage' on 'Window': () => 'not cloneable' could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227563039,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227563040,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227563050,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227563051,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227563362,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227563362,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Failed to execute 'postMessage' on 'Window': () => 'not cloneable' could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227567305,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227567306,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227567327,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227567328,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227568861,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227568861,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Function object could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227570517,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227570518,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227570529,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227570530,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227571357,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227571357,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "Function object could not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227577975,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227577984,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227578030,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227578061,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227578107,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227578107,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "same-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://127.0.0.1:8084",
+          "foreignOrigin": "http://localhost:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "The object can not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://127.0.0.1:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "round-trip",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "sync": 7,
+            "async": 8,
+            "error": "iframe baseline expected error",
+            "recovery": 9,
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 7,
+              "id": 1789227579702,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 8,
+              "id": 1789227579712,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "error",
+              "data": "iframe baseline expected error",
+              "id": 1789227579758,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 9,
+              "id": 1789227579789,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "same-tick",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "states": {
+              "first": {
+                "status": "resolved",
+                "value": 1
+              },
+              "second": {
+                "status": "resolved",
+                "value": 2
+              }
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 1,
+              "id": 1234,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": 2,
+              "id": 1235,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "destroy-pending",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "destroyed": true,
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-ready",
+              "data": "?auto=1&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "fixture-held",
+              "data": 1789227580236,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "response",
+              "data": "late",
+              "id": 1789227580236,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "destroy-wait",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "state": {
+              "status": "rejected",
+              "error": "The instance has been destroyed"
+            },
+            "pending": 0
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+          "platform": "win32",
+          "implementation": "candidate-artifact",
+          "sha256": "dc72986d86f8b5959acd673450c67cef7fe5e6384a586ba3ee5496e755046f52",
+          "relation": "cross-origin",
+          "scenario": "clone-failure",
+          "parentOrigin": "http://127.0.0.1:8084",
+          "childOrigin": "http://localhost:8084",
+          "foreignOrigin": "http://127.0.0.1:8084",
+          "result": {
+            "failure": "DataCloneError",
+            "deferred": {
+              "status": "rejected",
+              "error": "The object can not be cloned."
+            },
+            "pending": 0,
+            "uncaught": []
+          },
+          "packets": [
+            {
+              "type": "fixture-ready",
+              "data": "?auto=0&epoch=1",
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            },
+            {
+              "type": "inject",
+              "id": 0,
+              "origin": "http://localhost:8084",
+              "fromChild": true
+            }
+          ],
+          "lifecycleAcceptance": true,
+          "scope": "Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "exitCode": 0,
+      "log": "refactor/.cache/iframe03-ci-final.log",
+      "tests": 1505,
+      "unit": 1331,
+      "engineering": 14,
+      "baseline": 160,
+      "repeatedContracts": 44,
+      "productionTypeScriptFiles": 326
+    },
+    {
+      "command": "yarn test:imports",
+      "result": "pass",
+      "exitCode": 0,
+      "tests": 3,
+      "log": "refactor/.cache/iframe03-imports-final.log"
+    }
+  ],
+  "priorCandidate": [
+    "refactor/.cache/iframe03-main-results/report.json",
+    "refactor/.cache/iframe03-legacy-results/report.json",
+    "refactor/.cache/iframe03-ci.log"
+  ],
+  "build": {
+    "failed": "refactor/.cache/iframe03-build-final.log",
+    "failure": "Windows copyfile UNKNOWN while copying legacy output into docs; cause not established",
+    "recovered": "refactor/.cache/iframe03-build-recovered.log",
+    "result": "normal build rerun passed; all three docs copies byte-identical"
+  },
+  "limitations": [
+    "Navigation/reinjection and malformed-message handling remain open.",
+    "Source/origin trust policy is unchanged and unsafe foreign-window behavior remains open.",
+    "No player/media/demo integration is claimed by tool-only iframe fixtures.",
+    "Full old-name/helper/declaration/distribution consumers remain separate PKG-IFRAME-04/05/06 gates.",
+    "Independent module copies do not share request ID allocation."
+  ]
+}

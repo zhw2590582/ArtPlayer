@@ -4,6 +4,72 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
+const requests = /* @__PURE__ */ new WeakMap();
+let lastId = 0;
+function postRequest(host, { type, data }) {
+  return new Promise((resolve, reject) => {
+    if (host.destroyed) {
+      reject(new Error("The instance has been destroyed"));
+      return;
+    }
+    const pending = requests.get(host) || /* @__PURE__ */ new Set();
+    requests.set(host, pending);
+    const finish = (request2) => {
+      if (!pending.delete(request2))
+        return false;
+      if (request2.timer !== void 0)
+        clearTimeout(request2.timer);
+      if (request2.id !== void 0)
+        delete host.promises[request2.id];
+      if (!pending.size)
+        requests.delete(host);
+      return true;
+    };
+    const request = {
+      callbacks: {
+        resove(value) {
+          if (finish(request))
+            resolve(value);
+        },
+        reject(error) {
+          if (finish(request))
+            reject(error);
+        }
+      }
+    };
+    pending.add(request);
+    const loop = () => {
+      request.timer = void 0;
+      if (!pending.has(request))
+        return;
+      if (host.destroyed) {
+        request.callbacks.reject(new Error("The instance has been destroyed"));
+        return;
+      }
+      try {
+        if (host.injected) {
+          const id = Math.max(Date.now(), lastId + 1);
+          lastId = id;
+          request.id = id;
+          host.promises[id] = request.callbacks;
+          host.$iframe.contentWindow.postMessage({ type, data, id }, "*");
+        } else {
+          request.timer = setTimeout(loop, 200);
+        }
+      } catch (error) {
+        request.callbacks.reject(error);
+      }
+    };
+    loop();
+  });
+}
+function cancelRequests(host) {
+  const pending = requests.get(host);
+  if (!pending)
+    return;
+  for (const request of [...pending])
+    request.callbacks.reject(new Error("The instance has been destroyed"));
+}
 class ArtplayerToolIframe {
   static get iframe() {
     return window.top !== window;
@@ -71,13 +137,15 @@ ${data}
     this.$iframe.src = this.url;
   }
   onMessage(event) {
+    if (this.destroyed)
+      return;
     const { type, data, id } = event.data;
     switch (type) {
       case "inject":
         this.injected = true;
         break;
     }
-    if (this.promises[id]) {
+    if (id !== void 0 && Object.prototype.hasOwnProperty.call(this.promises, id) && this.promises[id]) {
       if (type === "error") {
         this.promises[id].reject(new Error(data));
       } else {
@@ -89,29 +157,8 @@ ${data}
       this.messageCallback({ type, data });
     }
   }
-  postMessage({ type, data }) {
-    return new Promise((resove, reject) => {
-      (function loop() {
-        if (this.destroyed) {
-          reject(new Error("The instance has been destroyed"));
-        } else {
-          if (this.injected) {
-            const id = Date.now();
-            this.promises[id] = { resove, reject };
-            this.$iframe.contentWindow.postMessage(
-              {
-                type,
-                data,
-                id
-              },
-              "*"
-            );
-          } else {
-            setTimeout(loop.bind(this), 200);
-          }
-        }
-      }).call(this);
-    });
+  postMessage(message) {
+    return postRequest(this, message);
   }
   commit(callback) {
     if (typeof callback !== "function") {
@@ -130,6 +177,7 @@ ${data}
   destroy() {
     this.destroyed = true;
     window.removeEventListener("message", this.onMessage);
+    cancelRequests(this);
   }
 }
 export {
