@@ -20,7 +20,7 @@ var __privateWrapper = (obj, member, setter, getter) => ({
     return __privateGet(obj, member, getter);
   }
 });
-var _closed, _generation, _iteration, _loading, _createSink, _usedSink, _destroyed, _preparing, _poster, _renderer, _onError, _VideoEngine_instances, current_fn, context_fn, report_fn, release_fn, draw_fn, load_fn, reset_fn, _playback;
+var _closed, _closed2, _generation, _contexts, _nodes, _pump, _playTask, _playing, _loading, _onError, _AudioEngine_instances, load_fn, startPump_fn, play_fn, _generation2, _iteration, _loading2, _createSink, _usedSink, _destroyed, _preparing, _poster, _renderer, _onError2, _VideoEngine_instances, current_fn, context_fn, report_fn, release_fn, draw_fn, load_fn2, reset_fn, _playback;
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
 const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
 function uniqBy(array, property) {
@@ -5317,13 +5317,13 @@ class IsobmffDemuxer extends Demuxer {
           const entryCount = readU32Be(slice);
           for (let i = 0; i < entryCount; i++) {
             const segmentDuration = version === 1 ? readU64Be(slice) : readU32Be(slice);
-            const mediaTime = version === 1 ? readI64Be(slice) : readI32Be(slice);
+            const mediaTime2 = version === 1 ? readI64Be(slice) : readI32Be(slice);
             const mediaRate = readFixed_16_16(slice);
             if (relevantEntryFound) {
               Logging._warn("Unsupported edit list: multiple edits are not currently supported. Only using first edit.");
               break;
             }
-            if (mediaTime === -1) {
+            if (mediaTime2 === -1) {
               previousSegmentDurations += segmentDuration;
               continue;
             }
@@ -5332,7 +5332,7 @@ class IsobmffDemuxer extends Demuxer {
               break;
             }
             track.editListPreviousSegmentDurations = previousSegmentDurations;
-            track.editListOffset = mediaTime;
+            track.editListOffset = mediaTime2;
             relevantEntryFound = true;
           }
         }
@@ -24076,8 +24076,344 @@ class Id3V2Reader {
     return this.readId3V2Text(encoding, until);
   }
 }
+function mediaTime(clock) {
+  if (clock.paused || !clock.audioContext)
+    return clock.playbackTimeAtStart;
+  return (clock.audioContext.currentTime - clock.audioContextStartTime) * clock.playbackRate + clock.playbackTimeAtStart;
+}
+function bufferTiming(clock, timestamp, duration, now) {
+  const startAt = clock.audioContextStartTime + (timestamp - clock.playbackTimeAtStart) / clock.playbackRate;
+  const endAt = startAt + duration / clock.playbackRate;
+  const endMediaTime = (endAt - clock.audioContextStartTime) * clock.playbackRate + clock.playbackTimeAtStart;
+  return { startAt: Math.max(startAt, now), offset: startAt < now ? (now - startAt) * clock.playbackRate : null, endMediaTime };
+}
+class ContextOwner {
+  constructor(host) {
+    this.host = host;
+    this.closed = false;
+    this.resumes = /* @__PURE__ */ new WeakMap();
+  }
+  ensure(sampleRate) {
+    if (this.closed)
+      return null;
+    if (this.host.audioContext)
+      return this.host.audioContext;
+    const Context = window.AudioContext || window.webkitAudioContext;
+    let context;
+    try {
+      context = new Context({ sampleRate });
+    } catch {
+      context = new Context();
+    }
+    if (this.closed) {
+      void context.close().catch((error) => console.warn("MediaBunny obsolete context cleanup:", error));
+      return null;
+    }
+    let gain = null;
+    try {
+      gain = context.createGain();
+      gain.connect(context.destination);
+      const volume = this.host.muted ? 0 : this.host.volume;
+      gain.gain.value = volume * volume;
+      if (this.closed) {
+        gain.disconnect();
+        void context.close().catch((error) => console.warn("MediaBunny obsolete context cleanup:", error));
+        return null;
+      }
+      this.host.audioContext = context;
+      this.host.gainNode = gain;
+      return context;
+    } catch (error) {
+      try {
+        gain?.disconnect();
+      } catch (failure) {
+        console.warn("MediaBunny gain setup cleanup:", failure);
+      }
+      void context.close().catch((failure) => console.warn("MediaBunny context setup cleanup:", failure));
+      throw error;
+    }
+  }
+  updateGain() {
+    if (!this.host.gainNode)
+      return;
+    const volume = this.host.muted ? 0 : this.host.volume;
+    this.host.gainNode.gain.value = volume * volume;
+  }
+  resume(context) {
+    const previous = this.resumes.get(context);
+    if (previous)
+      return previous;
+    const pending = context.resume();
+    this.resumes.set(context, pending);
+    const clear = () => {
+      if (this.resumes.get(context) === pending)
+        this.resumes.delete(context);
+    };
+    pending.then(clear, clear);
+    return pending;
+  }
+  destroy() {
+    if (this.closed)
+      return;
+    this.closed = true;
+    const { audioContext: context, gainNode: gain } = this.host;
+    this.host.audioContext = null;
+    this.host.gainNode = null;
+    try {
+      gain?.disconnect();
+    } finally {
+      if (context)
+        void context.close().catch((error) => console.warn("MediaBunny context close error:", error));
+    }
+  }
+}
+class NodeQueue {
+  constructor(host) {
+    this.host = host;
+  }
+  release(node, stop) {
+    this.host.queuedNodes.delete(node);
+    node.onended = null;
+    let failed = false;
+    let failure;
+    try {
+      if (stop)
+        node.stop();
+    } catch (error) {
+      failed = true;
+      failure = error;
+    }
+    try {
+      node.disconnect();
+    } catch (error) {
+      if (!failed) {
+        failed = true;
+        failure = error;
+      }
+    }
+    if (failed)
+      throw failure;
+  }
+  stop() {
+    const failures = [];
+    for (const node of [...this.host.queuedNodes]) {
+      try {
+        this.release(node, true);
+      } catch (error) {
+        failures.push(error);
+      }
+    }
+    if (failures.length)
+      throw failures[0];
+  }
+  schedule({ buffer, timestamp }) {
+    const context = this.host.audioContext;
+    const gain = this.host.gainNode;
+    if (!context || !gain)
+      return;
+    const timing = bufferTiming(this.host, timestamp, buffer.duration, context.currentTime);
+    if (timing.offset !== null && timing.offset >= buffer.duration)
+      return;
+    const node = context.createBufferSource();
+    this.host.queuedNodes.add(node);
+    try {
+      node.buffer = buffer;
+      node.connect(gain);
+      node.playbackRate.value = this.host.playbackRate;
+      node.onended = () => {
+        if (!this.host.queuedNodes.has(node))
+          return;
+        try {
+          this.release(node, false);
+        } catch (error) {
+          console.warn("MediaBunny ended node cleanup:", error);
+        }
+      };
+      if (timing.offset === null)
+        node.start(timing.startAt);
+      else
+        node.start(timing.startAt, timing.offset);
+      this.host.latestScheduledEndTime = Math.max(this.host.latestScheduledEndTime, timing.endMediaTime);
+    } catch (error) {
+      try {
+        this.release(node, true);
+      } catch (failure) {
+        console.warn("MediaBunny audio node cleanup:", failure);
+      }
+      throw error;
+    }
+  }
+}
+const CANCELLED = /* @__PURE__ */ Symbol("cancelled");
+class AudioTask {
+  constructor() {
+    this.cancelled = false;
+    this.waits = /* @__PURE__ */ new Set();
+    this.timers = /* @__PURE__ */ new Map();
+  }
+  wait(pending) {
+    return new Promise((resolve, reject) => {
+      const cancel = () => resolve(CANCELLED);
+      if (this.cancelled)
+        cancel();
+      else
+        this.waits.add(cancel);
+      pending.then((value) => {
+        this.waits.delete(cancel);
+        resolve(value);
+      }, (error) => {
+        this.waits.delete(cancel);
+        reject(error);
+      });
+    });
+  }
+  delay(ms) {
+    if (this.cancelled)
+      return Promise.resolve(false);
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        this.timers.delete(timer);
+        resolve(!this.cancelled);
+      }, ms);
+      this.timers.set(timer, resolve);
+    });
+  }
+  cancel() {
+    if (this.cancelled)
+      return;
+    this.cancelled = true;
+    for (const cancel of this.waits)
+      cancel();
+    this.waits.clear();
+    for (const [timer, resolve] of this.timers) {
+      clearTimeout(timer);
+      resolve(false);
+    }
+    this.timers.clear();
+  }
+}
+function publish(events, current, names) {
+  for (const name of names) {
+    if (!current())
+      return;
+    events.emit(name);
+  }
+}
+function metadataBarrier(ready, current) {
+  let video = false;
+  let audio = false;
+  let published = false;
+  function complete(part) {
+    if (!current() || published)
+      return;
+    if (part === "video")
+      video = true;
+    else audio = true;
+    if (video && audio) {
+      published = true;
+      ready();
+    }
+  }
+  return { video: () => complete("video"), audio: () => complete("audio") };
+}
+class AudioPump {
+  constructor(host, contexts, nodes) {
+    this.host = host;
+    this.contexts = contexts;
+    this.nodes = nodes;
+    this.task = null;
+    this.closing = /* @__PURE__ */ new WeakMap();
+  }
+  async stopIterator() {
+    const iterator = this.host.audioIterator;
+    this.host.audioIterator = null;
+    if (!iterator)
+      return;
+    let pending = this.closing.get(iterator);
+    if (!pending) {
+      pending = Promise.resolve().then(() => iterator.return()).then(() => {
+      });
+      this.closing.set(iterator, pending);
+    }
+    await pending;
+  }
+  cancel() {
+    this.task?.cancel();
+    this.task = null;
+    void this.stopIterator().catch((error) => console.warn("MediaBunny audio iterator cleanup:", error));
+  }
+  async run(id) {
+    if (this.host.asyncId !== id)
+      return;
+    this.cancel();
+    const sink = this.host.audioSink;
+    const context = this.host.audioContext;
+    if (!sink || !context || this.host.paused || this.host.asyncId !== id)
+      return;
+    const task = new AudioTask();
+    this.task = task;
+    let iterator = null;
+    const current = () => !task.cancelled && this.task === task && this.host.asyncId === id && !this.host.paused && this.host.audioContext === context && (!iterator || this.host.audioIterator === iterator);
+    try {
+      iterator = sink.buffers(this.host.currentTime);
+      this.host.audioIterator = iterator;
+      while (current()) {
+        const batch = [];
+        let done = false;
+        for (let index = 0; index < 16; index++) {
+          const result = await task.wait(iterator.next());
+          if (result === CANCELLED || !current())
+            return;
+          if (result.done) {
+            done = true;
+            break;
+          }
+          batch.push(result.value);
+        }
+        if (batch.length && context.state === "suspended") {
+          const resumed = await task.wait(this.contexts.resume(context));
+          if (resumed === CANCELLED || !current())
+            return;
+          publish(this.host.events, current, ["canplay", "playing"]);
+        }
+        for (const buffer of batch) {
+          if (!current())
+            return;
+          this.nodes.schedule(buffer);
+        }
+        if (done)
+          return;
+        if (!await task.delay(0) || !current())
+          return;
+        while (this.host.latestScheduledEndTime - this.host.currentTime > 1) {
+          if (!await task.delay(50) || !current())
+            return;
+        }
+      }
+    } catch (error) {
+      if (current())
+        throw error;
+    } finally {
+      task.cancel();
+      if (this.task === task) {
+        this.task = null;
+        void this.stopIterator().catch((error) => console.warn("MediaBunny audio iterator cleanup:", error));
+      }
+    }
+  }
+}
 class AudioEngine {
-  constructor(events) {
+  constructor(events, onError) {
+    __privateAdd(this, _AudioEngine_instances);
+    __privateAdd(this, _closed2, false);
+    __privateAdd(this, _generation, 0);
+    __privateAdd(this, _contexts);
+    __privateAdd(this, _nodes);
+    __privateAdd(this, _pump);
+    __privateAdd(this, _playTask, null);
+    __privateAdd(this, _playing, null);
+    __privateAdd(this, _loading, null);
+    __privateAdd(this, _onError);
     this.events = events;
     this.input = null;
     this.audioSink = null;
@@ -24094,164 +24430,108 @@ class AudioEngine {
     this.playbackRate = 1;
     this.asyncId = 0;
     this.queuedNodes = /* @__PURE__ */ new Set();
+    __privateSet(this, _contexts, new ContextOwner(this));
+    __privateSet(this, _nodes, new NodeQueue(this));
+    __privateSet(this, _pump, new AudioPump(this, __privateGet(this, _contexts), __privateGet(this, _nodes)));
+    __privateSet(this, _onError, onError);
   }
   get currentTime() {
-    if (this.paused)
-      return this.playbackTimeAtStart;
-    return (this.audioContext.currentTime - this.audioContextStartTime) * this.playbackRate + this.playbackTimeAtStart;
+    return mediaTime(this);
   }
   ensureAudioContext(sampleRate) {
-    if (this.audioContext)
-      return;
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    try {
-      this.audioContext = new AudioContext({ sampleRate });
-    } catch {
-      this.audioContext = new AudioContext();
-    }
-    this.gainNode = this.audioContext.createGain();
-    this.gainNode.connect(this.audioContext.destination);
-    this.updateGain();
+    __privateGet(this, _contexts).ensure(sampleRate);
   }
   updateGain() {
-    if (!this.gainNode)
-      return;
-    const v = this.muted ? 0 : this.volume;
-    this.gainNode.gain.value = v * v;
+    __privateGet(this, _contexts).updateGain();
   }
   stopQueuedNodes() {
-    this.queuedNodes.forEach((node) => node.stop());
-    this.queuedNodes.clear();
+    __privateGet(this, _nodes).stop();
   }
   async stopIterator() {
-    await this.audioIterator?.return();
-    this.audioIterator = null;
+    await __privateGet(this, _pump).stopIterator();
   }
   handleNoAudioTrack() {
+    if (__privateGet(this, _closed2))
+      return;
     this.audioSink = null;
     this.ensureAudioContext();
   }
+  cancelPending() {
+    __privateWrapper(this, _generation)._++;
+    try {
+      this.pause();
+    } finally {
+      __privateSet(this, _loading, null);
+      this.input = null;
+      this.audioSink = null;
+    }
+  }
   async load(media, onMetadata) {
-    ++this.asyncId;
-    await this.stopIterator();
-    this.stopQueuedNodes();
-    this.paused = true;
+    if (__privateGet(this, _closed2))
+      return;
+    this.cancelPending();
+    const generation = __privateGet(this, _generation);
     this.playbackTimeAtStart = 0;
     this.audioContextStartTime = 0;
-    const { input, audioTrack, duration } = media;
-    this.input = input;
-    this.duration = duration;
-    if (!audioTrack) {
-      this.handleNoAudioTrack();
-      onMetadata?.();
-      return;
+    this.latestScheduledEndTime = 0;
+    const pending = Promise.resolve().then(() => __privateMethod(this, _AudioEngine_instances, load_fn).call(this, media, generation, onMetadata));
+    __privateSet(this, _loading, pending);
+    try {
+      await pending;
+    } finally {
+      if (__privateGet(this, _loading) === pending)
+        __privateSet(this, _loading, null);
     }
-    if (audioTrack.codec === null || !await audioTrack.canDecode()) {
-      this.audioSink = null;
-      this.ensureAudioContext();
-      onMetadata?.();
-      return;
-    }
-    this.ensureAudioContext(audioTrack.sampleRate);
-    this.audioSink = new AudioBufferSink(audioTrack);
-    onMetadata?.();
   }
   async runIterator(localId) {
-    if (!this.audioSink)
+    if (__privateGet(this, _closed2))
       return;
-    await this.stopIterator();
-    this.audioIterator = this.audioSink.buffers(this.currentTime);
-    const BATCH_SIZE = 16;
-    while (true) {
-      if (localId !== this.asyncId || this.paused)
-        return;
-      const batch = [];
-      let batchDone = false;
-      try {
-        for (let i = 0; i < BATCH_SIZE; i++) {
-          const result = await this.audioIterator.next();
-          if (result.done) {
-            batchDone = true;
-            break;
-          }
-          batch.push(result.value);
-        }
-      } catch (e) {
-        console.error("Audio iterator error:", e);
-        batchDone = true;
-      }
-      if (localId !== this.asyncId || this.paused)
-        return;
-      if (batch.length > 0 && this.audioContext.state === "suspended") {
-        await this.audioContext.resume();
-        this.events.emit("canplay");
-        this.events.emit("playing");
-      }
-      for (const { buffer, timestamp } of batch) {
-        const node = this.audioContext.createBufferSource();
-        node.buffer = buffer;
-        node.connect(this.gainNode);
-        node.playbackRate.value = this.playbackRate;
-        const startAt = this.audioContextStartTime + (timestamp - this.playbackTimeAtStart) / this.playbackRate;
-        const duration = buffer.duration;
-        const endAt = startAt + duration / this.playbackRate;
-        const endMediaTime = (endAt - this.audioContextStartTime) * this.playbackRate + this.playbackTimeAtStart;
-        if (endMediaTime > this.latestScheduledEndTime) {
-          this.latestScheduledEndTime = endMediaTime;
-        }
-        if (startAt >= this.audioContext.currentTime) {
-          node.start(startAt);
-        } else {
-          node.start(
-            this.audioContext.currentTime,
-            (this.audioContext.currentTime - startAt) * this.playbackRate
-          );
-        }
-        this.queuedNodes.add(node);
-        node.onended = () => this.queuedNodes.delete(node);
-      }
-      if (batchDone)
-        break;
-      await new Promise((resolve) => setTimeout(resolve, 0));
-      const BUFFER_AHEAD = 1;
-      while (this.latestScheduledEndTime - this.currentTime > BUFFER_AHEAD) {
-        if (localId !== this.asyncId || this.paused)
-          return;
-        await new Promise((resolve) => setTimeout(resolve, 50));
-      }
-    }
+    await __privateGet(this, _pump).run(localId);
   }
   async play() {
+    if (__privateGet(this, _closed2))
+      return;
+    if (__privateGet(this, _playing))
+      return __privateGet(this, _playing);
     if (!this.paused)
       return;
-    if (!this.audioContext) {
-      this.ensureAudioContext();
+    const task = new AudioTask();
+    __privateSet(this, _playTask, task);
+    const generation = __privateGet(this, _generation);
+    const pending = __privateMethod(this, _AudioEngine_instances, play_fn).call(this, task, generation);
+    __privateSet(this, _playing, pending);
+    try {
+      await pending;
+    } finally {
+      if (__privateGet(this, _playTask) === task) {
+        __privateSet(this, _playTask, null);
+        __privateSet(this, _playing, null);
+      }
     }
-    if (this.audioContext.state === "suspended") {
-      await this.audioContext.resume();
-    }
-    this.audioContextStartTime = this.audioContext.currentTime;
-    this.latestScheduledEndTime = this.playbackTimeAtStart;
-    this.paused = false;
-    const id = ++this.asyncId;
-    this.runIterator(id);
   }
   pause() {
-    if (this.paused)
-      return;
-    this.playbackTimeAtStart = this.currentTime;
+    if (!this.paused)
+      this.playbackTimeAtStart = this.currentTime;
     this.paused = true;
-    this.stopIterator();
+    this.asyncId++;
+    __privateGet(this, _playTask)?.cancel();
+    __privateSet(this, _playTask, null);
+    __privateSet(this, _playing, null);
+    __privateGet(this, _pump).cancel();
     this.stopQueuedNodes();
   }
   async seek(time) {
+    if (__privateGet(this, _closed2))
+      return;
+    const playing = !this.paused;
+    __privateGet(this, _pump).cancel();
+    this.stopQueuedNodes();
     this.playbackTimeAtStart = Math.max(0, time);
-    this.audioContextStartTime = this.audioContext.currentTime;
+    this.audioContextStartTime = this.audioContext?.currentTime ?? 0;
     this.latestScheduledEndTime = this.playbackTimeAtStart;
     const id = ++this.asyncId;
-    if (!this.paused) {
-      this.runIterator(id);
-    }
+    if (playing)
+      __privateMethod(this, _AudioEngine_instances, startPump_fn).call(this, id);
   }
   setVolume(volume, muted) {
     this.volume = volume;
@@ -24259,27 +24539,118 @@ class AudioEngine {
     this.updateGain();
   }
   setPlaybackRate(rate) {
-    if (rate === this.playbackRate)
+    if (__privateGet(this, _closed2) || rate === this.playbackRate)
       return;
-    if (!this.paused) {
-      this.playbackTimeAtStart = this.currentTime;
-      this.audioContextStartTime = this.audioContext.currentTime;
-    }
+    const time = this.currentTime;
+    __privateGet(this, _pump).cancel();
+    this.stopQueuedNodes();
+    this.playbackTimeAtStart = time;
+    this.audioContextStartTime = this.audioContext?.currentTime ?? 0;
     this.playbackRate = rate;
-    if (!this.paused) {
-      const id = ++this.asyncId;
-      this.runIterator(id);
-    }
+    this.latestScheduledEndTime = time;
+    const id = ++this.asyncId;
+    if (!this.paused)
+      __privateMethod(this, _AudioEngine_instances, startPump_fn).call(this, id);
   }
   destroy() {
-    this.asyncId++;
-    this.pause();
-    this.audioContext?.close();
-    this.audioContext = null;
+    if (__privateGet(this, _closed2))
+      return;
+    __privateSet(this, _closed2, true);
+    __privateWrapper(this, _generation)._++;
+    const failures = [];
+    for (const release of [() => this.pause(), () => __privateGet(this, _contexts).destroy()]) {
+      try {
+        release();
+      } catch (error) {
+        failures.push(error);
+      }
+    }
     this.input = null;
     this.audioSink = null;
+    __privateSet(this, _loading, null);
+    if (failures.length)
+      throw failures[0];
   }
 }
+_closed2 = new WeakMap();
+_generation = new WeakMap();
+_contexts = new WeakMap();
+_nodes = new WeakMap();
+_pump = new WeakMap();
+_playTask = new WeakMap();
+_playing = new WeakMap();
+_loading = new WeakMap();
+_onError = new WeakMap();
+_AudioEngine_instances = new WeakSet();
+load_fn = async function({ input, audioTrack, duration }, generation, onMetadata) {
+  const current = () => !__privateGet(this, _closed2) && __privateGet(this, _generation) === generation;
+  if (!current())
+    return;
+  this.input = input;
+  this.duration = duration;
+  try {
+    const decodable = audioTrack && audioTrack.codec !== null && await audioTrack.canDecode();
+    if (!current())
+      return;
+    if (!decodable) {
+      this.handleNoAudioTrack();
+    } else {
+      this.ensureAudioContext(audioTrack.sampleRate);
+      if (!current())
+        return;
+      this.audioSink = new AudioBufferSink(audioTrack);
+    }
+    if (current())
+      onMetadata?.();
+  } catch (error) {
+    if (current())
+      throw error;
+  }
+};
+startPump_fn = function(id) {
+  void this.runIterator(id).catch((error) => {
+    if (__privateGet(this, _closed2) || id !== this.asyncId)
+      return;
+    try {
+      this.pause();
+    } catch (failure) {
+      console.warn("MediaBunny audio failure cleanup:", failure);
+    }
+    try {
+      if (__privateGet(this, _onError))
+        __privateGet(this, _onError).call(this, error);
+      else
+        this.events.emit("error", error);
+    } catch (failure) {
+      console.warn("MediaBunny audio error listener:", failure);
+    }
+  });
+};
+play_fn = async function(task, generation) {
+  const current = () => !__privateGet(this, _closed2) && !task.cancelled && __privateGet(this, _generation) === generation;
+  try {
+    const context = __privateGet(this, _contexts).ensure();
+    if (!context || !current())
+      return;
+    if (context.state === "suspended") {
+      const resumed = await task.wait(__privateGet(this, _contexts).resume(context));
+      if (resumed === CANCELLED || !current())
+        return;
+    }
+    if (__privateGet(this, _loading)) {
+      const loaded = await task.wait(__privateGet(this, _loading));
+      if (loaded === CANCELLED || !current())
+        return;
+    }
+    this.audioContextStartTime = context.currentTime;
+    this.latestScheduledEndTime = this.playbackTimeAtStart;
+    this.paused = false;
+    __privateMethod(this, _AudioEngine_instances, startPump_fn).call(this, ++this.asyncId);
+  } catch (error) {
+    if (current())
+      throw error;
+  }
+};
 async function selectQuality(host, value) {
   const { input, media, loadSeq } = host;
   if (!media?.isHls || !input || host.destroyed)
@@ -24469,30 +24840,6 @@ class LoadSession {
     this.disposeInput();
   }
 }
-function publish(events, current, names) {
-  for (const name of names) {
-    if (!current())
-      return;
-    events.emit(name);
-  }
-}
-function metadataBarrier(ready, current) {
-  let video = false;
-  let audio = false;
-  let published = false;
-  function complete(part) {
-    if (!current() || published)
-      return;
-    if (part === "video")
-      video = true;
-    else audio = true;
-    if (video && audio) {
-      published = true;
-      ready();
-    }
-  }
-  return { video: () => complete("video"), audio: () => complete("audio") };
-}
 async function resolveDuration({ input, videoTrack, audioTrack }) {
   const tracks = [videoTrack, audioTrack].filter((track) => track !== null);
   const referenceTrack = videoTrack || audioTrack;
@@ -24537,7 +24884,6 @@ class Playback {
     this.wanted = false;
     this.playing = null;
     this.seeking = null;
-    this.audioStart = null;
   }
   operation() {
     return { ...completion(), source: this.host.loadSeq, complete: completion() };
@@ -24602,17 +24948,6 @@ class Playback {
     this.runPlay(operation).then(operation.resolve, operation.reject);
     return operation.promise;
   }
-  async startAudio() {
-    if (!this.audioStart)
-      this.audioStart = this.host.audio.play();
-    const pending = this.audioStart;
-    try {
-      await pending;
-    } finally {
-      if (this.audioStart === pending)
-        this.audioStart = null;
-    }
-  }
   async runPlay(operation) {
     const current = () => this.current(operation, "playing") && this.wanted;
     try {
@@ -24624,7 +24959,7 @@ class Playback {
       if (!current())
         return;
       this.host.paused = false;
-      await this.startAudio();
+      await this.host.audio.play();
       if (!current()) {
         if (!this.wanted || this.host.destroyed)
           this.host.audio.pause();
@@ -24974,16 +25309,16 @@ class Renderer {
 class VideoEngine {
   constructor({ canvas, ctx, events, timeupdateInterval = 250, avSyncTolerance = 0.12, dropLateFrames = false, poster = "", preflightRange: preflightRange2 = false, onError }) {
     __privateAdd(this, _VideoEngine_instances);
-    __privateAdd(this, _generation, 0);
+    __privateAdd(this, _generation2, 0);
     __privateAdd(this, _iteration, 0);
-    __privateAdd(this, _loading, null);
+    __privateAdd(this, _loading2, null);
     __privateAdd(this, _createSink, null);
     __privateAdd(this, _usedSink, null);
     __privateAdd(this, _destroyed, false);
     __privateAdd(this, _preparing, false);
     __privateAdd(this, _poster, new Poster());
     __privateAdd(this, _renderer);
-    __privateAdd(this, _onError);
+    __privateAdd(this, _onError2);
     this.canvas = canvas;
     this.ctx = ctx;
     this.events = events;
@@ -25007,7 +25342,7 @@ class VideoEngine {
     this.playbackRate = 1;
     this.posterDrawn = false;
     this.isFetching = false;
-    __privateSet(this, _onError, onError);
+    __privateSet(this, _onError2, onError);
     __privateSet(this, _renderer, new Renderer(this, () => !__privateGet(this, _preparing), (frame) => __privateMethod(this, _VideoEngine_instances, draw_fn).call(this, frame, true), (error) => __privateMethod(this, _VideoEngine_instances, report_fn).call(this, error)));
   }
   async preflight(source, signal, current) {
@@ -25016,7 +25351,7 @@ class VideoEngine {
   drawPoster() {
     if (__privateGet(this, _destroyed) || !this.poster || this.posterDrawn)
       return;
-    const generation = __privateGet(this, _generation);
+    const generation = __privateGet(this, _generation2);
     __privateGet(this, _poster).draw(this.poster, () => __privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation), (image) => {
       this.clear();
       this.canvas.width = image.naturalWidth || this.canvas.width;
@@ -25035,13 +25370,13 @@ class VideoEngine {
     __privateMethod(this, _VideoEngine_instances, context_fn).call(this).clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
   cancelPending() {
-    __privateWrapper(this, _generation)._++;
+    __privateWrapper(this, _generation2)._++;
     __privateWrapper(this, _iteration)._++;
     this.stop();
     __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
     __privateGet(this, _poster).cancel();
     __privateSet(this, _preparing, false);
-    __privateSet(this, _loading, null);
+    __privateSet(this, _loading2, null);
     __privateSet(this, _createSink, null);
     __privateSet(this, _usedSink, null);
     this.videoSink = null;
@@ -25051,16 +25386,16 @@ class VideoEngine {
     if (__privateGet(this, _destroyed))
       return;
     this.cancelPending();
-    const generation = __privateGet(this, _generation);
+    const generation = __privateGet(this, _generation2);
     const iteration = __privateGet(this, _iteration);
     __privateSet(this, _preparing, true);
-    const pending = Promise.resolve().then(() => __privateMethod(this, _VideoEngine_instances, load_fn).call(this, media, generation, iteration, onMetadata));
-    __privateSet(this, _loading, pending);
+    const pending = Promise.resolve().then(() => __privateMethod(this, _VideoEngine_instances, load_fn2).call(this, media, generation, iteration, onMetadata));
+    __privateSet(this, _loading2, pending);
     try {
       await pending;
     } finally {
-      if (__privateGet(this, _loading) === pending)
-        __privateSet(this, _loading, null);
+      if (__privateGet(this, _loading2) === pending)
+        __privateSet(this, _loading2, null);
     }
   }
   handleNoVideoTrack() {
@@ -25077,9 +25412,9 @@ class VideoEngine {
   async resetIterator(time) {
     if (__privateGet(this, _destroyed))
       return;
-    const generation = __privateGet(this, _generation);
+    const generation = __privateGet(this, _generation2);
     const iteration = ++__privateWrapper(this, _iteration)._;
-    const loading = __privateGet(this, _loading);
+    const loading = __privateGet(this, _loading2);
     this.stop();
     __privateGet(this, _poster).cancel();
     __privateSet(this, _preparing, true);
@@ -25119,7 +25454,7 @@ class VideoEngine {
     if (__privateGet(this, _destroyed))
       return;
     __privateSet(this, _destroyed, true);
-    __privateWrapper(this, _generation)._++;
+    __privateWrapper(this, _generation2)._++;
     __privateGet(this, _renderer).destroy();
     __privateGet(this, _poster).cancel();
     __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
@@ -25131,19 +25466,19 @@ class VideoEngine {
     this.audioClock = null;
   }
 }
-_generation = new WeakMap();
+_generation2 = new WeakMap();
 _iteration = new WeakMap();
-_loading = new WeakMap();
+_loading2 = new WeakMap();
 _createSink = new WeakMap();
 _usedSink = new WeakMap();
 _destroyed = new WeakMap();
 _preparing = new WeakMap();
 _poster = new WeakMap();
 _renderer = new WeakMap();
-_onError = new WeakMap();
+_onError2 = new WeakMap();
 _VideoEngine_instances = new WeakSet();
 current_fn = function(generation) {
-  return !__privateGet(this, _destroyed) && __privateGet(this, _generation) === generation;
+  return !__privateGet(this, _destroyed) && __privateGet(this, _generation2) === generation;
 };
 context_fn = function() {
   if (!this.ctx)
@@ -25154,8 +25489,8 @@ report_fn = function(error) {
   if (__privateGet(this, _destroyed))
     return;
   __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
-  if (__privateGet(this, _onError))
-    __privateGet(this, _onError).call(this, error);
+  if (__privateGet(this, _onError2))
+    __privateGet(this, _onError2).call(this, error);
   else
     this.events.emit("error", error);
 };
@@ -25168,7 +25503,7 @@ draw_fn = function(frame, clear) {
     this.clear();
   __privateMethod(this, _VideoEngine_instances, context_fn).call(this).drawImage(frame.canvas, 0, 0);
 };
-load_fn = async function(media, generation, iteration, onMetadata) {
+load_fn2 = async function(media, generation, iteration, onMetadata) {
   if (!__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation))
     return;
   try {
@@ -25242,7 +25577,14 @@ class MediaBunnyEngine {
     __privateAdd(this, _playback);
     this.events = events;
     this.option = option;
-    this.audio = new AudioEngine(events);
+    this.audio = new AudioEngine(events, (error) => {
+      try {
+        this.pause();
+      } catch (failure) {
+        console.warn("MediaBunny audio coordinator cleanup:", failure);
+      }
+      this.reportError(error);
+    });
     this.video = new VideoEngine({
       canvas,
       ctx,
@@ -25279,6 +25621,7 @@ class MediaBunnyEngine {
       this.ended = true;
       this.paused = true;
       __privateGet(this, _playback).ended();
+      this.audio.pause();
     });
   }
   async load(src) {
@@ -25287,6 +25630,7 @@ class MediaBunnyEngine {
     const id = ++this.loadSeq;
     __privateGet(this, _playback).invalidate();
     this.video.cancelPending();
+    this.audio.cancelPending();
     this.loadSession?.cancel();
     if (id !== this.loadSeq || this.destroyed)
       return;
@@ -25311,6 +25655,7 @@ class MediaBunnyEngine {
       const failed = ++this.loadSeq;
       __privateGet(this, _playback).invalidate();
       this.video.cancelPending();
+      this.audio.cancelPending();
       session.cancel();
       if (failed !== this.loadSeq || this.destroyed)
         return;

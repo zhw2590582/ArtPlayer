@@ -28,7 +28,6 @@ export default class Playback {
   private wanted = false
   private playing: Operation | null = null
   private seeking: Operation | null = null
-  private audioStart: Promise<void> | null = null
 
   constructor(private host: PlaybackHost) {}
 
@@ -103,19 +102,6 @@ export default class Playback {
     return operation.promise
   }
 
-  private async startAudio(): Promise<void> {
-    if (!this.audioStart)
-      this.audioStart = this.host.audio.play()
-    const pending = this.audioStart
-    try {
-      await pending
-    }
-    finally {
-      if (this.audioStart === pending)
-        this.audioStart = null
-    }
-  }
-
   private async runPlay(operation: Operation): Promise<void> {
     const current = () => this.current(operation, 'playing') && this.wanted
     try {
@@ -127,7 +113,7 @@ export default class Playback {
       if (!current())
         return
       this.host.paused = false
-      await this.startAudio()
+      await this.host.audio.play()
       if (!current()) {
         if (!this.wanted || this.host.destroyed)
           this.host.audio.pause()

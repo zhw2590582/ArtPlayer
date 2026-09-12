@@ -61,3 +61,13 @@ VideoEngine与迭代器/渲染/海报职责已实际迁移TS，删除视频声�
 执行yarn test:mediabunny及新增mediabunny-video.spec.js，按实际报告区分普通播放、
 真实帧竞态、能力对照和synthetic RAF。[变更](changes/2026-09-12-PKG-MB-05-video.md)与
 [验证](baselines/mb-video-validation.json)记录38个新断言、旧产物复现及真实解码场景。
+
+## PKG-MB-06 音频归属与时钟
+
+实际AudioEngine迁移并拆为六个TS模块，包内26生产TS，无JS声明桥；m3u8/index由07/08接续。
+[变更](changes/2026-09-12-PKG-MB-06-audio.md)记录文件地图、resume归属下移、兼容边界和回退，
+[证据](baselines/mb-audio-validation.json)记录旧main 37断言8通过/29失败、候选专项183及
+main/legacy各159通过。最终78浏览器含16新增原生音频场景及8新增WebKit能力对照。
+同24音频浏览器断言对旧main20通过/4失败，失败为实际暂停后的节点清理；其余为回归对照。
+短时1×/2×帧/音频时钟偏差验证不替代长播放、听觉及设备验收；全部报告/results已归档。
+完整CI1344项及另44重复契约通过，316生产TS；完成后立即专用提交，MB-LIFE-01剩余范围仍open。

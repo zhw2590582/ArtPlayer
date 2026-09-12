@@ -35,7 +35,15 @@ export default class MediaBunnyEngine implements EnginePort {
   constructor({ canvas, ctx, events, option = {} }: EngineOptions) {
     this.events = events
     this.option = option
-    this.audio = new AudioEngine(events)
+    this.audio = new AudioEngine(events, (error) => {
+      try {
+        this.pause()
+      }
+      catch (failure) {
+        console.warn('MediaBunny audio coordinator cleanup:', failure)
+      }
+      this.reportError(error)
+    })
     this.video = new VideoEngine({
       canvas,
       ctx,
@@ -73,6 +81,7 @@ export default class MediaBunnyEngine implements EnginePort {
       this.ended = true
       this.paused = true
       this.#playback.ended()
+      this.audio.pause()
     })
   }
 
@@ -82,6 +91,7 @@ export default class MediaBunnyEngine implements EnginePort {
     const id = ++this.loadSeq
     this.#playback.invalidate()
     this.video.cancelPending()
+    this.audio.cancelPending()
     this.loadSession?.cancel()
     if (id !== this.loadSeq || this.destroyed)
       return
@@ -107,6 +117,7 @@ export default class MediaBunnyEngine implements EnginePort {
       const failed = ++this.loadSeq
       this.#playback.invalidate()
       this.video.cancelPending()
+      this.audio.cancelPending()
       session.cancel()
       if (failed !== this.loadSeq || this.destroyed)
         return

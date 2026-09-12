@@ -94,7 +94,7 @@ test('MediaBunny coordinator restores paused state after a play rejection and al
   env.art.emit('destroy')
 })
 
-test('MediaBunny coordinator shares delayed audio resume across play-pause-play and starts video once', async () => {
+test('MediaBunny coordinator delegates each new play intent to the audio owner and starts video once', async () => {
   const env = environment()
   const audio = deferred()
   let attempts = 0
@@ -107,7 +107,7 @@ test('MediaBunny coordinator shares delayed audio resume across play-pause-play 
   const second = env.engine.play()
   audio.resolve()
   await Promise.all([first, second])
-  assert.equal(attempts, 1)
+  assert.equal(attempts, 2)
   assert.equal(env.engine.paused, false)
   assert.equal(env.calls.filter(name => name === 'video:start').length, 1)
   assert.equal(env.calls.filter(name => name === 'play').length, 1)

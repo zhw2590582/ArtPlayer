@@ -1,0 +1,10 @@
+{
+  "task": "PKG-MB-06",
+  "sourceCommit": "9d037dcbf913fef2d2a9eb4f3924d6abf3ab5597",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/AudioEngine.js": "910d6831372e4895d55dec78010f281a199bc88f99735630a5a3b621f192ac35",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.ts": "237d3d29fbf61a74df83dea11d862450dfd8f3b7fbd555dd5552b630ff0191e9",
+    "packages/artplayer-proxy-mediabunny/src/playback.ts": "0512f6a1b253d754b6644266327e368e0e18cce1cf9a3af62b6747ed55d691f7",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "9c89a729197593ffcab11b64813b312f588f5515d2cb8acb0537d0a389a5209c"
+  }
+}

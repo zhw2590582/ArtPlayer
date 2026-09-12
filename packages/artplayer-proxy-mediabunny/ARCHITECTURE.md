@@ -16,25 +16,29 @@ declarations, the factory signature, canvas forwarding, or package entrypoints.
 | `preflight.ts` | Optional HEAD Range check, historical warning/error policy, cancellation and stale-result guard |
 | `load-session.ts` | Ownership of the pending/active SDK Input, HEAD AbortController, deferred load events and deadline |
 | `MediaBunnyEngine.ts` | Load/readiness coordinator, source identity, errors and terminal teardown |
-| `playback.ts` | Playback intent, cancellable play/seek/replacement operations and shared pending audio resume |
+| `playback.ts` | Playback intent and cancellable play/seek/replacement operations |
 | `readiness.ts` | One metadata publication after both participants, guarded event sequences |
 | `hls-selection.ts` | Source-bound track queries, pairing and active replacement errors |
 | `VideoEngine.ts` | Video capability/setup, source and seek ownership, first frames and terminal cleanup |
 | `video-frames.ts` | Shared pending iterator reads, idempotent iterator release and existing frame timing policy |
 | `video-renderer.ts` | Owned RAF, stale frame rejection, clock-driven draw/stall/end events |
 | `video-poster.ts` | Per-request image callbacks, source guards and handler cleanup |
-| `AudioEngine.js` | Remaining Web Audio clock, audio decoding and scheduling implementation |
+| `AudioEngine.ts` | Audio load/play generation, clock anchors and decoder-error forwarding |
+| `audio-clock.ts` | Existing media-clock and future/partially-late buffer scheduling formulas |
+| `audio-context.ts` | Context/gain setup, sample-rate fallback, shared native resume and terminal close |
+| `audio-nodes.ts` | Scheduled source nodes, rate, ended handlers and complete stop/disconnect |
+| `audio-pump.ts` | SDK buffer iterator, bounded batches, backpressure and stale-result guards |
+| `audio-task.ts` | Cancelable waits and owned batch/backpressure timers |
 | `VideoShim.ts` / `EventTarget.ts` | Video-like descriptors, synchronous/Promise forwarding and owned event lifecycle |
 | `shim-values.ts` | Existing volume coercion and synthetic TimeRanges values |
 | `shim-frames.ts` | Synthetic frame callbacks, per-instance RAF ownership and terminal cleanup |
 | `engine-types.ts` / `engine-ports.ts` | Internal shim, coordinator and decoder interfaces |
-| `AudioEngine.d.ts` | Temporary boundary for the remaining JS audio engine, removed in MB-06 |
 | `m3u8.js` | Current ArtPlayer control/setting integration |
 
-The twenty production TypeScript modules use strict checking with `skipLibCheck: false`
-and no ambient Node types. The coordinator and video engine are checked implementations.
-The adjacent audio declaration is a temporary boundary, not checking of its JavaScript
-implementation. Remaining JavaScript is scheduled in PKG-MB-06/07/08.
+The twenty-six production TypeScript modules use strict checking with `skipLibCheck: false`
+and no ambient Node types. The coordinator and both decoder engines are checked
+implementations; there are no remaining adjacent JavaScript declaration bridges.
+The public factory and HLS integration remain JavaScript, scheduled in PKG-MB-07/08.
 Do not describe the whole package as migrated yet.
 
 The shim keeps its existing own-property order and direct prototype surface because
@@ -86,7 +90,10 @@ for the seek completion signal, resolved before optional resume to avoid a cycle
 A pending AudioContext resume is shared across play-pause-play; only the current operation
 starts video and emits play/playing. Source change and destroy invalidate both operations.
 Cancellation settles the public operation while observing the underlying late result;
-video frame ownership is detailed below; remaining audio work belongs to MB-06.
+video and audio ownership are detailed below. Native resume coalescing belongs to the
+context owner: each new playback intent calls audio.play(), but shares the same pending
+native resume. Sharing a canceled upper-level play Promise would incorrectly start video
+before the latest audio intent is active.
 
 Normal play, pause, seek/resume and HLS replacement event order is retained. Before each
 event the coordinator rechecks ownership, since a listener may synchronously pause, seek,
@@ -140,6 +147,39 @@ stopIterator still rejects. Missing 2D context fails at use with a descriptive e
 than becoming falsely ready. Capability handling for existing undecodable tracks remains
 under MB-CAP-01/MB-READY-01; the current no-video fallback is preserved for that separate review.
 
+## Audio clock and resource ownership
+
+AudioEngine keeps source generation separate from pump IDs and cancellable play intent.
+Pause invalidates a suspended resume even when the audio clock has not started; source
+replacement invalidates audio before track parsing. Late resume, capability checks and
+buffer reads cannot install a sink, schedule nodes or resurrect a destroyed instance.
+Native AudioContext.resume is coalesced per context, while canceled callers settle early
+and late rejections stay observed. A valid no-audio-track source retains the Web Audio
+clock fallback; this is distinct from rejecting a container with neither track.
+
+The clock retains the existing anchor/rate formula and squared gain with mute. Pause
+captures media time; seek/rate changes cancel the old iterator and stop/disconnect its
+scheduled nodes before rebuilding the queue at the new anchor. The renderer's ended
+event freezes the audio clock and releases remaining nodes. Source load resets position.
+Fully expired buffers do not allocate nodes; partially late buffers retain the old offset
+calculation. Audio playbackRate changes still change pitch through native source playbackRate;
+no new pitch-preservation or acoustic synchronization guarantee is introduced.
+
+AudioPump owns 16-buffer batches, a zero-delay yield and the existing one-second/50ms
+backpressure policy. Its timers include ID zero and are canceled with its task. Iterator
+detachment is synchronous and return is observed once; obsolete cleanup cannot clear a
+new iterator. Native AudioBuffers have no close() contract: the SDK closes its AudioSamples,
+while the proxy releases buffer/node/iterator references. Every scheduled source is owned
+before start, cleared on ended, stopped/disconnected on cancellation, and has its callback
+removed. Cleanup attempts all nodes and context resources before throwing the first error;
+background cleanup failures are observed, and do not replace an active decoder failure.
+
+ContextOwner installs context/gain references only after successful setup. Setup failure
+releases partial resources, destroy nulls references and observes the asynchronous close,
+and repeated destroy is inert. Real-browser teardown assertions poll the native closed state.
+Tests deliberately delay native resume completion or decoded buffer delivery, without
+substituting fake audio decoding for native acceptance.
+
 ## Types and dependencies
 
 The locked runtime SDK remains MediaBunny 1.56.1. Its pinned WebCodecs declaration
@@ -160,6 +200,7 @@ yarn build artplayer-proxy-mediabunny
 yarn test:browser test/browser/mediabunny-inputs.spec.js test/browser/mediabunny.spec.js test/browser/mediabunny-load.spec.js
 yarn test:browser test/browser/mediabunny-shim.spec.js
 yarn test:browser test/browser/mediabunny-video.spec.js
+yarn test:browser test/browser/mediabunny-audio.spec.js
 ```
 
 Node tests use actual SDK parsing and controlled lifecycle interleavings. Browser tests
@@ -174,9 +215,9 @@ inputs, not a rebuilt dist. Package-specific evidence and remaining tasks are in
 `refactor/mb-validation.md`. The full refactor plan is at the repository root.
 
 PKG-MB-04 covers duplicate/trackless readiness, reentrant event sequences and
-pending play/seek coordination. PKG-MB-05/06 own late frame and audio callbacks,
-including operations already inside decoders at cancellation; releasing Input alone
-does not prove those resources are fully handled. PKG-MB-07 owns HLS UI/selection
+pending play/seek coordination. PKG-MB-05/06 cover late frame and audio callbacks,
+including operations already inside decoders at cancellation. These bounded cases do not
+replace long-run synchronization and combination validation. PKG-MB-07 owns HLS UI/selection
 races. PKG-MB-09 owns long-run AV sync, full core/proxy/plugin combinations and device
 validation. PKG-MB-10 owns the demo, installed package and MPL/source notice gate.
 Windows WebKit without WebCodecs/Web Audio is recorded as a capability failure,

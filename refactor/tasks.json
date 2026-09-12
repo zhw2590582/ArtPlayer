@@ -3502,11 +3502,15 @@
       "dependsOn": [
         "PKG-MB-04"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "AudioEngine 时钟、缓冲和 AudioContext 归属",
       "acceptance": "AV sync、倍速、无音轨、静音/音量和暂停恢复通过",
-      "evidence": []
+      "evidence": [
+        "baselines/mb-audio-source.json",
+        "changes/2026-09-12-PKG-MB-06-audio.md",
+        "baselines/mb-audio-validation.json"
+      ]
     },
     {
       "id": "PKG-MB-07",

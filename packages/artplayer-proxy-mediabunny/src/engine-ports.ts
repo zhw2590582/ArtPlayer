@@ -4,6 +4,7 @@ import type EventTarget from './EventTarget'
 import type { PlaybackMedia } from './media'
 
 export interface AudioPort {
+  cancelPending: () => void
   readonly currentTime: number
   duration: number
   paused: boolean

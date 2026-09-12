@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-MB-06完成：音频解码、时钟与资源归属
+
+AudioEngine实际迁移TS，拆清clock、context、nodes、pump、task职责，删除最后音频声明桥。
+暂停/切源/销毁取消迟到resume和buffer，seek/rate释放旧速节点；时钟、增益与无音轨回退
+保持契约，播放协调器的原生resume去重下移到context owner。包内26生产TS，剩m3u8/index
+由07/08接续。37音频断言旧main8通过/29失败，候选专项183、main/legacy各159通过。
+最终78浏览器通过：含16新增原生音频场景及8新增能力对照；旧main同24音频浏览器
+20通过/4节点清理失败。短时1×/2×音画取样最大偏差约39/38ms，长播/听觉/设备仍MB-09。
+完整CI1344项通过，另44重复契约；316生产TS。源码/产物/报告哈希及三格式复制一致。
+见[变更](changes/2026-09-12-PKG-MB-06-audio.md)与[证据](baselines/mb-audio-validation.json)。
+222项：103 done、7 doing、112 todo；立即专用本地提交，下一项MB-07 HLS UI/拓扑。
+MB-LIFE-01剩余长播放、全组合及HLS UI范围仍open；不构成npm发布验收。
+
 ## PKG-MB-05完成：视频迭代器、seek、晚帧与RAF
 
 VideoEngine实际迁移TS，拆出frame读取/释放、renderer与poster职责，删除视频声明桥。
