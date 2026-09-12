@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-02 完成：失败回归和原生抽帧对照
+
+64项旧行为测试覆盖8份冻结夹具的销毁/切源/重复metadata/逆序Blob/null Blob/
+draw与encode异常/缺context和media错误/setter异常。9项三浏览器原生HTTP/video/
+seek/JPEG/像素对照复现迟到更新；WebKit旧插件四点黑色，而播放及静态JPEG对照有色，
+登记为待修抽帧路径缺陷，不作为能力豁免。保留3次中间诊断失败报告和最终完整报告。
+完整CI1766项、339生产TS通过。新增test:auto-thumbnail，Node64项纳入test:unit。
+问题已复现并记录但源码尚未修复，03负责资源/抽帧重构；独立隐藏渲染实验仅作03线索。
+见[故障表](baselines/auto-thumbnail-failures.md)和[验证](baselines/auto-thumbnail-failures-validation.json)。
+222项：114 done、11 doing、97 todo；185风险，新增像素风险与已有相关风险均open。
+
+
 ## PKG-AUTO-THUMB-01 完成：自动缩略图发布与行为基线
 
 核实全部三个npm版本及16成员，冻结8份工作区输入。明确1.0.0缺main/legacy，

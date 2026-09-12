@@ -186,5 +186,6 @@
 | AUTO-THUMB-TYPE-01 | open / 已复现 | Published declarations misdescribe async registration and switch height/number option fields across generations | PKG-AUTO-THUMB-04 |
 | AUTO-THUMB-EXPORT-01 | open / 已复现 | Published 1.0.1 CommonJS default namespace differs from the direct function exported by 1.1.0 | PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-06 |
 | AUTO-THUMB-DIST-01 | open / 已复现 | Published 1.0.0 archive lacks declared main and legacy runtimes | PKG-AUTO-THUMB-06 |
-| AUTO-THUMB-LIFE-01 | open / 源码/产物事实 | Extraction tasks, decoder handlers and final object URLs lack source-switch and destroy ownership | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
-| AUTO-THUMB-ENCODE-01 | open / 源码/产物事实 | Unserialized encodes include blank output and lack media/canvas/input failure handling | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
+| AUTO-THUMB-LIFE-01 | open / 已复现 | Extraction tasks, decoder handlers and final object URLs lack source-switch and destroy ownership | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
+| AUTO-THUMB-ENCODE-01 | open / 已复现 | Unserialized encodes include blank output and lack media/canvas/input failure handling | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
+| AUTO-THUMB-PIXEL-01 | open / 已复现 | Historical auto-thumbnail yields black sampled JPEG cells on Windows WebKit while played native video and static JPEG controls yield color | PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |

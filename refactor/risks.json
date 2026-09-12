@@ -4051,7 +4051,7 @@
     {
       "id": "AUTO-THUMB-LIFE-01",
       "title": "Extraction tasks, decoder handlers and final object URLs lack source-switch and destroy ownership",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-AUTO-THUMB-02",
@@ -4061,15 +4061,19 @@
       "evidence": [
         "refactor/baselines/auto-thumbnail-release.json",
         "refactor/baselines/auto-thumbnail-contract.md",
-        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+        "refactor/scripts/auto-thumbnail-contract.test.mjs",
+        "test/auto-thumbnail.test.js",
+        "refactor/baselines/auto-thumbnail-failures.md",
+        "refactor/baselines/auto-thumbnail-failures-validation.json"
       ],
       "compatibleResolution": "Cancel obsolete work and release owned resources while retaining live options and progressive usable sheet updates.",
-      "closureCriteria": "Delayed callbacks, repeated metadata, switching, destroy, multiple instances and failure cleanup are reproduced then pass source/artifacts and native browser checks."
+      "closureCriteria": "Delayed callbacks, repeated metadata, switching, destroy, multiple instances and failure cleanup are reproduced then pass source/artifacts and native browser checks.",
+      "workspaceState": "Task02 reproduces old failures with 64 controlled tests and native delayed JPEG callbacks. Candidate fixes, numeric validation, reentrancy and complete cleanup boundaries remain task03; status stays open."
     },
     {
       "id": "AUTO-THUMB-ENCODE-01",
       "title": "Unserialized encodes include blank output and lack media/canvas/input failure handling",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-AUTO-THUMB-02",
@@ -4079,10 +4083,31 @@
       "evidence": [
         "refactor/baselines/auto-thumbnail-release.json",
         "refactor/baselines/auto-thumbnail-contract.md",
-        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+        "refactor/scripts/auto-thumbnail-contract.test.mjs",
+        "test/auto-thumbnail.test.js",
+        "refactor/baselines/auto-thumbnail-failures.md",
+        "refactor/baselines/auto-thumbnail-failures-validation.json"
       ],
       "compatibleResolution": "Preserve JPEG grid/time/scale while bounding jobs, sequencing valid updates and handling null Blob, invalid media and thrown callbacks.",
-      "closureCriteria": "Fault controls and native valid/corrupt media prove no stale sheet replacement, leaked URLs or unhandled async callbacks; capability limitations remain explicit."
+      "closureCriteria": "Fault controls and native valid/corrupt media prove no stale sheet replacement, leaked URLs or unhandled async callbacks; capability limitations remain explicit.",
+      "workspaceState": "Task02 reproduces old failures with 64 controlled tests and native delayed JPEG callbacks. Candidate fixes, numeric validation, reentrancy and complete cleanup boundaries remain task03; status stays open."
+    },
+    {
+      "id": "AUTO-THUMB-PIXEL-01",
+      "title": "Historical auto-thumbnail yields black sampled JPEG cells on Windows WebKit while played native video and static JPEG controls yield color",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-AUTO-THUMB-03",
+        "PKG-AUTO-THUMB-05"
+      ],
+      "evidence": [
+        "test/browser/auto-thumbnail.spec.js",
+        "refactor/baselines/auto-thumbnail-failures.md",
+        "refactor/baselines/auto-thumbnail-failures-validation.json"
+      ],
+      "compatibleResolution": "Establish actual decoded-frame readiness for the existing timeline/grid and preserve silent independent extraction; do not waive colored pixel checks as unsupported media.",
+      "closureCriteria": "Candidate source and artifacts generate usable sampled pixels on native browser controls with lifecycle checks; supported Safari and core combinations remain explicit final gates."
     }
   ]
 }

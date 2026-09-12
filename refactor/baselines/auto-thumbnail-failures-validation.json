@@ -1,0 +1,1947 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUTO-THUMB-02",
+  "status": "done",
+  "parentCommit": "cdc252b158af25836e7f0a5c07de78ee57eb0cf4",
+  "checks": [
+    {
+      "command": "node --test test/auto-thumbnail.test.js",
+      "result": "pass",
+      "tests": 64,
+      "scope": "Eight historical failure behaviors across eight frozen implementations; defects are reproduced, not fixed.",
+      "log": "refactor/.cache/auto-thumbnail02-unit.log"
+    },
+    {
+      "command": "yarn test:browser test/browser/auto-thumbnail.spec.js",
+      "result": "pass",
+      "tests": 9,
+      "retries": 0,
+      "skipped": 0,
+      "report": "refactor/.cache/auto-thumbnail02-browser-verified.json",
+      "results": "refactor/.cache/auto-thumbnail02-browser-verified-results",
+      "reportSha256": "e38a4478260d922d70389801ae230e6d5c30e439d108baeb8825a6ab3611b744"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1520,
+        "engineering": 14,
+        "baseline": 232,
+        "total": 1766
+      },
+      "strictProductionTypeScriptFiles": 339,
+      "log": "refactor/.cache/auto-thumbnail02-ci.log",
+      "logSha256": "f531bdcf2b73f49c81e994c3913ce340e3599620b91281a32feb6127a9749dec",
+      "warnings": [
+        "Existing generated core editor declaration unused eslint suppression",
+        "Existing Yarn DEP0169 url.parse warning"
+      ]
+    },
+    {
+      "command": "focused eslint --no-fix; yarn test:browser test/browser/auto-thumbnail.spec.js",
+      "result": "pass",
+      "tests": 9,
+      "retries": 0,
+      "skipped": 0,
+      "report": "refactor/.cache/auto-thumbnail02-browser-portable.json",
+      "reportSha256": "c48b511f69f0bad94956ff81de83a16a5d0dda17072775aa95ff7335a72b90c4",
+      "results": "refactor/.cache/auto-thumbnail02-browser-portable-results",
+      "scope": "Final platform assertion guard and all-cell color check verified after full CI. Production sources, package scripts and Node tests did not change after full CI; Linux hosted execution is not claimed."
+    },
+    {
+      "command": "yarn test:auto-thumbnail",
+      "result": "pass",
+      "tests": 102,
+      "log": "refactor/.cache/auto-thumbnail02-combined.log"
+    }
+  ],
+  "diagnosticRuns": [
+    {
+      "report": "refactor/.cache/auto-thumbnail02-browser-initial.json",
+      "results": "refactor/.cache/auto-thumbnail02-browser-initial-results",
+      "expected": 6,
+      "unexpected": 3,
+      "note": "Intermediate WebKit pixel hypothesis was tested and refined using independent native controls; not silently discarded."
+    },
+    {
+      "report": "refactor/.cache/auto-thumbnail02-browser-control.json",
+      "results": "refactor/.cache/auto-thumbnail02-browser-control-results",
+      "expected": 6,
+      "unexpected": 3,
+      "note": "Intermediate WebKit pixel hypothesis was tested and refined using independent native controls; not silently discarded."
+    },
+    {
+      "report": "refactor/.cache/auto-thumbnail02-browser-played-control.json",
+      "results": "refactor/.cache/auto-thumbnail02-browser-played-control-results",
+      "expected": 6,
+      "unexpected": 3,
+      "note": "Intermediate WebKit pixel hypothesis was tested and refined using independent native controls; not silently discarded."
+    }
+  ],
+  "measurements": [
+    {
+      "browser": "chromium",
+      "browserVersion": "153.0.8010.12",
+      "retry": 0,
+      "implementation": "published-1.1.0-main",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          15,
+          13,
+          138,
+          255
+        ],
+        "samples": [
+          [
+            15,
+            13,
+            138,
+            255
+          ],
+          [
+            12,
+            16,
+            139,
+            255
+          ],
+          [
+            11,
+            16,
+            136,
+            255
+          ],
+          [
+            14,
+            15,
+            141,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.267285,
+        "rawPixel": [
+          0,
+          0,
+          253,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          4,
+          17,
+          131,
+          255
+        ],
+        "samples": [
+          [
+            4,
+            17,
+            131,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "chromium",
+      "browserVersion": "153.0.8010.12",
+      "retry": 0,
+      "implementation": "published-1.0.1-main",
+      "sha256": "3d9756b7437f24372d34138002b46937bb09e7392b82fb1caf5f09460f151c46",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          15,
+          13,
+          138,
+          255
+        ],
+        "samples": [
+          [
+            15,
+            13,
+            138,
+            255
+          ],
+          [
+            12,
+            16,
+            139,
+            255
+          ],
+          [
+            11,
+            16,
+            136,
+            255
+          ],
+          [
+            14,
+            15,
+            141,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.253631,
+        "rawPixel": [
+          0,
+          0,
+          253,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          4,
+          17,
+          131,
+          255
+        ],
+        "samples": [
+          [
+            4,
+            17,
+            131,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "chromium",
+      "browserVersion": "153.0.8010.12",
+      "retry": 0,
+      "implementation": "frozen-workspace-js",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          15,
+          13,
+          138,
+          255
+        ],
+        "samples": [
+          [
+            15,
+            13,
+            138,
+            255
+          ],
+          [
+            12,
+            16,
+            139,
+            255
+          ],
+          [
+            11,
+            16,
+            136,
+            255
+          ],
+          [
+            14,
+            15,
+            141,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.252551,
+        "rawPixel": [
+          0,
+          0,
+          253,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          4,
+          17,
+          131,
+          255
+        ],
+        "samples": [
+          [
+            4,
+            17,
+            131,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "firefox",
+      "browserVersion": "155.0",
+      "retry": 0,
+      "implementation": "published-1.1.0-main",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          5,
+          15,
+          250,
+          255
+        ],
+        "samples": [
+          [
+            5,
+            15,
+            250,
+            255
+          ],
+          [
+            1,
+            14,
+            253,
+            255
+          ],
+          [
+            7,
+            10,
+            247,
+            255
+          ],
+          [
+            1,
+            14,
+            253,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.253576,
+        "rawPixel": [
+          0,
+          14,
+          253,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          11,
+          255,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            11,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "firefox",
+      "browserVersion": "155.0",
+      "retry": 0,
+      "implementation": "published-1.0.1-main",
+      "sha256": "3d9756b7437f24372d34138002b46937bb09e7392b82fb1caf5f09460f151c46",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          5,
+          15,
+          250,
+          255
+        ],
+        "samples": [
+          [
+            5,
+            15,
+            250,
+            255
+          ],
+          [
+            1,
+            14,
+            253,
+            255
+          ],
+          [
+            7,
+            10,
+            247,
+            255
+          ],
+          [
+            1,
+            14,
+            253,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.254526,
+        "rawPixel": [
+          0,
+          14,
+          253,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          11,
+          255,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            11,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "firefox",
+      "browserVersion": "155.0",
+      "retry": 0,
+      "implementation": "frozen-workspace-js",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          5,
+          15,
+          250,
+          255
+        ],
+        "samples": [
+          [
+            5,
+            15,
+            250,
+            255
+          ],
+          [
+            1,
+            14,
+            253,
+            255
+          ],
+          [
+            7,
+            10,
+            247,
+            255
+          ],
+          [
+            1,
+            14,
+            253,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.290804,
+        "rawPixel": [
+          0,
+          15,
+          253,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          18,
+          255,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            18,
+            255,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "webkit",
+      "browserVersion": "26.6",
+      "retry": 0,
+      "implementation": "published-1.1.0-main",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.2616568,
+        "rawPixel": [
+          13,
+          16,
+          239,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          6,
+          41,
+          133,
+          255
+        ],
+        "samples": [
+          [
+            6,
+            41,
+            133,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0.0007911,
+        2.0006032,
+        4.0010776,
+        6.0003922
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "webkit",
+      "browserVersion": "26.6",
+      "retry": 0,
+      "implementation": "published-1.0.1-main",
+      "sha256": "3d9756b7437f24372d34138002b46937bb09e7392b82fb1caf5f09460f151c46",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.2623449,
+        "rawPixel": [
+          13,
+          16,
+          239,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          6,
+          41,
+          133,
+          255
+        ],
+        "samples": [
+          [
+            6,
+            41,
+            133,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        2.0004229,
+        4.0015636,
+        6.0015607
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    },
+    {
+      "browser": "webkit",
+      "browserVersion": "26.6",
+      "retry": 0,
+      "implementation": "frozen-workspace-js",
+      "sha256": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "scope": "Native HTTP video, seeking and JPEG pixels with controlled delivery of native toBlob results; player-facing host is a stub, not a core integration result.",
+      "blanks": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "final": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          0,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "native": {
+        "readyState": 4,
+        "currentTime": 0.2557929,
+        "rawPixel": [
+          16,
+          15,
+          239,
+          255
+        ],
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          19,
+          35,
+          133,
+          255
+        ],
+        "samples": [
+          [
+            19,
+            35,
+            133,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "staticControl": {
+        "width": 800,
+        "height": 45,
+        "pixel": [
+          254,
+          0,
+          0,
+          255
+        ],
+        "samples": [
+          [
+            254,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ],
+          [
+            0,
+            0,
+            0,
+            255
+          ]
+        ],
+        "type": "image/jpeg"
+      },
+      "seeks": [
+        0,
+        0.0015887,
+        4.0007806,
+        6.001757
+      ],
+      "updates": [
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": false
+        },
+        {
+          "height": 45,
+          "column": 10,
+          "number": 4,
+          "width": 80,
+          "scale": 1,
+          "afterDestroy": true
+        }
+      ],
+      "outstandingAfterDestroy": 1,
+      "goodRevoked": true,
+      "staleUrlLive": true,
+      "result": {
+        "name": "artplayerPluginAutoThumbnail"
+      },
+      "videoState": {
+        "src": "/test/pattern.mp4",
+        "readyState": 4,
+        "width": 320,
+        "seekHandler": "function",
+        "metadataHandler": "function"
+      }
+    }
+  ],
+  "limitations": [
+    "Tests assert known historical defects, not successful candidate repair.",
+    "Browser player-facing host is a stub; actual core matrix/demo integration remains task05/06.",
+    "Windows WebKit black plugin samples coexist with colored played-video and static JPEG controls; this is not a waived capability.",
+    "Invalid numeric input, reentrancy, cross-instance and cleanup-failure candidate boundaries remain for task03.",
+    "No physical Safari, mobile, CORS matrix, arbitrary formats or sustained-load acceptance is claimed."
+  ],
+  "completedAt": "2026-09-12T22:04:39.411Z",
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "38c96d1cbfef31b38506465c71c06c3d8408ef8e48bf4cd7b3106fd112d9791f"
+    },
+    {
+      "file": "test/auto-thumbnail.test.js",
+      "sha256LF": "ce8ff64895b3e89648324ed5d9b16787ac397ed9f1076488361ab93e1b2681d9"
+    },
+    {
+      "file": "test/browser/auto-thumbnail.spec.js",
+      "sha256LF": "ec9fcbedc9ee12d61a82e2edff84f677d9474d38c111c7bd295bf880277ccc11"
+    },
+    {
+      "file": "test/helpers/auto-thumbnail.js",
+      "sha256LF": "6c4fb8a27d5495578fb18df813458b2cb1ae467f0a182de14d75b72f2f760c3a"
+    },
+    {
+      "file": "test/browser/media/pattern.mp4",
+      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233"
+    },
+    {
+      "file": "refactor/baselines/auto-thumbnail-failures.md",
+      "sha256LF": "2d7b49ba6711a6403a3e16011001019384cd54a4df3bcff08d51ba2fd57ab1de"
+    }
+  ],
+  "exploratoryReadinessProbes": [
+    {
+      "scope": "Exploratory conditions, includes unsupported and timeout outcomes; not counted as candidate acceptance.",
+      "source": "refactor/.cache/auto-thumbnail-readiness-initial.mjs",
+      "sourceSha256": "18ec3c5472d298c4bde1f0fc5e703a91d2028f1f8eed5cc45391c9d28d81c3e7",
+      "results": "refactor/.cache/auto-thumbnail-readiness-initial.json",
+      "resultsSha256": "0f77c28f7e60b07abde56ce29db597125ed1ed42dc34ef2e5000e30dfc7af43d"
+    },
+    {
+      "scope": "Exploratory conditions, includes unsupported and timeout outcomes; not counted as candidate acceptance.",
+      "source": "refactor/.cache/auto-thumbnail-readiness-probe.mjs",
+      "sourceSha256": "93cf64c7b1cbad915f5c70266f882ad7ad3e4b36aa21b2bc0f0b69d957e3141f",
+      "results": "refactor/.cache/auto-thumbnail-readiness-probe.json",
+      "resultsSha256": "bf8e252fddc77de84f54183d4329fe3b472c6d3ed62cce6957fcc14a3d6fc30a"
+    }
+  ],
+  "fullCiBrowserTestInput": {
+    "file": "test/browser/auto-thumbnail.spec.js",
+    "sha256LF": "5a8f20a77c145d534c624b23cb407bc6f50f21de365d9e5fb3c6e5bf0ba329c3"
+  }
+}
