@@ -3774,13 +3774,15 @@
         "PKG-IFRAME-03"
       ],
       "status": "open",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "compatibleResolution": "Reproduce same-tick request collision, pending injection, response errors and destroy behavior before changing internal ownership; preserve public promises[id].resove.",
       "closureCriteria": "Old behavior and candidate fixes have deterministic race/resource tests plus actual iframe integration.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
         "refactor/baselines/iframe-release.json",
-        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md"
+        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md",
+        "refactor/baselines/iframe-behavior-validation.json",
+        "refactor/changes/2026-09-12-PKG-IFRAME-02-behavior.md"
       ]
     },
     {
@@ -3791,13 +3793,15 @@
         "PKG-IFRAME-05"
       ],
       "status": "open",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "compatibleResolution": "Treat message origin/source and executable commit as an explicit compatibility and trust-boundary decision; do not silently replace the protocol during TS conversion.",
       "closureCriteria": "Controlled and real same/cross-origin evidence plus an explicit documented compatibility decision and supported trust model.",
       "evidence": [
         "refactor/baselines/iframe-contract.md",
         "refactor/baselines/iframe-release.json",
-        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md"
+        "refactor/changes/2026-09-12-PKG-IFRAME-01-contract.md",
+        "refactor/baselines/iframe-behavior-validation.json",
+        "refactor/changes/2026-09-12-PKG-IFRAME-02-behavior.md"
       ]
     },
     {

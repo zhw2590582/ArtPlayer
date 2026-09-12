@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 107 / doing 9 / blocked 0 / done 106 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 106 / doing 9 / blocked 0 / done 107 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -345,7 +345,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-IFRAME-01 | artplayer-tool-iframe<br>核对包契约与历史用法 | BASE-05 | constructor/commit/message/inject、postMessage 协议与历史公开拼写 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
-| PKG-IFRAME-02 | artplayer-tool-iframe<br>建立特有行为与错误测试 | PKG-IFRAME-01, ENG-03, ENG-05 | 跨窗口消息、ID 匹配、请求失败、重复 inject、销毁中请求 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-IFRAME-02 | artplayer-tool-iframe<br>建立特有行为与错误测试 | PKG-IFRAME-01, ENG-03, ENG-05 | 跨窗口消息、ID 匹配、请求失败、重复 inject、销毁中请求 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-IFRAME-03 | artplayer-tool-iframe<br>整理内部职责与资源 | PKG-IFRAME-02, CORE-02, BASE-07 | 请求注册/响应匹配/监听清理分离；origin/source 安全边界独立决策 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-IFRAME-04 | artplayer-tool-iframe<br>迁移自有源码和公开类型 | PKG-IFRAME-03, ENG-04, ENG-06, CORE-07 | 消息联合类型、回调/Promise 推导、旧公开字段兼容；旧npm export=与实际namespace、额外helper协议分别核验 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-IFRAME-05 | artplayer-tool-iframe<br>验证新旧核心和组合 | PKG-IFRAME-04, CORE-22 | 真实同源/跨源 iframe、既有 commit 协议；安全变化有独立结论 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
@@ -531,4 +531,5 @@
 - PKG-MB-08: [记录](baselines/mb-entry-source.json) [记录](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md) [记录](baselines/mb-entry-checkpoint.json) [记录](baselines/mb-capability-source.json) [记录](changes/2026-09-12-PKG-MB-08-capability.md) [记录](baselines/mb-capability-validation.json)
 - PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json) [记录](changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md) [记录](baselines/mb-sustained-validation.json) [记录](baselines/mb-sustained-media.json)
 - PKG-IFRAME-01: [记录](changes/2026-09-12-PKG-IFRAME-01-contract.md) [记录](baselines/iframe-release.json) [记录](baselines/iframe-contract.md) [记录](baselines/iframe-contract-validation.json)
+- PKG-IFRAME-02: [记录](changes/2026-09-12-PKG-IFRAME-02-behavior.md) [记录](baselines/iframe-behavior-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

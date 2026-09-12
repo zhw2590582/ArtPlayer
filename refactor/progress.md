@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-IFRAME-02 完成：历史生命周期与真实窗口缺陷复现
+
+52项Node和144项Chromium/Firefox/WebKit真实窗口检查通过，覆盖4份历史产物、同源/跨源。
+确认同毫秒请求串线、销毁/导航悬挂、克隆失败泄漏，以及无关窗口冒充握手/响应/commit。
+这是历史缺陷断言通过，尚未代表修复；工具测试未创建播放器，不计作核心媒体集成。
+完整CI1489与44重复契约通过，324生产TS；源码和归档报告哈希一致。
+见[变更](changes/2026-09-12-PKG-IFRAME-02-behavior.md)与[验证](baselines/iframe-behavior-validation.json)。
+222项：107 done、9 doing、106 todo；立即专用本地提交。三项Iframe风险仍open，下一项03实施修复。
+
 ## PKG-IFRAME-01 完成：发布名、辅助类与消息契约
 
 实际旧包plugin-iframe@1.0.0的8个成员和工作区11个输入已冻结；新tool名本次npm查询404，
