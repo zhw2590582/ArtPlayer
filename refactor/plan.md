@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 220 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 221 项，范围 22 个包及工作区/示例。
 
-状态：todo 126 / doing 6 / blocked 0 / done 88 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 126 / doing 6 / blocked 0 / done 89 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -16,7 +16,7 @@
 | --- | --- | --- |
 | artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
-| artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06 |
+| artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
 | artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06 |
@@ -31,7 +31,7 @@
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
-| artplayer-proxy-canvas | 1.1.0 | PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06 |
+| artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06 |
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
@@ -152,7 +152,8 @@
 | PKG-AMBILIGHT-02 | artplayer-plugin-ambilight<br>建立特有行为与错误测试 | PKG-AMBILIGHT-01, ENG-03, ENG-05 | 跨域 canvas 失败、零尺寸、暂停、重复 start/stop 和 destroy | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | done |
 | PKG-AMBILIGHT-03 | artplayer-plugin-ambilight<br>整理内部职责与资源 | PKG-AMBILIGHT-02, CORE-03, CORE-12 | 取色计算与绘帧分离，统一 RAF 和 DOM 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | done |
 | PKG-AMBILIGHT-04 | artplayer-plugin-ambilight<br>迁移自有源码和公开类型 | PKG-AMBILIGHT-03, ENG-04, ENG-06, CORE-07 | canvas 上下文、参数及 start/stop 的明确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | done |
-| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
+| PKG-AMBILIGHT-PROXY-01 | artplayer-plugin-ambilight, artplayer-proxy-canvas<br>修复Canvas代理输出尺寸与取色区域 | PKG-AMBILIGHT-04, CORE-22 | 按Canvas实际输出buffer取色，原生video保留intrinsic尺寸，明确5.1.7没有proxy配置 | 旧错误复现、三引擎实际代理九色区域对照及原生视频回归通过；不把本子项当作最终代理/设备验收 | M | done |
+| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22, PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-04 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
 | PKG-AMBILIGHT-06 | artplayer-plugin-ambilight<br>验证分发并同步文档 | PKG-AMBILIGHT-05, ENG-07 | ambilight.js 示例及样式/分发验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
 
 ## 5 包迁移：artplayer-plugin-audio-track
@@ -480,6 +481,8 @@
 - PKG-AMBILIGHT-02: [记录](changes/2026-09-12-PKG-AMBILIGHT-02-tests.md) [记录](baselines/ambilight-behavior-validation.json) [记录](ambilight-validation.md)
 - PKG-AMBILIGHT-03: [记录](changes/2026-09-12-PKG-AMBILIGHT-03-lifecycle.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-lifecycle-validation.json)
 - PKG-AMBILIGHT-04: [记录](changes/2026-09-12-PKG-AMBILIGHT-04-types.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-types-validation.json)
+- PKG-AMBILIGHT-PROXY-01: [记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-proxy-validation.json)
+- PKG-AMBILIGHT-05: [记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md) [记录](ambilight-validation.md)
 - PKG-AUDIO-01: [记录](changes/2026-09-12-PKG-AUDIO-01-contract.md) [记录](baselines/audio-track-contract.md) [记录](baselines/audio-track-release.json)
 - PKG-AUDIO-02: [记录](changes/2026-09-12-PKG-AUDIO-02-tests.md) [记录](audio-validation.md) [记录](baselines/audio-validation.json)
 - PKG-AUDIO-03: [记录](changes/2026-09-12-PKG-AUDIO-03-lifecycle.md) [记录](baselines/audio-lifecycle-validation.json)

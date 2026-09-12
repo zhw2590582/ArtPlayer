@@ -32,6 +32,13 @@ canvas could read the recovered same-origin video. Retries remain frequency-gate
 with a permanently cross-origin source this allocates at most one replacement per
 eligible sample. No bypass of canvas origin restrictions is attempted.
 
+Sampling uses the actual drawable pixels: native video's videoWidth/videoHeight,
+or a canvas proxy's width/height buffer. A proxy can forward the underlying media's
+dimensions while rendering a differently sized canvas, so never use its forwarded
+videoWidth/videoHeight to crop the output. The internal sampling source union and
+nodeName guard also avoid relying on same-window instanceof checks. Zero output
+dimensions skip sampling until the canvas has a valid buffer again.
+
 Compatibility constraints: keep numeric style arguments, nine row-major samples,
 blur/opacity/frequency/duration defaults, synchronous start/stop returns, option
 reading at registration, and the old frequency comparison (including NaN and
@@ -62,3 +69,11 @@ candidate modes with interop disabled, and ten negative uses. Published 1.1.0 fa
 NodeNext ESM with its old declarations; candidate must not inherit that failure.
 Published 1.0.0 required all option fields; 1.1.0 already made them optional. Current
 inference follows 1.1.0 while retaining valid calls from both generations.
+
+`test/ambilight-proxy.test.js` and `test/browser/ambilight-proxy.spec.js` protect
+resized output geometry. Browser tests play real video with the actual workspace
+proxy and paint a uniform nine-color palette through its public post-processing
+callback; getImageData is native. Actual core 5.1.7 has no proxy option and uses
+VIDEO, so its case checks that capability boundary and native playback. Only 5.4.0
+and candidate cases validate the canvas proxy combination. These tests do not
+establish that the unrefactored proxy's own async draw loop is terminally safe.

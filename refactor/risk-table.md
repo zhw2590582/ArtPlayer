@@ -154,3 +154,4 @@
 | AMBILIGHT-LIFE-01 | open / 已复现 | Ambilight sampling and RAF/DOM ownership lack terminal/error handling | PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-05 |
 | AMBILIGHT-TYPE-01 | resolved / 已复现 | Ambilight declarations disagree with optional factory argument and differ across published generations | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
 | AMBILIGHT-DIST-01 | resolved / 已复现 | Ambilight 1.0.0 CommonJS default namespace differs from callable 1.1.0 | PKG-AMBILIGHT-04, PKG-AMBILIGHT-06 |
+| AMBILIGHT-PROXY-01 | resolved / 已复现 | Canvas proxy output pixels differ from forwarded video dimensions | PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05 |

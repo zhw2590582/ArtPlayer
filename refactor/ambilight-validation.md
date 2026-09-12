@@ -70,3 +70,25 @@ chapter，专项安装命令的存在不代表全部包已加入该门槛。
 初始失败及明确限制见 [类型验证证据](baselines/ambilight-types-validation.json) 和
 [实施记录](changes/2026-09-12-PKG-AMBILIGHT-04-types.md)。类型与两代导出具体风险已
 关闭；当前待做范围为05/06，旧阶段记录保留其当时状态。
+
+## 05拆出：Canvas输出尺寸
+
+PKG-AMBILIGHT-PROXY-01从组合检查中独立修复采样边界：Canvas用实际width/height，
+原生video保留videoWidth/videoHeight。`yarn test:ambilight`加入3项输出resize/零尺寸
+与正常视频测试；修改前2失败/1通过，候选加历史/契约专项56项通过。
+
+`yarn test:browser test/browser/ambilight-proxy.spec.js test/browser/ambilight-lifecycle.spec.js`
+合计27项：6项真正Canvas组合（实际npm5.4.0/候选×三引擎）、3项实际npm5.1.7不支持
+proxy配置的原生播放能力对照、18项原生生命周期和跨域恢复。Canvas组合使用实际工作区
+代理源码和真实视频解码，通过公开callback绘制九色均匀区域，用原生getImageData
+检查九格颜色。不是下载媒体或模拟canvas返回值；这不是实际npm代理归档兼容证明。
+
+首次把5.1.7也当作代理是错误假设，诊断显示VIDEO节点、代理drawCount=0；旧option
+声明和真实Artplayer.option都不存在proxy，最终断言明确此能力边界。初始失败及中间
+诊断保留。本子项不关闭05最终设备/代理生命周期要求；代理自身仍需PKG-CANVAS系列
+完成后回归，不能从Ambilight视图清理推导代理已无残余绘帧。见
+[实施记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md)。
+
+子项最终56项Node专项、27项浏览器及978项CI通过，无skip；证据见
+[代理采样验证](baselines/ambilight-proxy-validation.json)。05新增PKG-CANVAS-04依赖，
+等待最终代理实现后再执行整体组合验收，当前保留todo；下一步先核对代理发布契约。

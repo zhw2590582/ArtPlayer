@@ -1,4 +1,10 @@
-export function createColorSampler(canvas: HTMLCanvasElement, video: HTMLVideoElement, createCanvas: () => HTMLCanvasElement) {
+type SamplingSource = HTMLVideoElement | HTMLCanvasElement
+
+function isCanvas(source: SamplingSource): source is HTMLCanvasElement {
+  return source.nodeName === 'CANVAS'
+}
+
+export function createColorSampler(canvas: HTMLCanvasElement, video: SamplingSource, createCanvas: () => HTMLCanvasElement) {
   let context: CanvasRenderingContext2D | null
   try {
     context = canvas.getContext('2d')
@@ -16,8 +22,10 @@ export function createColorSampler(canvas: HTMLCanvasElement, video: HTMLVideoEl
   function read(active: () => boolean): string[] | null {
     if (destroyed || !active())
       return null
-    const width = video.videoWidth
-    const height = video.videoHeight
+    // A canvas proxy's output buffer can differ from its forwarded video dimensions.
+    const canvasOutput = isCanvas(video)
+    const width = canvasOutput ? video.width : video.videoWidth
+    const height = canvasOutput ? video.height : video.videoHeight
     if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0)
       return null
     const w = width / 3

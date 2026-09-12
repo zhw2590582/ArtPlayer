@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-PROXY-01",
+  "status": "done",
+  "parentCommit": "959cccf5151edafef16310b3ede38c3cd1614e50",
+  "change": "Internal sampling source accepts native video or canvas; canvas buffer width/height replaces forwarded video dimensions for canvas only.",
+  "checks": [
+    {
+      "command": "node --test test/ambilight-proxy.test.js (before source fix)",
+      "result": "expected-negative-control",
+      "tests": 3,
+      "failed": 2,
+      "passedNormalVideo": 1
+    },
+    {
+      "command": "node --test test/ambilight-proxy.test.js test/ambilight-lifecycle.test.js test/ambilight.test.js refactor/scripts/ambilight-contract.test.mjs",
+      "result": "pass",
+      "tests": 56
+    },
+    {
+      "command": "playwright test test/browser/ambilight-proxy.spec.js test/browser/ambilight-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 27,
+      "actualCanvasCombinations": 6,
+      "oldCoreLacksProxyCapabilityObservations": 3,
+      "nativeLifecycleCases": 18,
+      "skipped": 0,
+      "stats": {
+        "startTime": "2026-09-12T03:57:46.543Z",
+        "duration": 33749.014,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": "refactor/.cache/ambilight-proxy01-final-results/report.json",
+      "archivedResults": "refactor/.cache/ambilight-proxy01-final-results/results",
+      "originalResultsPrefix": "refactor/.cache/browser/results",
+      "scope": "actual workspace canvas proxy with native video decode and native Canvas nine-color post-processing callback; 5.4.0/candidate proxy, 5.1.7 native capability boundary, three engines"
+    },
+    {
+      "command": "tsc -p packages/artplayer-plugin-ambilight/tsconfig.json and focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn build artplayer-plugin-ambilight",
+      "result": "pass",
+      "formats": [
+        "main",
+        "legacy",
+        "esm",
+        "docs/compiled copies"
+      ]
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 881,
+        "engineering": 14,
+        "baseline": 83,
+        "mainTotal": 978,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 278
+    }
+  ],
+  "failedIterations": [
+    {
+      "report": "refactor/.cache/ambilight-proxy01-before-results/report.json",
+      "scope": "Initial Chromium: two actual proxy color failures, one unsupported 5.1.7 proxy assumption"
+    },
+    {
+      "report": "refactor/.cache/ambilight-proxy01-first-fixed-results/report.json",
+      "scope": "Six actual proxy combinations pass, three unsupported 5.1.7 cases fail before draw"
+    },
+    {
+      "report": "refactor/.cache/ambilight-proxy01-capability-probe-results/report.json",
+      "scope": "Ready wait does not change old core VIDEO host; 24 pass, 3 unsupported-proxy failures; state attachments identify native host"
+    },
+    {
+      "log": "refactor/.cache/ambilight-proxy01-ci.log",
+      "scope": "New prerequisite left parent incorrectly doing; plan guard rejected unfinished dependency. Parent now todo until Canvas migration and this child are complete."
+    }
+  ],
+  "inputs": [
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/sampler.ts",
+      "sha256LF": "e6f4ea2795b500aa2ac8ffe4b65da4269e8b3457a9912808537bdacfbe9f5328"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/index.ts",
+      "sha256LF": "9db25144798ee667bc420b3e1f0b00ef6855185d26cefca45e05271354bf8591"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.js",
+      "sha256LF": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.legacy.js",
+      "sha256LF": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.mjs",
+      "sha256LF": "ef126959819c4973da27dbb1e60ccccc54386c23f8c7750ce1ba4d38f306aaaa"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/index.js",
+      "sha256LF": "4b5922b05b46adf0d54ae92025b5c70456a5b8c87819c797ef91eb50e0c8f4d4"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/package.json",
+      "sha256LF": "4df3a0098730cfc12232fc57066fd1f7159bbd41dce87904fa51f39b82252eed"
+    },
+    {
+      "file": "test/ambilight-proxy.test.js",
+      "sha256LF": "f284ea3069d66c36b62756cef468701c6fbc91cd17343843715d59b03779b928"
+    },
+    {
+      "file": "test/browser/ambilight-proxy.spec.js",
+      "sha256LF": "048d6b12dd26d174e978fcc68abed47df17ff232cb351583e4785ebbae6e5122"
+    },
+    {
+      "file": "test/browser/ambilight-lifecycle.spec.js",
+      "sha256LF": "321693a24d33f0c7aee02fd4137b55175386562a645ba138e15c3a51d6348d2c"
+    },
+    {
+      "file": "test/browser/server.mjs",
+      "sha256LF": "af513e1e64f875668b6a7cbd060276d85d930e0cc1715577e97907cc26c3b58d"
+    },
+    {
+      "file": "test/helpers/ambilight.js",
+      "sha256LF": "8cb80dba5270860afc121e3a02336a6cdb20b0a6a41e058cde11efe9174fba4f"
+    },
+    {
+      "file": "refactor/baselines/vast-core.json",
+      "sha256LF": "bb703cf37591211f78719665aed0e0cb2524ec5618dad48e6b8e2dbfef132b8e"
+    },
+    {
+      "file": "refactor/baselines/releases.json",
+      "sha256LF": "56054ecd0b861c91a14bf83fcb4243ab6f5ddb27004ad8eb98901c1f85f9b426"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "a94c6ded6fecef73e84932eb1f7c31de42e1ca02814fcd69c807f50c52fc8924"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/ambilight05-proxy-before.log",
+      "sha256": "02856164dc6566f05aa2336159f06352130356a86b046774acef09c8a4017090"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-node-before.log",
+      "sha256": "c43e7fd44d1227028443339300fe940c7d2e483aa6bd6740f4f084b40da9ca73"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-unit.log",
+      "sha256": "dbed1c54e564b2cdbfd587eb46961bc3288eef4c249943c94e5196f9d678d496"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-browser.log",
+      "sha256": "68ec5effee410003f046d78bd9fb22858a5fd999f4328c0bd26e92206dec312a"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-browser-final.log",
+      "sha256": "f5ef93ef517b1f1d66152699db77734d318d4a970d5d8f8259004c494e414bc0"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-browser-corrected.log",
+      "sha256": "b3702456e39ed6e8be3504a123065d4004b8e9f17ceaf6bbf53c124dd42e98da"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-build.log",
+      "sha256": "74a43735bbd36337dc218a3990b9f3571bdb8cf9b1115782ff325a0b4a6530e4"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-ci.log",
+      "sha256": "312049cd0a59b220249a033eef5589d22d9755b9c06b6988e89d4828742eb49f"
+    },
+    {
+      "file": "refactor/.cache/ambilight-proxy01-ci-final.log",
+      "sha256": "306ccefd21e8d8d860e9b576f8b6aa00cb057dde86c21a0b583e417584aa2b16"
+    }
+  ],
+  "limitations": [
+    "The actual npm core 5.1.7 option declaration and runtime option object lack proxy. It is not counted as a canvas combination.",
+    "Proxy source is current workspace JS, not an immutable npm proxy release. Freeze proxy history in PKG-CANVAS-01.",
+    "Proxy-owned async bitmap/RAF/terminal semantics remain unrefactored and are not validated by Ambilight grid removal.",
+    "PKG-AMBILIGHT-05 depends on PKG-CANVAS-04 and remains todo for final integration/device acceptance; task 06 remains todo.",
+    "Only formatting line breaks changed in the browser test after its final successful run; focused lint passed afterward. Candidate and proxy executed bundle bytes are recorded in report attachments.",
+    "No public type or export changes, no dependency installation, push, version bump or publication."
+  ]
+}

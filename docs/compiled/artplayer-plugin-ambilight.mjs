@@ -4,6 +4,9 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
+function isCanvas(source) {
+  return source.nodeName === "CANVAS";
+}
 function createColorSampler(canvas, video, createCanvas) {
   let context;
   try {
@@ -20,8 +23,9 @@ function createColorSampler(canvas, video, createCanvas) {
   function read(active) {
     if (destroyed || !active())
       return null;
-    const width = video.videoWidth;
-    const height = video.videoHeight;
+    const canvasOutput = isCanvas(video);
+    const width = canvasOutput ? video.width : video.videoWidth;
+    const height = canvasOutput ? video.height : video.videoHeight;
     if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0)
       return null;
     const w = width / 3;

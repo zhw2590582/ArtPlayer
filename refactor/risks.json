@@ -3319,6 +3319,26 @@
         "refactor/baselines/ambilight-types-validation.json"
       ],
       "resolutionRationale": "Actual production and installed root/legacy callable factories have self default identity, native ESM default is callable and script globals match. Public default/import= consumers pass. Broader deep-import/demo/package-browser review remains task 06."
+    },
+    {
+      "id": "AMBILIGHT-PROXY-01",
+      "title": "Canvas proxy output pixels differ from forwarded video dimensions",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-AMBILIGHT-PROXY-01",
+        "PKG-AMBILIGHT-05"
+      ],
+      "compatibleResolution": "Sample Canvas width/height while native video retains intrinsic videoWidth/videoHeight; preserve public calls and lifecycle.",
+      "closureCriteria": "Node resize/zero-size/normal-video and actual supported-core canvas palette comparisons pass across three engines.",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md",
+        "refactor/baselines/ambilight-proxy-validation.json"
+      ],
+      "resolutionRationale": "Node output resize/zero-size and normal video tests pass; actual 5.4.0/candidate canvas proxy nine-color regions pass across three engines. Actual 5.1.7 lacks proxy option and is recorded as a native capability observation, not a canvas pass. Proxy-owned lifecycle and final device acceptance remain tasks CANVAS and AMBILIGHT-05."
     }
   ]
 }

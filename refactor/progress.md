@@ -1,5 +1,16 @@
 # 进度与证据
 
+## 最新完成：Ambilight-PROXY-01 Canvas输出区域修复
+
+组合测试复现Canvas缩放后仍按底层视频尺寸截取而取错九格颜色；内部明确video/canvas
+来源类型，Canvas采用输出buffer尺寸，原生video保留intrinsic尺寸。3项新Node测试
+修改前2失败/1正常通过，专项56项、最终27项浏览器及978项完整CI通过。浏览器实际
+覆盖6项Canvas组合、3项5.1.7没有proxy配置的原生能力对照、18项既有生命周期回归，
+没有把未启用代理算作组合通过。新增独立子任务，当前221项：89 done、6 doing、
+126 todo。05增加PKG-CANVAS-04依赖，代理自身仍未迁移；下一步PKG-CANVAS-01核对
+真实发布和历史契约，再推进TS迁移。见 [实施记录](changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md)
+和 [验证证据](baselines/ambilight-proxy-validation.json)。独立本地提交，无推送/发布。
+
 ## 最新完成：Ambilight-04 公开类型与两代导出
 
 公共声明补齐可选调用，保留1.1.0的Parameters推导；CJS直接调用与历史.default自别名

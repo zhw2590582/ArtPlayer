@@ -1537,6 +1537,28 @@
       ]
     },
     {
+      "id": "PKG-AMBILIGHT-PROXY-01",
+      "phase": "5 包迁移：artplayer-plugin-ambilight",
+      "title": "修复Canvas代理输出尺寸与取色区域",
+      "scope": [
+        "artplayer-plugin-ambilight",
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-AMBILIGHT-04",
+        "CORE-22"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "按Canvas实际输出buffer取色，原生video保留intrinsic尺寸，明确5.1.7没有proxy配置",
+      "acceptance": "旧错误复现、三引擎实际代理九色区域对照及原生视频回归通过；不把本子项当作最终代理/设备验收",
+      "evidence": [
+        "changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md",
+        "ambilight-validation.md",
+        "baselines/ambilight-proxy-validation.json"
+      ]
+    },
+    {
       "id": "PKG-AMBILIGHT-05",
       "phase": "5 包迁移：artplayer-plugin-ambilight",
       "title": "验证新旧核心和组合",
@@ -1545,13 +1567,18 @@
       ],
       "dependsOn": [
         "PKG-AMBILIGHT-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-AMBILIGHT-PROXY-01",
+        "PKG-CANVAS-04"
       ],
       "status": "todo",
       "risk": "M",
       "deliverable": "原生 video、canvas proxy 的能力边界及销毁无帧循环",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md",
+        "ambilight-validation.md"
+      ]
     },
     {
       "id": "PKG-AMBILIGHT-06",
