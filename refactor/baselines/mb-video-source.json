@@ -1,0 +1,10 @@
+{
+  "task": "PKG-MB-05",
+  "sourceCommit": "5d0b128483a78a5374bb7163adc1421ba6a4d4c8",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/VideoEngine.js": "5ac862b0fd9c196dc6656f8908a214c1b3a0a53a7e85ff845d9068888831986b",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "01b88c915804e1c42b90c8c37aa948029472c7f47f6eb3a266629ed945be9fb1",
+    "node_modules/mediabunny/src/media-sink.ts": "9fbec4b6b0ec6c613d8f546fa91d8f14aac1c7c4a53ec7ed14b31319d43510f2"
+  },
+  "sdkNote": "Installed 1.56.1 CanvasSink closes each VideoSample after drawing into its pooled canvas. Consumer owns the iterator return, not VideoFrame.close on WrappedCanvas."
+}

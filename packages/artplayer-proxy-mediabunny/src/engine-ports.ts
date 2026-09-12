@@ -18,6 +18,7 @@ export interface AudioPort {
 }
 
 export interface VideoPort {
+  cancelPending: () => void
   width: number
   height: number
   duration: number
@@ -32,6 +33,7 @@ export interface VideoPort {
 }
 
 export interface VideoOptions {
+  onError?: (error: unknown) => void
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D | null
   events: EventTarget

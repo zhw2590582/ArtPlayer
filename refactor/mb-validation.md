@@ -54,3 +54,10 @@ VideoShim/EventTarget与主协调器已拆为严格TS模块，详情见
 无轨道容器由历史readyState 4改为code 4错误；有效媒体的正常顺序保持，重复就绪和
 失效操作结果被阻止。不要把synthetic RAF、受控竞态或Windows WebKit能力对照计为真实播放。
 音视频解码器仍通过两个显式声明桥连接，MB-05/06继续实际实现迁移和底层晚操作清理。
+
+## MB-05 video ownership
+
+VideoEngine与迭代器/渲染/海报职责已实际迁移TS，删除视频声明桥；只剩音频声明桥。
+执行yarn test:mediabunny及新增mediabunny-video.spec.js，按实际报告区分普通播放、
+真实帧竞态、能力对照和synthetic RAF。[变更](changes/2026-09-12-PKG-MB-05-video.md)与
+[验证](baselines/mb-video-validation.json)记录38个新断言、旧产物复现及真实解码场景。

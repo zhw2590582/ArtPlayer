@@ -11,7 +11,16 @@ var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot
 var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
-var _closed, _playback;
+var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
+var __privateWrapper = (obj, member, setter, getter) => ({
+  set _(value) {
+    __privateSet(obj, member, value, setter);
+  },
+  get _() {
+    return __privateGet(obj, member, getter);
+  }
+});
+var _closed, _generation, _iteration, _loading, _createSink, _usedSink, _destroyed, _preparing, _poster, _renderer, _onError, _VideoEngine_instances, current_fn, context_fn, report_fn, release_fn, draw_fn, load_fn, reset_fn, _playback;
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
 const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
 function uniqBy(array, property) {
@@ -24741,17 +24750,240 @@ async function preflightRange(url, enabled, events, signal, isCurrent = () => tr
     return true;
   }
 }
+const closing = /* @__PURE__ */ new WeakMap();
+const reading = /* @__PURE__ */ new WeakMap();
+function releaseIterator(iterator) {
+  if (!iterator)
+    return Promise.resolve();
+  const previous = closing.get(iterator);
+  if (previous)
+    return previous;
+  const pending = Promise.resolve().then(() => iterator.return()).then(() => {
+  });
+  closing.set(iterator, pending);
+  return pending;
+}
+function readCanvas(iterator) {
+  const previous = reading.get(iterator);
+  if (previous)
+    return previous;
+  const pending = Promise.resolve().then(() => iterator.next()).then((result) => result.value ?? null);
+  reading.set(iterator, pending);
+  const clear = () => {
+    if (reading.get(iterator) === pending)
+      reading.delete(iterator);
+  };
+  pending.then(clear, clear);
+  return pending;
+}
+function frameAction(timestamp, time, dropLateFrames, avSyncTolerance, playbackRate) {
+  const tolerance = dropLateFrames ? Math.max(0.06, avSyncTolerance / Math.max(1, playbackRate)) : 0;
+  if (dropLateFrames && timestamp < time - tolerance)
+    return "skip";
+  return timestamp <= time + tolerance ? "draw" : "queue";
+}
+class Poster {
+  constructor() {
+    this.image = null;
+  }
+  cancel() {
+    if (!this.image)
+      return;
+    this.image.onload = null;
+    this.image.onerror = null;
+    this.image = null;
+  }
+  draw(source, current, draw, failure) {
+    this.cancel();
+    const image = new Image();
+    this.image = image;
+    image.onload = () => {
+      if (this.image !== image || !current())
+        return;
+      this.cancel();
+      try {
+        draw(image);
+      } catch (error) {
+        failure(error);
+      }
+    };
+    image.onerror = () => {
+      if (this.image === image)
+        this.cancel();
+    };
+    image.src = source;
+  }
+}
+class Renderer {
+  constructor(host, ready, draw, failure) {
+    this.host = host;
+    this.ready = ready;
+    this.draw = draw;
+    this.failure = failure;
+    this.stopped = false;
+    this.closed = false;
+    this.scheduled = null;
+    this.fetching = null;
+  }
+  current(id) {
+    return !this.closed && !this.stopped && this.host.asyncId === id;
+  }
+  async update(id) {
+    const iterator = this.host.videoIterator;
+    if (!iterator || !this.ready() || !this.current(id) || this.host.isFetching)
+      return;
+    const request = {};
+    this.fetching = request;
+    this.host.isFetching = true;
+    const current = () => this.current(id) && this.host.videoIterator === iterator;
+    try {
+      while (current()) {
+        const frame = await readCanvas(iterator);
+        if (!current() || !frame)
+          return;
+        const time = this.host.audioClock?.currentTime;
+        if (time === void 0)
+          return;
+        const action = frameAction(frame.timestamp, time, this.host.dropLateFrames, this.host.avSyncTolerance, this.host.playbackRate);
+        if (action === "skip")
+          continue;
+        if (action === "draw") {
+          this.draw(frame);
+        } else {
+          this.host.nextFrame = frame;
+          return;
+        }
+      }
+    } catch (error) {
+      if (current())
+        throw error;
+    } finally {
+      if (this.fetching === request) {
+        this.fetching = null;
+        this.host.isFetching = false;
+      }
+    }
+  }
+  request(id) {
+    void this.update(id).catch((error) => {
+      if (!this.current(id))
+        return;
+      this.stop();
+      this.report(error);
+    });
+  }
+  report(error) {
+    try {
+      this.failure(error);
+    } catch (failure) {
+      console.warn("MediaBunny video error listener:", failure);
+    }
+  }
+  cancelFrame() {
+    if (this.scheduled === null)
+      return;
+    cancelAnimationFrame(this.scheduled);
+    this.scheduled = null;
+  }
+  schedule(id) {
+    if (!this.current(id))
+      return;
+    this.cancelFrame();
+    const frame = requestAnimationFrame(() => {
+      if (this.scheduled !== frame || !this.current(id))
+        return;
+      this.scheduled = null;
+      try {
+        this.render();
+      } catch (error) {
+        this.stop();
+        this.report(error);
+      }
+    });
+    this.scheduled = frame;
+    this.host.rafId = frame;
+  }
+  render() {
+    const id = this.host.asyncId;
+    const current = () => this.current(id);
+    if (!current() || !this.host.audioClock)
+      return;
+    const time = this.host.audioClock.currentTime;
+    const now = Date.now();
+    if (now - this.host.lastTimeUpdate >= this.host.timeupdateInterval) {
+      this.host.events.emit("timeupdate");
+      if (!current())
+        return;
+      this.host.lastTimeUpdate = now;
+    }
+    if (!this.ready()) {
+      this.schedule(id);
+      return;
+    }
+    if (Number.isFinite(this.host.duration) && time >= this.host.duration) {
+      this.stop();
+      this.host.stalled = false;
+      const ended = this.host.asyncId;
+      publish(this.host.events, () => !this.closed && this.host.asyncId === ended, ["ended", "pause", "canplay"]);
+      return;
+    }
+    if (this.host.nextFrame && this.host.nextFrame.timestamp <= time) {
+      this.draw(this.host.nextFrame);
+      this.host.nextFrame = null;
+      this.request(id);
+      if (this.host.stalled) {
+        publish(this.host.events, current, ["canplay", "playing"]);
+        if (!current())
+          return;
+        this.host.stalled = false;
+      }
+    } else if (!this.host.nextFrame) {
+      this.request(id);
+      if (Number.isFinite(this.host.duration) && time < this.host.duration && !this.host.stalled) {
+        this.host.stalled = true;
+        this.host.events.emit("waiting");
+      }
+    }
+    this.schedule(id);
+  }
+  start(clock) {
+    if (this.closed)
+      return;
+    this.stop();
+    this.stopped = false;
+    this.host.audioClock = clock;
+    this.host.stalled = false;
+    if (!this.host.nextFrame)
+      this.request(this.host.asyncId);
+    this.schedule(this.host.asyncId);
+  }
+  stop() {
+    this.stopped = true;
+    this.host.asyncId++;
+    this.cancelFrame();
+    this.fetching = null;
+    this.host.isFetching = false;
+  }
+  destroy() {
+    if (this.closed)
+      return;
+    this.stop();
+    this.closed = true;
+  }
+}
 class VideoEngine {
-  constructor({
-    canvas,
-    ctx,
-    events,
-    timeupdateInterval = 250,
-    avSyncTolerance = 0.12,
-    dropLateFrames = false,
-    poster = "",
-    preflightRange: preflightRange2 = false
-  }) {
+  constructor({ canvas, ctx, events, timeupdateInterval = 250, avSyncTolerance = 0.12, dropLateFrames = false, poster = "", preflightRange: preflightRange2 = false, onError }) {
+    __privateAdd(this, _VideoEngine_instances);
+    __privateAdd(this, _generation, 0);
+    __privateAdd(this, _iteration, 0);
+    __privateAdd(this, _loading, null);
+    __privateAdd(this, _createSink, null);
+    __privateAdd(this, _usedSink, null);
+    __privateAdd(this, _destroyed, false);
+    __privateAdd(this, _preparing, false);
+    __privateAdd(this, _poster, new Poster());
+    __privateAdd(this, _renderer);
+    __privateAdd(this, _onError);
     this.canvas = canvas;
     this.ctx = ctx;
     this.events = events;
@@ -24775,33 +25007,171 @@ class VideoEngine {
     this.playbackRate = 1;
     this.posterDrawn = false;
     this.isFetching = false;
+    __privateSet(this, _onError, onError);
+    __privateSet(this, _renderer, new Renderer(this, () => !__privateGet(this, _preparing), (frame) => __privateMethod(this, _VideoEngine_instances, draw_fn).call(this, frame, true), (error) => __privateMethod(this, _VideoEngine_instances, report_fn).call(this, error)));
   }
-  async preflight(url, signal, isCurrent) {
-    return preflightRange(url, this.preflightRange, this.events, signal, isCurrent);
+  async preflight(source, signal, current) {
+    return preflightRange(source, this.preflightRange, this.events, signal, current);
   }
   drawPoster() {
-    if (!this.poster || this.posterDrawn)
+    if (__privateGet(this, _destroyed) || !this.poster || this.posterDrawn)
       return;
-    const img = new Image();
-    img.onload = () => {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.canvas.width = img.naturalWidth || this.canvas.width;
-      this.canvas.height = img.naturalHeight || this.canvas.height;
-      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    const generation = __privateGet(this, _generation);
+    __privateGet(this, _poster).draw(this.poster, () => __privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation), (image) => {
+      this.clear();
+      this.canvas.width = image.naturalWidth || this.canvas.width;
+      this.canvas.height = image.naturalHeight || this.canvas.height;
+      __privateMethod(this, _VideoEngine_instances, context_fn).call(this).drawImage(image, 0, 0, this.canvas.width, this.canvas.height);
       this.posterDrawn = true;
-    };
-    img.src = this.poster;
+    }, (error) => __privateMethod(this, _VideoEngine_instances, report_fn).call(this, error));
   }
   async stopIterator() {
-    await this.videoIterator?.return();
+    const iterator = this.videoIterator;
     this.videoIterator = null;
+    this.nextFrame = null;
+    await releaseIterator(iterator);
   }
   clear() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    __privateMethod(this, _VideoEngine_instances, context_fn).call(this).clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+  cancelPending() {
+    __privateWrapper(this, _generation)._++;
+    __privateWrapper(this, _iteration)._++;
+    this.stop();
+    __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
+    __privateGet(this, _poster).cancel();
+    __privateSet(this, _preparing, false);
+    __privateSet(this, _loading, null);
+    __privateSet(this, _createSink, null);
+    __privateSet(this, _usedSink, null);
+    this.videoSink = null;
+    this.input = null;
   }
   async load(media, onMetadata) {
-    ++this.asyncId;
-    await this.stopIterator();
+    if (__privateGet(this, _destroyed))
+      return;
+    this.cancelPending();
+    const generation = __privateGet(this, _generation);
+    const iteration = __privateGet(this, _iteration);
+    __privateSet(this, _preparing, true);
+    const pending = Promise.resolve().then(() => __privateMethod(this, _VideoEngine_instances, load_fn).call(this, media, generation, iteration, onMetadata));
+    __privateSet(this, _loading, pending);
+    try {
+      await pending;
+    } finally {
+      if (__privateGet(this, _loading) === pending)
+        __privateSet(this, _loading, null);
+    }
+  }
+  handleNoVideoTrack() {
+    if (__privateGet(this, _destroyed))
+      return;
+    this.videoSink = null;
+    this.width = 0;
+    this.height = 0;
+    this.canvas.width = 0;
+    this.canvas.height = 0;
+    this.clear();
+    this.drawPoster();
+  }
+  async resetIterator(time) {
+    if (__privateGet(this, _destroyed))
+      return;
+    const generation = __privateGet(this, _generation);
+    const iteration = ++__privateWrapper(this, _iteration)._;
+    const loading = __privateGet(this, _loading);
+    this.stop();
+    __privateGet(this, _poster).cancel();
+    __privateSet(this, _preparing, true);
+    try {
+      if (loading)
+        await loading;
+      await __privateMethod(this, _VideoEngine_instances, reset_fn).call(this, time, generation, iteration);
+    } catch (error) {
+      if (__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation) && __privateGet(this, _iteration) === iteration) {
+        __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
+        throw error;
+      }
+    } finally {
+      if (__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation) && __privateGet(this, _iteration) === iteration)
+        __privateSet(this, _preparing, false);
+    }
+  }
+  async updateNextFrame(localId) {
+    await __privateGet(this, _renderer).update(localId);
+  }
+  render() {
+    __privateGet(this, _renderer).render();
+  }
+  start(audio) {
+    __privateGet(this, _renderer).start(audio);
+  }
+  stop() {
+    __privateGet(this, _renderer).stop();
+  }
+  async seek(time) {
+    await this.resetIterator(time);
+  }
+  setPlaybackRate(rate) {
+    this.playbackRate = Math.max(0.1, Number(rate) || 1);
+  }
+  destroy() {
+    if (__privateGet(this, _destroyed))
+      return;
+    __privateSet(this, _destroyed, true);
+    __privateWrapper(this, _generation)._++;
+    __privateGet(this, _renderer).destroy();
+    __privateGet(this, _poster).cancel();
+    __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
+    this.posterDrawn = false;
+    __privateSet(this, _createSink, null);
+    __privateSet(this, _usedSink, null);
+    this.videoSink = null;
+    this.input = null;
+    this.audioClock = null;
+  }
+}
+_generation = new WeakMap();
+_iteration = new WeakMap();
+_loading = new WeakMap();
+_createSink = new WeakMap();
+_usedSink = new WeakMap();
+_destroyed = new WeakMap();
+_preparing = new WeakMap();
+_poster = new WeakMap();
+_renderer = new WeakMap();
+_onError = new WeakMap();
+_VideoEngine_instances = new WeakSet();
+current_fn = function(generation) {
+  return !__privateGet(this, _destroyed) && __privateGet(this, _generation) === generation;
+};
+context_fn = function() {
+  if (!this.ctx)
+    throw new Error("Canvas 2D context is unavailable.");
+  return this.ctx;
+};
+report_fn = function(error) {
+  if (__privateGet(this, _destroyed))
+    return;
+  __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
+  if (__privateGet(this, _onError))
+    __privateGet(this, _onError).call(this, error);
+  else
+    this.events.emit("error", error);
+};
+release_fn = function() {
+  void this.stopIterator().catch((error) => console.warn("MediaBunny iterator cleanup error:", error));
+};
+draw_fn = function(frame, clear) {
+  __privateGet(this, _poster).cancel();
+  if (clear)
+    this.clear();
+  __privateMethod(this, _VideoEngine_instances, context_fn).call(this).drawImage(frame.canvas, 0, 0);
+};
+load_fn = async function(media, generation, iteration, onMetadata) {
+  if (!__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation))
+    return;
+  try {
     this.clear();
     this.posterDrawn = false;
     const { input, videoTrack, duration } = media;
@@ -24812,139 +25182,61 @@ class VideoEngine {
       onMetadata?.();
       return;
     }
-    if (videoTrack.codec === null || !await videoTrack.canDecode()) {
+    const decodable = videoTrack.codec !== null && await videoTrack.canDecode();
+    if (!__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation))
+      return;
+    if (!decodable) {
       this.handleNoVideoTrack();
       onMetadata?.();
       return;
     }
     const transparent = await videoTrack.canBeTransparent();
-    this.videoSink = new CanvasSink(videoTrack, {
-      poolSize: 2,
-      fit: "contain",
-      alpha: transparent
-    });
+    if (!__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation))
+      return;
+    __privateSet(this, _createSink, () => new CanvasSink(videoTrack, { poolSize: 2, fit: "contain", alpha: transparent }));
+    this.videoSink = __privateGet(this, _createSink).call(this);
     this.width = videoTrack.displayWidth;
     this.height = videoTrack.displayHeight;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     onMetadata?.();
-    await this.resetIterator(0);
+    if (__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation))
+      await __privateMethod(this, _VideoEngine_instances, reset_fn).call(this, 0, generation, iteration);
+  } catch (error) {
+    if (__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation)) {
+      __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
+      throw error;
+    }
+  } finally {
+    if (__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation) && __privateGet(this, _iteration) === iteration)
+      __privateSet(this, _preparing, false);
   }
-  handleNoVideoTrack() {
-    this.videoSink = null;
-    this.width = 0;
-    this.height = 0;
-    this.canvas.width = 0;
-    this.canvas.height = 0;
-    this.clear();
+};
+reset_fn = async function(time, generation, iteration) {
+  if (!__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation) || __privateGet(this, _iteration) !== iteration)
+    return;
+  __privateMethod(this, _VideoEngine_instances, release_fn).call(this);
+  if (__privateGet(this, _createSink) && this.videoSink === __privateGet(this, _usedSink))
+    this.videoSink = __privateGet(this, _createSink).call(this);
+  const sink = this.videoSink;
+  if (!sink || !__privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation))
+    return;
+  __privateSet(this, _usedSink, sink);
+  const iterator = sink.canvases(time);
+  this.videoIterator = iterator;
+  const current = () => __privateMethod(this, _VideoEngine_instances, current_fn).call(this, generation) && __privateGet(this, _iteration) === iteration && this.videoIterator === iterator;
+  const first = await readCanvas(iterator);
+  if (!current())
+    return;
+  const second = await readCanvas(iterator);
+  if (!current())
+    return;
+  this.nextFrame = second;
+  if (first)
+    __privateMethod(this, _VideoEngine_instances, draw_fn).call(this, first, false);
+  else
     this.drawPoster();
-  }
-  async resetIterator(time) {
-    await this.stopIterator();
-    if (!this.videoSink)
-      return;
-    this.videoIterator = this.videoSink.canvases(time);
-    const first = (await this.videoIterator.next()).value ?? null;
-    const second = (await this.videoIterator.next()).value ?? null;
-    this.nextFrame = second;
-    if (first) {
-      this.ctx.drawImage(first.canvas, 0, 0);
-    } else {
-      this.drawPoster();
-    }
-  }
-  async updateNextFrame(localId) {
-    if (!this.videoIterator || this.isFetching)
-      return;
-    this.isFetching = true;
-    try {
-      while (true) {
-        const frame = (await this.videoIterator.next()).value ?? null;
-        if (!frame || localId !== this.asyncId)
-          return;
-        const t = this.audioClock.currentTime;
-        const tolerance = this.dropLateFrames ? Math.max(0.06, this.avSyncTolerance / Math.max(1, this.playbackRate)) : 0;
-        if (this.dropLateFrames && frame.timestamp < t - tolerance) {
-          continue;
-        }
-        if (frame.timestamp <= t + tolerance) {
-          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-          this.ctx.drawImage(frame.canvas, 0, 0);
-          if (!this.dropLateFrames && frame.timestamp > t) {
-            this.nextFrame = null;
-            return;
-          }
-        } else {
-          this.nextFrame = frame;
-          return;
-        }
-      }
-    } finally {
-      this.isFetching = false;
-    }
-  }
-  render() {
-    if (!this.audioClock)
-      return;
-    const t = this.audioClock.currentTime;
-    const now = Date.now();
-    if (now - this.lastTimeUpdate >= this.timeupdateInterval) {
-      this.events.emit("timeupdate");
-      this.lastTimeUpdate = now;
-    }
-    if (Number.isFinite(this.duration) && t >= this.duration) {
-      this.stop();
-      this.stalled = false;
-      this.events.emit("ended");
-      this.events.emit("pause");
-      this.events.emit("canplay");
-      return;
-    }
-    if (this.nextFrame && this.nextFrame.timestamp <= t) {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.drawImage(this.nextFrame.canvas, 0, 0);
-      this.nextFrame = null;
-      this.updateNextFrame(this.asyncId);
-      if (this.stalled) {
-        this.events.emit("canplay");
-        this.events.emit("playing");
-        this.stalled = false;
-      }
-    } else if (!this.nextFrame) {
-      this.updateNextFrame(this.asyncId);
-      if (!this.nextFrame && Number.isFinite(this.duration) && t < this.duration && !this.stalled) {
-        this.stalled = true;
-        this.events.emit("waiting");
-      }
-    }
-    this.rafId = requestAnimationFrame(() => this.render());
-  }
-  start(audioEngine) {
-    this.audioClock = audioEngine;
-    this.asyncId++;
-    this.stalled = false;
-    this.updateNextFrame(this.asyncId);
-    this.rafId = requestAnimationFrame(() => this.render());
-  }
-  stop() {
-    cancelAnimationFrame(this.rafId);
-  }
-  async seek(time) {
-    this.asyncId++;
-    await this.resetIterator(time);
-  }
-  setPlaybackRate(rate) {
-    this.playbackRate = Math.max(0.1, Number(rate) || 1);
-  }
-  destroy() {
-    this.asyncId++;
-    this.stop();
-    this.stopIterator();
-    this.posterDrawn = false;
-    this.videoSink = null;
-    this.input = null;
-  }
-}
+};
 class MediaBunnyEngine {
   constructor({ canvas, ctx, events, option = {} }) {
     __privateAdd(this, _playback);
@@ -24959,7 +25251,15 @@ class MediaBunnyEngine {
       avSyncTolerance: option.avSyncTolerance ?? 0.12,
       dropLateFrames: option.dropLateFrames ?? false,
       poster: option.poster ?? "",
-      preflightRange: option.preflightRange ?? false
+      preflightRange: option.preflightRange ?? false,
+      onError: (error) => {
+        try {
+          this.pause();
+        } catch (failure) {
+          console.warn("MediaBunny video failure cleanup:", failure);
+        }
+        this.reportError(error);
+      }
     });
     this.paused = true;
     this.ended = false;
@@ -24986,6 +25286,7 @@ class MediaBunnyEngine {
       return;
     const id = ++this.loadSeq;
     __privateGet(this, _playback).invalidate();
+    this.video.cancelPending();
     this.loadSession?.cancel();
     if (id !== this.loadSeq || this.destroyed)
       return;
@@ -25009,6 +25310,7 @@ class MediaBunnyEngine {
         return;
       const failed = ++this.loadSeq;
       __privateGet(this, _playback).invalidate();
+      this.video.cancelPending();
       session.cancel();
       if (failed !== this.loadSeq || this.destroyed)
         return;

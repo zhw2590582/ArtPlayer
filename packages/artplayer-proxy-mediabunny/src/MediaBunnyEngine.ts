@@ -45,6 +45,15 @@ export default class MediaBunnyEngine implements EnginePort {
       dropLateFrames: option.dropLateFrames ?? false,
       poster: option.poster ?? '',
       preflightRange: option.preflightRange ?? false,
+      onError: (error) => {
+        try {
+          this.pause()
+        }
+        catch (failure) {
+          console.warn('MediaBunny video failure cleanup:', failure)
+        }
+        this.reportError(error)
+      },
     })
     this.paused = true
     this.ended = false
@@ -72,6 +81,7 @@ export default class MediaBunnyEngine implements EnginePort {
       return
     const id = ++this.loadSeq
     this.#playback.invalidate()
+    this.video.cancelPending()
     this.loadSession?.cancel()
     if (id !== this.loadSeq || this.destroyed)
       return
@@ -96,6 +106,7 @@ export default class MediaBunnyEngine implements EnginePort {
         return
       const failed = ++this.loadSeq
       this.#playback.invalidate()
+      this.video.cancelPending()
       session.cancel()
       if (failed !== this.loadSeq || this.destroyed)
         return

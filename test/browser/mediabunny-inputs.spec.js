@@ -145,9 +145,10 @@ for (const implementation of implementations) {
             const video = canvas.engine.video
             if (video.videoSink) {
               const times = new WeakMap()
-              const canvases = video.videoSink.canvases.bind(video.videoSink)
-              video.videoSink.canvases = (...args) => {
-                const iterator = canvases(...args)
+              const prototype = Object.getPrototypeOf(video.videoSink)
+              const canvases = prototype.canvases
+              prototype.canvases = function (...args) {
+                const iterator = canvases.apply(this, args)
                 const next = iterator.next.bind(iterator)
                 iterator.next = async (...values) => {
                   const result = await next(...values)

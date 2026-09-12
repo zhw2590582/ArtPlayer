@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 114 / doing 7 / blocked 0 / done 101 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 113 / doing 7 / blocked 0 / done 102 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -333,7 +333,7 @@
 | PKG-MB-02 | artplayer-proxy-mediabunny<br>建立真实媒体与事件基线 | PKG-MB-01, ENG-05, ENG-08 | MP4/WebM/HLS/Blob/Stream、seek/错误/轨道切换样本 | ready 事件顺序、音画同步、超时和释放可重跑 | H | done |
 | PKG-MB-03 | artplayer-proxy-mediabunny<br>整理 input 与加载取消 | PKG-MB-02, CORE-09 | input.js 源检测、输入资源、Range 与取消 | HLS 检测在 input 边界，旧来源类型和超时保持 | H | done |
 | PKG-MB-04 | artplayer-proxy-mediabunny<br>整理 VideoShim/EventTarget/Engine 协调 | PKG-MB-03, CORE-06, CORE-11 | shim 描述符、事件桥、加载状态和操作隔离 | 公开属性/同步异步返回与事件重入顺序保持 | H | done |
-| PKG-MB-05 | artplayer-proxy-mediabunny<br>整理视频解码、seek 和帧释放 | PKG-MB-04 | VideoEngine 调度、队列、晚帧处理和资源释放 | 暂停/seek/切源无旧帧覆盖，默认丢帧策略不变 | H | todo |
+| PKG-MB-05 | artplayer-proxy-mediabunny<br>整理视频解码、seek 和帧释放 | PKG-MB-04 | VideoEngine 调度、队列、晚帧处理和资源释放 | 暂停/seek/切源无旧帧覆盖，默认丢帧策略不变 | H | done |
 | PKG-MB-06 | artplayer-proxy-mediabunny<br>整理音频解码、时钟与同步 | PKG-MB-04 | AudioEngine 时钟、缓冲和 AudioContext 归属 | AV sync、倍速、无音轨、静音/音量和暂停恢复通过 | H | todo |
 | PKG-MB-07 | artplayer-proxy-mediabunny<br>整理 HLS 配对轨道与 selector | PKG-MB-05, PKG-MB-06, CORE-14 | m3u8 配对、质量/音频选择及拓扑清理 | 实际选择高亮、切到无轨道来源清理、无重复 readiness | H | todo |
 | PKG-MB-08 | artplayer-proxy-mediabunny<br>完成 TS 与媒体能力声明 | PKG-MB-07, ENG-04, ENG-06 | 8 个自有 JS 模块迁移与 Result/shim 类型 | 解码器/Stream/DOM 类型清楚，旧 Option 和 art.mediabunny 使用保持 | H | todo |
@@ -524,4 +524,5 @@
 - PKG-MB-02: [记录](changes/2026-09-12-PKG-MB-02-checkpoint.md) [记录](baselines/mb-media-checkpoint.json) [记录](mb-validation.md) [记录](changes/2026-09-12-PKG-MB-02-baseline.md) [记录](baselines/mb-behavior-validation.json)
 - PKG-MB-03: [记录](changes/2026-09-12-PKG-MB-03-input.md) [记录](baselines/mb-input-validation.json)
 - PKG-MB-04: [记录](baselines/mb-coordination-source.json) [记录](changes/2026-09-12-PKG-MB-04-shim-checkpoint.md) [记录](baselines/mb-shim-checkpoint.json) [记录](changes/2026-09-12-PKG-MB-04-coordination.md) [记录](baselines/mb-coordination-validation.json)
+- PKG-MB-05: [记录](baselines/mb-video-source.json) [记录](changes/2026-09-12-PKG-MB-05-video.md) [记录](baselines/mb-video-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

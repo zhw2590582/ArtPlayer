@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-MB-05完成：视频迭代器、seek、晚帧与RAF
+
+VideoEngine实际迁移TS，拆出frame读取/释放、renderer与poster职责，删除视频声明桥。
+新source立即取消旧视频操作；seek与加载、暂停分别管理，旧帧不覆盖新状态；单实例RAF
+与海报回调有清理；保留默认丢帧策略并修复启动预取覆盖第二帧，以及多seek共享
+Canvas池导致排队帧像素被旧样本改写。包内20生产TS，
+只剩AudioEngine显式声明桥。38项新断言对旧main7通过/31失败、候选全通过；包专项
+146、main/legacy各110通过。最终54浏览器：12普通播放+10真实解码帧竞态+9Stream
+取消+9synthetic RAF+11能力对照+3无轨道拒绝。旧main10项真实帧竞态全部失败，
+候选全部通过，完整报告/trace归档。最终完整CI1307通过，另44重复契约，310生产TS。
+见[变更](changes/2026-09-12-PKG-MB-05-video.md)及[证据](baselines/mb-video-validation.json)。
+222项：102 done、7 doing、113 todo；立即专用本地提交，下一项MB-06音频引擎。
+音频、HLS拓扑、长播放/AV同步与codec能力剩余项继续，不构成npm发布验收。
+
 ## PKG-MB-04完成：主协调器TS与操作隔离
 
 MediaBunnyEngine实际迁移TS，并拆分playback/readiness/HLS查询职责；正常接口和事件顺序
