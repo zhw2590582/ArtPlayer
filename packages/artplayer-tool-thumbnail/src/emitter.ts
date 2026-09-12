@@ -7,13 +7,19 @@ interface Registration<Args extends unknown[]> {
   ctx: unknown
 }
 type Registry = Partial<Record<PropertyKey, Registration<never[]>[]>>
+const owns = (object: object, name: PropertyKey) => Object.prototype.hasOwnProperty.call(object, name)
 
 export default class Emitter<Events extends EventMap<Events> = Record<PropertyKey, unknown[]>> {
   declare e?: Registry
 
   on<Name extends PropertyKey, Custom extends unknown[], Context>(name: Name, fn: (this: Context, ...args: EventArgs<Events, Name, Custom>) => unknown, ctx?: Context): this {
-    const e: Registry = this.e || (this.e = {});
-    (e[name] || (e[name] = [] as Registration<never[]>[])).push({ fn, ctx })
+    const e: Registry = this.e || (this.e = {})
+    let listeners = owns(e, name) ? e[name] : undefined
+    if (!listeners) {
+      listeners = []
+      Object.defineProperty(e, name, { value: listeners, enumerable: true, configurable: true, writable: true })
+    }
+    listeners.push({ fn, ctx })
     return this
   }
 
@@ -21,7 +27,11 @@ export default class Emitter<Events extends EventMap<Events> = Record<PropertyKe
     // eslint-disable-next-line ts/no-this-alias -- Preserve the owning emitter independently of callback ctx.
     const self = this
     const callback: Listener<EventArgs<Events, Name, Custom>> = fn
+    let fired = false
     function listener(...args: EventArgs<Events, Name, Custom>) {
+      if (fired)
+        return
+      fired = true
       self.off(name, listener)
       callback.apply(ctx, args)
     }
@@ -31,7 +41,7 @@ export default class Emitter<Events extends EventMap<Events> = Record<PropertyKe
 
   emit<Name extends PropertyKey, Custom extends unknown[]>(name: Name, ...data: EventArgs<Events, Name, Custom>): this {
     const e: Registry = this.e || (this.e = {})
-    const evtArr = (e[name] || []).slice()
+    const evtArr = (owns(e, name) ? e[name] || [] : []).slice()
     for (let i = 0; i < evtArr.length; i += 1) {
       // The registry erases heterogeneous listener tuples; emit checks its own payload.
       (evtArr[i]!.fn as Listener<typeof data>).apply(evtArr[i]!.ctx, data)
@@ -41,7 +51,7 @@ export default class Emitter<Events extends EventMap<Events> = Record<PropertyKe
 
   off<Name extends PropertyKey, Custom extends unknown[]>(name: Name, callback?: Listener<EventArgs<Events, Name, Custom>>): this {
     const e: Registry = this.e || (this.e = {})
-    const evts = e[name]
+    const evts = owns(e, name) ? e[name] : undefined
     const liveEvents: Registration<never[]>[] = []
     if (evts && callback) {
       for (let i = 0, len = evts.length; i < len; i += 1) {

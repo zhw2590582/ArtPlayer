@@ -138,10 +138,19 @@ build includes the complete notice in main, legacy and ESM bundle headers.
 Current packed contents include the complete notice and no implementation source;
 new release candidates must repeat the installed check. Do not replace this local
 emitter with the core emitter as part of a type-only change: dispatch semantics
-and historical prototype-key handling need their own behavior review.
+need their own behavior review. The subsequent emitter fix checks only own
+registry keys, defines new slots as ordinary enumerable/writable/configurable
+data properties and leaves the registry prototype unchanged. Inherited getters
+and setters cannot intercept event registration or dispatch. Each once wrapper
+is consumed before removal/invocation so nested snapshots cannot invoke it twice,
+including after a callback throws. New registrations of the same callback remain
+independent. Normal snapshot order and off(originalCallback) are preserved.
 
 `test/thumbnail-runtime.test.js` compares upstream, recovered/historical bundles
 and the selected candidate for dispatch behavior, and checks candidate public
 descriptors and validation. `test/thumbnail-vendor.test.js` verifies fixed source
 bytes, complete notices and dist/docs equality. `test/types/thumbnail-runtime.ts`
 checks source consumers with positive cases and six rejected invalid uses.
+`test/thumbnail-emitter.test.js` reproduces the old key-collision/nested-once
+failures and checks the candidate; `test/browser/thumbnail-emitter.spec.js` repeats
+the behavior with the real browser class and native DOM cleanup.

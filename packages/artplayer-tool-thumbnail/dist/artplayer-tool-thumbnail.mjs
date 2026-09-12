@@ -31,16 +31,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const owns = (object, name) => Object.prototype.hasOwnProperty.call(object, name);
 class Emitter {
   on(name, fn, ctx) {
     const e = this.e || (this.e = {});
-    (e[name] || (e[name] = [])).push({ fn, ctx });
+    let listeners = owns(e, name) ? e[name] : void 0;
+    if (!listeners) {
+      listeners = [];
+      Object.defineProperty(e, name, { value: listeners, enumerable: true, configurable: true, writable: true });
+    }
+    listeners.push({ fn, ctx });
     return this;
   }
   once(name, fn, ctx) {
     const self = this;
     const callback = fn;
+    let fired = false;
     function listener(...args) {
+      if (fired)
+        return;
+      fired = true;
       self.off(name, listener);
       callback.apply(ctx, args);
     }
@@ -49,7 +59,7 @@ class Emitter {
   }
   emit(name, ...data) {
     const e = this.e || (this.e = {});
-    const evtArr = (e[name] || []).slice();
+    const evtArr = (owns(e, name) ? e[name] || [] : []).slice();
     for (let i = 0; i < evtArr.length; i += 1) {
       evtArr[i].fn.apply(evtArr[i].ctx, data);
     }
@@ -57,7 +67,7 @@ class Emitter {
   }
   off(name, callback) {
     const e = this.e || (this.e = {});
-    const evts = e[name];
+    const evts = owns(e, name) ? e[name] : void 0;
     const liveEvents = [];
     if (evts && callback) {
       for (let i = 0, len = evts.length; i < len; i += 1) {

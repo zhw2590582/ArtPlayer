@@ -3919,12 +3919,14 @@
         "refactor/baselines/thumbnail-contract.md",
         "refactor/baselines/thumbnail-release.json",
         "refactor/scripts/thumbnail-contract.test.mjs",
-        "refactor/baselines/thumbnail-public-types-validation.json"
+        "refactor/baselines/thumbnail-public-types-validation.json",
+        "refactor/baselines/thumbnail-emitter-validation.json"
       ],
       "resolutionEvidence": [
         "refactor/baselines/thumbnail-public-types-validation.json",
         "refactor/baselines/thumbnail-vendor/sources.json",
-        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES"
+        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES",
+        "refactor/baselines/thumbnail-emitter-validation.json"
       ],
       "resolutionRationale": "Fixed 2.1.0 upstream comparison and local adaptation reviewed; complete MIT notice verified in every standalone bundle and every byte of the actual installed candidate pack. Exact original copied revision and complete historical npm archive remain unknown and are explicitly bounded, not claimed recovered. Historical CSS/paths remain independently open under BASE-DIST-01.",
       "workspaceState": "Current candidate source/bundle/packed attribution verified; repeat installed artifact verification when release contents change."
@@ -3961,7 +3963,8 @@
         "packages/artplayer-tool-thumbnail/src/emitter.ts",
         "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES",
         "test/thumbnail-vendor.test.js",
-        "refactor/baselines/thumbnail-public-types-validation.json"
+        "refactor/baselines/thumbnail-public-types-validation.json",
+        "refactor/baselines/thumbnail-emitter-validation.json"
       ],
       "compatibleResolution": "Preserve original attribution, typed local dispatch compatibility and complete MIT notice in source/package/standalone bundles.",
       "closureCriteria": "Pinned upstream reference and local adaptation reviewed; all bundle and actual packed distribution notices verified. Do not claim the exact original copied revision or a recovered complete historical archive.",
@@ -3969,9 +3972,32 @@
       "resolutionEvidence": [
         "refactor/baselines/thumbnail-public-types-validation.json",
         "refactor/baselines/thumbnail-vendor/sources.json",
-        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES"
+        "packages/artplayer-tool-thumbnail/THIRD_PARTY_NOTICES",
+        "refactor/baselines/thumbnail-emitter-validation.json"
       ],
       "resolutionRationale": "Fixed 2.1.0 upstream comparison and local adaptation reviewed; complete MIT notice verified in every standalone bundle and every byte of the actual installed candidate pack. Exact original copied revision and complete historical npm archive remain unknown and are explicitly bounded, not claimed recovered. Historical CSS/paths remain independently open under BASE-DIST-01."
+    },
+    {
+      "id": "THUMB-EVENT-01",
+      "title": "Thumbnail 原型事件名与嵌套 once 派发缺陷",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-TOOL-THUMB-04"
+      ],
+      "evidence": [
+        "test/thumbnail-emitter.test.js",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md",
+        "refactor/baselines/thumbnail-emitter-validation.json"
+      ],
+      "compatibleResolution": "Use own event keys and preserve registry descriptors/prototype; consume each once registration before removal and invocation across nested snapshots.",
+      "closureCriteria": "Frozen failure/candidate success, ordinary event and lifecycle parity, all runtime formats and actual browser plus installed candidate evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/thumbnail-emitter-validation.json",
+        "test/thumbnail-emitter.test.js",
+        "test/browser/thumbnail-emitter.spec.js"
+      ],
+      "resolutionRationale": "Frozen workspace reproduces five failures. Own-key/data-descriptor registry and once-per-registration consumption pass source/main/legacy, actual browser and installed candidate checks while ordinary snapshot/ctx/off/duplicate behavior remains tested."
     }
   ]
 }

@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-04 事件注册表修复检查点（doing）
+
+复现并修复特殊事件名碰撞对象原型、继承getter/setter干扰，以及嵌套emit导致once重复执行。
+保留普通派发快照/ctx/off原回调/独立重复注册语义，使用own key/data descriptor及每次
+注册独立的once消费标记。新6项旧版1通过/5失败；候选源码53、main/legacy各55通过。
+重新构建并重跑三份真实浏览器各63项，共189项：每份34工具、3输入、17Blob不可用、
+3原生对照、3Monaco、3事件注册表。没有沿用运行文件改变前的媒体证据。
+完整CI1664、339生产TS、3导入及实际安装7种模式/52项类型反例通过，关闭THUMB-EVENT-01。
+默认行为策略问题继续等待用户选择；04不标完成。见[变更](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md)
+与[验证](baselines/thumbnail-emitter-validation.json)。222项：112 done、11 doing、99 todo。
+
+
 ## PKG-TOOL-THUMB-04 公开类型与真实安装检查点（doing）
 
 补齐class/namespace及d.cts/d.mts，修复root ESM并保留直接CJS构造器，新增legacy类型路径。

@@ -3817,7 +3817,9 @@
         "changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md",
         "baselines/thumbnail-runtime-types-validation.json",
         "changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md",
-        "baselines/thumbnail-public-types-validation.json"
+        "baselines/thumbnail-public-types-validation.json",
+        "changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md",
+        "baselines/thumbnail-emitter-validation.json"
       ]
     },
     {

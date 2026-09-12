@@ -182,3 +182,4 @@
 | THUMB-PROVENANCE-01 | resolved / 源码/产物事实 | Thumbnail local emitter attribution and historical distribution completeness remain unverified | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
 | THUMB-MEDIA-01 | open / 已复现 | Windows WebKit native Blob URLs cannot load tested MP4 media despite successful HTTP controls | PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
 | VENDOR-09 | resolved / 源码/产物事实 | Thumbnail tiny-emitter 改写来源与最终分发许可 | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
+| THUMB-EVENT-01 | resolved / 已复现 | Thumbnail 原型事件名与嵌套 once 派发缺陷 | PKG-TOOL-THUMB-04 |

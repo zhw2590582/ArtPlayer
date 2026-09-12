@@ -1036,7 +1036,7 @@
         "PKG-TOOL-THUMB-04",
         "PKG-TOOL-THUMB-06"
       ],
-      "sourceStatus": "Local on/once/emit/off structurally correspond to the fixed tiny-emitter 2.1.0 reference; recovered 3.5.31 declared ^2.1.0. Exact original copied revision is unknown. This migration adds types while preserving the local class and dispatch behavior.",
+      "sourceStatus": "Local on/once/emit/off structurally correspond to the fixed tiny-emitter 2.1.0 reference; recovered 3.5.31 declared ^2.1.0. Exact original copied revision is unknown. This migration adds types while preserving the local class and dispatch behavior. Subsequent reviewed fixes use own event keys/data descriptors and once-per-registration consumption across nested snapshots, preserving ordinary dispatch behavior.",
       "licenseStatus": "Full pinned upstream MIT notice verified in package, all standalone bundles and actual installed candidate tarball. Repeat on changed release candidates; original copy revision remains unknown.",
       "upstreamSources": [
         "https://raw.githubusercontent.com/scottcorgan/tiny-emitter/2.1.0/index.js",
@@ -1049,7 +1049,7 @@
         {
           "path": "packages/artplayer-tool-thumbnail/src/emitter.ts",
           "algorithm": "sha256-lf",
-          "sha256": "bd4d5472361edd2e31a6ae1aecce01e310e4086edebe434733d0f5b5eea37a0b"
+          "sha256": "a083e029dd1104912d3e9a0ba23a6dcc160d9ccde6a55be40db74367a647a3cb"
         }
       ],
       "reviewEvidence": [
@@ -1058,7 +1058,9 @@
         "test/thumbnail-vendor.test.js",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md",
-        "refactor/baselines/thumbnail-public-types-validation.json"
+        "refactor/baselines/thumbnail-public-types-validation.json",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md",
+        "refactor/baselines/thumbnail-emitter-validation.json"
       ]
     }
   ],
