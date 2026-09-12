@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-MB-04完成：主协调器TS与操作隔离
+
+MediaBunnyEngine实际迁移TS，并拆分playback/readiness/HLS查询职责；正常接口和事件顺序
+保持，修复旧play/seek覆盖、错误吞掉、重复就绪及无轨道假就绪。新增40项测试在旧main上
+8通过/32失败，候选全通过；包专项108通过、main/legacy各72通过。最终39项浏览器
+包括12真实播放、9Stream取消、9synthetic RAF、6能力对照及3无轨道拒绝；另在已有
+Chromium/Firefox播放用例内验证play回调同步pause后无playing。完整CI1269通过，
+另44重复契约，306生产TS；包内16生产TS和2个未迁移解码器声明桥明确区分。
+见[变更](changes/2026-09-12-PKG-MB-04-coordination.md)及[证据](baselines/mb-coordination-validation.json)。
+222项：101 done、7 doing、114 todo；立即专用本地提交，下一项MB-05视频帧资源。
+MB-LIFE-01/MB-READY-01剩余解码器/能力与组合范围仍open；不构成npm发布验收。
+
 ## 当前检查点：PKG-MB-04 VideoShim、事件与RAF资源
 
 新增五个生产TS模块，保持shim/canvas布局和正常事件/Promise/属性契约；修复销毁后的RAF、

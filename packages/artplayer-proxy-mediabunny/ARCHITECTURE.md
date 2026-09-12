@@ -15,19 +15,22 @@ declarations, the factory signature, canvas forwarding, or package entrypoints.
 | `hls-state.ts` | HLS track snapshots, bitrate/name/language values and actual selected track identity |
 | `preflight.ts` | Optional HEAD Range check, historical warning/error policy, cancellation and stale-result guard |
 | `load-session.ts` | Ownership of the pending/active SDK Input, HEAD AbortController, deferred load events and deadline |
-| `MediaBunnyEngine.js` | Current coordinator; connects session cancellation to load, source replacement, errors and destroy |
+| `MediaBunnyEngine.ts` | Load/readiness coordinator, source identity, errors and terminal teardown |
+| `playback.ts` | Playback intent, cancellable play/seek/replacement operations and shared pending audio resume |
+| `readiness.ts` | One metadata publication after both participants, guarded event sequences |
+| `hls-selection.ts` | Source-bound track queries, pairing and active replacement errors |
 | `VideoEngine.js` / `AudioEngine.js` | Current native decoding, rendering, seeking, Web Audio clock and scheduling |
 | `VideoShim.ts` / `EventTarget.ts` | Video-like descriptors, synchronous/Promise forwarding and owned event lifecycle |
 | `shim-values.ts` | Existing volume coercion and synthetic TimeRanges values |
 | `shim-frames.ts` | Synthetic frame callbacks, per-instance RAF ownership and terminal cleanup |
-| `engine-types.ts` / `MediaBunnyEngine.d.ts` | Explicit temporary coordinator boundary while its JavaScript implementation is migrated in MB-04 |
+| `engine-types.ts` / `engine-ports.ts` | Internal shim, coordinator and decoder interfaces |
+| `AudioEngine.d.ts` / `VideoEngine.d.ts` | Temporary boundaries for JS decoders, removed in MB-06/05 |
 | `m3u8.js` | Current ArtPlayer control/setting integration |
 
-The eleven TypeScript modules use strict checking with `skipLibCheck: false` and no
-ambient Node types. The adjacent coordinator declaration is a transitional boundary,
-not proof that the JavaScript coordinator has been checked. Replace it with the actual
-strict implementation before completing MB-04. Remaining JavaScript is explicitly
-scheduled in PKG-MB-04/05/06/07/08.
+The sixteen production TypeScript modules use strict checking with `skipLibCheck: false`
+and no ambient Node types. The coordinator is an actual checked implementation. The two
+adjacent decoder declarations are temporary boundaries, not checking of their JavaScript
+implementations. Remaining JavaScript is scheduled in PKG-MB-05/06/07/08.
 Do not describe the whole package as migrated yet.
 
 The shim keeps its existing own-property order and direct prototype surface because
@@ -40,7 +43,8 @@ EventTarget retains duplicate listeners, first-match removal, live-array `forEac
 mutation semantics, detail identity and listener exceptions during normal dispatch.
 Its terminal state stops callbacks later in a dispatch when a listener destroys the
 shim. Shim teardown closes events in `finally`, even if engine cleanup throws, and
-subsequent teardown is inert. Engine playback/readiness race fixes remain in progress.
+subsequent teardown is inert. Engine teardown attempts input, audio and video cleanup
+even when an earlier release throws, then preserves the first failure.
 
 ## Input and cancellation flow
 
@@ -68,6 +72,32 @@ Network failure warns and continues; HLS strings and non-string sources skip HEA
 HLS matching preserves the old case-insensitive `.m3u8` suffix/query/hash rule.
 One explicit InputOptions assertion leaves unsupported values to SDK validation, preserving
 the old error owner rather than silently converting arbitrary inputs.
+
+## Playback and readiness ownership
+
+Playback intent is separate from the temporary paused state during seek. Explicit pause
+cancels pending play and prevents automatic resume; a newer seek settles the old operation
+without allowing its completion or rejection to overwrite current state. Pending play waits
+for the seek completion signal, resolved before optional resume to avoid a cycle.
+A pending AudioContext resume is shared across play-pause-play; only the current operation
+starts video and emits play/playing. Source change and destroy invalidate both operations.
+Cancellation settles the public operation while observing the underlying late result;
+actual late decoder work still belongs to MB-05/06.
+
+Normal play, pause, seek/resume and HLS replacement event order is retained. Before each
+event the coordinator rechecks ownership, since a listener may synchronously pause, seek,
+load another source or destroy. Active play errors reject their Promise and restore paused
+state; active seek errors additionally publish one media error. The synchronous currentTime
+setter observes its otherwise unreturnable rejection; direct engine.seek still rejects.
+Active replacement errors remain visible even after the media object changes. Stale HLS query
+errors are ignored only when their captured source no longer owns the result.
+
+Metadata publishes once after both audio/video participants report; repeated or obsolete
+callbacks cannot ready the current source. A parsed container with neither track fails with
+code 4 and message `Input has no audio or video tracks.` before decoder/AudioContext setup.
+This corrects the old false-ready state; normal valid input event order is preserved.
+Existing-track unsupported-codec handling remains a decoder capability task, not evidence
+that every capability failure has been fixed.
 
 ## Types and dependencies
 
@@ -101,7 +131,7 @@ The source of historical truth is `refactor/baselines/mb-release.json` and its G
 inputs, not a rebuilt dist. Package-specific evidence and remaining tasks are in
 `refactor/mb-validation.md`. The full refactor plan is at the repository root.
 
-PKG-MB-04 still owns duplicate/trackless readiness, reentrant event sequences and
+PKG-MB-04 covers duplicate/trackless readiness, reentrant event sequences and
 pending play/seek coordination. PKG-MB-05/06 own late frame and audio callbacks,
 including operations already inside decoders at cancellation; releasing Input alone
 does not prove those resources are fully handled. PKG-MB-07 owns HLS UI/selection

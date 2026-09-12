@@ -45,3 +45,12 @@ MB-03实施将input分离为六个strict TS模块，接入加载session、Range�
 Chrome连接不可用时可使用内置浏览器；CLI自动化也按现有Playwright三引擎流程执行。
 保留report.json及整个results目录。受控输入不能替代真实解码，iframe不能替代原生Document PiP。
 VAST脚本VPN豁免不适用于本包。
+
+## MB-04 coordinator implementation
+
+VideoShim/EventTarget与主协调器已拆为严格TS模块，详情见
+[协调器变更](changes/2026-09-12-PKG-MB-04-coordination.md)及
+[验证记录](baselines/mb-coordination-validation.json)。包专项命令已包含新的协调器回归用例。
+无轨道容器由历史readyState 4改为code 4错误；有效媒体的正常顺序保持，重复就绪和
+失效操作结果被阻止。不要把synthetic RAF、受控竞态或Windows WebKit能力对照计为真实播放。
+音视频解码器仍通过两个显式声明桥连接，MB-05/06继续实际实现迁移和底层晚操作清理。

@@ -19,7 +19,7 @@ export interface EngineOptions {
   option?: ProxyOptions
 }
 
-// Transitional boundary for the coordinator; replaced by its strict implementation in MB-04.
+// Stable coordinator-facing surface used by the public shim.
 export interface EnginePort {
   readonly currentTime: number
   readonly duration: number

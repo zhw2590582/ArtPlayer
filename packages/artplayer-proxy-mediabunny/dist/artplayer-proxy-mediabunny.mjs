@@ -11,7 +11,7 @@ var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot
 var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
-var _closed;
+var _closed, _playback;
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
 const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
 function uniqBy(array, property) {
@@ -24271,6 +24271,62 @@ class AudioEngine {
     this.audioSink = null;
   }
 }
+async function selectQuality(host, value) {
+  const { input, media, loadSeq } = host;
+  if (!media?.isHls || !input || host.destroyed)
+    return;
+  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && host.media === media;
+  let selection;
+  try {
+    const tracks = await input.getVideoTracks();
+    if (!current())
+      return;
+    const videoTrack = value === "auto" ? await input.getPrimaryVideoTrack() : tracks.find((track) => track.id === value) ?? media.videoTrack;
+    if (!current() || !videoTrack)
+      return;
+    let audioTrack = media.audioTrack;
+    let audioMode = media.audioMode;
+    if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
+      audioTrack = await videoTrack.getPrimaryPairableAudioTrack();
+      audioMode = "auto";
+    }
+    selection = { videoTrack, audioTrack, videoMode: value === "auto" ? "auto" : "manual", audioMode };
+  } catch (error) {
+    if (!current())
+      return;
+    throw error;
+  }
+  if (current())
+    await host.replaceTracks(selection);
+}
+async function selectAudio(host, value) {
+  const { input, media, loadSeq } = host;
+  if (!media?.isHls || !input || host.destroyed)
+    return;
+  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && host.media === media;
+  let selection;
+  try {
+    const tracks = await input.getAudioTracks();
+    if (!current())
+      return;
+    const audioTrack = value === "auto" ? media.videoTrack ? await media.videoTrack.getPrimaryPairableAudioTrack() : await input.getPrimaryAudioTrack() : tracks.find((track) => track.id === value) ?? media.audioTrack;
+    if (!current() || !audioTrack)
+      return;
+    let videoTrack = media.videoTrack;
+    let videoMode = media.videoMode;
+    if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
+      videoTrack = await audioTrack.getPrimaryPairableVideoTrack();
+      videoMode = "auto";
+    }
+    selection = { videoTrack, audioTrack, videoMode, audioMode: value === "auto" ? "auto" : "manual" };
+  } catch (error) {
+    if (!current())
+      return;
+    throw error;
+  }
+  if (current())
+    await host.replaceTracks(selection);
+}
 async function getTrackBitrate(track) {
   return await track.getAverageBitrate() ?? await track.getBitrate() ?? 0;
 }
@@ -24404,6 +24460,30 @@ class LoadSession {
     this.disposeInput();
   }
 }
+function publish(events, current, names) {
+  for (const name of names) {
+    if (!current())
+      return;
+    events.emit(name);
+  }
+}
+function metadataBarrier(ready, current) {
+  let video = false;
+  let audio = false;
+  let published = false;
+  function complete(part) {
+    if (!current() || published)
+      return;
+    if (part === "video")
+      video = true;
+    else audio = true;
+    if (video && audio) {
+      published = true;
+      ready();
+    }
+  }
+  return { video: () => complete("video"), audio: () => complete("audio") };
+}
 async function resolveDuration({ input, videoTrack, audioTrack }) {
   const tracks = [videoTrack, audioTrack].filter((track) => track !== null);
   const referenceTrack = videoTrack || audioTrack;
@@ -24432,6 +24512,212 @@ async function selectPlaybackTracks(input, src) {
     videoMode: isHls ? "auto" : "manual",
     audioMode: isHls ? "auto" : "manual"
   };
+}
+function completion() {
+  let resolve;
+  let reject;
+  const promise = new Promise((yes, no) => {
+    resolve = yes;
+    reject = no;
+  });
+  return { promise, resolve, reject };
+}
+class Playback {
+  constructor(host) {
+    this.host = host;
+    this.wanted = false;
+    this.playing = null;
+    this.seeking = null;
+    this.audioStart = null;
+  }
+  operation() {
+    return { ...completion(), source: this.host.loadSeq, complete: completion() };
+  }
+  current(operation, kind) {
+    return !this.host.destroyed && operation.source === this.host.loadSeq && this[kind] === operation;
+  }
+  cancelPlay() {
+    const previous = this.playing;
+    this.playing = null;
+    previous?.resolve();
+  }
+  invalidate() {
+    this.cancelPlay();
+    this.wanted = false;
+    const previous = this.seeking;
+    this.seeking = null;
+    previous?.complete.resolve();
+    previous?.resolve();
+    this.host.seeking = false;
+  }
+  ended() {
+    this.wanted = false;
+    this.cancelPlay();
+  }
+  stop() {
+    if (this.host.paused)
+      return;
+    this.host.paused = true;
+    this.stopEngines();
+    this.host.events.emit("pause");
+  }
+  stopEngines() {
+    const failures = [];
+    for (const stop of [() => this.host.audio.pause(), () => this.host.video.stop()]) {
+      try {
+        stop();
+      } catch (error) {
+        failures.push(error);
+      }
+    }
+    if (failures.length)
+      throw failures[0];
+  }
+  pause() {
+    this.wanted = false;
+    this.cancelPlay();
+    this.stop();
+  }
+  play() {
+    if (this.host.destroyed)
+      return Promise.resolve();
+    this.wanted = true;
+    if (this.playing)
+      return this.playing.promise;
+    if (this.host.ended)
+      return this.seek(0, true);
+    if (!this.host.paused && !this.seeking)
+      return Promise.resolve();
+    const operation = this.operation();
+    this.playing = operation;
+    this.runPlay(operation).then(operation.resolve, operation.reject);
+    return operation.promise;
+  }
+  async startAudio() {
+    if (!this.audioStart)
+      this.audioStart = this.host.audio.play();
+    const pending = this.audioStart;
+    try {
+      await pending;
+    } finally {
+      if (this.audioStart === pending)
+        this.audioStart = null;
+    }
+  }
+  async runPlay(operation) {
+    const current = () => this.current(operation, "playing") && this.wanted;
+    try {
+      while (this.seeking) {
+        await this.seeking.complete.promise;
+        if (!current())
+          return;
+      }
+      if (!current())
+        return;
+      this.host.paused = false;
+      await this.startAudio();
+      if (!current()) {
+        if (!this.wanted || this.host.destroyed)
+          this.host.audio.pause();
+        return;
+      }
+      this.host.video.start(this.host.audio);
+      publish(this.host.events, current, ["play", "playing"]);
+    } catch (error) {
+      if (!current())
+        return;
+      this.wanted = false;
+      this.host.paused = true;
+      try {
+        this.stopEngines();
+      } catch (failure) {
+        console.warn("MediaBunny play cleanup error:", failure);
+      }
+      throw error;
+    } finally {
+      if (this.playing === operation)
+        this.playing = null;
+    }
+  }
+  seek(time, resume) {
+    return this.position(async (current) => {
+      const audio = this.host.audio.seek(time);
+      const video = current() ? this.host.video.seek(time) : Promise.resolve();
+      await Promise.all([audio, video]);
+    }, ["seeked"], false, resume);
+  }
+  replace(media, time) {
+    return this.position(async (current) => {
+      media.duration = await resolveDuration(media);
+      if (!current())
+        return;
+      this.host.media = media;
+      await Promise.all([this.host.video.load(media), this.host.audio.load(media)]);
+      if (!current())
+        return;
+      await Promise.all([this.host.video.seek(time), this.host.audio.seek(time)]);
+      if (current()) {
+        this.host.readyState = 4;
+        this.host.networkState = 1;
+      }
+    }, ["loadedmetadata", "durationchange", "progress", "loadeddata", "canplay", "canplaythrough", "seeked"], true);
+  }
+  position(work, events, pauseFirst, resume) {
+    if (this.host.destroyed)
+      return Promise.resolve();
+    this.wanted = resume ?? (this.seeking ? this.wanted : !this.host.paused);
+    this.cancelPlay();
+    const previous = this.seeking;
+    const operation = this.operation();
+    this.seeking = operation;
+    previous?.complete.resolve();
+    previous?.resolve();
+    this.runPosition(operation, work, events, pauseFirst).then(operation.resolve, operation.reject);
+    return operation.promise;
+  }
+  async runPosition(operation, work, events, pauseFirst) {
+    const current = () => this.current(operation, "seeking");
+    let resume = false;
+    try {
+      if (pauseFirst)
+        this.stop();
+      if (!current())
+        return;
+      this.host.ended = false;
+      this.host.seeking = true;
+      publish(this.host.events, current, ["seeking", "waiting"]);
+      if (!current())
+        return;
+      if (!pauseFirst)
+        this.stop();
+      if (!current())
+        return;
+      await work(current);
+      if (!current())
+        return;
+      this.host.seeking = false;
+      operation.complete.resolve();
+      publish(this.host.events, current, events);
+      if (!current())
+        return;
+      this.seeking = null;
+      resume = this.wanted;
+    } catch (error) {
+      if (!current())
+        return;
+      this.host.seeking = false;
+      this.wanted = false;
+      this.cancelPlay();
+      this.host.reportError(error);
+      throw error;
+    } finally {
+      operation.complete.resolve();
+      if (this.seeking === operation)
+        this.seeking = null;
+    }
+    if (resume)
+      await this.play();
+  }
 }
 async function preflightRange(url, enabled, events, signal, isCurrent = () => true) {
   if (signal?.aborted || !isCurrent())
@@ -24661,6 +24947,7 @@ class VideoEngine {
 }
 class MediaBunnyEngine {
   constructor({ canvas, ctx, events, option = {} }) {
+    __privateAdd(this, _playback);
     this.events = events;
     this.option = option;
     this.audio = new AudioEngine(events);
@@ -24685,15 +24972,20 @@ class MediaBunnyEngine {
     this.media = null;
     this.loadSession = null;
     this.destroyed = false;
-    events.addEventListener?.("ended", () => {
+    __privateSet(this, _playback, new Playback(this));
+    events.addEventListener("ended", () => {
+      if (this.destroyed)
+        return;
       this.ended = true;
       this.paused = true;
+      __privateGet(this, _playback).ended();
     });
   }
   async load(src) {
     if (this.destroyed)
       return;
     const id = ++this.loadSeq;
+    __privateGet(this, _playback).invalidate();
     this.loadSession?.cancel();
     if (id !== this.loadSeq || this.destroyed)
       return;
@@ -24709,75 +25001,62 @@ class MediaBunnyEngine {
     this.readyState = 0;
     session.defer(() => this.events.emit("waiting"));
     session.defer(() => this.events.emit("loadstart"));
-    const loadTimeout = Number.isFinite(this.option.loadTimeout) ? this.option.loadTimeout : 0;
+    const timeout = Number.isFinite(this.option.loadTimeout) ? this.option.loadTimeout ?? 0 : 0;
     try {
-      await session.wait(this.performLoad(src, id, session), loadTimeout);
-    } catch (err) {
+      await session.wait(this.performLoad(src, id, session), timeout);
+    } catch (error) {
       if (id !== this.loadSeq)
         return;
       const failed = ++this.loadSeq;
+      __privateGet(this, _playback).invalidate();
       session.cancel();
       if (failed !== this.loadSeq || this.destroyed)
         return;
       this.disposeInput();
-      this.error = { code: 4, message: err.message };
-      this.networkState = 3;
-      this.events.emit("error");
+      this.reportError(error);
     }
   }
   async performLoad(src, id, session = this.loadSession) {
-    if (!await this.video.preflight(src, session?.signal, () => id === this.loadSeq) || id !== this.loadSeq)
+    const current = () => !this.destroyed && id === this.loadSeq;
+    if (!session || !await this.video.preflight(src, session.signal, current) || !current())
       return;
     const input = createInput(src);
     if (!input) {
       this.video.handleNoVideoTrack();
-      this.audio.handleNoAudioTrack();
+      if (current())
+        this.audio.handleNoAudioTrack();
       return;
     }
     session.own(input);
     const media = await selectPlaybackTracks(input, src);
-    if (id !== this.loadSeq)
+    if (!current())
       return;
+    if (!media.videoTrack && !media.audioTrack) {
+      this.video.handleNoVideoTrack();
+      this.video.duration = Number.NaN;
+      this.audio.duration = Number.NaN;
+      throw new Error("Input has no audio or video tracks.");
+    }
     this.input = input;
     this.media = media;
-    let videoMetadataLoaded = !media.videoTrack;
-    let audioMetadataLoaded = !media.audioTrack;
-    const checkMetadata = () => {
-      if (videoMetadataLoaded && audioMetadataLoaded) {
-        this.readyState = 1;
-        this.events.emit("loadedmetadata");
-        this.events.emit("durationchange");
-        this.events.emit("progress");
-      }
-    };
+    const metadata = metadataBarrier(() => {
+      this.readyState = 1;
+      publish(this.events, current, ["loadedmetadata", "durationchange", "progress"]);
+    }, current);
     try {
-      await Promise.all([
-        this.video.load(media, () => {
-          if (id !== this.loadSeq)
-            return;
-          videoMetadataLoaded = true;
-          checkMetadata();
-        }),
-        this.audio.load(media, () => {
-          if (id !== this.loadSeq)
-            return;
-          audioMetadataLoaded = true;
-          checkMetadata();
-        })
-      ]);
-      if (id !== this.loadSeq)
+      const video = this.video.load(media, metadata.video);
+      const audio = current() ? this.audio.load(media, metadata.audio) : Promise.resolve();
+      await Promise.all([video, audio]);
+      if (!current())
         return;
       this.readyState = 4;
       this.networkState = 1;
-      this.events.emit("loadeddata");
-      this.events.emit("canplay");
-      this.events.emit("canplaythrough");
-      this.events.emit("progress");
-    } catch (err) {
-      if (id !== this.loadSeq)
+      publish(this.events, current, ["loadeddata", "canplay", "canplaythrough", "progress"]);
+    } catch (error) {
+      if (!current())
         return;
-      console.error("MediaBunny load error:", err);
-      throw err;
+      console.error("MediaBunny load error:", error);
+      throw error;
     }
   }
   createTimeout(ms) {
@@ -24790,127 +25069,38 @@ class MediaBunnyEngine {
     this.input = null;
     this.media = null;
   }
-  async replaceTracks({ videoTrack, audioTrack, videoMode, audioMode }) {
-    if (!this.media)
+  async replaceTracks(tracks) {
+    if (!this.media || this.destroyed)
       return;
-    const nextMedia = {
-      ...this.media,
-      videoTrack,
-      audioTrack,
-      videoMode,
-      audioMode
-    };
-    const shouldResume = !this.paused;
-    const currentTime = this.currentTime;
-    this.pause();
-    this.ended = false;
-    this.seeking = true;
-    this.events.emit("seeking");
-    this.events.emit("waiting");
-    nextMedia.duration = await resolveDuration(nextMedia);
-    this.media = nextMedia;
-    await Promise.all([
-      this.video.load(nextMedia),
-      this.audio.load(nextMedia)
-    ]);
-    await Promise.all([
-      this.video.seek(currentTime),
-      this.audio.seek(currentTime)
-    ]);
-    this.readyState = 4;
-    this.networkState = 1;
-    this.seeking = false;
-    this.events.emit("loadedmetadata");
-    this.events.emit("durationchange");
-    this.events.emit("progress");
-    this.events.emit("loadeddata");
-    this.events.emit("canplay");
-    this.events.emit("canplaythrough");
-    this.events.emit("seeked");
-    if (shouldResume) {
-      await this.play();
-    }
+    return __privateGet(this, _playback).replace({ ...this.media, ...tracks }, this.currentTime);
   }
   async selectHlsQuality(value) {
-    if (!this.media?.isHls || !this.input)
-      return;
-    const videoTracks = await this.input.getVideoTracks();
-    const videoTrack = value === "auto" ? await this.input.getPrimaryVideoTrack() : videoTracks.find((track) => track.id === value) ?? this.media.videoTrack;
-    if (!videoTrack)
-      return;
-    let audioTrack = this.media.audioTrack;
-    let audioMode = this.media.audioMode;
-    if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
-      audioTrack = await videoTrack.getPrimaryPairableAudioTrack();
-      audioMode = "auto";
-    }
-    await this.replaceTracks({
-      videoTrack,
-      audioTrack,
-      videoMode: value === "auto" ? "auto" : "manual",
-      audioMode
-    });
+    return selectQuality(this, value);
   }
   async selectHlsAudio(value) {
-    if (!this.media?.isHls || !this.input)
-      return;
-    const audioTracks = await this.input.getAudioTracks();
-    const audioTrack = value === "auto" ? this.media.videoTrack ? await this.media.videoTrack.getPrimaryPairableAudioTrack() : await this.input.getPrimaryAudioTrack() : audioTracks.find((track) => track.id === value) ?? this.media.audioTrack;
-    if (!audioTrack)
-      return;
-    let videoTrack = this.media.videoTrack;
-    let videoMode = this.media.videoMode;
-    if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
-      videoTrack = await audioTrack.getPrimaryPairableVideoTrack();
-      videoMode = "auto";
-    }
-    await this.replaceTracks({
-      videoTrack,
-      audioTrack,
-      videoMode,
-      audioMode: value === "auto" ? "auto" : "manual"
-    });
+    return selectAudio(this, value);
   }
-  getHlsState() {
-    return getHlsState(this.media);
+  async getHlsState() {
+    const media = this.media;
+    if (this.destroyed)
+      return null;
+    try {
+      const state2 = await getHlsState(media);
+      return !this.destroyed && this.media === media ? state2 : null;
+    } catch (error) {
+      if (this.destroyed || this.media !== media)
+        return null;
+      throw error;
+    }
   }
   async play() {
-    if (!this.paused)
-      return;
-    if (this.ended) {
-      this.ended = false;
-      await this.seek(0);
-    }
-    this.paused = false;
-    await this.audio.play();
-    this.video.start(this.audio);
-    this.events.emit("play");
-    this.events.emit("playing");
+    return __privateGet(this, _playback).play();
   }
   pause() {
-    if (this.paused)
-      return;
-    this.paused = true;
-    this.audio.pause();
-    this.video.stop();
-    this.events.emit("pause");
+    __privateGet(this, _playback).pause();
   }
   async seek(time) {
-    const shouldResume = !this.paused;
-    this.ended = false;
-    this.seeking = true;
-    this.events.emit("seeking");
-    this.events.emit("waiting");
-    this.pause();
-    await Promise.all([
-      this.audio.seek(time),
-      this.video.seek(time)
-    ]);
-    this.seeking = false;
-    this.events.emit("seeked");
-    if (shouldResume && !this.ended) {
-      await this.play();
-    }
+    return __privateGet(this, _playback).seek(time);
   }
   setVolume(volume, muted) {
     this.audio.setVolume(volume, muted);
@@ -24919,18 +25109,31 @@ class MediaBunnyEngine {
     this.audio.setPlaybackRate(rate);
     this.video.setPlaybackRate(rate);
   }
+  reportError(error) {
+    if (this.destroyed)
+      return;
+    const message = error && typeof error === "object" ? Reflect.get(error, "message") : void 0;
+    this.error = { code: 4, message: typeof message === "string" ? message : String(error) };
+    this.networkState = 3;
+    this.events.emit("error");
+  }
   destroy() {
     if (this.destroyed)
       return;
     this.destroyed = true;
     this.loadSeq++;
-    this.loadSession?.cancel();
-    this.pause();
-    this.disposeInput();
-    this.audio.destroy();
-    this.video.destroy();
+    __privateGet(this, _playback).invalidate();
+    const failures = [];
+    for (const release of [() => this.loadSession?.cancel(), () => this.pause(), () => this.disposeInput(), () => this.audio.destroy(), () => this.video.destroy()]) {
+      try {
+        release();
+      } catch (error) {
+        failures.push(error);
+      }
+    }
+    if (failures.length)
+      throw failures[0];
   }
-  // Getters
   get currentTime() {
     return this.audio.currentTime;
   }
@@ -24944,6 +25147,7 @@ class MediaBunnyEngine {
     return this.video.height;
   }
 }
+_playback = new WeakMap();
 const states = /* @__PURE__ */ new WeakMap();
 function state(owner) {
   let value = states.get(owner);
@@ -25049,7 +25253,8 @@ class VideoShim {
     return this.engine.currentTime;
   }
   set currentTime(t) {
-    this.engine.seek(Number(t) || 0);
+    void Promise.resolve(this.engine.seek(Number(t) || 0)).catch(() => {
+    });
   }
   get duration() {
     return this.engine.duration;

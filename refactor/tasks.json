@@ -3460,14 +3460,16 @@
         "CORE-06",
         "CORE-11"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "shim 描述符、事件桥、加载状态和操作隔离",
       "acceptance": "公开属性/同步异步返回与事件重入顺序保持",
       "evidence": [
         "baselines/mb-coordination-source.json",
         "changes/2026-09-12-PKG-MB-04-shim-checkpoint.md",
-        "baselines/mb-shim-checkpoint.json"
+        "baselines/mb-shim-checkpoint.json",
+        "changes/2026-09-12-PKG-MB-04-coordination.md",
+        "baselines/mb-coordination-validation.json"
       ]
     },
     {

@@ -87,7 +87,8 @@ export default class VideoShim {
   }
 
   set currentTime(t: unknown) {
-    this.engine.seek(Number(t) || 0)
+    // The coordinator reports active failures; the synchronous setter must observe rejection.
+    void Promise.resolve(this.engine.seek(Number(t) || 0)).catch(() => {})
   }
 
   get duration() {

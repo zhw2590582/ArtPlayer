@@ -95,6 +95,13 @@ for (const implementation of implementations) {
           expect(loaded.dimensions).toEqual([0, 0])
           outcome = input === 'hls' ? 'historical-unsupported-hls-control' : 'historical-stream-lock-control'
         }
+        else if (implementation.name.startsWith('candidate') && input === 'trackless') {
+          expect(loaded.error).toEqual({ code: 4, message: 'Input has no audio or video tracks.' })
+          expect(loaded.readyState).toBe(0)
+          expect(loaded.dimensions).toEqual([0, 0])
+          expect(await page.evaluate(() => window.mbEvents.filter(item => ['video:loadedmetadata', 'video:loadeddata', 'video:canplay'].includes(item.name)))).toEqual([])
+          outcome = 'trackless-rejected-before-decoder-setup'
+        }
         else if (capabilities.AudioContext === 'undefined' && capabilities.webkitAudioContext === 'undefined') {
           expect(browserName).toBe('webkit')
           expect(capabilities).toEqual({ VideoDecoder: 'undefined', AudioDecoder: 'undefined', AudioContext: 'undefined', webkitAudioContext: 'undefined' })
@@ -115,7 +122,7 @@ for (const implementation of implementations) {
             expect(loaded.dimensions).toEqual([0, 0])
             expect(await page.evaluate(() => window.mbEvents.filter(item => item.name === 'video:loadedmetadata').length)).toBe(implementation.name === 'published-1.0.0' ? 1 : 2)
             expect(await page.evaluate(() => window.mbEvents.filter(item => item.name === 'video:canplay').length)).toBe(1)
-            outcome = implementation.name.startsWith('candidate') ? 'candidate-trackless-readiness-gap' : 'historical-trackless-readiness-control'
+            outcome = 'historical-trackless-readiness-control'
             return
           }
           const readiness = await page.evaluate(() => window.mbEvents.map(item => item.name).filter(name => ['video:loadedmetadata', 'video:loadeddata', 'video:canplay', 'video:canplaythrough'].includes(name)))
@@ -177,6 +184,21 @@ for (const implementation of implementations) {
             await expect.poll(() => page.evaluate(() => window.mbFrameClockSamples.filter(sample => !sample.paused).length)).toBeGreaterThan(2)
             await page.evaluate(() => window.mbCanvas.pause())
           }
+          if (implementation.name.startsWith('candidate') && input === 'webm') {
+            await page.evaluate(() => {
+              const canvas = window.mbCanvas
+              window.mbReentrantStart = window.mbEvents.length
+              const pause = () => {
+                canvas.events.removeEventListener('play', pause)
+                canvas.pause()
+              }
+              canvas.events.addEventListener('play', pause)
+            })
+            await page.click('#play')
+            await expect.poll(() => page.evaluate(() => window.mbEvents.slice(window.mbReentrantStart).filter(item => ['video:play', 'video:pause', 'video:playing'].includes(item.name)).map(item => item.name))).toEqual(['video:play', 'video:pause'])
+            expect(await page.evaluate(() => window.mbCanvas.paused)).toBe(true)
+            await page.evaluate(() => window.mbReentrantPlay = { paused: window.mbCanvas.paused, events: window.mbEvents.slice(window.mbReentrantStart).filter(item => ['video:play', 'video:pause', 'video:playing'].includes(item.name)).map(item => item.name) })
+          }
           if (input === 'hls') {
             const tracks = await page.evaluate(async () => {
               const canvas = window.mbCanvas
@@ -205,7 +227,7 @@ for (const implementation of implementations) {
           if (!canvas)
             return null
           const hls = canvas.getM3u8State ? await canvas.getM3u8State().catch(error => ({ error: error.message })) : null
-          return { events: window.mbEvents, actions: window.mbActions, dimensions: [canvas.width, canvas.height, canvas.videoWidth, canvas.videoHeight], currentTime: canvas.currentTime, duration: canvas.duration, error: canvas.error, readyState: canvas.readyState, audioState: canvas.engine.audio.audioContext?.state, frameClockSamples: window.mbFrameClockSamples, tracks: window.mbTrackTransitions, hls: hls && { levels: hls.levels?.map(({ id, height }) => ({ id, height })), audios: hls.audios?.map(({ id, lang }) => ({ id, lang })), error: hls.error }, inputBytes: window.mbInputBytes }
+          return { events: window.mbEvents, actions: window.mbActions, dimensions: [canvas.width, canvas.height, canvas.videoWidth, canvas.videoHeight], currentTime: canvas.currentTime, duration: canvas.duration, error: canvas.error, readyState: canvas.readyState, audioState: canvas.engine.audio.audioContext?.state, frameClockSamples: window.mbFrameClockSamples, tracks: window.mbTrackTransitions, reentrantPlay: window.mbReentrantPlay, hls: hls && { levels: hls.levels?.map(({ id, height }) => ({ id, height })), audios: hls.audios?.map(({ id, lang }) => ({ id, lang })), error: hls.error }, inputBytes: window.mbInputBytes }
         }).catch(error => ({ error: error.message }))
         await page.evaluate(() => {
           window.mbContext = window.mbCanvas?.engine.audio.audioContext
@@ -214,7 +236,7 @@ for (const implementation of implementations) {
         await expect.poll(() => page.evaluate(() => window.mbContext?.state || 'not-created')).toMatch(/^(?:closed|not-created)$/)
         expect(await page.evaluate(() => window.mbPendingFrames.size)).toBe(0)
         const cleanup = await page.evaluate(() => ({ audioContext: window.mbContext?.state || 'not-created', pendingFrames: window.mbPendingFrames.size, streamCancelled: window.mbStreamCancelled || false }))
-        await testInfo.attach('mediabunny-native-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), input, capabilities, outcome, state, cleanup, hlsManifest: input === 'hls' ? manifest : null, tracklessFixture: input === 'trackless' ? { parentSha256: hash(pattern), sha256: hash(trackless) } : null, scope: 'Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless readiness remains MB-READY-01, not release acceptance.' }) })
+        await testInfo.attach('mediabunny-native-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), input, capabilities, outcome, state, cleanup, hlsManifest: input === 'hls' ? manifest : null, tracklessFixture: input === 'trackless' ? { parentSha256: hash(pattern), sha256: hash(trackless) } : null, scope: 'Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance.' }) })
       }
     })
   }
