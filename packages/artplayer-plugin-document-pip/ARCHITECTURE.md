@@ -3,8 +3,14 @@
 The public factory still returns a synchronous plugin initializer. Its result has
 `name`, readonly runtime getters `isSupported`/`isActive`, async `open`/`close`
 returning `Promise<void>`, and synchronous `toggle` returning `undefined`.
-The published declarations currently describe void actions and writable flags;
-public declaration compatibility is tracked separately in PKG-DPIP-04.
+The public `Result` preserves published void actions and writable flags for legacy
+assignments. `AsyncResult` is an opt-in precise view for an unmodified runtime
+result, and the implementation is checked against it. The default factory keeps
+its exact published required-argument signature, including plain replacement
+function assignments. RuntimeFactory explicitly describes omitted options and
+self `.default` access. `.d.mts` and `.d.cts` wrappers map ESM/CJS consumers; old resolvers
+use the base declaration and legacy typesVersions path. A self `.default` alias
+supports the two historical runtime export shapes without adding named exports.
 
 | File | Responsibility |
 | --- | --- |
@@ -68,5 +74,7 @@ file for browser verification and never silently falls back to source.
 The iframe matrix uses real DOM with controlled window APIs. It does not prove
 native Document PiP activation, window focus/keyboard, continuous playback or
 device support. Native video/Canvas/Mediabunny combinations and the observed
-WebKit dimension reports remain PKG-DPIP-05. Full archive/demo/type acceptance is
-PKG-DPIP-04/06. See the repository `refactor/dpip-validation.md` for exact evidence.
+WebKit dimension reports remain PKG-DPIP-05. Full archive/demo acceptance is
+PKG-DPIP-06. Installed type consumers are verified by `yarn test:dpip-types-package`;
+historical missing runtime/type entry errors are exact negative cases, not waived
+candidate failures. See the repository `refactor/dpip-validation.md` for evidence.

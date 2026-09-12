@@ -42,3 +42,16 @@ test/helpers/dpip.js是受控DOM/window边界：验证ownerDocument、节点身�
 选择明确构建文件（不fallback）；最终产物证据与宽矩阵历史证据分开保存。
 本阶段保留原生窗口和媒体/代理验收门槛，详见[03记录](changes/2026-09-12-PKG-DPIP-03-lifecycle.md)
 及[03证据](baselines/dpip-lifecycle-validation.json)。04继续公开类型/导出/安装消费者。
+
+## 公开类型和真实安装（04）
+
+`node --test refactor/scripts/dpip-types.test.mjs`验证默认Result旧推导、显式AsyncResult、
+完整旧工厂形状、四历史声明、编辑器与实际产物。合法旧工厂/initializer和
+void方法替换必须继续编译；RuntimeFactory显式提供可选options和精确返回，不改变默认
+函数的反向可赋值性。14项非法用法在五个仓库
+编译模式及七个安装消费者模式均需被拒绝。
+`yarn test:dpip-types-package`在仓库外安装四实际发布和候选，offline/frozen重装并逐文件
+校验字节。27模式包含8历史失败：1.0.0现代解析三项2307、1.0.1三项7016、1.0.2和
+1.1.0各一项NodeNext ESM七诊断；候选7项全部零诊断。1.0.0的require必须复现缺失运行时，
+不能称作可执行版本。详见[04记录](changes/2026-09-12-PKG-DPIP-04-types.md)和
+[04证据](baselines/dpip-types-validation.json)。05/06的原生设备、demo和分发门槛保留。

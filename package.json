@@ -74,7 +74,8 @@
     "test:ambilight-types-package": "node refactor/scripts/ambilight-package-types.mjs",
     "test:canvas": "node --test test/canvas.test.js test/canvas-lifecycle.test.js",
     "test:canvas-types-package": "node refactor/scripts/canvas-package-types.mjs",
-    "test:dpip": "node --test test/dpip.test.js test/dpip-lifecycle.test.js"
+    "test:dpip": "node --test test/dpip.test.js test/dpip-lifecycle.test.js",
+    "test:dpip-types-package": "node refactor/scripts/dpip-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

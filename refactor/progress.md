@@ -1,5 +1,16 @@
 # 进度与证据
 
+## 最新完成：Document PiP-04 类型、工厂赋值与导出兼容
+
+默认工厂完整保留旧必填签名与可替换性；Result保持void/可写字段，显式RuntimeFactory
+和AsyncResult描述实际可选调用、self.default和异步只读状态。27安装场景含候选7及历史
+12零诊断，另8个精确历史错误对照；1.0.0缺运行时单独保留。四组专项、三格式/编辑器
+构建、最终main哈希对应的18浏览器检查与完整CI1140项通过，另44重复契约，290生产TS。
+横向复查确认Canvas/Ambilight也有旧工厂替换2741，新增PKG-FACTORY-01紧接修复，并
+加入两包05及REL-01依赖；该风险保持open。当前222项：97 done、6 doing、119 todo。
+见[本步记录](changes/2026-09-12-PKG-DPIP-04-types.md)和[证据](baselines/dpip-types-validation.json)。
+Document PiP原生组合05与完整demo/分发06仍未完成；独立本地提交，无推送/发布。
+
 ## 最新完成：Document PiP-03 严格TS与窗口资源修复
 
 6个模块分离窗口申请/终态、DOM还原、样式、控件与延迟资源。20候选用例在旧源码

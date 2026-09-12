@@ -3460,12 +3460,19 @@
       ],
       "compatibleResolution": "Support old default namespace access and new callable factory without changing runtime names or entrypoints.",
       "closureCriteria": "Actual candidate root/legacy/global/ESM and installed consumers verify both access shapes.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/dpip-release.json",
         "refactor/baselines/dpip-contract.md",
-        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
-      ]
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/dpip-types-validation.json"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/dpip-types-validation.json"
+      ],
+      "resolutionRationale": "Actual main/legacy/global/ESM and real isolated installed root/legacy consumers verify direct callable and self default identities. Conditional declaration wrappers and old resolver legacy mapping are verified; full demo/archive and device scopes remain tasks05/06."
     },
     {
       "id": "DPIP-TYPE-01",
@@ -3476,12 +3483,19 @@
       ],
       "compatibleResolution": "Verify historical legal callers and extraction before providing precise async and readonly capabilities; do not reuse unrelated Ads approval.",
       "closureCriteria": "Old/current consumer matrix and runtime/type distinctions are verified and documented without silently narrowing historical consumers.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/dpip-release.json",
         "refactor/baselines/dpip-contract.md",
-        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md"
-      ]
+        "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/dpip-types-validation.json"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/dpip-types-validation.json"
+      ],
+      "resolutionRationale": "Exact required default factory signature and direct/extracted Result remain assignable, including whole-factory replacements. Named AsyncResult and RuntimeFactory describe unmodified runtime values explicitly. Historical import= module.default access is preserved by CJS declarations; source checks its precise result."
     },
     {
       "id": "DPIP-LIFE-01",
@@ -3565,6 +3579,42 @@
       "evidence": [
         "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
         "refactor/baselines/dpip-behavior-validation.json"
+      ]
+    },
+    {
+      "id": "DPIP-RESOLVE-01",
+      "title": "Historical Document PiP exports hide declarations or infer an uncallable CommonJS namespace in modern resolution",
+      "status": "resolved",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-DPIP-04",
+        "PKG-DPIP-06"
+      ],
+      "compatibleResolution": "Use format-specific declaration wrappers and explicit types conditions while preserving old resolver paths and exact historical negative controls.",
+      "closureCriteria": "All candidate installed modes compile with exact invalid-use rejection; each historical missing type/default namespace failure stays recorded by version and mode.",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/dpip-types-validation.json"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md",
+        "refactor/baselines/dpip-types-validation.json"
+      ],
+      "resolutionRationale": "27 isolated installed modes preserve eight exact historical failure cases; all seven candidate modes and twelve historical modes are zero-diagnostic. Published1.0.0 runtime absence is retained separately, not fixed in place."
+    },
+    {
+      "id": "FACTORY-TYPE-01",
+      "title": "Canvas and Ambilight default self property narrows assignability of historical factory replacements",
+      "status": "open",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-FACTORY-01"
+      ],
+      "compatibleResolution": "Preserve historical complete factory assignments while modeling actual export variants explicitly; do not equate unchanged Parameters with complete callable compatibility.",
+      "closureCriteria": "Both historical and candidate replacement fixtures, all supported export/declaration paths and installed consumers verified; unresolved variant conflicts require an explicit decision rather than silent narrowing.",
+      "evidence": [
+        "refactor/baselines/factory-assignment-gaps.json",
+        "refactor/changes/2026-09-12-PKG-DPIP-04-types.md"
       ]
     }
   ]

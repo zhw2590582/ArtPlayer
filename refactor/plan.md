@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 221 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 119 / doing 6 / blocked 0 / done 96 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 119 / doing 6 / blocked 0 / done 97 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -16,7 +16,7 @@
 | --- | --- | --- |
 | artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
-| artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06 |
+| artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
 | artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06 |
@@ -31,7 +31,7 @@
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
-| artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06 |
+| artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01 |
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
@@ -153,7 +153,7 @@
 | PKG-AMBILIGHT-03 | artplayer-plugin-ambilight<br>整理内部职责与资源 | PKG-AMBILIGHT-02, CORE-03, CORE-12 | 取色计算与绘帧分离，统一 RAF 和 DOM 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | done |
 | PKG-AMBILIGHT-04 | artplayer-plugin-ambilight<br>迁移自有源码和公开类型 | PKG-AMBILIGHT-03, ENG-04, ENG-06, CORE-07 | canvas 上下文、参数及 start/stop 的明确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | done |
 | PKG-AMBILIGHT-PROXY-01 | artplayer-plugin-ambilight, artplayer-proxy-canvas<br>修复Canvas代理输出尺寸与取色区域 | PKG-AMBILIGHT-04, CORE-22 | 按Canvas实际输出buffer取色，原生video保留intrinsic尺寸，明确5.1.7没有proxy配置 | 旧错误复现、三引擎实际代理九色区域对照及原生视频回归通过；不把本子项当作最终代理/设备验收 | M | done |
-| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22, PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-04 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
+| PKG-AMBILIGHT-05 | artplayer-plugin-ambilight<br>验证新旧核心和组合 | PKG-AMBILIGHT-04, CORE-22, PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-04, PKG-FACTORY-01 | 原生 video、canvas proxy 的能力边界及销毁无帧循环 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
 | PKG-AMBILIGHT-06 | artplayer-plugin-ambilight<br>验证分发并同步文档 | PKG-AMBILIGHT-05, ENG-07 | ambilight.js 示例及样式/分发验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
 
 ## 5 包迁移：artplayer-plugin-audio-track
@@ -296,7 +296,7 @@
 | PKG-DPIP-01 | artplayer-plugin-document-pip<br>核对包契约与历史用法 | BASE-05 | width/height/placeholder/fallbackToVideoPiP、open/close/toggle 返回 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-DPIP-02 | artplayer-plugin-document-pip<br>建立特有行为与错误测试 | PKG-DPIP-01, ENG-03, ENG-05 | 不支持/拒绝、重复打开、pagehide、核心销毁和视频 PiP fallback | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-DPIP-03 | artplayer-plugin-document-pip<br>整理内部职责与资源 | PKG-DPIP-02, CORE-16, CORE-17 | 窗口生命周期、DOM 迁移、样式与事件 document 重绑分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
-| PKG-DPIP-04 | artplayer-plugin-document-pip<br>迁移自有源码和公开类型 | PKG-DPIP-03, ENG-04, ENG-06, CORE-07 | Document PiP 可选能力和真实状态/返回类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-DPIP-04 | artplayer-plugin-document-pip<br>迁移自有源码和公开类型 | PKG-DPIP-03, ENG-04, ENG-06, CORE-07 | Document PiP 可选能力和真实状态/返回类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-DPIP-05 | artplayer-plugin-document-pip<br>验证新旧核心和组合 | PKG-DPIP-04, CORE-22, PKG-CANVAS-04, PKG-MB-04 | 原生视频及两个 proxy、键盘/焦点/全屏与关闭还原 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-DPIP-06 | artplayer-plugin-document-pip<br>验证分发并同步文档 | PKG-DPIP-05, ENG-07 | document.pip.js、浏览器能力矩阵、旧接口与恢复证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
@@ -322,7 +322,7 @@
 | PKG-CANVAS-02 | artplayer-proxy-canvas<br>建立特有行为与错误测试 | PKG-CANVAS-01, ENG-03, ENG-05 | ready/loadeddata/canplay、play/seek、回调、resize 与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-CANVAS-03 | artplayer-proxy-canvas<br>整理内部职责与资源 | PKG-CANVAS-02, CORE-06, CORE-11, CORE-16 | video adapter/原 canvas 方法/RAF 绘制/事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-CANVAS-04 | artplayer-proxy-canvas<br>迁移自有源码和公开类型 | PKG-CANVAS-03, ENG-04, ENG-06, CORE-07 | canvas 与媒体能力的精确组合类型，保持 Result | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04, PKG-FACTORY-01 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-CANVAS-06 | artplayer-proxy-canvas<br>验证分发并同步文档 | PKG-CANVAS-05, ENG-07 | canvas.js、三种产物、调用兼容与资源证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-proxy-mediabunny
@@ -391,7 +391,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | REL-08 | workspace<br>提前建立逐包发布准入台账 | BASE-08, ENG-07 | 每批包/版本/源码/锁文件/工具/tarball integrity、必需测试/设备证据、限制和回退映射 | 受影响能力缺证据明确阻止对应批次；无关批次可独立准备，旧证据在候选内容变化后失效；站点采用真实构建/URL/资源验收，npm 分发依据历史核实，不从版本清单推断新增发布范围；关联 risks.json 和 third-party.json；受影响 bundle/worker/WASM/font/模型的来源与许可通知缺口必须有审查结论，未决项阻止对应批次 | H | todo |
-| REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志；按 BASE-05 区分 21 库与文档站分发，不机械把文档站当库上传 npm | H | todo |
+| REL-01 | workspace<br>提前确定分包版本与差异方案 | REL-08, CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08, PKG-FACTORY-01 | 每包版本/变更日志/依赖/类型差异方案和独立准入状态；按 version-policy.md 冻结各包下一 major（minor/patch 归零）并核实 registry 占用 | 所有包有方案和剩余门槛，未决项明确阻止相应发布；本步骤不声称已经可发布；全部包有 major 目标，版本冲突明确处理，独立准备任务同步 manifest/锁/依赖/日志；按 BASE-05 区分 21 库与文档站分发，不机械把文档站当库上传 npm | H | todo |
 | REL-09 | workspace<br>落实全包下一 major 版本及依赖元数据 | REL-01, DOC-11 | 22 包版本目标落实、适用锁文件/依赖范围/示例/变更日志同步，核实 registry 版本占用 | 版本与 policy 一致，旧核心支持保留；必要拆子任务各自提交，候选构建前完成，不执行 publish | H | todo |
 | REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07, REL-09 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本 | H | todo |
 | REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | todo |
@@ -407,6 +407,12 @@
 | REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
 | REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
 | REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | todo |
+
+## 5 工厂类型兼容补审
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PKG-FACTORY-01 | artplayer-proxy-canvas, artplayer-plugin-ambilight<br>修复已迁移工厂的反向赋值兼容 | PKG-CANVAS-04, PKG-AMBILIGHT-04, PKG-DPIP-04 | 复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档 | 默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用 | H | todo |
 
 ## 完成证据与阻塞
 
@@ -509,7 +515,9 @@
 - PKG-DPIP-01: [记录](changes/2026-09-12-PKG-DPIP-01-contract.md) [记录](baselines/dpip-release.json) [记录](baselines/dpip-contract.md) [记录](baselines/dpip-contract-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-02: [记录](changes/2026-09-12-PKG-DPIP-02-tests.md) [记录](baselines/dpip-behavior-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-03: [记录](changes/2026-09-12-PKG-DPIP-03-lifecycle.md) [记录](baselines/dpip-lifecycle-validation.json) [记录](dpip-validation.md)
+- PKG-DPIP-04: [记录](changes/2026-09-12-PKG-DPIP-04-types.md) [记录](baselines/dpip-types-validation.json) [记录](dpip-validation.md)
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-04: [记录](changes/2026-09-12-PKG-CANVAS-04-types.md) [记录](baselines/canvas-types-validation.json) [记录](canvas-validation.md)
+- PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json)

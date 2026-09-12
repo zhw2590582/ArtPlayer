@@ -473,8 +473,9 @@ function artplayerPluginDocumentPip(userOptions = {}) {
     return result;
   };
 }
+const index = Object.assign(artplayerPluginDocumentPip, { default: artplayerPluginDocumentPip });
 if (typeof document !== "undefined")
   installStyle(document);
 export {
-  artplayerPluginDocumentPip as default
+  index as default
 };

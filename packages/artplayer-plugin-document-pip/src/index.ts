@@ -1,5 +1,5 @@
 import type Artplayer from 'artplayer'
-import type PublicPlugin from '../types/artplayer-plugin-document-pip'
+import type { AsyncResult, Option } from '../types/artplayer-plugin-document-pip'
 import type { WindowApi } from './window-session'
 import { createControl } from './control'
 import { createProjection } from './projection'
@@ -7,9 +7,7 @@ import { releaseAll } from './resources'
 import { installStyle } from './styles'
 import { createWindowSession } from './window-session'
 
-type Option = Parameters<typeof PublicPlugin>[0]
-
-export default function artplayerPluginDocumentPip(userOptions: Option = {}) {
+function artplayerPluginDocumentPip(userOptions: Option = {}) {
   const options = { width: 480, height: 270, fallbackToVideoPiP: true, placeholder: 'Playing in Document Picture-in-Picture', ...userOptions }
   return (art: Artplayer) => {
     const browser = window as Window & { documentPictureInPicture?: WindowApi }
@@ -83,7 +81,7 @@ export default function artplayerPluginDocumentPip(userOptions: Option = {}) {
       if (errors.length)
         console.warn('[artplayer-plugin-document-pip] cleanup failed:', errors[0])
     }
-    const result = {
+    const result: AsyncResult = {
       name: 'artplayerPluginDocumentPip' as const,
       get isSupported() { return isSupported },
       get isActive() { return session.active },
@@ -110,6 +108,8 @@ export default function artplayerPluginDocumentPip(userOptions: Option = {}) {
     return result
   }
 }
+
+export default Object.assign(artplayerPluginDocumentPip, { default: artplayerPluginDocumentPip })
 
 if (typeof document !== 'undefined')
   installStyle(document)

@@ -1,0 +1,36 @@
+{
+  "compiler": "5.9.3",
+  "records": [
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "source": "import Artplayer from 'artplayer'; import plugin from 'artplayer-proxy-canvas'; const replacement: typeof plugin = (_option?: Parameters<typeof plugin>[0]) => (_art: Artplayer) => document.createElement('canvas'); void replacement;",
+      "historical": [],
+      "current": [
+        {
+          "file": "test/types/consumer.ts",
+          "code": 2741,
+          "line": 1,
+          "message": "Property 'default' is missing in type '(_option?: Parameters<typeof plugin>[0]) => (_art: Artplayer) => HTMLCanvasElement' but required in type 'Factory'."
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "source": "import Artplayer from 'artplayer'; import plugin from 'artplayer-plugin-ambilight'; const replacement: typeof plugin = (_option?: Parameters<typeof plugin>[0]) => (_art: Artplayer) => ({ name: 'artplayerPluginAmbilight' as const, start() {}, stop() {} }); void replacement;",
+      "historical": [],
+      "current": [
+        {
+          "file": "test/types/consumer.ts",
+          "code": 2741,
+          "line": 1,
+          "message": "Property 'default' is missing in type '(_option?: Option | undefined) => (_art: Artplayer) => { name: \"artplayerPluginAmbilight\"; start(): void; stop(): void; }' but required in type 'Factory'."
+        }
+      ]
+    }
+  ],
+  "introducedBy": "PKG-DPIP-04",
+  "followup": "PKG-FACTORY-01",
+  "scope": "Exact supplied consumer source passes actual published declarations and fails current declarations with missing required default property. Historical declaration bytes are frozen by each package release baseline."
+}
