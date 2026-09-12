@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-03 输入与导出源码检查点（doing）
+
+生产入口拆出input/sheet模块，修复drop注册、输入切换与wrapper所有权、构造/安装失败
+回滚、重复destroy及下载锚点清理；新增包内ARCHITECTURE.md。公开字段/方法/defaults
+和正常事件顺序保持。14项新回归在旧版2通过/12失败，源码/main/legacy各14通过。
+三份浏览器各54项通过：32真实工具场景、3候选原生输入场景、16WebKit Blob不可用
+对照、3原生媒体对照；不把不可用对照算作成功抽帧。正常构建同步dist/docs副本。
+完整CI1620、330生产TS与3导入测试通过。队列/URL取消、迟到Blob和失败重入仍需继续，
+本项不标done；04负责最终TS与声明。见[变更](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md)
+和[验证](baselines/thumbnail-input-checkpoint.json)。222项：111 done、11 doing、100 todo。
+
+
 ## PKG-TOOL-THUMB-02 完成：抽帧、失败与资源基线
 
 新增36项历史抽帧/生命周期测试，与26项契约共同通过；普通CI已接入新测试。

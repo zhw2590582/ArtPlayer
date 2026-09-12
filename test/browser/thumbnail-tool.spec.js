@@ -3,7 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { thumbnailHistorical } from '../helpers/thumbnail.js'
+import { thumbnailCandidate, thumbnailHistorical } from '../helpers/thumbnail.js'
 import { expect, test } from './fixtures.js'
 
 const sample = fileURLToPath(new URL('./media/thumbnail-pattern.mp4', import.meta.url))
@@ -27,7 +27,8 @@ async function capabilityControl(page, testInfo) {
   return true
 }
 
-for (const implementation of thumbnailHistorical()) {
+const implementations = [...thumbnailHistorical(), { ...await thumbnailCandidate(), inputOwnership: true }]
+for (const implementation of implementations) {
   test.describe(`Thumbnail tool ${implementation.name}`, () => {
     test.beforeEach(async ({ page }, testInfo) => {
       await page.goto('/test/player.html?core=published')
@@ -127,7 +128,7 @@ for (const implementation of thumbnailHistorical()) {
       await testInfo.attach('thumbnail-extraction', { contentType: 'application/json', body: JSON.stringify(result) })
     })
 
-    test('DOM drop dispatch exposes missing listener while callable ondrop works', async ({ page }, testInfo) => {
+    test(`DOM drop dispatch ${implementation.inputOwnership ? 'uses the registered handler' : 'exposes missing listener'} while callable ondrop works`, async ({ page }, testInfo) => {
       if (await capabilityControl(page, testInfo))
         return
       const result = await page.evaluate(async () => {
@@ -142,7 +143,7 @@ for (const implementation of thumbnailHistorical()) {
         tool.ondrop(event)
         return { fromListener, afterDirect: observed.filter(item => item.event === 'file').length, prevented: event.defaultPrevented }
       })
-      expect(result).toEqual({ fromListener: { files: 0, prevented: false }, afterDirect: 1, prevented: true })
+      expect(result).toEqual({ fromListener: { files: implementation.inputOwnership ? 1 : 0, prevented: !!implementation.inputOwnership }, afterDirect: implementation.inputOwnership ? 2 : 1, prevented: true })
       await expect.poll(() => page.evaluate(() => tool.video.readyState)).toBeGreaterThanOrEqual(2)
       await page.evaluate(() => tool.destroy())
     })
@@ -169,7 +170,7 @@ for (const implementation of thumbnailHistorical()) {
       expect(result.created).toHaveLength(2)
       expect(result.revoked).toEqual([result.created[1]])
       expect(result.revoked).not.toContain(failed.first)
-      expect(result.repeated).toBe('NotFoundError')
+      expect(result.repeated).toBe(implementation.inputOwnership ? undefined : 'NotFoundError')
       expect(result.value === '').toBe(!implementation.legacy)
       await testInfo.attach('thumbnail-media-failure', { contentType: 'application/json', body: JSON.stringify({ failed, result }) })
     })

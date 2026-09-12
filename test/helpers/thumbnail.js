@@ -1,5 +1,14 @@
+import fs from 'node:fs'
+import process from 'node:process'
 import vm from 'node:vm'
 import { verifyThumbnailContract } from '../../refactor/scripts/thumbnail-contract.mjs'
+import { compilePackage } from './load.js'
+
+export async function thumbnailCandidate() {
+  if (process.env.ARTPLAYER_THUMBNAIL_BASELINE === '1')
+    return thumbnailHistorical().find(item => item.name === 'workspace.js')
+  return { name: process.env.ARTPLAYER_THUMBNAIL_ARTIFACT ? 'candidate-artifact' : 'candidate-source', code: process.env.ARTPLAYER_THUMBNAIL_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_THUMBNAIL_ARTIFACT, 'utf8') : await compilePackage('artplayer-tool-thumbnail', 'umd') }
+}
 
 export function thumbnailHistorical() {
   const { source, historical } = verifyThumbnailContract()

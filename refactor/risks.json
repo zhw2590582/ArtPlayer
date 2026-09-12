@@ -3879,7 +3879,7 @@
         "PKG-TOOL-THUMB-03",
         "PKG-TOOL-THUMB-05"
       ],
-      "compatibleResolution": "36 frozen behavior tests reproduce timer/input/source/callback ownership gaps and historical error ordering. Actual Chromium/Firefox native Blob callbacks prove late update and URL leaks after destroy. Task 03 must add corrected candidate regressions and owned cleanup; 05 retains real integration acceptance.",
+      "compatibleResolution": "03 input checkpoint fixes registered drop, input/wrapper ownership, failed setup/construction cleanup, repeated destroy and temporary download anchors. Candidate input regressions contrast 12 old failures; source/main/legacy verify preserved shape. Pending extraction callbacks, source URL replacement, cancellation and failure reentrancy remain open for the rest of 03 and real integration in 05.",
       "closureCriteria": "Deterministic old failure/candidate success for replacement, error and destruction plus real media/browser resource validation.",
       "status": "open",
       "evidence": [
@@ -3889,7 +3889,12 @@
         "refactor/baselines/thumbnail-behavior-validation.json",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md",
         "test/thumbnail.test.js",
-        "test/browser/thumbnail-tool.spec.js"
+        "test/browser/thumbnail-tool.spec.js",
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md",
+        "packages/artplayer-tool-thumbnail/ARCHITECTURE.md",
+        "test/thumbnail-input.test.js",
+        "test/browser/thumbnail-input.spec.js",
+        "refactor/baselines/thumbnail-input-checkpoint.json"
       ]
     },
     {
