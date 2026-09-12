@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-MB-07完成：HLS配对、选择意图与UI拓扑
+
+m3u8实际迁移为四个TS模块，包内30生产TS，仅剩index.js待MB-08。
+旧查询/菜单回调不再覆盖当前source；control/setting各自清理，失败恢复实际轨道高亮。
+质量/音频共享最新选择意图，media在配对查询期间变化会重新计算，保留匹配轨道与正常默认行为。
+43断言旧main11通过/32失败，候选专项226、main/legacy各202通过；旧main30项HLS浏览器
+14通过/16失败，候选20新增原生新旧核心/UI/SDK场景和10能力对照通过。最终全部七个
+MediaBunny文件108浏览器通过，29项为能力对照，不计作播放。完整CI1387及44重复契约通过，
+320生产TS；源码/产物/报告哈希及三格式复制一致。
+见[变更](changes/2026-09-12-PKG-MB-07-hls.md)与[证据](baselines/mb-hls-validation.json)。
+222项：104 done、7 doing、111 todo；立即专用本地提交，下一项MB-08入口、能力与声明。
+长播放、全组合、设备及安装包仍待后续；未放行npm发布。
+
 ## PKG-MB-06完成：音频解码、时钟与资源归属
 
 AudioEngine实际迁移TS，拆清clock、context、nodes、pump、task职责，删除最后音频声明桥。

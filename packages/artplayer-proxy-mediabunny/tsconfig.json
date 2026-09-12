@@ -4,5 +4,5 @@
     "allowJs": false,
     "lib": ["ES2020", "DOM", "DOM.Iterable", "ESNext.Disposable"]
   },
-  "include": ["src/**/*.ts", "types/**/*.d.ts"]
+  "include": ["src/**/*.ts", "types/**/*.d.ts", "../../types/assets.d.ts"]
 }

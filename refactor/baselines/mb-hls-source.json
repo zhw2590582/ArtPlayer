@@ -1,0 +1,13 @@
+{
+  "task": "PKG-MB-07",
+  "sourceCommit": "ccee9157a70725e7f6bf77dc43ff2566bfa14540",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/m3u8.js": "4639f09e0c743dc2b24078f48ca1e58eaaedaa3f5e6b863583cbd4bc4a7d3142",
+    "packages/artplayer-proxy-mediabunny/src/hls-selection.ts": "a8632c0ea7d0c59434de005eee81bbf8d1dea8ae73c690673b603e5d6fa3cfd6",
+    "packages/artplayer-proxy-mediabunny/src/hls-state.ts": "ff9ffd742f9763349df1f50eac6b6bd488a80d05aaab8ca198f387f0d17d5e25",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.ts": "3d51f6ecd247d1622809b5b679b906eb9b5ad4f9332a5d52dd38e5e2e29f38e9",
+    "packages/artplayer-proxy-mediabunny/src/playback.ts": "e2a65782c89627198752ff1fe691d4eea0bef215d883a59f0bdcd3e904a4fb47",
+    "packages/artplayer-proxy-mediabunny/src/index.js": "4e1be8937908ff6e6ef8a4e863e22b4468312cf31d66ac299322e475757773bb",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "c80fd9015dd5d9c338ea780948dcb82f97a32f8395de20e19daf5cc65f05eb57"
+  }
+}

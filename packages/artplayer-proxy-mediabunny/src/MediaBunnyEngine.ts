@@ -199,14 +199,15 @@ export default class MediaBunnyEngine implements EnginePort {
 
   async getHlsState() {
     const media = this.media
+    const source = this.loadSeq
     if (this.destroyed)
       return null
     try {
       const state = await getHlsState(media)
-      return !this.destroyed && this.media === media ? state : null
+      return !this.destroyed && this.loadSeq === source && this.media === media ? state : null
     }
     catch (error) {
-      if (this.destroyed || this.media !== media)
+      if (this.destroyed || this.loadSeq !== source || this.media !== media)
         return null
       throw error
     }

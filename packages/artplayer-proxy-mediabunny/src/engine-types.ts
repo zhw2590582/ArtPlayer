@@ -21,6 +21,8 @@ export interface EngineOptions {
 
 // Stable coordinator-facing surface used by the public shim.
 export interface EnginePort {
+  readonly loadSeq: number
+  readonly destroyed: boolean
   readonly currentTime: number
   readonly duration: number
   readonly videoWidth: number

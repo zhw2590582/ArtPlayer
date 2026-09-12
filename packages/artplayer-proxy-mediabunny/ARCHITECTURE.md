@@ -18,7 +18,7 @@ declarations, the factory signature, canvas forwarding, or package entrypoints.
 | `MediaBunnyEngine.ts` | Load/readiness coordinator, source identity, errors and terminal teardown |
 | `playback.ts` | Playback intent and cancellable play/seek/replacement operations |
 | `readiness.ts` | One metadata publication after both participants, guarded event sequences |
-| `hls-selection.ts` | Source-bound track queries, pairing and active replacement errors |
+| `hls-selection.ts` | Latest selection intent, stable-media pairing queries and active replacement errors |
 | `VideoEngine.ts` | Video capability/setup, source and seek ownership, first frames and terminal cleanup |
 | `video-frames.ts` | Shared pending iterator reads, idempotent iterator release and existing frame timing policy |
 | `video-renderer.ts` | Owned RAF, stale frame rejection, clock-driven draw/stall/end events |
@@ -33,12 +33,15 @@ declarations, the factory signature, canvas forwarding, or package entrypoints.
 | `shim-values.ts` | Existing volume coercion and synthetic TimeRanges values |
 | `shim-frames.ts` | Synthetic frame callbacks, per-instance RAF ownership and terminal cleanup |
 | `engine-types.ts` / `engine-ports.ts` | Internal shim, coordinator and decoder interfaces |
-| `m3u8.js` | Current ArtPlayer control/setting integration |
+| `m3u8.ts` | HLS refresh/selection revisions, source guards, events and terminal cleanup |
+| `m3u8-model.ts` | Display names, selected IDs, label deduplication and sorted selector models |
+| `m3u8-menu.ts` | Owned control/setting surfaces and stale callback guards |
+| `m3u8-types.ts` | Narrow internal UI/shim contracts without changing public factory declarations |
 
-The twenty-six production TypeScript modules use strict checking with `skipLibCheck: false`
+The thirty production TypeScript modules use strict checking with `skipLibCheck: false`
 and no ambient Node types. The coordinator and both decoder engines are checked
 implementations; there are no remaining adjacent JavaScript declaration bridges.
-The public factory and HLS integration remain JavaScript, scheduled in PKG-MB-07/08.
+Only the public factory remains JavaScript, scheduled in PKG-MB-08.
 Do not describe the whole package as migrated yet.
 
 The shim keeps its existing own-property order and direct prototype surface because
@@ -100,8 +103,9 @@ event the coordinator rechecks ownership, since a listener may synchronously pau
 load another source or destroy. Active play errors reject their Promise and restore paused
 state; active seek errors additionally publish one media error. The synchronous currentTime
 setter observes its otherwise unreturnable rejection; direct engine.seek still rejects.
-Active replacement errors remain visible even after the media object changes. Stale HLS query
-errors are ignored only when their captured source no longer owns the result.
+Active replacement errors remain visible even after the media object changes. HLS queries
+and replacement errors also carry a selection intent; obsolete intents cannot replace newer
+results or surface an old failure. A still-current query retries if its media snapshot changed.
 
 Metadata publishes once after both audio/video participants report; repeated or obsolete
 callbacks cannot ready the current source. A parsed container with neither track fails with
@@ -180,6 +184,42 @@ and repeated destroy is inert. Real-browser teardown assertions poll the native 
 Tests deliberately delay native resume completion or decoded buffer delivery, without
 substituting fake audio decoding for native acceptance.
 
+## HLS selection and UI ownership
+
+Quality and audio requests share a per-engine intent token. A newer request supersedes an
+unresolved older query, including cross-kind requests, before it can call replaceTracks.
+Queries capture source generation and Input identity. If a prior replacement installs new
+media while the latest query is awaiting track metadata or pairing, recompute against the
+current media instead of dropping the latest intent or restoring an old counterpart.
+The resolver rechecks cancellation between SDK calls; active failures still reject the caller.
+An already-started replacement remains governed by Playback until the next replacement
+begins. This does not claim that issuing a selection synchronously cancels SDK decoding.
+Pairing preserves the current compatible counterpart and its mode; fallback chooses the
+SDK primary pairable track and resets only the counterpart mode to auto. Invalid IDs retain
+the historical current-track fallback. Media state getters suppress stale source results.
+
+The UI has separate refresh revisions, selection intent and source identity. Old reads
+cannot overwrite newer models; callbacks from replaced menus or a previous source are inert.
+The same visible menu accepts a newer click while a prior selection is pending. Its own
+loadedmetadata refresh does not cancel that valid selection's completion. Active failures
+refresh actual track highlights before rejecting; stale failures, including a failure
+superseded during recovery, cannot disturb the current intent. Background event-driven
+refreshes observe failures through a warning instead of unhandled Promise rejections.
+
+Models retain the existing menu names, title/Auto/getName defaults, sort order and notice
+format. Auto remains an action, while the actual selected track ID controls the highlighted
+item and displayed track label. Label deduplication is retained; if labels collide, keep the
+selected ID as that label's representative so it is not hidden by the first item. Height
+lookups use a map rather than repeated array searches during sorting. User getName callbacks
+are guarded against synchronous source/destroy reentry between calls and before UI writes.
+
+Each menu owns control and setting independently. Disabling either removes that surface;
+video-only/single-audio topology removes audio menus, non-HLS clears both, and loadstart/error/
+destroy invalidate pending work and clear owned UI. Teardown attempts every surface and
+listener even after one failure, and cannot prevent the entry's shim destroy callback.
+Control/setting callbacks retain their Promise and selected-label result; no new public
+methods or declarations are exposed by the internal modules.
+
 ## Types and dependencies
 
 The locked runtime SDK remains MediaBunny 1.56.1. Its pinned WebCodecs declaration
@@ -201,6 +241,7 @@ yarn test:browser test/browser/mediabunny-inputs.spec.js test/browser/mediabunny
 yarn test:browser test/browser/mediabunny-shim.spec.js
 yarn test:browser test/browser/mediabunny-video.spec.js
 yarn test:browser test/browser/mediabunny-audio.spec.js
+yarn test:browser test/browser/mediabunny-hls.spec.js
 ```
 
 Node tests use actual SDK parsing and controlled lifecycle interleavings. Browser tests
@@ -217,8 +258,8 @@ inputs, not a rebuilt dist. Package-specific evidence and remaining tasks are in
 PKG-MB-04 covers duplicate/trackless readiness, reentrant event sequences and
 pending play/seek coordination. PKG-MB-05/06 cover late frame and audio callbacks,
 including operations already inside decoders at cancellation. These bounded cases do not
-replace long-run synchronization and combination validation. PKG-MB-07 owns HLS UI/selection
-races. PKG-MB-09 owns long-run AV sync, full core/proxy/plugin combinations and device
+replace long-run synchronization and combination validation. PKG-MB-07 covers HLS UI/selection
+races using the actual new/old cores and SDK with controlled query ordering. PKG-MB-09 owns long-run AV sync, full core/proxy/plugin combinations and device
 validation. PKG-MB-10 owns the demo, installed package and MPL/source notice gate.
 Windows WebKit without WebCodecs/Web Audio is recorded as a capability failure,
 not successful playback or a claim about all Safari installations.

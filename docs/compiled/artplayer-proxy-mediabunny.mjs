@@ -23,164 +23,206 @@ var __privateWrapper = (obj, member, setter, getter) => ({
 var _closed, _closed2, _generation, _contexts, _nodes, _pump, _playTask, _playing, _loading, _onError, _AudioEngine_instances, load_fn, startPump_fn, play_fn, _generation2, _iteration, _loading2, _createSink, _usedSink, _destroyed, _preparing, _poster, _renderer, _onError2, _VideoEngine_instances, current_fn, context_fn, report_fn, release_fn, draw_fn, load_fn2, reset_fn, _playback;
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
 const $quality = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>';
-function uniqBy(array, property) {
-  const seen = /* @__PURE__ */ new Map();
-  return array.filter((item) => {
-    const key = item[property];
-    if (key === void 0) {
-      return true;
+function releaseAll(actions) {
+  const failures = [];
+  for (const action of actions) {
+    try {
+      action();
+    } catch (error) {
+      failures.push(error);
     }
-    return !seen.has(key) && seen.set(key, 1);
-  });
+  }
+  if (failures.length)
+    throw failures[0];
+}
+function createMenu(art, name, icon) {
+  const owned = { control: false, setting: false };
+  let model = null;
+  function remove(surface) {
+    if (!owned[surface])
+      return;
+    owned[surface] = false;
+    if (surface === "control") {
+      if (art.controls.cache.has(name))
+        art.controls.remove(name);
+    } else if (art.setting.find(name)) {
+      art.setting.remove(name);
+    }
+  }
+  function clear() {
+    model = null;
+    releaseAll([() => remove("control"), () => remove("setting")]);
+  }
+  function update(next, config, active, select2) {
+    if (!next) {
+      clear();
+      return;
+    }
+    model = next;
+    const valid = () => model === next && active();
+    const onSelect = async (item) => {
+      if (!valid() || !next.selector.some((entry) => entry.value === item.value))
+        return item.html;
+      return select2(item, next.title);
+    };
+    if (config.control) {
+      owned.control = true;
+      art.controls.update({ name, position: "right", html: next.html, style: { padding: "0 10px" }, selector: next.selector, onSelect });
+    } else {
+      remove("control");
+    }
+    if (!valid())
+      return;
+    if (config.setting) {
+      owned.setting = true;
+      art.setting.update({ name, tooltip: next.html, html: next.title, icon, width: 200, selector: next.selector, onSelect });
+    } else {
+      remove("setting");
+    }
+  }
+  return { update, clear };
+}
+function unique(items) {
+  const positions = /* @__PURE__ */ new Map();
+  const output = [];
+  for (const item of items) {
+    const position = positions.get(item.html);
+    if (item.html !== void 0 && position !== void 0) {
+      if (item.default)
+        output[position] = item;
+    } else {
+      positions.set(item.html, output.length);
+      output.push(item);
+    }
+  }
+  return output;
+}
+function qualityModel(state2, config, active) {
+  if (!config.control && !config.setting || !state2?.levels.length)
+    return null;
+  const auto = config.auto || "Auto";
+  const getName = config.getName || ((level) => level.name || `${level.height}P`);
+  const html = state2.currentLevel ? getName(state2.currentLevel) : auto;
+  const items = [];
+  for (const level of state2.levels) {
+    if (!active())
+      return null;
+    items.push({ html: getName(level), value: level.id, default: state2.currentLevel?.id === level.id });
+  }
+  const heights = new Map(state2.levels.map((level) => [level.id, level.height]));
+  const selector = unique(items).sort((left, right) => (right.value === "auto" ? 0 : heights.get(right.value) || 0) - (left.value === "auto" ? 0 : heights.get(left.value) || 0));
+  selector.push({ html: auto, value: "auto", default: !state2.currentLevel });
+  return { title: config.title || "Quality", html, selector };
+}
+function audioModel(state2, config, active) {
+  if (!config.control && !config.setting || !state2 || state2.audios.length < 2)
+    return null;
+  const auto = config.auto || "Auto";
+  const getName = config.getName || ((track) => track.name || track.lang || track.language);
+  const html = state2.currentAudio ? getName(state2.currentAudio) : auto;
+  const items = [];
+  for (const track of state2.audios) {
+    if (!active())
+      return null;
+    items.push({ html: getName(track), value: track.id, default: state2.currentAudio?.id === track.id });
+  }
+  const selector = unique(items);
+  selector.push({ html: auto, value: "auto", default: !state2.currentAudio });
+  return { title: config.title || "Audio", html, selector };
 }
 function setupM3u8Controls({ art, shim, option }) {
   if (!option.m3u8)
     return;
-  function removeControl(name) {
-    if (art.controls.cache.has(name)) {
-      art.controls.remove(name);
-    }
-  }
-  function removeSetting(name) {
-    if (art.setting.find(name)) {
-      art.setting.remove(name);
-    }
-  }
-  function clearQuality() {
-    removeControl("mediabunny-quality");
-    removeSetting("mediabunny-quality");
-  }
-  function clearAudio() {
-    removeControl("mediabunny-audio");
-    removeSetting("mediabunny-audio");
-  }
-  function canRender(config = {}) {
-    return config.control || config.setting;
-  }
-  async function updateQuality(state2) {
-    const config = option.m3u8?.quality || {};
-    if (!canRender(config) || !state2?.levels.length) {
-      clearQuality();
-      return;
-    }
-    const auto = config.auto || "Auto";
-    const title = config.title || "Quality";
-    const getName = config.getName || ((level) => level.name || `${level.height}P`);
-    const defaultHtml = state2.currentLevel ? getName(state2.currentLevel) : auto;
-    const selector = uniqBy(
-      state2.levels.map((item) => {
-        return {
-          html: getName(item),
-          value: item.id,
-          default: state2.currentLevel?.id === item.id
-        };
-      }),
-      "html"
-    ).sort((a, b) => {
-      const left = state2.levels.find((item) => item.id === a.value);
-      const right = state2.levels.find((item) => item.id === b.value);
-      return (right?.height || 0) - (left?.height || 0);
-    });
-    selector.push({
-      html: auto,
-      value: "auto",
-      default: !state2.currentLevel
-    });
-    const onSelect = async (item) => {
-      await shim.switchM3u8Quality(item.value);
-      art.notice.show = `${title}: ${item.html}`;
-      await update();
-      return item.html;
-    };
-    if (config.control) {
-      art.controls.update({
-        name: "mediabunny-quality",
-        position: "right",
-        html: defaultHtml,
-        style: { padding: "0 10px" },
-        selector,
-        onSelect
-      });
-    }
-    if (config.setting) {
-      art.setting.update({
-        name: "mediabunny-quality",
-        tooltip: defaultHtml,
-        html: title,
-        icon: $quality,
-        width: 200,
-        selector,
-        onSelect
-      });
-    }
-  }
-  async function updateAudio(state2) {
-    const config = option.m3u8?.audio || {};
-    if (!canRender(config) || !state2?.audios.length || state2.audios.length < 2) {
-      clearAudio();
-      return;
-    }
-    const auto = config.auto || "Auto";
-    const title = config.title || "Audio";
-    const getName = config.getName || ((track) => track.name || track.lang || track.language);
-    const defaultHtml = state2.currentAudio ? getName(state2.currentAudio) : auto;
-    const selector = uniqBy(
-      state2.audios.map((item) => {
-        return {
-          html: getName(item),
-          value: item.id,
-          default: state2.currentAudio?.id === item.id
-        };
-      }),
-      "html"
-    );
-    selector.push({
-      html: auto,
-      value: "auto",
-      default: !state2.currentAudio
-    });
-    const onSelect = async (item) => {
-      await shim.switchM3u8Audio(item.value);
-      art.notice.show = `${title}: ${item.html}`;
-      await update();
-      return item.html;
-    };
-    if (config.control) {
-      art.controls.update({
-        name: "mediabunny-audio",
-        position: "right",
-        html: defaultHtml,
-        style: { padding: "0 10px" },
-        selector,
-        onSelect
-      });
-    }
-    if (config.setting) {
-      art.setting.update({
-        name: "mediabunny-audio",
-        tooltip: defaultHtml,
-        html: title,
-        icon: $audio,
-        width: 200,
-        selector,
-        onSelect
-      });
-    }
-  }
+  let closed = false;
+  let revision = 0;
+  let selection = 0;
+  const quality2 = createMenu(art, "mediabunny-quality", $quality);
+  const audio2 = createMenu(art, "mediabunny-audio", $audio);
+  const current = (source) => !closed && !shim.engine.destroyed && shim.engine.loadSeq === source;
   async function update() {
-    const state2 = await shim.getM3u8State();
-    if (!state2) {
-      clearQuality();
-      clearAudio();
+    if (closed || shim.engine.destroyed)
       return;
+    const version = ++revision;
+    const source = shim.engine.loadSeq;
+    const active = () => version === revision && current(source);
+    try {
+      const state2 = await shim.getM3u8State();
+      if (!active())
+        return;
+      const qualityConfig = option.m3u8?.quality || {};
+      const qualityView = qualityModel(state2, qualityConfig, active);
+      if (!active())
+        return;
+      quality2.update(qualityView, qualityConfig, () => current(source), (item, title) => select2("quality", item, title));
+      if (!active())
+        return;
+      const audioConfig = option.m3u8?.audio || {};
+      const audioView = audioModel(state2, audioConfig, active);
+      if (active())
+        audio2.update(audioView, audioConfig, () => current(source), (item, title) => select2("audio", item, title));
+    } catch (error) {
+      if (active())
+        throw error;
     }
-    await Promise.all([
-      updateQuality(state2),
-      updateAudio(state2)
-    ]);
   }
-  art.on("video:loadedmetadata", update);
-  art.on("restart", update);
+  async function select2(kind, item, title) {
+    const intent = ++selection;
+    const source = shim.engine.loadSeq;
+    revision++;
+    const active = () => intent === selection && current(source);
+    try {
+      if (kind === "quality")
+        await shim.switchM3u8Quality(item.value);
+      else
+        await shim.switchM3u8Audio(item.value);
+      if (active()) {
+        await update();
+        if (active())
+          art.notice.show = `${title}: ${item.html}`;
+      }
+    } catch (error) {
+      if (active()) {
+        await refresh();
+        if (active())
+          throw error;
+      }
+    }
+    return item.html;
+  }
+  function refresh() {
+    return update().catch((error) => console.warn("MediaBunny HLS menu update:", error));
+  }
+  function invalidate() {
+    revision++;
+    selection++;
+    try {
+      releaseAll([quality2.clear, audio2.clear]);
+    } catch (error) {
+      console.warn("MediaBunny HLS menu cleanup:", error);
+    }
+  }
+  function destroy() {
+    if (closed)
+      return;
+    closed = true;
+    invalidate();
+    try {
+      releaseAll([
+        () => art.off("video:loadedmetadata", refresh),
+        () => art.off("restart", refresh),
+        () => art.off("video:loadstart", invalidate),
+        () => art.off("video:error", invalidate),
+        () => art.off("destroy", destroy)
+      ]);
+    } catch (error) {
+      console.warn("MediaBunny HLS listener cleanup:", error);
+    }
+  }
+  art.on("video:loadedmetadata", refresh);
+  art.on("restart", refresh);
+  art.on("video:loadstart", invalidate);
+  art.on("video:error", invalidate);
+  art.on("destroy", destroy);
   return { update };
 }
 class EventTarget {
@@ -24301,15 +24343,15 @@ function publish(events, current, names) {
 }
 function metadataBarrier(ready, current) {
   let video = false;
-  let audio = false;
+  let audio2 = false;
   let published = false;
   function complete(part) {
     if (!current() || published)
       return;
     if (part === "video")
       video = true;
-    else audio = true;
-    if (video && audio) {
+    else audio2 = true;
+    if (video && audio2) {
       published = true;
       ready();
     }
@@ -24651,61 +24693,78 @@ play_fn = async function(task, generation) {
       throw error;
   }
 };
-async function selectQuality(host, value) {
-  const { input, media, loadSeq } = host;
-  if (!media?.isHls || !input || host.destroyed)
+const requests = /* @__PURE__ */ new WeakMap();
+async function select(host, value, resolve) {
+  const { input, loadSeq } = host;
+  if (!host.media?.isHls || !input || host.destroyed)
     return;
-  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && host.media === media;
-  let selection;
-  try {
-    const tracks = await input.getVideoTracks();
-    if (!current())
+  const token = {};
+  requests.set(host, token);
+  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && requests.get(host) === token;
+  while (current()) {
+    const media = host.media;
+    if (!media?.isHls)
       return;
-    const videoTrack = value === "auto" ? await input.getPrimaryVideoTrack() : tracks.find((track) => track.id === value) ?? media.videoTrack;
-    if (!current() || !videoTrack)
-      return;
-    let audioTrack = media.audioTrack;
-    let audioMode = media.audioMode;
-    if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
-      audioTrack = await videoTrack.getPrimaryPairableAudioTrack();
-      audioMode = "auto";
+    let selection;
+    try {
+      selection = await resolve(input, media, value, current);
+    } catch (error) {
+      if (!current())
+        return;
+      if (host.media === media)
+        throw error;
+      continue;
     }
-    selection = { videoTrack, audioTrack, videoMode: value === "auto" ? "auto" : "manual", audioMode };
-  } catch (error) {
     if (!current())
       return;
-    throw error;
+    if (host.media !== media)
+      continue;
+    if (selection) {
+      try {
+        await host.replaceTracks(selection);
+      } catch (error) {
+        if (current())
+          throw error;
+      }
+    }
+    return;
   }
-  if (current())
-    await host.replaceTracks(selection);
 }
-async function selectAudio(host, value) {
-  const { input, media, loadSeq } = host;
-  if (!media?.isHls || !input || host.destroyed)
-    return;
-  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && host.media === media;
-  let selection;
-  try {
-    const tracks = await input.getAudioTracks();
-    if (!current())
-      return;
-    const audioTrack = value === "auto" ? media.videoTrack ? await media.videoTrack.getPrimaryPairableAudioTrack() : await input.getPrimaryAudioTrack() : tracks.find((track) => track.id === value) ?? media.audioTrack;
-    if (!current() || !audioTrack)
-      return;
-    let videoTrack = media.videoTrack;
-    let videoMode = media.videoMode;
-    if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
-      videoTrack = await audioTrack.getPrimaryPairableVideoTrack();
-      videoMode = "auto";
-    }
-    selection = { videoTrack, audioTrack, videoMode, audioMode: value === "auto" ? "auto" : "manual" };
-  } catch (error) {
-    if (!current())
-      return;
-    throw error;
+async function quality(input, media, value, current) {
+  const tracks = await input.getVideoTracks();
+  if (!current())
+    return null;
+  const videoTrack = value === "auto" ? await input.getPrimaryVideoTrack() : tracks.find((track) => track.id === value) ?? media.videoTrack;
+  if (!current() || !videoTrack)
+    return null;
+  let audioTrack = media.audioTrack;
+  let audioMode = media.audioMode;
+  if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
+    audioTrack = await videoTrack.getPrimaryPairableAudioTrack();
+    audioMode = "auto";
   }
-  if (current())
-    await host.replaceTracks(selection);
+  return { videoTrack, audioTrack, videoMode: value === "auto" ? "auto" : "manual", audioMode };
+}
+async function audio(input, media, value, current) {
+  const tracks = await input.getAudioTracks();
+  if (!current())
+    return null;
+  const audioTrack = value === "auto" ? media.videoTrack ? await media.videoTrack.getPrimaryPairableAudioTrack() : await input.getPrimaryAudioTrack() : tracks.find((track) => track.id === value) ?? media.audioTrack;
+  if (!current() || !audioTrack)
+    return null;
+  let videoTrack = media.videoTrack;
+  let videoMode = media.videoMode;
+  if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
+    videoTrack = await audioTrack.getPrimaryPairableVideoTrack();
+    videoMode = "auto";
+  }
+  return { videoTrack, audioTrack, videoMode, audioMode: value === "auto" ? "auto" : "manual" };
+}
+function selectQuality(host, value) {
+  return select(host, value, quality);
+}
+function selectAudio(host, value) {
+  return select(host, value, audio);
 }
 async function getTrackBitrate(track) {
   return await track.getAverageBitrate() ?? await track.getBitrate() ?? 0;
@@ -24985,9 +25044,9 @@ class Playback {
   }
   seek(time, resume) {
     return this.position(async (current) => {
-      const audio = this.host.audio.seek(time);
+      const audio2 = this.host.audio.seek(time);
       const video = current() ? this.host.video.seek(time) : Promise.resolve();
-      await Promise.all([audio, video]);
+      await Promise.all([audio2, video]);
     }, ["seeked"], false, resume);
   }
   replace(media, time) {
@@ -25438,8 +25497,8 @@ class VideoEngine {
   render() {
     __privateGet(this, _renderer).render();
   }
-  start(audio) {
-    __privateGet(this, _renderer).start(audio);
+  start(audio2) {
+    __privateGet(this, _renderer).start(audio2);
   }
   stop() {
     __privateGet(this, _renderer).stop();
@@ -25692,8 +25751,8 @@ class MediaBunnyEngine {
     }, current);
     try {
       const video = this.video.load(media, metadata.video);
-      const audio = current() ? this.audio.load(media, metadata.audio) : Promise.resolve();
-      await Promise.all([video, audio]);
+      const audio2 = current() ? this.audio.load(media, metadata.audio) : Promise.resolve();
+      await Promise.all([video, audio2]);
       if (!current())
         return;
       this.readyState = 4;
@@ -25729,13 +25788,14 @@ class MediaBunnyEngine {
   }
   async getHlsState() {
     const media = this.media;
+    const source = this.loadSeq;
     if (this.destroyed)
       return null;
     try {
       const state2 = await getHlsState(media);
-      return !this.destroyed && this.media === media ? state2 : null;
+      return !this.destroyed && this.loadSeq === source && this.media === media ? state2 : null;
     } catch (error) {
-      if (this.destroyed || this.media !== media)
+      if (this.destroyed || this.loadSeq !== source || this.media !== media)
         return null;
       throw error;
     }

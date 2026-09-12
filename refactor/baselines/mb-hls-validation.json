@@ -1,0 +1,2413 @@
+{
+  "task": "PKG-MB-07",
+  "status": "done",
+  "parentCommit": "ccee9157a70725e7f6bf77dc43ff2566bfa14540",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/src/audio-clock.ts": "6f11da4cfa46023bdab4f1bc3930f631f278ac562662fb0a7f908c110ea5d1a8",
+    "packages/artplayer-proxy-mediabunny/src/audio-context.ts": "7807a2b5343d6af5af67d23c1429a9715567c3f888fc4b5e9c9327bbb2f30332",
+    "packages/artplayer-proxy-mediabunny/src/audio-nodes.ts": "223e8241c7b2d8400ea25ac127ecc15dd16a687e984377b18b6891afa2fdef75",
+    "packages/artplayer-proxy-mediabunny/src/audio-pump.ts": "b85f086f4cae13d04d2e334e4e9fa18a6768f3e4187f6124761e3c439060cf06",
+    "packages/artplayer-proxy-mediabunny/src/audio-task.ts": "65d831e8455a5df3897315ee5b9ee8849a26347fee411e038860df388c1fa77b",
+    "packages/artplayer-proxy-mediabunny/src/AudioEngine.ts": "4d58cc30148bb4d9e384ea4716a805b00dd9633e03130ba6aeac8d431dd72c43",
+    "packages/artplayer-proxy-mediabunny/src/engine-ports.ts": "c56fad4a8f9578aa37686972d96d925012df8160c62337a53200b23a4fc3b164",
+    "packages/artplayer-proxy-mediabunny/src/engine-types.ts": "6714070f954f7345f33cd93655facc6aa94fd34fa1be0375361962d54fa6e180",
+    "packages/artplayer-proxy-mediabunny/src/EventTarget.ts": "4cea57e59b0a1118744a55b0a87c1df28cb0d69c26c50f9275039fe7540c9720",
+    "packages/artplayer-proxy-mediabunny/src/hls-selection.ts": "b17af12f8fe9f7054898c0cd9a12edce1fd5b58c8ad70e00bcedf098ead4b3dd",
+    "packages/artplayer-proxy-mediabunny/src/hls-state.ts": "ff9ffd742f9763349df1f50eac6b6bd488a80d05aaab8ca198f387f0d17d5e25",
+    "packages/artplayer-proxy-mediabunny/src/index.js": "4e1be8937908ff6e6ef8a4e863e22b4468312cf31d66ac299322e475757773bb",
+    "packages/artplayer-proxy-mediabunny/src/input.ts": "d25b1c4ee4aee358c86fd8c554b8b36bfc23fdbd3c27fa21d2cd7e812c98bf9c",
+    "packages/artplayer-proxy-mediabunny/src/load-session.ts": "560fbd5935fc787bde5f413fcaa41b8829506179c5328ce3cb51e734bbba8cec",
+    "packages/artplayer-proxy-mediabunny/src/m3u8-menu.ts": "051e6578431eb4a4d7675edc9149447e241eaffe5240b0de0349eaea888f2b5d",
+    "packages/artplayer-proxy-mediabunny/src/m3u8-model.ts": "239c9da0a2cba97ef8f681ba312acc8f7ef460c3486a803340cfaf355482ddc0",
+    "packages/artplayer-proxy-mediabunny/src/m3u8-types.ts": "cb8ef504eb038dc48cb9ac59811962ecbe1469d8435ecf56f4fd0cd12dd0c18c",
+    "packages/artplayer-proxy-mediabunny/src/m3u8.ts": "3e173806ebf8b1889a27eae42099fb89c693d6646c8ef9558c2fc41e22380599",
+    "packages/artplayer-proxy-mediabunny/src/media.ts": "e745cd8e750e05d0fcfa4bc588f7eb5a5576f3be20f5e67b65b704f57d539ae9",
+    "packages/artplayer-proxy-mediabunny/src/MediaBunnyEngine.ts": "f8c6d96d11878712a40571961d734d4baa4e6bb5317dd32b776ea7a4795ca951",
+    "packages/artplayer-proxy-mediabunny/src/playback.ts": "e2a65782c89627198752ff1fe691d4eea0bef215d883a59f0bdcd3e904a4fb47",
+    "packages/artplayer-proxy-mediabunny/src/preflight.ts": "d296234312f23b97a1e0a054f1d7dbbc988d5240c5fd5089c36df1677c7b7348",
+    "packages/artplayer-proxy-mediabunny/src/readiness.ts": "9aa24b5e994006b45bda9eafad602785c3e0e334cef54ff45a4939e386c4aceb",
+    "packages/artplayer-proxy-mediabunny/src/shim-frames.ts": "172b222f997a711c2cc7741f189f05127a4ac5099c1cbe2729e903b36b4ce24a",
+    "packages/artplayer-proxy-mediabunny/src/shim-values.ts": "a93ee17e87cc7db24f4b02d866af8af206d3007d01def446906fb769c20de17d",
+    "packages/artplayer-proxy-mediabunny/src/tracks.ts": "6da68530c1fc7105ab17ed742d87d93e84447e822e84386591f9c3e6d0bec733",
+    "packages/artplayer-proxy-mediabunny/src/video-frames.ts": "c48b93c77d976b03d9cb828478ef3f208e35fbd78a4c6d3d6566d90bdc0fe6f2",
+    "packages/artplayer-proxy-mediabunny/src/video-poster.ts": "db883faea9c6b6e74535ddfba1b55011b751faf94a342d70bef532a1c96f7a46",
+    "packages/artplayer-proxy-mediabunny/src/video-renderer.ts": "a1fe324f2b8e4efb0cc40a6021cb85bbcc0568f53352107d63a8b9bbebe5e9b5",
+    "packages/artplayer-proxy-mediabunny/src/VideoEngine.ts": "1c41d43e663b51319d25dccb08a16c7450703dcdffe15d686b4fa3f0a8c7a7e6",
+    "packages/artplayer-proxy-mediabunny/src/VideoShim.ts": "1fef3028a3937182c31503129655efdb88118ea0f6d3be96e9be99dcbcc5fdc7",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.legacy.js": "6300802b521be7b61a02bbeaff7d33b7dacbce43013701506f0b4a19e776643a",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.mjs": "66be02b1737b595abd69b16dead05236a3ab1224d6ea61fe0e8624c120ba71a6",
+    "packages/artplayer-proxy-mediabunny/ARCHITECTURE.md": "716412ba0249288e9a389b1467caff15d1d97749c0e116b791cffe54193b5758",
+    "packages/artplayer-proxy-mediabunny/package.json": "96b09ce19ea7914485aa9780329a0cfc43b18e38232ea1dd92d2e6dc27310055",
+    "packages/artplayer-proxy-mediabunny/tsconfig.json": "9591a5b4741c8e0b611b7166b985f5073b61ed566a4077dfa01ebc20035357ea",
+    "packages/artplayer-proxy-mediabunny/types/artplayer-proxy-mediabunny.d.ts": "af2083224d0760752d83eb2ac86b1dea5586455b81d47e4ba70f9f6a874a75d8",
+    "package.json": "c0859c8be769cf354d3d33f445a8891bcc40b81efc552a7fd3e3700409351155",
+    "test/mediabunny-hls.test.js": "000938032f651064be3727a210555e7c2c76120b07911bad7614c0c49bfcc2ab",
+    "test/browser/mediabunny-hls.spec.js": "20f73375c71929dcab596e15e01b00e9ac6b872652fad48ba44e541c4ab230ac"
+  },
+  "node": {
+    "total": 226,
+    "hls": 43,
+    "sameAssertionsOnPreviousMain": {
+      "passed": 11,
+      "failed": 32,
+      "cancelled": 0,
+      "log": "refactor/.cache/mb07-hls-frozen.log"
+    },
+    "main": 202,
+    "legacy": 202,
+    "artifactScope": "Each 202-case command contains 198 candidate artifact assertions and four frozen normal-event controls."
+  },
+  "browser": {
+    "total": 108,
+    "outcomes": {
+      "native-audio-ownership-observed": 16,
+      "unsupported-capability-control": 28,
+      "native-hls-ui-and-selection-observed": 20,
+      "native-input-playback-and-seek": 10,
+      "trackless-rejected-before-decoder-setup": 3,
+      "native-pending-stream-cancellation": 9,
+      "native-synthetic-raf": 9,
+      "native-decoded-video-race": 10,
+      "native-mp4-playback-observed": 2,
+      "verified-unsupported-capability-control": 1
+    },
+    "records": [
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "playback",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "buffer-pause",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "buffer-rate",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-pause",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-source",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-destroy",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "av-clock",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "no-track",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "playback",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "buffer-pause",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "buffer-rate",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-pause",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-source",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-destroy",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "av-clock",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "no-track",
+        "outcome": "native-audio-ownership-observed",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "playback",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "buffer-pause",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "buffer-rate",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-pause",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-source",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "resume-destroy",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "av-clock",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "no-track",
+        "outcome": "unsupported-capability-control",
+        "scope": "Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "menus",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "currentLevel": 4,
+          "qualitySelected": [
+            4
+          ],
+          "currentAudio": 3,
+          "audioSelected": [
+            3
+          ],
+          "paired": true,
+          "errors": []
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "topology",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "settingsSurviveControlDisable": true,
+          "audioRemovedForVideoOnly": true,
+          "allRemovedForMp4": true
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-source",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-destroy",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "latest",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "desired": 1,
+          "selected": 1,
+          "ready": 4,
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ]
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "menus",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "currentLevel": 4,
+          "qualitySelected": [
+            4
+          ],
+          "currentAudio": 3,
+          "audioSelected": [
+            3
+          ],
+          "paired": true,
+          "errors": []
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "topology",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "settingsSurviveControlDisable": true,
+          "audioRemovedForVideoOnly": true,
+          "allRemovedForMp4": true
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-source",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-destroy",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "latest",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "desired": 1,
+          "selected": 1,
+          "ready": 4,
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ]
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "menus",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "currentLevel": 4,
+          "qualitySelected": [
+            4
+          ],
+          "currentAudio": 3,
+          "audioSelected": [
+            3
+          ],
+          "paired": true,
+          "errors": []
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "topology",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "settingsSurviveControlDisable": true,
+          "audioRemovedForVideoOnly": true,
+          "allRemovedForMp4": true
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-source",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-destroy",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "latest",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "desired": 1,
+          "selected": 1,
+          "ready": 4,
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ]
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "menus",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "currentLevel": 4,
+          "qualitySelected": [
+            4
+          ],
+          "currentAudio": 3,
+          "audioSelected": [
+            3
+          ],
+          "paired": true,
+          "errors": []
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "topology",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "settingsSurviveControlDisable": true,
+          "audioRemovedForVideoOnly": true,
+          "allRemovedForMp4": true
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-source",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-destroy",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "before": 0,
+          "after": 0,
+          "menus": 0
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "latest",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "function",
+          "VideoDecoder": "function",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "native-hls-ui-and-selection-observed",
+        "result": {
+          "desired": 1,
+          "selected": 1,
+          "ready": 4,
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ]
+        },
+        "state": {
+          "events": [
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "loadedmetadata",
+            "loadeddata",
+            "canplay",
+            "canplaythrough",
+            "seeked"
+          ],
+          "errors": [],
+          "writes": [
+            {
+              "surface": "controls",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-quality"
+            },
+            {
+              "surface": "controls",
+              "name": "mediabunny-audio"
+            },
+            {
+              "surface": "setting",
+              "name": "mediabunny-audio"
+            }
+          ],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "menus",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "topology",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-source",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-destroy",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "latest",
+        "core": "published",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "menus",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "topology",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-source",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "stale-destroy",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "latest",
+        "core": "candidate",
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioDecoder": "undefined",
+          "VideoDecoder": "undefined",
+          "coreVersion": "5.4.1"
+        },
+        "outcome": "unsupported-capability-control",
+        "state": {
+          "events": [
+            "error"
+          ],
+          "errors": [],
+          "writes": [],
+          "error": null,
+          "destroyed": true
+        },
+        "scope": "Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "trackless",
+        "outcome": "trackless-rejected-before-decoder-setup",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "webm",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "blob",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "stream",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "audio",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "hls",
+        "outcome": "native-input-playback-and-seek",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "trackless",
+        "outcome": "trackless-rejected-before-decoder-setup",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "webm",
+        "outcome": "unsupported-capability-control",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "blob",
+        "outcome": "unsupported-capability-control",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "stream",
+        "outcome": "unsupported-capability-control",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "audio",
+        "outcome": "unsupported-capability-control",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "hls",
+        "outcome": "unsupported-capability-control",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "input": "trackless",
+        "outcome": "trackless-rejected-before-decoder-setup",
+        "scope": "Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "destroy",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "source",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "ending": "timeout",
+        "outcome": "native-pending-stream-cancellation",
+        "scope": "Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "callback",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "destroy",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "independent",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "callback",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "destroy",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "independent",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "callback",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "destroy",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "independent",
+        "outcome": "native-synthetic-raf",
+        "scope": "Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "pause-frame",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-source",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-newer",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "timeupdate-pause",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-pool",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "pause-frame",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-source",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-newer",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "timeupdate-pause",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-pool",
+        "outcome": "native-decoded-video-race",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "pause-frame",
+        "outcome": "unsupported-capability-control",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-source",
+        "outcome": "unsupported-capability-control",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-newer",
+        "outcome": "unsupported-capability-control",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "timeupdate-pause",
+        "outcome": "unsupported-capability-control",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "scenario": "seek-pool",
+        "outcome": "unsupported-capability-control",
+        "scope": "Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Identified published or candidate proxy with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No HLS or long-run AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "outcome": "native-mp4-playback-observed",
+        "scope": "Identified published or candidate proxy with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No HLS or long-run AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "candidate-artifact",
+        "sha256": "303b1a5d71b661c7d973c52850f5e68766990c86c59fe438f0070bd38edbfb0e",
+        "outcome": "verified-unsupported-capability-control",
+        "scope": "Identified published or candidate proxy with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No HLS or long-run AV-sync acceptance."
+      }
+    ],
+    "report": "refactor/.cache/mb07-hls-results/report.json",
+    "reportSha256": "413acc641bbc610853ffca430ae8201faf87e5fe2cce829ea9c46fc9c7a41377",
+    "results": "refactor/.cache/mb07-hls-results/results",
+    "sameNativeAssertionsOnPreviousMain": {
+      "total": 30,
+      "passed": 14,
+      "failed": 16,
+      "failedScope": "Controls disabled independently, stale source/destroy state writes, latest selection intent. Four ordinary menu cases and ten WebKit capability controls pass.",
+      "report": "refactor/.cache/mb07-hls-frozen-results/report.json",
+      "reportSha256": "cac3e0b77a68bf3d78718283dd062a0d3bfc88d58fb3b0cef1b845b9c7ed2840",
+      "results": "refactor/.cache/mb07-hls-frozen-results/results"
+    }
+  },
+  "checks": [
+    {
+      "command": "yarn test:mediabunny",
+      "result": "pass",
+      "tests": 226
+    },
+    {
+      "command": "main/legacy HLS, audio, video, coordinator, shim, load and input tests",
+      "result": "pass",
+      "eachRun": 202
+    },
+    {
+      "command": "same HLS assertions on frozen main",
+      "result": "expected historical failures",
+      "passed": 11,
+      "failed": 32
+    },
+    {
+      "command": "package strict tsc and focused eslint",
+      "result": "pass",
+      "productionTypeScriptModules": 30
+    },
+    {
+      "command": "three format build, ESM factory and docs/dist parity",
+      "result": "pass"
+    },
+    {
+      "command": "seven browser specs on final built main",
+      "result": "pass",
+      "tests": 108
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1232,
+        "engineering": 14,
+        "baseline": 141,
+        "mainTotal": 1387,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 320,
+      "log": "refactor/.cache/mb07-hls-ci.log"
+    }
+  ],
+  "iterations": [
+    "Old baseline expanded from 27 assertions (5 pass/22 fail) to 43 (11 pass/32 fail).",
+    "Stable media pairing and superseded error recovery reproduced on intermediate candidate; focused failing logs preserved.",
+    "First browser run: two assertions read zero readiness counts before async decoder completion. Wait for the same exact sequence within the original expect timeout.",
+    "Second browser run: a poll dereferenced the documented stale-state null. Wait for the non-null selected target; no assertion or timeout widening.",
+    "Final strict checking required an explicit PlaybackMedia|null annotation in the resolver loop. Rebuild verified byte-identical main against all 108 browser hashes; final artifact node checks rerun."
+  ],
+  "limitations": [
+    "Twenty real HLS UI cases cover two actual cores with native parsing/decoding and controlled query timing, not installed package or physical-device acceptance.",
+    "Twenty-nine total Windows WebKit capability controls are not playback and make no general Safari claim.",
+    "Already-started replacement work remains owned by Playback until a new replacement begins; a new query is not claimed to synchronously cancel SDK decoding.",
+    "Long-run AV sync and full core/proxy/plugin combinations remain MB-09.",
+    "Codec capability/fallback and public factory/shim type boundaries remain MB-08 and MB-CAP-01/MB-READY-01.",
+    "Installed package/demo and MPL/source-notice gates remain MB-10. No npm release acceptance is implied."
+  ]
+}

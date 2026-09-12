@@ -3524,11 +3524,15 @@
         "PKG-MB-06",
         "CORE-14"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "m3u8 配对、质量/音频选择及拓扑清理",
       "acceptance": "实际选择高亮、切到无轨道来源清理、无重复 readiness",
-      "evidence": []
+      "evidence": [
+        "baselines/mb-hls-source.json",
+        "changes/2026-09-12-PKG-MB-07-hls.md",
+        "baselines/mb-hls-validation.json"
+      ]
     },
     {
       "id": "PKG-MB-08",

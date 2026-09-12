@@ -2,7 +2,6 @@ import type { Input } from 'mediabunny'
 import type { PlaybackMedia } from './media'
 
 export type SelectedTracks = Pick<PlaybackMedia, 'videoTrack' | 'audioTrack' | 'videoMode' | 'audioMode'>
-
 interface SelectionHost {
   input: Input | null
   media: PlaybackMedia | null
@@ -10,65 +9,86 @@ interface SelectionHost {
   loadSeq: number
   replaceTracks: (tracks: SelectedTracks) => Promise<void>
 }
+type ResolveTracks = (input: Input, media: PlaybackMedia, value: unknown, current: () => boolean) => Promise<SelectedTracks | null>
 
-export async function selectQuality(host: SelectionHost, value: unknown): Promise<void> {
-  const { input, media, loadSeq } = host
-  if (!media?.isHls || !input || host.destroyed)
+const requests = new WeakMap<SelectionHost, object>()
+async function select(host: SelectionHost, value: unknown, resolve: ResolveTracks): Promise<void> {
+  const { input, loadSeq } = host
+  if (!host.media?.isHls || !input || host.destroyed)
     return
-  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && host.media === media
-  let selection: SelectedTracks
-  try {
-    const tracks = await input.getVideoTracks()
-    if (!current())
+  const token = {}
+  requests.set(host, token)
+  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && requests.get(host) === token
+  while (current()) {
+    const media: PlaybackMedia | null = host.media
+    if (!media?.isHls)
       return
-    const videoTrack = value === 'auto' ? await input.getPrimaryVideoTrack() : tracks.find(track => track.id === value) ?? media.videoTrack
-    if (!current() || !videoTrack)
-      return
-    let audioTrack = media.audioTrack
-    let audioMode = media.audioMode
-    if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
-      audioTrack = await videoTrack.getPrimaryPairableAudioTrack()
-      audioMode = 'auto'
+    let selection: SelectedTracks | null
+    try {
+      selection = await resolve(input, media, value, current)
     }
-    selection = { videoTrack, audioTrack, videoMode: value === 'auto' ? 'auto' : 'manual', audioMode }
-  }
-  catch (error) {
+    catch (error) {
+      if (!current())
+        return
+      if (host.media === media)
+        throw error
+      continue
+    }
     if (!current())
       return
-    throw error
+    if (host.media !== media)
+      continue
+    if (selection) {
+      try {
+        await host.replaceTracks(selection)
+      }
+      catch (error) {
+        if (current())
+          throw error
+      }
+    }
+    return
   }
-  if (current())
-    await host.replaceTracks(selection)
 }
 
-export async function selectAudio(host: SelectionHost, value: unknown): Promise<void> {
-  const { input, media, loadSeq } = host
-  if (!media?.isHls || !input || host.destroyed)
-    return
-  const current = () => !host.destroyed && host.loadSeq === loadSeq && host.input === input && host.media === media
-  let selection: SelectedTracks
-  try {
-    const tracks = await input.getAudioTracks()
-    if (!current())
-      return
-    const audioTrack = value === 'auto'
-      ? media.videoTrack ? await media.videoTrack.getPrimaryPairableAudioTrack() : await input.getPrimaryAudioTrack()
-      : tracks.find(track => track.id === value) ?? media.audioTrack
-    if (!current() || !audioTrack)
-      return
-    let videoTrack = media.videoTrack
-    let videoMode = media.videoMode
-    if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
-      videoTrack = await audioTrack.getPrimaryPairableVideoTrack()
-      videoMode = 'auto'
-    }
-    selection = { videoTrack, audioTrack, videoMode, audioMode: value === 'auto' ? 'auto' : 'manual' }
+async function quality(input: Input, media: PlaybackMedia, value: unknown, current: () => boolean): Promise<SelectedTracks | null> {
+  const tracks = await input.getVideoTracks()
+  if (!current())
+    return null
+  const videoTrack = value === 'auto' ? await input.getPrimaryVideoTrack() : tracks.find(track => track.id === value) ?? media.videoTrack
+  if (!current() || !videoTrack)
+    return null
+  let audioTrack = media.audioTrack
+  let audioMode = media.audioMode
+  if (!audioTrack || !videoTrack.canBePairedWith(audioTrack)) {
+    audioTrack = await videoTrack.getPrimaryPairableAudioTrack()
+    audioMode = 'auto'
   }
-  catch (error) {
-    if (!current())
-      return
-    throw error
+  return { videoTrack, audioTrack, videoMode: value === 'auto' ? 'auto' : 'manual', audioMode }
+}
+
+async function audio(input: Input, media: PlaybackMedia, value: unknown, current: () => boolean): Promise<SelectedTracks | null> {
+  const tracks = await input.getAudioTracks()
+  if (!current())
+    return null
+  const audioTrack = value === 'auto'
+    ? media.videoTrack ? await media.videoTrack.getPrimaryPairableAudioTrack() : await input.getPrimaryAudioTrack()
+    : tracks.find(track => track.id === value) ?? media.audioTrack
+  if (!current() || !audioTrack)
+    return null
+  let videoTrack = media.videoTrack
+  let videoMode = media.videoMode
+  if (!videoTrack || !audioTrack.canBePairedWith(videoTrack)) {
+    videoTrack = await audioTrack.getPrimaryPairableVideoTrack()
+    videoMode = 'auto'
   }
-  if (current())
-    await host.replaceTracks(selection)
+  return { videoTrack, audioTrack, videoMode, audioMode: value === 'auto' ? 'auto' : 'manual' }
+}
+
+export function selectQuality(host: SelectionHost, value: unknown): Promise<void> {
+  return select(host, value, quality)
+}
+
+export function selectAudio(host: SelectionHost, value: unknown): Promise<void> {
+  return select(host, value, audio)
 }
