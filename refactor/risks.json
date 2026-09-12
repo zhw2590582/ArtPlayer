@@ -3648,7 +3648,7 @@
         "PKG-MB-07",
         "PKG-MB-09"
       ],
-      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified.",
+      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified. Expanded MB-02 baseline reproduces play-after-pause/destroy, rejected-play false state, seek-after-destroy and retained successful-load timeout timers in all three actual historical implementations; Range and active-timeout normal controls remain separate.",
       "closureCriteria": "Historical failing interleavings and candidate cancellation/cleanup pass with real media and event evidence, including long playback and track topology.",
       "status": "open",
       "evidence": [
@@ -3656,7 +3656,9 @@
         "refactor/baselines/mb-contract.md",
         "refactor/changes/2026-09-12-PKG-MB-01-contract.md",
         "refactor/changes/2026-09-12-PKG-MB-02-checkpoint.md",
-        "refactor/baselines/mb-media-checkpoint.json"
+        "refactor/baselines/mb-media-checkpoint.json",
+        "refactor/changes/2026-09-12-PKG-MB-02-baseline.md",
+        "refactor/baselines/mb-behavior-validation.json"
       ]
     },
     {
@@ -3689,7 +3691,25 @@
       "closureCriteria": "Per-browser native media/support matrix and predictable unsupported-capability behavior verified, including target Safari evidence where support is claimed.",
       "evidence": [
         "refactor/changes/2026-09-12-PKG-MB-02-checkpoint.md",
-        "refactor/baselines/mb-media-checkpoint.json"
+        "refactor/baselines/mb-media-checkpoint.json",
+        "refactor/changes/2026-09-12-PKG-MB-02-baseline.md",
+        "refactor/baselines/mb-behavior-validation.json"
+      ]
+    },
+    {
+      "id": "MB-READY-01",
+      "title": "MediaBunny historical readiness can repeat for trackless input and occur after capability errors",
+      "status": "open",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-MB-04",
+        "PKG-MB-09"
+      ],
+      "compatibleResolution": "Use explicit coordinated readiness and failure state, preserving valid event order while preventing duplicate or stale callbacks; evaluate trackless behavior separately from normal media.",
+      "closureCriteria": "Candidate metadata/data/canplay ordering and counts pass normal, absent-track and failure interleavings in native browsers and controlled race tests.",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-MB-02-baseline.md",
+        "refactor/baselines/mb-behavior-validation.json"
       ]
     }
   ]

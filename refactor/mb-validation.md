@@ -1,7 +1,8 @@
 # MediaBunny proxy 验证入口
 
 开始改动前读取[冻结契约](baselines/mb-contract.md)、[接口快照](baselines/mb-surface.json)、
-[归档/源码哈希](baselines/mb-release.json)。当前阶段为PKG-MB-01；不得把接口基线称为真实媒体验收。
+[归档/源码哈希](baselines/mb-release.json)。MB-01接口基线与
+[MB-02行为基线](changes/2026-09-12-PKG-MB-02-baseline.md)分开记录；不得把接口测试称为真实媒体验收。
 
 ## 可重复命令
 
@@ -10,6 +11,8 @@
 ```sh
 node refactor/scripts/mb-contract.mjs
 node --test refactor/scripts/mb-contract.test.mjs
+node --test test/mediabunny.test.js
+yarn test:browser test/browser/mediabunny-inputs.spec.js test/browser/mediabunny.spec.js
 yarn ci:check
 ```
 
@@ -22,8 +25,9 @@ play/load/seek转发测试刻意截获engine方法；不得宣传为真实播放
 
 ## 后续顺序
 
-1. MB-02建立真实MP4/WebM/HLS/Blob/Stream和失败样本；三浏览器能力分别记录。
-   复现pending load/destroy、超时后释放、无轨道、并发seek/选轨、metadata重复与晚帧/音频回调。
+1. MB-02的输入、seek、HLS轨道、无轨道和失败样本见行为基线。42项浏览器检查须区分
+   20次实际播放、12次能力对照、6次历史输入失败及4次无轨道就绪行为；24项生命周期测试含18个历史缺陷。
+   后续修改须复跑对应正常和负例，不把全部负例变为候选豁免；并发选轨、晚帧和音频回调的完整修复分别在04/05/06/07。
 2. MB-03输入/取消，MB-04事件/状态协调，MB-05帧调度，MB-06音频时钟，MB-07配对轨道/控件。
    按已批准计划分步迁移，不等到MB-08才一次性堆积全部源码修改。
 3. MB-08完成严格TS和公开声明兼容矩阵；保留HTMLCanvasElement精确Result、可选工厂和全工厂
