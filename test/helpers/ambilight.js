@@ -1,8 +1,20 @@
 import assert from 'node:assert/strict'
+import path from 'node:path'
+import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import vm from 'node:vm'
-import { transform } from 'esbuild'
+import { build, transform } from 'esbuild'
 import { verifyAmbilightContract } from '../../refactor/scripts/ambilight-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { getEntryFile } from '../../scripts/projects.js'
+
+export async function ambilightCandidate() {
+  if (process.env.ARTPLAYER_AMBILIGHT_BASELINE === '1')
+    return (await ambilightHistorical()).find(item => item.name === 'frozen-workspace')
+  const root = fileURLToPath(new URL('../../', import.meta.url))
+  const result = await build({ entryPoints: [getEntryFile(path.join(root, 'packages/artplayer-plugin-ambilight'))], bundle: true, write: false, platform: 'browser', format: 'cjs', target: 'es2020' })
+  return { name: 'candidate-source', source: result.outputFiles[0].text, format: 'artifact' }
+}
 
 export async function ambilightHistorical() {
   const contract = await verifyAmbilightContract()
@@ -64,7 +76,10 @@ export async function ambilightEnvironment(implementation, settings = {}) {
         return child
       },
       remove() { this.parentNode?.removeChild(this) },
-      getContext: () => context,
+      getContext() {
+        settings.onContext?.()
+        return context
+      },
     }
     nodes.push(value)
     return value

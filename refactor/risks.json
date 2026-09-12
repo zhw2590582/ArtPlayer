@@ -3270,9 +3270,11 @@
         "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md",
         "refactor/changes/2026-09-12-PKG-AMBILIGHT-02-tests.md",
         "refactor/baselines/ambilight-behavior-validation.json",
-        "refactor/ambilight-validation.md"
+        "refactor/ambilight-validation.md",
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-03-lifecycle.md",
+        "refactor/baselines/ambilight-lifecycle-validation.json"
       ],
-      "workspaceState": "30 Node historical tests reproduce RAF id zero, terminal/escaped method, sampling/context, reentrant stop/destroy and setup rollback failures. Native browser sampling of a cross-origin video throws SecurityError and stays tainted after same-origin source recovery. No production fixes in this task."
+      "workspaceState": "Candidate source split into four strict TS modules. RAF zero, terminal cleanup, rollback and reentrant frames repaired; 16 candidate tests pass (14 fail against frozen source). Eighteen native video/canvas tests pass across three cores and three engines after reproducing Firefox width-reset taint and replacing failed canvas. Risk remains open for proxy lifecycle/capability checks in PKG-AMBILIGHT-05; do not extend native video evidence to proxies."
     },
     {
       "id": "AMBILIGHT-TYPE-01",

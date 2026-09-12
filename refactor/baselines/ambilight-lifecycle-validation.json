@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-03",
+  "status": "done",
+  "parentCommit": "43f0e9a8c66402e628f358602220aaa854b100e2",
+  "checks": [
+    {
+      "command": "node --test test/ambilight-lifecycle.test.js test/ambilight.test.js refactor/scripts/ambilight-contract.test.mjs",
+      "result": "pass",
+      "tests": 53,
+      "candidate": 16,
+      "historical": 30,
+      "publishedContract": 7
+    },
+    {
+      "command": "ARTPLAYER_AMBILIGHT_BASELINE=1 node --test test/ambilight-lifecycle.test.js",
+      "result": "expected-negative-control",
+      "tests": 16,
+      "failed": 14,
+      "passedNormalSemantics": 2,
+      "source": "immutable frozen-workspace from ambilight-release.json"
+    },
+    {
+      "command": "playwright test test/browser/ambilight-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 18,
+      "skipped": 0,
+      "stats": {
+        "startTime": "2026-09-12T03:28:59.484Z",
+        "duration": 28092.341,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": [
+        "chromium: 153.0.8010.12",
+        "firefox: 155.0",
+        "webkit: 26.6"
+      ],
+      "coreSources": [
+        "npm 5.1.7",
+        "npm 5.4.0",
+        "candidate source"
+      ],
+      "report": "refactor/.cache/ambilight03-final-results/report.json",
+      "archivedResults": "refactor/.cache/ambilight03-final-results/results",
+      "originalResultsPrefix": "refactor/.cache/browser/results"
+    },
+    {
+      "command": "yarn build artplayer-plugin-ambilight",
+      "result": "pass",
+      "outputs": [
+        "main es2020",
+        "legacy es2015",
+        "esm es2020",
+        "docs/compiled copies"
+      ]
+    },
+    {
+      "command": "focused eslint --no-fix and tsc -p packages/artplayer-plugin-ambilight/tsconfig.json",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 878,
+        "engineering": 14,
+        "baseline": 79,
+        "mainTotal": 971,
+        "repeatedContractExecutions": 44
+      }
+    }
+  ],
+  "failedIterations": [
+    {
+      "report": "refactor/.cache/ambilight03-first-results/report.json",
+      "archivedResults": "refactor/.cache/ambilight03-first-results/results",
+      "pass": 15,
+      "fail": 3,
+      "reason": "Firefox retained canvas taint after width reset in all three core combinations"
+    },
+    {
+      "report": "refactor/.cache/ambilight03-firefox-probe-results/report.json",
+      "archivedResults": "refactor/.cache/ambilight03-firefox-probe-results/results",
+      "pass": 0,
+      "fail": 1,
+      "reason": "Fresh native canvas read recovered video but reset old canvas still threw SecurityError; native-canvas-reset-control attachment records it"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/index.ts",
+      "sha256LF": "e5df94a5a541530533ccbf91f4365fcaa9965d6727fee0c67cef50dc967e22cb"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/sampler.ts",
+      "sha256LF": "b6a2ac951ddd162099d39aadaaca3b9fafe7929c5c12a857934d4b9c884edf5e"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/scheduler.ts",
+      "sha256LF": "2c87328cfa8d916c64e8eed26802116867f9d731991a6cddf871d53808261268"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/src/view.ts",
+      "sha256LF": "e30ec83e0a8f1b471c4f04cc436d550b3fed3f75d8042ddfd73be98705103e8b"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/tsconfig.json",
+      "sha256LF": "712a3fa32ed57692d16bf854a0e77ffaecd04236efa0f557905aab7291e0aef6"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.ts",
+      "sha256LF": "a36998b4d96d9a3200022029bf92918cc516d5ae4f38dc78a1a76b53a736d086"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.js",
+      "sha256LF": "56735a767696fe2cbe11b04db9a8af32fc814be58a5664395a8888bb31c7e046"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.legacy.js",
+      "sha256LF": "51ed35cffc43ac1748556210af1cee1a5e0b867e48e269e4c477bc45962203b6"
+    },
+    {
+      "file": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.mjs",
+      "sha256LF": "7c6b35fa873d4498fabf8ef7097e56664ab7ecd6a2d0efb884b4de0a3055f99d"
+    },
+    {
+      "file": "test/helpers/ambilight.js",
+      "sha256LF": "8cb80dba5270860afc121e3a02336a6cdb20b0a6a41e058cde11efe9174fba4f"
+    },
+    {
+      "file": "test/ambilight-lifecycle.test.js",
+      "sha256LF": "cc4a7a4068709f1c9f5be49ea4d51784f3ccfd22ca6f99bb15314b5032ff8395"
+    },
+    {
+      "file": "test/browser/ambilight-lifecycle.spec.js",
+      "sha256LF": "321693a24d33f0c7aee02fd4137b55175386562a645ba138e15c3a51d6348d2c"
+    },
+    {
+      "file": "test/browser/server.mjs",
+      "sha256LF": "af513e1e64f875668b6a7cbd060276d85d930e0cc1715577e97907cc26c3b58d"
+    },
+    {
+      "file": "refactor/baselines/ambilight-release.json",
+      "sha256LF": "6acbea40a26397ffa36549fbecb1a12c057cfb3fc932f7cb83181ad5fa37bd2f"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "415ee02f3c38691475c619b1f874c68ee0484630f805f9d835981d421fbbda84"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/ambilight03-targeted-final.log",
+      "sha256": "5524ffd95993fd31600b6f51ae4ae8297fd8a92b5b01670386b9c7a61b0700bb"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-baseline-negative.log",
+      "sha256": "20d82258de1bababe503ada70b95b8295126502f9d9fc26deaa8d8a25ccd3ec8"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-browser.log",
+      "sha256": "9f230d7cc02d6b038f26e7bd64968580b876b4146697c5ecf9d1511958dfb79f"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-firefox-probe.log",
+      "sha256": "8f90b54c0be91571f0070608f7b0f0b1ff02ff4c8ac3c973aaf1a1451ddee6ed"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-browser-fixed.log",
+      "sha256": "9cdb32d658b245fb8efea98b638f1afb0966bfde8b018cdba016b67e49665d2b"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-build.log",
+      "sha256": "a642ae2431cb33e10aa98f6520853f4c51077e5d2fe05659e8297100a81a0c8f"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/ambilight03-ci.log",
+      "sha256": "e5dbb40a578179624b5b394887d23f0164db4fd47c938e07de93070d16c044d7"
+    }
+  ],
+  "limitations": [
+    "Public declarations and historical CJS.default compatibility remain task 04; no API approval inferred from Ads.",
+    "Proxy and real device combinations remain task 05; package installation and local 8082 demo remain task 06.",
+    "Browser tests consume a direct candidate source bundle; production artifacts are built but not yet packed-consumer validated.",
+    "A permanently unreadable cross-origin source retries with at most one new canvas per eligible sample; performance review remains required.",
+    "VAST alone has user-authorized persistent VPN external-script exception. No skip or exception was used here.",
+    "Full CI retains the known generated docs lint warning and Yarn url.parse deprecation; remote workflows have not run."
+  ]
+}
