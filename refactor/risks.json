@@ -3500,8 +3500,11 @@
         "refactor/baselines/dpip-contract.md",
         "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md",
         "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
-        "refactor/baselines/dpip-behavior-validation.json"
-      ]
+        "refactor/baselines/dpip-behavior-validation.json",
+        "refactor/changes/2026-09-12-PKG-DPIP-03-lifecycle.md",
+        "refactor/baselines/dpip-lifecycle-validation.json"
+      ],
+      "workspaceState": "Six strict TS modules with candidate fixes for pending requests, terminal effects, partial rollback and style ownership. Candidate versus frozen tests preserve historical failures. Native Document PiP/proxy/device evidence remains task05; current iframe coverage controls the window API."
     },
     {
       "id": "DPIP-DOM-01",
@@ -3520,8 +3523,11 @@
         "refactor/baselines/dpip-contract.md",
         "refactor/changes/2026-09-12-PKG-DPIP-01-contract.md",
         "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
-        "refactor/baselines/dpip-behavior-validation.json"
-      ]
+        "refactor/baselines/dpip-behavior-validation.json",
+        "refactor/changes/2026-09-12-PKG-DPIP-03-lifecycle.md",
+        "refactor/baselines/dpip-lifecycle-validation.json"
+      ],
+      "workspaceState": "Six strict TS modules with candidate fixes for pending requests, terminal effects, partial rollback and style ownership. Candidate versus frozen tests preserve historical failures. Native Document PiP/proxy/device evidence remains task05; current iframe coverage controls the window API."
     },
     {
       "id": "DPIP-STYLE-01",
@@ -3532,11 +3538,19 @@
       "compatibleResolution": "Preserve the style id and injection timing while deduplicating at insertion and releasing loading listeners.",
       "closureCriteria": "Historical two-node versus Parcel cached one-node difference stays explicit; candidate has one final style node under duplicate evaluation.",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/changes/2026-09-12-PKG-DPIP-02-tests.md",
-        "refactor/baselines/dpip-behavior-validation.json"
-      ]
+        "refactor/baselines/dpip-behavior-validation.json",
+        "refactor/changes/2026-09-12-PKG-DPIP-03-lifecycle.md",
+        "refactor/baselines/dpip-lifecycle-validation.json"
+      ],
+      "workspaceState": "Six strict TS modules with candidate fixes for pending requests, terminal effects, partial rollback and style ownership. Candidate versus frozen tests preserve historical failures. Native Document PiP/proxy/device evidence remains task05; current iframe coverage controls the window API.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-03-lifecycle.md",
+        "refactor/baselines/dpip-lifecycle-validation.json"
+      ],
+      "resolutionRationale": "Candidate and frozen-source comparison verifies one style node and zero retained DOMContentLoaded listeners after duplicate evaluation. Insertion rechecks the shared id; reentrant style insertion cleanup is covered separately. Native window acceptance is unrelated and remains task05."
     },
     {
       "id": "DPIP-MEDIA-01",

@@ -164,5 +164,5 @@
 | DPIP-TYPE-01 | open / 已复现 | Document PiP requires options and declares void actions and writable flags that differ from runtime | PKG-DPIP-04 |
 | DPIP-LIFE-01 | open / 已复现 | Document PiP has no separate ownership for pending window requests and delayed post-transition callbacks | PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-05 |
 | DPIP-DOM-01 | open / 已复现 | Document PiP copies global-document styles and retains original parent without transactional rollback | PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-05 |
-| DPIP-STYLE-01 | open / 已复现 | Document PiP 1.1.0 and frozen source duplicate style IDs when evaluated before DOMContentLoaded | PKG-DPIP-03 |
+| DPIP-STYLE-01 | resolved / 已复现 | Document PiP 1.1.0 and frozen source duplicate style IDs when evaluated before DOMContentLoaded | PKG-DPIP-03 |
 | DPIP-MEDIA-01 | open / 已复现 | WebKit reports styled width640 for width320 media in the controlled Document PiP iframe matrix | PKG-DPIP-05 |

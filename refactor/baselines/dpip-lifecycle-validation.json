@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DPIP-03",
+  "status": "done",
+  "checks": [
+    {
+      "command": "node --test test/dpip-lifecycle.test.js test/dpip.test.js refactor/scripts/dpip-contract.test.mjs",
+      "result": "pass",
+      "tests": 84,
+      "candidate": 20,
+      "historicalLifecycle": 48,
+      "historicalContract": 16
+    },
+    {
+      "command": "ARTPLAYER_DPIP_BASELINE=1 node --test test/dpip-lifecycle.test.js",
+      "result": "expected-historical-failures",
+      "passed": 3,
+      "failed": 17
+    },
+    {
+      "command": "yarn build artplayer-plugin-document-pip",
+      "result": "pass",
+      "formats": [
+        "main",
+        "legacy",
+        "esm"
+      ],
+      "generatedFiles": 6
+    },
+    {
+      "command": "ARTPLAYER_DPIP_ARTIFACT=<main or legacy> node --test test/dpip-lifecycle.test.js",
+      "result": "pass",
+      "main": 20,
+      "legacy": 20
+    },
+    {
+      "command": "native Node ESM default import and initializer",
+      "result": "pass",
+      "scope": "actual ESM entry import shape; full installed consumer/type matrix remains task04"
+    },
+    {
+      "command": "playwright test test/browser/dpip.spec.js test/browser/dpip-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 66,
+      "scope": "earlier source wide matrix: 48 historical plus 18 candidate; final source refinements are rechecked below with built main"
+    },
+    {
+      "command": "ARTPLAYER_DPIP_ARTIFACT=<main> playwright test test/browser/dpip-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 18,
+      "skipped": 0,
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "scope": "final actual main artifact, two cores and three engines; native iframe DOM with controlled window APIs, not native Document PiP"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1006,
+        "engineering": 14,
+        "baseline": 116,
+        "mainTotal": 1136,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 290
+    }
+  ],
+  "limitations": [
+    "Public declarations and export compatibility remain task04; no inferred-type approval is borrowed from Ads.",
+    "The native DOM iframe matrix controls requestWindow and close; native Document PiP activation, media continuity, proxies and devices remain task05.",
+    "Restoration falls back to the original document body if the original parent rejects insertion, but cannot guarantee recovery if both reject insertion.",
+    "The full demo/archive acceptance remains task06."
+  ],
+  "inputs": [
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/control.ts",
+      "sha256LF": "9fe66b2fd59b50c05355d47a89af828b59eb9ad4e224237c72017170da7f7d65"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/index.ts",
+      "sha256LF": "cbf87010df6982f9b7ea39384f4120af380d26d3e051a96ee9db52eda8c7e1f8"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/projection.ts",
+      "sha256LF": "9a86780b54793427db448d7814d7e4a728d9f65ab3282bb6b476bb6ecedc731f"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/resources.ts",
+      "sha256LF": "6aa31086fd18104b176d6245ec297255c71993fe935db5b44ed649bedd33b8be"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/styles.ts",
+      "sha256LF": "7fed3354c81ccfd70cd70aba5afe8d1d78fa3f7022a3298c65446b5a0a0e6b96"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/window-session.ts",
+      "sha256LF": "cf6bc403caf22ecfea14da7bfa91ddb88a60ed0507d5485035abe48861e1ad17"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/src/style.less",
+      "sha256LF": "a75ae94a569c8fd6ce925dcc7ab6b22cfa39a4d81decb30cc447dd7108a84a22"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/tsconfig.json",
+      "sha256LF": "5b53a2bb158e81c5bfd3e2b50e750f7f6e20d0e9aaa6733facec036c15f28ebe"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/.npmignore",
+      "sha256LF": "145c5fa0341195e21cf13df3423a057282f8ea374e9a1b3065e2280e1ce1c5c1"
+    },
+    {
+      "file": "test/dpip-lifecycle.test.js",
+      "sha256LF": "bd9fb385a3bfd5d49695fbbaf5faf33d95d255cd63ef176758ccfd972e1f794c"
+    },
+    {
+      "file": "test/helpers/dpip.js",
+      "sha256LF": "36acf694e49472c927f7e8cf797fc21df27916cb5777b7d84dc280807948988e"
+    },
+    {
+      "file": "test/browser/dpip-helpers.js",
+      "sha256LF": "2ab9b30a60b809e3476462c3d89cf3eb31f74d321264a661e643321b5cf73d2a"
+    },
+    {
+      "file": "test/browser/dpip-lifecycle.spec.js",
+      "sha256LF": "813d8d3276283931b19f3046f93249116f3ff1bfe9e3782017b9d51f788166e0"
+    },
+    {
+      "file": "test/browser/dpip.spec.js",
+      "sha256LF": "fcf79924daca7b694b0265540f8e84355fc9ea81c6dd4d3d33f3749a0881e376"
+    },
+    {
+      "file": "package.json",
+      "sha256LF": "87ccb964b0247c4558f092ccb897084416f2d1a965703df7e28c1583885a134e"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.js",
+      "sha256LF": "166931ad0c2c5b9696a4f76dbb441afb396874c1445830b8ed8a58e8e98167ab"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-document-pip.js",
+      "sha256LF": "166931ad0c2c5b9696a4f76dbb441afb396874c1445830b8ed8a58e8e98167ab"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.legacy.js",
+      "sha256LF": "d3f0cbe82ae5bccf571a8112b6803f24d2548c8b24ed839350c95a1f05dfbedb"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-document-pip.legacy.js",
+      "sha256LF": "d3f0cbe82ae5bccf571a8112b6803f24d2548c8b24ed839350c95a1f05dfbedb"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.mjs",
+      "sha256LF": "82b26dcba24d7c550c9edb5481bf2c80864cde09522c7f8b8743be63dbca4c3c"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-document-pip.mjs",
+      "sha256LF": "82b26dcba24d7c550c9edb5481bf2c80864cde09522c7f8b8743be63dbca4c3c"
+    }
+  ],
+  "parentCommit": "202351934b1d9511691dcd298c7882ee6fe2c9f6",
+  "mainSize": {
+    "previousBytes": 4624,
+    "candidateBytes": 6874,
+    "previousGzipBytes": 1776,
+    "candidateGzipBytes": 2831,
+    "note": "Additional request cancellation, transactional rollback and cleanup increase plugin size. This is not a full ecosystem performance acceptance."
+  },
+  "logs": [
+    {
+      "file": "refactor/.cache/dpip03-node-reentry.log",
+      "sha256": "92189cb71428649ab1687448a324958e002221fe350854d96c359e33c4455a40"
+    },
+    {
+      "file": "refactor/.cache/dpip03-notice-rejection.log",
+      "sha256": "af2db5c23135434c292ea8d1905aa5578bbcedd9fe5b70780594e2c6e0c69927"
+    },
+    {
+      "file": "refactor/.cache/dpip03-node-final.log",
+      "sha256": "b63a0f80492f87aa22ab82bdef8da8503fecfb6a3dd5a34bd758659f738bb14e"
+    },
+    {
+      "file": "refactor/.cache/dpip03-old-negative-final.log",
+      "sha256": "655223967f6d05d1226921923d648875924c62ca9fb2e0960e5c61d77b532cdb"
+    },
+    {
+      "file": "refactor/.cache/dpip03-build-final.log",
+      "sha256": "71e1ba8c478b29c7a020d8aa107d11bbfb69bf2f08d02a8ae96c45a685284817"
+    },
+    {
+      "file": "refactor/.cache/dpip03-main-lifecycle.log",
+      "sha256": "87424989382aabc285c18254f188d730edf30c7dc09e2e8f4b6be973cbdad1e4"
+    },
+    {
+      "file": "refactor/.cache/dpip03-legacy-lifecycle.log",
+      "sha256": "395aab100482170a1671c7652340193cecb2602ea7f0cc0f3ff9ab2b75413341"
+    },
+    {
+      "file": "refactor/.cache/dpip03-esm.log",
+      "sha256": "9df9f793dfccb511716a2d8ae3b3d9ccc616e1e8f547ebdde8245cafd4e898cb"
+    },
+    {
+      "file": "refactor/.cache/dpip03-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/dpip03-browser.log",
+      "sha256": "f51123de2b1553e56208893787bfbae15f12b26744513c0faa0529ba879e623a"
+    },
+    {
+      "file": "refactor/.cache/dpip03-browser-artifact-final.log",
+      "sha256": "a0dd85434da54fd3a10cf4c3de2e136d1da14d792dc615b66958122a440a3768"
+    },
+    {
+      "file": "refactor/.cache/dpip03-ci.log",
+      "sha256": "723c3c5014bc9fbc3f908c7973cbe6ecc44df8596e252034093ba9d601fb17dd"
+    },
+    {
+      "file": "refactor/.cache/dpip03-final-results/report.json",
+      "sha256": "c9b4822cda572b23e83ad8fef81b28302598f94eb65b367c85b2ab72f8c14722"
+    },
+    {
+      "file": "refactor/.cache/dpip03-wide-results/report.json",
+      "sha256": "92be3a027d3782b4336f541186dcc26ea9d728dc12e579df090279b2a6229b08"
+    }
+  ],
+  "browserArtifacts": [
+    {
+      "file": "refactor/.cache/dpip03-final-results/results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    }
+  ]
+}

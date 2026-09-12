@@ -31,3 +31,14 @@ test/helpers/dpip.js是受控DOM/window边界：验证ownerDocument、节点身�
 当前WebKit的640宽读数与320宽fixture不同，精确保留为历史观察，待05查清尺寸和媒体
 连续性；测试不会宽泛允许任意尺寸。初次错误与修正原因见[02记录](changes/2026-09-12-PKG-DPIP-02-tests.md)，
 验收状态见[02证据](baselines/dpip-behavior-validation.json)。03必须新增候选修复断言。
+
+## TS实现与候选修复（03）
+
+源码现拆为6个严格TS模块，真实文件地图见包内ARCHITECTURE.md。`yarn test:dpip`同时
+执行48项历史与20项候选生命周期测试；`ARTPLAYER_DPIP_BASELINE=1`运行候选用例时，
+保留旧源码17失败/3正常通过。正常契约另有16项test:baseline。
+`test/browser/dpip-lifecycle.spec.js`为18项候选真实DOM验证；`dpip-helpers.js`共享受控
+窗口入口，记录替换前能力，绝不冒充原生Document PiP。`ARTPLAYER_DPIP_ARTIFACT`
+选择明确构建文件（不fallback）；最终产物证据与宽矩阵历史证据分开保存。
+本阶段保留原生窗口和媒体/代理验收门槛，详见[03记录](changes/2026-09-12-PKG-DPIP-03-lifecycle.md)
+及[03证据](baselines/dpip-lifecycle-validation.json)。04继续公开类型/导出/安装消费者。

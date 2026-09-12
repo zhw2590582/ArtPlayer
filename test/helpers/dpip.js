@@ -1,9 +1,32 @@
 import assert from 'node:assert/strict'
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import vm from 'node:vm'
-import { transform } from 'esbuild'
+import { build, transform } from 'esbuild'
 import less from 'less'
 import { verifyDpipContract } from '../../refactor/scripts/dpip-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { getEntryFile } from '../../scripts/projects.js'
+
+export async function dpipCandidate() {
+  if (process.env.ARTPLAYER_DPIP_BASELINE === '1')
+    return (await dpipHistorical()).find(item => item.name === 'frozen-workspace')
+  if (process.env.ARTPLAYER_DPIP_ARTIFACT)
+    return { name: 'candidate-artifact', code: await fs.readFile(process.env.ARTPLAYER_DPIP_ARTIFACT, 'utf8') }
+  const root = fileURLToPath(new URL('../../', import.meta.url))
+  const output = await build({ entryPoints: [getEntryFile(path.join(root, 'packages/artplayer-plugin-document-pip'))], bundle: true, write: false, format: 'cjs', target: 'es2020', plugins: [{
+    name: 'dpip-less-inline',
+    setup(build) {
+      build.onLoad({ filter: /\.less$/ }, async ({ path: filename }) => {
+        const source = await fs.readFile(filename.replace(/\?inline$/, ''), 'utf8')
+        return { contents: (await less.render(source)).css, loader: 'text' }
+      })
+    },
+  }] })
+  return { name: 'candidate-source', code: output.outputFiles[0].text }
+}
 
 export async function dpipHistorical() {
   const contract = await verifyDpipContract()
@@ -116,6 +139,8 @@ export function dpipEnvironment(implementation, settings = {}) {
   const controls = new Map()
   const proxies = []
   const rebinds = []
+  const timers = new Map()
+  let timerId = 0
   const window = { ...eventTarget(), document }
   document.defaultView = window
   function createWindow() {
@@ -186,7 +211,18 @@ export function dpipEnvironment(implementation, settings = {}) {
       art.emit('destroy')
     },
   }
-  const context = vm.createContext({ window, document, console: { warn: (...args) => warnings.push(args) }, module: { exports: {} } })
+  const context = vm.createContext({ window, document, console: { warn: (...args) => warnings.push(args) }, module: { exports: {} }, setTimeout(callback, ms) {
+    const id = timerId++
+    timers.set(id, callback)
+    sleeps.push(ms)
+    const delay = settings.sleep ? settings.sleep(ms) : Promise.resolve()
+    void delay.then(() => {
+      const run = timers.get(id)
+      timers.delete(id)
+      run?.()
+    })
+    return id
+  }, clearTimeout(id) { timers.delete(id) } })
   context.exports = context.module.exports
   const evaluate = () => vm.runInContext(`(() => { ${implementation.code}\n })()`, context, { timeout: 5000 })
   evaluate()
@@ -208,6 +244,7 @@ export function dpipEnvironment(implementation, settings = {}) {
     proxies,
     subscriptions,
     rebinds,
+    timers,
     evaluate,
     createWindow,
     async flush() {

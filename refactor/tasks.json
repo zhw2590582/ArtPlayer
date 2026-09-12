@@ -3031,11 +3031,15 @@
         "CORE-16",
         "CORE-17"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "窗口生命周期、DOM 迁移、样式与事件 document 重绑分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DPIP-03-lifecycle.md",
+        "baselines/dpip-lifecycle-validation.json",
+        "dpip-validation.md"
+      ]
     },
     {
       "id": "PKG-DPIP-04",
