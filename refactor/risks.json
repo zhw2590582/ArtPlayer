@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-12",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -2985,20 +2985,48 @@
     {
       "id": "ADS-TYPE-01",
       "title": "Ads 声明丢失真实 html/video/url，旧 totalDuration 为 string，当前 source/type 未实现",
-      "confirmation": "source-observed",
-      "status": "open",
-      "owners": ["PKG-ADS-02", "PKG-ADS-04"],
-      "evidence": ["refactor/baselines/ads-release.json", "refactor/baselines/ads-contract.md", "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts", "packages/artplayer-plugin-ads/src/index.ts"],
-      "compatibleResolution": "同时保护实际 npm 字段/旧声明消费者和当前类型接受面；真实数字时长、i18n 与 source/type 别名的行为差异单独登记，不伪称旧实现支持别名。",
-      "closureCriteria": "两套旧消费者、可选工厂、合法运行字段和错误参数有严格正反例，声明与真实方法一致。"
+      "confirmation": "reproduced",
+      "status": "accepted-with-scope",
+      "owners": [
+        "PKG-ADS-02",
+        "PKG-ADS-04"
+      ],
+      "evidence": [
+        "refactor/baselines/ads-release.json",
+        "refactor/baselines/ads-contract.md",
+        "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts",
+        "packages/artplayer-plugin-ads/src/index.ts",
+        "refactor/changes/2026-09-12-PKG-ADS-04-types.md",
+        "refactor/scripts/ads-types.test.mjs"
+      ],
+      "compatibleResolution": "保留真实html/video/url/i18n及两套历史输入的普通调用；string时长仍在运行时拒绝、source/type仍不实现。用户2026-09-12明确接受Parameters字段推导变宽，README和编译用例提供准确Option、/runtime及收窄迁移；不扩大到其他API差异。",
+      "closureCriteria": "两套旧消费者、可选工厂、合法运行字段和错误参数有严格正反例，声明与真实方法一致。",
+      "resolutionRationale": "用户在收到具体TS2322影响和两套矛盾声明证据后答复“接受这项类型推导修正，写清迁移说明并继续”。五模式、冻结声明、隔离包和真实编辑器通过；诊断测试继续保留，不声称所有历史TS程序无改动兼容。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-ADS-04-types.md",
+        "refactor/baselines/ads-types-validation.json",
+        "packages/artplayer-plugin-ads/README.md",
+        "refactor/scripts/ads-types.test.mjs",
+        "test/types/ads.ts"
+      ]
     },
     {
       "id": "ADS-DIST-01",
       "title": "Ads npm 1.0.6 default namespace 与未发布 2.1.0 callable/exports 分发不同",
       "confirmation": "reproduced",
       "status": "open",
-      "owners": ["PKG-ADS-04", "PKG-ADS-06", "REL-01"],
-      "evidence": ["refactor/baselines/ads-release.json", "refactor/baselines/ads-contract.md", "refactor/scripts/ads-contract.test.mjs", "packages/artplayer-plugin-ads/package.json"],
+      "owners": [
+        "PKG-ADS-04",
+        "PKG-ADS-06",
+        "REL-01"
+      ],
+      "evidence": [
+        "refactor/baselines/ads-release.json",
+        "refactor/baselines/ads-contract.md",
+        "refactor/scripts/ads-contract.test.mjs",
+        "packages/artplayer-plugin-ads/package.json",
+        "refactor/baselines/ads-types-validation.json"
+      ],
       "compatibleResolution": "保留旧 require(pkg).default、global 与有效 dist 路径，同时支持当前 callable/ESM/legacy。工作区 2.1.0 不冒充实际已发布版本，正式目标仍按计划 3.0.0。",
       "closureCriteria": "工作区外真实 tarball 的旧/新导入、浏览器与声明入口全部验证，版本占用再次核实。"
     },

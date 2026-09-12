@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ADS-04",
+  "status": "done",
+  "sourceCommit": "39e2d4cd",
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "7d56a87d087e96cb34465201cdf5c0926b5714a215f749e22bba96f908a64711"
+    },
+    {
+      "file": "scripts/build-ts.js",
+      "sha256LF": "0453b9a9ac25f5be99e9ecfe222c6ae1d16540374b2b6c9b7529a54bdd50f91a"
+    },
+    {
+      "file": "scripts/plugin-editor-types.mjs",
+      "sha256LF": "6ecf896e084a19e5a9a9e7aca65a1108d96d842e3e2da61a05755d74a8f7f9c8"
+    },
+    {
+      "file": "scripts/typecheck.mjs",
+      "sha256LF": "9e439c300afa6e37813db312478a3ac3f47d0bb363e615ec49c67cd6ecdbb883"
+    },
+    {
+      "file": "test/types/ads.ts",
+      "sha256LF": "16b333c61f7a57f9d8ba8e6fab6e40aba761c4dc746e99d6b38e122315b0dde3"
+    },
+    {
+      "file": "test/types/ads-source.ts",
+      "sha256LF": "02221946a6cb726045c4910a40027ff8e0a6e011426443e28e11762bc1cdb52e"
+    },
+    {
+      "file": "test/ads.test.js",
+      "sha256LF": "0b5406a5aca3cd69672343f00492f6fcb22db17ec39056f1d89fb5cdd467a7d6"
+    },
+    {
+      "file": "test/browser/ads-editor-types.spec.js",
+      "sha256LF": "e55c8674e93b04342e6ca0325a411b74fa4cf8d331e57e571e555c4c1e706b80"
+    },
+    {
+      "file": "refactor/scripts/ads-types.test.mjs",
+      "sha256LF": "ddecd08afe4f04740c3c915e3a54c88d94fecd4796cbe8e1c668d69c46322685"
+    },
+    {
+      "file": "refactor/scripts/ads-package-types.mjs",
+      "sha256LF": "846af87f5f7f0c84fcbccecd4b3dfd6e2c1946ce47dfe7122760fe5f25cf5b6a"
+    },
+    {
+      "file": "refactor/fixtures/consumers/ads-published.ts",
+      "sha256LF": "0b8e5bb9bb74aebcf309b7af8942a7cbe6036de14f07fac121959eeb7d7d3910"
+    },
+    {
+      "file": "refactor/fixtures/consumers/ads-workspace.ts",
+      "sha256LF": "aee3b18b9c8f566a71e1e9d31a2ce8cdeae5664b246806bceed66bc97e18129e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-ads.d.ts",
+      "sha256LF": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/package.json",
+      "sha256LF": "9a7d0a2e917902bb64282566e96123244a81aa4859a82c6b1c711d639660a9bf"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/tsconfig.json",
+      "sha256LF": "583e4ac1afa99e3a29c7f899df9fdeefcbd14d3847d69143e3fa6a8facac6d99"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/countdown.ts",
+      "sha256LF": "7dab796a3d8fb757da7f87e4396403f0687af52d0876cf74ebb2b8db7c2e752a"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/index.ts",
+      "sha256LF": "7b0e155a6371c71a5c3f5ba0e9e95737648a2b73b0cf124536de8b6f79a92371"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/options.ts",
+      "sha256LF": "3ce2ad78b9f0288314fa75adf14776adf10f2205789268e9599a6d551b3b8b4f"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/resources.ts",
+      "sha256LF": "ba0d5b5f25d79929a39a9cda6b80b9e60a2b746e20312aa658d84fbb9be6562f"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/session.ts",
+      "sha256LF": "59540b169b7bb348ddd1d773368717cbd6c4d3b1b28305c1c759fea6aef8d827"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/style.less",
+      "sha256LF": "0eeed3f29ccafc6836f5bc4338f58f784edd114d2b100fda7fc395329031a406"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/types.ts",
+      "sha256LF": "219d5b06bdbece09b88640fe6f2bc27c44dd34eff5909cec9f7405a9dced759a"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/view.ts",
+      "sha256LF": "7d2cba7a3e20ce02288627723ebc9256d61cee313c3a7d00a31373b7f250eb91"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.cts",
+      "sha256LF": "ccd2d5f47bb94f00cad3950d8fa8670f6fd46b384876b0d1c0325ff209a1a1d1"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.mts",
+      "sha256LF": "f8c5b9843d0992c2f01200581b8d1c166ba4d3423ccc87496c0a4c0bae5a9c5b"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/artplayer-plugin-ads.d.ts",
+      "sha256LF": "a347e5a3e244ff0e58a28cad7c0e84adcdbadbef4dfe2128c525e6d317e7e0bb"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/runtime/index.d.cts",
+      "sha256LF": "d97fbe931948bce1eb4ab3be7780f096a4b0095db31c1d82b4df1f80ab5c2d90"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/runtime/index.d.mts",
+      "sha256LF": "5f1f7a86be47bd72571e2665f37007c7c250ea0b774806c4864221bd7bef5bc5"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/types/runtime/index.d.ts",
+      "sha256LF": "ddaa0c124b4d1d2b673f1305bbe625dda83d4296eb7d0a9ede202201bd483b8e"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js",
+      "sha256": "bc718001050bbe73f0fb450fbdffdf127dd2b0839e19fbd473fe0856e6cdae76",
+      "bytes": 7276,
+      "copy": {
+        "file": "docs/compiled/artplayer-plugin-ads.js",
+        "sha256": "bc718001050bbe73f0fb450fbdffdf127dd2b0839e19fbd473fe0856e6cdae76",
+        "bytes": 7276
+      }
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.legacy.js",
+      "sha256": "3f60e8a5d9fc93affff4ecc97b4b4035f743ab076da6baa05e3ea50052141fa6",
+      "bytes": 7715,
+      "copy": {
+        "file": "docs/compiled/artplayer-plugin-ads.legacy.js",
+        "sha256": "3f60e8a5d9fc93affff4ecc97b4b4035f743ab076da6baa05e3ea50052141fa6",
+        "bytes": 7715
+      }
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.mjs",
+      "sha256": "e04ac6e56f2f9170fd56f40f0a01c4ed990de6dc6abf5f176d2df4e340f23b6a",
+      "bytes": 13059,
+      "copy": {
+        "file": "docs/compiled/artplayer-plugin-ads.mjs",
+        "sha256": "e04ac6e56f2f9170fd56f40f0a01c4ed990de6dc6abf5f176d2df4e340f23b6a",
+        "bytes": 13059
+      }
+    }
+  ],
+  "checks": [
+    {
+      "file": "refactor/.cache/ads04-types-first.log",
+      "sha256": "c18abde08ebfb2e58d076c2be9537ede0f26b98697822dec1380e68c259336e3",
+      "bytes": 490
+    },
+    {
+      "file": "refactor/.cache/ads04-types-final.log",
+      "sha256": "adf2534bbbb1e480c6697889554333c4db37dbf488c3dae84b35c91f25082bab",
+      "bytes": 481
+    },
+    {
+      "file": "refactor/.cache/ads04-build.log",
+      "sha256": "b13f278c4875a97015e66b17287b83c8e59d539a453136f9389c1fc03c30e282",
+      "bytes": 1438
+    },
+    {
+      "file": "refactor/.cache/ads04-artifacts-node.log",
+      "sha256": "56b6327c75b2e231e5a6f5c4ed31cc715fc8459f17d2770cc5a9f70fc3405509",
+      "bytes": 21421
+    },
+    {
+      "file": "refactor/.cache/ads04-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "node": {
+    "passed": 190,
+    "failed": 0,
+    "scope": "Source, three candidate builds, both frozen implementations. Four new candidate default identity contracts."
+  },
+  "ci": {
+    "file": "refactor/.cache/ads04-ci.log",
+    "sha256": "89a90190c53142bf8b46a75d7cea7f77e0a64739ec4a0e40d44e15d965c82f9d",
+    "bytes": 87364,
+    "passed": 834,
+    "groups": [
+      771,
+      14,
+      49
+    ],
+    "productionTS": 269,
+    "note": "Full local CI before final approval documentation and migration fixture additions; final focused type tests and isolated installation rerun afterwards. No runtime changes afterwards."
+  },
+  "installed": {
+    "report": {
+      "file": "refactor/.cache/ads-package-types-ViT0Rk/report.json",
+      "sha256": "790e857b2de783682ce920528f8e434900027c031e58389e6168d661270f99b5",
+      "bytes": 27243
+    },
+    "files": [
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/artplayer-pack.log",
+        "sha256": "2bfac87c586ecfd7b5bcd526df4ea5b029ecf6aa64cce74aa7d40655a7fb608f",
+        "bytes": 109
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/artplayer-plugin-ads-pack.log",
+        "sha256": "40c8eba25889d42ff743390b7a30a180dc0d799cc61f37425a3a17099df35855",
+        "bytes": 120
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/artplayer-plugin-ads.tgz",
+        "sha256": "61fc2065715603a6fec0385ea6f2c583c72a06717c60e590b644714fa40142da",
+        "bytes": 13099
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/artplayer.tgz",
+        "sha256": "2139af017670a4f30f667bf5fdc1aa680f3e03b9c8d3cb767fc92d6345aedff5",
+        "bytes": 280395
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/frozen-install.log",
+        "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8",
+        "bytes": 56
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/install.log",
+        "sha256": "c3b09f4c65bfb4a1bf31ddd2e3328c22988cf52a31e36c31ea2de4d3132a89c6",
+        "bytes": 142
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/report.json",
+        "sha256": "790e857b2de783682ce920528f8e434900027c031e58389e6168d661270f99b5",
+        "bytes": 27243
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/runtime-exports.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "file": "refactor/.cache/ads-package-types-ViT0Rk/yarn.lock",
+        "sha256": "dfbe3a9bb57cda8f2a56e56be62eb86f4621357bfe809404c53d8627c6f50012",
+        "bytes": 1142
+      }
+    ],
+    "log": {
+      "file": "refactor/.cache/ads04-isolated-approved.log",
+      "sha256": "5fff64be2b2a5842114383e1f179d82bafe85935bd37f383653416f6c5eeea65",
+      "bytes": 623
+    }
+  },
+  "browsers": [
+    {
+      "name": "editor-browser",
+      "stats": {
+        "startTime": "2026-09-12T00:13:32.234Z",
+        "duration": 5034.381,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads04-editor-browser-report.json",
+        "sha256": "dc368e26442ebd5ba13c248420f3ec0f0a6ab131bb0b202f2c235b3db45e5e92",
+        "bytes": 33504
+      },
+      "log": {
+        "file": "refactor/.cache/ads04-editor-browser.log",
+        "sha256": "5e883ca8658726669d00b22cf288437588dae0a571c7c13a1527fdd2c18de80f",
+        "bytes": 1624
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads04-editor-browser-results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        }
+      ]
+    },
+    {
+      "name": "editor-legacy-browser",
+      "stats": {
+        "startTime": "2026-09-12T00:18:00.519Z",
+        "duration": 6241.242,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads04-editor-legacy-browser-report.json",
+        "sha256": "a4986570a83a82c1ef1d3649d41b49c02cd242bf0bed48905b218d838d754afd",
+        "bytes": 33696
+      },
+      "log": {
+        "file": "refactor/.cache/ads04-editor-legacy-browser.log",
+        "sha256": "565c6e84a7fdf4c5be7763aa618319f2e79f9b85370d461a78fac770e5092503",
+        "bytes": 1624
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads04-editor-legacy-browser-results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        }
+      ]
+    },
+    {
+      "name": "browser-main",
+      "stats": {
+        "startTime": "2026-09-12T00:15:13.125Z",
+        "duration": 152809.649,
+        "expected": 144,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads04-browser-main-report.json",
+        "sha256": "3db67f4bc41458cdb0d5f6e51d981656111fe6010378aa135f5fc1c3a8955fff",
+        "bytes": 9439737
+      },
+      "log": {
+        "file": "refactor/.cache/ads04-browser-main.log",
+        "sha256": "987573115af5eeaf03ea33d355238a1c12fd17ae0dea9e01836d151d5931c42b",
+        "bytes": 25421
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads04-browser-main-results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        }
+      ]
+    }
+  ],
+  "acceptedDifference": {
+    "id": "ADS-TYPE-01",
+    "date": "2026-09-12",
+    "decision": "接受这项类型推导修正，写清迁移说明并继续",
+    "scope": "Only scalar inference correction between conflicting published/workspace declarations. Old calls accepted; string durations still rejected at runtime; migration examples compiled.",
+    "publishedDiagnostics": [
+      2322
+    ],
+    "workspaceDiagnostics": [
+      2322,
+      2322
+    ],
+    "compilers": [
+      "4.3.5",
+      "5.9.3"
+    ]
+  },
+  "unresolved": [
+    "Full legacy media matrix from 03 was not rerun for 04: 04 checks all three formats in Node, main media 144 and main/legacy editor 3 each.",
+    "Native fullscreen, real hidden-page/device behavior and complete historical distribution remain 05/06.",
+    "No push, tag, merge or npm publication."
+  ]
+}

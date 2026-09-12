@@ -2,6 +2,8 @@ import type Artplayer from 'artplayer'
 import type { Input, Options } from './types'
 
 export function normalizeOptions(input: Input | undefined, validate: typeof Artplayer.validator): Options {
+  // The legacy declaration accepts strings, but this unchanged validator proves
+  // numeric runtime durations before the result crosses the declaration boundary.
   return validate({
     html: '',
     video: '',
@@ -24,5 +26,5 @@ export function normalizeOptions(input: Input | undefined, validate: typeof Artp
     totalDuration: 'number',
     muted: '?boolean',
     i18n: { close: 'string', countdown: 'string', detail: 'string', canBeClosed: 'string' },
-  })
+  }) as Options
 }

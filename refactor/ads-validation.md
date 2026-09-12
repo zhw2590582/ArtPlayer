@@ -37,6 +37,19 @@ Node 测试已接入 test:unit，因此 ci:check 会执行。浏览器测试独�
 `ARTPLAYER_ADS_ARTIFACT` 给浏览器指定单个 script 产物，默认按仓库 Vite 配置从源码
 内存构建。路径无效直接失败，不自动回退。实际发布 bundle 总是先校验归档及成员哈希。
 
+## 04 类型与编辑器验证
+
+`refactor/scripts/ads-types.test.mjs` 验证五种类型消费模式、十个无效用法，以及实际
+npm 和冻结工作区声明。普通调用通过不代表 scalar 提取兼容；诊断测试明确复现
+旧字段读取在候选上的 TS2322。用户明确接受此项修正后，ADS-TYPE-01 标为
+accepted-with-scope；保留诊断并编译迁移示例，不把批准范围扩大到其他 API。
+
+`yarn test:ads-types-package` 在工作区外安装实际 tarball，验证安装字节、冻结离线
+重装、五种类型模式和 Node exports。`test/browser/ads-editor-types.spec.js` 从
+本地 docs 加载真实 Monaco 和生成声明，执行其编译结果并检查 default 工厂身份。
+`test/ads.test.js` 增加候选 `.default === factory` 及同步取消断言，覆盖三种产物。
+这些检查不替代全部历史子路径、媒体/设备与发布验收。
+
 ## 边界与文件职责
 
 - `test/helpers/ads.js`：来源加载、冻结 bundle 的 VM、可控时钟和最小 ArtPlayer 宿主。

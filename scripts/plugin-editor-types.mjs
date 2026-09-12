@@ -8,6 +8,8 @@ export function generatePluginEditorDeclaration(code, name) {
   assert(/^[a-z_$][\w$]*$/i.test(name), 'Invalid plugin global')
   const source = ts.createSourceFile('plugin.d.ts', code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
   assert.equal(source.parseDiagnostics.length, 0, 'Invalid plugin declaration syntax')
+  if (source.statements.some(node => ts.isExportAssignment(node) && node.isExportEquals))
+    return generateCommonJSPluginEditor(source, name)
   const factory = ts.factory
   const definitions = []
   const aliases = []
@@ -52,6 +54,49 @@ export function generatePluginEditorDeclaration(code, name) {
     factory.createExportAssignment(undefined, true, factory.createIdentifier(name)),
     factory.createNamespaceExportDeclaration(factory.createIdentifier(name)),
   ]
+  const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed })
+  return `// Generated from the package public declaration by yarn build:ts. Do not edit.\n/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */\n${statements.map(node => printer.printNode(ts.EmitHint.Unspecified, node, source)).join('\n')}\n`
+}
+
+function generateCommonJSPluginEditor(source, name) {
+  const statements = []
+  let namespace = false
+  let callable = false
+  let exported = false
+  let global = false
+  for (const node of source.statements) {
+    if (ts.isImportDeclaration(node)) {
+      assert(node.importClause?.isTypeOnly && !node.importClause.namedBindings && node.importClause.name?.text === 'Artplayer' && node.moduleSpecifier.text === 'artplayer', 'Unsupported CommonJS plugin editor import')
+      continue
+    }
+    if (ts.isModuleDeclaration(node)) {
+      assert.equal(node.name.text, name, 'Unexpected plugin namespace')
+      assert(node.body && ts.isModuleBlock(node.body) && node.body.statements.every(item => ts.isInterfaceDeclaration(item) || ts.isTypeAliasDeclaration(item)), 'Editor namespace must contain only public type declarations')
+      namespace = true
+    }
+    else if (ts.isVariableStatement(node)) {
+      const definitions = node.declarationList.declarations
+      assert.equal(definitions.length, 1)
+      const definition = definitions[0]
+      assert.equal(definition.name.text, name)
+      assert(ts.isTypeReferenceNode(definition.type) && ts.isQualifiedName(definition.type.typeName)
+        && definition.type.typeName.left.text === name && definition.type.typeName.right.text === 'Factory', 'Editor export must use its public Factory interface')
+      callable = true
+    }
+    else if (ts.isExportAssignment(node)) {
+      assert(node.isExportEquals && node.expression.text === name, 'Unexpected CommonJS plugin export')
+      exported = true
+    }
+    else if (ts.isNamespaceExportDeclaration(node)) {
+      assert.equal(node.name.text, name)
+      global = true
+    }
+    else {
+      assert.fail('Unsupported CommonJS plugin editor declaration')
+    }
+    statements.push(node)
+  }
+  assert(namespace && callable && exported && global, 'Incomplete CommonJS plugin editor declaration')
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed })
   return `// Generated from the package public declaration by yarn build:ts. Do not edit.\n/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */\n${statements.map(node => printer.printNode(ts.EmitHint.Unspecified, node, source)).join('\n')}\n`
 }

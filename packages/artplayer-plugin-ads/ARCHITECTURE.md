@@ -1,9 +1,9 @@
 # Ads implementation and maintenance
 
 Ads is a single preroll attached by `artplayerPluginAds(option)(art)`. The factory and
-returned `{ name, skip, pause, play }` are synchronous. Package public declarations are
-still scheduled for PKG-ADS-04; do not infer that their current source/type fields are
-implemented runtime aliases. Runtime input remains html/video/url plus timing, mute and i18n.
+returned `{ name, skip, pause, play }` are synchronous. Runtime input remains html/video/url
+plus timing, mute and i18n. Historical source/type fields are accepted by the compatibility
+declaration but are not implemented runtime aliases.
 
 ## Module boundaries
 
@@ -11,7 +11,7 @@ implemented runtime aliases. Runtime input remains html/video/url plus timing, m
 | --- | --- |
 | src/index.ts | Public factory, checked legacy constructor capabilities, import-time style injection |
 | src/options.ts | Per-attachment defaults and the existing shallow validator schema |
-| src/types.ts | Internal options, result and narrow core/DOM dependencies; public types remain separate for now |
+| src/types.ts | Normalized options and narrow core/DOM dependencies, reusing public input/result shapes |
 | src/countdown.ts | One owned timeout, whole-second counting, pause/resume and terminal cancellation; no core or DOM dependency |
 | src/view.ts | Existing HTML/CSS hooks, labels, ad element, mute and fullscreen icon rendering |
 | src/resources.ts | Instance-owned core/DOM subscriptions, guarded callbacks and disposal that continues after cleanup failures |
@@ -21,6 +21,33 @@ The entry calls options/session. Session composes view/countdown/resources. View
 only a parent, icons, options, three DOM utilities and callbacks, rather than the whole player.
 Style remains in src/style.less. There are no runtime imports from the ArtPlayer core package;
 all imports of its declarations are erased. Old cores do not need new lifecycle helpers.
+
+## Public declarations and imports
+
+`types/artplayer-plugin-ads.d.ts` owns the callable namespace and public shapes. CommonJS
+bridges use `.d.cts`; ESM bridges use `.d.mts`. Root and `/legacy` accept historical inputs.
+The new `/runtime` entry resolves to the same JS implementation and restricts options to
+implemented fields. `Option` is accurate, `LegacyOption` preserves the published string
+duration declaration error, and `WorkspaceOption` represents the unpublished source/type
+declaration. `CompatOption` accepts both families. No runtime duration coercion was added.
+The existing validator rejects string durations before the single localized normalization
+assertion in options.ts. Translation objects still replace all four fields together.
+
+The factory has a self-referencing `.default`, supporting both callable require and the
+published `require(package).default` access. This does not emulate the old noncallable
+CommonJS namespace object's identity or key set. The returned plugin and its lifecycle
+remain unchanged. Root and `/runtime` resolve to the same module for each module system.
+
+The editor generator in scripts/plugin-editor-types.mjs accepts this type-only namespace
+shape explicitly and rejects unknown imports/exports. Generate docs globals with
+`yarn build:ts`; test their semantics and actual Monaco emit/run, not only parseability.
+
+ADS-TYPE-01 is accepted with scope by the maintainer on 2026-09-12: `Parameters<typeof factory>[0]` accepts both old option
+objects, but reading totalDuration yields `number | string | undefined`; the published
+declaration yielded `string | undefined`. Workspace source/type fields also become optional.
+Frozen consumers reproduce these differences. This approval covers only these historical
+inference corrections, not general API changes. Preserve the diagnostic cases and migration
+examples in the README; do not claim every historical TS program compiles unchanged.
 
 ## State and ordering
 
@@ -78,6 +105,9 @@ generates main/legacy/ESM through the repository build. Do not hand-edit dist or
 
 Tests distinguish actual media decoding from injected errors/controlled clocks. Baseline and
 open release gates live in [Ads validation](../../refactor/ads-validation.md). Public declaration
-reconciliation, old CommonJS default compatibility, isolated package consumption and demo
-validation remain PKG-ADS-04/06. Real hidden-page/device behavior and complete media-resource
+reconciliation is recorded in PKG-ADS-04; complete historical distribution and demo validation
+remain PKG-ADS-06. `yarn test:ads-types-package` packs and installs outside the workspace,
+checks all installed bytes, frozen offline install, five compiler modes and Node exports.
+`yarn test:browser test/browser/ads-editor-types.spec.js` verifies actual Monaco integration.
+Real hidden-page/device behavior and complete media-resource
 acceptance remain PKG-ADS-05. No claim of compatibility with every historical 4.x core is made.

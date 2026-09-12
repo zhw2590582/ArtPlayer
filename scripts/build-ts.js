@@ -43,7 +43,7 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
     const source = String(fs.readFileSync(type))
-    const semanticPlugin = ['artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl'].includes(name)
+    const semanticPlugin = ['artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds'].includes(name)
     const code = semanticPlugin
       ? generatePluginEditorDeclaration(source, name)
       : `${source.replace(reg, '')}\nexport = ${name};\nexport as namespace ${name};\n`

@@ -8,6 +8,20 @@ const skips = host => host.calls.filter(call => call[0] === 'emit' && call[1] ==
 const clicks = host => host.calls.filter(call => call[0] === 'emit' && call[1] === 'artplayerPluginAds:click')
 const contentPlays = host => host.calls.filter(call => call[0] === 'content.play')
 
+for (const { name, factory } of implementations.filter(item => !item.historical)) {
+  test(`${name}: historical default and callable entry share one factory and synchronous contract`, (t) => {
+    const env = adsEnvironment(t)
+    assert.equal(factory.default, factory)
+    const host = env.host()
+    const result = factory.default({ html: 'ad' })(host.art)
+    assert.equal(result.name, 'artplayerPluginAds')
+    assert.equal(result.skip(), undefined)
+    host.start()
+    assert.equal(host.node(), undefined)
+    assert.equal(env.timers.size, 0)
+  })
+}
+
 for (const { name, factory } of implementations) {
   test(`${name}: lazy synchronous factory starts once after ready and either playback event`, (t) => {
     const env = adsEnvironment(t)

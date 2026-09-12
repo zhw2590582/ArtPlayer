@@ -390,6 +390,7 @@ function artplayerPluginAds(input) {
     return createSession(art, option, { volume, volumeClose, fullscreenOn, fullscreenOff, loading }, constructor.utils);
   };
 }
+const index = Object.assign(artplayerPluginAds, { default: artplayerPluginAds });
 if (typeof document !== "undefined" && !document.getElementById("artplayer-plugin-ads")) {
   const element = document.createElement("style");
   element.id = "artplayer-plugin-ads";
@@ -397,5 +398,5 @@ if (typeof document !== "undefined" && !document.getElementById("artplayer-plugi
   document.head.appendChild(element);
 }
 export {
-  artplayerPluginAds as default
+  index as default
 };

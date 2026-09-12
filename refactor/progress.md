@@ -1,5 +1,20 @@
 # 进度与证据
 
+## 最新完成：Ads-04 类型与导入兼容
+
+公开声明补齐 html/video/url/i18n，增加 CJS/ESM 类型桥和同一运行时的准确 /runtime
+类型入口。保留两套历史输入的普通调用，并补齐 require(pkg).default 自引用兼容。
+严格消费者、历史声明对照、隔离安装和真实 Monaco 编译运行已经接入可重跑测试。
+
+同一 Parameters 提取类型无法同时维持发布版 string 和工作区 number 时长字段；
+普通调用通过，但旧 scalar 读取分别复现1/2个 TS2322。用户已明确接受这项类型
+推导修正并要求迁移说明，ADS-TYPE-01 据此 accepted-with-scope，不扩展为其他豁免。
+完整 CI 834 项通过，三格式 Node190、main真实媒体144、main/legacy编辑器各3项通过；
+最终安装包五模式和迁移示例继续严格验证。04完成，下一步05真实页面与媒体/UI验收。
+当前217项：78 done、4 doing、135 todo。详细结果见
+[实施记录](changes/2026-09-12-PKG-ADS-04-types.md) 和
+[验证证据](baselines/ads-types-validation.json)。
+
 ## 最新完成：Ads-03 源码拆分与生命周期修复
 
 Ads 原入口拆为 7 个严格 TS 模块，职责为配置、类型、计时、资源、视图、session 和入口。

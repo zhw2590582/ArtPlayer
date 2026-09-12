@@ -1,5 +1,12 @@
 # 已实现的类型检查与迁移入口
 
+PKG-ADS-04 已协调公开声明：根入口保留历史输入，/runtime 使用准确输入，同一 JS
+实现不进行字符串时长转换。CJS/ESM 桥、五种消费者模式、实际旧声明对照与真实 Monaco
+生成运行已接入。`ads-source.ts` 检查源码与公开工厂的赋值关系；`ads.ts` 包含十个
+无效用法。`yarn test:ads-types-package` 在工作区外验证 tarball 安装后的同一矩阵。
+`ads-types.test.mjs` 额外复现旧 scalar 提取变宽的 TS2322；用户明确接受这项推导修正，
+已记录迁移说明，不扩大为其他发布豁免。详情见 [类型记录](changes/2026-09-12-PKG-ADS-04-types.md)。
+
 PKG-HLS-04 增加 HLS 的 5 个严格 TS 源模块，公开声明保留历史 .d.ts 并增加 CJS/ESM 条件桥。
 test/types/hls-control.ts 覆盖配置省略、旧 Parameters 提取、默认字段和 SDK 泛型、同步返回，
 hls-source.ts 检查源码工厂与公开工厂可相互赋值。hls-types.test.mjs 对五组编译模式检查正反例，

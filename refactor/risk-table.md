@@ -141,7 +141,7 @@
 | DASH-TYPE-01 | resolved / 源码/产物事实 | DASH 类型未表达默认工厂参数、SDK 回调对象和现代模块入口 | PKG-DASH-04 |
 | DASH-DEMO-01 | open / 源码/产物事实 | DASH 示例仅新 SDK 且重复安装会累积销毁回调 | PKG-DASH-06 |
 | DASH-SEEK-01 | open / 已复现 | dash.js 4.5.2 空裁剪漏更新缓冲量，稳定暂停 seek 后调度停滞 | PKG-DASH-05, REVIEW-02 |
-| ADS-TYPE-01 | open / 源码/产物事实 | Ads 声明丢失真实 html/video/url，旧 totalDuration 为 string，当前 source/type 未实现 | PKG-ADS-02, PKG-ADS-04 |
+| ADS-TYPE-01 | accepted-with-scope / 已复现 | Ads 声明丢失真实 html/video/url，旧 totalDuration 为 string，当前 source/type 未实现 | PKG-ADS-02, PKG-ADS-04 |
 | ADS-DIST-01 | open / 已复现 | Ads npm 1.0.6 default namespace 与未发布 2.1.0 callable/exports 分发不同 | PKG-ADS-04, PKG-ADS-06, REL-01 |
 | ADS-CORE-01 | open / 源码/产物事实 | Ads 旧发布关联核心 4.5.5，当前源码新增 >=5 门槛和 document 事件桥依赖 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
 | ADS-LIFE-01 | open / 已复现 | Ads 计时链、重复/过早调用、工厂复用与销毁缺乏资源边界 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
