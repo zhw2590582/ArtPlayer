@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ADS-05",
+  "status": "doing",
+  "sourceCommit": "fb1cfa70",
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "55b35b5738356fb88755ff55f7b3baa274ff78ed02dbd84888aac34eb490f4a3"
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/src/session.ts",
+      "sha256LF": "c45b0c63870975cf8fbd6f93340427de387d9dc15c56dfb3ad2ddacad8380e63"
+    },
+    {
+      "file": "test/ads-lifecycle.test.js",
+      "sha256LF": "3411000b63e5bee5ec1f4a422d333e90a856d476eb9f544d5b1049dbd63fbbfd"
+    },
+    {
+      "file": "test/browser/ads-ui.spec.js",
+      "sha256LF": "90a215d534703aa69654a3258fa5a46c29c308645356348db0229e1bc950bf4f"
+    },
+    {
+      "file": "test/helpers/native-chrome.js",
+      "sha256LF": "4f486db36f3e5738ee835005b0bd073b3878507b6ea417a01e5663ab6954d93b"
+    },
+    {
+      "file": "refactor/scripts/ads-native-visibility.mjs",
+      "sha256LF": "7521c78c3874cdc4b5029fe85b00a9afc6b8a14fb71728d64e588717219f19d0"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js",
+      "sha256": "1429541242f49c4d558eda242a63b6e57a876c2dba06ce9f631d71d315028023",
+      "bytes": 7279,
+      "copy": {
+        "file": "docs/compiled/artplayer-plugin-ads.js",
+        "sha256": "1429541242f49c4d558eda242a63b6e57a876c2dba06ce9f631d71d315028023",
+        "bytes": 7279
+      }
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.legacy.js",
+      "sha256": "4f64ac015e0850b71f51cf01d9fc6f238c95414730c71e91d1240c40e28499d8",
+      "bytes": 7718,
+      "copy": {
+        "file": "docs/compiled/artplayer-plugin-ads.legacy.js",
+        "sha256": "4f64ac015e0850b71f51cf01d9fc6f238c95414730c71e91d1240c40e28499d8",
+        "bytes": 7718
+      }
+    },
+    {
+      "file": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.mjs",
+      "sha256": "8ad7df8145b2514467cac0f733151619c36fa965e620df575c0779604372503f",
+      "bytes": 13067,
+      "copy": {
+        "file": "docs/compiled/artplayer-plugin-ads.mjs",
+        "sha256": "8ad7df8145b2514467cac0f733151619c36fa965e620df575c0779604372503f",
+        "bytes": 13067
+      }
+    }
+  ],
+  "fixed": "Destroy before initialization no longer deletes a caller-owned undefined template.$ads descriptor. Reproduced first, then verified in source and all three generated artifacts.",
+  "node": {
+    "before": {
+      "file": "refactor/.cache/ads05-ownership-before.log",
+      "sha256": "05a9e9a3cfed36b11ea62c3695c3e6d4cebb08da03ed6832fd2d23c97110d9ce",
+      "bytes": 1308
+    },
+    "after": {
+      "file": "refactor/.cache/ads05-artifacts-node.log",
+      "sha256": "b89fdd0efe47c96c170ce3e6d97a47c919334832c7ef792359f0b5f41fa2dc1e",
+      "bytes": 21921
+    },
+    "passed": 194,
+    "failed": 0
+  },
+  "build": {
+    "file": "refactor/.cache/ads05-build.log",
+    "sha256": "be382dde6782d27827ddec67d4bd93b6e45e4ca6a88fad953316cb0c9ded107a",
+    "bytes": 1438
+  },
+  "browser": [
+    {
+      "format": "main",
+      "stats": {
+        "startTime": "2026-09-12T00:34:58.186Z",
+        "duration": 30596.369,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads05-ui-main-report.json",
+        "sha256": "dc641b693ded43d4bcd43e67c4772e0874243b8c50f1fddba22f5b5ee3ec26ea",
+        "bytes": 541550
+      },
+      "log": {
+        "file": "refactor/.cache/ads05-ui-main.log",
+        "sha256": "521308ceca482e1cb6584039c63e00601802a5f5ceb4bb140596969c94dfa9e1",
+        "bytes": 6563
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads05-ui-main-results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "stats": {
+        "startTime": "2026-09-12T00:44:58.841Z",
+        "duration": 25158.441,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "report": {
+        "file": "refactor/.cache/ads05-ui-legacy-report.json",
+        "sha256": "33ddb6f0f8ccb62af712c0fcd386e0aa86b88bd54aafc03b11e53c2ed9540ecc",
+        "bytes": 542840
+      },
+      "log": {
+        "file": "refactor/.cache/ads05-ui-legacy.log",
+        "sha256": "c1bd76322c2aeda4a348edb7b5953fd717efa9e53058a77110af2a19cc37c701",
+        "bytes": 6563
+      },
+      "results": [
+        {
+          "file": "refactor/.cache/ads05-ui-legacy-results/.last-run.json",
+          "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+          "bytes": 45
+        }
+      ]
+    }
+  ],
+  "native": [
+    {
+      "format": "main",
+      "browser": "152.0.7977.84",
+      "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "scope": "Native selected/background tabs in isolated installed Chrome. Desktop window occlusion excluded by --disable-backgrounding-occluded-windows; no focus or visibility property emulation. Does not prove minimized-window or mobile lifecycle behavior.",
+      "cases": [
+        {
+          "core": "published-4.5.5",
+          "media": "html",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": null,
+          "restoredVideo": null,
+          "destroyed": true
+        },
+        {
+          "core": "published-4.5.5",
+          "media": "video",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": {
+            "time": 0.428142,
+            "paused": true
+          },
+          "restoredVideo": {
+            "time": 2.350778,
+            "paused": false
+          },
+          "destroyed": true
+        },
+        {
+          "core": "published",
+          "media": "html",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": null,
+          "restoredVideo": null,
+          "destroyed": true
+        },
+        {
+          "core": "published",
+          "media": "video",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": {
+            "time": 0.423085,
+            "paused": true
+          },
+          "restoredVideo": {
+            "time": 2.34293,
+            "paused": false
+          },
+          "destroyed": true
+        },
+        {
+          "core": "candidate",
+          "media": "html",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": null,
+          "restoredVideo": null,
+          "destroyed": true
+        },
+        {
+          "core": "candidate",
+          "media": "video",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": {
+            "time": 0.431513,
+            "paused": true
+          },
+          "restoredVideo": {
+            "time": 2.356181,
+            "paused": false
+          },
+          "destroyed": true
+        }
+      ],
+      "report": {
+        "file": "refactor/.cache/ads-native-visibility-KDPUQX/report.json",
+        "sha256": "73a9cba3b6cb6772cd89f83fe8318f942d9502f764b39bf91b0d25050aaaa6ff",
+        "bytes": 8852
+      },
+      "files": [
+        {
+          "file": "refactor/.cache/ads-native-visibility-KDPUQX/report.json",
+          "sha256": "73a9cba3b6cb6772cd89f83fe8318f942d9502f764b39bf91b0d25050aaaa6ff",
+          "bytes": 8852
+        },
+        {
+          "file": "refactor/.cache/ads-native-visibility-KDPUQX/server.log",
+          "sha256": "f8605bce374d9ef389168f86c0cb76d3c35d68089a3c609bb9634f17ce455e57",
+          "bytes": 43
+        },
+        {
+          "file": "refactor/.cache/ads-native-visibility-KDPUQX/trace.zip",
+          "sha256": "cf8dc9ae78d9cfc441aa5d9ad907cdf23cb76456ccda0f32200ec83fb9a172e3",
+          "bytes": 2383611
+        }
+      ],
+      "log": {
+        "file": "refactor/.cache/ads05-native-main-video.log",
+        "sha256": "25249bdf4cb22e1277931a6393c9b036d593d694da210a057b249cf83137c598",
+        "bytes": 510
+      }
+    },
+    {
+      "format": "legacy",
+      "browser": "152.0.7977.84",
+      "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "scope": "Native selected/background tabs in isolated installed Chrome. Desktop window occlusion excluded by --disable-backgrounding-occluded-windows; no focus or visibility property emulation. Does not prove minimized-window or mobile lifecycle behavior.",
+      "cases": [
+        {
+          "core": "published-4.5.5",
+          "media": "html",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": null,
+          "restoredVideo": null,
+          "destroyed": true
+        },
+        {
+          "core": "published-4.5.5",
+          "media": "video",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": {
+            "time": 0.448822,
+            "paused": true
+          },
+          "restoredVideo": {
+            "time": 2.388307,
+            "paused": false
+          },
+          "destroyed": true
+        },
+        {
+          "core": "published",
+          "media": "html",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": null,
+          "restoredVideo": null,
+          "destroyed": true
+        },
+        {
+          "core": "published",
+          "media": "video",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": {
+            "time": 0.430689,
+            "paused": true
+          },
+          "restoredVideo": {
+            "time": 2.361555,
+            "paused": false
+          },
+          "destroyed": true
+        },
+        {
+          "core": "candidate",
+          "media": "html",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": null,
+          "restoredVideo": null,
+          "destroyed": true
+        },
+        {
+          "core": "candidate",
+          "media": "video",
+          "hiddenText": "30秒",
+          "events": [
+            {
+              "hidden": true,
+              "trusted": true
+            },
+            {
+              "hidden": false,
+              "trusted": true
+            }
+          ],
+          "hiddenVideo": {
+            "time": 0.441339,
+            "paused": true
+          },
+          "restoredVideo": {
+            "time": 2.365354,
+            "paused": false
+          },
+          "destroyed": true
+        }
+      ],
+      "report": {
+        "file": "refactor/.cache/ads-native-visibility-lSst7b/report.json",
+        "sha256": "dcd60b88cff93a9843819ce7ceb8aab71c43f58eddf57bcdd68a2b62c7e79e07",
+        "bytes": 8902
+      },
+      "files": [
+        {
+          "file": "refactor/.cache/ads-native-visibility-lSst7b/report.json",
+          "sha256": "dcd60b88cff93a9843819ce7ceb8aab71c43f58eddf57bcdd68a2b62c7e79e07",
+          "bytes": 8902
+        },
+        {
+          "file": "refactor/.cache/ads-native-visibility-lSst7b/server.log",
+          "sha256": "f8605bce374d9ef389168f86c0cb76d3c35d68089a3c609bb9634f17ce455e57",
+          "bytes": 43
+        },
+        {
+          "file": "refactor/.cache/ads-native-visibility-lSst7b/trace.zip",
+          "sha256": "890ef0d36e9f32b98590279281d732767f21a6b4c474be924adc7d7756a6c018",
+          "bytes": 2453467
+        }
+      ],
+      "log": {
+        "file": "refactor/.cache/ads05-native-legacy-video.log",
+        "sha256": "6e01a308c3c218fff108f47be871b379c0d0c38279980540fbee3623ef351979",
+        "bytes": 510
+      }
+    }
+  ],
+  "visual": {
+    "file": "refactor/.cache/ads05-narrow-review.png",
+    "sha256": "ce01253a61890514a79d66a693c8839a659038451f938b8995ed9d03435a91ca",
+    "bytes": 5387,
+    "inspected": true,
+    "note": "390px viewport, 360px player; translated close/countdown/details and fullscreen controls visible without overflow. Not a physical phone."
+  },
+  "ci": {
+    "file": "refactor/.cache/ads05-ci.log",
+    "sha256": "cb77116e93e65ef47e9118b3b6ffbcf1868f6b0c535593bea480a9a9d9031db3",
+    "bytes": 87478,
+    "groups": [
+      772,
+      14,
+      49
+    ],
+    "passed": 835,
+    "productionTS": 269
+  },
+  "diagnosticAttempts": [
+    {
+      "file": "refactor/.cache/ads05-ui-source-report.json",
+      "sha256": "144a699807c807ee15e753ef2fd1a79939bceef959875da037600f6f91008db1",
+      "bytes": 533140
+    },
+    {
+      "file": "refactor/.cache/ads05-visibility-probe.json",
+      "sha256": "e8e8fec96c14429e03669fedef2c4cdb85de614d4e0aac7b8088e57643b91eef",
+      "bytes": 1356
+    },
+    {
+      "file": "refactor/.cache/ads05-visibility-chrome-probe.json",
+      "sha256": "436d44baa09185e3ea198cce9bda37c88fa2499ae77147f65fab910286827021",
+      "bytes": 541
+    },
+    {
+      "file": "refactor/.cache/ads05-native-cdp-probe.json",
+      "sha256": "f4ee12f981fdc5000ae43cd46844772898bed4eafcdc3843b09b71bdaf5086f4",
+      "bytes": 643
+    },
+    {
+      "file": "refactor/.cache/ads05-headed-install-script.log",
+      "sha256": "7a3bc4655c858bccff0130b36575da3dc10982a716bd269b49bdb49677eeb13c",
+      "bytes": 5297
+    },
+    {
+      "file": "refactor/.cache/ads-native-visibility-tJauB0/report.json",
+      "sha256": "6a04f099e92d8bba7396dc15955ff319487ebf16d6e551e22617ba86141eb65a",
+      "bytes": 6703
+    },
+    {
+      "file": "refactor/.cache/ads-native-visibility-ORaYRO/report.json",
+      "sha256": "d3601fd60d6da0b7178b8620c7ba3f6f684f192e915f19ece71c236c877b8a8d",
+      "bytes": 7109
+    },
+    {
+      "file": "refactor/.cache/ads-native-visibility-ghHsLL/report.json",
+      "sha256": "8aad442bf3f144d45deaa8ce134b8c2c6a6b2e7701cc8b1a1000250d26c3d295",
+      "bytes": 6379
+    },
+    {
+      "file": "refactor/.cache/ads-native-visibility-U9bOpa/report.json",
+      "sha256": "3839f6778d1ff6b3945b17a44baf6d68b50136b9f2c1ca37a5d1f16d7c9d5236",
+      "bytes": 6843
+    }
+  ],
+  "remaining": [
+    "Physical mobile/Safari lifecycle and minimize/background policy are not covered by Chromium/Firefox/WebKit automation or native Chrome tab checks; task05 remains doing.",
+    "Complete historical package distribution and docs demo belong to task06.",
+    "VAST-only VPN script loading exception recorded after user correction; not applied to Ads.",
+    "No push, tag, merge or publish."
+  ]
+}

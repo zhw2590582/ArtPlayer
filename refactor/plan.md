@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 217 项，范围 22 个包及工作区/示例。
 
-状态：todo 135 / doing 4 / blocked 0 / done 78 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 134 / doing 5 / blocked 0 / done 78 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -260,7 +260,7 @@
 | PKG-ADS-02 | artplayer-plugin-ads<br>建立特有行为与错误测试 | PKG-ADS-01, ENG-03, ENG-05 | 固定 npm 1.0.6 与工作区契约；HTML/视频/图片 HTML、跳过阈值、计时链、工厂复用、多实例、过早/重复方法、播放拒绝与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-ADS-03 | artplayer-plugin-ads<br>整理内部职责与资源 | PKG-ADS-02, CORE-10, CORE-13 | 配置/广告状态/计时/视图/主视频恢复分离，保留产品规则；资源与版本检查改用经验证的旧核心能力边界 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-ADS-04 | artplayer-plugin-ads<br>迁移自有源码和公开类型 | PKG-ADS-03, ENG-04, ENG-06, CORE-07 | 兼容真实 html/video/url/i18n、旧 export= 与工作区 source/type 类型接受面；时长 string/number 漂移与未实现别名单独处置 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-ADS-05 | artplayer-plugin-ads<br>验证新旧核心和组合 | PKG-ADS-04, CORE-22 | 本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-ADS-05 | artplayer-plugin-ads<br>验证新旧核心和组合 | PKG-ADS-04, CORE-22 | 本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-ADS-06 | artplayer-plugin-ads<br>验证分发并同步文档 | PKG-ADS-05, ENG-07 | ads.js/README/声明一致；旧 require(pkg).default、原 dist 路径、当前 callable/ESM/legacy 的隔离 tarball 及浏览器验收 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-vast
@@ -488,3 +488,4 @@
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)
 - PKG-ADS-04: [记录](changes/2026-09-12-PKG-ADS-04-types.md) [记录](baselines/ads-types-validation.json)
+- PKG-ADS-05: [记录](changes/2026-09-12-PKG-ADS-05-browser.md) [记录](baselines/ads-ui-visibility-validation.json)

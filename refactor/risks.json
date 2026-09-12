@@ -3034,7 +3034,7 @@
       "id": "ADS-CORE-01",
       "title": "Ads 旧发布关联核心 4.5.5，当前源码新增 >=5 门槛和 document 事件桥依赖",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-ADS-02",
         "PKG-ADS-03",
@@ -3046,16 +3046,27 @@
         "packages/artplayer-plugin-ads/src/index.ts",
         "refactor/baselines/ads-lifecycle-validation.json",
         "refactor/changes/2026-09-12-PKG-ADS-03-lifecycle.md",
-        "packages/artplayer-plugin-ads/ARCHITECTURE.md"
+        "packages/artplayer-plugin-ads/ARCHITECTURE.md",
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md"
       ],
       "compatibleResolution": "先核验实际核心归档和能力，通过本地 fallback 保留原用户调用；不能用未发布源码门槛强制全部旧消费者升级，也不泛称全部 4.x 通过。",
-      "closureCriteria": "4.5.5 关联来源和实际可用组合明确，5.4.1/候选核心与原生 visibility/事件桥路径有真实浏览器证据。"
+      "closureCriteria": "4.5.5 关联来源和实际可用组合明确，5.4.1/候选核心与原生 visibility/事件桥路径有真实浏览器证据。",
+      "resolutionEvidence": [
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md",
+        "refactor/baselines/ads-lifecycle-validation.json",
+        "test/browser/ads-ui.spec.js",
+        "refactor/scripts/ads-native-visibility.mjs",
+        "test/ads-lifecycle.test.js"
+      ],
+      "resolutionRationale": "实际4.5.5归档已冻结；候选入口按能力检查，没有>=5门槛。4.5.5/5.4.1/候选核心main/legacy的三引擎UI及原生Chrome标签可见性通过，覆盖原生监听和较新核心事件桥，不泛化为全部4.x。"
     },
     {
       "id": "ADS-LIFE-01",
       "title": "Ads 计时链、重复/过早调用、工厂复用与销毁缺乏资源边界",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-ADS-02",
         "PKG-ADS-03",
@@ -3070,10 +3081,21 @@
         "refactor/baselines/ads-validation.json",
         "refactor/baselines/ads-lifecycle-validation.json",
         "refactor/changes/2026-09-12-PKG-ADS-03-lifecycle.md",
-        "packages/artplayer-plugin-ads/ARCHITECTURE.md"
+        "packages/artplayer-plugin-ads/ARCHITECTURE.md",
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md"
       ],
       "compatibleResolution": "先复现重复 play 的计时链、skip 后计时、destroy 后恢复与复用工厂 options；以实例所有权和幂等清理修正，不更改广告时长/跳过规则。",
-      "closureCriteria": "时钟/订阅/DOM 与主片恢复的成功、异常、重入、销毁、复用和多实例回归通过。"
+      "closureCriteria": "时钟/订阅/DOM 与主片恢复的成功、异常、重入、销毁、复用和多实例回归通过。",
+      "resolutionEvidence": [
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md",
+        "refactor/baselines/ads-lifecycle-validation.json",
+        "test/browser/ads-ui.spec.js",
+        "refactor/scripts/ads-native-visibility.mjs",
+        "test/ads-lifecycle.test.js"
+      ],
+      "resolutionRationale": "03的可重跑重复/过早/复用/重入/拒绝修复与本批194项源码及三格式回归通过；真实双实例、后台销毁及自有资源清理通过。新增未创建root时误删调用方undefined属性的复现与修复，不触碰未拥有的引用。"
     },
     {
       "id": "ADS-MEDIA-01",
@@ -3095,16 +3117,18 @@
         "refactor/baselines/ads-validation.json",
         "refactor/baselines/ads-lifecycle-validation.json",
         "refactor/changes/2026-09-12-PKG-ADS-03-lifecycle.md",
-        "packages/artplayer-plugin-ads/ARCHITECTURE.md"
+        "packages/artplayer-plugin-ads/ARCHITECTURE.md",
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md"
       ],
-      "compatibleResolution": "用本地媒体验证事件安装顺序、加载失败与拒绝、倒计时和广告播放的独立语义，恢复主片时不吞公共拒绝或在销毁后播放。",
+      "compatibleResolution": "用本地媒体验证事件安装顺序、加载失败与拒绝、倒计时和广告播放的独立语义，恢复主片时不吞公共拒绝或在销毁后播放。 05已验证桌面Chrome真实后台标签暂停/恢复、视频继续播放和后台销毁，main/legacy各6组合；最小化和实际移动端媒体策略仍缺设备证据，保持open。",
       "closureCriteria": "实际广告/主片的加载、暂停/恢复、失败/换源/销毁和隐藏状态有新旧核心组合证据。"
     },
     {
       "id": "ADS-UI-01",
       "title": "Ads 零等待跳过与初始状态不符，全屏图标/外部状态需核验",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-ADS-02",
         "PKG-ADS-03",
@@ -3120,10 +3144,21 @@
         "refactor/baselines/ads-validation.json",
         "refactor/baselines/ads-lifecycle-validation.json",
         "refactor/changes/2026-09-12-PKG-ADS-03-lifecycle.md",
-        "packages/artplayer-plugin-ads/ARCHITECTURE.md"
+        "packages/artplayer-plugin-ads/ARCHITECTURE.md",
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md"
       ],
       "compatibleResolution": "复现 playDuration<=0 文案可关闭但 isCanClose 尚为 false；按既有 demo 规则修复，验证全屏按钮和外部退出状态，保留 CSS/DOM 钩子。",
-      "closureCriteria": "零/正/不可跳阈值、真实点击、倒计时/详情/静音/全屏与外部状态组合均有回归。"
+      "closureCriteria": "零/正/不可跳阈值、真实点击、倒计时/详情/静音/全屏与外部状态组合均有回归。",
+      "resolutionEvidence": [
+        "refactor/baselines/ads-ui-visibility-validation.json",
+        "refactor/changes/2026-09-12-PKG-ADS-05-browser.md",
+        "refactor/baselines/ads-lifecycle-validation.json",
+        "test/browser/ads-ui.spec.js",
+        "refactor/scripts/ads-native-visibility.mjs",
+        "test/ads-lifecycle.test.js"
+      ],
+      "resolutionRationale": "零/正/不可关闭阈值及错误输入由现有Node/媒体回归保持；main/legacy分别27项真实原生全屏（初始/外部退出/按钮）、静音、详情popup和窄屏翻译控件通过。截图已查看；手机设备策略仍由05媒体门槛承接。"
     }
   ]
 }

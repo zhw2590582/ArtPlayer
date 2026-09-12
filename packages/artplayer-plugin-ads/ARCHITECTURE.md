@@ -84,7 +84,8 @@ The session owns one countdown, active core/native listeners, a separate destroy
 and the overlay. Finishing releases active listeners and pauses video, but keeps the hidden
 overlay and source/error state available until destroy. Destroy cancels the timer, disposes
 all owned subscriptions, pauses/releases the ad src via load, and removes the overlay even
-when the core keeps its HTML. Only an owned template.$ads value is removed. Foreign DOM
+when the core keeps its HTML. Only an actually created, owned template.$ads value is removed;
+destroy before initialization preserves a caller's own undefined-valued property. Foreign DOM
 listeners and caller-owned replacement template references are not removed.
 
 Native DOM listeners are locally owned; the plugin does not mutate the core event registry
@@ -109,5 +110,15 @@ reconciliation is recorded in PKG-ADS-04; complete historical distribution and d
 remain PKG-ADS-06. `yarn test:ads-types-package` packs and installs outside the workspace,
 checks all installed bytes, frozen offline install, five compiler modes and Node exports.
 `yarn test:browser test/browser/ads-editor-types.spec.js` verifies actual Monaco integration.
-Real hidden-page/device behavior and complete media-resource
+`yarn test:browser test/browser/ads-ui.spec.js` covers native desktop fullscreen, two real
+ad videos, independent mute/destroy and popup/narrow-layout behavior with three core versions.
+`yarn test:ads-native-visibility` launches an owned fresh installed Chrome profile and server
+to verify background-tab countdown pause, foreground resume and hidden-page destruction.
+It uses CDP noDefaults to avoid Playwright focus emulation; OS-window occlusion is excluded
+by one browser flag. It does not test minimizing or mobile background lifecycle. Override
+ARTPLAYER_NATIVE_CHROME for another installed Chrome path; set ARTPLAYER_BROWSER_ARTIFACTS
+and ARTPLAYER_ADS_ARTIFACT to verify a specific core/plugin build. The script preserves a
+report and trace under refactor/.cache, never uses the user's daily browser profile, and
+closes its owned browser and server. Run it sequentially with other port-8084 browser suites.
+Additional minimized-window/mobile lifecycle behavior and complete media-resource
 acceptance remain PKG-ADS-05. No claim of compatibility with every historical 4.x core is made.

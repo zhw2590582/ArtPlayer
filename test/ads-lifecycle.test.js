@@ -10,6 +10,17 @@ const skips = host => host.calls.filter(call => call[0] === 'emit' && call[1] ==
 const contentPlays = host => host.calls.filter(call => call[0] === 'content.play')
 
 for (const { name, factory } of implementations) {
+  test(`${name}: destroy before initialization preserves caller-owned undefined template property`, (t) => {
+    const env = adsEnvironment(t)
+    const host = env.host()
+    Object.defineProperty(host.art.template, '$ads', { configurable: true, enumerable: true, writable: true, value: undefined })
+    const before = Object.getOwnPropertyDescriptor(host.art.template, '$ads')
+    factory({ html: 'ad' })(host.art)
+    host.art.destroy()
+    assert.deepEqual(Object.getOwnPropertyDescriptor(host.art.template, '$ads'), before)
+    assert.equal(env.timers.size, 0)
+  })
+
   test(`${name}: repeated play owns one timer and pause clears all countdown work`, (t) => {
     const env = adsEnvironment(t)
     const host = env.host()

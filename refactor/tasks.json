@@ -2610,11 +2610,14 @@
         "PKG-ADS-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "本地广告 fixture、多实例、正常结束/跳过/销毁；核验历史关联核心 4.5.5、发布 5.4.1 与候选核心的实际归档/能力/媒体组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-ADS-05-browser.md",
+        "baselines/ads-ui-visibility-validation.json"
+      ]
     },
     {
       "id": "PKG-ADS-06",

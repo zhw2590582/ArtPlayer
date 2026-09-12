@@ -50,6 +50,23 @@ accepted-with-scope；保留诊断并编译迁移示例，不把批准范围扩�
 `test/ads.test.js` 增加候选 `.default === factory` 及同步取消断言，覆盖三种产物。
 这些检查不替代全部历史子路径、媒体/设备与发布验收。
 
+## 05 真实 UI 与标签可见性
+
+ads-ui.spec.js 以三个实际核心和三个浏览器引擎覆盖原生全屏、双实例媒体/静音/销毁
+隔离、实际详情导航及390px视口布局。不把视口模拟称为真机。main/legacy各27项。
+
+`yarn test:ads-native-visibility` 使用本机Chrome的独立profile和默认context，通过
+connectOverCDP(noDefaults:true)避免框架强制可见。保留真实页面visibilitychange及
+isTrusted，只禁用桌面窗口遮挡背景化以排除其他应用干扰。测试开始先切换到本页并
+确认可见，再等待元数据；不放宽超时。三个核心分别验证HTML/视频广告后台倒计时
+停止、返回恢复、再次后台销毁后不触发skip。视频后台是否暂停作为浏览器状态记录，
+不假定不同浏览器策略相同。main/legacy、失败尝试和trace分别保存，见05变更记录。
+
+脚本独占8084，报告使用独立目录；关闭自建浏览器和服务后才运行下一浏览器套件。
+DevToolsActivePort刚创建时可能EBUSY/未写完，启动器仅对这两个已确认瞬态条件做
+有界重读，不重启浏览器，也不读取用户profile。缺安装路径直接失败，支持显式
+ARTPLAYER_NATIVE_CHROME。实际设备、最小化、全量分发仍是后续门槛。
+
 ## 边界与文件职责
 
 - `test/helpers/ads.js`：来源加载、冻结 bundle 的 VM、可控时钟和最小 ArtPlayer 宿主。

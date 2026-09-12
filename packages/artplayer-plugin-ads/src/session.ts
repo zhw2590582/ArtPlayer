@@ -72,7 +72,7 @@ export function createSession(art: Host, option: Options, icons: Icons, utils: U
     }
     catch (error) { report(error) }
     finally {
-      if (template.$ads === root)
+      if (root && template.$ads === root)
         delete template.$ads
     }
   }

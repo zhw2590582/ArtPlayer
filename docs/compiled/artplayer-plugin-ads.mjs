@@ -279,7 +279,7 @@ function createSession(art, option, icons, utils) {
     } catch (error) {
       report(error);
     } finally {
-      if (template.$ads === root)
+      if (root && template.$ads === root)
         delete template.$ads;
     }
   }

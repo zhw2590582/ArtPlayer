@@ -63,7 +63,8 @@
     "build:types": "node scripts/build-types.mjs --write",
     "check:types": "node scripts/build-types.mjs --check",
     "test:dash-types-package": "node refactor/scripts/dash-package-types.mjs",
-    "test:ads-types-package": "node refactor/scripts/ads-package-types.mjs"
+    "test:ads-types-package": "node refactor/scripts/ads-package-types.mjs",
+    "test:ads-native-visibility": "node refactor/scripts/ads-native-visibility.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
