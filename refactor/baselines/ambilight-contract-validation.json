@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-01",
+  "status": "done",
+  "sourceCommit": "c57c7e4b164557d111bb92a9df17c2f28d2ee657",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/ambilight-contract.test.mjs refactor/scripts/contracts.test.mjs",
+      "result": "pass",
+      "tests": 14,
+      "ambilightTests": 7,
+      "indexTests": 7,
+      "log": "refactor/.cache/ambilight-contract-final.log"
+    },
+    {
+      "command": "eslint Ambilight helper/contract scripts and updated contracts test --no-fix",
+      "result": "pass",
+      "log": "refactor/.cache/ambilight-lint-final.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 832,
+        "engineering": 14,
+        "baseline": 79,
+        "mainTotal": 925,
+        "repeatedContractExecutions": 44
+      },
+      "log": "refactor/.cache/ambilight01-ci.log"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/ambilight-contract-final.log",
+      "sha256": "a28f0c8a6b8b087174aeb39b1cb1ea3c792ed25fef86e8f636ffdb2349652177"
+    },
+    {
+      "file": "refactor/.cache/ambilight-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/ambilight01-ci.log",
+      "sha256": "71fd0363f2e34df800730bdf5fc6e9d1c40819ae119f83ce9c5add3310b91ec2"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "refactor/scripts/ambilight-contract.mjs",
+      "sha256LF": "50cd644d2715812ae57fad7e8babab85269b8693fddd6a7600fd4e3446927867"
+    },
+    {
+      "file": "refactor/scripts/ambilight-contract.test.mjs",
+      "sha256LF": "38b626131836a6087efb9bccdff8f46e907ed54d064fbcb4927d931ac39bb9d3"
+    },
+    {
+      "file": "test/helpers/ambilight.js",
+      "sha256LF": "7775f147355d2aa08615a82079760924ae151beb7d9bdc94cccfd8195f5b19d8"
+    },
+    {
+      "file": "refactor/contract-policy.json",
+      "sha256LF": "3da55d2e6e656831f2cc63678e8b78c9499640d8471463afd48369a02148aeaf"
+    },
+    {
+      "file": "refactor/scripts/contracts.test.mjs",
+      "sha256LF": "1db5b256464bf17e969070375558c6ff854f116a57e5283b04e9c1327dd9c1e3"
+    }
+  ],
+  "limitations": [
+    "Node-controlled Canvas/RAF is not real browser/media validation",
+    "Declarations inspected, not full installed compiler acceptance",
+    "Git core association is not a supported version interval",
+    "Lifecycle issues remain source observations until PKG-AMBILIGHT-02 reproduces them",
+    "No production source/type/artifact changes or remote publish"
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-01",
+  "capturedAt": "2026-09-12T02:42:35.458Z",
+  "sourceCommit": "c57c7e4b164557d111bb92a9df17c2f28d2ee657",
+  "registryObservation": {
+    "versions": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "latest": "1.1.0",
+    "workspaceVersion": "1.1.0"
+  },
+  "release": {
+    "name": "artplayer-plugin-ambilight",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ambilight/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-ambilight/-/artplayer-plugin-ambilight-1.1.0.tgz",
+    "integrity": "sha512-FkMI7bn9HovJMfEdgkKbo7/vPt6vrzcpELTaC/vM7B99FPSMWzAf6GAE0xnNxU3KibYcBV5gXnBgvHgpG2xq2A==",
+    "sha256": "e95bd60fd7bce52142cf0041bad811452305029cbe1129c7d89246eb260c5c86",
+    "archiveBytes": 2638,
+    "publishedAt": "2026-03-12T14:22:20.888Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "53946ecc0fca163d52465515dfa13de3619a01c3b89d7f966eafe0610584dede",
+      "package/dist/artplayer-plugin-ambilight.js": "8f32290c65a13b0a3026dee0045fef4125a9c9ac788ecb1675aef05f79172693",
+      "package/dist/artplayer-plugin-ambilight.legacy.js": "8f32290c65a13b0a3026dee0045fef4125a9c9ac788ecb1675aef05f79172693",
+      "package/dist/artplayer-plugin-ambilight.mjs": "77486db6d24f50420c952de5b37d226e404089730c7c1c6be226c836f4e85f9c",
+      "package/package.json": "39aa2790a79cbc2a62ba925ee5ff53bbb649440a5d7b9f526b3de819ece4f792",
+      "package/types/artplayer-plugin-ambilight.d.ts": "a36998b4d96d9a3200022029bf92918cc516d5ae4f38dc78a1a76b53a736d086"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "description": "ambilight plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-ambilight.d.ts",
+          "import": "./dist/artplayer-plugin-ambilight.mjs",
+          "require": "./dist/artplayer-plugin-ambilight.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-ambilight.d.ts",
+          "import": "./dist/artplayer-plugin-ambilight.legacy.js",
+          "require": "./dist/artplayer-plugin-ambilight.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-ambilight.js",
+      "module": "./dist/artplayer-plugin-ambilight.mjs",
+      "types": "./types/artplayer-plugin-ambilight.d.ts",
+      "legacy": "./dist/artplayer-plugin-ambilight.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "historicalCore": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "limitation": "Git association only; not a proof of support range or rebuilt tarball identity"
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-ambilight/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-ambilight/-/artplayer-plugin-ambilight-1.0.0.tgz",
+      "integrity": "sha512-7UxcQLI1XZXJBfv4gZsTd1YKNL9Y7Uw2w13FyqgHqgtKWT06+EEl72UHl/C/Je1s1GHlTnw+Hdg6CphZbQ9k/g==",
+      "sha256": "a95aa8c232ab48493e6b4d46b36edc8091230cbde5d18d7ec41912a4fa2b8956",
+      "archiveBytes": 4751,
+      "publishedAt": "2024-10-19T06:09:24.603Z",
+      "registryGitHead": "9221d42964700e6a3190943d288a6e6822596790",
+      "files": {
+        "package/README.md": "f9efabb68702c9c9cafdaa6b82a919ef09c2fb511568764c79854a955503cb98",
+        "package/dist/artplayer-plugin-ambilight.js": "caef43df8a2d4bd7aa5b42db2a16508a1f5b92443b8b76974e5e24b2a2c83911",
+        "package/dist/artplayer-plugin-ambilight.legacy.js": "c6eb26f3e17432f62ac24a86f78789d3dcd2a7ca03c3701b65574cc916387c49",
+        "package/package.json": "84c90d6d521c9d14a8140bef65171dce443b318630742f9901eb7c5ef5d10a3b",
+        "package/src/index.js": "7e9eff950bbde38bfc63913f2ed6e47217d70cf0ba918eed3389df37d9b94a4f",
+        "package/types/artplayer-plugin-ambilight.d.ts": "f08f24f814395cfd5f02bbcb1a9c99a02ed4692e9137d7a393c3ed395bba1515"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-plugin-ambilight",
+        "types": "types/artplayer-plugin-ambilight.d.ts",
+        "description": "ambilight plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-ambilight.js",
+        "legacy": "dist/artplayer-plugin-ambilight.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "historicalCore": {
+        "commit": "9221d42964700e6a3190943d288a6e6822596790",
+        "file": "packages/artplayer/package.json",
+        "version": "5.1.7",
+        "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+        "limitation": "Git association only; not a proof of support range or rebuilt tarball identity"
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-plugin-ambilight/src/index.js": "c56e0a1c33a2ff54b20e6bc7eafd3e14b163e3f967cce86d48e594a2f6d1f6fe",
+    "packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.ts": "a36998b4d96d9a3200022029bf92918cc516d5ae4f38dc78a1a76b53a736d086",
+    "packages/artplayer-plugin-ambilight/package.json": "39aa2790a79cbc2a62ba925ee5ff53bbb649440a5d7b9f526b3de819ece4f792",
+    "packages/artplayer-plugin-ambilight/README.md": "53946ecc0fca163d52465515dfa13de3619a01c3b89d7f966eafe0610584dede",
+    "docs/assets/example/ambilight.js": "f97c1404886ba6474b4e14339c563fd2de50b7d50fdc4c9d59d85a3142a1ad52"
+  },
+  "limitation": "Frozen actual archives and workspace source; runtime/type compatibility and supported core ranges require separate tests"
+}

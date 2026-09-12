@@ -3251,6 +3251,58 @@
       ],
       "compatibleResolution": "Preserve require(pkg).default alongside callable factory, script global and current ESM/legacy paths.",
       "closureCriteria": "Real packed main/legacy/ESM, historical deep imports, export= consumers and local demo/editor all pass with immutable published comparisons."
+    },
+    {
+      "id": "AMBILIGHT-LIFE-01",
+      "title": "Ambilight sampling and RAF/DOM ownership lack terminal/error handling",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-AMBILIGHT-02",
+        "PKG-AMBILIGHT-03",
+        "PKG-AMBILIGHT-05"
+      ],
+      "compatibleResolution": "Reproduce errors, zero sizes, RAF id zero, escaped methods and destroy before adding plugin-local ownership without changing stop semantics.",
+      "closureCriteria": "Published failures reproduced, candidate cleanup and real canvas/media/source-switch checks pass.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/ambilight-contract.md",
+        "refactor/baselines/ambilight-release.json",
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md"
+      ]
+    },
+    {
+      "id": "AMBILIGHT-TYPE-01",
+      "title": "Ambilight declarations disagree with optional factory argument and differ across published generations",
+      "confirmation": "source-observed",
+      "owners": [
+        "PKG-AMBILIGHT-04",
+        "PKG-AMBILIGHT-06"
+      ],
+      "compatibleResolution": "Preserve legal old/new calls and ignored zIndex, validate export= and default consumers without narrowing inferred options.",
+      "closureCriteria": "Installed old/current compiler consumers and documented historical limitations verified.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/ambilight-contract.md",
+        "refactor/baselines/ambilight-release.json",
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md"
+      ]
+    },
+    {
+      "id": "AMBILIGHT-DIST-01",
+      "title": "Ambilight 1.0.0 CommonJS default namespace differs from callable 1.1.0",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-AMBILIGHT-04",
+        "PKG-AMBILIGHT-06"
+      ],
+      "compatibleResolution": "Keep callable factory with compatible self default alias.",
+      "closureCriteria": "Packed root/legacy/global/ESM and old namespace consumers pass.",
+      "status": "open",
+      "evidence": [
+        "refactor/baselines/ambilight-contract.md",
+        "refactor/baselines/ambilight-release.json",
+        "refactor/changes/2026-09-12-PKG-AMBILIGHT-01-contract.md"
+      ]
     }
   ]
 }

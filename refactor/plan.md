@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 220 项，范围 22 个包及工作区/示例。
 
-状态：todo 130 / doing 6 / blocked 0 / done 84 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 129 / doing 6 / blocked 0 / done 85 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -148,7 +148,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-AMBILIGHT-01 | artplayer-plugin-ambilight<br>核对包契约与历史用法 | BASE-05 | blur/opacity/frequency/duration、start/stop 与挂载样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | todo |
+| PKG-AMBILIGHT-01 | artplayer-plugin-ambilight<br>核对包契约与历史用法 | BASE-05 | blur/opacity/frequency/duration、start/stop 与挂载样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | done |
 | PKG-AMBILIGHT-02 | artplayer-plugin-ambilight<br>建立特有行为与错误测试 | PKG-AMBILIGHT-01, ENG-03, ENG-05 | 跨域 canvas 失败、零尺寸、暂停、重复 start/stop 和 destroy | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | todo |
 | PKG-AMBILIGHT-03 | artplayer-plugin-ambilight<br>整理内部职责与资源 | PKG-AMBILIGHT-02, CORE-03, CORE-12 | 取色计算与绘帧分离，统一 RAF 和 DOM 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | todo |
 | PKG-AMBILIGHT-04 | artplayer-plugin-ambilight<br>迁移自有源码和公开类型 | PKG-AMBILIGHT-03, ENG-04, ENG-06, CORE-07 | canvas 上下文、参数及 start/stop 的明确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
@@ -476,6 +476,7 @@
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)
 - PKG-CHAPTER-04: [记录](changes/2026-09-10-PKG-CHAPTER-04-public-types.md) [记录](baselines/chapter-types-validation.json)
 - PKG-CHAPTER-05: [记录](changes/2026-09-12-PKG-CHAPTER-05-combinations.md) [记录](baselines/chapter-combinations-checkpoint.json)
+- PKG-AMBILIGHT-01: [记录](changes/2026-09-12-PKG-AMBILIGHT-01-contract.md) [记录](baselines/ambilight-contract.md) [记录](baselines/ambilight-release.json) [记录](baselines/ambilight-contract-validation.json)
 - PKG-AUDIO-01: [记录](changes/2026-09-12-PKG-AUDIO-01-contract.md) [记录](baselines/audio-track-contract.md) [记录](baselines/audio-track-release.json)
 - PKG-AUDIO-02: [记录](changes/2026-09-12-PKG-AUDIO-02-tests.md) [记录](audio-validation.md) [记录](baselines/audio-validation.json)
 - PKG-AUDIO-03: [记录](changes/2026-09-12-PKG-AUDIO-03-lifecycle.md) [记录](baselines/audio-lifecycle-validation.json)
