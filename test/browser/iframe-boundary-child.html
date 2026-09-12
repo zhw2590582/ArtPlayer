@@ -1,0 +1,15 @@
+<!doctype html>
+<script src="/iframe-boundary-lib.js"></script>
+<script>
+  const parameters = new URL(location.href).searchParams;
+  window.Tool = window[parameters.get('global')];
+  window.received = [];
+  window.executions = 0;
+  addEventListener('message', event => {
+    received.push({ type: event.data?.type, id: event.data?.id, fromParent: event.source === parent, origin: event.origin });
+    if (event.data?.type === 'hold') window.held = event.data;
+    parent.postMessage({ type: 'fixture-observed', data: { count: received.length, type: event.data?.type, id: event.data?.id } }, '*');
+  });
+  if (parameters.get('auto') !== '0') Tool.inject();
+  parent.postMessage({ type: 'fixture-ready' }, '*');
+</script>

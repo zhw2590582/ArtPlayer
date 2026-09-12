@@ -70,6 +70,29 @@ function cancelRequests(host) {
   for (const request of [...pending])
     request.callbacks.reject(new Error("The instance has been destroyed"));
 }
+const connections = /* @__PURE__ */ new WeakMap();
+function connect(host) {
+  const owner = window;
+  const receiver = host.onMessage;
+  connections.set(host, () => owner.removeEventListener("message", receiver));
+  owner.addEventListener("message", receiver);
+  host.$iframe.src = host.url;
+}
+function releaseConnection(host) {
+  const disconnect = connections.get(host);
+  connections.delete(host);
+  try {
+    disconnect?.();
+  } finally {
+    cancelRequests(host);
+  }
+}
+function acceptsMessage(event, peer) {
+  if (event.source !== void 0 && event.source !== null && event.source !== peer)
+    return false;
+  const data = event.data;
+  return typeof data === "object" && data !== null && "type" in data && typeof data.type === "string";
+}
 class ArtplayerToolIframe {
   static get iframe() {
     return window.top !== window;
@@ -91,6 +114,8 @@ class ArtplayerToolIframe {
     if (!ArtplayerToolIframe.iframe) {
       throw new Error('The "ArtplayerToolIframe.onMessage" method can only be used in iframe');
     }
+    if (!acceptsMessage(event, window.parent))
+      return;
     const { type, data, id } = event.data;
     switch (type) {
       case "commit":
@@ -133,11 +158,19 @@ ${data}
     this.destroyed = false;
     this.messageCallback = () => null;
     this.onMessage = this.onMessage.bind(this);
-    window.addEventListener("message", this.onMessage);
-    this.$iframe.src = this.url;
+    try {
+      connect(this);
+    } catch (error) {
+      this.destroyed = true;
+      try {
+        releaseConnection(this);
+      } catch {
+      }
+      throw error;
+    }
   }
   onMessage(event) {
-    if (this.destroyed)
+    if (this.destroyed || !acceptsMessage(event, this.$iframe.contentWindow))
       return;
     const { type, data, id } = event.data;
     switch (type) {
@@ -176,8 +209,7 @@ ${data}
   }
   destroy() {
     this.destroyed = true;
-    window.removeEventListener("message", this.onMessage);
-    cancelRequests(this);
+    releaseConnection(this);
   }
 }
 export {

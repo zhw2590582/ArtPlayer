@@ -1,5 +1,7 @@
 import type { Callbacks, Packet } from './requests'
-import { cancelRequests, postRequest } from './requests'
+import { connect, releaseConnection } from './connection'
+import { acceptsMessage } from './protocol'
+import { postRequest } from './requests'
 
 export default class ArtplayerToolIframe {
   declare url: string
@@ -32,6 +34,9 @@ export default class ArtplayerToolIframe {
     if (!ArtplayerToolIframe.iframe) {
       throw new Error('The "ArtplayerToolIframe.onMessage" method can only be used in iframe')
     }
+
+    if (!acceptsMessage(event, window.parent))
+      return
 
     const { type, data, id } = event.data
     switch (type) {
@@ -84,12 +89,23 @@ export default class ArtplayerToolIframe {
     this.destroyed = false
     this.messageCallback = () => null
     this.onMessage = this.onMessage.bind(this)
-    window.addEventListener('message', this.onMessage)
-    this.$iframe.src = this.url
+    try {
+      connect(this)
+    }
+    catch (error) {
+      this.destroyed = true
+      try {
+        releaseConnection(this)
+      }
+      catch {
+        // Preserve the original setup failure if cleanup also fails.
+      }
+      throw error
+    }
   }
 
   onMessage(event: MessageEvent<Packet>) {
-    if (this.destroyed)
+    if (this.destroyed || !acceptsMessage(event, this.$iframe.contentWindow))
       return
 
     const { type, data, id } = event.data
@@ -139,7 +155,6 @@ export default class ArtplayerToolIframe {
 
   destroy() {
     this.destroyed = true
-    window.removeEventListener('message', this.onMessage)
-    cancelRequests(this)
+    releaseConnection(this)
   }
 }

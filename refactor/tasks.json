@@ -3662,7 +3662,10 @@
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": [
         "changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md",
-        "baselines/iframe-requests-checkpoint.json"
+        "baselines/iframe-requests-checkpoint.json",
+        "changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md",
+        "baselines/iframe-boundaries-checkpoint.json",
+        "iframe-message-boundary.md"
       ]
     },
     {

@@ -75,6 +75,7 @@ const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/jav
 add('/test/declaration-cues.vtt', fs.readFileSync(path.join(workspace, 'test/browser/media/declaration-cues.vtt')), { kind: 'test-subtitles', file: 'test/browser/media/declaration-cues.vtt' })
 add('/test/thumbnail-grid.svg', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-grid.svg')), { kind: 'test-thumbnail-grid', file: 'test/browser/media/thumbnail-grid.svg' })
 add('/test/legacy-safe-area.js', fs.readFileSync(path.join(workspace, 'test/helpers/legacy-safe-area.js')), { kind: 'frozen-own-source', file: 'test/helpers/legacy-safe-area.js', commit: 'ccf77c4e' })
+add('/test/iframe-boundary-child.html', fs.readFileSync(path.join(workspace, 'test/browser/iframe-boundary-child.html')), { kind: 'iframe-fixture', file: 'test/browser/iframe-boundary-child.html' })
 function send(req, res, bytes, filename) {
   res.setHeader('Content-Type', mime[path.extname(filename)] || 'application/octet-stream')
   res.setHeader('Cache-Control', 'no-store')
@@ -103,6 +104,10 @@ const server = http.createServer((req, res) => {
     assert(['GET', 'HEAD'].includes(req.method), 'Unsupported method')
     const url = new URL(req.url, `http://127.0.0.1:${port}`)
     const caseId = url.searchParams.get('case')
+    if (url.pathname === '/test/iframe-boundary-redirect') {
+      res.writeHead(302, { Location: `http://localhost:${port}/test/iframe-boundary-child.html${url.search}` }).end()
+      return
+    }
     if (url.pathname === '/test/requests.json') {
       send(req, res, Buffer.from(JSON.stringify(requests.get(caseId) || [])), 'requests.json')
       return

@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-IFRAME-03 构造清理与窗口来源检查点（doing）
+
+增加connection/protocol两个严格TS模块；构造失败清理监听和重入请求，destroy即使
+移除监听报错仍取消请求。父/子仅处理选定对端的原生消息，忽略畸形封套；保留local
+onMessage、空type、自定义响应及旧commit协议。ADR-025记录来源绑定、跳转/opaque
+兼容与仍需信任嵌入父页的限制，未把WindowProxy身份误称作文档身份或代码沙箱。
+新18断言对上一提交2通过/16失败，候选连同原生命周期各34通过；旧构建实际Chromium
+12项全部失败。修复HTTP测试夹具后，源码浏览器60、正式main234、legacy90通过；
+每份边界矩阵含36来源/封套及24旧npm/工作区父子互通，未声称未升级一侧已被修复。
+完整CI1523与44重复契约、3导入/SSR通过，328生产TS；哈希与docs副本均一致。
+见[决策](iframe-message-boundary.md)、[变更](changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md)
+和[验证](baselines/iframe-boundaries-checkpoint.json)。222项：107 done、10 doing、105 todo。
+本地检查点提交。下一步导航/重新注入的文档代际与inject-before-load时序；三个风险仍open。
+
 ## PKG-IFRAME-03 请求资源与TS入口检查点（doing）
 
 入口和请求管理拆为2个严格TS模块，保留7个公开字段及resove/回调/消息协议。

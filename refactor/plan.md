@@ -532,5 +532,5 @@
 - PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json) [记录](changes/2026-09-12-PKG-MB-09-sustained-playback-checkpoint.md) [记录](baselines/mb-sustained-validation.json) [记录](baselines/mb-sustained-media.json)
 - PKG-IFRAME-01: [记录](changes/2026-09-12-PKG-IFRAME-01-contract.md) [记录](baselines/iframe-release.json) [记录](baselines/iframe-contract.md) [记录](baselines/iframe-contract-validation.json)
 - PKG-IFRAME-02: [记录](changes/2026-09-12-PKG-IFRAME-02-behavior.md) [记录](baselines/iframe-behavior-validation.json)
-- PKG-IFRAME-03: [记录](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md) [记录](baselines/iframe-requests-checkpoint.json)
+- PKG-IFRAME-03: [记录](changes/2026-09-12-PKG-IFRAME-03-requests-checkpoint.md) [记录](baselines/iframe-requests-checkpoint.json) [记录](changes/2026-09-12-PKG-IFRAME-03-boundaries-checkpoint.md) [记录](baselines/iframe-boundaries-checkpoint.json) [记录](iframe-message-boundary.md)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)
