@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-01 完成：自动缩略图发布与行为基线
+
+核实全部三个npm版本及16成员，冻结8份工作区输入。明确1.0.0缺main/legacy，
+其随包源码仅作为source-only夹具；1.0.1 CJS为default对象，1.1.0为直接函数。
+发现旧声明height无效且漏number、注册Promise错写同步Result。38项契约固定正常
+注册/活参数/默认值/十列JPEG/渐进更新；47项定向检查及完整CI1702项通过，339生产TS。
+登记5项公开类型/导出/分发/资源/编码风险。生产源码/类型/版本/构建未改；02开始故障
+复现后03实施源码修复。真实解码、核心组合与设备证据仍属于后续05/06。
+见[契约](baselines/auto-thumbnail-contract.md)及[验证](baselines/auto-thumbnail-contract-validation.json)。
+222项：113 done、11 doing、98 todo。契约索引22工作区+20发布，未补齐的精确索引不冒充通过。
+
+
 ## PKG-TOOL-THUMB-04 事件注册表修复检查点（doing）
 
 复现并修复特殊事件名碰撞对象原型、继承getter/setter干扰，以及嵌套emit导致once重复执行。

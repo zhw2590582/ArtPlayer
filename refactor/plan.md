@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 99 / doing 11 / blocked 0 / done 112 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 98 / doing 11 / blocked 0 / done 113 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -171,7 +171,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-AUTO-THUMB-01 | artplayer-plugin-auto-thumbnail<br>核对包契约与历史用法 | BASE-05 | url/width/number/scale、异步工厂和渐进缩略图更新 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | todo |
+| PKG-AUTO-THUMB-01 | artplayer-plugin-auto-thumbnail<br>核对包契约与历史用法 | BASE-05 | url/width/number/scale、异步工厂和渐进缩略图更新 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-AUTO-THUMB-02 | artplayer-plugin-auto-thumbnail<br>建立特有行为与错误测试 | PKG-AUTO-THUMB-01, ENG-03, ENG-05 | 抽帧边界、短视频、失败、连续来源和销毁中的抽帧 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-AUTO-THUMB-03 | artplayer-plugin-auto-thumbnail<br>整理内部职责与资源 | PKG-AUTO-THUMB-02, CORE-09, CORE-19 | 隐藏 video、seek 队列、canvas 编码与 Blob URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-AUTO-THUMB-04 | artplayer-plugin-auto-thumbnail<br>迁移自有源码和公开类型 | PKG-AUTO-THUMB-03, ENG-04, ENG-06, CORE-07 | 抽帧结果和真实异步插件返回类型兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
@@ -494,6 +494,7 @@
 - PKG-AUDIO-03: [记录](changes/2026-09-12-PKG-AUDIO-03-lifecycle.md) [记录](baselines/audio-lifecycle-validation.json)
 - PKG-AUDIO-04: [记录](changes/2026-09-12-PKG-AUDIO-04-types.md) [记录](baselines/audio-types-validation.json)
 - PKG-AUDIO-05: [记录](changes/2026-09-12-PKG-AUDIO-05-combinations.md) [记录](baselines/audio-combinations-first.json) [记录](baselines/audio-combinations-checkpoint.json) [记录](audio-validation.md)
+- PKG-AUTO-THUMB-01: [记录](baselines/auto-thumbnail-release.json) [记录](baselines/auto-thumbnail-contract.md) [记录](changes/2026-09-13-PKG-AUTO-THUMB-01-contract.md) [记录](baselines/auto-thumbnail-contract-validation.json)
 - PKG-HLS-01: [记录](baselines/hls-control-contract.md) [记录](baselines/hls-control-release.json) [记录](changes/2026-09-11-PKG-HLS-01-contract.md)
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)

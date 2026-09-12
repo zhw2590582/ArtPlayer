@@ -1732,11 +1732,16 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "url/width/number/scale、异步工厂和渐进缩略图更新",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "baselines/auto-thumbnail-release.json",
+        "baselines/auto-thumbnail-contract.md",
+        "changes/2026-09-13-PKG-AUTO-THUMB-01-contract.md",
+        "baselines/auto-thumbnail-contract-validation.json"
+      ]
     },
     {
       "id": "PKG-AUTO-THUMB-02",

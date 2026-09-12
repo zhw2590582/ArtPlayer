@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-12",
+  "updatedAt": "2026-09-13",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -3998,6 +3998,91 @@
         "test/browser/thumbnail-emitter.spec.js"
       ],
       "resolutionRationale": "Frozen workspace reproduces five failures. Own-key/data-descriptor registry and once-per-registration consumption pass source/main/legacy, actual browser and installed candidate checks while ordinary snapshot/ctx/off/duplicate behavior remains tested."
+    },
+    {
+      "id": "AUTO-THUMB-TYPE-01",
+      "title": "Published declarations misdescribe async registration and switch height/number option fields across generations",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-AUTO-THUMB-04"
+      ],
+      "evidence": [
+        "refactor/baselines/auto-thumbnail-release.json",
+        "refactor/baselines/auto-thumbnail-contract.md",
+        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve actual Promise runtime and old valid consumers; explicitly retain the historically ignored height field and verify paired CJS/ESM declarations.",
+      "closureCriteria": "Old and current isolated consumers, negative type cases and matching runtime registration pass; any irreconcilable inference change has an explicit user decision."
+    },
+    {
+      "id": "AUTO-THUMB-EXPORT-01",
+      "title": "Published 1.0.1 CommonJS default namespace differs from the direct function exported by 1.1.0",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-AUTO-THUMB-04",
+        "PKG-AUTO-THUMB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/auto-thumbnail-release.json",
+        "refactor/baselines/auto-thumbnail-contract.md",
+        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Exercise both old .default calls and direct require calls plus globals, actual ESM and legacy.",
+      "closureCriteria": "Installed tarballs and matching type consumers retain both usable calling forms with documented entry behavior."
+    },
+    {
+      "id": "AUTO-THUMB-DIST-01",
+      "title": "Published 1.0.0 archive lacks declared main and legacy runtimes",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-AUTO-THUMB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/auto-thumbnail-release.json",
+        "refactor/baselines/auto-thumbnail-contract.md",
+        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Keep the historical missing-entry baseline explicit; never substitute Git source as a released artifact.",
+      "closureCriteria": "Candidate pack has all declared runtime/types/assets and reviewed historical deep paths; missing old entries remain explicitly recorded."
+    },
+    {
+      "id": "AUTO-THUMB-LIFE-01",
+      "title": "Extraction tasks, decoder handlers and final object URLs lack source-switch and destroy ownership",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-AUTO-THUMB-02",
+        "PKG-AUTO-THUMB-03",
+        "PKG-AUTO-THUMB-05"
+      ],
+      "evidence": [
+        "refactor/baselines/auto-thumbnail-release.json",
+        "refactor/baselines/auto-thumbnail-contract.md",
+        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Cancel obsolete work and release owned resources while retaining live options and progressive usable sheet updates.",
+      "closureCriteria": "Delayed callbacks, repeated metadata, switching, destroy, multiple instances and failure cleanup are reproduced then pass source/artifacts and native browser checks."
+    },
+    {
+      "id": "AUTO-THUMB-ENCODE-01",
+      "title": "Unserialized encodes include blank output and lack media/canvas/input failure handling",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-AUTO-THUMB-02",
+        "PKG-AUTO-THUMB-03",
+        "PKG-AUTO-THUMB-05"
+      ],
+      "evidence": [
+        "refactor/baselines/auto-thumbnail-release.json",
+        "refactor/baselines/auto-thumbnail-contract.md",
+        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve JPEG grid/time/scale while bounding jobs, sequencing valid updates and handling null Blob, invalid media and thrown callbacks.",
+      "closureCriteria": "Fault controls and native valid/corrupt media prove no stale sheet replacement, leaked URLs or unhandled async callbacks; capability limitations remain explicit."
     }
   ]
 }

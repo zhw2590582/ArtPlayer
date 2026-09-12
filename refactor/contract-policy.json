@@ -183,10 +183,13 @@
         "API-12": "PKG-AUTO-THUMB-02"
       },
       "versionIds": [
-        "WS-artplayer-plugin-auto-thumbnail"
+        "WS-artplayer-plugin-auto-thumbnail",
+        "PUB-artplayer-plugin-auto-thumbnail-1.1.0",
+        "PUB-artplayer-plugin-auto-thumbnail-1.0.1",
+        "PUB-artplayer-plugin-auto-thumbnail-1.0.0"
       ],
       "supportWindow": "not-inferred-from-baseline",
-      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+      "scopeReview": "Three verified npm archives and a separate workspace snapshot. 1.0.0 lacks main/legacy and is not runnable through its declared entries. See auto-thumbnail-contract.md; source-only tests and Git core associations do not establish a supported range."
     },
     {
       "name": "artplayer-plugin-chapter",
@@ -882,6 +885,33 @@
       "file": "refactor/baselines/mb-release.json",
       "pointer": "/previous/0",
       "archiveSha256": "d62f3ad75d07abbc8ca597846e213f34abd15b3742f7e87f294800fdef2e8962"
+    },
+    {
+      "id": "PUB-artplayer-plugin-auto-thumbnail-1.1.0",
+      "package": "artplayer-plugin-auto-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/auto-thumbnail-release.json",
+      "pointer": "/release",
+      "archiveSha256": "5ea83d4e45d42fdaf42d3e37b6c666857872adaa276ab329c74edcdaa3c1a978"
+    },
+    {
+      "id": "PUB-artplayer-plugin-auto-thumbnail-1.0.1",
+      "package": "artplayer-plugin-auto-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.0.1",
+      "file": "refactor/baselines/auto-thumbnail-release.json",
+      "pointer": "/previous/0",
+      "archiveSha256": "e7e0e09865cf4b46350097137ec292a64e6feedece2c90f724f0498993bfa812"
+    },
+    {
+      "id": "PUB-artplayer-plugin-auto-thumbnail-1.0.0",
+      "package": "artplayer-plugin-auto-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/auto-thumbnail-release.json",
+      "pointer": "/previous/1",
+      "archiveSha256": "0a907bc8dbf2ef773764645730309b2c95592f84b31f5c4f9cec636d29c0263e"
     }
   ],
   "cases": [

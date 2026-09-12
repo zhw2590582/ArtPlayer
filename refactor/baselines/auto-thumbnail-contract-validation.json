@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUTO-THUMB-01",
+  "status": "done",
+  "parentCommit": "17befee4b1df7cf4ec29bbda4fd3271567f44223",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/auto-thumbnail-contract.test.mjs refactor/scripts/contracts.test.mjs refactor/scripts/risk-register.test.mjs",
+      "result": "pass",
+      "tests": 47,
+      "packageContract": 38,
+      "indexValidation": 7,
+      "riskValidation": 2,
+      "log": "refactor/.cache/auto-thumbnail01-focused.log"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1456,
+        "engineering": 14,
+        "baseline": 232,
+        "total": 1702
+      },
+      "strictProductionTypeScriptFiles": 339,
+      "log": "refactor/.cache/auto-thumbnail01-ci.log",
+      "logSha256": "5f47030026c9cfad99830281a0b825bc2247c52bab7368a831e4b86ba914c880",
+      "warnings": [
+        "Existing generated core editor declaration unused eslint suppression",
+        "Existing Yarn DEP0169 url.parse warning"
+      ]
+    }
+  ],
+  "archiveScope": {
+    "publishedVersions": [
+      "1.1.0",
+      "1.0.1",
+      "1.0.0"
+    ],
+    "members": 16,
+    "workspaceFiles": 8,
+    "runnableRootVersions": [
+      "1.1.0",
+      "1.0.1"
+    ],
+    "sourceOnlyFixture": "Actual 1.0.0 tarball source transformed by esbuild; not a runnable npm root entry",
+    "behaviorFixtures": 8,
+    "latestWorkspaceComparison": "All six matching 1.1.0 package members equal frozen workspace after LF normalization",
+    "supportedCoreRange": "Not inferred from Git associations 5.2.2/5.3.1"
+  },
+  "limitations": [
+    "Controlled DOM, seek and toBlob callbacks are not native decoding, pixel, CORS, device or browser evidence.",
+    "The eight fixtures include one explicitly source-only historical package; missing 1.0.0 main/legacy are never fabricated.",
+    "Lifecycle and encoder concerns remain source-observed pending task02 failure reproduction.",
+    "No production source, declarations, examples, versions or build artifacts change in task01.",
+    "Package-family exact case indexing remains incomplete and is not promoted by these frozen baseline results."
+  ],
+  "completedAt": "2026-09-12T21:47:22.218Z",
+  "inputs": [
+    {
+      "file": "refactor/baselines/auto-thumbnail-release.json",
+      "sha256LF": "d87b151ed653dca83047132f1ed3ca474ef52124db7f6a20503204e74ba392ba"
+    },
+    {
+      "file": "refactor/baselines/auto-thumbnail-contract.md",
+      "sha256LF": "dc14c8e51afbd86cedd1da08100812c97e459680b13021269dcb0117ce12a6db"
+    },
+    {
+      "file": "refactor/scripts/auto-thumbnail-contract.mjs",
+      "sha256LF": "53871d5c387152b332f9e337ac23969de227533af8cd3196f8f5a444d2aa4f4d"
+    },
+    {
+      "file": "refactor/scripts/auto-thumbnail-contract.test.mjs",
+      "sha256LF": "df43a7f581aec0dc286383cfe4eb64f5737b38e9b75bac1a410c85fb15e4e461"
+    },
+    {
+      "file": "test/helpers/auto-thumbnail.js",
+      "sha256LF": "6c4fb8a27d5495578fb18df813458b2cb1ae467f0a182de14d75b72f2f760c3a"
+    },
+    {
+      "file": "refactor/contract-policy.json",
+      "sha256LF": "420064c3288adfab9813a6163a6ab294c2dc2459d008cef3c82011293a19c0bb"
+    },
+    {
+      "file": "refactor/scripts/contracts.test.mjs",
+      "sha256LF": "8492e6eafe5fa656cf84a726881a62766a13228f218d9d0894125b59759724e1"
+    }
+  ]
+}

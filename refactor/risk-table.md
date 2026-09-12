@@ -183,3 +183,8 @@
 | THUMB-MEDIA-01 | open / 已复现 | Windows WebKit native Blob URLs cannot load tested MP4 media despite successful HTTP controls | PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
 | VENDOR-09 | resolved / 源码/产物事实 | Thumbnail tiny-emitter 改写来源与最终分发许可 | PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-06 |
 | THUMB-EVENT-01 | resolved / 已复现 | Thumbnail 原型事件名与嵌套 once 派发缺陷 | PKG-TOOL-THUMB-04 |
+| AUTO-THUMB-TYPE-01 | open / 已复现 | Published declarations misdescribe async registration and switch height/number option fields across generations | PKG-AUTO-THUMB-04 |
+| AUTO-THUMB-EXPORT-01 | open / 已复现 | Published 1.0.1 CommonJS default namespace differs from the direct function exported by 1.1.0 | PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-06 |
+| AUTO-THUMB-DIST-01 | open / 已复现 | Published 1.0.0 archive lacks declared main and legacy runtimes | PKG-AUTO-THUMB-06 |
+| AUTO-THUMB-LIFE-01 | open / 源码/产物事实 | Extraction tasks, decoder handlers and final object URLs lack source-switch and destroy ownership | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
+| AUTO-THUMB-ENCODE-01 | open / 源码/产物事实 | Unserialized encodes include blank output and lack media/canvas/input failure handling | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |

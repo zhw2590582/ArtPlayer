@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUTO-THUMB-01",
+  "capturedAt": "2026-09-12T21:35:30.078Z",
+  "sourceCommit": "17befee4b1df7cf4ec29bbda4fd3271567f44223",
+  "registryObservation": {
+    "url": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail",
+    "status": 200,
+    "sha256": "52f735ef9be271f06f806995635b7b9a6ba1aedea9c1ad2c307a63788cd28986",
+    "versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.1.0"
+    ],
+    "latest": "1.1.0",
+    "workspaceVersion": "1.1.0"
+  },
+  "release": {
+    "name": "artplayer-plugin-auto-thumbnail",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/-/artplayer-plugin-auto-thumbnail-1.1.0.tgz",
+    "integrity": "sha512-ALrcLv+qEDime+R8p4628RZTfMGlrpX6d7PLIQaYWsQEN3lPzVjcVcARCFpqnFI8gvRdqt21w72sJphf50xtVw==",
+    "sha256": "5ea83d4e45d42fdaf42d3e37b6c666857872adaa276ab329c74edcdaa3c1a978",
+    "archiveBytes": 2420,
+    "publishedAt": "2026-03-12T14:21:45.753Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "fb5331337763bf50a3dfafab221dbbb4510cfb89a1816e81a42f6832b99a4546",
+      "package/dist/artplayer-plugin-auto-thumbnail.js": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+      "package/dist/artplayer-plugin-auto-thumbnail.legacy.js": "3561e51e0a5f294b56641bf0884a24a4a9e326582d2e99416a04f9526c7d0cc0",
+      "package/dist/artplayer-plugin-auto-thumbnail.mjs": "99da4748422bad54663c669d78963589a64c7cb02102e3544439fec7570a7f8b",
+      "package/package.json": "8d9e186c8767a88cd2f6b7d5fa07d35f9c5dad1a29bf321906d17dab7fc95504",
+      "package/types/artplayer-plugin-auto-thumbnail.d.ts": "33dc298c73da947f17bc3b8a73f3c4f96f4e176097de4f5a274f9d995aaf4e5b"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.1.0",
+      "description": "auto-thumbnail plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+          "require": "./dist/artplayer-plugin-auto-thumbnail.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+          "require": "./dist/artplayer-plugin-auto-thumbnail.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-auto-thumbnail.js",
+      "module": "./dist/artplayer-plugin-auto-thumbnail.mjs",
+      "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
+      "legacy": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "missingEntrypoints": {},
+    "historicalCore": {
+      "version": "5.3.1",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "scope": "Git association only; no npm core integration result is implied."
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.0.1",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/1.0.1",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/-/artplayer-plugin-auto-thumbnail-1.0.1.tgz",
+      "integrity": "sha512-jewDuGQNqa9e0dDJ3DzC4UghnbJ1+sHgFbTVcVCPzlvh3teHSjjU3/173V5Lq8jaPCRosY3dJWUUi2ZRULf8JQ==",
+      "sha256": "e7e0e09865cf4b46350097137ec292a64e6feedece2c90f724f0498993bfa812",
+      "archiveBytes": 7619,
+      "publishedAt": "2025-03-01T03:23:42.583Z",
+      "registryGitHead": "38ef03d31f4d8c4fcfe1f94009625cfb55eac6c1",
+      "files": {
+        "package/README.md": "e3eddeee9ea9baf00b4df05d9623585f512622a0892aabf1d6636262f9741590",
+        "package/dist/artplayer-plugin-auto-thumbnail.js": "3d9756b7437f24372d34138002b46937bb09e7392b82fb1caf5f09460f151c46",
+        "package/dist/artplayer-plugin-auto-thumbnail.legacy.js": "e8253301c9d6d36bf6623caae52ef4019a8bf30522a52ee20850c2ed3a11769b",
+        "package/package.json": "eb03c9825d5229adc486dee0b560e9dc731fb4b9d4f3cbca45249fe235295dfb",
+        "package/src/index.js": "4bfd833404aa6b3f25594dc4544d62f516df90193e80d82f32bf234d081acfc0",
+        "package/types/artplayer-plugin-auto-thumbnail.d.ts": "2deb15e0e21225809b304b9f84adc1bed6ecce3a016f5b2fd5456bd597d3e7df"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.1",
+        "name": "artplayer-plugin-auto-thumbnail",
+        "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
+        "description": "auto-thumbnail plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-auto-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.2.2",
+        "commit": "38ef03d31f4d8c4fcfe1f94009625cfb55eac6c1",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "59b29c249778ee2ab4fc603a35e5de1509bad5104565315fcfdcb7a5e30944a9",
+        "scope": "Git association only; no npm core integration result is implied."
+      }
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/-/artplayer-plugin-auto-thumbnail-1.0.0.tgz",
+      "integrity": "sha512-IcGdX3ezuQSu4TtIxaYAu0je2MZYLKRzJiEfszKrnpRuPRqkYSbSioJo9e1dLmw5MpMLezqkuldrsb96FFUwww==",
+      "sha256": "0a907bc8dbf2ef773764645730309b2c95592f84b31f5c4f9cec636d29c0263e",
+      "archiveBytes": 1414,
+      "publishedAt": "2024-12-05T14:09:42.640Z",
+      "registryGitHead": "eb8cc22bf2524482c26187a6f9346fb0137bb9f6",
+      "files": {
+        "package/README.md": "e3eddeee9ea9baf00b4df05d9623585f512622a0892aabf1d6636262f9741590",
+        "package/package.json": "4f43e319293cd970215941476473185c87c67aafab2b027335fd30461310a707",
+        "package/src/index.js": "4bfd833404aa6b3f25594dc4544d62f516df90193e80d82f32bf234d081acfc0",
+        "package/types/artplayer-plugin-auto-thumbnail.d.ts": "2deb15e0e21225809b304b9f84adc1bed6ecce3a016f5b2fd5456bd597d3e7df"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-plugin-auto-thumbnail",
+        "types": "types/artplayer-plugin-auto-thumbnail.d.ts",
+        "description": "auto-thumbnail plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-auto-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {
+        "main": "dist/artplayer-plugin-auto-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-auto-thumbnail.legacy.js"
+      },
+      "historicalCore": {
+        "version": "5.2.2",
+        "commit": "eb8cc22bf2524482c26187a6f9346fb0137bb9f6",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "59b29c249778ee2ab4fc603a35e5de1509bad5104565315fcfdcb7a5e30944a9",
+        "scope": "Git association only; no npm core integration result is implied."
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-plugin-auto-thumbnail/package.json": "8d9e186c8767a88cd2f6b7d5fa07d35f9c5dad1a29bf321906d17dab7fc95504",
+    "packages/artplayer-plugin-auto-thumbnail/README.md": "fb5331337763bf50a3dfafab221dbbb4510cfb89a1816e81a42f6832b99a4546",
+    "packages/artplayer-plugin-auto-thumbnail/src/index.js": "bc9102c014fbb7b87fe94dc71b779e24a88afb92f5e70a97cf26fcaa2d5a864f",
+    "packages/artplayer-plugin-auto-thumbnail/types/artplayer-plugin-auto-thumbnail.d.ts": "33dc298c73da947f17bc3b8a73f3c4f96f4e176097de4f5a274f9d995aaf4e5b",
+    "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js": "ce1f1472bf02b836dd85b92eadf2f00786c02cde11a20ac2801136a0f675d12a",
+    "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js": "3561e51e0a5f294b56641bf0884a24a4a9e326582d2e99416a04f9526c7d0cc0",
+    "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs": "99da4748422bad54663c669d78963589a64c7cb02102e3544439fec7570a7f8b",
+    "docs/assets/example/auto.thumbnail.js": "e0f706bbbab8e2d0f3201ea6b91f1d5530c6bb65f5c1745dc8ade9acc6d66295"
+  }
+}
