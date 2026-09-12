@@ -1,5 +1,8 @@
 # 测试与验收
 
+本清单是验收目录，早期未勾选项不代表当前未实施。计划、历史执行与精确候选观察
+见tasks/progress及 [契约覆盖索引](contract-coverage.md)，不能以总通过数代替契约验证。
+
 核心/chapter 的 Node TS 覆盖率使用 `yarn test:coverage`。源映射防伪验证、关键生命周期门槛、报告位置及资源/性能实施状态见 [覆盖率与性能维护说明](coverage-performance.md)。
 
 ## 测试层次
@@ -79,4 +82,4 @@ ENG-02 先交付仓库内可执行的 CI 配置；GitHub required checks 的实�
 
 ## 本计划不代表已有测试
 
-以上新增命令、测试目录和矩阵都是待实现内容。现有测试事实及评估范围见 [progress.md](progress.md)。
+以上目录源自初始计划，部分命令、测试和矩阵已实施；当前事实及范围见 [progress.md](progress.md)。

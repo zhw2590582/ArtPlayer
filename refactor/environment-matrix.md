@@ -1,5 +1,9 @@
 # 消费者与真实环境矩阵
 
+时间范围说明：BASE-08初始状态及分段补充保留采集时事实，不是当前全局进度快照。
+早期“未运行”不能覆盖后续证据；当前查progress和包validation。逐包契约、版本、
+测试及历史报告入口见 [契约覆盖索引](contract-coverage.md)。
+
 BASE-08；2026-09-10；来源提交 ed293231。矩阵建立完成，矩阵内未运行的检查仍待完成。版本与路径以 [发布冻结](baselines/releases.json)、[包初始快照](package-inventory.json)、[分发观察](baselines/distribution.json)、[demo 清单](baselines/demo-inventory.json) 和 [第三方清单](third-party.json) 为依据。
 
 ## 版本和分发维度

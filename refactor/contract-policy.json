@@ -1,0 +1,957 @@
+{
+  "schemaVersion": 1,
+  "families": [
+    {
+      "id": "API-01",
+      "name": "构造与配置"
+    },
+    {
+      "id": "API-02",
+      "name": "属性与方法"
+    },
+    {
+      "id": "API-03",
+      "name": "属性描述符"
+    },
+    {
+      "id": "API-04",
+      "name": "事件"
+    },
+    {
+      "id": "API-05",
+      "name": "生命周期"
+    },
+    {
+      "id": "API-06",
+      "name": "插件注册"
+    },
+    {
+      "id": "API-07",
+      "name": "生态集成"
+    },
+    {
+      "id": "API-08",
+      "name": "DOM/CSS"
+    },
+    {
+      "id": "API-09",
+      "name": "包分发"
+    },
+    {
+      "id": "API-10",
+      "name": "浏览器能力"
+    },
+    {
+      "id": "API-11",
+      "name": "TypeScript"
+    },
+    {
+      "id": "API-12",
+      "name": "持久状态与协议"
+    }
+  ],
+  "packages": [
+    {
+      "name": "artplayer",
+      "owners": {
+        "API-01": "REVIEW-02",
+        "API-02": "REVIEW-02",
+        "API-03": "REVIEW-02",
+        "API-04": "REVIEW-02",
+        "API-05": "REVIEW-02",
+        "API-06": "REVIEW-02",
+        "API-07": "REVIEW-02",
+        "API-08": "REVIEW-02",
+        "API-09": "REVIEW-02",
+        "API-10": "REL-03",
+        "API-11": "REVIEW-02",
+        "API-12": "REVIEW-02"
+      },
+      "versionIds": [
+        "WS-artplayer",
+        "PUB-artplayer-5.4.0"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "owners": {
+        "API-01": "PKG-ADS-02",
+        "API-02": "PKG-ADS-02",
+        "API-03": "PKG-ADS-02",
+        "API-04": "PKG-ADS-02",
+        "API-05": "PKG-ADS-02",
+        "API-06": "PKG-ADS-02",
+        "API-07": "PKG-ADS-02",
+        "API-08": "PKG-ADS-02",
+        "API-09": "PKG-ADS-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-ADS-04",
+        "API-12": "PKG-ADS-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-ads",
+        "PUB-artplayer-plugin-ads-1.0.6"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "owners": {
+        "API-01": "PKG-AMBILIGHT-02",
+        "API-02": "PKG-AMBILIGHT-02",
+        "API-03": "PKG-AMBILIGHT-02",
+        "API-04": "PKG-AMBILIGHT-02",
+        "API-05": "PKG-AMBILIGHT-02",
+        "API-06": "PKG-AMBILIGHT-02",
+        "API-07": "PKG-AMBILIGHT-02",
+        "API-08": "PKG-AMBILIGHT-02",
+        "API-09": "PKG-AMBILIGHT-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-AMBILIGHT-04",
+        "API-12": "PKG-AMBILIGHT-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-ambilight"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "owners": {
+        "API-01": "PKG-ASR-02",
+        "API-02": "PKG-ASR-02",
+        "API-03": "PKG-ASR-02",
+        "API-04": "PKG-ASR-02",
+        "API-05": "PKG-ASR-02",
+        "API-06": "PKG-ASR-02",
+        "API-07": "PKG-ASR-02",
+        "API-08": "PKG-ASR-02",
+        "API-09": "PKG-ASR-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-ASR-04",
+        "API-12": "PKG-ASR-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-asr"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "owners": {
+        "API-01": "PKG-AUDIO-02",
+        "API-02": "PKG-AUDIO-02",
+        "API-03": "PKG-AUDIO-02",
+        "API-04": "PKG-AUDIO-02",
+        "API-05": "PKG-AUDIO-02",
+        "API-06": "PKG-AUDIO-02",
+        "API-07": "PKG-AUDIO-02",
+        "API-08": "PKG-AUDIO-02",
+        "API-09": "PKG-AUDIO-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-AUDIO-04",
+        "API-12": "PKG-AUDIO-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-audio-track",
+        "PUB-artplayer-plugin-audio-track-1.1.0"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "owners": {
+        "API-01": "PKG-AUTO-THUMB-02",
+        "API-02": "PKG-AUTO-THUMB-02",
+        "API-03": "PKG-AUTO-THUMB-02",
+        "API-04": "PKG-AUTO-THUMB-02",
+        "API-05": "PKG-AUTO-THUMB-02",
+        "API-06": "PKG-AUTO-THUMB-02",
+        "API-07": "PKG-AUTO-THUMB-02",
+        "API-08": "PKG-AUTO-THUMB-02",
+        "API-09": "PKG-AUTO-THUMB-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-AUTO-THUMB-04",
+        "API-12": "PKG-AUTO-THUMB-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-auto-thumbnail"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "owners": {
+        "API-01": "PKG-CHAPTER-02",
+        "API-02": "PKG-CHAPTER-02",
+        "API-03": "PKG-CHAPTER-02",
+        "API-04": "PKG-CHAPTER-02",
+        "API-05": "PKG-CHAPTER-02",
+        "API-06": "PKG-CHAPTER-02",
+        "API-07": "PKG-CHAPTER-02",
+        "API-08": "PKG-CHAPTER-02",
+        "API-09": "PKG-CHAPTER-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-CHAPTER-04",
+        "API-12": "PKG-CHAPTER-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-chapter",
+        "PUB-artplayer-plugin-chapter-1.1.0"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "owners": {
+        "API-01": "PKG-CAST-02",
+        "API-02": "PKG-CAST-02",
+        "API-03": "PKG-CAST-02",
+        "API-04": "PKG-CAST-02",
+        "API-05": "PKG-CAST-02",
+        "API-06": "PKG-CAST-02",
+        "API-07": "PKG-CAST-02",
+        "API-08": "PKG-CAST-02",
+        "API-09": "PKG-CAST-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-CAST-04",
+        "API-12": "PKG-CAST-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-chromecast"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "owners": {
+        "API-01": "PKG-DANMUKU-02",
+        "API-02": "PKG-DANMUKU-02",
+        "API-03": "PKG-DANMUKU-02",
+        "API-04": "PKG-DANMUKU-02",
+        "API-05": "PKG-DANMUKU-02",
+        "API-06": "PKG-DANMUKU-02",
+        "API-07": "PKG-DANMUKU-02",
+        "API-08": "PKG-DANMUKU-02",
+        "API-09": "PKG-DANMUKU-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-DANMUKU-04",
+        "API-12": "PKG-DANMUKU-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-danmuku"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "owners": {
+        "API-01": "PKG-MASK-02",
+        "API-02": "PKG-MASK-02",
+        "API-03": "PKG-MASK-02",
+        "API-04": "PKG-MASK-02",
+        "API-05": "PKG-MASK-02",
+        "API-06": "PKG-MASK-02",
+        "API-07": "PKG-MASK-02",
+        "API-08": "PKG-MASK-02",
+        "API-09": "PKG-MASK-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-MASK-04",
+        "API-12": "PKG-MASK-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-danmuku-mask"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "owners": {
+        "API-01": "PKG-DASH-02",
+        "API-02": "PKG-DASH-02",
+        "API-03": "PKG-DASH-02",
+        "API-04": "PKG-DASH-02",
+        "API-05": "PKG-DASH-02",
+        "API-06": "PKG-DASH-02",
+        "API-07": "PKG-DASH-02",
+        "API-08": "PKG-DASH-02",
+        "API-09": "PKG-DASH-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-DASH-04",
+        "API-12": "PKG-DASH-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-dash-control",
+        "PUB-artplayer-plugin-dash-control-1.1.0"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "owners": {
+        "API-01": "PKG-DPIP-02",
+        "API-02": "PKG-DPIP-02",
+        "API-03": "PKG-DPIP-02",
+        "API-04": "PKG-DPIP-02",
+        "API-05": "PKG-DPIP-02",
+        "API-06": "PKG-DPIP-02",
+        "API-07": "PKG-DPIP-02",
+        "API-08": "PKG-DPIP-02",
+        "API-09": "PKG-DPIP-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-DPIP-04",
+        "API-12": "PKG-DPIP-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-document-pip"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "owners": {
+        "API-01": "PKG-HLS-02",
+        "API-02": "PKG-HLS-02",
+        "API-03": "PKG-HLS-02",
+        "API-04": "PKG-HLS-02",
+        "API-05": "PKG-HLS-02",
+        "API-06": "PKG-HLS-02",
+        "API-07": "PKG-HLS-02",
+        "API-08": "PKG-HLS-02",
+        "API-09": "PKG-HLS-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-HLS-04",
+        "API-12": "PKG-HLS-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-hls-control",
+        "PUB-artplayer-plugin-hls-control-1.1.0"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "owners": {
+        "API-01": "PKG-JASSUB-02",
+        "API-02": "PKG-JASSUB-02",
+        "API-03": "PKG-JASSUB-02",
+        "API-04": "PKG-JASSUB-02",
+        "API-05": "PKG-JASSUB-02",
+        "API-06": "PKG-JASSUB-02",
+        "API-07": "PKG-JASSUB-02",
+        "API-08": "PKG-JASSUB-02",
+        "API-09": "PKG-JASSUB-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-JASSUB-04",
+        "API-12": "PKG-JASSUB-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-jassub"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "owners": {
+        "API-01": "PKG-MULTI-SUB-02",
+        "API-02": "PKG-MULTI-SUB-02",
+        "API-03": "PKG-MULTI-SUB-02",
+        "API-04": "PKG-MULTI-SUB-02",
+        "API-05": "PKG-MULTI-SUB-02",
+        "API-06": "PKG-MULTI-SUB-02",
+        "API-07": "PKG-MULTI-SUB-02",
+        "API-08": "PKG-MULTI-SUB-02",
+        "API-09": "PKG-MULTI-SUB-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-MULTI-SUB-04",
+        "API-12": "PKG-MULTI-SUB-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-multiple-subtitles"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "owners": {
+        "API-01": "PKG-VAST-02",
+        "API-02": "PKG-VAST-02",
+        "API-03": "PKG-VAST-02",
+        "API-04": "PKG-VAST-02",
+        "API-05": "PKG-VAST-02",
+        "API-06": "PKG-VAST-02",
+        "API-07": "PKG-VAST-02",
+        "API-08": "PKG-VAST-02",
+        "API-09": "PKG-VAST-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-VAST-04",
+        "API-12": "PKG-VAST-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-vast",
+        "PUB-artplayer-plugin-vast-1.0.0"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "owners": {
+        "API-01": "PKG-VTT-THUMB-02",
+        "API-02": "PKG-VTT-THUMB-02",
+        "API-03": "PKG-VTT-THUMB-02",
+        "API-04": "PKG-VTT-THUMB-02",
+        "API-05": "PKG-VTT-THUMB-02",
+        "API-06": "PKG-VTT-THUMB-02",
+        "API-07": "PKG-VTT-THUMB-02",
+        "API-08": "PKG-VTT-THUMB-02",
+        "API-09": "PKG-VTT-THUMB-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-VTT-THUMB-04",
+        "API-12": "PKG-VTT-THUMB-02"
+      },
+      "versionIds": [
+        "WS-artplayer-plugin-vtt-thumbnail"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "owners": {
+        "API-01": "PKG-CANVAS-02",
+        "API-02": "PKG-CANVAS-02",
+        "API-03": "PKG-CANVAS-02",
+        "API-04": "PKG-CANVAS-02",
+        "API-05": "PKG-CANVAS-02",
+        "API-06": "PKG-CANVAS-02",
+        "API-07": "PKG-CANVAS-02",
+        "API-08": "PKG-CANVAS-02",
+        "API-09": "PKG-CANVAS-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-CANVAS-04",
+        "API-12": "PKG-CANVAS-02"
+      },
+      "versionIds": [
+        "WS-artplayer-proxy-canvas"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "owners": {
+        "API-01": "PKG-MB-02",
+        "API-02": "PKG-MB-02",
+        "API-03": "PKG-MB-02",
+        "API-04": "PKG-MB-02",
+        "API-05": "PKG-MB-02",
+        "API-06": "PKG-MB-02",
+        "API-07": "PKG-MB-02",
+        "API-08": "PKG-MB-02",
+        "API-09": "PKG-MB-10",
+        "API-10": "REL-03",
+        "API-11": "PKG-MB-08",
+        "API-12": "PKG-MB-02"
+      },
+      "versionIds": [
+        "WS-artplayer-proxy-mediabunny"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "owners": {
+        "API-01": "PKG-IFRAME-02",
+        "API-02": "PKG-IFRAME-02",
+        "API-03": "PKG-IFRAME-02",
+        "API-04": "PKG-IFRAME-02",
+        "API-05": "PKG-IFRAME-02",
+        "API-06": "PKG-IFRAME-02",
+        "API-07": "PKG-IFRAME-02",
+        "API-08": "PKG-IFRAME-02",
+        "API-09": "PKG-IFRAME-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-IFRAME-04",
+        "API-12": "PKG-IFRAME-02"
+      },
+      "versionIds": [
+        "WS-artplayer-tool-iframe"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "owners": {
+        "API-01": "PKG-TOOL-THUMB-02",
+        "API-02": "PKG-TOOL-THUMB-02",
+        "API-03": "PKG-TOOL-THUMB-02",
+        "API-04": "PKG-TOOL-THUMB-02",
+        "API-05": "PKG-TOOL-THUMB-02",
+        "API-06": "PKG-TOOL-THUMB-02",
+        "API-07": "PKG-TOOL-THUMB-02",
+        "API-08": "PKG-TOOL-THUMB-02",
+        "API-09": "PKG-TOOL-THUMB-06",
+        "API-10": "REL-03",
+        "API-11": "PKG-TOOL-THUMB-04",
+        "API-12": "PKG-TOOL-THUMB-02"
+      },
+      "versionIds": [
+        "WS-artplayer-tool-thumbnail"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+    },
+    {
+      "name": "artplayer-vitepress",
+      "owners": {
+        "API-01": "SITE-06",
+        "API-02": "SITE-06",
+        "API-03": "SITE-06",
+        "API-04": "SITE-06",
+        "API-05": "SITE-06",
+        "API-06": "SITE-06",
+        "API-07": "SITE-06",
+        "API-08": "SITE-06",
+        "API-09": "SITE-06",
+        "API-10": "SITE-06",
+        "API-11": "SITE-06",
+        "API-12": "SITE-06"
+      },
+      "versionIds": [
+        "WS-artplayer-vitepress"
+      ],
+      "supportWindow": "not-inferred-from-baseline",
+      "scopeReview": "SITE-01/06 must distinguish website behavior from npm library APIs; all families retain review ownership, no invented player constructor"
+    }
+  ],
+  "versions": [
+    {
+      "id": "WS-artplayer",
+      "package": "artplayer",
+      "kind": "workspace-baseline",
+      "version": "5.4.1",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/0"
+    },
+    {
+      "id": "WS-artplayer-plugin-ads",
+      "package": "artplayer-plugin-ads",
+      "kind": "workspace-baseline",
+      "version": "2.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/1"
+    },
+    {
+      "id": "WS-artplayer-plugin-ambilight",
+      "package": "artplayer-plugin-ambilight",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/2"
+    },
+    {
+      "id": "WS-artplayer-plugin-asr",
+      "package": "artplayer-plugin-asr",
+      "kind": "workspace-baseline",
+      "version": "2.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/3"
+    },
+    {
+      "id": "WS-artplayer-plugin-audio-track",
+      "package": "artplayer-plugin-audio-track",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/4"
+    },
+    {
+      "id": "WS-artplayer-plugin-auto-thumbnail",
+      "package": "artplayer-plugin-auto-thumbnail",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/5"
+    },
+    {
+      "id": "WS-artplayer-plugin-chapter",
+      "package": "artplayer-plugin-chapter",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/6"
+    },
+    {
+      "id": "WS-artplayer-plugin-chromecast",
+      "package": "artplayer-plugin-chromecast",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/7"
+    },
+    {
+      "id": "WS-artplayer-plugin-danmuku",
+      "package": "artplayer-plugin-danmuku",
+      "kind": "workspace-baseline",
+      "version": "5.3.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/8"
+    },
+    {
+      "id": "WS-artplayer-plugin-danmuku-mask",
+      "package": "artplayer-plugin-danmuku-mask",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/9"
+    },
+    {
+      "id": "WS-artplayer-plugin-dash-control",
+      "package": "artplayer-plugin-dash-control",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/10"
+    },
+    {
+      "id": "WS-artplayer-plugin-document-pip",
+      "package": "artplayer-plugin-document-pip",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/11"
+    },
+    {
+      "id": "WS-artplayer-plugin-hls-control",
+      "package": "artplayer-plugin-hls-control",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/12"
+    },
+    {
+      "id": "WS-artplayer-plugin-jassub",
+      "package": "artplayer-plugin-jassub",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/13"
+    },
+    {
+      "id": "WS-artplayer-plugin-multiple-subtitles",
+      "package": "artplayer-plugin-multiple-subtitles",
+      "kind": "workspace-baseline",
+      "version": "1.2.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/14"
+    },
+    {
+      "id": "WS-artplayer-plugin-vast",
+      "package": "artplayer-plugin-vast",
+      "kind": "workspace-baseline",
+      "version": "1.2.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/15"
+    },
+    {
+      "id": "WS-artplayer-plugin-vtt-thumbnail",
+      "package": "artplayer-plugin-vtt-thumbnail",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/16"
+    },
+    {
+      "id": "WS-artplayer-proxy-canvas",
+      "package": "artplayer-proxy-canvas",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/17"
+    },
+    {
+      "id": "WS-artplayer-proxy-mediabunny",
+      "package": "artplayer-proxy-mediabunny",
+      "kind": "workspace-baseline",
+      "version": "1.2.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/18"
+    },
+    {
+      "id": "WS-artplayer-tool-iframe",
+      "package": "artplayer-tool-iframe",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/19"
+    },
+    {
+      "id": "WS-artplayer-tool-thumbnail",
+      "package": "artplayer-tool-thumbnail",
+      "kind": "workspace-baseline",
+      "version": "4.4.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/20"
+    },
+    {
+      "id": "WS-artplayer-vitepress",
+      "package": "artplayer-vitepress",
+      "kind": "workspace-baseline",
+      "version": "1.1.0",
+      "file": "refactor/package-inventory.json",
+      "pointer": "/packages/21"
+    },
+    {
+      "id": "PUB-artplayer-5.4.0",
+      "package": "artplayer",
+      "kind": "published-baseline",
+      "version": "5.4.0",
+      "file": "refactor/baselines/releases.json",
+      "pointer": "/releases/0",
+      "archiveSha256": "42b269a66b9658d53f9a92572bb36d656ea9af56254a387b3a69c7ddea43979e"
+    },
+    {
+      "id": "PUB-artplayer-plugin-chapter-1.1.0",
+      "package": "artplayer-plugin-chapter",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/releases.json",
+      "pointer": "/releases/1",
+      "archiveSha256": "4c3173661854ff96f643a479c0f1c2db7ce9e54681523bd059a7dd9bd77eeada"
+    },
+    {
+      "id": "PUB-artplayer-plugin-audio-track-1.1.0",
+      "package": "artplayer-plugin-audio-track",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/audio-track-release.json",
+      "pointer": "/release",
+      "archiveSha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff"
+    },
+    {
+      "id": "PUB-artplayer-plugin-hls-control-1.1.0",
+      "package": "artplayer-plugin-hls-control",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/hls-control-release.json",
+      "pointer": "/release",
+      "archiveSha256": "598c354d78d3cb77965136fa61dfc0f94cdea6906a91a30781c1acef2b0c3e8b"
+    },
+    {
+      "id": "PUB-artplayer-plugin-dash-control-1.1.0",
+      "package": "artplayer-plugin-dash-control",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/dash-control-release.json",
+      "pointer": "/release",
+      "archiveSha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9"
+    },
+    {
+      "id": "PUB-artplayer-plugin-ads-1.0.6",
+      "package": "artplayer-plugin-ads",
+      "kind": "published-baseline",
+      "version": "1.0.6",
+      "file": "refactor/baselines/ads-release.json",
+      "pointer": "/release",
+      "archiveSha256": "ff132ff8a7108d8b26421621e4aac1d7edf8c99099a5ab4fd2190bd79b8636cd"
+    },
+    {
+      "id": "PUB-artplayer-plugin-vast-1.0.0",
+      "package": "artplayer-plugin-vast",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/vast-release.json",
+      "pointer": "/release",
+      "archiveSha256": "35681d60fa3fa09b92f0f30887e39c73cf55e7b14d51a1c38fccbc6c1f253bab"
+    }
+  ],
+  "cases": [
+    {
+      "id": "CT-CORE-OPTIONS-001",
+      "package": "artplayer",
+      "contracts": [
+        "API-01"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/options.test.js",
+      "title": "default values, keys and nested order match the published getter",
+      "versionIds": [
+        "WS-artplayer",
+        "PUB-artplayer-5.4.0"
+      ],
+      "scope": "Current option getter compared with archived published 5.4.0",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-OPTIONS-002",
+      "package": "artplayer",
+      "contracts": [
+        "API-01"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/options.test.js",
+      "title": "invalid JS input keeps the published validation path, first error and thrown kind",
+      "versionIds": [
+        "WS-artplayer",
+        "PUB-artplayer-5.4.0"
+      ],
+      "scope": "Nine invalid input patches compare first error name/message with published 5.4.0",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-PLUGINS-001",
+      "package": "artplayer",
+      "contracts": [
+        "API-03",
+        "API-06"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/plugins.test.js",
+      "title": "plugin registration keeps receiver, arguments, id, descriptors and naming precedence",
+      "versionIds": [
+        "WS-artplayer"
+      ],
+      "scope": "Controlled registry checks receiver, identity, hidden nonwritable descriptor and naming conflicts",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-PLUGINS-002",
+      "package": "artplayer",
+      "contracts": [
+        "API-02",
+        "API-06"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/plugins.test.js",
+      "title": "async factories preserve pending visibility, completion-time fallback and registry fulfillment",
+      "versionIds": [
+        "WS-artplayer"
+      ],
+      "scope": "Controlled asynchronous factory visibility and returned registry",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-PLUGINS-003",
+      "package": "artplayer",
+      "contracts": [
+        "API-05",
+        "API-06"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/plugins.test.js",
+      "title": "closed registries ignore late results without inspecting or destroying them and reject new factories",
+      "versionIds": [
+        "WS-artplayer"
+      ],
+      "scope": "Disposed scope suppresses late result getters and disallows further factory execution",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-EVENTS-001",
+      "package": "artplayer",
+      "contracts": [
+        "API-04"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/public-behavior.test.js",
+      "title": "EVENT.once-nested-snapshot: candidate consumes a once registration across nested dispatch snapshots",
+      "versionIds": [
+        "WS-artplayer",
+        "PUB-artplayer-5.4.0"
+      ],
+      "scope": "Published duplicate nested once dispatch is reproduced; current consumes once exactly once",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-STORAGE-001",
+      "package": "artplayer",
+      "contracts": [
+        "API-02",
+        "API-12"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/storage.test.js",
+      "title": "storage preserves envelope, mutable name/settings fields and synchronous returns",
+      "versionIds": [
+        "WS-artplayer"
+      ],
+      "scope": "Controlled localStorage verifies exact key/envelope and synchronous returns",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CORE-STORAGE-002",
+      "package": "artplayer",
+      "contracts": [
+        "API-12"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/storage.test.js",
+      "title": "storage retains truthy key selection and historical JSON payload shapes",
+      "versionIds": [
+        "WS-artplayer"
+      ],
+      "scope": "Array/scalar/null/malformed JSON cases retain historical fallback semantics",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CHAPTER-NORMALIZE-001",
+      "package": "artplayer-plugin-chapter",
+      "contracts": [
+        "API-01",
+        "API-02"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/chapter.test.js",
+      "title": "Chapter normalization preserves caller array and objects while filling every gap",
+      "versionIds": [
+        "WS-artplayer-plugin-chapter"
+      ],
+      "scope": "Current normalizer retains caller array and chapter identity across repeated normalization",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    },
+    {
+      "id": "CT-CHAPTER-NORMALIZE-002",
+      "package": "artplayer-plugin-chapter",
+      "contracts": [
+        "API-02"
+      ],
+      "runner": "node",
+      "command": "yarn test:contracts",
+      "file": "test/chapter.test.js",
+      "title": "Chapter endpoints, adjacency and Infinity normalization retain historical behavior",
+      "versionIds": [
+        "WS-artplayer-plugin-chapter"
+      ],
+      "scope": "Current normalizer retains adjacent endpoints and resolves Infinity against duration",
+      "limitations": "Source/controlled-host assertions only; no whole-family acceptance, installed tarball, browser, device or continuous support-range claim"
+    }
+  ]
+}

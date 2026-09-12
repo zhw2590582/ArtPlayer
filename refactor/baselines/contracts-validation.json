@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "task": "ENG-COVERAGE-01",
+  "status": "done",
+  "sourceCommit": "6abac891ceb42bbff2c285befab3fda85490c3e9",
+  "model": {
+    "packages": 22,
+    "contractFamilies": 12,
+    "ownerRows": 264,
+    "workspaceVersionPoints": 22,
+    "publishedVersionPoints": 7,
+    "indexedCases": 10,
+    "rowsAwaitingTestIndexing": 255
+  },
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/contracts.test.mjs",
+      "result": "pass",
+      "tests": 7,
+      "log": {
+        "file": "refactor/.cache/contracts-tests-final-guards.log",
+        "sha256": "3d4c38f9710755ff6f825171d4798b0f53d516e2422c02a688315f10fe0e7d78"
+      }
+    },
+    {
+      "command": "node --test --test-reporter=D:/github/ArtPlayer/refactor/scripts/contract-reporter.mjs test/chapter.test.js",
+      "result": "Windows absolute ESM specifier failure reproduced; fixture fixed with file URL",
+      "log": {
+        "file": "refactor/.cache/contracts-reporter-path-before.log",
+        "sha256": "5009c96b9108020b163f72bf9ae50d9e7336616977e023f79e1ff3368c3b205f"
+      }
+    },
+    {
+      "command": "eslint contract index/model/runner/reporter/tests --no-fix",
+      "result": "pass",
+      "log": {
+        "file": "refactor/.cache/contracts-lint-verified.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "node refactor/scripts/run-contracts.mjs (final targeted verification)",
+      "result": "pass",
+      "executedTests": 44,
+      "indexedAssertions": 10,
+      "scope": "Five existing Node files; repeated executions are not new functional coverage",
+      "report": "refactor/baselines/contract-observations/2026-09-12-source-final.json",
+      "log": {
+        "file": "refactor/.cache/contracts-run-verified.log",
+        "sha256": "d34a6bfaa5bef99e48622886612aef299c8a7c475ab69baf721f951019aa14a4"
+      }
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 832,
+        "engineering": 14,
+        "baseline": 72,
+        "mainTestChainTotal": 918,
+        "additionalRepeatedContractExecutions": 44
+      },
+      "log": {
+        "file": "refactor/.cache/contracts-ci-verified.log",
+        "sha256": "3695a31e9952fc7d24d4221b306e8e61eaf44e86d945a681e2e05f290362085a"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256LF": "a114d0f1c1532e90984a93cc703dfcb250107f5de56b5a62bf4c30ad4f64c25b"
+    },
+    {
+      "file": "refactor/contract-policy.json",
+      "sha256LF": "ca545a3e721313f0dcb59c549c14589c108e064ff396a72a2c14e4ee993b1a04"
+    },
+    {
+      "file": "refactor/scripts/contracts-model.mjs",
+      "sha256LF": "99b3a774de9d4bbfbf6bc7728b74bf8784883e13ac24f5b9b7e5aff81367ca8a"
+    },
+    {
+      "file": "refactor/scripts/contracts.mjs",
+      "sha256LF": "66dd75e6624574dd2648317d087d67fd17f4a310066fc63b3eb32b90f68fcf36"
+    },
+    {
+      "file": "refactor/scripts/contracts.test.mjs",
+      "sha256LF": "022c46ac41b87b28fabded74dcda2658039b4487dfc1ff4d4d70edfbc08b8da3"
+    },
+    {
+      "file": "refactor/scripts/contract-reporter.mjs",
+      "sha256LF": "9fdd6cd1814e12df18a294558da9a4a561b5b8eee8149b21902c1b99b855b8c9"
+    },
+    {
+      "file": "refactor/scripts/run-contracts.mjs",
+      "sha256LF": "de7a44af890672605d6ce00c142420d146c4ba45b398786957b65edc3c25afd3"
+    }
+  ],
+  "limitations": [
+    "Ownership index covers the twelve declared contract families, not exhaustive testing of every public member",
+    "255 rows lack exact test indexing; recorded historical tests are not thereby absent or failed",
+    "Only Node literal assertions normalized so far; browser/type/device/vendor evidence remains in its original reports and package/review tasks",
+    "Exact baseline versions do not establish continuous support ranges",
+    "Local CI only, no remote GitHub run; no npm release acceptance",
+    "Existing generated-doc lint warning and Yarn url.parse deprecation remain outside this engineering change"
+  ]
+}

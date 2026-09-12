@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "runs": [
+    {
+      "file": "refactor/baselines/contract-observations/2026-09-12-source.json",
+      "sha256LF": "53e8b6f0483b9fcd555790faf454d17b652f15c30e82997d82fda69012061096"
+    },
+    {
+      "file": "refactor/baselines/contract-observations/2026-09-12-source-final.json",
+      "sha256LF": "9700e66ba9b33b811d2178c8c6c0c2b58c6cc7d802f33e929d6aa447204b6c42"
+    }
+  ]
+}

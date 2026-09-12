@@ -15,6 +15,8 @@
 | `yarn test:browser` | 隔离服务执行 Chromium/Firefox/WebKit 真实播放；首次先运行 test:browser:install，详见 [入口](../test/browser/README.md) |
 | `yarn test:imports` | 3 个既有包导入 smoke，构建后执行以使用新产物；不把 console 示例视为完整行为断言 |
 | `yarn test:baseline` | 固定发布包完整性及本地 HTTP 基线测试；首次可能下载已固定归档到缓存 |
+| `yarn test:contracts` | 重跑已登记断言的Node文件并采集精确事件/候选指纹，当前44项包含10个索引断言 |
+| `yarn check:contracts --report` | 校验12类契约/22包归属、版本及报告对应；--write更新静态表，详见 [维护说明](contract-coverage.md) |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
 | `yarn ci:build` | 21 库包、i18n、编辑器声明和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
 | `yarn check:impact --report` | 读取实际依赖/验证关系和Git变更，核对workflow必需命令，写CI影响报告；已接入ci:check，见[影响映射](impact-analysis.md) |

@@ -654,7 +654,7 @@
       "risk": "M",
       "id": "ENG-COVERAGE-01",
       "title": "建立公开契约与版本测试证据覆盖索引",
-      "status": "todo",
+      "status": "done",
       "dependsOn": [
         "BASE-08",
         "CORE-22",
@@ -662,7 +662,12 @@
       ],
       "deliverable": "契约-包-支持版本-固定测试ID-命令-候选/报告-责任任务索引和文档检查",
       "acceptance": "计划、已执行和缺证据状态分开，所有公开契约都有验证归属；无效路径、版本依据或报告对应不明确会被识别",
-      "evidence": []
+      "evidence": [
+        "contract-coverage.md",
+        "contract-index.md",
+        "changes/2026-09-12-ENG-COVERAGE-01-index.md",
+        "baselines/contracts-validation.json"
+      ]
     },
     {
       "id": "ENG-09",

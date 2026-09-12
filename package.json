@@ -47,7 +47,7 @@
     "check:plan": "node refactor/scripts/plan.mjs --check",
     "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js test/declarations.test.js test/editor-types.test.js test/coverage.test.js test/performance-report.test.js test/media-gate.test.js",
     "test:baseline": "node --test refactor/scripts/*.test.mjs",
-    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn test",
+    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn test:contracts && yarn check:contracts --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn test",
     "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
     "test:imports": "node --test test/esm.test.js test/i18n.test.js test/ssr.test.js",
     "typecheck": "node scripts/typecheck.mjs",
@@ -67,7 +67,9 @@
     "test:ads-native-visibility": "node refactor/scripts/ads-native-visibility.mjs",
     "test:vast": "node --test test/vast.test.js test/vast-lifecycle.test.js",
     "check:commits": "node refactor/scripts/commit-audit.mjs",
-    "check:impact": "node refactor/scripts/impact.mjs"
+    "check:impact": "node refactor/scripts/impact.mjs",
+    "check:contracts": "node refactor/scripts/contracts.mjs",
+    "test:contracts": "node refactor/scripts/run-contracts.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
