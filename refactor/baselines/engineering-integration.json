@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "task": "ENG-09",
+  "status": "done",
+  "sourceCommit": "f35fb876155f1ff1dc67b3ef90cedf33ccc5cf17",
+  "children": [
+    "e0aacc5d",
+    "6abac891",
+    "f35fb876"
+  ],
+  "checks": {
+    "commitAudit": {
+      "doneTasks": 83,
+      "bootstrapException": 4
+    },
+    "impact": {
+      "coreAffectedPackages": [
+        "artplayer",
+        "artplayer-plugin-ads",
+        "artplayer-plugin-ambilight",
+        "artplayer-plugin-asr",
+        "artplayer-plugin-audio-track",
+        "artplayer-plugin-auto-thumbnail",
+        "artplayer-plugin-chapter",
+        "artplayer-plugin-chromecast",
+        "artplayer-plugin-danmuku",
+        "artplayer-plugin-danmuku-mask",
+        "artplayer-plugin-dash-control",
+        "artplayer-plugin-document-pip",
+        "artplayer-plugin-hls-control",
+        "artplayer-plugin-jassub",
+        "artplayer-plugin-multiple-subtitles",
+        "artplayer-plugin-vast",
+        "artplayer-plugin-vtt-thumbnail",
+        "artplayer-proxy-canvas",
+        "artplayer-proxy-mediabunny",
+        "artplayer-tool-iframe",
+        "artplayer-tool-thumbnail",
+        "artplayer-vitepress"
+      ],
+      "requiredChecks": [
+        {
+          "job": "checks",
+          "command": "yarn ci:check",
+          "scope": "Toolchain, task/commit/impact contracts, lint, current strict projects and existing Node/baseline suites"
+        },
+        {
+          "job": "checks",
+          "command": "yarn ci:build",
+          "scope": "All library builds, i18n, editor declarations, docs site and existing import suites"
+        },
+        {
+          "job": "browser-smoke",
+          "command": "yarn test:package",
+          "scope": "Installed core/chapter consumers only; other package installation acceptance remains pending"
+        },
+        {
+          "job": "browser-smoke",
+          "command": "yarn test:browser",
+          "scope": "All existing three-engine browser suites; does not imply every package/device has a suite"
+        },
+        {
+          "job": "browser-smoke",
+          "command": "yarn test:performance",
+          "scope": "Existing installed performance and resource-cleanup scenarios"
+        },
+        {
+          "job": "coverage",
+          "command": "yarn test:coverage",
+          "scope": "Current coverage-policy packages and critical module thresholds only"
+        }
+      ]
+    },
+    "contracts": {
+      "assignedRows": 264,
+      "missingTestIndexRows": 255
+    },
+    "plan": "220 tasks, dependency graph and local links passed"
+  },
+  "logs": [
+    {
+      "file": "refactor/.cache/engineering-audit.log",
+      "sha256": "ded400ec2bbeda75467e05b24538ceff422dd7480e417b37f992dafb40f6bcaa"
+    },
+    {
+      "file": "refactor/.cache/engineering-impact.log",
+      "sha256": "edb61dc20791ba4edeb2e6c15556ed009fe31f02673edf0f5e643b7ae45bf116"
+    },
+    {
+      "file": "refactor/.cache/engineering-contracts.log",
+      "sha256": "a426ed65f4730328ef110d95762ccc64dfdd81862310f8047e71e4c3f602516a"
+    }
+  ],
+  "limitations": [
+    "Integration checks only; no new full CI/browser run claimed",
+    "Exact support ranges, exhaustive member mapping, installed consumers and device/vendor gates remain in package/REVIEW/REL tasks",
+    "No remote Actions, push or npm publish"
+  ]
+}

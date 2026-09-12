@@ -683,11 +683,14 @@
         "ENG-IMPACT-01",
         "ENG-COVERAGE-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "共享核心/构建影响映射、文档及每任务完成提交的 Git 审计接入；契约-支持版本-测试 ID-命令-候选/报告-任务的覆盖索引",
       "acceptance": "核心变化触发必需生态检查；原有 DOC-01 至 04 基线例外明确，后续 done 任务不能缺失独立 commit；计划/已执行/缺证据分开，识别缺少验证归属的公开契约",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-ENG-09-integration.md",
+        "baselines/engineering-integration.json"
+      ]
     },
     {
       "scope": [
