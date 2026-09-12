@@ -1,7 +1,19 @@
+import path from 'node:path'
+import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import vm from 'node:vm'
-import { transform } from 'esbuild'
+import { build, transform } from 'esbuild'
 import { verifyCanvasContract } from '../../refactor/scripts/canvas-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { getEntryFile } from '../../scripts/projects.js'
+
+export async function canvasCandidate() {
+  if (process.env.ARTPLAYER_CANVAS_BASELINE === '1')
+    return (await canvasHistorical()).find(item => item.name === 'frozen-workspace')
+  const root = fileURLToPath(new URL('../../', import.meta.url))
+  const result = await build({ entryPoints: [getEntryFile(path.join(root, 'packages/artplayer-proxy-canvas'))], bundle: true, write: false, platform: 'browser', format: 'cjs', target: 'es2020' })
+  return { name: 'candidate-source', source: result.outputFiles[0].text, format: 'artifact' }
+}
 
 export async function canvasHistorical() {
   const contract = await verifyCanvasContract()
@@ -50,6 +62,7 @@ export async function canvasEnvironment(implementation, settings = {}) {
     title: 'video-title',
     src: '',
     currentTime: 0,
+    readyState: 4,
     paused: true,
     muted: false,
     style: {},
@@ -63,11 +76,35 @@ export async function canvasEnvironment(implementation, settings = {}) {
       this.paused = true
     },
     addEventListener(...args) { calls.push({ name: 'video-listener', receiver: this, args }) },
+    removeEventListener(name, callback) {
+      for (let index = proxies.length - 1; index >= 0; index--) {
+        if (proxies[index].target === this && proxies[index].name === name && proxies[index].callback === callback)
+          proxies.splice(index, 1)
+      }
+    },
+    setAttribute(name, value) { this[name] = value },
+    removeAttribute(name) { delete this[name] },
+    remove() { this.parentNode?.removeChild(this) },
+    load() { calls.push({ name: 'load', receiver: this }) },
+  }
+  const player = {
+    clientWidth: 640,
+    clientHeight: 480,
+    children: [],
+    appendChild(node) {
+      this.children.push(node)
+      node.parentNode = this
+      return node
+    },
+    removeChild(node) {
+      this.children.splice(this.children.indexOf(node), 1)
+      node.parentNode = null
+    },
   }
   const art = {
     constructor: { config: { events: ['loadedmetadata', 'play', 'pause', 'seeked', 'error'] }, utils: { createElement: tag => tag === 'canvas' ? canvas : video } },
     option: { autoSize: false },
-    template: { $player: { clientWidth: 640, clientHeight: 480 } },
+    template: { $player: player },
     isDestroy: false,
     on(name, callback) {
       if (!listeners.has(name))

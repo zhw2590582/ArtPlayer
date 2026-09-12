@@ -1,12 +1,11 @@
-import fs from 'node:fs'
-import { transform } from 'esbuild'
 import { hash } from '../../refactor/scripts/releases.mjs'
 import { ambilightCandidate } from '../helpers/ambilight.js'
+import { canvasCandidate } from '../helpers/canvas.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await ambilightCandidate()
-const proxySource = fs.readFileSync('packages/artplayer-proxy-canvas/src/index.js', 'utf8')
-const proxy = (await transform(proxySource, { format: 'cjs', target: 'es2020' })).code
+const proxySource = (await canvasCandidate()).source
+const proxy = proxySource
 
 for (const core of ['published-5.1.7', 'published', 'candidate']) {
   const scenario = core === 'published-5.1.7' ? 'historical core has no proxy option and retains native Ambilight playback' : 'Ambilight samples all nine canvas proxy regions after output resizing'

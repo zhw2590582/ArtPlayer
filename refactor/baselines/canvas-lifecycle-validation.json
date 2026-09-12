@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CANVAS-03",
+  "status": "done",
+  "checks": [
+    {
+      "command": "ARTPLAYER_CANVAS_BASELINE=1 node --test test/canvas-lifecycle.test.js",
+      "result": "expected historical failures",
+      "tests": 24,
+      "failed": 20,
+      "normalControlsPassed": 4
+    },
+    {
+      "command": "node --test test/canvas-lifecycle.test.js test/canvas.test.js refactor/scripts/canvas-contract.test.mjs",
+      "result": "pass",
+      "tests": 70,
+      "candidate": 24,
+      "historical": 33,
+      "contract": 13
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass"
+    },
+    {
+      "command": "yarn build artplayer-proxy-canvas",
+      "result": "pass",
+      "formats": [
+        "main/es2020",
+        "legacy/es2015",
+        "esm/es2020"
+      ]
+    },
+    {
+      "command": "playwright test canvas.spec.js canvas-lifecycle.spec.js ambilight-proxy.spec.js ambilight-lifecycle.spec.js",
+      "result": "pass",
+      "tests": 87,
+      "skipped": 0,
+      "scope": "42 frozen historical observations +18 candidate proxy +9 Ambilight proxy/core capability +18 native Ambilight lifecycle; before final falsy-callback parity correction"
+    },
+    {
+      "command": "playwright test canvas-lifecycle.spec.js ambilight-proxy.spec.js",
+      "result": "pass",
+      "tests": 27,
+      "skipped": 0,
+      "browsers": [
+        {
+          "project": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        {
+          "project": "firefox",
+          "version": "155.0",
+          "platform": "win32"
+        },
+        {
+          "project": "webkit",
+          "version": "26.6",
+          "platform": "win32"
+        }
+      ],
+      "scope": "Final candidate source after falsy callback correction: rerun all 18 candidate proxy and 9 source-dependent composition/capability cases. Earlier unchanged 42 historical and 18 native Ambilight cases are not counted as fresh executions."
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 938,
+        "engineering": 14,
+        "baseline": 96,
+        "mainTotal": 1048,
+        "repeatedContractExecutions": 44
+      },
+      "strictProductionTypeScriptFiles": 284
+    }
+  ],
+  "limitations": [
+    "Public declaration/import and full installed artifact validation remain tasks 04/06.",
+    "Windows Playwright WebKit does not establish Safari or mobile device acceptance."
+  ],
+  "sourceCommit": "e931520e6611a1520c70d87ed5460f11f6c13110",
+  "modules": [
+    "index",
+    "adapter",
+    "media",
+    "geometry",
+    "renderer",
+    "scheduler"
+  ],
+  "inputs": [
+    {
+      "file": "test/canvas-lifecycle.test.js",
+      "sha256LF": "8a10d43b8af38e7eb6c447282293566e700a03ee020e5561248f775d5bc7b434"
+    },
+    {
+      "file": "test/helpers/canvas.js",
+      "sha256LF": "72a2f70eef76eb4e223f2f9092ef321b017f94ce194043e898cc24c827ac5104"
+    },
+    {
+      "file": "test/browser/canvas-lifecycle.spec.js",
+      "sha256LF": "5c50ad4f11d1df91c4247dc24c07edd2c9540e128e00fd07ee096406174512a7"
+    },
+    {
+      "file": "test/browser/ambilight-proxy.spec.js",
+      "sha256LF": "e02b1fd1f5deafeb993f4584a3bde0c42b1b7ca798665382b3861c92cd8a0f70"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/tsconfig.json",
+      "sha256LF": "712a3fa32ed57692d16bf854a0e77ffaecd04236efa0f557905aab7291e0aef6"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/index.ts",
+      "sha256LF": "ee0709df702b0773ca9bfe47dcf7ff1c010cb63f4a475ca7548c31205691b2a4"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/adapter.ts",
+      "sha256LF": "68acf8f0a594f31df981d776099ddd97e013ba2ced6eb61c18a1a967870d5597"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/media.ts",
+      "sha256LF": "f828c55f5fb5aad02dfd3a7bd35392ae03bb10725fa0c845932264783ddbc838"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/geometry.ts",
+      "sha256LF": "067feae2cd568f153e44346d40c1e01fdcd9b4ed021ee29e3918c218e7bf19ac"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/renderer.ts",
+      "sha256LF": "ba5f2f546b296cc6f688e7ac1129e89d0f64035ad1aa203cf479ff023d520a01"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/src/scheduler.ts",
+      "sha256LF": "2e32a634c655bd408250f0500d7895aab3311835b89d578aad07121e727d5fc9"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.js",
+      "sha256LF": "55e1c3ca512a02ea454414734d383a1b87bb8a4e8d80e98b8ea3e80419644f02"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.legacy.js",
+      "sha256LF": "0796737096eb59d0af1eb7d69859502a4e23b817471366b3922224f9bad5d97b"
+    },
+    {
+      "file": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.mjs",
+      "sha256LF": "98ee5a30ac170913205459e2d9b85a019159f8122d225967ece0894b9fe9f010"
+    },
+    {
+      "file": "docs/compiled/artplayer-proxy-canvas.js",
+      "sha256LF": "55e1c3ca512a02ea454414734d383a1b87bb8a4e8d80e98b8ea3e80419644f02"
+    },
+    {
+      "file": "docs/compiled/artplayer-proxy-canvas.legacy.js",
+      "sha256LF": "0796737096eb59d0af1eb7d69859502a4e23b817471366b3922224f9bad5d97b"
+    },
+    {
+      "file": "docs/compiled/artplayer-proxy-canvas.mjs",
+      "sha256LF": "98ee5a30ac170913205459e2d9b85a019159f8122d225967ece0894b9fe9f010"
+    }
+  ],
+  "preservedBrowserAttempts": [
+    {
+      "file": "refactor/.cache/canvas03-first-results/report.json",
+      "sha256": "4a85c2084c0724d094d53c254f59bdf506c719f00d71bd808222bd368f2557f4",
+      "stats": {
+        "startTime": "2026-09-12T04:49:55.760Z",
+        "duration": 22178.867,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-first-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-layout-probe-results/report.json",
+      "sha256": "2e92892971b83972cf63de53e3ff49de064587ea2bec228b64d4f8f394913b00",
+      "stats": {
+        "startTime": "2026-09-12T04:51:33.300Z",
+        "duration": 4576.275,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-layout-probe-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-second-results/report.json",
+      "sha256": "b1df18b795109551918a0fe4b2cbdc833c4eeebdca7aff312d2ea95a81d92750",
+      "stats": {
+        "startTime": "2026-09-12T04:52:41.768Z",
+        "duration": 20413.01,
+        "expected": 25,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-second-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-bitmap-probe-results/report.json",
+      "sha256": "210ff2eea0eab7b173a2cb8ff63ff514342fcc88f66dd3184e7faaf24c647ec3",
+      "stats": {
+        "startTime": "2026-09-12T04:54:33.938Z",
+        "duration": 3814.563,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-bitmap-probe-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-third-results/report.json",
+      "sha256": "db4c9100a4f88710374e67554e72c0c411947dd50438948fe872b841efb4ac3c",
+      "stats": {
+        "startTime": "2026-09-12T04:55:24.268Z",
+        "duration": 26707.128,
+        "expected": 25,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-third-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-native-fallback-probe-results/report.json",
+      "sha256": "19b8819931cd0b526de758ffcdda4ed57d1f0053f0d5a1a971ae4a0fa3ca2702",
+      "stats": {
+        "startTime": "2026-09-12T04:57:05.184Z",
+        "duration": 3502.855,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-native-fallback-probe-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-frame-count-probe-results/report.json",
+      "sha256": "ea9a49f26f6df1aa681d0d9e706da03856ff98c8ca95de992556d54c6d42267f",
+      "stats": {
+        "startTime": "2026-09-12T04:58:06.373Z",
+        "duration": 3458.946,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-frame-count-probe-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-fourth-results/report.json",
+      "sha256": "c31b99eb40330829318e172d97d67ad93f486672e1584e6bbf3061671223a06a",
+      "stats": {
+        "startTime": "2026-09-12T04:58:38.380Z",
+        "duration": 38111.093,
+        "expected": 19,
+        "skipped": 0,
+        "unexpected": 8,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-fourth-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-fifth-results/report.json",
+      "sha256": "d6dd221438e708c3f99ce17cdbd8a7d66c87bce3955efd05a3f509359d06e42c",
+      "stats": {
+        "startTime": "2026-09-12T05:00:10.543Z",
+        "duration": 20479.555,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-fifth-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-wide-results/report.json",
+      "sha256": "410e333e89f2343ed6fe89e9b383cf67260e0a332551c537673e9b9492b2849a",
+      "stats": {
+        "startTime": "2026-09-12T05:02:59.019Z",
+        "duration": 61692.277,
+        "expected": 87,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-wide-results/results"
+    },
+    {
+      "file": "refactor/.cache/canvas03-final-results/report.json",
+      "sha256": "5a448f03d32130b492b24211db94c360dcebf8b77d4dfab1db516b3304d03921",
+      "stats": {
+        "startTime": "2026-09-12T05:05:56.204Z",
+        "duration": 23901.64,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsDirectory": "refactor/.cache/canvas03-final-results/results"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/canvas03-before.log",
+      "sha256": "e9bb781a28df272462ca86d508274dd28ba575c0829877eecc3bb249d1041cb3"
+    },
+    {
+      "file": "refactor/.cache/canvas03-baseline-final24.log",
+      "sha256": "b3877dc5cabc1b07faec0f322a96172d4d850e11b7b59021b203f48e8491d034"
+    },
+    {
+      "file": "refactor/.cache/canvas03-falsy-before.log",
+      "sha256": "37edde1f7b9944aebbdb33401d013d4d0ec3fd1ed84ea5275a76502816777167"
+    },
+    {
+      "file": "refactor/.cache/canvas03-targeted-final.log",
+      "sha256": "f0816a3fa739383919c20869aa913e4624ab8deda6bfac00ea8aaa7c43118095"
+    },
+    {
+      "file": "refactor/.cache/canvas03-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/canvas03-build-final.log",
+      "sha256": "21a40f641ca7873cff075ac4b03b75a358f2436c3f08e38dc244a02e3abf82f3"
+    },
+    {
+      "file": "refactor/.cache/canvas03-browser-final.log",
+      "sha256": "99350e3995457a42c143a7b05e3d42a21e6221031e67b5720e0ec3c9720a236e"
+    },
+    {
+      "file": "refactor/.cache/canvas03-browser-final27.log",
+      "sha256": "fcfb0ad5e126ac601d433c160bbe1145fdaacd281ce5116d402f120cd113453e"
+    },
+    {
+      "file": "refactor/.cache/canvas03-ci.log",
+      "sha256": "afaf0d37208af4657653c7879e5f19d4013c8c232d32aa940f5006076102edc3"
+    },
+    {
+      "file": "refactor/.cache/canvas03-ci-final.log",
+      "sha256": "305427e2812e64942d3bada2db7c750f8ee26879aa515c825c96e0b7efe237a8"
+    }
+  ]
+}

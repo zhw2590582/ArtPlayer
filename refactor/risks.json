@@ -3351,7 +3351,7 @@
       ],
       "compatibleResolution": "Reproduce pending bitmap completion and rollback/late subscription before adding explicit draw scheduling and resource ownership.",
       "closureCriteria": "Historical failures reproduced and candidate terminal/error/bitmap/real media lifecycle verified.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/canvas-contract.md",
         "refactor/baselines/canvas-release.json",
@@ -3359,7 +3359,12 @@
         "refactor/changes/2026-09-12-PKG-CANVAS-02-tests.md",
         "refactor/baselines/canvas-behavior-validation.json"
       ],
-      "workspaceState": "33 historical Node checks reproduce pending bitmap, concurrent RAF, close omission, reentrant destroy and delayed/partial registration leaks; 18 real browser core/proxy combinations observe RAF continuing after destroy inside callback. Candidate fixes pending task 03."
+      "workspaceState": "24 candidate assertions show historical 20 failures/4 normal controls and all pass after ownership changes. Final native 18 proxy cases across actual npm core 5.4.0/candidate and three engines verify media/source/pause/seek/callback destruction and escaped-method termination. Full device and public declaration/distribution acceptance remains tasks 04-06.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-CANVAS-03-lifecycle.md",
+        "refactor/baselines/canvas-lifecycle-validation.json"
+      ],
+      "resolutionRationale": "24 candidate assertions show historical 20 failures/4 normal controls and all pass after ownership changes. Final native 18 proxy cases across actual npm core 5.4.0/candidate and three engines verify media/source/pause/seek/callback destruction and escaped-method termination. Full device and public declaration/distribution acceptance remains tasks 04-06."
     },
     {
       "id": "CANVAS-TYPE-01",
@@ -3398,7 +3403,7 @@
     {
       "id": "CANVAS-PIXEL-01",
       "title": "Historical Canvas proxy produces transparent frames with detached native video in tested WebKit",
-      "status": "open",
+      "status": "resolved",
       "confirmation": "reproduced",
       "owners": [
         "PKG-CANVAS-03",
@@ -3410,7 +3415,12 @@
         "refactor/changes/2026-09-12-PKG-CANVAS-02-tests.md",
         "refactor/baselines/canvas-behavior-validation.json"
       ],
-      "workspaceState": "All six historical WebKit proxy combinations produce alpha0 while time advances. Separate native video mounted before play yields alpha255; detached native control alpha0. Chromium/Firefox both paths yield255. These historical observations do not prove candidate fix or all Safari device behavior."
+      "workspaceState": "Final native pixel cases verify original 320x180 media dimensions, multiple colors, alpha255, resize and source replacement across two cores and three engines. Backing video is mounted before play at intrinsic CSS size. Diagnostic zero-count and 1px regressions are preserved; this resolves the recorded Windows Playwright defect, not all Safari/mobile device validation.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-CANVAS-03-lifecycle.md",
+        "refactor/baselines/canvas-lifecycle-validation.json"
+      ],
+      "resolutionRationale": "Final native pixel cases verify original 320x180 media dimensions, multiple colors, alpha255, resize and source replacement across two cores and three engines. Backing video is mounted before play at intrinsic CSS size. Diagnostic zero-count and 1px regressions are preserved; this resolves the recorded Windows Playwright defect, not all Safari/mobile device validation."
     }
   ]
 }

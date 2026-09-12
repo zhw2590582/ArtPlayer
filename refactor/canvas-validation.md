@@ -13,8 +13,7 @@ play/pause、destroy前后订阅、缺context和尺寸异常；保留历史失�
 03拆媒体adapter/绘制调度/订阅和所有权，04明确公共类型（尤其可选参数及canvas自有
 方法优先），05/06核验新旧核心、实际媒体/浏览器/设备/安装包和8082 demo。
 
-当前已有的Ambilight代理颜色测试会直接加载proxy的src/index.js；代理迁移文件入口
-或模块拆分时必须同步改为实际候选入口加载，不能用旧dist掩盖改名或遗漏模块。
+Ambilight代理颜色测试在03同步改用实际候选入口bundle，不能用旧dist掩盖改名或遗漏模块。
 Canvas正式历史浏览器矩阵在02建立；01没有使用新浏览器结果作包整体验收。
 
 01最终13项Canvas专项、7项契约索引检查与991项完整CI通过；证据见
@@ -39,3 +38,21 @@ WebKit历史代理输出透明是明确的失败基线；测试成功表示重�
 失败尝试与最终报告均保留report.json和完整results，哈希与范围见
 [02验证证据](baselines/canvas-behavior-validation.json)；问题处理细节见
 [02实施记录](changes/2026-09-12-PKG-CANVAS-02-tests.md)。本任务不修改生产源码。
+
+## 03 严格TS和候选生命周期
+
+源码拆为六个TS模块；职责、数据流和错误边界见
+[包内架构](../packages/artplayer-proxy-canvas/ARCHITECTURE.md)。`yarn test:canvas`现在
+同时运行历史和候选测试，候选可通过ARTPLAYER_CANVAS_BASELINE=1切换冻结源码以
+证明失败来源，不能把这个变量留在正常测试环境中。
+
+候选浏览器文件canvas-lifecycle.spec.js覆盖实际5.4.0/候选核心×三个引擎×三场景
+共18项：实际原始尺寸和多点像素、resize/切源、暂停seek补绘、回调销毁以及逃逸方法
+不重启资源。组合运行Ambilight的9项代理/旧核心能力对照及18项原生生命周期检查。
+所有加载均来自候选源码bundle；历史42项继续从归档/Git加载。
+
+WebKit须验证intrinsic尺寸，不能仅alpha255；1px挂载曾令videoWidth/videoHeight
+也变为1。Chromium临时无首帧不宜当稳定错误，WebKit零帧计数却不能作全局绘制门槛。
+失败诊断与针对性回归见[03记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md)和
+[03证据](baselines/canvas-lifecycle-validation.json)。04公开类型/导出和05设备、06
+完整分发/demo仍需完成；本步的strict内部类型不替代安装消费者验收。
