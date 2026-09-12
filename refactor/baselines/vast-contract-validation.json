@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VAST-01",
+  "sourceCommit": "29692d28158ad50e1d404293f592679c10dbf3f5",
+  "scope": "Immutable published archives and frozen-source wrapper contracts only; no production changes",
+  "inputs": [
+    {
+      "file": "refactor/baselines/vast-release.json",
+      "sha256LF": "493e15fa8d3cd1a9215a409dd78db61ecaef5f82f9629dfdc3f6090e7fad8453"
+    },
+    {
+      "file": "refactor/scripts/vast-contract.mjs",
+      "sha256LF": "718ec6c0765caa7c9604e55d10a3b6c6dc25bdd42fc30d6b6097200888a7dd9e"
+    },
+    {
+      "file": "refactor/scripts/vast-contract.test.mjs",
+      "sha256LF": "b9cfa09402b2f7e91dfead607c303015967c2cc0d96353029bbda798c3b56bc9"
+    }
+  ],
+  "archives": [
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "1.0.0",
+      "sha256": "35681d60fa3fa09b92f0f30887e39c73cf55e7b14d51a1c38fccbc6c1f253bab",
+      "members": 6
+    },
+    {
+      "name": "@glomex/vast-ima-player",
+      "version": "1.21.0",
+      "sha256": "924405b92ac5ccb4cc775d13b5caba6dc6fb537d55b0cb3ca128cb9be4b2bc48",
+      "members": 27
+    },
+    {
+      "name": "@glomex/vast-ima-player",
+      "version": "1.21.2",
+      "sha256": "5b5575c3a6c68a2a550c986348093de7471476318c9ec443285063dfbef3f9b5",
+      "members": 27
+    }
+  ],
+  "historicalCore": {
+    "commit": "252c226473792fd1537c1ff4a323344bf1060efc",
+    "file": "packages/artplayer/package.json",
+    "version": "5.1.7",
+    "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+    "note": "Git association only; actual core tarball and browser combination remain task02/05.",
+    "limitation": "Git association only; actual core tarball and browser execution pending PKG-VAST-02/05"
+  },
+  "currentWorkspaceTypes": {
+    "source": "import vast from \"artplayer-plugin-vast\"; vast(({imaPlayer})=>{void imaPlayer});",
+    "result": [
+      {
+        "compiler": "5.9.3",
+        "diagnostics": [
+          {
+            "file": "node_modules/@glomex/vast-ima-player/dist/index.d.ts",
+            "code": 2307,
+            "line": 1,
+            "message": "Cannot find module '@alugha/ima' or its corresponding type declarations."
+          },
+          {
+            "file": "node_modules/@glomex/vast-ima-player/dist/vast-ima-player.d.ts",
+            "code": 2307,
+            "line": 6,
+            "message": "Cannot find module '@alugha/ima' or its corresponding type declarations."
+          }
+        ]
+      },
+      {
+        "compiler": "4.3.5",
+        "diagnostics": [
+          {
+            "file": "node_modules/@glomex/vast-ima-player/dist/index.d.ts",
+            "code": 2307,
+            "line": 1,
+            "message": "Cannot find module '@alugha/ima' or its corresponding type declarations."
+          },
+          {
+            "file": "node_modules/@glomex/vast-ima-player/dist/vast-ima-player.d.ts",
+            "code": 2307,
+            "line": 6,
+            "message": "Cannot find module '@alugha/ima' or its corresponding type declarations."
+          }
+        ]
+      }
+    ],
+    "rawEvidence": {
+      "file": "refactor/.cache/vast01-current-types.json",
+      "sha256": "c9aa1d29b2ed4204e3e62f38b10e5dc4a81486a1b241e40d7b0424689080b32c"
+    }
+  },
+  "checks": [
+    {
+      "command": "eslint refactor/scripts/vast-contract.mjs refactor/scripts/vast-contract.test.mjs",
+      "result": "pass"
+    },
+    {
+      "command": "yarn test:baseline",
+      "result": "pass",
+      "tests": 53,
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0,
+      "log": {
+        "file": "refactor/.cache/vast01-baseline.log",
+        "sha256": "2bc059268118cd284ffdadfaf9d05481b368e4abceabb73cf7270660824ea2c8"
+      }
+    },
+    {
+      "command": "yarn lint",
+      "result": "pass",
+      "log": {
+        "file": "refactor/.cache/vast01-lint.log",
+        "sha256": "219a458ee587661bd80c1b6c34d49079560b732dcabe35afb30a804408d89277"
+      }
+    },
+    {
+      "command": "node refactor/scripts/plan.mjs --check",
+      "result": "pass",
+      "tasks": 217,
+      "packages": 22,
+      "states": {
+        "done": 79,
+        "doing": 5,
+        "todo": 133
+      }
+    },
+    {
+      "command": "node refactor/scripts/risk-register.mjs --check",
+      "result": "pass",
+      "risks": 147,
+      "vendoredGroups": 8,
+      "integrations": 12
+    }
+  ],
+  "fixtureCorrection": "First export VM omitted CustomEvent and triggered document fallback; supplying native platform CustomEvent fixed the fixture. This does not prove generic production SSR support.",
+  "limitations": [
+    "Injected SDK Player records wrapper behavior; no Google IMA media execution",
+    "Type diagnostic is current workspace evidence, not yet isolated installation proof",
+    "VAST VPN exception recorded but not exercised",
+    "VAST-CONTEXT-01, VAST-TYPE-01, VAST-LIFE-01, VAST-DIST-01 and SDK-07 remain open"
+  ],
+  "status": "done",
+  "validationScope": "Targeted contract tests, all 53 baseline tests, repository lint, plan and risk checks. No production changes; no new full CI/build/media run for this baseline-only task."
+}

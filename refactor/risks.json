@@ -702,10 +702,15 @@
         "PKG-VAST-05"
       ],
       "evidence": [
-        "packages/artplayer-plugin-vast/src/index.js"
+        "packages/artplayer-plugin-vast/src/index.js",
+        "refactor/baselines/vast-contract.md",
+        "refactor/baselines/vast-release.json",
+        "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
+        "refactor/baselines/vast-contract-validation.json"
       ],
       "compatibleResolution": "@glomex/vast-ima-player loadImaSdk loads external IMA; preserve event/content/ad state and teardown, do not equate mocks with vendor service acceptance.",
-      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
+      "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。",
+      "workspaceState": "VAST 1.0.0 and SDK 1.21.0/1.21.2 archives verified; Google IMA remote execution remains unverified. User allows recording/skipping only persistent VAST script loading failures caused by VPN rules, not Ads or other VAST code/type failures. This exception has not been used."
     },
     {
       "id": "SDK-08",
@@ -3159,6 +3164,80 @@
         "test/ads-lifecycle.test.js"
       ],
       "resolutionRationale": "零/正/不可关闭阈值及错误输入由现有Node/媒体回归保持；main/legacy分别27项真实原生全屏（初始/外部退出/按钮）、静音、详情popup和窄屏翻译控件通过。截图已查看；手机设备策略仍由05媒体门槛承接。"
+    },
+    {
+      "id": "VAST-CONTEXT-01",
+      "title": "Published VAST callback aliases and eager Player differ from the unpublished lazy workspace",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VAST-02",
+        "PKG-VAST-03",
+        "PKG-VAST-04"
+      ],
+      "evidence": [
+        "refactor/baselines/vast-contract.md",
+        "refactor/baselines/vast-release.json",
+        "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
+        "refactor/baselines/vast-contract-validation.json"
+      ],
+      "compatibleResolution": "Restore published id/$container access and reconcile eager non-null Player with lazy workspace usage using explicit consumer evidence.",
+      "closureCriteria": "Published and workspace consumer fixtures cover all callback fields and initialization timing; any irreconcilable behavior has a concrete decision rather than implicit waiver."
+    },
+    {
+      "id": "VAST-TYPE-01",
+      "title": "VAST declares an async factory as synchronous and imports an unavailable SDK type dependency",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VAST-04",
+        "PKG-VAST-06"
+      ],
+      "evidence": [
+        "refactor/baselines/vast-contract.md",
+        "refactor/baselines/vast-release.json",
+        "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
+        "refactor/baselines/vast-contract-validation.json"
+      ],
+      "compatibleResolution": "Provide accurate Promise/context/IMA types and a self-contained installed declaration chain while checking legacy export= and consumers.",
+      "closureCriteria": "Strict isolated package consumers pass without skipLibCheck; synchronous Result inference differences are reproduced and resolved or separately approved. Ads approval does not apply."
+    },
+    {
+      "id": "VAST-LIFE-01",
+      "title": "VAST SDK and container lack core destruction ownership and pending work cancellation",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-VAST-02",
+        "PKG-VAST-03",
+        "PKG-VAST-05"
+      ],
+      "evidence": [
+        "refactor/baselines/vast-contract.md",
+        "refactor/baselines/vast-release.json",
+        "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
+        "refactor/baselines/vast-contract-validation.json"
+      ],
+      "compatibleResolution": "Reproduce pending SDK/callback destruction, errors, duplicate IDs and stale ad events before adding compatible cleanup and state ownership.",
+      "closureCriteria": "Tests prove cleanup during load/callback rejection/core destruction and distinguish explicit plugin recreation from terminal core destruction; vendor media restoration is separately verified."
+    },
+    {
+      "id": "VAST-DIST-01",
+      "title": "Published VAST CommonJS default namespace differs from the current callable distribution",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VAST-04",
+        "PKG-VAST-06"
+      ],
+      "evidence": [
+        "refactor/baselines/vast-contract.md",
+        "refactor/baselines/vast-release.json",
+        "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
+        "refactor/baselines/vast-contract-validation.json"
+      ],
+      "compatibleResolution": "Preserve require(pkg).default alongside callable factory, script global and current ESM/legacy paths.",
+      "closureCriteria": "Real packed main/legacy/ESM, historical deep imports, export= consumers and local demo/editor all pass with immutable published comparisons."
     }
   ]
 }

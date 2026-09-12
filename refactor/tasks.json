@@ -2646,11 +2646,16 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
-      "deliverable": "异步工厂、callback context、playUrl/playRes/init 与 SDK 版本",
+      "deliverable": "异步工厂、callback context、playUrl/playRes/init 与 SDK 版本；实际 npm 1.0.0 与未发布 1.2.0、SDK 1.21.0/1.21.2 的60成员归档和发布关联核心5.1.7",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "baselines/vast-contract.md",
+        "baselines/vast-release.json",
+        "changes/2026-09-12-PKG-VAST-01-contract.md",
+        "baselines/vast-contract-validation.json"
+      ]
     },
     {
       "id": "PKG-VAST-02",
@@ -2666,7 +2671,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态",
+      "deliverable": "SDK 失败、重复初始化、广告事件、内容恢复和销毁竞态；发布 id/$container/eager 与工作区 lazy/config 覆盖、callback拒绝、加载中销毁、同毫秒多实例与晚到事件",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
       "evidence": []
     },
@@ -2684,7 +2689,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "SDK loader、IMA adapter、广告状态和 DOM 清理分离",
+      "deliverable": "SDK loader、IMA adapter、广告状态和 DOM 清理分离；保持发布 callback 别名，明确初始化冲突；核心终止与显式 destroy 后重建区分",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": []
     },
@@ -2703,7 +2708,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界",
+      "deliverable": "IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界；修复 @alugha/ima 声明依赖链，保留 export= 和 require.default 消费；同步错误声明的兼容决策单列",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
       "evidence": []
     },
@@ -2720,7 +2725,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "官方测试广告或受控 SDK 环境，错误后主视频状态恢复",
+      "deliverable": "官方测试广告或受控 SDK 环境，错误后主视频状态恢复；核验真实5.1.7/5.4.1/候选核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": []
     },
@@ -2737,7 +2742,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "vast.js、SDK 资源、声明消费和独立版本记录",
+      "deliverable": "vast.js、SDK 资源、声明消费和独立版本记录；核验实际发布 namespace default、历史深路径、ESM和准确声明，版本按政策2.0.0由REL-09统一处理",
       "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
       "evidence": []
     },

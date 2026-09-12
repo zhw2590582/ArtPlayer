@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VAST-01",
+  "capturedAt": "2026-09-12T00:54:44.270Z",
+  "sourceCommit": "29692d28158ad50e1d404293f592679c10dbf3f5",
+  "registryObservation": {
+    "registryUrl": "https://registry.npmjs.org/artplayer-plugin-vast",
+    "distTags": {
+      "latest": "1.0.0"
+    },
+    "versions": [
+      "1.0.0"
+    ],
+    "publishedAt": "2024-10-12T08:56:54.614Z",
+    "workspaceVersion": "1.2.0",
+    "workspaceVersionPublished": false
+  },
+  "release": {
+    "name": "artplayer-plugin-vast",
+    "version": "1.0.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-vast/1.0.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-vast/-/artplayer-plugin-vast-1.0.0.tgz",
+    "integrity": "sha512-6ia0BYlZMBUAbvfqPq6RD3kvCP/Vpnqjs4zgzcio0CUh3a/iJkp+caKFOFjROfilbL+B0lXUiA7U1kS9KqEwTg==",
+    "sha256": "35681d60fa3fa09b92f0f30887e39c73cf55e7b14d51a1c38fccbc6c1f253bab",
+    "archiveBytes": 18457,
+    "registryGitHead": "252c226473792fd1537c1ff4a323344bf1060efc",
+    "files": {
+      "package/README.md": "2476f0b0ec9c6957f8cf0902384faf638f34e35309b00a24dbb74ee4ce3d3019",
+      "package/dist/artplayer-plugin-vast.js": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+      "package/dist/artplayer-plugin-vast.legacy.js": "3f86ff7558662687f794790a33a76305e2947304a0800e0e4d6788fbec54bbcf",
+      "package/package.json": "8e2eadca73c8ecbdad130115ea340efe5ae6d52668771f27e1b3c6009d706f46",
+      "package/src/index.js": "6811308508bfcb3f8b8c94510c90bde0308996ecdaf1008b110d041dc962d4a4",
+      "package/types/artplayer-plugin-vast.d.ts": "51257361f482f026a9b5ba84ca85d320d9e1457a34d0d259ac3c7b46c4fbd29c"
+    },
+    "manifest": {
+      "license": "MIT",
+      "version": "1.0.0",
+      "name": "artplayer-plugin-vast",
+      "types": "types/artplayer-plugin-vast.d.ts",
+      "description": "vast plugin for ArtPlayer",
+      "main": "dist/artplayer-plugin-vast.js",
+      "legacy": "dist/artplayer-plugin-vast.legacy.js",
+      "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+      "browserslist": "last 1 Chrome version",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "dependencies": {
+        "@glomex/vast-ima-player": "^1.21.0"
+      }
+    }
+  },
+  "sdk": [
+    {
+      "name": "@glomex/vast-ima-player",
+      "version": "1.21.0",
+      "metadataUrl": "https://registry.npmjs.org/%40glomex%2Fvast-ima-player/1.21.0",
+      "tarball": "https://registry.npmjs.org/@glomex/vast-ima-player/-/vast-ima-player-1.21.0.tgz",
+      "integrity": "sha512-TfMiihsXP1Wwhe+H9EzRoiq8FUVssiKWiCAKgAw2EN32tdF28mmVc83LCdh2j65tKXZ8yT5RSUdI5Hlz4t79aQ==",
+      "sha256": "924405b92ac5ccb4cc775d13b5caba6dc6fb537d55b0cb3ca128cb9be4b2bc48",
+      "archiveBytes": 148164,
+      "registryGitHead": "789a7ab51d0a176ec747c9a99e6e482184d51d80",
+      "files": {
+        "package/LICENSE": "68b35bb64e6269277318ff4e4ee66a738bdeb83bbcdc7e3c3af85a0bdded8d0b",
+        "package/README.md": "26867a31c5546f9b40b41b50c168c0b073bdf9d8ff331521540adfc2187946ed",
+        "package/dist/custom-playhead.d.ts": "24de4901d6ff04c5a8f55fd2a5001c8c47c72cbd3f072d673a1deafa200656a9",
+        "package/dist/delegated-event-target.d.ts": "d1eb0fdc1e9c497e6c04d5c83dc22483d5644d1bd9b430bd51c63d13d32432c7",
+        "package/dist/index.d.ts": "ce1c59659a68c54fe5af34b94550f3de9d4400b8315c188f679ecab19f87b80f",
+        "package/dist/vast-ima-player.d.ts": "a6d80180646fcebc1255a75dcd780b618f226a111dfa33cb5fa64681071b7c16",
+        "package/dist/vast-ima-player.js": "5f565b78d336eecb32982bc0038528547e1c6d17b6478ee60c3ecbe3b720b58d",
+        "package/dist/vast-ima-player.js.map": "a55d8ef507597c87337d63de2158b62316193700264ef2ecadef0d0b909b6f00",
+        "package/dist/vast-ima-player.modern.js": "23c119fb54e190e38398a899fb2fb1809dbe5eaa9fccfda2f27d11920c28f3fe",
+        "package/dist/vast-ima-player.modern.js.map": "24e45e89da1ebcc9c276e6681c1bfb824f884a1129f15daea0e6da903e33e8b1",
+        "package/dist/vast-ima-player.module.js": "52f4bf3f39771e35c40b464d23de3ba0e770ca4684d908590f926055dba5b4f9",
+        "package/dist/vast-ima-player.module.js.map": "a1e91c835162f8ea2b13bcb63390f62cfe7a38fb018119662f9d9602e443d910",
+        "package/dist/vast-ima-player.umd.js": "38014c18a51138e5093ae4cf743e84cdae3e431816581f08f16cf0c10e932eae",
+        "package/dist/vast-ima-player.umd.js.map": "e119d5f96b8113710a72cdabe18e45531c455176a5fd74d3466e6446e31e3e45",
+        "package/package.json": "340bbbb564be16642e5326d180d6a4a5a8e0bb82e688d2d995d3ff5454f79667",
+        "package/src/custom-playhead.ts": "326ddefbb15b05b5f3c9b25de88b84bce97ace248e747efcfebd476951f7734e",
+        "package/src/delegated-event-target.ts": "0937aeaea09a115b10f742ec95dd19bfeee5aece4a95e83ef95d9ea7a09d1064",
+        "package/src/index.ts": "db58ca160cf01af6e8ef50872a077a3fc4b1c6551cecde1646c06fb5d944771e",
+        "package/src/vast-ima-player.ts": "25a630d51f770a298cba35791581d30ea3079c406830988c5efb28e0ad9531e4",
+        "package/test-page/bulma-slider.min.css": "9bd5f05ad71360d0e87f21dd3d07d94c080486342f335ff041f5394c6aa6dac9",
+        "package/test-page/bulma-slider.min.js": "e520e9ef6e3223ecfbb50b4649d238af5a85af9161800ad1d003dac80d748f24",
+        "package/test-page/bulma.min.css": "58b28659220961ead137cb5b346b5759562750ce703094d70fc786e0db467033",
+        "package/test-page/index.html": "41eb8677b1cbd260407d0d829ab8cb4838dbe834c537f5e7c372d7d25b024591",
+        "package/test-page/rollup.config.js": "8949cb766b7e4cab9506607e28d79887e3c60ae3b152c9445aef86d8e4d0f22d",
+        "package/test-page/test-page.bundle.js": "a7b4b66fc708b6cfc7cf07a11d00e825f658952ae9e8935388288cb05221c6d8",
+        "package/test-page/test-page.bundle.js.map": "ae996c9a5298853aebbd0374fef99f57016053746bc8e7083f978cc482f0f92f",
+        "package/test-page/test-page.js": "a4d7d98bd4fb57425df80e8448c1631a4aeeadfd88cf4a788d1d787c59756a53"
+      },
+      "manifest": {
+        "name": "@glomex/vast-ima-player",
+        "version": "1.21.0",
+        "description": "Convenience wrapper for advertising video/audio content with Google IMA",
+        "source": "src/index.ts",
+        "main": "dist/vast-ima-player.js",
+        "module": "dist/vast-ima-player.module.js",
+        "unpkg": "dist/vast-ima-player.umd.js",
+        "types": "dist/index.d.ts",
+        "mangle": {
+          "regex": "^_"
+        },
+        "scripts": {
+          "prepare": "npm run -s build",
+          "build": "npm-run-all --parallel build:*",
+          "build:bundle": "rollup -c test-page/rollup.config.js",
+          "build:test-page": "microbundle",
+          "start": "npm-run-all --parallel start:*",
+          "start:serve": "serve",
+          "start:bundle": "microbundle watch",
+          "start:test-page": "rollup -c test-page/rollup.config.js --watch",
+          "lint": "tslint -c tslint.json 'src/**/*.ts'",
+          "test": "karma start karma.conf.js --single-run"
+        },
+        "files": [
+          "dist",
+          "src",
+          "test-page"
+        ],
+        "keywords": [
+          "ima",
+          "ima-sdk",
+          "ad",
+          "googleads",
+          "vast",
+          "vpaid",
+          "vmap",
+          "player",
+          "video-player"
+        ],
+        "repository": "github:glomex/vast-ima-player",
+        "bugs": {
+          "url": "https://github.com/glomex/vast-ima-player/issues"
+        },
+        "author": "glomex GmbH",
+        "license": "Apache-2.0",
+        "devDependencies": {
+          "@alugha/ima": "^2.1.0",
+          "@ungap/custom-event": "^0.3.1",
+          "form-to-object": "^6.0.0",
+          "jasmine": "^4.1.0",
+          "karma": "^6.3.18",
+          "karma-chrome-launcher": "^3.1.1",
+          "karma-firefox-launcher": "^2.1.2",
+          "karma-jasmine": "^5.0.0",
+          "microbundle": "^0.13.3",
+          "npm-run-all": "^4.1.5",
+          "serve": "^13.0.2",
+          "tslint": "^6.1.3",
+          "typescript": "^4.6.3"
+        }
+      }
+    },
+    {
+      "name": "@glomex/vast-ima-player",
+      "version": "1.21.2",
+      "metadataUrl": "https://registry.npmjs.org/%40glomex%2Fvast-ima-player/1.21.2",
+      "tarball": "https://registry.npmjs.org/@glomex/vast-ima-player/-/vast-ima-player-1.21.2.tgz",
+      "integrity": "sha512-dmWB5enpmCvDEIg0AwDWfGehnshg/nvUpuDzgyKLGmqQx8K0vl/1GXEvgrAhN4fVb0lCIgwB/rXFdBZ9yPLwhw==",
+      "sha256": "5b5575c3a6c68a2a550c986348093de7471476318c9ec443285063dfbef3f9b5",
+      "archiveBytes": 148148,
+      "registryGitHead": "2a72ce27d81ff709cf8488324d80107e0fc484f9",
+      "files": {
+        "package/LICENSE": "68b35bb64e6269277318ff4e4ee66a738bdeb83bbcdc7e3c3af85a0bdded8d0b",
+        "package/README.md": "26867a31c5546f9b40b41b50c168c0b073bdf9d8ff331521540adfc2187946ed",
+        "package/dist/custom-playhead.d.ts": "24de4901d6ff04c5a8f55fd2a5001c8c47c72cbd3f072d673a1deafa200656a9",
+        "package/dist/delegated-event-target.d.ts": "d1eb0fdc1e9c497e6c04d5c83dc22483d5644d1bd9b430bd51c63d13d32432c7",
+        "package/dist/index.d.ts": "ce1c59659a68c54fe5af34b94550f3de9d4400b8315c188f679ecab19f87b80f",
+        "package/dist/vast-ima-player.d.ts": "a6d80180646fcebc1255a75dcd780b618f226a111dfa33cb5fa64681071b7c16",
+        "package/dist/vast-ima-player.js": "7e5481a5ea01df8178202fc36f96830e0ec1c920c27023e8de8479f90168f5eb",
+        "package/dist/vast-ima-player.js.map": "af1e5d4d981f914d5ed05b2f04469d0f469dd73233a23816467c2daf7cd821bf",
+        "package/dist/vast-ima-player.modern.js": "b2e40300da6392465a662ff05f617998435bbc9d8e36d76c91e0440ce0277c97",
+        "package/dist/vast-ima-player.modern.js.map": "86ed6a4ab1c5344480b2293141ba6f6784656393f75afb268596f3b623b769b2",
+        "package/dist/vast-ima-player.module.js": "861ace7a869c1eda98ccae1c42e617afa74e8a6d79e26e6ce2a052812e7314a7",
+        "package/dist/vast-ima-player.module.js.map": "8e4c6c85aae149581bcbb52d8d6192dcd22a354de47571db7e73d47ad275af40",
+        "package/dist/vast-ima-player.umd.js": "bfe5f9ba07cf3c6964edb91cba222af0214365a8fbbd25783a7a39a1393a49c7",
+        "package/dist/vast-ima-player.umd.js.map": "55d37417c392bbc758ecce58e96d7edc6c84e1309663eca5477a53ebe1e9e289",
+        "package/package.json": "c7361321ce792f6830af9eb40e70b7508a75f68290a3c0077e26a6f36daa7097",
+        "package/src/custom-playhead.ts": "326ddefbb15b05b5f3c9b25de88b84bce97ace248e747efcfebd476951f7734e",
+        "package/src/delegated-event-target.ts": "0937aeaea09a115b10f742ec95dd19bfeee5aece4a95e83ef95d9ea7a09d1064",
+        "package/src/index.ts": "db58ca160cf01af6e8ef50872a077a3fc4b1c6551cecde1646c06fb5d944771e",
+        "package/src/vast-ima-player.ts": "09c59b3051aa38b66657bc84f8d0e55f48b46577bff8090930b4729e9a3022d1",
+        "package/test-page/bulma-slider.min.css": "9bd5f05ad71360d0e87f21dd3d07d94c080486342f335ff041f5394c6aa6dac9",
+        "package/test-page/bulma-slider.min.js": "e520e9ef6e3223ecfbb50b4649d238af5a85af9161800ad1d003dac80d748f24",
+        "package/test-page/bulma.min.css": "58b28659220961ead137cb5b346b5759562750ce703094d70fc786e0db467033",
+        "package/test-page/index.html": "41eb8677b1cbd260407d0d829ab8cb4838dbe834c537f5e7c372d7d25b024591",
+        "package/test-page/rollup.config.js": "8949cb766b7e4cab9506607e28d79887e3c60ae3b152c9445aef86d8e4d0f22d",
+        "package/test-page/test-page.bundle.js": "a7b4b66fc708b6cfc7cf07a11d00e825f658952ae9e8935388288cb05221c6d8",
+        "package/test-page/test-page.bundle.js.map": "ae996c9a5298853aebbd0374fef99f57016053746bc8e7083f978cc482f0f92f",
+        "package/test-page/test-page.js": "a4d7d98bd4fb57425df80e8448c1631a4aeeadfd88cf4a788d1d787c59756a53"
+      },
+      "manifest": {
+        "name": "@glomex/vast-ima-player",
+        "version": "1.21.2",
+        "description": "Convenience wrapper for advertising video/audio content with Google IMA",
+        "source": "src/index.ts",
+        "main": "dist/vast-ima-player.js",
+        "module": "dist/vast-ima-player.module.js",
+        "unpkg": "dist/vast-ima-player.umd.js",
+        "types": "dist/index.d.ts",
+        "mangle": {
+          "regex": "^_"
+        },
+        "scripts": {
+          "prepare": "npm run -s build",
+          "build": "npm-run-all --parallel build:*",
+          "build:bundle": "rollup -c test-page/rollup.config.js",
+          "build:test-page": "microbundle",
+          "start": "npm-run-all --parallel start:*",
+          "start:serve": "serve",
+          "start:bundle": "microbundle watch",
+          "start:test-page": "rollup -c test-page/rollup.config.js --watch",
+          "lint": "tslint -c tslint.json 'src/**/*.ts'",
+          "test": "karma start karma.conf.js --single-run"
+        },
+        "files": [
+          "dist",
+          "src",
+          "test-page"
+        ],
+        "keywords": [
+          "ima",
+          "ima-sdk",
+          "ad",
+          "googleads",
+          "vast",
+          "vpaid",
+          "vmap",
+          "player",
+          "video-player"
+        ],
+        "repository": "github:glomex/vast-ima-player",
+        "bugs": {
+          "url": "https://github.com/glomex/vast-ima-player/issues"
+        },
+        "author": "glomex GmbH",
+        "license": "Apache-2.0",
+        "devDependencies": {
+          "@alugha/ima": "^2.1.0",
+          "@ungap/custom-event": "^0.3.1",
+          "form-to-object": "^6.0.0",
+          "jasmine": "^4.1.0",
+          "karma": "^6.3.18",
+          "karma-chrome-launcher": "^3.1.1",
+          "karma-firefox-launcher": "^2.1.2",
+          "karma-jasmine": "^5.0.0",
+          "microbundle": "^0.13.3",
+          "npm-run-all": "^4.1.5",
+          "serve": "^13.0.2",
+          "tslint": "^6.1.3",
+          "typescript": "^4.6.3"
+        }
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-plugin-vast/src/index.js": "cba7d7a5822d4088655c301264280dc19d67b1f1716e4e50c8a6dcb8b5580763",
+    "packages/artplayer-plugin-vast/types/artplayer-plugin-vast.d.ts": "38ba4b3e03b261c53a062d94bc73e1a9c4f453681d33ce6f7bf8d9b06ec2f052",
+    "packages/artplayer-plugin-vast/package.json": "615a17004252aa9301167a28d4b067f9d2866aa2392febad71c85cea02dbbd8e",
+    "packages/artplayer-plugin-vast/README.md": "91e1cdfd47fb6eabfc4cd44f15d44dc33201479e09552ac237505bb0658a8fbe",
+    "docs/assets/example/vast.js": "ce93b48fabc2f1fd39fdaa8af3ae9f86a420c9aa65551e2e196d754070f36064",
+    "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.js": "72842ae0b4a44e44a080f88783c0c9bcd0b572fa0e946d817b2c36d960a08bfe",
+    "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.legacy.js": "4b88cec8d12844d639cc7703f88703136a4fe586781d9939bf2e3a0c93b42b60",
+    "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.mjs": "91fbe929a9d8d780f1656b53697fb0fe400b9375db79370866ec2f4c5313e727"
+  },
+  "historicalCore": {
+    "commit": "252c226473792fd1537c1ff4a323344bf1060efc",
+    "file": "packages/artplayer/package.json",
+    "version": "5.1.7",
+    "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+    "note": "Git association only; actual core tarball and browser combination remain task02/05."
+  }
+}
