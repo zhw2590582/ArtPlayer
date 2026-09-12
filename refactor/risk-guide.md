@@ -54,3 +54,7 @@ yarn ci:check
 ```
 
 校验已包含在 test:baseline 中：保护既有基线发现、任务引用、证据路径、生成索引、包覆盖、依赖解析和内嵌文件指纹。负例覆盖漏项、错误任务、无证据关闭、越界路径、错误哈希和锁文件版本偏移。它不能自动发现所有新的第三方文件或判定许可证合规，新增资源仍须进入人工/AI 审查与包任务验收。
+
+任务或风险验收后若再次更新状态/关闭字段，提交前须针对最终快照运行plan --check、
+risk-register --check与风险测试。resolved/accepted-with-scope必须填写resolutionEvidence
+和resolutionRationale；不能仅在compatibleResolution或普通evidence中写关闭事实。

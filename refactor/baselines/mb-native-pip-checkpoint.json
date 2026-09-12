@@ -1,0 +1,1267 @@
+{
+  "task": "PKG-MB-09",
+  "status": "doing",
+  "parentCommit": "fb9fb23f5366cba41b85eda2df38e37adac3277d",
+  "sourceSha256LF": {
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+    "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.js": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+    "packages/artplayer-proxy-mediabunny/src/index.ts": "0c8f1318cf95152a4e1bcb57e60c97e2f3cb02fe6d9d4ff7dc5666159f87fbc2",
+    "packages/artplayer-proxy-mediabunny/src/VideoEngine.ts": "1c41d43e663b51319d25dccb08a16c7450703dcdffe15d686b4fa3f0a8c7a7e6",
+    "packages/artplayer-proxy-mediabunny/src/AudioEngine.ts": "4d58cc30148bb4d9e384ea4716a805b00dd9633e03130ba6aeac8d431dd72c43",
+    "packages/artplayer-plugin-document-pip/src/index.ts": "28ba9b809589f4c58acc7d36bc2bb11b75832e8e6e009487c741c5b47dc4a590",
+    "packages/artplayer-plugin-document-pip/src/window-session.ts": "cf6bc403caf22ecfea14da7bfa91ddb88a60ed0507d5485035abe48861e1ad17",
+    "test/browser/mediabunny-dpip.spec.js": "3b99591e0044021dc1f049a86e87d1c0d477f63766eb620ea3f30d3ce05ced4a"
+  },
+  "browser": {
+    "total": 36,
+    "native": 24,
+    "unavailable": 12,
+    "records": [
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.31999999999999995,
+          "draws": 8,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.31999999999999995,
+          "draws": 8,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.31999999999999995,
+          "draws": 8,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28800000000000003,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.32,
+          "draws": 8,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.2693333333333333,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.2693333333333333,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.26133333333333336,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.2613333333333333,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.2906666666666667,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.272,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28800000000000003,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.28,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.26666666666666666,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.25866666666666666,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.27999999999999997,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.29066666666666663,
+          "draws": 7,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.32266666666666666,
+          "draws": 8,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true,
+            false
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-canvas-playback",
+        "before": {
+          "time": 0.32266666666666666,
+          "draws": 8,
+          "adopted": true,
+          "sameCanvas": true,
+          "distinctWindow": true,
+          "openerVisibility": "visible"
+        },
+        "result": {
+          "events": [
+            true
+          ],
+          "placeholders": 0,
+          "nativeWindowClosed": true
+        },
+        "scope": "Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "video",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "npm-release",
+            "version": "5.4.0",
+            "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+            "member": "package/dist/artplayer.js"
+          },
+          "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+          "bytes": 134037
+        },
+        "core": "published",
+        "media": "hls",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "video",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "native-close",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "platform": "win32",
+        "coreSource": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "df495dd386d32ea96be5006e1bbfda1ea91cfeb32aa21758197b46a155ebe0dc",
+          "bytes": 378040
+        },
+        "core": "candidate",
+        "media": "hls",
+        "ending": "destroy",
+        "implementation": "candidate-artifact",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+        "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+        "outcome": "native-document-pip-unavailable",
+        "browserName": "webkit",
+        "supported": false
+      }
+    ],
+    "report": "refactor/.cache/mb09-native-pip-results/report.json",
+    "reportSha256": "c912a5a762bf21fb622a82faaa18a4ca4d2825f7fb0a3cc354b58c84e3c54c80",
+    "results": "refactor/.cache/mb09-native-pip-results/results"
+  },
+  "checks": [
+    {
+      "command": "yarn test:browser test/browser/mediabunny-dpip.spec.js",
+      "result": "pass",
+      "tests": 36
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "log": "refactor/.cache/mb09-native-ci-final.log",
+      "tests": 1418,
+      "repeatedContracts": 44,
+      "strictProductionTypeScriptFiles": 324,
+      "previousFailure": {
+        "log": "refactor/.cache/mb09-native-ci.log",
+        "reason": "MB-08 risk closure omitted required resolution fields after its passing CI. Fields repaired; validator unchanged."
+      }
+    }
+  ],
+  "limitations": [
+    "Opener remained visible; no background throttling claim.",
+    "Native window tests use video-only MP4 and HLS with video/audio; these short runs do not prove long-run synchronization.",
+    "Twelve WebKit API-unavailable cases are not successful playback or physical Safari evidence.",
+    "Document PiP full video/Canvas/MediaBunny combinations remain PKG-DPIP-05.",
+    "Long playback, wider interactions and physical device/support work remain PKG-MB-09."
+  ]
+}

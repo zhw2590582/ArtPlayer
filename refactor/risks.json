@@ -3690,7 +3690,12 @@
         "refactor/baselines/mb-entry-checkpoint.json",
         "refactor/changes/2026-09-12-PKG-MB-08-capability.md",
         "refactor/baselines/mb-capability-validation.json"
-      ]
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-MB-08-capability.md",
+        "refactor/baselines/mb-capability-validation.json"
+      ],
+      "resolutionRationale": "Preserved exact optional whole-factory and HTMLCanvasElement result; real VideoShim implements opt-in media/Player/HLS/synthetic-frame types without modern SDK declarations leaking to older compilers. Conditional ESM declarations and classic legacy resolution work. Runtime supports both historical default namespace and callable use without a required default property narrowing factory replacement. Final isolated installs of two frozen releases and candidate pass 17 compiler/runtime cases; seven candidate modes each reject fifteen invalid uses and check bidirectional assignments against actual frozen declaration bytes. Complete distribution/license/device gates remain separate."
     },
     {
       "id": "MB-CAP-01",
@@ -3729,7 +3734,12 @@
         "refactor/baselines/mb-entry-checkpoint.json",
         "refactor/changes/2026-09-12-PKG-MB-08-capability.md",
         "refactor/baselines/mb-capability-validation.json"
-      ]
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-12-PKG-MB-08-capability.md",
+        "refactor/baselines/mb-capability-validation.json"
+      ],
+      "resolutionRationale": "Coordinated metadata publishes once, trackless input rejects before decoder setup, and stale callbacks cannot publish. MB-08 additionally rejects existing but wholly undecodable tracks before metadata/data/canplay and before replacement success, preserving one usable audio/video track, SDK query errors and late-operation cancellation. Sixteen controlled Node cases and thirty added browser cases distinguish twelve controlled rejection cases, eight native partial-decoder playback cases and ten missing-API controls; the final 150-case media suite passes. Physical Safari/support-range work remains MB-CAP-01 rather than being claimed from these controls."
     }
   ]
 }

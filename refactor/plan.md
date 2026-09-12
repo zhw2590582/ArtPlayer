@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 110 / doing 7 / blocked 0 / done 105 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 109 / doing 8 / blocked 0 / done 105 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -337,7 +337,7 @@
 | PKG-MB-06 | artplayer-proxy-mediabunny<br>整理音频解码、时钟与同步 | PKG-MB-04 | AudioEngine 时钟、缓冲和 AudioContext 归属 | AV sync、倍速、无音轨、静音/音量和暂停恢复通过 | H | done |
 | PKG-MB-07 | artplayer-proxy-mediabunny<br>整理 HLS 配对轨道与 selector | PKG-MB-05, PKG-MB-06, CORE-14 | m3u8 配对、质量/音频选择及拓扑清理 | 实际选择高亮、切到无轨道来源清理、无重复 readiness | H | done |
 | PKG-MB-08 | artplayer-proxy-mediabunny<br>完成 TS 与媒体能力声明 | PKG-MB-07, ENG-04, ENG-06 | 8 个自有 JS 模块迁移与 Result/shim 类型 | 解码器/Stream/DOM 类型清楚，旧 Option 和 art.mediabunny 使用保持 | H | done |
-| PKG-MB-09 | artplayer-proxy-mediabunny<br>完成新旧核心和真实媒体组合 | PKG-MB-08, CORE-22 | 跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告 | 资源释放、事件顺序、AV sync 与支持范围满足基线 | H | todo |
+| PKG-MB-09 | artplayer-proxy-mediabunny<br>完成新旧核心和真实媒体组合 | PKG-MB-08, CORE-22 | 跨浏览器能力、长播放、DPiP、HLS 音轨/质量报告 | 资源释放、事件顺序、AV sync 与支持范围满足基线 | H | doing |
 | PKG-MB-10 | artplayer-proxy-mediabunny<br>完成分发和文档 | PKG-MB-09, ENG-07 | mediabunny.js、README、依赖版本、三产物和许可 | tarball 可消费、无意外依赖升级、旧调用与回退可用 | H | todo |
 
 ## 5 包迁移：artplayer-tool-iframe
@@ -528,4 +528,5 @@
 - PKG-MB-06: [记录](baselines/mb-audio-source.json) [记录](changes/2026-09-12-PKG-MB-06-audio.md) [记录](baselines/mb-audio-validation.json)
 - PKG-MB-07: [记录](baselines/mb-hls-source.json) [记录](changes/2026-09-12-PKG-MB-07-hls.md) [记录](baselines/mb-hls-validation.json)
 - PKG-MB-08: [记录](baselines/mb-entry-source.json) [记录](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md) [记录](baselines/mb-entry-checkpoint.json) [记录](baselines/mb-capability-source.json) [记录](changes/2026-09-12-PKG-MB-08-capability.md) [记录](baselines/mb-capability-validation.json)
+- PKG-MB-09: [记录](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md) [记录](baselines/mb-native-pip-checkpoint.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)

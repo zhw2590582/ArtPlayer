@@ -101,3 +101,12 @@ video-only输入及替换无sink仍readyState=4；任务保持doing，下一步�
 [变更](changes/2026-09-12-PKG-MB-08-capability.md)和[证据](baselines/mb-capability-validation.json)
 核对全部源码/产物/报告/安装文件哈希。MB-TYPE-01/MB-READY-01关闭；任务done并立即专用提交。
 39个WebKit能力对照不是播放或物理Safari支持，长播放/设备/组合及分发许可仍由09/10接续。
+
+## PKG-MB-09 原生画中画检查点（doing）
+
+36个新旧核心/媒体/关闭方式/浏览器场景通过，24项实际原生窗口中Canvas解码播放，
+12项WebKit缺失API对照未计作播放。HLS在画中画中切换质量/音轨，关闭还原与销毁清理通过。
+本轮opener始终visible，未覆盖后台节流。完整CI1418与44重复契约通过；补齐MB-08风险
+关闭字段遗漏，失败日志保留。见[变更](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md)
+和[证据](baselines/mb-native-pip-checkpoint.json)。222项：105 done、8 doing、109 todo。
+MB-09仍doing；接续持续播放/AV同步/更多组合与设备，DPIP-05仍独立验收。

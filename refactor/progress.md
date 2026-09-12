@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-MB-09 原生画中画检查点（doing）
+
+36个新旧核心/媒体/关闭方式/浏览器场景通过，24项实际原生窗口中Canvas解码播放，
+12项WebKit缺失API对照未计作播放。HLS在画中画中切换质量/音轨，关闭还原与销毁清理通过。
+本轮opener始终visible，未覆盖后台节流。完整CI1418与44重复契约通过；补齐MB-08风险
+关闭字段遗漏，失败日志保留。见[变更](changes/2026-09-12-PKG-MB-09-native-pip-checkpoint.md)
+和[证据](baselines/mb-native-pip-checkpoint.json)。222项：105 done、8 doing、109 todo。
+MB-09仍doing；接续持续播放/AV同步/更多组合与设备，DPIP-05仍独立验收。
+
 ## PKG-MB-08完成：严格TS、兼容声明与解码能力边界
 
 全包34生产TS已迁移，默认可选工厂/精确Canvas兼容；显式媒体类型不泄漏SDK现代声明。
