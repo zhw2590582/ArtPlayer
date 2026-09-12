@@ -62,8 +62,9 @@ export function webFullscreen(art: WebFullscreenHost): (value: boolean) => void 
         saved = { placement: capturePlacement($player), style: $player.getAttribute('style') }
       const snapshot = saved
       try {
-        if (art.constructor.FULLSCREEN_WEB_IN_BODY && $player.parentNode !== document.body)
-          document.body.appendChild($player)
+        const body = $player.ownerDocument.body
+        if (art.constructor.FULLSCREEN_WEB_IN_BODY && $player.parentNode !== body)
+          body.appendChild($player)
         if (!active())
           return
         art.state = 'fullscreenWeb'

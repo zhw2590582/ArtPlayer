@@ -3078,11 +3078,14 @@
         "PKG-CANVAS-04",
         "PKG-MB-04"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "原生视频及两个 proxy、键盘/焦点/全屏与关闭还原",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md",
+        "baselines/dpip-native-validation.json"
+      ]
     },
     {
       "id": "PKG-DPIP-06",

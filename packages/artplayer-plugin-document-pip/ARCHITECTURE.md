@@ -78,3 +78,14 @@ WebKit dimension reports remain PKG-DPIP-05. Full archive/demo acceptance is
 PKG-DPIP-06. Installed type consumers are verified by `yarn test:dpip-types-package`;
 historical missing runtime/type entry errors are exact negative cases, not waived
 candidate failures. See the repository `refactor/dpip-validation.md` for evidence.
+
+The separate dpip-native.spec.js uses actual requestWindow, a Playwright popup,
+trusted keyboard input and repeated window.close/restoration for native video,
+Canvas and MediaBunny with old/new cores. Native close uses window.close because
+Playwright Page.close hangs on the installed Firefox PiP target. The earlier
+iframe tests remain controlled lifecycle evidence, not native-window evidence.
+Core 5.4.0 still intercepts editable popup hotkeys, also reproduced with published
+plugin 1.1.0; candidate core's event-document focus checks fix this independently.
+Candidate web fullscreen stays in the current ownerDocument body and restores
+its captured placement. This does not prove native fullscreen availability inside
+PiP, background throttling or physical-device support; PKG-DPIP-05 stays open.

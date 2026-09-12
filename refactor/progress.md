@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-DPIP-05 原生组合检查点与核心文档归属修复（doing）
+
+真实popup键盘、两轮开关与节点还原覆盖原生video/Canvas/MediaBunny及新旧核心。
+修复网页全屏把PiP播放器移回opener的问题：挂载到当前ownerDocument.body，恢复位置/焦点。
+源码84、构建main219、legacy84浏览器检查通过，完整CI1418与44重复契约、3个导入/SSR文件通过。
+每个产物的18项原生矩阵为6候选正常、6旧核心带BASE-DOM-16历史缺陷、6WebKit缺API对照。
+旧插件1.1.0重现同一旧核心输入问题；Firefox Page.close协议挂起已用原生window.close处理，
+失败/trace全部保留。见[变更](changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md)和
+[证据](baselines/dpip-native-validation.json)。DPIP-DISPLAY-01关闭；原生全屏/后台/设备仍待验收。
+222项：105 done、9 doing、108 todo。本地检查点提交，未推送或发布。
+
 ## PKG-MB-09 持续播放检查点（doing）
 
 独立yarn test:mediabunny-soak读取600秒固定HLS，四个Chromium/Firefox新旧核心场景

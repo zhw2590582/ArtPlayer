@@ -6,6 +6,33 @@ async function setup(page, core) {
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
 }
 
+test('candidate: adopted player enters its current document body and restores placement and focus', async ({ page }) => {
+  await setup(page, 'candidate')
+  const result = await page.evaluate(() => {
+    const frame = document.createElement('iframe')
+    document.body.append(frame)
+    const target = frame.contentDocument
+    const wrapper = target.createElement('div')
+    const sibling = target.createElement('span')
+    const probe = target.createElement('button')
+    const player = window.art.template.$player
+    target.body.append(wrapper)
+    wrapper.append(player, sibling)
+    player.append(probe)
+    probe.focus()
+    window.Artplayer.FULLSCREEN_WEB_IN_BODY = true
+    window.art.fullscreenWeb = true
+    const entered = player.parentNode === target.body && player.ownerDocument === target
+    const focused = target.activeElement === probe
+    window.art.fullscreenWeb = false
+    const restored = player.parentNode === wrapper && player.nextSibling === sibling && target.activeElement === probe
+    window.art.destroy()
+    frame.remove()
+    return { entered, focused, restored }
+  })
+  expect(result).toEqual({ entered: true, focused: true, restored: true })
+})
+
 for (const removeHtml of [false, true]) {
   for (const movedBeforeThrow of [false, true]) {
     test(`candidate: failed destroy restoration cannot orphan the player removeHtml=${removeHtml} movedBeforeThrow=${movedBeforeThrow}`, async ({ page }) => {

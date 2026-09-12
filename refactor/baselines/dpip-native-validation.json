@@ -1,0 +1,1158 @@
+{
+  "task": "PKG-DPIP-05",
+  "status": "doing",
+  "sourceSha256LF": {
+    "packages/artplayer/src/display/web-fullscreen.ts": "13f901d20a31a7b8e4ebfbcceac5d3e0737df6335b71f0dfed638785bc413a5a",
+    "packages/artplayer/ARCHITECTURE.md": "e19079b3d419d82c86e65d6e05c826020c06286b7edfb1cce185e62ce3c50d30",
+    "packages/artplayer-plugin-document-pip/ARCHITECTURE.md": "9d13dceab40e4ac1e288278551fdcfbcac8d0ddd58ba52581f8502a770d8e65f",
+    "test/browser/display-web.spec.js": "f5c2c2d7dcd737788ce63257eadbf0b02819e0f99cfa73bae30d58d284b6164c",
+    "test/browser/dpip-native.spec.js": "fc395a4e9c63d0e6e08d3f069813cf7e769e757b7a47c17544ca40c0ed78339a",
+    "packages/artplayer/dist/artplayer.js": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+    "packages/artplayer/dist/artplayer.legacy.js": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+    "packages/artplayer/dist/artplayer.mjs": "574749f090251b7d7bddb507a3ca3cc91a759f694e7f4865d19ef1162d330626",
+    "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.js": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+    "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.js": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+    "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb"
+  },
+  "reports": [
+    {
+      "name": "protocol-failure",
+      "passed": 12,
+      "failed": 6,
+      "file": "refactor/.cache/dpip05-protocol-failure-results/report.json",
+      "sha256": "4ac437e649a060cf7ea6e58fe4309c4e83ada47dcd8a8bb043582436f8f55eea",
+      "results": "refactor/.cache/dpip05-protocol-failure-results/results"
+    },
+    {
+      "name": "editable-failure",
+      "passed": 12,
+      "failed": 6,
+      "file": "refactor/.cache/dpip05-editable-failure-results/report.json",
+      "sha256": "fd11baa42df15a8e4c4101081996ee1e2714faf4dfa1ca71f8ed4cad1ae27d03",
+      "results": "refactor/.cache/dpip05-editable-failure-results/results"
+    },
+    {
+      "name": "historical",
+      "passed": 0,
+      "failed": 1,
+      "file": "refactor/.cache/dpip05-historical-results/report.json",
+      "sha256": "df26d3895be2c458647291c06a0fc1306b18ba78e3e94dd5198ea94eda8b47f4",
+      "results": "refactor/.cache/dpip05-historical-results/results"
+    },
+    {
+      "name": "fullscreen-before",
+      "passed": 0,
+      "failed": 1,
+      "file": "refactor/.cache/dpip05-fullscreen-before-results/report.json",
+      "sha256": "4e756bd751c98ddad1eef636b7a6f8bbd0902e37512939509a7929155a84f172",
+      "results": "refactor/.cache/dpip05-fullscreen-before-results/results"
+    },
+    {
+      "name": "source",
+      "passed": 84,
+      "failed": 0,
+      "file": "refactor/.cache/dpip05-source-results/report.json",
+      "sha256": "b874920a7ddb95259955e24e0d251e74a6334075c1b0ca2a872790b3604df183",
+      "results": "refactor/.cache/dpip05-source-results/results"
+    },
+    {
+      "name": "artifact",
+      "passed": 219,
+      "failed": 0,
+      "file": "refactor/.cache/dpip05-artifact-results/report.json",
+      "sha256": "f525e7da687a04e2be8b246443a3e1385657bfe6e18f11508297da6c24466740",
+      "results": "refactor/.cache/dpip05-artifact-results/results"
+    },
+    {
+      "name": "legacy",
+      "passed": 84,
+      "failed": 0,
+      "file": "refactor/.cache/dpip05-legacy-results/report.json",
+      "sha256": "efb0c460f911d02095a8978c80438c26c06c3ad810fbb1237eee54123ec4f950",
+      "results": "refactor/.cache/dpip05-legacy-results/results"
+    }
+  ],
+  "nativeRecords": [
+    {
+      "format": "artifact",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "artifact",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "video",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "artifact",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "canvas",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "artifact",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "mediabunny",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "artifact",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "video",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "artifact",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "canvas",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "artifact",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+        "bytes": 208560
+      },
+      "core": "candidate",
+      "renderer": "mediabunny",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "legacy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "chromium",
+      "browser": "153.0.8010.12",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-with-historical-editable-hotkey-defect",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 3
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 6
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "video",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "canvas",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "firefox",
+      "browser": "155.0",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "mediabunny",
+      "supported": true,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-window-media-keyboard-restoration",
+      "rounds": [
+        {
+          "round": 0,
+          "nativeWindowClosed": true,
+          "keys": 2
+        },
+        {
+          "round": 1,
+          "nativeWindowClosed": true,
+          "keys": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "video",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "legacy",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "canvas",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "legacy",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "core": "published",
+      "renderer": "mediabunny",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "legacy",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "video",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": null,
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "legacy",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "canvas",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    },
+    {
+      "format": "legacy",
+      "project": "webkit",
+      "browser": "26.6",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "coreSource": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+        },
+        "sha256": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+        "bytes": 212819
+      },
+      "core": "candidate",
+      "renderer": "mediabunny",
+      "supported": false,
+      "dpipSha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "proxySha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb",
+      "outcome": "native-document-pip-unavailable",
+      "rounds": []
+    }
+  ],
+  "checks": [
+    {
+      "command": "yarn build artplayer && yarn build:i18n",
+      "result": "pass"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": 1418,
+      "repeatedContracts": 44,
+      "strictProductionTypeScriptFiles": 324,
+      "log": "refactor/.cache/dpip05-ci.log"
+    },
+    {
+      "command": "yarn test:imports",
+      "result": "pass",
+      "testFiles": 3,
+      "log": "refactor/.cache/dpip05-imports.log"
+    }
+  ],
+  "scope": [
+    "Main related regressions: 219; legacy native/web-fullscreen: 84. Counts include historical defects, controlled lifecycle/iframe tests and missing API controls, not exclusively native playback.",
+    "Native keyboard matrix per artifact: six candidate-core successes, six old-core runs reproducing BASE-DOM-16 while validating window lifecycle, six WebKit API-unavailable controls.",
+    "Native Fullscreen API, background opener and physical-device acceptance remain open."
+  ]
+}

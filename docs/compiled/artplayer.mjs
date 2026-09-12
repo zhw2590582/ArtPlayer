@@ -5262,8 +5262,9 @@ function webFullscreen(art) {
         saved = { placement: capturePlacement($player), style: $player.getAttribute("style") };
       const snapshot = saved;
       try {
-        if (art.constructor.FULLSCREEN_WEB_IN_BODY && $player.parentNode !== document.body)
-          document.body.appendChild($player);
+        const body = $player.ownerDocument.body;
+        if (art.constructor.FULLSCREEN_WEB_IN_BODY && $player.parentNode !== body)
+          body.appendChild($player);
         if (!active2())
           return;
         art.state = "fullscreenWeb";

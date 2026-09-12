@@ -173,3 +173,4 @@
 | MB-TYPE-01 | resolved / 已复现 | MediaBunny proxy declares only Canvas while exposing a shim and changes CommonJS export generation between releases | PKG-MB-08, PKG-MB-10 |
 | MB-CAP-01 | open / 已复现 | Current Windows WebKit lacks WebCodecs and Web Audio constructors needed by historical MediaBunny proxies | PKG-MB-02, PKG-MB-09 |
 | MB-READY-01 | resolved / 已复现 | MediaBunny historical readiness can repeat for trackless input and occur after capability errors | PKG-MB-04, PKG-MB-09 |
+| DPIP-DISPLAY-01 | resolved / 已复现 | Web fullscreen body placement reclaims a player adopted into another document | CORE-22, PKG-DPIP-05 |

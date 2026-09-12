@@ -526,6 +526,9 @@ the captured position even if FULLSCREEN_WEB_IN_BODY changes while active. Destr
 restores the player before template.destroy, so removeHtml still owns the same tree.
 Failed exit retains the snapshot for retry; reentrant event/DOM callbacks supersede
 the earlier setter. Normal fullscreenWeb/resize ordering remains synchronous.
+Body placement uses the player's current ownerDocument, including an adopted
+Document PiP window or iframe. The opener's global document must never reclaim
+the player when entering web fullscreen in another document.
 
 Destroy is terminal: if restoring the original position throws before reattachment,
 detach the displaced player so template cleanup cannot leave an orphan in body. The

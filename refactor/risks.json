@@ -1782,7 +1782,8 @@
       ],
       "evidence": [
         "test/browser/hotkey.spec.js",
-        "refactor/changes/2026-09-11-CORE-17-input.md"
+        "refactor/changes/2026-09-11-CORE-17-input.md",
+        "refactor/baselines/dpip-native-validation.json"
       ],
       "compatibleResolution": "Resolve the keyboard event document and deep editable focus while retaining normal shortcuts, modifiers and generic keydown notifications.",
       "closureCriteria": "Final installed matrices cover real typing and playback keys, iframe/global rebinding, shadow and inherited editing, composition and source ownership.",
@@ -3742,6 +3743,28 @@
         "refactor/baselines/mb-capability-validation.json"
       ],
       "resolutionRationale": "Coordinated metadata publishes once, trackless input rejects before decoder setup, and stale callbacks cannot publish. MB-08 additionally rejects existing but wholly undecodable tracks before metadata/data/canplay and before replacement success, preserving one usable audio/video track, SDK query errors and late-operation cancellation. Sixteen controlled Node cases and thirty added browser cases distinguish twelve controlled rejection cases, eight native partial-decoder playback cases and ten missing-API controls; the final 150-case media suite passes. Physical Safari/support-range work remains MB-CAP-01 rather than being claimed from these controls."
+    },
+    {
+      "id": "DPIP-DISPLAY-01",
+      "title": "Web fullscreen body placement reclaims a player adopted into another document",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CORE-22",
+        "PKG-DPIP-05"
+      ],
+      "compatibleResolution": "Select the player current ownerDocument body for FULLSCREEN_WEB_IN_BODY while preserving the existing entry snapshot, focus restoration and public event order.",
+      "closureCriteria": "Native Document PiP candidate video/Canvas/MediaBunny keep body placement in the popup, repeated exit restores placement, and cross-document iframe/focus plus existing display/input regressions pass on rebuilt core artifacts.",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md",
+        "test/browser/dpip-native.spec.js",
+        "test/browser/display-web.spec.js"
+      ],
+      "resolutionEvidence": [
+        "refactor/baselines/dpip-native-validation.json",
+        "refactor/changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md"
+      ],
+      "resolutionRationale": "Original candidate native video reproduction moves the player into the wrong document and fails. Current ownerDocument body placement passes source 84, built main 219 and built legacy 84 related cases, including real native PiP video/Canvas/MediaBunny and iframe placement/focus. Reentry/failure/teardown and keyboard regressions retain their assertions. Full CI and import/SSR checks pass. Native Fullscreen API, background and device gates are separate and not waived."
     }
   ]
 }
