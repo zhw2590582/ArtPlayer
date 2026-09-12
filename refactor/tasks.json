@@ -3416,11 +3416,15 @@
         "ENG-05",
         "ENG-08"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "MP4/WebM/HLS/Blob/Stream、seek/错误/轨道切换样本",
       "acceptance": "ready 事件顺序、音画同步、超时和释放可重跑",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-12-PKG-MB-02-checkpoint.md",
+        "baselines/mb-media-checkpoint.json",
+        "mb-validation.md"
+      ]
     },
     {
       "id": "PKG-MB-03",

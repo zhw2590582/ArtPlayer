@@ -1,5 +1,13 @@
 # 进度与证据
 
+## 当前检查点：PKG-MB-02 真实MP4与销毁负例
+
+22项Node（含3个销毁后晚加载历史缺陷）通过；6项浏览器检查中，4项Chromium/Firefox
+真实MP4像素/时钟/暂停成功，2项Windows WebKit明确能力失败对照。六项不是六次播放成功。
+见[检查点](changes/2026-09-12-PKG-MB-02-checkpoint.md)和[证据](baselines/mb-media-checkpoint.json)。
+MB-02仍doing，剩余WebM/HLS/Blob/Stream、seek、时序与释放；98 done、8 doing、116 todo。
+本步没有修改生产源码。Canvas/Ambilight类型取舍仍待确认。
+
 ## 最新完成：PKG-MB-01 MediaBunny proxy 契约基线
 
 冻结实际npm1.0.0/1.2.0共12成员、17个Git输入、3份产物接口表面与25条配置路径；

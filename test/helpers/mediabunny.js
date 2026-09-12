@@ -65,8 +65,8 @@ export function mbEnvironment({ code }, option = {}) {
     URL,
     console,
     performance,
-    setTimeout,
-    clearTimeout,
+    setTimeout: option.setTimeout || setTimeout,
+    clearTimeout: option.clearTimeout || clearTimeout,
     requestAnimationFrame(fn) {
       const id = nextFrame++
       frames.set(id, fn)

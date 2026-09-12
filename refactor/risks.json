@@ -3638,7 +3638,7 @@
     {
       "id": "MB-LIFE-01",
       "title": "MediaBunny load, track replacement, timeout, RAF and audio callbacks lack one shared terminal owner",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "owners": [
         "PKG-MB-02",
         "PKG-MB-03",
@@ -3648,13 +3648,15 @@
         "PKG-MB-07",
         "PKG-MB-09"
       ],
-      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use.",
+      "compatibleResolution": "Reproduce pending operations and destroy/source-switch races before migrating each owner; preserve public event and promise behavior while preventing stale resource use. MB-02 now reproduces late load rejection and uncancelled waiting/loadstart timers after destroy in all three historical implementations using a controlled host. Other interleavings and full-core native behavior are not yet verified.",
       "closureCriteria": "Historical failing interleavings and candidate cancellation/cleanup pass with real media and event evidence, including long playback and track topology.",
       "status": "open",
       "evidence": [
         "refactor/baselines/mb-release.json",
         "refactor/baselines/mb-contract.md",
-        "refactor/changes/2026-09-12-PKG-MB-01-contract.md"
+        "refactor/changes/2026-09-12-PKG-MB-01-contract.md",
+        "refactor/changes/2026-09-12-PKG-MB-02-checkpoint.md",
+        "refactor/baselines/mb-media-checkpoint.json"
       ]
     },
     {
@@ -3672,6 +3674,22 @@
         "refactor/baselines/mb-release.json",
         "refactor/baselines/mb-contract.md",
         "refactor/changes/2026-09-12-PKG-MB-01-contract.md"
+      ]
+    },
+    {
+      "id": "MB-CAP-01",
+      "title": "Current Windows WebKit lacks WebCodecs and Web Audio constructors needed by historical MediaBunny proxies",
+      "status": "open",
+      "confirmation": "reproduced",
+      "owners": [
+        "PKG-MB-02",
+        "PKG-MB-09"
+      ],
+      "compatibleResolution": "Keep exact capability negative controls and validate usable browsers/codecs separately; improve unsupported-capability reporting during migration without fabricating decoder support.",
+      "closureCriteria": "Per-browser native media/support matrix and predictable unsupported-capability behavior verified, including target Safari evidence where support is claimed.",
+      "evidence": [
+        "refactor/changes/2026-09-12-PKG-MB-02-checkpoint.md",
+        "refactor/baselines/mb-media-checkpoint.json"
       ]
     }
   ]

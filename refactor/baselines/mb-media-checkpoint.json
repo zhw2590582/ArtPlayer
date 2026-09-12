@@ -1,0 +1,713 @@
+{
+  "task": "PKG-MB-02",
+  "status": "doing",
+  "parentCommit": "1cfd2e17f319749ba5f2e73f4c54c21d858e9d7e",
+  "node": {
+    "tests": 22,
+    "historicalFailuresReproduced": 3,
+    "scope": "19 existing contracts plus actual historical load/destroy with controlled pending performLoad and timers. Does not model full core destroy or real decode."
+  },
+  "browser": {
+    "report": "refactor/.cache/mb02-first-results/report.json",
+    "results": "refactor/.cache/mb02-first-results/results",
+    "tests": 6,
+    "nativePlaybackSuccesses": 4,
+    "verifiedCapabilityFailures": 2,
+    "skipped": 0,
+    "records": [
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "capabilities": {
+          "secure": true,
+          "VideoDecoder": "function",
+          "AudioDecoder": "function",
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-mp4-playback-observed",
+        "state": {
+          "events": [
+            {
+              "name": "waiting",
+              "time": 97.90000000596046,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 98,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "waiting",
+              "time": 98.09999999403954,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 98.09999999403954,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadedmetadata",
+              "time": 157.80000001192093,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "durationchange",
+              "time": 157.80000001192093,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "progress",
+              "time": 157.90000000596046,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "time": 171.09999999403954,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "time": 171.09999999403954,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplaythrough",
+              "time": 171.09999999403954,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "progress",
+              "time": 171.09999999403954,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "play",
+              "time": 256.30000001192093,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "time": 256.30000001192093,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 265.90000000596046,
+              "currentTime": 0.010666666666666665,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 531,
+              "currentTime": 0.28,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "time": 655.3000000119209,
+              "currentTime": 0.4,
+              "readyState": 4
+            }
+          ],
+          "actions": [],
+          "ready": true,
+          "dimensions": [
+            320,
+            180,
+            320,
+            180
+          ],
+          "paused": true,
+          "currentTime": 0.4,
+          "error": null,
+          "readyState": 4,
+          "audioState": "running"
+        },
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "capabilities": {
+          "secure": true,
+          "VideoDecoder": "function",
+          "AudioDecoder": "function",
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-mp4-playback-observed",
+        "state": {
+          "events": [
+            {
+              "name": "waiting",
+              "time": 103.19999998807907,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 103.39999997615814,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "waiting",
+              "time": 103.39999997615814,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 103.39999997615814,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadedmetadata",
+              "time": 167.39999997615814,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "durationchange",
+              "time": 167.39999997615814,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "progress",
+              "time": 167.39999997615814,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "time": 176.39999997615814,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "time": 176.39999997615814,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "time": 176.5,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplaythrough",
+              "time": 176.5,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "progress",
+              "time": 176.5,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "play",
+              "time": 260.7999999821186,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "time": 260.89999997615814,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 270.2999999821186,
+              "currentTime": 0.010666666666666665,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 536,
+              "currentTime": 0.2693333333333333,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "time": 661.0999999940395,
+              "currentTime": 0.4,
+              "readyState": 4
+            }
+          ],
+          "actions": [],
+          "ready": true,
+          "dimensions": [
+            320,
+            180,
+            320,
+            180
+          ],
+          "paused": true,
+          "currentTime": 0.4,
+          "error": null,
+          "readyState": 4,
+          "audioState": "running"
+        },
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "capabilities": {
+          "secure": true,
+          "VideoDecoder": "function",
+          "AudioDecoder": "function",
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-mp4-playback-observed",
+        "state": {
+          "events": [
+            {
+              "name": "waiting",
+              "time": 408,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 408,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "waiting",
+              "time": 408,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 408,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadedmetadata",
+              "time": 432,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "durationchange",
+              "time": 432,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "progress",
+              "time": 432,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "time": 448,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "time": 449,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplaythrough",
+              "time": 449,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "progress",
+              "time": 449,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "play",
+              "time": 606,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "time": 606,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 613,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 862,
+              "currentTime": 0.2506666666666667,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "time": 1017,
+              "currentTime": 0.41066666666666674,
+              "readyState": 4
+            }
+          ],
+          "actions": [],
+          "ready": true,
+          "dimensions": [
+            320,
+            180,
+            320,
+            180
+          ],
+          "paused": true,
+          "currentTime": 0.41066666666666674,
+          "error": null,
+          "readyState": 4,
+          "audioState": "running"
+        },
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "capabilities": {
+          "secure": true,
+          "VideoDecoder": "function",
+          "AudioDecoder": "function",
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "native-mp4-playback-observed",
+        "state": {
+          "events": [
+            {
+              "name": "waiting",
+              "time": 339,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 339,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "waiting",
+              "time": 339,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 339,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadedmetadata",
+              "time": 369,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "durationchange",
+              "time": 369,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "progress",
+              "time": 369,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "time": 384,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "time": 385,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "time": 385,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "canplaythrough",
+              "time": 385,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "progress",
+              "time": 385,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "play",
+              "time": 535,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "time": 535,
+              "currentTime": 0,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 542,
+              "currentTime": 0.010666666666666658,
+              "readyState": 4
+            },
+            {
+              "name": "timeupdate",
+              "time": 808,
+              "currentTime": 0.28,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "time": 937,
+              "currentTime": 0.41066666666666674,
+              "readyState": 4
+            }
+          ],
+          "actions": [],
+          "ready": true,
+          "dimensions": [
+            320,
+            180,
+            320,
+            180
+          ],
+          "paused": true,
+          "currentTime": 0.41066666666666674,
+          "error": null,
+          "readyState": 4,
+          "audioState": "running"
+        },
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.2.0",
+        "sha256": "7d088c0abe2f3c1e2857cb0547405ce1e5588630f28e484a64211fc675322bbd",
+        "capabilities": {
+          "secure": true,
+          "VideoDecoder": "undefined",
+          "AudioDecoder": "undefined",
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "verified-unsupported-capability-control",
+        "state": {
+          "events": [
+            {
+              "name": "waiting",
+              "time": 158,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 158,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "waiting",
+              "time": 165,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 165,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "error",
+              "time": 229,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadedmetadata",
+              "time": 232,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "durationchange",
+              "time": 232,
+              "currentTime": 0,
+              "readyState": 1
+            },
+            {
+              "name": "progress",
+              "time": 232,
+              "currentTime": 0,
+              "readyState": 1
+            }
+          ],
+          "actions": [],
+          "ready": false,
+          "dimensions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "paused": true,
+          "currentTime": 0,
+          "error": {
+            "code": 4,
+            "message": "undefined is not a constructor (evaluating 'new t')"
+          },
+          "readyState": 1
+        },
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      },
+      {
+        "project": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "implementation": "published-1.0.0",
+        "sha256": "7331465d8c7a6575505b9d3fd45986c5d3d9cb3839b2620ad5a52c581199562b",
+        "capabilities": {
+          "secure": true,
+          "VideoDecoder": "undefined",
+          "AudioDecoder": "undefined",
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "coreVersion": "5.4.0"
+        },
+        "outcome": "verified-unsupported-capability-control",
+        "state": {
+          "events": [
+            {
+              "name": "waiting",
+              "time": 149,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 149,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "waiting",
+              "time": 151,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "loadstart",
+              "time": 151,
+              "currentTime": 0,
+              "readyState": 0
+            },
+            {
+              "name": "error",
+              "time": 200,
+              "currentTime": 0,
+              "readyState": 0
+            }
+          ],
+          "actions": [],
+          "ready": false,
+          "dimensions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "paused": true,
+          "currentTime": 0,
+          "error": {
+            "code": 4,
+            "message": "undefined is not a constructor (evaluating 'new t')"
+          },
+          "readyState": 0
+        },
+        "scope": "Two actual published proxies with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No candidate, HLS or AV-sync acceptance."
+      }
+    ]
+  },
+  "fixtureSha256": {
+    "test/browser/mediabunny.spec.js": "0d9af2fc2c47a9a78953e8c1fd69148ba553dc3b5e3f5ff0c141f537597ae9fe",
+    "test/mediabunny.test.js": "bc740a32d88cfb1291785d6ba20737d1e53276e9d43a3fc99ecc5423e5fa6a77",
+    "test/helpers/mediabunny.js": "3e25bd5274d58be4d0bb85cd5fb2a825848cae1bfdbfaf5c91177a0c2b03a87a"
+  },
+  "limitations": [
+    "No full CI rerun claimed for this checkpoint; MB-01 CI evidence belongs to its preceding completion commit.",
+    "WebM/HLS/Blob/Stream, seek and exact readiness/AV-sync/cleanup coverage still pending.",
+    "Windows WebKit missing APIs is an explicit negative control, not successful playback or a general Safari support verdict.",
+    "Candidate code has not yet been migrated or fixed."
+  ]
+}
