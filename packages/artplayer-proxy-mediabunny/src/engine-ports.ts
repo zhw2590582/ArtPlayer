@@ -1,9 +1,10 @@
-import type { Input } from 'mediabunny'
+import type { AudioBufferSink, CanvasSink, Input } from 'mediabunny'
 import type { ProxyOptions } from './engine-types'
 import type EventTarget from './EventTarget'
 import type { PlaybackMedia } from './media'
 
 export interface AudioPort {
+  readonly audioSink: AudioBufferSink | null
   cancelPending: () => void
   readonly currentTime: number
   duration: number
@@ -19,6 +20,7 @@ export interface AudioPort {
 }
 
 export interface VideoPort {
+  readonly videoSink: CanvasSink | null
   cancelPending: () => void
   width: number
   height: number

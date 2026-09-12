@@ -363,6 +363,8 @@ async function loadingEnvironment() {
   const audio = deferred()
   const metadata = {}
   env.engine.video.load = (media, callback) => {
+    // This fixture represents a supported decoder whose metadata/completion are delayed.
+    env.engine.video.videoSink = {}
     metadata.video = callback
     return video.promise
   }
@@ -493,6 +495,8 @@ function replacementEnvironment() {
   const track = { isLive: async () => false }
   const input = { getDurationFromMetadata: async () => 8 }
   env.engine.media = { input, videoTrack: track, audioTrack: null, isHls: true, videoMode: 'auto', audioMode: 'auto', duration: 8 }
+  // The already selected media has a working video decoder before a replacement starts.
+  env.engine.video.videoSink = {}
   env.engine.video.load = async () => env.calls.push('video:load')
   env.engine.audio.load = async () => env.calls.push('audio:load')
   return env

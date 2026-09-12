@@ -44,7 +44,9 @@ SDK track objects need explicit narrowing with your application's SDK types.
 The `canPlayType()` response remains `maybe` for compatibility; it does not test codec
 support. TimeRanges and frame callback metadata are synthetic. Actual playback requires
 supported codecs and browser media APIs; a `legacy` bundle does not polyfill those APIs.
-Decoder fallback and broader browser/device validation remain in progress.
+When every selected track is undecodable, loading or track replacement reports error code 4
+without a success readiness sequence. Partial playback keeps a usable audio or video track.
+Broader browser/device validation remains in progress.
 
 ESM default imports and `/legacy` type resolution now support the tested TS 5.9 and
 TS 4.3 modes. CommonJS supports both direct calls and the old `require(...).default`

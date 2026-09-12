@@ -24403,6 +24403,12 @@ class AudioTask {
     this.timers.clear();
   }
 }
+function requireDecoder(host) {
+  if (host.audio.audioSink || host.video.videoSink)
+    return;
+  host.readyState = 0;
+  throw new Error("Input has no decodable audio or video tracks.");
+}
 function publish(events, current, names) {
   for (const name of names) {
     if (!current())
@@ -25127,6 +25133,7 @@ class Playback {
       await Promise.all([this.host.video.load(media), this.host.audio.load(media)]);
       if (!current())
         return;
+      requireDecoder(this.host);
       await Promise.all([this.host.video.seek(time), this.host.audio.seek(time)]);
       if (current()) {
         this.host.readyState = 4;
@@ -25815,6 +25822,7 @@ class MediaBunnyEngine {
     this.input = input;
     this.media = media;
     const metadata = metadataBarrier(() => {
+      requireDecoder(this);
       this.readyState = 1;
       publish(this.events, current, ["loadedmetadata", "durationchange", "progress"]);
     }, current);
@@ -25824,6 +25832,7 @@ class MediaBunnyEngine {
       await Promise.all([video, audio2]);
       if (!current())
         return;
+      requireDecoder(this);
       this.readyState = 4;
       this.networkState = 1;
       publish(this.events, current, ["loadeddata", "canplay", "canplaythrough", "progress"]);

@@ -1,6 +1,6 @@
 import type { PlaybackHost } from './engine-ports'
 import type { PlaybackMedia } from './media'
-import { publish } from './readiness'
+import { publish, requireDecoder } from './readiness'
 import { resolveDuration } from './tracks'
 
 interface Completion {
@@ -156,6 +156,7 @@ export default class Playback {
       await Promise.all([this.host.video.load(media), this.host.audio.load(media)])
       if (!current())
         return
+      requireDecoder(this.host)
       await Promise.all([this.host.video.seek(time), this.host.audio.seek(time)])
       if (current()) {
         this.host.readyState = 4

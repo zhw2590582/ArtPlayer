@@ -1,4 +1,13 @@
+import type { PlaybackHost } from './engine-ports'
 import type EventTarget from './EventTarget'
+
+export function requireDecoder(host: Pick<PlaybackHost, 'audio' | 'video' | 'readyState'>): void {
+  // Sinks reflect the decoder's completed capability check; do not query the SDK twice.
+  if (host.audio.audioSink || host.video.videoSink)
+    return
+  host.readyState = 0
+  throw new Error('Input has no decodable audio or video tracks.')
+}
 
 export function publish(events: EventTarget, current: () => boolean, names: readonly string[]): void {
   for (const name of names) {

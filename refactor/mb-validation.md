@@ -91,3 +91,13 @@ index实际迁移，入口/Canvas桥/生命周期/清理拆为四模块，全包
 见[变更](changes/2026-09-12-PKG-MB-08-entry-checkpoint.md)和[证据](baselines/mb-entry-checkpoint.json)。
 完整CI1402项及44重复契约通过，324生产TS。受控canDecode=false已复现旧/候选
 video-only输入及替换无sink仍readyState=4；任务保持doing，下一步修复该能力边界。
+
+## PKG-MB-08 完成：能力与公开声明验收
+
+入口检查点后补齐解码能力就绪门槛：全部无sink时通过原code 4通道拒绝，至少一条可用则
+保留正常部分播放。16新增Node断言旧main8通过/8失败；候选专项257、main/legacy各233通过。
+新增30浏览器中12受控拒绝、8原生部分播放及10能力对照；旧main相同30项18通过/12失败。
+最终150浏览器、17组实际安装类型/导出、完整CI1418与44重复契约通过，324生产TS。
+[变更](changes/2026-09-12-PKG-MB-08-capability.md)和[证据](baselines/mb-capability-validation.json)
+核对全部源码/产物/报告/安装文件哈希。MB-TYPE-01/MB-READY-01关闭；任务done并立即专用提交。
+39个WebKit能力对照不是播放或物理Safari支持，长播放/设备/组合及分发许可仍由09/10接续。

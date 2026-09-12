@@ -46,8 +46,8 @@ view in `types/media.d.ts` is opt-in and checked against the real VideoShim clas
 The thirty-four production TypeScript modules use strict checking with `skipLibCheck: false`
 and no ambient Node types. The coordinator and both decoder engines are checked
 implementations; there are no remaining adjacent JavaScript declaration bridges.
-All owned production JavaScript has been migrated. This source milestone does not complete
-PKG-MB-08: unsupported decoder fallback/readiness still needs its remaining review.
+All owned production JavaScript has been migrated. PKG-MB-08 also checks public consumer
+compatibility and distinguishes supported partial media from wholly undecodable inputs.
 
 The entry preserves native Canvas method priority, detached createElement invocation,
 two reads of enumerable native method accessors, direct-prototype forwarding, bound shim
@@ -162,8 +162,18 @@ callbacks have source and request identity and are detached on replacement, draw
 Background decoder failure stops rendering and reports one media error through the coordinator,
 even if audio cleanup fails. Iterator cleanup failures are observed and warned; explicit
 stopIterator still rejects. Missing 2D context fails at use with a descriptive error, rather
-than becoming falsely ready. Capability handling for existing undecodable tracks remains
-under MB-CAP-01/MB-READY-01; the current no-video fallback is preserved for that separate review.
+than becoming falsely ready. Existing but undecodable tracks may use the historical
+no-video/no-audio fallback only when at least one selected decoder is usable.
+
+`readiness.requireDecoder` checks the actual audio/video sinks after their existing SDK
+capability checks. It does not issue duplicate canDecode queries or change decoder load
+return values. The metadata barrier checks before publishing metadata, and the load
+completion checks before publishing data/canplay. Track replacement checks after decoder
+setup and before seeking or publishing its success sequence. Without either sink, readyState
+returns to zero and the existing code-4 error channel reports
+`Input has no decodable audio or video tracks.` Active SDK query errors retain their own
+messages. Valid audio-only/video-only and mixed inputs with one usable track retain normal
+readiness/playback; canceled queries cannot report against a newer source or destroyed player.
 
 ## Audio clock and resource ownership
 
@@ -266,9 +276,9 @@ consumers. Do not switch to export= or a required default member without those c
 `canPlayType()` still always returns maybe; buffered/played/seekable and RAF metadata remain
 synthetic. None is proof that a codec or browser can play the input. Missing Web Audio or
 WebCodecs in Windows WebKit remains an unsupported-capability control. Existing but
-undecodable tracks can still take historical clock-only fallback; remaining MB-08 work
-must distinguish valid audio-only/video-only playback from false readiness with no usable
-decoder, including selection replacement. Native/long-play/device acceptance remains MB-09.
+undecodable tracks no longer produce clock-only false readiness when all selected decoders
+are unusable. Partial playback retains the usable decoder. Native/long-play/device acceptance
+remains MB-09; no synthetic capability probe proves support on a physical Safari device.
 
 ## Validation and remaining work
 
@@ -283,6 +293,7 @@ yarn test:browser test/browser/mediabunny-video.spec.js
 yarn test:browser test/browser/mediabunny-audio.spec.js
 yarn test:browser test/browser/mediabunny-hls.spec.js
 yarn test:browser test/browser/mediabunny-entry.spec.js
+yarn test:browser test/browser/mediabunny-capability.spec.js
 ```
 
 Node tests use actual SDK parsing and controlled lifecycle interleavings. Browser tests

@@ -10,7 +10,7 @@ import { getHlsState } from './hls-state'
 import { createInput } from './input'
 import LoadSession from './load-session'
 import Playback from './playback'
-import { metadataBarrier, publish } from './readiness'
+import { metadataBarrier, publish, requireDecoder } from './readiness'
 import { selectPlaybackTracks } from './tracks'
 import VideoEngine from './VideoEngine.js'
 
@@ -150,6 +150,7 @@ export default class MediaBunnyEngine implements EnginePort {
     this.input = input
     this.media = media
     const metadata = metadataBarrier(() => {
+      requireDecoder(this)
       this.readyState = 1
       publish(this.events, current, ['loadedmetadata', 'durationchange', 'progress'])
     }, current)
@@ -159,6 +160,7 @@ export default class MediaBunnyEngine implements EnginePort {
       await Promise.all([video, audio])
       if (!current())
         return
+      requireDecoder(this)
       this.readyState = 4
       this.networkState = 1
       publish(this.events, current, ['loadeddata', 'canplay', 'canplaythrough', 'progress'])

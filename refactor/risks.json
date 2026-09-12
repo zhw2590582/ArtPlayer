@@ -3679,15 +3679,17 @@
         "PKG-MB-08",
         "PKG-MB-10"
       ],
-      "compatibleResolution": "Preserve optional whole-factory and exact Canvas assignment, model explicit shim capabilities separately and verify historical default namespace and callable consumers. MB-08 entry checkpoint preserves exact optional factory/Canvas assignment, adds opt-in checked media types without SDK imports, and fixes classic legacy/NodeNext ESM resolution. Seventeen installed compiler cases plus runtime exports passed against two frozen releases and candidate; seven candidate cases reject fifteen invalid uses each. Type facade/runtime export part is verified; final MB-08 capability and MB-10 distribution gates remain open.",
+      "compatibleResolution": "Preserved exact optional whole-factory and HTMLCanvasElement result; real VideoShim implements opt-in media/Player/HLS/synthetic-frame types without modern SDK declarations leaking to older compilers. Conditional ESM declarations and classic legacy resolution work. Runtime supports both historical default namespace and callable use without a required default property narrowing factory replacement. Final isolated installs of two frozen releases and candidate pass 17 compiler/runtime cases; seven candidate modes each reject fifteen invalid uses and check bidirectional assignments against actual frozen declaration bytes. Complete distribution/license/device gates remain separate.",
       "closureCriteria": "Actual installed old/candidate compiler and runtime export matrices pass with negative controls; any incompatible declaration generation requires an explicit decision.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/mb-release.json",
         "refactor/baselines/mb-contract.md",
         "refactor/changes/2026-09-12-PKG-MB-01-contract.md",
         "refactor/changes/2026-09-12-PKG-MB-08-entry-checkpoint.md",
-        "refactor/baselines/mb-entry-checkpoint.json"
+        "refactor/baselines/mb-entry-checkpoint.json",
+        "refactor/changes/2026-09-12-PKG-MB-08-capability.md",
+        "refactor/baselines/mb-capability-validation.json"
       ]
     },
     {
@@ -3711,20 +3713,22 @@
     {
       "id": "MB-READY-01",
       "title": "MediaBunny historical readiness can repeat for trackless input and occur after capability errors",
-      "status": "open",
+      "status": "resolved",
       "confirmation": "reproduced",
       "owners": [
         "PKG-MB-04",
         "PKG-MB-09"
       ],
-      "compatibleResolution": "Use explicit coordinated readiness and failure state, preserving valid event order while preventing duplicate or stale callbacks; evaluate trackless behavior separately from normal media. MB-04 coordinates metadata once, suppresses stale readiness and rejects trackless input before decoder setup. Existing-track unsupported-codec behavior and full native combinations remain MB-05/06/09; risk stays open. MB-08 entry checkpoint reproduces remaining false readiness in both previous and candidate builds: actual SDK-parsed video-only MP4 with controlled canDecode=false and AudioContext yields null audio/video sinks but readyState 4 and all readiness events, including replaceTracks. Keep open for the next MB-08 capability implementation; this controlled case is not native decoding evidence.",
+      "compatibleResolution": "Coordinated metadata publishes once, trackless input rejects before decoder setup, and stale callbacks cannot publish. MB-08 additionally rejects existing but wholly undecodable tracks before metadata/data/canplay and before replacement success, preserving one usable audio/video track, SDK query errors and late-operation cancellation. Sixteen controlled Node cases and thirty added browser cases distinguish twelve controlled rejection cases, eight native partial-decoder playback cases and ten missing-API controls; the final 150-case media suite passes. Physical Safari/support-range work remains MB-CAP-01 rather than being claimed from these controls.",
       "closureCriteria": "Candidate metadata/data/canplay ordering and counts pass normal, absent-track and failure interleavings in native browsers and controlled race tests.",
       "evidence": [
         "refactor/changes/2026-09-12-PKG-MB-02-baseline.md",
         "refactor/baselines/mb-behavior-validation.json",
         "refactor/changes/2026-09-12-PKG-MB-04-coordination.md",
         "refactor/baselines/mb-coordination-validation.json",
-        "refactor/baselines/mb-entry-checkpoint.json"
+        "refactor/baselines/mb-entry-checkpoint.json",
+        "refactor/changes/2026-09-12-PKG-MB-08-capability.md",
+        "refactor/baselines/mb-capability-validation.json"
       ]
     }
   ]

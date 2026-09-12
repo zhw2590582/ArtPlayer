@@ -3546,14 +3546,17 @@
         "ENG-04",
         "ENG-06"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "8 个自有 JS 模块迁移与 Result/shim 类型",
       "acceptance": "解码器/Stream/DOM 类型清楚，旧 Option 和 art.mediabunny 使用保持",
       "evidence": [
         "baselines/mb-entry-source.json",
         "changes/2026-09-12-PKG-MB-08-entry-checkpoint.md",
-        "baselines/mb-entry-checkpoint.json"
+        "baselines/mb-entry-checkpoint.json",
+        "baselines/mb-capability-source.json",
+        "changes/2026-09-12-PKG-MB-08-capability.md",
+        "baselines/mb-capability-validation.json"
       ]
     },
     {
