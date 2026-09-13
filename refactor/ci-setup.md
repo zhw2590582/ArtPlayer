@@ -12,6 +12,8 @@
 | `yarn typecheck:react` / `yarn typecheck:vue` | 原 React TSX / Vue SFC 示例严格检查，ci:check 同时执行对应 lint |
 | `yarn typecheck:docs-tools` / `yarn check:docs-smoke` | 严格检查 TS 示例/声明生成器及 JS/MJS 门面；只读核对确定性生成的 readiness smoke，ci:check 执行 |
 | `yarn check:editor-types` | 只读核对全部编辑器声明、SDK notices 和实际 libUris；主 TS 5.9.3/历史 4.3.5 整组语义检查，ci:check 执行 |
+| `yarn build:site-assets` / `yarn check:site-assets` | 从站点 browser/ TS 生成三个经典脚本；check 只读，root build:docs 先生成；完整 VitePress 构建另行验收 |
+| `yarn typecheck:site-assets` | 严格检查站点 browser/ 模块；生成脚本由 typecheck:docs-tools 的 checkJs 覆盖；均进入 ci:check |
 | `yarn test:react-consumer` / `yarn test:vue-consumer` | 仓库外 tarball 安装、原框架示例、开发/生产三引擎；browser-smoke 执行并上传独立目录，本地证据不代替远端矩阵 |
 | `yarn test:unit` | 原播放/DASH 回归、同夹具的新旧公共契约与 JS/TS loader 验证 |
 | `yarn test:node` | test:unit 加工具链/文档构建回归，保留原 test:playback/test:dash-control 入口 |

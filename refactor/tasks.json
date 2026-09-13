@@ -4149,6 +4149,26 @@
       ]
     },
     {
+      "id": "SITE-LOAD-01",
+      "phase": "6 文档与消费者",
+      "title": "修复文档示例加载顺序与导航边界",
+      "scope": [
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-02"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "共享 TS loader、移动入口与 Run Code/语言路由，保留 URL 和使用方式",
+      "acceptance": "旧版复现 define 丢失和依赖乱序；真实浏览器验证成功/失败恢复、顺序、去重、编码/优先级及 localhost/127 路由和语言跳转；不以此替代 SITE-03 构建/翻译流程",
+      "evidence": [
+        "changes/2026-09-14-SITE-LOAD-01-site-loading.md",
+        "baselines/site-loading-validation.json"
+      ]
+    },
+    {
       "id": "SITE-03",
       "phase": "6 文档与消费者",
       "title": "整理 i18n/文档/LLM 生成流程",
@@ -4156,12 +4176,13 @@
         "artplayer-vitepress"
       ],
       "dependsOn": [
-        "SITE-02"
+        "SITE-02",
+        "SITE-LOAD-01"
       ],
       "status": "todo",
       "risk": "M",
-      "deliverable": "build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理",
-      "acceptance": "原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向",
+      "deliverable": "build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分",
+      "acceptance": "原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置",
       "evidence": []
     },
     {

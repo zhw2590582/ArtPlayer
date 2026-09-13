@@ -8,6 +8,10 @@ SITE-SMOKE-01 后续已将 build:test 拆为 TS 解析、生成和浏览器运�
 不再走删除 import 的文本回退。见[模块说明](../scripts/editor-declarations/README.md)。
 以下 SITE-01 对这些旧生成问题的描述是历史发现，站点/编辑器交互仍需后续验收。
 
+SITE-LOAD-01 后续修复并抽取共享 loader、移动入口和 Run Code/语言导航，TS
+来源及生成规则见[浏览器模块](../packages/artplayer-vitepress/browser/README.md)。
+保留本站点生成/翻译流程和桌面剩余 UI 给 SITE-03，完整内容/页面验收给 SITE-04/05。
+
 SITE-01 在 `d62ab13a35c756ea567c426d4fbe00d893dd7e2b` 后核对当前源码。
 可重跑清单见 [site-inventory.json](baselines/site-inventory.json)；它登记
 22 包、27 Markdown、30 示例、36 HTML、963 条声明成员和 204 个资产指纹。

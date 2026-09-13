@@ -16,6 +16,7 @@
     "docs-smoke/**/*.ts",
     "build-test.js",
     "build-ts.js",
+    "build-site-assets.mjs",
     "editor-declarations/**/*.ts",
     "editor-types.mjs",
     "plugin-editor-types.mjs"

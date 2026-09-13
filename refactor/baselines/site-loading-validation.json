@@ -1,0 +1,521 @@
+{
+  "task": "SITE-LOAD-01",
+  "baseline": "76499e7a3e033c8350ff495ba8bfff4ca5c08d25",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "scope": {
+    "generatedAssets": 3,
+    "englishRouteVariants": 26,
+    "newNodeTests": 5,
+    "newBrowserTests": 21,
+    "monacoRegressionTests": 3,
+    "rootLintExistingWarnings": 1,
+    "publicPackageRuntimeChanged": false,
+    "publicPackageDeclarationsChanged": false,
+    "lockUnchanged": true
+  },
+  "logs": {
+    "newNodeTests": {
+      "file": "refactor/.cache/site-loading-tests.log",
+      "sha256": "ca44177f795a8658e55e6e25a40c426a3625031f5af25c73e7596baf06034806",
+      "exitCode": 0,
+      "pass": 5
+    },
+    "finalTargeted": {
+      "file": "refactor/.cache/site-loading-targeted-final.log",
+      "sha256": "38f02e6e36a08816f006600f79334b98e2bf46b1aba3dca47583a0c8ba7a5a8f",
+      "exitCode": 0,
+      "pass": 13
+    },
+    "baseline": {
+      "file": "refactor/.cache/site-loading-baseline.log",
+      "sha256": "9750bf8d1100cf565b4873d6d36f63a07e48aa39941283ce4bcfa0bd0ff6d9b9",
+      "exitCode": 0,
+      "pass": 522
+    },
+    "browserInitial": {
+      "file": "refactor/.cache/site-loading-browser.log",
+      "sha256": "d02cca26fd1443c5a02f580bf44a0816dd39e28eb05b10b36bcea37564c69c59",
+      "exitCode": 0,
+      "pass": 15
+    },
+    "browserSetupFailure": {
+      "file": "refactor/.cache/site-loading-browser-final.log",
+      "sha256": "32ee26f81405a84496b72482094ff4251cf236cb2cebfefe655c297da50bcbc6",
+      "exitCode": 1,
+      "pass": 20
+    },
+    "browserAccepted": {
+      "file": "refactor/.cache/site-loading-browser-verified.log",
+      "sha256": "10e2712131e6be0dff7a3b2e06641981f11f1e46f0c6b4ec23e52c52d474da8e",
+      "exitCode": 0,
+      "pass": 24
+    },
+    "legacyCommonLintBefore": {
+      "file": "refactor/.cache/site-common-lint-before.log",
+      "sha256": "f1978826cbb118c296332259bdbd3e1caf4a3e6a8aa24b029c21fb13658f034a",
+      "exitCode": 1
+    },
+    "rootLint": {
+      "file": "refactor/.cache/site-loading-root-lint.log",
+      "sha256": "e3083de1ec97688cdfbce56aba620869eea4531afea294e4d5b4840c41e392be",
+      "exitCode": 0
+    },
+    "targetedLint": {
+      "file": "refactor/.cache/site-loading-final-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    "browserTypes": {
+      "file": "refactor/.cache/site-loading-types.log",
+      "sha256": "293a5b477d958aca4aaef3ee183447682f361ee94692b533a32c615396ba83b0",
+      "exitCode": 0
+    },
+    "toolTypes": {
+      "file": "refactor/.cache/site-loading-tool-types.log",
+      "sha256": "db6d032c8e69dbfbcdbc37d3dfc6227dce2c7be659fd003c4eca3cc290921771",
+      "exitCode": 0
+    },
+    "toolchain": {
+      "file": "refactor/.cache/site-loading-toolchain.log",
+      "sha256": "4b140bdd27acb3adeb1cf8a328d0024b598c8a4efe1b2c3ae180e9df5a4cb084",
+      "exitCode": 0
+    },
+    "ci": {
+      "file": "refactor/.cache/site-loading-ci-final.log",
+      "sha256": "797184eb9940868fbfc3709895966ecd38c1198fcc56f6ab409d189399d600b2",
+      "exitCode": 0,
+      "pass": 50
+    },
+    "assetsCheck": {
+      "file": "refactor/.cache/site-loading-assets-check.log",
+      "sha256": "80807571a48a18caf82db4ebbe36ec95dcec64372c7d0d1acd4d5984248f1b29",
+      "exitCode": 0
+    }
+  },
+  "browser": {
+    "file": "refactor/.cache/site-loading-browser-accepted/report.json",
+    "sha256": "eeeee6afcf056d50885a8f721f52a4e742d479420930668cc6ebcb9b1b0b0b9e",
+    "stats": {
+      "startTime": "2026-09-13T23:43:41.727Z",
+      "duration": 28844.011,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "mobile page runs dependencies in order and plays the selected code with no AMD property leak",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "title": "real script failure is retryable and cancellation restores the original AMD function",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/site-retry.js",
+            "resourceType": "script",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "title": "desktop editor preserves example priority and reuses loaded dependencies when Run is clicked",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          },
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Run Code handles nested clicks, encodes dependencies and stays local on 127.0.0.1",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "first-language redirect preserves the translated deep link and later explicit Chinese selection",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "a late initial example response cannot overwrite a newer editor Run",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "title": "denied storage keeps the requested documentation page without a redirect loop",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "mobile page runs dependencies in order and plays the selected code with no AMD property leak",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "real script failure is retryable and cancellation restores the original AMD function",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "desktop editor preserves example priority and reuses loaded dependencies when Run is clicked",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "Run Code handles nested clicks, encodes dependencies and stays local on 127.0.0.1",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "first-language redirect preserves the translated deep link and later explicit Chinese selection",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "a late initial example response cannot overwrite a newer editor Run",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "denied storage keeps the requested documentation page without a redirect loop",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "mobile page runs dependencies in order and plays the selected code with no AMD property leak",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "real script failure is retryable and cancellation restores the original AMD function",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/site-retry.js",
+            "resourceType": "script",
+            "failure": {
+              "errorText": "Load request cancelled"
+            }
+          }
+        ]
+      },
+      {
+        "title": "desktop editor preserves example priority and reuses loaded dependencies when Run is clicked",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "Run Code handles nested clicks, encodes dependencies and stays local on 127.0.0.1",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "first-language redirect preserves the translated deep link and later explicit Chinese selection",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "a late initial example response cannot overwrite a newer editor Run",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "title": "denied storage keeps the requested documentation page without a redirect loop",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ],
+    "initialArchive": "refactor/.cache/site-loading-browser-initial",
+    "setupFailureArchive": "refactor/.cache/site-loading-browser-setup-failure",
+    "failure": {
+      "project": "firefox",
+      "phase": "page fixture setup before test body",
+      "message": "Test timeout of 20000ms exceeded while setting up page",
+      "simultaneousBaseline": true,
+      "causalAttribution": "Not proven; subsequent run was serialized after the baseline. No timeout, retry or skip change."
+    }
+  },
+  "sources": [
+    {
+      "file": "docs/index.html",
+      "sha256Lf": "f654fa04c8aea08bc718e96ce2a438f04cc91060b2bb9b2b86f4e1467258fd97"
+    },
+    {
+      "file": "docs/assets/js/common.js",
+      "sha256Lf": "c18f72dd5489bdee5b7bd0030c716eab08ac7ea7bd253353eaf406fb8ae2bc14"
+    },
+    {
+      "file": "package.json",
+      "sha256Lf": "5d07a142cd37b886cbad801a2dd48ec6b6a55a40aebebacf206b1370688d9214"
+    },
+    {
+      "file": "scripts/build-site-assets.mjs",
+      "sha256Lf": "58c163e16efa901d227045b468f324ac79ad4ab2f8ab8716f10a8ede62091666"
+    },
+    {
+      "file": "scripts/tsconfig.docs.json",
+      "sha256Lf": "47895ead75f89bed4ec707b77b6b9daa3705b31f3d241c23e83d22b61d565359"
+    },
+    {
+      "file": "test/site-loading.test.js",
+      "sha256Lf": "cd0e513fcc5a6c69458ee6dd4ac12a270a2d28c15e13c46c0bab1ef1299b8667"
+    },
+    {
+      "file": "test/browser/site-loading.spec.js",
+      "sha256Lf": "3038e871b44d928fe537f15d20c88f541a7f73650b7fad46348739cfad535a57"
+    },
+    {
+      "file": "test/browser/editor-declarations.spec.js",
+      "sha256Lf": "3e80ea68e869e29e1a0230759bb1dc02d503f393de41b03ded5296b607e44684"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-loader.ts",
+      "sha256Lf": "7cfdc82726d164d450b21680d950ec3f508482f1ab743febee473855248568e1"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/loader.ts",
+      "sha256Lf": "d5d5c079854f40025be6af457baba863ab8cd37af59c120e811b7f59e5c160b6"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/mobile.ts",
+      "sha256Lf": "beba095b7fda9fb9aa2c5cd50437ea9e186fa76e700e6e79ee8e9eb67fd86d7d"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/navigation.ts",
+      "sha256Lf": "1ad87a6bee717f9e62d28c5e6dc382c5c1b43c09c9f10c64e3ef0824f2fbdedc"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/README.md",
+      "sha256Lf": "93c4b79c70e8a43ac4999642171366d272a0868907cf7e909ec9be9ed9f6562d"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/tsconfig.json",
+      "sha256Lf": "9a1331ca4b311d66df7aca6e5ff8a8e3647e338931e013ffc7df58aaee8f6a0c"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "docs/assets/js/loader.js",
+      "sha256Lf": "f917507fc921f96159402b7f744dc15b8341a89cf0e089abbfe459879169d1a5"
+    },
+    {
+      "file": "docs/assets/js/mobile.js",
+      "sha256Lf": "53a03d1c6725942ee306d2d38fb7ee31d756f16d68f7e0e38f0f01d6073dbf47"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/public/main.js",
+      "sha256Lf": "b8c9b9334abc800e12fd2b8154d89f04c580adf0a155718f2ed44e85f7fd44d7"
+    }
+  ],
+  "limitations": [
+    "Baseline 522 passed before final common.js const/layout cleanup; affected editor and site consumers then revalidated.",
+    "Common desktop UI remains JavaScript and is explicitly assigned to SITE-03.",
+    "No advertising-service, real device/BFCache, full VitePress/docs/document build or remote CI acceptance.",
+    "Cancellation test controls append; removing a classic script does not guarantee cancellation of already-started evaluation.",
+    "No manual Chrome/iab session, push, translation request or publication."
+  ]
+}

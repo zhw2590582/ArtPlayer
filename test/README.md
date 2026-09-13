@@ -1,5 +1,9 @@
 # Tests and fixture ownership
 
+`site-loading.test.js` freezes the old mobile loader's failure/race reproduction
+and checks shared loader ownership, retries/cancellation, query encoding and
+language rules. Actual local pages and Monaco are covered by site-loading.spec.js.
+
 Editor tooling lives in `scripts/editor-declarations/`; see its README.
 `test/editor-types.test.js` checks standalone globals and module consumers with
 current/old compilers, Chapter/VAST regressions, generated files and library-list

@@ -125,18 +125,11 @@
     return response.text();
   }
 
-  // packages/artplayer-vitepress/browser/mobile.ts
-  window.Artplayer.DEBUG = true;
+  // packages/artplayer-vitepress/browser/editor-loader.ts
   var loader = createLibraryLoader();
+  Object.assign(window, { ArtplayerDocsLoader: { ...loader, exampleSource, parameters } });
   window.addEventListener("pagehide", (event) => {
     if (!event.persisted)
       loader.dispose();
   });
-  async function start() {
-    const { code, libs, example } = parameters(location.href);
-    await loader.loadLibraries(libs);
-    const source = example ? await exampleSource(example) : code ? decodeURIComponent(code).trim() : await exampleSource("mobile");
-    new Function(source)();
-  }
-  start().catch((error) => console.error("Failed to initialize mobile example:", error));
 })();

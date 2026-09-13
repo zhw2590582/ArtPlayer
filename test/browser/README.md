@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`site-loading.spec.js` covers actual desktop/mobile loading, dependency order,
+failure/retry/AMD restoration, example priority, repeated Run and stale responses,
+plus Run Code and language routing. External analytics/ads are inert test routes;
+no advertising service or native device acceptance is implied. Keep this browser
+run serial with heavy compiler baselines after observing local setup contention.
+
 `editor-declarations.spec.js` loads the repository Monaco with the 22 declarations
 actually listed in `common.js`, checks positive/negative consumers and runs emitted
 Chapter code through ready/destroy with controlled media. VAST coverage is types

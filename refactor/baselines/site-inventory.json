@@ -17913,11 +17913,12 @@
     {
       "source": "docs/index.html",
       "route": "/",
-      "sha256Lf": "5285062f253dbf739050b00090b65296ffa1078594bd49255d315bd3ec3bdedc",
+      "sha256Lf": "f654fa04c8aea08bc718e96ce2a438f04cc91060b2bb9b2b86f4e1467258fd97",
       "kind": "demo-or-editor",
       "scriptSources": [
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
-        "./assets/js/console.js"
+        "./assets/js/console.js",
+        "./assets/js/loader.js"
       ],
       "status": "not-run",
       "owner": "EX-03"
@@ -18137,15 +18138,15 @@
     },
     {
       "file": "docs/assets/js/common.js",
-      "sha256Lf": "cc9f7d780cf4f0ffb9aaee75da69e2b2b062f3bac07b4ffc9a75956b2e7cd7af"
+      "sha256Lf": "c18f72dd5489bdee5b7bd0030c716eab08ac7ea7bd253353eaf406fb8ae2bc14"
     },
     {
       "file": "docs/assets/js/mobile.js",
-      "sha256Lf": "fd793b52d566a0ba94d4f2ccf85009d8f79d313aaeeeadad5cbb9cd8edd2e171"
+      "sha256Lf": "53a03d1c6725942ee306d2d38fb7ee31d756f16d68f7e0e38f0f01d6073dbf47"
     },
     {
       "file": "packages/artplayer-vitepress/docs/public/main.js",
-      "sha256Lf": "f966a945ecc22e1521208eeb57fe6402f61a2a94f85b0cbb9784ddb1912284fc"
+      "sha256Lf": "b8c9b9334abc800e12fd2b8154d89f04c580adf0a155718f2ed44e85f7fd44d7"
     },
     {
       "file": "packages/artplayer-vitepress/docs/vite.config.ts",
@@ -18154,6 +18155,10 @@
     {
       "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
       "sha256Lf": "9b2741347afb49d830dafa2a847625e6b1d6a820e930fb119c91b22dbbcc52d1"
+    },
+    {
+      "file": "scripts/build-site-assets.mjs",
+      "sha256Lf": "58c163e16efa901d227045b468f324ac79ad4ab2f8ab8716f10a8ede62091666"
     },
     {
       "file": "scripts/docs-smoke/generator.ts",
@@ -18194,12 +18199,28 @@
     {
       "file": "scripts/editor-declarations/vast-sdk.ts",
       "sha256Lf": "6da9176284b7a697a922b90befa64263e016f12eef483793cc524bdfc028ad05"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-loader.ts",
+      "sha256Lf": "7cfdc82726d164d450b21680d950ec3f508482f1ab743febee473855248568e1"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/loader.ts",
+      "sha256Lf": "d5d5c079854f40025be6af457baba863ab8cd37af59c120e811b7f59e5c160b6"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/mobile.ts",
+      "sha256Lf": "beba095b7fda9fb9aa2c5cd50437ea9e186fa76e700e6e79ee8e9eb67fd86d7d"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/navigation.ts",
+      "sha256Lf": "1ad87a6bee717f9e62d28c5e6dc382c5c1b43c09c9f10c64e3ef0824f2fbdedc"
     }
   ],
   "generationCommands": {
     "build:ts": "node ./scripts/build-ts.js",
     "build:llm": "node ./scripts/build-llm.js",
-    "build:docs": "node ./scripts/build-docs.js",
+    "build:docs": "yarn build:site-assets && node ./scripts/build-docs.js",
     "build:i18n": "node ./scripts/build-i18n.js",
     "build:test": "node ./scripts/build-test.js",
     "build:all": "yarn ci:build && yarn lint",

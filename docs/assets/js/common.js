@@ -1,3 +1,4 @@
+/* global Artplayer, monaco */
 (function () {
   Artplayer.DEBUG = true
 
@@ -5,22 +6,22 @@
     window.location.href = `./mobile.html${location.search}`
   }
 
-  let $codeMirror = document.querySelector('.codeMirrorWrap')
-  let $lib = document.querySelector('.libsInput')
-  let $run = document.querySelector('.run')
-  let $popups = document.querySelector('.popups')
-  let $console = document.querySelector('.console')
-  let $prod = document.querySelector('#prod')
-  let $ts = document.querySelector('#ts')
-  let $code = document.querySelector('#code')
-  let $log = document.querySelector('#log')
-  let $file = document.querySelector('#file')
-  let $editor = document.querySelector('#editor')
+  const $codeMirror = document.querySelector('.codeMirrorWrap')
+  const $lib = document.querySelector('.libsInput')
+  const $run = document.querySelector('.run')
+  const $popups = document.querySelector('.popups')
+  const $console = document.querySelector('.console')
+  const $prod = document.querySelector('#prod')
+  const $ts = document.querySelector('#ts')
+  const $code = document.querySelector('#code')
+  const $log = document.querySelector('#log')
+  const $file = document.querySelector('#file')
+  const $editor = document.querySelector('#editor')
 
   window.consoleLog($console)
 
   // Helper functions for localStorage
-  const getStorageBoolean = (key) => localStorage.getItem(key) === 'true'
+  const getStorageBoolean = key => localStorage.getItem(key) === 'true'
   const setStorageBoolean = (key, value) => localStorage.setItem(key, value ? 'true' : 'false')
 
   $prod.checked = getStorageBoolean('prod')
@@ -37,7 +38,7 @@
   }
 
   let editor = null
-  let loadedLibs = []
+  let initialization = 0
   require.config({ paths: { vs: './assets/js/vs' } })
   require(['vs/editor/editor.main'], async () => {
     monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
@@ -50,7 +51,7 @@
       allowNonTsExtensions: true,
     })
 
-    let libUris = [
+    const libUris = [
       './assets/ts/artplayer-plugin-ads.d.ts',
       './assets/ts/artplayer-plugin-ambilight.d.ts',
       './assets/ts/artplayer-plugin-asr.d.ts',
@@ -76,8 +77,8 @@
     ]
 
     for (let index = 0; index < libUris.length; index++) {
-      let libUri = libUris[index]
-      let libSource = await (await fetch(libUri)).text()
+      const libUri = libUris[index]
+      const libSource = await (await fetch(libUri)).text()
       monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri)
       monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri))
     }
@@ -108,122 +109,51 @@
     })
   })
 
-  function getURLParameters(url) {
-    return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce((params, pair) => {
-      const index = pair.indexOf('=')
-      params[pair.slice(0, index)] = pair.slice(index + 1)
-      return params
-    }, {})
+  async function loadLib(libs) {
+    $lib.value = decodeURIComponent(libs || '')
+    return window.ArtplayerDocsLoader.loadLibraries(libs)
   }
 
-  function getExt(url) {
-    if (url.includes('?')) {
-      return getExt(url.split('?')[0])
-    }
-
-    if (url.includes('#')) {
-      return getExt(url.split('#')[0])
-    }
-
-    return url.trim().toLowerCase().split('.').pop()
+  async function runExample(name, current) {
+    const text = await window.ArtplayerDocsLoader.exampleSource(name)
+    if (current !== initialization)
+      return
+    editor.setValue(text)
+    runCode()
   }
 
-  function loadScript(url) {
-    return new Promise((resolve, reject) => {
-      const originalDefine = window.define
-      window.define = undefined
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = url
-      script.onload = () => {
-        window.define = originalDefine
-        resolve(url)
-      }
-      script.onerror = () => {
-        window.define = originalDefine
-        reject(new Error(`Loading script failed: ${url}`))
-      }
-      document.head.appendChild(script)
-    })
-  }
-
-  function loadStyle(url) {
-    return new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      link.onload = () => resolve(url)
-      link.onerror = () => reject(new Error(`Loading style failed: ${url}`))
-      document.head.appendChild(link)
-    })
-  }
-
-  function loadLib(libs) {
-    const libPromises = []
-    const libsDecoded = decodeURIComponent(libs || '')
-    const urls = libsDecoded
-      .split(/\r?\n/)
-      .filter((url) => url.trim() && !loadedLibs.includes(url))
-    
-    urls.forEach((url) => {
-      const ext = getExt(url)
-      if (ext === 'js') {
-        libPromises.push(loadScript(url))
-      } else if (ext === 'css') {
-        libPromises.push(loadStyle(url))
-      }
-    })
-    
-    $lib.value = libsDecoded
-    return Promise.all(libPromises)
-  }
-
-  function runExample(name) {
-    fetch(`./assets/example/${name}.js`)
-      .then((response) => {
-        return response.text()
-      })
-      .then((text) => {
-        editor.setValue(text)
-        runCode()
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
-
-  function loadCode(code, example) {
-    if (example) {
-      runExample(example)
-    }
-    else if (code) {
+  function loadCode(code, example, current) {
+    if (current !== initialization)
+      return
+    if (example)
+      return runExample(example, current)
+    if (code) {
       editor.setValue(decodeURIComponent(code).trim())
       runCode()
     }
     else {
-      runExample('index')
+      return runExample('index', current)
     }
   }
 
   function runCode() {
     window.dispatchEvent(new Event('artplayer:example:cleanup'))
     // Destroy all existing instances
-    Artplayer.instances.slice().forEach((art) => art.destroy(true))
-    
+    Artplayer.instances.slice().forEach(art => art.destroy(true))
+
     const value = editor.getValue()
+    // eslint-disable-next-line no-eval -- Preserve the editor's classic-script Run scope for user-provided examples.
     eval(value)
     window.art = Artplayer.instances[0]
   }
 
   function initApp() {
-    const urlParams = getURLParameters(window.location.href)
+    const current = ++initialization
+    const urlParams = window.ArtplayerDocsLoader.parameters(window.location.href)
     const { code, libs, example } = urlParams
 
     loadLib(libs)
-      .then((result) => {
-        loadedLibs.push(...result)
-        loadCode(code, example)
-      })
+      .then(() => loadCode(code, example, current))
       .catch((err) => {
         console.error('Failed to initialize app:', err)
       })

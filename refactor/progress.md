@@ -1,5 +1,21 @@
 # 进度与证据
 
+## SITE-LOAD-01 示例加载与导航完成
+
+从 SITE-03 拆出共享 TS loader、移动入口与 Run Code/语言导航；恢复 define 原
+描述符，串行依赖/批次并缓存成功项、重试失败项，阻止旧示例晚到覆盖新 Run。
+保留原 URL、example 优先、Run cleanup 和页面使用方式。生成三个 ES2020
+资产，root build:docs 先生成；浏览器类型、生成一致性与 common.js lint 已纳入
+CI。13 项最终目标测试、522 项 baseline、50 项 CI 回归通过。三浏览器最终
+24 项通过（21 新项 + 3 Monaco）；一次 Firefox page fixture 创建超时保留报告，
+其后等基线结束串行复验，没有扩大超时/重试取绿。类型、只读资产、工具链、
+lint 均通过（根 lint 1 条既有 warning）。见
+[变更](changes/2026-09-14-SITE-LOAD-01-site-loading.md)和
+[证据](baselines/site-loading-validation.json)。当前 241 项：167 done、15 doing、
+59 todo。SITE-03 保留生成/翻译流程与桌面剩余 UI 的 TS 迁移；未验证完整
+VitePress 构建/设备/广告服务/远端 CI。下一步接续 SITE-03，不改变 VAST 默认
+行为和 Auto Thumbnail 首帧的开放状态。仅本地独立提交，无推送或发布。
+
 ## SITE-02 编辑器声明生成链完成
 
 build:ts 与 core/plugin 转换器完成 TS 模块拆分，原 JS/MJS 命令/导入路径保留。
