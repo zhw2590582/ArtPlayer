@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "registry": "https://registry.npmjs.org/artplayer-plugin-chromecast",
+  "capturedAt": "2026-09-13T08:26:54.146Z",
+  "sourceCommit": "146b78d5767bba88612184869155a39317794537",
+  "sourceNormalization": "Git text normalized to LF; archive members hashed as bytes.",
+  "source": {
+    "docs/assets/example/chromecast.js": "edd4d232a667a3ca5bae247dca3c557431975b9ae38dc56cc590b57e327d048f",
+    "packages/artplayer-plugin-chromecast/README.md": "d277a82e54df2af679f94c92da2250d3779f07e2c37282d7d66e776f54fed323",
+    "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js": "4959661fc7f22eee3d32363bb0392a486c44499ec4a9c608ccfea55de29aaac6",
+    "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js": "e2ba7aebec099884bb806f3caf77f9ff739ff9f236aefdfd0a4e69a8295c9d01",
+    "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.mjs": "b6d4e445a78f00fae53a35d239e62cc4a1448086d76058d69d8f9634a5754768",
+    "packages/artplayer-plugin-chromecast/package.json": "8157c06e4f764b1662ac108334e1240b07963400b906da6b21874e9a0e415adf",
+    "packages/artplayer-plugin-chromecast/src/cast.svg": "8c0f9ad82c2d6c70afb70ab5002204c4948dd282fbf52095aed4b07fa8d466d4",
+    "packages/artplayer-plugin-chromecast/src/index.js": "2ab8967cf7fdbf9fbac8a9afe73713e66047bad7e4d4afc802665ce594fa3274",
+    "packages/artplayer-plugin-chromecast/types/artplayer-plugin-chromecast.d.ts": "7826de339f5c027025c71215ed3c13995c01174bdf7d7697d01153d922c281a1"
+  },
+  "registrySnapshot": {
+    "status": 200,
+    "bodySha256": "357ef2db141c991366e9d1e0f4504a9fa9bb13c9cb99892a6d9e03da48c4d705",
+    "distTags": {
+      "latest": "1.1.0"
+    },
+    "stableVersions": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "prereleaseVersions": [],
+    "scope": "All stable versions listed by the live npm package catalog at capture time; registry signing keys/signatures were not independently verified."
+  },
+  "release": {
+    "name": "artplayer-plugin-chromecast",
+    "version": "1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-chromecast/-/artplayer-plugin-chromecast-1.1.0.tgz",
+    "integrity": "sha512-3xrHj1CHe0Tt8gNMUB9A1epuW4OrbPsa1T9MNFy4AfQsjhYAhWAmef6hYu1GdHdADDybXBtVHP50gQ+EW+ddcw==",
+    "sha256": "1941d41055ee02deaa343cbf9eaf714495cb9f04883f57966f5b27f128117c30",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "publishedAt": "2026-03-12T14:21:25.045Z",
+    "files": {
+      "package/README.md": "d277a82e54df2af679f94c92da2250d3779f07e2c37282d7d66e776f54fed323",
+      "package/dist/artplayer-plugin-chromecast.js": "4959661fc7f22eee3d32363bb0392a486c44499ec4a9c608ccfea55de29aaac6",
+      "package/dist/artplayer-plugin-chromecast.legacy.js": "e2ba7aebec099884bb806f3caf77f9ff739ff9f236aefdfd0a4e69a8295c9d01",
+      "package/dist/artplayer-plugin-chromecast.mjs": "b6d4e445a78f00fae53a35d239e62cc4a1448086d76058d69d8f9634a5754768",
+      "package/package.json": "8157c06e4f764b1662ac108334e1240b07963400b906da6b21874e9a0e415adf",
+      "package/types/artplayer-plugin-chromecast.d.ts": "7826de339f5c027025c71215ed3c13995c01174bdf7d7697d01153d922c281a1"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.1.0",
+      "description": "Chromecast plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-chromecast.d.ts",
+          "import": "./dist/artplayer-plugin-chromecast.mjs",
+          "require": "./dist/artplayer-plugin-chromecast.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-chromecast.d.ts",
+          "import": "./dist/artplayer-plugin-chromecast.legacy.js",
+          "require": "./dist/artplayer-plugin-chromecast.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-chromecast.js",
+      "module": "./dist/artplayer-plugin-chromecast.mjs",
+      "types": "./types/artplayer-plugin-chromecast.d.ts",
+      "legacy": "./dist/artplayer-plugin-chromecast.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "historicalCore": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c"
+    },
+    "entrypoints": {
+      "main": "./dist/artplayer-plugin-chromecast.js",
+      "module": "./dist/artplayer-plugin-chromecast.mjs",
+      "types": "./types/artplayer-plugin-chromecast.d.ts",
+      "legacy": "./dist/artplayer-plugin-chromecast.legacy.js"
+    },
+    "registrySourceManifest": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer-plugin-chromecast/package.json",
+      "version": "1.0.2",
+      "sha256LF": "875ba2d244df05666e22bc6a2cc48ac92f14349cef54aa00ff605caff96787a0",
+      "versionMatchesRelease": false
+    },
+    "sourceAssociationScope": "Actual manifests at the npm metadata gitHead; association only, not a minimum supported core or proof the source matches the published archive.",
+    "registrySourceComparison": [
+      {
+        "file": "packages/artplayer-plugin-chromecast/README.md",
+        "sha256LF": "d277a82e54df2af679f94c92da2250d3779f07e2c37282d7d66e776f54fed323",
+        "matchesArchiveBytes": true
+      },
+      {
+        "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js",
+        "sha256LF": "48d624932ab98791a4b493d49343cc8419319034b6a0da310c4fad1da7a852c7",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js",
+        "sha256LF": "b5d87717bc1a566699f9fbda69e346d4f6b378b9c28292447a576b5a23a5c2d3",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.mjs",
+        "sha256LF": "0d60f9f4ab2c6cf676c355d6db0e0315fac02e130ce0b1865d12da106c27af26",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-chromecast/package.json",
+        "sha256LF": "875ba2d244df05666e22bc6a2cc48ac92f14349cef54aa00ff605caff96787a0",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-chromecast/types/artplayer-plugin-chromecast.d.ts",
+        "sha256LF": "7826de339f5c027025c71215ed3c13995c01174bdf7d7697d01153d922c281a1",
+        "matchesArchiveBytes": true
+      }
+    ]
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-chromecast/-/artplayer-plugin-chromecast-1.0.0.tgz",
+      "integrity": "sha512-liF1ku8OYJqycgU/9HcAJsmv3amxp9/LG2Ce/RqVcQu+gTw8MoLELRfxeMolBK159s2sesmYp4N1043pDAtkAg==",
+      "sha256": "aa110388140046912d6da79f9891738a981aae3ec4e14722b987c46c9ecec3b2",
+      "registryGitHead": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+      "publishedAt": "2024-05-27T03:32:00.044Z",
+      "files": {
+        "package/README.md": "87f2c3eedad755e97a545ddabe3c47fad1b9e7b28c0ae08cb22680b92ba2f905",
+        "package/dist/artplayer-plugin-chromecast.js": "6d3f0b5b2c2feb16e86dfbbbac13fcf815daea9aaa017d2eb72821bccbbbad4a",
+        "package/dist/artplayer-plugin-chromecast.legacy.js": "1e3aceff99060c2934ddce16aac3284e2d41d4a6d866dd8cdf3237a2310e941f",
+        "package/package.json": "1e61fb7ff05f04370cb45dc80cc55f8ab3d2a194bb488bb45d0b0c738d96150a",
+        "package/src/cast.svg": "8c0f9ad82c2d6c70afb70ab5002204c4948dd282fbf52095aed4b07fa8d466d4",
+        "package/src/index.js": "e6c66bf803828f1b03e9a52e68ca90eaef0c42431b8e9c5c5504992125db23d9",
+        "package/types/artplayer-plugin-chromecast.d.ts": "3ed160931cef6843537801b9ffb4887284d67ae46e1f31a5f611f34a15836a72"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-plugin-chromecast",
+        "types": "types/artplayer-plugin-chromecast.d.ts",
+        "description": "Chromecast plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-chromecast.js",
+        "legacy": "dist/artplayer-plugin-chromecast.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "historicalCore": {
+        "commit": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+        "file": "packages/artplayer/package.json",
+        "version": "5.1.2",
+        "sha256LF": "aaf3ba9c7beaaea31170cc50e3958c0bb5d779ab4f90b6a213994ce8c9aace36"
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-chromecast.js",
+        "module": null,
+        "types": "types/artplayer-plugin-chromecast.d.ts",
+        "legacy": "dist/artplayer-plugin-chromecast.legacy.js"
+      },
+      "registrySourceManifest": {
+        "commit": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+        "file": "packages/artplayer-plugin-chromecast/package.json",
+        "version": "2.0.0",
+        "sha256LF": "ff9c26c916d181c0c30eee5a0481780f7b4f250809380c2dcf4be4cda124bf50",
+        "versionMatchesRelease": false
+      },
+      "sourceAssociationScope": "Actual manifests at the npm metadata gitHead; association only, not a minimum supported core or proof the source matches the published archive.",
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-chromecast/README.md",
+          "sha256LF": "87f2c3eedad755e97a545ddabe3c47fad1b9e7b28c0ae08cb22680b92ba2f905",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js",
+          "sha256LF": "6d3f0b5b2c2feb16e86dfbbbac13fcf815daea9aaa017d2eb72821bccbbbad4a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js",
+          "sha256LF": "1e3aceff99060c2934ddce16aac3284e2d41d4a6d866dd8cdf3237a2310e941f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-chromecast/package.json",
+          "sha256LF": "ff9c26c916d181c0c30eee5a0481780f7b4f250809380c2dcf4be4cda124bf50",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-chromecast/src/cast.svg",
+          "sha256LF": "8c0f9ad82c2d6c70afb70ab5002204c4948dd282fbf52095aed4b07fa8d466d4",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-chromecast/src/index.js",
+          "sha256LF": "e6c66bf803828f1b03e9a52e68ca90eaef0c42431b8e9c5c5504992125db23d9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-chromecast/types/artplayer-plugin-chromecast.d.ts",
+          "sha256LF": "3ed160931cef6843537801b9ffb4887284d67ae46e1f31a5f611f34a15836a72",
+          "matchesArchiveBytes": true
+        }
+      ]
+    }
+  ],
+  "observations": {
+    "latestArchiveMatchesFrozenSourceFiles": [
+      "packages/artplayer-plugin-chromecast/README.md",
+      "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js",
+      "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js",
+      "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.mjs",
+      "packages/artplayer-plugin-chromecast/package.json",
+      "packages/artplayer-plugin-chromecast/types/artplayer-plugin-chromecast.d.ts"
+    ],
+    "entrypointDifferences": [
+      "1.0.0 has main/types/legacy; module and exports are absent, and no ESM .mjs is shipped.",
+      "1.1.0 adds module and conditional root/legacy exports; it no longer ships src/index.js or src/cast.svg."
+    ],
+    "registrySourceMismatch": "Both npm metadata gitHeads disagree with their published plugin versions: 1.0.0 points to a Git manifest declaring 2.0.0 (only manifest differs among shipped members); 1.1.0 points to a Git manifest declaring 1.0.2 (manifest and all three dist members differ). Keep archives and associated Git sources separate; registrySourceComparison records exact differences.",
+    "typeRuntimeDifferences": [
+      "The frozen declaration returns Chromecast synchronously, but the runtime registration function is async.",
+      "Runtime result exposes getCastState/isCasting; neither method appears in the frozen declaration.",
+      "Runtime reads onStateChange/onCastAvailable/onCastStart/onError callbacks; Option does not declare them."
+    ],
+    "historicalCorePublication": "1.1.0 gitHead associates core workspace 5.3.1. Previous ASR registry evidence found no published stable 5.3.1; this baseline makes no published/minimum-core claim."
+  },
+  "thirdParty": {
+    "castSdk": {
+      "url": "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
+      "reference": "packages/artplayer-plugin-chromecast/src/index.js",
+      "loading": "Runtime script insertion on Cast initialization; consumers may override option.sdk.",
+      "frozenRuntimeBytes": false,
+      "version": "Mutable /v1 URL; exact served SDK build and transitive loads not captured.",
+      "status": "SDK availability, license terms, redistribution rights, sender initialization and real receiver validation remain separate work."
+    },
+    "icon": {
+      "reference": "packages/artplayer-plugin-chromecast/src/cast.svg",
+      "notice": "! Font Awesome Pro 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. ",
+      "pathSha256": "2e154456a8ebae91a32ba65d737baa54706b3d034dd546600cd6d5e3bf413e94",
+      "samePathInRuntime": true,
+      "publishedWithNotice": [
+        "1.0.0:package/src/cast.svg"
+      ],
+      "status": "The asset says Font Awesome Pro 6.5.1 / Commercial License. Repository entitlement and redistribution permission are not established by the package MIT declaration; runtime inlines the same path without this notice."
+    }
+  },
+  "validationScope": "Archive integrity/member bytes/entrypoint existence and Git source association only. No Cast SDK download, browser, receiver/device, compatibility behavior, or npm publication acceptance."
+}

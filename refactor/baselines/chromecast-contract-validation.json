@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CAST-01",
+  "capturedAt": "2026-09-13T08:34:48.666Z",
+  "sourceCommit": "146b78d5767bba88612184869155a39317794537",
+  "baseline": {
+    "file": "refactor/baselines/chromecast-release.json",
+    "sha256": "a68745786d976afee10afb2bb0fd61aeba8f9fffa18737af3e395d25079e3eec"
+  },
+  "verifier": {
+    "file": "refactor/scripts/chromecast-contract.mjs",
+    "sha256LF": "6898481ebc4ab0374e80e0e6064a4ee983af912bf7d2880142631a992376ce8d"
+  },
+  "tests": {
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "file": "refactor/.cache/chromecast01-contract.log",
+    "sha256": "82412503a635cdeb2bf0ebaa64d611a70a9db51ccf151456d1da27c1a22096ef",
+    "scope": "Real frozen main/legacy 1.0.0 and 1.1.0, frozen source and workspace main/legacy; controlled DOM and SDK, no device session."
+  },
+  "inputs": {
+    "test/helpers/chromecast.js": "a51ad278dffde582c00d66cd3c0ea868141548d349a80a24a355856378ab5de7",
+    "test/chromecast.test.js": "be9d42e13ea495d7c266732ffe0273acb96d1a29b8ef330eba32156aaa5eccb8"
+  },
+  "differences": [
+    "1.0.0 eager SDK load and name-only result; 1.1.0 lazy load, raw SessionState getters and callbacks.",
+    "1.0.0 CJS namespace/default and no ESM/module/exports; 1.1.0 callable CJS and ESM.",
+    "Both registry gitHeads point to differently versioned Git manifests; archive authority retained.",
+    "Synchronous declarations omit actual asynchronous result and modern callbacks/getters.",
+    "Commercial Font Awesome Pro notice on the identical embedded icon; entitlement unverified."
+  ],
+  "sourceReferences": [
+    "https://developers.google.com/cast/docs/reference/web_sender/cast.framework.CastContext",
+    "https://developers.google.com/cast/docs/web_sender/integrate"
+  ],
+  "releaseReady": false,
+  "deviceValidated": false,
+  "sourceChanged": false
+}

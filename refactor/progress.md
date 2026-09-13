@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-CAST-01 Chromecast 契约与来源完成
+
+冻结真实npm1.0.0/1.1.0与9个工作区输入，逐成员、入口及git关联核验通过。1.0.0
+提前加载SDK/仅name结果与1.1.0懒加载/状态回调分别测试，28项公共行为通过；
+gitHead和banner版本差异明确记录。VENDOR-10登记商业图标来源，CAST-TYPE-01
+登记同步声明缺口，SDK-06仍缺真实会话。见[变更](changes/2026-09-13-PKG-CAST-01-contracts.md)
+与[契约](baselines/chromecast-contract.md)。228项：131 done、17 doing、80 todo；
+212风险。下一步02错误基线、03拆分与修复；未改生产代码、未连接设备或发布。
+
+用户已确认历史类型冲突统一规则，见[type-compatibility-policy.md](type-compatibility-policy.md)；
+Canvas/Ambilight/VTT/Multiple Subtitles可继续实施，无需重复等待类型取舍确认。
+
+
 ## PKG-ASR-09 显式捕获归属完成
 
 新增可选capture策略，旧默认与根类型保留；Firefox无需强制异常，显式模式零直接

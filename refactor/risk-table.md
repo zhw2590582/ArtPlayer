@@ -214,3 +214,5 @@
 | ASR-FOREIGN-01 | resolved / 已复现 | Firefox permits parallel native media-element owners instead of selecting capture fallback | PKG-ASR-05, PKG-ASR-09 |
 | ASR-CORS-01 | open / 已复现 | Default WebAudio binding silences CORS-cross-origin media that otherwise advances normally | PKG-ASR-05 |
 | ASR-RESTART-01 | resolved / 已复现 | Delayed captured-source restart resumes recognition after a newer pause or stop | PKG-ASR-09 |
+| VENDOR-10 | open / 源码/产物事实 | Chromecast embeds a Font Awesome Pro path with no established redistribution entitlement | PKG-CAST-03, PKG-CAST-06 |
+| CAST-TYPE-01 | open / 源码/产物事实 | Chromecast declarations describe a synchronous name-only registration and omit existing runtime callbacks and query methods | PKG-CAST-04 |

@@ -1072,6 +1072,37 @@
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md",
         "refactor/baselines/thumbnail-emitter-validation.json"
       ]
+    },
+    {
+      "id": "chromecast-cast-icon",
+      "riskId": "VENDOR-10",
+      "inputs": [
+        "packages/artplayer-plugin-chromecast/src/cast.svg",
+        "packages/artplayer-plugin-chromecast/src/index.js"
+      ],
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-06"
+      ],
+      "sourceStatus": "Exact SVG path matches the runtime default icon; source notice identifies Font Awesome Pro 6.5.1.",
+      "licenseStatus": "Commercial License notice exists in cast.svg; repository entitlement and redistribution authorization are not established by the package MIT metadata.",
+      "updatePolicy": "Replace with owned artwork or verify permission before release; preserve user-supplied icon support and icon wrapper classes, retain historical archive evidence.",
+      "fingerprints": [
+        {
+          "path": "packages/artplayer-plugin-chromecast/src/cast.svg",
+          "algorithm": "sha256-lf",
+          "sha256": "8c0f9ad82c2d6c70afb70ab5002204c4948dd282fbf52095aed4b07fa8d466d4"
+        },
+        {
+          "path": "packages/artplayer-plugin-chromecast/src/index.js",
+          "algorithm": "sha256-lf",
+          "sha256": "2ab8967cf7fdbf9fbac8a9afe73713e66047bad7e4d4afc802665ce594fa3274"
+        }
+      ],
+      "reviewEvidence": [
+        "refactor/baselines/chromecast-release.json",
+        "refactor/changes/2026-09-13-PKG-CAST-01-contracts.md"
+      ]
     }
   ],
   "integrations": [
@@ -1163,7 +1194,7 @@
         "packages/artplayer-plugin-chromecast/src/index.js"
       ],
       "contract": "Default remote cast_sender.js?loadCastFramework=1; sdk URL/options and actual Cast device/session behavior require separate validation.",
-      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "validationStatus": "Real 1.0.0/1.1.0 archives and controlled public behavior frozen. Official requestSession completion is not a session; runtime/source gaps proceed through CAST-02/03. No actual SDK bytes, HTTPS sender, receiver, casting or media networking acceptance.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

@@ -4714,6 +4714,37 @@
         "refactor/baselines/asr-explicit-capture-validation.json"
       ],
       "resolutionRationale": "Two delayed-close red tests now pass in source/main/legacy, with subsequent play verified; native restart and default regressions pass."
+    },
+    {
+      "id": "VENDOR-10",
+      "title": "Chromecast embeds a Font Awesome Pro path with no established redistribution entitlement",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-06"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-chromecast/src/cast.svg",
+        "refactor/baselines/chromecast-release.json"
+      ],
+      "compatibleResolution": "Replace the default embedded artwork with an owned simple Cast indicator while retaining the custom icon option and wrapper classes; keep historical provenance separate.",
+      "closureCriteria": "Owned or properly licensed default artwork replaces the commercial-marked source and every shipped bundle, with source/provenance and generated-output checks."
+    },
+    {
+      "id": "CAST-TYPE-01",
+      "title": "Chromecast declarations describe a synchronous name-only registration and omit existing runtime callbacks and query methods",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-04"
+      ],
+      "evidence": [
+        "packages/artplayer-plugin-chromecast/types/artplayer-plugin-chromecast.d.ts",
+        "refactor/baselines/chromecast-contract.md"
+      ],
+      "compatibleResolution": "Preserve the latest published root factory type and provide a precise runtime type view; verify valid historical JavaScript module forms independently.",
+      "closureCriteria": "Frozen type consumers and replacements pass, accurate async/callback/state declarations work through an additive entry, and actual installed exports are tested."
     }
   ]
 }
