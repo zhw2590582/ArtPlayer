@@ -1,0 +1,92 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import process from 'node:process'
+import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
+import { compilePackage } from '../helpers/load.js'
+import { expect, test } from './fixtures.js'
+
+const implementations = new Map()
+test.beforeAll(async () => {
+  const release = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/danmuku-release.json', import.meta.url), 'utf8')).release
+  const member = `package/${release.manifest.main.replace(/^\.\//u, '')}`
+  const bytes = readMember(await ensureArchive(release), member)
+  assert.equal(hash(bytes), release.files[member])
+  implementations.set('published', bytes.toString())
+  implementations.set('candidate', process.env.ARTPLAYER_DANMUKU_ARTIFACT
+    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
+    : await compilePackage('artplayer-plugin-danmuku', 'umd'))
+})
+
+for (const core of ['published', 'candidate']) {
+  for (const implementation of ['published', 'candidate']) {
+    for (const mode of [0, 1]) {
+      test(`${core} core / ${implementation} plugin / mode ${mode}: Worker waiting does not consume visible lifetime`, async ({ page }, testInfo) => {
+        await page.goto(`/test/player.html?core=${core}`)
+        await page.evaluate(() => {
+          const evidence = window.lifetimeEvidence = { posts: [], replies: [], visible: [], recycled: [] }
+          const NativeWorker = window.Worker
+          window.Worker = class DelayedNativeWorker extends NativeWorker {
+            constructor(...args) {
+              super(...args)
+              this.addEventListener('message', event => evidence.replies.push({ id: event.data.id, wall: performance.now() }))
+            }
+
+            postMessage(message, ...args) {
+              evidence.posts.push({ id: message.id, wall: performance.now() })
+              // Delay delivery, then execute the actual native Worker and its real geometry.
+              this.delay = setTimeout(() => super.postMessage(message, ...args), 1500)
+            }
+
+            terminate() {
+              clearTimeout(this.delay)
+              return super.terminate()
+            }
+          }
+        })
+        const code = implementations.get(implementation)
+        await page.addScriptTag({ content: code })
+        await page.evaluate(() => window.createPlayer('/assets/sample/video.mp4'))
+        await page.click('#play')
+        await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
+        // Install after native playing, then start once. The published duplicate
+        // play/playing loop defect is covered elsewhere and is not this timing case.
+        await page.evaluate(async (mode) => {
+          const art = window.art
+          const evidence = window.lifetimeEvidence
+          art.on('artplayerPluginDanmuku:visible', row => evidence.visible.push({ wall: performance.now(), clock: Date.now(), startedAt: row.$lastStartTime, rest: row.$restTime, mode: row.mode, time: art.currentTime, transition: row.$ref.style.transition }))
+          art.plugins.add(window.artplayerPluginDanmuku({ danmuku: [], speed: 1, antiOverlap: false, heatmap: false, emitter: false }))
+          const plugin = art.plugins.artplayerPluginDanmuku
+          const owner = plugin.config({})
+          const makeWait = owner.makeWait
+          owner.makeWait = (row) => {
+            if (row.$state === 'emit')
+              evidence.recycled.push({ wall: performance.now(), rest: row.$restTime, time: art.currentTime })
+            return makeWait.call(owner, row)
+          }
+          await plugin.load([{ id: 'delayed', text: 'Full visible lifetime', time: art.currentTime + 0.4, mode }])
+          owner.start()
+        }, mode)
+        await expect.poll(() => page.evaluate(() => window.lifetimeEvidence.recycled.length)).toBe(1)
+        await page.click('#pause')
+        const evidence = await page.evaluate(() => ({ ...window.lifetimeEvidence, video: { width: window.art.video.videoWidth, time: window.art.currentTime } }))
+        await testInfo.attach('danmuku-lifetime', { contentType: 'application/json', body: JSON.stringify({ core, implementation, mode, sha256: hash(code), evidence, scope: 'Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation.' }) })
+        expect(evidence.posts).toHaveLength(1)
+        expect(evidence.replies).toHaveLength(1)
+        expect(evidence.visible).toHaveLength(1)
+        expect(evidence.video.width).toBeGreaterThan(0)
+        expect(evidence.replies[0].wall - evidence.posts[0].wall).toBeGreaterThanOrEqual(1400)
+        const lifetime = evidence.recycled[0].wall - evidence.visible[0].wall
+        if (implementation === 'published') {
+          // Preserve the historical defect as explicit evidence, not the candidate contract.
+          expect(lifetime).toBeLessThan(400)
+          expect(evidence.visible[0].clock - evidence.visible[0].startedAt).toBeGreaterThanOrEqual(1400)
+        }
+        else {
+          expect(lifetime).toBeGreaterThanOrEqual(900)
+          expect(evidence.visible[0].rest).toBe(1)
+        }
+        await page.evaluate(() => window.art.destroy())
+      })
+    }
+  }
+}

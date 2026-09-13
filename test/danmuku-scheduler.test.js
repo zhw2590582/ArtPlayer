@@ -491,6 +491,61 @@ test(`${prefix}: the actual algorithm places three same-time fixed rows on disti
   env.destroy()
 })
 
+for (const mode of [0, 1, 2]) {
+  test(`${prefix}: delayed Worker reply starts visible lifetime at placement for mode ${mode}`, async (t) => {
+    const { env, plugin, owner, worker, layer, reply } = await fixture({ speed: 1 })
+    t.after(() => env.destroy())
+    await plugin.emit({ text: `delayed-${mode}`, time: 10, mode })
+    const row = owner.queue[0]
+    env.art.playing = true
+    owner.start()
+    const pendingFrame = env.frame()
+    await env.flush()
+    assert.equal(worker.messages.length, 1)
+    const ref = row.$ref
+    assert.equal(layer.children.length, 1)
+    assert.equal(output(env, 'visible').length, 0, 'Measurement before the Worker reply is not visible lifetime')
+    assert.notEqual(ref.style.visibility, 'visible')
+
+    // The reply uses the real positioning algorithm; only its delivery and the
+    // wall/media clocks are controlled. No browser animation timing is claimed.
+    env.tick(3000)
+    env.art.currentTime += 3
+    const placedAt = env.context.Date.now()
+    reply(0)
+    await pendingFrame
+    assert.equal(row.$state, 'emit')
+    assert.equal(row.$ref, ref)
+    assert.equal(ref.style.visibility, 'visible')
+    assert.deepEqual(output(env, 'visible').map(event => event.args[0]), [row])
+    assert.equal(row.$restTime, 1)
+    assert.equal(row.$lastStartTime, placedAt, 'Hidden Worker waiting must not shorten the visible duration')
+    if (mode === 0)
+      assert.equal(ref.style.transition, 'transform 1s linear 0s')
+
+    env.tick(250)
+    env.art.currentTime += 0.25
+    await env.frame()
+    assert.equal(row.$state, 'emit')
+    assert.equal(row.$ref, ref)
+    assert.equal(row.$restTime, 0.75, 'Only elapsed time since visible placement consumes lifetime')
+    assert.equal(owner.$refs.length, 0)
+
+    env.tick(750)
+    env.art.currentTime += 0.75
+    await env.frame()
+    assert.equal(row.$state, 'wait')
+    assert.equal(row.$ref, null)
+    assert.equal(ref.style.visibility, 'hidden')
+    assert.deepEqual(Array.from(owner.$refs), [ref], 'The expired node returns to its pool exactly once')
+    await env.frame()
+    assert.deepEqual(Array.from(owner.$refs), [ref])
+    assert.equal(worker.messages.length, 1)
+    assert.equal(output(env, 'visible').length, 1)
+    assert.equal(output(env, 'error').length, 0)
+  })
+}
+
 test(`${prefix}: a sampled three-hour simulated clock preserves batch order, pooled nodes, pause and seek state`, async (t) => {
   // Advance a controlled clock at lifecycle boundaries; this is not a real-time
   // endurance, frame-rate, CSS animation or browser memory measurement.

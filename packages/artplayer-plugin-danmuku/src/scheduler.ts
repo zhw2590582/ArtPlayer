@@ -175,6 +175,8 @@ export default class Scheduler {
       if (!this.active(operation) || danmu.$ref !== ref)
         return
       if (top !== undefined) {
+        // The hidden Worker wait must not consume the CSS-visible lifetime.
+        danmu.$lastStartTime = Date.now()
         owner.setState(danmu, 'emit')
         owner.renderer.place(danmu, ref, top, distance, clientWidth)
         operation.ref = null

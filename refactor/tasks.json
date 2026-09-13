@@ -3380,7 +3380,8 @@
       ],
       "dependsOn": [
         "PKG-DANMUKU-06",
-        "PKG-DANMUKU-10"
+        "PKG-DANMUKU-10",
+        "PKG-DANMUKU-11"
       ],
       "status": "doing",
       "risk": "H",
@@ -4680,6 +4681,25 @@
       "evidence": [
         "changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md",
         "baselines/danmuku-heatmap-density-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-DANMUKU-11",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "修复 Worker 隐藏等待吞掉可见寿命",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-06"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "成功放置时的可见计时与延迟回复回归",
+      "acceptance": "真实 Worker 延迟下完整显示寿命；保留暂停/回收/取消和公开契约",
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md",
+        "baselines/danmuku-lifetime-validation.json"
       ]
     }
   ]

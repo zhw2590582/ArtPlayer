@@ -676,6 +676,7 @@ var artplayerPluginDanmuku = (function() {
         if (!this.active(operation) || danmu.$ref !== ref)
           return;
         if (top !== void 0) {
+          danmu.$lastStartTime = Date.now();
           owner.setState(danmu, "emit");
           owner.renderer.place(danmu, ref, top, distance, clientWidth);
           operation.ref = null;

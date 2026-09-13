@@ -1,0 +1,3059 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-11",
+  "status": "done",
+  "capturedAt": "2026-09-13T14:22:20.805Z",
+  "baselineCommit": "24b883d862e11b96fc2d5888857bacc62a24a94c",
+  "change": "Reset only the successful visible placement origin after cancellation and node-identity checks; hidden Worker wait no longer consumes configured display lifetime.",
+  "units": [
+    {
+      "file": "refactor/.cache/danmuku11-source-unit.log",
+      "sha256": "63e990eb31fcfadf4cdda75522d85344c729d18bd94cc811c56a45174ddfdcee",
+      "tests": 253
+    },
+    {
+      "file": "refactor/.cache/danmuku11-main-unit.log",
+      "sha256": "5910dceb73c5c400004f35119e96a247fa9571e5024169ffa121f78806f4ef0a",
+      "tests": 57
+    },
+    {
+      "file": "refactor/.cache/danmuku11-legacy-unit.log",
+      "sha256": "e845dbe004b71ffb61cc88f7babb610b6483be6800549c5b743a6bb21f5c57a0",
+      "tests": 57
+    }
+  ],
+  "browsers": [
+    {
+      "format": "source",
+      "file": "refactor/.cache/danmuku11-source-browser.json",
+      "sha256": "2f30e9133aa4d7a55918281daf7c323f7d5016d6a0993587dbce19b5a5d69188",
+      "stats": {
+        "startTime": "2026-09-13T14:18:26.191Z",
+        "duration": 139762.33,
+        "expected": 90,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": {
+        "chromium": {
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "version": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "version": "26.6",
+          "platform": "win32"
+        }
+      },
+      "cases": [
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2750,
+          "lifetime": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309110414,
+                  "wall": 914.3999999761581
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309110414,
+                  "wall": 2415.899999976158
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2416.199999988079,
+                  "clock": 1789309111916,
+                  "startedAt": 1789309110414,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.205412,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2429,
+                  "rest": -0.5149999999999999,
+                  "time": 2.217988
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.344235
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2603,
+          "lifetime": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309113047,
+                  "wall": 837.5
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309113047,
+                  "wall": 2339
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2339.399999976158,
+                  "clock": 1789309114549,
+                  "startedAt": 1789309113047,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.189061,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2351.699999988079,
+                  "rest": -0.5149999999999999,
+                  "time": 2.201526
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.338725
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3607,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 835.1000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2337.100000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2337.300000011921,
+                  "clock": 1789309117166,
+                  "startedAt": 1789309117166,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.174232,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3349.100000023842,
+                  "rest": -0.012000000000000774,
+                  "time": 3.185465
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.322828
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3629,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 851.3000000119209
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2352.5
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2352.599999964237,
+                  "clock": 1789309120798,
+                  "startedAt": 1789309120798,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.186323,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3365.599999964237,
+                  "rest": -0.013000000000000775,
+                  "time": 3.200521
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.33795
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2757,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309110414,
+                  "wall": 915.1000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309110414,
+                  "wall": 2416.699999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2416.899999976158,
+                  "clock": 1789309111916,
+                  "startedAt": 1789309110414,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.2053,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2429.600000023842,
+                  "rest": -0.5149999999999999,
+                  "time": 2.217939
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.345893
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2618,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309113080,
+                  "wall": 868.3999999761581
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309113080,
+                  "wall": 2369.599999964237
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2369.800000011921,
+                  "clock": 1789309114582,
+                  "startedAt": 1789309113080,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.189116,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2382.899999976158,
+                  "rest": -0.5149999999999999,
+                  "time": 2.202559
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.322561
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3657,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 880.1999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2381.599999964237
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2381.699999988079,
+                  "clock": 1789309117234,
+                  "startedAt": 1789309117233,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.191529,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3393.099999964237,
+                  "rest": -0.011000000000000742,
+                  "time": 3.203557
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.342734
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3658,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 877.1999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2378.300000011921
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2378.599999964237,
+                  "clock": 1789309120898,
+                  "startedAt": 1789309120898,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.188009,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3391.599999964237,
+                  "rest": -0.013000000000000775,
+                  "time": 3.201505
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.3408
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3913,
+          "lifetime": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309148698,
+                  "wall": 1256
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309148698,
+                  "wall": 2758
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2759,
+                  "clock": 1789309150201,
+                  "startedAt": 1789309148697,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.19407,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2772,
+                  "rest": -0.518,
+                  "time": 2.19407
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.395995
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2830,
+          "lifetime": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309151617,
+                  "wall": 941
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309151617,
+                  "wall": 2444
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2444,
+                  "clock": 1789309153121,
+                  "startedAt": 1789309151617,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.203515,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2457,
+                  "rest": -0.516,
+                  "time": 2.203515
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.324736
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3670,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 714
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2215
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2216,
+                  "clock": 1789309155722,
+                  "startedAt": 1789309155722,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.960448,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3231,
+                  "rest": -0.015000000000000721,
+                  "time": 2.976753
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.182941
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3583,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 660
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2163
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2163,
+                  "clock": 1789309159343,
+                  "startedAt": 1789309159343,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.960894,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3177,
+                  "rest": -0.014000000000000772,
+                  "time": 2.984423
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.145992
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3645,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309148933,
+                  "wall": 1124
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309148933,
+                  "wall": 2629
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2629,
+                  "clock": 1789309150437,
+                  "startedAt": 1789309148932,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.964281,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2640,
+                  "rest": -0.516,
+                  "time": 1.964281
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.168054
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2851,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309151851,
+                  "wall": 938
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309151851,
+                  "wall": 2457
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2458,
+                  "clock": 1789309153371,
+                  "startedAt": 1789309151850,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.243228,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2471,
+                  "rest": -0.534,
+                  "time": 2.243228
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.364522
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3938,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 951
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2479
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2479,
+                  "clock": 1789309156333,
+                  "startedAt": 1789309156332,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.213262,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3483,
+                  "rest": -0.005000000000000782,
+                  "time": 3.227008
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.351024
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3833,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 904
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2422
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2423,
+                  "clock": 1789309160124,
+                  "startedAt": 1789309160124,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.202015,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3421,
+                  "rest": -7.181755190543981e-16,
+                  "time": 3.172538
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.338076
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3798,
+          "lifetime": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309188709,
+                  "wall": 1354
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309188709,
+                  "wall": 2871
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2871,
+                  "clock": 1789309190227,
+                  "startedAt": 1789309188708,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0022711,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2886,
+                  "rest": -0.534,
+                  "time": 2.0174169
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4219795
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3517,
+          "lifetime": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309192383,
+                  "wall": 1272
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309192383,
+                  "wall": 2798
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2799,
+                  "clock": 1789309193909,
+                  "startedAt": 1789309192382,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0168128,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2800,
+                  "rest": -0.528,
+                  "time": 2.0175419
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.3542086
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4634,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1172
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2688
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2689,
+                  "clock": 1789309197326,
+                  "startedAt": 1789309197326,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0251252,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3733,
+                  "rest": -0.04400000000000037,
+                  "time": 3.0695212
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5142505
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4720,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1231
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2753
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2753,
+                  "clock": 1789309202034,
+                  "startedAt": 1789309202033,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9947086,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3769,
+                  "rest": -0.016000000000000236,
+                  "time": 3.0101463
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5138755
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3791,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309189515,
+                  "wall": 1208
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309189515,
+                  "wall": 2734
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2734,
+                  "clock": 1789309191041,
+                  "startedAt": 1789309189515,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.9772502,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2735,
+                  "rest": -0.5269999999999999,
+                  "time": 1.9780002
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.396042
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3612,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789309193163,
+                  "wall": 1212
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789309193163,
+                  "wall": 2734
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2735,
+                  "clock": 1789309194686,
+                  "startedAt": 1789309193163,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9728753,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2735,
+                  "rest": -0.524,
+                  "time": 1.9734377
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.3742087
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4661,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1275
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2793
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2794,
+                  "clock": 1789309198354,
+                  "startedAt": 1789309198354,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0235419,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3807,
+                  "rest": -0.013000000000000234,
+                  "time": 3.0366046
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.481563
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4711,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "2d22d12a9da52e1b1164398556e43c9101ef392350311c2499c0ac72c8e7d789",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1227
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2757
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2758,
+                  "clock": 1789309202989,
+                  "startedAt": 1789309202989,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9792502,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3793,
+                  "rest": -0.036000000000000074,
+                  "time": 3.0149171
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4940421
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: accepted NaN timestamp keeps the historical current-time fallback",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2265
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: failed recovery respects synchronous destroy from the error listener",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 458
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: failed recovery respects synchronous stop from the error listener",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 493
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native pause cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2671
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native reset cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2425
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native seek cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2415
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native destroy cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2251
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native Worker renders three modes with synchronous filter and asynchronous beforeVisible",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 1293
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: six simultaneous fixed comments preserve usable track geometry and input order",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 1393
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native pause seek rate and public reset/load retain historical pool semantics",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2312
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: actual settings, asynchronous send lock, external fullscreen mount and two-player destruction",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 4039
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: accepted NaN timestamp keeps the historical current-time fallback",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2281
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: failed recovery respects synchronous destroy from the error listener",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 458
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: failed recovery respects synchronous stop from the error listener",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 491
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native pause cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2659
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native reset cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2440
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native seek cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2439
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native destroy cancels pending visibility without blocking later work",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2291
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native Worker renders three modes with synchronous filter and asynchronous beforeVisible",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 1310
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: six simultaneous fixed comments preserve usable track geometry and input order",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 1424
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native pause seek rate and public reset/load retain historical pool semantics",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 2353
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: actual settings, asynchronous send lock, external fullscreen mount and two-player destruction",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3979
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: accepted NaN timestamp keeps the historical current-time fallback",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2515
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: failed recovery respects synchronous destroy from the error listener",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 593
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: failed recovery respects synchronous stop from the error listener",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 662
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native pause cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2781
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native reset cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2612
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native seek cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3079
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native destroy cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2561
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native Worker renders three modes with synchronous filter and asynchronous beforeVisible",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 1576
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: six simultaneous fixed comments preserve usable track geometry and input order",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 1454
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native pause seek rate and public reset/load retain historical pool semantics",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2437
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: actual settings, asynchronous send lock, external fullscreen mount and two-player destruction",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 4452
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: accepted NaN timestamp keeps the historical current-time fallback",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2405
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: failed recovery respects synchronous destroy from the error listener",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 677
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: failed recovery respects synchronous stop from the error listener",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 678
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native pause cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2766
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native reset cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2757
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native seek cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3059
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native destroy cancels pending visibility without blocking later work",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2455
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native Worker renders three modes with synchronous filter and asynchronous beforeVisible",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 1457
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: six simultaneous fixed comments preserve usable track geometry and input order",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 1479
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native pause seek rate and public reset/load retain historical pool semantics",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 2497
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: actual settings, asynchronous send lock, external fullscreen mount and two-player destruction",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 4463
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: accepted NaN timestamp keeps the historical current-time fallback",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3616
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: failed recovery respects synchronous destroy from the error listener",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 1927
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: failed recovery respects synchronous stop from the error listener",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 1986
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native pause cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4521
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native reset cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4143
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native seek cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4177
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native destroy cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3600
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native Worker renders three modes with synchronous filter and asynchronous beforeVisible",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 2672
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: six simultaneous fixed comments preserve usable track geometry and input order",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 2869
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: native pause seek rate and public reset/load retain historical pool semantics",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4068
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "published / Candidate Danmuku candidate: actual settings, asynchronous send lock, external fullscreen mount and two-player destruction",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 6333
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: accepted NaN timestamp keeps the historical current-time fallback",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3580
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: failed recovery respects synchronous destroy from the error listener",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 1669
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: failed recovery respects synchronous stop from the error listener",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 2027
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native pause cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4667
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native reset cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4002
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native seek cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4112
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native destroy cancels pending visibility without blocking later work",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3643
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native Worker renders three modes with synchronous filter and asynchronous beforeVisible",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 2791
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: six simultaneous fixed comments preserve usable track geometry and input order",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 2994
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: native pause seek rate and public reset/load retain historical pool semantics",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 3946
+        },
+        {
+          "file": "danmuku-scheduler.spec.js",
+          "title": "candidate / Candidate Danmuku candidate: actual settings, asynchronous send lock, external fullscreen mount and two-player destruction",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 6776
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "file": "refactor/.cache/danmuku11-main-browser.json",
+      "sha256": "aacb70a0e8c2f9e4220cb849be369a2a01d9c37d89f9c4654764341c8cc10f15",
+      "stats": {
+        "startTime": "2026-09-13T14:20:46.619Z",
+        "duration": 31967.545,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": {
+        "chromium": {
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "version": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "version": "26.6",
+          "platform": "win32"
+        }
+      },
+      "cases": [
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3753,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 935.4000000357628
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2436.600000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2436.699999988079,
+                  "clock": 1789309252010,
+                  "startedAt": 1789309252010,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.204667,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3448.699999988079,
+                  "rest": -0.012000000000000774,
+                  "time": 3.216882
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.354773
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3627,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 862.3000000119209
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2362.899999976158
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2363.099999964237,
+                  "clock": 1789309255676,
+                  "startedAt": 1789309255676,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.188799,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3375.899999976158,
+                  "rest": -0.013000000000000771,
+                  "time": 3.201587
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.324092
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3791,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 940.4000000357628
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2441.5
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2441.699999988079,
+                  "clock": 1789309252010,
+                  "startedAt": 1789309252010,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.205718,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3453.699999988079,
+                  "rest": -0.012000000000000746,
+                  "time": 3.216897
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.37352
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3649,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 866.9000000357628
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2368.100000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2368.400000035763,
+                  "clock": 1789309255710,
+                  "startedAt": 1789309255709,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.189831,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3381.400000035763,
+                  "rest": -0.01400000000000072,
+                  "time": 3.201943
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.340104
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 4940,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1324
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2834
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2834,
+                  "clock": 1789309261899,
+                  "startedAt": 1789309261899,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.209763,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3842,
+                  "rest": -0.009000000000000726,
+                  "time": 3.205177
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.447448
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3863,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 930
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2438
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2439,
+                  "clock": 1789309265851,
+                  "startedAt": 1789309265850,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.213712,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3448,
+                  "rest": -0.010000000000000717,
+                  "time": 3.228843
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.391541
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 5077,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1364
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2886
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2887,
+                  "clock": 1789309262515,
+                  "startedAt": 1789309262515,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.244616,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3897,
+                  "rest": -0.009000000000000688,
+                  "time": 3.220611
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.423031
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3675,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 699
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2201
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2201,
+                  "clock": 1789309266231,
+                  "startedAt": 1789309266231,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.964104,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3214,
+                  "rest": -0.012000000000000718,
+                  "time": 2.978202
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.139033
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4875,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1335
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2854
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2854,
+                  "clock": 1789309271315,
+                  "startedAt": 1789309271314,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0577503,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3862,
+                  "rest": -0.009000000000000313,
+                  "time": 3.0659171
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5605005
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4782,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1328
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2850
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2851,
+                  "clock": 1789309276143,
+                  "startedAt": 1789309276142,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0572919,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3892,
+                  "rest": -0.042000000000000245,
+                  "time": 3.0985213
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5382505
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4848,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1313
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2832
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2832,
+                  "clock": 1789309271621,
+                  "startedAt": 1789309271621,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0435836,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3839,
+                  "rest": -0.006000000000000311,
+                  "time": 3.0503963
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5013755
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4820,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1318
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2843
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2844,
+                  "clock": 1789309276465,
+                  "startedAt": 1789309276464,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0192919,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3848,
+                  "rest": -0.005000000000000088,
+                  "time": 3.0231046
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5475213
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "file": "refactor/.cache/danmuku11-legacy-browser.json",
+      "sha256": "f63d6735c1d1a94176d57ff6b25865a5b44e382efb7cf99e7f2659cc713bb012",
+      "stats": {
+        "startTime": "2026-09-13T14:21:19.082Z",
+        "duration": 32117.738999999998,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": {
+        "chromium": {
+          "version": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "version": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "version": "26.6",
+          "platform": "win32"
+        }
+      },
+      "cases": [
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3760,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 904.6999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2405.699999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2406,
+                  "clock": 1789309284527,
+                  "startedAt": 1789309284526,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.205246,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3418.699999988079,
+                  "rest": -0.013000000000000712,
+                  "time": 3.216793
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.354641
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3603,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 826.4000000357628
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2328.100000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2328.5,
+                  "clock": 1789309288160,
+                  "startedAt": 1789309288160,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.173315,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3340.7000000476837,
+                  "rest": -0.01200000000000066,
+                  "time": 3.187427
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.324789
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3802,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 919.1999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2421.100000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2421.300000011921,
+                  "clock": 1789309284544,
+                  "startedAt": 1789309284544,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.202848,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3431.199999988079,
+                  "rest": -0.010000000000000717,
+                  "time": 3.212378
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.370735
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "chromium",
+          "status": "passed",
+          "durationMs": 3649,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 853.6999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2355.899999976158
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2356.300000011921,
+                  "clock": 1789309288260,
+                  "startedAt": 1789309288260,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.190169,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3367.300000011921,
+                  "rest": -0.011000000000000718,
+                  "time": 3.200492
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.327724
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 5082,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1429
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2934
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2935,
+                  "clock": 1789309294406,
+                  "startedAt": 1789309294406,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.214997,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3946,
+                  "rest": -0.01100000000000076,
+                  "time": 3.202215
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.484347
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3629,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 692
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2194
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2195,
+                  "clock": 1789309298140,
+                  "startedAt": 1789309298140,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.958091,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3208,
+                  "rest": -0.01400000000000072,
+                  "time": 2.971989
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.133963
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 4834,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1070
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2576
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2577,
+                  "clock": 1789309294656,
+                  "startedAt": 1789309294656,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.927643,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3588,
+                  "rest": -0.011000000000000718,
+                  "time": 2.942477
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.224983
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "firefox",
+          "status": "passed",
+          "durationMs": 3944,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 979
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2480
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2481,
+                  "clock": 1789309298722,
+                  "startedAt": 1789309298722,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.190933,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3496,
+                  "rest": -0.015000000000000777,
+                  "time": 3.200517
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.36647
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4990,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1494
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 3024
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 3024,
+                  "clock": 1789309303675,
+                  "startedAt": 1789309303675,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0485419,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 4032,
+                  "rest": -0.007000000000000367,
+                  "time": 3.0563129
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4431046
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4709,
+          "lifetime": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1274
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2803
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2804,
+                  "clock": 1789309308352,
+                  "startedAt": 1789309308351,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0574794,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3809,
+                  "rest": -0.005000000000000199,
+                  "time": 3.0620213
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.496813
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 5071,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1248
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2777
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2777,
+                  "clock": 1789309304285,
+                  "startedAt": 1789309304285,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0385627,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3804,
+                  "rest": -0.026000000000000106,
+                  "time": 3.0651254
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.542313
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "file": "danmuku-lifetime.spec.js",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "engine": "webkit",
+          "status": "passed",
+          "durationMs": 4779,
+          "lifetime": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1412
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2937
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2937,
+                  "clock": 1789309309221,
+                  "startedAt": 1789309309220,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0369377,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3957,
+                  "rest": -0.021000000000000213,
+                  "time": 3.0571254
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4555005
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        }
+      ]
+    }
+  ],
+  "browserScope": "Source: 66 existing scheduling cases plus 24 lifetime cases across two cores, old/new plugins, modes 0/1 and three engines. Main/legacy: each 12 selected candidate lifetime cases, same two cores/modes/engines. Controlled 1500ms delivery delay then actual native Worker geometry. Not evidence of natural Worker starvation, complete load stability or Safari hardware.",
+  "failures": [
+    {
+      "file": "refactor/.cache/danmuku11-unit-red.log",
+      "sha256": "99184f9b493ee9d041c0d009e83436a467d66830b7650e9d21253937528d701f"
+    },
+    {
+      "file": "refactor/.cache/danmuku11-browser-red.json",
+      "sha256": "5f48b8c7b897c53db8d84973cd449bb34efa905666d2ec5e6fdc2815da3f8860"
+    },
+    {
+      "file": "refactor/.cache/danmuku11-browser-red-isolated.json",
+      "sha256": "97f8fd1cb3b8d7ee4179c1af6fb3a151757bcc6035ed84ad2c76f6dd42de259f"
+    }
+  ],
+  "redScope": "Three controlled candidate modes fail visible-start timestamp. First browser run also exposed the separate known published duplicate play/playing loop; isolate one start after native playback. Isolated run preserves four historical defect passes and four candidate lifetime failures without changing lifetime thresholds.",
+  "checks": [
+    {
+      "file": "refactor/.cache/danmuku11-build.log",
+      "sha256": "f19dd81f39d43660cfe82a469f1843c5bd54dcf6fec1df48c804abc7f6d04eb9"
+    },
+    {
+      "file": "refactor/.cache/danmuku11-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/danmuku11-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fingerprints": [
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/scheduler.ts",
+      "sha256": "bc5fabee60e2f244e708ddd97ec690393f24be98eb1ffcf9052b42af2db82292"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/ARCHITECTURE.md",
+      "sha256": "8609a86e8a89750dcacc65e15967e85caf75240901f69145b41bc2f61b9f5785"
+    },
+    {
+      "file": "test/danmuku-scheduler.test.js",
+      "sha256": "814154bcac55cc1cef9804eb03fea11bc75a39c49ad694320777f32b437525be"
+    },
+    {
+      "file": "test/browser/danmuku-lifetime.spec.js",
+      "sha256": "99ad1f1be473035f86549290951856fb00b035d88a50ac4b675fd97bebe1280e"
+    },
+    {
+      "file": "docs/uncompiled/artplayer-plugin-danmuku/index.js",
+      "sha256": "377b07538c23034a172a02295b494bd9b5a199406aa94ab6c5b904c854512837"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+      "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-danmuku.js",
+      "sha256": "43a5d785210c378a7d06e53bdbd6db0d276e5eac4e4feeabaed4f02ac02f3df0"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+      "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-danmuku.legacy.js",
+      "sha256": "d3b8ff3b9fa880336b6fd267dc73894fc546488178513269a62a66711e108ede"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+      "sha256": "2bca0ec5cb653e83e87f06261a07a0354c423c4dd91d8a14fc08cde1dfe2b565"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-danmuku.mjs",
+      "sha256": "2bca0ec5cb653e83e87f06261a07a0354c423c4dd91d8a14fc08cde1dfe2b565"
+    }
+  ],
+  "remaining": [
+    "PKG-DANMUKU-07",
+    "DANMUKU-LOAD-01",
+    "PKG-DANMUKU-08",
+    "PKG-DANMUKU-09",
+    "Release review gates"
+  ]
+}

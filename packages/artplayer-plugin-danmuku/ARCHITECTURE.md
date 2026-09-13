@@ -154,6 +154,14 @@ playback enabled, new comments sample speed/playbackRate when allocated; active
 comments retain their assigned remaining seconds. Do not change these timing
 rules as incidental cleanup.
 
+Successful Worker placement resets the visible start timestamp. Hidden measurement
+and Worker waiting do not consume the CSS-visible duration; recording only before
+postMessage can recycle a slow reply's comment on its first visible frame. Keep the
+remaining lifetime and geometry speed assigned during preparation, and change only
+the visible origin after the cancellation/node-identity checks. The delayed Worker
+regression in `test/browser/danmuku-lifetime.spec.js` uses real geometry with a
+controlled request delay; it does not claim natural Worker starvation.
+
 A rejected `beforeVisible` reports its original error once and excludes that
 item from further attempts in the current run. Explicit start, reset, an
 invalidation or replacement callback permits another attempt if the item is

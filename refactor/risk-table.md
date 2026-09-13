@@ -239,3 +239,4 @@
 | DANMUKU-INPUT-02 | resolved / 已复现 | Intermediate explicit-zero correction regressed accepted NaN timestamp fallback | PKG-DANMUKU-04 |
 | DANMUKU-LOAD-01 | open / 待取证 | Native lifecycle fixtures sometimes miss timestamp eligibility during concurrent workload; real frame/window behavior needs load evidence | PKG-DANMUKU-07 |
 | DANMUKU-HEATMAP-02 | resolved / 已复现 | Issue958 dense automatic heatmaps exceed the fixed Y domain and flatten across video | PKG-DANMUKU-10 |
+| DANMUKU-TIMING-01 | resolved / 已复现 | Hidden Worker wait is deducted from visible lifetime and can recycle a comment immediately after visible | PKG-DANMUKU-11 |

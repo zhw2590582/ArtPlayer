@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-DANMUKU-11 Worker 等待寿命修复
+
+07负载审查独立发现并复现：隐藏Worker等待超过speed时，刚显示的弹幕下一帧就被
+回收。成功放置时重置可见起点，保留准备时速度、几何、取消检查与事件顺序。
+三模式受控红/绿、两核心与三引擎真实延迟Worker验证通过；完整源码253项、
+main/legacy各57项单测，源码90及两个产物各12共114项浏览器通过。构建/lint/严格
+分包TS通过，见[变更](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md)和
+[机器证据](baselines/danmuku-lifetime-validation.json)。
+这是实际视频/Worker加受控请求延迟，不声称自然饥饿或持续高负载通过。
+230项：147 done、15 doing、68 todo；07继续，DANMUKU-LOAD-01仍开放。
+新增11是独立缺陷任务和本地commit；不推送或发布。
+
 ## PKG-DANMUKU-06 自有 TS 与公开声明完成
 
 20个自有运行模块完成严格TS，新增内部状态/Worker/parser/UI类型边界；公开运行

@@ -5324,6 +5324,28 @@
         "refactor/baselines/danmuku-heatmap-density-validation.json"
       ],
       "resolutionRationale": "250 unit tests and 102 native browser cases passed, including source/main/legacy density matrices and main resource regression. No claim of full load or macOS device acceptance."
+    },
+    {
+      "id": "DANMUKU-TIMING-01",
+      "title": "Hidden Worker wait is deducted from visible lifetime and can recycle a comment immediately after visible",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-DANMUKU-11"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md",
+        "test/danmuku-scheduler.test.js",
+        "test/browser/danmuku-lifetime.spec.js",
+        "refactor/baselines/danmuku-lifetime-validation.json"
+      ],
+      "compatibleResolution": "Anchor the lifetime clock to successful placement while preserving speed, Worker geometry, queue ordering and lifecycle cancellation.",
+      "closureCriteria": "Controlled three-mode regression and native delayed Worker runs distinguish historical immediate recycling from full candidate visible lifetime; ordinary scheduling regressions remain green.",
+      "resolutionEvidence": [
+        "refactor/baselines/danmuku-lifetime-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md"
+      ],
+      "resolutionRationale": "Three exact controlled modes and real delayed Worker/native video regression establish full visible lifetime, with the unchanged published defect retained and existing scheduling/pause/cancellation checks green."
     }
   ]
 }
