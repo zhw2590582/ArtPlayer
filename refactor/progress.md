@@ -1,5 +1,24 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-04 公开类型与仓库外安装检查点（doing）
+
+保留 root/legacy 的旧必填 subtitles、同步 LegacyResult 提取与可替换工厂；新增 runtime
+入口提供真实 Promise<Result> 和 tracks/reset，共享同一实现。新增可写 default 自别名、
+分开的 ESM/CJS 声明、classic typesVersions 和语义生成的编辑器类型，包内文档同步。
+实际旧三个 tarball 各五模式、候选 pack 七模式，共 22 格安装检查；offline/frozen 重装、
+全成员字节、类型未逃逸、真实 Node 入口身份通过。旧 1.2 NodeNext ESM 失败独立登记。
+公开声明每模式 12 个反例、编辑器各 2 个反例、严格运行时各 9 个反例通过；本包 274 项，
+源码/main/legacy 各 39 项，三浏览器两核心三入口共 108 项通过。完整 CI 2344 项通过
+（1989 单元、14 工程、341 基线），严格生产 TS 353 文件；实际 build 与 docs 副本一致。
+见[变更与待决表](changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md)和
+[证据](baselines/multiple-subtitles-public-types.json)。没有新依赖、锁或版本修改。
+旧 1.0/1.1 原始 CommonJS 模块类型提取与 1.2 default 模块声明矛盾；必填/可选 default
+两种替代均有编译失败证据。JS 调用已兼容，纯旧类型差异尚未获接受，04 与 TYPE/EXPORT
+风险保持 open。VTT 的相同历史声明问题仍待决；不能扩用此前 Ads 的参数类型授权。
+223 项仍为 121 done、14 doing、88 todo；198 项风险。独立本地检查点，不推送、不发布。
+下一步处理类型取舍及其迁移说明；实体解码、完整设备/核心/编辑器仍待 05/06。
+
+
 ## PKG-MULTI-SUB-07 内嵌时间戳与显示修复完成
 
 修复数字时间戳被文本包装成 NaN；合法 VTT class 标记保留原生 processing instruction，

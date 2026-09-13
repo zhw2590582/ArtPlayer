@@ -3,8 +3,11 @@
 The public factory is `artplayerPluginMultipleSubtitles({ subtitles })`. Registration is
 asynchronous and resolves to `{ name: 'multipleSubtitles', tracks, reset }`. `tracks(names)`
 selects names in caller order, `tracks()` clears, and `reset()` restores the original order.
-Both methods return undefined. Current declarations incorrectly omit the Promise and methods;
-task PKG-MULTI-SUB-04 owns that compatibility work. Do not infer runtime behavior from them.
+Both methods return undefined. Root and legacy declarations retain the historical synchronous
+`LegacyResult` for existing extraction and replacement-function consumers. The additive
+`artplayer-plugin-multiple-subtitles/runtime` entry describes the actual `Promise<Result>`
+and selection methods. It shares the root implementation, not another plugin instance.
+The factory has a writable `.default` self alias for historical CommonJS access.
 
 ## Current module boundaries
 
@@ -19,8 +22,8 @@ task PKG-MULTI-SUB-04 owns that compatibility work. Do not infer runtime behavio
   Reentrant selections and stale host rejections cannot release the latest selected resource.
 - `src/caption.ts` owns a subtitleAfterUpdate listener. It unwraps internal timestamp markers
   in the custom HTML caption layer, preserving subsequent nodes and literal user text.
-- `src/types.ts` describes the internal Promise result, selected tracks and narrow host/resource
-  boundaries; option fields reuse the existing public declaration. It is not a published API.
+- `src/types.ts` describes selected tracks and narrow host/resource boundaries and reuses public
+  runtime option/result types. The private host/resource types are not a published API.
 - `src/parser.d.ts` describes the vendored parse result and discriminated cue nodes. Parsed
   timestamp values must remain numeric in both parsed and serialized trees.
 - `src/parser.js` is vendored WebVTT parser/serializer code with a CC0 dedication. It is not
@@ -28,7 +31,11 @@ task PKG-MULTI-SUB-04 owns that compatibility work. Do not infer runtime behavio
   The pinned upstream reference and full adaptation check are in
   `../../refactor/baselines/multiple-subtitles-vendor/` and
   `../../refactor/scripts/multiple-subtitles-vendor.mjs`.
-- `types/artplayer-plugin-multiple-subtitles.d.ts` is the historical public declaration.
+- `types/artplayer-plugin-multiple-subtitles.d.ts` owns public data types and the historical
+  callable signature. Root/legacy `.d.mts` and `.d.cts` forward that signature; `runtime.d.*`
+  forwards the precise asynchronous factory. Classic resolution uses typesVersions.
+- `scripts/build-ts.js` generates the editor's global factory and named type namespace from
+  this declaration through the semantic generator. Never edit the generated editor file.
 - `../../docs/assets/example/multiple.subtitles.js` demonstrates the real plugin name,
   `tracks/reset`, name order and `.art-subtitle-chinese/.art-subtitle-japanese` CSS hooks.
 
@@ -77,6 +84,8 @@ Use the pinned Node and Yarn 1.22.22:
 
 ```sh
 yarn test:multiple-subtitles
+yarn test:multiple-subtitles-types-package
+yarn build:ts artplayer-plugin-multiple-subtitles
 yarn test:browser test/browser/multiple-subtitles-history.spec.js
 yarn test:browser test/browser/multiple-subtitles-lifecycle.spec.js
 yarn build artplayer-plugin-multiple-subtitles
@@ -98,6 +107,11 @@ environment variable above before running it; source builds are used when it is 
 The package tsconfig checks only authored TS and declarations, with strict/noUncheckedIndexedAccess
 and allowJs=false. TS 5.9.3/5.1.6 positive and negative fixtures cover internal runtime types.
 Do not remove cancellation/index boundary assertions by changing historical optional inputs.
-The public synchronous declaration mismatch remains an explicit task 04 migration boundary.
+Public declaration tests check exact old extraction/replacement signatures, accurate runtime
+types and negative uses with TS 5.9.3 and 4.3.5. The package test packs core and plugin, installs
+outside the workspace and checks Node10/NodeNext/Bundler modes plus real CJS/ESM identities.
+Historical 1.0.0/1.1.0 export-assignment declarations and 1.2.0 default-module declarations
+disagree on raw `import = require` extraction. Task 04 retains that unresolved boundary;
+default-import compatibility must not be presented as proof of every historical module form.
 Tasks 05/06 still own complete core/device combinations and demo acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.

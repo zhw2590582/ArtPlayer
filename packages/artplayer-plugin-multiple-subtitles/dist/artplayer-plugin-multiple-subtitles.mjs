@@ -293,7 +293,7 @@ var WebVTTCueTimingsAndSettingsParser = function(line, errorHandler) {
     var settings = input.split(SPACE), seen = [];
     for (var i = 0; i < settings.length; i++) {
       if (settings[i] == "") continue;
-      var index = settings[i].indexOf(":"), setting = settings[i].slice(0, index), value = settings[i].slice(index + 1);
+      var index2 = settings[i].indexOf(":"), setting = settings[i].slice(0, index2), value = settings[i].slice(index2 + 1);
       if (seen.indexOf(setting) != -1) {
         err("Duplicate setting.");
       }
@@ -812,9 +812,9 @@ function markNestedTimestamps(node) {
 }
 function parseTracks(vtts, subtitles) {
   const parser = new WebVTTParser();
-  return vtts.map((vtt, index) => {
+  return vtts.map((vtt, index2) => {
     const tree = parser.parse(vtt, "metadata");
-    return { ...tree, url: subtitles[index].url, name: subtitles[index].name };
+    return { ...tree, url: subtitles[index2].url, name: subtitles[index2].name };
   });
 }
 function serializeTracks(trees) {
@@ -1040,6 +1040,7 @@ function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
     }
   };
 }
+const index = Object.assign(artplayerPluginMultipleSubtitles, { default: artplayerPluginMultipleSubtitles });
 export {
-  artplayerPluginMultipleSubtitles as default
+  index as default
 };

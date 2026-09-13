@@ -24,6 +24,29 @@ function empty(env) {
   for (const listeners of env.listeners.values()) assert.equal(listeners.size, 0)
 }
 
+for (const script of [false, true]) {
+  test(`Multiple subtitles candidate: ${script ? 'script global' : 'CommonJS'} self alias preserves identity, registration and writable metadata`, async () => {
+    const env = create({ script })
+    assert.equal(typeof env.exported, 'function')
+    assert.equal(env.exported.default, env.exported)
+    assert.equal(env.factory.default.default, env.factory)
+    const descriptor = Object.getOwnPropertyDescriptor(env.factory, 'default')
+    assert.equal(descriptor.writable, true)
+    assert.equal(descriptor.configurable, true)
+    assert.equal(descriptor.enumerable, true)
+    const pending = env.factory.default({})(env.art)
+    assert.equal(typeof pending.then, 'function')
+    const result = await pending
+    assert.equal(result.name, 'multipleSubtitles')
+    assert.equal(result.tracks(), undefined)
+    assert.equal(result.reset(), undefined)
+    env.factory.default = () => 'replacement'
+    assert.equal(env.factory.default(), 'replacement')
+    env.emit('destroy')
+    empty(env)
+  })
+}
+
 for (const abortController of [true, false]) {
   for (const phase of ['fetch', 'body']) {
     test(`Multiple subtitles candidate: destroy cancels ${phase}, AbortController=${abortController}`, async () => {

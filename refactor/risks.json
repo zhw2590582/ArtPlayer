@@ -4256,9 +4256,13 @@
         "refactor/baselines/multiple-subtitles-release.json",
         "refactor/baselines/multiple-subtitles-contract.md",
         "test/multiple-subtitles.test.js",
-        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+        "refactor/scripts/multiple-subtitles-contract.test.mjs",
+        "refactor/baselines/multiple-subtitles-public-types.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md",
+        "refactor/scripts/multiple-subtitles-types.test.mjs",
+        "refactor/scripts/multiple-subtitles-package-types.mjs"
       ],
-      "compatibleResolution": "Preserve valid old consumers while exposing accurate methods and async types; review onParser variance separately.",
+      "compatibleResolution": "Root/legacy retain 1.2.0 default-module extraction and replaceable synchronous factory types; additive runtime entry exposes accurate Promise and methods; writable default self alias preserves historical valid JS forms. Actual installed old 1.0.0/1.1.0 raw export-assignment extraction conflicts with 1.2.0 declarations and remains awaiting explicit resolution. Do not close on default-import success alone.",
       "closureCriteria": "Strict old/new consumers and installed type views cover parameters, result methods and factory replacement."
     },
     {
@@ -4332,9 +4336,13 @@
         "refactor/baselines/multiple-subtitles-release.json",
         "refactor/baselines/multiple-subtitles-contract.md",
         "test/multiple-subtitles.test.js",
-        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+        "refactor/scripts/multiple-subtitles-contract.test.mjs",
+        "refactor/baselines/multiple-subtitles-public-types.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md",
+        "refactor/scripts/multiple-subtitles-types.test.mjs",
+        "refactor/scripts/multiple-subtitles-package-types.mjs"
       ],
-      "compatibleResolution": "Preserve valid historical runtime import forms and explicitly assess type-only extraction conflicts.",
+      "compatibleResolution": "Root/legacy retain 1.2.0 default-module extraction and replaceable synchronous factory types; additive runtime entry exposes accurate Promise and methods; writable default self alias preserves historical valid JS forms. Actual installed old 1.0.0/1.1.0 raw export-assignment extraction conflicts with 1.2.0 declarations and remains awaiting explicit resolution. Do not close on default-import success alone.",
       "closureCriteria": "Actual installed CJS/ESM/global/legacy consumers and their declarations are verified."
     },
     {

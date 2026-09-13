@@ -6,6 +6,8 @@
   "include": [
     "src/**/*.ts",
     "types/**/*.d.ts",
+    "types/**/*.d.mts",
+    "types/**/*.d.cts",
     "../../types/assets.d.ts",
     "../../test/types/multiple-subtitles-runtime.ts"
   ]

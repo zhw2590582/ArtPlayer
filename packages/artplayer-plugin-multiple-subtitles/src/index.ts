@@ -1,4 +1,5 @@
 import type Artplayer from 'artplayer'
+import type { RuntimeFactory } from '../types/artplayer-plugin-multiple-subtitles'
 import type { Option, Result, Track } from './types'
 import installCaptionView from './caption'
 import createLifetime from './lifetime'
@@ -6,7 +7,7 @@ import { parseTracks, serializeTracks } from './merge'
 import createRenderer from './render'
 import loadVtt from './request'
 
-export default function artplayerPluginMultipleSubtitles({ subtitles = [] }: Option) {
+function artplayerPluginMultipleSubtitles({ subtitles = [] }: Option) {
   return async (art: Artplayer): Promise<Result> => {
     const { unescape, getExt, srtToVtt, assToVtt } = (art.constructor as typeof Artplayer).utils
     const lifetime = createLifetime(art)
@@ -44,3 +45,5 @@ export default function artplayerPluginMultipleSubtitles({ subtitles = [] }: Opt
     }
   }
 }
+
+export default Object.assign(artplayerPluginMultipleSubtitles, { default: artplayerPluginMultipleSubtitles }) as RuntimeFactory

@@ -1,0 +1,2729 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MULTI-SUB-04",
+  "status": "public-types-checkpoint-validated",
+  "parentCommit": "7f226ff8229e91d8cdc17053926cbbf1071474c4",
+  "checks": [
+    {
+      "command": "normal/lifecycle/merge selected-entry regressions",
+      "candidate": "source",
+      "tests": 39,
+      "file": "refactor/.cache/multiple-subtitles04-public-source.log",
+      "sha256": "54d9f3648f67f248c41a21c6de45b5a0a9020a2089033dafeeaa97a452e59a24",
+      "scope": "Pure frozen-tree tests use source; remaining behavior executes the selected entry."
+    },
+    {
+      "command": "normal/lifecycle/merge selected-entry regressions",
+      "candidate": "main",
+      "tests": 39,
+      "file": "refactor/.cache/multiple-subtitles04-public-main.log",
+      "sha256": "875f99a8bf58763ec08bb65d4351a7684971cff0dbe781ed8e5420fd81e70bf9",
+      "scope": "Pure frozen-tree tests use source; remaining behavior executes the selected entry."
+    },
+    {
+      "command": "normal/lifecycle/merge selected-entry regressions",
+      "candidate": "legacy",
+      "tests": 39,
+      "file": "refactor/.cache/multiple-subtitles04-public-legacy.log",
+      "sha256": "d9693001f63dc46664780d26663506cadf4443a1655481d255820092d4a32c09",
+      "scope": "Pure frozen-tree tests use source; remaining behavior executes the selected entry."
+    },
+    {
+      "command": "yarn ci:check",
+      "tests": 2344,
+      "unit": 1989,
+      "engineering": 14,
+      "baseline": 341,
+      "strictProductionTS": 353,
+      "file": "refactor/.cache/multiple-subtitles04-public-ci.log",
+      "sha256": "6ece0322eda63f5e5de92b8f1bf9bc5342dfcf4cc11b759df80c104bcfc5811d"
+    },
+    {
+      "command": "build",
+      "file": "refactor/.cache/multiple-subtitles04-public-build.log",
+      "sha256": "b79432933936f313e0beaa9d204ac0838834756a28e28f90105c7a0831b90e31"
+    },
+    {
+      "command": "editor",
+      "file": "refactor/.cache/multiple-subtitles04-public-editor.log",
+      "sha256": "3263ced7993ea0c0fe94c26dfcc2570ec1ee63755cca44afe45c7c66bc9aa2e8"
+    },
+    {
+      "command": "lint",
+      "file": "refactor/.cache/multiple-subtitles04-public-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "yarn test:multiple-subtitles",
+      "tests": 274,
+      "publicCompilerModes": 5,
+      "invalidUsesPerMode": 12,
+      "strictRuntimeCompilers": [
+        "5.9.3",
+        "5.1.6"
+      ],
+      "runtimeInvalidUsesPerCompiler": 9,
+      "editorCompilers": [
+        "5.9.3",
+        "4.3.5"
+      ],
+      "editorInvalidUsesPerCompiler": 2,
+      "file": "refactor/.cache/multiple-subtitles04-public-package-final.log",
+      "sha256": "8e7fec9f1b38cde93f2d5dd69f99bcf67ea9e9d58a0f53275e5e89627bc099d8"
+    }
+  ],
+  "installed": {
+    "file": "refactor/.cache/multiple-subtitles-package-types-QhZYAQ/report.json",
+    "sha256": "21d8692e89bceeeaaa7967b12a295319122347b1f4a16a1cd95d1f183cb361e1",
+    "command": "yarn test:multiple-subtitles-types-package",
+    "scope": "Three actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline frozen reinstalls and byte identity verified. Expected old NodeNext ESM and CommonJS module extraction failures remain explicit; these do not count as candidate compatibility success. Raw historical export-assignment type compatibility remains unresolved. Full device and distribution acceptance remains separate.",
+    "packages": [
+      {
+        "name": "artplayer",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\multiple-subtitles-package-types-QhZYAQ\\artplayer.tgz",
+        "sha256": "7be178936e4e12fc59d0af15402bf4b36adcd6dcf40f3ef90e73bbe6aaaf0d49",
+        "files": {
+          "package/ARCHITECTURE.md": "e19079b3d419d82c86e65d6e05c826020c06286b7edfb1cce185e62ce3c50d30",
+          "package/README.md": "1e185e65f67fc2081b4182bbc6c4558ea05b6e3fa3acc5dd0c3ac7df1d542b09",
+          "package/THIRD_PARTY_NOTICES": "b77b5b46b79fa0cda850b0781f78c3b1112c4ed9672fa291956fe8eff53098e7",
+          "package/dist/artplayer.cts": "0e91e907d021db02a68004603e6190505fdc0806d873ebb6af171aa089a81da7",
+          "package/dist/artplayer.js": "4b29968839ba816db09910a908d1d6b8ec6cf1edaad418c96e1f407545a19bf9",
+          "package/dist/artplayer.legacy.js": "2dc2eb7cb26012ef1d780680d622aba61a79b7ac3b37bb1ca7a6047834513dd9",
+          "package/dist/artplayer.mjs": "574749f090251b7d7bddb507a3ca3cc91a759f694e7f4865d19ef1162d330626",
+          "package/dist/artplayer.mts": "f6292596a9ccb1d43a6d6a12c35f859b1889ad15924c5ae0f9f280941aade313",
+          "package/dist/artplayer.ts": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527",
+          "package/dist/component.ts": "aa1c43be67322781b4b355b143bc69d9f29d22e578e4974d6a13e957a7c0334f",
+          "package/dist/config.ts": "c4fd8681bf32b10c743e3e561c532520c8f32e43fd765524850b15e55cb91c72",
+          "package/dist/cssVar.ts": "e027d82fb4f01c9ce7559cf679b2d5ee1962d3f7e5b4dd64ca21f472b933efb6",
+          "package/dist/emitter.ts": "9c62551cdcc6dd3966bed8a7a85dd477435db977c91a294d2ac8f162f9592537",
+          "package/dist/events.ts": "af191f862af4ec8933b09113b8c074603ae254a8b70460d0f3006646cd74ae42",
+          "package/dist/i18n.ts": "34b0c684668044f7600c80b9d3979f8fb730138007b7cb4e7034326b340156fb",
+          "package/dist/i18n/ar.js": "bd0bef65f4f7dc3f8ed562904cc6fa9071ff4537fb64c1e0fc3d554141bcd3cb",
+          "package/dist/i18n/ar.mjs": "59310b7bbeea83bbb7d73aadc5ca82a6ec269c3530d19aa741c94d5c64fc5da8",
+          "package/dist/i18n/cs.js": "6e2c93daba24c2e48dfa206bcf4f2f2a8a02713b856e404d2e4e4ecd8309ca2f",
+          "package/dist/i18n/cs.mjs": "c73fba18797d62d7b2581e67fe7340c35fe84510b2250ff1ecaad253d9cabbac",
+          "package/dist/i18n/es.js": "f4133ac6ea06b69a474b33c4a1809a4066e2376bb9464a3f3aa8330f01f1944a",
+          "package/dist/i18n/es.mjs": "1390bca3def2be115e811de337df0a0c3f63998e51359f283023246245c552a7",
+          "package/dist/i18n/fa.js": "8d3ef2e0f0cc0ea480c2167b6fcb87cdf444e90759c3519e8daa139fec576da4",
+          "package/dist/i18n/fa.mjs": "ab441e8a2d79043b29ceca87c783bf06874bb9d3a149c1604bc167eb481be2a9",
+          "package/dist/i18n/fr.js": "89dc4194a6c0a962b9ce756b52c90401c1acf3b159f265f3bc0d7d6d7d987f03",
+          "package/dist/i18n/fr.mjs": "99491878430fb7b6f2b7bf93da0588a831704b412e01116f23ba1d9d45863816",
+          "package/dist/i18n/id.js": "4c6dc86db741bcc2857df55a9d037e82e91d375fa6fd22e0562809ff621b92db",
+          "package/dist/i18n/id.mjs": "383e5803a6b6686c6de4e867770241de75b6f517dcca2bdedc6f2004bf6e1fb3",
+          "package/dist/i18n/pl.js": "3a38828b1c3d719c0aca9906cf6a46c23555a8411f8d57645f0e0ce8147dc664",
+          "package/dist/i18n/pl.mjs": "079ed96732979035297af387c64a7b99519b5a43107fb86735a654ea4fe8e9b5",
+          "package/dist/i18n/ru.js": "62fac9dddb302eb16382e6e9301fc4b2c66f5f69d4a358a26b67026a5fa4e787",
+          "package/dist/i18n/ru.mjs": "a893aeaee1d79409db72e324fbff200e3864f33ed168f04d91d25f7cf2efa765",
+          "package/dist/i18n/tr.js": "1492c36b069a7d73db4f3913bd18085faff7afd8b3c158138fe264e31600e38c",
+          "package/dist/i18n/tr.mjs": "a90478cac078836b76c2a98261907610fee07f3e4b28671b8e7dbf533778f918",
+          "package/dist/i18n/vi.js": "c7216ef7e608a79b7e2c479a07bf310d4ab79577947ac4a62d676faaced0e9cf",
+          "package/dist/i18n/vi.mjs": "66270fdfa0b5da396322d1769169b7df37a030ba15ac18eb30bd87b3af8074ec",
+          "package/dist/i18n/zh-tw.js": "11c49857d6d40a5ffd224ffa59c9026e71621b345f63c5a086326db80a22371a",
+          "package/dist/i18n/zh-tw.mjs": "a38e630cb96de96c15d824686aec750e25cf6c8ada01285a292442a81566314f",
+          "package/dist/icons.ts": "0d8e8e52e52130dd4a29bab551dd7a2a954797e42e92a6e068c85d583e23e6a4",
+          "package/dist/language.cts": "2248040d86a8e34626755c4ecf53ea0174706c653073cf0e15884a030d173120",
+          "package/dist/language.mts": "c391e863012c77769e661afbf8fa949e9373aa88d17f58cbba7f5696edb8077f",
+          "package/dist/legacy/language.ts": "c452ffd764ff9b29b819b3475c42395d2ea7a33560d8c186ef5df3844b9524c3",
+          "package/dist/option.ts": "850e5264219b8b438c80694402225b690b131786677a5da0d22739ec2352d263",
+          "package/dist/playback.ts": "1ceaed3aa1cef511fe8b20f4874647f6065c723ad805b742a0a9247e16bb1bb5",
+          "package/dist/player.ts": "f1e50257df2ea592d0a0e1f36078dda77eaf2cf3b3d795307501396562d99f28",
+          "package/dist/plugin.ts": "2a57e148fda00ee687da5036b890b0f611cb94bb403a1ed52602179060259d35",
+          "package/dist/quality.ts": "7ed6ed78cea52991b2f6ddd2bd3b7bd8c5146fdfff7486fe8b814c3e632f1567",
+          "package/dist/runtime.cts": "52cfff1daeb6841a90212c8fa8d46ca46d6650bb7ed1b59b62115d854b8ad652",
+          "package/dist/runtime.mts": "1b09bc0ee0f0ee2f788689eaff441bdeda1fab0ce783e71b61b9792d81072b03",
+          "package/dist/runtime.ts": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b",
+          "package/dist/runtime/component.ts": "840213299c942fe058eb5436977ceec066b9dccda24c55ae9f464b399c979e39",
+          "package/dist/runtime/construction.ts": "24cc5cda1f614314db382271a9b0d5583b781894cfdf6c548700b1b5270467ee",
+          "package/dist/runtime/events.ts": "52848f57d35eb1037cf74c8877521edf99a015bcd77f30ef6bbcba1807a99bfe",
+          "package/dist/runtime/media.ts": "8828f80953aec3e95328cefe691661e8897cb27cb309483cf806ec45a8549ae3",
+          "package/dist/runtime/option.ts": "bb672e49ffe74a6fc78543217f6de80d7d738890146df0857c709d4dc283e4ce",
+          "package/dist/runtime/player.ts": "a4a24794e26cfb9e4310bf0f459a7a407e85bf81b4f3a4feb6294331af8036fb",
+          "package/dist/runtime/plugin.ts": "9ad482f2a77914a91450419680b8af6b314b926f0831c2f7f6d7c466690f95c9",
+          "package/dist/runtime/services.ts": "8e4648d8c61bff47343f9e1c2b995af69fc00947264b826109ceadcbaf553254",
+          "package/dist/runtime/setting.ts": "c48d20957b57f79f985ef76a2950cc8a5cfa25dafa8ec5939e562661778e6218",
+          "package/dist/runtime/subtitle.ts": "13241c4f9a87517aa2cf7b3e0bb8cedaa12fa0b4d3f8934285797583b752557e",
+          "package/dist/runtime/template.ts": "da9975513a1938e7f386f4f65f718f0fc595164bfeac8f0cd99a3e97a54919a1",
+          "package/dist/runtime/utils.ts": "cab9916f5224a3b047812b9f759cc9cc62105662599744067a6955020ab36916",
+          "package/dist/setting.ts": "d12a75b656fff70cbb30be4bffec46d9c4273636e8722bce971a4d2b188712a1",
+          "package/dist/subtitle.ts": "d25b470e47d6a9bd696d9c1ad8adb58e56a208f05695186d513bc8c43c2e8acf",
+          "package/dist/template.ts": "68aed9e97d006d6be4fabb8504ca84dafab770b0925f4d6e7319e67c82f21b0d",
+          "package/dist/utils.ts": "494ec447ab467a07ddd7a2c2abf778b3fce69fd28a09aaa8ced9759f8de2e3f6",
+          "package/package.json": "82e92699e7c29847f32ac6767ece0401290e7d7a12854722bdbcfd09b90b7954",
+          "package/types/COMPATIBILITY.md": "a7da9e102a116104b513df4f7451247b7759bc502d3375f30bd5b14a541826e0",
+          "package/types/README.md": "1bd9868e773610e6312fd48a1c5aa20772d29df0af40c3db66e75b7ab4a1aee0",
+          "package/types/artplayer.d.cts": "3685065e4263abcfd9d953176e461d5b3eb990b0363b54689a7f55deba770fef",
+          "package/types/artplayer.d.mts": "b664fec51ee5c5381f2ceab25d99d52aee56feab04a2ee7b4ea5b2145ea5fa0e",
+          "package/types/artplayer.d.ts": "5d0162adf7ac6d0f2bb9b5cfe361f28657c4d9c540cadbf36eba3cc954ce50f8",
+          "package/types/component.d.ts": "ae5bc1ddeaa1ee1ebbc62573e32423993727079205c64751a5a314170e588a32",
+          "package/types/config.d.ts": "36f9a84cd436f17701a0d11d3417fc1fe0414e0c52c80083b94a85dfc329e37e",
+          "package/types/cssVar.d.ts": "93217860fff2ebf750f606d95ddd22220a58837119e63bdf2f5f78fd7488458b",
+          "package/types/emitter.d.ts": "7e1f9a2a8ce65feb95734f1ed52d1334e57aa388bbef2a43d8bc53a9b6f6623c",
+          "package/types/events.d.ts": "f83624c9268a284477e8bd793fe3562a2363b72f2a44d5c64fe8c6a6cede8830",
+          "package/types/i18n.d.ts": "f4f2f05bdfda73c74fef34767cb18ee8e11b743120b1c4598e9714d7846018e5",
+          "package/types/icons.d.ts": "326a67ba7bdcf52862c5b2a269e540140aff98d05c7b96196485a77f84fe5960",
+          "package/types/language.d.cts": "f7928e108cf7b7814c2d75cb0a525333e95873fca6cd6d89a740450656b9c1cd",
+          "package/types/language.d.mts": "6619a26d604b7cccbe2f596243d87ae37cfaae33b8b52874ec071d9787446f9e",
+          "package/types/legacy/language.d.ts": "c7abda4d506fd933c350e9030290bf9e64347a921d683a66115da1995ebe0a81",
+          "package/types/option.d.ts": "ccf2c8ddc537dc65c9682d39f044726e23bff18f476b622512d7e6a4b949b5f6",
+          "package/types/playback.d.ts": "58705c273df6e76a77a6575e769a9ec6c013785c25080f2551aa22415788d870",
+          "package/types/player.d.ts": "92b00211b70ac71336e495899df972a0519dd138111846044fe4e0f967966177",
+          "package/types/plugin.d.ts": "fc3594a41c51d8248713e33c486fb1f6a518ac5c7ce31be6988a6cd8d052c5f3",
+          "package/types/quality.d.ts": "1ac1a48b4f74ff9ba1ce60443e1463d50d1c6a2e5d87d63dc7d2a8eb7f4c2c34",
+          "package/types/runtime.d.cts": "7ee988dfea9a0ac71a34a656f96f7b74e78aa92547cfdfab7ff7e1139a77d4a3",
+          "package/types/runtime.d.mts": "dcb85f59a8b7714918ced0c1d18c2bb24e8b80b56d8c594e019dcbdb5ad88b08",
+          "package/types/runtime.d.ts": "9c6ccd39a1be293f17ae46dae8ea077053e12635ee79d73a5e3b3a559230fcff",
+          "package/types/runtime/component.d.ts": "1b4c0cee44568649e80140fe778febfcae88af0ac85515f1cbeff78ab0c6d14f",
+          "package/types/runtime/construction.d.ts": "7a87bedf6f7ffff0c46078aa5f1551e0077d35574e286516121f5f935e2d9ce4",
+          "package/types/runtime/events.d.ts": "a1e2f9d387475453eaf95c2a5ee79e228636c0bb859bda3fcc46da46574a0c31",
+          "package/types/runtime/media.d.ts": "8fc89401be7fe25542c169d07dd5675f10916ed20be8493e19695966cf3864a8",
+          "package/types/runtime/option.d.ts": "6e334e1a76fdcc40b4665c02523bd31c3994d96078fadeb40e23422aa54c1a1d",
+          "package/types/runtime/player.d.ts": "8ac6383502e4872e83659838844856903031a81a0adc8e8535feb78453aa042c",
+          "package/types/runtime/plugin.d.ts": "8528f2b17843149f42f9cc16d6fd70baa238c9dc2c329b67d2c38096799c69bd",
+          "package/types/runtime/services.d.ts": "604c9f8e4b6c0da818f96576bf9f4b0e96085a9003927b2f7ba30027b1ba237e",
+          "package/types/runtime/setting.d.ts": "349c1fcb205ad312916bd3ee55e6bf241ea8a569fb2ab6c80822e69fc518f7d7",
+          "package/types/runtime/subtitle.d.ts": "269ff84678d327b3a9dc2f5bc6cc0d731d1e081b85422e474621d5d792efb153",
+          "package/types/runtime/template.d.ts": "7a62f968a38b4bf9109a4439557c02074eb1d62ba1f6e21a8eb194e91f0badfe",
+          "package/types/runtime/utils.d.ts": "6bf731705d86853e066dbaf3b8d4003b6548423fe615b7412b722bd0d3a6e48b",
+          "package/types/setting.d.ts": "08305a75dff96f06490430e099338b463df471b550c1d0dac3abc8995b39eb09",
+          "package/types/subtitle.d.ts": "b18314e2d64efdb6045830b6e12f615ae2ed585416130e562329ad3ea337f6ce",
+          "package/types/template.d.ts": "4792bc0c2cbcb7966e4375118bd34b326166e0831862e94ace4cf6b1bbe6a8c8",
+          "package/types/utils.d.ts": "fca0d3d814df94a25f9eb067c86fa0cf272e2791bac793b91229d57680797712"
+        }
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\multiple-subtitles-package-types-QhZYAQ\\artplayer-plugin-multiple-subtitles.tgz",
+        "sha256": "0d28f3fc3844d083723780cd5d0cc9b170bd0535214c3e3ec2a8b0af7f5ebc8d",
+        "files": {
+          "package/ARCHITECTURE.md": "287f18046e0965c7766b6aaf6f6e158f4b647a1c4e25a3a9e34912a482f2f1d5",
+          "package/README.md": "d2fce7b38cb6a5fad4cee7b5895793c664c1f1284e62a42084d8e2848e43166a",
+          "package/THIRD_PARTY_NOTICES": "50755f38458d41151c7f0b1675c744aa365f0510dc11f53832691ef5c14ce6b6",
+          "package/dist/artplayer-plugin-multiple-subtitles.js": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446",
+          "package/dist/artplayer-plugin-multiple-subtitles.legacy.js": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323",
+          "package/dist/artplayer-plugin-multiple-subtitles.mjs": "07e4f628b4038d7c250f6242c410ddb188148b4ed58bb592975532666412e3e2",
+          "package/package.json": "9a2050415658e3544fda3e9d35f14e277842b68f6493d0ac99f2920e7baf8cbd",
+          "package/types/artplayer-plugin-multiple-subtitles.d.cts": "f30630d6f5e69adfb6dd3bc7a262f66824a557a67a49257c41fb5e03e052181b",
+          "package/types/artplayer-plugin-multiple-subtitles.d.mts": "f30630d6f5e69adfb6dd3bc7a262f66824a557a67a49257c41fb5e03e052181b",
+          "package/types/artplayer-plugin-multiple-subtitles.d.ts": "30d4ced6135354e722e13cdf8890b58fa1f53f9840e211b98d3952f5c5ac5e82",
+          "package/types/runtime.d.cts": "c0b2c27d9562265fd82aae5b5259d4641b44be8ed723d1bed7d7be593d7900ff",
+          "package/types/runtime.d.mts": "49bb05b960e2fd41aa2a4eca2d2f39c4ea52845ac5b37e4ea66b265c995a06d4",
+          "package/types/runtime.d.ts": "49bb05b960e2fd41aa2a4eca2d2f39c4ea52845ac5b37e4ea66b265c995a06d4"
+        }
+      }
+    ],
+    "historicalPackages": [
+      {
+        "label": "published-1.0.0",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-plugin-multiple-subtitles-1.0.0.tgz",
+        "sha256": "9b584f27287dbda1722315c07d05e1d7391453130b8fd9f952669e809e662ef5",
+        "missingEntrypoints": {}
+      },
+      {
+        "label": "published-1.1.0",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-plugin-multiple-subtitles-1.1.0.tgz",
+        "sha256": "b5e8cfa9671496b08a6f1377bace4ce557c865335dc2f746156707c03c8d9d16",
+        "missingEntrypoints": {}
+      },
+      {
+        "label": "published-1.2.0",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-plugin-multiple-subtitles-1.2.0.tgz",
+        "sha256": "a013fbe0772bf560d177449fc80e848c41f16ae2f72ace86f8fb0d5b1000a54e",
+        "missingEntrypoints": {}
+      }
+    ],
+    "matrix": [
+      {
+        "plugin": "published-1.0.0",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": true,
+            "diagnostics": []
+          },
+          "default": {
+            "typeChecks": false,
+            "diagnostics": [
+              2339
+            ]
+          }
+        }
+      },
+      {
+        "plugin": "published-1.0.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": true,
+            "diagnostics": []
+          },
+          "default": {
+            "typeChecks": false,
+            "diagnostics": [
+              2339
+            ]
+          }
+        }
+      },
+      {
+        "plugin": "published-1.0.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {}
+      },
+      {
+        "plugin": "published-1.0.0",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {}
+      },
+      {
+        "plugin": "published-1.0.0",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": true,
+            "diagnostics": []
+          },
+          "default": {
+            "typeChecks": false,
+            "diagnostics": [
+              2339
+            ]
+          }
+        }
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": true,
+            "diagnostics": []
+          },
+          "default": {
+            "typeChecks": false,
+            "diagnostics": [
+              2339
+            ]
+          }
+        }
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": true,
+            "diagnostics": []
+          },
+          "default": {
+            "typeChecks": false,
+            "diagnostics": [
+              2339
+            ]
+          }
+        }
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {}
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {}
+      },
+      {
+        "plugin": "published-1.1.0",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": true,
+            "diagnostics": []
+          },
+          "default": {
+            "typeChecks": false,
+            "diagnostics": [
+              2339
+            ]
+          }
+        }
+      },
+      {
+        "plugin": "published-1.2.0",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": false,
+            "diagnostics": [
+              2322,
+              2344,
+              2344,
+              2322,
+              2344,
+              2349
+            ]
+          },
+          "default": {
+            "typeChecks": true,
+            "diagnostics": []
+          }
+        }
+      },
+      {
+        "plugin": "published-1.2.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": false,
+            "diagnostics": [
+              2322,
+              2344,
+              2344,
+              2322,
+              2344,
+              2349
+            ]
+          },
+          "default": {
+            "typeChecks": true,
+            "diagnostics": []
+          }
+        }
+      },
+      {
+        "plugin": "published-1.2.0",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "expectedHistoricalFailure": true,
+        "diagnostics": [
+          2322,
+          2344,
+          7019,
+          2349,
+          2344,
+          2322,
+          2344,
+          2349
+        ],
+        "rejectedInvalidUses": 0,
+        "commonjs": {}
+      },
+      {
+        "plugin": "published-1.2.0",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {}
+      },
+      {
+        "plugin": "published-1.2.0",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 0,
+        "commonjs": {
+          "direct": {
+            "typeChecks": false,
+            "diagnostics": [
+              2344,
+              2322,
+              2344,
+              2741,
+              2344,
+              2349
+            ]
+          },
+          "default": {
+            "typeChecks": true,
+            "diagnostics": []
+          }
+        }
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {
+          "direct": {
+            "typeChecks": false,
+            "diagnostics": [
+              2322,
+              2344,
+              2344,
+              2322,
+              2344,
+              2349
+            ]
+          },
+          "default": {
+            "typeChecks": true,
+            "diagnostics": []
+          }
+        }
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {
+          "direct": {
+            "typeChecks": false,
+            "diagnostics": [
+              2322,
+              2344,
+              2344,
+              2322,
+              2344,
+              2349
+            ]
+          },
+          "default": {
+            "typeChecks": true,
+            "diagnostics": []
+          }
+        }
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {}
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {}
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {
+          "direct": {
+            "typeChecks": false,
+            "diagnostics": [
+              2344,
+              2322,
+              2344,
+              2741,
+              2344,
+              2349
+            ]
+          },
+          "default": {
+            "typeChecks": true,
+            "diagnostics": []
+          }
+        }
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs-no-interop",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {}
+      },
+      {
+        "plugin": "candidate",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs-no-interop",
+        "expectedHistoricalFailure": false,
+        "diagnostics": [],
+        "rejectedInvalidUses": 12,
+        "commonjs": {}
+      }
+    ]
+  },
+  "browser": [
+    {
+      "candidate": "source",
+      "file": "refactor/.cache/multiple-subtitles04-public-browser-source.json",
+      "sha256": "2d61b7f567cf9d97f20460dc3033e5f14b6ff795742f5908c675f30d52b00226",
+      "results": "refactor/.cache/multiple-subtitles04-public-browser-source-results",
+      "stats": {
+        "startTime": "2026-09-13T04:05:53.916Z",
+        "duration": 24342.678,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        }
+      ],
+      "scope": "Actual SRT display/selection, pending fetch destroy, Blob revocation, HTTP failure, video source switch and inline timestamps; three desktop engines, published/candidate cores. Expected HTTP/revoked-Blob console/network diagnostics remain in the full attachments. Not physical Safari/mobile or complete historical-core acceptance."
+    },
+    {
+      "candidate": "main",
+      "file": "refactor/.cache/multiple-subtitles04-public-browser-main.json",
+      "sha256": "d228a6e4b78f068825486b2bd58825c270a626b9a23c920f736eded0579d2d05",
+      "results": "refactor/.cache/multiple-subtitles04-public-browser-main-results",
+      "stats": {
+        "startTime": "2026-09-13T04:06:19.013Z",
+        "duration": 21627.28,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        }
+      ],
+      "scope": "Actual SRT display/selection, pending fetch destroy, Blob revocation, HTTP failure, video source switch and inline timestamps; three desktop engines, published/candidate cores. Expected HTTP/revoked-Blob console/network diagnostics remain in the full attachments. Not physical Safari/mobile or complete historical-core acceptance."
+    },
+    {
+      "candidate": "legacy",
+      "file": "refactor/.cache/multiple-subtitles04-public-browser-legacy.json",
+      "sha256": "5197eeeb4cd68cff1d81a767dfeba2de98e123fb3cd8de479591dd261373d33d",
+      "results": "refactor/.cache/multiple-subtitles04-public-browser-legacy-results",
+      "stats": {
+        "startTime": "2026-09-13T04:06:41.353Z",
+        "duration": 21271.851,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "chromium",
+          "version": "153.0.8010.12",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "firefox",
+          "version": "155.0",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "published",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "nativeSrtDisplay": true,
+            "released": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "name": "multipleSubtitles",
+            "voidReset": true,
+            "initialized": 0,
+            "aborted": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "voidReset": true,
+            "inaccessible": true,
+            "initialized": 1,
+            "revoked": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "message": "Failed to fetch multiple subtitles: HTTP 404",
+            "initialized": 0
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "requests": [
+              "/test/multiple-restart.vtt"
+            ],
+            "nativeSourceSwitch": true
+          },
+          "unhandledErrors": []
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "browser": "webkit",
+          "version": "26.6",
+          "platform": "win32",
+          "core": "candidate",
+          "implementation": {
+            "name": "candidate",
+            "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+          },
+          "observation": {
+            "native": {
+              "text": "<c.artplayer-multiple-subtitles-timestamp><00:01.250></c><div class=\"art-subtitle-timed\">Before </div><c.artplayer-multiple-subtitles-timestamp><00:02.000></c><div class=\"art-subtitle-timed\"> after</div><c.artplayer-multiple-subtitles-timestamp><00:03.500></c>",
+              "timestamps": [
+                "00:00:01.250",
+                "00:00:02.000",
+                "00:00:03.500"
+              ]
+            },
+            "visible": "\n                                Before  after\n                            "
+          },
+          "unhandledErrors": []
+        }
+      ],
+      "scope": "Actual SRT display/selection, pending fetch destroy, Blob revocation, HTTP failure, video source switch and inline timestamps; three desktop engines, published/candidate cores. Expected HTTP/revoked-Blob console/network diagnostics remain in the full attachments. Not physical Safari/mobile or complete historical-core acceptance."
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js",
+      "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446",
+      "copied": "docs/compiled/artplayer-plugin-multiple-subtitles.js"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323",
+      "copied": "docs/compiled/artplayer-plugin-multiple-subtitles.legacy.js"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs",
+      "sha256": "07e4f628b4038d7c250f6242c410ddb188148b4ed58bb592975532666412e3e2",
+      "copied": "docs/compiled/artplayer-plugin-multiple-subtitles.mjs"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "package.json",
+      "sha256": "5e196c3f79f1cfc13b57430b994a9a249d4e20935bdf8e6d8e87302677c5064a"
+    },
+    {
+      "file": "scripts/build-ts.js",
+      "sha256": "119190f4a72639906d4bbbcdc9205db31b28560aa6be0bfe60f2e2e221a9efb0"
+    },
+    {
+      "file": "test/multiple-subtitles-lifecycle.test.js",
+      "sha256": "445d274e8e31e992bd026ce9423d55c71267c27117720cf97de677ec901375e5"
+    },
+    {
+      "file": "test/types/multiple-subtitles-public.ts",
+      "sha256": "e0b87c7833c88ac21901dde75048a2a974781c91d0244a4b1c216cb5ef5acc01"
+    },
+    {
+      "file": "refactor/scripts/multiple-subtitles-types.test.mjs",
+      "sha256": "c0446f2826addd91c257bdf3da74295e1e8dc993dd204b27bde232fc3c5e139f"
+    },
+    {
+      "file": "refactor/scripts/multiple-subtitles-package-types.mjs",
+      "sha256": "f578a874099cea74f3e64c092e40625dd9cf4560d96c72d4affe9d47ab5a616a"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/package.json",
+      "sha256": "9a2050415658e3544fda3e9d35f14e277842b68f6493d0ac99f2920e7baf8cbd"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/types/artplayer-plugin-multiple-subtitles.d.cts",
+      "sha256": "f30630d6f5e69adfb6dd3bc7a262f66824a557a67a49257c41fb5e03e052181b"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/types/artplayer-plugin-multiple-subtitles.d.mts",
+      "sha256": "f30630d6f5e69adfb6dd3bc7a262f66824a557a67a49257c41fb5e03e052181b"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/types/artplayer-plugin-multiple-subtitles.d.ts",
+      "sha256": "30d4ced6135354e722e13cdf8890b58fa1f53f9840e211b98d3952f5c5ac5e82"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/types/runtime.d.cts",
+      "sha256": "c0b2c27d9562265fd82aae5b5259d4641b44be8ed723d1bed7d7be593d7900ff"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/types/runtime.d.mts",
+      "sha256": "49bb05b960e2fd41aa2a4eca2d2f39c4ea52845ac5b37e4ea66b265c995a06d4"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/types/runtime.d.ts",
+      "sha256": "49bb05b960e2fd41aa2a4eca2d2f39c4ea52845ac5b37e4ea66b265c995a06d4"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/caption.ts",
+      "sha256": "cbc44cd8c9171685c0fcba059d6868799ef195a13379dbb7da791582ba5b3402"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/index.ts",
+      "sha256": "7231cbeca6404cc7c021b768089e3f11d59522f3479012ceec3234e25851ffb2"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/lifetime.ts",
+      "sha256": "469cec6a9f87311aa433ad2d74925e39d56324b8136975e818388315200f1e58"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/merge.ts",
+      "sha256": "38bde420334987b3f3546e2e032c2c98071987a3a1779ba191f4d9b6448bfafa"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/parser.d.ts",
+      "sha256": "22a596dfb02aaa00e333e9bf3285ececfa94eda3a699726cba190ae858f7c120"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/parser.js",
+      "sha256": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/render.ts",
+      "sha256": "fc8df5637e7904fb4b21512ac22d80b580eca93f576e9f01a799418b3d9afc84"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/request.ts",
+      "sha256": "68ae50354de8d2f8ca32f77d79b7f406d19275e173fbdc5807a27b8b975e6759"
+    },
+    {
+      "file": "packages/artplayer-plugin-multiple-subtitles/src/types.ts",
+      "sha256": "da6b3390ac671c887567b64e07ee006305e74517e0e06f86738d0e2ba46bc898"
+    }
+  ],
+  "remaining": "Raw 1.0.0/1.1.0 export-assignment module extraction conflicts with 1.2.0 default-module replacement types. TYPE/EXPORT risks and task 04 remain open pending explicit resolution. Vendor entity decoding and complete device/core/editor/distribution acceptance remain task 05/06. No dependency, lockfile or version changes; no push or publication."
+}

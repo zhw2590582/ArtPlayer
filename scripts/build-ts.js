@@ -53,7 +53,7 @@ console.log(`✨ Built ${artplayerTSoutput}`);
     const type = pluginsTS[index]
     const { name, file } = parsePluginInfo(type)
     const source = String(fs.readFileSync(type))
-    const semanticPlugin = ['artplayerPluginVttThumbnail', 'artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds', 'artplayerPluginAmbilight', 'artplayerProxyCanvas', 'artplayerProxyMediabunny', 'artplayerPluginDocumentPip', 'ArtplayerToolIframe', 'ArtplayerToolThumbnail'].includes(name)
+    const semanticPlugin = ['artplayerPluginMultipleSubtitles', 'artplayerPluginVttThumbnail', 'artplayerPluginHlsControl', 'artplayerPluginAudioTrack', 'artplayerPluginDashControl', 'artplayerPluginAds', 'artplayerPluginAmbilight', 'artplayerProxyCanvas', 'artplayerProxyMediabunny', 'artplayerPluginDocumentPip', 'ArtplayerToolIframe', 'ArtplayerToolThumbnail'].includes(name)
     const localTypes = name === 'artplayerProxyMediabunny' ? { './media': fs.readFileSync(path.join(path.dirname(type), 'media.d.ts'), 'utf8') } : {}
     const code = semanticPlugin
       ? generatePluginEditorDeclaration(source, name, localTypes)

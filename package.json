@@ -88,7 +88,8 @@
     "test:auto-thumbnail": "node --test test/auto-thumbnail-frames.test.js test/auto-thumbnail-lifecycle.test.js test/auto-thumbnail.test.js refactor/scripts/auto-thumbnail-contract.test.mjs",
     "test:vtt-thumbnail": "node --test test/vtt-thumbnail-parser.test.js test/vtt-thumbnail-lifecycle.test.js test/vtt-thumbnail.test.js refactor/scripts/vtt-thumbnail-contract.test.mjs refactor/scripts/vtt-thumbnail-types.test.mjs",
     "test:vtt-thumbnail-types-package": "node refactor/scripts/vtt-thumbnail-package-types.mjs",
-    "test:multiple-subtitles": "node --test test/multiple-subtitles-merge.test.js test/multiple-subtitles-lifecycle.test.js test/multiple-subtitles-failures.test.js test/multiple-subtitles.test.js test/multiple-subtitles-vendor.test.js refactor/scripts/multiple-subtitles-contract.test.mjs refactor/scripts/multiple-subtitles-runtime-types.test.mjs"
+    "test:multiple-subtitles": "node --test test/multiple-subtitles-merge.test.js test/multiple-subtitles-lifecycle.test.js test/multiple-subtitles-failures.test.js test/multiple-subtitles.test.js test/multiple-subtitles-vendor.test.js refactor/scripts/multiple-subtitles-contract.test.mjs refactor/scripts/multiple-subtitles-runtime-types.test.mjs refactor/scripts/multiple-subtitles-types.test.mjs",
+    "test:multiple-subtitles-types-package": "node refactor/scripts/multiple-subtitles-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

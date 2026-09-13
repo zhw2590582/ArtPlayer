@@ -515,7 +515,7 @@
 - PKG-MULTI-SUB-01: [记录](baselines/multiple-subtitles-release.json) [记录](baselines/multiple-subtitles-contract.md) [记录](baselines/multiple-subtitles-contract-validation.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-01-contract.md)
 - PKG-MULTI-SUB-02: [记录](baselines/multiple-subtitles-failures.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-02-failures.md)
 - PKG-MULTI-SUB-03: [记录](baselines/multiple-subtitles-resources.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-03-resources.md)
-- PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md)
+- PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md) [记录](baselines/multiple-subtitles-public-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md)
 - PKG-MULTI-SUB-07: [记录](baselines/multiple-subtitles-timestamps.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
