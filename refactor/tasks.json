@@ -3252,11 +3252,16 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "emit/load/config/hide/show/reset/mount、option/isHide/isStop/icons 与事件清单",
       "acceptance": "源码、声明、发布包、Bilibili 输入和设置入口对照",
-      "evidence": []
+      "evidence": [
+        "baselines/danmuku-release.json",
+        "baselines/danmuku-contract.md",
+        "baselines/danmuku-contract-validation.json",
+        "changes/2026-09-13-PKG-DANMUKU-01-contracts.md"
+      ]
     },
     {
       "id": "PKG-DANMUKU-02",
@@ -3270,7 +3275,7 @@
         "ENG-05",
         "ENG-08"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "密集/稀疏弹幕、过滤/异步输入、seek/倍率/重载测试",
       "acceptance": "轨道选择、发射顺序、事件、内存和可视结果可重跑",

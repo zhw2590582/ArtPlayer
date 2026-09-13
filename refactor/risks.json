@@ -5006,6 +5006,143 @@
       ],
       "compatibleResolution": "Trace included SDK assets and license notices against actual bundle sources; preserve required notices in candidate packages.",
       "closureCriteria": "Document incorporated SDK provenance and applicable notices; inspect built and packed artifacts, without treating manifest license claims as full clearance."
+    },
+    {
+      "id": "DANMUKU-TYPE-01",
+      "title": "Danmuku historical declared results, optional mount and initial Promise input disagree with runtime",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-03",
+        "PKG-DANMUKU-06"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Preserve latest published complete root type contracts and actual legal JS return identities; expose accurate types separately.",
+      "closureCriteria": "Installed consumers verify latest root assignments and precise async/getter/mount contracts; initial Promise mismatch has an explicit tested resolution."
+    },
+    {
+      "id": "DANMUKU-INPUT-01",
+      "title": "Danmuku replaces time zero with current time plus 0.5 and mutates supplied input objects",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-02",
+        "PKG-DANMUKU-03"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Separate the time-zero defect from observable input object identity/mutation before changing parsing or queue ownership.",
+      "closureCriteria": "Zero, absent, negative and explicit times plus object identity are covered with candidate expectations and compatibility decisions."
+    },
+    {
+      "id": "DANMUKU-CONFIG-01",
+      "title": "Danmuku JSON configuration comparison ignores a replacement filter function",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-02",
+        "PKG-DANMUKU-03"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Compare relevant configuration values without dropping callable properties; retain callback receivers and config event ordering.",
+      "closureCriteria": "Function-only changes take effect, unchanged options remain stable and partial configuration/callback reentry has regression evidence."
+    },
+    {
+      "id": "DANMUKU-CLEANUP-01",
+      "title": "Danmuku removes a different resize callback and retains the settings lock timer on destroy",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-02",
+        "PKG-DANMUKU-05"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Track and release exact subscription and timer ownership across settings, renderer and instances.",
+      "closureCriteria": "Repeated lifecycle and pending settings actions leave no owned subscriptions, timers or late DOM writes."
+    },
+    {
+      "id": "DANMUKU-TYPE-02",
+      "title": "Danmuku id, icons, Slider steps, heatmap points and partial configuration drift from declarations",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-05",
+        "PKG-DANMUKU-06"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Validate actual accepted data and static properties, retain root compatibility and document effective fields.",
+      "closureCriteria": "Positive and negative installed consumers and source behavior tests cover these fields without widening away old factory contracts."
+    },
+    {
+      "id": "DANMUKU-ASYNC-01",
+      "title": "Danmuku asynchronous input, worker replies and pending visibility have unverified failure and cancellation paths",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-02",
+        "PKG-DANMUKU-03",
+        "PKG-DANMUKU-04",
+        "PKG-DANMUKU-05"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Reproduce load ordering, Bilibili rejection and late worker/visibility paths before defining operation ownership.",
+      "closureCriteria": "Failures settle, obsolete results cannot alter new queues or destroyed instances, and worker resources are released with browser evidence."
+    },
+    {
+      "id": "DANMUKU-HEATMAP-01",
+      "title": "Danmuku heatmap sampling can become zero and points/instance ownership need browser validation",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-02",
+        "PKG-DANMUKU-05"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Use isolated timeout-protected reproduction for narrow dimensions, then define finite sampling and per-instance rendering.",
+      "closureCriteria": "Narrow widths terminate, points/config behavior is explicit and multiple SVG/control instances remain independent."
+    },
+    {
+      "id": "DANMUKU-SOURCE-01",
+      "title": "Danmuku registry Git associations differ from releases and static icon provenance remains incomplete",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-09"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-contract.md",
+        "refactor/baselines/danmuku-contract-validation.json",
+        "refactor/baselines/danmuku-release.json"
+      ],
+      "compatibleResolution": "Use actual archive identity, preserve missing historical Git information and audit icon source/notice obligations.",
+      "closureCriteria": "Candidate tarball paths, complete module forms and icon/source provenance are explicitly reviewed; unresolved history is not invented."
     }
   ]
 }

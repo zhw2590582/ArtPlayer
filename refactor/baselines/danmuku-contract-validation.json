@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-01",
+  "capturedAt": "2026-09-13T09:35:02.032Z",
+  "sourceCommit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "executable": "refactor/.cache/toolchains/node-v24.21.0-win-x64/node.exe",
+    "yarnPolicy": "1.22.22; no install or lockfile changes"
+  },
+  "inputs": {
+    "refactor/baselines/danmuku-release.json": {
+      "sha256LF": "82a0ab2e87f108cbb1d09ce1b6647cfefc896d974da1cb60b2668fded18a4b2f"
+    },
+    "refactor/scripts/danmuku-contract.mjs": {
+      "sha256LF": "8ca0996605cfbcd732030708bd67ecedff5018d2b7436fa7247de7bbb39d7573"
+    },
+    "refactor/scripts/danmuku-contract.test.mjs": {
+      "sha256LF": "37836083e849cd8b7d5d47a4e9d952949d3b28bd885225e3197fb6715febf44e"
+    },
+    "refactor/baselines/danmuku-contract.md": {
+      "sha256LF": "ff51611322cfbb5ad744a37eebc555b74e4d9853b59c91bf13547889fa976bb0"
+    },
+    "refactor/changes/2026-09-13-PKG-DANMUKU-01-contracts.md": {
+      "sha256LF": "fb7355058ee1b13688c2e8c713118f6b802aa086209cb8a6e236694f2764abd9"
+    }
+  },
+  "registry": {
+    "url": "https://registry.npmjs.org/artplayer-plugin-danmuku",
+    "status": 200,
+    "catalogStable": 81,
+    "archivedReleases": 15,
+    "unverifiedCatalogArchives": 66,
+    "bodySha256": "6fccd0198b2322827b3271a807b60f73a3e4d6f46aeb5494a86aade409caf1d6"
+  },
+  "evidence": [
+    {
+      "command": "node refactor/scripts/danmuku-contract.mjs",
+      "log": "refactor/.cache/danmuku01/verify.log",
+      "exitCode": 0,
+      "logSha256": "655d90ee59df53dd2136c79f14886bd5b281ea142bc0032e4b7e52b13ee7f5bd"
+    },
+    {
+      "command": "node --test refactor/scripts/danmuku-contract.test.mjs",
+      "log": "refactor/.cache/danmuku01/contract-test.log",
+      "exitCode": 0,
+      "passed": 44,
+      "failed": 0,
+      "skipped": 0,
+      "logSha256": "492c7313c98f197a8241e370854860a0980ada771d1c86b26e5e2303920fb6a0"
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js refactor/scripts/danmuku-contract.mjs refactor/scripts/danmuku-contract.test.mjs",
+      "log": "refactor/.cache/danmuku01/lint.log",
+      "exitCode": 0,
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "coverage": {
+    "immutableSourceFiles": 28,
+    "commonJsModulesExecuted": 28,
+    "manifestEsmModulesExecuted": 3,
+    "esmMethod": "Dynamic data URL imports of the actual archive bytes, not package-resolution tests",
+    "runtimeFixtures": [
+      "frozen-Git-source with controlled Worker/CSS loader",
+      "real npm 5.3.0 main",
+      "real npm 5.3.0 legacy"
+    ],
+    "runtimeCasesPerFixture": 4,
+    "parser": "Frozen actual Bilibili parser exercised through URL adapter with controlled fetch and absent-Worker fallback",
+    "validator": {
+      "name": "artplayer",
+      "version": "5.4.0",
+      "tarballSha256": "42b269a66b9658d53f9a92572bb36d656ea9af56254a387b3a69c7ddea43979e",
+      "source": "Actual frozen published core bundle static validator, not a replacement validator"
+    }
+  },
+  "reproduced": [
+    "Actual CJS namespace.default/direct function changes and 12 enumerable writable static icons from 5.1.0.",
+    "Latest and frozen source registration synchronous; enumerable facade/getter keys and defaults stable.",
+    "emit returns Promise; chain methods and load resolve the internal Danmuku rather than the facade described by Result.",
+    "Initial Promise danmuku is rejected by published core validator; load(Promise) works in the same realm.",
+    "time:0 becomes currentTime+0.5 and input fields are mutated; public emit bypasses beforeEmit.",
+    "load() replacement, load(target) append, filter this and loaded queue reference identity.",
+    "Function-only filter config updates are ignored by JSON comparison; load rejection emits and rejects the same error.",
+    "Empty-array synchronous show/config/reset/loaded ordering and video play/pause state hooks.",
+    "Settings beforeEmit callback receives trimmed input and option this; border/time reset and lock timer observed.",
+    "destroy leaves registered resize handlers and a started settings lock timer.",
+    "Bilibili fallback parser mode/entity/metadata behavior and unpadded hexadecimal color."
+  ],
+  "observedNotReproduced": [
+    "id/icons declaration omissions; Slider value/hide and heatmap points declaration drift",
+    "Bilibili async Promise executor/fetch rejection and unrevoked URL",
+    "worker onmessage replacement and Date.now ids; late callback/duplicate-start cases",
+    "heatmap zero sampling, option.points not consumed, repeated SVG ids",
+    "12 SVG source authorization not separately established"
+  ],
+  "limitations": [
+    "No browser playback/layout/Worker/CSP/device validation",
+    "No actual Bilibili request, media fetch, load/performance/long-running memory validation",
+    "No package-installed NodeNext/Node10/TypeScript or AMD/global matrix",
+    "Older selected archives have module-shape coverage, not full old-major runtime compatibility",
+    "Historical defect assertions are observations and must not become candidate normal expectations",
+    "Registry signatures and publisher authorization not independently verified"
+  ],
+  "sourceChanged": false,
+  "browserValidated": false,
+  "installedConsumerValidated": false,
+  "releaseReady": false
+}

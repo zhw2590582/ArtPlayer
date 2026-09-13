@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 228 项，范围 22 个包及工作区/示例。
 
-状态：todo 74 / doing 16 / blocked 0 / done 138 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 73 / doing 16 / blocked 0 / done 139 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -309,8 +309,8 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-DANMUKU-01 | artplayer-plugin-danmuku<br>核对弹幕全部公开契约 | BASE-05 | emit/load/config/hide/show/reset/mount、option/isHide/isStop/icons 与事件清单 | 源码、声明、发布包、Bilibili 输入和设置入口对照 | H | doing |
-| PKG-DANMUKU-02 | artplayer-plugin-danmuku<br>建立弹幕算法与浏览器基线 | PKG-DANMUKU-01, ENG-05, ENG-08 | 密集/稀疏弹幕、过滤/异步输入、seek/倍率/重载测试 | 轨道选择、发射顺序、事件、内存和可视结果可重跑 | H | todo |
+| PKG-DANMUKU-01 | artplayer-plugin-danmuku<br>核对弹幕全部公开契约 | BASE-05 | emit/load/config/hide/show/reset/mount、option/isHide/isStop/icons 与事件清单 | 源码、声明、发布包、Bilibili 输入和设置入口对照 | H | done |
+| PKG-DANMUKU-02 | artplayer-plugin-danmuku<br>建立弹幕算法与浏览器基线 | PKG-DANMUKU-01, ENG-05, ENG-08 | 密集/稀疏弹幕、过滤/异步输入、seek/倍率/重载测试 | 轨道选择、发射顺序、事件、内存和可视结果可重跑 | H | doing |
 | PKG-DANMUKU-03 | artplayer-plugin-danmuku<br>整理加载、解析与配置 | PKG-DANMUKU-02, CORE-08 | bilibili/input/parser/config 的分层与取消 | 旧格式、回调、过滤、追加/替换语义保持 | M | todo |
 | PKG-DANMUKU-04 | artplayer-plugin-danmuku<br>整理时钟、队列与轨道调度 | PKG-DANMUKU-03, CORE-10 | danmuku 调度器和确定性时钟测试 | seek/暂停/倍率/长时间运行无顺序和碰撞回归 | H | todo |
 | PKG-DANMUKU-05 | artplayer-plugin-danmuku<br>整理 DOM 渲染、设置、热力图与 worker | PKG-DANMUKU-04, CORE-14, CORE-18 | renderer/setting/heatmap/worker 职责及资源归属 | mount/icons/设置和 worker 协议保持，销毁无后台工作 | H | todo |
@@ -552,6 +552,7 @@
 - PKG-DPIP-03: [记录](changes/2026-09-12-PKG-DPIP-03-lifecycle.md) [记录](baselines/dpip-lifecycle-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-04: [记录](changes/2026-09-12-PKG-DPIP-04-types.md) [记录](baselines/dpip-types-validation.json) [记录](dpip-validation.md)
 - PKG-DPIP-05: [记录](changes/2026-09-12-PKG-DPIP-05-native-checkpoint.md) [记录](baselines/dpip-native-validation.json)
+- PKG-DANMUKU-01: [记录](baselines/danmuku-release.json) [记录](baselines/danmuku-contract.md) [记录](baselines/danmuku-contract-validation.json) [记录](changes/2026-09-13-PKG-DANMUKU-01-contracts.md)
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)

@@ -1,0 +1,3265 @@
+{
+  "schemaVersion": 1,
+  "registry": "https://registry.npmjs.org/artplayer-plugin-danmuku",
+  "capturedAt": "2026-09-13T09:19:29.434Z",
+  "sourceCommit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+  "sourceNormalization": "Git text normalized to LF; archive members hashed as bytes.",
+  "source": {
+    "docs/assets/example/danmuku.js": "3f91461e2466f13ed4e72e6bd69986461192d8c6a9ca866fa347599f6958e021",
+    "packages/artplayer-plugin-danmuku/.npmignore": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+    "packages/artplayer-plugin-danmuku/README.md": "5a7bff740434fdb92d97d11b7a9f45fc1265a475112b898b50567937765a21f1",
+    "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+    "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js": "62db96685c48b8573f0480cead6ac934b1d0382b9fdd0046d17d15d2549c56dc",
+    "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs": "083d7de2f9a0314955dc83cdeedbc46c36728f7c9a0943ada8c3229edf9264ce",
+    "packages/artplayer-plugin-danmuku/package.json": "6e9b642cda22728631f71b3121b9dcae9f979c6eebb4b6d555d723b71cde9a50",
+    "packages/artplayer-plugin-danmuku/src/bilibili.js": "3235b1e7be09d55971a5fd70b7b87b7d7ff9e2b2c84452a64f095d326d5af897",
+    "packages/artplayer-plugin-danmuku/src/danmuku.js": "1723094f73adb7f8d358c244c52972510d845de03d41263d12a45edecc054df1",
+    "packages/artplayer-plugin-danmuku/src/heatmap.js": "3cf77ff82f62958728445eaf9c044bc4cbcf04a4ea82e753e7c44e59128c16f4",
+    "packages/artplayer-plugin-danmuku/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+    "packages/artplayer-plugin-danmuku/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+    "packages/artplayer-plugin-danmuku/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+    "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+    "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+    "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+    "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+    "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+    "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+    "packages/artplayer-plugin-danmuku/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+    "packages/artplayer-plugin-danmuku/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+    "packages/artplayer-plugin-danmuku/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+    "packages/artplayer-plugin-danmuku/src/index.js": "c457bb11e68a4ebb393f7dbf47ed3872166b72cf12498fc03187ead6f60ce234",
+    "packages/artplayer-plugin-danmuku/src/setting.js": "ffbaa808551410dc015a5f3ffe4e091f5e1b1bb45eee2d9790cf15cbf82eace2",
+    "packages/artplayer-plugin-danmuku/src/style.less": "7148a1bd32f5d3d743db4a4ae8d39dc0e1406d2bff18df42cbb20e6705d5fed9",
+    "packages/artplayer-plugin-danmuku/src/worker.js": "05995a16cd728dd5ca513587a777b4be9012b8cc4b77e3a46fed1826e6769c53",
+    "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts": "006c3e2d22425b936d6d09bf5138b0ae13c4cfffd0a571d03722c17137dbe99c",
+    "packages/artplayer-vitepress/docs/plugin/danmuku.md": "a019e334d22628f1697a2a0be15e9c3f01e36b2c8da825f32ea86b4135b91c2b"
+  },
+  "registrySnapshot": {
+    "status": 200,
+    "bodySha256": "6fccd0198b2322827b3271a807b60f73a3e4d6f46aeb5494a86aade409caf1d6",
+    "distTags": {
+      "latest": "5.3.0"
+    },
+    "stableVersions": [
+      "3.1.8",
+      "3.1.9",
+      "3.1.10",
+      "3.1.12",
+      "3.1.13",
+      "3.1.14",
+      "3.1.15",
+      "3.1.16",
+      "3.1.17",
+      "3.1.18",
+      "3.1.19",
+      "3.2.3",
+      "3.2.4",
+      "3.2.5",
+      "3.2.6",
+      "3.3.1",
+      "3.3.2",
+      "3.3.3",
+      "3.4.1",
+      "3.4.2",
+      "3.5.1",
+      "3.5.2",
+      "3.5.4",
+      "3.5.5",
+      "3.5.8",
+      "3.5.9",
+      "3.5.10",
+      "3.5.11",
+      "3.5.12",
+      "3.5.13",
+      "3.5.14",
+      "3.5.15",
+      "3.5.17",
+      "3.5.18",
+      "3.5.19",
+      "3.5.20",
+      "3.5.21",
+      "3.5.22",
+      "3.5.23",
+      "3.5.24",
+      "3.5.26",
+      "3.5.27",
+      "3.5.28",
+      "3.5.29",
+      "3.5.30",
+      "3.5.31",
+      "4.1.0",
+      "4.3.0",
+      "4.3.12",
+      "4.3.13",
+      "4.3.14",
+      "4.3.15",
+      "4.3.16",
+      "4.3.17",
+      "4.3.18",
+      "4.3.19",
+      "4.3.21",
+      "4.3.22",
+      "4.3.23",
+      "4.4.0",
+      "4.4.1",
+      "4.4.2",
+      "4.4.3",
+      "4.4.6",
+      "4.4.7",
+      "4.4.8",
+      "4.4.10",
+      "4.4.11",
+      "5.0.0",
+      "5.0.1",
+      "5.1.0",
+      "5.1.1",
+      "5.1.2",
+      "5.1.3",
+      "5.1.4",
+      "5.1.5",
+      "5.1.6",
+      "5.1.7",
+      "5.1.8",
+      "5.2.0",
+      "5.3.0"
+    ],
+    "prereleaseVersions": [],
+    "selectedVersions": [
+      "3.5.31",
+      "4.4.11",
+      "5.0.0",
+      "5.0.1",
+      "5.1.0",
+      "5.1.1",
+      "5.1.2",
+      "5.1.3",
+      "5.1.4",
+      "5.1.5",
+      "5.1.6",
+      "5.1.7",
+      "5.1.8",
+      "5.2.0",
+      "5.3.0"
+    ],
+    "selection": "All 5.x stable releases plus the last listed stable release of each older major (3.5.31 and 4.4.11). Remaining catalog versions are inventoried but their archives and behavior are not verified; this is not a minimum support declaration.",
+    "catalog": [
+      {
+        "version": "3.1.8",
+        "publishedAt": "2019-05-03T14:22:48.140Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.8.tgz",
+        "integrity": "sha512-ddy+wYz2kRyd+putUI9wtaWjzCr/w6rycY9jSPJ4NDrd33+9fTQEBuJ7U8HKmRI2rX/YNOmWoS+YMqv0Elenpg==",
+        "gitHead": "296a8122d842802bfe5fc500c360ef7e6b0f205d"
+      },
+      {
+        "version": "3.1.9",
+        "publishedAt": "2019-05-12T22:09:41.882Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.9.tgz",
+        "integrity": "sha512-J+vtZcPBhLZIw+Esr61kEZu/CnAlQI/heE4cxHjxfHmsx2tbIeSRIfdn9OEEyqnAajUKMiXjRx3xz8J9OktPfA==",
+        "gitHead": "af2f30442d8aabda79e331317f1bc1a9213b2e6c"
+      },
+      {
+        "version": "3.1.10",
+        "publishedAt": "2019-07-19T09:55:39.319Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.10.tgz",
+        "integrity": "sha512-WiNHRVJpzlyqlVfzI/Cxxyf81pRfkf7LaQvp6JGHG7JuM+envrBkatAw7uhjD4zWJXr4BgGOm0ptEdEprTwmhg==",
+        "gitHead": "8b16c0fc29eb0de7aecc7d2be8b9c7bb86aab77e"
+      },
+      {
+        "version": "3.1.12",
+        "publishedAt": "2019-07-19T10:25:42.257Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.12.tgz",
+        "integrity": "sha512-s/KEwedhfR+y+J+0MxVdA+OGysBJtuvQ/LQ8fWqqTCO+WMafrAiEcRrdjWYj9wDj7hsyMz1qhTPFKZe2foHNow==",
+        "gitHead": "1a5cf941a1ef24ce4faf6fe533c3ed7d3ba38549"
+      },
+      {
+        "version": "3.1.13",
+        "publishedAt": "2019-08-15T00:37:19.777Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.13.tgz",
+        "integrity": "sha512-9uDpxIpSikG/AZqNy+oX8odzDJrDXtEvtb73IKHvvT2sxg9M1z/mNwHO0lPTDn9/1RdyUPgsbltOxPcz3fFCPA==",
+        "gitHead": "2560cee9373492701f83e6a4d038f9b4da477101"
+      },
+      {
+        "version": "3.1.14",
+        "publishedAt": "2019-08-21T03:16:15.992Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.14.tgz",
+        "integrity": "sha512-Ko1EW14CtVcvFpsBmi72rHFXf08AW5oF/btPAKMocKNM2PRC9EVON/P6pjmcwbY+VukuGyH3Up/3W1orh2LwrQ==",
+        "gitHead": "71d56e0a6382132b9f95683bf2f072120d2de4eb"
+      },
+      {
+        "version": "3.1.15",
+        "publishedAt": "2019-09-15T08:17:18.296Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.15.tgz",
+        "integrity": "sha512-yC9cjRuIhOAJ1Q1N2Uc4iDmff2B62lQ9T/vaUXl39nPgXPilzfhQ5ZgkeKit/Z6aC20YRZ+zQS1fnseYBSGktA==",
+        "gitHead": "902fe2089541f2bb4b63ad25791649baed2c76c8"
+      },
+      {
+        "version": "3.1.16",
+        "publishedAt": "2019-09-25T04:44:32.335Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.16.tgz",
+        "integrity": "sha512-jrwHUwe6kuKYB64MlLsImmT4hDdCYDjospsY2wmW15xQ6ZEuoUHBAHa26kjLgF+rF4+sexSxw61hI8Gl/vxnOg==",
+        "gitHead": "1644a7530f9805ca2308c16019cecc33f1c0f87d"
+      },
+      {
+        "version": "3.1.17",
+        "publishedAt": "2019-11-10T07:53:32.675Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.17.tgz",
+        "integrity": "sha512-2unA1OvxijZHxmcs3ECGC4ogfG+GfBkS0/AiC1TF8zoPhFFvZrVhvG0q7bCP3z7lVg7WYlRSopS5ZROexGLHqQ==",
+        "gitHead": "2b83fc1b26fc0c971f9d66a01008c6a2961055f6"
+      },
+      {
+        "version": "3.1.18",
+        "publishedAt": "2019-11-11T01:22:42.369Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.18.tgz",
+        "integrity": "sha512-WxXPJa0f3Xn8hRpWXbduiZZmIwotyZYpcqwt/BeQDYnyEar9MfhIseQE0nefa6FuM2ZyM2h4X5/+bAoIgNmpBw==",
+        "gitHead": "48ade9904721f9227f66ca92725eb01750cc3bd7"
+      },
+      {
+        "version": "3.1.19",
+        "publishedAt": "2019-11-20T01:50:01.893Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.1.19.tgz",
+        "integrity": "sha512-QS4VIk1uFiNDeo2cwbY4lKbrOV2qiH2ZlviQDAW6F1CI1b4/9dST0ALz2n8e0Pw7KC7XO7tOnEEwrt+atpIzHg==",
+        "gitHead": "339ec6a1633c88d703dfd98ad7daaf111c0bf883"
+      },
+      {
+        "version": "3.2.3",
+        "publishedAt": "2019-11-22T13:39:14.290Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.2.3.tgz",
+        "integrity": "sha512-KswLXHixkNsl5Dg2pDFMciuBIj6Kd3b5DZey8LyEX4RGKMlrraq0snVl6TakH5cnyNDPW0lhUM0j88LjWV8Tug==",
+        "gitHead": "247d626c3d6f0608e4a6b9d8e6e7dd282dd3b9cd"
+      },
+      {
+        "version": "3.2.4",
+        "publishedAt": "2019-11-22T13:41:42.685Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.2.4.tgz",
+        "integrity": "sha512-O5Gf+xnF2eA9g97M5F2KhTDhW0s6LYLl8bZZJNYUMgy7HGX0qicQeTVK4N9ln1ufWQ+pAYOkY0iFX15LajDepg==",
+        "gitHead": "0a3a20568e37f99972eefb01d4b1dcf4036a46db"
+      },
+      {
+        "version": "3.2.5",
+        "publishedAt": "2019-11-28T03:55:24.221Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.2.5.tgz",
+        "integrity": "sha512-H31lSaoR451PWkFssRC6G1/hNx1Be7bJXmseq3twcZMv2Au3huDws4G5zSMSk5l9r0BVSqhp5Lqlx6RojwMMDQ==",
+        "gitHead": "a6e4575b842c2ef23e0f335340ab72722beca675"
+      },
+      {
+        "version": "3.2.6",
+        "publishedAt": "2019-12-02T00:40:47.603Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.2.6.tgz",
+        "integrity": "sha512-hvBTeD0XnRFsuZaR+5COnK7G8QvmAFSAZ4quni0W5c5iQ46+jDSs21vQH7Ymcz9pUW8hxoNaVAB4LKXPVvuGOQ==",
+        "gitHead": "a8cbb56d931e2b59c96f7c91cdd5e18bafd9ecfc"
+      },
+      {
+        "version": "3.3.1",
+        "publishedAt": "2019-12-09T09:38:34.638Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.3.1.tgz",
+        "integrity": "sha512-hSxw0BMJLYY22YyDkzXBnC1p+1KbOWCwvDiPiHwj5ixJu8RT/IBtXWWye+KP44dL4PuMbaAeHphMhHF+4KeBCw==",
+        "gitHead": "124240255c09691aefb873edc9a775ae642a8198"
+      },
+      {
+        "version": "3.3.2",
+        "publishedAt": "2019-12-11T09:11:22.399Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.3.2.tgz",
+        "integrity": "sha512-LrZNgg+gEo+Spm3JmLCWEtIIWriVhI/8uHHs+8R47AbJNAKZ0XOFdGGHz1dxmHMnes6Z/yunxRyTVkV7psHt9g==",
+        "gitHead": "8ca17bf0ae26778c6f56460d9cf4ac62d7c131b9"
+      },
+      {
+        "version": "3.3.3",
+        "publishedAt": "2020-02-24T03:20:43.336Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.3.3.tgz",
+        "integrity": "sha512-A+rqMg5sF0T81diEo5WSNRqtVmchglQ2GLwjGmwso51ljeXgSXoZvmECDbzGfNufAoSgDMcGEzYciYtFwpkZRA==",
+        "gitHead": "13cc7ec64a0522b5aaa64aefd136746f5e539794"
+      },
+      {
+        "version": "3.4.1",
+        "publishedAt": "2020-02-27T09:05:17.871Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.4.1.tgz",
+        "integrity": "sha512-pi1GseRL/stC15fe+Y92wGtfehdSSjvm5LyZY9PfdIASJArSiE1HjnJgq52sL+YfzawA27SYPiSdxSwKCB/X2g==",
+        "gitHead": "cefbade4a0598ae8720b12f574ff21f72f6ab725"
+      },
+      {
+        "version": "3.4.2",
+        "publishedAt": "2020-02-28T01:17:46.475Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.4.2.tgz",
+        "integrity": "sha512-3zweihWJu3rvu6fmTkEaImb1zjm8pQ4tOzkfjHgW8MZ9Y5yCTSe8sfoyVFsQGodH8ggcy9AlLw2Uxj9Mb2GQbA==",
+        "gitHead": "3128e233da9ccb9efd3b0de19d318d4bc4ef9dfe"
+      },
+      {
+        "version": "3.5.1",
+        "publishedAt": "2020-03-21T23:37:20.195Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.1.tgz",
+        "integrity": "sha512-O5P+3T01oDBaZ8gwN0smGEiMchtJv4aRLkcaxwpUsuvb6Z/27jkDU4te2WpqxgY719SaPx65cF2QHzVSSX2yFA==",
+        "gitHead": "70002b7fb5d44fa8a039c515a7914918cd270b20"
+      },
+      {
+        "version": "3.5.2",
+        "publishedAt": "2020-04-14T04:59:52.878Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.2.tgz",
+        "integrity": "sha512-ekg+pmyHBqKSRpoOpccH8+/Y4y4zSr2eWGWPZPpINwanZ/dBEvXSj66nWc59V9XGEShsxVKihRQXa/C8m6LGAA==",
+        "gitHead": "687df9fd5eb3b273cb119f6eab96f8955b52c0a1"
+      },
+      {
+        "version": "3.5.4",
+        "publishedAt": "2020-04-27T03:45:40.254Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.4.tgz",
+        "integrity": "sha512-POWM8Rs7dx/7UI5FBG/pGjRmOGOx0wZ8n+nGOeMyEy09+mDXuLtJe7NqCESl1xMg0/nbJIars3DZaDR0DA+ofg==",
+        "gitHead": "824bd20e94167ff799ab79a7f71ecd2345e5873f"
+      },
+      {
+        "version": "3.5.5",
+        "publishedAt": "2020-05-20T09:15:57.873Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.5.tgz",
+        "integrity": "sha512-iZll/2WoshbWdKKfyGGntjMjGIODme10L4r4tb4p2mCtTp/qy4Vro91VHztsyVyiPjcqwAtwFKTB6/PgWWLQug==",
+        "gitHead": "22fa8d5379247dcb172874f1c314fe0cde5283ab"
+      },
+      {
+        "version": "3.5.8",
+        "publishedAt": "2020-05-21T02:21:47.534Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.8.tgz",
+        "integrity": "sha512-bFHNZUq0Cx93KU150eP/RLcNES+DOpJFl1Gtq1lBk7u+LZb1QAT+iOO/0ggwELc38+b3MT3+LQkJ5c4AKb0TWQ==",
+        "gitHead": "938b90f3a7e5ba91a94df43544fba05f431ee662"
+      },
+      {
+        "version": "3.5.9",
+        "publishedAt": "2020-05-29T14:06:45.883Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.9.tgz",
+        "integrity": "sha512-xw7WyBkgCDzh+2yjtWx9dwWIyoH6Yccvs1Efuj3HVT5/uI458BzyoTrL0naW5n1DwdqwWPjYUxsC4oyfbrB1cg==",
+        "gitHead": "65fd3fb9e62f88622d0519fd5c485df9275b5a09"
+      },
+      {
+        "version": "3.5.10",
+        "publishedAt": "2020-08-27T08:28:53.197Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.10.tgz",
+        "integrity": "sha512-gAxkhtBUiR/ws33SgoYp5u9oZYQyM2a6DhonzQypHN9w7BjC+l7niTys+ie+rtxe2itY+SYNLB/2VVqwcPLQLA==",
+        "gitHead": "a50c519896a75e9fc692931ff6add46660e7514a"
+      },
+      {
+        "version": "3.5.11",
+        "publishedAt": "2020-09-02T14:10:58.110Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.11.tgz",
+        "integrity": "sha512-OazyRA7tBiJeKl+0/ZmGUvVkQVjiu9jY4PQTiQnqSEnzv3xVezBozhQ+QsMAHSaGiLZRWvjqBoz1Gc/Q+fcAow==",
+        "gitHead": "35cb0398cfba9cbe69314f4d3adf0c5a02a3f0ad"
+      },
+      {
+        "version": "3.5.12",
+        "publishedAt": "2020-09-04T00:57:32.658Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.12.tgz",
+        "integrity": "sha512-WChxX6H/Z5XdnDJg3qG24ypInF0gbwjxZyWBGGpxRekSC7B9FI1/fOv/FEYIHm6VRI380Uract1Zfhpz1BMH0g==",
+        "gitHead": "0c841eca50f617a1b6f82b8ca40246a4335aad7b"
+      },
+      {
+        "version": "3.5.13",
+        "publishedAt": "2020-09-04T01:05:26.235Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.13.tgz",
+        "integrity": "sha512-3A8LejMEiPB21Ykip4Dp9w3k14kguVXMMYElFWi+88wi+LwHSeIYrcrz7X7EWvFHOi4F2NUHm5aCUMhfsXp7EA==",
+        "gitHead": "9ed4febf4cd09dee2f1db5b890018ef757335247"
+      },
+      {
+        "version": "3.5.14",
+        "publishedAt": "2020-09-04T14:41:01.237Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.14.tgz",
+        "integrity": "sha512-3uJ+aQrNcTmq5wHejVpr0J8aPNHLP574F1a9Pz8Lg76CmgIrZ4tv34q5ZfBwNjEwDQ2z/XHNjW6DsocdTGpP/Q==",
+        "gitHead": "53324bc43376613b845e5e69e03d3b137073e55f"
+      },
+      {
+        "version": "3.5.15",
+        "publishedAt": "2020-09-23T07:02:32.416Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.15.tgz",
+        "integrity": "sha512-WWksFSwNn1fV/aH1GSQNfzswZJ5DPezyzMenM94MG9ART0I24Rp07orWgNNyaELvv9OAT0EAqcPU82rfF0NVPQ==",
+        "gitHead": "6b9e0b3c42b4797287a930764a206a98803ed592"
+      },
+      {
+        "version": "3.5.17",
+        "publishedAt": "2020-10-18T06:50:21.219Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.17.tgz",
+        "integrity": "sha512-AP2j5bhq4jHt3nh755UU5LbPLIYZBDijF3lb99mMEbVtbOD2eHEDa5/hE+MXagpXawk8yZPayBRRY6fiIcagKQ==",
+        "gitHead": "debec4e4abfd9b270504422833a8f40875c3f09b"
+      },
+      {
+        "version": "3.5.18",
+        "publishedAt": "2020-11-07T14:19:31.901Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.18.tgz",
+        "integrity": "sha512-D7RM0PfanBKPdHS9mOb9ou5GMpm+hO3T4OiLywpv/CVk7bvOJj8ainrGOmDVYUge69dwujb8E+aV27Iy8eEIHg==",
+        "gitHead": "4c9b3b966c9c9b71f393fc8af4a0d0b62f764bf8"
+      },
+      {
+        "version": "3.5.19",
+        "publishedAt": "2020-11-09T13:32:17.049Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.19.tgz",
+        "integrity": "sha512-aKXutmjc+OyxDl6riDCDEpVAqYtAupiVLf86BnuE+hb9KmuYWWHUhtdgbvt00O1Ty6DWlwcHVp1vEbk4ZW1Kcg==",
+        "gitHead": "803cd862f5431949aa9db0d7f239a20efce0408e"
+      },
+      {
+        "version": "3.5.20",
+        "publishedAt": "2020-11-21T00:43:09.828Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.20.tgz",
+        "integrity": "sha512-Ar4WNFW8OZ4A/uE1P9vEPEbcDALLLf83+mDTWHtig5ozAD8xvLLRjAgSF5tagF5lttU1mVJhcZ0Ymi2mcuHkhA==",
+        "gitHead": "7dbe1ae929dd6318a57a25de153f9cc6453a7997"
+      },
+      {
+        "version": "3.5.21",
+        "publishedAt": "2020-11-22T13:22:03.454Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.21.tgz",
+        "integrity": "sha512-cIat8z9rWduZBSLr+Xo0OqDC3+I/Sy1t1fvVVTM8d9CaVhT7Som8eFGakJgnRIt91mO46176SCP1d+/tudUnTw==",
+        "gitHead": "360c3179aea73295efdb4bd1b266f9243b36d865"
+      },
+      {
+        "version": "3.5.22",
+        "publishedAt": "2020-11-23T12:29:08.531Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.22.tgz",
+        "integrity": "sha512-YoDStxZyUk5FvUNzjgGn/bIspfpnVZ/zsQkzIgPRRSEuCfZ3oEXBX/5kR0rRH6ywWE07AOwYHzuzt2fDW8PUgw==",
+        "gitHead": "39819c5b46592c32cb327ae8c20b03bcc929703a"
+      },
+      {
+        "version": "3.5.23",
+        "publishedAt": "2020-11-24T00:03:13.815Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.23.tgz",
+        "integrity": "sha512-iU2l4R+7rjC1c+rZhVV6DEq2fHYviskb9YwIyLI++y9iSPoSQk1LSZpQava56dFSRTs/lel8caXhc2diOz9mcg==",
+        "gitHead": "ed03008bc96b6f30a0dfe09fd96130d2c97bfc39"
+      },
+      {
+        "version": "3.5.24",
+        "publishedAt": "2020-11-24T06:11:19.002Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.24.tgz",
+        "integrity": "sha512-x4WBWQwweXZhzlE6hgYWj1gYoAtX/Hyixg96Zt7YJW/lXeCi8DQ64lnI1prDsj4Emv6OoghFplP5aHIHPySgUA==",
+        "gitHead": "f414b9d9a4ea81adf784746afec90951220520d0"
+      },
+      {
+        "version": "3.5.26",
+        "publishedAt": "2020-12-01T04:01:15.607Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.26.tgz",
+        "integrity": "sha512-GN4WVGdYN4k2goxe3QE16M7nDsN1ownXnNEZIEu+bQc2ch2NBpOxnHhOGHFKXQZgdXmCLgIgVybCG6qc0pfQyg==",
+        "gitHead": "5ea211ef738351668e4acace326af4ff6947e2ee"
+      },
+      {
+        "version": "3.5.27",
+        "publishedAt": "2020-12-17T07:34:56.593Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.27.tgz",
+        "integrity": "sha512-dfUCw0AwXlDY3ZBxf8ONoUbinTn8p3CZxEviqJphoNDf2uXQSqbQjbDA/q7iJzz3RX/uxmle9yPvAzpFXCPHqw==",
+        "gitHead": "36d6bf942276d86e104c6eea490613be4090f955"
+      },
+      {
+        "version": "3.5.28",
+        "publishedAt": "2021-05-06T05:10:51.204Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.28.tgz",
+        "integrity": "sha512-99YgGuS780zS2xUs8FdGf9bQhpKxufsJDBzAbSg6U5M87/4U3z2FarVVnvirkBDy4lBI4ugplCuzQkN51pDy4A==",
+        "gitHead": "8550cabe48f292ff369f37f1f7c24090b9b8a3bf"
+      },
+      {
+        "version": "3.5.29",
+        "publishedAt": "2021-05-11T02:37:33.712Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.29.tgz",
+        "integrity": "sha512-6TIyvNR655ZPf4niq20cHlysBLk+EZ7I2CaeGcQQ4cECNkjphORPU1HVx5iPnwJBpeb3A4hHbSKc/w7Q9bpVyw==",
+        "gitHead": "20a5fff0f61582d6262b2540036e295168a991fb"
+      },
+      {
+        "version": "3.5.30",
+        "publishedAt": "2021-05-20T01:39:20.867Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.30.tgz",
+        "integrity": "sha512-N1WaGGGNRAJX7Gk6ZqZSDDvPVSR7SrK6xqNYJMkdXIsw81mOszTm//Bj8ehHOJOvksCjM2Mp5jyWr/CXwrSGXA==",
+        "gitHead": "5d9de9eea9c63654e0c30701739984fc97e96150"
+      },
+      {
+        "version": "3.5.31",
+        "publishedAt": "2021-11-01T01:38:02.660Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.31.tgz",
+        "integrity": "sha512-rOdX2ujuCi/IX3lmsnXob1eAdd2x3UyemcC2uAUUD83St0nwcQvt27Kvme6M5/zQsEo3LzE7iesIsx3LeMvWpA==",
+        "gitHead": "af1a116a31b088efdd77afa81c4b6565d12bd162"
+      },
+      {
+        "version": "4.1.0",
+        "publishedAt": "2022-01-07T15:40:41.904Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.1.0.tgz",
+        "integrity": "sha512-01x6RoHTDKhN0BcXoHX6AkTN2KA57EipHljEfcuQSQGmo43v3J7PeWLUyArmSVMz8B3beLpPp3ATt4ytobudHw==",
+        "gitHead": "5ea211ef738351668e4acace326af4ff6947e2ee"
+      },
+      {
+        "version": "4.3.0",
+        "publishedAt": "2022-02-12T01:35:20.007Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.0.tgz",
+        "integrity": "sha512-rWFx5I7IJYKaggcWVG/u0K6T1/C1qTNiO4DKMOIvSJNYzn11wLtp9vknyP3GVkbJ2M9PTcPfpZElcsbDxbuXcA==",
+        "gitHead": "5ea211ef738351668e4acace326af4ff6947e2ee"
+      },
+      {
+        "version": "4.3.12",
+        "publishedAt": "2022-04-30T01:15:52.090Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.12.tgz",
+        "integrity": "sha512-vrzTfoqOrA3GmtOezNT+Ssd3/l6zDoKKTGz+VEhK++sPzARycDJHvAySuBt3dV918obzf3cEhOWVznR72iwI9g==",
+        "gitHead": "2979fc49bcb793462227c8b1421f3f4161efb42d"
+      },
+      {
+        "version": "4.3.13",
+        "publishedAt": "2022-04-30T09:57:51.833Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.13.tgz",
+        "integrity": "sha512-UggG9cZ6oErJ7fVUkmalW3XEmogDssjBQfy5km1GCxWidQo0Y1vpa61j/qyq7qNWOliaDPZyT0e4YWOpEKBoWA==",
+        "gitHead": "def8c6df464a79bba813c5a0d16110a8cdf106de"
+      },
+      {
+        "version": "4.3.14",
+        "publishedAt": "2022-05-01T07:20:28.804Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.14.tgz",
+        "integrity": "sha512-zzfAXq/MpqrG32h3yWluhB8vPzj5bj0PX3oMW5sBC9gZ2m0lbTaG0pqQB8FOu4AFkKYlNXGzEgRH2BsCQZjXww==",
+        "gitHead": "9b153ff0dd286a6e8237be3cfeff7f09b8b9ee17"
+      },
+      {
+        "version": "4.3.15",
+        "publishedAt": "2022-05-01T08:52:01.580Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.15.tgz",
+        "integrity": "sha512-ze3l9HMtUVGAYC5+nviClrr01YMYc51R6CQK7WYpxeSBmm5DLyu6jBYn+R0le1ME8ba+xkiRbjpCJZyaCDtL9Q==",
+        "gitHead": "de8d7ec999a059e14e8dde21d8237b141f36d5d1"
+      },
+      {
+        "version": "4.3.16",
+        "publishedAt": "2022-05-01T09:59:57.504Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.16.tgz",
+        "integrity": "sha512-0pQlKG91/94h+Q9VSEp2SoDLjmMk9mQ2r5klXVUCYb/mAh+0l1WGEpRHYqYxzVL8wMsiE8mA4P3g6X+yunIvTg==",
+        "gitHead": "49337a3e3fd6f3ca1facd2e427814edea3f6f9b4"
+      },
+      {
+        "version": "4.3.17",
+        "publishedAt": "2022-05-01T16:22:48.948Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.17.tgz",
+        "integrity": "sha512-GITm0XR5sPUTh7Idhkd6CdD+C+YDvwhLf/zr71NXEV54cYVzYqDM+Iqc5oqtIWQcdHXyUAY/s66MVcaon1U96A==",
+        "gitHead": "7bcc296fc29679d0d17ae6e36917eed4360e1b21"
+      },
+      {
+        "version": "4.3.18",
+        "publishedAt": "2022-05-01T16:52:12.821Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.18.tgz",
+        "integrity": "sha512-dWpjiwFVgiWkxsj8eM5OnkmihAoN82cIeNzSfLgfNtsY4fxkSuA7WdPoHC5CRjh16d4xiMXEM4gDdxRhDjrTKw==",
+        "gitHead": "992803e10c9082132c8b67dd29477b1e23d8395e"
+      },
+      {
+        "version": "4.3.19",
+        "publishedAt": "2022-05-01T23:03:05.740Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.19.tgz",
+        "integrity": "sha512-saszt5l+p2gDe6itoiVt6jWola9vUp3ugTkR4xjr7RCwxKRa3QlO4nbhWBJPcJavMwX7dFNzJc+V7CGFeZVsrA==",
+        "gitHead": "526096bef38df1d761fd0176633e9041fe7b6abe"
+      },
+      {
+        "version": "4.3.21",
+        "publishedAt": "2022-05-03T03:51:47.202Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.21.tgz",
+        "integrity": "sha512-IG/NKaHxtJuKqWXTZS8CiOTRJxAWHhXwdOdmTTjPtA1IoqBsSDnpnYQ9ivDje24Oza5zJJZFnNJoci5RDRgArg==",
+        "gitHead": "c3e5afe4d31f493ec1db96b919bef5199445abc3"
+      },
+      {
+        "version": "4.3.22",
+        "publishedAt": "2022-05-03T04:03:30.082Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.22.tgz",
+        "integrity": "sha512-ug6tNecs5vSFNHB4EasPGFBAsAWZEVirzt3ZOc1GSILtIc4DJu2l3TDY3vKjHm65BFKBVtFMIDn+ORGwo5kgew==",
+        "gitHead": "21d4a50c543f6423aba3fb02fe8f50f4cf258292"
+      },
+      {
+        "version": "4.3.23",
+        "publishedAt": "2022-05-03T04:11:20.812Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.3.23.tgz",
+        "integrity": "sha512-l9pkQKZZ9az2vWgBuc0dM2wRSSve8JOnV1RinOOO1LNhLdK9xubSP15ILBjDZgSGozTrBvRxWaiD4Z3hBhNORw==",
+        "gitHead": "9d31e8d6e053f2187469ac0ff402f8b3b7bfb8bd"
+      },
+      {
+        "version": "4.4.0",
+        "publishedAt": "2022-05-14T15:24:01.249Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.0.tgz",
+        "integrity": "sha512-oIUMHOJYsTjUlGwniVE3CmnwlpXr1uvy5SkdGjXVIhEbZq6k2wF7KDzRURrfteb0b7AHb3yn9ilfNtO6o8G/Yg==",
+        "gitHead": "9c623b7fd751b9c49d63345e93d64c2f8d26c1ad"
+      },
+      {
+        "version": "4.4.1",
+        "publishedAt": "2022-05-17T07:50:24.214Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.1.tgz",
+        "integrity": "sha512-Il50h+KF8Aw+APEh3wF8WTgvZMBj8QYYfcuFy67FiS1qxp6SSQqyaCUpgT8mZO3jvjvd1krjpqpREqYredv3ew==",
+        "gitHead": "0eb07c22f2166587f475eafcb29e58ee4d8a3079"
+      },
+      {
+        "version": "4.4.2",
+        "publishedAt": "2022-05-20T10:13:30.337Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.2.tgz",
+        "integrity": "sha512-h0QZCNs8QgKIMi/gItv9kMPsZOki4Cevmlv1h36eQWBnlvBRUNYYJICHRBLKYZDEC+YC0KTB7vjBoFvhpNR/Ww==",
+        "gitHead": "6d638b398329033f7ed56a9bc0cf40e5c8479dfb"
+      },
+      {
+        "version": "4.4.3",
+        "publishedAt": "2022-05-26T05:37:27.450Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.3.tgz",
+        "integrity": "sha512-jo0KSqLGHZSglUKqwwqqSXeQvVCRgD6mKDtduKcqN+F34O96+hsQ/4UpI5r1udQuHq8DxTKfiLfj9It/2n4noQ==",
+        "gitHead": "d716c31af53f07536d4910ab69146603804d06cf"
+      },
+      {
+        "version": "4.4.6",
+        "publishedAt": "2022-06-11T06:18:33.153Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.6.tgz",
+        "integrity": "sha512-Q5LWMwzdtFF/SmRQzjD8itMG6v/VghOmHiUe0WM3mnuKRZCS6H4wWsE3dCp95UTPY9GxaRmq0t5T2miVc6/1oQ==",
+        "gitHead": "064841f5558e4dbe6445cf11c15e597d274db364"
+      },
+      {
+        "version": "4.4.7",
+        "publishedAt": "2022-06-12T12:15:21.352Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.7.tgz",
+        "integrity": "sha512-XBrU6grfOQThdo+Sj6luupPasHq194yWHOSqj6uva5vr7ZVDbe/q6lHpFAs8zSZ//SEHo+xo33i6yAVCLPo/jQ==",
+        "gitHead": "1a638c490a28e514d628259734d0694071923c6e"
+      },
+      {
+        "version": "4.4.8",
+        "publishedAt": "2022-06-13T05:27:30.402Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.8.tgz",
+        "integrity": "sha512-l7a20i19emzHP//R1UQ4lbkmCbVBEbBazCtHSxUq3H7Pj32Rfft9Tc5afrG5uJEvtkxDKDSBdBavrmwh5aM64w==",
+        "gitHead": "dce698a64896c21bdd4cce5e6057ee023725d741"
+      },
+      {
+        "version": "4.4.10",
+        "publishedAt": "2022-09-19T02:02:57.531Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.10.tgz",
+        "integrity": "sha512-NMfpkwsp4kxDKd4VuEMGnpkavllJZysyReIF09LEnRCr3D72R1f22byG5y7tcdSNRr/9I/bRCyfXioTn326cPw==",
+        "gitHead": "0b0aad78a56c024f00924c95f259bd545c29f196"
+      },
+      {
+        "version": "4.4.11",
+        "publishedAt": "2022-10-11T02:48:34.632Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.11.tgz",
+        "integrity": "sha512-/4F8IyB29Bdr1LV1RM3FM7CdiAMsVNOOJ/HY4jaJCXnMAKThQiGa++0PhCJ07nhyGvDcZGRL2/UWJRz9zZJFNw==",
+        "gitHead": "e0351a7b930033307d4efd77e9b07a1d5be3e665"
+      },
+      {
+        "version": "5.0.0",
+        "publishedAt": "2023-04-23T10:14:05.436Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.0.0.tgz",
+        "integrity": "sha512-swnnTIHnwyAft4Pbh7uQtzjNNhqoiMffuEvZ3eUkMfFGWOEjoZ23TQ7rqXXY08iGJTIWt4Rn7iqUS5DdKsHy9g==",
+        "gitHead": "08ff3dd19d24fbbc62b900f19a91aba08e1bf9f6"
+      },
+      {
+        "version": "5.0.1",
+        "publishedAt": "2023-05-03T03:59:57.685Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.0.1.tgz",
+        "integrity": "sha512-b6/Y4/+X0rNmnqS5+zzQgow+WW4iVT8eFv4LAUzJgIyORIcf5Gn00Dy0PZ+kwGb1VJy0CUCRK6gVVvh0tWsRAg==",
+        "gitHead": "8ff35b5f6f74e607e4d22d085252e837cfd9cd98"
+      },
+      {
+        "version": "5.1.0",
+        "publishedAt": "2024-05-31T23:18:54.995Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.0.tgz",
+        "integrity": "sha512-F2dGt8nmSrAkGGNoKErrPipNqW8OueTYsE/Yh8Cze8oSWSHpXnaZbhqkg5ZFtLCNp85/MHrU0OUv3+D4wKmYGA==",
+        "gitHead": "d86840749b12718d6ce016848e691dbde33db477"
+      },
+      {
+        "version": "5.1.1",
+        "publishedAt": "2024-06-02T11:51:28.874Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.1.tgz",
+        "integrity": "sha512-5A0j9pjKZI5hy5q2zk94shty4LoKdQgdUjlAfgiK9AgcfBv6EZE0itYNwoYzTMYJhSWmZ4CTDxpePXGMV261wQ==",
+        "gitHead": "41cdde4b7901b0d63bb9c28b6d8d1a042250705b"
+      },
+      {
+        "version": "5.1.2",
+        "publishedAt": "2024-06-05T01:17:30.526Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.2.tgz",
+        "integrity": "sha512-r1+CTzKQlKsMEKglORMKkZWKYBKN2PDZnvurZKH52n6un5Zkgw2ibQnbCvWzsgJ8IdIt2jrufiMq020BXXPwMQ==",
+        "gitHead": "403be5dc6b1d88291353413b37e5927808449a9e"
+      },
+      {
+        "version": "5.1.3",
+        "publishedAt": "2024-06-12T13:48:43.333Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.3.tgz",
+        "integrity": "sha512-jHj1hRPKHGvB/Vh0m96O80Cq9UGp5WjGw6PZwnEafrcc3CqTbJhewWS5jqb7qRWkTgfJXWBty/u1lMagUeoIrA==",
+        "gitHead": "665348ad5575d9422aa886ce07358159601163ac"
+      },
+      {
+        "version": "5.1.4",
+        "publishedAt": "2024-06-13T03:13:28.713Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.4.tgz",
+        "integrity": "sha512-f2gJ9HsvSmOwg6UdNcWCUkSI6WmfkTiQKVDWr+pRJF9jQ2wK8c4YjNJ11SY63H5OGlaJBSvWWyNVdFHOX7pUbg==",
+        "gitHead": "b4e31219173e0e045cdfdec2295b13c870505ff0"
+      },
+      {
+        "version": "5.1.5",
+        "publishedAt": "2025-01-19T09:34:27.588Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.5.tgz",
+        "integrity": "sha512-iFjdXVbkw5FbkB98SOwMPQEFJp7k6Io4nHfehpSdCc7Eo1gkmjNShOT6dAtAH1kLMHjh38vRnf/oYwCvTKkVOw==",
+        "gitHead": "fae71811db4a1f6999690d527aa1c715266cb32c"
+      },
+      {
+        "version": "5.1.6",
+        "publishedAt": "2025-04-20T01:35:48.740Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.6.tgz",
+        "integrity": "sha512-3JufaEvxI0bTR74vxLU7K9F9OLmR3yrDFqeflV0T0QWedabassX5hsl0AyNNcjVkfdm3A5s1YC0icdtiFZA1Ig==",
+        "gitHead": "2aaef7db45e04d11e886f9bb59cb22c5a458b2f3"
+      },
+      {
+        "version": "5.1.7",
+        "publishedAt": "2025-08-01T01:37:35.518Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.7.tgz",
+        "integrity": "sha512-lnfPQlzRzG16/UOLr4OjYVHTwka2SeEbmAHANxAR02rwSTBVfmqTi/OATccvuXtXwaCCF+Oik9XKQAvkhsAUXQ==",
+        "gitHead": null
+      },
+      {
+        "version": "5.1.8",
+        "publishedAt": "2025-08-01T07:32:20.976Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.8.tgz",
+        "integrity": "sha512-J9kUtU46/07ZckvmfFDwfJRJDLD7UIfrWVutc7EqDCkUModArOISifXkD27/R2ruIpfAJk6HxOfB0cQfvjbZCQ==",
+        "gitHead": "ea392e0d60bcdbbde498080be12e7f4f93944b0a"
+      },
+      {
+        "version": "5.2.0",
+        "publishedAt": "2025-09-06T05:34:27.583Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.2.0.tgz",
+        "integrity": "sha512-iHHSGEc0J+gl7imX4nmLqqC7LXmv8xeGf2lUevhhyUCoiCRZplecpKQICHjErVb1Yqyp1xCy6Sp8eYN+EpFWFw==",
+        "gitHead": "18475f08fd7ad22f4dca3e2167a670d27bfdff09"
+      },
+      {
+        "version": "5.3.0",
+        "publishedAt": "2026-03-12T14:19:00.425Z",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.3.0.tgz",
+        "integrity": "sha512-a76bU1cWEZr53hD1X8IHfOzS4QawGHn8dQ3fIYyJ5TsyhTSnznhi2WzkS8M7LL3H02ekXRZTUFan9+9EERk12g==",
+        "gitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96"
+      }
+    ],
+    "scope": "Live npm metadata plus downloaded archive hashes; registry signatures and publisher authorization were not independently verified."
+  },
+  "release": {
+    "name": "artplayer-plugin-danmuku",
+    "version": "5.3.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.3.0.tgz",
+    "integrity": "sha512-a76bU1cWEZr53hD1X8IHfOzS4QawGHn8dQ3fIYyJ5TsyhTSnznhi2WzkS8M7LL3H02ekXRZTUFan9+9EERk12g==",
+    "sha256": "1abb76460790d85a26590b8b911eb1301fd720885f96c73432060416a38dcb0e",
+    "publishedAt": "2026-03-12T14:19:00.425Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "5a7bff740434fdb92d97d11b7a9f45fc1265a475112b898b50567937765a21f1",
+      "package/dist/artplayer-plugin-danmuku.js": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "package/dist/artplayer-plugin-danmuku.legacy.js": "62db96685c48b8573f0480cead6ac934b1d0382b9fdd0046d17d15d2549c56dc",
+      "package/dist/artplayer-plugin-danmuku.mjs": "083d7de2f9a0314955dc83cdeedbc46c36728f7c9a0943ada8c3229edf9264ce",
+      "package/package.json": "6e9b642cda22728631f71b3121b9dcae9f979c6eebb4b6d555d723b71cde9a50",
+      "package/types/artplayer-plugin-danmuku.d.ts": "006c3e2d22425b936d6d09bf5138b0ae13c4cfffd0a571d03722c17137dbe99c"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.3.0",
+      "description": "Danmuku plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-danmuku.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku.mjs",
+          "require": "./dist/artplayer-plugin-danmuku.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-danmuku.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+          "require": "./dist/artplayer-plugin-danmuku.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-danmuku.js",
+      "module": "./dist/artplayer-plugin-danmuku.mjs",
+      "types": "./types/artplayer-plugin-danmuku.d.ts",
+      "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "entrypoints": {
+      "main": "./dist/artplayer-plugin-danmuku.js",
+      "module": "./dist/artplayer-plugin-danmuku.mjs",
+      "types": "./types/artplayer-plugin-danmuku.d.ts",
+      "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-danmuku.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku.mjs",
+          "require": "./dist/artplayer-plugin-danmuku.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-danmuku.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+          "require": "./dist/artplayer-plugin-danmuku.legacy.js"
+        }
+      }
+    },
+    "registrySourceManifest": {
+      "status": "verified-local-git-object",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer-plugin-danmuku/package.json",
+      "sha256LF": "86c62cc56b7d634aa90b161f15d0a3a0002b33a5cf2afe316040922edc81576d",
+      "version": "5.2.1"
+    },
+    "historicalCore": {
+      "status": "verified-local-git-object",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "version": "5.3.1"
+    },
+    "registrySourceComparison": [
+      {
+        "file": "packages/artplayer-plugin-danmuku/README.md",
+        "sha256LF": "5a7bff740434fdb92d97d11b7a9f45fc1265a475112b898b50567937765a21f1",
+        "matchesArchiveBytes": true
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+        "sha256LF": "5c43532cf909238e0614e3eeee13146c6e1b117443e8bce54207636590b8fc74",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+        "sha256LF": "0bffd5d99a55025f707683487059e3be06a60a9cb55915e69907fce24eb0de55",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+        "sha256LF": "1ca59efa03a01e9fc7d16325a4563bc884839181f9c5bf1a68a7085c742d5cbd",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "86c62cc56b7d634aa90b161f15d0a3a0002b33a5cf2afe316040922edc81576d",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+        "sha256LF": "006c3e2d22425b936d6d09bf5138b0ae13c4cfffd0a571d03722c17137dbe99c",
+        "matchesArchiveBytes": true
+      }
+    ]
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.2.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.2.0.tgz",
+      "integrity": "sha512-iHHSGEc0J+gl7imX4nmLqqC7LXmv8xeGf2lUevhhyUCoiCRZplecpKQICHjErVb1Yqyp1xCy6Sp8eYN+EpFWFw==",
+      "sha256": "8fe9e7b088eff985a269fe03f60a97f40b6bfec89fbf1fa9cdacbff9cd5ca07f",
+      "publishedAt": "2025-09-06T05:34:27.583Z",
+      "registryGitHead": "18475f08fd7ad22f4dca3e2167a670d27bfdff09",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "c4b7c1631ec78047d421da409ca10201fe11491d0f7c180eca8ed3c27dc14a6a",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "8685fcb120ee9d908f48cb7949b4ce8cf4e301b175a774b29ad3539cf9feacd1",
+        "package/dist/artplayer-plugin-danmuku.mjs": "9deda143957412832cfec7766049f244a75edab2085027337da5f43ed2c3665e",
+        "package/package.json": "497bcdf4c1eea225ce82d3afb7e21e0468a5a94fa6efe9bb654d063ae2910ceb",
+        "package/types/artplayer-plugin-danmuku.d.ts": "006c3e2d22425b936d6d09bf5138b0ae13c4cfffd0a571d03722c17137dbe99c"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-danmuku",
+        "version": "5.2.0",
+        "description": "Danmuku plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "import": "./dist/artplayer-plugin-danmuku.mjs",
+            "require": "./dist/artplayer-plugin-danmuku.js",
+            "types": "./types/artplayer-plugin-danmuku.d.ts"
+          },
+          "./legacy": {
+            "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+            "require": "./dist/artplayer-plugin-danmuku.legacy.js",
+            "types": "./types/artplayer-plugin-danmuku.d.ts"
+          }
+        },
+        "main": "./dist/artplayer-plugin-danmuku.js",
+        "module": "./dist/artplayer-plugin-danmuku.mjs",
+        "types": "./types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "entrypoints": {
+        "main": "./dist/artplayer-plugin-danmuku.js",
+        "module": "./dist/artplayer-plugin-danmuku.mjs",
+        "types": "./types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": {
+          ".": {
+            "import": "./dist/artplayer-plugin-danmuku.mjs",
+            "require": "./dist/artplayer-plugin-danmuku.js",
+            "types": "./types/artplayer-plugin-danmuku.d.ts"
+          },
+          "./legacy": {
+            "import": "./dist/artplayer-plugin-danmuku.legacy.js",
+            "require": "./dist/artplayer-plugin-danmuku.legacy.js",
+            "types": "./types/artplayer-plugin-danmuku.d.ts"
+          }
+        }
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "18475f08fd7ad22f4dca3e2167a670d27bfdff09",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "db3f07f3ea12d5a48ea0aea076341205b709218c1f3342806cafef9e903ff2e5",
+        "version": "5.1.9"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "18475f08fd7ad22f4dca3e2167a670d27bfdff09",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "fbadd47595d282efdfddfb3fe0b8470c2fe12319a7737a6abd77fd7155ba4f7a",
+        "version": "5.3.0-beta.3"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "7c2e12c65ea70d81255b179766d8066a2020699aee5278686fa422700b610604",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "64759f088e0932d5641212f1e3ea9f4e432481ccfb79ccf0056c3aa8fd1ec815",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+          "sha256LF": "f75730e9cfb8351d97141159da9aa2f58943b3524b81f95800ccf5e016c956f9",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "db3f07f3ea12d5a48ea0aea076341205b709218c1f3342806cafef9e903ff2e5",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "006c3e2d22425b936d6d09bf5138b0ae13c4cfffd0a571d03722c17137dbe99c",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.8",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.8.tgz",
+      "integrity": "sha512-J9kUtU46/07ZckvmfFDwfJRJDLD7UIfrWVutc7EqDCkUModArOISifXkD27/R2ruIpfAJk6HxOfB0cQfvjbZCQ==",
+      "sha256": "c9250da97d6037b8aab573f66fc688457fa5b7a18dfcd1e0e5435e7db60d8a4f",
+      "publishedAt": "2025-08-01T07:32:20.976Z",
+      "registryGitHead": "ea392e0d60bcdbbde498080be12e7f4f93944b0a",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.esm.js": "9a73ecf33dbcd79c7e46d568bdc4b23906644b24e94217b04ce8bf7937e262c1",
+        "package/dist/artplayer-plugin-danmuku.esm.js.map": "7fc1be26f9189cca9021979e4d5b2de925542bc845e802fa37ecf4da2b9fca90",
+        "package/dist/artplayer-plugin-danmuku.js": "0b9464ba631abca9e28c21ba1183bb2a8b23d77c18200648cb82ec512ab100a2",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "b736df345b4ed5690a52932a97d577421ca7898aa3b69d9763179c2cdbf654cd",
+        "package/package.json": "03d67e975e41f9b2818cac2fc5ac82c95b4f49982d2ad42b11ca28c364b0d8d0",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "877b5c2ddee26c26cdc8f328f12e69db15c2f4ff4165960a4b8c61867acdcca0",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "f05eb5cbdbb8cadd0fe05ea68218ed5c57a5381a069018e71ac4282acdcf7e80",
+        "package/src/style.less": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "efa48e17618fe15051269d4790dabc39c345ea1a86c143645667d764e0633d73"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.8",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "ea392e0d60bcdbbde498080be12e7f4f93944b0a",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "dcebd3c41191b94ac20aaf5445a694eec4417a48a8252f86c3d80a818340e5ef",
+        "version": "5.1.7"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "ea392e0d60bcdbbde498080be12e7f4f93944b0a",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "6952d6e7d603106d6fe66cf7fdf119cd4fa77361144bb62a20a6e11ef89fb75d",
+        "version": "5.2.4"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.esm.js",
+          "sha256LF": "0162bf80b8d1e6eb4350a5d9d5fecf7ce93ab73af2acc3929d76387eadab9e67",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.esm.js.map",
+          "sha256LF": "7fc1be26f9189cca9021979e4d5b2de925542bc845e802fa37ecf4da2b9fca90",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "9d796ce67e7e30c4be7ad2c8d879511b4fcde5436723b6b93f8d27593a8ec554",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "16eb50bba4d20b53fe9fe71c2daf1dff93409f43bc67862aa49c4a80757800b1",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "dcebd3c41191b94ac20aaf5445a694eec4417a48a8252f86c3d80a818340e5ef",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "877b5c2ddee26c26cdc8f328f12e69db15c2f4ff4165960a4b8c61867acdcca0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "f05eb5cbdbb8cadd0fe05ea68218ed5c57a5381a069018e71ac4282acdcf7e80",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "efa48e17618fe15051269d4790dabc39c345ea1a86c143645667d764e0633d73",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.7",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.7.tgz",
+      "integrity": "sha512-lnfPQlzRzG16/UOLr4OjYVHTwka2SeEbmAHANxAR02rwSTBVfmqTi/OATccvuXtXwaCCF+Oik9XKQAvkhsAUXQ==",
+      "sha256": "cfe47e5aab9d20422a4216b4dc153c3a6e32e17b2bdd9c06d7c9419a68581a6c",
+      "publishedAt": "2025-08-01T01:37:35.518Z",
+      "registryGitHead": null,
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.esm.js": "0162bf80b8d1e6eb4350a5d9d5fecf7ce93ab73af2acc3929d76387eadab9e67",
+        "package/dist/artplayer-plugin-danmuku.esm.js.map": "7fc1be26f9189cca9021979e4d5b2de925542bc845e802fa37ecf4da2b9fca90",
+        "package/dist/artplayer-plugin-danmuku.js": "9d796ce67e7e30c4be7ad2c8d879511b4fcde5436723b6b93f8d27593a8ec554",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "16eb50bba4d20b53fe9fe71c2daf1dff93409f43bc67862aa49c4a80757800b1",
+        "package/package.json": "dcebd3c41191b94ac20aaf5445a694eec4417a48a8252f86c3d80a818340e5ef",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "877b5c2ddee26c26cdc8f328f12e69db15c2f4ff4165960a4b8c61867acdcca0",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "f05eb5cbdbb8cadd0fe05ea68218ed5c57a5381a069018e71ac4282acdcf7e80",
+        "package/src/style.less": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "efa48e17618fe15051269d4790dabc39c345ea1a86c143645667d764e0633d73"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.7",
+        "name": "artplayer-plugin-danmuku",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "module": "dist/artplayer-plugin-danmuku.esm.js",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "exports": {
+          "import": "./dist/artplayer-plugin-danmuku.esm.js",
+          "require": "./dist/artplayer-plugin-danmuku.js",
+          "default": "./dist/artplayer-plugin-danmuku.js"
+        },
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": "dist/artplayer-plugin-danmuku.esm.js",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": {
+          "import": "./dist/artplayer-plugin-danmuku.esm.js",
+          "require": "./dist/artplayer-plugin-danmuku.js",
+          "default": "./dist/artplayer-plugin-danmuku.js"
+        }
+      },
+      "registrySourceManifest": {
+        "status": "registry-gitHead-absent",
+        "file": "packages/artplayer-plugin-danmuku/package.json"
+      },
+      "historicalCore": {
+        "status": "registry-gitHead-absent",
+        "file": "packages/artplayer/package.json"
+      },
+      "registrySourceComparison": []
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.6",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.6.tgz",
+      "integrity": "sha512-3JufaEvxI0bTR74vxLU7K9F9OLmR3yrDFqeflV0T0QWedabassX5hsl0AyNNcjVkfdm3A5s1YC0icdtiFZA1Ig==",
+      "sha256": "8e2f7b135e01ba4af022ba098e6584fc2c33e8629627641285fda8674e90fb9b",
+      "publishedAt": "2025-04-20T01:35:48.740Z",
+      "registryGitHead": "2aaef7db45e04d11e886f9bb59cb22c5a458b2f3",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "5e57041111c11b7378a40453d2aa3c64cfbc7dcbaa809917eb1b3e523a15ac24",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "c6c384adb53d31b5fa88ac0badfec5a145cddf6b8af494aa3add1ce1b0164ce9",
+        "package/package.json": "8fc534301cd843ea767b546d45c0329e8539d42c708379052494b62bb0f3dc4c",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "66bd17ac9dee79e192a2bcc2c0e5f7247dbf676b7a96929f0abde0944d40bd8c",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "f05eb5cbdbb8cadd0fe05ea68218ed5c57a5381a069018e71ac4282acdcf7e80",
+        "package/src/style.less": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "efa48e17618fe15051269d4790dabc39c345ea1a86c143645667d764e0633d73"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.6",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "2aaef7db45e04d11e886f9bb59cb22c5a458b2f3",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "8fc534301cd843ea767b546d45c0329e8539d42c708379052494b62bb0f3dc4c",
+        "version": "5.1.6"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "2aaef7db45e04d11e886f9bb59cb22c5a458b2f3",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "59b29c249778ee2ab4fc603a35e5de1509bad5104565315fcfdcb7a5e30944a9",
+        "version": "5.2.2"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "5e57041111c11b7378a40453d2aa3c64cfbc7dcbaa809917eb1b3e523a15ac24",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "c6c384adb53d31b5fa88ac0badfec5a145cddf6b8af494aa3add1ce1b0164ce9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "8fc534301cd843ea767b546d45c0329e8539d42c708379052494b62bb0f3dc4c",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "66bd17ac9dee79e192a2bcc2c0e5f7247dbf676b7a96929f0abde0944d40bd8c",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "f05eb5cbdbb8cadd0fe05ea68218ed5c57a5381a069018e71ac4282acdcf7e80",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "efa48e17618fe15051269d4790dabc39c345ea1a86c143645667d764e0633d73",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.5",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.5.tgz",
+      "integrity": "sha512-iFjdXVbkw5FbkB98SOwMPQEFJp7k6Io4nHfehpSdCc7Eo1gkmjNShOT6dAtAH1kLMHjh38vRnf/oYwCvTKkVOw==",
+      "sha256": "6140f7edbe16a8bae0bff1c287bf8e1db01a4942075222a6d8a9150021f6ec86",
+      "publishedAt": "2025-01-19T09:34:27.588Z",
+      "registryGitHead": "fae71811db4a1f6999690d527aa1c715266cb32c",
+      "files": {
+        "package/README.md": "16f81e764780afe2b56f572f35af5705da11688a156107cc941cb83d70ab4bcb",
+        "package/dist/artplayer-plugin-danmuku.js": "5e57041111c11b7378a40453d2aa3c64cfbc7dcbaa809917eb1b3e523a15ac24",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "c6c384adb53d31b5fa88ac0badfec5a145cddf6b8af494aa3add1ce1b0164ce9",
+        "package/package.json": "e63d42147f3f0bf7f0eb82288f91e396e55314a20b969d60329af991dc2238fd",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "66bd17ac9dee79e192a2bcc2c0e5f7247dbf676b7a96929f0abde0944d40bd8c",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "1333aec4721c93d5ee022162063158955affc7bc55fafbb4a83498364cc4ad65",
+        "package/src/style.less": "867954f11d9661b0ed141e47546a82ae952cbcbf2110e388130b5c85f0a8f111",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "16bd5670878c49cacd2e8e1a9424536b91f7931778fa08e8aa72f0d20ff9ca0b"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.5",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "fae71811db4a1f6999690d527aa1c715266cb32c",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "7088172d44d87f4fcbbd3fdda82045e78b9ae8bbdee5e6c59dd55fff82418651",
+        "version": "5.1.4"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "fae71811db4a1f6999690d527aa1c715266cb32c",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "59b29c249778ee2ab4fc603a35e5de1509bad5104565315fcfdcb7a5e30944a9",
+        "version": "5.2.2"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "9d374ca46076e31f5563c73d1232036a1d4f059676a256f3e1c13c6a384e5d4e",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "0311f36467c7ab4c5d8997ee7870c2dde007f5aa508579d433863ed5f2fc4c0e",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "7088172d44d87f4fcbbd3fdda82045e78b9ae8bbdee5e6c59dd55fff82418651",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "66bd17ac9dee79e192a2bcc2c0e5f7247dbf676b7a96929f0abde0944d40bd8c",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "1333aec4721c93d5ee022162063158955affc7bc55fafbb4a83498364cc4ad65",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "efa48e17618fe15051269d4790dabc39c345ea1a86c143645667d764e0633d73",
+          "matchesArchiveBytes": false
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.4",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.4.tgz",
+      "integrity": "sha512-f2gJ9HsvSmOwg6UdNcWCUkSI6WmfkTiQKVDWr+pRJF9jQ2wK8c4YjNJ11SY63H5OGlaJBSvWWyNVdFHOX7pUbg==",
+      "sha256": "6dcf90ac29d19aa957de6405174a593acb5b48d461ec0836a433a6cd9435f305",
+      "publishedAt": "2024-06-13T03:13:28.713Z",
+      "registryGitHead": "b4e31219173e0e045cdfdec2295b13c870505ff0",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "9d374ca46076e31f5563c73d1232036a1d4f059676a256f3e1c13c6a384e5d4e",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "0311f36467c7ab4c5d8997ee7870c2dde007f5aa508579d433863ed5f2fc4c0e",
+        "package/package.json": "7088172d44d87f4fcbbd3fdda82045e78b9ae8bbdee5e6c59dd55fff82418651",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "4f0b443d90c1525b9af8e620971e55673c231a9159f91ac31de12a7d4f104105",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "17275c53a227e4479d5ed224d9b09ded0507b25e3ab76c53274527527d8af206",
+        "package/src/style.less": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "056fb7ad80769718577b0a23ab75684a67e50315c07f5e17d64ee626acb228a1"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.4",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "b4e31219173e0e045cdfdec2295b13c870505ff0",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "7088172d44d87f4fcbbd3fdda82045e78b9ae8bbdee5e6c59dd55fff82418651",
+        "version": "5.1.4"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "b4e31219173e0e045cdfdec2295b13c870505ff0",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "412253a67616ed94c058a4eefdb5f0e7b863f696a92e5ac9e3e82c87ce5aec0d",
+        "version": "5.1.6"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "13719de1bbb28fd12bc26b77eedb62453a21fb51988e7fa8f5e11ba0afa63399",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "a957b6f157201d5b66cee7dcd8f4231e7c6f0961a702825c19086fc505376a8f",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "7088172d44d87f4fcbbd3fdda82045e78b9ae8bbdee5e6c59dd55fff82418651",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "4f0b443d90c1525b9af8e620971e55673c231a9159f91ac31de12a7d4f104105",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "17275c53a227e4479d5ed224d9b09ded0507b25e3ab76c53274527527d8af206",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "056fb7ad80769718577b0a23ab75684a67e50315c07f5e17d64ee626acb228a1",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.3",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.3.tgz",
+      "integrity": "sha512-jHj1hRPKHGvB/Vh0m96O80Cq9UGp5WjGw6PZwnEafrcc3CqTbJhewWS5jqb7qRWkTgfJXWBty/u1lMagUeoIrA==",
+      "sha256": "1c0f18c2c14058bf7ee8f91868431a445e04d0817cfd825fb7fa1a34fcb7a286",
+      "publishedAt": "2024-06-12T13:48:43.333Z",
+      "registryGitHead": "665348ad5575d9422aa886ce07358159601163ac",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "13719de1bbb28fd12bc26b77eedb62453a21fb51988e7fa8f5e11ba0afa63399",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "a957b6f157201d5b66cee7dcd8f4231e7c6f0961a702825c19086fc505376a8f",
+        "package/package.json": "deffa72215517145ffbc9075dca0044100b038933a1a0b482bb55e0df5eab4b8",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "4f0b443d90c1525b9af8e620971e55673c231a9159f91ac31de12a7d4f104105",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "4ef11da455914c4996220f66a331c2a2b28c62f2e1864552d3c1b960367dc853",
+        "package/src/style.less": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "056fb7ad80769718577b0a23ab75684a67e50315c07f5e17d64ee626acb228a1"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.3",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "665348ad5575d9422aa886ce07358159601163ac",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "deffa72215517145ffbc9075dca0044100b038933a1a0b482bb55e0df5eab4b8",
+        "version": "5.1.3"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "665348ad5575d9422aa886ce07358159601163ac",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "412253a67616ed94c058a4eefdb5f0e7b863f696a92e5ac9e3e82c87ce5aec0d",
+        "version": "5.1.6"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "944581149436a8ddb8892177798193979ef5e9a8d545f1d883e69a27ac5cce71",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "04a82e795078902bdedc613f18e2f7bc33a1997a553612b81e82716cff6e1501",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "deffa72215517145ffbc9075dca0044100b038933a1a0b482bb55e0df5eab4b8",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "4f0b443d90c1525b9af8e620971e55673c231a9159f91ac31de12a7d4f104105",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "4ef11da455914c4996220f66a331c2a2b28c62f2e1864552d3c1b960367dc853",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "60140d423361eeb5fbee5723b7b7b28cc5ff20ca588ba433f9dd6bfd22ea7e5e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "056fb7ad80769718577b0a23ab75684a67e50315c07f5e17d64ee626acb228a1",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.2",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.2.tgz",
+      "integrity": "sha512-r1+CTzKQlKsMEKglORMKkZWKYBKN2PDZnvurZKH52n6un5Zkgw2ibQnbCvWzsgJ8IdIt2jrufiMq020BXXPwMQ==",
+      "sha256": "3da17ec92f33df87828094b1f711b9baff3ae16577c7786f1005c79504e6e063",
+      "publishedAt": "2024-06-05T01:17:30.526Z",
+      "registryGitHead": "403be5dc6b1d88291353413b37e5927808449a9e",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "944581149436a8ddb8892177798193979ef5e9a8d545f1d883e69a27ac5cce71",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "04a82e795078902bdedc613f18e2f7bc33a1997a553612b81e82716cff6e1501",
+        "package/package.json": "3cd290ef72b391419442cf190b32ffe75f8c55e7dc91edd9587294e9ca48e8b7",
+        "package/src/bilibili.js": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+        "package/src/danmuku.js": "00d15aa81a2fe8f2a2914bd9f65276b7b9f69bbed3aa77a0b76340b4aaa0bc2f",
+        "package/src/heatmap.js": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "113ce4fcef3bf143d3517e5f5e9f0425926e76d70bd875a75fddc0bf24bfc9cc",
+        "package/src/style.less": "84e928468dc411b111c264c7a028bc01966a93baa1e2c4de59b63abeda4e8e59",
+        "package/src/worker.js": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+        "package/types/artplayer-plugin-danmuku.d.ts": "bc2f2ba1c0a3e5567ca13d84fa42b6526c3aaf03d146936d89dc519de0e035eb"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.2",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "403be5dc6b1d88291353413b37e5927808449a9e",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "3cd290ef72b391419442cf190b32ffe75f8c55e7dc91edd9587294e9ca48e8b7",
+        "version": "5.1.2"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "403be5dc6b1d88291353413b37e5927808449a9e",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "a9a02df04041e6578b84b0caeb7ae2dad49c9996acf7bd6296d6ebe8adcb3910",
+        "version": "5.1.6"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "f1ea6697c60dab8a80230e968ca4b87258e001ca45997ba600ee87aba6a1b31f",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "c3a319158898b2c3307e28ea2a417f85668c433a06d111142319e6b70cd3a7d9",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "3cd290ef72b391419442cf190b32ffe75f8c55e7dc91edd9587294e9ca48e8b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "e01f39d0d6d34aa2d546d77ca121a757cb5ea555d63b48836a95f695cdf11fe0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "00d15aa81a2fe8f2a2914bd9f65276b7b9f69bbed3aa77a0b76340b4aaa0bc2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "1db9f92d508d9bed84389e3fb1f24331ad4fe0c9493de443e492c4a43488bc63",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "113ce4fcef3bf143d3517e5f5e9f0425926e76d70bd875a75fddc0bf24bfc9cc",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "84e928468dc411b111c264c7a028bc01966a93baa1e2c4de59b63abeda4e8e59",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "987338e575647552f9065b1867867a21d812216e9d190f1adc03464b0fc459f9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "bc2f2ba1c0a3e5567ca13d84fa42b6526c3aaf03d146936d89dc519de0e035eb",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.1",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.1.tgz",
+      "integrity": "sha512-5A0j9pjKZI5hy5q2zk94shty4LoKdQgdUjlAfgiK9AgcfBv6EZE0itYNwoYzTMYJhSWmZ4CTDxpePXGMV261wQ==",
+      "sha256": "565a2e2587a85067f9fa9a0a67edbd0f21a09dd830f359b263cb33954677ca3a",
+      "publishedAt": "2024-06-02T11:51:28.874Z",
+      "registryGitHead": "41cdde4b7901b0d63bb9c28b6d8d1a042250705b",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "0623c1beebed8f51792c21967ecf1bdf141faa4f6c26d996001573100e850d57",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "4156c63e406b2c5b026232eb37af4566e1ffccba8b427e6d413c20f5dcb940a6",
+        "package/package.json": "341f9d88239a3ff7db1062da833f9905008ae23276cf1ff38862d705c2b6016e",
+        "package/src/bilibili.js": "c2cf47b2fdb22addaa5fb17bc4b719d29a3fb036a3dcddf980d8c43d7a2cdc36",
+        "package/src/danmuku.js": "dfa1d201cbe95a7ac036cc97731b9033fe7c651f0cba0d7b36c49e5b6e9a6e65",
+        "package/src/heatmap.js": "e93714dc046402ccce7fc736f8755b51b5c2d6bf74efbb77cf3e00f2b91d857f",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "e271bced7c29bba0f2d5c3024bfba81c7edb0e150f370aa347c8ec3750afb33d",
+        "package/src/style.less": "bccb1fb17fad5e40c2b4c86719c5aab4fe0d0e685421a8a6a07bddd050857d68",
+        "package/src/worker.js": "5c90f383abb41873a6de5f178f2ebf6cada2d200dd8aa3f78318705180d3d745",
+        "package/types/artplayer-plugin-danmuku.d.ts": "b36293053bfd7787ddb0365f4705b626ff9f7e3e5b90f0c36f212b6f82df5875"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.1",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "41cdde4b7901b0d63bb9c28b6d8d1a042250705b",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "a54c64b4f5297b03a776775678612b90e994ee5d187662579a15634d665da25f",
+        "version": "5.1.0"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "41cdde4b7901b0d63bb9c28b6d8d1a042250705b",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "814b784a8880ebbef321f0776b7cc1e5480ea3abee403f507af9d850df7f6c3a",
+        "version": "5.1.5"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "61e05ae1cb000696e123f78be770519e74f5b702032e4c09a28ca194e67dbb10",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "0119dad66b911663dea0d856b8a61f54204417708582a3a53807fe370f806b76",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "a54c64b4f5297b03a776775678612b90e994ee5d187662579a15634d665da25f",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "c2cf47b2fdb22addaa5fb17bc4b719d29a3fb036a3dcddf980d8c43d7a2cdc36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "52c5422bf3f1b95f01283ed0f7b50bfa0093757b58928f10e3d94bf419421f4e",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "e93714dc046402ccce7fc736f8755b51b5c2d6bf74efbb77cf3e00f2b91d857f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "e271bced7c29bba0f2d5c3024bfba81c7edb0e150f370aa347c8ec3750afb33d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "bccb1fb17fad5e40c2b4c86719c5aab4fe0d0e685421a8a6a07bddd050857d68",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "5c90f383abb41873a6de5f178f2ebf6cada2d200dd8aa3f78318705180d3d745",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "b36293053bfd7787ddb0365f4705b626ff9f7e3e5b90f0c36f212b6f82df5875",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.1.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.1.0.tgz",
+      "integrity": "sha512-F2dGt8nmSrAkGGNoKErrPipNqW8OueTYsE/Yh8Cze8oSWSHpXnaZbhqkg5ZFtLCNp85/MHrU0OUv3+D4wKmYGA==",
+      "sha256": "827214779335f56039cdc0e2d5fb1f8e072ae30f883d74d38b94752d6d6ba1bb",
+      "publishedAt": "2024-05-31T23:18:54.995Z",
+      "registryGitHead": "d86840749b12718d6ce016848e691dbde33db477",
+      "files": {
+        "package/README.md": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+        "package/dist/artplayer-plugin-danmuku.js": "61e05ae1cb000696e123f78be770519e74f5b702032e4c09a28ca194e67dbb10",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "0119dad66b911663dea0d856b8a61f54204417708582a3a53807fe370f806b76",
+        "package/package.json": "a54c64b4f5297b03a776775678612b90e994ee5d187662579a15634d665da25f",
+        "package/src/bilibili.js": "c2cf47b2fdb22addaa5fb17bc4b719d29a3fb036a3dcddf980d8c43d7a2cdc36",
+        "package/src/danmuku.js": "52c5422bf3f1b95f01283ed0f7b50bfa0093757b58928f10e3d94bf419421f4e",
+        "package/src/heatmap.js": "e93714dc046402ccce7fc736f8755b51b5c2d6bf74efbb77cf3e00f2b91d857f",
+        "package/src/img/check_off.svg": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+        "package/src/img/check_on.svg": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+        "package/src/img/config.svg": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+        "package/src/img/mode_0_off.svg": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+        "package/src/img/mode_0_on.svg": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+        "package/src/img/mode_1_off.svg": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+        "package/src/img/mode_1_on.svg": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+        "package/src/img/mode_2_off.svg": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+        "package/src/img/mode_2_on.svg": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+        "package/src/img/off.svg": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+        "package/src/img/on.svg": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+        "package/src/img/style.svg": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+        "package/src/index.js": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+        "package/src/setting.js": "e271bced7c29bba0f2d5c3024bfba81c7edb0e150f370aa347c8ec3750afb33d",
+        "package/src/style.less": "bccb1fb17fad5e40c2b4c86719c5aab4fe0d0e685421a8a6a07bddd050857d68",
+        "package/src/worker.js": "5c90f383abb41873a6de5f178f2ebf6cada2d200dd8aa3f78318705180d3d745",
+        "package/types/artplayer-plugin-danmuku.d.ts": "b36293053bfd7787ddb0365f4705b626ff9f7e3e5b90f0c36f212b6f82df5875"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.1.0",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "d86840749b12718d6ce016848e691dbde33db477",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "a54c64b4f5297b03a776775678612b90e994ee5d187662579a15634d665da25f",
+        "version": "5.1.0"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "d86840749b12718d6ce016848e691dbde33db477",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "aaf3ba9c7beaaea31170cc50e3958c0bb5d779ab4f90b6a213994ce8c9aace36",
+        "version": "5.1.2"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "46decce71f6c59b7970b81c035fd5336329fcf879709ac7a2bbe06905bd86c27",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "61e05ae1cb000696e123f78be770519e74f5b702032e4c09a28ca194e67dbb10",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "0119dad66b911663dea0d856b8a61f54204417708582a3a53807fe370f806b76",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "a54c64b4f5297b03a776775678612b90e994ee5d187662579a15634d665da25f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "c2cf47b2fdb22addaa5fb17bc4b719d29a3fb036a3dcddf980d8c43d7a2cdc36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "52c5422bf3f1b95f01283ed0f7b50bfa0093757b58928f10e3d94bf419421f4e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "e93714dc046402ccce7fc736f8755b51b5c2d6bf74efbb77cf3e00f2b91d857f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_off.svg",
+          "sha256LF": "8cb8e31da1bf7b5be8f4065920b46e1988755910218fb121dd3d9649c50156cf",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/check_on.svg",
+          "sha256LF": "c5a34f56c56b0f696b4e3740c73e803076b5bfdfdee89714793118fc4c6baa84",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/config.svg",
+          "sha256LF": "bbd7c2952740ac8220f396477eaca3b01f6c249866d880ece38c565cc77c5e36",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_off.svg",
+          "sha256LF": "fe9e5e1745e8206a4eda0d0ac30815f301c37acccec2564bbda51c1fa4bd1e1e",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_0_on.svg",
+          "sha256LF": "96720a81f0315caf6c70664de934e49d22e6dd070a9f6ca1fec2a9a96af4d138",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_off.svg",
+          "sha256LF": "3ccd22bf3648dc260cd1d0b6a60a9226a853764ae20efb8fe9c940cd856c81b2",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_1_on.svg",
+          "sha256LF": "2238ca27e3c7c4c687d10de13b794d8be70ae1c5ba9225ebad27f251cfe5f12a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_off.svg",
+          "sha256LF": "31423e3d67c00839adc77dd871dc1da55f77c8b83b5a37b445e4b4c3f46c6d6d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/mode_2_on.svg",
+          "sha256LF": "96b4c9db8d5055c8777fda74cb5e0f32b3e12e62a1e0bacbf75d2088f4505e2f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/off.svg",
+          "sha256LF": "4e6743ee28002e16117caf47ea3bffb34ca75bcc4118744b4ee720829ae3b563",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/on.svg",
+          "sha256LF": "cc0fb7048bff6dc3f14a17ed549209c67e9bc34368cb1571e0abd8035c7b59b7",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/style.svg",
+          "sha256LF": "9034ea7b9a214a6d4c086c02cf85f42b1c4487cec0906e919fc91e99dfff529a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "096eeb016ae1323434029a4bc88d060a5c1bf4f77c1269e6fbd4b09c5746b4dd",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "e271bced7c29bba0f2d5c3024bfba81c7edb0e150f370aa347c8ec3750afb33d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "bccb1fb17fad5e40c2b4c86719c5aab4fe0d0e685421a8a6a07bddd050857d68",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "5c90f383abb41873a6de5f178f2ebf6cada2d200dd8aa3f78318705180d3d745",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "b36293053bfd7787ddb0365f4705b626ff9f7e3e5b90f0c36f212b6f82df5875",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.0.1",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.0.1.tgz",
+      "integrity": "sha512-b6/Y4/+X0rNmnqS5+zzQgow+WW4iVT8eFv4LAUzJgIyORIcf5Gn00Dy0PZ+kwGb1VJy0CUCRK6gVVvh0tWsRAg==",
+      "sha256": "6ecf4ff8a2289e85d0ad7c8ba97e32a0d432a4fd45dce438fff4371a90122846",
+      "publishedAt": "2023-05-03T03:59:57.685Z",
+      "registryGitHead": "8ff35b5f6f74e607e4d22d085252e837cfd9cd98",
+      "files": {
+        "package/README.md": "3c4259d1bf03fd5059b058b476f4dbe4ca140f149630fc49fed5df6d67a97436",
+        "package/dist/artplayer-plugin-danmuku.js": "4e520c267f1612b9d59ef9cbbbf13509b021027a262a9031e02931924643cc57",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "40db9f9d5c738122d8510256d7541a244c42c9000c1519f28e7639fead3d7699",
+        "package/package.json": "8f1966e020cdaf3d43f311e49eff283c182bafaa5a5c1f3a31cfef8d9e21b0c0",
+        "package/src/bilibili.js": "154c94e979e31cc2bd4f51736b8a0f164b4b93b86da8f4005162a240ffbb6d2a",
+        "package/src/danmuku.js": "ccecc9fb501fcd7c0f023d400b1e25b89655b7d718d09c632027260c6e20c8db",
+        "package/src/getDanmuTop.js": "33895709bdf4e1412c98cac43fddc670cde2d0d867940c6e0be4e04318cbbc85",
+        "package/src/heatmap.js": "9dba62558d64f78c26a2bb8f8d080c5acb361af1c84630a53d658a845891d0df",
+        "package/src/img/danmu-config.svg": "4663b0250341a69286683e93644c9fa193ed3d8862612dba659a54834b0b112d",
+        "package/src/img/danmu-off.svg": "a9423b1fa20bad51102c08d226bdd7bda7c68f94270d06746fb0a752a4b8ab79",
+        "package/src/img/danmu-on.svg": "c71a36ea24c4cb28ba29e0a9f14fbf6677178226c7d551bddbe49f8110800fd6",
+        "package/src/img/danmu-style.svg": "f5b0ef602172a668210a037aae4d0406792292b3e76cb6613e173606eb3633de",
+        "package/src/index.js": "a905cf9753c4ce0a9aec10232719cd735b5e81461cdf77134294d4ce2110fcd4",
+        "package/src/setting.js": "bcfb8f6c0d3b27e43b0ab11d62cd32b4eaf49b264fc50494c7279a6a3730e55b",
+        "package/src/style.less": "cd687d5c65d2efca9fd32353797868dff4f9344a166703c76ee44c1e6da4d89f",
+        "package/src/worker.js": "fcb69bf2af7349b1320d6f7a0987c6580c8c2c54c08be2f0cabfe5b6547da23f",
+        "package/types/artplayer-plugin-danmuku.d.ts": "d75afb1079d421c71d583f21b24e0f7e9c06b66916e4480f9fbb330043cf40c3"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.0.1",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "8ff35b5f6f74e607e4d22d085252e837cfd9cd98",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "8f1966e020cdaf3d43f311e49eff283c182bafaa5a5c1f3a31cfef8d9e21b0c0",
+        "version": "5.0.1"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "8ff35b5f6f74e607e4d22d085252e837cfd9cd98",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "3a721574b7dd3eb5a02bda3eaebfa402dd6d9fd362c9cf36d2f12a349561d5cc",
+        "version": "5.0.5"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "3c4259d1bf03fd5059b058b476f4dbe4ca140f149630fc49fed5df6d67a97436",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "d2c3aeddbda83befa243f2c1178bce044fdbfca3e849854b3223e0388831144b",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "6d76d4c69450358a409ad4dd3f27ddc2e9d2050384b739a3fcae7fb0566bea8a",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "8f1966e020cdaf3d43f311e49eff283c182bafaa5a5c1f3a31cfef8d9e21b0c0",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "154c94e979e31cc2bd4f51736b8a0f164b4b93b86da8f4005162a240ffbb6d2a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "ccecc9fb501fcd7c0f023d400b1e25b89655b7d718d09c632027260c6e20c8db",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/getDanmuTop.js",
+          "sha256LF": "33895709bdf4e1412c98cac43fddc670cde2d0d867940c6e0be4e04318cbbc85",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/heatmap.js",
+          "sha256LF": "9dba62558d64f78c26a2bb8f8d080c5acb361af1c84630a53d658a845891d0df",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-config.svg",
+          "sha256LF": "246138f284193761078a7668990557629e7966c1ba834154ad9f9daf8ee5d9e9",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-off.svg",
+          "sha256LF": "743c5c8b96dd7fc1361abe1a7e7139c41647487c9a877e1a623ca50629d4b2b8",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-on.svg",
+          "sha256LF": "560cf3c7eed0bdc2def9fad152f71f4daeb842102696311aeb12d1b1d0eab1ee",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-style.svg",
+          "sha256LF": "bac5c41208eb5e7b79cdc0c7fb3b117dd01b1d3c44d62765f329da911511bfef",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "a905cf9753c4ce0a9aec10232719cd735b5e81461cdf77134294d4ce2110fcd4",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "bcfb8f6c0d3b27e43b0ab11d62cd32b4eaf49b264fc50494c7279a6a3730e55b",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "cd687d5c65d2efca9fd32353797868dff4f9344a166703c76ee44c1e6da4d89f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "fcb69bf2af7349b1320d6f7a0987c6580c8c2c54c08be2f0cabfe5b6547da23f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "8ffd5f5b87f915c3925b5ee0249d4de1e29ec48825ae3ff2c7ae1c24756b5c56",
+          "matchesArchiveBytes": false
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.0.0.tgz",
+      "integrity": "sha512-swnnTIHnwyAft4Pbh7uQtzjNNhqoiMffuEvZ3eUkMfFGWOEjoZ23TQ7rqXXY08iGJTIWt4Rn7iqUS5DdKsHy9g==",
+      "sha256": "6ee366f60f2bbc8d813ca419edaa32f4d2484dac58d4843a25cc0b8021f0c44c",
+      "publishedAt": "2023-04-23T10:14:05.436Z",
+      "registryGitHead": "08ff3dd19d24fbbc62b900f19a91aba08e1bf9f6",
+      "files": {
+        "package/README.md": "3c4259d1bf03fd5059b058b476f4dbe4ca140f149630fc49fed5df6d67a97436",
+        "package/dist/artplayer-plugin-danmuku.js": "46510684dac35241dfbd354cdfd514d498fbecef2d92e3cc8e52313a9f712bbd",
+        "package/dist/artplayer-plugin-danmuku.legacy.js": "b438a902954eaed93a9ea1ecaa7b58ace67806aa0b3ecc4e07bed87f4aab1af1",
+        "package/package.json": "2f9c39b9b05567c429ee54ef2910e559ceb85a3343183e466795998c52928b80",
+        "package/src/bilibili.js": "154c94e979e31cc2bd4f51736b8a0f164b4b93b86da8f4005162a240ffbb6d2a",
+        "package/src/danmuku.js": "7d017868c909bc3a94d4038e1c55b07c3b0e39e628f91b74257ad60b6e3108ce",
+        "package/src/getDanmuTop.js": "33895709bdf4e1412c98cac43fddc670cde2d0d867940c6e0be4e04318cbbc85",
+        "package/src/img/danmu-config.svg": "246138f284193761078a7668990557629e7966c1ba834154ad9f9daf8ee5d9e9",
+        "package/src/img/danmu-off.svg": "743c5c8b96dd7fc1361abe1a7e7139c41647487c9a877e1a623ca50629d4b2b8",
+        "package/src/img/danmu-on.svg": "560cf3c7eed0bdc2def9fad152f71f4daeb842102696311aeb12d1b1d0eab1ee",
+        "package/src/img/danmu-style.svg": "bac5c41208eb5e7b79cdc0c7fb3b117dd01b1d3c44d62765f329da911511bfef",
+        "package/src/index.js": "700dd27cfaf87a7609de6a84d389e2d175c246f835bdef2ab9cf378a50cc91f6",
+        "package/src/setting.js": "23d1d4c815f0871505fc652dbefb3fa88732441c21eaa29e54e2fd457256ba81",
+        "package/src/style.less": "4a7c500edd90ecdf71f785890415b278cfdaa9e10f0f95b05d78f313c0622b37",
+        "package/src/worker.js": "fcb69bf2af7349b1320d6f7a0987c6580c8c2c54c08be2f0cabfe5b6547da23f",
+        "package/types/artplayer-plugin-danmuku.d.ts": "982746483054da0b43211218b4433f32fe77131d49bb5b7f9b9af819bb82d2e3"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "5.0.0",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": "dist/artplayer-plugin-danmuku.legacy.js",
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "08ff3dd19d24fbbc62b900f19a91aba08e1bf9f6",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "2f9c39b9b05567c429ee54ef2910e559ceb85a3343183e466795998c52928b80",
+        "version": "5.0.0"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "08ff3dd19d24fbbc62b900f19a91aba08e1bf9f6",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "54a304a95596c172aa2aca667682c4ae920a1d62730bb614baa538dc6d29f5db",
+        "version": "5.0.0"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "3c4259d1bf03fd5059b058b476f4dbe4ca140f149630fc49fed5df6d67a97436",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "2de375819fa0fa8e0f1dd16decb42f3ac23ed78c19f4c869759a200e3ab4996d",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+          "sha256LF": "e6ddde26dbfc5b26d75b85a210ce75e97fe6b84689542ad510971ecef8d850e1",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "2f9c39b9b05567c429ee54ef2910e559ceb85a3343183e466795998c52928b80",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "154c94e979e31cc2bd4f51736b8a0f164b4b93b86da8f4005162a240ffbb6d2a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "7d017868c909bc3a94d4038e1c55b07c3b0e39e628f91b74257ad60b6e3108ce",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/getDanmuTop.js",
+          "sha256LF": "33895709bdf4e1412c98cac43fddc670cde2d0d867940c6e0be4e04318cbbc85",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-config.svg",
+          "sha256LF": "246138f284193761078a7668990557629e7966c1ba834154ad9f9daf8ee5d9e9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-off.svg",
+          "sha256LF": "743c5c8b96dd7fc1361abe1a7e7139c41647487c9a877e1a623ca50629d4b2b8",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-on.svg",
+          "sha256LF": "560cf3c7eed0bdc2def9fad152f71f4daeb842102696311aeb12d1b1d0eab1ee",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-style.svg",
+          "sha256LF": "bac5c41208eb5e7b79cdc0c7fb3b117dd01b1d3c44d62765f329da911511bfef",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "700dd27cfaf87a7609de6a84d389e2d175c246f835bdef2ab9cf378a50cc91f6",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "23d1d4c815f0871505fc652dbefb3fa88732441c21eaa29e54e2fd457256ba81",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "4a7c500edd90ecdf71f785890415b278cfdaa9e10f0f95b05d78f313c0622b37",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "fcb69bf2af7349b1320d6f7a0987c6580c8c2c54c08be2f0cabfe5b6547da23f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "982746483054da0b43211218b4433f32fe77131d49bb5b7f9b9af819bb82d2e3",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "4.4.11",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-4.4.11.tgz",
+      "integrity": "sha512-/4F8IyB29Bdr1LV1RM3FM7CdiAMsVNOOJ/HY4jaJCXnMAKThQiGa++0PhCJ07nhyGvDcZGRL2/UWJRz9zZJFNw==",
+      "sha256": "11da9a9a69e096dce7dada4ea12d9ef715f8fedc5479e88d3a8e364f8cfad926",
+      "publishedAt": "2022-10-11T02:48:34.632Z",
+      "registryGitHead": "e0351a7b930033307d4efd77e9b07a1d5be3e665",
+      "files": {
+        "package/README.md": "3c4259d1bf03fd5059b058b476f4dbe4ca140f149630fc49fed5df6d67a97436",
+        "package/dist/artplayer-plugin-danmuku.js": "ea5b69bcfc8175c63e942eb17e353f6d9acd1ccc3fd8e6aba49772f706bbeaa8",
+        "package/package.json": "aa2f35ef193e65200cda26ee619c28e20f7edd6edbfad89c08f401de891478a3",
+        "package/src/bilibili.js": "154c94e979e31cc2bd4f51736b8a0f164b4b93b86da8f4005162a240ffbb6d2a",
+        "package/src/danmuku.js": "ebcf164638f92e275478f16d6b76af0a30cc6a388f65dfda8234cff1608a71c5",
+        "package/src/getDanmuTop.js": "33895709bdf4e1412c98cac43fddc670cde2d0d867940c6e0be4e04318cbbc85",
+        "package/src/img/danmu-config.svg": "246138f284193761078a7668990557629e7966c1ba834154ad9f9daf8ee5d9e9",
+        "package/src/img/danmu-off.svg": "743c5c8b96dd7fc1361abe1a7e7139c41647487c9a877e1a623ca50629d4b2b8",
+        "package/src/img/danmu-on.svg": "560cf3c7eed0bdc2def9fad152f71f4daeb842102696311aeb12d1b1d0eab1ee",
+        "package/src/img/danmu-style.svg": "bac5c41208eb5e7b79cdc0c7fb3b117dd01b1d3c44d62765f329da911511bfef",
+        "package/src/index.js": "552fab0a432b349417caeb5c8b898cf8c4ebfd372e156e0a0bcbce65416d4909",
+        "package/src/setting.js": "1b1c4ce4d52ff202c072693e9d96563c69c2ce7067e6931433983adb6d8da0e2",
+        "package/src/style.less": "1ba61cd4744f7248a1fb9548aced06efd4c2e9494bde92474e48c4472b1878c1",
+        "package/src/worker.js": "fcb69bf2af7349b1320d6f7a0987c6580c8c2c54c08be2f0cabfe5b6547da23f",
+        "package/types/artplayer-plugin-danmuku.d.ts": "982746483054da0b43211218b4433f32fe77131d49bb5b7f9b9af819bb82d2e3"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "4.4.11",
+        "name": "artplayer-plugin-danmuku",
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "> 0.5%, last 2 versions, not dead",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": "types/artplayer-plugin-danmuku.d.ts",
+        "legacy": null,
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "e0351a7b930033307d4efd77e9b07a1d5be3e665",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "2b3d07e39ba302df5e804c9c480460470e8aacbab731573f838705a9a9efd391",
+        "version": "4.4.10"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "e0351a7b930033307d4efd77e9b07a1d5be3e665",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "232695f1ed9c44e2187b017379be852c6da51d3dbe812fff8c9eb44e43702217",
+        "version": "4.5.8"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "3c4259d1bf03fd5059b058b476f4dbe4ca140f149630fc49fed5df6d67a97436",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "e42c7eab9ddf2a7ff376a5c6ef8e455ca522441b88a6eef9550ee60c8156a6b4",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "2b3d07e39ba302df5e804c9c480460470e8aacbab731573f838705a9a9efd391",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "154c94e979e31cc2bd4f51736b8a0f164b4b93b86da8f4005162a240ffbb6d2a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "ebcf164638f92e275478f16d6b76af0a30cc6a388f65dfda8234cff1608a71c5",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/getDanmuTop.js",
+          "sha256LF": "33895709bdf4e1412c98cac43fddc670cde2d0d867940c6e0be4e04318cbbc85",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-config.svg",
+          "sha256LF": "246138f284193761078a7668990557629e7966c1ba834154ad9f9daf8ee5d9e9",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-off.svg",
+          "sha256LF": "743c5c8b96dd7fc1361abe1a7e7139c41647487c9a877e1a623ca50629d4b2b8",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-on.svg",
+          "sha256LF": "560cf3c7eed0bdc2def9fad152f71f4daeb842102696311aeb12d1b1d0eab1ee",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/img/danmu-style.svg",
+          "sha256LF": "bac5c41208eb5e7b79cdc0c7fb3b117dd01b1d3c44d62765f329da911511bfef",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "552fab0a432b349417caeb5c8b898cf8c4ebfd372e156e0a0bcbce65416d4909",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "a9535a41ad79771d960aefa48612f1fddb0811a16ba64cc0e22deb89194ac4f4",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/style.less",
+          "sha256LF": "1ba61cd4744f7248a1fb9548aced06efd4c2e9494bde92474e48c4472b1878c1",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/worker.js",
+          "sha256LF": "fcb69bf2af7349b1320d6f7a0987c6580c8c2c54c08be2f0cabfe5b6547da23f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts",
+          "sha256LF": "982746483054da0b43211218b4433f32fe77131d49bb5b7f9b9af819bb82d2e3",
+          "matchesArchiveBytes": true
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "3.5.31",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-3.5.31.tgz",
+      "integrity": "sha512-rOdX2ujuCi/IX3lmsnXob1eAdd2x3UyemcC2uAUUD83St0nwcQvt27Kvme6M5/zQsEo3LzE7iesIsx3LeMvWpA==",
+      "sha256": "08e997e0dcd07a46866ddb83c19142a0781666fc430998bcd8cb7e9486ba09dc",
+      "publishedAt": "2021-11-01T01:38:02.660Z",
+      "registryGitHead": "af1a116a31b088efdd77afa81c4b6565d12bd162",
+      "files": {
+        "package/LICENSE": "e10af0b158a3cd8d923fd524b234cc2ee7219f08746ec3851e71e59d5061f2c2",
+        "package/README.md": "6096f1be46f3352cebd2f37449a93e5e0cb776432cfe35852d651d840490c30d",
+        "package/dist/artplayer-plugin-danmuku.js": "9fde8d3cb39ecc783403230a0f055d9de46b258c896b47f2c63467b45122e035",
+        "package/package.json": "10bce323ab5a2089333676f834f4d1ea9e8f6032960ace4e4f3de4c70b55452f",
+        "package/src/bilibili.js": "62315c81744cb561b788daf1ba7d5fda8b6bfefd7ebdb86345fd8ba531976b35",
+        "package/src/danmuku.js": "2be900a7cea2aaee1a8cc8a659c00e945288bc823eb8b2e5555727d18f4119ef",
+        "package/src/getDanmuTop.js": "9ea8053493152e3a2bf06dc0763b071cdc78602a7306a0180aaaa702596583a6",
+        "package/src/i18n.js": "d75ca22db63443987621ba14524f3c26ab406b6c8c037e14af5fcb926ff8d52b",
+        "package/src/index.js": "32da330e150972281f78ea4806bb0b85b75d714e1140c4612817dfd3e5c02a32",
+        "package/src/setting.js": "ea8a28e3995d804a6eb8339d076bd8f68ea71fce827fd7725b22b8c670e5b465",
+        "package/src/utils.js": "609fce77b0fb027e76f56b540c4caee0e911a4104a0067ad9adf3ebd79b460d0"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-danmuku",
+        "version": "3.5.31",
+        "expose": "artplayerPluginDanmuku",
+        "description": "Danmuku plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "keywords": [
+          "video",
+          "player"
+        ],
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "homepage": "https://github.com/zhw2590582/ArtPlayer#readme",
+        "gitHead": "af1a116a31b088efdd77afa81c4b6565d12bd162"
+      },
+      "entrypoints": {
+        "main": "dist/artplayer-plugin-danmuku.js",
+        "module": null,
+        "types": null,
+        "legacy": null,
+        "exports": null
+      },
+      "registrySourceManifest": {
+        "status": "verified-local-git-object",
+        "commit": "af1a116a31b088efdd77afa81c4b6565d12bd162",
+        "file": "packages/artplayer-plugin-danmuku/package.json",
+        "sha256LF": "c62c3c122fa3238d451c74fa579f1d0abdafa035e6214a8819ee7dceffcb178b",
+        "version": "3.5.31"
+      },
+      "historicalCore": {
+        "status": "verified-local-git-object",
+        "commit": "af1a116a31b088efdd77afa81c4b6565d12bd162",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "8b67bd5fcd17a5e481dd477cc0e2b8327160a7b5699dab7b22c884c109a494eb",
+        "version": "3.5.31"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku/LICENSE",
+          "status": "git-object-or-path-unavailable"
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/README.md",
+          "sha256LF": "6096f1be46f3352cebd2f37449a93e5e0cb776432cfe35852d651d840490c30d",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+          "sha256LF": "9fde8d3cb39ecc783403230a0f055d9de46b258c896b47f2c63467b45122e035",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/package.json",
+          "sha256LF": "c62c3c122fa3238d451c74fa579f1d0abdafa035e6214a8819ee7dceffcb178b",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/bilibili.js",
+          "sha256LF": "62315c81744cb561b788daf1ba7d5fda8b6bfefd7ebdb86345fd8ba531976b35",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/danmuku.js",
+          "sha256LF": "2be900a7cea2aaee1a8cc8a659c00e945288bc823eb8b2e5555727d18f4119ef",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/getDanmuTop.js",
+          "sha256LF": "9ea8053493152e3a2bf06dc0763b071cdc78602a7306a0180aaaa702596583a6",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/i18n.js",
+          "sha256LF": "d75ca22db63443987621ba14524f3c26ab406b6c8c037e14af5fcb926ff8d52b",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/index.js",
+          "sha256LF": "32da330e150972281f78ea4806bb0b85b75d714e1140c4612817dfd3e5c02a32",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/setting.js",
+          "sha256LF": "ea8a28e3995d804a6eb8339d076bd8f68ea71fce827fd7725b22b8c670e5b465",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku/src/utils.js",
+          "sha256LF": "609fce77b0fb027e76f56b540c4caee0e911a4104a0067ad9adf3ebd79b460d0",
+          "matchesArchiveBytes": true
+        }
+      ]
+    }
+  ],
+  "observations": {
+    "latestArchiveMatchesFrozenSourceFiles": [
+      "packages/artplayer-plugin-danmuku/README.md",
+      "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+      "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+      "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+      "packages/artplayer-plugin-danmuku/package.json",
+      "packages/artplayer-plugin-danmuku/types/artplayer-plugin-danmuku.d.ts"
+    ],
+    "sourceAssociationScope": "Registry gitHead manifests are source associations only. Missing gitHead or unavailable Git paths are retained as gaps; core version does not establish published availability or minimum support."
+  }
+}
