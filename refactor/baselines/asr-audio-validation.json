@@ -1,0 +1,551 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ASR-02",
+  "baseCommit": "a22586a172a4f061205c514267473189c6ce759d",
+  "capturedAt": "2026-09-13T06:08:57.980Z",
+  "unit": {
+    "historicalImplementations": 7,
+    "audioScenariosPerImplementation": 19,
+    "audioPassed": 133,
+    "publicPassed": 28,
+    "provenancePassed": 4,
+    "command": "node --test test/asr.test.js test/asr-audio.test.js refactor/scripts/asr-contract.test.mjs"
+  },
+  "browser": {
+    "passed": 8,
+    "skipped": 4,
+    "failed": 0,
+    "rows": [
+      {
+        "title": "ASR 2.0.0 + published: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "inputs": {
+          "version": "2.0.0",
+          "core": "published",
+          "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+          "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 852,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 849,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.0.0 + candidate: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "inputs": {
+          "version": "2.0.0",
+          "core": "candidate",
+          "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+          "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 837,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 849,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 850,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.1.0 + published: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "inputs": {
+          "version": "2.1.0",
+          "core": "published",
+          "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+          "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 850,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.1.0 + candidate: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "inputs": {
+          "version": "2.1.0",
+          "core": "candidate",
+          "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+          "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 860,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 850,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 852,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.0.0 + published: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "inputs": {
+          "version": "2.0.0",
+          "core": "published",
+          "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+          "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 899,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 852,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 838,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 849,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.0.0 + candidate: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "inputs": {
+          "version": "2.0.0",
+          "core": "candidate",
+          "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+          "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 0,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 852,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 849,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.1.0 + published: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "inputs": {
+          "version": "2.1.0",
+          "core": "published",
+          "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+          "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 0,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 840,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 852,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.1.0 + candidate: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "inputs": {
+          "version": "2.1.0",
+          "core": "candidate",
+          "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+          "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "function",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "function"
+        },
+        "chunks": [
+          {
+            "samples": 1600,
+            "max": 0,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 852,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          },
+          {
+            "samples": 1600,
+            "max": 851,
+            "wavBytes": 3244,
+            "sampleRate": 16000
+          }
+        ],
+        "annotations": []
+      },
+      {
+        "title": "ASR 2.0.0 + published: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "webkit",
+        "status": "skipped",
+        "browser": "26.6",
+        "inputs": {
+          "version": "2.0.0",
+          "core": "published",
+          "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+          "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "undefined"
+        },
+        "chunks": [],
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+            "location": {
+              "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+              "line": 27,
+              "column": 14
+            }
+          }
+        ]
+      },
+      {
+        "title": "ASR 2.0.0 + candidate: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "webkit",
+        "status": "skipped",
+        "browser": "26.6",
+        "inputs": {
+          "version": "2.0.0",
+          "core": "candidate",
+          "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+          "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "undefined"
+        },
+        "chunks": [],
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+            "location": {
+              "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+              "line": 27,
+              "column": 14
+            }
+          }
+        ]
+      },
+      {
+        "title": "ASR 2.1.0 + published: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "webkit",
+        "status": "skipped",
+        "browser": "26.6",
+        "inputs": {
+          "version": "2.1.0",
+          "core": "published",
+          "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+          "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "undefined"
+        },
+        "chunks": [],
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+            "location": {
+              "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+              "line": 27,
+              "column": 14
+            }
+          }
+        ]
+      },
+      {
+        "title": "ASR 2.1.0 + candidate: native Worklet supplies local PCM and stop closes AudioContext",
+        "project": "webkit",
+        "status": "skipped",
+        "browser": "26.6",
+        "inputs": {
+          "version": "2.1.0",
+          "core": "candidate",
+          "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+          "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+          "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+          "media": "local mono AAC 440 Hz tone",
+          "networkService": false
+        },
+        "capabilities": {
+          "AudioContext": "undefined",
+          "webkitAudioContext": "undefined",
+          "AudioWorkletNode": "undefined"
+        },
+        "chunks": [],
+        "annotations": [
+          {
+            "type": "skip",
+            "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+            "location": {
+              "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+              "line": 27,
+              "column": 14
+            }
+          }
+        ]
+      }
+    ],
+    "reportPath": "refactor/.cache/asr02-browser-final/report.json",
+    "reportSha256": "e6c6de70406c39a5d24c55505aa77837054c681c613baebcc30d38fcb9fce993",
+    "firstRun": {
+      "passed": 8,
+      "failed": 4,
+      "reason": "Fixture extended an unavailable AudioContext constructor; independent native probe found all three WebAudio globals undefined in Windows WebKit 26.6.",
+      "reportPath": "refactor/.cache/asr02-browser-before/report.json"
+    }
+  },
+  "limits": [
+    "Controlled audio is not native audio evidence.",
+    "Windows WebKit has no WebAudio; Safari/device acceptance remains pending.",
+    "Native tests cover initial capture and stop only; candidate resource fixes need new regressions.",
+    "No external ASR service or microphone request."
+  ]
+}

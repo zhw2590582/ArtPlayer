@@ -4560,7 +4560,7 @@
     {
       "id": "ASR-CHUNK-01",
       "title": "ASR tick discards underfilled chunks and overrun samples in source",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-ASR-02",
@@ -4568,7 +4568,10 @@
       ],
       "evidence": [
         "refactor/baselines/asr-contract.md",
-        "refactor/baselines/asr-release.json"
+        "refactor/baselines/asr-release.json",
+        "test/asr-audio.test.js",
+        "refactor/changes/2026-09-13-PKG-ASR-02-audio-baseline.md",
+        "refactor/baselines/asr-audio-validation.json"
       ],
       "compatibleResolution": "Reproduce exact sample loss and retain queue remainders with bounded, ordered callback delivery.",
       "closureCriteria": "Exact PCM/WAV byte sequence and slow/rejected callback regression tests pass without losing or reordering accepted input."
@@ -4576,7 +4579,7 @@
     {
       "id": "ASR-LIFE-01",
       "title": "ASR partial initialization, pause resume and stale callback cleanup need controlled evidence",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-ASR-02",
@@ -4585,7 +4588,10 @@
       ],
       "evidence": [
         "refactor/baselines/asr-contract.md",
-        "refactor/baselines/asr-release.json"
+        "refactor/baselines/asr-release.json",
+        "test/asr-audio.test.js",
+        "refactor/changes/2026-09-13-PKG-ASR-02-audio-baseline.md",
+        "refactor/baselines/asr-audio-validation.json"
       ],
       "compatibleResolution": "Own pending setup, URLs, source nodes and callbacks across pause, stop, restart and terminal destruction.",
       "closureCriteria": "Failure/race regression tests plus native WebAudio playback and cleanup evidence prove resource ownership."

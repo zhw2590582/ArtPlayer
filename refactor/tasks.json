@@ -2639,11 +2639,14 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "PCM/WAV、chunk 时序、回调慢/拒绝、重复初始化与停止",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-ASR-02-audio-baseline.md",
+        "baselines/asr-audio-validation.json"
+      ]
     },
     {
       "id": "PKG-ASR-03",

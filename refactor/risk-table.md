@@ -207,5 +207,5 @@
 | CORE-DEFAULTS-SSR-01 | resolved / 已复现 | Reading static defaults throws when navigator is absent | CORE-25 |
 | ENG-DIST-PUBLIC-01 | resolved / 已复现 | Vite copied authored declarations into library distribution | ENG-12 |
 | ASR-TYPE-01 | open / 源码/产物事实 | ASR declarations omit asynchronous stop and callback text results | PKG-ASR-04 |
-| ASR-CHUNK-01 | open / 源码/产物事实 | ASR tick discards underfilled chunks and overrun samples in source | PKG-ASR-02, PKG-ASR-03 |
-| ASR-LIFE-01 | open / 源码/产物事实 | ASR partial initialization, pause resume and stale callback cleanup need controlled evidence | PKG-ASR-02, PKG-ASR-03, PKG-ASR-05 |
+| ASR-CHUNK-01 | open / 已复现 | ASR tick discards underfilled chunks and overrun samples in source | PKG-ASR-02, PKG-ASR-03 |
+| ASR-LIFE-01 | open / 已复现 | ASR partial initialization, pause resume and stale callback cleanup need controlled evidence | PKG-ASR-02, PKG-ASR-03, PKG-ASR-05 |
