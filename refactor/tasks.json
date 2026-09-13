@@ -2518,11 +2518,17 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "模型参数、start/stop、默认下载路径及 mask 样式",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 SDK-08，分别核实 Yarn 解析版本、未固定版本的模型 solutionPath 和资源来源",
-      "evidence": []
+      "evidence": [
+        "baselines/danmuku-mask-release.json",
+        "baselines/danmuku-mask-registry.json",
+        "baselines/danmuku-mask-contract.md",
+        "baselines/danmuku-mask-contract-validation.json",
+        "changes/2026-09-13-PKG-MASK-01-contract.md"
+      ]
     },
     {
       "id": "PKG-MASK-02",
@@ -2536,7 +2542,7 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",

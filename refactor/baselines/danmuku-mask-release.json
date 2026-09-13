@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "registry": "https://registry.npmjs.org/artplayer-plugin-danmuku-mask",
+  "capturedAt": "2026-09-13T09:18:03.395Z",
+  "sourceCommit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+  "sourceNormalization": "Git source text normalized to LF; archive and binary asset members hashed as bytes.",
+  "source": {
+    "packages/artplayer-plugin-danmuku-mask/.npmignore": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+    "packages/artplayer-plugin-danmuku-mask/README.md": "31ecede166379454dfd030c73b1e83cfcffd2d7e3361abe624838f3db7314cae",
+    "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js": "07cebbfbf77f8ec4b2df6a77d7d7300345b86f2993e220ff14e1aae530e4fb31",
+    "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js": "a678a3c0f6d3920bee3b66af9943b3612935028bff61c96677b8eaf8ef7cc8f0",
+    "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs": "48f7a449dc9555ab4060a578902b5431701f81b2f093a7cb0526042a8c417400",
+    "packages/artplayer-plugin-danmuku-mask/package.json": "b216164ada1b9baf4fcec3388036839c28686f864e3d2a706258af78e6633887",
+    "packages/artplayer-plugin-danmuku-mask/src/index.js": "2397900688f86bc74bc86a4e870f69478a651bd8df02bba543cdab832773fd6e",
+    "packages/artplayer-plugin-danmuku-mask/types/artplayer-plugin-danmuku-mask.d.ts": "bbb270d73fc791488ac306f55e8c78990d0d9eef0a9d70cdf6093dadd7dff4b2",
+    "docs/assets/example/danmuku.mask.js": "c0fe4f2d4cd60738583c4bfeebc24bc3365d8ca382e6f4ff86e1056f5a2729a8"
+  },
+  "registrySnapshot": {
+    "status": 200,
+    "bodySha256": "b4caa94b8179a6c6e6ff8f96ed7ec09a615df48afadd2cad66409cf176395820",
+    "distTags": {
+      "latest": "1.1.0"
+    },
+    "stableVersions": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "prereleaseVersions": [],
+    "scope": "All stable versions listed in the live registry snapshot; registry signatures not independently verified."
+  },
+  "release": {
+    "name": "artplayer-plugin-danmuku-mask",
+    "version": "1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku-mask/-/artplayer-plugin-danmuku-mask-1.1.0.tgz",
+    "integrity": "sha512-VBmmwtNLj0TKYz9lWbyQ7A8osQHdyDiPMazP9g1UZbLyw/rMJ3qRclMgszRpZHN9hod0dQl2iYSJDoaqu3hGOQ==",
+    "sha256": "96682e46cb140a84b164818dd118480d7be42b24afaab390027a25e52e8ae31c",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "publishedAt": "2026-03-12T14:21:17.027Z",
+    "files": {
+      "package/README.md": "31ecede166379454dfd030c73b1e83cfcffd2d7e3361abe624838f3db7314cae",
+      "package/dist/artplayer-plugin-danmuku-mask.js": "07cebbfbf77f8ec4b2df6a77d7d7300345b86f2993e220ff14e1aae530e4fb31",
+      "package/dist/artplayer-plugin-danmuku-mask.legacy.js": "a678a3c0f6d3920bee3b66af9943b3612935028bff61c96677b8eaf8ef7cc8f0",
+      "package/dist/artplayer-plugin-danmuku-mask.mjs": "48f7a449dc9555ab4060a578902b5431701f81b2f093a7cb0526042a8c417400",
+      "package/package.json": "b216164ada1b9baf4fcec3388036839c28686f864e3d2a706258af78e6633887",
+      "package/types/artplayer-plugin-danmuku-mask.d.ts": "bbb270d73fc791488ac306f55e8c78990d0d9eef0a9d70cdf6093dadd7dff4b2"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.1.0",
+      "description": "Danmuku mask plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku-mask.mjs",
+          "require": "./dist/artplayer-plugin-danmuku-mask.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+          "import": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "require": "./dist/artplayer-plugin-danmuku-mask.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-danmuku-mask.js",
+      "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+      "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+      "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "browserslist": "last 1 Chrome version",
+      "dependencies": {
+        "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+        "@tensorflow-models/body-segmentation": "^1.0.2",
+        "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+        "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+        "@tensorflow/tfjs-converter": "^4.21.0",
+        "@tensorflow/tfjs-core": "^4.21.0"
+      }
+    },
+    "entrypoints": {
+      "main": "./dist/artplayer-plugin-danmuku-mask.js",
+      "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+      "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+      "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js"
+    },
+    "missingEntrypoints": [],
+    "registrySourceManifest": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer-plugin-danmuku-mask/package.json",
+      "version": "1.0.1",
+      "sha256LF": "320f1762d2e062089d11e013fa2199dae36003e3500252900e47c593d16af265",
+      "versionMatchesRelease": false
+    },
+    "historicalCore": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c"
+    },
+    "registrySourceComparison": [
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/.npmignore",
+        "sha256LF": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/README.md",
+        "sha256LF": "31ecede166379454dfd030c73b1e83cfcffd2d7e3361abe624838f3db7314cae",
+        "matchesArchiveBytes": true
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+        "sha256LF": "9e4f16458fe4887d5850591ee6a8ed07b13ce819dd2d30d23610548772de5f63",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+        "sha256LF": "871af38b439e1e49fad2bdc8e4f25a25bc9335ad023dee9ecfb66ddd326b81cb",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs",
+        "sha256LF": "b0669d5348fc21e3b1d6ec7d0baa95d822e27d79ee555c751ca7ab71e2b3ecb8",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/package.json",
+        "sha256LF": "320f1762d2e062089d11e013fa2199dae36003e3500252900e47c593d16af265",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/src/index.js",
+        "sha256LF": "2397900688f86bc74bc86a4e870f69478a651bd8df02bba543cdab832773fd6e",
+        "matchesArchiveBytes": false
+      },
+      {
+        "file": "packages/artplayer-plugin-danmuku-mask/types/artplayer-plugin-danmuku-mask.d.ts",
+        "sha256LF": "bbb270d73fc791488ac306f55e8c78990d0d9eef0a9d70cdf6093dadd7dff4b2",
+        "matchesArchiveBytes": true
+      }
+    ]
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku-mask/-/artplayer-plugin-danmuku-mask-1.0.0.tgz",
+      "integrity": "sha512-x5Kd6nfPYyXVUoy4xNq7EQ8PeVGOiWVpIT75RVOrGLMjFrBKvAYp0btcjSu9ZZN7aAkB9MtAyFcTB6hbkOX8uw==",
+      "sha256": "8a88f52ae843bed1be01a2e60b82cf886d33582f990a5016d49b1409c3493c4b",
+      "registryGitHead": "b36f88db5f7fe0250285fd4f47229842231f402b",
+      "publishedAt": "2026-01-04T08:48:59.809Z",
+      "files": {
+        "package/README.md": "8c042edec31eb22fb6022bc5a94f3b896a877653141cc0a7819d853d4ae3add4",
+        "package/dist/artplayer-plugin-danmuku-mask.js": "940cc240fcdb208427cb25d54180f9b84e0bfa96b5a4d3ba68fa9fb2ad8ffa16",
+        "package/dist/artplayer-plugin-danmuku-mask.legacy.js": "49da39c368e036f894e623277ce837efa9b7524a040d8ae01e2245b3459c3c9f",
+        "package/dist/artplayer-plugin-danmuku-mask.mjs": "92ae895c45c3dd39110c3513eb5cb6d99b9249d96b37b7fd1a6437e97febdc8f",
+        "package/package.json": "c24d66328eff31d93789a24e6e198bc92126f62ce4dd6c8929f64e4458b3b02a",
+        "package/types/artplayer-plugin-danmuku-mask.d.ts": "bbb270d73fc791488ac306f55e8c78990d0d9eef0a9d70cdf6093dadd7dff4b2"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-danmuku-mask",
+        "version": "1.0.0",
+        "description": "Danmuku mask plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+            "import": "./dist/artplayer-plugin-danmuku-mask.mjs",
+            "require": "./dist/artplayer-plugin-danmuku-mask.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+            "import": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "require": "./dist/artplayer-plugin-danmuku-mask.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-danmuku-mask.js",
+        "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+        "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+        "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+          "@tensorflow-models/body-segmentation": "^1.0.2",
+          "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+          "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+          "@tensorflow/tfjs-converter": "^4.21.0",
+          "@tensorflow/tfjs-core": "^4.21.0"
+        }
+      },
+      "entrypoints": {
+        "main": "./dist/artplayer-plugin-danmuku-mask.js",
+        "module": "./dist/artplayer-plugin-danmuku-mask.mjs",
+        "types": "./types/artplayer-plugin-danmuku-mask.d.ts",
+        "legacy": "./dist/artplayer-plugin-danmuku-mask.legacy.js"
+      },
+      "missingEntrypoints": [],
+      "registrySourceManifest": {
+        "commit": "b36f88db5f7fe0250285fd4f47229842231f402b",
+        "file": "packages/artplayer-plugin-danmuku-mask/package.json",
+        "version": "1.0.0",
+        "sha256LF": "c24d66328eff31d93789a24e6e198bc92126f62ce4dd6c8929f64e4458b3b02a",
+        "versionMatchesRelease": true
+      },
+      "historicalCore": {
+        "commit": "b36f88db5f7fe0250285fd4f47229842231f402b",
+        "file": "packages/artplayer/package.json",
+        "version": "5.3.1-beta.1",
+        "sha256LF": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497"
+      },
+      "registrySourceComparison": [
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/.npmignore",
+          "sha256LF": "19c9675ae41ddf5428d894c9edebf1800ffea8f9be5b7d77c01a3635116cd9e8",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/README.md",
+          "sha256LF": "8c042edec31eb22fb6022bc5a94f3b896a877653141cc0a7819d853d4ae3add4",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+          "sha256LF": "940cc240fcdb208427cb25d54180f9b84e0bfa96b5a4d3ba68fa9fb2ad8ffa16",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+          "sha256LF": "49da39c368e036f894e623277ce837efa9b7524a040d8ae01e2245b3459c3c9f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs",
+          "sha256LF": "92ae895c45c3dd39110c3513eb5cb6d99b9249d96b37b7fd1a6437e97febdc8f",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/package.json",
+          "sha256LF": "c24d66328eff31d93789a24e6e198bc92126f62ce4dd6c8929f64e4458b3b02a",
+          "matchesArchiveBytes": true
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/src/index.js",
+          "sha256LF": "105a6ffa4476cc0af680d1ef90e9095b17f73e33ffe5e4b70f245c1c095c196a",
+          "matchesArchiveBytes": false
+        },
+        {
+          "file": "packages/artplayer-plugin-danmuku-mask/types/artplayer-plugin-danmuku-mask.d.ts",
+          "sha256LF": "bbb270d73fc791488ac306f55e8c78990d0d9eef0a9d70cdf6093dadd7dff4b2",
+          "matchesArchiveBytes": true
+        }
+      ]
+    }
+  ],
+  "sdk": {
+    "lock": {
+      "file": "yarn.lock",
+      "commit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+      "sha256LF": "6dfb6c5b0154bcd3adc279e12c4393db66a6ec52274002adf2d5ab93caa05d4b"
+    },
+    "dependencies": [
+      {
+        "name": "@mediapipe/selfie_segmentation",
+        "range": "^0.1.1675465747",
+        "key": "@mediapipe/selfie_segmentation@^0.1.1675465747",
+        "version": "0.1.1675465747",
+        "resolved": "https://registry.npmjs.org/@mediapipe/selfie_segmentation/-/selfie_segmentation-0.1.1675465747.tgz",
+        "integrity": "sha512-IxYxNhwE5VwOm52L1yoFWYLP7q9Pd+NJjzOC5tlepfvEGaY3o9hslhUrx9BgseqdfZtKSDtd/4NfCSMjNzQalA==",
+        "installedManifest": {
+          "file": "node_modules/@mediapipe/selfie_segmentation/package.json",
+          "sha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+          "license": "Apache-2.0",
+          "peerDependencies": {}
+        }
+      },
+      {
+        "name": "@tensorflow-models/body-segmentation",
+        "range": "^1.0.2",
+        "key": "@tensorflow-models/body-segmentation@^1.0.2",
+        "version": "1.0.2",
+        "resolved": "https://registry.npmjs.org/@tensorflow-models/body-segmentation/-/body-segmentation-1.0.2.tgz",
+        "integrity": "sha512-sbPiL8wpqfKqh01of6qguZzU9yLWOQDTwiPEIHFPA/EAjz5T51LKHKIySll+mmteRo/TxNED8pxd9VJ6q2r7kg==",
+        "installedManifest": {
+          "file": "node_modules/@tensorflow-models/body-segmentation/package.json",
+          "sha256": "53d2b6b38be7d4d4ad44fce80d7d9bc58cf4a666b2791d846324e369d011b3dd",
+          "license": "Apache-2.0",
+          "peerDependencies": {
+            "@mediapipe/selfie_segmentation": "~0.1.0",
+            "@tensorflow/tfjs-backend-webgl": "^4.9.0",
+            "@tensorflow/tfjs-converter": "^4.9.0",
+            "@tensorflow/tfjs-core": "^4.9.0"
+          }
+        }
+      },
+      {
+        "name": "@tensorflow/tfjs-backend-cpu",
+        "range": "^4.21.0",
+        "key": "@tensorflow/tfjs-backend-cpu@^4.21.0",
+        "version": "4.22.0",
+        "resolved": "https://registry.npmjs.org/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-4.22.0.tgz",
+        "integrity": "sha512-1u0FmuLGuRAi8D2c3cocHTASGXOmHc/4OvoVDENJayjYkS119fcTcQf4iHrtLthWyDIPy3JiPhRrZQC9EwnhLw==",
+        "installedManifest": {
+          "file": "node_modules/@tensorflow/tfjs-backend-cpu/package.json",
+          "sha256": "9400f1a4ea5f144646b62c8b393f54ed53b3446a2827321ba6b462ac220f0859",
+          "license": "Apache-2.0",
+          "peerDependencies": {
+            "@tensorflow/tfjs-core": "4.22.0"
+          }
+        }
+      },
+      {
+        "name": "@tensorflow/tfjs-backend-webgl",
+        "range": "^4.21.0",
+        "key": "@tensorflow/tfjs-backend-webgl@^4.21.0",
+        "version": "4.22.0",
+        "resolved": "https://registry.npmjs.org/@tensorflow/tfjs-backend-webgl/-/tfjs-backend-webgl-4.22.0.tgz",
+        "integrity": "sha512-H535XtZWnWgNwSzv538czjVlbJebDl5QTMOth4RXr2p/kJ1qSIXE0vZvEtO+5EC9b00SvhplECny2yDewQb/Yg==",
+        "installedManifest": {
+          "file": "node_modules/@tensorflow/tfjs-backend-webgl/package.json",
+          "sha256": "286282c479b83d0b00d71d4ec40071c76244ad6da85441e0efc7a1b51456bf2f",
+          "license": "Apache-2.0",
+          "peerDependencies": {
+            "@tensorflow/tfjs-core": "4.22.0"
+          }
+        }
+      },
+      {
+        "name": "@tensorflow/tfjs-converter",
+        "range": "^4.21.0",
+        "key": "@tensorflow/tfjs-converter@^4.21.0",
+        "version": "4.22.0",
+        "resolved": "https://registry.npmjs.org/@tensorflow/tfjs-converter/-/tfjs-converter-4.22.0.tgz",
+        "integrity": "sha512-PT43MGlnzIo+YfbsjM79Lxk9lOq6uUwZuCc8rrp0hfpLjF6Jv8jS84u2jFb+WpUeuF4K33ZDNx8CjiYrGQ2trQ==",
+        "installedManifest": {
+          "file": "node_modules/@tensorflow/tfjs-converter/package.json",
+          "sha256": "b6a4f89058a5f4a5fdfb7fe0fe4cf3181023bdedcc80a374e0349c002ab068b5",
+          "license": "Apache-2.0",
+          "peerDependencies": {
+            "@tensorflow/tfjs-core": "4.22.0"
+          }
+        }
+      },
+      {
+        "name": "@tensorflow/tfjs-core",
+        "range": "^4.21.0",
+        "key": "@tensorflow/tfjs-core@^4.21.0",
+        "version": "4.22.0",
+        "resolved": "https://registry.npmjs.org/@tensorflow/tfjs-core/-/tfjs-core-4.22.0.tgz",
+        "integrity": "sha512-LEkOyzbknKFoWUwfkr59vSB68DMJ4cjwwHgicXN0DUi3a0Vh1Er3JQqCI1Hl86GGZQvY8ezVrtDIvqR1ZFW55A==",
+        "installedManifest": {
+          "file": "node_modules/@tensorflow/tfjs-core/package.json",
+          "sha256": "d4b3c3f337f7ea6de582ac1320b7521abe970a9b11f4d486e6929b29ccdbd283",
+          "license": "Apache-2.0",
+          "peerDependencies": {}
+        }
+      }
+    ],
+    "adapterFiles": {
+      "node_modules/@tensorflow-models/body-segmentation/dist/selfie_segmentation_mediapipe/segmenter.js": "a8d076647e9ba9a787fdf354e48de6ecf62d4d3f74c10505dc58ef975b63bb67",
+      "node_modules/@tensorflow-models/body-segmentation/dist/selfie_segmentation_mediapipe/types.d.ts": "c259e6d1f55c9d69ba61eaa8eb884461e30ef93557123a01172c9e8380576603",
+      "node_modules/@tensorflow-models/body-segmentation/dist/selfie_segmentation_mediapipe/segmenter_utils.js": "a6646102407f3ea0bd87e48d6a7c0c6d8fc64a179b7990deafac4b0ba3e4a413",
+      "node_modules/@tensorflow-models/body-segmentation/dist/selfie_segmentation_mediapipe/constants.js": "27b0ffba42da166433af40ab1d4f2a5eccc97edf416c5d2e2ec4a665a18e9f5d",
+      "node_modules/@tensorflow-models/body-segmentation/dist/create_segmenter.js": "8f1f9f9bb4d53ffb411e41123298d2053bd344955cf51bdec3eee39898e06ced",
+      "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation.js": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3"
+    },
+    "assets": [
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/README.md",
+        "bytes": 379,
+        "sha256": "9dad28188ae54ea420e3d29c23360b040a0dfb88954b99a3e456b8a8c93cf2a1",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/README.md",
+        "installedSha256": "9dad28188ae54ea420e3d29c23360b040a0dfb88954b99a3e456b8a8c93cf2a1",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/index.d.ts",
+        "bytes": 2772,
+        "sha256": "46152cccb63a9249503f7b8f49dbc3cfbd2a2994eda2c9f0db32a2998e1879a9",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/index.d.ts",
+        "installedSha256": "46152cccb63a9249503f7b8f49dbc3cfbd2a2994eda2c9f0db32a2998e1879a9",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/package.json",
+        "bytes": 734,
+        "sha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/package.json",
+        "installedSha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+        "bytes": 362,
+        "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+        "installedSha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js",
+        "bytes": 44542,
+        "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation.js",
+        "installedSha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+        "bytes": 249024,
+        "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+        "installedSha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite",
+        "bytes": 249792,
+        "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite",
+        "installedSha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data",
+        "installedSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+        "bytes": 276493,
+        "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+        "installedSha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+        "bytes": 5694839,
+        "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+        "installedSha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js",
+        "bytes": 276488,
+        "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js",
+        "installedSha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+        "matchesInstalled": true
+      },
+      {
+        "file": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm",
+        "bytes": 5587523,
+        "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+        "installedFile": "node_modules/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm",
+        "installedSha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+        "matchesInstalled": true
+      }
+    ],
+    "defaultSolutionPath": "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
+    "demoSolutionPath": "/assets/@mediapipe/selfie_segmentation",
+    "scope": "Read-only installed SDK source and existing local assets. No SDK/model execution, remote model requests, GPU or device validation. Installed assets are compared with frozen Git bytes; not independently authenticated against a newly downloaded SDK archive."
+  },
+  "observations": {
+    "latestArchiveMatchesFrozenSourceFiles": [
+      "packages/artplayer-plugin-danmuku-mask/README.md",
+      "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+      "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs",
+      "packages/artplayer-plugin-danmuku-mask/package.json",
+      "packages/artplayer-plugin-danmuku-mask/types/artplayer-plugin-danmuku-mask.d.ts"
+    ]
+  }
+}

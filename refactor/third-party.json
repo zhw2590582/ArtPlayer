@@ -1224,14 +1224,20 @@
       "riskId": "SDK-08",
       "owners": [
         "PKG-MASK-01",
-        "PKG-MASK-05"
+        "PKG-MASK-05",
+        "PKG-MASK-06"
       ],
       "sourceFiles": [
         "packages/artplayer-plugin-danmuku-mask/src/index.js"
       ],
       "contract": "Npm dependency versions are separate from unversioned solutionPath CDN assets; keep option override, backend fallback, model result disposal and masks.",
-      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
-      "demoPathsSource": "refactor/baselines/demo-inventory.json"
+      "validationStatus": "MASK01 verified two actual releases, six frozen Yarn/installed SDK versions, adapter source hashes and 12 existing demo resource byte matches. The default solutionPath remains an unversioned CDN. Controlled export/default/pixel probes do not establish real models, fallback, browser/GPU cleanup or notice completeness; MASK05/06 remain open.",
+      "demoPathsSource": "refactor/baselines/demo-inventory.json",
+      "reviewEvidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-contract-validation.json",
+        "refactor/baselines/danmuku-mask-release.json"
+      ]
     },
     {
       "id": "jassub-worker-wasm-fonts",

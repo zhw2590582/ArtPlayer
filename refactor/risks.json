@@ -743,14 +743,18 @@
     {
       "id": "SDK-08",
       "title": "mediapipe-tensorflow 实际集成验证范围",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
         "PKG-MASK-01",
-        "PKG-MASK-05"
+        "PKG-MASK-05",
+        "PKG-MASK-06"
       ],
       "evidence": [
-        "packages/artplayer-plugin-danmuku-mask/src/index.js"
+        "packages/artplayer-plugin-danmuku-mask/src/index.js",
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-contract-validation.json",
+        "refactor/baselines/danmuku-mask-release.json"
       ],
       "compatibleResolution": "Npm dependency versions are separate from unversioned solutionPath CDN assets; keep option override, backend fallback, model result disposal and masks.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
@@ -4898,6 +4902,110 @@
         "test/browser/chromecast-lifecycle.spec.js"
       ],
       "resolutionRationale": "35 candidate source/main/legacy tests and 135 native browser DOM/core cases verify corrected behavior against controlled SDK boundaries. 93 frozen historical observations remain. Actual remote SDK and receivers remain SDK06/CAST05, not waived."
+    },
+    {
+      "id": "MASK-LIFETIME-01",
+      "title": "Mask asynchronous initialization and inference continue after stop or destroy",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-02",
+        "PKG-MASK-03"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-contract-validation.json"
+      ],
+      "compatibleResolution": "Invalidate stale work while keeping restartable stop distinct from final destroy; release model and subscriptions.",
+      "closureCriteria": "Pending initialization/inference cannot write masks or schedule work after stop/destroy; errors settle and owned resources are released."
+    },
+    {
+      "id": "MASK-START-01",
+      "title": "Concurrent Mask start calls can initialize multiple models and create independent RAF chains",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-02",
+        "PKG-MASK-03"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-contract-validation.json"
+      ],
+      "compatibleResolution": "Share pending initialization and own at most one inference loop per live registration.",
+      "closureCriteria": "Repeated and concurrent starts, stop then start, failures and multiple instances have deterministic resource and result assertions."
+    },
+    {
+      "id": "MASK-MODEL-01",
+      "title": "Published Mask options and installed MediaPipe adapter consume different model settings",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-02",
+        "PKG-MASK-04",
+        "PKG-MASK-05"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-contract-validation.json"
+      ],
+      "compatibleResolution": "Freeze actual default/zero behavior and distinguish supported SDK configuration from inactive historical option fields before changing effects.",
+      "closureCriteria": "Effective model selection, zero values and configuration mapping have controlled and real model evidence, with explicit compatibility decisions for effect changes."
+    },
+    {
+      "id": "MASK-BACKEND-01",
+      "title": "Mask TensorFlow backend fallback does not establish MediaPipe fallback and failed initialization keeps scheduling",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-02",
+        "PKG-MASK-03",
+        "PKG-MASK-05"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-contract-validation.json"
+      ],
+      "compatibleResolution": "Model backend outcomes explicitly, settle initialization failures and document the actual MediaPipe capability boundary.",
+      "closureCriteria": "Fulfilled false, rejection, CPU failure, createSegmenter failure and later retry are tested; real inference fallback is separately evidenced."
+    },
+    {
+      "id": "MASK-DOM-01",
+      "title": "Mask registration and frame processing assume Danmuku DOM, readable frames and a 2D context",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-02",
+        "PKG-MASK-03",
+        "PKG-MASK-05"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-contract-validation.json"
+      ],
+      "compatibleResolution": "Handle missing dependencies and frame/context failures without stale writes or uncontrolled loops while preserving plugin ordering.",
+      "closureCriteria": "Missing Danmuku/context, CORS failure, source changes and ready/destroy timing have controlled and real browser evidence."
+    },
+    {
+      "id": "MASK-NOTICE-01",
+      "title": "Published Mask bundles lack a separate third-party notice despite bundled SDK code",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-06"
+      ],
+      "evidence": [
+        "refactor/baselines/danmuku-mask-contract.md",
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-contract-validation.json"
+      ],
+      "compatibleResolution": "Trace included SDK assets and license notices against actual bundle sources; preserve required notices in candidate packages.",
+      "closureCriteria": "Document incorporated SDK provenance and applicable notices; inspect built and packed artifacts, without treating manifest license claims as full clearance."
     }
   ]
 }

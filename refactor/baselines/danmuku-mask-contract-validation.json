@@ -1,0 +1,56 @@
+{
+  "task": "PKG-MASK-01",
+  "sourceCommit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+  "node": "v24.21.0",
+  "releases": [
+    {
+      "version": "1.1.0",
+      "sha256": "96682e46cb140a84b164818dd118480d7be42b24afaab390027a25e52e8ae31c",
+      "integrity": "sha512-VBmmwtNLj0TKYz9lWbyQ7A8osQHdyDiPMazP9g1UZbLyw/rMJ3qRclMgszRpZHN9hod0dQl2iYSJDoaqu3hGOQ==",
+      "members": 6,
+      "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "sourceManifest": "1.0.1",
+      "coreAssociation": "5.3.1"
+    },
+    {
+      "version": "1.0.0",
+      "sha256": "8a88f52ae843bed1be01a2e60b82cf886d33582f990a5016d49b1409c3493c4b",
+      "integrity": "sha512-x5Kd6nfPYyXVUoy4xNq7EQ8PeVGOiWVpIT75RVOrGLMjFrBKvAYp0btcjSu9ZZN7aAkB9MtAyFcTB6hbkOX8uw==",
+      "members": 6,
+      "registryGitHead": "b36f88db5f7fe0250285fd4f47229842231f402b",
+      "sourceManifest": "1.0.0",
+      "coreAssociation": "5.3.1-beta.1"
+    }
+  ],
+  "checks": {
+    "archiveVerifier": "passed",
+    "nodeTests": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "actualExportProbes": 8,
+    "lint": "passed",
+    "diffCheck": "passed"
+  },
+  "evidence": [
+    {
+      "file": "refactor/.cache/danmuku-mask-contract-verify.log",
+      "sha256": "c36b2313c5d2fbabf6f7e6a4285ac905870f9764663a85df87693693e9648f73"
+    },
+    {
+      "file": "refactor/.cache/danmuku-mask-contract-tests.log",
+      "sha256": "a7dc7994625711f0256b16663c49406d734e0c4b12c7cfa689468be5deaf41cd"
+    }
+  ],
+  "riskIds": [
+    "MASK-LIFETIME-01",
+    "MASK-START-01",
+    "MASK-MODEL-01",
+    "MASK-BACKEND-01",
+    "MASK-DOM-01",
+    "SDK-08",
+    "MASK-NOTICE-01"
+  ],
+  "scope": "Published archive export probes without model startup; owned source uses controlled SDK stubs; installed adapter read-only and existing model assets hashed. No model download or inference, real browser or physical device, installation matrix or release acceptance."
+}

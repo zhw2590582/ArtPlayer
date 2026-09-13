@@ -40,7 +40,7 @@
 | SDK-05 | open / 待取证 | webtorrent 实际集成验证范围 | EX-03 |
 | SDK-06 | open / 待取证 | google-cast 实际集成验证范围 | PKG-CAST-01, PKG-CAST-05 |
 | SDK-07 | open / 待取证 | ima-via-glomex 实际集成验证范围 | PKG-VAST-01, PKG-VAST-05 |
-| SDK-08 | open / 待取证 | mediapipe-tensorflow 实际集成验证范围 | PKG-MASK-01, PKG-MASK-05 |
+| SDK-08 | open / 源码/产物事实 | mediapipe-tensorflow 实际集成验证范围 | PKG-MASK-01, PKG-MASK-05, PKG-MASK-06 |
 | SDK-09 | open / 待取证 | jassub-worker-wasm-fonts 实际集成验证范围 | PKG-JASSUB-01, PKG-JASSUB-05 |
 | SDK-10 | open / 待取证 | mediabunny 实际集成验证范围 | PKG-MB-01, PKG-MB-09 |
 | SDK-11 | open / 待取证 | asr-caller-service 实际集成验证范围 | PKG-ASR-01, PKG-ASR-05, EX-03 |
@@ -221,3 +221,9 @@
 | CAST-LIFE-01 | resolved / 已复现 | Cast listeners and continuations survive player destruction and update another player icon | PKG-CAST-03, PKG-CAST-05 |
 | CAST-STATE-01 | resolved / 已复现 | Cast terminal session states leave the normalized callback and icon connected | PKG-CAST-03, PKG-CAST-05 |
 | CAST-ERROR-01 | resolved / 已复现 | Cast media loading rejection escapes on a detached Promise while the click has already fulfilled | PKG-CAST-03, PKG-CAST-05 |
+| MASK-LIFETIME-01 | open / 源码/产物事实 | Mask asynchronous initialization and inference continue after stop or destroy | PKG-MASK-02, PKG-MASK-03 |
+| MASK-START-01 | open / 源码/产物事实 | Concurrent Mask start calls can initialize multiple models and create independent RAF chains | PKG-MASK-02, PKG-MASK-03 |
+| MASK-MODEL-01 | open / 源码/产物事实 | Published Mask options and installed MediaPipe adapter consume different model settings | PKG-MASK-02, PKG-MASK-04, PKG-MASK-05 |
+| MASK-BACKEND-01 | open / 源码/产物事实 | Mask TensorFlow backend fallback does not establish MediaPipe fallback and failed initialization keeps scheduling | PKG-MASK-02, PKG-MASK-03, PKG-MASK-05 |
+| MASK-DOM-01 | open / 源码/产物事实 | Mask registration and frame processing assume Danmuku DOM, readable frames and a 2D context | PKG-MASK-02, PKG-MASK-03, PKG-MASK-05 |
+| MASK-NOTICE-01 | open / 源码/产物事实 | Published Mask bundles lack a separate third-party notice despite bundled SDK code | PKG-MASK-06 |
