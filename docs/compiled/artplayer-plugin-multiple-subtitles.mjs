@@ -55,6 +55,56 @@
  *
  *     d. Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
  */
+function createLifetime(art) {
+  let closed = Boolean(art.isDestroy);
+  const cleanups = /* @__PURE__ */ new Set();
+  let cancel;
+  const cancelled = new Promise((resolve) => {
+    cancel = resolve;
+  });
+  function run(cleanup) {
+    try {
+      cleanup();
+    } catch (error) {
+      console.warn("Failed to clean up multiple subtitles:", error);
+    }
+  }
+  const lifetime = {
+    get closed() {
+      return closed;
+    },
+    own(cleanup) {
+      if (closed)
+        run(cleanup);
+      else
+        cleanups.add(cleanup);
+      return () => cleanups.delete(cleanup);
+    },
+    wait(value) {
+      return Promise.race([value, cancelled]);
+    },
+    dispose() {
+      if (closed)
+        return;
+      closed = true;
+      cancel();
+      const pending = [...cleanups].reverse();
+      cleanups.clear();
+      for (const cleanup of pending)
+        run(cleanup);
+    }
+  };
+  if (!closed) {
+    lifetime.own(() => art.off("destroy", lifetime.dispose));
+    try {
+      art.on("destroy", lifetime.dispose);
+    } catch (error) {
+      lifetime.dispose();
+      throw error;
+    }
+  }
+  return lifetime;
+}
 var defaultCueSettings = {
   direction: "horizontal",
   snapToLines: true,
@@ -799,85 +849,166 @@ var WebVTTSerializer = function() {
     return result;
   };
 };
-async function loadVtt(option, { getExt, srtToVtt, assToVtt }) {
-  const response = await fetch(option.url);
-  const buffer = await response.arrayBuffer();
-  const decoder = new TextDecoder(option.encoding || "utf-8");
-  const text = decoder.decode(buffer);
-  switch (option.type || getExt(option.url)) {
-    case "srt": {
-      return srtToVtt(text);
-    }
-    case "ass": {
-      return assToVtt(text);
-    }
-    case "vtt": {
-      return text;
-    }
-    default:
-      return "";
-  }
-}
-function mergeTrees(trees) {
+function parseTracks(vtts, subtitles) {
   const parser = new WebVTTParser();
-  const result = parser.parse("", "metadata");
-  for (let i = 0; i < trees.length; i++) {
-    const tree = trees[i];
-    if (!tree.updated) {
-      tree.updated = true;
-      for (let j = 0; j < tree.cues.length; j++) {
-        const cue = tree.cues[j];
-        for (let k = 0; k < cue.tree.children.length; k++) {
-          const children = cue.tree.children[k];
-          children.value = `<div class="art-subtitle-${tree.name}">${children.value}</div>`;
+  return vtts.map((vtt, index) => {
+    const tree = parser.parse(vtt, "metadata");
+    tree.url = subtitles[index].url;
+    tree.name = subtitles[index].name;
+    return tree;
+  });
+}
+function serializeTracks(trees) {
+  const cues = [];
+  for (const tree of trees) {
+    for (const cue of tree.cues) {
+      cues.push({
+        ...cue,
+        tree: {
+          ...cue.tree,
+          children: cue.tree.children.map((child) => ({
+            ...child,
+            value: `<div class="art-subtitle-${tree.name}">${child.value}</div>`
+          }))
         }
-      }
+      });
     }
-    result.cues.push(...tree.cues);
   }
-  return result;
+  return new WebVTTSerializer().serialize(cues);
+}
+function createRenderer(art, lifetime, unescape) {
+  let current = null;
+  function own(url) {
+    let freed = false;
+    let release = () => {
+    };
+    const entry = {
+      free() {
+        if (freed)
+          return;
+        freed = true;
+        release();
+        URL.revokeObjectURL(url);
+      }
+    };
+    release = lifetime.own(entry.free);
+    return entry;
+  }
+  return (vtt) => {
+    if (lifetime.closed)
+      return;
+    const url = URL.createObjectURL(new Blob([vtt], { type: "text/vtt" }));
+    const entry = own(url);
+    if (lifetime.closed)
+      return;
+    const previous = current;
+    let option;
+    let escape;
+    let configured = false;
+    current = entry;
+    try {
+      option = art.option.subtitle;
+      escape = option.escape;
+      if (lifetime.closed || current !== entry)
+        return;
+      option.escape = false;
+      configured = true;
+      const config = { ...option, url, type: "vtt", onVttLoad: unescape };
+      if (lifetime.closed || current !== entry)
+        return;
+      const pending = art.subtitle.init(config);
+      Promise.resolve(pending).catch((error) => {
+        if (current === entry) {
+          current = null;
+          entry.free();
+        }
+        if (!lifetime.closed)
+          console.warn("Failed to initialize multiple subtitles:", error);
+      });
+    } catch (error) {
+      if (current === entry) {
+        current = previous;
+        if (configured && option.escape === false)
+          option.escape = escape;
+      }
+      entry.free();
+      throw error;
+    } finally {
+      if (previous !== current)
+        previous?.free();
+      if (entry !== current)
+        entry.free();
+    }
+  };
+}
+async function loadVtt(option, { getExt, srtToVtt, assToVtt }, lifetime) {
+  if (lifetime.closed)
+    return;
+  const controller = typeof AbortController === "function" ? new AbortController() : null;
+  const release = lifetime.own(() => controller?.abort());
+  try {
+    const url = option.url;
+    if (lifetime.closed)
+      return;
+    const response = await lifetime.wait(controller ? fetch(url, { signal: controller.signal }) : fetch(url));
+    if (lifetime.closed)
+      return;
+    if (response.ok === false)
+      throw new Error(`Failed to fetch multiple subtitles: HTTP ${response.status}`);
+    const buffer = await lifetime.wait(response.arrayBuffer());
+    if (lifetime.closed)
+      return;
+    const text = new TextDecoder(option.encoding || "utf-8").decode(buffer);
+    switch (option.type || getExt(option.url)) {
+      case "srt":
+        return srtToVtt(text);
+      case "ass":
+        return assToVtt(text);
+      case "vtt":
+        return text;
+      default:
+        return "";
+    }
+  } catch (error) {
+    controller?.abort();
+    throw error;
+  } finally {
+    release();
+  }
 }
 function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
   return async (art) => {
     const { unescape, getExt, srtToVtt, assToVtt } = art.constructor.utils;
-    const parser = new WebVTTParser();
-    const seri = new WebVTTSerializer();
-    const vtts = await Promise.all(
-      subtitles.map((option) => {
-        return loadVtt(option, { getExt, srtToVtt, assToVtt });
-      })
-    );
-    const trees = vtts.map((vtt, index) => {
-      const tree = parser.parse(vtt, "metadata");
-      tree.url = subtitles[index].url;
-      tree.name = subtitles[index].name;
-      return tree;
-    });
-    let lastUrl = "";
-    function setTracks(trees2 = []) {
-      const tree = mergeTrees(trees2);
-      const vtt = seri.serialize(tree.cues);
-      URL.revokeObjectURL(lastUrl);
-      const url = URL.createObjectURL(new Blob([vtt], { type: "text/vtt" }));
-      lastUrl = url;
-      art.option.subtitle.escape = false;
-      art.subtitle.init({
-        ...art.option.subtitle,
-        url,
-        type: "vtt",
-        onVttLoad: unescape
-      });
+    const lifetime = createLifetime(art);
+    const render = createRenderer(art, lifetime, unescape);
+    let trees = [];
+    function setTracks(selected) {
+      if (!lifetime.closed)
+        render(serializeTracks(selected));
     }
-    setTracks(trees);
-    return {
+    const result = {
       name: "multipleSubtitles",
       tracks(names = []) {
-        return setTracks(names.map((name) => trees.find((tree) => tree.name === name)));
+        if (!lifetime.closed)
+          setTracks(names.map((name) => trees.find((tree) => tree.name === name)));
       },
       reset() {
-        return setTracks(trees);
+        setTracks(trees);
       }
     };
+    try {
+      if (lifetime.closed)
+        return result;
+      const vtts = await Promise.all(subtitles.map((option) => loadVtt(option, { getExt, srtToVtt, assToVtt }, lifetime)));
+      if (lifetime.closed)
+        return result;
+      trees = parseTracks(vtts, subtitles);
+      setTracks(trees);
+      return result;
+    } catch (error) {
+      lifetime.dispose();
+      throw error;
+    }
   };
 }
 export {

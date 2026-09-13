@@ -4279,10 +4279,16 @@
         "test/multiple-subtitles-failures.test.js",
         "test/browser/multiple-subtitles-history.spec.js",
         "refactor/baselines/multiple-subtitles-failures.json",
-        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md",
+        "refactor/baselines/multiple-subtitles-resources.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
+        "test/multiple-subtitles-lifecycle.test.js",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
       ],
       "compatibleResolution": "Keep historical merge profiles explicit and test real overlap/timing before choosing compatibility behavior.",
-      "closureCriteria": "Unaligned lengths, overlap, sorting, names and real subtitle display across supported cores are verified."
+      "closureCriteria": "Unaligned lengths, overlap, sorting, names and real subtitle display across supported cores are verified.",
+      "workspaceState": "Candidate resource fixes and serialization parity are verified in task 03. This risk remains open for the complete supported-core/device coverage owned by task 05."
     },
     {
       "id": "MULTI-SUB-LIFE-01",
@@ -4302,10 +4308,16 @@
         "test/multiple-subtitles-failures.test.js",
         "test/browser/multiple-subtitles-history.spec.js",
         "refactor/baselines/multiple-subtitles-failures.json",
-        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md",
+        "refactor/baselines/multiple-subtitles-resources.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
+        "test/multiple-subtitles-lifecycle.test.js",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
       ],
       "compatibleResolution": "Reproduce stale completion and own requests and URLs without changing public selection methods.",
-      "closureCriteria": "Cancellation, failures, source changes, repeated selection and destroy are verified with native core coverage."
+      "closureCriteria": "Cancellation, failures, source changes, repeated selection and destroy are verified with native core coverage.",
+      "workspaceState": "Candidate resource fixes and serialization parity are verified in task 03. This risk remains open for the complete supported-core/device coverage owned by task 05."
     },
     {
       "id": "MULTI-SUB-EXPORT-01",
@@ -4331,7 +4343,7 @@
       "compatibleResolution": "Reject actual HTTP failures with explicit diagnostics while preserving successful conversion and original transport errors.",
       "closureCriteria": "Native HTTP errors, transport/body failures, sibling cancellation and successful requests have candidate regressions.",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-MULTI-SUB-03",
         "PKG-MULTI-SUB-05"
@@ -4340,8 +4352,21 @@
         "test/multiple-subtitles-failures.test.js",
         "test/browser/multiple-subtitles-history.spec.js",
         "refactor/baselines/multiple-subtitles-failures.json",
-        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
-      ]
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md",
+        "refactor/baselines/multiple-subtitles-resources.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
+        "test/multiple-subtitles-lifecycle.test.js",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
+      ],
+      "resolutionEvidence": [
+        "refactor/baselines/multiple-subtitles-resources.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
+        "test/multiple-subtitles-lifecycle.test.js",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "HTTP failures reject before body consumption and abort their requests. Exact transport/body errors, sibling cancellation, conversion success and native 404 rejection pass candidate regressions; source/main/legacy run with both core fixtures."
     },
     {
       "id": "MULTI-SUB-HOST-01",
@@ -4349,7 +4374,7 @@
       "compatibleResolution": "Own installation results and URL rollback while preserving void selection methods and normal registration timing.",
       "closureCriteria": "Synchronous and asynchronous host failures, stale rejection, allocation failure and destroy leave no plugin-owned live resources.",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-MULTI-SUB-03",
         "PKG-MULTI-SUB-05"
@@ -4358,8 +4383,21 @@
         "test/multiple-subtitles-failures.test.js",
         "test/browser/multiple-subtitles-history.spec.js",
         "refactor/baselines/multiple-subtitles-failures.json",
-        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
-      ]
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md",
+        "refactor/baselines/multiple-subtitles-resources.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
+        "test/multiple-subtitles-lifecycle.test.js",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
+      ],
+      "resolutionEvidence": [
+        "refactor/baselines/multiple-subtitles-resources.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
+        "test/multiple-subtitles-lifecycle.test.js",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Owned installations retain prior URLs on synchronous failure, observe async rejections, release the failed active URL without affecting newer installs, and clean up on destroy. Controlled sync/async/reentrant/getter failures and native Blob revocation pass; void methods and registration timing are preserved."
     }
   ]
 }

@@ -198,5 +198,5 @@
 | MULTI-SUB-MERGE-01 | open / 已复现 | 1.0.0 merges cues by index while later versions concatenate independently timed track cues | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-LIFE-01 | open / 已复现 | Pending downloads and final object URL have no destroy owner | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-EXPORT-01 | open / 已复现 | Older CommonJS default objects conflict with export-assignment declarations; latest exports a direct factory | PKG-MULTI-SUB-04, PKG-MULTI-SUB-06 |
-| MULTI-SUB-HTTP-01 | open / 已复现 | HTTP error responses with parseable bodies are installed as subtitles | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
-| MULTI-SUB-HOST-01 | open / 已复现 | Subtitle init rejections are ignored and failed installation or URL replacement leaks or invalidates resources | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
+| MULTI-SUB-HTTP-01 | resolved / 已复现 | HTTP error responses with parseable bodies are installed as subtitles | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
+| MULTI-SUB-HOST-01 | resolved / 已复现 | Subtitle init rejections are ignored and failed installation or URL replacement leaks or invalidates resources | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |

@@ -1,5 +1,22 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-03 模块与资源修复完成
+
+生产源码拆为入口、请求、纯解析合并、生命周期和宿主安装五个模块，vendor parser 不变。
+修复 HTTP 失败、兄弟请求取消、fetch/body 销毁中结算、Blob 泄漏、分配失败替换顺序、
+同步/异步安装失败与重入归属；保留 async 注册与 void tracks/reset、轨序、元数据和容错。
+九种 markup/timing/空轨输入及真实转换/编码逐字对照已发布 1.2.0，冻结树重复序列化通过。
+源码/main/legacy 各 31 项通过；本包 241 项通过，两新增文件已接入主 test:unit。
+三入口配发布/候选核心，在 Chromium/Firefox/Windows WebKit 共 90 项通过：真实 SRT、
+选择/清空/reset、请求销毁、Blob 不可访问、HTTP 失败和真实视频切源无重复字幕下载。
+完整 CI 2311 项通过（1963 单元、14 工程、334 基线）；严格生产 TS 仍 346，04 继续 TS。
+正常生产构建及实际 ESM 导入通过，三个 dist 与 docs/compiled 对应字节一致。
+HTTP/HOST 风险关闭；LIFE/MERGE 完整支持范围组合仍待 05。见
+[变更](changes/2026-09-13-PKG-MULTI-SUB-03-resources.md)和[验证](baselines/multiple-subtitles-resources.json)。
+222 项：120 done、13 doing、89 todo；196 项风险。独立本地提交，不推送、不发布。
+下一步 MULTI-SUB-04 自有模块严格 TS 与旧消费者公开类型；VTT 类型取舍继续待决。
+
+
 ## PKG-MULTI-SUB-02 错误与生命周期复现完成
 
 9 份历史实现各 18 类异常/边界，共 162 项；本包命令及主 test:unit 已接入，

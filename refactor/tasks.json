@@ -2297,11 +2297,14 @@
         "PKG-MULTI-SUB-02",
         "CORE-15"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "解析与合并/获取/渲染分离，过期请求及对象 URL 清理",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "baselines/multiple-subtitles-resources.json",
+        "changes/2026-09-13-PKG-MULTI-SUB-03-resources.md"
+      ]
     },
     {
       "id": "PKG-MULTI-SUB-04",

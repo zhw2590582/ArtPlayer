@@ -28,7 +28,7 @@ export async function multipleSubtitlesHistorical() {
   return implementations
 }
 
-export function multipleSubtitlesEnvironment(implementation, { script = false, responses = {}, fetchResponse, coreUtils, onInit, onCreate } = {}) {
+export function multipleSubtitlesEnvironment(implementation, { script = false, responses = {}, fetchResponse, coreUtils, onInit, onCreate, abortController = true } = {}) {
   const requests = []
   const requestOptions = []
   const blobs = new Map()
@@ -38,6 +38,7 @@ export function multipleSubtitlesEnvironment(implementation, { script = false, r
   const initStates = []
   const converted = []
   const listeners = new Map()
+  const warnings = []
   const module = { exports: {} }
   const utils = {
     getExt: url => url.split('.').pop(),
@@ -80,7 +81,8 @@ export function multipleSubtitlesEnvironment(implementation, { script = false, r
   const context = {
     Blob,
     TextDecoder,
-    console: { log() {}, warn() {}, error() {} },
+    AbortController: abortController ? AbortController : undefined,
+    console: { log() {}, warn(...args) { warnings.push(args) }, error() {} },
     URL: {
       createObjectURL(blob) {
         onCreate?.(blob)
@@ -115,5 +117,5 @@ export function multipleSubtitlesEnvironment(implementation, { script = false, r
     for (const callback of [...(listeners.get(name) || [])])
       callback(...args)
   }
-  return { factory, exported, art, utils, requests, requestOptions, blobs, liveBlobs, revoked, initialized, initStates, converted, listeners, emit, responseFor, latestText }
+  return { factory, exported, art, utils, requests, requestOptions, blobs, liveBlobs, revoked, initialized, initStates, converted, listeners, warnings, emit, responseFor, latestText }
 }

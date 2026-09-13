@@ -64,11 +64,11 @@ for (const implementation of implementations) {
     assert.equal(env.initialized[0].onVttLoad, env.utils.unescape)
     assert.equal(env.initialized[0].style, env.art.option.subtitle.style)
     assert.equal(env.initialized[0].type, 'vtt')
-    assert.deepEqual(env.revoked, [''])
+    assert.deepEqual(env.revoked, implementation.version === 'candidate' ? [] : [''])
     env.art.option.subtitle.encoding = 'utf-16le'
     result.reset()
     assert.equal(env.initialized[1].encoding, 'utf-16le')
-    assert.deepEqual(env.revoked, ['', 'blob:subtitle-1'])
+    assert.deepEqual(env.revoked, implementation.version === 'candidate' ? ['blob:subtitle-1'] : ['', 'blob:subtitle-1'])
     assert.equal(env.blobs.get('blob:subtitle-2').type, 'text/vtt')
   })
 
