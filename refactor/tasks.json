@@ -4138,11 +4138,15 @@
         "ENG-06",
         "SITE-SMOKE-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "build-ts/build-test 生成链的可验证 TS 脚本",
       "acceptance": "不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制；坏代码块解析必须终止，覆盖 malformed 分支不推进 regexp 的回归",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-SITE-02-editor-declarations.md",
+        "baselines/editor-declarations-validation.json",
+        "changes/2026-09-14-SITE-SMOKE-01-documentation-smoke.md"
+      ]
     },
     {
       "id": "SITE-03",

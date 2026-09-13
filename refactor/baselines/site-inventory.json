@@ -18101,15 +18101,15 @@
     },
     {
       "file": "scripts/build-ts.js",
-      "sha256Lf": "338f3b5b4e4bdcb42c878997d13da6f71ce9842d730f57efece7566124dae9f6"
+      "sha256Lf": "1ff2d13f4247bba1818a187eb945a86969f4c4d60245ba5cac8fc0b2b8edd3ba"
     },
     {
       "file": "scripts/editor-types.mjs",
-      "sha256Lf": "951d3d40dc7f90034561fd1a3b3015bdb1449593121bb410e3f15e4415547b8b"
+      "sha256Lf": "62c6ef8affb5f28b9a9caa9810e3c5e565ca0d25fb031fe0a169beba6a3a1125"
     },
     {
       "file": "scripts/plugin-editor-types.mjs",
-      "sha256Lf": "429c304ce7c801836a311e76e85f2e6dc0328d599103e39d071a915164b94102"
+      "sha256Lf": "09b6bdc419e92d6052ba8575aa9b726e7231ca2579578cd91f9b34d1f99b44bc"
     },
     {
       "file": "scripts/build-test.js",
@@ -18166,6 +18166,34 @@
     {
       "file": "scripts/docs-smoke/runtime.ts",
       "sha256Lf": "9fae3aa1bc6a6ef9728d9a677de9e283d40314022b710b2ecf19a9b951f6291d"
+    },
+    {
+      "file": "scripts/editor-declarations/core.ts",
+      "sha256Lf": "0cda0fe093299099c62ae907a6f517f1cb5c49be9085d4c8fb20aed6579a0058"
+    },
+    {
+      "file": "scripts/editor-declarations/dependencies.ts",
+      "sha256Lf": "aa697e095f3e9ea476a2ae625714542f62db47e1257cb69cc5e249277db67f8c"
+    },
+    {
+      "file": "scripts/editor-declarations/generate.ts",
+      "sha256Lf": "6cf6ee27b2032e9e3a4aef949f2b54ba7bf12e40bed473478f63eb82759c8e5a"
+    },
+    {
+      "file": "scripts/editor-declarations/plugin.ts",
+      "sha256Lf": "02dd90a19b75235ac6080aa2088114f3ae51c45567789c7daf2653be63ceee7d"
+    },
+    {
+      "file": "scripts/editor-declarations/syntax.ts",
+      "sha256Lf": "d5c7d8f400b3053e1c1a588dab809f5d17e95be88ecb985cbc90f9ffaea3a0e6"
+    },
+    {
+      "file": "scripts/editor-declarations/validation.ts",
+      "sha256Lf": "1b5524844d030ba32df8bb47f1f3963e7df1f0843db61ad1cc7a983db2546517"
+    },
+    {
+      "file": "scripts/editor-declarations/vast-sdk.ts",
+      "sha256Lf": "6da9176284b7a697a922b90befa64263e016f12eef483793cc524bdfc028ad05"
     }
   ],
   "generationCommands": {

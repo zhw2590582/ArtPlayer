@@ -1,5 +1,20 @@
 # 进度与证据
 
+## SITE-02 编辑器声明生成链完成
+
+build:ts 与 core/plugin 转换器完成 TS 模块拆分，原 JS/MJS 命令/导入路径保留。
+修复 Chapter/VAST 文本回退产生的冲突导出与 SDK 类型丢失；22 份实际加载声明
+在内存格式化后用主 TS 5.9.3/旧 TS 4.3.5 整组检查，通过才写文件。其余 20 份
+声明与起点一致，生产源码/公开类型/锁不变。VAST SDK 类型保留私有命名空间与
+原签名，生成上游 notices；新增只读 check:editor-types 接入 CI。4 项编辑器
+测试、522 项 baseline、50 项 CI 回归、严格工具链/工具类型/lint 通过（根 lint
+1 条既有 warning）。三浏览器实际 Monaco 检查 22 份声明、拒绝坏参数并执行
+Chapter emit 的 ready/destroy，3 项通过。VAST 仅验类型，未执行广告。
+见[变更](changes/2026-09-14-SITE-02-editor-declarations.md)和
+[验证](baselines/editor-declarations-validation.json)。当前 240 项：166 done、
+15 doing、59 todo。下一步 SITE-03 站点/移动加载与编辑器流程；VAST 默认行为、
+Auto Thumbnail 首帧及插件最终验收保持开放。独立本地提交，无推送或发布。
+
 ## SITE-SMOKE-01 示例生成器与就绪检查完成
 
 从 SITE-02 拆出文档示例工具，TS parser/generator/runtime 与严格检查的原 JS

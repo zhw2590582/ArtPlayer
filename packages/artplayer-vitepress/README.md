@@ -42,6 +42,9 @@ The repository generators have different ownership:
 
 - `scripts/build-types.mjs`: core public declaration sources to existing `types/`.
 - `scripts/build-ts.js`: standalone editor declarations and the editor library list.
+  Checked TS modules in `scripts/editor-declarations/` validate all selected
+  declarations together with current and historical compilers before writing.
+  Use `yarn check:editor-types` for drift checks; see that module's README.
 - `scripts/build-test.js`: extracts Chinese Run Code blocks into `docs/test/test.js`.
   The TS implementation in `scripts/docs-smoke/` produces deterministic readiness
   smoke cases with owned frames, error observation and cleanup. It does not prove

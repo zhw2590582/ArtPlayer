@@ -1,5 +1,10 @@
 # Tests and fixture ownership
 
+Editor tooling lives in `scripts/editor-declarations/`; see its README.
+`test/editor-types.test.js` checks standalone globals and module consumers with
+current/old compilers, Chapter/VAST regressions, generated files and library-list
+failures. Package baseline tests continue to exercise the old MJS import paths.
+
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
 `yarn build:test` generates deterministic documentation readiness smoke and its

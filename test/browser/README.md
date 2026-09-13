@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`editor-declarations.spec.js` loads the repository Monaco with the 22 declarations
+actually listed in `common.js`, checks positive/negative consumers and runs emitted
+Chapter code through ready/destroy with controlled media. VAST coverage is types
+only, not advertising SDK execution. The unreferenced legacy WebSR declaration
+asset is preserved; this test follows the actual editor's library list.
+
 `docs-smoke.spec.js` verifies the documentation runner in three engines with
 actual core/media, controlled failures and three selected generated snippets.
 It checks pending readiness beyond the former 100ms timer, returned/unhandled

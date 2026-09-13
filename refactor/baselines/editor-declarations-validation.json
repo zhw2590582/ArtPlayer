@@ -1,0 +1,444 @@
+{
+  "task": "SITE-02",
+  "baseline": "1a5440a67f50c8c1c5c695099bea5ee5d4b0cc77",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "compilers": [
+    "5.9.3",
+    "4.3.5"
+  ],
+  "scope": {
+    "generatedDeclarations": 22,
+    "changedDeclarations": [
+      "docs/assets/ts/artplayer-plugin-chapter.d.ts",
+      "docs/assets/ts/artplayer-plugin-vast.d.ts"
+    ],
+    "unchangedDeclarations": 20,
+    "totalOutputs": 24,
+    "rootLintExistingWarnings": 1,
+    "packageRuntimeChanged": false,
+    "packagePublicTypesChanged": false,
+    "lockUnchanged": true
+  },
+  "logs": {
+    "reproduction": {
+      "file": "refactor/.cache/editor-before.log",
+      "sha256": "13639bee172bc86c2b8787f325fa251be989c16c1bbf00a0a77636fe591da7fc"
+    },
+    "targeted": {
+      "file": "refactor/.cache/editor-tests-final.log",
+      "sha256": "bdcc879dc19dc25a086442c982f7e9fa091ec011d80e7878dfa9bab222733f85",
+      "exitCode": 0,
+      "pass": 4
+    },
+    "baseline": {
+      "file": "refactor/.cache/editor-baseline.log",
+      "sha256": "c92fcf9cfe1c64dfecb23d44bb37542519b78f7da4318b1c80322a81948949f4",
+      "exitCode": 0,
+      "pass": 522
+    },
+    "browserBefore": {
+      "file": "refactor/.cache/editor-browser.log",
+      "sha256": "07ed1bbb4fdc0ba2f45e8ef659ad8d73bbb1a6ffb1cfee0c212f7bc4829996a3",
+      "exitCode": 1,
+      "pass": 0
+    },
+    "browserAccepted": {
+      "file": "refactor/.cache/editor-browser-verified.log",
+      "sha256": "72784c4ce8f6ce298abc93529d1c2d2dfde1bb4bc582ed889b02ba27ab856b93",
+      "exitCode": 0,
+      "pass": 3
+    },
+    "buildAll": {
+      "file": "refactor/.cache/editor-all-build.log",
+      "sha256": "b3c6a01e75ce9e33ac43e63d90a79c5b3924294985d054ba1ef267b8ab683baf",
+      "exitCode": 0
+    },
+    "readonlyCheck": {
+      "file": "refactor/.cache/editor-readonly-check.log",
+      "sha256": "91e7a45d96d8a86b96d49822ee6284e70e9c4577cc7ac8bc730fbfd2087b3517",
+      "exitCode": 0
+    },
+    "typecheckTools": {
+      "file": "refactor/.cache/editor-types-check.log",
+      "sha256": "713f8f9c2ea18e5da3e50f5e3a943515b4e93e7adb8172025ee31a7d7b566cff",
+      "exitCode": 0
+    },
+    "rootLint": {
+      "file": "refactor/.cache/editor-root-lint.log",
+      "sha256": "5d7ca80241e65fed23117d779a3e1fba0b2281003a304005ea014a0e3cb75cdf",
+      "exitCode": 0
+    },
+    "targetedLint": {
+      "file": "refactor/.cache/editor-final-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    "ci": {
+      "file": "refactor/.cache/editor-ci-tests.log",
+      "sha256": "ebc514dfc48afff766aeba32c689a922efa36e8c85fc5d2552ca36f22248c0e5",
+      "exitCode": 0,
+      "pass": 50
+    },
+    "strictToolchainBefore": {
+      "file": "refactor/.cache/editor-toolchain-direct-before.log",
+      "sha256": "23de6d33eafd3123528d9a4f7b3d82131a32ee90e0724eaab8f2446bca9b48da",
+      "exitCode": 1
+    },
+    "strictToolchain": {
+      "file": "refactor/.cache/editor-toolchain.log",
+      "sha256": "3da883e18990c25a4eee9f46febb386fc33b0ea6a25ff748d5c129bb8d16ea85",
+      "exitCode": 0
+    }
+  },
+  "browser": {
+    "file": "refactor/.cache/editor-browser-accepted/report.json",
+    "sha256": "20de4582ac416faa3e69d7a1444018a99e7ba0f00f60a114c5905cee5fdf6ff7",
+    "stats": {
+      "startTime": "2026-09-13T23:16:22.090Z",
+      "duration": 23649.482000000004,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "result": {
+          "syntax": [],
+          "semantic": [],
+          "declarations": [],
+          "bad": [
+            2322,
+            2322,
+            2322
+          ],
+          "name": "artplayerPluginChapter",
+          "ready": true,
+          "instances": 0
+        },
+        "declarationInputs": {
+          "artplayer-plugin-ads.d.ts": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652",
+          "artplayer-plugin-ambilight.d.ts": "9f06ccb7398053dca642ca369aa47f54cbb3e4dd4d5e252e999e59e496d8eee8",
+          "artplayer-plugin-asr.d.ts": "5096f097636c018bc05c497324c271af3fefaebccda7fa3e9cd43b63477704ad",
+          "artplayer-plugin-audio-track.d.ts": "604af2a3790eb7c583ba150c402dca0a3e458469cc74913b51fee2f3d3882541",
+          "artplayer-plugin-auto-thumbnail.d.ts": "f66bba7f633202c2ef359a989269c643b75d91594364f7ed6fb67f9898aeac03",
+          "artplayer-plugin-chapter.d.ts": "d5bd68579659afa44158c894e12372cedd6f958415ced370a65c294550aa828d",
+          "artplayer-plugin-chromecast.d.ts": "0a0b932081cac0efbcedea28dc1077484963b7f406808378704062661a4c0338",
+          "artplayer-plugin-danmuku-mask.d.ts": "06c6e938876edcc0ac2c8dcd1e1be4596b0f056685a3523d4c9836f2f2f90362",
+          "artplayer-plugin-danmuku.d.ts": "e3421bdbdfc6bea1b0b633300350fff1a745d8bc21c1430b6154a23fa3ad0415",
+          "artplayer-plugin-dash-control.d.ts": "c7e3c83f3377b615e503a270af12915dcc82fe3f2cfabdae396632855a27f73f",
+          "artplayer-plugin-document-pip.d.ts": "42faa0a6549149efd01b46c3c59246bd4dc33f2383b63b04e9f5376de29fdb8e",
+          "artplayer-plugin-hls-control.d.ts": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c",
+          "artplayer-plugin-jassub.d.ts": "ce713e0a61a81bfc31087ea1a880a99398ef7c2b833e567c91e4e98f5ae6f621",
+          "artplayer-plugin-multiple-subtitles.d.ts": "edb15207df69a695311e849555cf989bfc32da20c2456731b6814de5400567bb",
+          "artplayer-plugin-vast.d.ts": "b21ed9a852b3ec3cc9b409cce08e91905e42abdc1d642acc9b412c33c83287b7",
+          "artplayer-plugin-vtt-thumbnail.d.ts": "d82c0fe08bcf9c60e2a634e9f1fd8ccc75dc8e0ddbfa8262cccaefc9604aa61b",
+          "artplayer-proxy-canvas.d.ts": "83c408e0724a598f9ff32d68d752f39e03feb69ba4f6a49ba02f9d4df898453e",
+          "artplayer-proxy-mediabunny.d.ts": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e",
+          "artplayer-tool-iframe.d.ts": "c06c6819146ba64bd6ee498871d9e19ab5a9e88c9cc7bed2c0c4968fa39dfed7",
+          "artplayer-tool-thumbnail.d.ts": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6",
+          "artplayer.d.ts": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+          "artplayer-i18n.d.ts": "60851e22ea50ed540f1be0f5a110077cdd5e6ab87345a675838f6c6333517405"
+        }
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "result": {
+          "syntax": [],
+          "semantic": [],
+          "declarations": [],
+          "bad": [
+            2322,
+            2322,
+            2322
+          ],
+          "name": "artplayerPluginChapter",
+          "ready": true,
+          "instances": 0
+        },
+        "declarationInputs": {
+          "artplayer-plugin-ads.d.ts": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652",
+          "artplayer-plugin-ambilight.d.ts": "9f06ccb7398053dca642ca369aa47f54cbb3e4dd4d5e252e999e59e496d8eee8",
+          "artplayer-plugin-asr.d.ts": "5096f097636c018bc05c497324c271af3fefaebccda7fa3e9cd43b63477704ad",
+          "artplayer-plugin-audio-track.d.ts": "604af2a3790eb7c583ba150c402dca0a3e458469cc74913b51fee2f3d3882541",
+          "artplayer-plugin-auto-thumbnail.d.ts": "f66bba7f633202c2ef359a989269c643b75d91594364f7ed6fb67f9898aeac03",
+          "artplayer-plugin-chapter.d.ts": "d5bd68579659afa44158c894e12372cedd6f958415ced370a65c294550aa828d",
+          "artplayer-plugin-chromecast.d.ts": "0a0b932081cac0efbcedea28dc1077484963b7f406808378704062661a4c0338",
+          "artplayer-plugin-danmuku-mask.d.ts": "06c6e938876edcc0ac2c8dcd1e1be4596b0f056685a3523d4c9836f2f2f90362",
+          "artplayer-plugin-danmuku.d.ts": "e3421bdbdfc6bea1b0b633300350fff1a745d8bc21c1430b6154a23fa3ad0415",
+          "artplayer-plugin-dash-control.d.ts": "c7e3c83f3377b615e503a270af12915dcc82fe3f2cfabdae396632855a27f73f",
+          "artplayer-plugin-document-pip.d.ts": "42faa0a6549149efd01b46c3c59246bd4dc33f2383b63b04e9f5376de29fdb8e",
+          "artplayer-plugin-hls-control.d.ts": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c",
+          "artplayer-plugin-jassub.d.ts": "ce713e0a61a81bfc31087ea1a880a99398ef7c2b833e567c91e4e98f5ae6f621",
+          "artplayer-plugin-multiple-subtitles.d.ts": "edb15207df69a695311e849555cf989bfc32da20c2456731b6814de5400567bb",
+          "artplayer-plugin-vast.d.ts": "b21ed9a852b3ec3cc9b409cce08e91905e42abdc1d642acc9b412c33c83287b7",
+          "artplayer-plugin-vtt-thumbnail.d.ts": "d82c0fe08bcf9c60e2a634e9f1fd8ccc75dc8e0ddbfa8262cccaefc9604aa61b",
+          "artplayer-proxy-canvas.d.ts": "83c408e0724a598f9ff32d68d752f39e03feb69ba4f6a49ba02f9d4df898453e",
+          "artplayer-proxy-mediabunny.d.ts": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e",
+          "artplayer-tool-iframe.d.ts": "c06c6819146ba64bd6ee498871d9e19ab5a9e88c9cc7bed2c0c4968fa39dfed7",
+          "artplayer-tool-thumbnail.d.ts": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6",
+          "artplayer.d.ts": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+          "artplayer-i18n.d.ts": "60851e22ea50ed540f1be0f5a110077cdd5e6ab87345a675838f6c6333517405"
+        }
+      },
+      {
+        "title": "Monaco checks all editor declarations together and runs the Chapter consumer",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "result": {
+          "syntax": [],
+          "semantic": [],
+          "declarations": [],
+          "bad": [
+            2322,
+            2322,
+            2322
+          ],
+          "name": "artplayerPluginChapter",
+          "ready": true,
+          "instances": 0
+        },
+        "declarationInputs": {
+          "artplayer-plugin-ads.d.ts": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652",
+          "artplayer-plugin-ambilight.d.ts": "9f06ccb7398053dca642ca369aa47f54cbb3e4dd4d5e252e999e59e496d8eee8",
+          "artplayer-plugin-asr.d.ts": "5096f097636c018bc05c497324c271af3fefaebccda7fa3e9cd43b63477704ad",
+          "artplayer-plugin-audio-track.d.ts": "604af2a3790eb7c583ba150c402dca0a3e458469cc74913b51fee2f3d3882541",
+          "artplayer-plugin-auto-thumbnail.d.ts": "f66bba7f633202c2ef359a989269c643b75d91594364f7ed6fb67f9898aeac03",
+          "artplayer-plugin-chapter.d.ts": "d5bd68579659afa44158c894e12372cedd6f958415ced370a65c294550aa828d",
+          "artplayer-plugin-chromecast.d.ts": "0a0b932081cac0efbcedea28dc1077484963b7f406808378704062661a4c0338",
+          "artplayer-plugin-danmuku-mask.d.ts": "06c6e938876edcc0ac2c8dcd1e1be4596b0f056685a3523d4c9836f2f2f90362",
+          "artplayer-plugin-danmuku.d.ts": "e3421bdbdfc6bea1b0b633300350fff1a745d8bc21c1430b6154a23fa3ad0415",
+          "artplayer-plugin-dash-control.d.ts": "c7e3c83f3377b615e503a270af12915dcc82fe3f2cfabdae396632855a27f73f",
+          "artplayer-plugin-document-pip.d.ts": "42faa0a6549149efd01b46c3c59246bd4dc33f2383b63b04e9f5376de29fdb8e",
+          "artplayer-plugin-hls-control.d.ts": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c",
+          "artplayer-plugin-jassub.d.ts": "ce713e0a61a81bfc31087ea1a880a99398ef7c2b833e567c91e4e98f5ae6f621",
+          "artplayer-plugin-multiple-subtitles.d.ts": "edb15207df69a695311e849555cf989bfc32da20c2456731b6814de5400567bb",
+          "artplayer-plugin-vast.d.ts": "b21ed9a852b3ec3cc9b409cce08e91905e42abdc1d642acc9b412c33c83287b7",
+          "artplayer-plugin-vtt-thumbnail.d.ts": "d82c0fe08bcf9c60e2a634e9f1fd8ccc75dc8e0ddbfa8262cccaefc9604aa61b",
+          "artplayer-proxy-canvas.d.ts": "83c408e0724a598f9ff32d68d752f39e03feb69ba4f6a49ba02f9d4df898453e",
+          "artplayer-proxy-mediabunny.d.ts": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e",
+          "artplayer-tool-iframe.d.ts": "c06c6819146ba64bd6ee498871d9e19ab5a9e88c9cc7bed2c0c4968fa39dfed7",
+          "artplayer-tool-thumbnail.d.ts": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6",
+          "artplayer.d.ts": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985",
+          "artplayer-i18n.d.ts": "60851e22ea50ed540f1be0f5a110077cdd5e6ab87345a675838f6c6333517405"
+        }
+      }
+    ],
+    "beforeArchive": "refactor/.cache/editor-browser-before",
+    "beforeReason": "Directory has 23 .d.ts assets; actual libUris references 22, excluding historical WebSR. Browser test now follows actual loader list."
+  },
+  "sources": [
+    {
+      "file": "scripts/build-ts.js",
+      "sha256Lf": "1ff2d13f4247bba1818a187eb945a86969f4c4d60245ba5cac8fc0b2b8edd3ba"
+    },
+    {
+      "file": "scripts/editor-types.mjs",
+      "sha256Lf": "62c6ef8affb5f28b9a9caa9810e3c5e565ca0d25fb031fe0a169beba6a3a1125"
+    },
+    {
+      "file": "scripts/plugin-editor-types.mjs",
+      "sha256Lf": "09b6bdc419e92d6052ba8575aa9b726e7231ca2579578cd91f9b34d1f99b44bc"
+    },
+    {
+      "file": "scripts/tsconfig.docs.json",
+      "sha256Lf": "4398157a60f8be091484d332455745708b999753cad3d7e0dd4a216c818da79e"
+    },
+    {
+      "file": "scripts/tsconfig.editor.json",
+      "sha256Lf": "ce57cedc75093d62f9d62efe1ff24c1d5d0fd157cbe830d082b8cebcf5f0e6a1"
+    },
+    {
+      "file": "package.json",
+      "sha256Lf": "0726e24a97b8107dd7c8effe37202b194d4211a3f06ea9c8c22058029a6d0871"
+    },
+    {
+      "file": "test/editor-types.test.js",
+      "sha256Lf": "2c431f49ca5b7428171ee7f494b48ac72df787c9a0824362855c49fc0c4cdbca"
+    },
+    {
+      "file": "test/browser/editor-declarations.spec.js",
+      "sha256Lf": "33e824e96b2fb385fa99fd384325f9cf660c49eff0afd4fb0234a3a5f4048e00"
+    },
+    {
+      "file": "scripts/editor-declarations/core.ts",
+      "sha256Lf": "0cda0fe093299099c62ae907a6f517f1cb5c49be9085d4c8fb20aed6579a0058"
+    },
+    {
+      "file": "scripts/editor-declarations/dependencies.ts",
+      "sha256Lf": "aa697e095f3e9ea476a2ae625714542f62db47e1257cb69cc5e249277db67f8c"
+    },
+    {
+      "file": "scripts/editor-declarations/generate.ts",
+      "sha256Lf": "6cf6ee27b2032e9e3a4aef949f2b54ba7bf12e40bed473478f63eb82759c8e5a"
+    },
+    {
+      "file": "scripts/editor-declarations/plugin.ts",
+      "sha256Lf": "02dd90a19b75235ac6080aa2088114f3ae51c45567789c7daf2653be63ceee7d"
+    },
+    {
+      "file": "scripts/editor-declarations/README.md",
+      "sha256Lf": "968b7d6b558a5dde76bc004517fa02eaa33d81a1051e34b33f21a112d85aa8a0"
+    },
+    {
+      "file": "scripts/editor-declarations/syntax.ts",
+      "sha256Lf": "d5c7d8f400b3053e1c1a588dab809f5d17e95be88ecb985cbc90f9ffaea3a0e6"
+    },
+    {
+      "file": "scripts/editor-declarations/validation.ts",
+      "sha256Lf": "1b5524844d030ba32df8bb47f1f3963e7df1f0843db61ad1cc7a983db2546517"
+    },
+    {
+      "file": "scripts/editor-declarations/vast-sdk.ts",
+      "sha256Lf": "6da9176284b7a697a922b90befa64263e016f12eef483793cc524bdfc028ad05"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "docs/assets/ts/artplayer-i18n.d.ts",
+      "sha256Lf": "60851e22ea50ed540f1be0f5a110077cdd5e6ab87345a675838f6c6333517405"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-ads.d.ts",
+      "sha256Lf": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-ambilight.d.ts",
+      "sha256Lf": "9f06ccb7398053dca642ca369aa47f54cbb3e4dd4d5e252e999e59e496d8eee8"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-asr.d.ts",
+      "sha256Lf": "5096f097636c018bc05c497324c271af3fefaebccda7fa3e9cd43b63477704ad"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-audio-track.d.ts",
+      "sha256Lf": "604af2a3790eb7c583ba150c402dca0a3e458469cc74913b51fee2f3d3882541"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-auto-thumbnail.d.ts",
+      "sha256Lf": "f66bba7f633202c2ef359a989269c643b75d91594364f7ed6fb67f9898aeac03"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-chapter.d.ts",
+      "sha256Lf": "d5bd68579659afa44158c894e12372cedd6f958415ced370a65c294550aa828d"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-chromecast.d.ts",
+      "sha256Lf": "0a0b932081cac0efbcedea28dc1077484963b7f406808378704062661a4c0338"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-danmuku-mask.d.ts",
+      "sha256Lf": "06c6e938876edcc0ac2c8dcd1e1be4596b0f056685a3523d4c9836f2f2f90362"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-danmuku.d.ts",
+      "sha256Lf": "e3421bdbdfc6bea1b0b633300350fff1a745d8bc21c1430b6154a23fa3ad0415"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-dash-control.d.ts",
+      "sha256Lf": "c7e3c83f3377b615e503a270af12915dcc82fe3f2cfabdae396632855a27f73f"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-document-pip.d.ts",
+      "sha256Lf": "42faa0a6549149efd01b46c3c59246bd4dc33f2383b63b04e9f5376de29fdb8e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-hls-control.d.ts",
+      "sha256Lf": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-jassub.d.ts",
+      "sha256Lf": "ce713e0a61a81bfc31087ea1a880a99398ef7c2b833e567c91e4e98f5ae6f621"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-multiple-subtitles.d.ts",
+      "sha256Lf": "edb15207df69a695311e849555cf989bfc32da20c2456731b6814de5400567bb"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-vast.d.ts",
+      "sha256Lf": "b21ed9a852b3ec3cc9b409cce08e91905e42abdc1d642acc9b412c33c83287b7"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-vtt-thumbnail.d.ts",
+      "sha256Lf": "d82c0fe08bcf9c60e2a634e9f1fd8ccc75dc8e0ddbfa8262cccaefc9604aa61b"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-proxy-canvas.d.ts",
+      "sha256Lf": "83c408e0724a598f9ff32d68d752f39e03feb69ba4f6a49ba02f9d4df898453e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-proxy-mediabunny.d.ts",
+      "sha256Lf": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-tool-iframe.d.ts",
+      "sha256Lf": "c06c6819146ba64bd6ee498871d9e19ab5a9e88c9cc7bed2c0c4968fa39dfed7"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-tool-thumbnail.d.ts",
+      "sha256Lf": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6"
+    },
+    {
+      "file": "docs/assets/ts/artplayer.d.ts",
+      "sha256Lf": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985"
+    },
+    {
+      "file": "docs/assets/js/common.js",
+      "sha256Lf": "cc9f7d780cf4f0ffb9aaee75da69e2b2b062f3bac07b4ffc9a75956b2e7cd7af"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-vast.LICENSE.txt",
+      "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
+    }
+  ],
+  "sdk": [
+    {
+      "name": "@glomex/vast-ima-player",
+      "version": "1.21.2",
+      "manifest": {
+        "file": "node_modules\\@glomex\\vast-ima-player\\package.json",
+        "sha256": "c7361321ce792f6830af9eb40e70b7508a75f68290a3c0077e26a6f36daa7097"
+      },
+      "license": {
+        "file": "node_modules\\@glomex\\vast-ima-player\\LICENSE",
+        "sha256": "68b35bb64e6269277318ff4e4ee66a738bdeb83bbcdc7e3c3af85a0bdded8d0b"
+      }
+    },
+    {
+      "name": "@alugha/ima",
+      "version": "2.1.0",
+      "manifest": {
+        "file": "node_modules\\@alugha\\ima\\package.json",
+        "sha256": "0c0f9d2a4cc8ea3f96239b44e4ef764630421998e5de91d05d04e42582b24852"
+      },
+      "license": {
+        "file": "node_modules\\@alugha\\ima\\LICENSE.md",
+        "sha256": "0fe0f6dd9671aecf84ea082cdcd7b3297b75ca942d082b485b94dd3b4dfd648a"
+      }
+    }
+  ],
+  "limitations": [
+    "Browser uses repository Monaco, not an entire editor UI/route acceptance.",
+    "VAST is type-only; no ad SDK request, no runtime default behavior decision.",
+    "No full production/runtime or publication matrix rerun, no remote CI or manual Chrome/iab.",
+    "No new dependencies, push or publication."
+  ]
+}

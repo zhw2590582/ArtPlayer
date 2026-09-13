@@ -78,7 +78,7 @@ export function captureSiteInventory() {
     pages: demo.pages,
     baselinePaths: { examplesAdded: demo.examples.filter(row => !historical.examples.some(old => old.source === row.source)).map(row => row.source), examplesRemoved: historical.examples.filter(row => !demo.examples.some(now => now.source === row.source)).map(row => row.source), htmlAdded: demo.pages.filter(row => !historical.pages.some(old => old.source === row.source)).map(row => row.source), htmlRemoved: historical.pages.filter(row => !demo.pages.some(now => now.source === row.source)).map(row => row.source) },
     editorDeclarations: [...read('docs/assets/js/common.js').matchAll(/'\.\/assets\/ts\/([^']+\.d\.ts)'/g)].map(match => ({ file: `docs/assets/ts/${match[1]}`, exists: fs.existsSync(path.join(root, 'docs/assets/ts', match[1])), owner: 'SITE-02' })),
-    scripts: [...scriptFiles, ...files('scripts/docs-smoke').filter(file => file.endsWith('.ts'))].map(file => ({ file, sha256Lf: hash(read(file)) })),
+    scripts: [...scriptFiles, ...files('scripts/docs-smoke').filter(file => file.endsWith('.ts')), ...files('scripts/editor-declarations').filter(file => file.endsWith('.ts'))].map(file => ({ file, sha256Lf: hash(read(file)) })),
     generationCommands: Object.fromEntries(Object.entries(json('package.json').scripts).filter(([name]) => /^(?:build:(?:types|ts|test|i18n|docs|llm|all)|ci:build)$/.test(name))),
     siteManifest: json('packages/artplayer-vitepress/package.json'),
     assets,

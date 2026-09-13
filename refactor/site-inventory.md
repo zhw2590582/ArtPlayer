@@ -3,7 +3,10 @@
 SITE-SMOKE-01 后续已将 build:test 拆为 TS 解析、生成和浏览器运行模块，新增
 确定性 examples.json 和 readonly check，替换 100ms done 为实例 ready/错误/清理。
 以下 SITE-01 的旧生成器问题属于历史发现；当前维护入口见
-[docs-smoke README](../scripts/docs-smoke/README.md)。声明生成仍归 SITE-02。
+[docs-smoke README](../scripts/docs-smoke/README.md)。SITE-02 后续已将声明生成
+迁到 `scripts/editor-declarations/`：全部 22 份加载声明整组验证，Chapter/VAST
+不再走删除 import 的文本回退。见[模块说明](../scripts/editor-declarations/README.md)。
+以下 SITE-01 对这些旧生成问题的描述是历史发现，站点/编辑器交互仍需后续验收。
 
 SITE-01 在 `d62ab13a35c756ea567c426d4fbe00d893dd7e2b` 后核对当前源码。
 可重跑清单见 [site-inventory.json](baselines/site-inventory.json)；它登记
