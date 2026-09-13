@@ -168,12 +168,12 @@ function createPreview({ lifetime, thumbnails, progress, duration, setStyle, isM
     style(control, "height", `${cue.h}px`);
     style(control, "width", `${cue.w}px`);
     style(control, "backgroundPosition", `-${cue.x}px -${cue.y}px`);
-    if (width <= cue.w / 2)
+    if (width <= Number(cue.w) / 2)
       style(control, "left", 0);
-    else if (width > progress.clientWidth - cue.w / 2)
-      style(control, "left", `${progress.clientWidth - cue.w}px`);
+    else if (width > progress.clientWidth - Number(cue.w) / 2)
+      style(control, "left", `${progress.clientWidth - Number(cue.w)}px`);
     else
-      style(control, "left", `${width - cue.w / 2}px`);
+      style(control, "left", `${width - Number(cue.w) / 2}px`);
   }
   return (control) => async (type, percentage, event) => {
     if (lifetime.closed)
@@ -234,7 +234,8 @@ async function requestVtt(url = "", lifetime) {
 }
 function artplayerPluginVttThumbnail(option) {
   return async (art) => {
-    const { constructor: { utils: { setStyle, isMobile, addClass } }, template: { $progress } } = art;
+    const { setStyle, isMobile, addClass } = art.constructor.utils;
+    const { $progress } = art.template;
     const lifetime = createLifetime(art);
     const result = { name: "artplayerPluginVttThumbnail" };
     try {

@@ -1,11 +1,14 @@
-export default function createLifetime(art) {
+import type { Events } from 'artplayer'
+import type { Cleanup, Lifetime, LifetimeHost, OwnedEvent } from './types'
+
+export default function createLifetime(art: LifetimeHost): Lifetime {
   let closed = Boolean(art.isDestroy)
-  const cleanups = new Set()
-  let cancel
-  const cancelled = new Promise((resolve) => {
+  const cleanups = new Set<Cleanup>()
+  let cancel!: Cleanup
+  const cancelled = new Promise<void>((resolve) => {
     cancel = resolve
   })
-  const lifetime = {
+  const lifetime: Lifetime = {
     get closed() { return closed },
     own(cleanup) {
       if (closed)
@@ -14,13 +17,13 @@ export default function createLifetime(art) {
         cleanups.add(cleanup)
       return () => cleanups.delete(cleanup)
     },
-    listen(name, callback) {
+    listen<Name extends OwnedEvent>(name: Name, callback: (...args: Events[Name]) => unknown) {
       if (closed)
         return
       lifetime.own(() => art.off(name, callback))
       art.on(name, callback)
     },
-    wait(value) { return Promise.race([value, cancelled]) },
+    wait<Value>(value: Value | PromiseLike<Value>) { return Promise.race([value, cancelled]) },
     dispose() {
       if (closed)
         return
@@ -32,7 +35,7 @@ export default function createLifetime(art) {
         run(cleanup)
     },
   }
-  function run(cleanup) {
+  function run(cleanup: Cleanup) {
     try {
       cleanup()
     }

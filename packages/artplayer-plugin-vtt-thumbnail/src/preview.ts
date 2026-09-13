@@ -1,7 +1,9 @@
+import type { Events } from 'artplayer'
+import type { PreviewOptions, StyleKey, Thumbnail } from './types'
 import { findThumbnail } from './parseVtt'
 
-export default function createPreview({ lifetime, thumbnails, progress, duration, setStyle, isMobile }) {
-  let timer = null
+export default function createPreview({ lifetime, thumbnails, progress, duration, setStyle, isMobile }: PreviewOptions) {
+  let timer: ReturnType<typeof setTimeout> | null = null
   let generation = 0
   lifetime.own(() => {
     generation++
@@ -11,23 +13,23 @@ export default function createPreview({ lifetime, thumbnails, progress, duration
       clearTimeout(previous)
     }
   })
-  function style(control, key, value) {
+  function style(control: HTMLElement, key: StyleKey, value: string | number) {
     if (!lifetime.closed)
-      setStyle(control, key, value)
+      setStyle<keyof CSSStyleDeclaration>(control, key, value)
   }
-  function show(control, cue, width) {
+  function show(control: HTMLElement, cue: Thumbnail, width: number) {
     style(control, 'backgroundImage', `url(${cue.url})`)
     style(control, 'height', `${cue.h}px`)
     style(control, 'width', `${cue.w}px`)
     style(control, 'backgroundPosition', `-${cue.x}px -${cue.y}px`)
-    if (width <= cue.w / 2)
+    if (width <= Number(cue.w) / 2)
       style(control, 'left', 0)
-    else if (width > progress.clientWidth - cue.w / 2)
-      style(control, 'left', `${progress.clientWidth - cue.w}px`)
+    else if (width > progress.clientWidth - Number(cue.w) / 2)
+      style(control, 'left', `${progress.clientWidth - Number(cue.w)}px`)
     else
-      style(control, 'left', `${width - cue.w / 2}px`)
+      style(control, 'left', `${width - Number(cue.w) / 2}px`)
   }
-  return control => async (type, percentage, event) => {
+  return (control: HTMLElement) => async (type: Events['setBar'][0], percentage: number, event?: Event) => {
     if (lifetime.closed)
       return
     const dragging = type === 'played' && event && isMobile

@@ -1,13 +1,16 @@
+import type Artplayer from 'artplayer'
+import type { Option, Result } from './types'
 import createLifetime from './lifetime'
 import parseVtt from './parseVtt'
 import createPreview from './preview'
 import requestVtt from './request'
 
-export default function artplayerPluginVttThumbnail(option) {
-  return async (art) => {
-    const { constructor: { utils: { setStyle, isMobile, addClass } }, template: { $progress } } = art
+export default function artplayerPluginVttThumbnail(option: Option) {
+  return async (art: Artplayer): Promise<Result> => {
+    const { setStyle, isMobile, addClass } = (art.constructor as typeof Artplayer).utils
+    const { $progress } = art.template
     const lifetime = createLifetime(art)
-    const result = { name: 'artplayerPluginVttThumbnail' }
+    const result: Result = { name: 'artplayerPluginVttThumbnail' }
     try {
       if (lifetime.closed)
         return result

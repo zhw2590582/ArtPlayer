@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-VTT-THUMB-04 严格运行时 TS 检查点（doing）
+
+六个 JS 实现迁为 TS，另有明确数据/资源类型模块，分包 allowJs=false。TS 5.9.3/5.1.6
+严格检查及正反例通过，移除 expect-error 后各复现 8 个预期类型错误。内部注册准确为
+Promise<Result>，公开旧同步声明保持原样，旧消费者/类型视图和导出兼容仍待 04。
+源码/main/legacy 的解析与生命周期各 47 通过，原生三入口各 18 通过，共 54 项；
+实际 ESM 和完整 CI 2064 项通过，全仓严格生产 TS 增至 346 文件。包内架构和构建同步。
+见[变更](changes/2026-09-13-PKG-VTT-THUMB-04-runtime-types.md)和
+[验证](baselines/vtt-thumbnail-runtime-types.json)。222 项：117 done、13 doing、92 todo。
+本次为独立本地检查点提交，不推送、不发布。
+
+
 ## PKG-VTT-THUMB-03 内部模块与解析修复完成
 
 在资源检查点上完成纯解析/首个区间查找，支持 cue ID、注释/元数据块和 timing settings，

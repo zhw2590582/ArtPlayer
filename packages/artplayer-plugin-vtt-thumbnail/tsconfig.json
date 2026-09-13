@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "allowJs": false },
+  "include": ["src/**/*.ts", "types/**/*.d.ts", "../../types/assets.d.ts", "../../test/types/vtt-thumbnail-runtime.ts"]
+}

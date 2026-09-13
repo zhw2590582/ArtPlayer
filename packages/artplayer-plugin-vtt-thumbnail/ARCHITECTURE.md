@@ -3,27 +3,27 @@
 The factory remains `artplayerPluginVttThumbnail(option)`. Its registration function is
 asynchronous and resolves to `{ name: 'artplayerPluginVttThumbnail' }`. Existing public
 declarations still describe a synchronous result; task PKG-VTT-THUMB-04 owns that conflict
-and the strict TypeScript migration. Do not infer the return shape from those declarations.
+and the public declaration/consumer migration. The seven internal TS files are strict. Do not infer the return shape from those declarations.
 
 ## Modules and ownership
 
-- `src/index.js` composes registration, captures the VTT URL before awaiting, reads style
+- `src/index.ts` composes registration, captures the VTT URL before awaiting, reads style
   afterwards, and installs the `vtt-thumbnail` control with its existing CSS class/index.
-- `src/lifetime.js` owns one registration's destroy listener, event listeners and cleanup
+- `src/lifetime.ts` owns one registration's destroy listener, event listeners and cleanup
   callbacks. Close is idempotent. Cleanup continues after a callback fails. An independent
   cancellation Promise settles pending work even if fetch does not honor AbortSignal.
-- `src/request.js` owns a native AbortController when available and reads the response body.
+- `src/request.ts` owns a native AbortController when available and reads the response body.
   Destroy cancels both phases; late rejections are observed. Failed HTTP responses reject
   before parsing. The controller cleanup is released when the request ends.
-- `src/parseVtt.js` parses thumbnail metadata and exports the pure `findThumbnail` lookup.
+- `src/parseVtt.ts` parses thumbnail metadata and exports the pure `findThumbnail` lookup.
   It preserves timestamp flooring, first inclusive matches, decimal xywh strings and lexical
   URL joining. It handles cue IDs, NOTE/STYLE/REGION blocks, BOM/line endings and timing
   settings; invalid input raises TypeError with the original line before any UI is installed.
-- `src/preview.js` owns the mobile 500ms timer and creates the setBar callback. Timer
+- `src/preview.ts` owns the mobile 500ms timer and creates the setBar callback. Timer
   generations reject old callbacks. Every style write checks lifetime state, including
   callbacks captured before destroy. Geometry, mobile/desktop edges and cue selection
   retain the latest published behavior.
-- `src/getVttArray.js` retains the old source helper signature as a fetch/parse wrapper.
+- `src/getVttArray.ts` retains the old source helper signature as a fetch/parse wrapper.
   The player registration uses the owned request module instead. Distribution/deep-import
   review belongs to PKG-VTT-THUMB-06.
 
@@ -31,6 +31,26 @@ The registration owns only the control element passed to its mounted callback. B
 removing it, cleanup compares the live `art.controls['vtt-thumbnail']` alias with that exact
 element. It must not remove a later replacement. Partial listener/control installation is
 rolled back if initialization throws, preserving the original rejection.
+
+## Runtime types
+
+`src/types.ts` defines options, result, rectangle/cue data, owned events, cleanup and
+preview inputs. Request cancellation is typed as a void branch; actual registration is
+Promise<Result>. The lifetime accepts only destroy/setBar and uses the core event tuples.
+The preview receives only its required DOM/style/duration inputs.
+
+Assertions are limited to the real Artplayer constructor boundary, validated regex groups
+and loop indexes, the completed four-key rectangle, and native responses after the closed
+check. The latter is valid because native fetch returns Response and cancellation only
+resolves void after closing; malformed custom responses still throw at runtime. Numeric
+rectangle strings are explicitly converted for arithmetic while the zero style write stays
+numeric. No any, unchecked JS or skipLibCheck exception is introduced.
+
+The package tsconfig also checks test/types/vtt-thumbnail-runtime.ts. It tests the async
+result, required options, CSS/URL types, event tuples, cancellation, readonly state and raw
+rectangle strings, including expected errors. It separately proves the old public result
+is synchronous in declarations; those declarations are not silently corrected in this
+runtime checkpoint. New/old declaration consumers and export aliases remain task 04.
 
 ## Compatibility and intentional fixes
 

@@ -4200,7 +4200,9 @@
       "evidence": [
         "refactor/baselines/vtt-thumbnail-release.json",
         "refactor/baselines/vtt-thumbnail-contract.md",
-        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs",
+        "test/types/vtt-thumbnail-runtime.ts",
+        "refactor/baselines/vtt-thumbnail-runtime-types.json"
       ],
       "compatibleResolution": "Preserve valid consumers and actual async runtime, with explicit decisions for irreconcilable inference changes.",
       "closureCriteria": "Isolated old/new compiler and installed consumers verify options, styles, callback and result forms."
