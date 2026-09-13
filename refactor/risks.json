@@ -5640,7 +5640,7 @@
     },
     {
       "id": "JASSUB-FIREFOX-OFFSCREEN-01",
-      "title": "Windows Firefox default offscreen readback/playback can stall after a preceding subtitle-switch test and web fullscreen",
+      "title": "Windows Firefox offscreen readback and asynchronous ImageBitmap creation can stall through seek/layout, including a minimal Worker control",
       "confirmation": "reproduced",
       "status": "open",
       "owners": [
@@ -5650,6 +5650,9 @@
       "evidence": [
         "refactor/changes/2026-09-14-PKG-JASSUB-09-hybrid.md",
         "refactor/baselines/jassub-hybrid-validation.json",
+        "refactor/changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md",
+        "refactor/baselines/jassub-firefox-diagnostics.json",
+        "test/browser/jassub-platform.spec.js",
         "test/browser/jassub-native.spec.js",
         "test/browser/jassub-hybrid.spec.js"
       ],

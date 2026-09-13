@@ -1,0 +1,5533 @@
+{
+  "task": "PKG-JASSUB-09",
+  "status": "doing",
+  "baselineCommit": "7f185f698dbd303b00ca7bc0c21f51cf65c69a04",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "productionChanges": false,
+  "limitation": "Diagnostic profiles are not fixes. Intermediate controls differ as described; final source hashes are not claimed for all earlier runs. Pure native hosts passed, so core/style/compositor effects remain unresolved. Software preference is not verified GPU backend identity. Raw traces remain local; paths within attachments refer to their original shared result directory and must be resolved under each archived resultsPath.",
+  "currentFiles": [
+    {
+      "path": "test/browser/jassub-native.spec.js",
+      "sha256": "26303f9d86cdba788409534fd6a096d202170ca1965da5c1ae078cd5c0cc0d93"
+    },
+    {
+      "path": "test/browser/jassub-platform.spec.js",
+      "sha256": "cf86f9295a23b033d313c154c19c27d9246ed42596412f5f61ea8ee866ef7677"
+    },
+    {
+      "path": "playwright.jassub-diagnostic.config.js",
+      "sha256": "76c596b7a10455a7223b996c58bc6ad71ed7c86b9a791bdbd5592f86e9629dc8"
+    },
+    {
+      "path": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+      "sha256": "60590f2fca6ffded74f96f8a6001a86c32eb38f5e1fae26338cbbb43e93fb70a"
+    },
+    {
+      "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+      "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+    }
+  ],
+  "softwareConfigUsed": {
+    "path": "refactor/.cache/jassub-firefox-software.config.mjs",
+    "sha256": "41ff98209b4a26b0388284f4a1f5607e40cc93a187cca8cec4b4958d8f486f4c",
+    "content": "import path from 'node:path'\nimport base from '../../playwright.config.js'\nconst root = process.cwd()\nexport default {\n  ...base,\n  testDir: path.join(root, 'test/browser'),\n  outputDir: path.join(root, 'refactor/.cache/browser/results'),\n  reporter: [['list'], ['json', { outputFile: path.join(root, 'refactor/.cache/browser/report.json') }]],\n  projects: base.projects.filter(project => project.name === 'firefox').map(project => ({ ...project, use: { ...project.use, launchOptions: { firefoxUserPrefs: { 'gfx.webrender.software': true } } } })),\n  webServer: { ...base.webServer, cwd: root },\n}\n"
+  },
+  "reports": [
+    {
+      "profile": "JASSUB default offscreen, animation-frame readback, hybrid seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-raf-readback.json",
+      "sha256": "d22163a48b2be1659c5a6dbc2a24d06d881fc6109d5c93d9534622c1b09ee84c",
+      "resultsPath": "refactor/.cache/jassub09-firefox-raf-readback-results",
+      "stats": {
+        "startTime": "2026-09-13T18:54:10.633Z",
+        "duration": 45193.848999999995,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 2111,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                }
+              ],
+              "terminal": {
+                "sameCanvas": true,
+                "containers": 0
+              },
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 11098,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  160 |       expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  161 |       await page.locator('#play').click()\n> 162 |       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                   ^\n  163 |       const before = await pixels(page, 'before-seek')\n  164 |       expect(before.connected).toBe(true)\n  165 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:162:67"
+          ],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.2
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.2
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 4,
+                "delivered": 3,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 10676.6,
+                  "height": 720,
+                  "mediaTime": 10.2,
+                  "presentationTime": 10676.6,
+                  "presentedFrames": 256,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "visible": 0,
+                "signature": 0,
+                "width": 640,
+                "height": 360,
+                "cssWidth": 640,
+                "cssHeight": 360,
+                "time": 0.190425,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 254,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 254
+                },
+                "onDemand": true
+              },
+              "readbackFrame": true
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-0f197-false-defaultOffscreen-true-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-0f197-false-defaultOffscreen-true-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-0f197-false-defaultOffscreen-true-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 12417,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  160 |       expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  161 |       await page.locator('#play').click()\n> 162 |       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                   ^\n  163 |       const before = await pixels(page, 'before-seek')\n  164 |       expect(before.connected).toBe(true)\n  165 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:162:67"
+          ],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.48
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 4,
+                "delivered": 3,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 11260.38,
+                  "height": 720,
+                  "mediaTime": 10.48,
+                  "presentationTime": 11243.72,
+                  "presentedFrames": 263,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "visible": 0,
+                "signature": 0,
+                "width": 640,
+                "height": 360,
+                "cssWidth": 640,
+                "cssHeight": 360,
+                "time": 0.445192,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 260,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 260
+                },
+                "onDemand": true
+              },
+              "readbackFrame": true
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-c0461-false-defaultOffscreen-true-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-c0461-false-defaultOffscreen-true-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-c0461-false-defaultOffscreen-true-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 12427,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  160 |       expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  161 |       await page.locator('#play').click()\n> 162 |       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                   ^\n  163 |       const before = await pixels(page, 'before-seek')\n  164 |       expect(before.connected).toBe(true)\n  165 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:162:67"
+          ],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.48
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 4,
+                "delivered": 3,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 11206.18,
+                  "height": 720,
+                  "mediaTime": 10.48,
+                  "presentationTime": 11189.52,
+                  "presentedFrames": 263,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "visible": 0,
+                "signature": 0,
+                "width": 640,
+                "height": 360,
+                "cssWidth": 640,
+                "cssHeight": 360,
+                "time": 0.445906,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 260,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 260
+                },
+                "onDemand": true
+              },
+              "readbackFrame": true
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-a4e6a-false-defaultOffscreen-true-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-a4e6a-false-defaultOffscreen-true-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-native-JASSUB-candi-a4e6a-false-defaultOffscreen-true-firefox\\trace.zip"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "profile": "JASSUB default offscreen, software WebRender requested, hybrid seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-software.json",
+      "sha256": "49d616a9d306b0053bbd23ba09a047ac98f448c9f07a1250f03823fd3d59954f",
+      "resultsPath": "refactor/.cache/jassub09-firefox-software-results",
+      "stats": {
+        "startTime": "2026-09-13T18:55:40.007Z",
+        "duration": 11446.834,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 2292,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack",
+                "demand",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                }
+              ],
+              "terminal": {
+                "sameCanvas": true,
+                "containers": 0
+              },
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1963,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.6
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.64
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.16
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.24
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.578111,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 13,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 13
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000023,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 15,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 15
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.169707,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 19,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 19
+                  },
+                  "onDemand": true
+                }
+              ],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 13,
+                "delivered": 12,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 1708.74,
+                  "height": 720,
+                  "mediaTime": 10.24,
+                  "presentationTime": 1692.06,
+                  "presentedFrames": 49,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.169707,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 19,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 19
+                },
+                "onDemand": true
+              },
+              "readbackFrame": false
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1900,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.6
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.64
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.68
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.60064,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 14,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 14
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000024,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 16,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 16
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.040616,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 17,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 17
+                  },
+                  "onDemand": true
+                }
+              ],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 13,
+                "delivered": 12,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 1611.14,
+                  "height": 720,
+                  "mediaTime": 10.12,
+                  "presentationTime": 1611.14,
+                  "presentedFrames": 48,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.040616,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 17,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 17
+                },
+                "onDemand": true
+              },
+              "readbackFrame": false
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1888,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.6
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.565826,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 13,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 13
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000019,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 15,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 15
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.040477,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 16,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 16
+                  },
+                  "onDemand": true
+                }
+              ],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 12,
+                "delivered": 11,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 1583.56,
+                  "height": 720,
+                  "mediaTime": 10.12,
+                  "presentationTime": 1583.56,
+                  "presentedFrames": 45,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.040477,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 16,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 16
+                },
+                "onDemand": true
+              },
+              "readbackFrame": false
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "JASSUB default offscreen, asyncRender=false, hybrid seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-sync-render.json",
+      "sha256": "e8a1904028668372d42767d3da44052df6d7f4009934175751d61e93527e7d09",
+      "resultsPath": "refactor/.cache/jassub09-firefox-sync-render-results",
+      "stats": {
+        "startTime": "2026-09-13T18:58:26.541Z",
+        "duration": 10769.944,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 2087,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                }
+              ],
+              "terminal": {
+                "sameCanvas": true,
+                "containers": 0
+              },
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1859,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150,
+                      "asyncRender": false
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.6
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.64
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.563054,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 13,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 13
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000021,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 15,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 15
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.045057,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 16,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 16
+                  },
+                  "onDemand": true
+                }
+              ],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 12,
+                "delivered": 11,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 1546.4,
+                  "height": 720,
+                  "mediaTime": 10.08,
+                  "presentationTime": 1546.4,
+                  "presentedFrames": 45,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 6216,
+                "signature": 3526987101,
+                "width": 640,
+                "height": 360,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.045057,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 16,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 16
+                },
+                "onDemand": true
+              },
+              "readbackFrame": false,
+              "synchronousRender": true
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1738,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150,
+                      "asyncRender": false
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.2
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.24
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.28
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.32
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.36
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.16
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.2
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.316549,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 7,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 7
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000025,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 8,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 8
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.166352,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 12,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 12
+                  },
+                  "onDemand": true
+                }
+              ],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 14,
+                "delivered": 13,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 1421.2,
+                  "height": 720,
+                  "mediaTime": 10.2,
+                  "presentationTime": 1421.2,
+                  "presentedFrames": 34,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.166352,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 12,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 12
+                },
+                "onDemand": true
+              },
+              "readbackFrame": false,
+              "synchronousRender": true
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1583,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": {
+            "source": {
+              "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+              "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+            },
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150,
+                      "asyncRender": false
+                    },
+                    {
+                      "target": "offscreenCanvas"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.2
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.24
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.28
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.32
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.36
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.315222,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 7,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 7
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.00002,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 8,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 8
+                  },
+                  "onDemand": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.040418,
+                  "connected": true,
+                  "media": {
+                    "paused": false,
+                    "readyState": 4,
+                    "totalFrames": 9,
+                    "droppedFrames": 0,
+                    "mozPresentedFrames": 9
+                  },
+                  "onDemand": true
+                }
+              ],
+              "errors": [],
+              "frames": {
+                "before": "function",
+                "registered": 12,
+                "delivered": 11,
+                "after": "function",
+                "lastMetadata": {
+                  "expectedDisplayTime": 1320.98,
+                  "height": 720,
+                  "mediaTime": 10.12,
+                  "presentationTime": 1320.98,
+                  "presentedFrames": 32,
+                  "width": 1280
+                }
+              },
+              "renderCalls": [],
+              "offscreen": {
+                "available": true,
+                "selected": true
+              },
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.040418,
+                "connected": true,
+                "media": {
+                  "paused": false,
+                  "readyState": 4,
+                  "totalFrames": 9,
+                  "droppedFrames": 0,
+                  "mozPresentedFrames": 9
+                },
+                "onDemand": true
+              },
+              "readbackFrame": false,
+              "synchronousRender": true
+            },
+            "defaultOffscreen": true
+          },
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Worker fillRect, initial native host, hybrid seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-platform.json",
+      "sha256": "a23e16fa398737687e455ba2f8494dd5dee48b878460fe30a43cce12017f523a",
+      "resultsPath": "refactor/.cache/jassub09-firefox-platform-results",
+      "stats": {
+        "startTime": "2026-09-13T18:57:23.035Z",
+        "duration": 8438.881,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 2076,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack",
+                "demand",
+                "demand",
+                "setTrack"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                }
+              ],
+              "terminal": {
+                "sameCanvas": true,
+                "containers": 0
+              },
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 958,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.284068,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 7
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. JASSUB wrapper, WASM, fonts and ImageBitmap rendering are absent. Capability fallback on hosts without transfer is main-thread painting, not offscreen verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1019,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.285671,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 7
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. JASSUB wrapper, WASM, fonts and ImageBitmap rendering are absent. Capability fallback on hosts without transfer is main-thread painting, not offscreen verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 940,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 960,
+              "height": 540,
+              "time": 10.201786,
+              "frames": 9,
+              "sent": 9,
+              "received": 9,
+              "quality": 5
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. JASSUB wrapper, WASM, fonts and ImageBitmap rendering are absent. Capability fallback on hosts without transfer is main-thread painting, not offscreen verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Worker ImageBitmap, initial native host 960x540, hybrid seed; attachment limitation incorrectly said no ImageBitmap",
+      "reportPath": "refactor/.cache/jassub09-firefox-platform-bitmap.json",
+      "sha256": "4d375c8d46f91d5ea27040afc7e85e107d43921d8ae3808f48a1f137e7bb039d",
+      "resultsPath": "refactor/.cache/jassub09-firefox-platform-bitmap-results",
+      "stats": {
+        "startTime": "2026-09-13T18:59:55.790Z",
+        "duration": 43776.993,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 2365,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                }
+              ],
+              "terminal": {
+                "sameCanvas": true,
+                "containers": 0
+              },
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 10787,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  83 |     }, { host, bitmap })\n  84 |     try {\n> 85 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).pixel).toEqual([255, 0, 0, 255])\n     |                                                                                                           ^\n  86 |       const before = await page.evaluate(() => window.nativeCanvasProbe.sample())\n  87 |       await page.evaluate(async () => {\n  88 |         const video = window.nativeCanvasProbe.video\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-platform.spec.js:85:107"
+          ],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 640,
+              "height": 360,
+              "time": 10.075562,
+              "frames": 3,
+              "sent": 3,
+              "received": 2,
+              "quality": 251
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. JASSUB wrapper, WASM, fonts and ImageBitmap rendering are absent. Capability fallback on hosts without transfer is main-thread painting, not offscreen verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "timedOut",
+          "duration": 22200,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Test timeout of 20000ms exceeded.",
+            "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 640\nReceived:   640\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  103 |         }\n  104 |       }, host)\n> 105 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).width).toBeGreaterThan(before.width)\n      |                                                                                                           ^\n  106 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).time).toBeGreaterThan(10.2)\n  107 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).pixel).toEqual([0, 0, 255, 255])\n  108 |     }\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-platform.spec.js:105:107"
+          ],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "pixel": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 20.154108,
+              "frames": 8,
+              "sent": 8,
+              "received": 7,
+              "quality": 504
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. JASSUB wrapper, WASM, fonts and ImageBitmap rendering are absent. Capability fallback on hosts without transfer is main-thread painting, not offscreen verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-28634-ut-without-JASSUB-published-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-28634-ut-without-JASSUB-published-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-28634-ut-without-JASSUB-published-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1798,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 960,
+              "height": 540,
+              "time": 10.24264,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. JASSUB wrapper, WASM, fonts and ImageBitmap rendering are absent. Capability fallback on hosts without transfer is main-thread painting, not offscreen verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Worker ImageBitmap, script-free native host and matched viewport, hybrid seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-platform-matched.json",
+      "sha256": "3504b38aab7ceadfc9faee4b0dd2796d19cd737bbb1a1e3bfb94a571dc55c1e3",
+      "resultsPath": "refactor/.cache/jassub09-firefox-platform-matched-results",
+      "stats": {
+        "startTime": "2026-09-13T19:05:46.891Z",
+        "duration": 33957.972,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 12211,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  89 |       return { available: probe.available, selected: probe.selected, matrix }\n  90 |     }, subtitle)\n> 91 |     await expect.poll(() => page.evaluate(() => window.hybridProbe.pixels().visible)).toBeGreaterThan(100)\n     |                                                                                       ^\n  92 |     const before = await page.evaluate(() => window.hybridProbe.pixels())\n  93 |     expect(capabilities.selected).toBe(capabilities.available)\n  94 |     const hybridExpected = capabilities.selected && ['bt709', 'bt470bg', 'smpte170m'].includes(capabilities.matrix)\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-hybrid.spec.js:91:87"
+          ],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                }
+              ],
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-hybrid-JASSUB-actua-ba712-ap-and-terminal-track-calls-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-hybrid-JASSUB-actua-ba712-ap-and-terminal-track-calls-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-hybrid-JASSUB-actua-ba712-ap-and-terminal-track-calls-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 11983,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  109 |         await video.play()\n  110 |       })\n> 111 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).pixel).toEqual([0, 0, 255, 255])\n      |                                                                                                           ^\n  112 |       await page.evaluate((host) => {\n  113 |         if (host === 'native') {\n  114 |           Object.assign(window.nativeCanvasProbe.video.style, { position: 'fixed', inset: '0', width: '100vw', height: '100vh' })\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-platform.spec.js:111:107"
+          ],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 116
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 117
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 118
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.052674,
+                  "at": 183
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.052674,
+                  "at": 184
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.052674,
+                  "at": 184
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 500
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 10510
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 10510
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 640,
+              "height": 360,
+              "time": 19.981265,
+              "frames": 3,
+              "sent": 3,
+              "received": 3,
+              "quality": 250
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1839,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 92
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 92
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 93
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040613,
+                  "at": 157
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040613,
+                  "at": 157
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040613,
+                  "at": 157
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 191
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 191
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 192
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000023,
+                  "at": 477
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000023,
+                  "at": 479
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000023,
+                  "at": 483
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.040591,
+                  "at": 508
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.040591,
+                  "at": 511
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040591,
+                  "at": 514
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.080739,
+                  "at": 561
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.080739,
+                  "at": 562
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080739,
+                  "at": 564
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121073,
+                  "at": 594
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121073,
+                  "at": 596
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121073,
+                  "at": 598
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.163093,
+                  "at": 644
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.163093,
+                  "at": 647
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.163093,
+                  "at": 649
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.203433,
+                  "at": 677
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.203433,
+                  "at": 680
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.203433,
+                  "at": 681
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.244072,
+                  "at": 726
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.244072,
+                  "at": 728
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.244072,
+                  "at": 730
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.244072,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 7
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 965,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 28
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 29
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 30
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040632,
+                  "at": 80
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040632,
+                  "at": 80
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040632,
+                  "at": 81
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 368
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 368
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 368
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000023,
+                  "at": 396
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000023,
+                  "at": 397
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000023,
+                  "at": 401
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.041058,
+                  "at": 430
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.041058,
+                  "at": 431
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.041058,
+                  "at": 434
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.081799,
+                  "at": 466
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.081799,
+                  "at": 468
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.081799,
+                  "at": 469
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.122462,
+                  "at": 505
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.122462,
+                  "at": 507
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.122462,
+                  "at": 508
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.16302,
+                  "at": 546
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.16302,
+                  "at": 548
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.16302,
+                  "at": 549
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.203452,
+                  "at": 588
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.203452,
+                  "at": 589
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.203452,
+                  "at": 590
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.243697,
+                  "at": 632
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.243697,
+                  "at": 634
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.243697,
+                  "at": 636
+                }
+              ],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.243697,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 7
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Matched control plus software WebRender requested, hybrid seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-platform-software.json",
+      "sha256": "1abe7886296272e604cd0c08a2e536be846e54835cf79e126fa40b962376ceb0",
+      "resultsPath": "refactor/.cache/jassub09-firefox-platform-software-results",
+      "stats": {
+        "startTime": "2026-09-13T19:06:43.149Z",
+        "duration": 28568.394,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB actual subtitle color-space transitions tolerate a queued native hybrid bitmap and terminal track calls",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1893,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": null,
+          "jassub": null,
+          "hybrid": {
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f",
+            "state": {
+              "available": true,
+              "selected": true,
+              "matrix": null,
+              "sent": [
+                "init",
+                "offscreenCanvas",
+                "canvas",
+                "canvas",
+                "canvas",
+                "demand",
+                "getColorSpace",
+                "demand",
+                "demand",
+                "demand",
+                "setTrack",
+                "demand",
+                "setTrack"
+              ],
+              "received": [
+                {
+                  "target": "ready"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                },
+                {
+                  "target": "unbusy"
+                },
+                {
+                  "target": "verifyColorSpace"
+                }
+              ],
+              "terminal": {
+                "sameCanvas": true,
+                "containers": 0
+              },
+              "errors": [],
+              "busy": false,
+              "lastDemand": null
+            }
+          },
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 969,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 32
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 33
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 34
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.04032,
+                  "at": 99
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.04032,
+                  "at": 99
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.04032,
+                  "at": 100
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000021,
+                  "at": 379
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000021,
+                  "at": 380
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000021,
+                  "at": 413
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.040633,
+                  "at": 429
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.040633,
+                  "at": 430
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040633,
+                  "at": 430
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.081222,
+                  "at": 462
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.081222,
+                  "at": 463
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.081222,
+                  "at": 463
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121777,
+                  "at": 514
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121777,
+                  "at": 516
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121777,
+                  "at": 519
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161893,
+                  "at": 548
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161893,
+                  "at": 551
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161893,
+                  "at": 553
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.202426,
+                  "at": 584
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.202426,
+                  "at": 586
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.202426,
+                  "at": 587
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.242986,
+                  "at": 635
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.242986,
+                  "at": 637
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.242986,
+                  "at": 639
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.242986,
+              "frames": 9,
+              "sent": 9,
+              "received": 9,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 18995,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n   99 |     }, { host, bitmap })\n  100 |     try {\n> 101 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).pixel).toEqual([255, 0, 0, 255])\n      |                                                                                                           ^\n  102 |       const before = await page.evaluate(() => window.nativeCanvasProbe.sample())\n  103 |       await page.evaluate(async () => {\n  104 |         const video = window.nativeCanvasProbe.video\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-platform.spec.js:101:107"
+          ],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 31
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 32
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 33
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040297,
+                  "at": 96
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040297,
+                  "at": 18325
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040297,
+                  "at": 18326
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                255,
+                0,
+                0,
+                255
+              ],
+              "width": 640,
+              "height": 360,
+              "time": 18.29168,
+              "frames": 3,
+              "sent": 3,
+              "received": 2,
+              "quality": 456
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-28634-ut-without-JASSUB-published-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-28634-ut-without-JASSUB-published-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-28634-ut-without-JASSUB-published-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1776,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 166
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 167
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 168
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040431,
+                  "at": 220
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040431,
+                  "at": 221
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040431,
+                  "at": 221
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 539
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 539
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 539
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000019,
+                  "at": 563
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000019,
+                  "at": 565
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000019,
+                  "at": 568
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.051738,
+                  "at": 613
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.051738,
+                  "at": 615
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.051738,
+                  "at": 618
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.092131,
+                  "at": 648
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.092131,
+                  "at": 649
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.092131,
+                  "at": 651
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.132581,
+                  "at": 689
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.132581,
+                  "at": 689
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.132581,
+                  "at": 691
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.173092,
+                  "at": 731
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.173092,
+                  "at": 733
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.173092,
+                  "at": 735
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.213372,
+                  "at": 769
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.213372,
+                  "at": 771
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.213372,
+                  "at": 771
+                }
+              ],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.213372,
+              "frames": 9,
+              "sent": 9,
+              "received": 9,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Matched ImageBitmap control, idle readback, no seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-platform-idle.json",
+      "sha256": "6f5c83a61672e097b8bd58283058b4dcd05970a06c823cd2da8d28ff090fa8e3",
+      "resultsPath": "refactor/.cache/jassub09-firefox-platform-idle-results",
+      "stats": {
+        "startTime": "2026-09-13T19:08:10.952Z",
+        "duration": 7130.853999999999,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1840,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "idleReadback": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 87
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 88
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 88
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040379,
+                  "at": 145
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040379,
+                  "at": 145
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040379,
+                  "at": 145
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000021,
+                  "at": 461
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000021,
+                  "at": 462
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000021,
+                  "at": 494
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.040279,
+                  "at": 510
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.040279,
+                  "at": 511
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040279,
+                  "at": 511
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.080455,
+                  "at": 544
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.080455,
+                  "at": 544
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080455,
+                  "at": 545
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121005,
+                  "at": 596
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121005,
+                  "at": 598
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121005,
+                  "at": 601
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161182,
+                  "at": 631
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161182,
+                  "at": 635
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161182,
+                  "at": 637
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.201333,
+                  "at": 670
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.201333,
+                  "at": 672
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.201333,
+                  "at": 674
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.241504,
+                  "at": 713
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.241504,
+                  "at": 716
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.241504,
+                  "at": 717
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.241504,
+              "frames": 9,
+              "sent": 9,
+              "received": 9,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1004,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "idleReadback": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 33
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 33
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 34
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040508,
+                  "at": 94
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040508,
+                  "at": 95
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040508,
+                  "at": 95
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 359
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 359
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 390
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000022,
+                  "at": 392
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000022,
+                  "at": 393
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000022,
+                  "at": 393
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.080975,
+                  "at": 466
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.080975,
+                  "at": 468
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080975,
+                  "at": 470
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121129,
+                  "at": 498
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121129,
+                  "at": 501
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121129,
+                  "at": 504
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161782,
+                  "at": 551
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161782,
+                  "at": 553
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161782,
+                  "at": 554
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.201966,
+                  "at": 580
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.201966,
+                  "at": 582
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.201966,
+                  "at": 583
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.242223,
+                  "at": 616
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.242223,
+                  "at": 618
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.242223,
+                  "at": 619
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.28244,
+                  "at": 664
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.28244,
+                  "at": 666
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.28244,
+                  "at": 668
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.28244,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 7
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 921,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "idleReadback": true,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 27
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 28
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 29
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040256,
+                  "at": 80
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040256,
+                  "at": 80
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040256,
+                  "at": 81
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 351
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 352
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 352
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000018,
+                  "at": 372
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000018,
+                  "at": 374
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000018,
+                  "at": 377
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.040502,
+                  "at": 422
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.040502,
+                  "at": 424
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040502,
+                  "at": 426
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.080779,
+                  "at": 447
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.080779,
+                  "at": 449
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080779,
+                  "at": 450
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.12114,
+                  "at": 494
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.12114,
+                  "at": 496
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.12114,
+                  "at": 498
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161487,
+                  "at": 528
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161487,
+                  "at": 530
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161487,
+                  "at": 531
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.201889,
+                  "at": 574
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.201889,
+                  "at": 578
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.201889,
+                  "at": 580
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.242753,
+                  "at": 612
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.242753,
+                  "at": 614
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.242753,
+                  "at": 616
+                }
+              ],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.242753,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Matched ImageBitmap control, overlapping readback, no seed",
+      "reportPath": "refactor/.cache/jassub09-firefox-platform-overlap.json",
+      "sha256": "f6e800a03f09d5257d8a15265514be806e0dd137700966a03700bf5a5e3d7eb4",
+      "resultsPath": "refactor/.cache/jassub09-firefox-platform-overlap-results",
+      "stats": {
+        "startTime": "2026-09-13T19:09:31.864Z",
+        "duration": 20068.783000000003,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 12079,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  134 |       }, host)\n  135 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).width).toBeGreaterThan(before.width)\n> 136 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).time).toBeGreaterThan(10.2)\n      |                                                                                                          ^\n  137 |       await expect.poll(async () => (await page.evaluate(() => window.nativeCanvasProbe.sample())).pixel).toEqual([0, 0, 255, 255])\n  138 |     }\n  139 |     finally {\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-platform.spec.js:136:106"
+          ],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 84
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 85
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 86
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040729,
+                  "at": 145
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040729,
+                  "at": 146
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040729,
+                  "at": 147
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 445
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 447
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 482
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000021,
+                  "at": 499
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000021,
+                  "at": 501
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000021,
+                  "at": 504
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.081146,
+                  "at": 546
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.081146,
+                  "at": 549
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.081146,
+                  "at": 551
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121322,
+                  "at": 585
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121322,
+                  "at": 587
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121322,
+                  "at": 588
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161796,
+                  "at": 633
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161796,
+                  "at": 10645
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 20.190294,
+              "frames": 7,
+              "sent": 7,
+              "received": 6,
+              "quality": 255
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": [
+            {
+              "name": "screenshot",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\error-context.md"
+            },
+            {
+              "name": "trace",
+              "path": "D:\\github\\ArtPlayer\\refactor\\.cache\\browser\\results\\jassub-platform-Native-can-42c11-ut-without-JASSUB-candidate-firefox\\trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1948,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 116
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 117
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 118
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.04221,
+                  "at": 182
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.04221,
+                  "at": 182
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.04221,
+                  "at": 183
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 497
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 499
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 532
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.000035,
+                  "at": 532
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.000035,
+                  "at": 533
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000035,
+                  "at": 533
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.040368,
+                  "at": 548
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.040368,
+                  "at": 548
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040368,
+                  "at": 549
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.080949,
+                  "at": 598
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.080949,
+                  "at": 598
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080949,
+                  "at": 598
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121213,
+                  "at": 633
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121213,
+                  "at": 636
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121213,
+                  "at": 639
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161633,
+                  "at": 667
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161633,
+                  "at": 671
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161633,
+                  "at": 673
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.201905,
+                  "at": 716
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.201905,
+                  "at": 719
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.201905,
+                  "at": 720
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.242337,
+                  "at": 751
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.242337,
+                  "at": 752
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.242337,
+                  "at": 755
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.282543,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 8
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 958,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": true,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "bitmap-start",
+                  "time": 0,
+                  "at": 31
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0,
+                  "at": 32
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 33
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 0.040311,
+                  "at": 85
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 0.040311,
+                  "at": 85
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040311,
+                  "at": 86
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10,
+                  "at": 353
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10,
+                  "at": 353
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 354
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.00002,
+                  "at": 375
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.00002,
+                  "at": 377
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.00002,
+                  "at": 379
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.040363,
+                  "at": 423
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.040363,
+                  "at": 425
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040363,
+                  "at": 428
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.080901,
+                  "at": 449
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.080901,
+                  "at": 451
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080901,
+                  "at": 454
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.121234,
+                  "at": 489
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.121234,
+                  "at": 492
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.121234,
+                  "at": 494
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.161583,
+                  "at": 529
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.161583,
+                  "at": 531
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161583,
+                  "at": 533
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.201804,
+                  "at": 569
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.201804,
+                  "at": 571
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.201804,
+                  "at": 573
+                },
+                {
+                  "stage": "bitmap-start",
+                  "time": 10.24233,
+                  "at": 610
+                },
+                {
+                  "stage": "bitmap-ready",
+                  "time": 10.24233,
+                  "at": 612
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.24233,
+                  "at": 615
+                }
+              ],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.24233,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    },
+    {
+      "profile": "Final fillRect control, three browsers, overlapping readback, no seed",
+      "reportPath": "refactor/.cache/jassub09-platform-fill-final.json",
+      "sha256": "56e6090da34843a6212e06e4b25e5337173562ab28e70c01ea000ce4933405eb",
+      "resultsPath": "refactor/.cache/jassub09-platform-fill-final-results",
+      "stats": {
+        "startTime": "2026-09-13T19:10:10.107Z",
+        "duration": 15722.711,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 766,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "drawn",
+                  "time": 0.001745,
+                  "at": 193.80000001192093
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.008198,
+                  "at": 306.4000000357628
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.035398,
+                  "at": 374
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.067577,
+                  "at": 407.2000000476837
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.117807,
+                  "at": 458.60000002384186
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.151417,
+                  "at": 489.9000000357628
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.200295,
+                  "at": 539.7000000476837
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.215356,
+              "frames": 7,
+              "sent": 7,
+              "received": 7,
+              "quality": 135
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 633,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "drawn",
+                  "time": 0.002338,
+                  "at": 129.80000001192093
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.008063,
+                  "at": 242.19999998807907
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.033379,
+                  "at": 308.4000000357628
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.066185,
+                  "at": 341.4000000357628
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.117208,
+                  "at": 394
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.135637,
+                  "at": 410.19999998807907
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.200339,
+                  "at": 474.9000000357628
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.214106,
+              "frames": 7,
+              "sent": 7,
+              "received": 7,
+              "quality": 135
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 775,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "drawn",
+                  "time": 0.000254,
+                  "at": 58.19999998807907
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 160.5
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.031822,
+                  "at": 240.60000002384186
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.064609,
+                  "at": 269.19999998807907
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.113383,
+                  "at": 318.10000002384186
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.163098,
+                  "at": 368.30000001192093
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.213633,
+                  "at": 418.39999997615814
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.231002,
+                  "at": 435.30000001192093
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.282114,
+                  "at": 486.10000002384186
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.330315,
+                  "at": 534.6999999880791
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.348213,
+                  "at": 553.6999999880791
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.398234,
+                  "at": 603.1000000238419
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.447594,
+                  "at": 652.3999999761581
+                }
+              ],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.456233,
+              "frames": 13,
+              "sent": 13,
+              "received": 13,
+              "quality": 141
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 1941,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 77
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 145
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 427
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000023,
+                  "at": 449
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040368,
+                  "at": 478
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.084491,
+                  "at": 528
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.12508,
+                  "at": 561
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.165403,
+                  "at": 612
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.205704,
+                  "at": 645
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.249933,
+                  "at": 696
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.290075,
+                  "at": 729
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.330524,
+                  "at": 779
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.370674,
+                  "at": 811
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.411144,
+                  "at": 861
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.411144,
+              "frames": 14,
+              "sent": 14,
+              "received": 14,
+              "quality": 10
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 949,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 32
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040779,
+                  "at": 100
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.000022,
+                  "at": 366
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.040467,
+                  "at": 417
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.080643,
+                  "at": 450
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.120946,
+                  "at": 484
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.161254,
+                  "at": 539
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.20156,
+                  "at": 571
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.24292,
+                  "at": 623
+                }
+              ],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.283147,
+              "frames": 9,
+              "sent": 9,
+              "received": 9,
+              "quality": 7
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 927,
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": true,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [
+                {
+                  "stage": "drawn",
+                  "time": 0,
+                  "at": 27
+                },
+                {
+                  "stage": "drawn",
+                  "time": 0.040666,
+                  "at": 79
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10,
+                  "at": 361
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.00003,
+                  "at": 393
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.041574,
+                  "at": 427
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.082066,
+                  "at": 462
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.122386,
+                  "at": 507
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.162813,
+                  "at": 541
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.20337,
+                  "at": 581
+                },
+                {
+                  "stage": "drawn",
+                  "time": 10.243711,
+                  "at": 622
+                }
+              ],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.243711,
+              "frames": 10,
+              "sent": 10,
+              "received": 10,
+              "quality": 6
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: candidate",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 1854,
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "candidate",
+            "evidence": {
+              "offscreen": false,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.2838334,
+              "frames": 13,
+              "sent": 13,
+              "received": 13,
+              "quality": 0
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: published",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 1929,
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "published",
+            "evidence": {
+              "offscreen": false,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [],
+              "errors": [],
+              "coreLoaded": true,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.32375,
+              "frames": 17,
+              "sent": 17,
+              "received": 17,
+              "quality": 0
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        },
+        {
+          "title": "Native canvas and video control through seek/layout without JASSUB: native",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 1505,
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "control": {
+            "host": "native",
+            "evidence": {
+              "offscreen": false,
+              "bitmap": false,
+              "idleReadback": false,
+              "stages": [],
+              "errors": [],
+              "coreLoaded": false,
+              "pixel": [
+                0,
+                0,
+                255,
+                255
+              ],
+              "width": 1280,
+              "height": 720,
+              "time": 10.4148334,
+              "frames": 22,
+              "sent": 22,
+              "received": 22,
+              "quality": 0
+            },
+            "limitation": "Native video/frame callbacks and a minimal Worker painting opaque colors. Bitmap mode uses createImageBitmap/drawImage/close; otherwise fillRect. JASSUB wrapper, WASM and fonts are absent. The native host loads no ArtPlayer scripts. Capability fallback without transfer is main-thread fillRect, not offscreen or ImageBitmap verification."
+          },
+          "jassub": null,
+          "hybrid": null,
+          "artifactPaths": []
+        }
+      ]
+    }
+  ]
+}

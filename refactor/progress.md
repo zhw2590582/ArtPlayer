@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-JASSUB-09 Firefox 原生绘制诊断（doing）
+
+新增不加载 JASSUB 的 Worker/ImageBitmap 控制，按新核心、已发布核心及无脚本的
+原生页面验证 seek/viewport 布局。一次失败的 createImageBitmap 等待区间约十秒；
+统一尺寸后纯原生仍通过，尚不能完全排除核心宿主/样式/合成调度影响。前置切字幕
+已不是必要条件：无前置测试的重叠读取 2 通过/1 失败，等待 Worker 完成再读取
+三项通过。软件渲染对照也有失败，rAF 等待亦未解决，均不作为默认配置替代。
+最终 fillRect 三浏览器控制九项通过；这是原生控制，不是 JASSUB 字幕验收。
+本轮只改测试和诊断文档，生产代码/类型/产物未变，保留 09/05 和风险 open。
+[诊断记录](changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md)及
+[机器证据](baselines/jassub-firefox-diagnostics.json)保存不同参数和所有红绿结果。
+下一步验证画布像素复制与异步绘制竞争的假设，补充无需复制转移画布的实际显示
+证据；仍须证明字幕在播放、seek、布局后真实可见，不能只检查 Worker 通知。
+
 ## PKG-JASSUB-09 hybrid 归属修复检查点（doing）
 
 修复旧混合帧干扰新 offscreen 画布、被丢弃完成通知导致等待卡死，以及销毁后

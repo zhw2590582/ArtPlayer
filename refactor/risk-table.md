@@ -251,4 +251,4 @@
 | JASSUB-QUERY-01 | resolved / 已复现 | Subtitle query errors throw before calling the consumer and leave request listeners attached | PKG-JASSUB-07, PKG-JASSUB-05 |
 | JASSUB-OFFSCREEN-01 | resolved / 已复现 | Default offscreen initialization lets queued resize render before Worker canvas ownership, raising clearRect on false context | PKG-JASSUB-08, PKG-JASSUB-05 |
 | JASSUB-HYBRID-01 | open / 已复现 | Late hybrid frames mutate the new offscreen canvas or throw; terminal track calls recreate transferred canvases | PKG-JASSUB-09, PKG-JASSUB-05 |
-| JASSUB-FIREFOX-OFFSCREEN-01 | open / 已复现 | Windows Firefox default offscreen readback/playback can stall after a preceding subtitle-switch test and web fullscreen | PKG-JASSUB-09, PKG-JASSUB-05 |
+| JASSUB-FIREFOX-OFFSCREEN-01 | open / 已复现 | Windows Firefox offscreen readback and asynchronous ImageBitmap creation can stall through seek/layout, including a minimal Worker control | PKG-JASSUB-09, PKG-JASSUB-05 |

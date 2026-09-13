@@ -12,6 +12,15 @@ const customCanvas = process.env.ARTPLAYER_JASSUB_CUSTOM_CANVAS === 'true'
 const code = artifact ? fs.readFileSync(artifact, 'utf8') : readMember(archive, member).toString()
 const onDemandRender = process.env.ARTPLAYER_JASSUB_ON_DEMAND !== 'false'
 const defaultOffscreen = process.env.ARTPLAYER_JASSUB_OFFSCREEN === 'default'
+const readbackFrame = process.env.ARTPLAYER_JASSUB_READBACK_FRAME === 'true'
+const synchronousRender = process.env.ARTPLAYER_JASSUB_ASYNC_RENDER === 'false'
+async function pixels(page, phase) {
+  return page.evaluate(async ({ phase, readbackFrame }) => {
+    if (readbackFrame)
+      await new Promise(requestAnimationFrame)
+    return window.jassubPixels(phase)
+  }, { phase, readbackFrame })
+}
 const subtitles = `[Script Info]
 ScriptType: v4.00+
 PlayResX: 640
@@ -71,7 +80,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
         }
 
         postMessage(message, ...rest) {
-          this.observation.sent.push({ target: message.target, time: message.time, width: message.width, height: message.height })
+          this.observation.sent.push({ target: message.target, time: message.time, width: message.width, height: message.height, asyncRender: message.asyncRender })
           return super.postMessage(message, ...rest)
         }
 
@@ -87,7 +96,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
       await page.locator('#pause').click()
-      await page.evaluate(async ({ subContent, onDemandRender, customCanvas, defaultOffscreen }) => {
+      await page.evaluate(async ({ subContent, onDemandRender, customCanvas, defaultOffscreen, synchronousRender }) => {
         const register = window.artplayerPluginJassub.default || window.artplayerPluginJassub
         let canvas
         if (customCanvas) {
@@ -106,6 +115,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
           availableFonts: { 'liberation sans': '/assets/jassub/default.woff2' },
           fonts: ['/assets/jassub/default.woff2'],
           ...(defaultOffscreen ? {} : { offscreenRender: false }),
+          ...(synchronousRender ? { asyncRender: false } : {}),
           onDemandRender,
           ...(canvas ? { canvas } : {}),
         }))
@@ -147,12 +157,12 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
             window.jassubNative.snapshots.push(state)
           return state
         }
-      }, { subContent: subtitles, onDemandRender, customCanvas, defaultOffscreen })
+      }, { subContent: subtitles, onDemandRender, customCanvas, defaultOffscreen, synchronousRender })
       const offscreen = await page.evaluate(() => window.jassubNative.offscreen)
       expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)
       await page.locator('#play').click()
-      await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)
-      const before = await page.evaluate(() => window.jassubPixels('before-seek'))
+      await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
+      const before = await pixels(page, 'before-seek')
       expect(before.connected).toBe(true)
       await page.locator('#pause').click()
       await page.evaluate(async () => {
@@ -161,17 +171,17 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
         await seeked
       })
       await page.locator('#play').click()
-      await expect.poll(() => page.evaluate(() => window.jassubPixels().signature)).not.toBe(before.signature)
-      await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)
-      const after = await page.evaluate(() => window.jassubPixels('after-seek'))
+      await expect.poll(async () => (await pixels(page)).signature).not.toBe(before.signature)
+      await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
+      const after = await pixels(page, 'after-seek')
       expect(after.time).toBeGreaterThanOrEqual(10)
       expect(after.signature).not.toBe(before.signature)
       await page.evaluate(() => {
         window.art.fullscreenWeb = true
       })
-      await expect.poll(() => page.evaluate(() => window.jassubPixels().cssWidth)).toBeGreaterThan(before.cssWidth)
-      await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)
-      await page.evaluate(() => window.jassubPixels('fullscreen'))
+      await expect.poll(async () => (await pixels(page)).cssWidth).toBeGreaterThan(before.cssWidth)
+      await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
+      await pixels(page, 'fullscreen')
       await testInfo.attach('actual-jassub-page', { body: await page.screenshot(), contentType: 'image/png' })
       if (artifact)
         await page.evaluate(() => window.jassub.destroy())
@@ -187,6 +197,8 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
     }
     finally {
       const state = await page.evaluate(() => window.jassubNative).catch(error => ({ unavailable: error.message }))
+      state.readbackFrame = readbackFrame
+      state.synchronousRender = synchronousRender
       await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, customCanvas, defaultOffscreen, source: artifact ? { artifact, sha256: hash(code) } : { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: `Actual worker, WASM and local font; offscreen option ${defaultOffscreen ? 'omitted, actual capability/selection recorded' : 'explicitly false'}. Canvas pixels are read from a separate canvas copying the native display bitmap. No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction.` }, null, 2), contentType: 'application/json' })
       if (!page.isClosed()) {
         await page.evaluate(() => {

@@ -185,3 +185,23 @@ cleanup. ARTPLAYER_JASSUB_CUSTOM_CANVAS=true supplies a caller-owned canvas and
 asserts it remains connected after destroy(false). The native report records the
 artifact hash and both mode choices. This does not change the default published
 baseline or establish ESM/offscreen/device acceptance.
+
+JASSUB Firefox diagnostics retain the canonical failing cases. Set
+`ARTPLAYER_JASSUB_OFFSCREEN=default` to exercise native capability selection.
+`ARTPLAYER_JASSUB_ASYNC_RENDER=false` explicitly selects synchronous rendering;
+`ARTPLAYER_JASSUB_READBACK_FRAME=true` waits one animation frame before readback.
+Neither diagnostic changes the default candidate or constitutes a runtime fix.
+`playwright.jassub-diagnostic.config.js` requests Firefox software WebRender for
+comparison only; it is not the canonical browser acceptance configuration.
+
+`jassub-platform.spec.js` isolates native video and a minimal canvas Worker under
+candidate/published cores and a script-free native host. All hosts resize to the
+viewport. Default drawing uses fillRect; `ARTPLAYER_JASSUB_CONTROL_BITMAP=true`
+selects actual createImageBitmap/drawImage/close and records worker stage times.
+`ARTPLAYER_JASSUB_CONTROL_IDLE_READBACK=true` pauses submissions while waiting for
+all draw acknowledgements before copying the display canvas. This is a deliberate
+scheduling diagnostic, not unchanged production timing. Hosts without canvas
+transfer use main-thread fillRect and do not verify the Worker/ImageBitmap path.
+The report records these distinctions and never infers a JASSUB fix from a control
+pass. Preserve each raw report/results directory before the next browser command.
+See [the isolation record](../../refactor/changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md).
