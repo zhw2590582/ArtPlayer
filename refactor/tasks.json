@@ -4490,7 +4490,8 @@
         "artplayer"
       ],
       "dependsOn": [
-        "CORE-22"
+        "CORE-22",
+        "ENG-12"
       ],
       "status": "todo",
       "risk": "M",
@@ -4498,6 +4499,27 @@
       "acceptance": "记录旧发布版 ReferenceError；候选在无 navigator 时可读默认选项，浏览器语言和公开类型不回归；不以补全局对象隐藏错误",
       "evidence": [
         "changes/2026-09-13-CI-01-node-consumers.md"
+      ]
+    },
+    {
+      "id": "ENG-12",
+      "phase": "2 测试与工程基础",
+      "title": "隔离库构建的 public 源码与分发内容",
+      "scope": [
+        "workspace",
+        "artplayer"
+      ],
+      "dependsOn": [
+        "ENG-03",
+        "CORE-21"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "禁用库的隐式 public 复制，拒绝误入包内的 TS 源码，清理生成污染并验证真实构建",
+      "acceptance": "三格式真实构建和严格 tarball 检查通过；已有声明和所有剩余成员字节不变；文档站使用独立构建",
+      "evidence": [
+        "changes/2026-09-13-ENG-12-library-public.md",
+        "baselines/library-public-validation.json"
       ]
     }
   ]

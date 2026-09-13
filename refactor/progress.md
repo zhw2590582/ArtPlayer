@@ -1,5 +1,19 @@
 # 进度与证据
 
+## ENG-12 库声明源码复制修复完成
+
+CORE-25 构建期间发现 Vite 默认复制 core/public 到 dist；实际候选 tarball 含 37 个
+误复制的声明源码。库配置现在禁用 publicDir，打包检查拒绝任意路径非声明 TS 后缀。
+三个格式真实磁盘构建反例由失败转通过；旧候选被新检查拒绝，新包去掉 37 个文件，
+其余 68 成员字节完全一致。完整 ci:build 的 21 库/i18n/编辑器/文档站/3 导入通过。
+定向 3 项、元数据 9 项和 lint 通过；本任务未另跑完整 ci:check，留给 CORE-25 最终验证。
+见[记录](changes/2026-09-13-ENG-12-library-public.md)和[证据](baselines/library-public-validation.json)。
+恢复 58 个无关生成文件，13 个新增站点 hash 资源移至缓存；保留构建移除的污染文件。
+CORE-25 源码/测试/三个 JS 产物仍在工作区，尚未完成/提交；本提交不包含这些修改。
+225 项：122 done、16 doing、87 todo；202 风险。ENG-DIST-PUBLIC-01 关闭。
+独立本地提交，不推送、不发布；下一步完成 CORE-25 全量验收。
+
+
 ## CI-01 Node 消费者矩阵检查点（doing）
 
 标准 Node 24.21.0 构建同一 core/chapter tarball，20.19.0/22.12.0/24.21.0 实际

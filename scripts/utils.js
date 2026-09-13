@@ -36,6 +36,7 @@ export function getViteBuildConfig(options) {
 
   const config = {
     configFile: false,
+    publicDir: false,
     logLevel: 'warn',
     build: {
       outDir,

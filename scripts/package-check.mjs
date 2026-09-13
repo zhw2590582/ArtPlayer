@@ -26,6 +26,7 @@ export function checkFiles(manifest, files, historical = []) {
   for (const file of historical.filter(file => /^package\/(?:dist|types)\//.test(file)))
     assert(files.includes(file), `Historical distribution file removed: ${file}`)
   assert(!files.some(file => /^package\/(?:src|public|node_modules)\//.test(file)), 'Source/dependencies leaked into package')
+  assert(!files.some(file => /\.[cm]?ts$/.test(file) && !/\.d\.[cm]?ts$/.test(file)), 'Authored TypeScript leaked into package')
   assert(!files.includes('package/tsconfig.json'), 'Implementation tsconfig leaked into package')
 }
 

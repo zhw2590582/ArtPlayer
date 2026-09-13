@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "task": "ENG-12",
+  "date": "2026-09-13",
+  "baseCommit": "38355ae4cf058053d050a69625808af0b18290ff",
+  "worktreeScope": "CORE-25 default fix and tests were also present; their runtime acceptance belongs to CORE-25",
+  "before": {
+    "archiveSha256": "e742d78759a036df6a745973e053b272447e879f139f3641d909fa261f9360b3",
+    "copiedSources": [
+      "package/dist/artplayer.cts",
+      "package/dist/artplayer.mts",
+      "package/dist/artplayer.ts",
+      "package/dist/component.ts",
+      "package/dist/config.ts",
+      "package/dist/cssVar.ts",
+      "package/dist/emitter.ts",
+      "package/dist/events.ts",
+      "package/dist/i18n.ts",
+      "package/dist/icons.ts",
+      "package/dist/language.cts",
+      "package/dist/language.mts",
+      "package/dist/legacy/language.ts",
+      "package/dist/option.ts",
+      "package/dist/playback.ts",
+      "package/dist/player.ts",
+      "package/dist/plugin.ts",
+      "package/dist/quality.ts",
+      "package/dist/runtime.cts",
+      "package/dist/runtime.mts",
+      "package/dist/runtime.ts",
+      "package/dist/runtime/component.ts",
+      "package/dist/runtime/construction.ts",
+      "package/dist/runtime/events.ts",
+      "package/dist/runtime/media.ts",
+      "package/dist/runtime/option.ts",
+      "package/dist/runtime/player.ts",
+      "package/dist/runtime/plugin.ts",
+      "package/dist/runtime/services.ts",
+      "package/dist/runtime/setting.ts",
+      "package/dist/runtime/subtitle.ts",
+      "package/dist/runtime/template.ts",
+      "package/dist/runtime/utils.ts",
+      "package/dist/setting.ts",
+      "package/dist/subtitle.ts",
+      "package/dist/template.ts",
+      "package/dist/utils.ts"
+    ]
+  },
+  "after": {
+    "archiveSha256": "9e2fcf57f3ad0c9eba9e50aea4118b053c36616a905ffe14a1c0a69cfcb47f2b",
+    "remainingFiles": 68,
+    "allRemainingMemberBytesIdentical": true
+  },
+  "fixture": {
+    "before": "Private declaration source was copied",
+    "after": "all 3 real Vite formats omit private .ts and unrelated .txt",
+    "focusedTests": 3
+  },
+  "build": {
+    "command": "yarn ci:build",
+    "libraries": 21,
+    "imports": 3,
+    "seconds": 72.79,
+    "declarationsChanged": 0,
+    "exitCode": 0
+  },
+  "packageCheck": {
+    "command": "yarn test:package:release",
+    "exitCode": 0,
+    "includesUncommittedCore25": true
+  },
+  "incidentalGeneratedFilesRestored": 58,
+  "newGeneratedDocsArchived": 13,
+  "logs": [
+    {
+      "file": "refactor/.cache/eng12-build-before.log",
+      "sha256": "547c7cbba4362e1f191c7b6da96219a08c1a8a5e410e170f1d19276629cbf9c9"
+    },
+    {
+      "file": "refactor/.cache/eng12-focused.log",
+      "sha256": "809b43ea894b0e1eb7d30663667f04befbc964c540f455edbcb0fe84cffc3f72"
+    },
+    {
+      "file": "refactor/.cache/eng12-build.log",
+      "sha256": "cbdf8ebacd81a12a97ea27be151e4ac355fa8c86bc4dd1bc4556b0e7c95c8717"
+    },
+    {
+      "file": "refactor/.cache/eng12-package.log",
+      "sha256": "e01db4a932d5f596b5c223641ec860e3d1ce10ff289102b451842da2f880bde2"
+    },
+    {
+      "file": "refactor/.cache/eng12-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "remoteRun": null
+}

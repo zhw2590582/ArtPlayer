@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 224 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 225 项，范围 22 个包及工作区/示例。
 
-状态：todo 87 / doing 16 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 87 / doing 16 / blocked 0 / done 122 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,7 +14,7 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, CORE-25 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, CORE-25, ENG-12 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
@@ -132,7 +132,7 @@
 | CORE-23 | artplayer<br>检查并补齐键盘、焦点与可访问名称 | CORE-13, CORE-14, CORE-17, ENG-05, BASE-04 | 主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正 | 保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互；处理 BASE-DOM-01 的主要控件 Tab 不可达，保留既有名称与快捷键 | H | done |
 | CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | done |
 | CORE-24 | artplayer<br>修复连续切源的播放意图继承 | CORE-22, PKG-AUDIO-04 | 连续切源保留原播放意图，同时尊重显式暂停与最新来源，回归旧/新 audio | 真实暂停状态的受控测试、重入/取消/失败/销毁、三引擎和 main/legacy 产物验证通过；不恢复过期来源的公开副作用 | H | done |
-| CORE-25 | artplayer<br>修复无 navigator 环境读取默认选项 | CORE-22 | 安全读取默认语言并保留浏览器已有默认值；实际 Node 与发布产物正反例 | 记录旧发布版 ReferenceError；候选在无 navigator 时可读默认选项，浏览器语言和公开类型不回归；不以补全局对象隐藏错误 | M | todo |
+| CORE-25 | artplayer<br>修复无 navigator 环境读取默认选项 | CORE-22, ENG-12 | 安全读取默认语言并保留浏览器已有默认值；实际 Node 与发布产物正反例 | 记录旧发布版 ReferenceError；候选在无 navigator 时可读默认选项，浏览器语言和公开类型不回归；不以补全局对象隐藏错误 | M | todo |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -416,6 +416,12 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-FACTORY-01 | artplayer-proxy-canvas, artplayer-plugin-ambilight<br>修复已迁移工厂的反向赋值兼容 | PKG-CANVAS-04, PKG-AMBILIGHT-04, PKG-DPIP-04 | 复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档 | 默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用 | H | doing |
 
+## 2 测试与工程基础
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| ENG-12 | workspace, artplayer<br>隔离库构建的 public 源码与分发内容 | ENG-03, CORE-21 | 禁用库的隐式 public 复制，拒绝误入包内的 TS 源码，清理生成污染并验证真实构建 | 三格式真实构建和严格 tarball 检查通过；已有声明和所有剩余成员字节不变；文档站使用独立构建 | M | done |
+
 ## 完成证据与阻塞
 
 - DOC-01: [记录](progress.md)
@@ -557,3 +563,4 @@
 - PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md) [记录](baselines/thumbnail-emitter-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)
 - CORE-25: [记录](changes/2026-09-13-CI-01-node-consumers.md)
+- ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)

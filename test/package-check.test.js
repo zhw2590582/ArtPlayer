@@ -16,6 +16,9 @@ test('Package checks reject missing files, missing wildcard exports and internal
   assert.throws(() => checkFiles(manifest, [...files, 'package/tsconfig.json']), /tsconfig/)
   for (const source of ['src/internal.ts', 'public/artplayer.ts', 'node_modules/private/index.js'])
     assert.throws(() => checkFiles(manifest, [...files, `package/${source}`]), /Source\/dependencies/)
+  for (const source of ['dist/internal.ts', 'dist/internal.cts', 'dist/internal.mts'])
+    assert.throws(() => checkFiles(manifest, [...files, `package/${source}`]), /Authored TypeScript/)
+  checkFiles(manifest, [...files, 'package/types/entry.d.cts', 'package/types/entry.d.mts'])
   assert.throws(() => checkFiles(manifest, files, ['package/dist/old.js']), /Historical/)
 })
 

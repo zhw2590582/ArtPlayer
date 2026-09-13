@@ -2,6 +2,12 @@
 
 ENG-06 保留原来的 Vite 7.3.6、Terser、三种库产物及路径，增加选包参数和 TS 入口；未切换 bundler 或运行时依赖。固定工具链仍为 Node 24.21.0 / Yarn 1.22.22。
 
+ENG-12 将库配置的 publicDir 设为 false，防止 core/public 的声明源码被复制到 dist。
+库静态资源须通过已有显式 import/构建入口处理；文档站仍使用独立 VitePress 配置。
+打包检查拒绝非声明形式的 .ts/.cts/.mts，保留 .d.ts/.d.cts/.d.mts；
+实际三格式构建回归见 test/library-build.test.js 和
+[修复记录](changes/2026-09-13-ENG-12-library-public.md)。
+
 ```sh
 yarn build                              # TTY 中原交互选择
 yarn build artplayer                    # 一个包，无交互

@@ -4514,6 +4514,28 @@
       "compatibleResolution": "Read navigator through a guarded global lookup while preserving browser language defaults and public declaration shape.",
       "closureCriteria": "Published failure remains explicit; source and actual installed candidate defaults work without navigator on selected Node versions and browser language behavior stays unchanged.",
       "workspaceState": "Node 20.19.0 actual installed probe fails with ReferenceError: navigator is not defined. Published 5.4.0 and candidate 5.4.1 both reproduce under explicitly absent navigator on every selected runtime. CI-01 records this known failure, then compares default values under the same controlled en-US navigator; this is not a production fix."
+    },
+    {
+      "id": "ENG-DIST-PUBLIC-01",
+      "title": "Vite copied authored declarations into library distribution",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "ENG-12"
+      ],
+      "evidence": [
+        "test/library-build.test.js",
+        "refactor/baselines/library-public-validation.json",
+        "refactor/changes/2026-09-13-ENG-12-library-public.md"
+      ],
+      "compatibleResolution": "Disable library publicDir copying and reject non-declaration TypeScript members anywhere in checked tarballs.",
+      "closureCriteria": "Actual format builds omit public source/resources; dirty historical candidate fails the guard; new archive has no copied sources and preserves other bytes.",
+      "workspaceState": "Actual candidate had copied authored public TS files in dist; getViteBuildConfig now disables publicDir. Strict member checking rejects the prior archive, and the replacement differs only by source removals.",
+      "resolutionEvidence": [
+        "refactor/baselines/library-public-validation.json",
+        "refactor/changes/2026-09-13-ENG-12-library-public.md"
+      ],
+      "resolutionRationale": "Three-format disk fixture and actual core archive prove removal; all other package members remain byte-identical. Full 21-library and docs build passed. CORE-25 runtime work was present but is not closed by this task."
     }
   ]
 }
