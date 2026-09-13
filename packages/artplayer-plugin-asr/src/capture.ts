@@ -34,8 +34,11 @@ export class Capture {
   restart() {
     const active = this.running || Boolean(this.starting)
     this.pause()
-    if (this.graph && !this.graph.ownsMediaConnection)
-      return this.stop().then(() => active ? this.start() : undefined)
+    if (this.graph && !this.graph.ownsMediaConnection) {
+      const stopping = this.stop()
+      const epoch = this.epoch
+      return stopping.then(() => active && !this.terminal && this.epoch === epoch ? this.start() : undefined)
+    }
     return active ? this.start() : Promise.resolve()
   }
 
@@ -54,7 +57,7 @@ export class Capture {
       const count = Math.floor(sampleRate * interval / 1000)
       if (!Number.isSafeInteger(count) || count < 1 || !Number.isFinite(interval) || interval <= 0)
         throw new Error('Audio chunk length must be positive and finite')
-      const graph = this.graph ??= new AudioGraph(this.video, sampleRate)
+      const graph = this.graph ??= new AudioGraph(this.video, sampleRate, this.options.captureOnly)
       await graph.prepare()
       if (!current()) {
         if (!this.running && this.graph === graph)

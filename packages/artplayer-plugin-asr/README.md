@@ -52,6 +52,36 @@ independent `audio` element is not mixed into recognition. Muting the main video
 silences its default ASR input even if a consumer separately unmutes that audio
 element. Both plugins keep their existing volume and playback APIs.
 
+## Existing audio graphs
+
+When another library already routes the main video through Web Audio, explicitly
+select capture mode to avoid taking ownership of its playback connection:
+
+```ts
+import asr from 'artplayer-plugin-asr/runtime'
+
+const plugin = asr({ audioInput: { type: 'capture' }, onAudioChunk: ({ pcm }) => {
+  // Consume main-media PCM without adding a second speaker route.
+  void pcm
+} })
+```
+
+Omitting `audioInput` keeps the existing direct-first behavior. Explicit capture
+uses `captureStream`/`mozCaptureStream` and never falls back to direct binding,
+including on failure. It owns its captured tracks and Context, not the other
+library's playback graph. Pause retains that capture graph; stop and source
+changes release it, and subsequent play obtains a new stream. An unsupported
+capture source reports an initialization error and releases acquired resources.
+
+Captured PCM is independent of the media element's volume and mute. It is the
+main media stream, not the output of another library's effects or an independent
+audio-track element. CORS restrictions still apply: Chromium rejects restricted
+capture; Firefox may expose a track without delivering PCM. ASR leaves the
+original media route alone in either case. This mode does not automatically
+detect external owners or repair the default mode's restricted-media silence.
+For TypeScript, this additive option is exposed through `/runtime`; historical
+root and `/legacy` option declarations remain unchanged.
+
 ## Maintenance
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the current audio flow, public behavior,

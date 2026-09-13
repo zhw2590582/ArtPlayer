@@ -25,6 +25,8 @@ export type Factory = (option?: AsrPluginOption) => (art: Artplayer) => AsrPlugi
 
 /** Accurate asynchronous view available through the /runtime entry. */
 export interface RuntimeOption extends Omit<AsrPluginOption, 'onAudioChunk'> {
+  /** Capture the media stream without taking ownership of its playback route. */
+  audioInput?: { type: 'capture' }
   onAudioChunk?: (chunk: AudioChunk) => string | void | null | Promise<string | void | null>
 }
 

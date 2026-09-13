@@ -38,6 +38,8 @@ type PreciseResult = Assert<Equal<ReturnType<ReturnType<typeof runtime>>, Runtim
 type PreciseStop = Assert<Equal<ReturnType<RuntimeResult['stop']>, Promise<void>>>
 type PreciseFactory = Assert<Equal<typeof runtime, RuntimeFactory>>
 type PreciseCallback = Assert<Equal<NonNullable<RuntimeOption['onAudioChunk']>, (chunk: AudioChunk) => string | void | null | Promise<string | void | null>>>
+type PreciseAudioInput = Assert<Equal<RuntimeOption['audioInput'], { type: 'capture' } | undefined>>
+type RootAudioInputAbsent = Assert<Equal<Extract<keyof AsrPluginOption, 'audioInput'>, never>>
 
 const replacement: HistoricalFactory = (_option?: HistoricalOption) => (_art: Artplayer) => ({
   name: 'artplayerPluginAsr',
@@ -72,6 +74,24 @@ runtime({ onAudioChunk: () => undefined })
 runtime({ onAudioChunk: async () => {} })
 runtime({ onAudioChunk: async () => null })
 runtime(option)
+const captureOption: RuntimeOption = { audioInput: { type: 'capture' } }
+const captureEntryOption: EntryOption = captureOption
+runtime(captureOption)
+runtime(captureEntryOption)
+runtime({ audioInput: { type: 'capture' }, onAudioChunk: async () => 'Captured main media.' })
+
+// @ts-expect-error Only the explicit capture strategy is public.
+runtime({ audioInput: { type: 'direct' } })
+// @ts-expect-error The strategy discriminator is required when audioInput is provided.
+runtime({ audioInput: {} })
+// @ts-expect-error Audio input is a descriptor, not a string shorthand.
+runtime({ audioInput: 'capture' })
+// @ts-expect-error Root options retain their historical fields without the runtime-only strategy.
+const rootCaptureOption: AsrPluginOption = { audioInput: { type: 'capture' } }
+// @ts-expect-error The historical factory does not expose runtime-only options.
+legacy({ audioInput: { type: 'capture' } })
+// @ts-expect-error The explicit legacy entry also retains the historical option shape.
+legacyEntry({ audioInput: { type: 'capture' } })
 
 // @ts-expect-error Root options preserve the historical void/Promise<void> callback shape.
 legacy({ onAudioChunk: () => 'Only the precise entry describes returned subtitles.' })
@@ -97,5 +117,5 @@ runtime()()
 correct.append(123)
 // @ts-expect-error PCM is an ArrayBuffer rather than encoded text.
 const invalidChunk: AudioChunk = { pcm: 'raw audio', wav: new ArrayBuffer(4) }
-void [assignToOld, assignFromOld, namespaceFactory, explicitLegacy, oldReturns, stopped, aliasResult, rootPromise, synchronous, wrongStop, invalidChunk]
-export type { ChunkShape, PreciseArguments, PreciseCallback, PreciseFactory, PreciseResult, PreciseStop, RootArguments, RootFactory, RootOption, RootResult, RootShape, RootStop, RuntimeEntryTypes }
+void [assignToOld, assignFromOld, namespaceFactory, explicitLegacy, oldReturns, stopped, aliasResult, rootCaptureOption, rootPromise, synchronous, wrongStop, invalidChunk]
+export type { ChunkShape, PreciseArguments, PreciseAudioInput, PreciseCallback, PreciseFactory, PreciseResult, PreciseStop, RootArguments, RootAudioInputAbsent, RootFactory, RootOption, RootResult, RootShape, RootStop, RuntimeEntryTypes }

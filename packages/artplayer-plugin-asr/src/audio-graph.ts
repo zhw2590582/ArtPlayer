@@ -13,7 +13,7 @@ export class AudioGraph {
   private direct = false
   private workletLoaded = false
 
-  constructor(private readonly video: CaptureVideo, private readonly sampleRate: number) {}
+  constructor(private readonly video: CaptureVideo, private readonly sampleRate: number, private readonly captureOnly = false) {}
 
   private assertOpen() {
     if (this.closed)
@@ -49,12 +49,16 @@ export class AudioGraph {
     }
     this.assertOpen()
     if (!this.source) {
-      try {
-        this.source = context.createMediaElementSource(this.video)
-        this.direct = true
+      if (!this.captureOnly) {
+        try {
+          this.source = context.createMediaElementSource(this.video)
+          this.direct = true
+        }
+        catch (error) {
+          console.warn('[artplayerPluginAsr] Direct connection failed:', error)
+        }
       }
-      catch (error) {
-        console.warn('[artplayerPluginAsr] Direct connection failed:', error)
+      if (!this.source) {
         const capture = this.video.captureStream || this.video.mozCaptureStream
         if (!capture)
           throw new Error('Could not establish audio source')

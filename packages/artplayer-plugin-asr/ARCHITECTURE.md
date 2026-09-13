@@ -70,6 +70,18 @@ This lifetime follows the [Web Audio close semantics](https://www.w3.org/TR/weba
 and [media-element source behavior](https://www.w3.org/TR/webaudio-1.0/#MediaElementAudioSourceNode).
 Captured-stream source changes follow [Media Capture from DOM Elements](https://www.w3.org/TR/mediacapture-fromelement/#html-media-element-media-capture-extensions).
 
+The optional `audioInput: { type: 'capture' }` snapshots a capture-only strategy at
+factory creation. It skips direct binding entirely and reuses the silent capture
+route, with no fallback to media ownership after capture failure. This supports
+external owners on Firefox without pretending that default duplicate ownership
+is detected automatically. Captured PCM ignores element mute/volume and does not
+include processing done in another graph. The browser's CORS checks still apply.
+
+A captured-source restart snapshots the epoch after stopping its previous graph.
+When closing settles, a later pause/stop/restart/destroy must invalidate that
+continuation. Otherwise a paused player could silently resume recognition. Keep
+the delayed-close regressions when changing this state machine.
+
 Queued audio is limited to the larger of 60 seconds or two configured chunks. A caller that
 cannot keep up gets an explicit console error and capture pauses, leaving normal
 playback routed. This avoids an unbounded backlog; it does not claim lossless
@@ -112,6 +124,11 @@ From the repository root:
 - `yarn test:browser test/browser/asr-fallback.spec.js`: native capture/Worklet
   audio with an external media owner, silent ASR output even while muted, stop,
   fresh tracks after restart/source change and independent context cleanup.
+  Explicit capture cases must have zero direct calls and no forced exception on
+  Firefox; only default fallback coverage uses controlled rejection there.
+- `yarn test:browser test/browser/asr-capture-cors.spec.js`: explicit capture
+  respects native cross-origin restrictions without changing media properties or
+  binding its playback route, then recovers on same-origin source change.
 - `yarn test:browser test/browser/asr-cors.spec.js`: CORS-authorized media,
   opaque direct/redirected media, native zero-output or absent-chunk observations,
   and restoration after switching to a same-origin source. Default routing keeps

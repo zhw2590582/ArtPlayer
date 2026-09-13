@@ -17,9 +17,10 @@ class RecorderProcessor extends AudioWorkletProcessor {
 registerProcessor('recorder-processor', RecorderProcessor);
 `;
 class AudioGraph {
-  constructor(video, sampleRate) {
+  constructor(video, sampleRate, captureOnly = false) {
     this.video = video;
     this.sampleRate = sampleRate;
+    this.captureOnly = captureOnly;
     this.closed = false;
     this.direct = false;
     this.workletLoaded = false;
@@ -55,11 +56,15 @@ class AudioGraph {
     }
     this.assertOpen();
     if (!this.source) {
-      try {
-        this.source = context.createMediaElementSource(this.video);
-        this.direct = true;
-      } catch (error) {
-        console.warn("[artplayerPluginAsr] Direct connection failed:", error);
+      if (!this.captureOnly) {
+        try {
+          this.source = context.createMediaElementSource(this.video);
+          this.direct = true;
+        } catch (error) {
+          console.warn("[artplayerPluginAsr] Direct connection failed:", error);
+        }
+      }
+      if (!this.source) {
         const capture = this.video.captureStream || this.video.mozCaptureStream;
         if (!capture)
           throw new Error("Could not establish audio source");
@@ -241,8 +246,11 @@ class Capture {
   restart() {
     const active = this.running || Boolean(this.starting);
     this.pause();
-    if (this.graph && !this.graph.ownsMediaConnection)
-      return this.stop().then(() => active ? this.start() : void 0);
+    if (this.graph && !this.graph.ownsMediaConnection) {
+      const stopping = this.stop();
+      const epoch = this.epoch;
+      return stopping.then(() => active && !this.terminal && this.epoch === epoch ? this.start() : void 0);
+    }
     return active ? this.start() : Promise.resolve();
   }
   start() {
@@ -260,7 +268,7 @@ class Capture {
       const count = Math.floor(sampleRate * interval / 1e3);
       if (!Number.isSafeInteger(count) || count < 1 || !Number.isFinite(interval) || interval <= 0)
         throw new Error("Audio chunk length must be positive and finite");
-      const graph = this.graph ?? (this.graph = new AudioGraph(this.video, sampleRate));
+      const graph = this.graph ?? (this.graph = new AudioGraph(this.video, sampleRate, this.options.captureOnly));
       await graph.prepare();
       if (!current()) {
         if (!this.running && this.graph === graph)
@@ -352,13 +360,16 @@ function createSubtitles(layer, length, autoHideTimeout) {
   };
 }
 function artplayerPluginAsr(option = {}) {
-  const { length = 3, interval = 100, sampleRate = 16e3, autoHideTimeout = 1e4, onAudioChunk = () => null } = option;
+  const { length = 3, interval = 100, sampleRate = 16e3, autoHideTimeout = 1e4, onAudioChunk = () => null, audioInput } = option;
+  if (audioInput !== void 0 && audioInput.type !== "capture")
+    throw new TypeError("Unsupported ASR audio input");
+  const captureOnly = audioInput?.type === "capture";
   return (art) => {
     const layer = art.layers.add({ name: "asr", html: "" });
     if (!layer)
       throw new Error("Could not create ASR subtitle layer");
     const subtitles = createSubtitles(layer, length, autoHideTimeout);
-    const capture = new Capture(art.video, { interval, sampleRate, onAudioChunk }, subtitles.append);
+    const capture = new Capture(art.video, { interval, sampleRate, onAudioChunk, captureOnly }, subtitles.append);
     const play = () => capture.start();
     const pause = () => capture.pause();
     const restart = () => capture.restart();

@@ -154,7 +154,7 @@ Promise.all(['artplayer-plugin-asr', 'artplayer-plugin-asr/runtime', 'artplayer-
     if (result.plugin === 'candidate') {
       const publishedBaseline = result.mode === 'nodenext-esm' ? expected.cases.find(item => item.plugin === 'published-2.1.0' && item.compiler === result.compiler && item.mode === result.mode).diagnostics : []
       assert.deepEqual(result.published, publishedBaseline, `Historical direct consumer: ${result.compiler} ${result.mode}`)
-      assert.equal(result.invalid.length, 12, 'Installed declarations must reject all 12 invalid uses')
+      assert.equal(result.invalid.length, 18, 'Installed declarations must reject all 18 invalid uses')
     }
   }
   console.log(`ASR installed matrix verified: ${matrix.length} cases; ${output}`)

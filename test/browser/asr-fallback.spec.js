@@ -12,14 +12,14 @@ test.beforeAll(async () => {
   candidateCode = process.env.ARTPLAYER_ASR_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_ASR_ARTIFACT) : await compilePackage('artplayer-plugin-asr', 'umd')
 })
 
-for (const version of ['2.1.0', 'candidate']) {
+for (const { version, captureOnly } of [{ version: '2.1.0', captureOnly: false }, { version: 'candidate', captureOnly: false }, { version: 'candidate', captureOnly: true }]) {
   for (const core of ['published-5.3.0', 'published', 'candidate']) {
-    test(`ASR ${version} + ${core}: native capture fallback does not create a second audible route`, async ({ page }, testInfo) => {
+    test(`ASR ${version}${captureOnly ? ' capture' : ''} + ${core}: native capture fallback does not create a second audible route`, async ({ page }, testInfo) => {
       const code = version === 'candidate' ? candidateCode : readMember(contract.archives.get(version), 'package/dist/artplayer-plugin-asr.js')
       await page.goto(`/test/player.html?core=${core}`)
       const capabilities = await page.evaluate(() => ({ context: typeof AudioContext, worklet: typeof AudioWorkletNode, capture: typeof HTMLMediaElement.prototype.captureStream, mozCapture: typeof HTMLMediaElement.prototype.mozCaptureStream }))
-      const forceRejection = testInfo.project.name === 'firefox'
-      await testInfo.attach('asr-fallback-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, pluginSha256: hash(code), capabilities, forcedException: forceRejection, reason: forceRejection ? 'Firefox permits a second native media source; force only binding rejection to reach real captureStream/Worklet' : 'Native duplicate binding rejection', externalContext: 'Native media-element source remains owned and running', physicalOutput: false }) })
+      const forceRejection = testInfo.project.name === 'firefox' && !captureOnly
+      await testInfo.attach('asr-fallback-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, captureOnly, pluginSha256: hash(code), capabilities, forcedException: forceRejection, reason: captureOnly ? 'Explicit capture mode never binds the element; no forced exceptions' : forceRejection ? 'Firefox permits a second native media source; force only binding rejection to reach real captureStream/Worklet' : 'Native duplicate binding rejection', externalContext: 'Native media-element source remains owned and running', physicalOutput: false }) })
       if (capabilities.context !== 'function') {
         expect(process.platform).toBe('win32')
         expect(testInfo.project.name).toBe('webkit')
@@ -28,13 +28,14 @@ for (const version of ['2.1.0', 'candidate']) {
       expect(capabilities.worklet).toBe('function')
       expect([capabilities.capture, capabilities.mozCapture]).toContain('function')
       await page.addScriptTag({ content: code.toString() })
-      await page.evaluate((forceRejection) => {
+      await page.evaluate(({ forceRejection, captureOnly }) => {
         const NativeContext = window.AudioContext
         window.asrContexts = []
         window.asrMeters = []
         window.asrStreams = []
         window.asrChunks = []
         window.asrDirectFailures = []
+        window.asrDirectCalls = 0
         window.AudioContext = class extends NativeContext {
           constructor(option) {
             super(option)
@@ -42,6 +43,7 @@ for (const version of ['2.1.0', 'candidate']) {
           }
 
           createMediaElementSource(video) {
+            window.asrDirectCalls++
             try {
               if (forceRejection)
                 throw new DOMException('Controlled duplicate binding rejection for native capture test', 'InvalidStateError')
@@ -80,7 +82,7 @@ for (const version of ['2.1.0', 'candidate']) {
           url: '/test/audio-tone.m4a',
           volume: 1,
           loop: true,
-          plugins: [window.artplayerPluginAsr({ onAudioChunk({ pcm }) {
+          plugins: [window.artplayerPluginAsr({ audioInput: captureOnly ? { type: 'capture' } : undefined, onAudioChunk({ pcm }) {
             const samples = new Int16Array(pcm)
             const max = samples.reduce((value, sample) => Math.max(value, Math.abs(sample)), 0)
             window.asrChunks.push({ max, source: window.art.video.currentSrc, samples: samples.length })
@@ -108,9 +110,9 @@ for (const version of ['2.1.0', 'candidate']) {
             analyser.getFloatTimeDomainData(samples)
             return Math.sqrt(samples.reduce((sum, value) => sum + value * value, 0) / samples.length)
           }
-          return { external: rms(window.externalMeter), asr: window.asrMeters.map(rms), contexts: window.asrContexts.map(c => c.state), owner: window.externalContext.state, streams: window.asrStreams.map(s => s.tracks.map(t => ({ kind: t.kind, state: t.readyState }))), chunks: window.asrChunks.slice(-3), failures: window.asrDirectFailures }
+          return { external: rms(window.externalMeter), asr: window.asrMeters.map(rms), contexts: window.asrContexts.map(c => c.state), owner: window.externalContext.state, streams: window.asrStreams.map(s => s.tracks.map(t => ({ kind: t.kind, state: t.readyState }))), chunks: window.asrChunks.slice(-3), failures: window.asrDirectFailures, directCalls: window.asrDirectCalls }
         }
-      }, forceRejection)
+      }, { forceRejection, captureOnly })
       await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.asrChunks.filter(c => c.max > 0).length)).toBeGreaterThanOrEqual(3)
@@ -121,7 +123,8 @@ for (const version of ['2.1.0', 'candidate']) {
       await page.waitForTimeout(450)
       const muted = await page.evaluate(() => window.readFallback())
       await testInfo.attach('asr-fallback-output', { contentType: 'application/json', body: JSON.stringify({ playing, muted }) })
-      expect(playing.failures.length).toBe(1)
+      expect(playing.failures.length).toBe(captureOnly ? 0 : 1)
+      expect(playing.directCalls).toBe(captureOnly ? 0 : 1)
       expect(playing.external).toBeGreaterThan(0.01)
       expect(muted.external).toBe(0)
       if (version === '2.1.0') {
@@ -167,6 +170,8 @@ for (const version of ['2.1.0', 'candidate']) {
       await page.evaluate(() => window.art.destroy())
       await expect.poll(() => page.evaluate(() => window.asrContexts.every(context => context.state === 'closed'))).toBe(true)
       expect(await page.evaluate(() => window.externalContext.state)).toBe('running')
+      if (captureOnly)
+        expect(await page.evaluate(() => window.asrDirectCalls)).toBe(0)
       await page.evaluate(() => window.externalContext.close())
     })
   }

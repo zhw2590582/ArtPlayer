@@ -4,6 +4,7 @@ export interface AudioChunk {
 }
 
 export interface AsrOptions {
+  audioInput?: { type: 'capture' }
   length?: number
   interval?: number
   sampleRate?: number
@@ -24,6 +25,7 @@ export interface CaptureVideo extends HTMLVideoElement {
 }
 
 export interface CaptureOptions {
+  captureOnly?: boolean
   interval: number
   sampleRate: number
   onAudioChunk: (chunk: AudioChunk) => unknown

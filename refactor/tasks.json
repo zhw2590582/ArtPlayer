@@ -2703,7 +2703,8 @@
         "PKG-ASR-04",
         "CORE-22",
         "PKG-ASR-07",
-        "PKG-ASR-08"
+        "PKG-ASR-08",
+        "PKG-ASR-09"
       ],
       "status": "doing",
       "risk": "H",
@@ -2716,7 +2717,8 @@
         "baselines/asr-local-core-validation.json",
         "changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md",
         "baselines/asr-combinations-validation.json",
-        "changes/2026-09-13-PKG-ASR-05-cors-combinations.md"
+        "changes/2026-09-13-PKG-ASR-05-cors-combinations.md",
+        "baselines/asr-explicit-capture-validation.json"
       ]
     },
     {
@@ -4583,6 +4585,26 @@
       "evidence": [
         "changes/2026-09-13-PKG-ASR-08-capture-output.md",
         "baselines/asr-fallback-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-ASR-09",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "提供显式捕获归属并取消过期切源重启",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-04",
+        "PKG-ASR-08"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "保留默认API的capture模式、精确runtime类型、可取消重启和原生外部归属/CORS证据",
+      "acceptance": "显式模式零直接绑定、不增加输出、拥有资源正确清理；Firefox不强制异常，CORS无绕过；旧工厂类型保持；延迟关闭期间pause/stop取消旧重启",
+      "evidence": [
+        "changes/2026-09-13-PKG-ASR-09-explicit-capture.md",
+        "baselines/asr-explicit-capture-validation.json"
       ]
     }
   ]

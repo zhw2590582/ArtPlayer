@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-ASR-09 显式捕获归属完成
+
+新增可选capture策略，旧默认与根类型保留；Firefox无需强制异常，显式模式零直接
+绑定、非零PCM、零附加输出，外部Context保持独立。无CORS源遵循原生限制且不
+接管播放，同源切换恢复。独立审查发现的延迟close后过期重启已用两项红绿测试修复。
+229定向、main/legacy各43项通过；最终source/main/legacy原生106过、53能力跳过；
+正常构建、strict/lint、隔离安装17配置及每候选18个负例通过。见[变更](changes/2026-09-13-PKG-ASR-09-explicit-capture.md)
+与[证据](baselines/asr-explicit-capture-validation.json)。外部归属按显式模式闭环，默认
+CORS静音仍open，不声称自动检测或物理设备已完成。228项：130 done、17 doing、
+81 todo；210风险。ASR-05继续，完整发行和整仓重构仍有剩余任务；无推送或发布。
+
+
 ## PKG-ASR-05 CORS 与独立音轨检查点
 
 新增跨源允许/不允许/重定向及同源恢复、audio-track组合生命周期与独立音频归属

@@ -5,13 +5,16 @@ import style from './style.less?inline'
 import { createSubtitles } from './subtitles'
 
 export default function artplayerPluginAsr(option: AsrOptions = {}) {
-  const { length = 3, interval = 100, sampleRate = 16000, autoHideTimeout = 10000, onAudioChunk = () => null } = option
+  const { length = 3, interval = 100, sampleRate = 16000, autoHideTimeout = 10000, onAudioChunk = () => null, audioInput } = option
+  if (audioInput !== undefined && audioInput.type !== 'capture')
+    throw new TypeError('Unsupported ASR audio input')
+  const captureOnly = audioInput?.type === 'capture'
   return (art: Artplayer): AsrResult => {
     const layer = art.layers.add({ name: 'asr', html: '' })
     if (!layer)
       throw new Error('Could not create ASR subtitle layer')
     const subtitles = createSubtitles(layer, length, autoHideTimeout)
-    const capture = new Capture(art.video, { interval, sampleRate, onAudioChunk }, subtitles.append)
+    const capture = new Capture(art.video, { interval, sampleRate, onAudioChunk, captureOnly }, subtitles.append)
     const play = () => capture.start()
     const pause = () => capture.pause()
     const restart = () => capture.restart()

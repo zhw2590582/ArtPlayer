@@ -1245,7 +1245,7 @@
         "docs/assets/example/asr.local.js"
       ],
       "contract": "Core plugin supplies PCM to caller onAudioChunk. Example fetches an external ASR endpoint and opens its returned WebSocket; not an embedded ASR SDK or a verified service.",
-      "validationStatus": "Native PCM/Worklet, volume and lifecycle verified on Chromium/Firefox with candidate, 5.4.0 and adjacent stable 5.3.0 cores; fallback Firefox selection is explicitly controlled, with foreign ownership still open. Offline docs example verifies local audio only. Windows WebKit, physical devices and actual external recognition service remain unverified.",
+      "validationStatus": "Native PCM/Worklet, volume, CORS and lifecycle verified on Chromium/Firefox with candidate and published cores. Explicit capture has native Firefox zero-binding external ownership; default fallback still uses controlled rejection there. Offline demo remains local audio only. Default CORS silence, Windows WebKit, physical devices and the external recognition service remain unverified or restricted.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

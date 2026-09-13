@@ -4662,16 +4662,22 @@
       "id": "ASR-FOREIGN-01",
       "title": "Firefox permits parallel native media-element owners instead of selecting capture fallback",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
-        "PKG-ASR-05"
+        "PKG-ASR-05",
+        "PKG-ASR-09"
       ],
       "evidence": [
         "refactor/baselines/asr-fallback-validation.json",
         "refactor/changes/2026-09-13-PKG-ASR-08-capture-output.md"
       ],
       "compatibleResolution": "Establish an explicit compatible ownership contract for external audio graphs without silently changing default direct-path PCM/mute semantics.",
-      "closureCriteria": "Natural Firefox external-owner integration has no duplicate output or has a documented, validated explicit ownership mode; controlled binding rejection alone cannot close this finding."
+      "closureCriteria": "Natural Firefox external-owner integration has no duplicate output or has a documented, validated explicit ownership mode; controlled binding rejection alone cannot close this finding.",
+      "resolutionEvidence": [
+        "refactor/baselines/asr-explicit-capture-validation.json",
+        "refactor/changes/2026-09-13-PKG-ASR-09-explicit-capture.md"
+      ],
+      "resolutionRationale": "The documented explicit capture mode satisfies the ownership-mode closure branch: native Firefox never calls direct binding and keeps the external route independent. This is not automatic default-mode owner detection."
     },
     {
       "id": "ASR-CORS-01",
@@ -4683,10 +4689,31 @@
       ],
       "evidence": [
         "test/browser/asr-cors.spec.js",
-        "refactor/baselines/asr-combinations-validation.json"
+        "refactor/baselines/asr-combinations-validation.json",
+        "refactor/baselines/asr-explicit-capture-validation.json"
       ],
       "compatibleResolution": "Document required CORS setup and provide an explicitly chosen capture path that never takes over media playback; do not bypass browser security or silently change default PCM semantics.",
       "closureCriteria": "Authorized capture and same-origin recovery remain valid; an explicit integration avoids direct ownership for restricted input, fails or stays silent without rerouting playback, and is documented with native evidence."
+    },
+    {
+      "id": "ASR-RESTART-01",
+      "title": "Delayed captured-source restart resumes recognition after a newer pause or stop",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-ASR-09"
+      ],
+      "evidence": [
+        "test/asr-explicit-capture.test.js",
+        "refactor/baselines/asr-explicit-capture-validation.json"
+      ],
+      "compatibleResolution": "Invalidate stale restart continuation using the lifecycle epoch while allowing the next explicit play.",
+      "closureCriteria": "Pause and stop during delayed context close prevent a new graph and timer; later play works normally.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-ASR-09-explicit-capture.md",
+        "refactor/baselines/asr-explicit-capture-validation.json"
+      ],
+      "resolutionRationale": "Two delayed-close red tests now pass in source/main/legacy, with subsequent play verified; native restart and default regressions pass."
     }
   ]
 }
