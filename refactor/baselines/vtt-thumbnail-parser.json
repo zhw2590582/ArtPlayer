@@ -1,0 +1,2557 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VTT-THUMB-03",
+  "status": "done",
+  "parentCommit": "524ddf784fdc143d3020040e4de1a9e0921698ce",
+  "checks": [
+    {
+      "command": "frozen 524ddf78 parser and bundle",
+      "tests": 26,
+      "pass": 5,
+      "fail": 21,
+      "file": "refactor/.cache/vtt-thumbnail03-parser-before-final.log",
+      "sha256": "b958f0579dcf801ef310f90b8578739288e15c2a65391241e4addda491dc15f0",
+      "bundleSha256": "2b64d4f4e357692b4bf697dd226ca4938638078c58e302166947fbb2594bf95a"
+    },
+    {
+      "command": "parser and lifecycle source",
+      "tests": 47,
+      "pass": 47,
+      "file": "refactor/.cache/vtt-thumbnail03-parser-unit-source.log",
+      "sha256": "525eaca046c50a46814153f99c2dcda5142b85e508c059a9bda01b9e91da93ac",
+      "scope": "26 parser tests plus 21 lifecycle tests. Pure parser assertions use source; the 15 malformed payload cases, extended registration and 21 lifecycle cases also execute the selected factory."
+    },
+    {
+      "command": "native browser source",
+      "file": "refactor/.cache/vtt-thumbnail03-parser-browser-source.json",
+      "sha256": "a4edf319187bd6ab0fa4ca2be0f49218b72ee1ce748d757c0ed584bbd0b45ac6",
+      "resultsDirectory": "refactor/.cache/vtt-thumbnail03-parser-browser-source-results",
+      "stats": {
+        "startTime": "2026-09-13T00:46:09.142Z",
+        "duration": 13536.269,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "Load request cancelled"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "f31ac55a2d4cb3efcbf32d824237c288ce3d429d2d7bd5eb7de9df34639f5f72",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "Load request cancelled"
+              }
+            }
+          ],
+          "consoleErrors": []
+        }
+      ]
+    },
+    {
+      "command": "parser and lifecycle main",
+      "tests": 47,
+      "pass": 47,
+      "file": "refactor/.cache/vtt-thumbnail03-parser-unit-main.log",
+      "sha256": "c51e4bcd0dd2fd100277556483d74d38638140719b580b1ec810ce067c0a562c",
+      "scope": "26 parser tests plus 21 lifecycle tests. Pure parser assertions use source; the 15 malformed payload cases, extended registration and 21 lifecycle cases also execute the selected factory."
+    },
+    {
+      "command": "native browser main",
+      "file": "refactor/.cache/vtt-thumbnail03-parser-browser-main.json",
+      "sha256": "bf7ffee07525d6516627dba6941cfce29d73dbb2a9e21e79487685b6c4a9a1c2",
+      "resultsDirectory": "refactor/.cache/vtt-thumbnail03-parser-browser-main-results",
+      "stats": {
+        "startTime": "2026-09-13T00:46:23.888Z",
+        "duration": 12638.268,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "Load request cancelled"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "Load request cancelled"
+              }
+            }
+          ],
+          "consoleErrors": []
+        }
+      ]
+    },
+    {
+      "command": "parser and lifecycle legacy",
+      "tests": 47,
+      "pass": 47,
+      "file": "refactor/.cache/vtt-thumbnail03-parser-unit-legacy.log",
+      "sha256": "6db481857a04e7e6fa6ea0b47ce7dd5ce28bd0a9fe93f70c7f416b962b2e7f56",
+      "scope": "26 parser tests plus 21 lifecycle tests. Pure parser assertions use source; the 15 malformed payload cases, extended registration and 21 lifecycle cases also execute the selected factory."
+    },
+    {
+      "command": "native browser legacy",
+      "file": "refactor/.cache/vtt-thumbnail03-parser-browser-legacy.json",
+      "sha256": "7ea1ec9c761e87a7b5b735d9dd1731628e8efd8faf6ec37241764b4cf27bf29c",
+      "resultsDirectory": "refactor/.cache/vtt-thumbnail03-parser-browser-legacy-results",
+      "stats": {
+        "startTime": "2026-09-13T00:46:37.635Z",
+        "duration": 13811.528999999999,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/pattern.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "published",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "Load request cancelled"
+              }
+            }
+          ],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "pixels": [
+              [
+                255,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                255,
+                255
+              ]
+            ]
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "recoveredAfter": {
+              "name": "TypeError",
+              "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+            }
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [],
+          "consoleErrors": []
+        },
+        {
+          "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "candidate": {
+            "core": "candidate",
+            "implementation": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+            "nativeAbort": true
+          },
+          "core": {
+            "published": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "candidate": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "e8945bc9d3ff0a6e247772a662f874df13875f7dbeb949968943b9589f6e2946",
+              "bytes": 378073
+            }
+          },
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/test/vtt-held.vtt",
+              "resourceType": "fetch",
+              "failure": {
+                "errorText": "Load request cancelled"
+              }
+            }
+          ],
+          "consoleErrors": []
+        }
+      ]
+    },
+    {
+      "command": "actual ESM import and controlled registration/hover/destroy",
+      "file": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.mjs",
+      "sha256": "e846cdff71fffd46146c837fb31af119fc113ce48b837b8170fc704349354b94",
+      "status": "pass",
+      "scope": "Native import of actual .mjs; controlled host registration/hover/destroy, not installed tarball"
+    },
+    {
+      "command": "yarn ci:check",
+      "tests": {
+        "unit": 1727,
+        "engineering": 14,
+        "baseline": 323,
+        "total": 2064
+      },
+      "file": "refactor/.cache/vtt-thumbnail03-parser-ci.log",
+      "sha256": "704b458de2452cf63964dd1d379d0d63ec219a462aa727832d9334d673e58f52"
+    },
+    {
+      "command": "focused eslint --no-fix",
+      "result": "pass",
+      "file": "refactor/.cache/vtt-thumbnail03-parser-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limitations": [
+    "Thumbnail metadata profile only, not full subtitle conformance",
+    "Public types and older CJS forms await 04",
+    "Full device/core combinations, installed packages and demo/editor await 05/06"
+  ],
+  "formatReference": {
+    "url": "https://www.w3.org/TR/webvtt1/",
+    "checked": "2026-09-13",
+    "scope": "Cue identifiers, timing settings, NOTE and caption metadata blocks; legacy extensions remain explicit, no full subtitle conformance claim"
+  },
+  "source": {
+    "packages/artplayer-plugin-vtt-thumbnail/src/getVttArray.js": "3c5d78bec07628eafc5eb0b4afd86118cfc40242a1ae9597eef893c9533e61dc",
+    "packages/artplayer-plugin-vtt-thumbnail/src/index.js": "e6e5a51a8011e0cdc312c713f746bd9e229d4edb563f29c9d7b5eae3f39d371d",
+    "packages/artplayer-plugin-vtt-thumbnail/src/lifetime.js": "e13e98ca5f2f1de0f591437a7ca93addef0b0e2e19bcae9e30aa687a71a6a714",
+    "packages/artplayer-plugin-vtt-thumbnail/src/parseVtt.js": "aea38a4e85c0335f22ac4c3095b57b669eef724f5e40c0c48892c596be5545af",
+    "packages/artplayer-plugin-vtt-thumbnail/src/preview.js": "a0e43d74b77e2f6941028d38c45ca59626d58d033d7d2f1ac8ee88ded0943bfa",
+    "packages/artplayer-plugin-vtt-thumbnail/src/request.js": "dd161a0780b926bb93de50779c961c7d2b1c66ceb8a5eea31b8fe7d9123c55f1"
+  },
+  "demo": {
+    "file": "docs/assets/sample/bbb-thumbnails.vtt",
+    "cuesCompared": 120,
+    "sha256": "1b88c30cf67d5c3da8281a150e8277858781c8077df0c6bfd2f32550da7323ba"
+  },
+  "artifacts": {
+    "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.js": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+    "docs/compiled/artplayer-plugin-vtt-thumbnail.js": "bd6333a850278d985cf1f8d5dc9ff2b1ba9c8948b19cfafabecc6a97304f2754",
+    "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+    "docs/compiled/artplayer-plugin-vtt-thumbnail.legacy.js": "137c768a13febe328c274e4dd3d520755e5e746dc25cb5a69dc27899903616d6",
+    "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.mjs": "e846cdff71fffd46146c837fb31af119fc113ce48b837b8170fc704349354b94",
+    "docs/compiled/artplayer-plugin-vtt-thumbnail.mjs": "e846cdff71fffd46146c837fb31af119fc113ce48b837b8170fc704349354b94"
+  }
+}

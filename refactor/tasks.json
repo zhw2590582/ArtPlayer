@@ -1897,13 +1897,15 @@
         "CORE-09",
         "CORE-19"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "M",
       "deliverable": "纯解析/区间查找与 DOM、请求/定时器生命周期分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
       "evidence": [
         "changes/2026-09-13-PKG-VTT-THUMB-03-resources.md",
-        "baselines/vtt-thumbnail-resources.json"
+        "baselines/vtt-thumbnail-resources.json",
+        "changes/2026-09-13-PKG-VTT-THUMB-03-parser.md",
+        "baselines/vtt-thumbnail-parser.json"
       ]
     },
     {

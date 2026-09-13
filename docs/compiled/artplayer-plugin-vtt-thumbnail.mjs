@@ -57,58 +57,96 @@ function createLifetime(art) {
   }
   return lifetime;
 }
-function padEnd(str, targetLength, padString) {
-  if (str.length > targetLength) {
-    return String(str);
-  } else {
-    targetLength = targetLength - str.length;
-    if (targetLength > padString.length) {
-      padString += padString.repeat(targetLength / padString.length);
-    }
-    return String(str) + padString.slice(0, targetLength);
+function invalid(line, message) {
+  throw new TypeError(`Invalid VTT thumbnail at line ${line}: ${message}`);
+}
+function timestamp(value, line) {
+  if (!/^\d{2,}(?::\d{2}){0,2}(?:\.\d{3})?$/.test(value))
+    invalid(line, "invalid timestamp");
+  const [whole, fraction = "0"] = value.split(".");
+  const seconds = whole.split(":").reduce((total, part) => total * 60 + Number(part), 0) + Number(fraction) / 1e3;
+  if (!Number.isSafeInteger(Math.floor(seconds)))
+    invalid(line, "timestamp exceeds the supported numeric range");
+  return seconds;
+}
+function rectangle(text, vttUrl, line) {
+  const match = text.match(/^(.+)#([xywh]{4})=(.*)$/);
+  if (!match || new Set(match[2]).size !== 4)
+    invalid(line, "expected an image URL and four distinct xywh keys");
+  const values = match[3].split(",").map((value) => value.trim());
+  if (values.length !== 4)
+    invalid(line, "expected four rectangle coordinates");
+  const rect = {};
+  for (let index = 0; index < 4; index++) {
+    const key = match[2][index];
+    const value = values[index];
+    if (!/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(value) || !Number.isFinite(Number(value)))
+      invalid(line, "rectangle coordinates must be finite non-negative decimals");
+    if ((key === "w" || key === "h") && Number(value) === 0)
+      invalid(line, "rectangle width and height must be positive");
+    rect[key] = value;
   }
+  let url = match[1];
+  if (!/^\/|(?:https?|ftp|file):\/\//i.test(url)) {
+    const segments = vttUrl.split("/");
+    segments.pop();
+    segments.push(url);
+    url = segments.join("/");
+  }
+  return { url, ...rect };
 }
-function t2d(time) {
-  const arr = time.split(".");
-  const left = arr[0].split(":") || [];
-  const right = padEnd(arr[1] || "0", 3, "0");
-  const ms = Number(right) / 1e3;
-  const h = Number(left[left.length - 3] || 0) * 3600;
-  const m = Number(left[left.length - 2] || 0) * 60;
-  const s = Number(left[left.length - 1] || 0);
-  return h + m + s + ms;
+function findThumbnail(thumbnails, second) {
+  return thumbnails.find((item) => second >= item.start && second <= item.end);
 }
-function parseVtt(vttString, vttUrl = "") {
-  const lines = vttString.split(/[\n\r]/g).filter((item) => item.trim());
-  const vttArray = [];
-  for (let i = 1; i < lines.length; i += 2) {
-    const time = lines[i];
-    const text = lines[i + 1];
-    if (!text.trim())
+function parseVtt(text, vttUrl = "") {
+  if (typeof text !== "string")
+    invalid(1, "expected text");
+  const lines = text.replace(/^\uFEFF/, "").split(/\r\n|\r|\n/);
+  let index = 0;
+  function skipEmpty() {
+    while (index < lines.length && !lines[index].trim())
+      index++;
+  }
+  skipEmpty();
+  if (index === lines.length)
+    return [];
+  if (!/^WEBVTT(?:[\t ].*)?$/.test(lines[index].trim()) || lines[index].includes("-->"))
+    invalid(index + 1, "expected WEBVTT header");
+  index++;
+  const thumbnails = [];
+  while (index < lines.length) {
+    skipEmpty();
+    if (index === lines.length)
+      break;
+    const first = lines[index].trim();
+    if (/^NOTE(?:[\t ]|$)/.test(first) || first === "STYLE" || first === "REGION") {
+      while (index < lines.length && lines[index].trim())
+        index++;
       continue;
-    const timeReg = /((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?) ?--> ?((?:\d{2}:)?(?:\d{2}:)?\d{2}(?:.\d{3})?)/;
-    const timeMatch = time.match(timeReg);
-    const textReg = /(.*)#(\w{4})=(.*)/;
-    const textMatch = text.match(textReg);
-    const start = Math.floor(t2d(timeMatch[1]));
-    const end = Math.floor(t2d(timeMatch[2]));
-    let url = textMatch[1];
-    const isAbsoluteUrl = /^\/|(?:https?|ftp|file):\/\//i.test(url);
-    if (!isAbsoluteUrl) {
-      const urlArr = vttUrl.split("/");
-      urlArr.pop();
-      urlArr.push(url);
-      url = urlArr.join("/");
     }
-    const result = { start, end, url };
-    const keys = textMatch[2].split("");
-    const values = textMatch[3].split(",");
-    for (let j = 0; j < keys.length; j++) {
-      result[keys[j]] = values[j];
+    const identifierLine = index + 1;
+    if (!first.includes("-->")) {
+      index++;
+      if (index === lines.length || !lines[index].trim())
+        invalid(identifierLine, "cue identifier must be followed by timing");
     }
-    vttArray.push(result);
+    const timingLine = index + 1;
+    const timing = lines[index].trim().match(/^([\d:.]+)[\t ]*-->[\t ]*([\d:.]+)(?:[\t ].*)?$/);
+    if (!timing)
+      invalid(timingLine, "invalid cue timing");
+    const start = timestamp(timing[1], timingLine);
+    const end = timestamp(timing[2], timingLine);
+    if (end < start)
+      invalid(timingLine, "cue end precedes its start");
+    index++;
+    skipEmpty();
+    if (index === lines.length)
+      invalid(timingLine, "missing sprite image");
+    const image = rectangle(lines[index].trim(), vttUrl, index + 1);
+    thumbnails.push({ start: Math.floor(start), end: Math.floor(end), ...image });
+    index++;
   }
-  return vttArray;
+  return thumbnails;
 }
 function createPreview({ lifetime, thumbnails, progress, duration, setStyle, isMobile }) {
   let timer = null;
@@ -148,7 +186,7 @@ function createPreview({ lifetime, thumbnails, progress, duration, setStyle, isM
     style(control, "display", "flex");
     if (lifetime.closed)
       return;
-    const cue = thumbnails.find((item) => second >= item.start && second <= item.end);
+    const cue = findThumbnail(thumbnails, second);
     if (!cue)
       return style(control, "display", "none");
     if (width > 0 && width < progress.clientWidth)

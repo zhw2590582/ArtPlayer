@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 93 / doing 13 / blocked 0 / done 116 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 93 / doing 12 / blocked 0 / done 117 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -184,7 +184,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-VTT-THUMB-01 | artplayer-plugin-vtt-thumbnail<br>核对包契约与历史用法 | BASE-05 | vtt/style、异步返回、预览控件名与样式契约 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | M | done |
 | PKG-VTT-THUMB-02 | artplayer-plugin-vtt-thumbnail<br>建立特有行为与错误测试 | PKG-VTT-THUMB-01, ENG-03, ENG-05 | VTT 解析、xywh、相对 URL、时间边界、请求失败和定位 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | M | done |
-| PKG-VTT-THUMB-03 | artplayer-plugin-vtt-thumbnail<br>整理内部职责与资源 | PKG-VTT-THUMB-02, CORE-09, CORE-19 | 纯解析/区间查找与 DOM、请求/定时器生命周期分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | doing |
+| PKG-VTT-THUMB-03 | artplayer-plugin-vtt-thumbnail<br>整理内部职责与资源 | PKG-VTT-THUMB-02, CORE-09, CORE-19 | 纯解析/区间查找与 DOM、请求/定时器生命周期分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | M | done |
 | PKG-VTT-THUMB-04 | artplayer-plugin-vtt-thumbnail<br>迁移自有源码和公开类型 | PKG-VTT-THUMB-03, ENG-04, ENG-06, CORE-07 | cue/rect/result 和参数可选性保持兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | M | todo |
 | PKG-VTT-THUMB-05 | artplayer-plugin-vtt-thumbnail<br>验证新旧核心和组合 | PKG-VTT-THUMB-04, CORE-22 | 鼠标和移动进度、全屏、切源、chapter 组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | todo |
 | PKG-VTT-THUMB-06 | artplayer-plugin-vtt-thumbnail<br>验证分发并同步文档 | PKG-VTT-THUMB-05, ENG-07 | vtt.thumbnail.js、VTT/图片资源解析和产物验证 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
@@ -499,7 +499,7 @@
 - PKG-AUTO-THUMB-03: [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-lifecycle-checkpoint.md) [记录](baselines/auto-thumbnail-lifecycle-checkpoint.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-hidden-renderer.md) [记录](baselines/auto-thumbnail-hidden-renderer.json) [记录](baselines/auto-thumbnail-timeline-media.json) [记录](changes/2026-09-13-PKG-AUTO-THUMB-03-frame-presentation.md) [记录](baselines/auto-thumbnail-frame-presentation.json)
 - PKG-VTT-THUMB-01: [记录](baselines/vtt-thumbnail-release.json) [记录](baselines/vtt-thumbnail-contract.md) [记录](changes/2026-09-13-PKG-VTT-THUMB-01-contract.md)
 - PKG-VTT-THUMB-02: [记录](baselines/vtt-thumbnail-failures.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-02-failures.md)
-- PKG-VTT-THUMB-03: [记录](changes/2026-09-13-PKG-VTT-THUMB-03-resources.md) [记录](baselines/vtt-thumbnail-resources.json)
+- PKG-VTT-THUMB-03: [记录](changes/2026-09-13-PKG-VTT-THUMB-03-resources.md) [记录](baselines/vtt-thumbnail-resources.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-03-parser.md) [记录](baselines/vtt-thumbnail-parser.json)
 - PKG-HLS-01: [记录](baselines/hls-control-contract.md) [记录](baselines/hls-control-release.json) [记录](changes/2026-09-11-PKG-HLS-01-contract.md)
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)

@@ -4141,7 +4141,7 @@
       "id": "VTT-THUMB-PARSE-01",
       "title": "Historical compiled arrows differ from shipped source; parsing floors bounds and assumes alternating lines",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-VTT-THUMB-02",
         "PKG-VTT-THUMB-03"
@@ -4157,7 +4157,14 @@
         "refactor/baselines/vtt-thumbnail-resources.json"
       ],
       "compatibleResolution": "Preserve valid cue selection and geometry; test malformed data and standard VTT separately from old compiler defects.",
-      "closureCriteria": "Parser fixtures include malformed, empty, real demo VTT, fractional and shared bounds, relative URLs and historical accepted formats."
+      "closureCriteria": "Parser fixtures include malformed, empty, real demo VTT, fractional and shared bounds, relative URLs and historical accepted formats.",
+      "resolutionEvidence": [
+        "test/vtt-thumbnail-parser.test.js",
+        "test/browser/vtt-thumbnail-lifecycle.spec.js",
+        "refactor/baselines/vtt-thumbnail-parser.json",
+        "refactor/changes/2026-09-13-PKG-VTT-THUMB-03-parser.md"
+      ],
+      "resolutionRationale": "Historical compiled/source arrow differences stay frozen. Pure parser validates malformed input with original lines, handles metadata blocks/IDs/settings and long hours, retains legacy boundaries/URL/coordinate semantics and compares all 120 demo cues. Candidate factories and native old/new core cases demonstrate rejection before mounting and recovery. This resolves the thumbnail parsing scope; declaration, full device/core and installed-package risks remain separate."
     },
     {
       "id": "VTT-THUMB-LIFE-01",

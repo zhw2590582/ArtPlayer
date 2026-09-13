@@ -5,10 +5,11 @@ import { expect, test } from './fixtures.js'
 const implementation = await vttThumbnailCandidate()
 const cues = 'WEBVTT\n\n00:00.000 --> 00:04.000\nvtt-sprite.svg#xywh=0,0,80,45\n\n00:04.000 --> 00:08.000\nvtt-sprite.svg#xywh=80,0,80,45\n'
 const sprite = '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="45"><path fill="red" d="M0 0h80v45H0z"/><path fill="blue" d="M80 0h80v45H80z"/></svg>'
+const extendedCues = '\uFEFFWEBVTT thumbnails\r\n\r\nNOTE source metadata\r\nignored\r\n\r\nSTYLE\r\n::cue { color: red }\r\n\r\nREGION\r\nid:unused\r\n\r\nfirst\r\n00:00.000\t-->\t00:04.000 align:start\r\nvtt-sprite.svg#xywh=0,0,80,45\r\n\r\nsecond\r\n00:04.000 --> 00:08.000\r\nvtt-sprite.svg#xywh=80,0,80,45\r\n'
 
 for (const core of ['published', 'candidate']) {
   test(`VTT native ${core} core: real progress hover selects sprite regions and destroy removes owned UI`, async ({ page }, testInfo) => {
-    await page.route('**/test/vtt-cues.vtt', route => route.fulfill({ contentType: 'text/vtt', body: cues }))
+    await page.route('**/test/vtt-cues.vtt', route => route.fulfill({ contentType: 'text/vtt', body: extendedCues }))
     await page.route('**/test/vtt-sprite.svg', route => route.fulfill({ contentType: 'image/svg+xml', body: sprite }))
     await page.goto(`/test/player.html?core=${core}`)
     await page.addScriptTag({ content: implementation.code })
@@ -43,6 +44,32 @@ for (const core of ['published', 'candidate']) {
     await page.evaluate(() => window.art.destroy(false))
     await expect(preview).toHaveCount(0)
     await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), pixels }), contentType: 'application/json' })
+  })
+
+  test(`VTT native ${core} core: malformed sprite rejects before mounting and a corrected registration recovers`, async ({ page }, testInfo) => {
+    await page.route('**/test/vtt-invalid.vtt', route => route.fulfill({ contentType: 'text/vtt', body: 'WEBVTT\n\n00:00.000 --> 00:08.000\nvtt-sprite.svg#xywh=0,0,bad,45\n' }))
+    await page.route('**/test/vtt-cues.vtt', route => route.fulfill({ contentType: 'text/vtt', body: extendedCues }))
+    await page.route('**/test/vtt-sprite.svg', route => route.fulfill({ contentType: 'image/svg+xml', body: sprite }))
+    await page.goto(`/test/player.html?core=${core}`)
+    await page.addScriptTag({ content: implementation.code })
+    const error = await page.evaluate(async () => {
+      window.createPlayer('/test/pattern.mp4')
+      try {
+        await window.art.plugins.add(window.artplayerPluginVttThumbnail({ vtt: '/test/vtt-invalid.vtt' }))
+        return null
+      }
+      catch (error) {
+        return { name: error.name, message: error.message }
+      }
+    })
+    expect(error.name).toBe('TypeError')
+    expect(error.message).toContain('line 4:')
+    await expect(page.locator('.art-control-vtt-thumbnail')).toHaveCount(0)
+    await page.evaluate(() => window.art.plugins.add(window.artplayerPluginVttThumbnail({ vtt: '/test/vtt-cues.vtt' })))
+    await expect(page.locator('.art-control-vtt-thumbnail')).toHaveCount(1)
+    await page.evaluate(() => window.art.destroy(false))
+    await expect(page.locator('.art-control-vtt-thumbnail')).toHaveCount(0)
+    await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), recoveredAfter: error }), contentType: 'application/json' })
   })
 
   test(`VTT native ${core} core: destroy aborts a pending native fetch and settles registration`, async ({ page }, testInfo) => {

@@ -1,3 +1,5 @@
+import { findThumbnail } from './parseVtt'
+
 export default function createPreview({ lifetime, thumbnails, progress, duration, setStyle, isMobile }) {
   let timer = null
   let generation = 0
@@ -36,7 +38,7 @@ export default function createPreview({ lifetime, thumbnails, progress, duration
     style(control, 'display', 'flex')
     if (lifetime.closed)
       return
-    const cue = thumbnails.find(item => second >= item.start && second <= item.end)
+    const cue = findThumbnail(thumbnails, second)
     if (!cue)
       return style(control, 'display', 'none')
     if (width > 0 && width < progress.clientWidth)

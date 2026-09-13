@@ -15,9 +15,10 @@ and the strict TypeScript migration. Do not infer the return shape from those de
 - `src/request.js` owns a native AbortController when available and reads the response body.
   Destroy cancels both phases; late rejections are observed. Failed HTTP responses reject
   before parsing. The controller cleanup is released when the request ends.
-- `src/parseVtt.js` is pure parsing with the historical timestamp floor, first inclusive
-  match data, raw xywh strings and lexical URL joining. Its old malformed-input limitations
-  remain under PKG-VTT-THUMB-03; extracting this function is not a parser rewrite.
+- `src/parseVtt.js` parses thumbnail metadata and exports the pure `findThumbnail` lookup.
+  It preserves timestamp flooring, first inclusive matches, decimal xywh strings and lexical
+  URL joining. It handles cue IDs, NOTE/STYLE/REGION blocks, BOM/line endings and timing
+  settings; invalid input raises TypeError with the original line before any UI is installed.
 - `src/preview.js` owns the mobile 500ms timer and creates the setBar callback. Timer
   generations reject old callbacks. Every style write checks lifetime state, including
   callbacks captured before destroy. Geometry, mobile/desktop edges and cue selection
@@ -43,6 +44,20 @@ later option.vtt changes. Empty cues remain valid and hide the preview. HTTP fai
 reject explicitly; before this fix, a 404 with a parseable body incorrectly displayed cues.
 The historical failure tests retain the former outcome rather than claiming it was valid API.
 
+This is a thumbnail metadata profile, not a complete subtitle renderer or WebVTT validator.
+Caption style/region blocks and timing settings do not style the player's DOM. Preserve
+legacy compact arrows, seconds-only timestamps, numeric overflow between minute/second
+fields, zero-length cues, unsorted/overlapping cues and dense pairs. Lookup does not sort:
+the first inclusive match in input order wins. Fractions still floor only after conversion.
+Three-or-more-digit hours now use the entire field rather than silently truncating it.
+
+Malformed headers/timing, reversed ranges and missing/duplicate/unknown rectangle keys
+reject. Coordinates must be finite non-negative decimal strings, and width/height positive;
+coordinate whitespace is trimmed before forming CSS. Broken input no longer creates
+invalid CSS or partially mounted controls. Each cue has one image/rectangle payload line;
+multiline subtitle text, timestamp-map offsets and full caption semantics are outside this
+plugin. Empty or comment-only input remains a valid empty preview.
+
 The old 1.0.x export objects, earlier `thumbnails` control name and incorrect declarations
 are separately frozen and remain compatibility work for tasks 04-06. Current runtime work
 does not claim those consumer migrations or the full package refactor are finished.
@@ -65,5 +80,9 @@ core/device coverage, installed tarballs, mobile Safari or the online editor.
 
 Modify parsing in parseVtt, requests in request, layout/timers in preview, and ownership in
 lifetime. Preserve the normal/failure lifecycle tests alongside any parser improvements.
+Pure parser comparison can use ARTPLAYER_VTT_PARSER_BASELINE=1, which loads the exact
+parser from the 524ddf78 resource checkpoint. Bundle-mode parser tests also run malformed
+payloads and extended registration through the actual factory; pure parsing assertions
+still target source and must not be described as tests of an installed tarball.
 See ../../refactor/baselines/vtt-thumbnail-contract.md and the task 03 change record for
 historical evidence and outstanding acceptance work.
