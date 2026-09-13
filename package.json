@@ -97,7 +97,8 @@
     "test:asr": "node --test test/asr.test.js test/asr-audio.test.js test/asr-encoding.test.js test/asr-lifecycle.test.js test/asr-distribution.test.js test/asr-fallback-routing.test.js test/asr-local-example.test.js test/asr-explicit-capture.test.js",
     "test:asr-types-package": "node refactor/scripts/asr-package-types.mjs",
     "test:asr-demo": "node refactor/scripts/asr-local-demo.mjs",
-    "test:chromecast": "node --test test/chromecast.test.js test/chromecast-failures.test.js test/chromecast-runtime.test.js"
+    "test:chromecast": "node --test test/chromecast.test.js test/chromecast-failures.test.js test/chromecast-runtime.test.js",
+    "test:chromecast-types-package": "node refactor/scripts/chromecast-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

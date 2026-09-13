@@ -1086,7 +1086,7 @@
       ],
       "sourceStatus": "Former commercial SVG removed. Current cast.svg is an original geometric icon authored for this repository during PKG-CAST-03; controller imports that file directly.",
       "licenseStatus": "Current original repository artwork follows the package MIT license; no entitlement in or relicensing of the removed Font Awesome Pro artwork is asserted.",
-      "updatePolicy": "Keep original artwork and custom icon/wrapper support; review any replacement provenance and verify actual rebuilt/shipped assets. Historical commercial-source evidence remains immutable.",
+      "updatePolicy": "Keep original artwork and custom icon/wrapper support; review any replacement provenance and verify actual rebuilt/shipped assets. Historical commercial-source evidence remains immutable. CAST04 refreshes the controller fingerprint only for type imports/return annotation; six rebuilt/copied JavaScript files are byte-identical to CAST03.",
       "fingerprints": [
         {
           "path": "packages/artplayer-plugin-chromecast/src/cast.svg",
@@ -1096,14 +1096,16 @@
         {
           "path": "packages/artplayer-plugin-chromecast/src/controller.ts",
           "algorithm": "sha256-lf",
-          "sha256": "e61760f082e233da1f4e94ca98c68b4f07357117a66b2b5c448659dd57cb193d"
+          "sha256": "1bf55c5a6a4a83290ee591d4286452acd7ba0b27d01e4b6293e16d61772655c2"
         }
       ],
       "reviewEvidence": [
         "refactor/baselines/chromecast-release.json",
         "refactor/changes/2026-09-13-PKG-CAST-01-contracts.md",
         "refactor/changes/2026-09-13-PKG-CAST-03-runtime.md",
-        "refactor/baselines/chromecast-runtime-validation.json"
+        "refactor/baselines/chromecast-runtime-validation.json",
+        "refactor/changes/2026-09-13-PKG-CAST-04-types.md",
+        "refactor/baselines/chromecast-types-validation.json"
       ]
     }
   ],

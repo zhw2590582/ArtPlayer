@@ -27,11 +27,27 @@
       "types": "./types/artplayer-plugin-chromecast.d.ts",
       "import": "./dist/artplayer-plugin-chromecast.legacy.js",
       "require": "./dist/artplayer-plugin-chromecast.legacy.js"
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer-plugin-chromecast.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer-plugin-chromecast.js"
+      }
     }
   },
   "main": "./dist/artplayer-plugin-chromecast.js",
   "module": "./dist/artplayer-plugin-chromecast.mjs",
   "types": "./types/artplayer-plugin-chromecast.d.ts",
   "legacy": "./dist/artplayer-plugin-chromecast.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": ["types/artplayer-plugin-chromecast.d.ts"],
+      "runtime": ["types/runtime.d.ts"]
+    }
+  }
 }

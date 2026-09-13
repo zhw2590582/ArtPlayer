@@ -1,10 +1,11 @@
 import type Artplayer from 'artplayer'
+import type { RuntimeResult } from '../types/artplayer-plugin-chromecast'
 import type { AvailabilityEvent, CastContext, CastSdk, CastSession, ChromecastOptions, ConnectionState, SessionEvent } from './types'
 import icon from './cast.svg?raw'
 import { loadMedia } from './media'
 import { configure, loadSdk } from './sdk'
 
-export function createController(art: Artplayer, option: ChromecastOptions) {
+export function createController(art: Artplayer, option: ChromecastOptions): RuntimeResult {
   let disposed = false
   let sdk: CastSdk | undefined
   let context: CastContext | undefined

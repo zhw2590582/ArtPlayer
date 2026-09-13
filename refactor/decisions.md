@@ -29,7 +29,12 @@
 | ADR-022 | 采用方向 | Chrome 不可用时使用 Codex 内置浏览器 | 用户明确授权；记录实际环境和能力范围，必要设备测试仍独立验收 |
 | ADR-023 | 已验证于 Audio Track | 参数类型纠正会破坏旧推断时，默认入口保留兼容类型，/runtime 复用相同运行文件提供精确类型 | PKG-AUDIO-04 的 Parameters 与无注解 update 实现证明 Partial/重载仍可能破坏旧用户；沿用核心的类型分层方向，具体包需独立编译与入口身份验证，不增加第二套实现或用 any 绕过 |
 | ADR-024 | 已验证于 CORE-24 | 切源播放意图归属当前操作，在公开 play/pause 命令入口更新，内部暂停不覆盖用户意图 | Audio-05 三引擎复现连续切源最终停在 0；新操作继承未完成操作的意图，显式暂停及其修订号终止旧恢复副作用，过期 Promise 仍保留原结算语义；不依赖用户回调之后才执行的事件监听器 |
-| ADR-025 | 用户已确认，待实施验证 | 历史声明冲突以最新已发布类型形状为准，较早差异提供迁移，合法旧JS继续兼容，/runtime提供精确类型 | 2026-09-13明确答复“接受这条规则并继续”；覆盖Canvas/Ambilight/VTT Thumbnail/Multiple Subtitles，见[type-compatibility-policy.md](type-compatibility-policy.md)，不等同任务完成或发布授权 |
+| ADR-027 | 用户已确认，逐包实施验证 | 历史声明冲突以最新已发布类型形状为准，较早差异提供迁移，合法旧JS继续兼容，/runtime提供精确类型 | 2026-09-13明确答复“接受这条规则并继续”；Canvas/Ambilight/VTT Thumbnail/Multiple Subtitles已完成相关类型任务，后续各包独立验证，见[type-compatibility-policy.md](type-compatibility-policy.md)，不等同全包完成或发布授权 |
+
+编号更正（2026-09-13）：历史类型策略最初误用已由Iframe消息边界占用的ADR-025，
+现唯一编号为ADR-027。此前类型相关变更记录、包架构及冻结报告中的“ADR-025”
+指向[type-compatibility-policy.md](type-compatibility-policy.md)，应读作ADR-027；
+不改写已归档证据或已验证包内容。Iframe原ADR-025/026及其引用保持原意。
 
 ## 开始实现前需补齐的决定
 

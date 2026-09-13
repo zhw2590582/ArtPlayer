@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-CAST-04 公开类型与隔离安装完成
+
+最新npm 1.1.0根类型保持，/runtime精确描述异步注册、回调与查询。17安装配置、
+7候选配置各17逐行反例、4项专项测试和全局366生产TS strict通过。pack混入tsconfig
+已修复，最终文档包重新安装通过；正常构建的六个JS文件与CAST03逐字节一致。
+见[变更](changes/2026-09-13-PKG-CAST-04-types.md)及[证据](baselines/chromecast-types-validation.json)。
+类型策略重号更正为ADR-027，旧冻结记录保留并中央解释。
+228项：137 done、16 doing、75 todo。弹幕/遮罩契约并行推进，
+Cast05真实SDK设备与06完整分发仍待完成；没有推送或发布。
+
+
 ## PKG-CAST-03 Chromecast生产重构完成
 
 5个TS模块与35个候选测试落地，SDK等待/会话返回值/过期结果/实例图标/错误Promise

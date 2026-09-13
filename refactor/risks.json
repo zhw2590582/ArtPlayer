@@ -4765,8 +4765,8 @@
     {
       "id": "CAST-TYPE-01",
       "title": "Chromecast declarations describe a synchronous name-only registration and omit existing runtime callbacks and query methods",
-      "confirmation": "source-observed",
-      "status": "open",
+      "confirmation": "reproduced",
+      "status": "resolved",
       "owners": [
         "PKG-CAST-04"
       ],
@@ -4775,7 +4775,14 @@
         "refactor/baselines/chromecast-contract.md"
       ],
       "compatibleResolution": "Preserve the latest published root factory type and provide a precise runtime type view; verify valid historical JavaScript module forms independently.",
-      "closureCriteria": "Frozen type consumers and replacements pass, accurate async/callback/state declarations work through an additive entry, and actual installed exports are tested."
+      "closureCriteria": "Frozen type consumers and replacements pass, accurate async/callback/state declarations work through an additive entry, and actual installed exports are tested.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-CAST-04-types.md",
+        "refactor/baselines/chromecast-types-validation.json",
+        "refactor/scripts/chromecast-types.test.mjs",
+        "refactor/scripts/chromecast-package-types.mjs"
+      ],
+      "resolutionRationale": "Actual npm 1.1.0 root factory and namespace contracts retained; older export-assignment conflict documented. Additive runtime describes real async/callback/state API through the same JS. Four tests and 17 installed configurations verify identities, replacements, editor and 17 individual negative statements per candidate mode. Real receivers remain CAST05."
     },
     {
       "id": "CAST-SDK-01",

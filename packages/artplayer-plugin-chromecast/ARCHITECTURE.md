@@ -20,9 +20,11 @@ The control HTML is captured at registration, as before.
 
 Dependencies point from the factory to the controller, then to the SDK loader and
 media builder. The loader and media builder do not receive an ArtPlayer instance.
-Public declarations remain in `types/`; their historical mismatch with async
-registration is tracked separately by PKG-CAST-04. Internal strict typing does not
-silently change those declarations.
+Public declarations remain in `types/`. The root and legacy entries retain npm
+1.1.0's required option argument and synchronous name-only factory type, including
+ordinary replacement-function assignment. `/runtime` describes the actual async
+registration and callbacks using the same JavaScript files. Internal option and
+result contracts reference these precise public types to prevent another drift.
 
 ## Initialization and ownership
 
@@ -111,6 +113,9 @@ node --test test/chromecast.test.js test/chromecast-failures.test.js test/chrome
 yarn exec tsc -p packages/artplayer-plugin-chromecast/tsconfig.json
 yarn exec eslint packages/artplayer-plugin-chromecast/src test/chromecast-runtime.test.js
 yarn build artplayer-plugin-chromecast
+yarn build:ts artplayer-plugin-chromecast
+node --test refactor/scripts/chromecast-types.test.mjs
+yarn test:chromecast-types-package
 ```
 
 `ARTPLAYER_CHROMECAST_ARTIFACT` selects a built main or legacy file for the candidate
@@ -129,3 +134,25 @@ receiver playback. PKG-CAST-05 still requires the supported Chrome/HTTPS sender,
 actual receiver, network-reachable media, source changes and disconnection evidence.
 The default SDK URL is mutable; no remote SDK version, physical receiver or Safari
 support is established by this source migration.
+
+## Type and module compatibility
+
+ADR-027 preserves the latest actual npm declaration, not a claim that all past
+incompatible declarations can coexist. npm 1.0.0 used `export =` and its CommonJS
+module exposed `.default`; npm 1.1.0 uses a default declaration and direct CommonJS
+factory. Both legal JavaScript forms work in the candidate through a writable
+self `.default`. Root types remain a plain factory without that required member.
+
+The historical types-first root mapping also retains the latest declaration's
+NodeNext ESM namespace shape and its existing direct-call diagnostic. Its legal
+namespace consumers and full module replacement are tested independently. Choose
+`/runtime` for a directly callable modern ESM default and precise async results;
+its `.d.mts`, `.d.cts` and Node10 `export =` declarations share eight named types.
+The option argument remains required on both type surfaces. Callbacks have the
+live option object as `this`; errors are unknown, raw session state is string or
+null, and `isCasting()` does not establish receiver playback.
+
+The installed consumer verifier compares both actual historical tarballs and an
+isolated candidate package, validates individual negative statement diagnostics,
+and checks runtime entry identity. The editor declaration is generated semantically
+from the root declaration. Keep internal `tsconfig.json` and source out of npm packs.

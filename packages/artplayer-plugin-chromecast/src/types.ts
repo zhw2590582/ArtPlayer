@@ -1,15 +1,5 @@
-export type ConnectionState = 'disconnected' | 'connecting' | 'connected' | 'disconnecting'
-
-export interface ChromecastOptions {
-  url?: string
-  sdk?: string
-  icon?: string
-  mimeType?: string
-  onStateChange?: (this: ChromecastOptions, state: ConnectionState) => void
-  onCastAvailable?: (this: ChromecastOptions, available: boolean) => void
-  onCastStart?: (this: ChromecastOptions) => void
-  onError?: (this: ChromecastOptions, error: unknown) => void
-}
+export type { ConnectionState } from '../types/artplayer-plugin-chromecast'
+export type ChromecastOptions = import('../types/artplayer-plugin-chromecast').RuntimeOption
 
 export interface MediaInfo {
   contentId: string
