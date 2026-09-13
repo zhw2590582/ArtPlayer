@@ -118,6 +118,10 @@ From the repository root:
   modes, verifies offline frozen reinstall and file hashes, exercises actual
   import/require exports, and rejects invalid uses. Historical declaration errors
   are explicit expectations and never counted as candidate success.
+- `yarn test:asr-demo`: actual localhost:8082 docs/Monaco/Run flow in Chromium
+  and Firefox, served script hashes, local PCM statistics, stop/play and destroy.
+  Requires a free port 8082; owns only its temporary dev server. The exact AdSense
+  request is isolated in this test; recognition requests must remain absent.
 - `yarn dev artplayer-plugin-asr` and `yarn build artplayer-plugin-asr`: normal
   repository development and three-format production builds.
 

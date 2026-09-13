@@ -1241,10 +1241,11 @@
       ],
       "sourceFiles": [
         "packages/artplayer-plugin-asr/src/index.ts",
-        "docs/assets/example/asr.js"
+        "docs/assets/example/asr.js",
+        "docs/assets/example/asr.local.js"
       ],
       "contract": "Core plugin supplies PCM to caller onAudioChunk. Example fetches an external ASR endpoint and opens its returned WebSocket; not an embedded ASR SDK or a verified service.",
-      "validationStatus": "Source integration observed; complete real SDK/service/device matrix not yet verified.",
+      "validationStatus": "Native PCM/Worklet, volume and lifecycle verified on Chromium/Firefox with candidate, 5.4.0 and adjacent stable 5.3.0 cores; fallback Firefox selection is explicitly controlled, with foreign ownership still open. Offline docs example verifies local audio only. Windows WebKit, physical devices and actual external recognition service remain unverified.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

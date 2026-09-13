@@ -13,7 +13,7 @@ test.beforeAll(async () => {
 })
 
 for (const version of ['2.0.0', '2.1.0', 'candidate']) {
-  for (const core of ['published', 'candidate']) {
+  for (const core of ['published-5.3.0', 'published', 'candidate']) {
     test(`ASR ${version} + ${core}: native Worklet supplies local PCM with owned stop and destroy`, async ({ page }, testInfo) => {
       const release = [contract.baseline.release, ...contract.baseline.previous].find(release => release.version === version)
       const code = version === 'candidate' ? candidateCode : readMember(contract.archives.get(version), 'package/dist/artplayer-plugin-asr.js')

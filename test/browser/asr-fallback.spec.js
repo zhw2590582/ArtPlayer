@@ -13,7 +13,7 @@ test.beforeAll(async () => {
 })
 
 for (const version of ['2.1.0', 'candidate']) {
-  for (const core of ['published', 'candidate']) {
+  for (const core of ['published-5.3.0', 'published', 'candidate']) {
     test(`ASR ${version} + ${core}: native capture fallback does not create a second audible route`, async ({ page }, testInfo) => {
       const code = version === 'candidate' ? candidateCode : readMember(contract.archives.get(version), 'package/dist/artplayer-plugin-asr.js')
       await page.goto(`/test/player.html?core=${core}`)

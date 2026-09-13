@@ -46,6 +46,13 @@ known migration gaps and test commands.
 
 [https://artplayer.org](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr)
 
+For local verification without a recognition service, run
+`yarn dev artplayer-plugin-asr --no-open` in the repository and open the
+[local capture demo](http://localhost:8082/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr.local).
+It displays PCM/WAV statistics and clearly labelled simulated subtitles, using
+the site's sample video. Stop ASR leaves playback running; pause/play resumes
+capture. The existing `asr` example remains the external-service example.
+
 ## License
 
 MIT © Harvey Zhao

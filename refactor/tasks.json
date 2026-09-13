@@ -2711,7 +2711,10 @@
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "baselines/asr-volume-validation.json",
-        "baselines/asr-fallback-validation.json"
+        "baselines/asr-fallback-validation.json",
+        "baselines/asr-core.json",
+        "baselines/asr-local-core-validation.json",
+        "changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md"
       ]
     },
     {

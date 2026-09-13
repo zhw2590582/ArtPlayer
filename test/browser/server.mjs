@@ -74,6 +74,11 @@ const iframeCoreMember = `package/${iframeCore.manifest.main}`
 const iframeCoreBytes = readMember(await ensureArchive(iframeCore), iframeCoreMember)
 assert.equal(hash(iframeCoreBytes), iframeCore.files[iframeCoreMember], 'Historical Iframe core differs from frozen release')
 add('/published-4.5.9/artplayer.js', iframeCoreBytes, { kind: 'npm-release', version: iframeCore.version, integrity: iframeCore.integrity, member: iframeCoreMember })
+const asrCore = JSON.parse(fs.readFileSync(path.join(workspace, 'refactor/baselines/asr-core.json'), 'utf8')).release
+const asrCoreMember = `package/${asrCore.manifest.main.replace(/^\.\//, '')}`
+const asrCoreBytes = readMember(await ensureArchive(asrCore), asrCoreMember)
+assert.equal(hash(asrCoreBytes), asrCore.files[asrCoreMember], 'Adjacent stable ASR core differs from frozen release')
+add('/published-5.3.0/artplayer.js', asrCoreBytes, { kind: 'npm-release', version: asrCore.version, integrity: asrCore.integrity, member: asrCoreMember })
 add('/test/audio-tone.m4a', fs.readFileSync(path.join(workspace, 'test/browser/media/audio-tone.m4a')), { kind: 'generated-media', file: 'test/browser/media/audio-tone.m4a' })
 add('/test/thumbnail-pattern.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-pattern.mp4')), { kind: 'generated-media', file: 'test/browser/media/thumbnail-pattern.mp4' })
 add('/test/auto-thumbnail-timeline.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/auto-thumbnail-timeline.mp4')), { kind: 'generated-media', file: 'test/browser/media/auto-thumbnail-timeline.mp4' })
@@ -145,7 +150,7 @@ const server = http.createServer((req, res) => {
     if (url.pathname === '/test/player.html') {
       const core = url.searchParams.get('core') || 'candidate'
       const chapter = url.searchParams.get('chapter') || 'candidate'
-      assert(['candidate', 'published', 'published-4.5.5', 'published-4.5.9', 'published-5.1.7'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
+      assert(['candidate', 'published', 'published-4.5.5', 'published-4.5.9', 'published-5.1.7', 'published-5.3.0'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
       const html = fs.readFileSync(path.join(workspace, 'test/browser/player.html'), 'utf8')
         .replace('__CORE__', core)
         .replace('__CHAPTER__', chapter)

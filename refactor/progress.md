@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-ASR-05 本地编辑器与相邻核心检查点
+
+真实 npm 5.3.0 核心扩大对照：main 14过/7能力跳过，legacy 6过/3能力跳过。
+实际 localhost:8082 docs/Monaco 在 Chromium、Firefox 均通过非零 PCM、stop保留
+播放、暂停恢复、Run销毁旧实例并重采集、最终清理；216项ASR测试通过。新增可
+重放的 yarn test:asr-demo，保存真实响应哈希、trace、截图及自有进程清理证据。
+见[检查点](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md)与
+[证据](baselines/asr-local-core-validation.json)。源关联5.3.1未发布，5.3.0不作最低
+支持承诺。ASR-05保持doing，CORS、audio-track、Firefox外部归属和设备范围待完成。
+227项：129 done、17 doing、81 todo；208风险。子代理成果经主代理复核整合，
+本检查点单独提交；没有推送或发布。
+
+
 ## PKG-ASR-08 回退漏声修复完成，ASR-05 继续
 
 独立审查指出 captureStream 回退额外接扬声器；Chromium 原生两个候选核心确实在

@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ASR-05",
+  "sourceCommit": "93208e59e14e3384d0a5f5ffa49f55ee95c218c4",
+  "capturedAt": "2026-09-13T07:20:45.919Z",
+  "association": {
+    "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "file": "packages/artplayer/package.json",
+    "version": "5.3.1",
+    "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c"
+  },
+  "associationScope": "ASR 2.1.0 source commit records core workspace version 5.3.1, which is absent from npm at capture time. The frozen 5.3.0 archive is an adjacent published stable comparison point; it is not that source-associated version, a minimum supported core, or completed browser validation.",
+  "metadata": {
+    "requestedVersion": "5.3.1",
+    "selectedVersion": "5.3.0",
+    "selectionReason": "Expand actual native compatibility coverage with an available adjacent stable npm release; existing 5.4.0 and candidate checks remain separate.",
+    "checks": [
+      {
+        "checkedAt": "2026-09-13T07:20:42.645Z",
+        "url": "https://registry.npmjs.org/artplayer/5.3.1",
+        "method": "GET",
+        "status": 404,
+        "body": "\"version not found: 5.3.1\""
+      },
+      {
+        "checkedAt": "2026-09-13T07:20:43.810Z",
+        "url": "https://registry.npmjs.org/artplayer",
+        "method": "GET",
+        "status": 200,
+        "bodySha256": "560fa27d689284c6e1743835b765e790613b0b11d7255ea0390eb0017a7e9748",
+        "containsRequestedVersion": false,
+        "requestedVersion": "5.3.1",
+        "nearbyVersions": [
+          "5.2.0",
+          "5.2.1",
+          "5.2.2",
+          "5.2.3",
+          "5.2.4",
+          "5.2.5",
+          "5.3.0-beta.0",
+          "5.3.0-beta.1",
+          "5.3.0-beta.2",
+          "5.3.0-beta.3",
+          "5.3.0-beta.4",
+          "5.3.0",
+          "5.3.1-beta.0",
+          "5.3.1-beta.1",
+          "5.4.0"
+        ],
+        "distTags": {
+          "latest": "5.4.0",
+          "beta": "5.3.1-beta.1"
+        }
+      },
+      {
+        "checkedAt": "2026-09-13T07:20:44.012Z",
+        "url": "https://registry.npmjs.org/artplayer/-/artplayer-5.3.1.tgz",
+        "method": "HEAD",
+        "status": 404,
+        "contentType": "application/json"
+      }
+    ],
+    "replayCommand": "@'\nconst urls = ['https://registry.npmjs.org/artplayer/5.3.1', 'https://registry.npmjs.org/artplayer', 'https://registry.npmjs.org/artplayer/-/artplayer-5.3.1.tgz'];\nfor (const url of urls) { const method = url.endsWith('.tgz') ? 'HEAD' : 'GET'; const response = await fetch(url, { method, redirect: 'error', signal: AbortSignal.timeout(30000) }); const body = method === 'HEAD' ? null : await response.text(); console.log({ url, method, status: response.status, body: url.endsWith('/artplayer') && response.ok ? { contains531: Object.hasOwn(JSON.parse(body).versions, '5.3.1'), nearbyVersions: Object.keys(JSON.parse(body).versions).filter(version => /^5\\.[234]\\./.test(version)) } : body }); }\n'@ | & refactor/.cache/toolchains/node-v24.21.0-win-x64/node.exe --input-type=module",
+    "archiveVerificationCommand": "@'\nimport assert from 'node:assert/strict';\nimport fs from 'node:fs';\nimport {execFileSync} from 'node:child_process';\nimport {archiveFiles,ensureArchive,hash,readMember} from './refactor/scripts/releases.mjs';\nconst baseline=JSON.parse(fs.readFileSync('refactor/baselines/asr-core.json','utf8'));\nconst {release,association}=baseline;\nconst archive=await ensureArchive(release);\nassert.deepEqual(archiveFiles(archive),Object.keys(release.files).sort());\nfor(const [member,expected] of Object.entries(release.files)) assert.equal(hash(readMember(archive,member)),expected,member);\nassert.deepEqual(JSON.parse(readMember(archive,'package/package.json')),release.manifest);\nassert.equal(hash(fs.readFileSync(archive),'sha1'),release.registryShasum);\nfor(const field of ['main','module','types','legacy']) assert(Object.hasOwn(release.files,'package/'+release.manifest[field].replace(/^\\.\\//,'')));\nconst source=execFileSync('git',['show',association.commit+':'+association.file],{encoding:'utf8'}).replaceAll('\\r\\n','\\n');\nassert.equal(hash(source),association.sha256LF);\nassert.equal(JSON.parse(source).version,'5.3.1');\nassert.equal(release.manifest.version,'5.3.0');\nconsole.log('Verified ASR adjacent stable core 5.3.0: '+Object.keys(release.files).length+' archive members and distinct 5.3.1 source association');\n'@ | & refactor/.cache/toolchains/node-v24.21.0-win-x64/node.exe --input-type=module"
+  },
+  "release": {
+    "name": "artplayer",
+    "version": "5.3.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer/5.3.0",
+    "tarball": "https://registry.npmjs.org/artplayer/-/artplayer-5.3.0.tgz",
+    "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+    "sha256": "8649d22785381d2f7729efeb73f384e5810507031e9b47ebe6df79ae5bea309b",
+    "registryShasum": "ecb011d1eed008ee806e2a1850026ee0030fd85f",
+    "registryGitHead": "eb015c7facd42cde2f1af6b79dd19e4662182fdf",
+    "files": {
+      "package/README.md": "2070b94087839a80dc01616a3114cbe2d3a4950018188f433752880daf7843f8",
+      "package/dist/artplayer.js": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+      "package/dist/artplayer.legacy.js": "16cbdfbae82f91e16aa7654885e82be00647b57652ce81d050bb42ae1e58ed52",
+      "package/dist/artplayer.mjs": "9282f24a395f6ebc8122fddce6faaac2c58f22a05f150b538b954c3ace8b0712",
+      "package/dist/i18n/ar.js": "44b94758cfc7c45179ee1a90ca730b91717fccb5a79d27afd691b61fdfdf51e0",
+      "package/dist/i18n/ar.mjs": "5dd3a7183c81350786e95a5f0431de9c64937a16627c2a44042af7cb33d3d646",
+      "package/dist/i18n/cs.js": "76353dbd1b97f52f3bcd7e71aa9117ca7d76d2b2cbf86426cf3dac64afd7abf2",
+      "package/dist/i18n/cs.mjs": "aa6cb5eaa1ce78fd7d4033affb4f48cff4fedd773bf55f88ccaf3d76dd822cb1",
+      "package/dist/i18n/es.js": "7e43252ba479d87c1edd5244a7c870126aae07c8791c365888fe0ba82dd6e85f",
+      "package/dist/i18n/es.mjs": "7a0aa9698ddcb191fc4f62d1fcd07ee004dbb00053b2920cfcf5fa81f71ea71e",
+      "package/dist/i18n/fa.js": "4b60d3d4f5d5e87686a3af179c9b671b4f432888c6f77ae92fb7025386a9910b",
+      "package/dist/i18n/fa.mjs": "261a81e46d40a1bcad64419d4954036fb49e9fea86682a89aaba277bd52d3c54",
+      "package/dist/i18n/fr.js": "410d9552ad387c191d168b6fff6d21538c57e74d07908ebab2c0dedc3577ed90",
+      "package/dist/i18n/fr.mjs": "d8adfe0ba5eb2208a5241675a084dbd1c4d20d8ac2979fcbcb72bef18827fbfd",
+      "package/dist/i18n/id.js": "4a8fc5d2393a5a19a8ba68429545073035c8803d9d3101b696fbc895d20b22b2",
+      "package/dist/i18n/id.mjs": "b3ac8f8c203a7a64374ac64931d7eb3d912c2e71c4a604ddc4651229cca64c07",
+      "package/dist/i18n/pl.js": "a7c421f0264cd054b8d289e553e77018c547417d8d437f24157ccb1a2cd8c4f6",
+      "package/dist/i18n/pl.mjs": "c58ce3f06411e837c28dbea3d2a68f38045da58de3b73ae5457468a01d526884",
+      "package/dist/i18n/ru.js": "5406ee8662a259af703a930c4e241874e12a811304f3e1d40dd00033e7ff0b52",
+      "package/dist/i18n/ru.mjs": "c17c830da2189d4584c816907b6e8626d8606c7a20565b383c4b768be00e6600",
+      "package/dist/i18n/tr.js": "f82cdbf5feefceff68f78466ca261e1ea1c4975c853543947fc91ffd8107ec46",
+      "package/dist/i18n/tr.mjs": "683b768eeea905793f63bf483d9870af10183a718aba84d8ee794934a8f07b22",
+      "package/dist/i18n/vi.js": "c4f0c224404ce73a807758661c9eaa46fb548eb4519a2ee11304396f268a6a0e",
+      "package/dist/i18n/vi.mjs": "68d10c0bb6e7fe4d82817bca883f04f514d73301ff5dfddf02a0a1e3b2bfbc0a",
+      "package/dist/i18n/zh-tw.js": "1241a6749c088192d1118f91ae36a894ecc198875d4b9bdfe2bbf617803e3806",
+      "package/dist/i18n/zh-tw.mjs": "b28d13355759e2b47d0553617a01ad6b3af76d975681b569bad2e99e48d095ff",
+      "package/package.json": "da526c13939b7a55b08c5c518608fa59c7185a0bab184186d5a1af80d1ea5078",
+      "package/types/artplayer.d.ts": "28cb09ddffb6591372ab01cbde8ff3c3c0db903eea58851dc6561375e740cc3c",
+      "package/types/component.d.ts": "0118ec5dbb9aa48d735169c74bd65149b72c9f99db29dd635cd41ff69707b68d",
+      "package/types/config.d.ts": "bb40a0ca9d200c15bba7ecba0103d4ce8216e428d05c17ec43288d298223bc68",
+      "package/types/cssVar.d.ts": "dd4ff10f9b4d55b3e438abf1ec6239baa3692a110e05f49d883285ce069c3687",
+      "package/types/events.d.ts": "afd56b6939bedecc070eecd2b7440d0903ef8d3107fe41d376bfdb9e0ae3362d",
+      "package/types/i18n.d.ts": "01e7d7e7f775166eed6dbc6b86feb26306302fcbfe33fa01b7e363a14b3ef2b0",
+      "package/types/icons.d.ts": "61ce1b0cb9bc7488263b644419b5fd5a13e72de1493c8113eee81d5174f1234b",
+      "package/types/option.d.ts": "d689b55e3fbc0a9ca9c554b5c9f6c1ae5f1d81aed07c174a557c95633a18a276",
+      "package/types/player.d.ts": "8eb3e3b5822139379ad09f6aad8a0da360fb049bd0ebf4540d128cdd1fb5e994",
+      "package/types/quality.d.ts": "dcca8c0f5b5c25373f85825a274fc3ee8beeffd7c8b2a978468e039ff4946a9e",
+      "package/types/setting.d.ts": "cc87ff5ccb87901e12d2f367ec2e872afd5c029b9f6d0a22d01d7d44a63dfb33",
+      "package/types/subtitle.d.ts": "92f711ad0f7924e609ad4425cd26d19c73eb027cccddc6d89fcf9b8e334db065",
+      "package/types/template.d.ts": "22d64dc2c68f8bd90247755a12bcd233343bb67537591ab08e34900917e1723d",
+      "package/types/utils.d.ts": "65cbb66ab2f5d38085e0a1e5ebea57c320d16f566fb6dc8f8e2dac6cf096c004"
+    },
+    "manifest": {
+      "name": "artplayer",
+      "version": "5.3.0",
+      "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+      "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer.d.ts",
+          "import": "./dist/artplayer.mjs",
+          "require": "./dist/artplayer.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer.d.ts",
+          "import": "./dist/artplayer.legacy.js",
+          "require": "./dist/artplayer.legacy.js"
+        },
+        "./i18n/*": {
+          "types": "./types/i18n.d.ts",
+          "import": "./dist/i18n/*.mjs",
+          "require": "./dist/i18n/*.js"
+        }
+      },
+      "main": "./dist/artplayer.js",
+      "module": "./dist/artplayer.mjs",
+      "types": "./types/artplayer.d.ts",
+      "typesVersions": {
+        "*": {
+          "i18n/*": [
+            "types/i18n.d.ts"
+          ],
+          "legacy": [
+            "types/artplayer.d.ts"
+          ]
+        }
+      },
+      "legacy": "./dist/artplayer.legacy.js",
+      "browserslist": "last 1 Chrome version",
+      "dependencies": {
+        "option-validator": "^2.0.6"
+      }
+    }
+  }
+}
