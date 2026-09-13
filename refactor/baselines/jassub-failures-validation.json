@@ -1,0 +1,3657 @@
+{
+  "task": "PKG-JASSUB-02",
+  "sourceCommit": "0cf56b64d2711947ee7ea40a5a7f47fdb13e4521",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "tests": {
+    "passed": 120,
+    "failed": 0,
+    "skipped": 0,
+    "historicalFailureAndContainment": 63,
+    "meaning": "Historical problem observations and existing protections, not candidate fixes.",
+    "log": {
+      "file": "refactor/.cache/jassub02-failures-final.log",
+      "sha256": "1c9650a5e2d118713f40f10ca62280b70e77a6de2af65901d890b7581b40531c"
+    }
+  },
+  "sources": [
+    {
+      "file": "test/jassub.test.js",
+      "sha256": "8c6fbb488912ac91eeb0beaf05b77cddbfc3c1d4cc663ab3196e237d689225c0"
+    },
+    {
+      "file": "refactor/scripts/jassub-failures.test.mjs",
+      "sha256": "073f3fd419ff46177ffac091a7bcd6bfb3b1ee4f7da2cbf8991db9692880bc83"
+    },
+    {
+      "file": "test/helpers/jassub.js",
+      "sha256": "16e7506ca140c61526e16bcc748c8f1d559f522950bebfbbbe1014317d7a283d"
+    },
+    {
+      "file": "test/browser/jassub-native.spec.js",
+      "sha256": "5a048e6e2f851312f44e69474437b46a73c03210c4b4212b804e3b1437b9f0b0"
+    },
+    {
+      "file": "test/browser/server.mjs",
+      "sha256": "8f7eed79508a1038f54d77d68d704e602499de3bf1d24c7aae8400caef6e560d"
+    }
+  ],
+  "observations": [
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "published-1.1.0-main",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "published-1.1.0-legacy",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "published-1.0.0-main",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "published-1.0.0-legacy",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "frozen-workspace-source",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "frozen-workspace-js",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "rate-event-payload",
+      "mediaRate": 1.5,
+      "forwardedType": "ratechange",
+      "directNumericRatePreserved": true
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "repeated-destroy",
+      "throws": true,
+      "workerTerminations": 1
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "set-video-parent",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "originalContainerRetained": true
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "custom-canvas",
+      "workerTerminations": 0,
+      "listenersRetained": 7,
+      "hostDestroyHandlerRegistered": false,
+      "initSent": true
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "worker-construction-failure",
+      "originalErrorPreserved": true,
+      "insertedContainerRetained": true,
+      "listenersRetained": 7
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "old-video-frame",
+      "replacementCurrentTime": 9,
+      "staleDemandTime": 123,
+      "replacementPendingCallbacks": 2,
+      "cancelledCallbacks": 0
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "destroy-before-ready",
+      "workerTerminations": 1,
+      "listenersRetained": 0,
+      "postAfterTermination": [
+        "init"
+      ],
+      "loadedSettledWithinFixtureFlush": false
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "worker-error",
+      "exactErrorForwarded": true,
+      "automaticallyTerminated": false,
+      "explicitHostCleanup": true
+    },
+    {
+      "implementation": "frozen-workspace-legacy.js",
+      "case": "frame-after-destroy",
+      "activelyCancelled": false,
+      "callbackDoesNoWork": true,
+      "callbackRearms": false
+    }
+  ],
+  "reports": [
+    {
+      "name": "first",
+      "file": "refactor/.cache/jassub02-native-first.json",
+      "sha256": "aaee75320045b5604c70b3c6aa2157c5edce930818c4855ae2cf45eabc362d80",
+      "stats": {
+        "startTime": "2026-09-13T16:45:55.577Z",
+        "duration": 64639.776,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "chromium",
+          "status": "timedOut",
+          "retry": 0,
+          "errors": [
+            "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)",
+            "Error: page.evaluate: Target page, context or browser has been closed\n\n  125 |     }\n  126 |     finally {\n> 127 |       const state = await page.evaluate(() => window.jassubNative)\n      |                                ^\n  128 |       await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, release: { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: 'Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance.' }, null, 2), contentType: 'application/json' })\n  129 |       await page.evaluate(() => {\n  130 |         if (window.art && !window.art.isDestroy)\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:127:32"
+          ],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [
+              "Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'."
+            ],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": null,
+          "screenshots": []
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core",
+          "engine": "chromium",
+          "status": "timedOut",
+          "retry": 0,
+          "errors": [
+            "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)",
+            "Error: page.evaluate: Target page, context or browser has been closed\n\n  125 |     }\n  126 |     finally {\n> 127 |       const state = await page.evaluate(() => window.jassubNative)\n      |                                ^\n  128 |       await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, release: { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: 'Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance.' }, null, 2), contentType: 'application/json' })\n  129 |       await page.evaluate(() => {\n  130 |         if (window.art && !window.art.isDestroy)\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:127:32"
+          ],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [
+              "Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'."
+            ],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": null,
+          "screenshots": []
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "status": "timedOut",
+          "retry": 0,
+          "errors": [
+            "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)",
+            "Error: page.evaluate: Target page, context or browser has been closed\n\n  125 |     }\n  126 |     finally {\n> 127 |       const state = await page.evaluate(() => window.jassubNative)\n      |                                ^\n  128 |       await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, release: { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: 'Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance.' }, null, 2), contentType: 'application/json' })\n  129 |       await page.evaluate(() => {\n  130 |         if (window.art && !window.art.isDestroy)\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:127:32"
+          ],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [
+              "Failed to execute 'compile' on 'WebAssembly': Incorrect response MIME type. Expected 'application/wasm'."
+            ],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": null,
+          "screenshots": []
+        }
+      ]
+    },
+    {
+      "name": "mime",
+      "file": "refactor/.cache/jassub02-native-mime.json",
+      "sha256": "888fcfe6554158ce71f376b0072ed029905c32ce90167ac64524ced8b928079d",
+      "stats": {
+        "startTime": "2026-09-13T16:48:39.077Z",
+        "duration": 7125.699,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "candidate",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.497676,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.014073,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.117091,
+                  "connected": true
+                }
+              ],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "b14c548fa54a855a50dd491ff263052e44c081e366ad847e7caa9273dc7c6a0e"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "published",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.503139,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.013048,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.114327,
+                  "connected": true
+                }
+              ],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "ecfe0b2a8b5b3b4609b8a478db467f91c45fef9c57ec1ebda03e0500cf75fe1e"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "published-5.3.1-beta.1",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.523336,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.012859,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.101009,
+                  "connected": true
+                }
+              ],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "187d1a46c31c16f80c027d779ca78c961f29a250f6bd49dc2ede1174e67cfbae"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "other",
+      "file": "refactor/.cache/jassub02-native-other.json",
+      "sha256": "f5a4a3ff6bde205cf0abc15b8d99e1c0375443cbcf8eb425f5591bf4a9f6c1ca",
+      "stats": {
+        "startTime": "2026-09-13T16:49:10.751Z",
+        "duration": 46204.432,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "155.0",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "candidate",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.567509,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000023,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.040388,
+                  "connected": true
+                }
+              ],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "184959dcee6e1aaecbecf12c760003455109f1b9b1e74dda4c4bd6226b2c39cf"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "155.0",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "published",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.350295,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.00002,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.040321,
+                  "connected": true
+                }
+              ],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "8e128bda82ccf0bd36d19a1bd0ee8275590734805fabbd780f03b9e3a8ae617b"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "155.0",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "published-5.3.1-beta.1",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.570445,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000021,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.161301,
+                  "connected": true
+                }
+              ],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "220205864406f061da34aafee3c3be1eba23ec8d811f8fbe9c87f578f7e99f64"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "webkit",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n   97 |       }, subtitles)\n   98 |       await page.locator('#play').click()\n>  99 |       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)\n      |                                                                                   ^\n  100 |       const before = await page.evaluate(() => window.jassubPixels('before-seek'))\n  101 |       expect(before.connected).toBe(true)\n  102 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:99:83"
+          ],
+          "browser": {
+            "version": "26.6",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "candidate",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0
+                }
+              ],
+              "snapshots": [],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": []
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core",
+          "engine": "webkit",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n   97 |       }, subtitles)\n   98 |       await page.locator('#play').click()\n>  99 |       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)\n      |                                                                                   ^\n  100 |       const before = await page.evaluate(() => window.jassubPixels('before-seek'))\n  101 |       expect(before.connected).toBe(true)\n  102 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:99:83"
+          ],
+          "browser": {
+            "version": "26.6",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "published",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0
+                }
+              ],
+              "snapshots": [],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": []
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core",
+          "engine": "webkit",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n   97 |       }, subtitles)\n   98 |       await page.locator('#play').click()\n>  99 |       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)\n      |                                                                                   ^\n  100 |       const before = await page.evaluate(() => window.jassubPixels('before-seek'))\n  101 |       expect(before.connected).toBe(true)\n  102 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:99:83"
+          ],
+          "browser": {
+            "version": "26.6",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "published-5.3.1-beta.1",
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0
+                }
+              ],
+              "snapshots": [],
+              "errors": []
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": []
+        }
+      ]
+    },
+    {
+      "name": "event-clock",
+      "file": "refactor/.cache/jassub02-native-event-clock.json",
+      "sha256": "a40530587be362c2b37abcfda70c52967b1b8b892a2aecb7b8c7565603ceaf65",
+      "stats": {
+        "startTime": "2026-09-13T16:51:44.674Z",
+        "duration": 6249.097000000001,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "26.6",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "candidate",
+            "onDemandRender": false,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 2560,
+                      "height": 1440
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "video"
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 2560,
+                      "height": 1440
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 13152,
+                  "signature": 1263898348,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.3775417,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 30818,
+                  "signature": 827736580,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.0411875,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 119170,
+                  "signature": 1826006850,
+                  "width": 2560,
+                  "height": 1440,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.2653959,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 119170,
+                "signature": 1826006850,
+                "width": 2560,
+                "height": 1440,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.2653959,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "ca726d3de3838bf7f2327a37846fd31aa5db04a6b70c274e06f7e4a3bea38deb"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "frame-clock",
+      "file": "refactor/.cache/jassub02-native-frame-clock.json",
+      "sha256": "12f747cffb9c950d6804bc795f6c5155ff98bb2f145b9942d6cd4f8eb0ca620f",
+      "stats": {
+        "startTime": "2026-09-13T16:52:08.322Z",
+        "duration": 11462.328,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "webkit",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  107 |       }, { subContent: subtitles, onDemandRender })\n  108 |       await page.locator('#play').click()\n> 109 |       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)\n      |                                                                                   ^\n  110 |       const before = await page.evaluate(() => window.jassubPixels('before-seek'))\n  111 |       expect(before.connected).toBe(true)\n  112 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:109:83"
+          ],
+          "browser": {
+            "version": "26.6",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "candidate",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 0,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 1280,
+                      "height": 720
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [],
+              "errors": [],
+              "lastPixel": {
+                "visible": 0,
+                "signature": 0,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 640,
+                "cssHeight": 360,
+                "time": 6.4992094,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": []
+        }
+      ]
+    },
+    {
+      "name": "final",
+      "file": "refactor/.cache/jassub02-native-final.json",
+      "sha256": "acfc4af7f5384166dbc6d5434018c5f46e32c3d582395745a7bf390bea3cf026",
+      "stats": {
+        "startTime": "2026-09-13T16:54:43.778Z",
+        "duration": 14993.602,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "candidate",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.4
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.16
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.2
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.507385,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.013288,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.116258,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.116258,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "b14c548fa54a855a50dd491ff263052e44c081e366ad847e7caa9273dc7c6a0e"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "published",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.4
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.16
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.2
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.24
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.505015,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.014939,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.114424,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.114424,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "b14c548fa54a855a50dd491ff263052e44c081e366ad847e7caa9273dc7c6a0e"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "net::ERR_ABORTED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "published-5.3.1-beta.1",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.4
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.16
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.2
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.24
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.505061,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.014032,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.101751,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.101751,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "187d1a46c31c16f80c027d779ca78c961f29a250f6bd49dc2ede1174e67cfbae"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with candidate core",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "155.0",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "candidate",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.6
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.5638,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.00002,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.040412,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.040412,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "dcfe4e47ed962c6a6b98380878819a43be1581adb21722733b81fcac88897c2c"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published core",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "155.0",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": []
+          },
+          "evidence": {
+            "core": "published",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.48
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.64
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.16
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.2
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.532466,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000023,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 22298,
+                  "signature": 2781790832,
+                  "width": 1280,
+                  "height": 720,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.161754,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 22298,
+                "signature": 2781790832,
+                "width": 1280,
+                "height": 720,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.161754,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "65fbdabc25f645a591068987a59b4b9ecb073738c87d7d83876a6b6b6a053c3e"
+            }
+          ]
+        },
+        {
+          "title": "JASSUB published 1.1.0 renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "browser": {
+            "version": "155.0",
+            "platform": "win32",
+            "errors": [],
+            "consoleErrors": [],
+            "failedRequests": [
+              {
+                "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                "resourceType": "media",
+                "failure": {
+                  "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+                }
+              }
+            ]
+          },
+          "evidence": {
+            "core": "published-5.3.1-beta.1",
+            "onDemandRender": true,
+            "release": {
+              "version": "1.1.0",
+              "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+              "member": "package/dist/artplayer-plugin-jassub.js",
+              "sha256": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a"
+            },
+            "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+            "resources": [
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker.js",
+                "status": 200,
+                "contentType": "text/javascript"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/jassub-worker-modern.wasm",
+                "status": 200,
+                "contentType": "application/wasm"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              },
+              {
+                "url": "http://127.0.0.1:8084/assets/jassub/default.woff2",
+                "status": 200,
+                "contentType": "font/woff2"
+              }
+            ],
+            "external": [],
+            "state": {
+              "workers": [
+                {
+                  "url": "/assets/jassub/jassub-worker.js",
+                  "terminated": 1,
+                  "sent": [
+                    {
+                      "target": "init",
+                      "width": 300,
+                      "height": 150
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.44
+                    },
+                    {
+                      "target": "getColorSpace"
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.52
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.56
+                    },
+                    {
+                      "target": "demand",
+                      "time": 0.6
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10
+                    },
+                    {
+                      "target": "canvas",
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.04
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.08
+                    },
+                    {
+                      "target": "demand",
+                      "time": 10.12
+                    },
+                    {
+                      "target": "destroy"
+                    }
+                  ],
+                  "received": [
+                    {
+                      "target": "ready"
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 0,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "verifyColorSpace"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 640,
+                      "height": 360
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "render",
+                      "images": 2,
+                      "width": 1280,
+                      "height": 720
+                    },
+                    {
+                      "target": "unbusy"
+                    },
+                    {
+                      "target": "unbusy"
+                    }
+                  ]
+                }
+              ],
+              "snapshots": [
+                {
+                  "phase": "before-seek",
+                  "visible": 2676,
+                  "signature": 1690974404,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 0.571282,
+                  "connected": true
+                },
+                {
+                  "phase": "after-seek",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 640,
+                  "cssHeight": 360,
+                  "time": 10.000023,
+                  "connected": true
+                },
+                {
+                  "phase": "fullscreen",
+                  "visible": 6216,
+                  "signature": 3526987101,
+                  "width": 640,
+                  "height": 360,
+                  "cssWidth": 1280,
+                  "cssHeight": 720,
+                  "time": 10.045326,
+                  "connected": true
+                }
+              ],
+              "errors": [],
+              "lastPixel": {
+                "phase": "fullscreen",
+                "visible": 6216,
+                "signature": 3526987101,
+                "width": 640,
+                "height": 360,
+                "cssWidth": 1280,
+                "cssHeight": 720,
+                "time": 10.045326,
+                "connected": true
+              }
+            },
+            "limitation": "Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance."
+          },
+          "screenshots": [
+            {
+              "name": "actual-jassub-page",
+              "sha256": "832a7ac308c27290f7ec6484e502f593271e1c1580bd4fe2dc44ecfab48bc2d2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "WebKit default frame-clock tests remain failing; explicit event-clock diagnosis is separate.",
+    "Offscreen rendering is explicitly disabled for pixel readback.",
+    "No native failure recovery, CSP, ratechange, default OffscreenCanvas, devices or sustained heap evidence.",
+    "Controlled removeChild uses assertion errors; Event rate payload is not an actual browser structured-clone failure proof.",
+    "Historical vendor remains unchanged; candidate repair is later work."
+  ]
+}

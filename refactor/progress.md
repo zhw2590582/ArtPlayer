@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-JASSUB-02 历史缺陷与原生渲染基线完成
+
+联合 120 项通过，其中 63 项确认旧失败/已有保护；没有宣称修复。Chromium/Firefox
+实际 npm 插件和 WASM/字体六个核心组合通过，WebKit 默认逐帧路径仍失败，显式
+事件时钟诊断单独通过。测试 server 的 WASM MIME 错误已修正并保存首次失败。
+[基线记录](changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md)明确新增六项风险；
+03 处理自有 adapter，新增 07 专门修 vendor 生命周期/时钟且纳入 05 前置。生产文件
+未改，02 仅完成基线职责，全部兼容与发布门槛保留。
+
 ## PKG-JASSUB-01 来源及契约核对完成
 
 两份 WASM 与 11 份字体的上游 blob 已精确匹配，nightly 对应源码、七子模块和

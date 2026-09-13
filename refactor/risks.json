@@ -5425,6 +5425,104 @@
       ],
       "compatibleResolution": "Retain startup sampling evidence and distinguish it from post-model-ready delivery; investigate actual startup scheduling without silently adding catch-up semantics.",
       "closureCriteria": "Identify the startup scheduling cause and assess a compatible mitigation or explicitly reviewed limitation using actual model/media evidence; post-ready success alone cannot close this risk."
+    },
+    {
+      "id": "JASSUB-DESTROY-01",
+      "title": "Repeated destruction or cross-parent setVideo can throw before JASSUB cleanup",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-02",
+        "PKG-JASSUB-03",
+        "PKG-JASSUB-07"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
+        "refactor/baselines/jassub-failures-validation.json"
+      ],
+      "compatibleResolution": "Use actual resource ownership and tolerate direct instance teardown before host teardown.",
+      "closureCriteria": "Candidate direct/repeated/host teardown and cross-parent video replacement release container, Worker and listeners without throwing or removing user nodes."
+    },
+    {
+      "id": "JASSUB-CANVAS-01",
+      "title": "Custom canvas registration throws after JASSUB Worker allocation",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-02",
+        "PKG-JASSUB-03"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
+        "refactor/baselines/jassub-failures-validation.json"
+      ],
+      "compatibleResolution": "Guard adapter-created parent styling; retain the supplied canvas and roll back failed registration.",
+      "closureCriteria": "Custom canvas registration succeeds and cleanup releases owned work while preserving caller DOM; public instance and option override behavior remain compatible."
+    },
+    {
+      "id": "JASSUB-CONSTRUCTION-01",
+      "title": "Worker construction failure leaves previously allocated JASSUB DOM and listeners",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-02",
+        "PKG-JASSUB-07"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
+        "refactor/baselines/jassub-failures-validation.json"
+      ],
+      "compatibleResolution": "Roll back each construction phase and rethrow the original error without assuming new returned an instance.",
+      "closureCriteria": "Controlled and native construction failure do not retain owned DOM/listeners/callbacks; original error identity and successful construction remain intact."
+    },
+    {
+      "id": "JASSUB-VIDEO-FRAME-01",
+      "title": "Old video frame callbacks can drive replacement subtitle time and duplicate chains",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-02",
+        "PKG-JASSUB-07"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
+        "refactor/baselines/jassub-failures-validation.json"
+      ],
+      "compatibleResolution": "Track video generation and callback ownership across setVideo and destroy.",
+      "closureCriteria": "Actually queued old callbacks cannot deliver stale mediaTime or rearm; replacement video owns one loop, with native evidence."
+    },
+    {
+      "id": "JASSUB-RATE-01",
+      "title": "Fallback ratechange sends an Event instead of numeric playbackRate",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-02",
+        "PKG-JASSUB-07"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
+        "refactor/baselines/jassub-failures-validation.json"
+      ],
+      "compatibleResolution": "Adapt event subscription to read the current video rate while retaining direct setRate(number).",
+      "closureCriteria": "Real ratechange and direct calls send numeric values, preserve timing, and avoid stale listeners after source replacement."
+    },
+    {
+      "id": "JASSUB-NATIVE-FRAME-01",
+      "title": "Windows WebKit default frame-clock path does not produce subtitle demands in actual playback",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-02",
+        "PKG-JASSUB-07",
+        "PKG-JASSUB-05"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
+        "refactor/baselines/jassub-failures-validation.json"
+      ],
+      "compatibleResolution": "Investigate native frame delivery and establish a compatible capability response; explicit event-clock success is diagnostic only.",
+      "closureCriteria": "Default native behavior is verified or an explicit reviewed environment limitation is recorded; no silent global fallback or substitution of diagnostic mode for default acceptance."
     }
   ]
 }

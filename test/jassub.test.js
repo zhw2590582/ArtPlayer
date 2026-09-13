@@ -76,4 +76,30 @@ for (const implementation of implementations) {
     assert.equal(init.availableFonts['liberation sans'], './default.woff2')
     result.instance.destroy()
   })
+  test(`JASSUB ${implementation.name}: fallback clock keeps offsets and synchronous track replacement preserves message order`, async () => {
+    const env = jassubEnvironment(implementation)
+    const { instance } = env.factory({ timeOffset: -0.25 })(env.art)
+    await env.ready()
+    env.art.video.currentTime = 12
+    env.art.video.paused = false
+    env.art.video.dispatchEvent(new Event('playing'))
+    await env.flush()
+    const playing = env.workers[0].messages.at(-1)
+    assert.equal(playing.target, 'video')
+    assert.equal(playing.currentTime, 11.75)
+    assert.equal(playing.isPaused, false)
+    env.art.video.dispatchEvent(new Event('seeking'))
+    await env.flush()
+    assert.equal(env.workers[0].messages.at(-1).isPaused, true)
+    const start = env.workers[0].messages.length
+    assert.equal(instance.setTrackByUrl('/replacement.ass'), undefined)
+    assert.equal(instance.setTrack('[Script Info]\nTitle: Replacement'), undefined)
+    assert.equal(instance.freeTrack(), undefined)
+    await env.flush()
+    const messages = env.workers[0].messages.slice(start)
+    assert.deepEqual(messages.map(message => message.target), ['setTrackByUrl', 'setTrack', 'freeTrack'])
+    assert.equal(messages[0].url, '/replacement.ass')
+    assert.equal(messages[1].content, '[Script Info]\nTitle: Replacement')
+    instance.destroy()
+  })
 }

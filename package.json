@@ -90,7 +90,7 @@
     "test:vtt-thumbnail-types-package": "node refactor/scripts/vtt-thumbnail-package-types.mjs",
     "test:multiple-subtitles": "node --test test/multiple-subtitles-merge.test.js test/multiple-subtitles-lifecycle.test.js test/multiple-subtitles-failures.test.js test/multiple-subtitles.test.js test/multiple-subtitles-vendor.test.js refactor/scripts/multiple-subtitles-contract.test.mjs refactor/scripts/multiple-subtitles-runtime-types.test.mjs refactor/scripts/multiple-subtitles-types.test.mjs",
     "test:multiple-subtitles-types-package": "node refactor/scripts/multiple-subtitles-package-types.mjs",
-    "test:jassub": "node --test test/jassub.test.js refactor/scripts/jassub-contract.test.mjs refactor/scripts/jassub-provenance.test.mjs",
+    "test:jassub": "node --test test/jassub.test.js refactor/scripts/jassub-contract.test.mjs refactor/scripts/jassub-provenance.test.mjs refactor/scripts/jassub-failures.test.mjs",
     "check:ci": "node refactor/scripts/ci-workflow.mjs",
     "test:ci": "node --test test/ci-summary.test.js refactor/scripts/ci-workflow.test.mjs refactor/scripts/impact.test.mjs test/package-runtime.test.js",
     "test:package:runtime": "node scripts/package-runtime.mjs --canonical",

@@ -42,5 +42,16 @@ asset comparisons and fails on any request error, without substituting cached ev
 Set ARTPLAYER_JASSUB_CANDIDATE=1 for current source behavior; ARTPLAYER_JASSUB_ARTIFACT can point
 at a main/legacy artifact. Tests use controlled DOM, Worker and SIMD detection, with actual
 vendor JavaScript. They do not render ASS or execute worker WASM. Real browser, failures,
-repeated destroy and resource cleanup remain later steps. See
+repeated destroy and resource cleanup remain later steps. Frozen failure tests now
+cover repeated teardown, cross-parent setVideo, custom canvas, Worker construction
+failure, stale video frames and incorrect fallback ratechange payloads. They assert
+the old failures, not candidate fixes. PKG-JASSUB-03 owns adapter cleanup; 07 owns
+separately tracked vendor lifecycle/clock changes and 05 verifies native behavior.
+
+`yarn test:browser test/browser/jassub-native.spec.js --workers=1` loads the actual
+published wrapper, Worker, WASM and default font with offscreenRender=false.
+Chromium/Firefox render and seek correctly; Windows WebKit's default frame-clock
+path remains a recorded failure. The onDemandRender=false diagnostic does not
+waive the default behavior gate. Native failure recovery, default offscreen mode,
+full devices and sustained resource release remain unverified. See
 `../../refactor/baselines/jassub-contract.md` for precise contract and provenance evidence.

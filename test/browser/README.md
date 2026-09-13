@@ -169,3 +169,12 @@ The startup time=6 row remains diagnostic because initial model work can coincid
 with a missed narrow timestamp window. A passing post-ready combination is not
 proof of startup losslessness, private GPU/WASM closure, OS fullscreen or devices.
 See refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md for exact limits.
+
+`jassub-native.spec.js` runs actual published JASSUB 1.1.0, its native Worker,
+fixed local WASM/font and authored ASS cues with offscreenRender=false. It checks
+real canvas pixels before/after seek, CSS web fullscreen and normal destruction.
+Windows WebKit currently fails the default frame-clock path; the explicitly
+selected ARTPLAYER_JASSUB_ON_DEMAND=false diagnostic passes on the candidate core.
+This is a retained historical failure, not a waived browser gate. The server must
+serve WASM as application/wasm for native streaming compilation. Archive failed
+and successful runs independently. See the PKG-JASSUB-02 change record.
