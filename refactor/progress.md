@@ -1,5 +1,21 @@
 # 进度与证据
 
+## EX-02 Vue 消费者完成
+
+Vue 示例入口和配置职责完成 TS 整理；保留挂载时读取 option、原 getInstance
+事件/类型和私有 ref 边界。严格检查实际 SFC/模板，原 JS 调用单独验证。候选
+与旧包装分别开发/生产 × 三引擎，各 15 类检查共 12 组通过，实际 Worker、
+实例和 DOM 均清理。新依赖下 React 六组回归、全仓 406 个生产 TS 文件、50 项
+CI 回归、lint（0 error/1 既有 warning）、frozen 安装、工具链、声明漂移和
+Vue 构建检查通过。内置浏览器另验证真实开发页公网样例播放/暂停/Home，UA
+报告 Chrome/152.0.0.0，补丁版本未提供；临时页和服务已关闭。见
+[变更](changes/2026-09-14-EX-02-vue-consumer.md)及
+[证据](baselines/vue-consumer-validation.json)。未关闭 PiP/Danmuku 等专项和
+真实设备/发布门槛；远端 CI 未验证，无推送/发布。当前 238 项：163 done、
+15 doing、60 todo。下一步推进 SITE-01 文档站入口/资产核对，VAST 兼容选择和
+Auto Thumbnail 首帧仍未关闭。
+
+
 ## ENG-LINT-01 全仓 lint 恢复
 
 在 EX-01 独立提交 e0d785662 并通过提交审计后，只调整 Mask manifest 顶层字段

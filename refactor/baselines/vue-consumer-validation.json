@@ -1,0 +1,1519 @@
+{
+  "task": "EX-02",
+  "environment": {
+    "os": "Windows",
+    "node": "24.21.0",
+    "yarn": "1.22.22"
+  },
+  "reports": [
+    {
+      "file": "refactor/.cache/vue-consumer-jGIWSm/report.json",
+      "sha256": "019d4cac8a69d737b5893d6a0898660e0115a785fd38d4a253d0faa115bad19f"
+    },
+    {
+      "file": "refactor/.cache/vue-consumer-HpwUKY/report.json",
+      "sha256": "f265f75308d78bf93302a53d066446691bd2fcaded36a68fe6522b1ed3163677"
+    },
+    {
+      "file": "refactor/.cache/react-consumer-ZyMc7G/report.json",
+      "sha256": "a97bdf4c014f31608de8147bdf86f55b0393ad4a4a64be19ace31e2477db6bc7"
+    }
+  ],
+  "candidate": {
+    "task": "EX-02",
+    "before": false,
+    "node": "v24.21.0",
+    "source": "4df96893649ee0d3ffe1504af0609c3c6e023409",
+    "packages": [
+      {
+        "name": "artplayer",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\vue-consumer-jGIWSm\\artplayer.tgz",
+        "sha256": "0c0ea52d41575261b836aefac68280733b119c75834ecad6d4bc78edb073f4c1"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\vue-consumer-jGIWSm\\artplayer-plugin-danmuku.tgz",
+        "sha256": "7d1f0d4e3cf4a5579aa8a0f8c850b6205bfdd7e70c46244db6ebc4f7a866a949"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\vue-consumer-jGIWSm\\artplayer-plugin-document-pip.tgz",
+        "sha256": "4ac0fca9a5a36c1039a34f37caf67479691f153ffda02ed2bc3a96946914a8c2"
+      }
+    ],
+    "browsers": [
+      {
+        "mode": "development",
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.155798,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "fc838a7f2b0d4c7cb6482718dfffe6f33cd05cc8d1a5efec70c56a2cc9937a95",
+            "nonDarkChannels": 115,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "development",
+        "engine": "firefox",
+        "version": "155.0",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.168891,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "33fe3ff9f4bcc6d9701ba4d220fdf8f985a84942e95c8e6bd222b94eb5c39ad2",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "development",
+        "engine": "webkit",
+        "version": "26.6",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.1590748,
+          "paused": true,
+          "seek": 1.0023504,
+          "width": 640,
+          "rgba": {
+            "sha256": "15b2369b1f3350810e8bbdce3097afeebf63037cba467171e9cce7f239e4e715",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "production",
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.158436,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "fc838a7f2b0d4c7cb6482718dfffe6f33cd05cc8d1a5efec70c56a2cc9937a95",
+            "nonDarkChannels": 115,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "production",
+        "engine": "firefox",
+        "version": "155.0",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.169328,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "33fe3ff9f4bcc6d9701ba4d220fdf8f985a84942e95c8e6bd222b94eb5c39ad2",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "production",
+        "engine": "webkit",
+        "version": "26.6",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.1655602,
+          "paused": true,
+          "seek": 1.0022635,
+          "width": 640,
+          "rgba": {
+            "sha256": "15b2369b1f3350810e8bbdce3097afeebf63037cba467171e9cce7f239e4e715",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      }
+    ],
+    "passed": true,
+    "media": {
+      "file": "test/browser/media/pattern.mp4",
+      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233"
+    },
+    "inputs": {
+      "src/Player.vue": "7da72a5ac73f25e26940043f8a27b5b7d18843dbd4e894c68b6e54ea310f7f1f",
+      "src/player-options.ts": "4ac59db434d53d90b8b3068249cdf9a1b71a4789966490e67aea186e8a9ce8a5",
+      "src/App.vue": "a3b5cc939a085b1a511d8fbed0a2b7afac8c90e98cbf1de548c28e3ab9dd63be",
+      "src/main.ts": "50cb9f18b1c7115799ae456f0d0038840278b49ea520b5549d468ec76c248fb9",
+      "index.html": "b5111a3898009c4b9d8c9789e64e5cb4e984520e4777c2ad243e4d4cebe8df82",
+      "Lifecycle.vue": "84b5586b8d47e56b89bdcecda305e0c71418ff3a390b48355f729724f938d5ce",
+      "entry.ts": "d06f34191f1ddd65042476daf086b0d473bf7d8cf7865186a05dedb001e624d2",
+      "LegacyConsumer.vue": "b943f75a302242a205c8a19241cebf6040530c6130293a2db4f4d58c35bc3822",
+      "legacy-entry.js": "182b9fe361f82072d928e2cee736372ba07fa70390c8ffc1be4548dd5e553ba2",
+      "consumer.ts": "b952b6926d478ed0847672597d2951cca016957c88d4e0e2431880f5741e9274"
+    },
+    "types": {
+      "vueTsc": "3.3.11",
+      "typescript": "5.9.3",
+      "vue": "3.5.28",
+      "files": 90,
+      "isolated": true,
+      "negativeCases": 3
+    }
+  },
+  "before": {
+    "task": "EX-02",
+    "before": true,
+    "node": "v24.21.0",
+    "source": "4df96893649ee0d3ffe1504af0609c3c6e023409",
+    "packages": [
+      {
+        "name": "artplayer",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\vue-consumer-HpwUKY\\artplayer.tgz",
+        "sha256": "0c0ea52d41575261b836aefac68280733b119c75834ecad6d4bc78edb073f4c1"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\vue-consumer-HpwUKY\\artplayer-plugin-danmuku.tgz",
+        "sha256": "7d1f0d4e3cf4a5579aa8a0f8c850b6205bfdd7e70c46244db6ebc4f7a866a949"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\vue-consumer-HpwUKY\\artplayer-plugin-document-pip.tgz",
+        "sha256": "4ac0fca9a5a36c1039a34f37caf67479691f153ffda02ed2bc3a96946914a8c2"
+      }
+    ],
+    "browsers": [
+      {
+        "mode": "development",
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.153314,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "fc838a7f2b0d4c7cb6482718dfffe6f33cd05cc8d1a5efec70c56a2cc9937a95",
+            "nonDarkChannels": 115,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "development",
+        "engine": "firefox",
+        "version": "155.0",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.166666,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "33fe3ff9f4bcc6d9701ba4d220fdf8f985a84942e95c8e6bd222b94eb5c39ad2",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "development",
+        "engine": "webkit",
+        "version": "26.6",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.1596341,
+          "paused": true,
+          "seek": 1.0022472,
+          "width": 640,
+          "rgba": {
+            "sha256": "15b2369b1f3350810e8bbdce3097afeebf63037cba467171e9cce7f239e4e715",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "production",
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.155424,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "fc838a7f2b0d4c7cb6482718dfffe6f33cd05cc8d1a5efec70c56a2cc9937a95",
+            "nonDarkChannels": 115,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "production",
+        "engine": "firefox",
+        "version": "155.0",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.166666,
+          "paused": true,
+          "seek": 1,
+          "width": 320,
+          "rgba": {
+            "sha256": "33fe3ff9f4bcc6d9701ba4d220fdf8f985a84942e95c8e6bd222b94eb5c39ad2",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 19
+        }
+      },
+      {
+        "mode": "production",
+        "engine": "webkit",
+        "version": "26.6",
+        "checks": [
+          "mount-event-closed-component-ref-and-plugin-registration",
+          "mutate-option-retains-mount-only-contract",
+          "replace-option-retains-mount-only-contract",
+          "native-play-pause-seek-and-decoded-pixels",
+          "instance-api-updates-source-without-remount",
+          "key-change-reconstructs-with-current-props",
+          "sibling-cleanup-retains-other-instance",
+          "optional-listener-and-unmount",
+          "cancel-before-mount-does-not-allocate",
+          "three-mount-unmount-cycles-clean-once",
+          "vue-captured-listener-error-retains-instance-until-unmount",
+          "listener-triggered-unmount-cleans-created-instance",
+          "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+          "plain-js-event-prop-usage-and-remount",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true,
+        "media": {
+          "time": 0.1591394,
+          "paused": true,
+          "seek": 1.0014247,
+          "width": 640,
+          "rgba": {
+            "sha256": "15b2369b1f3350810e8bbdce3097afeebf63037cba467171e9cce7f239e4e715",
+            "nonDarkChannels": 104,
+            "pixelCount": 64
+          }
+        },
+        "final": {
+          "active": 0,
+          "created": 9,
+          "records": [
+            {
+              "id": 1,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 2,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 3,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 5,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 6,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 7,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 8,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 9,
+              "isDestroy": true,
+              "destroyed": 1
+            },
+            {
+              "id": 10,
+              "isDestroy": true,
+              "destroyed": 1
+            }
+          ],
+          "errors": [
+            {
+              "message": "vue-consumer-listener-failure",
+              "same": true
+            }
+          ],
+          "exposesArt": false,
+          "componentRef": false,
+          "players": 0,
+          "videos": 0
+        },
+        "workers": {
+          "active": 0,
+          "created": 18
+        }
+      }
+    ],
+    "passed": true,
+    "beforeWrapper": "f2f7e34a9510fd21f541afbc71f1f2262a02dfb3dfc5f3ba9e59d32779c28afe",
+    "media": {
+      "file": "test/browser/media/pattern.mp4",
+      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233"
+    },
+    "inputs": {
+      "src/Player.vue": "f2f7e34a9510fd21f541afbc71f1f2262a02dfb3dfc5f3ba9e59d32779c28afe",
+      "src/player-options.ts": "4ac59db434d53d90b8b3068249cdf9a1b71a4789966490e67aea186e8a9ce8a5",
+      "src/App.vue": "a3b5cc939a085b1a511d8fbed0a2b7afac8c90e98cbf1de548c28e3ab9dd63be",
+      "src/main.ts": "50cb9f18b1c7115799ae456f0d0038840278b49ea520b5549d468ec76c248fb9",
+      "index.html": "b5111a3898009c4b9d8c9789e64e5cb4e984520e4777c2ad243e4d4cebe8df82",
+      "Lifecycle.vue": "84b5586b8d47e56b89bdcecda305e0c71418ff3a390b48355f729724f938d5ce",
+      "entry.ts": "d06f34191f1ddd65042476daf086b0d473bf7d8cf7865186a05dedb001e624d2",
+      "LegacyConsumer.vue": "b943f75a302242a205c8a19241cebf6040530c6130293a2db4f4d58c35bc3822",
+      "legacy-entry.js": "182b9fe361f82072d928e2cee736372ba07fa70390c8ffc1be4548dd5e553ba2",
+      "consumer.ts": "b952b6926d478ed0847672597d2951cca016957c88d4e0e2431880f5741e9274"
+    },
+    "types": {
+      "vueTsc": "3.3.11",
+      "typescript": "5.9.3",
+      "vue": "3.5.28",
+      "files": 90,
+      "isolated": true,
+      "negativeCases": 3
+    }
+  },
+  "reactRegression": {
+    "passed": true,
+    "source": "4df96893649ee0d3ffe1504af0609c3c6e023409",
+    "packages": [
+      {
+        "name": "artplayer",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\react-consumer-ZyMc7G\\artplayer.tgz",
+        "sha256": "0c0ea52d41575261b836aefac68280733b119c75834ecad6d4bc78edb073f4c1"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\react-consumer-ZyMc7G\\artplayer-plugin-danmuku.tgz",
+        "sha256": "7d1f0d4e3cf4a5579aa8a0f8c850b6205bfdd7e70c46244db6ebc4f7a866a949"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "archive": "D:\\github\\ArtPlayer\\refactor\\.cache\\react-consumer-ZyMc7G\\artplayer-plugin-document-pip.tgz",
+        "sha256": "4ac0fca9a5a36c1039a34f37caf67479691f153ffda02ed2bc3a96946914a8c2"
+      }
+    ],
+    "browsers": [
+      {
+        "mode": "development",
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "checks": [
+          "strict-mode-and-plugin-registration",
+          "stable-props-retain-instance",
+          "callback-change-cleans-old-instance",
+          "option-change-cleans-old-instance",
+          "native-play-pause-seek-and-decoded-pixels",
+          "sibling-unmount-preserves-other-instance",
+          "optional-getInstance",
+          "unmount-cleans-recorded-instances-and-dom",
+          "remount-after-empty",
+          "callback-exception-cleanup-and-original-error",
+          "cleanup-error-preserves-primary-callback-error",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true
+      },
+      {
+        "mode": "development",
+        "engine": "firefox",
+        "version": "155.0",
+        "checks": [
+          "strict-mode-and-plugin-registration",
+          "stable-props-retain-instance",
+          "callback-change-cleans-old-instance",
+          "option-change-cleans-old-instance",
+          "native-play-pause-seek-and-decoded-pixels",
+          "sibling-unmount-preserves-other-instance",
+          "optional-getInstance",
+          "unmount-cleans-recorded-instances-and-dom",
+          "remount-after-empty",
+          "callback-exception-cleanup-and-original-error",
+          "cleanup-error-preserves-primary-callback-error",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true
+      },
+      {
+        "mode": "development",
+        "engine": "webkit",
+        "version": "26.6",
+        "checks": [
+          "strict-mode-and-plugin-registration",
+          "stable-props-retain-instance",
+          "callback-change-cleans-old-instance",
+          "option-change-cleans-old-instance",
+          "native-play-pause-seek-and-decoded-pixels",
+          "sibling-unmount-preserves-other-instance",
+          "optional-getInstance",
+          "unmount-cleans-recorded-instances-and-dom",
+          "remount-after-empty",
+          "callback-exception-cleanup-and-original-error",
+          "cleanup-error-preserves-primary-callback-error",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true
+      },
+      {
+        "mode": "production",
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "checks": [
+          "strict-mode-and-plugin-registration",
+          "stable-props-retain-instance",
+          "callback-change-cleans-old-instance",
+          "option-change-cleans-old-instance",
+          "native-play-pause-seek-and-decoded-pixels",
+          "sibling-unmount-preserves-other-instance",
+          "optional-getInstance",
+          "unmount-cleans-recorded-instances-and-dom",
+          "remount-after-empty",
+          "callback-exception-cleanup-and-original-error",
+          "cleanup-error-preserves-primary-callback-error",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true
+      },
+      {
+        "mode": "production",
+        "engine": "firefox",
+        "version": "155.0",
+        "checks": [
+          "strict-mode-and-plugin-registration",
+          "stable-props-retain-instance",
+          "callback-change-cleans-old-instance",
+          "option-change-cleans-old-instance",
+          "native-play-pause-seek-and-decoded-pixels",
+          "sibling-unmount-preserves-other-instance",
+          "optional-getInstance",
+          "unmount-cleans-recorded-instances-and-dom",
+          "remount-after-empty",
+          "callback-exception-cleanup-and-original-error",
+          "cleanup-error-preserves-primary-callback-error",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true
+      },
+      {
+        "mode": "production",
+        "engine": "webkit",
+        "version": "26.6",
+        "checks": [
+          "strict-mode-and-plugin-registration",
+          "stable-props-retain-instance",
+          "callback-change-cleans-old-instance",
+          "option-change-cleans-old-instance",
+          "native-play-pause-seek-and-decoded-pixels",
+          "sibling-unmount-preserves-other-instance",
+          "optional-getInstance",
+          "unmount-cleans-recorded-instances-and-dom",
+          "remount-after-empty",
+          "callback-exception-cleanup-and-original-error",
+          "cleanup-error-preserves-primary-callback-error",
+          "original-app-entry-loads-media"
+        ],
+        "passed": true
+      }
+    ]
+  },
+  "validation": {
+    "rootProductionTsFiles": 406,
+    "rootLint": {
+      "errors": 0,
+      "warnings": 1
+    },
+    "ciTestsPassed": 50,
+    "frozenInstall": true,
+    "strictToolchain": true,
+    "exampleBuild": true,
+    "coreDeclarationDrift": false,
+    "workerCountNote": "Candidate profiles created 19 workers; the old production WebKit profile created 18, other old profiles 19. All were terminated. Creation totals are observations, not an API invariant.",
+    "historicalSourceTypes": {
+      "command": "node node_modules/vue-tsc/bin/vue-tsc.js -p refactor/.cache/vue-source-before/tsconfig.json --noEmit --pretty false",
+      "exit": 2,
+      "diagnostic": "refactor/.cache/vue-source-before/src/App.vue(23,12): error TS2322: Type '{ id?: string | undefined; container?: string | { align: string; addEventListener: { <K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLDivElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | ... 1 more ... | undefined): void; (type: string, listener: EventListenerOrEventListenerObject, ...' is not assignable to type 'Partial<Option>'.\r\n  Types of property 'container' are incompatible.\r\n    Type 'string | { align: string; addEventListener: { <K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLDivElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | ... 1 more ... | undefined): void; (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | ... 1 more ... | un...' is not assignable to type 'string | HTMLDivElement | undefined'.\r\n      Type '{ align: string; addEventListener: { <K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLDivElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | ... 1 more ... | undefined): void; (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | ... 1 more ... | undefined):...' is not assignable to type 'string | HTMLDivElement | undefined'.\r\n        Type '{ align: string; addEventListener: { <K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLDivElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | ... 1 more ... | undefined): void; (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | ... 1 more ... | undefined):...' is not assignable to type 'HTMLDivElement'.\r\n          Types of property 'offsetParent' are incompatible.\r\n            Type '{ readonly attributes: { [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { readonly URL: string; alinkColor: string; readonly all: { [x: number]: ...; readonly length: number; item: (nameOrIndex?: string | undefined) => Element | ... 1 m...' is not assignable to type 'Element | null'.\r\n              Type '{ readonly attributes: { [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { readonly URL: string; alinkColor: string; readonly all: { [x: number]: ...; readonly length: number; item: (nameOrIndex?: string | undefined) => Element | ... 1 m...' is not assignable to type 'Element'.\r\n                Types of property 'attributes' are incompatible.\r\n                  Type '{ [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { readonly URL: string; alinkColor: string; readonly all: { [x: number]: { readonly attributes: ...; ... 183 more ...; readonly assignedSlot: { ...; } | null; }; readonly length: number; ...' is not assignable to type 'NamedNodeMap'.\r\n                    'number' index signatures are incompatible.\r\n                      Type '{ readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { readonly URL: string; alinkColor: string; readonly all: { [x: number]: { readonly attributes: { [x: number]: ...; ... 8 more ...; [Symbol.iterator]: () => ArrayIterator<...>; }; ... 183 more ...; read...' is not assignable to type 'Attr'.\r\n                        The types of 'ownerDocument.anchors' are incompatible between these types.\r\n                          Type '{ [x: number]: { charset: string; coords: string; download: string; hreflang: string; name: string; ping: string; referrerPolicy: string; rel: string; relList: { [x: number]: string; readonly length: number; ... 13 more ...; [Symbol.iterator]: () => ArrayIterator<...>; }; ... 339 more ...; username: string; }; item:...' is not assignable to type 'HTMLCollectionOf<HTMLAnchorElement>'.\r\n                            'number' index signatures are incompatible.\r\n                              Type '{ charset: string; coords: string; download: string; hreflang: string; name: string; ping: string; referrerPolicy: string; rel: string; relList: { [x: number]: string; readonly length: number; value: string; ... 12 more ...; [Symbol.iterator]: () => ArrayIterator<...>; }; ... 339 more ...; username: string; }' is not assignable to type 'HTMLAnchorElement'.\r\n                                Types of property 'shadowRoot' are incompatible.\r\n                                  Type '{ readonly clonable: boolean; readonly delegatesFocus: boolean; readonly host: { readonly attributes: { [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; ... 53 more ...; removeEventListener: (type: string, callback: EventListenerOrEventListenerObject | null, opt...' is not assignable to type 'ShadowRoot | null'.\r\n                                    Type '{ readonly clonable: boolean; readonly delegatesFocus: boolean; readonly host: { readonly attributes: { [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { ...; }; ... 52 more ...; removeEventListener: (type: string, callback: EventListene...' is not assignable to type 'ShadowRoot'.\r\n                                      Types of property 'childNodes' are incompatible.\r\n                                        Type '{ [x: number]: { after: (...nodes: (string | Node)[]) => void; before: (...nodes: (string | Node)[]) => void; remove: () => void; replaceWith: (...nodes: (string | Node)[]) => void; readonly baseURI: string; ... 48 more ...; removeEventListener: (type: string, callback: EventListenerOrEventListenerObject | null, opt...' is not assignable to type 'NodeListOf<ChildNode>'.\r\n                                          'number' index signatures are incompatible.\r\n                                            Type '{ after: (...nodes: (string | Node)[]) => void; before: (...nodes: (string | Node)[]) => void; remove: () => void; replaceWith: (...nodes: (string | Node)[]) => void; readonly baseURI: string; ... 48 more ...; removeEventListener: (type: string, callback: EventListenerOrEventListenerObject | null, options?: boolean ...' is not assignable to type 'ChildNode'.\r\n                                              Types of property 'parentElement' are incompatible.\r\n                                                Type '{ accessKey: string; readonly accessKeyLabel: string; autocapitalize: string; autocorrect: boolean; dir: string; draggable: boolean; hidden: boolean; inert: boolean; innerText: string; lang: string; ... 312 more ...; focus: (options?: FocusOptions | undefined) => void; } | null' is not assignable to type 'HTMLElement | null'.\r\n                                                  Type '{ accessKey: string; readonly accessKeyLabel: string; autocapitalize: string; autocorrect: boolean; dir: string; draggable: boolean; hidden: boolean; inert: boolean; innerText: string; lang: string; ... 312 more ...; focus: (options?: FocusOptions | undefined) => void; }' is not assignable to type 'HTMLElement'.\r\n                                                    Types of property 'assignedSlot' are incompatible.\r\n                                                      Type '{ name: string; assign: (...nodes: (Element | Text)[]) => void; assignedElements: (options?: AssignedNodesOptions | undefined) => Element[]; ... 323 more ...; focus: (options?: FocusOptions | undefined) => void; } | null' is not assignable to type 'HTMLSlotElement | null'.\r\n                                                        Type '{ name: string; assign: (...nodes: (Element | Text)[]) => void; assignedElements: (options?: AssignedNodesOptions | undefined) => Element[]; ... 323 more ...; focus: (options?: FocusOptions | undefined) => void; }' is not assignable to type 'HTMLSlotElement'.\r\n                                                          The types of 'style.parentRule' are incompatible between these types.\r\n                                                            Type '{ cssText: string; readonly parentRule: ... | null; readonly parentStyleSheet: { readonly cssRules: { [x: number]: ...; readonly length: number; item: (index: number) => CSSRule | null; [Symbol.iterator]: () => ArrayIterator<...>; }; ... 14 more ...; readonly type: string; } | null; ... 12 more ...; readonly FONT_FE...' is not assignable to type 'CSSRule | null'.\r\n                                                              Type '{ cssText: string; readonly parentRule: ... | null; readonly parentStyleSheet: { readonly cssRules: { [x: number]: ...; readonly length: number; item: (index: number) => CSSRule | null; [Symbol.iterator]: () => ArrayIterator<...>; }; ... 14 more ...; readonly type: string; } | null; ... 12 more ...; readonly FONT_FE...' is not assignable to type 'CSSRule'.\r\n                                                                Types of property 'parentStyleSheet' are incompatible.\r\n                                                                  Type '{ readonly cssRules: { [x: number]: { cssText: string; readonly parentRule: ... | null; readonly parentStyleSheet: ... | null; readonly type: number; readonly STYLE_RULE: 1; readonly CHARSET_RULE: 2; ... 9 more ...; readonly FONT_FEATURE_VALUES_RULE: 14; }; readonly length: number; item: (index: number) => CSSRule |...' is not assignable to type 'CSSStyleSheet | null'.\r\n                                                                    Type '{ readonly cssRules: { [x: number]: { cssText: string; readonly parentRule: ... | null; readonly parentStyleSheet: ... | null; readonly type: number; readonly STYLE_RULE: 1; readonly CHARSET_RULE: 2; ... 9 more ...; readonly FONT_FEATURE_VALUES_RULE: 14; }; readonly length: number; item: (index: number) => CSSRule |...' is not assignable to type 'CSSStyleSheet'.\r\n                                                                      Types of property 'ownerNode' are incompatible.\r\n                                                                        Type '{ readonly attributes: { [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { readonly URL: string; alinkColor: string; readonly all: { [x: number]: ...; readonly length: number; item: (nameOrIndex?: string | undefined) => Element | ... 1 m...' is not assignable to type 'Element | ProcessingInstruction | null'.\r\n                                                                          Type '{ readonly attributes: { [x: number]: { readonly localName: string; readonly name: string; readonly namespaceURI: string | null; readonly ownerDocument: { readonly URL: string; alinkColor: string; readonly all: { [x: number]: ...; readonly length: number; item: (nameOrIndex?: string | undefined) => Element | ... 1 m...' is not assignable to type 'Element | ProcessingInstruction | null'.\r\n",
+      "note": "Old App and Player checked in the current workspace dependency tree; not a claim about all historical Vue environments."
+    }
+  },
+  "inAppBrowser": {
+    "name": "Codex In-app Browser",
+    "url": "http://127.0.0.1:5188/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "fullVersion": "Unavailable: Browser.getVersion is unsupported",
+    "source": "https://artplayer.org/assets/sample/video.mp4",
+    "mockedRequests": false,
+    "playing": {
+      "time": 74.60414,
+      "duration": 90.045011,
+      "paused": false,
+      "readyState": 4,
+      "width": 640,
+      "height": 360,
+      "error": null
+    },
+    "afterPauseAndHome": {
+      "time": 0,
+      "paused": true,
+      "readyState": 4,
+      "error": null
+    },
+    "capturedWarningsAndErrors": [],
+    "temporaryTabClosed": true,
+    "devServerStopped": true
+  },
+  "logs": {
+    "candidate": "refactor/.cache/vue-verified.log",
+    "before": "refactor/.cache/vue-before.log",
+    "react": "refactor/.cache/vue-react-regression.log",
+    "types": "refactor/.cache/vue-root-types.log",
+    "vueTypes": "refactor/.cache/vue-final-types.log",
+    "lint": "refactor/.cache/vue-root-lint.log",
+    "ci": "refactor/.cache/vue-ci-tests.log",
+    "frozen": "refactor/.cache/vue-frozen.log",
+    "toolchain": "refactor/.cache/vue-toolchain.log",
+    "declarations": "refactor/.cache/vue-declaration-drift.log",
+    "exampleBuild": "refactor/.cache/vue-example-build.log"
+  },
+  "limitations": [
+    "Historical wrapper source with current candidate packages is not every published core/plugin combination.",
+    "Automated media/XML are controlled; in-app development check separately used original public samples.",
+    "Worker termination counters do not establish process memory usage.",
+    "Real PiP windows, full Danmuku behavior, SSR/HMR and physical Safari are not covered.",
+    "Remote GitHub runs and publication are not verified or authorized by local success."
+  ]
+}

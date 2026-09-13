@@ -37,6 +37,9 @@ for (const [name, mutate] of [
   ['skipped React consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:react-consumer')).if = 'false'],
   ['removed React consumer', w => w.jobs['browser-smoke'].steps = w.jobs['browser-smoke'].steps.filter(s => !s.run?.startsWith('yarn test:react-consumer'))],
   ['missing React evidence', w => w.jobs['browser-smoke'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@')).with.path = 'refactor/.cache/ci/'],
+  ['skipped Vue consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:vue-consumer')).if = 'false'],
+  ['removed Vue consumer', w => w.jobs['browser-smoke'].steps = w.jobs['browser-smoke'].steps.filter(s => !s.run?.startsWith('yarn test:vue-consumer'))],
+  ['missing Vue evidence', w => w.jobs['browser-smoke'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@')).with.path = w.jobs['browser-smoke'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@')).with.path.replace('refactor/.cache/vue-consumer-*/', '')],
   ['Pages uploaded by both matrix legs', w => w.jobs.checks.steps.find(s => s.uses?.startsWith('actions/upload-pages-artifact@')).if = 'inputs.pages-artifact && github.ref == \'refs/heads/master\''],
 ]) {
   test(`CI rejects ${name}`, () => {

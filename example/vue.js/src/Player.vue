@@ -1,44 +1,28 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
+import type { Option } from 'artplayer'
+import Artplayer from 'artplayer'
 
-// Test type
-import Artplayer, { type Option } from 'artplayer'
-
-// Test i18n
-import fr from 'artplayer/i18n/fr'
-import id from 'artplayer/i18n/id'
-
-// Test plugins
-import artplayerPluginDocumentPip from 'artplayer-plugin-document-pip'
-import artplayerPluginDanmuku from 'artplayer-plugin-danmuku'
+import { onBeforeUnmount, onMounted, shallowRef } from 'vue'
+import { playerOptions } from './player-options'
 
 const props = defineProps<{ option: Partial<Option> }>()
 const emit = defineEmits(['getInstance'])
 
 const art = shallowRef<Artplayer | null>(null)
-const $container = ref<HTMLDivElement | null>(null)
+const $container = shallowRef<HTMLDivElement | null>(null)
 
 onMounted(() => {
-  art.value = new Artplayer({
-    ...props.option,
-    url: props.option.url as string,
-    container: $container.value as HTMLDivElement,
-    i18n: { id, fr },
-    lang: 'fr',
-    plugins: [
-      artplayerPluginDocumentPip({
-        //
-      }),
-      artplayerPluginDanmuku({
-        danmuku: 'https://artplayer.org/assets/sample/danmuku.xml',
-      }),
-    ],
-  })
+  const container = $container.value
+  if (!container)
+    return
+  art.value = new Artplayer(playerOptions(props.option, container))
   emit('getInstance', art.value)
 })
 
 onBeforeUnmount(() => {
-  art.value?.destroy(false)
+  const instance = art.value
+  art.value = null
+  instance?.destroy(false)
 })
 </script>
 

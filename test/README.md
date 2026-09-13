@@ -2,6 +2,15 @@
 
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
+`yarn test:vue-consumer` checks the actual Vue example with packed core/Danmuku/
+Document PiP in an outside-workspace install. It also installs its pinned Vue
+compiler there, checks all declaration paths for isolation, and runs development
+and production builds in three engines. `test/vue/` contains strict SFC/type
+fixtures and a separate plain-JS consumer. Reports under
+`refactor/.cache/vue-consumer-*` cover updates, remount, KeepAlive, captured errors,
+native media and real Worker cleanup. `--before` substitutes the recorded old
+wrapper and must preserve the same lifecycle behavior; it is not expected to fail.
+
 `yarn test:react-consumer` installs packed core/Danmuku/Document PiP outside the
 workspace and checks the actual React example's strict TSX, development and
 production builds, and native lifecycle/playback in three engines. Its fixture

@@ -47,7 +47,7 @@
     "check:plan": "node refactor/scripts/plan.mjs --check",
     "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js test/declarations.test.js test/editor-types.test.js test/coverage.test.js test/performance-report.test.js test/media-gate.test.js test/ci-summary.test.js test/package-runtime.test.js test/library-build.test.js",
     "test:baseline": "node --test refactor/scripts/*.test.mjs",
-    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:ci && yarn test:contracts && yarn check:contracts --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn typecheck:react && yarn lint:react && yarn test",
+    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:ci && yarn test:contracts && yarn check:contracts --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn typecheck:react && yarn lint:react && yarn typecheck:vue && yarn lint:vue && yarn test",
     "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
     "test:imports": "node --test test/esm.test.js test/i18n.test.js test/ssr.test.js test/asr-distribution.test.js",
     "typecheck": "node scripts/typecheck.mjs",
@@ -113,7 +113,12 @@
     "typecheck:react": "tsc -p example/react.js/tsconfig.json --noEmit",
     "build:react": "yarn typecheck:react && vite build example/react.js --config example/react.js/vite.config.js --outDir ../../refactor/.cache/react-example-dist",
     "test:react-consumer": "node refactor/scripts/react-consumer.mjs",
-    "lint:react": "eslint example/react.js --no-fix"
+    "lint:react": "eslint example/react.js --no-fix",
+    "dev:vue": "vite example/vue.js --config example/vue.js/vite.config.js",
+    "typecheck:vue": "vue-tsc -p example/vue.js/tsconfig.json --noEmit",
+    "build:vue": "yarn typecheck:vue && vite build example/vue.js --config example/vue.js/vite.config.js --outDir ../../refactor/.cache/vue-example-dist",
+    "test:vue-consumer": "node refactor/scripts/vue-consumer.mjs",
+    "lint:vue": "eslint example/vue.js --no-fix"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
@@ -122,6 +127,7 @@
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "@vitejs/plugin-react": "5.0.0",
+    "@vitejs/plugin-vue": "6.0.1",
     "@vue/compiler-sfc": "3.5.28",
     "@yarnpkg/lockfile": "1.1.0",
     "c8": "12.0.0",
@@ -149,6 +155,8 @@
     "typescript-compat": "npm:typescript@4.3.5",
     "typescript-runtime-compat": "npm:typescript@5.1.6",
     "vite": "7.3.6",
+    "vue": "3.5.28",
+    "vue-tsc": "3.3.11",
     "yaml": "2.8.2"
   },
   "resolutions": {

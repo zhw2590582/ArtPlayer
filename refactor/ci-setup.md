@@ -9,6 +9,8 @@
 | `yarn lint` | 只读 ESLint，覆盖包源码/声明、JS/MJS 工具、测试和编辑器声明 |
 | `yarn lint:fix` | 显式自动修复相同范围 |
 | `yarn typecheck` | 根/迁移包严格检查、当前与兼容 TS 消费；历史 NodeNext ESM 错误单独核对，见 typechecking.md |
+| `yarn typecheck:react` / `yarn typecheck:vue` | 原 React TSX / Vue SFC 示例严格检查，ci:check 同时执行对应 lint |
+| `yarn test:react-consumer` / `yarn test:vue-consumer` | 仓库外 tarball 安装、原框架示例、开发/生产三引擎；browser-smoke 执行并上传独立目录，本地证据不代替远端矩阵 |
 | `yarn test:unit` | 原播放/DASH 回归、同夹具的新旧公共契约与 JS/TS loader 验证 |
 | `yarn test:node` | test:unit 加工具链/文档构建回归，保留原 test:playback/test:dash-control 入口 |
 | `yarn test` | 统一执行 Node 与基线测试，源码/夹具维护入口见仓库 test/README.md |
