@@ -1,4 +1,6 @@
-export default function maskConfig(option) {
+import type { MaskConfig, MaskOptions } from './types'
+
+export default function maskConfig(option: MaskOptions): MaskConfig {
   return {
     solutionPath: option.solutionPath || 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation',
     modelSelection: option.modelSelection || 1,

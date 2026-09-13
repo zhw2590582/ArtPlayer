@@ -41,5 +41,12 @@
     "@tensorflow/tfjs-backend-webgl": "^4.21.0",
     "@tensorflow/tfjs-converter": "^4.21.0",
     "@tensorflow/tfjs-core": "^4.21.0"
+  },
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-danmuku-mask.d.ts"
+      ]
+    }
   }
 }

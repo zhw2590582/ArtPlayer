@@ -2585,11 +2585,14 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "模型 adapter、canvas 和选项的精确类型",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-MASK-04-types.md",
+        "baselines/danmuku-mask-types-validation.json"
+      ]
     },
     {
       "id": "PKG-MASK-05",

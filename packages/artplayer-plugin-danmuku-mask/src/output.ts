@@ -1,15 +1,18 @@
+import type { BodySegmenter } from '@tensorflow-models/body-segmentation'
+import type { Active, MaskConfig, MaskOutput } from './types'
 import { drawMask, toBinaryMask } from './sdk'
 
-export function makeWhiteTransparent(imageData) {
+export function makeWhiteTransparent(imageData: ImageData): ImageData {
   const data = imageData.data
+  // Native ImageData stores complete four-byte RGBA pixels.
   for (let i = 0; i < data.length; i += 4) {
-    if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250)
+    if (data[i]! > 250 && data[i + 1]! > 250 && data[i + 2]! > 250)
       data[i + 3] = 0
   }
   return imageData
 }
 
-export function createOutput(layer) {
+export function createOutput(layer: HTMLElement): MaskOutput {
   const canvas = document.createElement('canvas')
   try {
     const ctx = canvas.getContext('2d')
@@ -31,7 +34,7 @@ export function createOutput(layer) {
   }
 }
 
-export async function renderMask(output, video, layer, segmenter, config, active) {
+export async function renderMask(output: MaskOutput, video: HTMLVideoElement, layer: HTMLElement, segmenter: BodySegmenter, config: MaskConfig, active: Active): Promise<void> {
   const { canvas, ctx } = output
   canvas.width = video.videoWidth
   canvas.height = video.videoHeight
@@ -57,7 +60,7 @@ export async function renderMask(output, video, layer, segmenter, config, active
     layer.style.maskImage = `url(${url})`
 }
 
-export function releaseOutput(output) {
+export function releaseOutput(output: MaskOutput | null): void {
   if (output) {
     output.canvas.width = 0
     output.canvas.height = 0

@@ -6,6 +6,10 @@ Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 frozen historical defects and public contracts. Candidate tests also run in
 `test:unit`; their controlled SDK, RAF and canvas hosts do not prove native model
 inference, GPU disposal or browser mask geometry. See the Mask architecture map.
+`yarn test:danmuku-mask-types-package` installs both published versions and the
+candidate tarball outside the workspace for old/current compiler compatibility,
+negative cases and CJS/legacy registration without model startup. The ordinary
+baseline suite also checks public declaration identity and editor generation.
 
 `yarn test:mediabunny` runs historical lifecycle observations, candidate load cancellation,
 and real SDK input parsing/track contracts; all are in `test:unit`. Candidate failures

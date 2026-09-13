@@ -1228,7 +1228,11 @@
         "PKG-MASK-06"
       ],
       "sourceFiles": [
-        "packages/artplayer-plugin-danmuku-mask/src/index.js"
+        "packages/artplayer-plugin-danmuku-mask/src/index.ts",
+        "packages/artplayer-plugin-danmuku-mask/src/config.ts",
+        "packages/artplayer-plugin-danmuku-mask/src/sdk.ts",
+        "packages/artplayer-plugin-danmuku-mask/src/controller.ts",
+        "packages/artplayer-plugin-danmuku-mask/src/output.ts"
       ],
       "contract": "Npm dependency versions are separate from unversioned solutionPath CDN assets; keep option override, backend fallback, model result disposal and masks.",
       "validationStatus": "MASK01 verified two actual releases, six frozen Yarn/installed SDK versions, adapter source hashes and 12 existing demo resource byte matches. The default solutionPath remains an unversioned CDN. Controlled export/default/pixel probes do not establish real models, fallback, browser/GPU cleanup or notice completeness; MASK05/06 remain open.",

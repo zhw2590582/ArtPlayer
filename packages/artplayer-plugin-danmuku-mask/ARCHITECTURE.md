@@ -9,15 +9,47 @@ The compatibility baseline is the actual npm 1.1.0 package and the earlier
 
 | Module | Responsibility |
 | --- | --- |
-| `src/index.js` | Preserve synchronous registration, capture core template nodes before option getters, expose named start/stop closures |
-| `src/config.js` | Snapshot the original option defaults without changing OR/undefined semantics |
-| `src/sdk.js` | Existing TF backend selection, MediaPipe adapter configuration, mask calls and model disposal outlet |
-| `src/controller.js` | One active run, initialization/inference serialization, cancellation, RAF ownership, ready/destroy subscriptions |
-| `src/output.js` | Private canvas/context, unchanged binary mask colors and threshold conversion, guarded maskImage commit, canvas release |
+| `src/index.ts` | Preserve synchronous registration, capture core template nodes before option getters, expose named start/stop closures |
+| `src/config.ts` | Snapshot the original option defaults without changing OR/undefined semantics |
+| `src/sdk.ts` | Existing TF backend selection, MediaPipe adapter configuration, mask calls and model disposal outlet |
+| `src/controller.ts` | One active run, initialization/inference serialization, cancellation, RAF ownership, ready/destroy subscriptions |
+| `src/output.ts` | Private canvas/context, unchanged binary mask colors and threshold conversion, guarded maskImage commit, canvas release |
+| `src/types.ts` | Internal host, normalized options, exact legacy SDK arguments, canvas resources and nullable run state |
+| `src/sdk-ambient.d.ts` | Declaration-only import of the SDK's official Long namespace dependency |
 
-These modules remain JavaScript for PKG-MASK-03. Full owned-source TypeScript and
-public declaration work belongs to PKG-MASK-04; this task does not claim it is
-finished. Public declarations are unchanged.
+The owned modules use strict TypeScript. The entry depends on config/controller;
+controller depends on SDK/output; output delegates mask operations to SDK. The
+shared contracts contain only types and do not add runtime dependencies. The
+internal host accepts the actual core declaration in
+`refactor/fixtures/implementation/danmuku-mask.ts`; it needs only core template
+nodes, destroy state and ready/destroy subscription methods. Public declarations
+remain a separate compatibility surface and never import these source types.
+
+Controller fields use `declare` to retain the existing own-property initialization
+order. Its limited non-null assertions describe lifecycle invariants: tick runs
+only after model/output initialization, disposal waits for busy frame work, and
+the public start promise is assigned before the first initialization continuation.
+The cancellation resolver is assigned by the synchronous Promise executor.
+Output byte indexing relies on native ImageData's complete RGBA pixels. The
+backend error's message assertion preserves the old property read, including
+its behavior for non-Error rejections; it does not normalize thrown values.
+
+The SDK config uses the official MediaPipe config intersected with the exact
+legacy extra keys. `satisfies` checks those fields, and the subsequent assertion
+prevents the SDK union's excess-property check from deleting compatibility data.
+No SDK option interpretation changes. TF 4.22.0 `dist/hash_util.d.ts:2-3` references
+`Long` without an import. The local declaration-only bridge loads its existing
+official `@types/long` 4.0.2 UMD namespace. This package imports the TF declarations
+directly; it therefore needs the bridge under the root's explicit `types: []`.
+Keep `skipLibCheck: false`, do not rewrite Long or add a runtime import for it.
+The package tsconfig and all source modules stay outside the packed artifact.
+
+Public factory declarations retain the actual npm 1.0.0/1.1.0 shape. The exact
+`typesVersions` legacy mapping fixes old Node-resolution consumers without
+changing the root factory. See `types/README.md` for private types, namespace
+limits and the semantic online-editor generator. Strict positive/negative
+factory replacement and return-type cases run in the baseline suite; installed
+consumers separately check packed contents and historical diagnostics.
 
 Mask captures the core's video and `.art-danmuku` layer. The core template
 provides that layer before plugins register; Danmuku does not create it.
@@ -104,15 +136,19 @@ make a disposal test appear stronger than its real API.
 From the repository root with pinned Node and Yarn:
 
 ```sh
+node node_modules/typescript/bin/tsc -p packages/artplayer-plugin-danmuku-mask/tsconfig.json
 node --test test/danmuku-mask-lifecycle.test.js
 yarn test:danmuku-mask
+yarn test:danmuku-mask-types-package
+yarn build:ts artplayer-plugin-danmuku-mask
 node --test test/danmuku-mask-failures.test.js refactor/scripts/danmuku-mask-contract.test.mjs
 node node_modules/eslint/bin/eslint.js packages/artplayer-plugin-danmuku-mask/src test/helpers/danmuku-mask-candidate.js test/danmuku-mask-lifecycle.test.js
 yarn build artplayer-plugin-danmuku-mask
 yarn dev artplayer-plugin-danmuku-mask
 ```
 
-The candidate helper bundles current owned modules and substitutes the SDK
+The candidate helper requires exactly one JS/TS source entry, bundles current
+owned modules and substitutes the SDK
 imports with controlled implementations. Its fake RAF/video/canvas test
 cancellation and output ownership; they do not prove real model quality, canvas
 pixels, CSS alignment, CORS, browser scheduling, GPU memory or WASM cleanup.
@@ -129,5 +165,5 @@ by its original player. Native shared TensorFlow backend state remains unverifie
 Native acceptance still needs actual local model loading, new/old cores, real
 Danmuku composition, pause/seek/source/layout changes, multiple players, failure
 recovery and post-destroy resources. The default unversioned solutionPath can
-load assets independently of Yarn's SDK resolution. PKG-MASK-04/05/06 remain
-separate source/type, real combination and distribution/release stages.
+load assets independently of Yarn's SDK resolution. PKG-MASK-05/06 retain the
+real combination and distribution/release gates after source/type migration.

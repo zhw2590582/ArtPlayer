@@ -751,7 +751,7 @@
         "PKG-MASK-06"
       ],
       "evidence": [
-        "packages/artplayer-plugin-danmuku-mask/src/index.js",
+        "packages/artplayer-plugin-danmuku-mask/src/index.ts",
         "refactor/baselines/danmuku-mask-contract.md",
         "refactor/baselines/danmuku-mask-contract-validation.json",
         "refactor/baselines/danmuku-mask-release.json"

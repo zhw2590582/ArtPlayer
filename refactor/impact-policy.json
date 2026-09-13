@@ -123,7 +123,7 @@
       "consumer": "artplayer-plugin-danmuku-mask",
       "reason": "Mask and Danmuku share the core-owned $danmuku layer; retain combination validation for root identity, styles and lifecycle",
       "evidence": [
-        "packages/artplayer-plugin-danmuku-mask/src/index.js",
+        "packages/artplayer-plugin-danmuku-mask/src/index.ts",
         "docs/assets/example/danmuku.mask.js"
       ]
     }

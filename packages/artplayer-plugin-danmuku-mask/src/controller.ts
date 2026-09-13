@@ -1,8 +1,18 @@
+import type { MaskConfig, MaskHost, MaskNodes, MaskRun } from './types'
 import { createOutput, releaseOutput, renderMask } from './output'
 import { loadSegmenter, releaseSegmenter } from './sdk'
 
 export default class MaskController {
-  constructor(art, config, { $video, $danmuku }) {
+  declare art: MaskHost
+  declare config: MaskConfig
+  declare video: HTMLVideoElement
+  declare layer: HTMLElement
+  declare closed: boolean
+  declare run: MaskRun | null
+  declare tail: Promise<void>
+  declare ready: () => void
+
+  constructor(art: MaskHost, config: MaskConfig, { $video, $danmuku }: MaskNodes) {
     this.art = art
     this.config = config
     this.video = $video
@@ -38,11 +48,11 @@ export default class MaskController {
     }
   }
 
-  active(run) {
+  active(run: MaskRun): boolean {
     return run === this.run && run.running && !this.closed && !this.art.isDestroy
   }
 
-  release(run) {
+  release(run: MaskRun): Promise<void> {
     if (run.releasing)
       return run.releasing
     const segmenter = run.segmenter
@@ -63,7 +73,7 @@ export default class MaskController {
     return run.releasing
   }
 
-  schedule(run) {
+  schedule(run: MaskRun): void {
     if (!this.active(run) || run.frame !== null || run.busy)
       return
     run.frame = requestAnimationFrame(() => {
@@ -72,7 +82,7 @@ export default class MaskController {
     })
   }
 
-  tick(run) {
+  tick(run: MaskRun): void {
     if (!this.active(run) || run.busy)
       return
     const video = this.video
@@ -86,7 +96,8 @@ export default class MaskController {
         // Reserve the work slot before SDK code can synchronously reenter start/stop.
         await Promise.resolve()
         if (this.active(run))
-          await renderMask(run.output, video, this.layer, run.segmenter, this.config, () => this.active(run))
+          // Only initialized runs reach tick; release waits for this busy work to settle.
+          await renderMask(run.output!, video, this.layer, run.segmenter!, this.config, () => this.active(run))
       }
       catch (error) {
         if (this.active(run))
@@ -103,14 +114,16 @@ export default class MaskController {
     this.tail = work.catch(error => console.warn('Failed to release danmuku mask resources:', error))
   }
 
-  async start() {
+  async start(): Promise<void> {
     if (this.closed || this.art.isDestroy)
       return
+    // The start promise is assigned before initialization resumes after its first await.
     if (this.run?.running)
-      return this.run.started
-    let cancel
-    const cancelled = new Promise(resolve => cancel = resolve)
-    const run = { running: true, initializing: true, busy: false, frame: null, segmenter: null, output: null, cancel, started: null }
+      return this.run.started!
+    // Promise executors install their resolver synchronously.
+    let cancel!: () => void
+    const cancelled = new Promise<void>(resolve => cancel = resolve)
+    const run: MaskRun = { running: true, initializing: true, busy: false, frame: null, segmenter: null, output: null, cancel, started: null }
     const previous = this.tail
     this.run = run
     const initialize = (async () => {
@@ -149,7 +162,7 @@ export default class MaskController {
     return run.started
   }
 
-  halt() {
+  halt(): void {
     const run = this.run
     if (run) {
       run.running = false
@@ -163,13 +176,13 @@ export default class MaskController {
     }
   }
 
-  stop() {
+  stop(): void {
     this.halt()
     if (this.layer?.style)
       this.layer.style.maskImage = 'none'
   }
 
-  destroy() {
+  destroy(): void {
     if (this.closed)
       return
     this.closed = true

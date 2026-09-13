@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import vm from 'node:vm'
 import { build } from 'esbuild'
+import { resolveSource } from './load.js'
 
 export const flush = () => new Promise(resolve => setImmediate(resolve))
 export async function maskCandidate() {
-  const result = await build({ entryPoints: ['packages/artplayer-plugin-danmuku-mask/src/index.js'], bundle: true, write: false, format: 'cjs', platform: 'browser', external: ['@tensorflow-models/body-segmentation', '@tensorflow/tfjs-core', '@tensorflow/tfjs-backend-webgl', '@tensorflow/tfjs-backend-cpu'] })
+  const result = await build({ entryPoints: [resolveSource('packages/artplayer-plugin-danmuku-mask/src/index')], bundle: true, write: false, format: 'cjs', platform: 'browser', external: ['@tensorflow-models/body-segmentation', '@tensorflow/tfjs-core', '@tensorflow/tfjs-backend-webgl', '@tensorflow/tfjs-backend-cpu'] })
   return result.outputFiles[0].text
 }
 
