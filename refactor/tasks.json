@@ -4902,11 +4902,14 @@
       "dependsOn": [
         "PKG-MASK-04"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "L",
       "deliverable": "仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变",
       "acceptance": "根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-ENG-LINT-01-manifest-order.md",
+        "baselines/manifest-lint-validation.json"
+      ]
     }
   ]
 }

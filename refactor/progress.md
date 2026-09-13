@@ -1,5 +1,15 @@
 # 进度与证据
 
+## ENG-LINT-01 全仓 lint 恢复
+
+在 EX-01 独立提交 e0d785662 并通过提交审计后，只调整 Mask manifest 顶层字段
+顺序。解析后与起点完全相等；全仓 lint 返回 0（0 error、1 条既有生成声明
+注释 warning），严格工具链通过。见[变更](changes/2026-09-14-ENG-LINT-01-manifest-order.md)
+和[证据](baselines/manifest-lint-validation.json)。未改运行代码/类型/产物/锁，
+未关闭 Mask 设备等任务，未推送发布。当前 238 项：162 done、15 doing、61 todo。
+下一步为 EX-02 Vue 实际消费者；VAST 默认选择和 Auto Thumbnail 首帧仍待关闭。
+
+
 ## EX-01 React 实际消费者完成
 
 修复 React HTML 错误入口，以及 getInstance 抛错时实例泄漏；保留 Partial<Option>、

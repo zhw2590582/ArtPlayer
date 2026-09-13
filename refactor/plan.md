@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 238 项，范围 22 个包及工作区/示例。
 
-状态：todo 62 / doing 15 / blocked 0 / done 161 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 61 / doing 15 / blocked 0 / done 162 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -438,7 +438,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| ENG-LINT-01 | artplayer-plugin-danmuku-mask, workspace<br>修复 Mask manifest 排序并恢复全仓 lint | PKG-MASK-04 | 仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变 | 根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口 | L | todo |
+| ENG-LINT-01 | artplayer-plugin-danmuku-mask, workspace<br>修复 Mask manifest 排序并恢复全仓 lint | PKG-MASK-04 | 仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变 | 根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口 | L | done |
 
 ## 完成证据与阻塞
 
@@ -619,3 +619,4 @@
 - PKG-AUTO-THUMB-07: [记录](changes/2026-09-14-PKG-AUTO-THUMB-07-canvas.md) [记录](baselines/auto-thumbnail-canvas-validation.json)
 - PKG-AUTO-THUMB-08: [记录](changes/2026-09-14-PKG-AUTO-THUMB-08-types.md) [记录](baselines/auto-thumbnail-types-validation.json)
 - PKG-AUTO-THUMB-09: [记录](changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md) [记录](baselines/auto-thumbnail-alias-validation.json)
+- ENG-LINT-01: [记录](changes/2026-09-14-ENG-LINT-01-manifest-order.md) [记录](baselines/manifest-lint-validation.json)

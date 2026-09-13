@@ -1,0 +1,18 @@
+{
+  "task": "ENG-LINT-01",
+  "source": "e0d785662daac01d3c9c01f2dd2d2d2c16ab32d1",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "file": "packages/artplayer-plugin-danmuku-mask/package.json",
+  "beforeSha256": "03b68f518f32d6619d7da1f163180224942ab195b5d1c0d18ab852d98fffdc3f",
+  "afterSha256": "7b9778b964582cd7f4a340bf0401a4222dd21bcdc23163e2d3fc85b12d4a2a1c",
+  "parsedDeepEqual": true,
+  "lint": {
+    "passed": true,
+    "errors": 0,
+    "warnings": 1,
+    "log": "yarn run v1.22.22\r\n(node:30840) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\r\n(Use `node --trace-deprecation ...` to show where the warning was created)\r\n$ eslint \"packages/*/{src,public,types,package.json}\" \"scripts/*.{js,mjs}\" \"test/*\" \"docs/assets/ts/*\" \"types/*.d.ts\" \"playwright*.config.js\" --no-fix\r\n\r\nD:\\github\\ArtPlayer\\docs\\assets\\ts\\artplayer.d.ts\r\n  2:1  warning  Unused eslint-disable directive (no problems were reported from 'ts/no-namespace')\r\n\r\n✖ 1 problem (0 errors, 1 warning)\r\n  0 errors and 1 warning potentially fixable with the `--fix` option.\r\n\r\nDone in 8.31s.\r\n"
+  },
+  "toolchain": "yarn run v1.22.22\r\n(node:21480) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\r\n(Use `node --trace-deprecation ...` to show where the warning was created)\r\n$ node scripts/check-toolchain.mjs --strict\r\nToolchain verified: 22 workspaces, 33 pinned tools, 1450 dependency selectors; Node 24.21.0 (canonical 24.21.0), yarn@1.22.22\r\nDone in 0.16s.\r\n",
+  "scope": "Top-level manifest property ordering only. No source, declaration, runtime distribution or lockfile change; package-specific runtime acceptance is unchanged."
+}
