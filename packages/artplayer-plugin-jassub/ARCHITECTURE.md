@@ -72,7 +72,15 @@ The original wrapper matched upstream jassub 1.8.8 apart from formatting and the
 PKG-JASSUB-07 records its local lifecycle/clock patch separately in
 `../../refactor/baselines/jassub-vendor-patch.json` and the accompanying patch file.
 Keep original and patched fingerprints distinct; do not call the changed wrapper an
-unmodified upstream file. The
+unmodified upstream file. PKG-JASSUB-08 adds a separate follow-up patch in
+`../../refactor/baselines/jassub-offscreen-patch.json`: initial offscreen ownership
+is transferred synchronously when the Worker reports ready, before resolving the
+loaded gate and dispatching the public ready event. Otherwise a queued resize can
+ask the Worker to return main-thread images while the instance has no main-thread
+context. Duplicate ready delivery must not transfer the same canvas twice. The
+explicit main-thread/custom-canvas and unsupported-capability paths keep their
+existing selection. Later hybrid detach/reattach remains separate and must retain
+its own rendering/lifetime checks. The
 worker JS and default font match that archive byte-for-byte. Local WASM instead matches
 the exact Pages nightly blobs associated with source 6b19a04ddfbad8f9bfd3237395788dd76218841b.
 Its build workflow and seven submodule revisions are pinned in the separate
@@ -123,6 +131,11 @@ The candidate's default onDemandRender path is tested through playback/seek/layo
 Chromium/Firefox/WebKit. jassub-lifecycle.spec.js additionally checks actual replacement
 video pixels, numerical fallback playbackRate, repeated teardown, invalid-URL constructor
 rollback and a genuine asynchronous CSP Worker error reaching a pending query. These
-are distinct from default offscreen mode, full devices and sustained memory/GPU release,
-which remain unverified. See
+are distinct from full devices and sustained memory/GPU release, which remain
+unverified. Set ARTPLAYER_JASSUB_OFFSCREEN=default to omit the option and exercise
+the browser's actual default selection. The test copies the displayed canvas bitmap
+to a separate readback canvas, so it supports both transferred and main-thread
+canvases. PKG-JASSUB-08 records default-mode Chromium/Firefox rendering and WebKit's
+capability fallback separately; this does not prove physical Safari/mobile behavior.
+See
 `../../refactor/baselines/jassub-contract.md` for precise contract and provenance evidence.

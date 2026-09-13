@@ -2496,7 +2496,8 @@
       "dependsOn": [
         "PKG-JASSUB-04",
         "CORE-22",
-        "PKG-JASSUB-07"
+        "PKG-JASSUB-07",
+        "PKG-JASSUB-08"
       ],
       "status": "todo",
       "risk": "H",
@@ -4768,6 +4769,26 @@
       "evidence": [
         "changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md",
         "baselines/danmuku-frame-sampling-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-JASSUB-08",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "修复默认 offscreen 初始化消息顺序",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-07"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "在释放排队绘制消息前转移初始画布；独立 vendor 补丁、默认模式原生回归和维护文档",
+      "acceptance": "保留默认能力选择、Worker/资源和公开同步 API；旧红新绿消息顺序测试及真实默认 offscreen 播放/seek/全屏通过，主线程绘制保持",
+      "evidence": [
+        "changes/2026-09-14-PKG-JASSUB-08-offscreen.md",
+        "baselines/jassub-offscreen-validation.json",
+        "baselines/jassub-offscreen-patch.json"
       ]
     }
   ]

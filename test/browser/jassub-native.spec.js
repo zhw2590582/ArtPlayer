@@ -11,6 +11,7 @@ const artifact = process.env.ARTPLAYER_JASSUB_ARTIFACT
 const customCanvas = process.env.ARTPLAYER_JASSUB_CUSTOM_CANVAS === 'true'
 const code = artifact ? fs.readFileSync(artifact, 'utf8') : readMember(archive, member).toString()
 const onDemandRender = process.env.ARTPLAYER_JASSUB_ON_DEMAND !== 'false'
+const defaultOffscreen = process.env.ARTPLAYER_JASSUB_OFFSCREEN === 'default'
 const subtitles = `[Script Info]
 ScriptType: v4.00+
 PlayResX: 640
@@ -25,7 +26,7 @@ Dialogue: 0,0:00:05.00,0:00:30.00,Default,,0,0,0,,After seek with actual WASM
 `
 
 for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
-  test(`JASSUB ${artifact ? 'candidate artifact' : `published ${release.version}`} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=${customCanvas}`, async ({ page, context }, testInfo) => {
+  test(`JASSUB ${artifact ? 'candidate artifact' : `published ${release.version}`} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=${customCanvas}, defaultOffscreen=${defaultOffscreen}`, async ({ page, context }, testInfo) => {
     const resources = []
     const external = []
     const origin = new URL(testInfo.project.use.baseURL).origin
@@ -86,7 +87,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
       await page.locator('#pause').click()
-      await page.evaluate(async ({ subContent, onDemandRender, customCanvas }) => {
+      await page.evaluate(async ({ subContent, onDemandRender, customCanvas, defaultOffscreen }) => {
         const register = window.artplayerPluginJassub.default || window.artplayerPluginJassub
         let canvas
         if (customCanvas) {
@@ -104,20 +105,26 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
           modernWasmUrl: '/assets/jassub/jassub-worker-modern.wasm',
           availableFonts: { 'liberation sans': '/assets/jassub/default.woff2' },
           fonts: ['/assets/jassub/default.woff2'],
-          offscreenRender: false,
+          ...(defaultOffscreen ? {} : { offscreenRender: false }),
           onDemandRender,
           ...(canvas ? { canvas } : {}),
         }))
         window.jassub = window.art.plugins.artplayerPluginJassub.instance
+        window.jassubNative.offscreen = { available: 'transferControlToOffscreen' in HTMLCanvasElement.prototype, selected: window.jassub._offscreenRender }
         window.jassub.addEventListener('error', event => window.jassubNative.errors.push(String(event.error)))
         await new Promise((resolve, reject) => {
           window.jassub.addEventListener('ready', resolve, { once: true })
           window.jassub.addEventListener('error', event => reject(event.error), { once: true })
         })
+        const readback = document.createElement('canvas')
         window.jassubPixels = (phase) => {
           const canvas = window.jassub._canvas
           const rect = canvas.getBoundingClientRect()
-          const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data
+          readback.width = canvas.width
+          readback.height = canvas.height
+          const context = readback.getContext('2d')
+          context.drawImage(canvas, 0, 0)
+          const pixels = context.getImageData(0, 0, readback.width, readback.height).data
           let visible = 0
           let signature = 0
           for (let i = 3; i < pixels.length; i += 4) {
@@ -134,7 +141,9 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
             window.jassubNative.snapshots.push(state)
           return state
         }
-      }, { subContent: subtitles, onDemandRender, customCanvas })
+      }, { subContent: subtitles, onDemandRender, customCanvas, defaultOffscreen })
+      const offscreen = await page.evaluate(() => window.jassubNative.offscreen)
+      expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)
       const before = await page.evaluate(() => window.jassubPixels('before-seek'))
@@ -172,7 +181,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
     }
     finally {
       const state = await page.evaluate(() => window.jassubNative).catch(error => ({ unavailable: error.message }))
-      await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, customCanvas, source: artifact ? { artifact, sha256: hash(code) } : { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: 'Actual worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery or device acceptance; candidate adds direct-then-host destruction.' }, null, 2), contentType: 'application/json' })
+      await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, customCanvas, defaultOffscreen, source: artifact ? { artifact, sha256: hash(code) } : { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: `Actual worker, WASM and local font; offscreen option ${defaultOffscreen ? 'omitted, actual capability/selection recorded' : 'explicitly false'}. Canvas pixels are read from a separate canvas copying the native display bitmap. No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction.` }, null, 2), contentType: 'application/json' })
       if (!page.isClosed()) {
         await page.evaluate(() => {
           if (window.art && !window.art.isDestroy)

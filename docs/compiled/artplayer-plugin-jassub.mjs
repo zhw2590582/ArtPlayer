@@ -147,7 +147,7 @@ const _o = class _o extends EventTarget {
           // @ts-ignore
           useLocalFonts: typeof queryLocalFonts < "u" && (e.useLocalFonts ?? true),
           hasBitmapBug: _o._hasBitmapBug
-        }), this._offscreenRender === true && this.sendMessage("offscreenCanvas", null, [this._canvasctrl]);
+        });
       }).catch((error) => {
         if (!this._destroyed) this.destroy(error);
       });
@@ -581,6 +581,10 @@ const _o = class _o extends EventTarget {
   }
   _ready() {
     if (this._destroyed) return;
+    if (this._offscreenRender === true && !this._initialOffscreenSent) {
+      this._initialOffscreenSent = true;
+      this._worker.postMessage({ target: "offscreenCanvas", transferable: [this._canvasctrl] }, [this._canvasctrl]);
+    }
     this._init(), this.dispatchEvent(new CustomEvent("ready"));
   }
   /**

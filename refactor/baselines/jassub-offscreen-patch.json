@@ -1,0 +1,11 @@
+{
+  "task": "PKG-JASSUB-08",
+  "baselineCommit": "0f3c068aae1415c2d40ede8708f02f4c5864fe7a",
+  "file": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+  "originalSha256LF": "1fdcf24d206e8711348dddcb5fe7b656007a9b1d81a992bb497c6d10bd0a2cdb",
+  "patchedSha256LF": "6a96af7914f702eb7d6303b466cbe16abddd278040f60cd29f153cdf60e92cb2",
+  "patchFile": "refactor/baselines/jassub-offscreen.patch",
+  "patchSha256LF": "b6cb5c4cb3c9fab920724fa7ddfe7a6b58db68d177f720231f5823fc5bfd6dac",
+  "predecessor": "refactor/baselines/jassub-vendor-patch.json",
+  "purpose": "Transfer the initial offscreen canvas on Worker readiness before releasing queued resize/render messages; keep later reattachment behavior unchanged."
+}

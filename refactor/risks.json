@@ -5599,6 +5599,28 @@
         "test/browser/jassub-lifecycle.spec.js"
       ],
       "resolutionRationale": "Actual wrapper timeout and Worker error invoke once with the original error and clean all request listeners/timers first, including throwing user callbacks. Native CSP plain Event identity is preserved; real WASM queries still succeed. Destroy cancellation settles all pending queries after cleanup; complete error recovery remains task05."
+    },
+    {
+      "id": "JASSUB-OFFSCREEN-01",
+      "title": "Default offscreen initialization lets queued resize render before Worker canvas ownership, raising clearRect on false context",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-JASSUB-08",
+        "PKG-JASSUB-05"
+      ],
+      "evidence": [
+        "test/jassub-offscreen.test.js",
+        "test/browser/jassub-native.spec.js"
+      ],
+      "compatibleResolution": "Transfer the initial canvas after Worker readiness but before releasing queued rendering; preserve selected offscreen/default and all worker resources.",
+      "closureCriteria": "Same ordering test fails on the pre-fix artifact and passes on candidate; actual default offscreen pixels, seek/layout and teardown pass on Chromium/Firefox and capability fallback on WebKit, with main-thread regressions retained.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-08-offscreen.md",
+        "refactor/baselines/jassub-offscreen-validation.json",
+        "test/jassub-offscreen.test.js"
+      ],
+      "resolutionRationale": "Controlled queue test reproduces pre-fix canvas-before-transfer order. Candidate transfers before opening readiness and passes actual default offscreen Chromium/Firefox playback/seek/layout; Windows WebKit default capability fallback and explicit main-thread/lifecycle regressions remain green. Full device/hybrid/error recovery remains task05."
     }
   ]
 }

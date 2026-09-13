@@ -249,3 +249,4 @@
 | JASSUB-RATE-01 | resolved / 已复现 | Fallback ratechange sends an Event instead of numeric playbackRate | PKG-JASSUB-02, PKG-JASSUB-07 |
 | JASSUB-NATIVE-FRAME-01 | resolved / 已复现 | Windows WebKit default frame-clock path does not produce subtitle demands in actual playback | PKG-JASSUB-02, PKG-JASSUB-07, PKG-JASSUB-05 |
 | JASSUB-QUERY-01 | resolved / 已复现 | Subtitle query errors throw before calling the consumer and leave request listeners attached | PKG-JASSUB-07, PKG-JASSUB-05 |
+| JASSUB-OFFSCREEN-01 | resolved / 已复现 | Default offscreen initialization lets queued resize render before Worker canvas ownership, raising clearRect on false context | PKG-JASSUB-08, PKG-JASSUB-05 |

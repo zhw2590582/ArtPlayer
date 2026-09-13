@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-JASSUB-08 默认 offscreen 初始化完成
+
+05 默认模式验收发现 Chromium/Firefox 六项真实页面错误；初始 canvas 消息先于
+offscreenCanvas，使 Worker 返回主线程无法绘制的 render。现在先交接画布再打开
+ready 门槛，保留原能力选择，新增六项顺序/取消/回退测试（旧 5 通过/1 失败）。
+联合 191 项、源码/main/legacy 各 74 项通过；默认 main、默认 legacy 加生命周期、
+显式主线程加生命周期共 51 项原生验证通过。15 个安装类型矩阵和最终包成员一致。
+[变更与复跑](changes/2026-09-14-PKG-JASSUB-08-offscreen.md)及
+[证据](baselines/jassub-offscreen-validation.json)保留失败与修复，关闭
+JASSUB-OFFSCREEN-01。08 独立交付；05 保留全量组合、hybrid/错误恢复/设备等验收，
+06、VENDOR-04/05、独立 major 与全局发布复盘均未完成。
+
 ## PKG-JASSUB-07 vendor 生命周期与默认字幕时钟完成
 
 独立补丁保留原上游身份，修复幂等销毁、构造回滚、跨视频帧归属、数值倍率和
