@@ -28,12 +28,16 @@ export async function multipleSubtitlesHistorical() {
   return implementations
 }
 
-export function multipleSubtitlesEnvironment(implementation, { script = false, responses = {} } = {}) {
+export function multipleSubtitlesEnvironment(implementation, { script = false, responses = {}, fetchResponse, coreUtils, onInit, onCreate } = {}) {
   const requests = []
+  const requestOptions = []
   const blobs = new Map()
+  const liveBlobs = new Map()
   const revoked = []
   const initialized = []
+  const initStates = []
   const converted = []
+  const listeners = new Map()
   const module = { exports: {} }
   const utils = {
     getExt: url => url.split('.').pop(),
@@ -46,11 +50,32 @@ export function multipleSubtitlesEnvironment(implementation, { script = false, r
       converted.push(['ass', text])
       return subtitleVtt('ASS')
     },
+    ...coreUtils,
   }
   const art = {
+    isDestroy: false,
     constructor: { utils },
     option: { subtitle: { escape: true, style: { color: 'red' } } },
-    subtitle: { init(option) { initialized.push(option) } },
+    subtitle: { init(option) {
+      initialized.push(option)
+      initStates.push({ destroyed: art.isDestroy })
+      return onInit?.(option)
+    } },
+    on(name, callback) {
+      if (!listeners.has(name))
+        listeners.set(name, new Set())
+      listeners.get(name).add(callback)
+      return art
+    },
+    off(name, callback) {
+      listeners.get(name)?.delete(callback)
+      return art
+    },
+  }
+  function responseFor(url) {
+    const value = responses[url] ?? subtitleVtt(url)
+    const bytes = typeof value === 'string' ? new TextEncoder().encode(value) : value
+    return { ok: true, status: 200, arrayBuffer: async () => bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) }
   }
   const context = {
     Blob,
@@ -58,16 +83,21 @@ export function multipleSubtitlesEnvironment(implementation, { script = false, r
     console: { log() {}, warn() {}, error() {} },
     URL: {
       createObjectURL(blob) {
+        onCreate?.(blob)
         const url = `blob:subtitle-${blobs.size + 1}`
         blobs.set(url, blob)
+        liveBlobs.set(url, blob)
         return url
       },
-      revokeObjectURL(url) { revoked.push(url) },
+      revokeObjectURL(url) {
+        revoked.push(url)
+        liveBlobs.delete(url)
+      },
     },
-    fetch: async (url) => {
+    fetch: async (url, options) => {
       requests.push(url)
-      const bytes = new TextEncoder().encode(responses[url] ?? subtitleVtt(url))
-      return { ok: true, arrayBuffer: async () => bytes.buffer }
+      requestOptions.push(options)
+      return fetchResponse ? fetchResponse(url, options, responseFor) : responseFor(url)
     },
   }
   context.window = context
@@ -79,5 +109,11 @@ export function multipleSubtitlesEnvironment(implementation, { script = false, r
   const exported = script ? context.artplayerPluginMultipleSubtitles : module.exports
   const factory = exported?.default || exported
   const latestText = async () => blobs.get(initialized.at(-1).url).text()
-  return { factory, exported, art, utils, requests, blobs, revoked, initialized, converted, latestText }
+  function emit(name, ...args) {
+    if (name === 'destroy')
+      art.isDestroy = true
+    for (const callback of [...(listeners.get(name) || [])])
+      callback(...args)
+  }
+  return { factory, exported, art, utils, requests, requestOptions, blobs, liveBlobs, revoked, initialized, initStates, converted, listeners, emit, responseFor, latestText }
 }

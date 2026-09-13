@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
 
-状态：todo 91 / doing 13 / blocked 0 / done 118 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 90 / doing 13 / blocked 0 / done 119 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -217,7 +217,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-MULTI-SUB-01 | artplayer-plugin-multiple-subtitles<br>核对包契约与历史用法 | BASE-05 | subtitles/onParser、multipleSubtitles 名称及实际返回方法 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-03，定位 WebVTT parser 来源/修订及 CC0 头，保留解析/序列化行为 | H | done |
-| PKG-MULTI-SUB-02 | artplayer-plugin-multiple-subtitles<br>建立特有行为与错误测试 | PKG-MULTI-SUB-01, ENG-03, ENG-05 | VTT/SRT/ASS、编码/重叠 cue/排序/空轨/失败与切换 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
+| PKG-MULTI-SUB-02 | artplayer-plugin-multiple-subtitles<br>建立特有行为与错误测试 | PKG-MULTI-SUB-01, ENG-03, ENG-05 | VTT/SRT/ASS、编码/重叠 cue/排序/空轨/失败与切换 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-MULTI-SUB-03 | artplayer-plugin-multiple-subtitles<br>整理内部职责与资源 | PKG-MULTI-SUB-02, CORE-15 | 解析与合并/获取/渲染分离，过期请求及对象 URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
@@ -512,6 +512,7 @@
 - PKG-DASH-04: [记录](changes/2026-09-12-PKG-DASH-04-types.md) [记录](baselines/dash-types-validation.json) [记录](dash-validation.md)
 - PKG-DASH-05: [记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) [记录](baselines/dash-sdk.json) [记录](baselines/dash-sdk-checkpoint.json) [记录](dash-validation.md) [记录](changes/2026-09-12-PKG-DASH-05-sdk-types.md) [记录](baselines/dash-sdk-types-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md) [记录](baselines/dash-sdk-events-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md) [记录](baselines/dash-seek-diagnosis.json)
 - PKG-MULTI-SUB-01: [记录](baselines/multiple-subtitles-release.json) [记录](baselines/multiple-subtitles-contract.md) [记录](baselines/multiple-subtitles-contract-validation.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-01-contract.md)
+- PKG-MULTI-SUB-02: [记录](baselines/multiple-subtitles-failures.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-02-failures.md)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)

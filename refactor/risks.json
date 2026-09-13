@@ -4275,7 +4275,11 @@
         "refactor/baselines/multiple-subtitles-release.json",
         "refactor/baselines/multiple-subtitles-contract.md",
         "test/multiple-subtitles.test.js",
-        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+        "refactor/scripts/multiple-subtitles-contract.test.mjs",
+        "test/multiple-subtitles-failures.test.js",
+        "test/browser/multiple-subtitles-history.spec.js",
+        "refactor/baselines/multiple-subtitles-failures.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
       ],
       "compatibleResolution": "Keep historical merge profiles explicit and test real overlap/timing before choosing compatibility behavior.",
       "closureCriteria": "Unaligned lengths, overlap, sorting, names and real subtitle display across supported cores are verified."
@@ -4283,7 +4287,7 @@
     {
       "id": "MULTI-SUB-LIFE-01",
       "title": "Pending downloads and final object URL have no destroy owner",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-MULTI-SUB-02",
@@ -4294,7 +4298,11 @@
         "refactor/baselines/multiple-subtitles-release.json",
         "refactor/baselines/multiple-subtitles-contract.md",
         "test/multiple-subtitles.test.js",
-        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+        "refactor/scripts/multiple-subtitles-contract.test.mjs",
+        "test/multiple-subtitles-failures.test.js",
+        "test/browser/multiple-subtitles-history.spec.js",
+        "refactor/baselines/multiple-subtitles-failures.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
       ],
       "compatibleResolution": "Reproduce stale completion and own requests and URLs without changing public selection methods.",
       "closureCriteria": "Cancellation, failures, source changes, repeated selection and destroy are verified with native core coverage."
@@ -4316,6 +4324,42 @@
       ],
       "compatibleResolution": "Preserve valid historical runtime import forms and explicitly assess type-only extraction conflicts.",
       "closureCriteria": "Actual installed CJS/ESM/global/legacy consumers and their declarations are verified."
+    },
+    {
+      "id": "MULTI-SUB-HTTP-01",
+      "title": "HTTP error responses with parseable bodies are installed as subtitles",
+      "compatibleResolution": "Reject actual HTTP failures with explicit diagnostics while preserving successful conversion and original transport errors.",
+      "closureCriteria": "Native HTTP errors, transport/body failures, sibling cancellation and successful requests have candidate regressions.",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-03",
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "test/multiple-subtitles-failures.test.js",
+        "test/browser/multiple-subtitles-history.spec.js",
+        "refactor/baselines/multiple-subtitles-failures.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
+      ]
+    },
+    {
+      "id": "MULTI-SUB-HOST-01",
+      "title": "Subtitle init rejections are ignored and failed installation or URL replacement leaks or invalidates resources",
+      "compatibleResolution": "Own installation results and URL rollback while preserving void selection methods and normal registration timing.",
+      "closureCriteria": "Synchronous and asynchronous host failures, stale rejection, allocation failure and destroy leave no plugin-owned live resources.",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-03",
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "test/multiple-subtitles-failures.test.js",
+        "test/browser/multiple-subtitles-history.spec.js",
+        "refactor/baselines/multiple-subtitles-failures.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-02-failures.md"
+      ]
     }
   ]
 }

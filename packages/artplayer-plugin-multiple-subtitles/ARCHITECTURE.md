@@ -31,6 +31,13 @@ sets the live subtitle option's escape to false and calls subtitle.init with the
 configuration plus URL/type/onVttLoad overrides. The latest URL and pending requests have
 no destroy owner yet. These are explicit future fixes, not behavior to silently call safe.
 
+The failure baseline now reproduces late fetch/body installation, retained and newly allocated
+URLs after destroy, ignored HTTP failures, orphaned URLs after init failures, and revoking the
+old URL before a new allocation can fail. Async init rejection is currently unobserved by the
+plugin. Task 03 must handle these internal failures while retaining the void selection methods.
+Keep the current parser's best-effort behavior separate from these resource fixes: invalid-header
+diagnostics can coexist with usable cues, and metadata is intentionally read after download.
+
 ## Vendor boundary and validation
 
 The comparison revision is w3c/webvtt.js `380cfcce34ba8b472d3a31474874eb72a0e5f460`.
@@ -43,6 +50,7 @@ Use the pinned Node and Yarn 1.22.22:
 
 ```sh
 yarn test:multiple-subtitles
+yarn test:browser test/browser/multiple-subtitles-history.spec.js
 yarn build artplayer-plugin-multiple-subtitles
 ```
 
@@ -50,6 +58,10 @@ Historical tests read verified npm bytes and frozen Git inputs. For current norm
 set ARTPLAYER_MULTIPLE_SUBTITLES_CANDIDATE=1; optionally set
 ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT to an actual main/legacy file, then run
 `node --test test/multiple-subtitles.test.js`. These tests use controlled subtitle hosts;
-they do not prove native rendering, decoder coverage or the online editor. Tasks 02 and
-05/06 own error/lifecycle reproduction, real core/device combinations and demo acceptance.
+they do not prove native rendering or the online editor. The separate historical browser suite
+uses actual 1.2.0 main with published/candidate cores: SRT display and selection, pending native
+fetch after destroy, and native Blob readability/late reset allocations. It covers Chromium,
+Firefox and Windows WebKit; it is not all historical cores, ASS display or physical Safari.
+The failure unit suite uses real current core converters and TextDecoder for SRT/ASS/encodings.
+Tasks 05/06 still own complete core/device combinations and demo acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.

@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-02 错误与生命周期复现完成
+
+9 份历史实现各 18 类异常/边界，共 162 项；本包命令及主 test:unit 已接入，
+本包 215 项通过。真实核心 converter 与 TextDecoder 覆盖 SRT/ASS/编码，另验证
+轨序、重叠、名称、空轨、坏 header 容错、错误身份、下载中销毁和保留方法。
+真实 1.2.0 插件配发布/候选核心，在 Chromium/Firefox/Windows WebKit 共 18 项通过：
+SRT 原生字幕显示与切换、挂起 fetch 销毁后继续安装、Blob URL 残留与 late reset。
+这是历史缺陷的复现成功，不代表已修复；LIFE/MERGE 保持 open，新增 HTTP/HOST 风险。
+完整 CI 2285 项通过（1937 单元、14 工程、334 基线），严格生产 TS 仍 346 文件；
+新增文件显式 lint 通过。声明指纹差异已核对仅为 CRLF，生产源码/声明/产物均未改。
+见[复现记录](changes/2026-09-13-PKG-MULTI-SUB-02-failures.md)和
+[验证证据](baselines/multiple-subtitles-failures.json)。实体设备、ASS 原生显示及完整组合仍待 05/06。
+222 项：119 done、13 doing、90 todo；196 项风险。独立本地任务提交，不推送、不发布。
+下一步 MULTI-SUB-03 拆分获取/解析合并/资源所有权并修复已复现缺陷；VTT 类型取舍继续待决。
+
+
 ## PKG-MULTI-SUB-01 历史契约与 parser 来源完成
 
 冻结三个实际 npm 版本、20 成员与 9 份 Git 输入；53 项本包契约/vendor 测试通过，
