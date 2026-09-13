@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VTT-THUMB-02",
+  "status": "done",
+  "parentCommit": "d4ede650e8188dab3c21524cf2e524887412a436",
+  "checks": [
+    {
+      "command": "node --test test/vtt-thumbnail.test.js",
+      "result": "pass",
+      "tests": 108,
+      "log": "refactor/.cache/vtt-thumbnail02-initial.log"
+    },
+    {
+      "command": "yarn test:vtt-thumbnail",
+      "result": "pass",
+      "tests": 199,
+      "log": "refactor/.cache/vtt-thumbnail02-targeted.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1680,
+        "engineering": 14,
+        "baseline": 323,
+        "total": 2017
+      },
+      "log": "refactor/.cache/vtt-thumbnail02-ci.log",
+      "logSha256": "1d478933a55cde3b947b5a20a6dc7f1d346729a8afaa6adf5075365f7fcd0643"
+    }
+  ],
+  "fixture": {
+    "file": "docs/assets/sample/bbb-thumbnails.vtt",
+    "sha256": "1b88c30cf67d5c3da8281a150e8277858781c8077df0c6bfd2f32550da7323ba",
+    "cues": 120
+  },
+  "limitations": [
+    "Historical failures are reproduced, not fixed",
+    "Controlled host only; no native browser, installed package or final core claim",
+    "Twelve fixtures preserve actual archive/source distinctions from task 01"
+  ]
+}

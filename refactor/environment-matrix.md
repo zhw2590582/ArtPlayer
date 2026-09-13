@@ -57,7 +57,7 @@ Node10 是 TS 模块解析模式名，不代表支持 Node.js 10。现代 es2020
 | artplayer-plugin-jassub / 1.1.0 | ASS、worker/WASM/font 加载、切源/销毁；短 ASS+明确来源字体 | 内嵌资源哈希已有；版本对应、跨源/worker 限制、实际渲染待 | PKG-JASSUB-01/02/05/06 |
 | artplayer-plugin-multiple-subtitles / 1.2.0 | VTT 合并/排序/解析错误、URL 回收；双语言/空/坏 VTT | parser 来源头已观察；特有行为和浏览器字幕待 | PKG-MULTI-SUB-01/02/05/06 |
 | artplayer-plugin-vast / 1.2.0 | Glomex/Google IMA、广告错误/恢复、重复初始化；供应商测试广告标签 | 依赖版本已记录；实际 IMA 网络/广告流程待，PR 用受控 adapter | PKG-VAST-01/02/05/06 |
-| artplayer-plugin-vtt-thumbnail / 1.1.0 | WebVTT 时间和 sprite xywh、图片失败/跨源；本地 VTT+sprite | 发布/浏览器/边界待 | PKG-VTT-THUMB-01/02/05/06 |
+| artplayer-plugin-vtt-thumbnail / 1.1.0 | WebVTT 时间和 sprite xywh、图片失败/跨源；本地 VTT+sprite | 五个实际发布归档和可控历史边界/故障已核对；原生图片、浏览器、核心组合仍待 05/06 | PKG-VTT-THUMB-01/02/05/06 |
 | artplayer-proxy-canvas / 1.1.0 | video-like 属性/事件、Canvas 绘制、seek/销毁；MP4 | shim 与实际媒体顺序、跨源/移动待 | PKG-CANVAS-01/02/05/06 |
 | artplayer-proxy-mediabunny / 1.2.0 | Mediabunny 1.56.1 当前解析；WebCodecs/AudioContext、HLS/轨道拓扑、AV 同步 | 库依赖不等于 codec 可用；准确 codec/profile、设备能力、长播放待 | PKG-MB-01/02/07/08/09/10 |
 | artplayer-tool-iframe / 1.1.0 | 跨窗协议、ready/错误/销毁；同源与两个受控不同 origin 页面 | 消息/嵌套浏览器及沙箱权限待 | PKG-IFRAME-01/02/05/06 |
