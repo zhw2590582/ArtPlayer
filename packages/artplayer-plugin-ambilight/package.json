@@ -19,23 +19,23 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-plugin-ambilight.d.ts",
+      "import": "./dist/artplayer-plugin-ambilight.mjs",
+      "require": "./dist/artplayer-plugin-ambilight.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-plugin-ambilight.d.ts",
+      "import": "./dist/artplayer-plugin-ambilight.legacy.js",
+      "require": "./dist/artplayer-plugin-ambilight.legacy.js"
+    },
+    "./runtime": {
       "import": {
-        "types": "./types/artplayer-plugin-ambilight.d.mts",
+        "types": "./types/runtime.d.mts",
         "default": "./dist/artplayer-plugin-ambilight.mjs"
       },
       "require": {
-        "types": "./types/artplayer-plugin-ambilight.d.cts",
+        "types": "./types/runtime.d.cts",
         "default": "./dist/artplayer-plugin-ambilight.js"
-      }
-    },
-    "./legacy": {
-      "import": {
-        "types": "./types/artplayer-plugin-ambilight.d.cts",
-        "default": "./dist/artplayer-plugin-ambilight.legacy.js"
-      },
-      "require": {
-        "types": "./types/artplayer-plugin-ambilight.d.cts",
-        "default": "./dist/artplayer-plugin-ambilight.legacy.js"
       }
     }
   },
@@ -48,6 +48,9 @@
     "*": {
       "legacy": [
         "types/artplayer-plugin-ambilight.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
       ]
     }
   }

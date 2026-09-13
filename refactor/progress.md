@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-FACTORY-01 历史工厂类型修复完成
+
+Canvas/Ambilight落实已批准规则：保留真实npm1.1.0根工厂与NodeNext namespace，
+/runtime提供准确可选调用与self.default；1.0冲突迁移已入两包README。共34个真实
+安装配置、14个候选配置全部正例通过，每配置分别拒绝14/15个指定反例。8项专项
+测试、共享strict消费检查和编辑器生成通过。见[变更](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
+及[证据](baselines/factory-compatibility-validation.json)。FACTORY-TYPE-01关闭；
+包05/06及发布验收仍独立。ASR编辑器导出冲突另已修复并提交111710703。
+228项：133 done、17 doing、78 todo。CAST03源码迁移开始；VTT/MultiSub类型规则
+由独立子代理继续落实。未推送或发布。
+
+
 ## PKG-CAST-02 Chromecast 错误基线完成
 
 93项受控历史测试通过，其中65项新增错误/生命周期观察。首次会话结果误用、已就绪

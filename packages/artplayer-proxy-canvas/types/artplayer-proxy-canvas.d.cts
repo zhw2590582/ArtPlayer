@@ -1,4 +1,2 @@
-// eslint-disable-next-line ts/no-require-imports -- Preserve the CommonJS export-assignment namespace.
-import artplayerProxyCanvas = require('./artplayer-proxy-canvas.js')
-
-export = artplayerProxyCanvas
+export { default } from './artplayer-proxy-canvas.js'
+export type { Callable, Factory, MediaCanvas, Option, Result, RuntimeFactory } from './artplayer-proxy-canvas.js'

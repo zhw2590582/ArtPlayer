@@ -10,18 +10,21 @@ import compat from 'typescript-compat'
 import { checkPluginEditorDeclaration, generatePluginEditorDeclaration } from '../../scripts/plugin-editor-types.mjs'
 import { checkConsumer } from '../../scripts/typecheck.mjs'
 import { verifyCanvasContract } from './canvas-contract.mjs'
+import { canvasConsumerSource, canvasNamespaceConsumer, checkInvalidCanvasStatements } from './canvas-package-types.mjs'
 import { readMember } from './releases.mjs'
 
 const modes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
 
-test('Canvas current types preserve optional Parameters and exact Canvas result, while rejecting eleven invalid uses', () => {
+test('Canvas types preserve the latest plain factory and expose accurate runtime identity separately', () => {
   const source = fs.readFileSync('test/types/canvas.ts', 'utf8')
   for (const [compiler, mode] of modes) {
-    assert.deepEqual(checkConsumer(compiler, mode, source), [], `${compiler.version} ${mode}`)
-    assert.equal(checkConsumer(compiler, mode, source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 11)
+    const consumer = canvasConsumerSource(source, mode)
+    assert.deepEqual(checkConsumer(compiler, mode, consumer), [], `${compiler.version} ${mode}`)
+    checkInvalidCanvasStatements(consumer, checkConsumer(compiler, mode, consumer.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')))
   }
-  assert.deepEqual(checkConsumer(ts, 'nodenext-cjs', `import canvas = require('artplayer-proxy-canvas'); import legacy = require('artplayer-proxy-canvas/legacy');
-const callback: canvas.Option = (ctx, video) => ctx.drawImage(video, 0, 0); canvas(callback); canvas.default(); legacy(); legacy.default(callback);`), [])
+  assert.deepEqual(checkConsumer(ts, 'nodenext-cjs', `import canvas = require('artplayer-proxy-canvas'); import legacy = require('artplayer-proxy-canvas/legacy'); import runtime = require('artplayer-proxy-canvas/runtime');
+const callback: canvas.Option = (ctx, video) => ctx.drawImage(video, 0, 0); canvas.default(callback); legacy.default(); runtime(); runtime.default(callback);`), [])
+  assert.deepEqual(checkConsumer(ts, 'nodenext-esm', canvasNamespaceConsumer), [])
 })
 
 test('Canvas published declarations distinguish required 1.0.0 and optional 1.1.0 callbacks without changing Canvas return assignability', async () => {
@@ -48,11 +51,17 @@ test('Canvas published declarations distinguish required 1.0.0 and optional 1.1.
       assert.deepEqual(historical(source), [])
       assert.deepEqual(historical(`${source}\n${optional}`), version === '1.0.0' ? [2322, 2554] : [])
       assert.deepEqual(checkConsumer(compiler, 'node10-commonjs', `${source}\n${optional}`), [])
+      if (version === '1.1.0') {
+        assert.deepEqual(historical(`${source}
+type Factory = (option?: (ctx: CanvasRenderingContext2D, video: HTMLVideoElement) => void) => (art: Artplayer) => HTMLCanvasElement;
+const replacement: Factory = () => () => document.createElement('canvas');
+const fromOld: typeof canvas = replacement; const toOld: Factory = canvas; void [fromOld, toOld];`), [])
+      }
     }
   }
 })
 
-test('Canvas editor globals are generated from public types with optional callback, media view and negative checking', async () => {
+test('Canvas editor globals preserve the plain root factory with an explicit accurate runtime type view', async () => {
   const source = fs.readFileSync('packages/artplayer-proxy-canvas/types/artplayer-proxy-canvas.d.ts', 'utf8')
   const generated = generatePluginEditorDeclaration(source, 'artplayerProxyCanvas')
   const file = 'docs/assets/ts/artplayer-proxy-canvas.d.ts'
@@ -60,14 +69,19 @@ test('Canvas editor globals are generated from public types with optional callba
   assert.equal(formatted.errorCount, 0)
   assert.equal(fs.readFileSync(file, 'utf8').replaceAll('\r\n', '\n'), formatted.output || generated)
   const core = fs.readFileSync('docs/assets/ts/artplayer.d.ts', 'utf8')
-  const consumer = `artplayerProxyCanvas(); artplayerProxyCanvas.default((ctx, video) => ctx.drawImage(video, 0, 0));
+  const consumer = `artplayerProxyCanvas(); artplayerProxyCanvas((ctx, video) => ctx.drawImage(video, 0, 0));
+const replacement: typeof artplayerProxyCanvas = (_option?: artplayerProxyCanvas.Option) => (_art: Artplayer) => document.createElement('canvas');
+const precise = artplayerProxyCanvas as artplayerProxyCanvas.RuntimeFactory; precise.default();
 const result: artplayerProxyCanvas.Result = document.createElement('canvas');
 const media = result as artplayerProxyCanvas.MediaCanvas; media.play();
+void replacement;
+// @ts-expect-error Root factory does not require or expose a self alias.
+artplayerProxyCanvas.default();
 // @ts-expect-error Callback must be a function in public types.
 artplayerProxyCanvas(42);`
   for (const compiler of [ts, compat]) {
     assert.deepEqual(checkPluginEditorDeclaration(generated, core, consumer, compiler), [])
-    assert.equal(checkPluginEditorDeclaration(generated, core, consumer.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, ''), compiler).length, 1)
+    assert.equal(checkPluginEditorDeclaration(generated, core, consumer.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, ''), compiler).length, 2)
   }
 })
 

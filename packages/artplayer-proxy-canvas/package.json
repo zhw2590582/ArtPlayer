@@ -19,23 +19,23 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/artplayer-proxy-canvas.d.ts",
+      "import": "./dist/artplayer-proxy-canvas.mjs",
+      "require": "./dist/artplayer-proxy-canvas.js"
+    },
+    "./legacy": {
+      "types": "./types/artplayer-proxy-canvas.d.ts",
+      "import": "./dist/artplayer-proxy-canvas.legacy.js",
+      "require": "./dist/artplayer-proxy-canvas.legacy.js"
+    },
+    "./runtime": {
       "import": {
-        "types": "./types/artplayer-proxy-canvas.d.mts",
+        "types": "./types/runtime.d.mts",
         "default": "./dist/artplayer-proxy-canvas.mjs"
       },
       "require": {
-        "types": "./types/artplayer-proxy-canvas.d.cts",
+        "types": "./types/runtime.d.cts",
         "default": "./dist/artplayer-proxy-canvas.js"
-      }
-    },
-    "./legacy": {
-      "import": {
-        "types": "./types/artplayer-proxy-canvas.d.cts",
-        "default": "./dist/artplayer-proxy-canvas.legacy.js"
-      },
-      "require": {
-        "types": "./types/artplayer-proxy-canvas.d.cts",
-        "default": "./dist/artplayer-proxy-canvas.legacy.js"
       }
     }
   },
@@ -48,6 +48,9 @@
     "*": {
       "legacy": [
         "types/artplayer-proxy-canvas.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
       ]
     }
   }

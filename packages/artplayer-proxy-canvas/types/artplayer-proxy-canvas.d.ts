@@ -1,27 +1,22 @@
-/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */
 import type Artplayer from 'artplayer'
 
-declare namespace artplayerProxyCanvas {
-  /** Runs after drawing and bitmap release, before the draw event. */
-  type Option = (ctx: CanvasRenderingContext2D, video: HTMLVideoElement) => void
+/** Runs after drawing and bitmap release, before the draw event. */
+export type Option = (ctx: CanvasRenderingContext2D, video: HTMLVideoElement) => void
 
-  /** Preserve the exact published return type and its assignability. */
-  type Result = HTMLCanvasElement
+/** Preserve the exact published 1.1.0 return type and its assignability. */
+export type Result = HTMLCanvasElement
 
-  /** Opt-in view of supported enumerable media members; native Canvas members win. */
-  type MediaCanvas = HTMLCanvasElement & Pick<HTMLVideoElement, Exclude<keyof HTMLVideoElement, keyof HTMLCanvasElement>>
+export type Factory = (option?: Option) => (art: Artplayer) => Result
+export type Callable = Factory
 
-  interface Callable {
-    /** Keep Parameters extraction optional, as published in 1.1.0. */
-    (option?: Option): (art: Artplayer) => Result
-  }
+/** Explicit view of forwarded media members; native Canvas members win. */
+export type MediaCanvas = HTMLCanvasElement & Pick<HTMLVideoElement, Exclude<keyof HTMLVideoElement, keyof HTMLCanvasElement>>
 
-  interface Factory extends Callable {
-    /** Same factory, for historical require(package).default calls. */
-    readonly default: Factory
-  }
+/** Opt-in runtime identity; the historical root factory has no required properties. */
+export interface RuntimeFactory extends Factory {
+  readonly default: RuntimeFactory
 }
 
-declare const artplayerProxyCanvas: artplayerProxyCanvas.Factory
-export = artplayerProxyCanvas
-export as namespace artplayerProxyCanvas
+declare const artplayerProxyCanvas: (option?: Option) => (art: Artplayer) => Result
+
+export default artplayerProxyCanvas

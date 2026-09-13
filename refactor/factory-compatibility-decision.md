@@ -1,15 +1,17 @@
-# Canvas / Ambilight 工厂类型兼容取舍（已确认，待实施）
+# Canvas / Ambilight 工厂类型兼容取舍（已确认并实施）
 
-PKG-FACTORY-01 已复现当前声明的问题，但尚未修改生产声明，不能标记完成。
-2026-09-13用户已接受统一规则，见[确认记录](type-compatibility-policy.md)。本页推荐
-方向已授权；此前Ads单项授权之外的待决状态由此次确认替代，实施和验证仍须完成。
+2026-09-13用户已接受统一规则，见[确认记录](type-compatibility-policy.md)。
+PKG-FACTORY-01随后完成两包声明、/runtime、迁移文档及真实安装验证，见
+[完成记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)和
+[验证证据](baselines/factory-compatibility-validation.json)。以下矩阵保留决策时的
+历史方案对照，不能将其中故意展示的失败方案视为当前生产实现。
 
 ## 问题与真实发布对照
 
 两包 npm 1.0.0 声明均为 `export =`，npm 1.1.0 均改为 `export default`。
 归档由各包 release 基线核验；测试读取真实 tarball 中的声明，不用工作区文件替代。
 
-当前为了兼容运行时 `require(package)` 和 `require(package).default`，公开 Factory
+修复前为了兼容运行时 `require(package)` 和 `require(package).default`，公开 Factory
 增加了必填 `.default`。这使 1.1.0 原本合法的 `const replacement: typeof factory = ...`
 报 TS2741。Ambilight 另外增加的可选参数重载也使只接受必填参数的旧替代工厂报 TS2322；
 保留最后一个必填重载只能保住 Parameters，无法保住整个函数的赋值关系。
@@ -63,17 +65,17 @@ import module = require('artplayer-plugin-ambilight')
 module.default({})
 ```
 
-完整候选声明由 `scripts/factory-assignability.mjs` 的 declaration(pkg, 'latest-default')
-生成。当前它只是可编译的核心签名提案，尚未加入全部命名类型、格式包装和安装验收，
-属于已批准方向，尚不属于已经实施并验证的生产修复。
+提案核心签名仍由 `scripts/factory-assignability.mjs` 的 declaration(pkg, 'latest-default')
+生成用于历史对照。实际生产声明已加入命名类型与/runtime格式桥，并完成34个真实安装
+配置验证。根NodeNext ESM保留1.1.0 namespace形状；准确默认导入应使用/runtime。
 
 ## 决策与后续
 
 - 状态：用户已明确接受上述较早版本TypeScript导入迁移；不因批准而跳过验证。
-- 下一步：修改两包声明和包装，补充 RuntimeFactory、全工厂赋值测试、编辑器和包内文档，
-  重建并执行真实安装消费矩阵；保留逐版本负例，验证 JS 产物与浏览器证据，单独完成任务提交。
+- 已完成：两包声明、RuntimeFactory、全工厂赋值测试、编辑器与文档、真实安装消费矩阵。
+  JS产物没有修改，现有实际分发身份测试通过，不声称新增浏览器设备证据。
 - 仍不得把optional .default、any、skipLibCheck或删除历史消费者当作修复。
-- PKG-CANVAS-05、PKG-AMBILIGHT-05、REL-01 仍依赖本任务完成。
+- PKG-CANVAS-05、PKG-AMBILIGHT-05、REL-01的此项依赖已满足，各自剩余验证继续实施。
 
 证据：[编译矩阵](baselines/factory-compatibility-proposals.json)、
 [原始回归](baselines/factory-assignment-gaps.json)。

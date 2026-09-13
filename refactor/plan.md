@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 228 项，范围 22 个包及工作区/示例。
 
-状态：todo 79 / doing 17 / blocked 0 / done 132 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 78 / doing 17 / blocked 0 / done 133 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -289,7 +289,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-CAST-01 | artplayer-plugin-chromecast<br>核对包契约与历史用法 | BASE-05 | url/sdk/icon/mimeType、loader、会话、全局 SDK 与结果 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-CAST-02 | artplayer-plugin-chromecast<br>建立特有行为与错误测试 | PKG-CAST-01, ENG-03, ENG-05 | SDK 脚本加载失败/重入、无设备/拒绝、重复实例与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
-| PKG-CAST-03 | artplayer-plugin-chromecast<br>整理内部职责与资源 | PKG-CAST-02, CORE-11, CORE-13 | SDK singleton/实例订阅/会话与控件职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
+| PKG-CAST-03 | artplayer-plugin-chromecast<br>整理内部职责与资源 | PKG-CAST-02, CORE-11, CORE-13 | SDK singleton/实例订阅/会话与控件职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | doing |
 | PKG-CAST-04 | artplayer-plugin-chromecast<br>迁移自有源码和公开类型 | PKG-CAST-03, ENG-04, ENG-06, CORE-07 | Cast 能力 adapter、全局对象和元数据类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-CAST-05 | artplayer-plugin-chromecast<br>验证新旧核心和组合 | PKG-CAST-04, CORE-22 | stub 测试之外记录实际 Cast 设备会话、源更新和断开 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-CAST-06 | artplayer-plugin-chromecast<br>验证分发并同步文档 | PKG-CAST-05, ENG-07 | chromecast.js、SDK URL/权限能力及待支持环境说明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
@@ -417,7 +417,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-FACTORY-01 | artplayer-proxy-canvas, artplayer-plugin-ambilight<br>修复已迁移工厂的反向赋值兼容 | PKG-CANVAS-04, PKG-AMBILIGHT-04, PKG-DPIP-04 | 复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档 | 默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用 | H | doing |
+| PKG-FACTORY-01 | artplayer-proxy-canvas, artplayer-plugin-ambilight<br>修复已迁移工厂的反向赋值兼容 | PKG-CANVAS-04, PKG-AMBILIGHT-04, PKG-DPIP-04 | 复现两包旧typeof工厂替换与新.default/可选重载冲突，修复公开类型并补安装消费者、产物和文档 | 默认工厂的历史合法反向赋值继续通过；既有类型/运行时导出逐版本核对，不能只验证Parameters或直接调用 | H | done |
 
 ## 2 测试与工程基础
 
@@ -533,7 +533,7 @@
 - PKG-ASR-02: [记录](changes/2026-09-13-PKG-ASR-02-audio-baseline.md) [记录](baselines/asr-audio-validation.json)
 - PKG-ASR-03: [记录](changes/2026-09-13-PKG-ASR-03-audio-ownership.md) [记录](baselines/asr-ownership-validation.json)
 - PKG-ASR-04: [记录](changes/2026-09-13-PKG-ASR-04-public-types.md) [记录](baselines/asr-types-validation.json) [记录](baselines/asr-type-diagnostics.json)
-- PKG-ASR-05: [记录](baselines/asr-volume-validation.json) [记录](baselines/asr-fallback-validation.json) [记录](baselines/asr-core.json) [记录](baselines/asr-local-core-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md) [记录](baselines/asr-combinations-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-cors-combinations.md) [记录](baselines/asr-explicit-capture-validation.json)
+- PKG-ASR-05: [记录](baselines/asr-volume-validation.json) [记录](baselines/asr-fallback-validation.json) [记录](baselines/asr-core.json) [记录](baselines/asr-local-core-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md) [记录](baselines/asr-combinations-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-cors-combinations.md) [记录](baselines/asr-explicit-capture-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-editor-generation.md)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)
@@ -571,7 +571,7 @@
 - PKG-TOOL-THUMB-02: [记录](baselines/thumbnail-behavior-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md)
 - PKG-TOOL-THUMB-03: [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md) [记录](baselines/thumbnail-input-checkpoint.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md) [记录](baselines/thumbnail-lifecycle-validation.json)
 - PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md) [记录](baselines/thumbnail-emitter-validation.json)
-- PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)
+- PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)
 - ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)
 - PKG-ASR-07: [记录](changes/2026-09-13-PKG-ASR-07-playback-volume.md) [记录](baselines/asr-volume-validation.json)

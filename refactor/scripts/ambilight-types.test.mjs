@@ -14,14 +14,23 @@ import { readMember } from './releases.mjs'
 
 const modes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
 
-test('Ambilight current types retain inference, optional runtime arguments and ten invalid-use rejections', () => {
+function publicSource(source, mode) {
+  return mode === 'nodenext-esm'
+    ? source.replace('import ambilight from \'artplayer-plugin-ambilight\'', 'import ambilightModule from \'artplayer-plugin-ambilight\'\nconst ambilight = ambilightModule.default')
+        .replace('import legacy from \'artplayer-plugin-ambilight/legacy\'', 'import legacyModule from \'artplayer-plugin-ambilight/legacy\'\nconst legacy = legacyModule.default')
+    : source
+}
+
+test('Ambilight retains published factory replacements and separates accurate optional runtime calls', () => {
   const source = fs.readFileSync('test/types/ambilight.ts', 'utf8')
   for (const [compiler, mode] of modes) {
-    assert.deepEqual(checkConsumer(compiler, mode, source), [], `${compiler.version} ${mode}`)
-    assert.equal(checkConsumer(compiler, mode, source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 10)
+    const adapted = publicSource(source, mode)
+    assert.deepEqual(checkConsumer(compiler, mode, adapted), [], `${compiler.version} ${mode}`)
+    assert.equal(checkConsumer(compiler, mode, adapted.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 15)
   }
   assert.deepEqual(checkConsumer(ts, 'nodenext-cjs', `import ambilight = require('artplayer-plugin-ambilight'); import legacy = require('artplayer-plugin-ambilight/legacy');
-const option: ambilight.Option = {}; ambilight(option); ambilight.default(option); legacy(); legacy.default(option);`), [])
+import runtime = require('artplayer-plugin-ambilight/runtime');
+const option: ambilight.Option = {}; ambilight.default(option); legacy.default(option); runtime(); runtime.default(option);`), [])
 })
 
 test('Ambilight published calls compile against both exact historical declarations and candidate without new inference widening', async () => {
@@ -53,7 +62,7 @@ test('Ambilight published calls compile against both exact historical declaratio
   }
 })
 
-test('Ambilight editor globals are generated from the public namespace and retain negative checks', async () => {
+test('Ambilight editor globals retain the required root factory and negative checks', async () => {
   const source = fs.readFileSync('packages/artplayer-plugin-ambilight/types/artplayer-plugin-ambilight.d.ts', 'utf8')
   const generated = generatePluginEditorDeclaration(source, 'artplayerPluginAmbilight')
   const file = 'docs/assets/ts/artplayer-plugin-ambilight.d.ts'
@@ -61,12 +70,17 @@ test('Ambilight editor globals are generated from the public namespace and retai
   assert.equal(formatted.errorCount, 0)
   assert.equal(fs.readFileSync(file, 'utf8').replaceAll('\r\n', '\n'), formatted.output || generated)
   const core = fs.readFileSync('docs/assets/ts/artplayer.d.ts', 'utf8')
-  const consumer = `const option: artplayerPluginAmbilight.Option = {}; artplayerPluginAmbilight(); artplayerPluginAmbilight.default(option);
+  const consumer = `const option: artplayerPluginAmbilight.Option = {}; artplayerPluginAmbilight(option);
+const replacement: typeof artplayerPluginAmbilight = (_option) => (_art) => ({name: 'artplayerPluginAmbilight', start() {}, stop() {}});
+// @ts-expect-error Required root argument.
+artplayerPluginAmbilight();
+// @ts-expect-error Optional invocation belongs to the runtime module.
+artplayerPluginAmbilight.default(option);
 // @ts-expect-error Invalid blur.
 artplayerPluginAmbilight({ blur: 2 });`
   for (const compiler of [ts, compat]) {
     assert.deepEqual(checkPluginEditorDeclaration(generated, core, consumer, compiler), [])
-    assert.equal(checkPluginEditorDeclaration(generated, core, consumer.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, ''), compiler).length, 1)
+    assert.equal(checkPluginEditorDeclaration(generated, core, consumer.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, ''), compiler).length, 3)
   }
 })
 

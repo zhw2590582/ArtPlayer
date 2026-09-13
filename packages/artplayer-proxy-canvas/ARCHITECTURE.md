@@ -3,10 +3,18 @@
 Public entry: `src/index.ts`; public declarations remain in
 `types/artplayer-proxy-canvas.d.ts`. The factory accepts the optional drawing callback,
 then synchronously returns an actual HTMLCanvasElement when registered with ArtPlayer.
-The public namespace preserves the optional callback and exact Canvas return extraction.
+The root preserves the latest npm 1.1.0 pure factory, optional callback and exact Canvas
+return extraction. Do not attach a required default member to this type: that breaks
+assigning an ordinary historical replacement function back to typeof factory.
 MediaCanvas is an explicit type view, not a narrowed factory result. CommonJS and browser
-factory.default are self aliases; .d.mts/.d.cts wrappers distinguish ESM and CommonJS
-resolution, and typesVersions keeps the legacy path available to older TypeScript.
+factory.default remain runtime self aliases. Accurate RuntimeFactory lives behind the
+additive /runtime entry, whose runtime.d.mts/runtime.d.cts bridges distinguish ESM and
+CommonJS and whose runtime.d.ts supports old Node10 export= resolution. Both entrypoints
+load the same existing dist files. The old root declaration bridges remain packaged,
+but root/legacy conditional types deliberately select the original .d.ts module shape.
+Root NodeNext ESM therefore keeps the published namespace shape; it is not silently made
+callable. Use /runtime for precise ESM default calls. The package README documents the
+approved 1.0 export= migration; no JavaScript calls were removed by this type decision.
 Historical JavaScript falsy callback arguments remain ignored at runtime; the typed public
 callback remains optional and function-valued.
 
@@ -72,8 +80,13 @@ geometry and is separate from native media pixel acceptance. npm core 5.1.7 has 
 option and is only a native-player capability control.
 
 `yarn test:canvas-types-package` installs real archived and candidate packages outside the
-workspace, verifies installed bytes and checks old/current compiler modes. The public
-namespace also generates the local editor declaration through the semantic generator.
+workspace, verifies installed bytes and checks old/current compiler modes. It preserves
+the actual old NodeNext direct-import errors and 1.0 export= differences, while testing
+latest namespace replacements, plain factory bidirectional assignments, runtime self
+identity and negative statements at their exact lines. No skipLibCheck or strictness
+relaxation is used. The public declarations also generate the local editor declaration
+through the semantic generator; the editor root stays plain, with an explicit
+artplayerProxyCanvas.RuntimeFactory assertion for code needing the runtime self alias.
 Broader installed artifact contents/deep paths and 8082 demos remain 06.
 Real Safari/mobile/device scope remains 05; Windows Playwright WebKit is not a device claim.
 See `refactor/canvas-validation.md` and the task evidence for actual outcomes and limitations.

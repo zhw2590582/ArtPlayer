@@ -167,7 +167,7 @@
 | DPIP-STYLE-01 | resolved / 已复现 | Document PiP 1.1.0 and frozen source duplicate style IDs when evaluated before DOMContentLoaded | PKG-DPIP-03 |
 | DPIP-MEDIA-01 | open / 已复现 | WebKit reports styled width640 for width320 media in the controlled Document PiP iframe matrix | PKG-DPIP-05 |
 | DPIP-RESOLVE-01 | resolved / 已复现 | Historical Document PiP exports hide declarations or infer an uncallable CommonJS namespace in modern resolution | PKG-DPIP-04, PKG-DPIP-06 |
-| FACTORY-TYPE-01 | open / 已复现 | Canvas and Ambilight default self property narrows assignability of historical factory replacements | PKG-FACTORY-01 |
+| FACTORY-TYPE-01 | resolved / 已复现 | Canvas and Ambilight default self property narrows assignability of historical factory replacements | PKG-FACTORY-01 |
 | MB-LICENSE-01 | open / 已复现 | Historical MediaBunny proxy bundles embed SDK code without MPL notice markers or separate license/source provenance | PKG-MB-10 |
 | MB-LIFE-01 | open / 已复现 | MediaBunny load, track replacement, timeout, RAF and audio callbacks lack one shared terminal owner | PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-09 |
 | MB-TYPE-01 | resolved / 已复现 | MediaBunny proxy declares only Canvas while exposing a shim and changes CommonJS export generation between releases | PKG-MB-08, PKG-MB-10 |

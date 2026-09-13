@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-FACTORY-01",
+  "capturedAt": "2026-09-13T08:50:20.867Z",
+  "status": "done",
+  "policy": "refactor/type-compatibility-policy.md",
+  "baseline": "Latest actual npm 1.1.0 for both packages; earlier 1.0.0 conflicts explicitly migrated, not silently claimed compatible.",
+  "reports": [
+    {
+      "name": "canvas",
+      "report": "refactor/.cache/canvas-package-types-2pltVA/report.json",
+      "sha256": "a1c381b23928f4bcc3fe4a8e54d90277a1ff6f4a4ec8bc0423ba1a6117cc18d1",
+      "archiveSha256": "da8cb6d8eb0f01cd97a9e4bccdebdab028fb4f985e54ff45743a5a6661980e62",
+      "modes": 17,
+      "candidateModes": 7,
+      "negativeStatementsPerCandidateMode": 14,
+      "historicalDiagnosticsRetained": true,
+      "sourceAndDistUnchanged": true
+    },
+    {
+      "name": "ambilight",
+      "report": "refactor/.cache/ambilight-package-types-sHTRf5/report.json",
+      "sha256": "4efcad331c5879d62b50d7333538bf908959b3ccda70933a37c233e804d7ff62",
+      "archiveSha256": "1a07bde5804eb63bd0436d0f63af6a9d0d35873e30e120b9ff1553806729649e",
+      "modes": 17,
+      "candidateModes": 7,
+      "negativeStatementsPerCandidateMode": 15,
+      "historicalDiagnosticsRetained": true,
+      "sourceAndDistUnchanged": true
+    }
+  ],
+  "checks": [
+    {
+      "file": "refactor/.cache/factory01-types-final.log",
+      "sha256": "e73fd496e06fd0eaba1646183d4f55e0e57350d24f3cdbbefebee5db40301476"
+    },
+    {
+      "file": "refactor/.cache/factory01-typecheck.log",
+      "sha256": "876eed09bef39ddecdbdf7202ba3b5d0ae062502da8f6b8d87d73efe90cab8d9"
+    },
+    {
+      "file": "refactor/.cache/factory01-editor.log",
+      "sha256": "c61d3d927caaf293c1442a2bbcc88ac3c79d25f6f7b16efcdb05feb7e4b02c79"
+    },
+    {
+      "file": "refactor/.cache/factory01-parent-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "verified": [
+    "Plain root factories assign both ways, exact Parameters/ReturnType.",
+    "Canvas optional callback and exact HTMLCanvasElement result; Ambilight required option and exact synchronous Result.",
+    "Root/legacy preserve 1.1.0 NodeNext namespace; runtime provides callable native ESM and CommonJS self alias.",
+    "Each actual tarball installed outside workspace, offline frozen reinstall and exact installed bytes.",
+    "Generated editor declarations and strict old/current compilers, actual main/legacy/global/ESM factory identities."
+  ],
+  "limitations": [
+    "No source or emitted JavaScript changed; no new browser/device evidence claimed.",
+    "Package 05/06 and release reviews remain separate tasks."
+  ]
+}

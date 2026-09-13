@@ -50,8 +50,9 @@ async function main() {
       const runtimeFile = path.join(consumer, 'exports.cjs')
       fs.writeFileSync(runtimeFile, plugin.label === 'candidate'
         ? `const assert = require('node:assert/strict');
-for (const name of ['artplayer-plugin-ambilight', 'artplayer-plugin-ambilight/legacy']) { const factory = require(name); assert.equal(typeof factory, 'function'); assert.equal(factory.default, factory); assert.equal(typeof factory(), 'function'); }
-import('artplayer-plugin-ambilight').then(module => { assert.deepEqual(Object.keys(module), ['default']); assert.equal(module.default.default, module.default); }).catch(error => { console.error(error); process.exitCode = 1; });`
+for (const name of ['artplayer-plugin-ambilight', 'artplayer-plugin-ambilight/legacy', 'artplayer-plugin-ambilight/runtime']) { const factory = require(name); assert.equal(typeof factory, 'function'); assert.equal(factory.default, factory); assert.equal(typeof factory(), 'function'); }
+assert.equal(require('artplayer-plugin-ambilight/runtime'), require('artplayer-plugin-ambilight'));
+Promise.all(['artplayer-plugin-ambilight', 'artplayer-plugin-ambilight/runtime', 'artplayer-plugin-ambilight/legacy'].map(name => import(name))).then(([root, runtime, legacy]) => { assert.deepEqual(Object.keys(root), ['default']); assert.deepEqual(Object.keys(runtime), ['default']); assert.equal(runtime.default, root.default); assert.equal(root.default.default, root.default); assert.equal(legacy.default, require('artplayer-plugin-ambilight/legacy')); }).catch(error => { console.error(error); process.exitCode = 1; });`
         : `const assert = require('node:assert/strict'); const value = require('artplayer-plugin-ambilight'); assert.equal(typeof value, '${plugin.version === '1.0.0' ? 'object' : 'function'}'); assert.equal(typeof (value.default || value)({}), 'function');`)
       fs.writeFileSync(path.join(output, `${plugin.label}-runtime.log`), run([runtimeFile], consumer))
       const modes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
@@ -60,14 +61,24 @@ import('artplayer-plugin-ambilight').then(module => { assert.deepEqual(Object.ke
       for (const [compiler, mode] of modes) {
         const next = mode.startsWith('nodenext')
         const extension = next ? mode.endsWith('-cjs') ? 'cts' : 'mts' : 'ts'
-        const source = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/ambilight.ts' : 'refactor/fixtures/consumers/ambilight-published.ts'), 'utf8')
+        let source = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/ambilight.ts' : 'refactor/fixtures/consumers/ambilight-published.ts'), 'utf8')
+        if (plugin.label === 'candidate' && mode === 'nodenext-esm') {
+          source = source
+            .replace('import ambilight from \'artplayer-plugin-ambilight\'', 'import ambilightModule from \'artplayer-plugin-ambilight\'\nconst ambilight = ambilightModule.default')
+            .replace('import legacy from \'artplayer-plugin-ambilight/legacy\'', 'import legacyModule from \'artplayer-plugin-ambilight/legacy\'\nconst legacy = legacyModule.default')
+        }
+        if (mode.endsWith('-no-interop'))
+          source = source.replace('import runtime from \'artplayer-plugin-ambilight/runtime\'', 'import runtime = require(\'artplayer-plugin-ambilight/runtime\')')
         const filename = path.join(consumer, `consumer.${extension}`)
-        const historical = path.join(consumer, `historical.${extension}`)
-        fs.copyFileSync(path.join(workspace, 'refactor/fixtures/consumers/ambilight-published.ts'), historical)
-        const files = plugin.label === 'candidate' ? [filename, historical] : [filename]
-        if (mode === 'nodenext-cjs' && plugin.label !== 'published-1.1.0') {
-          const commonjs = path.join(consumer, 'commonjs.cts')
-          fs.writeFileSync(commonjs, `import ambilight = require('artplayer-plugin-ambilight'); ambilight({ blur: '50px', opacity: 0.5, frequency: 10, zIndex: 9, duration: 0.3 }); ${plugin.label === 'candidate' ? 'ambilight.default();' : ''}`)
+        const files = [filename]
+        if (plugin.label === 'candidate' && mode !== 'bundler-esm' && mode !== 'nodenext-esm') {
+          const commonjs = path.join(consumer, `commonjs.${extension}`)
+          fs.writeFileSync(commonjs, `import ambilight = require('artplayer-plugin-ambilight'); import legacy = require('artplayer-plugin-ambilight/legacy'); import runtime = require('artplayer-plugin-ambilight/runtime');
+import type Artplayer from 'artplayer';
+const replacement: typeof ambilight.default = (_option) => (_art: Artplayer) => ({name: 'artplayerPluginAmbilight', start() {}, stop() {}});
+const legacyReplacement: typeof legacy.default = replacement;
+ambilight.default({}); legacy.default({}); runtime(); runtime.default();
+const option: runtime.Option = {}; runtime(option); void legacyReplacement;`)
           files.push(commonjs)
         }
         const options = { strict: true, noEmit: true, skipLibCheck: false, types: [], esModuleInterop: !mode.endsWith('-no-interop'), target: compiler.ScriptTarget.ES2020, lib: ['lib.es2020.d.ts', 'lib.dom.d.ts'], module: next ? compiler.ModuleKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleKind.ESNext : compiler.ModuleKind.CommonJS, moduleResolution: next ? compiler.ModuleResolutionKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleResolutionKind.Bundler : compiler.ModuleResolutionKind.NodeJs }
@@ -78,22 +89,43 @@ import('artplayer-plugin-ambilight').then(module => { assert.deepEqual(Object.ke
             const actual = fs.realpathSync(file.fileName)
             assert(actual.startsWith(fs.realpathSync(consumer) + path.sep) || (program.isSourceFileDefaultLibrary(file) && path.dirname(actual) === fs.realpathSync(path.dirname(compiler.sys.getExecutingFilePath()))), `Types escaped installed consumer: ${actual}`)
           }
-          return compiler.getPreEmitDiagnostics(program).map(item => ({ code: item.code, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n') }))
+          return compiler.getPreEmitDiagnostics(program).map(item => ({ code: item.code, line: item.file && item.start !== undefined ? item.file.getLineAndCharacterOfPosition(item.start).line + 1 : null, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n').replaceAll(consumer.replaceAll('\\', '/'), '<consumer>') }))
         }
         const diagnostics = compile(source)
         const historicalFailure = plugin.label === 'published-1.1.0' && mode === 'nodenext-esm'
         assert.deepEqual(diagnostics.map(item => item.code), historicalFailure ? [2349, 2349, 2322, 2344] : [], `${plugin.label} ${compiler.version} ${mode}`)
         const invalid = plugin.label === 'candidate' ? compile(source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')) : []
-        if (plugin.label === 'candidate')
-          assert.equal(invalid.length, 10, 'Installed declarations must reject all invalid uses')
-        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid })
+        if (plugin.label === 'candidate') {
+          assert.equal(invalid.length, 15, 'Installed declarations must reject all invalid uses')
+          const expectedLines = []
+          let line = 1
+          for (const text of source.split('\n')) {
+            if (text.startsWith('// @ts-expect-error'))
+              expectedLines.push(line)
+            else line++
+          }
+          assert.deepEqual(invalid.map(item => item.line).sort((a, b) => a - b), expectedLines, 'Each invalid statement must fail at its own line')
+        }
+        const published = plugin.label === 'candidate' ? compile(fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/ambilight-published.ts'), 'utf8')) : diagnostics
+        assert.deepEqual(published.map(item => item.code), (plugin.label === 'candidate' || plugin.label === 'published-1.1.0') && mode === 'nodenext-esm' ? [2349, 2349, 2322, 2344] : [], 'Preserve exact historical direct-consumer diagnostic codes')
+        const namespace = plugin.label !== 'published-1.0.0' && mode === 'nodenext-esm'
+          ? compile(`import ambilight from 'artplayer-plugin-ambilight'; import type Artplayer from 'artplayer';
+const replacement: typeof ambilight.default = (_option) => (_art: Artplayer) => ({name: 'artplayerPluginAmbilight', start() {}, stop() {}});
+ambilight.default({}); void replacement;`)
+          : []
+        assert.deepEqual(namespace, [], 'Latest published NodeNext namespace remains valid')
+        const olderRequire = mode !== 'bundler-esm' && mode !== 'nodenext-esm'
+          ? compile(`import ambilight = require('artplayer-plugin-ambilight'); ambilight({blur: '50px', opacity: 0.5, frequency: 10, zIndex: 9, duration: 0.3});`)
+          : []
+        assert.deepEqual(olderRequire.map(item => item.code), mode !== 'bundler-esm' && mode !== 'nodenext-esm' && plugin.label !== 'published-1.0.0' ? [2349] : [], 'Earlier export-assignment typing conflicts are retained and documented')
+        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid, published, namespace, olderRequire })
       }
     }
     finally {
       removeConsumer(consumer)
     }
   }
-  writeJson(path.join(output, 'report.json'), { suite: 'ambilight-isolated-package-types', introducedBy: 'PKG-AMBILIGHT-04', scope: 'Two actual published plugins and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, compiler/default/import= contracts. Published 1.0.0 required option fields became optional in 1.1.0; candidate retains 1.1.0 extraction. This is not proxy, device or complete distribution acceptance.', packages, published: candidates.slice(0, 2).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: pkg.sha256 })), matrix })
+  writeJson(path.join(output, 'report.json'), { suite: 'ambilight-isolated-package-types', introducedBy: 'PKG-FACTORY-01', scope: 'Two actual published plugins and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, full factory replacements and required root option; runtime optional calls and self alias. Published 1.1.0 NodeNext ESM namespace and four old direct-call diagnostics are retained. Published 1.0.0 export-assignment and required fields have documented migration. This is not proxy, device or complete distribution acceptance.', packages, published: candidates.slice(0, 2).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: pkg.sha256 })), matrix })
   console.log(`Ambilight installed types passed: ${matrix.length} cases; ${output}`)
 }
 
