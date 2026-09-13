@@ -1,0 +1,4248 @@
+{
+  "task": "PKG-AUTO-THUMB-07",
+  "status": "complete",
+  "baselineCommit": "e93d3cbb67a937a94e3979f36efe16ee39cadb33",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "source": {
+    "path": "packages/artplayer-plugin-auto-thumbnail/src/extraction.ts",
+    "sha256": "028772ae962cb9d02e719435b799c6e0e193b15bc8448baa411a94bb7556fd5d",
+    "bytes": 2296
+  },
+  "architecture": {
+    "path": "packages/artplayer-plugin-auto-thumbnail/ARCHITECTURE.md",
+    "sha256": "d25be2e728d2c8cab00426a84abba2b5afffe407fc2d92b0caf939baf47a904b",
+    "bytes": 8933
+  },
+  "beforeArtifact": {
+    "path": "refactor/.cache/auto-thumb-canvas-before.js",
+    "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+    "bytes": 6044
+  },
+  "artifacts": [
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+      "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+      "bytes": 6135,
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-auto-thumbnail.js",
+        "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+        "bytes": 6135
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+      "bytes": 6715,
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-auto-thumbnail.legacy.js",
+        "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+        "bytes": 6715
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+      "sha256": "cf726c7e6c5c08a1afc9b2c080e15150f3b16c0b321779257db662fe83336bf0",
+      "bytes": 11677,
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-auto-thumbnail.mjs",
+        "sha256": "cf726c7e6c5c08a1afc9b2c080e15150f3b16c0b321779257db662fe83336bf0",
+        "bytes": 11677
+      }
+    }
+  ],
+  "controlled": [
+    {
+      "path": "refactor/.cache/auto-thumb-canvas-before.log",
+      "sha256": "3d40653069bcfe515426ecc8bb0595ac7191d7ebb74f88dd3bb974bc87929ff4",
+      "bytes": 5476,
+      "counts": {
+        "tests": 6,
+        "pass": 0,
+        "fail": 6
+      }
+    },
+    {
+      "path": "refactor/.cache/auto-thumb-canvas-after.log",
+      "sha256": "68fcd7a895737219444afc172b83114fd48661c840085de65396958244c96283",
+      "bytes": 664,
+      "counts": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0
+      }
+    },
+    {
+      "path": "refactor/.cache/auto-thumb-canvas-tests.log",
+      "sha256": "12e0e8b06291be00082f18f74d27bba1bfe4812c9da1c85b4edb843082060a77",
+      "bytes": 20711,
+      "counts": {
+        "tests": 160,
+        "pass": 159,
+        "fail": 1
+      }
+    },
+    {
+      "path": "refactor/.cache/auto-thumb-canvas-tests-final.log",
+      "sha256": "69157d61e43a1a99e3f17d760a4043ca6c0c9757305c2672e899fe58b2d90c83",
+      "bytes": 19819,
+      "counts": {
+        "tests": 160,
+        "pass": 160,
+        "fail": 0
+      }
+    },
+    {
+      "path": "refactor/.cache/auto-thumb-canvas-unit-js.log",
+      "sha256": "dd24231c16af3a8c8bdd70b61aea9204ba7d84648f339ff8e8bb9525dab8833d",
+      "bytes": 5808,
+      "counts": {
+        "tests": 58,
+        "pass": 58,
+        "fail": 0
+      }
+    },
+    {
+      "path": "refactor/.cache/auto-thumb-canvas-unit-legacy.js.log",
+      "sha256": "ffe539b33fb110ce4f5997000cb4f9d2f0981defd9b15e1b08be7dd3950f71f2",
+      "bytes": 5810,
+      "counts": {
+        "tests": 58,
+        "pass": 58,
+        "fail": 0
+      }
+    }
+  ],
+  "reports": [
+    {
+      "mode": "before",
+      "report": "refactor/.cache/auto-thumb-canvas-native-before.json",
+      "sha256": "62b56c29d2f1c8d391f534dc4d51b4c336b75e48503c9bc2f5e882b0e777f063",
+      "results": "refactor/.cache/auto-thumb-canvas-native-before-results",
+      "stats": {
+        "startTime": "2026-09-13T19:40:36.042Z",
+        "duration": 3486.4629999999997,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            {
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js",
+                "column": 36,
+                "line": 116
+              },
+              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    Array [\u001b[22m\n\u001b[32m-     0,\u001b[39m\n\u001b[32m-     0,\u001b[39m\n\u001b[31m+     800,\u001b[39m\n\u001b[31m+     45,\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m  ]\u001b[22m\n\n  114 |     expect(state.after).toEqual(state.before)\n  115 |     expect(state.video).toEqual({ connected: false, src: null, readyState: 0, paused: true, handlers: [true, true, true, true] })\n> 116 |     expect(state.canvasDimensions).toEqual([[0, 0]])\n      |                                    ^\n  117 |     expect(state.publishedImage).toEqual(scenario === 'complete' ? { width: 800, height: 45 } : null)\n  118 |     expect(state.final).toEqual({ urls: 0, listeners: 0, updates: scenario === 'complete' ? 2 : 0 })\n  119 |     expect(state.blobs.every(blob => blob.type === 'image/jpeg' && blob.bytes > 0)).toBe(true)\n    at D:\\github\\ArtPlayer\\test\\browser\\auto-thumbnail-lifecycle.spec.js:116:36"
+            }
+          ],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    800,
+                    45
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4226
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "main",
+      "report": "refactor/.cache/auto-thumb-canvas-native-main.json",
+      "sha256": "dae64fb488c400b5a8e9eba20fa92c593a669a6eaab7f2120816617ab2a80650",
+      "results": "refactor/.cache/auto-thumb-canvas-native-main-results",
+      "stats": {
+        "startTime": "2026-09-13T19:42:49.544Z",
+        "duration": 25004.026,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "destroy",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "restart",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4226
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-destroy",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-restart",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "destroy",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4076
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "restart",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4076
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4076
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 6752
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-destroy",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-restart",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "destroy",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "restart",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4125
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-destroy",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-restart",
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "media": "auto-thumbnail-timeline",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    126,
+                    0,
+                    126,
+                    255
+                  ],
+                  [
+                    254,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    1,
+                    252,
+                    255
+                  ],
+                  [
+                    255,
+                    255,
+                    1,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      127,
+                      0,
+                      126,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      254,
+                      0,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      255,
+                      2,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.6,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.2,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.8,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.4,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "media": "pattern",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    15,
+                    13,
+                    138,
+                    255
+                  ],
+                  [
+                    15,
+                    15,
+                    139,
+                    255
+                  ],
+                  [
+                    15,
+                    15,
+                    139,
+                    255
+                  ],
+                  [
+                    14,
+                    15,
+                    141,
+                    255
+                  ],
+                  [
+                    213,
+                    61,
+                    47,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    244,
+                    1,
+                    0,
+                    255
+                  ],
+                  [
+                    5,
+                    251,
+                    2,
+                    255
+                  ],
+                  [
+                    15,
+                    15,
+                    139,
+                    255
+                  ],
+                  [
+                    255,
+                    0,
+                    253,
+                    255
+                  ],
+                  [
+                    2,
+                    255,
+                    253,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      253,
+                      52,
+                      0,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.583333,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.166667,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.791667,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.375,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "media": "auto-thumbnail-timeline",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    136,
+                    19,
+                    126,
+                    255
+                  ],
+                  [
+                    254,
+                    24,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    254,
+                    241,
+                    2,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      137,
+                      19,
+                      126,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      24,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      241,
+                      2,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.6,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.2,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.8,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.4,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "media": "pattern",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    5,
+                    15,
+                    250,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    247,
+                    64,
+                    0,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    255,
+                    22,
+                    9,
+                    255
+                  ],
+                  [
+                    0,
+                    216,
+                    3,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    255,
+                    36,
+                    254,
+                    255
+                  ],
+                  [
+                    1,
+                    229,
+                    254,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      69,
+                      1,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.6,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.2,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.8,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.4,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "media": "auto-thumbnail-timeline",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    238,
+                    14,
+                    14,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    15,
+                    239,
+                    255
+                  ],
+                  [
+                    235,
+                    236,
+                    12,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "time": 1.6016053,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      238,
+                      14,
+                      14,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.200928,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      16,
+                      16,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8015866,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4018795,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      235,
+                      236,
+                      12,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [],
+                "supportsPresentation": false,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "23c8a1405077c315a7ebd4700a16d8ac05716464a6601c32a702a30e599727c3",
+                "media": "pattern",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    201,
+                    71,
+                    57,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    238,
+                    14,
+                    15,
+                    255
+                  ],
+                  [
+                    14,
+                    238,
+                    14,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    238,
+                    13,
+                    237,
+                    255
+                  ],
+                  [
+                    14,
+                    237,
+                    237,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "time": 1.6003974,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2008015,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8012444,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4034658,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      238,
+                      61,
+                      10,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [],
+                "supportsPresentation": false,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "legacy",
+      "report": "refactor/.cache/auto-thumb-canvas-native-legacy.json",
+      "sha256": "87505fd4eb9cd4dab04ed7a284a60d118682214ccea88320630a297a1935a6a0",
+      "results": "refactor/.cache/auto-thumb-canvas-native-legacy-results",
+      "stats": {
+        "startTime": "2026-09-13T19:43:49.558Z",
+        "duration": 25423.173,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "destroy",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "restart",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 2635
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4226
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-destroy",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-restart",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "destroy",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4076
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "restart",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4076
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4076
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 6752
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-destroy",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-restart",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [],
+                "heldFrames": 1,
+                "frameSupport": true,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "destroy",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "restart",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "complete",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "after": {
+                  "urls": 1,
+                  "updates": 2
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": {
+                  "width": 800,
+                  "height": 45
+                },
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 2
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  },
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4215
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-destroy",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 983
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-native-lifecycle",
+              "value": {
+                "scenario": "frame-restart",
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+                "before": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "after": {
+                  "urls": 0,
+                  "updates": 0
+                },
+                "video": {
+                  "connected": false,
+                  "src": null,
+                  "readyState": 0,
+                  "paused": true,
+                  "handlers": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "canvasDimensions": [
+                  [
+                    0,
+                    0
+                  ]
+                ],
+                "publishedImage": null,
+                "final": {
+                  "urls": 0,
+                  "listeners": 0,
+                  "updates": 0
+                },
+                "blobs": [
+                  {
+                    "type": "image/jpeg",
+                    "bytes": 4125
+                  }
+                ],
+                "heldFrames": 0,
+                "frameSupport": false,
+                "result": {
+                  "name": "artplayerPluginAutoThumbnail"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "media": "auto-thumbnail-timeline",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    126,
+                    0,
+                    126,
+                    255
+                  ],
+                  [
+                    254,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    1,
+                    252,
+                    255
+                  ],
+                  [
+                    255,
+                    255,
+                    1,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      127,
+                      0,
+                      126,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      254,
+                      0,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      255,
+                      2,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.6,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.2,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.8,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.4,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "browser": "153.0.8010.12",
+          "project": "chromium",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "media": "pattern",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    15,
+                    13,
+                    138,
+                    255
+                  ],
+                  [
+                    15,
+                    15,
+                    139,
+                    255
+                  ],
+                  [
+                    15,
+                    15,
+                    139,
+                    255
+                  ],
+                  [
+                    14,
+                    15,
+                    141,
+                    255
+                  ],
+                  [
+                    213,
+                    61,
+                    47,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    244,
+                    1,
+                    0,
+                    255
+                  ],
+                  [
+                    5,
+                    251,
+                    2,
+                    255
+                  ],
+                  [
+                    15,
+                    15,
+                    139,
+                    255
+                  ],
+                  [
+                    255,
+                    0,
+                    253,
+                    255
+                  ],
+                  [
+                    2,
+                    255,
+                    253,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      253,
+                      52,
+                      0,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.583333,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.166667,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.791667,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.375,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "media": "auto-thumbnail-timeline",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    136,
+                    19,
+                    126,
+                    255
+                  ],
+                  [
+                    254,
+                    24,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    254,
+                    241,
+                    2,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      137,
+                      19,
+                      126,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      24,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      241,
+                      2,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.6,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.2,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.8,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.4,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "browser": "155.0",
+          "project": "firefox",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "media": "pattern",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    5,
+                    15,
+                    250,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    247,
+                    64,
+                    0,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    255,
+                    22,
+                    9,
+                    255
+                  ],
+                  [
+                    0,
+                    216,
+                    3,
+                    255
+                  ],
+                  [
+                    1,
+                    14,
+                    253,
+                    255
+                  ],
+                  [
+                    255,
+                    36,
+                    254,
+                    255
+                  ],
+                  [
+                    1,
+                    229,
+                    254,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 1.6,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      14,
+                      253,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      255,
+                      69,
+                      1,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [
+                  {
+                    "mediaTime": 0,
+                    "currentTime": 0
+                  },
+                  {
+                    "mediaTime": 1.6,
+                    "currentTime": 1.6
+                  },
+                  {
+                    "mediaTime": 3.2,
+                    "currentTime": 3.2
+                  },
+                  {
+                    "mediaTime": 4.8,
+                    "currentTime": 4.8
+                  },
+                  {
+                    "mediaTime": 6.4,
+                    "currentTime": 6.4
+                  }
+                ],
+                "supportsPresentation": true,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "media": "auto-thumbnail-timeline",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    238,
+                    14,
+                    14,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    15,
+                    239,
+                    255
+                  ],
+                  [
+                    235,
+                    236,
+                    12,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ],
+                  [
+                    16,
+                    16,
+                    16,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0.0002962,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "time": 1.6019117,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      238,
+                      14,
+                      14,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2013872,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      16,
+                      16,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8018211,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4017066,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      235,
+                      236,
+                      12,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [],
+                "supportsPresentation": false,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        },
+        {
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "browser": "26.6",
+          "project": "webkit",
+          "status": "passed",
+          "errors": [],
+          "attachments": [
+            {
+              "name": "auto-thumbnail-candidate-hidden-pixels",
+              "value": {
+                "sha256": "32a620523aaccbfa3910232f88f255ebbadc89e20a0cb21dc09c17dff611627d",
+                "media": "pattern",
+                "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+                "cells": [
+                  [
+                    0,
+                    0,
+                    0,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    217,
+                    65,
+                    51,
+                    255
+                  ]
+                ],
+                "spatial": [
+                  [
+                    238,
+                    14,
+                    15,
+                    255
+                  ],
+                  [
+                    14,
+                    238,
+                    14,
+                    255
+                  ],
+                  [
+                    28,
+                    28,
+                    140,
+                    255
+                  ],
+                  [
+                    238,
+                    13,
+                    237,
+                    255
+                  ],
+                  [
+                    14,
+                    237,
+                    237,
+                    255
+                  ]
+                ],
+                "draws": [
+                  {
+                    "time": 0.0011342,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "time": 1.6006964,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 3.2010741,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 4.8014946,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      16,
+                      15,
+                      239,
+                      255
+                    ]
+                  },
+                  {
+                    "time": 6.4062879,
+                    "duration": 8,
+                    "connected": true,
+                    "visibility": "hidden",
+                    "display": "block",
+                    "width": 320,
+                    "height": 180,
+                    "raw": [
+                      239,
+                      62,
+                      14,
+                      255
+                    ]
+                  }
+                ],
+                "presented": [],
+                "supportsPresentation": false,
+                "final": [
+                  {
+                    "connected": false,
+                    "src": null,
+                    "paused": true
+                  }
+                ],
+                "playing": 0,
+                "warnings": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checks": [
+    "Package strict TypeScript passed",
+    "Targeted source and test ESLint passed",
+    "Yarn strict toolchain passed: 28 tools / 1394 selectors",
+    "Normal three-format repository build passed; all docs copies byte-identical",
+    "Native Node ESM import exposes the existing default function"
+  ],
+  "limitation": "Only private canvas dimensions/lifecycle and retained JPEG ownership are closed. No exact RAM/VRAM reclamation measurement, native encoder cancellation, whole-package installed type matrix, full core combinations or device acceptance. Pixel specs retain explicit callback-less WebKit first-two-cell gaps. Full source suite includes historical defect observations. Intermediate 159/1 failure was the legacy test reading dimensions after completion; the same dimension assertion now runs before extraction and final zero dimensions are checked separately."
+}

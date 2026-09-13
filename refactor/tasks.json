@@ -1783,7 +1783,8 @@
       "dependsOn": [
         "PKG-AUTO-THUMB-02",
         "CORE-09",
-        "CORE-19"
+        "CORE-19",
+        "PKG-AUTO-THUMB-07"
       ],
       "status": "doing",
       "risk": "H",
@@ -4815,6 +4816,27 @@
         "changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md",
         "changes/2026-09-14-PKG-JASSUB-09-display.md",
         "baselines/jassub-display-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-07",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "终止抽帧时清空私有画布像素尺寸",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "CORE-09",
+        "CORE-19"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "将私有 canvas 尺寸归入 job 清理；完成、取消、失败及分配重入均有回归，保留已编码 JPEG",
+      "acceptance": "旧红新绿证明保留回调时画布归零，单项清理失败不阻断其他资源；原生取消和完成后 JPEG 仍可解码，原 API/时间公式/类型不变",
+      "evidence": [
+        "changes/2026-09-14-PKG-AUTO-THUMB-07-canvas.md",
+        "baselines/auto-thumbnail-canvas-validation.json"
       ]
     }
   ]

@@ -27,10 +27,20 @@ export default function extract(job: ExtractionJob, config: ExtractionConfig) {
     video.style.width = `${videoWidth}px`
     video.style.height = `${videoHeight}px`
     const canvas = document.createElement('canvas')
+    job.own(() => {
+      canvas.height = 0
+    })
+    job.own(() => {
+      canvas.width = 0
+    })
     if (!job.active())
       return
     canvas.width = canvasWidth
+    if (!job.active())
+      return
     canvas.height = canvasHeight
+    if (!job.active())
+      return
     const ctx = canvas.getContext('2d')
     if (!ctx)
       throw new Error('Auto-thumbnail canvas context is unavailable')

@@ -24,6 +24,13 @@ for video processing.
   handlers, and the frame/encode sequence. Each valid draw is encoded before the
   next seek. The final decoder is paused, cleared and reset; the final sheet URL
   remains owned by the session until another usable sheet replaces it or destroy.
+  The private canvas is also job-owned: cancellation, failure and normal completion
+  reset both dimensions to zero, even if an encoding callback still retains it.
+  Width and height resets are independent cleanup actions, so one throwing setter
+  cannot prevent the other reset or decoder cleanup. Allocation checks job identity
+  after each dimension write; synchronous destruction cannot reallocate the sheet.
+  Previously encoded JPEG Blobs/URLs retain their independent bytes. This controls
+  canvas dimensions, not the browser's precise GPU/encoder reclamation time.
 - `src/video.ts` creates and owns the hidden media element. It is attached to the
   document root because detached media loses drawable pixels on Windows WebKit.
   `visibility:hidden` preserves its rendered box; `display:none` and a 1px box do

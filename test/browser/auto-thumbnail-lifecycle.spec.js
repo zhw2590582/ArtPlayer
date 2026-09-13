@@ -9,13 +9,15 @@ for (const scenario of ['destroy', 'restart', 'complete', 'frame-destroy', 'fram
     await page.setContent('<!doctype html><div></div>')
     await page.addScriptTag({ content: implementation.code })
     await page.evaluate(async (scenario) => {
-      const probe = window.probe = { videos: [], updates: [], urls: new Set(), blobs: [], frames: [], frameSupport: false, listeners: new Map(), hold: scenario !== 'complete' }
+      const probe = window.probe = { videos: [], canvases: [], updates: [], urls: new Set(), blobs: [], frames: [], frameSupport: false, listeners: new Map(), hold: scenario !== 'complete' }
       const createElement = document.createElement.bind(document)
       const createUrl = URL.createObjectURL.bind(URL)
       const revokeUrl = URL.revokeObjectURL.bind(URL)
       const toBlob = HTMLCanvasElement.prototype.toBlob
       document.createElement = function (name, ...args) {
         const element = createElement(name, ...args)
+        if (name === 'canvas')
+          probe.canvases.push(element)
         if (name === 'video') {
           probe.videos.push(element)
           const request = element.requestVideoFrameCallback?.bind(element)
@@ -74,7 +76,7 @@ for (const scenario of ['destroy', 'restart', 'complete', 'frame-destroy', 'fram
     }, scenario)
     const holdFrame = scenario.startsWith('frame-') && await page.evaluate(() => window.probe.frameSupport)
     await expect.poll(() => page.evaluate(holdFrame => holdFrame ? window.probe.frames.length : window.probe.blobs.length, holdFrame)).toBe(scenario === 'complete' ? 2 : 1)
-    const state = await page.evaluate((scenario) => {
+    const state = await page.evaluate(async (scenario) => {
       const probe = window.probe
       const before = { urls: probe.urls.size, updates: probe.updates.length }
       if (scenario !== 'complete') {
@@ -91,18 +93,28 @@ for (const scenario of ['destroy', 'restart', 'complete', 'frame-destroy', 'fram
       const after = { urls: probe.urls.size, updates: probe.updates.length }
       const decoder = probe.videos[0]
       const video = { connected: decoder.isConnected, src: decoder.getAttribute('src'), readyState: decoder.readyState, paused: decoder.paused, handlers: ['onloadedmetadata', 'onloadeddata', 'onseeked', 'onerror'].map(key => decoder[key] === null) }
+      const canvasDimensions = probe.canvases.map(canvas => [canvas.width, canvas.height])
+      let publishedImage = null
+      if (scenario === 'complete') {
+        const image = new Image()
+        image.src = probe.updates.at(-1).url
+        await image.decode()
+        publishedImage = { width: image.naturalWidth, height: image.naturalHeight }
+      }
       probe.art.emit('destroy')
       probe.art.emit('destroy')
       const final = { urls: probe.urls.size, listeners: [...probe.listeners.values()].reduce((sum, set) => sum + set.size, 0), updates: probe.updates.length }
       const blobs = probe.blobs.map(({ blob }) => ({ type: blob.type, bytes: blob.size }))
       probe.restore()
-      return { before, after, video, final, blobs, heldFrames: probe.frames.length, frameSupport: probe.frameSupport, result: probe.result }
+      return { before, after, video, canvasDimensions, publishedImage, final, blobs, heldFrames: probe.frames.length, frameSupport: probe.frameSupport, result: probe.result }
     }, scenario)
     await testInfo.attach('auto-thumbnail-candidate-native-lifecycle', { contentType: 'application/json', body: JSON.stringify({ scenario, sha256: hash(implementation.code), scope: 'Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.', ...state }) })
     expect(state.result).toEqual({ name: 'artplayerPluginAutoThumbnail' })
     expect(state.before).toEqual(scenario === 'complete' ? { urls: 1, updates: 2 } : { urls: 0, updates: 0 })
     expect(state.after).toEqual(state.before)
     expect(state.video).toEqual({ connected: false, src: null, readyState: 0, paused: true, handlers: [true, true, true, true] })
+    expect(state.canvasDimensions).toEqual([[0, 0]])
+    expect(state.publishedImage).toEqual(scenario === 'complete' ? { width: 800, height: 45 } : null)
     expect(state.final).toEqual({ urls: 0, listeners: 0, updates: scenario === 'complete' ? 2 : 0 })
     expect(state.blobs.every(blob => blob.type === 'image/jpeg' && blob.bytes > 0)).toBe(true)
     expect(state.heldFrames).toBe(holdFrame ? 1 : 0)

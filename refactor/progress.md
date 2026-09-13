@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-07 私有画布清理完成
+
+抽帧 canvas 现由 job 清理宽高；取消、失败和正常完成后归零，单个 reset 抛错
+仍继续其他清理，分配期间销毁不会继续分配另一维。已编码 JPEG 和最终预览 URL
+保留。六项受控回归旧实现全部失败、新实现全部通过；冻结 main 的原生完成检查
+同样先失败。联合 160 项通过，main/legacy 各 58 项受控检查和各 21 项原生检查
+通过，完成后的 JPEG 仍可解码为 800×45。严格包 TS、lint、正常三格式构建及
+docs 副本一致性通过。关闭 AUTO-THUMB-CANVAS-01；不声称精确 GPU/内存回收量。
+[变更](changes/2026-09-14-PKG-AUTO-THUMB-07-canvas.md)和
+[红绿记录](baselines/auto-thumbnail-canvas-validation.json)含中间测试调整。
+03 依赖该独立修复，仍继续前两格 WebKit 像素和其他迁移工作；04-06、版本及
+发布验收未完成。VAST 的初始化决定仍待答复。下一步继续未完成源码/类型迁移。
+
 ## PKG-CHAPTER-05 时序取证继续（doing）
 
 复核旧失败 ZIP：一次 restart 数组读取耗时 9956.244 ms，返回时已含目标 URL；

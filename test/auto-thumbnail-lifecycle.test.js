@@ -269,6 +269,7 @@ test('Auto-thumbnail candidate retains coercible numeric strings and fractional 
   for (const option of [{ width: '80', number: '2', scale: '0.5' }, { width: 20.5, number: 2.5, scale: 1 }]) {
     const env = await setup(option)
     env.metadata()
+    assert.equal(env.canvases[0].width, Math.trunc(Number(option.width) * 10))
     for (let index = 0; index < Math.ceil(Number(option.number)); index++) {
       env.seeked()
       env.finish(index)
@@ -277,7 +278,7 @@ test('Auto-thumbnail candidate retains coercible numeric strings and fractional 
     assert.equal(env.updates[0].width, option.width)
     assert.equal(env.updates[0].number, option.number)
     assert.equal(env.updates[0].scale, option.scale)
-    assert.equal(env.canvases[0].width, Math.trunc(Number(option.width) * 10))
+    assert.deepEqual([env.canvases[0].width, env.canvases[0].height], [0, 0])
     assertClosed(env)
     env.art.emit('destroy')
     assert.equal(env.urls.size, 0)
