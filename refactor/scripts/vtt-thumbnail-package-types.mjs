@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 import compat from 'typescript-compat'
 import { checkFiles, packedFiles } from '../../scripts/package-check.mjs'
@@ -9,7 +10,46 @@ import { consumerDirectory, removeConsumer, run, workspace, writeJson } from '..
 import { hash, readMember } from './releases.mjs'
 import { verifyVttThumbnailContract } from './vtt-thumbnail-contract.mjs'
 
+export function vttThumbnailConsumerSource(source, mode) {
+  if (mode === 'nodenext-esm') {
+    source = source.replace('import legacy from \'artplayer-plugin-vtt-thumbnail\'', 'import legacyModule from \'artplayer-plugin-vtt-thumbnail\'\nconst legacy = legacyModule.default')
+      .replace('import legacyEntry from \'artplayer-plugin-vtt-thumbnail/legacy\'', 'import legacyEntryModule from \'artplayer-plugin-vtt-thumbnail/legacy\'\nconst legacyEntry = legacyEntryModule.default')
+      .replace('import vtt from \'artplayer-plugin-vtt-thumbnail\'', 'import vttModule from \'artplayer-plugin-vtt-thumbnail\'\nconst vtt = vttModule.default')
+      .replace('namespace.default', 'namespace.default.default')
+  }
+  if (mode.endsWith('-no-interop'))
+    source = source.replace('import runtime from \'artplayer-plugin-vtt-thumbnail/runtime\'', 'import runtime = require(\'artplayer-plugin-vtt-thumbnail/runtime\')')
+  return source
+}
+
+export const vttThumbnailNamespaceConsumer = `import type Artplayer from 'artplayer';
+import vttModule from 'artplayer-plugin-vtt-thumbnail';
+import * as namespace from 'artplayer-plugin-vtt-thumbnail';
+import legacyModule from 'artplayer-plugin-vtt-thumbnail/legacy';
+type Factory = (option: { vtt?: string, style?: Partial<CSSStyleDeclaration> }) => (art: Artplayer) => {name: 'artplayerPluginVttThumbnail'};
+const replacement: Factory = () => () => ({name: 'artplayerPluginVttThumbnail'});
+vttModule.default({}); namespace.default.default({}); legacyModule.default({});
+const fromOld: typeof vttModule = {default: replacement};
+const toOld: {default: Factory} = vttModule;
+const namespaceReplacement: typeof namespace.default = {default: replacement};
+const oldNamespace: {default: Factory} = namespace.default;
+const option: Parameters<typeof vttModule.default>[0] = {};
+const result: ReturnType<ReturnType<typeof vttModule.default>> = {name: 'artplayerPluginVttThumbnail'};
+void [fromOld, toOld, namespaceReplacement, oldNamespace, option, result];`
+
+export function checkInvalidVttStatements(source, diagnostics) {
+  const expected = []
+  let line = 1
+  for (const text of source.split('\n')) {
+    if (text.startsWith('// @ts-expect-error'))
+      expected.push(line)
+    else line++
+  }
+  assert.deepEqual(diagnostics.map(item => item.line).sort((a, b) => a - b), expected, 'Each invalid VTT statement must fail at its own line')
+}
+
 async function main() {
+  assert.equal(process.version.slice(1), fs.readFileSync(path.join(workspace, '.node-version'), 'utf8').trim(), 'Use the repository Node version')
   assert.equal(process.env.npm_config_user_agent?.split(' ')[0], 'yarn/1.22.22', 'Use yarn test:vtt-thumbnail-types-package')
   const yarn = process.env.npm_execpath
   assert(yarn && fs.existsSync(yarn))
@@ -66,14 +106,16 @@ Promise.all(['artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-vtt-thumbnail/r
       for (const [compiler, mode] of (plugin.label === 'candidate' ? candidateModes : historicalModes)) {
         const next = mode.startsWith('nodenext')
         const extension = next ? mode.endsWith('-cjs') ? 'cts' : 'mts' : 'ts'
-        const source = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/vtt-thumbnail-public.ts' : 'refactor/fixtures/consumers/vtt-thumbnail-published.ts'), 'utf8')
+        const fixture = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/vtt-thumbnail-public.ts' : 'refactor/fixtures/consumers/vtt-thumbnail-published.ts'), 'utf8')
+        const source = plugin.label === 'candidate' ? vttThumbnailConsumerSource(fixture, mode) : fixture
         const filename = path.join(consumer, `consumer.${extension}`)
         const historical = path.join(consumer, `historical.${extension}`)
-        fs.copyFileSync(path.join(workspace, 'refactor/fixtures/consumers/vtt-thumbnail-published.ts'), historical)
+        fs.writeFileSync(historical, vttThumbnailConsumerSource(fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/vtt-thumbnail-published.ts'), 'utf8'), mode))
         const files = plugin.label === 'candidate' ? [filename, historical] : [filename]
-        if (mode === 'nodenext-cjs' && plugin.label === 'candidate') {
-          const commonjs = path.join(consumer, 'commonjs.cts')
-          fs.writeFileSync(commonjs, `import vtt = require('artplayer-plugin-vtt-thumbnail'); import legacy = require('artplayer-plugin-vtt-thumbnail/legacy'); import runtime = require('artplayer-plugin-vtt-thumbnail/runtime'); vtt.default({}); legacy.default({}); runtime({}); runtime.default({});`)
+        if (plugin.label === 'candidate' && mode !== 'nodenext-esm' && mode !== 'bundler-esm') {
+          const commonjs = path.join(consumer, `commonjs.${extension}`)
+          fs.writeFileSync(commonjs, `import vtt = require('artplayer-plugin-vtt-thumbnail'); import legacy = require('artplayer-plugin-vtt-thumbnail/legacy'); import runtime = require('artplayer-plugin-vtt-thumbnail/runtime'); vtt.default({}); legacy.default({}); runtime({}); runtime.default({});
+const option: runtime.Option = {}; const factory: runtime.RuntimeFactory = runtime; const old: runtime.Factory = () => () => ({name: 'artplayerPluginVttThumbnail'}); const result: runtime.Result = {name: 'artplayerPluginVttThumbnail'}; void [option, factory, old, result];`)
           files.push(commonjs)
         }
         const options = { strict: true, noEmit: true, skipLibCheck: false, types: [], esModuleInterop: !mode.endsWith('-no-interop'), target: compiler.ScriptTarget.ES2020, lib: ['lib.es2020.d.ts', 'lib.dom.d.ts'], module: next ? compiler.ModuleKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleKind.ESNext : compiler.ModuleKind.CommonJS, moduleResolution: next ? compiler.ModuleResolutionKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleResolutionKind.Bundler : compiler.ModuleResolutionKind.NodeJs }
@@ -84,7 +126,7 @@ Promise.all(['artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-vtt-thumbnail/r
             const actual = fs.realpathSync(file.fileName)
             assert(actual.startsWith(fs.realpathSync(consumer) + path.sep) || (program.isSourceFileDefaultLibrary(file) && path.dirname(actual) === fs.realpathSync(path.dirname(compiler.sys.getExecutingFilePath()))), `Types escaped installed consumer: ${actual}`)
           }
-          return compiler.getPreEmitDiagnostics(program).map(item => ({ code: item.code, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n') }))
+          return compiler.getPreEmitDiagnostics(program).map(item => ({ file: item.file && path.relative(consumer, item.file.fileName), line: item.file && item.start !== undefined ? item.file.getLineAndCharacterOfPosition(item.start).line + 1 : null, code: item.code, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n') }))
         }
         const diagnostics = compile(source)
         const historicalFailure = plugin.version === '1.1.0' && mode === 'nodenext-esm'
@@ -93,7 +135,9 @@ Promise.all(['artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-vtt-thumbnail/r
         assert.deepEqual(diagnostics.map(item => item.code), expected, `${plugin.label} ${compiler.version} ${mode}`)
         const invalid = plugin.label === 'candidate' ? compile(source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')) : []
         if (plugin.label === 'candidate')
-          assert.equal(invalid.length, 10, 'Installed declarations must reject all invalid uses')
+          checkInvalidVttStatements(source, invalid)
+        const namespace = mode === 'nodenext-esm' && (plugin.label === 'candidate' || plugin.version === '1.1.0') ? compile(vttThumbnailNamespaceConsumer) : []
+        assert.deepEqual(namespace, [], 'Latest published and candidate NodeNext namespace replacements must remain valid')
         const commonjs = {}
         if (mode === 'node10-commonjs' || mode === 'nodenext-cjs') {
           const fixture = fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/vtt-thumbnail-commonjs.ts'), 'utf8')
@@ -108,18 +152,20 @@ Promise.all(['artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-vtt-thumbnail/r
             commonjs[form] = { diagnostics, typeChecks: diagnostics.length === 0 }
           }
         }
-        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid, commonjs })
+        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid, commonjs, namespace })
       }
     }
     finally {
       removeConsumer(consumer)
     }
   }
-  writeJson(path.join(output, 'report.json'), { suite: 'vtt-thumbnail-isolated-package-types', introducedBy: 'PKG-VTT-THUMB-04', scope: 'Five actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline/frozen reinstall and byte identity are verified. One historical NodeNext ESM declaration failure is expected, not accepted as candidate success. Direct/default import=require extraction and replacement forms reproduce opposing 1.0.x and 1.1.0 declarations; the candidate preserves 1.1.0 forms. The 1.0.x direct module type difference remains unresolved, although old actual CommonJS direct calls already fail. Device and full distribution acceptance remain separate.', packages, published: candidates.slice(0, 5).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: hash(fs.readFileSync(pkg.archive)), missingEntrypoints: pkg.missingEntrypoints })), matrix })
+  writeJson(path.join(output, 'report.json'), { suite: 'vtt-thumbnail-isolated-package-types', introducedBy: 'PKG-VTT-THUMB-04', node: process.version, scope: 'Five actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline/frozen reinstall and byte identity are verified. Root preserves latest 1.1.0 factory and NodeNext ESM namespace, including plain module replacements. Historical raw direct-import diagnostics remain recorded. Direct/default import=require forms retain opposing 1.0.x and 1.1.0 evidence; the candidate follows 1.1.0 under approved type-compatibility-policy.md and documents earlier migration. Runtime describes Promise results, writable self identity and all named types with NodeNext and Node10 including no-interop consumers. Device and full distribution acceptance remain separate.', packages, published: candidates.slice(0, 5).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: hash(fs.readFileSync(pkg.archive)), missingEntrypoints: pkg.missingEntrypoints })), matrix })
   console.log(`VTT thumbnail installed matrix verified: ${matrix.length} cases, including ${matrix.filter(item => item.historicalFailure).length} expected historical declaration failure; ${output}`)
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exitCode = 1
-})
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+  })
+}

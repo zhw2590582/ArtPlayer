@@ -10,6 +10,7 @@ import { checkPluginEditorDeclaration, generatePluginEditorDeclaration } from '.
 import { checkConsumer } from '../../scripts/typecheck.mjs'
 import { readMember } from './releases.mjs'
 import { verifyVttThumbnailContract } from './vtt-thumbnail-contract.mjs'
+import { checkInvalidVttStatements, vttThumbnailConsumerSource, vttThumbnailNamespaceConsumer } from './vtt-thumbnail-package-types.mjs'
 
 const modes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
 
@@ -39,9 +40,11 @@ artplayerPluginVttThumbnail({ vtt: 12 });`
 test('VTT public legacy extraction remains exact while runtime entry gives cast-free Promise types', () => {
   const source = fs.readFileSync('test/types/vtt-thumbnail-public.ts', 'utf8')
   for (const [compiler, mode] of modes) {
-    assert.deepEqual(checkConsumer(compiler, mode, source), [], `${compiler.version} ${mode}`)
-    assert.equal(checkConsumer(compiler, mode, source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 10)
+    const consumer = vttThumbnailConsumerSource(source, mode)
+    assert.deepEqual(checkConsumer(compiler, mode, consumer), [], `${compiler.version} ${mode}`)
+    checkInvalidVttStatements(consumer, checkConsumer(compiler, mode, consumer.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')))
   }
+  assert.deepEqual(checkConsumer(ts, 'nodenext-esm', vttThumbnailNamespaceConsumer), [])
 })
 
 test('VTT runtime CommonJS declaration supports direct and default calls without an interop cast', () => {

@@ -58,21 +58,29 @@ legacy parameter/result/factory extraction, replacement factories and accurate a
 through `/runtime`, including negative cases. The source factory explicitly returns Promise;
 its final assertion only describes the self-reference that Object.assign creates.
 
-Root and legacy use paired `.d.mts`/`.d.cts` default declarations. `/runtime` uses an ESM
-default and a CommonJS export assignment, supporting direct and `.default` require calls.
-Classic resolution uses `.d.ts` and typesVersions, including TypeScript 4.3. The generated
+Root and legacy select the original `.d.ts` shape in every export condition, preserving
+latest npm 1.1.0's NodeNext ESM namespace and plain factory replacements. Do not add a
+required self alias or silently make the root ESM namespace callable. Previously added
+root `.d.mts`/`.d.cts` files remain packaged but are not selected by these entrypoints.
+`/runtime` uses an ESM default and a CommonJS export assignment, supporting direct and
+`.default` calls. Its Node10 `.d.ts` also uses export=, including raw require without
+interop on TS 4.3/5.9. Each runtime declaration exports the same four named types.
+Classic resolution uses typesVersions. The generated
 editor global retains the legacy callable type; its RuntimeFactory namespace member is only
 a type, not an additional runtime global. Do not hand-edit generated editor declarations.
 
 The installed-consumer command packs both core and plugin, installs outside the workspace,
 verifies member hashes, and repeats an offline frozen install. It tests five actual old npm
 declarations in five modes on TS 4.3/5.9 and seven candidate modes: 32 default-import cells,
-including one expected 1.1.0 NodeNext ESM declaration failure. Candidate ESM passes that cell.
+including one expected 1.1.0 raw NodeNext ESM declaration failure. Candidate root keeps
+the old namespace shape and verifies its legal calls and whole-module replacements;
+accurate direct ESM calls use /runtime. Negative cases are checked at their exact lines.
 Another 36 direct/default CommonJS extraction/replacement forms reproduce the opposing 1.0.x
 export-assignment and 1.1.0 default declaration shapes. Candidate preserves the latter.
-Earlier type-only direct module extraction remains an explicit decision in task 04; a broken
-historical JS direct call does not waive that type-only consumer. See the module-forms change
-record for the concrete required/optional default-property alternatives and migration proposal.
+Earlier type-only direct module extraction now follows the user's approved rule in
+../../refactor/type-compatibility-policy.md: keep latest 1.1.0 types and document the
+1.0.x export= migration without changing valid JavaScript behavior. Historical failures
+remain in the installed reports; runtime failures never stand in for type evidence.
 
 ## Compatibility and intentional fixes
 
@@ -102,9 +110,9 @@ plugin. Empty or comment-only input remains a valid empty preview.
 
 The exported callable has a writable self `.default` alias, restoring the usable 1.0.x
 CommonJS default access while retaining direct calls. It does not add a name property to the
-registration Promise. Earlier `thumbnails` control names and remaining historical declaration
-forms are separately frozen and remain compatibility work for tasks 04-06. The full package
-refactor is not yet finished.
+registration Promise. Earlier `thumbnails` control names are separately frozen and remain
+combination/distribution work for tasks 05-06. The approved declaration migration does not
+complete the remaining package or device acceptance.
 
 ## Verification and future changes
 

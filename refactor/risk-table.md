@@ -192,7 +192,7 @@
 | VTT-THUMB-DIST-01 | open / 已复现 | Historical 1.0.0 main/legacy contain invalid regular expressions and cannot load | PKG-VTT-THUMB-06 |
 | VTT-THUMB-PARSE-01 | resolved / 已复现 | Historical compiled arrows differ from shipped source; parsing floors bounds and assumes alternating lines | PKG-VTT-THUMB-02, PKG-VTT-THUMB-03 |
 | VTT-THUMB-LIFE-01 | open / 已复现 | Fetch completion, setBar listeners and mobile timers have no destroy ownership | PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-05 |
-| VTT-THUMB-TYPE-01 | open / 已复现 | Published declarations falsely describe async registration as a synchronous result | PKG-VTT-THUMB-04 |
+| VTT-THUMB-TYPE-01 | resolved / 已复现 | Published declarations falsely describe async registration as a synchronous result | PKG-VTT-THUMB-04 |
 | VTT-THUMB-EXPORT-01 | open / 已复现 | Older CommonJS default objects and thumbnails control names differ from latest direct export and vtt-thumbnail name | PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
 | MULTI-SUB-TYPE-01 | open / 已复现 | Declarations omit async registration, tracks/reset and make the subtitles array required | PKG-MULTI-SUB-04 |
 | MULTI-SUB-MERGE-01 | open / 已复现 | 1.0.0 merges cues by index while later versions concatenate independently timed track cues | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |

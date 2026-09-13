@@ -19,24 +19,14 @@
   ],
   "exports": {
     ".": {
-      "import": {
-        "types": "./types/artplayer-plugin-vtt-thumbnail.d.mts",
-        "default": "./dist/artplayer-plugin-vtt-thumbnail.mjs"
-      },
-      "require": {
-        "types": "./types/artplayer-plugin-vtt-thumbnail.d.cts",
-        "default": "./dist/artplayer-plugin-vtt-thumbnail.js"
-      }
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+      "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+      "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
     },
     "./legacy": {
-      "import": {
-        "types": "./types/artplayer-plugin-vtt-thumbnail.d.mts",
-        "default": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
-      },
-      "require": {
-        "types": "./types/artplayer-plugin-vtt-thumbnail.d.cts",
-        "default": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
-      }
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+      "import": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+      "require": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
     },
     "./runtime": {
       "import": {

@@ -4222,7 +4222,7 @@
       "id": "VTT-THUMB-TYPE-01",
       "title": "Published declarations falsely describe async registration as a synchronous result",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-VTT-THUMB-04"
       ],
@@ -4238,8 +4238,14 @@
         "refactor/changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md",
         "refactor/baselines/vtt-thumbnail-module-forms.json"
       ],
-      "compatibleResolution": "Preserve valid consumers and actual async runtime, with explicit decisions for irreconcilable inference changes.",
-      "closureCriteria": "Isolated old/new compiler and installed consumers verify options, styles, callback and result forms."
+      "compatibleResolution": "Approved latest npm 1.1.0 root factory/namespace stays exact; additive runtime supplies accurate asynchronous and module forms. Earlier 1.0.x type conflicts have explicit migration under ADR-025.",
+      "closureCriteria": "Isolated old/new compiler and installed consumers verify options, styles, callback and result forms.",
+      "resolutionEvidence": [
+        "refactor/baselines/vtt-thumbnail-approved-types.json",
+        "refactor/changes/2026-09-13-PKG-VTT-THUMB-04-approved-types.md",
+        "refactor/type-compatibility-policy.md"
+      ],
+      "resolutionRationale": "32 isolated installation configurations, seven zero-diagnostic candidate modes with 12 exact invalid statements each, 5 focused tests. Legal latest namespace and complete factory replacements retained, historical incompatible forms recorded. No production JS changed."
     },
     {
       "id": "VTT-THUMB-EXPORT-01",
@@ -4259,9 +4265,11 @@
         "refactor/baselines/vtt-thumbnail-public-types.json",
         "refactor/scripts/vtt-thumbnail-package-types.mjs",
         "refactor/changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md",
-        "refactor/baselines/vtt-thumbnail-module-forms.json"
+        "refactor/baselines/vtt-thumbnail-module-forms.json",
+        "refactor/baselines/vtt-thumbnail-approved-types.json",
+        "refactor/changes/2026-09-13-PKG-VTT-THUMB-04-approved-types.md"
       ],
-      "compatibleResolution": "Validate historical import forms and control integrations before selecting compatibility adapters.",
+      "compatibleResolution": "Approved latest npm 1.1.0 root factory/namespace stays exact; additive runtime supplies accurate asynchronous and module forms. Earlier 1.0.x type conflicts have explicit migration under ADR-025. Historical thumbnails/vtt-thumbnail control names and complete core/distribution validation remain 05/06.",
       "closureCriteria": "Actual package consumers and old/new cores prove supported forms; unresolved differences stay explicit."
     },
     {

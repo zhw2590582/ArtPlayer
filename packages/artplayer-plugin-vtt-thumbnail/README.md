@@ -27,6 +27,33 @@ returned a Promise at runtime. Reading `result.name` requires awaiting registrat
 to `/runtime` opts into that accurate type without changing runtime behavior. The option
 object remains required, and its `vtt` and `style` fields remain optional.
 
+The root factory keeps the latest published 1.1.0 type shape, with no required `.default`
+property. Plain replacement functions remain assignable in both directions. `/runtime`
+exports `Option`, `Result`, `Factory` and `RuntimeFactory` in all resolution modes; its
+factory describes the actual writable `.default` self alias and asynchronous registration.
+
+### Earlier declaration migration
+
+The 1.0.x declarations used `export =`, while 1.1.0 uses `export default`. Following the
+approved compatibility policy, the root retains 1.1.0. Older TypeScript code that directly
+calls or extracts the type of `import vtt = require('artplayer-plugin-vtt-thumbnail')`
+should use the accurate runtime entry:
+
+```ts
+import vtt = require('artplayer-plugin-vtt-thumbnail/runtime')
+
+const register = vtt({ vtt: '/thumbnails/index.vtt' })
+const result = await register(art)
+console.log(result.name)
+```
+
+This export-assignment form supports Node10 resolution without `esModuleInterop`.
+Default `/runtime` imports support interoperability and native NodeNext ESM. Root
+NodeNext ESM intentionally preserves the old declaration namespace shape (the factory
+is `root.default` after a default import); that historical declaration does not accurately
+describe the actual ESM export. Use `/runtime` for accurate ESM calls. Valid historical
+JavaScript default access, the direct factory, and legacy distribution entrypoints remain.
+
 See [ARCHITECTURE.md](ARCHITECTURE.md) for module ownership, testing commands and remaining
 compatibility validation.
 

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VTT-THUMB-04",
+  "status": "done",
+  "capturedAt": "2026-09-13T08:57:34.487Z",
+  "policy": "type-compatibility-policy.md",
+  "baseline": "Latest actual npm 1.1.0 root type shape; earlier 1.0.x conflicts migrated under ADR-025.",
+  "checks": {
+    "isolatedReport": "refactor/.cache/vtt-thumbnail-package-types-JQwPa2/report.json",
+    "reportSha256": "2080b138fa9c9b0e654941b2373862ad2d23ce7caa7b7186cfb2cd6efbe32ead",
+    "candidateArchiveSha256": "8884ad821cee9f1c6792db68bca9cb2f31b092cc8385e0b8fd0299ec726628ad",
+    "configurations": 32,
+    "candidatePositiveConfigurations": 7,
+    "invalidStatementsPerCandidateConfiguration": 12,
+    "log": "refactor/.cache/vtt04-approved-types.log",
+    "logSha256": "3f9283f2387db3db329384e6d59a530b30c6b4aa13c9111714194a7d2971f72a",
+    "focusedTests": 5
+  },
+  "preserves": [
+    "Whole factory replacement in both directions, required arguments and historical sync result.",
+    "Latest published valid NodeNext namespace and plain module replacement, old direct-call diagnostics retained.",
+    "Runtime accurate async result, named types and CommonJS/default identity including old no-interop resolution.",
+    "Isolated actual tarball installation, exact installed bytes, offline frozen reinstall."
+  ],
+  "sourceAndDistChanged": false,
+  "browserRerun": false,
+  "limitations": [
+    "Historical thumbnails/vtt-thumbnail control names and complete core/distribution validation remain 05/06.",
+    "Existing runtime/source evidence is linked in the completion note; these checks do not establish devices or final npm release readiness."
+  ]
+}
