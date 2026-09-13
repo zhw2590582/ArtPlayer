@@ -1,5 +1,7 @@
-export function cleanupAll(actions) {
-  let failure
+import type { Cleanup, ExtractionJob, ThumbnailSheet } from './types'
+
+export function cleanupAll(actions: Cleanup[]) {
+  let failure: unknown
   let failed = false
   for (const action of actions) {
     try {
@@ -15,14 +17,14 @@ export function cleanupAll(actions) {
   return { failed, failure }
 }
 
-export default function createSession(publish, report) {
+export default function createSession(publish: (sheet: ThumbnailSheet) => void, report: (error: unknown) => void) {
   let closed = false
-  let current
-  let lastUrl
-  const urls = new Set()
+  let current: ExtractionJob | undefined
+  let lastUrl: string | undefined
+  const urls = new Set<string>()
 
-  function release(url) {
-    if (urls.delete(url))
+  function release(url: string | undefined) {
+    if (url !== undefined && urls.delete(url))
       URL.revokeObjectURL(url)
   }
 
@@ -47,9 +49,9 @@ export default function createSession(publish, report) {
       return
     // Install the replacement before cleanup, which can reenter through host APIs.
     const previous = current
-    const actions = []
+    const actions: Cleanup[] = []
     let disposed = false
-    const job = {
+    const job: ExtractionJob = {
       active: () => !closed && !disposed && current === job,
       own(action) {
         if (disposed) {
@@ -107,7 +109,7 @@ export default function createSession(publish, report) {
         }
         catch (error) {
           if (lastUrl === url)
-            lastUrl = urls.has(previousUrl) ? previousUrl : undefined
+            lastUrl = previousUrl !== undefined && urls.has(previousUrl) ? previousUrl : undefined
           const result = cleanupAll([() => release(url)])
           if (result.failed)
             report(result.failure)

@@ -1,0 +1,3770 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUTO-THUMB-03",
+  "status": "checkpoint-task-remains-doing",
+  "capturedAt": "2026-09-13T15:32:25.629Z",
+  "baselineCommit": "00e81309ca4799e5819a6b112f1a9e5e09289226",
+  "implementation": "Six runtime modules migrated to strict TypeScript; one internal type module, package config and real Artplayer host assignment fixture. No public declaration or dependency/version changes.",
+  "units": [
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-unit.log",
+      "sha256": "a85773d11dcfe5b4ec5058caaf3fc85c254d604beea38413affb72bd2ed69823",
+      "tests": 154
+    },
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-main-unit.log",
+      "sha256": "60d67e2821cb04c24b2b6b7dcf8b18988aad76dd664ec6c30a0ca6fb0a8dbf18",
+      "tests": 52
+    },
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-legacy-unit.log",
+      "sha256": "ec16e7767601fd65b65bd500518d68763df4ded430f381d89668b4d6fda88ee2",
+      "tests": 52
+    }
+  ],
+  "browsers": [
+    {
+      "format": "source",
+      "file": "refactor/.cache/auto-thumbnail-internal-types-source-browser.json",
+      "sha256": "40b2096e8ed59c10752d6608b12a902c5a0932a580dcb4d3f9d3c455fc5af28e",
+      "stats": {
+        "startTime": "2026-09-13T15:23:50.380Z",
+        "duration": 20317.548,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": {
+        "chromium": {
+          "browser": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "browser": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "browser": "26.6",
+          "platform": "win32"
+        }
+      },
+      "cases": [
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 374,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 375,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 272,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 168,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 270,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1674,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1704,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 519,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 493,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 531,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1206,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1272,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1202,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1056,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1076,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 285,
+          "annotations": [],
+          "pixels": {
+            "sha256": "8e587103b60c1da0d811cf8e6cbfc0c37ed65af7d2c5d609d773b5f055f03289",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                126,
+                0,
+                126,
+                255
+              ],
+              [
+                254,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                1,
+                252,
+                255
+              ],
+              [
+                255,
+                255,
+                1,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  127,
+                  0,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  254,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  255,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 296,
+          "annotations": [],
+          "pixels": {
+            "sha256": "8e587103b60c1da0d811cf8e6cbfc0c37ed65af7d2c5d609d773b5f055f03289",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                15,
+                13,
+                138,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                14,
+                15,
+                141,
+                255
+              ],
+              [
+                213,
+                61,
+                47,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                244,
+                1,
+                0,
+                255
+              ],
+              [
+                5,
+                251,
+                2,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                255,
+                0,
+                253,
+                255
+              ],
+              [
+                2,
+                255,
+                253,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  253,
+                  52,
+                  0,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.583333,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.166667,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.791667,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.375,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 508,
+          "annotations": [],
+          "pixels": {
+            "sha256": "8e587103b60c1da0d811cf8e6cbfc0c37ed65af7d2c5d609d773b5f055f03289",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                136,
+                19,
+                126,
+                255
+              ],
+              [
+                254,
+                24,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                254,
+                241,
+                2,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  137,
+                  19,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  24,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  241,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 784,
+          "annotations": [],
+          "pixels": {
+            "sha256": "8e587103b60c1da0d811cf8e6cbfc0c37ed65af7d2c5d609d773b5f055f03289",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                5,
+                15,
+                250,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                247,
+                64,
+                0,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                255,
+                22,
+                9,
+                255
+              ],
+              [
+                0,
+                216,
+                3,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                255,
+                36,
+                254,
+                255
+              ],
+              [
+                1,
+                229,
+                254,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  69,
+                  1,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 1283,
+          "annotations": [
+            {
+              "type": "remaining-initial-frame-risk",
+              "description": "webkit: no native presentation callback; cells 0-1 remain evidence only and cannot close AUTO-THUMB-PIXEL-01 or PKG-AUTO-THUMB-03."
+            }
+          ],
+          "pixels": {
+            "sha256": "8e587103b60c1da0d811cf8e6cbfc0c37ed65af7d2c5d609d773b5f055f03289",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                238,
+                14,
+                14,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                15,
+                239,
+                255
+              ],
+              [
+                235,
+                236,
+                12,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0.0022181,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6020552,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  14,
+                  14,
+                  255
+                ]
+              },
+              {
+                "time": 3.2025943,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  16,
+                  16,
+                  255
+                ]
+              },
+              {
+                "time": 4.8025587,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4017965,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  235,
+                  236,
+                  12,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 6441,
+          "annotations": [
+            {
+              "type": "remaining-initial-frame-risk",
+              "description": "webkit: no native presentation callback; cells 0-1 remain evidence only and cannot close AUTO-THUMB-PIXEL-01 or PKG-AUTO-THUMB-03."
+            }
+          ],
+          "pixels": {
+            "sha256": "8e587103b60c1da0d811cf8e6cbfc0c37ed65af7d2c5d609d773b5f055f03289",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                217,
+                65,
+                51,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                238,
+                14,
+                15,
+                255
+              ],
+              [
+                14,
+                238,
+                14,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                238,
+                13,
+                237,
+                255
+              ],
+              [
+                14,
+                237,
+                237,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0.0011895,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6016229,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 3.2012411,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 4.8014734,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4061077,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  239,
+                  62,
+                  14,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "file": "refactor/.cache/auto-thumbnail-internal-types-main-browser.json",
+      "sha256": "94d6551d99c665ac75b012cff2b12ab3760ec0617dac68546ce879d9bedb1ebf",
+      "stats": {
+        "startTime": "2026-09-13T15:25:27.022Z",
+        "duration": 19642.729,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": {
+        "chromium": {
+          "browser": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "browser": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "browser": "26.6",
+          "platform": "win32"
+        }
+      },
+      "cases": [
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 375,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 400,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 269,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 274,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 263,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1636,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1673,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 509,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 515,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 477,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1224,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1191,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1303,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1102,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1046,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 332,
+          "annotations": [],
+          "pixels": {
+            "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                126,
+                0,
+                126,
+                255
+              ],
+              [
+                254,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                1,
+                252,
+                255
+              ],
+              [
+                255,
+                255,
+                1,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  127,
+                  0,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  254,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  255,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 299,
+          "annotations": [],
+          "pixels": {
+            "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                15,
+                13,
+                138,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                14,
+                15,
+                141,
+                255
+              ],
+              [
+                213,
+                61,
+                47,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                244,
+                1,
+                0,
+                255
+              ],
+              [
+                5,
+                251,
+                2,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                255,
+                0,
+                253,
+                255
+              ],
+              [
+                2,
+                255,
+                253,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  253,
+                  52,
+                  0,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.583333,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.166667,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.791667,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.375,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 504,
+          "annotations": [],
+          "pixels": {
+            "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                136,
+                19,
+                126,
+                255
+              ],
+              [
+                254,
+                24,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                254,
+                241,
+                2,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  137,
+                  19,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  24,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  241,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 761,
+          "annotations": [],
+          "pixels": {
+            "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                5,
+                15,
+                250,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                247,
+                64,
+                0,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                255,
+                22,
+                9,
+                255
+              ],
+              [
+                0,
+                216,
+                3,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                255,
+                36,
+                254,
+                255
+              ],
+              [
+                1,
+                229,
+                254,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  69,
+                  1,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 1373,
+          "annotations": [
+            {
+              "type": "remaining-initial-frame-risk",
+              "description": "webkit: no native presentation callback; cells 0-1 remain evidence only and cannot close AUTO-THUMB-PIXEL-01 or PKG-AUTO-THUMB-03."
+            }
+          ],
+          "pixels": {
+            "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                238,
+                14,
+                14,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                15,
+                239,
+                255
+              ],
+              [
+                235,
+                236,
+                12,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0.0012328,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6021034,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  14,
+                  14,
+                  255
+                ]
+              },
+              {
+                "time": 3.2010096,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  16,
+                  16,
+                  255
+                ]
+              },
+              {
+                "time": 4.8020184,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4019061,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  235,
+                  236,
+                  12,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 6454,
+          "annotations": [
+            {
+              "type": "remaining-initial-frame-risk",
+              "description": "webkit: no native presentation callback; cells 0-1 remain evidence only and cannot close AUTO-THUMB-PIXEL-01 or PKG-AUTO-THUMB-03."
+            }
+          ],
+          "pixels": {
+            "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                217,
+                65,
+                51,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                238,
+                14,
+                15,
+                255
+              ],
+              [
+                14,
+                238,
+                14,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                238,
+                13,
+                237,
+                255
+              ],
+              [
+                14,
+                237,
+                237,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6020625,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 3.2018047,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 4.8012267,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4059399,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  239,
+                  62,
+                  14,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "file": "refactor/.cache/auto-thumbnail-internal-types-legacy-browser.json",
+      "sha256": "856b5db07e045ced0a462afe57523e8fe986f6e84592910459eb577605efcb32",
+      "stats": {
+        "startTime": "2026-09-13T15:25:47.406Z",
+        "duration": 19308.398,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "versions": {
+        "chromium": {
+          "browser": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "browser": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "browser": "26.6",
+          "platform": "win32"
+        }
+      },
+      "cases": [
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 364,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 372,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 260,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 168,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 156,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1565,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1697,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 515,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 479,
+          "annotations": []
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 519,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1174,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1188,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1214,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1078,
+          "annotations": []
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "status": "passed",
+          "durationMs": 1093,
+          "annotations": []
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 283,
+          "annotations": [],
+          "pixels": {
+            "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                126,
+                0,
+                126,
+                255
+              ],
+              [
+                254,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                1,
+                252,
+                255
+              ],
+              [
+                255,
+                255,
+                1,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  127,
+                  0,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  254,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  255,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 282,
+          "annotations": [],
+          "pixels": {
+            "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                15,
+                13,
+                138,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                14,
+                15,
+                141,
+                255
+              ],
+              [
+                213,
+                61,
+                47,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                244,
+                1,
+                0,
+                255
+              ],
+              [
+                5,
+                251,
+                2,
+                255
+              ],
+              [
+                15,
+                15,
+                139,
+                255
+              ],
+              [
+                255,
+                0,
+                253,
+                255
+              ],
+              [
+                2,
+                255,
+                253,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  253,
+                  52,
+                  0,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.583333,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.166667,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.791667,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.375,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 509,
+          "annotations": [],
+          "pixels": {
+            "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                136,
+                19,
+                126,
+                255
+              ],
+              [
+                254,
+                24,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                254,
+                241,
+                2,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                0,
+                0,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  137,
+                  19,
+                  126,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  24,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  241,
+                  2,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 758,
+          "annotations": [],
+          "pixels": {
+            "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                5,
+                15,
+                250,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                247,
+                64,
+                0,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                255,
+                22,
+                9,
+                255
+              ],
+              [
+                0,
+                216,
+                3,
+                255
+              ],
+              [
+                1,
+                14,
+                253,
+                255
+              ],
+              [
+                255,
+                36,
+                254,
+                255
+              ],
+              [
+                1,
+                229,
+                254,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 1.6,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 3.2,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 4.8,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  14,
+                  253,
+                  255
+                ]
+              },
+              {
+                "time": 6.4,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  255,
+                  69,
+                  1,
+                  255
+                ]
+              }
+            ],
+            "presented": [
+              {
+                "mediaTime": 0,
+                "currentTime": 0
+              },
+              {
+                "mediaTime": 1.6,
+                "currentTime": 1.6
+              },
+              {
+                "mediaTime": 3.2,
+                "currentTime": 3.2
+              },
+              {
+                "mediaTime": 4.8,
+                "currentTime": 4.8
+              },
+              {
+                "mediaTime": 6.4,
+                "currentTime": 6.4
+              }
+            ],
+            "supportsPresentation": true,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate verifies presented auto-thumbnail-timeline pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 1334,
+          "annotations": [
+            {
+              "type": "remaining-initial-frame-risk",
+              "description": "webkit: no native presentation callback; cells 0-1 remain evidence only and cannot close AUTO-THUMB-PIXEL-01 or PKG-AUTO-THUMB-03."
+            }
+          ],
+          "pixels": {
+            "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616",
+            "media": "auto-thumbnail-timeline",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                238,
+                14,
+                14,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                15,
+                239,
+                255
+              ],
+              [
+                235,
+                236,
+                12,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ],
+              [
+                16,
+                16,
+                16,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6019401,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  14,
+                  14,
+                  255
+                ]
+              },
+              {
+                "time": 3.2015531,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  16,
+                  16,
+                  255
+                ]
+              },
+              {
+                "time": 4.8013107,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4024188,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  235,
+                  236,
+                  12,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "Auto-thumbnail candidate verifies presented pattern pixels and records fallback limits",
+          "status": "passed",
+          "durationMs": 6445,
+          "annotations": [
+            {
+              "type": "remaining-initial-frame-risk",
+              "description": "webkit: no native presentation callback; cells 0-1 remain evidence only and cannot close AUTO-THUMB-PIXEL-01 or PKG-AUTO-THUMB-03."
+            }
+          ],
+          "pixels": {
+            "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616",
+            "media": "pattern",
+            "scope": "All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.",
+            "cells": [
+              [
+                0,
+                0,
+                0,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                201,
+                71,
+                57,
+                255
+              ]
+            ],
+            "spatial": [
+              [
+                238,
+                14,
+                15,
+                255
+              ],
+              [
+                14,
+                238,
+                14,
+                255
+              ],
+              [
+                28,
+                28,
+                140,
+                255
+              ],
+              [
+                238,
+                13,
+                237,
+                255
+              ],
+              [
+                14,
+                237,
+                237,
+                255
+              ]
+            ],
+            "draws": [
+              {
+                "time": 0.0012302,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "time": 1.6009068,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 3.2017037,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 4.8009416,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  16,
+                  15,
+                  239,
+                  255
+                ]
+              },
+              {
+                "time": 6.4020228,
+                "duration": 8,
+                "connected": true,
+                "visibility": "hidden",
+                "display": "block",
+                "width": 320,
+                "height": 180,
+                "raw": [
+                  238,
+                  61,
+                  10,
+                  255
+                ]
+              }
+            ],
+            "presented": [],
+            "supportsPresentation": false,
+            "final": [
+              {
+                "connected": false,
+                "src": null,
+                "paused": true
+              }
+            ],
+            "playing": 0,
+            "warnings": []
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "build": {
+        "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+        "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a"
+      },
+      "docs": {
+        "file": "docs/compiled/artplayer-plugin-auto-thumbnail.js",
+        "sha256": "806d3c4601099bc67210c500f6b556072a90c7de0269d45821cb19d5e3b0c69a"
+      }
+    },
+    {
+      "build": {
+        "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616"
+      },
+      "docs": {
+        "file": "docs/compiled/artplayer-plugin-auto-thumbnail.legacy.js",
+        "sha256": "d5f5def04fbb4378d2560324b54e7ada222ade395ad1f968adf0cd0af1192616"
+      }
+    },
+    {
+      "build": {
+        "file": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+        "sha256": "f5a11607816f8db540ea78b3ddb97ba5731392bae47ec7683a9ff1cb37f9ddec"
+      },
+      "docs": {
+        "file": "docs/compiled/artplayer-plugin-auto-thumbnail.mjs",
+        "sha256": "f5a11607816f8db540ea78b3ddb97ba5731392bae47ec7683a9ff1cb37f9ddec"
+      }
+    }
+  ],
+  "source": [
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/extraction.ts",
+      "sha256": "e1a994647b8c37ffe71d8cb8ebb2a2b1728a0a2cd6d6690f18399658ba0666ef"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/frames.ts",
+      "sha256": "0c1ce944dfe0684feba51987ccb78a3de7a9c784f17d16993634916e0eb1db31"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/index.ts",
+      "sha256": "59324c12a302092d7e4a081b78936f0e760731994c1adb7ed94fd27d87282961"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/options.ts",
+      "sha256": "8481d30b912fca90dee72224fc87e1c6c295b03f1f01fd675643d4364ae0e4ae"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/session.ts",
+      "sha256": "c831c720f99d42374905e443526a336e065b041f3421e17875b42cddf1fd1659"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/types.ts",
+      "sha256": "57d34100fef8bf93ec39df8c90759ae977600d28cc46fd8e4fc4ef3530520992"
+    },
+    {
+      "file": "packages/artplayer-plugin-auto-thumbnail/src/video.ts",
+      "sha256": "d675a45d3baddfca8d7d469050b373e3b7a66ea3f9746768469d61b408b59426"
+    }
+  ],
+  "sourceUnitScope": "52 candidate lifecycle/frame tests plus 102 fixed historical contract/failure checks; historical defect assertions are not candidate acceptance.",
+  "checks": [
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-all-types.log",
+      "sha256": "19ec2de05e7a446a3240fd61d80b4e0954448a8b2ed3971a49def4a3e7ec51a5"
+    },
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/auto-thumbnail-internal-types-build.log",
+      "sha256": "4b9fdaf765abcf7ba88221786456c5b8d422f3b898b8ae11dc66c7e80894e752"
+    }
+  ],
+  "typeScope": "Repository check passed 398 production TS files and compiler consumer modes. The subsequently added final core-host fixture and corrected partial host configuration were separately checked with the package strict config. Public plugin declaration migration remains task04.",
+  "fixture": {
+    "file": "refactor/fixtures/implementation/auto-thumbnail.ts",
+    "sha256": "392159869f45b32a0346fba7c7bb50cbbcf71137d6b7a657f16b7109b8e4b7c4"
+  },
+  "typeFinding": "Initial source host required all existing thumbnails fields; actual Artplayer allows optional height, producing TS2345. Host view now permits partial SheetConfig while produced ThumbnailSheet and publish remain complete.",
+  "limitations": [
+    "AUTO-THUMB-PIXEL-01 stays open: without native frame callbacks, first two cells remain diagnostic, not pixel acceptance.",
+    "Remaining task03 resource and fallback behavior work",
+    "Task04 public types and distribution declarations",
+    "Final core/device/package/release acceptance"
+  ],
+  "packaging": {
+    "archive": "refactor/.cache/auto-thumbnail-internal-types.tgz",
+    "sha256": "a1d4c53b0865b9edee64a29ee021565b4974f5b65d2bdded5754db51ed90280d",
+    "files": [
+      "package/ARCHITECTURE.md",
+      "package/README.md",
+      "package/dist/artplayer-plugin-auto-thumbnail.js",
+      "package/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "package/dist/artplayer-plugin-auto-thumbnail.mjs",
+      "package/package.json",
+      "package/types/artplayer-plugin-auto-thumbnail.d.ts"
+    ],
+    "scope": "Yarn 1.22.22 actual archive file and entrypoint check; no isolated install or full distribution acceptance claimed"
+  }
+}

@@ -1,4 +1,6 @@
-export function readOptions(option, getFallbackUrl) {
+import type { ExtractionConfig, ThumbnailOptions } from './types'
+
+export function readOptions(option: ThumbnailOptions, getFallbackUrl: () => string): ExtractionConfig {
   const config = {
     url: option.url || getFallbackUrl(),
     width: option.width || 160,
@@ -10,7 +12,7 @@ export function readOptions(option, getFallbackUrl) {
   return config
 }
 
-export function sheetSize(config, video) {
+export function sheetSize(config: ExtractionConfig, video: Pick<HTMLVideoElement, 'duration' | 'videoWidth' | 'videoHeight'>) {
   if (!Number.isFinite(video.duration) || video.duration <= 0 || !Number.isFinite(video.videoWidth) || video.videoWidth <= 0 || !Number.isFinite(video.videoHeight) || video.videoHeight <= 0)
     throw new TypeError('Auto-thumbnail requires finite media duration and dimensions')
   const height = Math.floor(config.width * video.videoHeight / video.videoWidth)

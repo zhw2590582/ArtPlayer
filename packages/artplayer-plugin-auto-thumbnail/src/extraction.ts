@@ -1,8 +1,9 @@
+import type { ExtractionConfig, ExtractionJob } from './types'
 import createFrameReader from './frames'
 import { sheetSize } from './options'
 import createVideo from './video'
 
-export default function extract(job, config) {
+export default function extract(job: ExtractionJob, config: ExtractionConfig) {
   const video = createVideo(job)
   if (!job.active())
     return

@@ -1,10 +1,12 @@
-export default function createVideo(job) {
+import type { ExtractionJob } from './types'
+
+export default function createVideo(job: ExtractionJob) {
   const video = document.createElement('video')
   job.own(() => video.remove())
   job.own(() => video.load())
   job.own(() => video.removeAttribute('src'))
   job.own(() => video.pause())
-  for (const property of ['onloadedmetadata', 'onloadeddata', 'onseeked', 'onerror'])
+  for (const property of ['onloadedmetadata', 'onloadeddata', 'onseeked', 'onerror'] as const)
     job.own(() => { video[property] = null })
   if (!job.active())
     return video

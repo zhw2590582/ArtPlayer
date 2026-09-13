@@ -7,39 +7,42 @@ for video processing.
 
 ## Modules and ownership
 
-- `src/index.js` owns ArtPlayer subscriptions and the public factory. Options are
+- `src/index.ts` owns ArtPlayer subscriptions and the public factory. Options are
   read at each `video:loadedmetadata` event, including subsequent changes to the
   original options object. `restart` cancels the old decoder immediately. `destroy`
   closes the session and removes subscriptions. Partial registration is rolled back.
-- `src/options.js` preserves truthy defaults and computes the ten-column layout.
+- `src/options.ts` preserves truthy defaults and computes the ten-column layout.
   Coercible numeric JS inputs and fractional frame counts retain their previous
   behavior; raw option values are forwarded to the thumbnail configuration.
   Invalid/nonfinite dimensions fail before canvas allocation. Canvas dimensions
   are checked against integer/IDL bounds, not a universal memory budget.
-- `src/session.js` owns one active extraction job and the generated object URLs.
+- `src/session.ts` owns one active extraction job and the generated object URLs.
   Guards prevent obsolete callbacks from publishing or scheduling another frame.
   Cleanup runs all registered actions even if one fails. Installing a replacement
   before cleaning up its predecessor makes synchronous host reentry observable.
-- `src/extraction.js` owns the private video and canvas, metadata/seek/error
+- `src/extraction.ts` owns the private video and canvas, metadata/seek/error
   handlers, and the frame/encode sequence. Each valid draw is encoded before the
   next seek. The final decoder is paused, cleared and reset; the final sheet URL
   remains owned by the session until another usable sheet replaces it or destroy.
-- `src/video.js` creates and owns the hidden media element. It is attached to the
+- `src/video.ts` creates and owns the hidden media element. It is attached to the
   document root because detached media loses drawable pixels on Windows WebKit.
   `visibility:hidden` preserves its rendered box; `display:none` and a 1px box do
   not. Metadata locks the box to intrinsic dimensions, overriding ordinary global
   video sizing rules. It is silent, excluded from focus/accessibility, and never
   played by this implementation. Cleanup also removes the element if insertion,
   cancellation, pause or decoder reset fails.
-- `src/frames.js` owns one pending sample, its seek/data handlers, deadline and
+- `src/frames.ts` owns one pending sample, its seek/data handlers, deadline and
   native presentation callback. When request/cancel frame callbacks are both
   available it waits for loaded data, then requires both seek completion and frame
   presentation before drawing. Callback identities are invalidated on retry and
   replacement; late/duplicate delivery cannot complete a newer sample. One job
   cleanup handles every frame without accumulating per-frame cleanup closures.
+- `src/types.ts` defines internal configuration, sheet data, the minimal host and
+  guarded extraction-job callbacks. `guard` retains argument/result types and the
+  inactive undefined result. No public declarations are generated from this file.
 
 Only the entry module receives ArtPlayer. Extraction receives a guarded job and a
-  configuration snapshot. These internal modules do not add public player fields,
+configuration snapshot. These internal modules do not add public player fields,
 plugin methods, or a dependency on a particular core implementation.
 
 ## Compatibility and intentional fixes
@@ -80,6 +83,7 @@ Use the root Yarn toolchain:
 
 ```sh
 yarn test:auto-thumbnail
+yarn exec tsc -p packages/artplayer-plugin-auto-thumbnail/tsconfig.json --noEmit
 yarn test:browser test/browser/auto-thumbnail-lifecycle.spec.js
 yarn test:browser test/browser/auto-thumbnail-pixels.spec.js
 yarn build artplayer-plugin-auto-thumbnail
@@ -109,9 +113,18 @@ red, black, blue and yellow sections. Its command and fingerprint are in
 directory with `ARTPLAYER_FFMPEG` and `node scripts/generate-auto-thumbnail-fixture.mjs
 <new-directory>`; never silently replace the committed fixture.
 
-Task04 converts these modules to strict TypeScript and resolves historical public
-declaration/CommonJS differences. Task05 verifies old/final cores and actual
+Task03's internal-type checkpoint has converted the six runtime modules to strict
+TypeScript. Numeric annotations describe the nominal options; no runtime casts or
+normalization were added, so historical coercible JS inputs retain the same
+validation/arithmetic and raw values. Missing options retain the existing behavior.
+Task04 still resolves public declarations, implementation-to-consumer contracts and
+historical CommonJS differences. Task05 verifies old/final cores and actual
 devices; task06 covers installed package entries and the real demo/editor. The
 types and package version are unchanged at this checkpoint. Use
 `refactor/baselines/auto-thumbnail-contract.md` and `auto-thumbnail-failures.md` as
 the historical evidence map; do not regenerate those baselines from this source.
+
+The internal type checkpoint and its core-host assignment fixture are recorded in
+`refactor/changes/2026-09-13-PKG-AUTO-THUMB-03-internal-types.md`. A core host can
+hold partial user thumbnail options; extraction publishes a complete sheet. Do not
+require the host's existing getter to have every generated-sheet field.

@@ -25,7 +25,7 @@ function createSession(publish, report) {
   let lastUrl;
   const urls = /* @__PURE__ */ new Set();
   function release(url) {
-    if (urls.delete(url))
+    if (url !== void 0 && urls.delete(url))
       URL.revokeObjectURL(url);
   }
   function cancel() {
@@ -103,7 +103,7 @@ function createSession(publish, report) {
           publish({ url, ...config });
         } catch (error) {
           if (lastUrl === url)
-            lastUrl = urls.has(previousUrl) ? previousUrl : void 0;
+            lastUrl = previousUrl !== void 0 && urls.has(previousUrl) ? previousUrl : void 0;
           const result = cleanupAll([() => release(url)]);
           if (result.failed)
             report(result.failure);
@@ -136,7 +136,10 @@ function createFrameReader(job, video) {
     if (!previous)
       return;
     const result = cleanupAll([
-      () => clearTimeout(previous.timer),
+      () => {
+        if (previous.timer !== null)
+          clearTimeout(previous.timer);
+      },
       () => {
         if (previous.frame !== null)
           video.cancelVideoFrameCallback(previous.frame);
@@ -360,7 +363,8 @@ function artplayerPluginAutoThumbnail(option) {
         report(result.failure);
     };
     try {
-      for (const [name, callback] of [["destroy", onDestroy], ["restart", session.cancel], ["video:loadedmetadata", onMetadata]]) {
+      const events = [["destroy", onDestroy], ["restart", session.cancel], ["video:loadedmetadata", onMetadata]];
+      for (const [name, callback] of events) {
         if (session.closed)
           break;
         subscriptions.push(() => art.off(name, callback));

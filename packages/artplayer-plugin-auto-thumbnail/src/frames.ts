@@ -1,9 +1,20 @@
+import type { ExtractionJob } from './types'
 import { cleanupAll } from './session'
 
-export default function createFrameReader(job, video) {
+interface PendingFrame {
+  frame: number | null
+  timer: ReturnType<typeof setTimeout> | null
+  sought: boolean
+  presented: boolean
+  retries: number
+  sequence: number
+  started: boolean
+}
+
+export default function createFrameReader(job: ExtractionJob, video: HTMLVideoElement) {
   const presentedFrames = typeof video.requestVideoFrameCallback === 'function'
     && typeof video.cancelVideoFrameCallback === 'function'
-  let pending
+  let pending: PendingFrame | undefined
 
   function clear() {
     const previous = pending
@@ -13,7 +24,10 @@ export default function createFrameReader(job, video) {
     if (!previous)
       return
     const result = cleanupAll([
-      () => clearTimeout(previous.timer),
+      () => {
+        if (previous.timer !== null)
+          clearTimeout(previous.timer)
+      },
       () => {
         if (previous.frame !== null)
           video.cancelVideoFrameCallback(previous.frame)
@@ -24,11 +38,11 @@ export default function createFrameReader(job, video) {
   }
   job.own(clear)
 
-  return (target, draw) => {
+  return (target: number, draw: () => void) => {
     clear()
     if (!job.active())
       return
-    const current = { frame: null, timer: null, sought: false, presented: !presentedFrames, retries: 0, sequence: 0, started: false }
+    const current: PendingFrame = { frame: null, timer: null, sought: false, presented: !presentedFrames, retries: 0, sequence: 0, started: false }
     pending = current
     const active = () => job.active() && pending === current
     const finish = job.guard(() => {
