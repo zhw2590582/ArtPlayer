@@ -1,19 +1,21 @@
+import type Artplayer from 'artplayer'
+import type { Option, Result, Track } from './types'
 import createLifetime from './lifetime'
 import { parseTracks, serializeTracks } from './merge'
 import createRenderer from './render'
 import loadVtt from './request'
 
-export default function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
-  return async (art) => {
-    const { unescape, getExt, srtToVtt, assToVtt } = art.constructor.utils
+export default function artplayerPluginMultipleSubtitles({ subtitles = [] }: Option) {
+  return async (art: Artplayer): Promise<Result> => {
+    const { unescape, getExt, srtToVtt, assToVtt } = (art.constructor as typeof Artplayer).utils
     const lifetime = createLifetime(art)
     const render = createRenderer(art, lifetime, unescape)
-    let trees = []
-    function setTracks(selected) {
+    let trees: Track[] = []
+    function setTracks(selected: readonly (Track | undefined)[]): void {
       if (!lifetime.closed)
         render(serializeTracks(selected))
     }
-    const result = {
+    const result: Result = {
       name: 'multipleSubtitles',
       tracks(names = []) {
         if (!lifetime.closed)
@@ -29,7 +31,8 @@ export default function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
       const vtts = await Promise.all(subtitles.map(option => loadVtt(option, { getExt, srtToVtt, assToVtt }, lifetime)))
       if (lifetime.closed)
         return result
-      trees = parseTracks(vtts, subtitles)
+      // A live completed request yields text; cancellation was checked above.
+      trees = parseTracks(vtts as string[], subtitles)
       setTracks(trees)
       return result
     }

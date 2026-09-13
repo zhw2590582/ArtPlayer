@@ -1,11 +1,13 @@
-export default function createLifetime(art) {
+import type { Cleanup, Lifetime, LifetimeHost } from './types'
+
+export default function createLifetime(art: LifetimeHost): Lifetime {
   let closed = Boolean(art.isDestroy)
-  const cleanups = new Set()
-  let cancel
-  const cancelled = new Promise((resolve) => {
+  const cleanups = new Set<Cleanup>()
+  let cancel!: Cleanup
+  const cancelled = new Promise<void>((resolve) => {
     cancel = resolve
   })
-  function run(cleanup) {
+  function run(cleanup: Cleanup): void {
     try {
       cleanup()
     }
@@ -13,7 +15,7 @@ export default function createLifetime(art) {
       console.warn('Failed to clean up multiple subtitles:', error)
     }
   }
-  const lifetime = {
+  const lifetime: Lifetime = {
     get closed() { return closed },
     own(cleanup) {
       if (closed)

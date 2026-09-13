@@ -4398,6 +4398,23 @@
         "test/browser/multiple-subtitles-lifecycle.spec.js"
       ],
       "resolutionRationale": "Owned installations retain prior URLs on synchronous failure, observe async rejections, release the failed active URL without affecting newer installs, and clean up on destroy. Controlled sync/async/reentrant/getter failures and native Blob revocation pass; void methods and registration timing are preserved."
+    },
+    {
+      "id": "MULTI-SUB-TIMESTAMP-01",
+      "title": "Text wrappers replace numeric inline cue timestamps and serialize NaN times",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-07",
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "refactor/baselines/multiple-subtitles-runtime-types.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md",
+        "test/multiple-subtitles-failures.test.js"
+      ],
+      "compatibleResolution": "Preserve numeric timestamp nodes while retaining subtitle text, track wrappers and selection contracts; record the intentional repair of invalid legacy output.",
+      "closureCriteria": "Valid inline timestamps and surrounding text survive serialization and native subtitle playback; frozen historical failure remains reproducible and ordinary markup regressions pass."
     }
   ]
 }

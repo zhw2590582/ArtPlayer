@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 222 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 223 项，范围 22 个包及工作区/示例。
 
-状态：todo 89 / doing 13 / blocked 0 / done 120 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 89 / doing 14 / blocked 0 / done 120 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -28,7 +28,7 @@
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
 | artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06 |
-| artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
+| artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
 | artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01 |
@@ -219,8 +219,9 @@
 | PKG-MULTI-SUB-01 | artplayer-plugin-multiple-subtitles<br>核对包契约与历史用法 | BASE-05 | subtitles/onParser、multipleSubtitles 名称及实际返回方法 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-03，定位 WebVTT parser 来源/修订及 CC0 头，保留解析/序列化行为 | H | done |
 | PKG-MULTI-SUB-02 | artplayer-plugin-multiple-subtitles<br>建立特有行为与错误测试 | PKG-MULTI-SUB-01, ENG-03, ENG-05 | VTT/SRT/ASS、编码/重叠 cue/排序/空轨/失败与切换 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-MULTI-SUB-03 | artplayer-plugin-multiple-subtitles<br>整理内部职责与资源 | PKG-MULTI-SUB-02, CORE-15 | 解析与合并/获取/渲染分离，过期请求及对象 URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
-| PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
-| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | doing |
+| PKG-MULTI-SUB-07 | artplayer-plugin-multiple-subtitles<br>修复字幕内嵌时间戳序列化 | PKG-MULTI-SUB-03 | 保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异 | 旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变 | H | todo |
+| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-jassub
@@ -514,6 +515,7 @@
 - PKG-MULTI-SUB-01: [记录](baselines/multiple-subtitles-release.json) [记录](baselines/multiple-subtitles-contract.md) [记录](baselines/multiple-subtitles-contract-validation.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-01-contract.md)
 - PKG-MULTI-SUB-02: [记录](baselines/multiple-subtitles-failures.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-02-failures.md)
 - PKG-MULTI-SUB-03: [记录](baselines/multiple-subtitles-resources.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-03-resources.md)
+- PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)

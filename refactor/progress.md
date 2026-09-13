@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-04 严格运行时 TS 检查点（doing）
+
+五个自有模块迁为 TS，新增明确的 Option/Promise Result/Track/host/lifetime 类型；
+parser.js 保持原 vendor，私有 parser.d.ts 区分 cue 与节点，分包 allowJs=false。
+TS 5.9.3/5.1.6 严格正例通过，移除标记后各 8 个负例准确报错；公开旧声明未改。
+源码/main/legacy 各 31 项通过，三入口原生各 30 项共 90 项通过；实际构建/ESM 导入通过。
+实际 yarn pack 检查入口、成员及产物字节，私有源码、parser 声明和 tsconfig 未泄漏。
+本包 252 项通过，完整 CI 2322 项通过（1972 单元、14 工程、336 基线），
+严格生产 TS 增至 352 文件。见[检查点](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md)
+和[验证](baselines/multiple-subtitles-runtime-types.json)。公开异步/旧类型及安装消费者仍待 04。
+类型梳理复现旧/候选内嵌时间戳输出 NaN；九份历史实现均复现，新建 TIMESTAMP 风险与
+PKG-MULTI-SUB-07，并将 07 加入 05 前置。此问题未修复，下一步先做 07，再继续公开类型。
+223 项：120 done、14 doing、89 todo；197 项风险。独立本地检查点提交，不推送、不发布。
+
+
 ## PKG-MULTI-SUB-03 模块与资源修复完成
 
 生产源码拆为入口、请求、纯解析合并、生命周期和宿主安装五个模块，vendor parser 不变。

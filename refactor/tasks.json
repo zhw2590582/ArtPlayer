@@ -2319,10 +2319,29 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "准确 parser/cue/tree/result 类型与真实异步形状",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
+      "evidence": [
+        "baselines/multiple-subtitles-runtime-types.json",
+        "changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md"
+      ]
+    },
+    {
+      "id": "PKG-MULTI-SUB-07",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "修复字幕内嵌时间戳序列化",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-03"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异",
+      "acceptance": "旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变",
       "evidence": []
     },
     {
@@ -2334,7 +2353,8 @@
       ],
       "dependsOn": [
         "PKG-MULTI-SUB-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-MULTI-SUB-07"
       ],
       "status": "todo",
       "risk": "H",

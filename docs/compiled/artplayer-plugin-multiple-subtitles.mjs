@@ -853,14 +853,13 @@ function parseTracks(vtts, subtitles) {
   const parser = new WebVTTParser();
   return vtts.map((vtt, index) => {
     const tree = parser.parse(vtt, "metadata");
-    tree.url = subtitles[index].url;
-    tree.name = subtitles[index].name;
-    return tree;
+    return { ...tree, url: subtitles[index].url, name: subtitles[index].name };
   });
 }
 function serializeTracks(trees) {
   const cues = [];
-  for (const tree of trees) {
+  for (const selected of trees) {
+    const tree = selected;
     for (const cue of tree.cues) {
       cues.push({
         ...cue,

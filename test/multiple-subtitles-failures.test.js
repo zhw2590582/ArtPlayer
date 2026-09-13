@@ -257,4 +257,10 @@ for (const implementation of implementations) {
     assert(env.utils.unescape(await env.latestText()).includes('art-subtitle-renamed'))
     assert.deepEqual(env.requests, ['a.vtt'])
   })
+
+  test(`Multiple-subtitles ${implementation.name} failure baseline: inline timestamp nodes become invalid serialized times`, async () => {
+    const env = create({ responses: { 'a.vtt': 'WEBVTT\n\n00:00.000 --> 00:08.000\nBefore <00:02.000> after\n' } })
+    await env.factory(options(subtitle()))(env.art)
+    assert((await env.latestText()).includes('<NaN:NaN.NaN>'))
+  })
 }

@@ -8,15 +8,20 @@ task PKG-MULTI-SUB-04 owns that compatibility work. Do not infer runtime behavio
 
 ## Current module boundaries
 
-- `src/index.js` composes registration, named selection and the unchanged public result.
-- `src/request.js` owns each fetch through byte decoding and delegates SRT/ASS conversion
+- `src/index.ts` composes registration, named selection and the unchanged public result.
+- `src/request.ts` owns each fetch through byte decoding and delegates SRT/ASS conversion
   to the existing core utils. Failure aborts the request; registration failure closes siblings.
-- `src/merge.js` parses metadata and serializes selected cues without mutating parsed trees.
+- `src/merge.ts` parses metadata and serializes selected cues without mutating parsed trees.
   It depends only on the vendor parser, not the player or browser resource APIs.
-- `src/lifetime.js` owns the destroy listener, request cancellation and resource callbacks.
+- `src/lifetime.ts` owns the destroy listener, request cancellation and resource callbacks.
   Its cancellation Promise also settles pending operations without AbortController support.
-- `src/render.js` owns generated Blob URLs and synchronous/async host installation outcomes.
+- `src/render.ts` owns generated Blob URLs and synchronous/async host installation outcomes.
   Reentrant selections and stale host rejections cannot release the latest selected resource.
+- `src/types.ts` describes the internal Promise result, selected tracks and narrow host/resource
+  boundaries; option fields reuse the existing public declaration. It is not a published API.
+- `src/parser.d.ts` describes the vendored parse result and discriminated cue nodes. Parsed
+  numeric timestamps are distinct from the historically wrapped string nodes accepted by the
+  serializer. That wrapping produces invalid inline times; PKG-MULTI-SUB-07 owns its repair.
 - `src/parser.js` is vendored WebVTT parser/serializer code with a CC0 dedication. It is not
   owned plugin code to mechanically migrate to TypeScript. Keep it distinct from task 04.
   The pinned upstream reference and full adaptation check are in
@@ -77,5 +82,9 @@ Candidate lifecycle and merge suites cover cancellation, failures, resource owne
 reentrancy and immutable serialization. The candidate browser suite adds real video source
 switching, HTTP rejection and Blob revocation. For main/legacy validation, set the artifact
 environment variable above before running it; source builds are used when it is absent.
+The package tsconfig checks only authored TS and declarations, with strict/noUncheckedIndexedAccess
+and allowJs=false. TS 5.9.3/5.1.6 positive and negative fixtures cover internal runtime types.
+Do not remove cancellation/index boundary assertions by changing historical optional inputs.
+The public synchronous declaration mismatch remains an explicit task 04 migration boundary.
 Tasks 05/06 still own complete core/device combinations and demo acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.

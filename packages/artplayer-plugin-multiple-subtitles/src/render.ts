@@ -1,9 +1,12 @@
-export default function createRenderer(art, lifetime, unescape) {
-  let current = null
-  function own(url) {
+import type { Subtitle, Utils } from 'artplayer'
+import type { Lifetime, OwnedURL, RenderHost } from './types'
+
+export default function createRenderer(art: RenderHost, lifetime: Lifetime, unescape: Utils['unescape']): (vtt: string) => void {
+  let current: OwnedURL | null = null
+  function own(url: string): OwnedURL {
     let freed = false
-    let release = () => {}
-    const entry = {
+    let release: () => unknown = () => {}
+    const entry: OwnedURL = {
       free() {
         if (freed)
           return
@@ -24,12 +27,13 @@ export default function createRenderer(art, lifetime, unescape) {
     if (lifetime.closed)
       return
     const previous = current
-    let option
-    let escape
+    let option: Subtitle | undefined
+    let escape: boolean | undefined
     let configured = false
     current = entry
     try {
-      option = art.option.subtitle
+      // ArtPlayer merges subtitle defaults; preserve errors for invalid custom hosts.
+      option = art.option.subtitle!
       escape = option.escape
       if (lifetime.closed || current !== entry)
         return
@@ -52,8 +56,8 @@ export default function createRenderer(art, lifetime, unescape) {
     catch (error) {
       if (current === entry) {
         current = previous
-        if (configured && option.escape === false)
-          option.escape = escape
+        if (configured && option!.escape === false)
+          option!.escape = escape
       }
       entry.free()
       throw error
