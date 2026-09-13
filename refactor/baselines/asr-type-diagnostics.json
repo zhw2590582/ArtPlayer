@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ASR-04",
+  "sourceReport": "refactor/.cache/asr-package-types-3KzGBO/report.json",
+  "scope": "Observed strict installed consumers from frozen 2.0.0 and 2.1.0 archives with packed candidate core. Both old NodeNext ESM default imports are namespaces; direct-call diagnostics are retained, not counted as passing compatibility. Legal namespace consumers are verified separately.",
+  "cases": [
+    {
+      "plugin": "published-2.0.0",
+      "compiler": "5.9.3",
+      "mode": "node10-commonjs",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.0.0",
+      "compiler": "5.9.3",
+      "mode": "nodenext-cjs",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.0.0",
+      "compiler": "5.9.3",
+      "mode": "nodenext-esm",
+      "diagnostics": [
+        {
+          "file": "consumer.mts",
+          "line": 26,
+          "code": 2322,
+          "message": "Type '{ length: number; interval: number; sampleRate: number; autoHideTimeout: number; onAudioChunk(chunk: any): void; }' is not assignable to type 'never'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 26,
+          "code": 2344,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' does not satisfy the constraint '(...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(...args: any): any'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 31,
+          "code": 7006,
+          "message": "Parameter 'chunk' implicitly has an 'any' type."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 37,
+          "code": 2322,
+          "message": "Type 'undefined' is not assignable to type 'never'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 37,
+          "code": 2344,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' does not satisfy the constraint '(...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(...args: any): any'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 39,
+          "code": 2344,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' does not satisfy the constraint '(...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(...args: any): any'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 46,
+          "code": 2322,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' is not assignable to type 'PublishedFactory'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(option?: PublishedOption | undefined): (art: Artplayer) => PublishedResult'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 47,
+          "code": 2322,
+          "message": "Type 'PublishedFactory' is not assignable to type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 48,
+          "code": 2322,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' is not assignable to type 'PublishedFactory'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(option?: PublishedOption | undefined): (art: Artplayer) => PublishedResult'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 50,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 54,
+          "code": 2339,
+          "message": "Property 'onAudioChunk' does not exist on type 'never'."
+        }
+      ]
+    },
+    {
+      "plugin": "published-2.0.0",
+      "compiler": "5.9.3",
+      "mode": "bundler-esm",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.0.0",
+      "compiler": "4.3.5",
+      "mode": "node10-commonjs",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.1.0",
+      "compiler": "5.9.3",
+      "mode": "node10-commonjs",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.1.0",
+      "compiler": "5.9.3",
+      "mode": "nodenext-cjs",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.1.0",
+      "compiler": "5.9.3",
+      "mode": "nodenext-esm",
+      "diagnostics": [
+        {
+          "file": "consumer.mts",
+          "line": 26,
+          "code": 2322,
+          "message": "Type '{ length: number; interval: number; sampleRate: number; autoHideTimeout: number; onAudioChunk(chunk: any): void; }' is not assignable to type 'never'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 26,
+          "code": 2344,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' does not satisfy the constraint '(...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(...args: any): any'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 31,
+          "code": 7006,
+          "message": "Parameter 'chunk' implicitly has an 'any' type."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 37,
+          "code": 2322,
+          "message": "Type 'undefined' is not assignable to type 'never'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 37,
+          "code": 2344,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' does not satisfy the constraint '(...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(...args: any): any'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 39,
+          "code": 2344,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' does not satisfy the constraint '(...args: any) => any'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(...args: any): any'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 46,
+          "code": 2322,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' is not assignable to type 'PublishedFactory'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(option?: PublishedOption | undefined): (art: Artplayer) => PublishedResult'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 47,
+          "code": 2322,
+          "message": "Type 'PublishedFactory' is not assignable to type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 48,
+          "code": 2322,
+          "message": "Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' is not assignable to type 'PublishedFactory'.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' provides no match for the signature '(option?: PublishedOption | undefined): (art: Artplayer) => PublishedResult'."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 49,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 50,
+          "code": 2349,
+          "message": "This expression is not callable.\n  Type 'typeof import(\"<consumer>/node_modules/artplayer-plugin-asr/types/artplayer-plugin-asr\")' has no call signatures."
+        },
+        {
+          "file": "consumer.mts",
+          "line": 54,
+          "code": 2339,
+          "message": "Property 'onAudioChunk' does not exist on type 'never'."
+        }
+      ]
+    },
+    {
+      "plugin": "published-2.1.0",
+      "compiler": "5.9.3",
+      "mode": "bundler-esm",
+      "diagnostics": []
+    },
+    {
+      "plugin": "published-2.1.0",
+      "compiler": "4.3.5",
+      "mode": "node10-commonjs",
+      "diagnostics": []
+    }
+  ],
+  "fixtures": {
+    "refactor/fixtures/consumers/asr-published.ts": "7611ab9ef9765fe6a6ca5112589228d49012400bf0b9d9cede96ead8e63cffc2",
+    "refactor/fixtures/consumers/asr-esm-namespace.ts": "1e3b7475452f43f71e4e038c17368860fe2bc00a61451397fe609e9a3e078d98"
+  }
+}

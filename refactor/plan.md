@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 225 项，范围 22 个包及工作区/示例。
 
-状态：todo 83 / doing 16 / blocked 0 / done 126 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 82 / doing 16 / blocked 0 / done 127 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -254,7 +254,7 @@
 | PKG-ASR-01 | artplayer-plugin-asr<br>核对包契约与历史用法 | BASE-05 | length/interval/sampleRate/onAudioChunk、append/hide/stop 的真实能力 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-ASR-02 | artplayer-plugin-asr<br>建立特有行为与错误测试 | PKG-ASR-01, ENG-03, ENG-05 | PCM/WAV、chunk 时序、回调慢/拒绝、重复初始化与停止 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-ASR-03 | artplayer-plugin-asr<br>整理内部职责与资源 | PKG-ASR-02, CORE-10, CORE-18 | AudioContext/Worklet/Stream 生命周期和背压分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
-| PKG-ASR-04 | artplayer-plugin-asr<br>迁移自有源码和公开类型 | PKG-ASR-03, ENG-04, ENG-06, CORE-07 | 主线程/Worklet/音频 buffer 与异步回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-ASR-04 | artplayer-plugin-asr<br>迁移自有源码和公开类型 | PKG-ASR-03, ENG-04, ENG-06, CORE-07 | 主线程/Worklet/音频 buffer 与异步回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-ASR-05 | artplayer-plugin-asr<br>验证新旧核心和组合 | PKG-ASR-04, CORE-22 | 真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-ASR-06 | artplayer-plugin-asr<br>验证分发并同步文档 | PKG-ASR-05, ENG-07 | asr.js、Worklet 资源、输出格式与声明证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
@@ -529,6 +529,7 @@
 - PKG-ASR-01: [记录](changes/2026-09-13-PKG-ASR-01-contracts.md) [记录](baselines/asr-contract.md) [记录](baselines/asr-release.json)
 - PKG-ASR-02: [记录](changes/2026-09-13-PKG-ASR-02-audio-baseline.md) [记录](baselines/asr-audio-validation.json)
 - PKG-ASR-03: [记录](changes/2026-09-13-PKG-ASR-03-audio-ownership.md) [记录](baselines/asr-ownership-validation.json)
+- PKG-ASR-04: [记录](changes/2026-09-13-PKG-ASR-04-public-types.md) [记录](baselines/asr-types-validation.json) [记录](baselines/asr-type-diagnostics.json)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)

@@ -1,11 +1,11 @@
 import type Artplayer from 'artplayer'
 
-interface AudioChunk {
+export interface AudioChunk {
   pcm: ArrayBuffer
   wav: ArrayBuffer
 }
 
-interface AsrPluginOption {
+export interface AsrPluginOption {
   length?: number
   interval?: number
   sampleRate?: number
@@ -13,11 +13,28 @@ interface AsrPluginOption {
   onAudioChunk?: (chunk: AudioChunk) => void | Promise<void>
 }
 
-interface AsrPluginInstance {
+export interface AsrPluginInstance {
   name: 'artplayerPluginAsr'
   stop: () => void
   hide: () => void
   append: (subtitle: string) => void
+}
+
+/** Historical factory shape, including void stop and callback results. */
+export type Factory = (option?: AsrPluginOption) => (art: Artplayer) => AsrPluginInstance
+
+/** Accurate asynchronous view available through the /runtime entry. */
+export interface RuntimeOption extends Omit<AsrPluginOption, 'onAudioChunk'> {
+  onAudioChunk?: (chunk: AudioChunk) => string | void | null | Promise<string | void | null>
+}
+
+export interface RuntimeResult extends Omit<AsrPluginInstance, 'stop'> {
+  stop: () => Promise<void>
+}
+
+export interface RuntimeFactory {
+  (option?: RuntimeOption): (art: Artplayer) => RuntimeResult
+  readonly default: RuntimeFactory
 }
 
 declare function artplayerPluginAsr(option?: AsrPluginOption): (art: Artplayer) => AsrPluginInstance

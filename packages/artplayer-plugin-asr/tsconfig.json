@@ -1,5 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": { "allowJs": false },
-  "include": ["src/**/*.ts", "types/**/*.d.ts", "../../types/assets.d.ts"]
+  "include": ["src/**/*.ts", "types/**/*.d.ts", "types/**/*.d.mts", "types/**/*.d.cts", "../../types/assets.d.ts"]
 }

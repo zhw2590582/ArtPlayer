@@ -2682,11 +2682,15 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "主线程/Worklet/音频 buffer 与异步回调类型",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-ASR-04-public-types.md",
+        "baselines/asr-types-validation.json",
+        "baselines/asr-type-diagnostics.json"
+      ]
     },
     {
       "id": "PKG-ASR-05",

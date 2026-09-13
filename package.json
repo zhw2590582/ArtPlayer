@@ -94,7 +94,8 @@
     "check:ci": "node refactor/scripts/ci-workflow.mjs",
     "test:ci": "node --test test/ci-summary.test.js refactor/scripts/ci-workflow.test.mjs refactor/scripts/impact.test.mjs test/package-runtime.test.js",
     "test:package:runtime": "node scripts/package-runtime.mjs --canonical",
-    "test:asr": "node --test test/asr.test.js test/asr-audio.test.js test/asr-encoding.test.js test/asr-lifecycle.test.js test/asr-distribution.test.js"
+    "test:asr": "node --test test/asr.test.js test/asr-audio.test.js test/asr-encoding.test.js test/asr-lifecycle.test.js test/asr-distribution.test.js",
+    "test:asr-types-package": "node refactor/scripts/asr-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

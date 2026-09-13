@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-ASR-04 公共类型与安装兼容完成
+
+保留根入口及 legacy 的旧工厂、void stop 和 NodeNext ESM 命名空间形状；新增
+runtime 精确类型入口，描述字幕回调与 Promise stop。子代理补消费者并发现
+CommonJS 命名类型遗漏、旧 ESM 替换对象兼容风险，均修复后由主代理隔离安装验收。
+实际 2.0/2.1/候选共 17 配置：候选 7 配置通过，每种 12 负例按语句拒绝；两旧包
+各有 1 组原生 NodeNext direct 声明错误单独冻结，三个包的合法 namespace 用法通过。
+根/分包 strict、定向 lint、包字节与 frozen reinstall 检查通过，修复 tsconfig 打包泄漏。
+见[变更](changes/2026-09-13-PKG-ASR-04-public-types.md)与[证据](baselines/asr-types-validation.json)。
+225 项：127 done、16 doing、82 todo；205 风险，ASR-TYPE-01 闭环。
+下一步 ASR-05 原生 fallback/音量/跨源/设备组合与 ASR-06 发行；运行时 JS 未改，
+沿用 ASR-03 浏览器证据，本项不等于 ASR 整包发布验收，没有推送或发布。
+
+
 ## PKG-ASR-03 TS 拆分与音频生命周期完成
 
 生产源码拆为 8 个严格 TS 模块；队列保留半块/尾部，识别回调背压、拒绝恢复、

@@ -4545,8 +4545,8 @@
     {
       "id": "ASR-TYPE-01",
       "title": "ASR declarations omit asynchronous stop and callback text results",
-      "confirmation": "source-observed",
-      "status": "open",
+      "confirmation": "reproduced",
+      "status": "resolved",
       "owners": [
         "PKG-ASR-04"
       ],
@@ -4555,7 +4555,15 @@
         "refactor/baselines/asr-release.json"
       ],
       "compatibleResolution": "Keep historical assignment compatibility while supplying accurate asynchronous consumption.",
-      "closureCriteria": "Actual old/new installed TS consumers cover void callback, Promise<void>, returned text and factory substitution."
+      "closureCriteria": "Actual old/new installed TS consumers cover void callback, Promise<void>, returned text and factory substitution.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-ASR-04-public-types.md",
+        "refactor/baselines/asr-types-validation.json",
+        "refactor/scripts/asr-package-types.mjs",
+        "test/types/asr-public.ts",
+        "refactor/fixtures/consumers/asr-esm-namespace.ts"
+      ],
+      "resolutionRationale": "Root/legacy preserve historical void callback and stop, factory substitution and legal NodeNext namespace shape. Additive runtime supplies text/null/void callbacks and Promise stop with consistent named types. Actual isolated 2.0/2.1/candidate installs, seven candidate compiler configurations and 12 per-mode invalid statements verify declarations. Existing old NodeNext direct-call diagnostics remain explicit, not candidate success."
     },
     {
       "id": "ASR-CHUNK-01",

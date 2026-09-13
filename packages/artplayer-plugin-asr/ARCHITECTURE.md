@@ -63,10 +63,20 @@ HTML, punctuation splitting, replacement, ignored non-string values and the
 historical `length=0` behavior. The CJS function has a non-enumerable self `default`
 alias for consumers of the 2.0 namespace, while preserving the callable 2.1 form.
 
-Root public declarations have not yet migrated: they describe stop as void and
-the callback as void/Promise<void>. PKG-ASR-04 owns exact asynchronous public types,
-old assignment consumers, module forms and installed tarball acceptance. Internal
-strict TypeScript does not prove that public type migration complete.
+Root and `/legacy` declarations intentionally retain the historical factory,
+void stop and void/Promise<void> callback. Their NodeNext ESM default import remains
+the old namespace type: changing it into a callable default would break legal
+namespace substitution. Historical direct-call errors are frozen separately from
+legal namespace consumers. Do not silently rewrite these declarations to match
+runtime behavior or require a self-default property on old replacement factories.
+
+The additive `/runtime` entry references the same main/ESM implementation, with
+`RuntimeOption`, `RuntimeResult` and `RuntimeFactory`: callback text/null/no result
+and asynchronous stop are accurate. Its `.d.mts` default export and `.d.cts`/
+`.d.ts` export assignment support ESM, raw CommonJS and old Node10 resolution.
+Pure type namespaces make all four named runtime types available in every mode.
+The root also exports those types for convenient annotations. No runtime code or
+version changes are needed for this entry.
 
 From the repository root:
 
@@ -76,6 +86,11 @@ From the repository root:
   published/current core, pause/resume, source switch, stop/restart and destroy.
   Set `ARTPLAYER_ASR_ARTIFACT` to an actual main/legacy file to test that artifact.
 - `yarn typecheck`: includes the package strict/noUncheckedIndexedAccess project.
+- `yarn test:asr-types-package`: packs and installs core/ASR outside the workspace,
+  checks frozen 2.0/2.1 consumers and candidate declarations in strict compiler
+  modes, verifies offline frozen reinstall and file hashes, exercises actual
+  import/require exports, and rejects invalid uses. Historical declaration errors
+  are explicit expectations and never counted as candidate success.
 - `yarn dev artplayer-plugin-asr` and `yarn build artplayer-plugin-asr`: normal
   repository development and three-format production builds.
 
