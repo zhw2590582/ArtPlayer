@@ -3,13 +3,30 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { setImmediate as nextTurn } from 'node:timers/promises'
 import { danmukuCandidate, danmukuCandidateEnvironment } from './helpers/danmuku-candidate.js'
-import { deferred } from './helpers/danmuku.js'
+import { danmukuEnvironment, danmukuHistorical, deferred } from './helpers/danmuku.js'
 
 const implementation = await danmukuCandidate()
 const prefix = `Danmuku ${implementation.name}`
 const names = env => env.events.map(event => event.name)
 const loaded = env => env.events.filter(event => event.name === 'artplayerPluginDanmuku:loaded')
 const failures = env => env.events.filter(event => event.name === 'artplayerPluginDanmuku:error')
+
+for (const baseline of [...await danmukuHistorical(), implementation]) {
+  test(`Danmuku ${baseline.name}: NaN time retains the historical fallback while infinities retain their numeric behavior`, async () => {
+    const env = baseline === implementation ? danmukuCandidateEnvironment(baseline) : danmukuEnvironment(baseline)
+    const plugin = env.factory({ danmuku: [] })(env.art)
+    const internal = plugin.show()
+    for (const [input, expected] of [[Number.NaN, 10.5], [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY], [Number.NEGATIVE_INFINITY, 0]]) {
+      const row = { text: `numeric time ${input}`, time: input }
+      assert.equal(await plugin.emit(row), internal)
+      assert.equal(row.time, expected)
+      assert.equal(internal.queue.at(-1).time, expected)
+      assert.equal(internal.queue.at(-1).text, row.text)
+    }
+    assert.equal(failures(env).length, 0)
+    env.destroy()
+  })
+}
 
 function fixture(option = { danmuku: [] }) {
   const env = danmukuCandidateEnvironment(implementation)

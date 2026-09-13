@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-DANMUKU-04 时钟、队列与轨道调度完成
+
+拆分scheduler/queue/worker-client，修复多RAF、同毫秒请求串线、取消后续写、
+节点重复分配、异步拒绝及恢复重入；复审修复03引入的NaN兼容回归。
+源码/main/legacy各104联合测试、三格式共198真实浏览器项及60次额外密集场景通过；
+完整构建、lint通过。关闭ASYNC-01/TRACK-01，Settings/heatmap/完整TS/长负载仍待后续。
+见[变更](changes/2026-09-13-PKG-DANMUKU-04-scheduler.md)及[机器证据](baselines/danmuku-scheduler-validation.json)。
+228项：143 done、15 doing、70 todo；05进入实施。
+没有推送或发布。
+
+
 ## PKG-DANMUKU-03 输入、解析和配置源码完成
 
 拆分input/config/XML parser模块，修复过期替换、加载拒绝、资源清理、time0、函数配置

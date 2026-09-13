@@ -1,5 +1,8 @@
 import { defaultOption, normalizeOption, optionChanged, optionScheme } from './config'
 import { beginInput, cancelInputs, inputActive, readInput } from './input'
+import { filterState, readyItems, setItemState } from './queue'
+import Scheduler from './scheduler'
+import WorkerClient from './worker-client'
 import DanmuWorker from './worker.js?worker&inline'
 
 export default class Danmuku {
@@ -19,6 +22,8 @@ export default class Danmuku {
     this.timer = null // 定时器
     this.index = 0 // 弹幕索引
     this.worker = null
+    this.workerClient = null
+    this.scheduler = new Scheduler(this)
 
     // 格式化后的配置项
     this.option = Danmuku.option
@@ -32,6 +37,7 @@ export default class Danmuku {
     this.reset = this.reset.bind(this)
     this.resize = this.resize.bind(this)
     this.destroy = this.destroy.bind(this)
+    this.seek = this.seek.bind(this)
 
     // 配置事件可同步销毁播放器，先建立输入和销毁边界。
     inputActive(this)
@@ -42,11 +48,12 @@ export default class Danmuku {
         return
 
       // 创建 Web Worker, 用于计算弹幕的 top 值
-      this.worker = new DanmuWorker()
+      this.createWorker()
     }
     catch (error) {
       art.off('destroy', this.destroy)
       cancelInputs(this)
+      this.scheduler.destroy()
       throw error
     }
     // 监听事件
@@ -55,6 +62,7 @@ export default class Danmuku {
     art.on('video:pause', this.stop)
     art.on('video:waiting', this.stop)
     art.on('resize', this.resize)
+    art.on('video:seeking', this.seek)
 
     // 开始加载弹幕
     this.load().catch(error => console.warn('Failed to load initial danmuku:', error))
@@ -160,21 +168,7 @@ export default class Danmuku {
 
   // 获取准备好发送的弹幕
   get readys() {
-    const { currentTime } = this.art
-
-    const result = []
-
-    // 有的是ready状态：之前因为弹幕太多而暂停发送的弹幕
-    this.filter('ready', danmu => result.push(danmu))
-
-    // 有的是wait状态：符合时间范围的弹幕
-    this.filter('wait', (danmu) => {
-      if (currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1) {
-        result.push(danmu)
-      }
-    })
-
-    return result
+    return readyItems(this)
   }
 
   // 可见的弹幕的数据，用于计算下一个弹幕的top值
@@ -289,7 +283,7 @@ export default class Danmuku {
       return this
 
     // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
-    if (danmu.time !== undefined) {
+    if (danmu.time || danmu.time === 0) {
       danmu.time = clamp(danmu.time, 0, Infinity)
     }
     else {
@@ -367,7 +361,12 @@ export default class Danmuku {
     })
     if (!inputActive(this))
       return this
+    const beforeVisibleChanged = this.option.beforeVisible !== next.beforeVisible
     this.option = next
+    if (beforeVisibleChanged) {
+      this.scheduler.invalidate()
+      this.scheduler.schedule()
+    }
 
     // 动态配置有字体大小，需要重新渲染
     if (option.fontSize) {
@@ -398,43 +397,22 @@ export default class Danmuku {
 
   // 复杂运算交给 Web Worker 处理
   postMessage(message = {}) {
-    return new Promise((resolve) => {
-      message.id = Date.now() // 生成唯一标识
-      this.worker.postMessage(message)
-      this.worker.onmessage = (event) => {
-        const { data } = event
-        // 判断是否是当前的消息
-        if (data.id === message.id) {
-          resolve(data)
-        }
-      }
-    })
+    return this.workerClient.request(message)
+  }
+
+  createWorker() {
+    this.workerClient = new WorkerClient(() => new DanmuWorker(), error => this.scheduler.fail(error))
+    this.worker = this.workerClient.worker
   }
 
   // 根据状态获取弹幕
   filter(state, callback) {
-    const danmus = this.states[state] || []
-    for (let index = 0; index < danmus.length; index++) {
-      callback(danmus[index])
-    }
-    return danmus
+    return filterState(this, state, callback)
   }
 
   // 设置弹幕状态
   setState(danmu, state) {
-    // 从原状态池中删除
-    this.states[danmu.$state] = this.states[danmu.$state].filter(item => item !== danmu)
-
-    // 设置新状态
-    danmu.$state = state
-
-    // 设置DOM节点状态
-    if (danmu.$ref) {
-      danmu.$ref.dataset.state = state
-    }
-
-    // 添加到新状态池中
-    this.states[state].push(danmu)
+    setItemState(this, danmu, state)
   }
 
   // 重置弹幕到wait状态，回收弹幕DOM节点
@@ -453,118 +431,8 @@ export default class Danmuku {
 
   // 实时更新弹幕
   update() {
-    const { setStyles } = this.utils
-
-    this.timer = window.requestAnimationFrame(async () => {
-      if (this.art.playing && !this.isHide) {
-        // 实时计算弹幕的剩余显示时间
-        this.filter('emit', (danmu) => {
-          const emitTime = (Date.now() - danmu.$lastStartTime) / 1000
-          danmu.$restTime -= emitTime
-          danmu.$lastStartTime = Date.now()
-          // 超过时间即重置弹幕
-          if (danmu.$restTime <= 0) {
-            this.makeWait(danmu)
-          }
-        })
-
-        // 获取准备好发送的弹幕，可能包含ready和wait状态的弹幕
-        const readys = this.readys
-
-        for (let index = 0; index < readys.length; index++) {
-          const danmu = readys[index]
-
-          // 弹幕发送前的过滤器
-          const state = await this.option.beforeVisible(danmu)
-
-          if (state) {
-            const { clientWidth, clientHeight } = this.$player
-            danmu.$ref = this.$ref // 获取弹幕DOM节点
-            danmu.$ref.textContent = danmu.text // 设置弹幕文本
-
-            // 提前添加到弹幕层中，用于计算top值
-            this.$danmuku.appendChild(danmu.$ref)
-
-            // 设置初始弹幕样式
-            danmu.$ref.style.opacity = this.option.opacity
-            danmu.$ref.style.fontSize = `${this.fontSize}px`
-            danmu.$ref.style.color = danmu.color
-            danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null
-            danmu.$ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null
-
-            // 设置单独弹幕样式
-            setStyles(danmu.$ref, danmu.style)
-
-            // 记录弹幕时间戳
-            danmu.$lastStartTime = Date.now()
-
-            // 计算弹幕剩余时间
-            danmu.$restTime = this.speed
-
-            // 计算弹幕滚动的距离
-            const distance = clientWidth + danmu.$ref.clientWidth
-
-            // 计算弹幕的top值
-            const { result: top } = await this.postMessage({
-              type: 'getDanmuTop',
-              target: {
-                mode: danmu.mode,
-                height: danmu.$ref.clientHeight,
-                speed: distance / danmu.$restTime,
-              }, // 当前弹幕信息
-              visibles: this.visibles, // 可见的弹幕的数据
-              antiOverlap: this.option.antiOverlap,
-              clientWidth,
-              clientHeight,
-              marginBottom: this.marginBottom,
-              marginTop: this.marginTop,
-            })
-
-            if (danmu.$ref) {
-              if (!this.isStop && top !== undefined) {
-                this.setState(danmu, 'emit') // 转换为emit状态
-                danmu.$ref.style.top = `${top}px`
-                danmu.$ref.style.visibility = 'visible'
-                danmu.$ref.dataset.mode = danmu.mode // CSS控制模式的显示和隐藏
-                danmu.$ref.dataset.id = danmu.id || '' // 用于悬停的唯一标识
-
-                switch (danmu.mode) {
-                  // 滚动的弹幕
-                  case 0: {
-                    danmu.$ref.style.left = `${clientWidth}px`
-                    danmu.$ref.style.marginLeft = '0px'
-                    danmu.$ref.style.transform = `translateX(${-distance}px)`
-                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`
-                    break
-                  }
-                  case 1:
-                    // falls through
-                  case 2:
-                    danmu.$ref.style.left = '50%'
-                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`
-                    break
-                  default:
-                    break
-                }
-
-                this.art.emit('artplayerPluginDanmuku:visible', danmu)
-              }
-              else {
-                // 假如弹幕已经停止或者没有 top 值，则重置弹幕为ready状态，回收弹幕DOM节点，等待下次发送
-                this.setState(danmu, 'ready')
-                this.$refs.push(danmu.$ref)
-                danmu.$ref = null
-              }
-            }
-          }
-        }
-      }
-
-      // 递归调用
-      if (!this.isStop) {
-        this.update()
-      }
-    })
+    this.scheduler.running = true
+    this.scheduler.schedule()
     return this
   }
 
@@ -645,14 +513,24 @@ export default class Danmuku {
 
   stop() {
     this.isStop = true
+    this.scheduler.running = false
+    this.scheduler.invalidate()
     this.suspend()
-    window.cancelAnimationFrame(this.timer)
     this.art.emit('artplayerPluginDanmuku:stop')
     return this
   }
 
   start() {
+    if (this.scheduler.closed || this.art.isDestroy)
+      return this
+    const start = ++this.scheduler.starts
+    const generation = this.scheduler.generation
     this.isStop = false
+    this.scheduler.recover()
+    const obsolete = this.scheduler.closed || this.art.isDestroy || this.isStop || this.scheduler.fault
+      || generation !== this.scheduler.generation || start !== this.scheduler.starts
+    if (obsolete)
+      return this
     this.continue()
     this.update()
     this.art.emit('artplayerPluginDanmuku:start')
@@ -660,9 +538,17 @@ export default class Danmuku {
   }
 
   reset() {
+    this.scheduler.invalidate()
     this.queue.forEach(danmu => this.makeWait(danmu))
     this.art.emit('artplayerPluginDanmuku:reset')
+    this.scheduler.recover()
+    this.scheduler.schedule()
     return this
+  }
+
+  seek() {
+    this.scheduler.invalidate()
+    this.scheduler.schedule()
   }
 
   show() {
@@ -675,22 +561,34 @@ export default class Danmuku {
 
   hide() {
     this.isHide = true
+    this.scheduler.invalidate()
     this.$danmuku.style.opacity = 0
     this.option.visible = false
     this.art.emit('artplayerPluginDanmuku:hide')
+    this.scheduler.schedule()
     return this
   }
 
   destroy() {
     cancelInputs(this)
-    this.stop()
-    this.worker?.terminate()
-    this.art.off('video:play', this.start)
-    this.art.off('video:playing', this.start)
-    this.art.off('video:pause', this.stop)
-    this.art.off('video:waiting', this.stop)
-    this.art.off('resize', this.resize)
-    this.art.off('destroy', this.destroy)
-    this.art.emit('artplayerPluginDanmuku:destroy')
+    this.scheduler.destroy()
+    try {
+      try {
+        this.stop()
+      }
+      finally {
+        this.workerClient?.dispose()
+      }
+    }
+    finally {
+      this.art.off('video:play', this.start)
+      this.art.off('video:playing', this.start)
+      this.art.off('video:pause', this.stop)
+      this.art.off('video:waiting', this.stop)
+      this.art.off('resize', this.resize)
+      this.art.off('video:seeking', this.seek)
+      this.art.off('destroy', this.destroy)
+      this.art.emit('artplayerPluginDanmuku:destroy')
+    }
   }
 }

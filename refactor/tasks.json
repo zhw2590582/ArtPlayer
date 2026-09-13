@@ -3320,11 +3320,14 @@
         "PKG-DANMUKU-03",
         "CORE-10"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "danmuku 调度器和确定性时钟测试",
       "acceptance": "seek/暂停/倍率/长时间运行无顺序和碰撞回归",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-04-scheduler.md",
+        "baselines/danmuku-scheduler-validation.json"
+      ]
     },
     {
       "id": "PKG-DANMUKU-05",
@@ -3338,7 +3341,7 @@
         "CORE-14",
         "CORE-18"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "renderer/setting/heatmap/worker 职责及资源归属",
       "acceptance": "mount/icons/设置和 worker 协议保持，销毁无后台工作",

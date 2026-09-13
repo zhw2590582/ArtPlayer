@@ -133,7 +133,7 @@ function onmessage({ data }) {
   const danmus = bilibiliDanmuParseFromXml(xml);
   globalThis.postMessage({ danmus, id });
 }
-let nextRequest = 0;
+let nextRequest$1 = 0;
 function abortError(signal) {
   if (signal?.reason !== void 0)
     return signal.reason;
@@ -147,7 +147,7 @@ function bilibiliDanmuParseFromUrl(url, { signal, onCancel } = {}) {
     let worker;
     let workerUrl;
     let releaseCancel;
-    const id = ++nextRequest;
+    const id = ++nextRequest$1;
     const cancel = () => finish(void 0, abortError(signal));
     function releaseWorker() {
       let error;
@@ -264,7 +264,7 @@ function bilibiliDanmuParseFromUrl(url, { signal, onCancel } = {}) {
   });
 }
 const inputs = /* @__PURE__ */ new WeakMap();
-const cancelled = /* @__PURE__ */ Symbol("cancelled danmuku input");
+const cancelled$1 = /* @__PURE__ */ Symbol("cancelled danmuku input");
 function stateFor(owner) {
   if (!inputs.has(owner))
     inputs.set(owner, { closed: false, tasks: /* @__PURE__ */ new Set(), emitting: [] });
@@ -305,7 +305,7 @@ function beginInput(owner, replace) {
       if (stopped)
         return;
       stopped = true;
-      resolveCancel(cancelled);
+      resolveCancel(cancelled$1);
       controller?.abort();
       for (const callback of [...handlers]) callback();
       handlers.clear();
@@ -325,7 +325,7 @@ function beginInput(owner, replace) {
     }
   };
   if (stopped)
-    resolveCancel(cancelled);
+    resolveCancel(cancelled$1);
   else state.tasks.add(task);
   return task;
 }
@@ -342,6 +342,301 @@ function readInput(target, task) {
   if (typeof target === "string")
     return { asynchronous: true, value: bilibiliDanmuParseFromUrl(target, task) };
   return { asynchronous: false, value: Array.isArray(target) ? target : [] };
+}
+function filterState(owner, state, callback) {
+  const danmus = owner.states[state] || [];
+  for (let index = 0; index < danmus.length; index++) callback(danmus[index]);
+  return danmus;
+}
+function readyItems(owner) {
+  const { currentTime } = owner.art;
+  const result = [];
+  filterState(owner, "ready", (danmu) => result.push(danmu));
+  filterState(owner, "wait", (danmu) => {
+    if (currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1)
+      result.push(danmu);
+  });
+  return result;
+}
+function setItemState(owner, danmu, state) {
+  owner.states[danmu.$state] = owner.states[danmu.$state].filter((item) => item !== danmu);
+  danmu.$state = state;
+  if (danmu.$ref)
+    danmu.$ref.dataset.state = state;
+  owner.states[state].push(danmu);
+}
+const cancelled = /* @__PURE__ */ Symbol("cancelled danmuku frame");
+class Scheduler {
+  constructor(owner) {
+    this.owner = owner;
+    this.generation = 0;
+    this.starts = 0;
+    this.frame = null;
+    this.operation = null;
+    this.closed = false;
+    this.running = false;
+    this.fault = false;
+    this.failedItems = /* @__PURE__ */ new Set();
+  }
+  active(operation) {
+    const owner = this.owner;
+    return !this.closed && !this.fault && !owner.art.isDestroy && !owner.isStop && !owner.isHide && operation.generation === this.generation;
+  }
+  release(operation) {
+    const { danmu, ref } = operation;
+    if (ref && danmu.$ref === ref) {
+      ref.style.cssText = this.owner.constructor.cssText;
+      ref.style.visibility = "hidden";
+      this.owner.$refs.push(ref);
+      danmu.$ref = null;
+    }
+    operation.ref = null;
+  }
+  invalidate() {
+    this.generation++;
+    if (this.frame !== null)
+      window.cancelAnimationFrame(this.frame);
+    this.frame = null;
+    this.owner.timer = null;
+    if (this.operation) {
+      const operation = this.operation;
+      this.operation = null;
+      operation.cancel();
+      this.release(operation);
+    }
+    this.owner.workerClient?.cancel();
+    this.failedItems.clear();
+  }
+  report(error) {
+    try {
+      this.owner.art.emit("artplayerPluginDanmuku:error", error);
+    } catch (listenerError) {
+      console.warn("Failed to report danmuku scheduling error:", listenerError);
+    }
+  }
+  fail(error) {
+    if (this.closed || this.fault)
+      return;
+    this.fault = true;
+    this.invalidate();
+    this.report(error);
+  }
+  recover() {
+    if (this.closed || this.owner.art.isDestroy)
+      return;
+    this.failedItems.clear();
+    if (this.fault) {
+      try {
+        this.owner.workerClient?.dispose();
+        this.owner.createWorker();
+        this.fault = false;
+      } catch (error) {
+        this.report(error);
+      }
+    }
+  }
+  schedule() {
+    const owner = this.owner;
+    if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null || this.operation)
+      return;
+    this.frame = window.requestAnimationFrame(() => {
+      this.frame = null;
+      owner.timer = null;
+      if (this.closed || this.fault || owner.isStop || owner.art.isDestroy)
+        return;
+      let cancel;
+      const cancellation = new Promise((resolve) => cancel = () => resolve(cancelled));
+      const operation = { generation: this.generation, cancel, wait: (value) => Promise.race([value, cancellation]), ref: null };
+      this.operation = operation;
+      return this.run(operation).catch((error) => {
+        if (this.active(operation))
+          this.fail(error);
+      }).finally(() => {
+        this.release(operation);
+        if (this.operation === operation) {
+          this.operation = null;
+          this.schedule();
+        }
+      });
+    });
+    owner.timer = this.frame;
+  }
+  async run(operation) {
+    const owner = this.owner;
+    const { setStyles } = owner.utils;
+    if (!owner.art.playing || !this.active(operation))
+      return;
+    owner.filter("emit", (danmu) => {
+      const emitTime = (Date.now() - danmu.$lastStartTime) / 1e3;
+      danmu.$restTime -= emitTime;
+      danmu.$lastStartTime = Date.now();
+      if (danmu.$restTime <= 0)
+        owner.makeWait(danmu);
+    });
+    const readys = owner.readys;
+    for (const danmu of readys) {
+      if (!this.active(operation))
+        return;
+      if (this.failedItems.has(danmu))
+        continue;
+      let state;
+      try {
+        state = await operation.wait(owner.option.beforeVisible(danmu));
+      } catch (error) {
+        if (!this.active(operation))
+          return;
+        this.failedItems.add(danmu);
+        this.report(error);
+        continue;
+      }
+      if (!this.active(operation))
+        return;
+      if (!state)
+        continue;
+      const { clientWidth, clientHeight } = owner.$player;
+      const ref = owner.$ref;
+      operation.danmu = danmu;
+      operation.ref = ref;
+      danmu.$ref = ref;
+      ref.textContent = danmu.text;
+      owner.$danmuku.appendChild(ref);
+      ref.style.opacity = owner.option.opacity;
+      ref.style.fontSize = `${owner.fontSize}px`;
+      ref.style.color = danmu.color;
+      ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
+      ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
+      setStyles(ref, danmu.style);
+      if (!this.active(operation))
+        return;
+      danmu.$lastStartTime = Date.now();
+      danmu.$restTime = owner.speed;
+      const distance = clientWidth + ref.clientWidth;
+      const { result: top } = await operation.wait(owner.postMessage({
+        type: "getDanmuTop",
+        target: { mode: danmu.mode, height: ref.clientHeight, speed: distance / danmu.$restTime },
+        visibles: owner.visibles,
+        antiOverlap: owner.option.antiOverlap,
+        clientWidth,
+        clientHeight,
+        marginBottom: owner.marginBottom,
+        marginTop: owner.marginTop
+      }));
+      if (!this.active(operation) || danmu.$ref !== ref)
+        return;
+      if (top !== void 0) {
+        owner.setState(danmu, "emit");
+        ref.style.top = `${top}px`;
+        ref.style.visibility = "visible";
+        ref.dataset.mode = danmu.mode;
+        ref.dataset.id = danmu.id || "";
+        switch (danmu.mode) {
+          case 0:
+            ref.style.left = `${clientWidth}px`;
+            ref.style.marginLeft = "0px";
+            ref.style.transform = `translateX(${-distance}px)`;
+            ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
+            break;
+          case 1:
+          case 2:
+            ref.style.left = "50%";
+            ref.style.marginLeft = `-${ref.clientWidth / 2}px`;
+            break;
+        }
+        operation.ref = null;
+        owner.art.emit("artplayerPluginDanmuku:visible", danmu);
+      } else {
+        owner.setState(danmu, "ready");
+        this.release(operation);
+      }
+    }
+  }
+  destroy() {
+    this.closed = true;
+    this.invalidate();
+  }
+}
+let nextRequest = 0;
+class WorkerClient {
+  constructor(createWorker, onFailure) {
+    this.pending = /* @__PURE__ */ new Map();
+    this.closed = false;
+    this.failed = false;
+    this.onFailure = onFailure;
+    this.worker = createWorker();
+    try {
+      this.worker.onmessage = (event) => {
+        const request = this.pending.get(event.data?.id);
+        if (!request)
+          return;
+        this.pending.delete(event.data.id);
+        request.resolve(event.data);
+      };
+      this.worker.onerror = (event) => {
+        event.preventDefault?.();
+        this.fail(event.error || event);
+      };
+      this.worker.onmessageerror = (event) => this.fail(event.error || event);
+    } catch (error) {
+      try {
+        this.dispose();
+      } catch {
+      }
+      throw error;
+    }
+  }
+  request(message) {
+    message.id = ++nextRequest;
+    const { id } = message;
+    if (this.closed || this.failed)
+      return Promise.resolve({ id, result: void 0 });
+    return new Promise((resolve, reject) => {
+      this.pending.set(id, { resolve, reject });
+      try {
+        this.worker.postMessage(message);
+      } catch (error) {
+        this.fail(error);
+      }
+    });
+  }
+  fail(error) {
+    if (this.closed || this.failed)
+      return;
+    this.failed = true;
+    for (const request of this.pending.values()) request.reject(error);
+    this.pending.clear();
+    try {
+      this.dispose();
+    } catch {
+    }
+    this.onFailure(error);
+  }
+  cancel() {
+    for (const [id, request] of this.pending) request.resolve({ id, result: void 0 });
+    this.pending.clear();
+  }
+  dispose() {
+    if (this.closed)
+      return;
+    this.closed = true;
+    this.cancel();
+    let failed = false;
+    let error;
+    const attempt = (callback) => {
+      try {
+        callback();
+      } catch (failure) {
+        if (!failed)
+          error = failure;
+        failed = true;
+      }
+    };
+    for (const name of ["onmessage", "onerror", "onmessageerror"]) {
+      attempt(() => this.worker[name] = null);
+    }
+    attempt(() => this.worker.terminate());
+    if (failed)
+      throw error;
+  }
 }
 const jsContent = '/*!\n * artplayer-plugin-danmuku.js v5.3.0\n * Github: https://github.com/zhw2590582/ArtPlayer\n * (c) 2017-2026 Harvey Zhao\n * Released under the MIT License.\n */\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n  const maxTop = clientHeight - marginBottom;\n  const danmus = visibles.filter((item) => item.mode === target.mode && item.top <= maxTop).sort((prev, next) => prev.top - next.top);\n  if (danmus.length === 0) {\n    if (target.mode === 2) {\n      return maxTop - target.height;\n    } else {\n      return marginTop;\n    }\n  }\n  danmus.unshift({\n    type: "top",\n    top: 0,\n    left: 0,\n    right: 0,\n    height: marginTop,\n    width: clientWidth,\n    speed: 0,\n    distance: clientWidth\n  });\n  danmus.push({\n    type: "bottom",\n    top: maxTop,\n    left: 0,\n    right: 0,\n    height: marginBottom,\n    width: clientWidth,\n    speed: 0,\n    distance: clientWidth\n  });\n  if (target.mode === 2) {\n    for (let index = danmus.length - 2; index >= 0; index -= 1) {\n      const item = danmus[index];\n      const prev = danmus[index + 1];\n      const itemBottom = item.top + item.height;\n      const diff = prev.top - itemBottom;\n      if (diff >= target.height) {\n        return prev.top - target.height;\n      }\n    }\n  } else {\n    for (let index = 1; index < danmus.length; index += 1) {\n      const item = danmus[index];\n      const prev = danmus[index - 1];\n      const prevBottom = prev.top + prev.height;\n      const diff = item.top - prevBottom;\n      if (diff >= target.height) {\n        return prevBottom;\n      }\n    }\n  }\n  const topMap = [];\n  for (let index = 1; index < danmus.length - 1; index += 1) {\n    const item = danmus[index];\n    if (topMap.length) {\n      const last = topMap[topMap.length - 1];\n      if (last[0].top === item.top) {\n        last.push(item);\n      } else {\n        topMap.push([item]);\n      }\n    } else {\n      topMap.push([item]);\n    }\n  }\n  if (antiOverlap) {\n    switch (target.mode) {\n      case 0: {\n        const result = topMap.find((list) => {\n          return list.every((danmu) => {\n            if (clientWidth < danmu.distance)\n              return false;\n            if (target.speed < danmu.speed)\n              return true;\n            const overlapTime = danmu.right / (target.speed - danmu.speed);\n            if (overlapTime > danmu.time)\n              return true;\n            return false;\n          });\n        });\n        return result && result[0] ? result[0].top : void 0;\n      }\n      // 静止弹幕没有重叠问题\n      case 1:\n      case 2:\n        return void 0;\n    }\n  } else {\n    switch (target.mode) {\n      case 0:\n        topMap.sort((prev, next) => {\n          const nextMinRight = Math.min(...next.map((item) => item.right));\n          const prevMinRight = Math.min(...prev.map((item) => item.right));\n          return nextMinRight * next.length - prevMinRight * prev.length;\n        });\n        break;\n      case 1:\n      case 2:\n        topMap.sort((prev, next) => {\n          const nextMaxWidth = Math.max(...next.map((item) => item.width));\n          const prevMaxWidth = Math.max(...prev.map((item) => item.width));\n          return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n        });\n        break;\n    }\n    return topMap[0][0].top;\n  }\n}\nonmessage = (event) => {\n  const { data } = event;\n  if (!data.id || !data.type)\n    return;\n  const fns = { getDanmuTop };\n  const fn = fns[data.type];\n  const result = fn(data);\n  globalThis.postMessage({\n    result,\n    id: data.id\n  });\n};\n';
 const blob = typeof self !== "undefined" && self.Blob && new Blob(["URL.revokeObjectURL(import.meta.url);", jsContent], { type: "text/javascript;charset=utf-8" });
@@ -383,6 +678,8 @@ class Danmuku {
     this.timer = null;
     this.index = 0;
     this.worker = null;
+    this.workerClient = null;
+    this.scheduler = new Scheduler(this);
     this.option = Danmuku.option;
     this.states = { wait: [], ready: [], emit: [], stop: [] };
     this.start = this.start.bind(this);
@@ -390,16 +687,18 @@ class Danmuku {
     this.reset = this.reset.bind(this);
     this.resize = this.resize.bind(this);
     this.destroy = this.destroy.bind(this);
+    this.seek = this.seek.bind(this);
     inputActive(this);
     art.on("destroy", this.destroy);
     try {
       this.config(option, true);
       if (!inputActive(this))
         return;
-      this.worker = new WorkerWrapper();
+      this.createWorker();
     } catch (error) {
       art.off("destroy", this.destroy);
       cancelInputs(this);
+      this.scheduler.destroy();
       throw error;
     }
     art.on("video:play", this.start);
@@ -407,6 +706,7 @@ class Danmuku {
     art.on("video:pause", this.stop);
     art.on("video:waiting", this.stop);
     art.on("resize", this.resize);
+    art.on("video:seeking", this.seek);
     this.load().catch((error) => console.warn("Failed to load initial danmuku:", error));
   }
   // 默认配置
@@ -491,15 +791,7 @@ class Danmuku {
   }
   // 获取准备好发送的弹幕
   get readys() {
-    const { currentTime } = this.art;
-    const result = [];
-    this.filter("ready", (danmu) => result.push(danmu));
-    this.filter("wait", (danmu) => {
-      if (currentTime + 0.1 >= danmu.time && danmu.time >= currentTime - 0.1) {
-        result.push(danmu);
-      }
-    });
-    return result;
+    return readyItems(this);
   }
   // 可见的弹幕的数据，用于计算下一个弹幕的top值
   get visibles() {
@@ -595,7 +887,7 @@ class Danmuku {
     });
     if (!danmu.text.trim())
       return this;
-    if (danmu.time !== void 0) {
+    if (danmu.time || danmu.time === 0) {
       danmu.time = clamp(danmu.time, 0, Infinity);
     } else {
       danmu.time = this.art.currentTime + 0.5;
@@ -647,7 +939,12 @@ class Danmuku {
     });
     if (!inputActive(this))
       return this;
+    const beforeVisibleChanged = this.option.beforeVisible !== next.beforeVisible;
     this.option = next;
+    if (beforeVisibleChanged) {
+      this.scheduler.invalidate();
+      this.scheduler.schedule();
+    }
     if (option.fontSize) {
       this.reset();
       if (!inputActive(this))
@@ -669,33 +966,19 @@ class Danmuku {
   }
   // 复杂运算交给 Web Worker 处理
   postMessage(message = {}) {
-    return new Promise((resolve) => {
-      message.id = Date.now();
-      this.worker.postMessage(message);
-      this.worker.onmessage = (event) => {
-        const { data } = event;
-        if (data.id === message.id) {
-          resolve(data);
-        }
-      };
-    });
+    return this.workerClient.request(message);
+  }
+  createWorker() {
+    this.workerClient = new WorkerClient(() => new WorkerWrapper(), (error) => this.scheduler.fail(error));
+    this.worker = this.workerClient.worker;
   }
   // 根据状态获取弹幕
   filter(state, callback) {
-    const danmus = this.states[state] || [];
-    for (let index = 0; index < danmus.length; index++) {
-      callback(danmus[index]);
-    }
-    return danmus;
+    return filterState(this, state, callback);
   }
   // 设置弹幕状态
   setState(danmu, state) {
-    this.states[danmu.$state] = this.states[danmu.$state].filter((item) => item !== danmu);
-    danmu.$state = state;
-    if (danmu.$ref) {
-      danmu.$ref.dataset.state = state;
-    }
-    this.states[state].push(danmu);
+    setItemState(this, danmu, state);
   }
   // 重置弹幕到wait状态，回收弹幕DOM节点
   makeWait(danmu) {
@@ -712,88 +995,8 @@ class Danmuku {
   }
   // 实时更新弹幕
   update() {
-    const { setStyles } = this.utils;
-    this.timer = window.requestAnimationFrame(async () => {
-      if (this.art.playing && !this.isHide) {
-        this.filter("emit", (danmu) => {
-          const emitTime = (Date.now() - danmu.$lastStartTime) / 1e3;
-          danmu.$restTime -= emitTime;
-          danmu.$lastStartTime = Date.now();
-          if (danmu.$restTime <= 0) {
-            this.makeWait(danmu);
-          }
-        });
-        const readys = this.readys;
-        for (let index = 0; index < readys.length; index++) {
-          const danmu = readys[index];
-          const state = await this.option.beforeVisible(danmu);
-          if (state) {
-            const { clientWidth, clientHeight } = this.$player;
-            danmu.$ref = this.$ref;
-            danmu.$ref.textContent = danmu.text;
-            this.$danmuku.appendChild(danmu.$ref);
-            danmu.$ref.style.opacity = this.option.opacity;
-            danmu.$ref.style.fontSize = `${this.fontSize}px`;
-            danmu.$ref.style.color = danmu.color;
-            danmu.$ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null;
-            danmu.$ref.style.backgroundColor = danmu.border ? "rgb(0 0 0 / 50%)" : null;
-            setStyles(danmu.$ref, danmu.style);
-            danmu.$lastStartTime = Date.now();
-            danmu.$restTime = this.speed;
-            const distance = clientWidth + danmu.$ref.clientWidth;
-            const { result: top } = await this.postMessage({
-              type: "getDanmuTop",
-              target: {
-                mode: danmu.mode,
-                height: danmu.$ref.clientHeight,
-                speed: distance / danmu.$restTime
-              },
-              // 当前弹幕信息
-              visibles: this.visibles,
-              // 可见的弹幕的数据
-              antiOverlap: this.option.antiOverlap,
-              clientWidth,
-              clientHeight,
-              marginBottom: this.marginBottom,
-              marginTop: this.marginTop
-            });
-            if (danmu.$ref) {
-              if (!this.isStop && top !== void 0) {
-                this.setState(danmu, "emit");
-                danmu.$ref.style.top = `${top}px`;
-                danmu.$ref.style.visibility = "visible";
-                danmu.$ref.dataset.mode = danmu.mode;
-                danmu.$ref.dataset.id = danmu.id || "";
-                switch (danmu.mode) {
-                  // 滚动的弹幕
-                  case 0: {
-                    danmu.$ref.style.left = `${clientWidth}px`;
-                    danmu.$ref.style.marginLeft = "0px";
-                    danmu.$ref.style.transform = `translateX(${-distance}px)`;
-                    danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`;
-                    break;
-                  }
-                  case 1:
-                  // falls through
-                  case 2:
-                    danmu.$ref.style.left = "50%";
-                    danmu.$ref.style.marginLeft = `-${danmu.$ref.clientWidth / 2}px`;
-                    break;
-                }
-                this.art.emit("artplayerPluginDanmuku:visible", danmu);
-              } else {
-                this.setState(danmu, "ready");
-                this.$refs.push(danmu.$ref);
-                danmu.$ref = null;
-              }
-            }
-          }
-        }
-      }
-      if (!this.isStop) {
-        this.update();
-      }
-    });
+    this.scheduler.running = true;
+    this.scheduler.schedule();
     return this;
   }
   // 重置正在显示的弹幕: stop/emit 状态的弹幕
@@ -858,22 +1061,38 @@ class Danmuku {
   }
   stop() {
     this.isStop = true;
+    this.scheduler.running = false;
+    this.scheduler.invalidate();
     this.suspend();
-    window.cancelAnimationFrame(this.timer);
     this.art.emit("artplayerPluginDanmuku:stop");
     return this;
   }
   start() {
+    if (this.scheduler.closed || this.art.isDestroy)
+      return this;
+    const start = ++this.scheduler.starts;
+    const generation = this.scheduler.generation;
     this.isStop = false;
+    this.scheduler.recover();
+    const obsolete = this.scheduler.closed || this.art.isDestroy || this.isStop || this.scheduler.fault || generation !== this.scheduler.generation || start !== this.scheduler.starts;
+    if (obsolete)
+      return this;
     this.continue();
     this.update();
     this.art.emit("artplayerPluginDanmuku:start");
     return this;
   }
   reset() {
+    this.scheduler.invalidate();
     this.queue.forEach((danmu) => this.makeWait(danmu));
     this.art.emit("artplayerPluginDanmuku:reset");
+    this.scheduler.recover();
+    this.scheduler.schedule();
     return this;
+  }
+  seek() {
+    this.scheduler.invalidate();
+    this.scheduler.schedule();
   }
   show() {
     this.isHide = false;
@@ -884,22 +1103,32 @@ class Danmuku {
   }
   hide() {
     this.isHide = true;
+    this.scheduler.invalidate();
     this.$danmuku.style.opacity = 0;
     this.option.visible = false;
     this.art.emit("artplayerPluginDanmuku:hide");
+    this.scheduler.schedule();
     return this;
   }
   destroy() {
     cancelInputs(this);
-    this.stop();
-    this.worker?.terminate();
-    this.art.off("video:play", this.start);
-    this.art.off("video:playing", this.start);
-    this.art.off("video:pause", this.stop);
-    this.art.off("video:waiting", this.stop);
-    this.art.off("resize", this.resize);
-    this.art.off("destroy", this.destroy);
-    this.art.emit("artplayerPluginDanmuku:destroy");
+    this.scheduler.destroy();
+    try {
+      try {
+        this.stop();
+      } finally {
+        this.workerClient?.dispose();
+      }
+    } finally {
+      this.art.off("video:play", this.start);
+      this.art.off("video:playing", this.start);
+      this.art.off("video:pause", this.stop);
+      this.art.off("video:waiting", this.stop);
+      this.art.off("resize", this.resize);
+      this.art.off("video:seeking", this.seek);
+      this.art.off("destroy", this.destroy);
+      this.art.emit("artplayerPluginDanmuku:destroy");
+    }
   }
 }
 const lib = {
