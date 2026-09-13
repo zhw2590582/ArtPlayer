@@ -1,21 +1,5 @@
-import JASSUB from './jassub.es.js'
+import { registerJassub } from './registration.js'
 
 export default function artplayerPluginJassub(option) {
-  return (art) => {
-    const instance = new JASSUB({
-      video: art.video,
-      ...option,
-    })
-
-    instance._canvasParent.style.zIndex = 20
-
-    art.on('destroy', () => {
-      instance.destroy()
-    })
-
-    return {
-      name: 'artplayerPluginJassub',
-      instance,
-    }
-  }
+  return art => registerJassub(art, option)
 }

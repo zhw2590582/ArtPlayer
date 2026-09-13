@@ -557,21 +557,39 @@ __publicField(_o, "_hasAlphaBug", null);
 /** @type {boolean|null} */
 __publicField(_o, "_hasBitmapBug", null);
 let o = _o;
-function artplayerPluginJassub(option) {
-  return (art) => {
-    const instance = new o({
-      video: art.video,
-      ...option
-    });
-    instance._canvasParent.style.zIndex = 20;
-    art.on("destroy", () => {
+function registerJassub(art, option) {
+  const instance = new o({ video: art.video, ...option });
+  let disposed = false;
+  const dispose = () => {
+    if (disposed || instance._destroyed)
+      return;
+    disposed = true;
+    try {
       instance.destroy();
-    });
-    return {
-      name: "artplayerPluginJassub",
-      instance
-    };
+    } catch (error) {
+      disposed = false;
+      throw error;
+    }
   };
+  try {
+    if (instance._canvasParent)
+      instance._canvasParent.style.zIndex = 20;
+    art.on("destroy", dispose);
+  } catch (error) {
+    try {
+      art.off("destroy", dispose);
+    } catch {
+    }
+    try {
+      dispose();
+    } catch {
+    }
+    throw error;
+  }
+  return { name: "artplayerPluginJassub", instance };
+}
+function artplayerPluginJassub(option) {
+  return (art) => registerJassub(art, option);
 }
 export {
   artplayerPluginJassub as default

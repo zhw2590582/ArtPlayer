@@ -141,6 +141,12 @@ export function jassubEnvironment(implementation, { script = false, simd = false
       listeners.set(name, [])
     listeners.get(name).push(callback)
     return art
+  }, off(name, callback) {
+    const callbacks = listeners.get(name)
+    const index = callbacks?.indexOf(callback) ?? -1
+    if (index >= 0)
+      callbacks.splice(index, 1)
+    return art
   } }
   const emit = name => listeners.get(name)?.forEach(callback => callback())
   const flush = async () => {
@@ -154,5 +160,5 @@ export function jassubEnvironment(implementation, { script = false, simd = false
     workers.at(-1).onmessage({ data: { target: 'ready' } })
     await flush()
   }
-  return { factory, exported, art, workers, parent, errors, listeners, emit, ready, flush, createVideo: () => parent.appendChild(new Video()) }
+  return { factory, exported, art, workers, parent, errors, listeners, emit, ready, flush, createVideo: () => parent.appendChild(new Video()), createCanvas: () => new Canvas() }
 }

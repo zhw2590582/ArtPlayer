@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-JASSUB-03 自有注册/清理改造完成
+
+入口与 registration 分离；自定义 canvas、直接实例销毁后的宿主清理、重入与
+注册异常回滚已修复。旧产物同断言 1 通过/7 失败，候选八项通过；联合 128 项、
+main/legacy 各 15 项和实际浏览器 24 项通过，三格式正常构建。
+[实现记录](changes/2026-09-14-PKG-JASSUB-03-registration.md)说明 onDemand=false 的
+自定义 canvas 验证边界；WebKit 默认逐帧和 vendor 其他问题仍在 07/05。04 接着
+完成自有 TS 和公开类型，vendor/资源/声明本次未变；每项单独本地提交。
+
 ## PKG-JASSUB-02 历史缺陷与原生渲染基线完成
 
 联合 120 项通过，其中 63 项确认旧失败/已有保护；没有宣称修复。Chromium/Firefox

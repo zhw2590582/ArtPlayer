@@ -178,3 +178,10 @@ selected ARTPLAYER_JASSUB_ON_DEMAND=false diagnostic passes on the candidate cor
 This is a retained historical failure, not a waived browser gate. The server must
 serve WASM as application/wasm for native streaming compilation. Archive failed
 and successful runs independently. See the PKG-JASSUB-02 change record.
+
+For candidate registration regressions, set ARTPLAYER_JASSUB_ARTIFACT to a built
+main/legacy global file. Those runs also destroy the exposed instance before host
+cleanup. ARTPLAYER_JASSUB_CUSTOM_CANVAS=true supplies a caller-owned canvas and
+asserts it remains connected after destroy(false). The native report records the
+artifact hash and both mode choices. This does not change the default published
+baseline or establish ESM/offscreen/device acceptance.

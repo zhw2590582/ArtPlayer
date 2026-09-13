@@ -5438,26 +5438,38 @@
       ],
       "evidence": [
         "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
-        "refactor/baselines/jassub-failures-validation.json"
+        "refactor/baselines/jassub-failures-validation.json",
+        "refactor/changes/2026-09-14-PKG-JASSUB-03-registration.md",
+        "refactor/baselines/jassub-registration-validation.json",
+        "test/jassub-registration.test.js"
       ],
-      "compatibleResolution": "Use actual resource ownership and tolerate direct instance teardown before host teardown.",
+      "compatibleResolution": "Use actual resource ownership and tolerate direct instance teardown before host teardown. Task03 fixes host cleanup after direct teardown, reentry and retry/rollback. Direct vendor repetition and cross-parent cleanup remain task07 and this risk stays open.",
       "closureCriteria": "Candidate direct/repeated/host teardown and cross-parent video replacement release container, Worker and listeners without throwing or removing user nodes."
     },
     {
       "id": "JASSUB-CANVAS-01",
       "title": "Custom canvas registration throws after JASSUB Worker allocation",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-02",
         "PKG-JASSUB-03"
       ],
       "evidence": [
         "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
-        "refactor/baselines/jassub-failures-validation.json"
+        "refactor/baselines/jassub-failures-validation.json",
+        "refactor/changes/2026-09-14-PKG-JASSUB-03-registration.md",
+        "refactor/baselines/jassub-registration-validation.json",
+        "test/jassub-registration.test.js"
       ],
       "compatibleResolution": "Guard adapter-created parent styling; retain the supplied canvas and roll back failed registration.",
-      "closureCriteria": "Custom canvas registration succeeds and cleanup releases owned work while preserving caller DOM; public instance and option override behavior remain compatible."
+      "closureCriteria": "Custom canvas registration succeeds and cleanup releases owned work while preserving caller DOM; public instance and option override behavior remain compatible.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-03-registration.md",
+        "refactor/baselines/jassub-registration-validation.json",
+        "test/jassub-registration.test.js"
+      ],
+      "resolutionRationale": "Adapter no longer assumes a vendor-created parent for caller canvas. Old-artifact red tests and candidate rollback/ownership tests distinguish the fix. Actual main/legacy native Worker/WASM rendering, seek/fullscreen and direct-then-host cleanup pass with caller nodes preserved across three engines and three cores using explicit event-clock mode. Default WebKit frame delivery is a separate open risk."
     },
     {
       "id": "JASSUB-CONSTRUCTION-01",

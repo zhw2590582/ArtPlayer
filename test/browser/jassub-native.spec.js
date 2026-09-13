@@ -7,7 +7,9 @@ const baseline = JSON.parse(fs.readFileSync('refactor/baselines/jassub-release.j
 const release = baseline.release
 const archive = await ensureArchive(release)
 const member = `package/${release.manifest.main.replace(/^\.\//, '')}`
-const code = readMember(archive, member).toString()
+const artifact = process.env.ARTPLAYER_JASSUB_ARTIFACT
+const customCanvas = process.env.ARTPLAYER_JASSUB_CUSTOM_CANVAS === 'true'
+const code = artifact ? fs.readFileSync(artifact, 'utf8') : readMember(archive, member).toString()
 const onDemandRender = process.env.ARTPLAYER_JASSUB_ON_DEMAND !== 'false'
 const subtitles = `[Script Info]
 ScriptType: v4.00+
@@ -23,7 +25,7 @@ Dialogue: 0,0:00:05.00,0:00:30.00,Default,,0,0,0,,After seek with actual WASM
 `
 
 for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
-  test(`JASSUB published ${release.version} renders actual WASM subtitles through seek and layout with ${core} core`, async ({ page, context }, testInfo) => {
+  test(`JASSUB ${artifact ? 'candidate artifact' : `published ${release.version}`} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=${customCanvas}`, async ({ page, context }, testInfo) => {
     const resources = []
     const external = []
     const origin = new URL(testInfo.project.use.baseURL).origin
@@ -68,8 +70,17 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
       await page.locator('#pause').click()
-      await page.evaluate(async ({ subContent, onDemandRender }) => {
+      await page.evaluate(async ({ subContent, onDemandRender, customCanvas }) => {
         const register = window.artplayerPluginJassub.default || window.artplayerPluginJassub
+        let canvas
+        if (customCanvas) {
+          canvas = document.createElement('canvas')
+          canvas.style.position = 'absolute'
+          canvas.style.pointerEvents = 'none'
+          canvas.style.zIndex = '20'
+          window.art.video.insertAdjacentElement('afterend', canvas)
+          window.jassubUserCanvas = canvas
+        }
         window.art.plugins.add(register({
           subContent,
           workerUrl: '/assets/jassub/jassub-worker.js',
@@ -79,6 +90,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
           fonts: ['/assets/jassub/default.woff2'],
           offscreenRender: false,
           onDemandRender,
+          ...(canvas ? { canvas } : {}),
         }))
         window.jassub = window.art.plugins.artplayerPluginJassub.instance
         window.jassub.addEventListener('error', event => window.jassubNative.errors.push(String(event.error)))
@@ -104,7 +116,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
             window.jassubNative.snapshots.push(state)
           return state
         }
-      }, { subContent: subtitles, onDemandRender })
+      }, { subContent: subtitles, onDemandRender, customCanvas })
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)
       const before = await page.evaluate(() => window.jassubPixels('before-seek'))
@@ -128,7 +140,11 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       await expect.poll(() => page.evaluate(() => window.jassubPixels().visible)).toBeGreaterThan(100)
       await page.evaluate(() => window.jassubPixels('fullscreen'))
       await testInfo.attach('actual-jassub-page', { body: await page.screenshot(), contentType: 'image/png' })
+      if (artifact)
+        await page.evaluate(() => window.jassub.destroy())
       await page.evaluate(() => window.art.destroy(false))
+      if (customCanvas)
+        expect(await page.evaluate(() => window.jassubUserCanvas.isConnected)).toBe(true)
       expect(await page.evaluate(() => document.querySelectorAll('.JASSUB').length)).toBe(0)
       expect(await page.evaluate(() => window.jassubNative.workers.map(worker => worker.terminated))).toEqual([1])
       expect(await page.evaluate(() => window.jassubNative.errors)).toEqual([])
@@ -138,7 +154,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
     }
     finally {
       const state = await page.evaluate(() => window.jassubNative).catch(error => ({ unavailable: error.message }))
-      await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, release: { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: 'Actual published plugin, worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery, repeated destruction or device acceptance.' }, null, 2), contentType: 'application/json' })
+      await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, customCanvas, source: artifact ? { artifact, sha256: hash(code) } : { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: 'Actual worker, WASM and local font with offscreenRender=false. No default offscreen path, failure recovery or device acceptance; candidate adds direct-then-host destruction.' }, null, 2), contentType: 'application/json' })
       if (!page.isClosed()) {
         await page.evaluate(() => {
           if (window.art && !window.art.isDestroy)

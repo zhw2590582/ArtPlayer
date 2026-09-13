@@ -1,9 +1,25 @@
 # JASSUB maintenance
 
-`src/index.js` is the ArtPlayer-owned adapter. It forwards `{ video: art.video, ...option }`
-to the vendored constructor, sets the canvas parent's z-index to 20, registers a destroy
-listener, and synchronously returns `{ name: 'artplayerPluginJassub', instance }`. The instance
-is the actual vendor object. Options remain live until registration; a supplied video wins.
+`src/index.js` preserves the lazy factory and delegates registration to
+`src/registration.js`. The registration module constructs the actual vendor object
+with `{ video: art.video, ...option }`, styles only a vendor-created canvas parent,
+binds host cleanup and synchronously returns `{ name: 'artplayerPluginJassub', instance }`.
+Options remain live until registration; a supplied video wins. This small split keeps
+the public factory separate from ownership/error handling, without a general lifecycle
+framework or new runtime dependency.
+
+Caller-supplied canvas nodes remain caller-owned. The adapter does not invent a parent
+or delete those nodes; vendor-created containers still get z-index 20. Host cleanup
+dynamically calls the exposed instance's current destroy method, ignores already
+destroyed instances and blocks synchronous reentry. A thrown disposal error is preserved
+and the guard resets for a later attempt. Direct repeated vendor destroy is still a
+separate PKG-JASSUB-07 problem; the adapter does not replace public instance methods.
+
+If styling or host subscription throws after construction, registration independently
+attempts off with the exact callback and instance cleanup, then rethrows the original
+error. Secondary rollback errors do not replace it. An invalid/custom host whose off
+throws may retain an inert callback; failed vendor cleanup is not magically repaired.
+Failures inside the vendor constructor before it returns an instance remain 07 work.
 
 `src/jassub.es.js` owns rendering, media listeners, canvas state, capability checks and worker
 messages. Keep this third-party file separate from the adapter's TypeScript migration.
@@ -32,6 +48,7 @@ Use the pinned Node/Yarn toolchain:
 
 ```sh
 yarn test:jassub
+node --test test/jassub-registration.test.js
 node refactor/scripts/jassub-provenance.test.mjs --network
 yarn build artplayer-plugin-jassub
 ```
