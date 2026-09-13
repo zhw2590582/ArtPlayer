@@ -58,6 +58,13 @@ independent gradient for each instance. Its existing points event still changes
 the inner point arrays as before; copy those arrays first if the original values
 must be retained. Removing or replacing its control releases its listeners.
 
+Dense automatically sampled heatmaps now scale down instead of becoming a tall,
+flat block over the video (issue #958). When the sampled peak exceeds one quarter
+of the chart height, the curve fits inside that bottom quarter (25px in the
+default 100px control). Small curves keep their existing appearance. Explicit
+finite `heatmap.yMin` or `heatmap.yMax`, and custom points events, retain their
+original coordinate mapping; use these when deliberately controlling the scale.
+
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for module ownership, compatibility
 constraints, tests and the remaining staged TypeScript migration.
 

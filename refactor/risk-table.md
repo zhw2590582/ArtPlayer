@@ -238,3 +238,4 @@
 | DANMUKU-TRACK-01 | resolved / 已复现 | Native simultaneous fixed Danmuku comments can overlap with duplicate start loops and repeated Worker IDs | PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-07 |
 | DANMUKU-INPUT-02 | resolved / 已复现 | Intermediate explicit-zero correction regressed accepted NaN timestamp fallback | PKG-DANMUKU-04 |
 | DANMUKU-LOAD-01 | open / 待取证 | Native lifecycle fixtures sometimes miss timestamp eligibility during concurrent workload; real frame/window behavior needs load evidence | PKG-DANMUKU-07 |
+| DANMUKU-HEATMAP-02 | resolved / 已复现 | Issue958 dense automatic heatmaps exceed the fixed Y domain and flatten across video | PKG-DANMUKU-10 |

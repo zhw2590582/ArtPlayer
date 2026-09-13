@@ -187,6 +187,27 @@ fractional step progression and strict-left/inclusive-right time bins. The
 original points event clones only the outer array and mutates inner y values;
 preserve that observable behavior, including repeated updates.
 
+Issue #958 is a separate density defect from the earlier zero-step/cleanup fixes.
+Automatic queue sampling keeps the historical 128-unit Y domain until its
+transformed peak exceeds 32 units. Above that threshold, use four times the peak
+as the upper domain and constrain endpoints/Bezier controls to the bottom quarter
+of the chart. Constraining the control polygon bounds the whole cubic; merely
+clipping SVG overflow would retain the tall, flattened block. This is a visual
+correction for sampled high density, not a change to queue counts or timing.
+Small unfitted curves keep their exact old path, including small Bezier overshoot;
+the 25px bound applies to fitted charts, not every possible custom option.
+
+Copy own enumerable option fields once, as the historical Object.assign did;
+do not reread getters or treat inherited axis fields as overrides. Finite explicit
+Y axes and nonempty custom points bypass fitting and preserve old paths and
+caller-visible writes. A resize/loaded event resamples the queue as before.
+`test/danmuku-heatmap.test.js` retains historical paths and tests dense bins,
+peak differences, control bounds and option property semantics.
+`test/browser/danmuku-heatmap-density.spec.js` verifies 16000 uniform, clustered
+and mixed rows using native SVG bounds, playback, progress and resizing against
+both cores in Chromium/Firefox/WebKit. This is heatmap validation; it is not a
+16000-visible-DOM-danmuku throughput or long-duration heap benchmark (task07).
+
 `test/danmuku-setting.test.js` uses Linkedom and real published core utilities
 for template parsing, selectors, events and lifecycle tests. Linkedom has no
 layout; its measured rectangles are controlled inputs, not browser evidence.

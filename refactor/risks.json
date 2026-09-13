@@ -5288,6 +5288,28 @@
       ],
       "compatibleResolution": "Capture native RAF/media-time gaps and scheduled/eligible/visible item counts under realistic load before deciding whether the old plus/minus 0.1 second eligibility rule needs a compatible correction.",
       "closureCriteria": "Real load runs explain missing scheduled items with frame and media evidence, and any confirmed implementation defect has a regression and compatible fix; seeding ready in lifecycle fixtures is not closure evidence."
+    },
+    {
+      "id": "DANMUKU-HEATMAP-02",
+      "title": "Issue958 dense automatic heatmaps exceed the fixed Y domain and flatten across video",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-DANMUKU-10"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md",
+        "refactor/baselines/danmuku-heatmap-density-validation.json",
+        "test/danmuku-heatmap.test.js",
+        "test/browser/danmuku-heatmap-density.spec.js"
+      ],
+      "compatibleResolution": "Fit dense automatically sampled curves while preserving explicit axes, custom points, option property semantics and lifecycle.",
+      "closureCriteria": "Native playback, SVG/screen bounds, gradients and resize verified for uniform/clustered/mixed 16000 rows on both cores; historical custom paths retain exact behavior.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md",
+        "refactor/baselines/danmuku-heatmap-density-validation.json"
+      ],
+      "resolutionRationale": "250 unit tests and 102 native browser cases passed, including source/main/legacy density matrices and main resource regression. No claim of full load or macOS device acceptance."
     }
   ]
 }

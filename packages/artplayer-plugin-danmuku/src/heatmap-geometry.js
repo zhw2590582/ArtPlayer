@@ -25,7 +25,8 @@ export function heatmapGeometry({ width, height, duration, queue, option, points
     smoothing: 0.2,
     flattening: 0.2,
   }
-  const options = Object.assign({}, defaults, typeof option === 'object' ? option : {})
+  const configured = Object.assign({}, typeof option === 'object' ? option : {})
+  const options = Object.assign({}, defaults, configured)
   for (const key of Object.keys(defaults)) {
     if (!Number.isFinite(options[key]))
       options[key] = defaults[key]
@@ -34,7 +35,8 @@ export function heatmapGeometry({ width, height, duration, queue, option, points
     options.sampling = defaults.sampling
   if (options.xMin === options.xMax || options.yMin === options.yMax)
     return null
-  const points = Array.isArray(input) && input.length ? [...input] : sampleHeatmap(queue, width, duration, options.sampling)
+  const hasCustomPoints = Array.isArray(input) && input.length > 0
+  const points = hasCustomPoints ? [...input] : sampleHeatmap(queue, width, duration, options.sampling)
   if (!points.length
     || !points.every(point => Array.isArray(point) && Number.isFinite(point[0]) && Number.isFinite(point[1]))) { return null }
   const lastPoint = points[points.length - 1]
@@ -55,14 +57,24 @@ export function heatmapGeometry({ width, height, duration, queue, option, points
     const y = point[1]
     point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight
   }
+  // Explicit axes and custom points retain their coordinate interpretation. Fit automatic
+  // charts into the lower quarter so dense data cannot obscure the video.
+  const automatic = !hasCustomPoints && !Number.isFinite(configured.yMin) && !Number.isFinite(configured.yMax)
+  let peak = 0
+  for (const point of points) peak = Math.max(peak, point[1])
+  const fitted = automatic && peak > defaults.yMax / 4
+  if (fitted)
+    options.yMax = peak * 4
+  const boundY = value => fitted ? Math.min(height, Math.max(height * 0.75, value)) : value
   const controlPoint = (current, previous, next, reverse) => {
     const geometry = line(previous || current, next || current)
     const flat = map(Math.cos(geometry.angle) * options.flattening, 0, 1, 1, 0)
     const angle = geometry.angle * flat + (reverse ? Math.PI : 0)
     const length = geometry.length * options.smoothing
-    return [current[0] + Math.cos(angle) * length, current[1] + Math.sin(angle) * length]
+    // A cubic stays inside the convex hull of its endpoints and controls.
+    return [current[0] + Math.cos(angle) * length, boundY(current[1] + Math.sin(angle) * length)]
   }
-  const positions = points.map(point => [map(point[0], options.xMin, options.xMax, 0, width), map(point[1], options.yMin, options.yMax, height, 0)])
+  const positions = points.map(point => [map(point[0], options.xMin, options.xMax, 0, width), boundY(map(point[1], options.yMin, options.yMax, height, 0))])
   if (!positions.every(point => point.every(Number.isFinite)))
     return null
   const path = positions.map((point, index, all) => {

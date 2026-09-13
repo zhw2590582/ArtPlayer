@@ -3376,7 +3376,8 @@
         "artplayer-plugin-danmuku"
       ],
       "dependsOn": [
-        "PKG-DANMUKU-06"
+        "PKG-DANMUKU-06",
+        "PKG-DANMUKU-10"
       ],
       "status": "todo",
       "risk": "H",
@@ -4657,6 +4658,25 @@
       "evidence": [
         "changes/2026-09-13-PKG-ASR-09-explicit-capture.md",
         "baselines/asr-explicit-capture-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-DANMUKU-10",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "修复 issue958 密集热力图过高与曲线裁平",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-05"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "自动密度缩放与曲线边界、历史自定义坐标兼容及真实浏览器红绿证据",
+      "acceptance": "16000条三种分布在两核心三引擎和source/main/legacy不遮挡；显式轴和自定义points保持旧解释，有单独commit",
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md",
+        "baselines/danmuku-heatmap-density-validation.json"
       ]
     }
   ]

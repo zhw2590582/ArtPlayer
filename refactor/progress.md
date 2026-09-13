@@ -1,5 +1,13 @@
 # 进度与证据
 
+## PKG-DANMUKU-10：issue #958 密集热力图修复
+
+用户新增的16000条弹幕热图过高/裁平已独立复现并修复。自动密度拟合到底部四分之一，
+保留显式坐标、自定义points、getter和历史生命周期。完整弹幕250项与102项真实浏览器
+通过，包含两核心/三引擎/三格式；构建和lint通过。详见[变更](changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md)及[证据](baselines/danmuku-heatmap-density-validation.json)。
+229项：145 done、15 doing、69 todo。06的TS迁移仍进行中，07长负载与发布复盘未完成。
+独立本地提交；未推送、未发布、未关闭远端issue。
+
 ## PKG-DANMUKU-05 渲染、设置与热力图完成
 
 拆renderer、Setting模板/滑块/发送/资源/全局样式和heatmap采样/几何/生命周期。

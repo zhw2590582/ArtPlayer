@@ -84,6 +84,78 @@ function listenerCount(env) {
   return [...env.listeners.values()].reduce((sum, list) => sum + list.length, 0)
 }
 
+function verticalCoordinates(path) {
+  const values = path.match(/-?\d+(?:\.\d+)?(?:e[+-]?\d+)?/giu).map(Number)
+  return values.filter((_, index) => index % 2 === 1)
+}
+
+test('heatmap #958: 16000 uniform, clustered and mixed rows stay in a 25px band without losing peaks', () => {
+  for (const distribution of ['uniform', 'clustered', 'mixed']) {
+    const queue = Array.from({ length: 16000 }, (_, index) => ({
+      time: distribution === 'clustered' ? 30 : distribution === 'mixed' && index < 8000 ? 30 : (index + 0.5) * 60 / 16000,
+    }))
+    for (const width of [400, 640, 1920]) {
+      const shape = heatmapGeometry({ width, height: 100, duration: 60, queue, option: true })
+      const coordinates = verticalCoordinates(shape.path)
+      assert(Math.min(...coordinates) >= 75, `${distribution}/${width}: top ${Math.min(...coordinates)}`)
+      assert(Math.max(...coordinates) <= 100, `${distribution}/${width}: bottom ${Math.max(...coordinates)}`)
+      if (distribution === 'mixed') {
+        const endpoints = [...shape.path.matchAll(/C [^Cz]+/gu)].map(segment => verticalCoordinates(segment[0]).at(-1))
+        assert(new Set(endpoints.map(value => value.toFixed(3))).size > 2, 'Dense peaks must remain distinct from the background and zero bin')
+      }
+    }
+  }
+})
+
+test('heatmap #958: automatic scaling bounds Bezier controls around adjacent peaks', () => {
+  const queue = Array.from({ length: 172 }, (_, index) => ({ time: index < 86 ? 0.9 : 1.5 }))
+  const shape = heatmapGeometry({ width: 400, height: 100, duration: 60, queue, option: true })
+  const coordinates = verticalCoordinates(shape.path)
+  assert(Math.min(...coordinates) >= 75)
+  assert(Math.max(...coordinates) <= 100)
+})
+
+test('heatmap #958: axis overrides read own enumerable getters once and ignore inherited fields', () => {
+  const queue = Array.from({ length: 16000 }, () => ({ time: 30 }))
+  const geometry = option => heatmapGeometry({ width: 400, height: 100, duration: 60, queue, option })
+  let reads = 0
+  const option = {
+    get yMax() {
+      assert.equal(++reads, 1)
+      return 128
+    },
+  }
+  assert.equal(geometry(option).path, geometry({ yMax: 128 }).path)
+  assert.equal(reads, 1)
+  assert.equal(geometry(Object.create({ yMax: 500 })).path, geometry(true).path)
+  assert.equal(geometry(Object.defineProperty({}, 'yMax', { value: 500 })).path, geometry(true).path)
+})
+
+test('heatmap #958: non-array points retain queue fallback and density fitting', () => {
+  const queue = Array.from({ length: 16000 }, () => ({ time: 30 }))
+  const geometry = points => heatmapGeometry({ width: 400, height: 100, duration: 60, queue, option: true, points })
+  for (const points of [null, false, 'points', { length: 1 }, {}, []])
+    assert.equal(geometry(points).path, geometry(undefined).path)
+})
+
+test('heatmap #958: explicit axes retain the historical dense-data mapping', async () => {
+  const queue = Array.from({ length: 16000 }, (_, index) => ({ time: (index + 0.5) * 60 / 16000 }))
+  for (const option of [{ yMax: 128 }, { yMin: 0 }, { yMin: -10, yMax: 500, scale: 0.4 }]) {
+    const candidate = fixture({ queue })
+    candidate.install(option)
+    candidate.art.emit('ready')
+    for (const implementation of historical) {
+      const env = danmukuEnvironment(implementation, { heatmapWidth: 400 })
+      const plugin = env.factory({ danmuku: [], heatmap: option })(env.art)
+      await env.flush()
+      plugin.show().queue = queue
+      env.art.emit('ready')
+      assert.equal(pathOf(candidate.element), pathOf(env.controls[0].element), `${implementation.name} / ${JSON.stringify(option)}`)
+      env.destroy()
+    }
+  }
+})
+
 test('heatmap: sampled SVG path matches frozen source and actual 5.3.0 main/legacy for legal options', async () => {
   const queue = [0, 0.6, 1, 2, 2, 2.1, 8, 15, 28, 59.9, 60, Number.NaN, Infinity, -Infinity].map(time => ({ time }))
   for (const option of [true, { sampling: 2.5, smoothing: 0.3, flattening: 0.1, scale: 0.4, opacity: 0.7, minHeight: 2, xMin: -10, xMax: 450, yMin: -1, yMax: 40 }]) {
