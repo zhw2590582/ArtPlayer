@@ -1,0 +1,187 @@
+{
+  "task": "PKG-MASK-03",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "scope": "Source controller and output ownership with controlled SDK/RAF/canvas; normal three-format builds. No native inference or GPU cleanup acceptance.",
+  "source": [
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/src/config.js",
+      "sha256": "b055e6a3f5814207cfac452904853813a67b98c63c0c70695c3da133353d8129"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/src/controller.js",
+      "sha256": "b6b546484e0f3ba9ff38da57d7a14f8d522adfff3e85da9d788516e7551b1bed"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/src/index.js",
+      "sha256": "3e518e52fc1ede883d3acca6d5ee66fd6da0d343dfa5803386d23f0bbd72c90f"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/src/output.js",
+      "sha256": "142a29ac269065122323ad10d7103d01eba8e2776cd2bcf40f988332330709e5"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/src/sdk.js",
+      "sha256": "caa21c19aac14fd8634e2867e6d712f217e7bb47cbb36667947e436dc30b2984"
+    }
+  ],
+  "tests": {
+    "command": "yarn test:danmuku-mask",
+    "log": "refactor/.cache/mask03-integrated-final.log",
+    "logSha256": "6800ef6f0988f81ee3ea80fffd1a1401b210b8e2d038c206b7a62995351bbf3d",
+    "passed": 96,
+    "candidate": 36,
+    "frozenDefects": 54,
+    "frozenContract": 6,
+    "failed": 0,
+    "skipped": 0,
+    "cases": [
+      "✔ Danmuku Mask freezes all published stable archive members and their actual Git associations (0.6332ms)",
+      "✔ Both published declarations retain optional options, synchronous registration, async start and void stop (45.5503ms)",
+      "✔ Actual main and legacy exports preserve historical CommonJS and browser global forms without starting a model (270.2566ms)",
+      "✔ Frozen owned source keeps its defaults, ready/destroy hooks and alpha mask pixel boundary without a real SDK (20.0664ms)",
+      "✔ Frozen zero numeric options use historical OR defaults while false smoothSegmentation is retained (2.3961ms)",
+      "✔ SDK-08 distinguishes the frozen Yarn adapter and local resource bytes from unversioned CDN resolution (0.8288ms)",
+      "✔ Historical SDK probes replace exactly five call sites and retain verified input identities (1.6883ms)",
+      "✔ frozen-source: historical stop during initialization is undone by late initialization (5.4237ms)",
+      "✔ frozen-source: historical inference completion after destroy writes a mask and revives RAF (1.6315ms)",
+      "✔ frozen-source: historical repeated start leaves a second RAF chain after stop (1.6516ms)",
+      "✔ published-1.1.0-main: historical stop during initialization is undone by late initialization (29.7697ms)",
+      "✔ published-1.1.0-main: historical inference completion after destroy writes a mask and revives RAF (4.2542ms)",
+      "✔ published-1.1.0-main: historical repeated start leaves a second RAF chain after stop (5.5539ms)",
+      "✔ published-1.1.0-legacy: historical stop during initialization is undone by late initialization (42.0313ms)",
+      "✔ published-1.1.0-legacy: historical inference completion after destroy writes a mask and revives RAF (10.7785ms)",
+      "✔ published-1.1.0-legacy: historical repeated start leaves a second RAF chain after stop (3.312ms)",
+      "✔ published-1.1.0-module: historical stop during initialization is undone by late initialization (29.5567ms)",
+      "✔ published-1.1.0-module: historical inference completion after destroy writes a mask and revives RAF (7.2118ms)",
+      "✔ published-1.1.0-module: historical repeated start leaves a second RAF chain after stop (8.5416ms)",
+      "✔ published-1.0.0-main: historical stop during initialization is undone by late initialization (62.8032ms)",
+      "✔ published-1.0.0-main: historical inference completion after destroy writes a mask and revives RAF (16.2368ms)",
+      "✔ published-1.0.0-main: historical repeated start leaves a second RAF chain after stop (11.9776ms)",
+      "✔ published-1.0.0-legacy: historical stop during initialization is undone by late initialization (60.0044ms)",
+      "✔ published-1.0.0-legacy: historical inference completion after destroy writes a mask and revives RAF (13.9692ms)",
+      "✔ published-1.0.0-legacy: historical repeated start leaves a second RAF chain after stop (12.9393ms)",
+      "✔ published-1.0.0-module: historical stop during initialization is undone by late initialization (62.9506ms)",
+      "✔ published-1.0.0-module: historical inference completion after destroy writes a mask and revives RAF (13.5528ms)",
+      "✔ published-1.0.0-module: historical repeated start leaves a second RAF chain after stop (15.421ms)",
+      "✔ frozen-source: historical stop during initialization does not dispose the late model (1.3067ms)",
+      "✔ frozen-source: historical destroy during initialization does not dispose the late model (1.0049ms)",
+      "✔ frozen-source: historical stop during inference cannot prevent its pending write (0.9691ms)",
+      "✔ frozen-source: historical concurrent starts initialize two models and lose disposal ownership (1.28ms)",
+      "✔ frozen-source: historical inference rejection logs once per frame and keeps retrying (1.7847ms)",
+      "✔ frozen-source: historical fulfilled false WebGL selection does not trigger CPU fallback (1.3902ms)",
+      "✔ frozen-source: historical rejected WebGL selection tries CPU and ignores its fulfilled boolean (2.1617ms)",
+      "✔ frozen-source: historical CPU rejection rejects explicit start before creating a model (1.8598ms)",
+      "✔ frozen-source: historical model initialization rejection resolves start and polls without a model (1.3122ms)",
+      "✔ frozen-source: historical missing danmuku rejects start after allocating the model and makes stop throw (0.9713ms)",
+      "✔ frozen-source: historical unavailable 2D context logs read failures and keeps the frame loop (1.1514ms)",
+      "✔ frozen-source: historical canvas allocation failure rejects start but leaves the initialized model owned (0.8525ms)",
+      "✔ frozen-source: historical canvas read security failure is logged and retried without clearing the previous mask (1.2027ms)",
+      "✔ frozen-source: historical zero RAF id survives stop and retained ready listeners restart after destroy (1.0528ms)",
+      "✔ frozen-source: historical ready-backend unhandled rejection is observed only in a fatal isolated child (2903.2536ms)",
+      "✔ frozen-source: historical missing-video unhandled rejection is observed only in a fatal isolated child (2990.5019ms)",
+      "✔ published-1.1.0-main: historical stop during initialization does not dispose the late model (3.81ms)",
+      "✔ published-1.1.0-main: historical destroy during initialization does not dispose the late model (3.343ms)",
+      "✔ published-1.1.0-main: historical stop during inference cannot prevent its pending write (14.4356ms)",
+      "✔ published-1.1.0-main: historical concurrent starts initialize two models and lose disposal ownership (3.56ms)",
+      "✔ published-1.1.0-main: historical inference rejection logs once per frame and keeps retrying (5.4085ms)",
+      "✔ published-1.1.0-main: historical fulfilled false WebGL selection does not trigger CPU fallback (19.8639ms)",
+      "✔ published-1.1.0-main: historical rejected WebGL selection tries CPU and ignores its fulfilled boolean (7.0089ms)",
+      "✔ published-1.1.0-main: historical CPU rejection rejects explicit start before creating a model (2.6735ms)",
+      "✔ published-1.1.0-main: historical model initialization rejection resolves start and polls without a model (3.21ms)",
+      "✔ published-1.1.0-main: historical missing danmuku rejects start after allocating the model and makes stop throw (3.5393ms)",
+      "✔ published-1.1.0-main: historical unavailable 2D context logs read failures and keeps the frame loop (3.0877ms)",
+      "✔ published-1.1.0-main: historical canvas allocation failure rejects start but leaves the initialized model owned (2.7232ms)",
+      "✔ published-1.1.0-main: historical canvas read security failure is logged and retried without clearing the previous mask (3.4678ms)",
+      "✔ published-1.1.0-main: historical zero RAF id survives stop and retained ready listeners restart after destroy (3.1487ms)",
+      "✔ published-1.1.0-main: historical ready-backend unhandled rejection is observed only in a fatal isolated child (3039.1198ms)",
+      "✔ published-1.1.0-main: historical missing-video unhandled rejection is observed only in a fatal isolated child (2950.6901ms)",
+      "✔ Mask candidate instances sharing SDK and RAF retain independent models, layers and cancellation (6.5051ms)",
+      "✔ Mask candidate retains synchronous registrar, optional options, exact public methods and Promise<void> start (3.5659ms)",
+      "✔ Mask candidate preserves OR defaults, false smooth setting, snapshot and exact SDK interpretation (1.6287ms)",
+      "✔ Mask candidate stop during webgl prevents late output and RAF revival (1.1136ms)",
+      "✔ Mask candidate stop during init prevents late output and RAF revival (0.9582ms)",
+      "✔ Mask candidate stop during segment prevents late output and RAF revival (1.0316ms)",
+      "✔ Mask candidate stop during mask prevents late output and RAF revival (1.185ms)",
+      "✔ Mask candidate stop during draw prevents late output and RAF revival (1.06ms)",
+      "✔ Mask candidate destroy during webgl prevents late output and RAF revival (0.8933ms)",
+      "✔ Mask candidate destroy during init prevents late output and RAF revival (1.1325ms)",
+      "✔ Mask candidate destroy during segment prevents late output and RAF revival (1.3227ms)",
+      "✔ Mask candidate destroy during mask prevents late output and RAF revival (1.9155ms)",
+      "✔ Mask candidate destroy during draw prevents late output and RAF revival (1.4494ms)",
+      "✔ Mask candidate concurrent and repeated starts keep one initialization and one inference chain (1.482ms)",
+      "✔ Mask candidate restart waits for old inference and model disposal without blocking stop settlement (1.1059ms)",
+      "✔ Mask candidate repeated stops cannot bypass a pending disposal when restarting (1.1706ms)",
+      "✔ Mask candidate synchronous SDK reentry does not overlap old and new runs (1.1659ms)",
+      "✔ Mask candidate cancels RAF id zero, detaches exact listeners and ignores start after destroy (1.4668ms)",
+      "✔ Mask candidate no readable dimensions waits without invoking inference (1.3263ms)",
+      "✔ Mask candidate backend false keeps old interpretation while rejection tries CPU (3.3682ms)",
+      "✔ Mask candidate rejects explicit backend failure and observes automatic ready failure (2.0741ms)",
+      "✔ Mask candidate model rejection retains resolved start and logged error without idle retry loop (1.527ms)",
+      "✔ Mask candidate noLayer initialization fails without retaining resources (2.1708ms)",
+      "✔ Mask candidate noVideo initialization fails without retaining resources (1.1812ms)",
+      "✔ Mask candidate noContext initialization fails without retaining resources (1.3588ms)",
+      "✔ Mask candidate canvasError initialization fails without retaining resources (1.4164ms)",
+      "✔ Mask candidate inference and canvas-read errors keep the old active retry outlet (2.6162ms)",
+      "✔ Mask candidate late SDK rejection after cancellation remains observed and silent (1.3766ms)",
+      "✔ Mask candidate already-destroyed registration does not install listeners or allocate resources (0.9332ms)",
+      "✔ Mask candidate subscription rollback preserves original failure and prior host styles (1.9141ms)",
+      "✔ Mask candidate immediate stop skips backend/model startup and public start settles (1.4292ms)",
+      "✔ Mask candidate cancelled backend/model rejection is observed without retry or late log (1.6941ms)",
+      "✔ Mask candidate disposal rejection is observed, clears canvas and allows independent restart (1.6381ms)",
+      "✔ Mask candidate empty segmentation retains existing mask and a single active loop (1.1239ms)",
+      "✔ Mask candidate cancelled inference cannot overwrite a subsequent external mask write (1.1616ms)",
+      "✔ Mask candidate retains template capture before evaluating option getters (1.0374ms)"
+    ]
+  },
+  "checks": [
+    {
+      "file": "refactor/.cache/mask03-build.log",
+      "sha256": "4c198f39b981759a137c5c6a69f8166f497bc3946519e64c1e17e585d0db77d5"
+    },
+    {
+      "file": "refactor/.cache/mask03-integrated-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "regression": {
+    "log": "refactor/.cache/mask03-canvas-disposal-red.log",
+    "sha256": "1f0fd4d3f2e3a6e4a98789138ca3cfdc98c38336fe08b9f8ea39e92597fc90e9",
+    "cause": "Private bitmap retained while model disposal never resolved; release independent canvas first."
+  },
+  "review": {
+    "independent": "Read-only controller/SDK/reentry review found no concrete blocker; added before-gate model disposal assertion and shared-SDK multiple-instance case.",
+    "artifacts": "Candidate helper only builds source and substitutes SDK. Built main/legacy/ESM are not covered by its controlled lifecycle run."
+  },
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+      "copy": "docs/compiled/artplayer-plugin-danmuku-mask.js",
+      "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55",
+      "bytes": 907181
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "copy": "docs/compiled/artplayer-plugin-danmuku-mask.legacy.js",
+      "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db",
+      "bytes": 910266
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs",
+      "copy": "docs/compiled/artplayer-plugin-danmuku-mask.mjs",
+      "sha256": "51936576383129170125b33d2983858e0841ea507368970f6d154bc9d78583b1",
+      "bytes": 1732398
+    }
+  ],
+  "publicTypes": {
+    "file": "packages/artplayer-plugin-danmuku-mask/types/artplayer-plugin-danmuku-mask.d.ts",
+    "sha256": "f2b67f82a6471b79d921a7376b24620d0ed8284a3e1882b0f75a9b38dfac3638",
+    "changed": false
+  },
+  "limitations": [
+    "SDK model operations are unabortable; restart waits for old work settlement.",
+    "body-segmentation 1.0.2 dispose calls MediaPipe close without returning its result; no native close completion is proven.",
+    "Actual models, native video/CSS, SDK fallback, GPU resources and cross-instance backend state remain PKG-MASK-05.",
+    "Full TypeScript/public declaration migration remains PKG-MASK-04; distribution/notice work remains PKG-MASK-06."
+  ]
+}

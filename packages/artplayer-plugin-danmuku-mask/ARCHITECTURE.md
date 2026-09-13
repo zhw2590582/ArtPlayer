@@ -1,0 +1,133 @@
+# Danmuku Mask maintenance map
+
+The compatibility baseline is the actual npm 1.1.0 package and the earlier
+1.0.0 export shape. Sources and historical failure probes are recorded in
+`refactor/baselines/danmuku-mask-contract.md`, `danmuku-mask-release.json` and
+`danmuku-mask-failures-validation.json`, relative to the repository root.
+
+## Modules and ownership
+
+| Module | Responsibility |
+| --- | --- |
+| `src/index.js` | Preserve synchronous registration, capture core template nodes before option getters, expose named start/stop closures |
+| `src/config.js` | Snapshot the original option defaults without changing OR/undefined semantics |
+| `src/sdk.js` | Existing TF backend selection, MediaPipe adapter configuration, mask calls and model disposal outlet |
+| `src/controller.js` | One active run, initialization/inference serialization, cancellation, RAF ownership, ready/destroy subscriptions |
+| `src/output.js` | Private canvas/context, unchanged binary mask colors and threshold conversion, guarded maskImage commit, canvas release |
+
+These modules remain JavaScript for PKG-MASK-03. Full owned-source TypeScript and
+public declaration work belongs to PKG-MASK-04; this task does not claim it is
+finished. Public declarations are unchanged.
+
+Mask captures the core's video and `.art-danmuku` layer. The core template
+provides that layer before plugins register; Danmuku does not create it.
+Mask does not access the Danmuku queue, individual item nodes, Worker protocol,
+facade/Owner methods or `artplayerPluginDanmuku:*` events. Danmuku07's fixed CSS
+mask test establishes root-layer coexistence, not segmentation/model acceptance.
+The existing demo registers Danmuku then Mask; that order alone is not a model
+or template readiness guarantee.
+
+## Start, cancellation and resource lifecycle
+
+Registration returns `{ name, start, stop }` synchronously. The public named
+`startSegmentation` closure returns `Promise<void>`; `stopSegmentation` returns
+undefined. Extracted calls keep their captured controller. Concurrent/repeated
+starts share the current initialization and do not add a second inference or
+RAF chain. Successful start still does not wait for a completed first mask.
+
+Each run owns its model, canvas/context, cancellation resolver and at most one
+RAF or inference. A run may commit output only while it remains current, running
+and attached to an undestroyed player. Check this after backend/model loading,
+segmentPeople, toBinaryMask and drawMask. An old continuation must never update
+the layer or reschedule its own loop after stop, destroy or replacement.
+
+Stop marks the run inactive, resolves pending public start, cancels its exact
+RAF (including id zero), and writes the historical `maskImage = 'none'`.
+It leaves the other setup styles intact. Destroy additionally prevents restart
+and detaches the exact ready/destroy callbacks. Registration rollback detaches
+subscriptions without changing preexisting host styles. Ready observes startup
+rejections locally; explicit start still rejects backend or canvas failures.
+
+Stopping now releases the model and canvas instead of retaining them indefinitely.
+A subsequent start initializes a new model. This is an intentional resource
+correction; the extra restart initialization cost needs native validation.
+An in-progress SDK operation cannot be aborted through the current SDK API.
+Its late result is ignored, then its private canvas bitmap is reset to zero
+dimensions and its accessible model is disposed. Once frame work has settled,
+a pending SDK disposal must not keep the independent canvas bitmap allocated.
+Restart waits for that outstanding work and
+visible disposal result instead of overlapping two model runs. Repeated stop
+calls share disposal and cannot bypass that wait.
+
+If an SDK operation never settles, a restart can remain pending. Cancellation
+still settles its public start when stopped again. The plugin cannot prove
+termination of unabortable native/WASM work or recover resources hidden inside
+a rejected SDK initialization. Do not claim otherwise from Promise cancellation.
+
+`releaseSegmenter` calls the supported segmenter.dispose API and observes any
+returned Promise. The installed body-segmentation 1.0.2 MediaPipe implementation
+calls its underlying solution.close without returning that result. Consequently
+awaiting dispose does not prove the native close or GPU release has completed.
+Actual resource release, model requests, cross-instance TF state and devices
+remain PKG-MASK-05 evidence requirements. Do not depend on private SDK fields to
+make a disposal test appear stronger than its real API.
+
+## Behavior and compatibility boundaries
+
+- Keep registrar-time option snapshots and the historical OR defaults. Zero
+  modelSelection/opacity/threshold/blur still take their defaults; explicit
+  smoothSegmentation=false is retained. Template references are captured before
+  getters in the option snapshot run.
+- Keep runtime=mediapipe and modelType=general. The current adapter maps general
+  to modelSelection=0 and ignores several additionally passed plugin options;
+  connecting those options would be a behavior change, not a cleanup.
+- tf.setBackend('webgl') fulfilled false does not mean CPU fallback. Only rejection
+  tries CPU. TF backend selection does not prove MediaPipe's inference backend.
+- Model creation failure still logs `Error initializing segmenter:` and resolves
+  start, but no longer creates an idle endless RAF loop. Explicit start retries.
+  CPU/backend failure still rejects explicit start; automatic ready logs the
+  observed rejection through `Failed to start danmuku mask:`.
+- No video/layer or no 2D context fails startup before retaining an accessible
+  model or loop. Missing dimensions waits for readable frames. These are failure
+  handling corrections; normal video inference/output is unchanged.
+- Active inference/read failures retain `Error in segmentBody:` and retry on the
+  next frame without silently clearing an earlier mask. Late failures after
+  cancellation are observed without restarting work or overwriting user state.
+- Preserve white foreground/black background binary colors, drawMask arguments,
+  canvas PNG data URLs and strict RGB >250 transparency (250 stays opaque).
+  The canvas remains private; it is never inserted into Danmuku's node pool.
+- This task introduces no public events, type augmentation, SDK dependency
+  updates, default CDN pinning or new model-selection semantics.
+
+## Editing and validation
+
+From the repository root with pinned Node and Yarn:
+
+```sh
+node --test test/danmuku-mask-lifecycle.test.js
+yarn test:danmuku-mask
+node --test test/danmuku-mask-failures.test.js refactor/scripts/danmuku-mask-contract.test.mjs
+node node_modules/eslint/bin/eslint.js packages/artplayer-plugin-danmuku-mask/src test/helpers/danmuku-mask-candidate.js test/danmuku-mask-lifecycle.test.js
+yarn build artplayer-plugin-danmuku-mask
+yarn dev artplayer-plugin-danmuku-mask
+```
+
+The candidate helper bundles current owned modules and substitutes the SDK
+imports with controlled implementations. Its fake RAF/video/canvas test
+cancellation and output ownership; they do not prove real model quality, canvas
+pixels, CSS alignment, CORS, browser scheduling, GPU memory or WASM cleanup.
+Historical probes remain frozen and assert old failures, not candidate success.
+
+Future changes to controller scheduling must cover stop/destroy during backend,
+model, inference, binary-mask and draw waits; repeated/concurrent starts; restart
+behind disposal; synchronous SDK reentry; RAF zero; late rejection; and listener
+rollback. Change the output module only with pixel-boundary and late-commit tests.
+Two registrations in the same controlled SDK/RAF environment also verify that
+stopping or destroying one leaves the other model, mask and scheduled frame owned
+by its original player. Native shared TensorFlow backend state remains unverified.
+
+Native acceptance still needs actual local model loading, new/old cores, real
+Danmuku composition, pause/seek/source/layout changes, multiple players, failure
+recovery and post-destroy resources. The default unversioned solutionPath can
+load assets independently of Yarn's SDK resolution. PKG-MASK-04/05/06 remain
+separate source/type, real combination and distribution/release stages.

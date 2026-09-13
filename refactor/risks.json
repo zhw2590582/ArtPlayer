@@ -4910,7 +4910,8 @@
       "status": "open",
       "owners": [
         "PKG-MASK-02",
-        "PKG-MASK-03"
+        "PKG-MASK-03",
+        "PKG-MASK-05"
       ],
       "evidence": [
         "refactor/baselines/danmuku-mask-contract.md",
@@ -4918,16 +4919,19 @@
         "refactor/baselines/danmuku-mask-contract-validation.json",
         "refactor/changes/2026-09-13-PKG-MASK-02-failures.md",
         "refactor/baselines/danmuku-mask-failures-validation.json",
-        "test/danmuku-mask-failures.test.js"
+        "test/danmuku-mask-failures.test.js",
+        "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
+        "refactor/baselines/danmuku-mask-lifecycle-validation.json",
+        "test/danmuku-mask-lifecycle.test.js"
       ],
-      "compatibleResolution": "Invalidate stale work while keeping restartable stop distinct from final destroy; release model and subscriptions.",
+      "compatibleResolution": "Invalidate stale work while keeping restartable stop distinct from final destroy; release model and subscriptions. PKG-MASK-03 fixes controlled stale work, owned bitmaps and subscriptions; native SDK dispose completion is not exposed by body-segmentation 1.0.2 and remains a real-resource validation limit in PKG-MASK-05.",
       "closureCriteria": "Pending initialization/inference cannot write masks or schedule work after stop/destroy; errors settle and owned resources are released."
     },
     {
       "id": "MASK-START-01",
       "title": "Concurrent Mask start calls can initialize multiple models and create independent RAF chains",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-MASK-02",
         "PKG-MASK-03"
@@ -4938,10 +4942,19 @@
         "refactor/baselines/danmuku-mask-contract-validation.json",
         "refactor/changes/2026-09-13-PKG-MASK-02-failures.md",
         "refactor/baselines/danmuku-mask-failures-validation.json",
-        "test/danmuku-mask-failures.test.js"
+        "test/danmuku-mask-failures.test.js",
+        "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
+        "refactor/baselines/danmuku-mask-lifecycle-validation.json",
+        "test/danmuku-mask-lifecycle.test.js"
       ],
       "compatibleResolution": "Share pending initialization and own at most one inference loop per live registration.",
-      "closureCriteria": "Repeated and concurrent starts, stop then start, failures and multiple instances have deterministic resource and result assertions."
+      "closureCriteria": "Repeated and concurrent starts, stop then start, failures and multiple instances have deterministic resource and result assertions.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
+        "refactor/baselines/danmuku-mask-lifecycle-validation.json",
+        "test/danmuku-mask-lifecycle.test.js"
+      ],
+      "resolutionRationale": "Controlled shared-SDK multiple-instance, concurrent/repeated start, cancellation/restart behind inference/disposal, failure recovery and synchronous reentry prove one owned chain per registration. Actual global SDK/device state is separately retained by PKG-MASK-05."
     },
     {
       "id": "MASK-MODEL-01",
@@ -4977,7 +4990,10 @@
         "refactor/baselines/danmuku-mask-contract-validation.json",
         "refactor/changes/2026-09-13-PKG-MASK-02-failures.md",
         "refactor/baselines/danmuku-mask-failures-validation.json",
-        "test/danmuku-mask-failures.test.js"
+        "test/danmuku-mask-failures.test.js",
+        "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
+        "refactor/baselines/danmuku-mask-lifecycle-validation.json",
+        "test/danmuku-mask-lifecycle.test.js"
       ],
       "compatibleResolution": "Model backend outcomes explicitly, settle initialization failures and document the actual MediaPipe capability boundary.",
       "closureCriteria": "Fulfilled false, rejection, CPU failure, createSegmenter failure and later retry are tested; real inference fallback is separately evidenced."
@@ -4998,7 +5014,10 @@
         "refactor/baselines/danmuku-mask-contract-validation.json",
         "refactor/changes/2026-09-13-PKG-MASK-02-failures.md",
         "refactor/baselines/danmuku-mask-failures-validation.json",
-        "test/danmuku-mask-failures.test.js"
+        "test/danmuku-mask-failures.test.js",
+        "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
+        "refactor/baselines/danmuku-mask-lifecycle-validation.json",
+        "test/danmuku-mask-lifecycle.test.js"
       ],
       "compatibleResolution": "Handle missing dependencies and frame/context failures without stale writes or uncontrolled loops while preserving plugin ordering.",
       "closureCriteria": "Missing Danmuku/context, CORS failure, source changes and ready/destroy timing have controlled and real browser evidence."

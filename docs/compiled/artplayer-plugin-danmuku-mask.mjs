@@ -23,6 +23,20 @@ function _mergeNamespaces(n, m) {
   }
   return Object.freeze(Object.defineProperty(n, Symbol.toStringTag, { value: "Module" }));
 }
+function maskConfig(option) {
+  return {
+    solutionPath: option.solutionPath || "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
+    modelSelection: option.modelSelection || 1,
+    smoothSegmentation: option.smoothSegmentation !== void 0 ? option.smoothSegmentation : true,
+    minDetectionConfidence: option.minDetectionConfidence || 0.5,
+    minTrackingConfidence: option.minTrackingConfidence || 0.5,
+    selfieMode: option.selfieMode || false,
+    drawContour: option.drawContour || false,
+    foregroundThreshold: option.foregroundThreshold || 0.5,
+    opacity: option.opacity || 1,
+    maskBlurAmount: option.maskBlurAmount || 3
+  };
+}
 const EPSILON_FLOAT32$1 = 1e-7;
 const EPSILON_FLOAT16$1 = 1e-4;
 class DataStorage {
@@ -49040,129 +49054,278 @@ const kernelConfigs = [
 for (const kernelConfig of kernelConfigs) {
   registerKernel(kernelConfig);
 }
-function artplayerPluginDanmukuMask(option = {}) {
-  return (art) => {
-    const {
-      template: { $video, $danmuku }
-    } = art;
-    let segmenter = null;
-    let canvas = null;
-    let ctx = null;
-    let animationFrameId = null;
-    let isInitialized = false;
-    const config = {
-      solutionPath: option.solutionPath || "https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation",
-      modelSelection: option.modelSelection || 1,
-      smoothSegmentation: option.smoothSegmentation !== void 0 ? option.smoothSegmentation : true,
-      minDetectionConfidence: option.minDetectionConfidence || 0.5,
-      minTrackingConfidence: option.minTrackingConfidence || 0.5,
-      selfieMode: option.selfieMode || false,
-      drawContour: option.drawContour || false,
-      foregroundThreshold: option.foregroundThreshold || 0.5,
-      opacity: option.opacity || 1,
-      maskBlurAmount: option.maskBlurAmount || 3
+async function loadSegmenter(config, active) {
+  try {
+    await setBackend("webgl");
+  } catch (error) {
+    if (!active())
+      return null;
+    console.warn("WebGL backend not available, falling back to CPU", error.message);
+    await setBackend("cpu");
+  }
+  if (!active())
+    return null;
+  try {
+    return await ke(Se.MediaPipeSelfieSegmentation, {
+      runtime: "mediapipe",
+      modelType: "general",
+      solutionPath: config.solutionPath,
+      modelSelection: config.modelSelection,
+      smoothSegmentation: config.smoothSegmentation,
+      minDetectionConfidence: config.minDetectionConfidence,
+      minTrackingConfidence: config.minTrackingConfidence,
+      selfieMode: config.selfieMode
+    });
+  } catch (error) {
+    if (active())
+      console.error("Error initializing segmenter:", error);
+    return null;
+  }
+}
+async function releaseSegmenter(segmenter) {
+  try {
+    await segmenter.dispose();
+  } catch (error) {
+    console.warn("Failed to dispose danmuku mask segmenter:", error);
+  }
+}
+const toBinaryMask = (...args) => Ue(...args);
+const drawMask = (...args) => Ne(...args);
+function makeWhiteTransparent(imageData) {
+  const data = imageData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250)
+      data[i + 3] = 0;
+  }
+  return imageData;
+}
+function createOutput(layer) {
+  const canvas = document.createElement("canvas");
+  try {
+    const ctx = canvas.getContext("2d");
+    if (!ctx)
+      throw new Error("Danmuku mask requires a 2D canvas context");
+    Object.assign(layer.style, {
+      maskMode: "alpha",
+      maskSize: "contain",
+      maskRepeat: "no-repeat",
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat"
+    });
+    return { canvas, ctx };
+  } catch (error) {
+    canvas.width = 0;
+    canvas.height = 0;
+    throw error;
+  }
+}
+async function renderMask(output, video, layer, segmenter, config, active) {
+  const { canvas, ctx } = output;
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  const segmentation = await segmenter.segmentPeople(video);
+  if (!active() || !segmentation || !segmentation.length)
+    return;
+  const mask = await toBinaryMask(
+    segmentation,
+    { r: 255, g: 255, b: 255, a: 255 },
+    { r: 0, g: 0, b: 0, a: 255 },
+    config.drawContour,
+    config.foregroundThreshold
+  );
+  if (!active())
+    return;
+  await drawMask(canvas, video, mask, config.opacity, config.maskBlurAmount);
+  if (!active())
+    return;
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  ctx.putImageData(makeWhiteTransparent(imageData), 0, 0);
+  const url = canvas.toDataURL();
+  if (active())
+    layer.style.maskImage = `url(${url})`;
+}
+function releaseOutput(output) {
+  if (output) {
+    output.canvas.width = 0;
+    output.canvas.height = 0;
+  }
+}
+class MaskController {
+  constructor(art, config, { $video, $danmuku }) {
+    this.art = art;
+    this.config = config;
+    this.video = $video;
+    this.layer = $danmuku;
+    this.closed = art.isDestroy;
+    this.run = null;
+    this.tail = Promise.resolve();
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
+    this.destroy = this.destroy.bind(this);
+    this.ready = () => {
+      this.start().catch((error) => console.error("Failed to start danmuku mask:", error));
     };
-    async function initTensorFlow() {
+    if (!this.closed) {
       try {
-        await setBackend("webgl");
+        art.on("destroy", this.destroy);
+        if (!this.closed)
+          art.on("ready", this.ready);
       } catch (error) {
-        console.warn("WebGL backend not available, falling back to CPU", error.message);
-        await setBackend("cpu");
-      }
-    }
-    async function initSegmenter() {
-      await initTensorFlow();
-      const model = Se.MediaPipeSelfieSegmentation;
-      const segmenterConfig = {
-        runtime: "mediapipe",
-        modelType: "general",
-        solutionPath: config.solutionPath,
-        modelSelection: config.modelSelection,
-        smoothSegmentation: config.smoothSegmentation,
-        minDetectionConfidence: config.minDetectionConfidence,
-        minTrackingConfidence: config.minTrackingConfidence,
-        selfieMode: config.selfieMode
-      };
-      try {
-        segmenter = await ke(model, segmenterConfig);
-        isInitialized = true;
-      } catch (error) {
-        console.error("Error initializing segmenter:", error);
-        isInitialized = false;
-      }
-    }
-    function setupDanmukuStyle() {
-      Object.assign($danmuku.style, {
-        maskMode: "alpha",
-        maskSize: "contain",
-        maskRepeat: "no-repeat",
-        backgroundSize: "contain",
-        backgroundRepeat: "no-repeat"
-      });
-    }
-    function createCanvas2() {
-      canvas = document.createElement("canvas");
-      ctx = canvas.getContext("2d");
-    }
-    function makeWhiteTransparent(imageData) {
-      const data = imageData.data;
-      for (let i = 0; i < data.length; i += 4) {
-        if (data[i] > 250 && data[i + 1] > 250 && data[i + 2] > 250) {
-          data[i + 3] = 0;
+        this.closed = true;
+        this.halt();
+        try {
+          art.off("ready", this.ready);
+        } catch {
         }
+        try {
+          art.off("destroy", this.destroy);
+        } catch {
+        }
+        throw error;
       }
-      return imageData;
     }
-    async function segmentBody() {
-      if (!isInitialized || $video.paused || $video.ended) {
-        animationFrameId = requestAnimationFrame(segmentBody);
-        return;
-      }
+  }
+  active(run) {
+    return run === this.run && run.running && !this.closed && !this.art.isDestroy;
+  }
+  release(run) {
+    if (run.releasing)
+      return run.releasing;
+    const segmenter = run.segmenter;
+    run.segmenter = null;
+    const output = run.output;
+    run.output = null;
+    run.releasing = (async () => {
+      await Promise.resolve();
       try {
-        canvas.width = $video.videoWidth;
-        canvas.height = $video.videoHeight;
-        const segmentation = await segmenter.segmentPeople($video);
-        if (!segmentation || segmentation.length === 0) {
-          animationFrameId = requestAnimationFrame(segmentBody);
+        releaseOutput(output);
+      } finally {
+        if (segmenter)
+          await releaseSegmenter(segmenter);
+      }
+    })();
+    return run.releasing;
+  }
+  schedule(run) {
+    if (!this.active(run) || run.frame !== null || run.busy)
+      return;
+    run.frame = requestAnimationFrame(() => {
+      run.frame = null;
+      this.tick(run);
+    });
+  }
+  tick(run) {
+    if (!this.active(run) || run.busy)
+      return;
+    const video = this.video;
+    if (video.paused || video.ended || !(video.videoWidth > 0 && video.videoHeight > 0)) {
+      this.schedule(run);
+      return;
+    }
+    run.busy = true;
+    const work = (async () => {
+      try {
+        await Promise.resolve();
+        if (this.active(run))
+          await renderMask(run.output, video, this.layer, run.segmenter, this.config, () => this.active(run));
+      } catch (error) {
+        if (this.active(run))
+          console.error("Error in segmentBody:", error);
+      } finally {
+        run.busy = false;
+        if (!this.active(run))
+          await this.release(run);
+        else this.schedule(run);
+      }
+    })();
+    this.tail = work.catch((error) => console.warn("Failed to release danmuku mask resources:", error));
+  }
+  async start() {
+    if (this.closed || this.art.isDestroy)
+      return;
+    if (this.run?.running)
+      return this.run.started;
+    let cancel;
+    const cancelled = new Promise((resolve) => cancel = resolve);
+    const run = { running: true, initializing: true, busy: false, frame: null, segmenter: null, output: null, cancel, started: null };
+    const previous = this.tail;
+    this.run = run;
+    const initialize = (async () => {
+      try {
+        await previous;
+        if (!this.active(run))
+          return;
+        if (!this.video || !this.layer?.style)
+          throw new Error("Danmuku mask requires core video and danmuku template nodes");
+        run.segmenter = await loadSegmenter(this.config, () => this.active(run));
+        if (!this.active(run))
+          return;
+        if (!run.segmenter) {
+          run.running = false;
           return;
         }
-        const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
-        const backgroundColor = { r: 0, g: 0, b: 0, a: 255 };
-        const mask = await Ue(
-          segmentation,
-          foregroundColor,
-          backgroundColor,
-          config.drawContour,
-          config.foregroundThreshold
-        );
-        await Ne(canvas, $video, mask, config.opacity, config.maskBlurAmount);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        ctx.putImageData(makeWhiteTransparent(imageData), 0, 0);
-        $danmuku.style.maskImage = `url(${canvas.toDataURL()})`;
+        run.output = createOutput(this.layer);
       } catch (error) {
-        console.error("Error in segmentBody:", error);
+        if (this.active(run)) {
+          run.running = false;
+          throw error;
+        }
+      } finally {
+        run.initializing = false;
+        if (!this.active(run))
+          await this.release(run);
       }
-      animationFrameId = requestAnimationFrame(segmentBody);
+      if (this.active(run))
+        this.tick(run);
+    })();
+    this.tail = initialize.catch(() => {
+    });
+    run.started = Promise.race([initialize, cancelled]);
+    return run.started;
+  }
+  halt() {
+    const run = this.run;
+    if (run) {
+      run.running = false;
+      run.cancel();
+      if (run.frame !== null) {
+        cancelAnimationFrame(run.frame);
+        run.frame = null;
+      }
+      if (!run.initializing && !run.busy)
+        this.tail = this.release(run).catch((error) => console.warn("Failed to release danmuku mask resources:", error));
     }
+  }
+  stop() {
+    this.halt();
+    if (this.layer?.style)
+      this.layer.style.maskImage = "none";
+  }
+  destroy() {
+    if (this.closed)
+      return;
+    this.closed = true;
+    try {
+      this.stop();
+    } finally {
+      try {
+        this.art.off("ready", this.ready);
+      } finally {
+        this.art.off("destroy", this.destroy);
+      }
+    }
+  }
+}
+function artplayerPluginDanmukuMask(option = {}) {
+  return (art) => {
+    const { template: { $video, $danmuku } } = art;
+    const controller = new MaskController(art, maskConfig(option), { $video, $danmuku });
     async function startSegmentation() {
-      if (!isInitialized) {
-        await initSegmenter();
-      }
-      if (!canvas) {
-        createCanvas2();
-      }
-      setupDanmukuStyle();
-      segmentBody();
+      await controller.start();
     }
     function stopSegmentation() {
-      $danmuku.style.maskImage = "none";
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
-      }
+      controller.stop();
     }
-    art.on("ready", startSegmentation);
-    art.on("destroy", stopSegmentation);
     return {
       name: "artplayerPluginDanmukuMask",
       start: startSegmentation,
