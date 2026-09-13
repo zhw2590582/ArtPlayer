@@ -249,7 +249,8 @@
       ],
       "evidence": [
         "docs/assets/example/thumbnail.js",
-        "refactor/baselines/demo-inventory.json"
+        "refactor/baselines/demo-inventory.json",
+        "refactor/site-inventory.md"
       ],
       "compatibleResolution": "核实旧外部插件和链接，不自动替换为不同 API 的 auto-thumbnail。",
       "closureCriteria": "示例依赖有来源，旧参数/URL 的保留或迁移解释完整。"
@@ -440,7 +441,8 @@
         "REL-01"
       ],
       "evidence": [
-        "refactor/baselines/distribution.json"
+        "refactor/baselines/distribution.json",
+        "refactor/site-inventory.md"
       ],
       "compatibleResolution": "区分站点部署和库 npm 发布；自身 next-major 要求保留。",
       "closureCriteria": "发布流程显式列出站点处理方式，不机械将其当库发布。"
@@ -453,11 +455,14 @@
       "owners": [
         "BASE-08",
         "SITE-01",
-        "EX-03"
+        "EX-03",
+        "SITE-07"
       ],
       "evidence": [
         "docs/assets/sample",
-        "docs/assets/jassub"
+        "docs/assets/jassub",
+        "refactor/site-inventory.md",
+        "refactor/baselines/site-provenance.json"
       ],
       "compatibleResolution": "复用现有样本时记录来源；缺许可的公开分发样本需补证据或可兼容替代，不能从文件名猜授权。",
       "closureCriteria": "候选实际分发样本有来源、许可/使用依据和测试映射。"
@@ -569,7 +574,8 @@
       "owners": [
         "PKG-JASSUB-01",
         "SITE-01",
-        "PKG-JASSUB-06"
+        "PKG-JASSUB-06",
+        "SITE-07"
       ],
       "evidence": [
         "refactor/third-party.json",
@@ -583,7 +589,9 @@
         "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md",
         "refactor/baselines/jassub-provenance.json",
         "refactor/baselines/jassub-provenance-validation.json",
-        "refactor/changes/2026-09-14-PKG-JASSUB-01-provenance.md"
+        "refactor/changes/2026-09-14-PKG-JASSUB-01-provenance.md",
+        "refactor/site-inventory.md",
+        "refactor/baselines/site-provenance.json"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
@@ -591,15 +599,18 @@
     {
       "id": "VENDOR-06",
       "title": "monaco-static-assets 来源、版本与许可闭环",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
         "SITE-01",
-        "SITE-05"
+        "SITE-05",
+        "SITE-07"
       ],
       "evidence": [
         "refactor/third-party.json",
-        "docs/assets/js/vs"
+        "docs/assets/js/vs",
+        "refactor/site-inventory.md",
+        "refactor/baselines/site-provenance.json"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
@@ -607,14 +618,17 @@
     {
       "id": "VENDOR-07",
       "title": "vconsole 来源、版本与许可闭环",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
-        "SITE-01"
+        "SITE-01",
+        "SITE-07"
       ],
       "evidence": [
         "refactor/third-party.json",
-        "docs/assets/js/vconsole.min.js"
+        "docs/assets/js/vconsole.min.js",
+        "refactor/site-inventory.md",
+        "refactor/baselines/site-provenance.json"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
@@ -625,11 +639,14 @@
       "confirmation": "unverified",
       "status": "open",
       "owners": [
-        "SITE-01"
+        "SITE-01",
+        "SITE-07"
       ],
       "evidence": [
         "refactor/third-party.json",
-        "docs/assets/js/console.js"
+        "docs/assets/js/console.js",
+        "refactor/site-inventory.md",
+        "refactor/baselines/site-provenance.json"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"

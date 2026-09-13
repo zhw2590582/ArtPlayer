@@ -4084,17 +4084,25 @@
       "phase": "6 文档与消费者",
       "title": "清点文档/示例/生成链",
       "scope": [
-        "artplayer-vitepress"
+        "artplayer-vitepress",
+        "workspace"
       ],
       "dependsOn": [
         "BASE-04",
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向",
       "acceptance": "所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径；明确 BASE-05 所记录站点实际分发与未设 private 的 manifest 意图；接续 VENDOR-05/06/07/08 和 BASE-SITE-01/BASE-MEDIA-01，核对字体、Monaco、vConsole、console bundle 与样本来源及分发范围",
-      "evidence": []
+      "evidence": [
+        "site-inventory.md",
+        "baselines/site-inventory.json",
+        "baselines/site-provenance.json",
+        "baselines/demo-additions.json",
+        "changes/2026-09-14-SITE-01-site-inventory.md",
+        "baselines/site-inventory-validation.json"
+      ]
     },
     {
       "id": "SITE-02",
@@ -4111,7 +4119,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "build-ts/build-test 生成链的可验证 TS 脚本",
-      "acceptance": "不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制",
+      "acceptance": "不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制；坏代码块解析必须终止，覆盖 malformed 分支不推进 regexp 的回归",
       "evidence": []
     },
     {
@@ -4127,7 +4135,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理",
-      "acceptance": "原命令兼容、生成可复现，翻译步骤不隐式运行远程服务",
+      "acceptance": "原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向",
       "evidence": []
     },
     {
@@ -4164,7 +4172,7 @@
       "status": "todo",
       "risk": "M",
       "deliverable": "已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对",
-      "acceptance": "未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收",
+      "acceptance": "未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口",
       "evidence": []
     },
     {
@@ -4177,7 +4185,8 @@
       "dependsOn": [
         "SITE-04",
         "EX-01",
-        "EX-02"
+        "EX-02",
+        "SITE-07"
       ],
       "status": "todo",
       "risk": "M",
@@ -4200,6 +4209,26 @@
       "deliverable": "维护指南和站点变更记录",
       "acceptance": "未手改 generated 目录，旧 URL 可用、部署与检查分离",
       "evidence": []
+    },
+    {
+      "id": "SITE-07",
+      "phase": "6 文档与消费者",
+      "title": "整理站点第三方资产与来源说明",
+      "scope": [
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-01"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices",
+      "acceptance": "接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据",
+      "evidence": [
+        "site-inventory.md",
+        "baselines/site-provenance.json"
+      ]
     },
     {
       "id": "EX-01",

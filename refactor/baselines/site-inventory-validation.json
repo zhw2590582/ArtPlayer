@@ -1,0 +1,61 @@
+{
+  "task": "SITE-01",
+  "node": "v24.21.0",
+  "baseline": "d62ab13a35c756ea567c426d4fbe00d893dd7e2b",
+  "targeted": {
+    "command": "node --test refactor/scripts/demos.test.mjs refactor/scripts/site-inventory.test.mjs",
+    "pass": 3,
+    "fail": 0,
+    "log": "refactor/.cache/site-tests.log",
+    "sha256": "ae5aca5e96da5e5a1f9ef9db81c510b4d64ed0497cb2ebe856b33e267bccc85f"
+  },
+  "before": {
+    "pass": 0,
+    "fail": 1,
+    "reason": "Demo file coverage drift: missing asr.local.js",
+    "log": "refactor/.cache/site-demo-before.log",
+    "sha256": "1fdf244c9783a10c8ae70fccc4d932d3999e1f76a0bc8ad51734b79ac60b957d"
+  },
+  "scriptExtraction": {
+    "pages": 36,
+    "oldRegexEqualsCurrent": true
+  },
+  "targetedLint": {
+    "exitCode": 0,
+    "log": "refactor/.cache/site-lint.log"
+  },
+  "fullBaseline": {
+    "command": "yarn test:baseline",
+    "exitCode": 0,
+    "pass": 517,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 129550.3754,
+    "log": "refactor/.cache/site-baseline-suite.log",
+    "sha256": "3fa91c86eecc5a473761accfeb754f0935eff5a621370b031155e3a7030564d5"
+  },
+  "browserRun": false,
+  "remoteCiRun": false,
+  "rootLint": {
+    "exitCode": 0,
+    "errors": 0,
+    "existingWarnings": 1,
+    "log": "refactor/.cache/site-root-lint.log",
+    "sha256": "2eb55dab2763460e909607f1a17426503877eb50ae9ff4fba24d451364c16092"
+  },
+  "strictToolchain": {
+    "exitCode": 0,
+    "log": "refactor/.cache/site-toolchain.log",
+    "sha256": "96a2f051474efb8ac032f71a077401dad8a7fdc166fdf11498da8a9aaccadfc7"
+  },
+  "sourceInputs": {
+    "refactor/scripts/site-inventory.mjs": "aa748b5c0b4a62e15220b8427fab6bbbd616cc7a5ea53be3c71e9a5630c8a184",
+    "refactor/scripts/site-provenance.mjs": "f92eccfd9fcdd17632c6ba03ad77dec9b55a1e9a0e696a6f155ad8ccbbb40513",
+    "refactor/scripts/site-inventory.test.mjs": "4b6c4095697396798491b0aba09924de57490095c58c255834b319d8a7d1fbc1",
+    "refactor/scripts/demos.mjs": "4b9e2cfd6292b9048ca7c61160fcda0f4fcd166039801aa2b853842cfad2ff3a",
+    "refactor/scripts/demos.test.mjs": "55a16dc5d8037d14ea8041bb55b43bd5b6b9710c4c9f3ed1a3906473ee123e47",
+    "refactor/site-inventory.md": "392b7021bdabcfa1aba671d748b4c4df260c7fd2e5cc1c0c0d64c52572dea62a",
+    "packages/artplayer-vitepress/README.md": "621b2680fa00a3761eb5145e1bec346c196e2fc5afe0643d301216e90b9545ee"
+  },
+  "note": "Logs and hashes describe this local run. No runtime assets, dependency lock or consumer declarations changed; no package build/browser/remote workflow acceptance is inferred."
+}

@@ -1,5 +1,21 @@
 # 进度与证据
 
+## SITE-01 文档/示例/生成链清点完成
+
+建立当前 22 包、27 Markdown、30 示例、36 HTML、963 声明成员和 204 资产
+的可重跑清单。增加文档站维护地图；核对六类执行 HTML、查询/存储/移动加载、
+声明注入和生成链。修复 BASE-04 漏登记 asr.local.js 导致的真实路径校验失败，
+保留历史快照并用有提交来源的增量记录覆盖新增路径。固定 npm 对照确认 vConsole
+3.15.0 字节一致，Monaco 0.30.1 的 98/99 字节一致、余下 CSS 仅换行不同；
+取得 notices，console bundle/字体/样本和历史 thumbnail 差异仍需处置。新增
+SITE-07 接续资产/notice 并成为 SITE-05 前置。517 项完整基线测试无失败/跳过，
+目标和根 lint（0 error/1 既有 warning）、严格工具链、清单/计划/风险校验通过。
+见[变更](changes/2026-09-14-SITE-01-site-inventory.md)、[清单](site-inventory.md)
+和[验证](baselines/site-inventory-validation.json)。没有执行实播、完整站点构建或
+远端 CI/部署；来源指纹与标题候选不作为授权/语义/发布通过。当前 239 项：
+164 done、15 doing、60 todo。下一步 SITE-02 声明/示例生成器；VAST 兼容选择和
+Auto Thumbnail 首帧仍开放。
+
 ## EX-02 Vue 消费者完成
 
 Vue 示例入口和配置职责完成 TS 整理；保留挂载时读取 option、原 getInstance

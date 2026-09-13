@@ -24,15 +24,15 @@
 | BASE-SOURCE-01 | open / 源码/产物事实 | 工作区 5.4.1 与采集时真实发布 5.4.0 不同 | BASE-08, REL-01 |
 | BASE-SOURCE-02 | open / 源码/产物事实 | registry gitHead 与发布包版本对应不可靠 | ENG-07, REL-01 |
 | BASE-SITE-01 | open / 源码/产物事实 | 文档站实际为静态站点但 manifest 未设 private | SITE-01, REL-01 |
-| BASE-MEDIA-01 | open / 待取证 | 示例媒体和字体的完整来源/授权链待核实 | BASE-08, SITE-01, EX-03 |
+| BASE-MEDIA-01 | open / 待取证 | 示例媒体和字体的完整来源/授权链待核实 | BASE-08, SITE-01, EX-03, SITE-07 |
 | VENDOR-01 | resolved / 源码/产物事实 | screenfull 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-02 | resolved / 源码/产物事实 | hint.css 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-03 | resolved / 已复现 | webvtt-parser 来源、版本与许可闭环 | PKG-MULTI-SUB-01 |
 | VENDOR-04 | open / 源码/产物事实 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01, PKG-JASSUB-06 |
-| VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01, PKG-JASSUB-06 |
-| VENDOR-06 | open / 待取证 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05 |
-| VENDOR-07 | open / 待取证 | vconsole 来源、版本与许可闭环 | SITE-01 |
-| VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01 |
+| VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01, PKG-JASSUB-06, SITE-07 |
+| VENDOR-06 | open / 源码/产物事实 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05, SITE-07 |
+| VENDOR-07 | open / 源码/产物事实 | vconsole 来源、版本与许可闭环 | SITE-01, SITE-07 |
+| VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01, SITE-07 |
 | SDK-01 | open / 源码/产物事实 | hls.js 实际集成验证范围 | PKG-HLS-05, EX-03 |
 | SDK-02 | open / 待取证 | dash.js 实际集成验证范围 | PKG-DASH-01, EX-03, PKG-DASH-05 |
 | SDK-03 | open / 待取证 | flv.js 实际集成验证范围 | EX-03 |

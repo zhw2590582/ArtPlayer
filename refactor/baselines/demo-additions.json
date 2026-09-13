@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "note": "Append-only additions to BASE-04. This records path ownership, not browser acceptance; the original 29-example snapshot remains unchanged.",
+  "examples": [
+    {
+      "source": "docs/assets/example/asr.local.js",
+      "route": "/?libs=./uncompiled/artplayer-plugin-asr/index.js&example=asr.local",
+      "introducedBy": "2cede66933e92b253bab4b3b2502f0268b22b087",
+      "owner": "PKG-ASR-05",
+      "finalDemoOwner": "EX-03",
+      "note": "Local audio capture demo with simulated subtitles; does not contact a recognition service. No menu link. Runtime evidence remains with the owning task."
+    }
+  ]
+}
