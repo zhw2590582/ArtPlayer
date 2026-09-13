@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 import compat from 'typescript-compat'
 import runtimeCompat from 'typescript-runtime-compat'
+import { publicSource as autoThumbnailPublic, runtimeSource as autoThumbnailRuntime } from '../refactor/scripts/auto-thumbnail-consumer.mjs'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const relative = name => path.relative(root, name).replaceAll('\\', '/')
@@ -73,6 +74,8 @@ export function runTypechecks() {
     console.log(`Strict project passed: ${relative(config)} (${result.files.length} root files)`)
   }
   for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [ts, 'nodenext-esm'], [compat, 'node10-commonjs']]) {
+    for (const source of [autoThumbnailPublic(mode), autoThumbnailRuntime(mode)])
+      assert.deepEqual(checkConsumer(compiler, mode, source), [], `Auto Thumbnail consumer failed: TS ${compiler.version} ${mode}`)
     for (const fixture of ['test/types/asr-public.ts', mode === 'nodenext-esm' ? 'refactor/fixtures/consumers/asr-esm-namespace.ts' : 'refactor/fixtures/consumers/asr-published.ts']) {
       let source = fs.readFileSync(path.join(root, fixture), 'utf8')
       if (fixture === 'test/types/asr-public.ts' && mode === 'nodenext-esm') {

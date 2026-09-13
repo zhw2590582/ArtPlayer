@@ -2,6 +2,16 @@
 
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
+`yarn test:auto-thumbnail-types` checks the preserved npm 1.1.0 declaration,
+accurate `/runtime` Promise types, exact rejected consumer lines, and generated
+editor globals. It also runs in `test:auto-thumbnail` and `test:baseline`.
+`yarn test:auto-thumbnail-types-package` packs the candidate and installs it and
+the actual npm 1.1.0 archive outside the workspace with a packed core. It verifies
+frozen reinstalls, byte identity, conditional declaration resolution, old/current
+compiler consumers, no-interop CommonJS, and installed factory registration.
+This does not decode video or close the older 1.0.x export-shape, native pixel,
+or device acceptance gaps. Candidate entry types use the same runtime files.
+
 `yarn test:danmuku-mask` runs candidate run cancellation/resource ownership plus
 frozen historical defects and public contracts. Candidate tests also run in
 `test:unit`; their controlled SDK, RAF and canvas hosts do not prove native model

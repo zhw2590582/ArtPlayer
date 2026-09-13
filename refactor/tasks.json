@@ -1811,7 +1811,8 @@
         "PKG-AUTO-THUMB-03",
         "ENG-04",
         "ENG-06",
-        "CORE-07"
+        "CORE-07",
+        "PKG-AUTO-THUMB-08"
       ],
       "status": "todo",
       "risk": "H",
@@ -4837,6 +4838,28 @@
       "evidence": [
         "changes/2026-09-14-PKG-AUTO-THUMB-07-canvas.md",
         "baselines/auto-thumbnail-canvas-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-08",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "保留旧声明并提供准确异步类型入口",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "ENG-04",
+        "ENG-06",
+        "CORE-07"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "保留实际 npm 1.1.0 根声明；新增同实现 /runtime 类型、编辑器声明及隔离安装消费者",
+      "acceptance": "原 Parameters/ReturnType/替代函数不变；准确 Promise 类型正反例、CJS/ESM 条件入口和声明解析通过；不把像素与设备缺口计为通过",
+      "evidence": [
+        "changes/2026-09-14-PKG-AUTO-THUMB-08-types.md",
+        "baselines/auto-thumbnail-types-validation.json"
       ]
     }
   ]

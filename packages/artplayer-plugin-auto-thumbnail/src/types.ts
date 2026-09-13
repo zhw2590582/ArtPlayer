@@ -1,11 +1,5 @@
-// Internal contracts only. Public declarations retain their historical entrypoint.
-export interface ThumbnailOptions {
-  url?: string
-  width?: number
-  number?: number
-  scale?: number
-  height?: number
-}
+// Root declarations retain their historical shape; the opt-in runtime view is shared.
+export type { Option as ThumbnailOptions } from '../types/runtime-api'
 
 export interface ExtractionConfig {
   url: string

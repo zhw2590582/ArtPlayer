@@ -4050,14 +4050,17 @@
       "confirmation": "reproduced",
       "status": "open",
       "owners": [
-        "PKG-AUTO-THUMB-04"
+        "PKG-AUTO-THUMB-04",
+        "PKG-AUTO-THUMB-08"
       ],
       "evidence": [
         "refactor/baselines/auto-thumbnail-release.json",
         "refactor/baselines/auto-thumbnail-contract.md",
-        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+        "refactor/scripts/auto-thumbnail-contract.test.mjs",
+        "refactor/changes/2026-09-14-PKG-AUTO-THUMB-08-types.md",
+        "refactor/baselines/auto-thumbnail-types-validation.json"
       ],
-      "compatibleResolution": "Preserve actual Promise runtime and old valid consumers; explicitly retain the historically ignored height field and verify paired CJS/ESM declarations.",
+      "compatibleResolution": "Preserve actual Promise runtime and old valid consumers; explicitly retain the historically ignored height field and verify paired CJS/ESM declarations. PKG-AUTO-THUMB-08 retains npm 1.1.0 root bytes and adds tested /runtime types and editor generation; older 1.0.x isolated consumer/export evidence is still pending in 04/06.",
       "closureCriteria": "Old and current isolated consumers, negative type cases and matching runtime registration pass; any irreconcilable inference change has an explicit user decision."
     },
     {

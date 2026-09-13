@@ -27,11 +27,31 @@
       "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
       "import": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
       "require": "./dist/artplayer-plugin-auto-thumbnail.legacy.js"
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer-plugin-auto-thumbnail.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer-plugin-auto-thumbnail.js"
+      }
     }
   },
   "main": "./dist/artplayer-plugin-auto-thumbnail.js",
   "module": "./dist/artplayer-plugin-auto-thumbnail.mjs",
   "types": "./types/artplayer-plugin-auto-thumbnail.d.ts",
   "legacy": "./dist/artplayer-plugin-auto-thumbnail.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-auto-thumbnail.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
+      ]
+    }
+  }
 }

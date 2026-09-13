@@ -46,7 +46,17 @@ for video processing.
   cleanup handles every frame without accumulating per-frame cleanup closures.
 - `src/types.ts` defines internal configuration, sheet data, the minimal host and
   guarded extraction-job callbacks. `guard` retains argument/result types and the
-  inactive undefined result. No public declarations are generated from this file.
+  inactive undefined result. It shares the opt-in `runtime-api.d.ts` option type;
+  the entry's Promise result is checked against that public result. No public
+  declarations are generated from this file.
+
+The original `types/artplayer-plugin-auto-thumbnail.d.ts` remains byte-equivalent
+to npm 1.1.0 after newline normalization. `types/runtime-api.d.ts` owns the precise
+option/result/factory contracts; `runtime.d.mts`, `runtime.d.cts`, and `runtime.d.ts`
+adapt module resolution without adding runtime code or a factory `.default` alias.
+The root editor declaration is generated semantically by `yarn build:ts`; its
+historical synchronous callable shape is retained, without mixing default and
+export-assignment syntax. See README for the optional accurate import.
 
 Only the entry module receives ArtPlayer. Extraction receives a guarded job and a
 configuration snapshot. These internal modules do not add public player fields,
@@ -90,6 +100,8 @@ Use the root Yarn toolchain:
 
 ```sh
 yarn test:auto-thumbnail
+yarn test:auto-thumbnail-types
+yarn test:auto-thumbnail-types-package
 yarn exec tsc -p packages/artplayer-plugin-auto-thumbnail/tsconfig.json --noEmit
 yarn test:browser test/browser/auto-thumbnail-lifecycle.spec.js
 yarn test:browser test/browser/auto-thumbnail-pixels.spec.js
@@ -101,7 +113,10 @@ regression tests. `ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT` selects an actual bundle.
 Historical contract/failure tests remain separate and continue to reproduce old
 defects; their passing status does not mean those defects should remain.
 
-This is an intermediate `PKG-AUTO-THUMB-03` implementation. Native lifecycle
+The public type entry is tracked independently as `PKG-AUTO-THUMB-08`, split from
+04 so that declaration work can proceed without weakening the unfinished 03
+pixel gate. Task04 still depends on both 03 and 08. The source/runtime remains an
+intermediate `PKG-AUTO-THUMB-03` implementation. Native lifecycle
 validation does not prove correct pixels. The attached renderer now has native
 pixel checks for all five cells when native frame callbacks are available,
 including the unique first frame, real black content, changing colors, spatial

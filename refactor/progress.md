@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-08 公开类型入口完成
+
+保留实际 npm 1.1.0 根声明字节与旧工厂提取/替换形状，新增复用原运行文件的
+`/runtime`，准确声明 Promise 注册、选项和结果；未添加不存在的 default 自引用。
+内部选项与运行类型共用，源码返回值通过公开 Factory 验证。编辑器改用语义
+生成器，修复混合导出声明；Node10 legacy 类型路径已补齐。最新与候选实际安装
+十组编译配置和三组无 interop 验证通过，安装产物 Promise 注册与清理通过。
+联合 163 项、最终三项类型回归、全仓严格类型检查（406 个生产 TS 文件）、lint、
+正常构建、frozen Yarn 安装和严格工具链检查通过；构建运行代码与起点归一化
+换行后完全一致。中间 no-interop 声明失败已修复并留证。没有新增依赖或发布。
+见[变更](changes/2026-09-14-PKG-AUTO-THUMB-08-types.md)与
+[验证](baselines/auto-thumbnail-types-validation.json)。本项从 04 独立拆出，04
+仍依赖 03 与 08；03 首帧、1.0.x 完整历史隔离消费及 05/06 仍未完成，不关闭
+AUTO-THUMB-PIXEL-01/TYPE-01/EXPORT-01。源码和公开类型阶段完全完成的插件仍
+为 14/16；全计划 236 项中 159 done、15 doing、62 todo。
+
 ## PKG-AUTO-THUMB-07 私有画布清理完成
 
 抽帧 canvas 现由 job 清理宽高；取消、失败和正常完成后归零，单个 reset 抛错
