@@ -53,7 +53,10 @@
 `setBackend` fulfilled false 视为已执行 fallback。
 
 registrar 捕获 `art.template.$video/$danmuku`，订阅 ready→start、destroy→stop。
-必须在 Danmuku 插件建立 `$danmuku` 后注册；demo 正是先 Danmuku 再 Mask。
+需要核心模板已经提供 `$danmuku/$video`；demo 使用先 Danmuku 再 Mask 的顺序。
+2026-09-13（PKG-DANMUKU-07）纠正初始记录：`$danmuku` 由核心模板创建，
+不是 Danmuku 插件创建，因此 demo 顺序本身不构成 Mask 对 Danmuku 注册的硬依赖。
+Mask 源码不读取 Danmuku 队列、owner 或插件事件；完整模型组合仍待 Mask 验收。
 start 建立 2D canvas 并设置 `$danmuku.style`：maskMode=alpha、maskSize=contain、
 maskRepeat=no-repeat、backgroundSize=contain、backgroundRepeat=no-repeat。
 每轮以视频固有尺寸推理，白色前景/黑色背景生成 binary mask，drawMask 后将 RGB

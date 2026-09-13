@@ -3384,11 +3384,15 @@
         "PKG-DANMUKU-11",
         "PKG-DANMUKU-12"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "负载/渲染/资源对比及 mask 可依赖的稳定边界",
       "acceptance": "在试点核心中旧插件 API 与关键帧路径通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-07-stability.md",
+        "baselines/danmuku-stability-validation.json",
+        "danmuku-stability.md"
+      ]
     },
     {
       "id": "PKG-DANMUKU-08",

@@ -136,6 +136,14 @@ legacy build targets remain es2020 and es2015; syntax lowering does not polyfill
 
 ## Scheduling ownership
 
+The root `art.template.$danmuku` belongs to the core template, not this plugin.
+The Mask plugin captures this layer and the core video, and listens to core
+ready/destroy; it does not read Danmuku queues, owners or plugin events. Renderer
+cleanup owns individual comment nodes. Reset/replacement must preserve the root
+identity and external mask styles; hide/show owns only its visibility opacity.
+CSS-mask boundary tests do not establish model inference, SDK cleanup or complete
+Mask integration. Those remain responsibilities of the Mask migration tasks.
+
 Keep at most one pending RAF and one asynchronous preparation batch. Native `play`
 and `playing` both invoke the existing start path and retain its events, but
 must not create competing loops. Ready items precede wait items; wait selection

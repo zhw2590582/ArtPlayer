@@ -1,0 +1,6157 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-07",
+  "status": "done",
+  "capturedAt": "2026-09-13T15:15:04.455Z",
+  "baselineCommit": "4f559cb31d6b69a37439c6db2d32ca28ae5c78f3",
+  "report": {
+    "file": "refactor/.cache/danmuku07-stability-final.json",
+    "sha256": "474aa2aa3b0fa8f5700307db9a05d2253e15ab3d90f7cd2a1434c1b5ff131bc8"
+  },
+  "stats": {
+    "startTime": "2026-09-13T15:08:26.510Z",
+    "duration": 308645.533,
+    "expected": 66,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "groups": {
+    "chromium/danmuku-mask-boundary.spec.js": 2,
+    "firefox/danmuku-mask-boundary.spec.js": 2,
+    "webkit/danmuku-mask-boundary.spec.js": 2,
+    "chromium/danmuku-resources.spec.js": 16,
+    "firefox/danmuku-resources.spec.js": 16,
+    "webkit/danmuku-resources.spec.js": 16,
+    "chromium/danmuku-stability.spec.js": 4,
+    "firefox/danmuku-stability.spec.js": 4,
+    "webkit/danmuku-stability.spec.js": 4
+  },
+  "versions": {
+    "chromium": {
+      "browser": "153.0.8010.12",
+      "platform": "win32"
+    },
+    "firefox": {
+      "browser": "155.0",
+      "platform": "win32"
+    },
+    "webkit": {
+      "browser": "26.6",
+      "platform": "win32"
+    }
+  },
+  "loads": [
+    {
+      "engine": "chromium",
+      "implementation": "published",
+      "rowsPerSecond": 2,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.374546,
+          "startWall": 627.8000000119209,
+          "endWall": 14764,
+          "time": 14.477616,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 4,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 846,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "max": 16.80000000000109
+          },
+          "framesMediaSeconds": {
+            "count": 846,
+            "p50": 0.0166590000000002,
+            "p95": 0.018034000000000106,
+            "max": 0.01936200000000099
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.477616,
+          "startWall": 14773.699999988079,
+          "endWall": 28914.5,
+          "time": 28.577985,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 5,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 846,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 846,
+            "p50": 0.016647999999999996,
+            "p95": 0.018342000000000525,
+            "max": 0.023869999999998726
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.577985,
+          "startWall": 28922,
+          "endWall": 43066.10000002384,
+          "time": 42.680636,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 6,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 846,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 846,
+            "p50": 0.0166959999999996,
+            "p95": 0.01811000000000007,
+            "max": 0.020167000000000712
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2538,
+          "p50": 16.69999999999709,
+          "p95": 16.700000000004366,
+          "max": 66.70000000000073
+        },
+        "framesMediaSeconds": {
+          "count": 2538,
+          "p50": 0.016670000000004848,
+          "p95": 0.018145000000000522,
+          "max": 0.05940100000000115
+        },
+        "samplingWallMs": {
+          "count": 2607,
+          "p50": 16.69999998807907,
+          "p95": 17.80000001192093,
+          "max": 83.90000003576279
+        },
+        "samplingMediaSeconds": {
+          "count": 2607,
+          "p50": 0.016633999999999816,
+          "p95": 0.018132999999999733,
+          "max": 0.0597139999999996
+        }
+      },
+      "totalVisible": 72,
+      "uniqueVisible": 72,
+      "recycled": 72,
+      "callbacks": 75,
+      "allocations": 6,
+      "reuses": 69,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 75,
+          "replies": 75,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "chromium",
+      "implementation": "published",
+      "rowsPerSecond": 20,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.369621,
+          "startWall": 586.3999999761581,
+          "endWall": 14722.399999976158,
+          "time": 14.460377,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 845,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000109
+          },
+          "framesMediaSeconds": {
+            "count": 845,
+            "p50": 0.016639999999998878,
+            "p95": 0.018498000000001014,
+            "max": 0.019878999999999536
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.460377,
+          "startWall": 14737.300000011921,
+          "endWall": 28888.399999976158,
+          "time": 28.579458,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 23,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 846,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 846,
+            "p50": 0.01665800000000317,
+            "p95": 0.018109000000002595,
+            "max": 0.02022799999999947
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.579458,
+          "startWall": 28905.399999976158,
+          "endWall": 43037.10000002384,
+          "time": 42.662662,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 845,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 845,
+            "p50": 0.016683000000000447,
+            "p95": 0.018039000000001693,
+            "max": 0.01981900000000536
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2536,
+          "p50": 16.69999999999709,
+          "p95": 16.700000000004366,
+          "max": 83.40000000000146
+        },
+        "framesMediaSeconds": {
+          "count": 2536,
+          "p50": 0.016664000000002233,
+          "p95": 0.018217999999997403,
+          "max": 0.07596999999999987
+        },
+        "samplingWallMs": {
+          "count": 2603,
+          "p50": 16.600000023841858,
+          "p95": 17.80000001192093,
+          "max": 99.30000001192093
+        },
+        "samplingMediaSeconds": {
+          "count": 2603,
+          "p50": 0.016636000000005424,
+          "p95": 0.018202999999999747,
+          "max": 0.07654499999999942
+        }
+      },
+      "totalVisible": 720,
+      "uniqueVisible": 720,
+      "recycled": 720,
+      "callbacks": 723,
+      "allocations": 24,
+      "reuses": 699,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 723,
+          "replies": 723,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "chromium",
+      "implementation": "candidate",
+      "rowsPerSecond": 2,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.369808,
+          "startWall": 609.9000000357628,
+          "endWall": 14777.800000011921,
+          "time": 14.494251,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 847,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000109
+          },
+          "framesMediaSeconds": {
+            "count": 847,
+            "p50": 0.016671999999999798,
+            "p95": 0.017968999999999014,
+            "max": 0.019351999999999592
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.494251,
+          "startWall": 14789.400000035763,
+          "endWall": 28912.200000047684,
+          "time": 28.58184,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 845,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 845,
+            "p50": 0.016664999999999708,
+            "p95": 0.01806399999999897,
+            "max": 0.024385999999999797
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.58184,
+          "startWall": 28921.80000001192,
+          "endWall": 43076.200000047684,
+          "time": 42.715746,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 847,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 847,
+            "p50": 0.016697000000000628,
+            "p95": 0.01815099999999603,
+            "max": 0.019627999999997314
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2539,
+          "p50": 16.69999999999709,
+          "p95": 16.700000000004366,
+          "max": 66.70000000000073
+        },
+        "framesMediaSeconds": {
+          "count": 2539,
+          "p50": 0.016674000000001854,
+          "p95": 0.018076000000000647,
+          "max": 0.061954999999999316
+        },
+        "samplingWallMs": {
+          "count": 2536,
+          "p50": 16.69999998807907,
+          "p95": 17.899999976158142,
+          "max": 83.09999996423721
+        },
+        "samplingMediaSeconds": {
+          "count": 2536,
+          "p50": 0.016676000000000357,
+          "p95": 0.018077999999995598,
+          "max": 0.0623389999999997
+        }
+      },
+      "totalVisible": 72,
+      "uniqueVisible": 72,
+      "recycled": 72,
+      "callbacks": 72,
+      "allocations": 3,
+      "reuses": 69,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 72,
+          "replies": 72,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "chromium",
+      "implementation": "candidate",
+      "rowsPerSecond": 20,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.374623,
+          "startWall": 604.1999999880791,
+          "endWall": 14771.5,
+          "time": 14.496561,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 847,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000109
+          },
+          "framesMediaSeconds": {
+            "count": 847,
+            "p50": 0.01671499999999959,
+            "p95": 0.018153999999999115,
+            "max": 0.019287000000000276
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.496561,
+          "startWall": 14789,
+          "endWall": 28950,
+          "time": 28.613425,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 847,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 847,
+            "p50": 0.01666099999999915,
+            "p95": 0.018369999999997333,
+            "max": 0.020493999999999346
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.613425,
+          "startWall": 28967.600000023842,
+          "endWall": 43120.69999998808,
+          "time": 42.719133,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 846,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "max": 16.80000000000291
+          },
+          "framesMediaSeconds": {
+            "count": 846,
+            "p50": 0.016661999999996624,
+            "p95": 0.018042000000001224,
+            "max": 0.019764000000002113
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2540,
+          "p50": 16.69999999999709,
+          "p95": 16.700000000004366,
+          "max": 83.40000000000146
+        },
+        "framesMediaSeconds": {
+          "count": 2540,
+          "p50": 0.01668199999999942,
+          "p95": 0.0182399999999987,
+          "max": 0.06178000000000239
+        },
+        "samplingWallMs": {
+          "count": 2537,
+          "p50": 16.69999998807907,
+          "p95": 17.80000001192093,
+          "max": 100.40000003576279
+        },
+        "samplingMediaSeconds": {
+          "count": 2537,
+          "p50": 0.016683999999997923,
+          "p95": 0.0182399999999987,
+          "max": 0.06213999999999942
+        }
+      },
+      "totalVisible": 720,
+      "uniqueVisible": 720,
+      "recycled": 720,
+      "callbacks": 720,
+      "allocations": 21,
+      "reuses": 699,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 720,
+          "replies": 720,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "firefox",
+      "implementation": "published",
+      "rowsPerSecond": 2,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.425651,
+          "startWall": 728,
+          "endWall": 14945,
+          "time": 14.549274,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 4,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 848,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 21.579999999999927
+          },
+          "framesMediaSeconds": {
+            "count": 848,
+            "p50": 0,
+            "p95": 0.04182500000000111,
+            "max": 0.04531200000000002
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.549274,
+          "startWall": 14965,
+          "endWall": 29244,
+          "time": 28.779661,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 5,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 852,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 20.720000000001164
+          },
+          "framesMediaSeconds": {
+            "count": 852,
+            "p50": 0,
+            "p95": 0.0414500000000011,
+            "max": 0.044920999999998656
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.779661,
+          "startWall": 29256,
+          "endWall": 43519,
+          "time": 42.950316,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 6,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 851,
+            "p50": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 19.81999999999971
+          },
+          "framesMediaSeconds": {
+            "count": 851,
+            "p50": 0,
+            "p95": 0.0416450000000026,
+            "max": 0.04536300000000182
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2551,
+          "p50": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 100
+        },
+        "framesMediaSeconds": {
+          "count": 2551,
+          "p50": 0,
+          "p95": 0.041733000000000686,
+          "max": 0.04536300000000182
+        },
+        "samplingWallMs": {
+          "count": 2624,
+          "p50": 17,
+          "p95": 18,
+          "max": 101
+        },
+        "samplingMediaSeconds": {
+          "count": 2624,
+          "p50": 0,
+          "p95": 0.041701999999999906,
+          "max": 0.04536300000000182
+        }
+      },
+      "totalVisible": 72,
+      "uniqueVisible": 72,
+      "recycled": 72,
+      "callbacks": 75,
+      "allocations": 6,
+      "reuses": 69,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 75,
+          "replies": 75,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "firefox",
+      "implementation": "published",
+      "rowsPerSecond": 20,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.424629,
+          "startWall": 718,
+          "endWall": 15066,
+          "time": 14.695414,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 23,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 856,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 20.699999999999818
+          },
+          "framesMediaSeconds": {
+            "count": 856,
+            "p50": 0,
+            "p95": 0.041786999999999797,
+            "max": 0.04524600000000012
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.695414,
+          "startWall": 15087,
+          "endWall": 29354,
+          "time": 28.8765,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 850,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 20.979999999999563
+          },
+          "framesMediaSeconds": {
+            "count": 850,
+            "p50": 0,
+            "p95": 0.04186299999999932,
+            "max": 0.045232999999999635
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.8765,
+          "startWall": 29376,
+          "endWall": 43637,
+          "time": 43.066147,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 851,
+            "p50": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 18.860000000000582
+          },
+          "framesMediaSeconds": {
+            "count": 851,
+            "p50": 0,
+            "p95": 0.041758000000001516,
+            "max": 0.04478300000000246
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2557,
+          "p50": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 116.67999999999665
+        },
+        "framesMediaSeconds": {
+          "count": 2557,
+          "p50": 0,
+          "p95": 0.04180399999999995,
+          "max": 0.04524600000000012
+        },
+        "samplingWallMs": {
+          "count": 2631,
+          "p50": 17,
+          "p95": 18,
+          "max": 116
+        },
+        "samplingMediaSeconds": {
+          "count": 2631,
+          "p50": 0,
+          "p95": 0.04177699999999618,
+          "max": 0.04524600000000012
+        }
+      },
+      "totalVisible": 720,
+      "uniqueVisible": 720,
+      "recycled": 720,
+      "callbacks": 723,
+      "allocations": 24,
+      "reuses": 699,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 723,
+          "replies": 723,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "firefox",
+      "implementation": "candidate",
+      "rowsPerSecond": 2,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.427679,
+          "startWall": 714,
+          "endWall": 14964,
+          "time": 14.596651,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 850,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 21.699999999999818
+          },
+          "framesMediaSeconds": {
+            "count": 850,
+            "p50": 0,
+            "p95": 0.04170599999999958,
+            "max": 0.04553100000000043
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.596651,
+          "startWall": 14976,
+          "endWall": 29230,
+          "time": 28.767115,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 850,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 21.260000000002037
+          },
+          "framesMediaSeconds": {
+            "count": 850,
+            "p50": 0,
+            "p95": 0.04095400000000282,
+            "max": 0.04606899999999925
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.767115,
+          "startWall": 29240,
+          "endWall": 43452,
+          "time": 42.937943,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 848,
+            "p50": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 18.720000000001164
+          },
+          "framesMediaSeconds": {
+            "count": 848,
+            "p50": 0,
+            "p95": 0.04165899999999567,
+            "max": 0.04530800000000568
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2548,
+          "p50": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 100
+        },
+        "framesMediaSeconds": {
+          "count": 2548,
+          "p50": 0,
+          "p95": 0.041519000000000084,
+          "max": 0.04606899999999925
+        },
+        "samplingWallMs": {
+          "count": 2548,
+          "p50": 17,
+          "p95": 18,
+          "max": 99
+        },
+        "samplingMediaSeconds": {
+          "count": 2548,
+          "p50": 0,
+          "p95": 0.041519000000000084,
+          "max": 0.04606899999999925
+        }
+      },
+      "totalVisible": 72,
+      "uniqueVisible": 72,
+      "recycled": 72,
+      "callbacks": 72,
+      "allocations": 3,
+      "reuses": 69,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 72,
+          "replies": 72,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "firefox",
+      "implementation": "candidate",
+      "rowsPerSecond": 20,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.181611,
+          "startWall": 437,
+          "endWall": 14704,
+          "time": 14.375495,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 851,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 21.0600000000004
+          },
+          "framesMediaSeconds": {
+            "count": 851,
+            "p50": 0,
+            "p95": 0.0420170000000013,
+            "max": 0.04489000000000054
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.375495,
+          "startWall": 14730,
+          "endWall": 28990,
+          "time": 28.559151,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 850,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 20.92000000000189
+          },
+          "framesMediaSeconds": {
+            "count": 850,
+            "p50": 0,
+            "p95": 0.04180500000000009,
+            "max": 0.04524799999999907
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.559151,
+          "startWall": 29012,
+          "endWall": 43243,
+          "time": 42.690484,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 849,
+            "p50": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 19
+          },
+          "framesMediaSeconds": {
+            "count": 849,
+            "p50": 0,
+            "p95": 0.04203499999999849,
+            "max": 0.04544299999999879
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2550,
+          "p50": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 116.66000000000167
+        },
+        "framesMediaSeconds": {
+          "count": 2550,
+          "p50": 0,
+          "p95": 0.04198500000000038,
+          "max": 0.04544299999999879
+        },
+        "samplingWallMs": {
+          "count": 2550,
+          "p50": 17,
+          "p95": 18,
+          "max": 117
+        },
+        "samplingMediaSeconds": {
+          "count": 2550,
+          "p50": 0,
+          "p95": 0.04198500000000038,
+          "max": 0.04544299999999879
+        }
+      },
+      "totalVisible": 720,
+      "uniqueVisible": 720,
+      "recycled": 720,
+      "callbacks": 720,
+      "allocations": 22,
+      "reuses": 698,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 720,
+          "replies": 720,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "webkit",
+      "implementation": "published",
+      "rowsPerSecond": 2,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.2676458,
+          "startWall": 1302,
+          "endWall": 16269,
+          "time": 15.0319999,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 4,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 358,
+            "p50": 45,
+            "p95": 61,
+            "max": 64
+          },
+          "framesMediaSeconds": {
+            "count": 358,
+            "p50": 0.045270799999999056,
+            "p95": 0.06116659999999996,
+            "max": 0.06383330000000065
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.0319999,
+          "startWall": 16311,
+          "endWall": 31301,
+          "time": 29.7106039,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 5,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 363,
+            "p50": 45,
+            "p95": 61,
+            "max": 76
+          },
+          "framesMediaSeconds": {
+            "count": 363,
+            "p50": 0.045270900000002,
+            "p95": 0.06120830000000055,
+            "max": 0.07685419999999965
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.7106039,
+          "startWall": 31312,
+          "endWall": 46136,
+          "time": 44.2841962,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 6,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 370,
+            "p50": 45,
+            "p95": 49,
+            "max": 78
+          },
+          "framesMediaSeconds": {
+            "count": 370,
+            "p50": 0.044770800000002,
+            "p95": 0.049208300000003646,
+            "max": 0.07760420000000323
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 1091,
+          "p50": 45,
+          "p95": 61,
+          "max": 365
+        },
+        "framesMediaSeconds": {
+          "count": 1091,
+          "p50": 0.045083300000001714,
+          "p95": 0.060958299999999355,
+          "max": 0.07760420000000323
+        },
+        "samplingWallMs": {
+          "count": 1120,
+          "p50": 45,
+          "p95": 61,
+          "max": 365
+        },
+        "samplingMediaSeconds": {
+          "count": 1120,
+          "p50": 0.04497920000000022,
+          "p95": 0.06087510000000007,
+          "max": 0.07762500000000472
+        }
+      },
+      "totalVisible": 72,
+      "uniqueVisible": 72,
+      "recycled": 72,
+      "callbacks": 75,
+      "allocations": 6,
+      "reuses": 69,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 75,
+          "replies": 75,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "webkit",
+      "implementation": "published",
+      "rowsPerSecond": 20,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.2983958,
+          "startWall": 1309,
+          "endWall": 16297,
+          "time": 15.0258749,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 23,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 220,
+            "p50": 77,
+            "p95": 79,
+            "max": 93
+          },
+          "framesMediaSeconds": {
+            "count": 220,
+            "p50": 0.07679159999999996,
+            "p95": 0.07877080000000003,
+            "max": 0.09327089999999982
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.0258749,
+          "startWall": 16320,
+          "endWall": 31241,
+          "time": 29.6541872,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 219,
+            "p50": 77,
+            "p95": 79,
+            "max": 93
+          },
+          "framesMediaSeconds": {
+            "count": 219,
+            "p50": 0.07679169999999758,
+            "p95": 0.07897920000000269,
+            "max": 0.09302089999999907
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.6541872,
+          "startWall": 31285,
+          "endWall": 46222,
+          "time": 44.2532795,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 25,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 220,
+            "p50": 77,
+            "p95": 79,
+            "max": 94
+          },
+          "framesMediaSeconds": {
+            "count": 220,
+            "p50": 0.07668759999999963,
+            "p95": 0.07902080000000211,
+            "max": 0.09408340000000237
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 659,
+          "p50": 77,
+          "p95": 79,
+          "max": 414
+        },
+        "framesMediaSeconds": {
+          "count": 659,
+          "p50": 0.07675000000000054,
+          "p95": 0.07889580000000151,
+          "max": 0.09408340000000237
+        },
+        "samplingWallMs": {
+          "count": 689,
+          "p50": 77,
+          "p95": 79,
+          "max": 414
+        },
+        "samplingMediaSeconds": {
+          "count": 689,
+          "p50": 0.07662499999999994,
+          "p95": 0.0788542000000021,
+          "max": 0.0940833000000012
+        }
+      },
+      "totalVisible": 720,
+      "uniqueVisible": 720,
+      "recycled": 720,
+      "callbacks": 723,
+      "allocations": 25,
+      "reuses": 698,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 723,
+          "replies": 723,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "webkit",
+      "implementation": "candidate",
+      "rowsPerSecond": 2,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.37275,
+          "startWall": 1294,
+          "endWall": 16315,
+          "time": 15.1836874,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 363,
+            "p50": 45,
+            "p95": 61,
+            "max": 64
+          },
+          "framesMediaSeconds": {
+            "count": 363,
+            "p50": 0.045187499999999936,
+            "p95": 0.06122919999999965,
+            "max": 0.06333330000000004
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.1836874,
+          "startWall": 16375,
+          "endWall": 31283,
+          "time": 29.8325622,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 361,
+            "p50": 45,
+            "p95": 61,
+            "max": 64
+          },
+          "framesMediaSeconds": {
+            "count": 361,
+            "p50": 0.04527080000000083,
+            "p95": 0.06106250000000024,
+            "max": 0.06364589999999737
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.8325622,
+          "startWall": 31328,
+          "endWall": 46200,
+          "time": 44.4231129,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 24,
+          "framesWallMs": {
+            "count": 365,
+            "p50": 45,
+            "p95": 61,
+            "max": 63
+          },
+          "framesMediaSeconds": {
+            "count": 365,
+            "p50": 0.044958299999997564,
+            "p95": 0.060916699999999935,
+            "max": 0.06322919999999854
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 1089,
+          "p50": 45,
+          "p95": 61,
+          "max": 337
+        },
+        "framesMediaSeconds": {
+          "count": 1089,
+          "p50": 0.045125000000000526,
+          "p95": 0.06106250000000024,
+          "max": 0.06364589999999737
+        },
+        "samplingWallMs": {
+          "count": 1089,
+          "p50": 45,
+          "p95": 61,
+          "max": 338
+        },
+        "samplingMediaSeconds": {
+          "count": 1089,
+          "p50": 0.045125000000000526,
+          "p95": 0.061062499999998465,
+          "max": 0.06362500000000182
+        }
+      },
+      "totalVisible": 72,
+      "uniqueVisible": 72,
+      "recycled": 72,
+      "callbacks": 72,
+      "allocations": 3,
+      "reuses": 69,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 72,
+          "replies": 72,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    },
+    {
+      "engine": "webkit",
+      "implementation": "candidate",
+      "rowsPerSecond": 20,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.3515,
+          "startWall": 1224,
+          "endWall": 16051,
+          "time": 14.9101248,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 217,
+            "p50": 77,
+            "p95": 80,
+            "max": 109
+          },
+          "framesMediaSeconds": {
+            "count": 217,
+            "p50": 0.07679170000000024,
+            "p95": 0.0804999999999998,
+            "max": 0.10902089999999998
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.9101248,
+          "startWall": 16109,
+          "endWall": 31070,
+          "time": 29.5584789,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 220,
+            "p50": 77,
+            "p95": 79,
+            "max": 93
+          },
+          "framesMediaSeconds": {
+            "count": 220,
+            "p50": 0.07683340000000172,
+            "p95": 0.07910419999999974,
+            "max": 0.0930624999999985
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.5584789,
+          "startWall": 31135,
+          "endWall": 46123,
+          "time": 44.2043628,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduled": 240,
+          "framesWallMs": {
+            "count": 219,
+            "p50": 77,
+            "p95": 79,
+            "max": 95
+          },
+          "framesMediaSeconds": {
+            "count": 219,
+            "p50": 0.0768333000000041,
+            "p95": 0.0792707999999962,
+            "max": 0.09527079999999444
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 656,
+          "p50": 77,
+          "p95": 80,
+          "max": 428
+        },
+        "framesMediaSeconds": {
+          "count": 656,
+          "p50": 0.07679170000000024,
+          "p95": 0.07935409999999621,
+          "max": 0.10902089999999998
+        },
+        "samplingWallMs": {
+          "count": 656,
+          "p50": 77,
+          "p95": 80,
+          "max": 429
+        },
+        "samplingMediaSeconds": {
+          "count": 656,
+          "p50": 0.07679170000000024,
+          "p95": 0.07958329999999947,
+          "max": 0.10904169999999969
+        }
+      },
+      "totalVisible": 720,
+      "uniqueVisible": 720,
+      "recycled": 720,
+      "callbacks": 720,
+      "allocations": 22,
+      "reuses": 698,
+      "bypassedPool": 0,
+      "workers": [
+        {
+          "posts": 720,
+          "replies": 720,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "errors": [],
+      "destroyed": true,
+      "retainedPlayerRoots": 0
+    }
+  ],
+  "mask": [
+    {
+      "engine": "chromium",
+      "title": "published: Danmuku retains the core layer and external CSS mask across commands and retained-HTML destroy",
+      "snapshots": [
+        {
+          "label": "before-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "",
+          "time": 0
+        },
+        {
+          "label": "after-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.032529
+        },
+        {
+          "label": "after-reset",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.046696
+        },
+        {
+          "label": "after-no-argument-load",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0.049324
+        },
+        {
+          "label": "after-replacement-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.065865
+        },
+        {
+          "label": "after-hide",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "0",
+          "time": 0.070047
+        },
+        {
+          "label": "after-show",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.07497
+        },
+        {
+          "label": "after-destroy-false",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-destroy-native-frames",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        }
+      ],
+      "workers": [
+        {
+          "requests": [
+            {
+              "type": "getDanmuTop",
+              "id": 1
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 2
+            }
+          ],
+          "replies": [
+            {
+              "id": 1,
+              "result": 10
+            },
+            {
+              "id": 2,
+              "result": 10
+            }
+          ],
+          "terminated": 1
+        }
+      ],
+      "visible": [
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-AFTER-LOAD"
+      ],
+      "errors": []
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: Danmuku retains the core layer and external CSS mask across commands and retained-HTML destroy",
+      "snapshots": [
+        {
+          "label": "before-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "",
+          "time": 0
+        },
+        {
+          "label": "after-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.035365
+        },
+        {
+          "label": "after-reset",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.051809
+        },
+        {
+          "label": "after-no-argument-load",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0.054545
+        },
+        {
+          "label": "after-replacement-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.070648
+        },
+        {
+          "label": "after-hide",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "0",
+          "time": 0.076207
+        },
+        {
+          "label": "after-show",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.080349
+        },
+        {
+          "label": "after-destroy-false",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-destroy-native-frames",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        }
+      ],
+      "workers": [
+        {
+          "requests": [
+            {
+              "type": "getDanmuTop",
+              "id": 1
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 2
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 3
+            }
+          ],
+          "replies": [
+            {
+              "id": 1,
+              "result": 10
+            },
+            {
+              "id": 2,
+              "result": 10
+            },
+            {
+              "id": 3,
+              "result": 10
+            }
+          ],
+          "terminated": 1
+        }
+      ],
+      "visible": [
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-AFTER-LOAD"
+      ],
+      "errors": []
+    },
+    {
+      "engine": "firefox",
+      "title": "published: Danmuku retains the core layer and external CSS mask across commands and retained-HTML destroy",
+      "snapshots": [
+        {
+          "label": "before-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "",
+          "time": 0
+        },
+        {
+          "label": "after-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.001882
+        },
+        {
+          "label": "after-reset",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.041666
+        },
+        {
+          "label": "after-no-argument-load",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0.041666
+        },
+        {
+          "label": "after-replacement-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.041666
+        },
+        {
+          "label": "after-hide",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "0",
+          "time": 0.083332
+        },
+        {
+          "label": "after-show",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.083332
+        },
+        {
+          "label": "after-destroy-false",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-destroy-native-frames",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        }
+      ],
+      "workers": [
+        {
+          "requests": [
+            {
+              "type": "getDanmuTop",
+              "id": 1
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 2
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 3
+            }
+          ],
+          "replies": [
+            {
+              "id": 1,
+              "result": 10
+            },
+            {
+              "id": 2,
+              "result": 10
+            },
+            {
+              "id": 3,
+              "result": 10
+            }
+          ],
+          "terminated": 1
+        }
+      ],
+      "visible": [
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-AFTER-LOAD"
+      ],
+      "errors": []
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: Danmuku retains the core layer and external CSS mask across commands and retained-HTML destroy",
+      "snapshots": [
+        {
+          "label": "before-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "",
+          "time": 0
+        },
+        {
+          "label": "after-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.041666
+        },
+        {
+          "label": "after-reset",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.041666
+        },
+        {
+          "label": "after-no-argument-load",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0.041666
+        },
+        {
+          "label": "after-replacement-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.083332
+        },
+        {
+          "label": "after-hide",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "0",
+          "time": 0.083332
+        },
+        {
+          "label": "after-show",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.083332
+        },
+        {
+          "label": "after-destroy-false",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-destroy-native-frames",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        }
+      ],
+      "workers": [
+        {
+          "requests": [
+            {
+              "type": "getDanmuTop",
+              "id": 1
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 2
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 3
+            }
+          ],
+          "replies": [
+            {
+              "id": 1,
+              "result": 10
+            },
+            {
+              "id": 2,
+              "result": 10
+            },
+            {
+              "id": 3,
+              "result": 10
+            }
+          ],
+          "terminated": 1
+        }
+      ],
+      "visible": [
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-AFTER-LOAD"
+      ],
+      "errors": []
+    },
+    {
+      "engine": "webkit",
+      "title": "published: Danmuku retains the core layer and external CSS mask across commands and retained-HTML destroy",
+      "snapshots": [
+        {
+          "label": "before-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "",
+          "time": 0
+        },
+        {
+          "label": "after-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.0560853
+        },
+        {
+          "label": "after-reset",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.1145099
+        },
+        {
+          "label": "after-no-argument-load",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0.1331493
+        },
+        {
+          "label": "after-replacement-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.2290091
+        },
+        {
+          "label": "after-hide",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "0",
+          "time": 0.2411342
+        },
+        {
+          "label": "after-show",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.2466298
+        },
+        {
+          "label": "after-destroy-false",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-destroy-native-frames",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        }
+      ],
+      "workers": [
+        {
+          "requests": [
+            {
+              "type": "getDanmuTop",
+              "id": 1
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 2
+            }
+          ],
+          "replies": [
+            {
+              "id": 1,
+              "result": 10
+            },
+            {
+              "id": 2,
+              "result": 10
+            }
+          ],
+          "terminated": 1
+        }
+      ],
+      "visible": [
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-AFTER-LOAD"
+      ],
+      "errors": []
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: Danmuku retains the core layer and external CSS mask across commands and retained-HTML destroy",
+      "snapshots": [
+        {
+          "label": "before-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "",
+          "time": 0
+        },
+        {
+          "label": "after-registration",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.0547591
+        },
+        {
+          "label": "after-reset",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.1121272
+        },
+        {
+          "label": "after-no-argument-load",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0.1244461
+        },
+        {
+          "label": "after-replacement-native-emit",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.2397548
+        },
+        {
+          "label": "after-hide",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "0",
+          "time": 0.2532712
+        },
+        {
+          "label": "after-show",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 1,
+          "opacity": "1",
+          "time": 0.2585794
+        },
+        {
+          "label": "after-destroy-false",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        },
+        {
+          "label": "after-destroy-native-frames",
+          "sameLayer": true,
+          "connected": true,
+          "styles": [
+            {
+              "name": "mask-image",
+              "value": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")",
+              "priority": "",
+              "computed": "url(\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22360%22%3E%3Crect%20width%3D%22320%22%20height%3D%22360%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E\")"
+            },
+            {
+              "name": "mask-mode",
+              "value": "alpha",
+              "priority": "",
+              "computed": "alpha"
+            },
+            {
+              "name": "mask-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "mask-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            },
+            {
+              "name": "background-size",
+              "value": "contain",
+              "priority": "",
+              "computed": "contain"
+            },
+            {
+              "name": "background-repeat",
+              "value": "no-repeat",
+              "priority": "",
+              "computed": "no-repeat"
+            }
+          ],
+          "children": 0,
+          "opacity": "1",
+          "time": 0
+        }
+      ],
+      "workers": [
+        {
+          "requests": [
+            {
+              "type": "getDanmuTop",
+              "id": 1
+            },
+            {
+              "type": "getDanmuTop",
+              "id": 2
+            }
+          ],
+          "replies": [
+            {
+              "id": 1,
+              "result": 10
+            },
+            {
+              "id": 2,
+              "result": 10
+            }
+          ],
+          "terminated": 1
+        }
+      ],
+      "visible": [
+        "MASK-BOUNDARY-EMIT",
+        "MASK-BOUNDARY-AFTER-LOAD"
+      ],
+      "errors": []
+    }
+  ],
+  "resources": [
+    {
+      "engine": "chromium",
+      "title": "published: shared setting mount preserves the surviving instance and later user changes",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: invalid setting mount rolls back plugin resources while preserving the original error",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: destroy cancels pending setting send without clearing retained input or starting a lock",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "PENDING",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: destroy clears active send timer and leaves another mounted instance usable",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "LOCK",
+          "receiver": true
+        },
+        {
+          "index": 1,
+          "text": "SECOND",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: rejected setting callback retains input and original console error without an unhandled rejection",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "REJECT",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [
+        [
+          "Error emitting danmuku:",
+          "controlled setting rejection"
+        ]
+      ],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: destroy false releases actual renderer nodes while retaining the player shell",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "VISIBLE"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: replacement load removes a moved renderer node and preserves unrelated body content",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "MOVED"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "published: narrow heatmap invalid sampling stays responsive and two instances have independent gradients",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: shared setting mount preserves the surviving instance and later user changes",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: invalid setting mount rolls back plugin resources while preserving the original error",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: destroy cancels pending setting send without clearing retained input or starting a lock",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "PENDING",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: destroy clears active send timer and leaves another mounted instance usable",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "LOCK",
+          "receiver": true
+        },
+        {
+          "index": 1,
+          "text": "SECOND",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: rejected setting callback retains input and original console error without an unhandled rejection",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "REJECT",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [
+        [
+          "Error emitting danmuku:",
+          "controlled setting rejection"
+        ]
+      ],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: destroy false releases actual renderer nodes while retaining the player shell",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "VISIBLE"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: replacement load removes a moved renderer node and preserves unrelated body content",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "MOVED"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "chromium",
+      "title": "candidate: narrow heatmap invalid sampling stays responsive and two instances have independent gradients",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: shared setting mount preserves the surviving instance and later user changes",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: invalid setting mount rolls back plugin resources while preserving the original error",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: destroy cancels pending setting send without clearing retained input or starting a lock",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "PENDING",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: destroy clears active send timer and leaves another mounted instance usable",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "LOCK",
+          "receiver": true
+        },
+        {
+          "index": 1,
+          "text": "SECOND",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: rejected setting callback retains input and original console error without an unhandled rejection",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "REJECT",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [
+        [
+          "Error emitting danmuku:",
+          "controlled setting rejection"
+        ]
+      ],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: destroy false releases actual renderer nodes while retaining the player shell",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "VISIBLE"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: replacement load removes a moved renderer node and preserves unrelated body content",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "MOVED"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "published: narrow heatmap invalid sampling stays responsive and two instances have independent gradients",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: shared setting mount preserves the surviving instance and later user changes",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: invalid setting mount rolls back plugin resources while preserving the original error",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: destroy cancels pending setting send without clearing retained input or starting a lock",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "PENDING",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: destroy clears active send timer and leaves another mounted instance usable",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "LOCK",
+          "receiver": true
+        },
+        {
+          "index": 1,
+          "text": "SECOND",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: rejected setting callback retains input and original console error without an unhandled rejection",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "REJECT",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [
+        [
+          "Error emitting danmuku:",
+          "controlled setting rejection"
+        ]
+      ],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: destroy false releases actual renderer nodes while retaining the player shell",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "VISIBLE"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: replacement load removes a moved renderer node and preserves unrelated body content",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "MOVED"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "firefox",
+      "title": "candidate: narrow heatmap invalid sampling stays responsive and two instances have independent gradients",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: shared setting mount preserves the surviving instance and later user changes",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: invalid setting mount rolls back plugin resources while preserving the original error",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: destroy cancels pending setting send without clearing retained input or starting a lock",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "PENDING",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: destroy clears active send timer and leaves another mounted instance usable",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "LOCK",
+          "receiver": true
+        },
+        {
+          "index": 1,
+          "text": "SECOND",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: rejected setting callback retains input and original console error without an unhandled rejection",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "REJECT",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [
+        [
+          "Error emitting danmuku:",
+          "controlled setting rejection"
+        ]
+      ],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: destroy false releases actual renderer nodes while retaining the player shell",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "VISIBLE"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: replacement load removes a moved renderer node and preserves unrelated body content",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "MOVED"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "published: narrow heatmap invalid sampling stays responsive and two instances have independent gradients",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: shared setting mount preserves the surviving instance and later user changes",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: invalid setting mount rolls back plugin resources while preserving the original error",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: destroy cancels pending setting send without clearing retained input or starting a lock",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "PENDING",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: destroy clears active send timer and leaves another mounted instance usable",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "LOCK",
+          "receiver": true
+        },
+        {
+          "index": 1,
+          "text": "SECOND",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: rejected setting callback retains input and original console error without an unhandled rejection",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [
+        {
+          "index": 0,
+          "text": "REJECT",
+          "receiver": true
+        }
+      ],
+      "messages": [],
+      "errors": [
+        [
+          "Error emitting danmuku:",
+          "controlled setting rejection"
+        ]
+      ],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: destroy false releases actual renderer nodes while retaining the player shell",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "VISIBLE"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: replacement load removes a moved renderer node and preserves unrelated body content",
+      "workers": [
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [
+        "MOVED"
+      ],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    },
+    {
+      "engine": "webkit",
+      "title": "candidate: narrow heatmap invalid sampling stays responsive and two instances have independent gradients",
+      "workers": [
+        {
+          "terminated": 1
+        },
+        {
+          "terminated": 1
+        }
+      ],
+      "sends": [],
+      "messages": [],
+      "errors": [],
+      "retainedSettings": 0,
+      "timers": 0
+    }
+  ],
+  "checks": [
+    {
+      "file": "refactor/.cache/danmuku07-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/danmuku07-impact.log",
+      "sha256": "a273a996c268b4ad09d1a4fed9b75ede1417e499f26ccbed7f134d00209f5c3e"
+    }
+  ],
+  "scope": "Candidate core with fixed published/candidate plugins at 2 and 20 rows per second, three native 14-second append/play/pause cycles. Source candidate, synchronous true callbacks, antiOverlap false. Hard candidate delivery/once/recycle/state ownership/actual node reuse checks. Two-core CSS root-mask boundary plus existing resource suite. Not model inference, device equivalence, unbounded soak or heap leak proof.",
+  "timingDiagnosis": {
+    "evidence": "refactor/baselines/danmuku-frame-sampling-validation.json",
+    "resolvedDefects": [
+      "PKG-DANMUKU-11",
+      "PKG-DANMUKU-12"
+    ],
+    "unchangedBoundary": "An 800ms blocked main thread cannot sample crossed timestamps under the historical +/-0.1-second rule. No invisible catchup or seeded readiness is used in the load suite."
+  },
+  "failures": [
+    {
+      "file": "refactor/.cache/danmuku07-stability-first.json",
+      "sha256": "89fbdf1c241eb8f855dcd7b69dc59cd3e6047aedaa3b6d73f8cd83764f4b1a38"
+    }
+  ],
+  "calibration": "First two Chromium cases failed only because the test wrongly expected load(rows) to replace. Source contract confirmed append; queue expectation changed to cumulative count while each-cycle visible count stayed exact. Initial corrected 12-case run passed, then independent review added actual node identity reuse, per-item state membership, once-only final visible/recycle and nonempty Worker assertions for this final run.",
+  "reusedEvidence": [
+    "refactor/baselines/danmuku-frame-sampling-validation.json",
+    "refactor/baselines/danmuku-lifetime-validation.json",
+    "refactor/baselines/danmuku-heatmap-density-validation.json"
+  ],
+  "reuseReason": "No runtime or declaration change after PKG-DANMUKU-12. Its source/modern/legacy tests cover asynchronous serial dispatch, cancellation, geometry and visible lifetime; this task adds native load/resource/CSS evidence rather than claiming those paths were rerun by the load suite.",
+  "fingerprints": [
+    {
+      "file": "test/browser/danmuku-stability.spec.js",
+      "sha256": "2778330a1a907c6d710ac8d47004c36e1527c94817644f1419f9ea71340e084e"
+    },
+    {
+      "file": "test/browser/danmuku-mask-boundary.spec.js",
+      "sha256": "4220fa681f8d577ac666d02807f60337fb2a71bfc27cd1e1b0c47807215e1bdc"
+    },
+    {
+      "file": "test/browser/danmuku-resources.spec.js",
+      "sha256": "f0d09e962cb422a66bd644c52268aff8f288606ae9c93676fa979539743f9c6b"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/scheduler.ts",
+      "sha256": "8b5623a34e81253f08633c0240cf632e23f890b76ebfe96e21da23597cd35447"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/scheduling-buffer.ts",
+      "sha256": "0a7eaf5229adcc74a8d9814fbc9a61cb3990045b3e99ac4ad9dc3f65fb9aab2e"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/renderer.ts",
+      "sha256": "6ac4b1991c6cb683353a811f41b6ca025401029720cbcadaff120616ca936cdf"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku-mask/src/index.js",
+      "sha256": "2397900688f86bc74bc86a4e870f69478a651bd8df02bba543cdab832773fd6e"
+    }
+  ],
+  "remaining": [
+    "PKG-DANMUKU-08 full combinations",
+    "PKG-DANMUKU-09 final distribution/docs",
+    "Mask lifecycle/TS/model migration and genuine model integration",
+    "Device and release review gates"
+  ]
+}

@@ -121,7 +121,7 @@
     {
       "dependency": "artplayer-plugin-danmuku",
       "consumer": "artplayer-plugin-danmuku-mask",
-      "reason": "Mask renders into the $danmuku element supplied by the danmuku plugin",
+      "reason": "Mask and Danmuku share the core-owned $danmuku layer; retain combination validation for root identity, styles and lifecycle",
       "evidence": [
         "packages/artplayer-plugin-danmuku-mask/src/index.js",
         "docs/assets/example/danmuku.mask.js"

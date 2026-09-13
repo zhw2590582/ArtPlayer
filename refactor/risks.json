@@ -5290,18 +5290,27 @@
     {
       "id": "DANMUKU-LOAD-01",
       "title": "Native lifecycle fixtures sometimes miss timestamp eligibility during concurrent workload; real frame/window behavior needs load evidence",
-      "confirmation": "unverified",
-      "status": "open",
+      "confirmation": "reproduced",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-07"
       ],
       "evidence": [
         "refactor/changes/2026-09-13-PKG-DANMUKU-05-resources.md",
         "refactor/baselines/danmuku-resources-validation.json",
-        "test/browser/danmuku-scheduler.spec.js"
+        "test/browser/danmuku-scheduler.spec.js",
+        "refactor/baselines/danmuku-stability-validation.json",
+        "refactor/baselines/danmuku-frame-sampling-validation.json"
       ],
       "compatibleResolution": "Capture native RAF/media-time gaps and scheduled/eligible/visible item counts under realistic load before deciding whether the old plus/minus 0.1 second eligibility rule needs a compatible correction.",
-      "closureCriteria": "Real load runs explain missing scheduled items with frame and media evidence, and any confirmed implementation defect has a regression and compatible fix; seeding ready in lifecycle fixtures is not closure evidence."
+      "closureCriteria": "Real load runs explain missing scheduled items with frame and media evidence, and any confirmed implementation defect has a regression and compatible fix; seeding ready in lifecycle fixtures is not closure evidence.",
+      "resolutionEvidence": [
+        "refactor/baselines/danmuku-stability-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-07-stability.md",
+        "refactor/baselines/danmuku-frame-sampling-validation.json",
+        "refactor/baselines/danmuku-lifetime-validation.json"
+      ],
+      "resolutionRationale": "Native timing evidence distinguishes unobserved CPU-blocked windows from asynchronous scheduler starvation. Tasks 11/12 fix the reproduced implementation defects. Final three-engine real-load runs keep candidate scheduled rows observed/displayed/recycled exactly once, with actual node reuse and state/Worker ownership; unchanged historical CPU-gap semantics and full model/device/release scope remain explicit."
     },
     {
       "id": "DANMUKU-HEATMAP-02",

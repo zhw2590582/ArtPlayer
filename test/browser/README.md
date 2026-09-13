@@ -147,3 +147,14 @@ rows and serial callbacks; the fixed published baseline retains its missing midd
 row. CPU-block observations remain diagnostic, not no-loss acceptance. Both it and
 `danmuku-lifetime.spec.js` accept the same artifact override. The latter verifies
 the full visible lifetime after a controlled delay to an actual Worker request.
+
+`danmuku-stability.spec.js` runs three native 14-second media cycles at 2 or 20
+rows per second, appending through the public load(rows) contract. The candidate
+must deliver and recycle every row once, preserve state membership and reuse
+actual node identities. Its 90-second per-case deadline budgets the 42 seconds
+of media plus setup/teardown; it is not a relaxation of other tests. Heap readings
+remain observations. No media/RAF clock is replaced or ready state seeded here.
+`danmuku-mask-boundary.spec.js` verifies the core-owned root and external CSS mask
+across commands and destroy(false), with actual video and placement Worker. It
+uses explicit ready rows for resource setup and a fixed SVG mask; it does not
+load the Mask SDK/model or provide timestamp-delivery evidence.
