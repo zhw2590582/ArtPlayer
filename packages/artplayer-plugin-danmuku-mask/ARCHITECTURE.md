@@ -162,8 +162,13 @@ Two registrations in the same controlled SDK/RAF environment also verify that
 stopping or destroying one leaves the other model, mask and scheduled frame owned
 by its original player. Native shared TensorFlow backend state remains unverified.
 
-Native acceptance still needs actual local model loading, new/old cores, real
-Danmuku composition, pause/seek/source/layout changes, multiple players, failure
-recovery and post-destroy resources. The default unversioned solutionPath can
+`yarn test:browser test/browser/danmuku-mask-native.spec.js --workers=1` now covers
+actual local model loading, bitmap alpha and owned canvas cleanup, new/old cores,
+real Danmuku delivery after model readiness, pause/seek and CSS web fullscreen.
+Set ARTPLAYER_MASK_ARTIFACT to the legacy global build for the second format.
+Archive each report before another browser run. The startup timestamp diagnostic
+can still miss a row; do not interpret the post-ready assertions as losslessness.
+Native acceptance still needs source changes, multiple players, failure recovery,
+devices and internal GPU/WASM resources. The default unversioned solutionPath can
 load assets independently of Yarn's SDK resolution. PKG-MASK-05/06 retain the
 real combination and distribution/release gates after source/type migration.

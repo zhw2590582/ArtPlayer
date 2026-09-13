@@ -1,5 +1,13 @@
 # 进度与证据
 
+## PKG-MASK-05 真实模型组合检查点（仍 doing）
+
+main/legacy 各 18 项，三个浏览器引擎和三个核心组合共 36 项通过。实际模型、PNG
+透明像素、弹幕节点、暂停/seek/网页全屏和画布清理已有证据；启动窗口遗漏单独
+登记 MASK-SCHEDULING-01，GPU/WASM/设备与其他剩余门槛未关闭。
+[检查点](changes/2026-09-14-PKG-MASK-05-native-checkpoint.md)记录失败历史、独立审查、
+历史 beta 归档、重跑和限制；没有生产修改或新增 done。
+
 ## PKG-MASK-04 严格TS及公开类型完成
 
 五个自有模块迁TS且运行产物保持MASK03字节；真实核心宿主、SDK声明桥接和私有资源

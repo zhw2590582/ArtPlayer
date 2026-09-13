@@ -158,3 +158,14 @@ remain observations. No media/RAF clock is replaced or ready state seeded here.
 across commands and destroy(false), with actual video and placement Worker. It
 uses explicit ready rows for resource setup and a fixed SVG mask; it does not
 load the Mask SDK/model or provide timestamp-delivery evidence.
+
+`danmuku-mask-native.spec.js` loads the actual built Mask/SDK and fixed local
+MediaPipe assets with native video. It verifies bitmap alpha, stop/restart/destroy,
+then actual Danmuku delivery after model readiness, pause, seek and CSS web
+fullscreen with candidate, published and actual 5.3.1-beta.1 cores. Set
+`ARTPLAYER_MASK_ARTIFACT` to a main/legacy global artifact; ESM is not supported by
+that override. Run formats sequentially and archive each completed report.
+The startup time=6 row remains diagnostic because initial model work can coincide
+with a missed narrow timestamp window. A passing post-ready combination is not
+proof of startup losslessness, private GPU/WASM closure, OS fullscreen or devices.
+See refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md for exact limits.

@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MASK-05",
+  "sharedWith": [
+    "PKG-JASSUB-05"
+  ],
+  "sourceCommit": "aca4bc1cd26f3327236cc9801b331c40ac93e385",
+  "capturedAt": "2026-09-13T16:16:17.160Z",
+  "associationScope": "These versions are the core workspace manifests at the Git commits associated with real Mask/JASSUB releases. Archive existence is not a supported-version range or browser validation. Stable 5.3.1 and prerelease 5.3.1-beta.1 are distinct identities.",
+  "existingEvidence": [
+    "refactor/baselines/asr-core.json records prior unavailable 5.3.1 and adjacent published 5.3.0; it is not substituted here",
+    "refactor/baselines/vast-core.json records separate 5.1.7"
+  ],
+  "associations": [
+    {
+      "baseline": "refactor/baselines/danmuku-mask-release.json",
+      "plugin": "artplayer-plugin-danmuku-mask",
+      "pluginVersion": "1.1.0",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "sourceManifest": {
+        "name": "artplayer",
+        "version": "5.3.1",
+        "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.mjs",
+            "require": "./dist/artplayer.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.legacy.js",
+            "require": "./dist/artplayer.legacy.js"
+          },
+          "./i18n/*": {
+            "types": "./types/i18n.d.ts",
+            "import": "./dist/i18n/*.mjs",
+            "require": "./dist/i18n/*.js"
+          }
+        },
+        "main": "./dist/artplayer.js",
+        "module": "./dist/artplayer.mjs",
+        "types": "./types/artplayer.d.ts",
+        "typesVersions": {
+          "*": {
+            "i18n/*": [
+              "types/i18n.d.ts"
+            ],
+            "legacy": [
+              "types/artplayer.d.ts"
+            ]
+          }
+        },
+        "legacy": "./dist/artplayer.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        }
+      }
+    },
+    {
+      "baseline": "refactor/baselines/danmuku-mask-release.json",
+      "plugin": "artplayer-plugin-danmuku-mask",
+      "pluginVersion": "1.0.0",
+      "commit": "b36f88db5f7fe0250285fd4f47229842231f402b",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1-beta.1",
+      "sha256LF": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497",
+      "sourceManifest": {
+        "name": "artplayer",
+        "version": "5.3.1-beta.1",
+        "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.mjs",
+            "require": "./dist/artplayer.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.legacy.js",
+            "require": "./dist/artplayer.legacy.js"
+          },
+          "./i18n/*": {
+            "types": "./types/i18n.d.ts",
+            "import": "./dist/i18n/*.mjs",
+            "require": "./dist/i18n/*.js"
+          }
+        },
+        "main": "./dist/artplayer.js",
+        "module": "./dist/artplayer.mjs",
+        "types": "./types/artplayer.d.ts",
+        "typesVersions": {
+          "*": {
+            "i18n/*": [
+              "types/i18n.d.ts"
+            ],
+            "legacy": [
+              "types/artplayer.d.ts"
+            ]
+          }
+        },
+        "legacy": "./dist/artplayer.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        }
+      }
+    },
+    {
+      "baseline": "refactor/baselines/jassub-release.json",
+      "plugin": "artplayer-plugin-jassub",
+      "pluginVersion": "1.1.0",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "scope": "Source-associated core version only, not verified supported core range.",
+      "sourceManifest": {
+        "name": "artplayer",
+        "version": "5.3.1",
+        "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.mjs",
+            "require": "./dist/artplayer.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.legacy.js",
+            "require": "./dist/artplayer.legacy.js"
+          },
+          "./i18n/*": {
+            "types": "./types/i18n.d.ts",
+            "import": "./dist/i18n/*.mjs",
+            "require": "./dist/i18n/*.js"
+          }
+        },
+        "main": "./dist/artplayer.js",
+        "module": "./dist/artplayer.mjs",
+        "types": "./types/artplayer.d.ts",
+        "typesVersions": {
+          "*": {
+            "i18n/*": [
+              "types/i18n.d.ts"
+            ],
+            "legacy": [
+              "types/artplayer.d.ts"
+            ]
+          }
+        },
+        "legacy": "./dist/artplayer.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        }
+      }
+    },
+    {
+      "baseline": "refactor/baselines/jassub-release.json",
+      "plugin": "artplayer-plugin-jassub",
+      "pluginVersion": "1.0.0",
+      "commit": "b69d020c5a5d06e093c63f456ad7d0c7777b0b03",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1-beta.1",
+      "sha256LF": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497",
+      "scope": "Source-associated core version only, not verified supported core range.",
+      "sourceManifest": {
+        "name": "artplayer",
+        "version": "5.3.1-beta.1",
+        "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.mjs",
+            "require": "./dist/artplayer.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer.d.ts",
+            "import": "./dist/artplayer.legacy.js",
+            "require": "./dist/artplayer.legacy.js"
+          },
+          "./i18n/*": {
+            "types": "./types/i18n.d.ts",
+            "import": "./dist/i18n/*.mjs",
+            "require": "./dist/i18n/*.js"
+          }
+        },
+        "main": "./dist/artplayer.js",
+        "module": "./dist/artplayer.mjs",
+        "types": "./types/artplayer.d.ts",
+        "typesVersions": {
+          "*": {
+            "i18n/*": [
+              "types/i18n.d.ts"
+            ],
+            "legacy": [
+              "types/artplayer.d.ts"
+            ]
+          }
+        },
+        "legacy": "./dist/artplayer.legacy.js",
+        "browserslist": "last 1 Chrome version",
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "checks": [
+      {
+        "checkedAt": "2026-09-13T16:16:11.693Z",
+        "url": "https://registry.npmjs.org/artplayer",
+        "method": "GET",
+        "status": 200,
+        "bodySha256": "560fa27d689284c6e1743835b765e790613b0b11d7255ea0390eb0017a7e9748",
+        "contentType": "application/json",
+        "containsRequestedVersions": {
+          "5.3.1": false,
+          "5.3.1-beta.1": true
+        },
+        "nearbyVersions": [
+          "5.2.0",
+          "5.2.1",
+          "5.2.2",
+          "5.2.3",
+          "5.2.4",
+          "5.2.5",
+          "5.3.0-beta.0",
+          "5.3.0-beta.1",
+          "5.3.0-beta.2",
+          "5.3.0-beta.3",
+          "5.3.0-beta.4",
+          "5.3.0",
+          "5.3.1-beta.0",
+          "5.3.1-beta.1",
+          "5.4.0"
+        ],
+        "distTags": {
+          "latest": "5.4.0",
+          "beta": "5.3.1-beta.1"
+        }
+      },
+      {
+        "checkedAt": "2026-09-13T16:16:12.059Z",
+        "url": "https://registry.npmjs.org/artplayer/5.3.1",
+        "method": "GET",
+        "status": 404,
+        "bodySha256": "cb85b239f6d43e568f1a54eeac640ca05397450355d18994fe3719fed61dfd8b",
+        "contentType": "application/json",
+        "body": "\"version not found: 5.3.1\""
+      },
+      {
+        "checkedAt": "2026-09-13T16:16:12.880Z",
+        "url": "https://registry.npmjs.org/artplayer/-/artplayer-5.3.1.tgz",
+        "method": "HEAD",
+        "status": 404,
+        "bodySha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "contentType": "application/json",
+        "body": ""
+      },
+      {
+        "checkedAt": "2026-09-13T16:16:13.152Z",
+        "url": "https://registry.npmjs.org/artplayer/5.3.1-beta.1",
+        "method": "GET",
+        "status": 200,
+        "bodySha256": "c239f203392461685268b388af53eb1ff4cd1f72c2fb7c776181302edb58c074",
+        "contentType": "application/json"
+      },
+      {
+        "checkedAt": "2026-09-13T16:16:16.650Z",
+        "url": "https://registry.npmjs.org/artplayer/-/artplayer-5.3.1-beta.1.tgz",
+        "method": "GET",
+        "status": 200,
+        "byteLength": 152307,
+        "bodySha256": "335d4e042b92249aea5d9dfbc7ea4c9b5fd42c7c427b54c5d4b91ec6068a487e"
+      }
+    ]
+  },
+  "entries": [
+    {
+      "requestedVersion": "5.3.1",
+      "status": "unavailable-in-npm-at-capture",
+      "release": null,
+      "archivePath": null,
+      "note": "Source-associated workspace version only; no npm tarball or integrity is available. No substitute version is selected."
+    },
+    {
+      "requestedVersion": "5.3.1-beta.1",
+      "status": "archive-verified",
+      "release": {
+        "name": "artplayer",
+        "version": "5.3.1-beta.1",
+        "metadataUrl": "https://registry.npmjs.org/artplayer/5.3.1-beta.1",
+        "tarball": "https://registry.npmjs.org/artplayer/-/artplayer-5.3.1-beta.1.tgz",
+        "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+        "sha256": "335d4e042b92249aea5d9dfbc7ea4c9b5fd42c7c427b54c5d4b91ec6068a487e",
+        "registryShasum": "15eb5cd86016ff22702d1c4fe69c75293c026baf",
+        "registryGitHead": "3f47356d2ce11a5ebf81fe4a5a30600f5e714d57",
+        "files": {
+          "package/README.md": "2070b94087839a80dc01616a3114cbe2d3a4950018188f433752880daf7843f8",
+          "package/dist/artplayer.js": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+          "package/dist/artplayer.legacy.js": "da8180437fe7f65af62041ef95a5e6c40ef701560cf7d2619c2873bde38d20f0",
+          "package/dist/artplayer.mjs": "04896904fb8ff3c4757bcd790a88f1517c65dba718b8b96ecca347a81694b7e8",
+          "package/dist/i18n/ar.js": "44b94758cfc7c45179ee1a90ca730b91717fccb5a79d27afd691b61fdfdf51e0",
+          "package/dist/i18n/ar.mjs": "5dd3a7183c81350786e95a5f0431de9c64937a16627c2a44042af7cb33d3d646",
+          "package/dist/i18n/cs.js": "76353dbd1b97f52f3bcd7e71aa9117ca7d76d2b2cbf86426cf3dac64afd7abf2",
+          "package/dist/i18n/cs.mjs": "aa6cb5eaa1ce78fd7d4033affb4f48cff4fedd773bf55f88ccaf3d76dd822cb1",
+          "package/dist/i18n/es.js": "7e43252ba479d87c1edd5244a7c870126aae07c8791c365888fe0ba82dd6e85f",
+          "package/dist/i18n/es.mjs": "7a0aa9698ddcb191fc4f62d1fcd07ee004dbb00053b2920cfcf5fa81f71ea71e",
+          "package/dist/i18n/fa.js": "4b60d3d4f5d5e87686a3af179c9b671b4f432888c6f77ae92fb7025386a9910b",
+          "package/dist/i18n/fa.mjs": "261a81e46d40a1bcad64419d4954036fb49e9fea86682a89aaba277bd52d3c54",
+          "package/dist/i18n/fr.js": "410d9552ad387c191d168b6fff6d21538c57e74d07908ebab2c0dedc3577ed90",
+          "package/dist/i18n/fr.mjs": "d8adfe0ba5eb2208a5241675a084dbd1c4d20d8ac2979fcbcb72bef18827fbfd",
+          "package/dist/i18n/id.js": "4a8fc5d2393a5a19a8ba68429545073035c8803d9d3101b696fbc895d20b22b2",
+          "package/dist/i18n/id.mjs": "b3ac8f8c203a7a64374ac64931d7eb3d912c2e71c4a604ddc4651229cca64c07",
+          "package/dist/i18n/pl.js": "a7c421f0264cd054b8d289e553e77018c547417d8d437f24157ccb1a2cd8c4f6",
+          "package/dist/i18n/pl.mjs": "c58ce3f06411e837c28dbea3d2a68f38045da58de3b73ae5457468a01d526884",
+          "package/dist/i18n/ru.js": "5406ee8662a259af703a930c4e241874e12a811304f3e1d40dd00033e7ff0b52",
+          "package/dist/i18n/ru.mjs": "c17c830da2189d4584c816907b6e8626d8606c7a20565b383c4b768be00e6600",
+          "package/dist/i18n/tr.js": "f82cdbf5feefceff68f78466ca261e1ea1c4975c853543947fc91ffd8107ec46",
+          "package/dist/i18n/tr.mjs": "683b768eeea905793f63bf483d9870af10183a718aba84d8ee794934a8f07b22",
+          "package/dist/i18n/vi.js": "c4f0c224404ce73a807758661c9eaa46fb548eb4519a2ee11304396f268a6a0e",
+          "package/dist/i18n/vi.mjs": "68d10c0bb6e7fe4d82817bca883f04f514d73301ff5dfddf02a0a1e3b2bfbc0a",
+          "package/dist/i18n/zh-tw.js": "1241a6749c088192d1118f91ae36a894ecc198875d4b9bdfe2bbf617803e3806",
+          "package/dist/i18n/zh-tw.mjs": "b28d13355759e2b47d0553617a01ad6b3af76d975681b569bad2e99e48d095ff",
+          "package/package.json": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497",
+          "package/types/artplayer.d.ts": "28cb09ddffb6591372ab01cbde8ff3c3c0db903eea58851dc6561375e740cc3c",
+          "package/types/component.d.ts": "0118ec5dbb9aa48d735169c74bd65149b72c9f99db29dd635cd41ff69707b68d",
+          "package/types/config.d.ts": "bb40a0ca9d200c15bba7ecba0103d4ce8216e428d05c17ec43288d298223bc68",
+          "package/types/cssVar.d.ts": "2ff9827aa10bf326f60f6cda7556a94fdcabafba529185a1ceae46d865f33697",
+          "package/types/events.d.ts": "afd56b6939bedecc070eecd2b7440d0903ef8d3107fe41d376bfdb9e0ae3362d",
+          "package/types/i18n.d.ts": "01e7d7e7f775166eed6dbc6b86feb26306302fcbfe33fa01b7e363a14b3ef2b0",
+          "package/types/icons.d.ts": "61ce1b0cb9bc7488263b644419b5fd5a13e72de1493c8113eee81d5174f1234b",
+          "package/types/option.d.ts": "d689b55e3fbc0a9ca9c554b5c9f6c1ae5f1d81aed07c174a557c95633a18a276",
+          "package/types/player.d.ts": "8eb3e3b5822139379ad09f6aad8a0da360fb049bd0ebf4540d128cdd1fb5e994",
+          "package/types/quality.d.ts": "dcca8c0f5b5c25373f85825a274fc3ee8beeffd7c8b2a978468e039ff4946a9e",
+          "package/types/setting.d.ts": "cc87ff5ccb87901e12d2f367ec2e872afd5c029b9f6d0a22d01d7d44a63dfb33",
+          "package/types/subtitle.d.ts": "92f711ad0f7924e609ad4425cd26d19c73eb027cccddc6d89fcf9b8e334db065",
+          "package/types/template.d.ts": "22d64dc2c68f8bd90247755a12bcd233343bb67537591ab08e34900917e1723d",
+          "package/types/utils.d.ts": "65cbb66ab2f5d38085e0a1e5ebea57c320d16f566fb6dc8f8e2dac6cf096c004"
+        },
+        "manifest": {
+          "name": "artplayer",
+          "version": "5.3.1-beta.1",
+          "description": "ArtPlayer.js is a modern and full featured HTML5 video player",
+          "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+          "license": "MIT",
+          "homepage": "https://artplayer.org",
+          "repository": {
+            "type": "git",
+            "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+          },
+          "bugs": {
+            "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+          },
+          "keywords": [
+            "html5",
+            "video",
+            "player"
+          ],
+          "exports": {
+            ".": {
+              "types": "./types/artplayer.d.ts",
+              "import": "./dist/artplayer.mjs",
+              "require": "./dist/artplayer.js"
+            },
+            "./legacy": {
+              "types": "./types/artplayer.d.ts",
+              "import": "./dist/artplayer.legacy.js",
+              "require": "./dist/artplayer.legacy.js"
+            },
+            "./i18n/*": {
+              "types": "./types/i18n.d.ts",
+              "import": "./dist/i18n/*.mjs",
+              "require": "./dist/i18n/*.js"
+            }
+          },
+          "main": "./dist/artplayer.js",
+          "module": "./dist/artplayer.mjs",
+          "types": "./types/artplayer.d.ts",
+          "typesVersions": {
+            "*": {
+              "i18n/*": [
+                "types/i18n.d.ts"
+              ],
+              "legacy": [
+                "types/artplayer.d.ts"
+              ]
+            }
+          },
+          "legacy": "./dist/artplayer.legacy.js",
+          "browserslist": "last 1 Chrome version",
+          "dependencies": {
+            "option-validator": "^2.0.6"
+          }
+        }
+      },
+      "archivePath": "D:\\github\\ArtPlayer\\refactor\\.cache\\releases\\artplayer-5.3.1-beta.1.tgz",
+      "archiveRelativePath": "refactor/.cache/releases/artplayer-5.3.1-beta.1.tgz",
+      "cachedBefore": false,
+      "memberCount": 41,
+      "verification": [
+        "registry metadata agrees with packument",
+        "registry SHA-512 integrity",
+        "registry SHA-1 shasum",
+        "archive SHA-256",
+        "all member SHA-256 hashes",
+        "manifest identity and declared entrypoints"
+      ]
+    }
+  ],
+  "helperBoundary": "ensureArchive currently restricts versions to stable x.y.z. For the fixed beta identity this capture uses the same releases.mjs verifyIntegrity/archiveFiles/readMember primitives, registry-only download, expected registry SHA-512/SHA-1 verification before cache write, and normal cache filename. No shared helper was modified.",
+  "validationLimits": [
+    "No browser run",
+    "No plugin/core combination acceptance",
+    "No claim of all historical support"
+  ]
+}

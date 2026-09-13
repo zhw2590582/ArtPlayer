@@ -241,3 +241,4 @@
 | DANMUKU-HEATMAP-02 | resolved / 已复现 | Issue958 dense automatic heatmaps exceed the fixed Y domain and flatten across video | PKG-DANMUKU-10 |
 | DANMUKU-TIMING-01 | resolved / 已复现 | Hidden Worker wait is deducted from visible lifetime and can recycle a comment immediately after visible | PKG-DANMUKU-11 |
 | DANMUKU-SAMPLING-01 | resolved / 已复现 | Serial asynchronous placement stops native frame eligibility sampling and delays existing visible expiry | PKG-DANMUKU-12 |
+| MASK-SCHEDULING-01 | open / 已复现 | Native Mask startup can coincide with a missed narrow Danmuku timestamp window | PKG-MASK-05 |

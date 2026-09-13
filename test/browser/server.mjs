@@ -88,6 +88,12 @@ add('/test/declaration-cues.vtt', fs.readFileSync(path.join(workspace, 'test/bro
 add('/test/thumbnail-grid.svg', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-grid.svg')), { kind: 'test-thumbnail-grid', file: 'test/browser/media/thumbnail-grid.svg' })
 add('/test/legacy-safe-area.js', fs.readFileSync(path.join(workspace, 'test/helpers/legacy-safe-area.js')), { kind: 'frozen-own-source', file: 'test/helpers/legacy-safe-area.js', commit: 'ccf77c4e' })
 add('/test/iframe-boundary-child.html', fs.readFileSync(path.join(workspace, 'test/browser/iframe-boundary-child.html')), { kind: 'iframe-fixture', file: 'test/browser/iframe-boundary-child.html' })
+const maskHistorical = JSON.parse(fs.readFileSync(path.join(workspace, 'refactor/baselines/danmuku-mask-historical-cores.json'), 'utf8'))
+const maskCore = maskHistorical.entries.find(entry => entry.requestedVersion === '5.3.1-beta.1').release
+const maskCoreMember = `package/${maskCore.manifest.main.replace(/^\.\//, '')}`
+const maskCoreBytes = readMember(await ensureArchive(maskCore), maskCoreMember)
+assert.equal(hash(maskCoreBytes), maskCore.files[maskCoreMember], 'Historical Mask core differs from frozen archive')
+add('/published-5.3.1-beta.1/artplayer.js', maskCoreBytes, { kind: 'npm-release', version: maskCore.version, integrity: maskCore.integrity, member: maskCoreMember })
 function send(req, res, bytes, filename) {
   res.setHeader('Content-Type', mime[path.extname(filename)] || 'application/octet-stream')
   res.setHeader('Cache-Control', 'no-store')
@@ -159,7 +165,7 @@ const server = http.createServer((req, res) => {
     if (url.pathname === '/test/player.html') {
       const core = url.searchParams.get('core') || 'candidate'
       const chapter = url.searchParams.get('chapter') || 'candidate'
-      assert(['candidate', 'published', 'published-4.5.5', 'published-4.5.9', 'published-5.1.7', 'published-5.3.0'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
+      assert(['candidate', 'published', 'published-4.5.5', 'published-4.5.9', 'published-5.1.7', 'published-5.3.0', 'published-5.3.1-beta.1'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
       const html = fs.readFileSync(path.join(workspace, 'test/browser/player.html'), 'utf8')
         .replace('__CORE__', core)
         .replace('__CHAPTER__', chapter)

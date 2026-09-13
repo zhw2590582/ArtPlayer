@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 231 项，范围 22 个包及工作区/示例。
 
-状态：todo 66 / doing 14 / blocked 0 / done 151 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 65 / doing 15 / blocked 0 / done 151 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -244,7 +244,7 @@
 | PKG-MASK-02 | artplayer-plugin-danmuku-mask<br>建立特有行为与错误测试 | PKG-MASK-01, ENG-03, ENG-05 | 加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-MASK-03 | artplayer-plugin-danmuku-mask<br>整理内部职责与资源 | PKG-MASK-02, CORE-18, PKG-DANMUKU-07 | 模型加载/推理/画布输出分离，阻止重叠推理与过期写入 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-MASK-04 | artplayer-plugin-danmuku-mask<br>迁移自有源码和公开类型 | PKG-MASK-03, ENG-04, ENG-06, CORE-07 | 模型 adapter、canvas 和选项的精确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-MASK-05 | artplayer-plugin-danmuku-mask<br>验证新旧核心和组合 | PKG-MASK-04, CORE-22 | 真实模型和 danmuku/seek/全屏组合，GPU 资源释放 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-MASK-05 | artplayer-plugin-danmuku-mask<br>验证新旧核心和组合 | PKG-MASK-04, CORE-22 | 真实模型和 danmuku/seek/全屏组合，GPU 资源释放 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-MASK-06 | artplayer-plugin-danmuku-mask<br>验证分发并同步文档 | PKG-MASK-05, ENG-07 | danmuku.mask.js、资源版本/许可、CPU fallback 和包体积证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-asr
@@ -536,6 +536,7 @@
 - PKG-MASK-02: [记录](changes/2026-09-13-PKG-MASK-02-failures.md) [记录](baselines/danmuku-mask-failures-validation.json)
 - PKG-MASK-03: [记录](changes/2026-09-13-PKG-MASK-03-lifecycle.md) [记录](baselines/danmuku-mask-lifecycle-validation.json)
 - PKG-MASK-04: [记录](changes/2026-09-14-PKG-MASK-04-types.md) [记录](baselines/danmuku-mask-types-validation.json)
+- PKG-MASK-05: [记录](changes/2026-09-14-PKG-MASK-05-native-checkpoint.md) [记录](baselines/danmuku-mask-native-validation.json) [记录](baselines/danmuku-mask-historical-cores.json)
 - PKG-ASR-01: [记录](changes/2026-09-13-PKG-ASR-01-contracts.md) [记录](baselines/asr-contract.md) [记录](baselines/asr-release.json)
 - PKG-ASR-02: [记录](changes/2026-09-13-PKG-ASR-02-audio-baseline.md) [记录](baselines/asr-audio-validation.json)
 - PKG-ASR-03: [记录](changes/2026-09-13-PKG-ASR-03-audio-ownership.md) [记录](baselines/asr-ownership-validation.json)

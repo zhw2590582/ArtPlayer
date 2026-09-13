@@ -754,7 +754,9 @@
         "packages/artplayer-plugin-danmuku-mask/src/index.ts",
         "refactor/baselines/danmuku-mask-contract.md",
         "refactor/baselines/danmuku-mask-contract-validation.json",
-        "refactor/baselines/danmuku-mask-release.json"
+        "refactor/baselines/danmuku-mask-release.json",
+        "refactor/baselines/danmuku-mask-native-validation.json",
+        "refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md"
       ],
       "compatibleResolution": "Npm dependency versions are separate from unversioned solutionPath CDN assets; keep option override, backend fallback, model result disposal and masks.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。"
@@ -4922,7 +4924,9 @@
         "test/danmuku-mask-failures.test.js",
         "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
         "refactor/baselines/danmuku-mask-lifecycle-validation.json",
-        "test/danmuku-mask-lifecycle.test.js"
+        "test/danmuku-mask-lifecycle.test.js",
+        "refactor/baselines/danmuku-mask-native-validation.json",
+        "refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md"
       ],
       "compatibleResolution": "Invalidate stale work while keeping restartable stop distinct from final destroy; release model and subscriptions. PKG-MASK-03 fixes controlled stale work, owned bitmaps and subscriptions; native SDK dispose completion is not exposed by body-segmentation 1.0.2 and remains a real-resource validation limit in PKG-MASK-05.",
       "closureCriteria": "Pending initialization/inference cannot write masks or schedule work after stop/destroy; errors settle and owned resources are released."
@@ -5017,7 +5021,9 @@
         "test/danmuku-mask-failures.test.js",
         "refactor/changes/2026-09-13-PKG-MASK-03-lifecycle.md",
         "refactor/baselines/danmuku-mask-lifecycle-validation.json",
-        "test/danmuku-mask-lifecycle.test.js"
+        "test/danmuku-mask-lifecycle.test.js",
+        "refactor/baselines/danmuku-mask-native-validation.json",
+        "refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md"
       ],
       "compatibleResolution": "Handle missing dependencies and frame/context failures without stale writes or uncontrolled loops while preserving plugin ordering.",
       "closureCriteria": "Missing Danmuku/context, CORS failure, source changes and ready/destroy timing have controlled and real browser evidence."
@@ -5395,6 +5401,22 @@
         "refactor/changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md"
       ],
       "resolutionRationale": "Controlled red/green tests prove continued observation and expiry with serial callback/Worker ownership, lifecycle clearing and ready priority. Three-format native media/RAF and existing two-core scheduling/lifetime tests pass. CPU-blocked unobserved timestamps and sustained load remain separately tracked."
+    },
+    {
+      "id": "MASK-SCHEDULING-01",
+      "title": "Native Mask startup can coincide with a missed narrow Danmuku timestamp window",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MASK-05"
+      ],
+      "evidence": [
+        "test/browser/danmuku-mask-native.spec.js",
+        "refactor/baselines/danmuku-mask-native-validation.json",
+        "refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md"
+      ],
+      "compatibleResolution": "Retain startup sampling evidence and distinguish it from post-model-ready delivery; investigate actual startup scheduling without silently adding catch-up semantics.",
+      "closureCriteria": "Identify the startup scheduling cause and assess a compatible mitigation or explicitly reviewed limitation using actual model/media evidence; post-ready success alone cannot close this risk."
     }
   ]
 }

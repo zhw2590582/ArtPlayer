@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
-import { createHash } from 'node:crypto'
+import { Buffer } from 'node:buffer'
 import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 
 export const refactorDir = fileURLToPath(new URL('../', import.meta.url))
@@ -30,7 +32,7 @@ export function readMember(archive, member) {
 }
 
 export async function ensureArchive(release) {
-  assert(/^(?:@[a-z0-9]+(?:[.-][a-z0-9]+)*\/)?[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(release.name) && /^\d+\.\d+\.\d+$/.test(release.version), 'Invalid release identifier')
+  assert(/^(?:@[a-z0-9]+(?:[.-][a-z0-9]+)*\/)?[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(release.name) && /^\d+\.\d+\.\d+(?:-[a-z0-9]+(?:[.-][a-z0-9]+)*)?$/i.test(release.version), 'Invalid release identifier')
   const archive = path.join(cacheDir, `${release.name.replace('/', '+')}-${release.version}.tgz`)
   if (!fs.existsSync(archive)) {
     const url = new URL(release.tarball)
@@ -59,7 +61,8 @@ export async function verifyReleases() {
     assert.equal(manifest.name, release.name)
     assert.equal(manifest.version, release.version)
     for (const field of ['main', 'module', 'types', 'legacy']) {
-      if (manifest[field]) assert(names.includes(`package/${manifest[field].replace(/^\.\//, '')}`), `Missing ${field}: ${release.name}`)
+      if (manifest[field])
+        assert(names.includes(`package/${manifest[field].replace(/^\.\//, '')}`), `Missing ${field}: ${release.name}`)
     }
     console.log(`Verified ${release.name}@${release.version}: SHA-512, SHA-256, ${names.length} files and manifest entrypoints`)
   }

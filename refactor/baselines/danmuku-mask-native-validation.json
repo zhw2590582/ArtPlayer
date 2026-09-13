@@ -1,0 +1,4569 @@
+{
+  "task": "PKG-MASK-05",
+  "status": "doing",
+  "sourceCommit": "aca4bc1cd26f3327236cc9801b331c40ac93e385",
+  "test": {
+    "file": "test/browser/danmuku-mask-native.spec.js",
+    "sha256": "0ae683f88bcb56e3920e0120c7be8f9a6927e65173668ad2eed200c76a48aed1"
+  },
+  "node": "v24.21.0",
+  "platform": "win32",
+  "passed": 36,
+  "failed": 0,
+  "skipped": 0,
+  "retries": 0,
+  "reports": [
+    {
+      "format": "main",
+      "report": {
+        "file": "refactor/.cache/mask05-native-main-final.json",
+        "sha256": "9bffd7499e2452fac1ce45f3c5c4131c9c9c50d4020ed5e4780805ca7242ea5a"
+      },
+      "log": {
+        "file": "refactor/.cache/mask05-native-main-final.log",
+        "sha256": "a2b6f99e3a6079c412746b770963a83563a2cb68477b6356eb5189ed0fdea9d4"
+      },
+      "stats": {
+        "startTime": "2026-09-13T16:25:03.317Z",
+        "duration": 152613.854,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with candidate core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6724,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 6.773363,
+              "firstTime": 5.966282,
+              "lastTime": 6.643641,
+              "width": 1280,
+              "height": 720,
+              "transparent": 338064,
+              "opaque": 583536,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 7
+            }
+          ],
+          "outputCount": 25,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "5ea001f37cf960293696a651c3c5e29931ddab13645563b3610b71ae85177e56"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 11315,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.92563,
+              "outputs": 23,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.523934,
+              "outputs": 36,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 36,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.102348,
+              "outputs": 61,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 36
+          },
+          "outputCount": 72,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 6.256901,
+                "wall": 1755,
+                "rows": []
+              },
+              {
+                "time": 6.417124,
+                "wall": 1915.699999988079,
+                "rows": []
+              },
+              {
+                "time": 6.541528,
+                "wall": 2039.5,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.121699,
+              6.256166,
+              6.416498,
+              6.540911
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "061a4d6feb8412b210a11c6f6a4c0de74dad64f6c95430d9cbe6e80dab46f025"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6452,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 6.689145,
+              "firstTime": 6.059932,
+              "lastTime": 6.554668,
+              "width": 1280,
+              "height": 720,
+              "transparent": 341884,
+              "opaque": 579716,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 6
+            }
+          ],
+          "outputCount": 24,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "70d35d0d79354cd5421a921060156d07e28fabb2409d403cd1bcd8a034a2551c"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 11540,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.258248,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.831688,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.066495,
+              "outputs": 65,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 40
+          },
+          "outputCount": 76,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 6.170958,
+                "wall": 1609.5,
+                "rows": []
+              },
+              {
+                "time": 6.326293,
+                "wall": 1764.800000011921,
+                "rows": []
+              },
+              {
+                "time": 6.450651,
+                "wall": 1888.199999988079,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.040193,
+              6.170227,
+              6.325647,
+              6.450078
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "86416df2d5c19738e872be0b03c38c7a9fc23e9c424da1205dad6f004fe56de3"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6486,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 6.736771,
+              "firstTime": 6.067674,
+              "lastTime": 6.600092,
+              "width": 1280,
+              "height": 720,
+              "transparent": 342187,
+              "opaque": 579413,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 6
+            }
+          ],
+          "outputCount": 24,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "ba2aee0df2d8d2d4ff657d0a9cf324899d208cf7a6d6d0ea6b83d4e10e1ae69b"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 11753,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.281374,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.854857,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.208207,
+              "outputs": 65,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 40
+          },
+          "outputCount": 76,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 6.192061,
+                "wall": 1634,
+                "rows": []
+              },
+              {
+                "time": 6.345875,
+                "wall": 1786.800000011921,
+                "rows": []
+              },
+              {
+                "time": 6.467903,
+                "wall": 1909.5,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.056965,
+              6.191389,
+              6.345207,
+              6.467232
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "a0b432a703dac4ef624cef00fc49080b06db87a0079518e7d4bc449f7a9ab38b"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with candidate core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7428,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.062465,
+              "firstTime": 6.861084,
+              "lastTime": 7.022338,
+              "width": 1280,
+              "height": 720,
+              "transparent": 329533,
+              "opaque": 592067,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 4
+            }
+          ],
+          "outputCount": 10,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "0ce44e2fd46d97eefb340ea98230e18bb56aafbf7b0da4e2956627d9855acd9c"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7837,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.525388,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.968909,
+              "outputs": 34,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 34,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.577352,
+              "outputs": 61,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 34
+          },
+          "outputCount": 66,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 5,
+                "wall": 2626,
+                "rows": []
+              },
+              {
+                "time": 6.895908,
+                "wall": 2642,
+                "rows": []
+              },
+              {
+                "time": 6.895908,
+                "wall": 2687,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.895908,
+              6.979993,
+              7.0622,
+              7.102591
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "b4be6c5c0a258830c3cbe6f65abf9448f1c71192f10d289d5eaa5939e4fcd80d"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6726,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.308064,
+              "firstTime": 6.939327,
+              "lastTime": 7.222492,
+              "width": 1280,
+              "height": 720,
+              "transparent": 328462,
+              "opaque": 593138,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 7
+            }
+          ],
+          "outputCount": 13,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "9395880ba0290cc6a7f2b44aa6fc75aa0b13dc920fb03f823c3538a8188de632"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7627,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.480743,
+              "outputs": 28,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.885259,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.706469,
+              "outputs": 65,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 35
+          },
+          "outputCount": 70,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 5,
+                "wall": 2474,
+                "rows": []
+              },
+              {
+                "time": 6.897186,
+                "wall": 2529,
+                "rows": []
+              },
+              {
+                "time": 7.020916,
+                "wall": 2587,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.897186,
+              6.980856,
+              7.020916,
+              7.101468
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "8955423666cfada71adce425c05b247de930073a76710a1b5d5b9c7443a14a7d"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published-5.3.1-beta.1 core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6670,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.221327,
+              "firstTime": 6.897175,
+              "lastTime": 7.140644,
+              "width": 1280,
+              "height": 720,
+              "transparent": 329195,
+              "opaque": 592405,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 6
+            }
+          ],
+          "outputCount": 13,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "355b5afc2c3efb7c323ef04a4c129daf59597d702fdb4c576b24c2aec8f862de"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7793,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.52556,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.973702,
+              "outputs": 34,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 34,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.706796,
+              "outputs": 60,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 34
+          },
+          "outputCount": 65,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 5,
+                "wall": 2491,
+                "rows": []
+              },
+              {
+                "time": 6.937142,
+                "wall": 2548,
+                "rows": []
+              },
+              {
+                "time": 7.021228,
+                "wall": 2605,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.937142,
+              6.980767,
+              7.061446,
+              7.101976
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "d120d926c05c6be5478c5b2a49e6a300da677571b826241f0f50c151246cb5c6"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with candidate core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7812,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.1808545,
+              "firstTime": 6.9928961,
+              "lastTime": 7.1459795,
+              "width": 640,
+              "height": 360,
+              "transparent": 187,
+              "opaque": 230213,
+              "pixels": 230400,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 3
+            }
+          ],
+          "outputCount": 7,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "44a49c2fa71464a25cbf3ec7489cffc8777ffc252638e7158bc3416add79c176"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8803,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 6.3096252,
+              "outputs": 18,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 7.0463753,
+              "outputs": 29,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 29,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.7134795,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Native mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 287.5,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 29
+          },
+          "outputCount": 42,
+          "startup": {
+            "visible": true,
+            "firstSamples": [
+              {
+                "time": 5.055875,
+                "wall": 3321,
+                "rows": []
+              },
+              {
+                "time": 5.1253542,
+                "wall": 3391,
+                "rows": []
+              },
+              {
+                "time": 5.2023125,
+                "wall": 3468,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [
+              {
+                "time": 5.9599793,
+                "wall": 4225,
+                "rows": [
+                  {
+                    "time": 6,
+                    "text": "Native mask combination"
+                  }
+                ]
+              },
+              {
+                "time": 6.0329376,
+                "wall": 4298,
+                "rows": []
+              }
+            ],
+            "firstOutputs": [
+              5,
+              5.0555208,
+              5.1251875,
+              5.2021666
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "1b6709f8bf9be9f3b77dfc6940c446239ffde3dfebff48b54c4c05490e31a0a4"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7764,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.3877504,
+              "firstTime": 7.0856253,
+              "lastTime": 7.3565003,
+              "width": 640,
+              "height": 360,
+              "transparent": 191,
+              "opaque": 230209,
+              "pixels": 230400,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 5
+            }
+          ],
+          "outputCount": 10,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "f163e621b89d1f19968e4ef225f4b2a8ca093077be2a59e0b4871d70d2e325b9"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8709,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.3617088,
+              "outputs": 18,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.0043131,
+              "outputs": 28,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 28,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.7377087,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 28
+          },
+          "outputCount": 41,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 7.0251045,
+                "wall": 3302,
+                "rows": []
+              },
+              {
+                "time": 7.1039378,
+                "wall": 3381,
+                "rows": []
+              },
+              {
+                "time": 7.1722503,
+                "wall": 3449,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              7.0244378,
+              7.103417,
+              7.1717503,
+              7.2483962
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "4610646ac2c4b47d631cf05690218731f20306dbd1c86e29d2833c01c4f90ee4"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published-5.3.1-beta.1 core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7577,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.2483754,
+              "firstTime": 7.0572503,
+              "lastTime": 7.2173545,
+              "width": 640,
+              "height": 360,
+              "transparent": 187,
+              "opaque": 230213,
+              "pixels": 230400,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 3
+            }
+          ],
+          "outputCount": 7,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "f50e6a02258227e8642ba345f4c0928f6723eef9a63242c758e48cd8f68d7102"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8420,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.1740005,
+              "outputs": 16,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.8039589,
+              "outputs": 26,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 26,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.6339586,
+              "outputs": 37,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 26
+          },
+          "outputCount": 39,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 7.0082086,
+                "wall": 3162,
+                "rows": []
+              },
+              {
+                "time": 7.0826878,
+                "wall": 3237,
+                "rows": []
+              },
+              {
+                "time": 7.1615211,
+                "wall": 3316,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              7.0075003,
+              7.0821462,
+              7.160917,
+              7.2379795
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "2c3d64cfa548813491ab913799e3e337c11b12a0c19597d1fb76f7a6fdde58db"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "report": {
+        "file": "refactor/.cache/mask05-native-legacy-final.json",
+        "sha256": "3991a3c4e74bf115324b19ccecd75d80efef4be21bce0ef3a49d815754eefe33"
+      },
+      "log": {
+        "file": "refactor/.cache/mask05-native-legacy-final.log",
+        "sha256": "d4c44dd36427e9e96343299090ccafdf02ec8e4f830be285b729b4780ac07503"
+      },
+      "stats": {
+        "startTime": "2026-09-13T16:30:39.099Z",
+        "duration": 154067.135,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with candidate core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6517,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 6.65466,
+              "firstTime": 5.909731,
+              "lastTime": 6.523158,
+              "width": 1280,
+              "height": 720,
+              "transparent": 339450,
+              "opaque": 582150,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 7
+            }
+          ],
+          "outputCount": 25,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "cfcada31e8a3b2ee6a7408cfb856b026471b33d5b13f7a2372dcc52991445890"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 11120,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.821125,
+              "outputs": 23,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.383074,
+              "outputs": 36,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 36,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.075592,
+              "outputs": 61,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 36
+          },
+          "outputCount": 72,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 6.232899,
+                "wall": 1729.8999999761581,
+                "rows": []
+              },
+              {
+                "time": 6.390401,
+                "wall": 1887,
+                "rows": []
+              },
+              {
+                "time": 6.505868,
+                "wall": 2003.3999999761581,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.098885,
+              6.232157,
+              6.389711,
+              6.505242
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "b7c0df81d714f023e4fe9d486b62b72c149c4391919d44b48151a6c117493723"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6570,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 6.695476,
+              "firstTime": 6.064988,
+              "lastTime": 6.563296,
+              "width": 1280,
+              "height": 720,
+              "transparent": 341884,
+              "opaque": 579716,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 6
+            }
+          ],
+          "outputCount": 24,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "70d35d0d79354cd5421a921060156d07e28fabb2409d403cd1bcd8a034a2551c"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 11605,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.288628,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.917781,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.055909,
+              "outputs": 65,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 40
+          },
+          "outputCount": 76,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 6.197414,
+                "wall": 1639.5,
+                "rows": []
+              },
+              {
+                "time": 6.329742,
+                "wall": 1772,
+                "rows": []
+              },
+              {
+                "time": 6.453184,
+                "wall": 1895.5,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.065303,
+              6.196699,
+              6.329113,
+              6.452598
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "86416df2d5c19738e872be0b03c38c7a9fc23e9c424da1205dad6f004fe56de3"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6522,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 6.785254,
+              "firstTime": 6.048613,
+              "lastTime": 6.665211,
+              "width": 1280,
+              "height": 720,
+              "transparent": 328944,
+              "opaque": 592656,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 7
+            }
+          ],
+          "outputCount": 25,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "eb49f4056e38d5fe1c60a54411179992e35780a96eff5bf336aaad51cd07f31c"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 11633,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "net::ERR_ABORTED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.371528,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.91683,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.209275,
+              "outputs": 66,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 40
+          },
+          "outputCount": 76,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 6.180692,
+                "wall": 1640.0999999642372,
+                "rows": []
+              },
+              {
+                "time": 6.305701,
+                "wall": 1765.3999999761581,
+                "rows": []
+              },
+              {
+                "time": 6.424776,
+                "wall": 1884.8999999761581,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.058517,
+              6.179543,
+              6.305068,
+              6.424157
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "86416df2d5c19738e872be0b03c38c7a9fc23e9c424da1205dad6f004fe56de3"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with candidate core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7646,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.223286,
+              "firstTime": 6.896363,
+              "lastTime": 7.102225,
+              "width": 1280,
+              "height": 720,
+              "transparent": 329195,
+              "opaque": 592405,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 6
+            }
+          ],
+          "outputCount": 14,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "864a7752b4b80c7b8c27b4ce7b834f2b18718b8c91bc4c88c20fd451be500f8a"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7918,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.560687,
+              "outputs": 28,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.924253,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.696979,
+              "outputs": 64,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 35
+          },
+          "outputCount": 69,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 5,
+                "wall": 2621,
+                "rows": []
+              },
+              {
+                "time": 6.899055,
+                "wall": 2634,
+                "rows": []
+              },
+              {
+                "time": 6.939224,
+                "wall": 2683,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.939224,
+              6.979719,
+              7.060408,
+              7.100555
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "6c3fce3a5f97143ddb6b8581cf1d7775151a174c51d6323e66df89e42edb1bd8"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6750,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.264883,
+              "firstTime": 6.897026,
+              "lastTime": 7.180821,
+              "width": 1280,
+              "height": 720,
+              "transparent": 328773,
+              "opaque": 592827,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 7
+            }
+          ],
+          "outputCount": 14,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "d73cd2acfa8c20e2e0a09440c9d22deff5470c99992591e3e958ed155c7e9a7d"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8272,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.01427,
+              "outputs": 32,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.461501,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.743024,
+              "outputs": 68,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 40
+          },
+          "outputCount": 73,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 5,
+                "wall": 2684,
+                "rows": []
+              },
+              {
+                "time": 7.1085,
+                "wall": 2698,
+                "rows": []
+              },
+              {
+                "time": 7.1085,
+                "wall": 2742,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              7.1085,
+              7.188912,
+              7.232897,
+              7.31363
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "2a83947c0fbc6ea5ee8d0b830690aad09401a4d0a8a39cb7fb82c2e4fd040a2f"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published-5.3.1-beta.1 core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6768,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.273503,
+              "firstTime": 6.910644,
+              "lastTime": 7.192773,
+              "width": 1280,
+              "height": 720,
+              "transparent": 328882,
+              "opaque": 592718,
+              "pixels": 921600,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 7
+            }
+          ],
+          "outputCount": 13,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "245e5b6f5731fe2f52282970e4defb8b5e6ac2cade1beb09cf7111fe95f88fd7"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "engine": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7496,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+              "resourceType": "media",
+              "failure": {
+                "errorText": "NS_ERROR_PARSED_DATA_CACHED"
+              }
+            }
+          ],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.407038,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.851887,
+              "outputs": 34,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 34,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.616425,
+              "outputs": 59,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 34
+          },
+          "outputCount": 64,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 5,
+                "wall": 2511,
+                "rows": []
+              },
+              {
+                "time": 6.902091,
+                "wall": 2523,
+                "rows": []
+              },
+              {
+                "time": 6.902091,
+                "wall": 2570,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              6.902091,
+              6.982769,
+              7.023019,
+              7.06349
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "f33fdb37cbf35fd41fe9366df826311984196028ac8e7b4a69969d3535e9bdaa"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with candidate core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7777,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.1836462,
+              "firstTime": 7.009417,
+              "lastTime": 7.1475836,
+              "width": 640,
+              "height": 360,
+              "transparent": 187,
+              "opaque": 230213,
+              "pixels": 230400,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 3
+            }
+          ],
+          "outputCount": 8,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "2c547fb89fae9624eea984031b392d3c098ebb206bf3c8669c19bc7754fe3a05"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8793,
+          "core": {
+            "id": "candidate",
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.4995422,
+              "outputs": 20,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.1772923,
+              "outputs": 30,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20.01,
+              "outputs": 30,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.5687712,
+              "outputs": 41,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20.01,
+            "outputs": 30
+          },
+          "outputCount": 43,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 7.0199586,
+                "wall": 3305,
+                "rows": []
+              },
+              {
+                "time": 7.102042,
+                "wall": 3387,
+                "rows": []
+              },
+              {
+                "time": 7.1743337,
+                "wall": 3460,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              7.0192503,
+              7.1014586,
+              7.1738128,
+              7.2506879
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "8f9813895ae023b75b0935f3c860c6b2eea8e236bc3a68064f778be28732492b"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7538,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.2434587,
+              "firstTime": 7.0569795,
+              "lastTime": 7.2118961,
+              "width": 640,
+              "height": 360,
+              "transparent": 187,
+              "opaque": 230213,
+              "pixels": 230400,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 3
+            }
+          ],
+          "outputCount": 8,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "f50e6a02258227e8642ba345f4c0928f6723eef9a63242c758e48cd8f68d7102"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8663,
+          "core": {
+            "id": "published",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.3635213,
+              "outputs": 17,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.013709,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 27,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.715167,
+              "outputs": 39,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 27
+          },
+          "outputCount": 40,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 7.060792,
+                "wall": 3235,
+                "rows": []
+              },
+              {
+                "time": 7.1781878,
+                "wall": 3352,
+                "rows": []
+              },
+              {
+                "time": 7.2578545,
+                "wall": 3432,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              7.0598961,
+              7.1776462,
+              7.2573545,
+              7.3358962
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "8fd90352431ba07ed4653cf9368965f66fdd3fcbd9928afbebd883cb1d158111"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual local MediaPipe model renders, stops and restarts with published-5.3.1-beta.1 core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7786,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "modelRequests": [
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            },
+            {
+              "url": "http://127.0.0.1:8084/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+              "status": 200
+            }
+          ],
+          "snapshots": [
+            {
+              "time": 7.260042,
+              "firstTime": 7.085042,
+              "lastTime": 7.2337087,
+              "width": 640,
+              "height": 360,
+              "transparent": 199,
+              "opaque": 230201,
+              "pixels": 230400,
+              "maskImage": "url(\"data:image/png;base64,iVBORw0KGgoAAAANSU",
+              "outputs": 3
+            }
+          ],
+          "outputCount": 7,
+          "outputCanvasesCleared": true,
+          "limitation": "Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.",
+          "screenshots": [
+            {
+              "name": "actual-model-page",
+              "sha256": "3142aac88d376e4965a78dc3a181d769b68d049faa438a872aa0077211dd21cc"
+            }
+          ]
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "engine": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 9427,
+          "core": {
+            "id": "published-5.3.1-beta.1",
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.1-beta.1",
+              "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+            "bytes": 159458
+          },
+          "artifact": {
+            "file": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "external": [],
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.3303339,
+              "outputs": 18,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.1086048,
+              "outputs": 29,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 29,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 22.4489796,
+              "outputs": 47,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "seeked": {
+            "time": 20,
+            "outputs": 29
+          },
+          "outputCount": 49,
+          "startup": {
+            "visible": false,
+            "firstSamples": [
+              {
+                "time": 7.0454794,
+                "wall": 3314,
+                "rows": []
+              },
+              {
+                "time": 7.1291462,
+                "wall": 3398,
+                "rows": []
+              },
+              {
+                "time": 7.2032503,
+                "wall": 3472,
+                "rows": []
+              }
+            ],
+            "samplesInWindow": [],
+            "firstOutputs": [
+              7.0447503,
+              7.128542,
+              7.202667,
+              7.2730837
+            ]
+          },
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim.",
+          "screenshots": [
+            {
+              "name": "actual-combination-page",
+              "sha256": "d799debcd5ca61df71e782d46cff4a4dd12f15484441b0609b73beec92beb1c3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "historical": [
+    {
+      "file": "refactor/.cache/mask05-native-first.json",
+      "sha256": "3cf310e3394f57fe484e2ef8e14c08d6fea05ee72f60a0833623b592b6d94257",
+      "stats": {
+        "startTime": "2026-09-13T16:10:06.833Z",
+        "duration": 2242.488,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "refactor/.cache/mask05-combination-first.json",
+      "sha256": "47b0e1362a859b5ade3792ec94b5da6c81005fe6db6b64663af85a199605537a",
+      "stats": {
+        "startTime": "2026-09-13T16:15:00.471Z",
+        "duration": 70201.653,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 5,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "refactor/.cache/mask05-combination-diagnostic.json",
+      "sha256": "a5542ba9eb89931161d17613898b76c31a0e28d9c3876927e917c5210ec67a10",
+      "stats": {
+        "startTime": "2026-09-13T16:18:55.119Z",
+        "duration": 20109.002,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "limitations": [
+    "Post-ready delivery is asserted; the startup row remains diagnostic and can be missed.",
+    "No ESM/native shared-backend multiple-instance, source/error recovery, OS fullscreen or device acceptance.",
+    "Owned canvas cleanup does not prove private GPU/WASM close completion.",
+    "Local fixed model assets only; no default remote CDN or licensing acceptance.",
+    "Media request abort/cache diagnostics are retained; no page errors or console errors in the passing main/legacy matrix."
+  ]
+}
