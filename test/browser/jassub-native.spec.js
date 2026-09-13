@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
 import { expect, test } from './fixtures.js'
+import { captureJassubDisplay } from './jassub-display.js'
 
 const baseline = JSON.parse(fs.readFileSync('refactor/baselines/jassub-release.json', 'utf8'))
 const release = baseline.release
@@ -14,7 +15,21 @@ const onDemandRender = process.env.ARTPLAYER_JASSUB_ON_DEMAND !== 'false'
 const defaultOffscreen = process.env.ARTPLAYER_JASSUB_OFFSCREEN === 'default'
 const readbackFrame = process.env.ARTPLAYER_JASSUB_READBACK_FRAME === 'true'
 const synchronousRender = process.env.ARTPLAYER_JASSUB_ASYNC_RENDER === 'false'
+const screenshotReadback = process.env.ARTPLAYER_JASSUB_SCREENSHOT === 'true'
+const seekTime = screenshotReadback ? 50 : 10
 async function pixels(page, phase) {
+  if (screenshotReadback) {
+    try {
+      const { state, png } = await captureJassubDisplay(page, phase)
+      if (phase)
+        await test.info().attach(`jassub-display-${phase}`, { body: png, contentType: 'image/png' })
+      return state
+    }
+    catch (error) {
+      await test.info().attach('jassub-display-attempt-error', { body: error.stack || error.message, contentType: 'text/plain' })
+      throw error
+    }
+  }
   return page.evaluate(async ({ phase, readbackFrame }) => {
     if (readbackFrame)
       await new Promise(requestAnimationFrame)
@@ -30,9 +45,10 @@ Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour,
 Style: Default,Liberation Sans,36,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,20,1
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:00:04.00,Default,,0,0,0,,Before seek
-Dialogue: 0,0:00:05.00,0:00:30.00,Default,,0,0,0,,After seek with actual WASM
+Dialogue: 0,0:00:00.00,${screenshotReadback ? '0:00:30.00' : '0:00:04.00'},Default,,0,0,0,,Before seek
+Dialogue: 0,${screenshotReadback ? '0:00:40.00,0:01:50.00' : '0:00:05.00,0:00:30.00'},Default,,0,0,0,,After seek with actual WASM
 `
+const testedSubtitles = screenshotReadback ? subtitles.replace('&H00FFFFFF', '&H0000FF00') : subtitles
 
 for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
   test(`JASSUB ${artifact ? 'candidate artifact' : `published ${release.version}`} renders actual WASM subtitles through seek and layout with ${core} core, customCanvas=${customCanvas}, defaultOffscreen=${defaultOffscreen}`, async ({ page, context }, testInfo) => {
@@ -133,9 +149,15 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
           window.jassub.addEventListener('error', event => reject(event.error), { once: true })
         })
         const readback = document.createElement('canvas')
-        window.jassubPixels = (phase) => {
+        window.jassubGeometry = () => {
           const canvas = window.jassub._canvas
           const rect = canvas.getBoundingClientRect()
+          const video = window.art.video
+          const quality = video.getVideoPlaybackQuality?.()
+          return { width: canvas.width, height: canvas.height, cssWidth: rect.width, cssHeight: rect.height, clip: { x: rect.x, y: rect.y, width: rect.width, height: rect.height }, time: window.art.currentTime, connected: canvas.isConnected, media: { paused: video.paused, readyState: video.readyState, totalFrames: quality?.totalVideoFrames, droppedFrames: quality?.droppedVideoFrames, decodedFrames: video.webkitDecodedFrameCount, mozPresentedFrames: video.mozPresentedFrames }, onDemand: window.jassub._onDemandRender }
+        }
+        window.jassubPixels = (phase) => {
+          const canvas = window.jassub._canvas
           readback.width = canvas.width
           readback.height = canvas.height
           const context = readback.getContext('2d')
@@ -149,32 +171,34 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
               signature = (signature + i * pixels[i]) >>> 0
             }
           }
-          const video = window.art.video
-          const quality = video.getVideoPlaybackQuality?.()
-          const state = { phase, visible, signature, width: canvas.width, height: canvas.height, cssWidth: rect.width, cssHeight: rect.height, time: window.art.currentTime, connected: canvas.isConnected, media: { paused: video.paused, readyState: video.readyState, totalFrames: quality?.totalVideoFrames, droppedFrames: quality?.droppedVideoFrames, decodedFrames: video.webkitDecodedFrameCount, mozPresentedFrames: video.mozPresentedFrames }, onDemand: window.jassub._onDemandRender }
+          const state = { phase, visible, signature, ...window.jassubGeometry() }
           window.jassubNative.lastPixel = state
           if (phase)
             window.jassubNative.snapshots.push(state)
           return state
         }
-      }, { subContent: subtitles, onDemandRender, customCanvas, defaultOffscreen, synchronousRender })
+      }, { subContent: testedSubtitles, onDemandRender, customCanvas, defaultOffscreen, synchronousRender })
       const offscreen = await page.evaluate(() => window.jassubNative.offscreen)
       expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)
       await page.locator('#play').click()
       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
       const before = await pixels(page, 'before-seek')
       expect(before.connected).toBe(true)
+      if (screenshotReadback) {
+        expect(before.time).toBeLessThan(30)
+        expect(before.visible).toBeGreaterThan(100)
+      }
       await page.locator('#pause').click()
-      await page.evaluate(async () => {
+      await page.evaluate(async (seekTime) => {
         const seeked = new Promise(resolve => window.art.video.addEventListener('seeked', resolve, { once: true }))
-        window.art.currentTime = 10
+        window.art.currentTime = seekTime
         await seeked
-      })
+      }, seekTime)
       await page.locator('#play').click()
       await expect.poll(async () => (await pixels(page)).signature).not.toBe(before.signature)
       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
       const after = await pixels(page, 'after-seek')
-      expect(after.time).toBeGreaterThanOrEqual(10)
+      expect(after.time).toBeGreaterThanOrEqual(seekTime)
       expect(after.signature).not.toBe(before.signature)
       await page.evaluate(() => {
         window.art.fullscreenWeb = true
@@ -182,6 +206,18 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       await expect.poll(async () => (await pixels(page)).cssWidth).toBeGreaterThan(before.cssWidth)
       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
       await pixels(page, 'fullscreen')
+      if (screenshotReadback) {
+        await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(after.time + 0.2)
+        await page.evaluate(() => {
+          window.art.pause()
+          window.jassub._canvas.style.visibility = 'hidden'
+        })
+        const hidden = await pixels(page, 'hidden-negative-control')
+        expect(hidden.visible).toBe(0)
+        await page.evaluate(() => window.jassub._canvas.style.visibility = '')
+        await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)
+        await pixels(page, 'restored')
+      }
       await testInfo.attach('actual-jassub-page', { body: await page.screenshot(), contentType: 'image/png' })
       if (artifact)
         await page.evaluate(() => window.jassub.destroy())
@@ -199,7 +235,11 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       const state = await page.evaluate(() => window.jassubNative).catch(error => ({ unavailable: error.message }))
       state.readbackFrame = readbackFrame
       state.synchronousRender = synchronousRender
-      await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, customCanvas, defaultOffscreen, source: artifact ? { artifact, sha256: hash(code) } : { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(subtitles), resources, external, state, limitation: `Actual worker, WASM and local font; offscreen option ${defaultOffscreen ? 'omitted, actual capability/selection recorded' : 'explicitly false'}. Canvas pixels are read from a separate canvas copying the native display bitmap. No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction.` }, null, 2), contentType: 'application/json' })
+      state.screenshotReadback = screenshotReadback
+      const observation = screenshotReadback
+        ? 'Composited page PNG decoded in Node; authored green ASS glyphs with hidden/restored negative control. No transferred-canvas copy.'
+        : 'Canvas pixels are read from a separate canvas copying the native display bitmap.'
+      await testInfo.attach('actual-jassub-evidence', { body: JSON.stringify({ core, onDemandRender, customCanvas, defaultOffscreen, source: artifact ? { artifact, sha256: hash(code) } : { version: release.version, integrity: release.integrity, member, sha256: hash(code) }, subtitleSha256: hash(testedSubtitles), resources, external, state, limitation: `Actual worker, WASM and local font; offscreen option ${defaultOffscreen ? 'omitted, actual capability/selection recorded' : 'explicitly false'}. ${observation} No full failure recovery, sustained GPU/memory or physical-device acceptance; candidate adds direct-then-host destruction.` }, null, 2), contentType: 'application/json' })
       if (!page.isClosed()) {
         await page.evaluate(() => {
           if (window.art && !window.art.isDestroy)

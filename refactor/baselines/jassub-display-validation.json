@@ -1,0 +1,5317 @@
+{
+  "task": "PKG-JASSUB-09",
+  "status": "doing",
+  "baselineCommit": "7ef605fba7e7009b4838ecf391969b17fd0e1315",
+  "productionChanges": false,
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "dependency": {
+    "name": "pngjs",
+    "version": "7.0.0",
+    "scope": "root devDependency",
+    "purpose": "Node-side decoding of composited Playwright PNGs",
+    "runtimeDependencies": {}
+  },
+  "checks": [
+    "Yarn add --dev --exact --ignore-workspace-root-check pngjs@7.0.0",
+    "Yarn install --frozen-lockfile --non-interactive (existing workspace, not a clean installation)",
+    "Yarn check:toolchain --strict: 28 tools / 1394 selectors",
+    "ESLint native spec and display helper: passed",
+    "Node test/toolchain.test.js: 1 passed"
+  ],
+  "limitation": "Diagnostic screenshot mode is opt-in; canonical readback remains. Earlier red runs and the WebKit short-window flaw are retained, not waived. The final screenshot run proves its selected fixture/capability paths only, not a production fix or complete JASSUB acceptance. Automatic failure screenshots after cleanup are not pre-destroy playback evidence. Final source hashes do not describe intermediate spec versions. Named PNG bytes and raw reports remain local, their identities are retained here.",
+  "currentFiles": [
+    {
+      "path": "package.json",
+      "sha256": "88e9a073965e77cabacfe50a918f10626ba2dec5dba6be1a16ba080e0fab454b"
+    },
+    {
+      "path": "yarn.lock",
+      "sha256": "1aee91387e21b01515447bd21cdbf18d57e55d6449eee8abaf4ab27397aaa667"
+    },
+    {
+      "path": "test/browser/jassub-native.spec.js",
+      "sha256": "3198fb4314a8ac3d379beb027aed79103905f23ab615d7e54a368c7a6763e105"
+    },
+    {
+      "path": "test/browser/jassub-display.js",
+      "sha256": "8b63c5b519c2efbe16c290c288fdf323268b8aa3267e2b48ca643dffafb81db3"
+    },
+    {
+      "path": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+      "sha256": "60590f2fca6ffded74f96f8a6001a86c32eb38f5e1fae26338cbbb43e93fb70a"
+    },
+    {
+      "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+      "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+    }
+  ],
+  "reports": [
+    {
+      "profile": "Initial green screenshot mode; short cue windows; incorrect baseline-white ASS hash/limitation in original report",
+      "reportPath": "refactor/.cache/jassub09-firefox-display.json",
+      "sha256": "2345a2b0e2d1b5fd95eb83f94c478206c82405c895e8db64c07ffb1b6e287024",
+      "resultsPath": "refactor/.cache/jassub09-firefox-display-results",
+      "stats": {
+        "startTime": "2026-09-13T19:17:14.163Z",
+        "duration": 43165.816999999995,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 19620,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.650326,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 90,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 90
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.248798,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 173,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 173
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 158,
+            "delivered": 157,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 18214.64,
+              "height": 720,
+              "mediaTime": 23.36,
+              "presentationTime": 18214.64,
+              "presentedFrames": 532,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 640,
+            "height": 360,
+            "cssWidth": 640,
+            "cssHeight": 360,
+            "clip": {
+              "x": 8,
+              "y": 8,
+              "width": 640,
+              "height": 360
+            },
+            "time": 13.248798,
+            "connected": true,
+            "media": {
+              "paused": false,
+              "readyState": 4,
+              "totalFrames": 173,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 173
+            },
+            "onDemand": true,
+            "phase": "after-seek",
+            "visible": 2342,
+            "signature": 1938468104,
+            "screenshotWidth": 640,
+            "screenshotHeight": 360,
+            "observation": "composited-png"
+          },
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  192 |         window.art.fullscreenWeb = true\n  193 |       })\n> 194 |       await expect.poll(async () => (await pixels(page)).cssWidth).toBeGreaterThan(before.cssWidth)\n      |                                                                    ^\n  195 |       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n  196 |       await pixels(page, 'fullscreen')\n  197 |       if (screenshotReadback) {\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:194:68"
+          ],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "c1c70e3a349c57afab4f489e3d52544b98c4b2af236a29943bfae0f937d749d6",
+              "bytes": 26649
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "b96fe4f1d87fd4587f97a8242bbcf1a99df044f8894851e912670dd2a4435d55",
+              "bytes": 228999
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 9605,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.644191,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 90,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 90
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.274188,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 174,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 174
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.521551,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 180,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 180
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.602952,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 182,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 182
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.602952,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 182,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 182
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 158,
+            "delivered": 157,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8385.1,
+              "height": 720,
+              "mediaTime": 13.6,
+              "presentationTime": 8385.1,
+              "presentedFrames": 287,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.602952,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 182,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 182
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "c1c70e3a349c57afab4f489e3d52544b98c4b2af236a29943bfae0f937d749d6",
+              "bytes": 26649
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "b96fe4f1d87fd4587f97a8242bbcf1a99df044f8894851e912670dd2a4435d55",
+              "bytes": 228999
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "5fe9f99c505942ff6b5a73703b5f33a0943101466457db046ff50f70e0405cea",
+              "bytes": 588910
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "2d198838e78b2add051d427103fcb5e1f4b65e36cd18d09d6aa4287f7f97d41b",
+              "bytes": 569334
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "730685de35f722dfa661e101d07e037d10c67692565e94ec21daa61b0e0b8f02",
+              "bytes": 591920
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 8593,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.358781,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 83,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 83
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.246703,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 166,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 166
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.610195,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 175,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 175
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.69069,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 178,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 178
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.69069,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 178,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 178
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 166,
+            "delivered": 165,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 7942.16,
+              "height": 720,
+              "mediaTime": 13.68,
+              "presentationTime": 7925.5,
+              "presentedFrames": 275,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.69069,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 178,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 178
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "57e0ab0c8bc3cad61c5cb90474a5cfdf3bd8fa2d0046f4def3cf173c234c434f",
+              "bytes": 26661
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "d9268d84f12086f1fb9513cdeea91f00d150f72123e50ef39cd39d3bc0920958",
+              "bytes": 229344
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "f2b9457c53572ba11736323914ae2cc063feec627582d9906b43af4c0065f6eb",
+              "bytes": 589086
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "57c66260e377f68569f6025ff3916f48b38521c0e4c6f9aa408a0ce982cef6b1",
+              "bytes": 570044
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "55e89de57944a92f0b94944ec531aa5c0fd8d46cbcd4f326086ac42cc83b51f1",
+              "bytes": 592621
+            }
+          ],
+          "attemptErrors": []
+        }
+      ]
+    },
+    {
+      "profile": "Added screenshot timing/operation errors; short windows; original report still used baseline-white ASS hash/limitation",
+      "reportPath": "refactor/.cache/jassub09-firefox-display-observed.json",
+      "sha256": "7b1c0f19dc0f3f686b804ab5014e0d595dc274176f5e5acae2ae7cfbc3b772d6",
+      "resultsPath": "refactor/.cache/jassub09-firefox-display-observed-results",
+      "stats": {
+        "startTime": "2026-09-13T19:19:06.304Z",
+        "duration": 33845.081999999995,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 9599,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.582906,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 89,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 89
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 32,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.24094,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 172,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 172
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 34,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.524122,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 179,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 179
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 79,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.604586,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 181,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 181
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 73,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.604586,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 181,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 181
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 79,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 157,
+            "delivered": 156,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8418.12,
+              "height": 720,
+              "mediaTime": 13.6,
+              "presentationTime": 8418.12,
+              "presentedFrames": 286,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.604586,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 181,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 181
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 79,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "9cb38aacfe45ed5855ba6ef1518adf1ac029d55d95041432d7e505e37fa75693",
+              "bytes": 26663
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "b96fe4f1d87fd4587f97a8242bbcf1a99df044f8894851e912670dd2a4435d55",
+              "bytes": 228999
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "5fe9f99c505942ff6b5a73703b5f33a0943101466457db046ff50f70e0405cea",
+              "bytes": 588910
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "2d198838e78b2add051d427103fcb5e1f4b65e36cd18d09d6aa4287f7f97d41b",
+              "bytes": 569334
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "30f142569045c947a36ddf7e266407c8ee543810616b9b606f51b4f1106884bf",
+              "bytes": 591803
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 8797,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.574806,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 88,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 88
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1018,
+              "signature": 842894512,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 29,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.200463,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 171,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 171
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 34,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.605907,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 181,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 181
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 71,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.68764,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 184,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 184
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 61,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.68764,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 184,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 184
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 69,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 160,
+            "delivered": 159,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8167.12,
+              "height": 720,
+              "mediaTime": 13.68,
+              "presentationTime": 8167.12,
+              "presentedFrames": 287,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.68764,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 184,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 184
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 69,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "39f740c0ff36f25d7e0c691c1e4e5a537943c38ac4ee4f4909075a27844aae75",
+              "bytes": 27425
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "d9268d84f12086f1fb9513cdeea91f00d150f72123e50ef39cd39d3bc0920958",
+              "bytes": 229344
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "0b9358c79b0c50fb8b536d76d0f20f9ebb49a93c9cd96d66da6ea13ec75689a2",
+              "bytes": 589077
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "8ede63ee8d1f25cbddd2dc70af5967326d0c6484004b61d8072d3a39195511cc",
+              "bytes": 570046
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "4e3e7f6ce02b755c2848535078dc2a3dddd4a95fb056651451a4fe3f6ebc5e12",
+              "bytes": 592664
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "failed",
+          "duration": 11524,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [],
+          "frames": {
+            "before": "function",
+            "registered": 3,
+            "delivered": 2,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 922.1,
+              "height": 720,
+              "mediaTime": 0.48,
+              "presentationTime": 905.42,
+              "presentedFrames": 13,
+              "width": 1280
+            }
+          },
+          "errors": [
+            "Error: Timeout 7000ms exceeded while waiting on the predicate\n\n  175 |       expect(offscreen.selected).toBe(defaultOffscreen && !customCanvas && offscreen.available)\n  176 |       await page.locator('#play').click()\n> 177 |       await expect.poll(async () => (await pixels(page)).visible).toBeGreaterThan(100)\n      |                                                                   ^\n  178 |       const before = await pixels(page, 'before-seek')\n  179 |       expect(before.connected).toBe(true)\n  180 |       await page.locator('#pause').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:177:67"
+          ],
+          "screenshots": [],
+          "attemptErrors": []
+        }
+      ]
+    },
+    {
+      "profile": "Added complete attempt error attachments; short windows; original report still used baseline-white ASS hash/limitation",
+      "reportPath": "refactor/.cache/jassub09-firefox-display-errors.json",
+      "sha256": "bd0766ef47a7f881adecdb8cf0c8c151befcf5a5e29ccab07b28743fa680375a",
+      "resultsPath": "refactor/.cache/jassub09-firefox-display-errors-results",
+      "stats": {
+        "startTime": "2026-09-13T19:20:22.823Z",
+        "duration": 30560.77,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 9732,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.603481,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 89,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 89
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 34,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.23443,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 173,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 173
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 33,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.481224,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 179,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 179
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 86,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.602852,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 182,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 182
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 77,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.602852,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 182,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 182
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 80,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 158,
+            "delivered": 157,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8467.64,
+              "height": 720,
+              "mediaTime": 13.6,
+              "presentationTime": 8467.64,
+              "presentedFrames": 287,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.602852,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 182,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 182
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 80,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "c1c70e3a349c57afab4f489e3d52544b98c4b2af236a29943bfae0f937d749d6",
+              "bytes": 26649
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "d9268d84f12086f1fb9513cdeea91f00d150f72123e50ef39cd39d3bc0920958",
+              "bytes": 229344
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "5fe9f99c505942ff6b5a73703b5f33a0943101466457db046ff50f70e0405cea",
+              "bytes": 588910
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "2d198838e78b2add051d427103fcb5e1f4b65e36cd18d09d6aa4287f7f97d41b",
+              "bytes": 569334
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "30f142569045c947a36ddf7e266407c8ee543810616b9b606f51b4f1106884bf",
+              "bytes": 591803
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 8679,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.593802,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 89,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 89
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 35,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.235217,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 173,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 173
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 35,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.482202,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 179,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 179
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7119,
+              "signature": 1900259656,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 70,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.563306,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 181,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 181
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 62,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.563306,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 181,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 181
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 68,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 157,
+            "delivered": 156,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8070.96,
+              "height": 720,
+              "mediaTime": 13.56,
+              "presentationTime": 8070.96,
+              "presentedFrames": 286,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.563306,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 181,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 181
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 68,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "c1c70e3a349c57afab4f489e3d52544b98c4b2af236a29943bfae0f937d749d6",
+              "bytes": 26649
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "d9268d84f12086f1fb9513cdeea91f00d150f72123e50ef39cd39d3bc0920958",
+              "bytes": 229344
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "bc3f3b4cfb51688488598407d3b9cc0626bd71f2a9813dfe3da344fdcd14081b",
+              "bytes": 587128
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "3afd1bb8091f4a07779d119af706ea0eb720ba5d59fbd35cd45ea339222342ea",
+              "bytes": 568699
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "0c6852a139c3fc3cd215da98d455910ac9e4020bc9d4c1b105d1583b2a1d8e8f",
+              "bytes": 591242
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 8665,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "12994d1b6a07c45fd9776cb8709afc37725a8003bd90e4e829b7cc44fbadc0ec",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.603969,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 89,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 89
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 28,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.202683,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 171,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 171
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 37,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.48489,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 178,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 178
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 71,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.567798,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 180,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 180
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 65,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.567798,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 180,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 180
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1909994892,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 69,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 151,
+            "delivered": 150,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8063.4,
+              "height": 720,
+              "mediaTime": 13.56,
+              "presentationTime": 8063.4,
+              "presentedFrames": 284,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.567798,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 180,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 180
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1909994892,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 69,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "9cb38aacfe45ed5855ba6ef1518adf1ac029d55d95041432d7e505e37fa75693",
+              "bytes": 26663
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "d9268d84f12086f1fb9513cdeea91f00d150f72123e50ef39cd39d3bc0920958",
+              "bytes": 229344
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "57314a6566ade06a97501ecbbcae778bce392f01dec113d2cdb822bd9b978c6e",
+              "bytes": 588594
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "2919c127f041d9f3e19ab65c210c3db920653635e33b9b43ae77ab909de5b9be",
+              "bytes": 568711
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "fc4c3b4178ed9ef28e4aa83345ff8df399c43cc26baece7e172d82a5f1e6bc61",
+              "bytes": 591300
+            }
+          ],
+          "attemptErrors": []
+        }
+      ]
+    },
+    {
+      "profile": "Chromium/WebKit short cue windows; metadata corrected; WebKit initial capture could be empty or already the second cue",
+      "reportPath": "refactor/.cache/jassub09-display-other-engines.json",
+      "sha256": "aae18d9e9b1bbc43d1bfca36b39283b17bcf7ef27f6ab9f54fe5c4e6be196995",
+      "resultsPath": "refactor/.cache/jassub09-display-other-engines-results",
+      "stats": {
+        "startTime": "2026-09-13T19:21:36.909Z",
+        "duration": 68959.875,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 9173,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "f1bccac9797b459eba39875e7fa0f91c8453f3d83c7dd19893513736fea9dcba",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.594855,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 93,
+                "droppedFrames": 0,
+                "decodedFrames": 93
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 42,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.461436,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 307,
+                "droppedFrames": 0,
+                "decodedFrames": 307
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 75,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 14.038394,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 321,
+                "droppedFrames": 0,
+                "decodedFrames": 321
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7120,
+              "signature": 1903585488,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 128,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 14.182993,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 325,
+                "droppedFrames": 0,
+                "decodedFrames": 325
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 138,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 14.182993,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 325,
+                "droppedFrames": 0,
+                "decodedFrames": 325
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7120,
+              "signature": 1903585488,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 127,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 190,
+            "delivered": 189,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8417.8,
+              "height": 720,
+              "mediaTime": 14.16,
+              "presentationTime": 8402,
+              "presentedFrames": 197,
+              "processingDuration": 0.0507,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 14.182993,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 325,
+              "droppedFrames": 0,
+              "decodedFrames": 325
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7120,
+            "signature": 1903585488,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 127,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "664d33bbe6ff35c6d8977080653e7ecd2b961a0980f0164bdf4a0fb32fbb1e9a",
+              "bytes": 20850
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "746daea2c5bb64da112c89714824a8b904f464d50ec8949804f70cbdcef35559",
+              "bytes": 171883
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "1aa599747c3ddb668cc6883c2bef2fc9f93ec77161b9112ed7622fea9655818b",
+              "bytes": 433499
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "3886b002292d256bf63ea1c4b4159169ba2b55963b75c1697ab92b198957fe79",
+              "bytes": 417839
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "4c61ad316779dd5dc1aa02a0aa892fe62d02348bf259e77b6d2aac898054fa02",
+              "bytes": 436111
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 8867,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "f1bccac9797b459eba39875e7fa0f91c8453f3d83c7dd19893513736fea9dcba",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.586952,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 93,
+                "droppedFrames": 0,
+                "decodedFrames": 93
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 53,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.418583,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 306,
+                "droppedFrames": 0,
+                "decodedFrames": 306
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 77,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.802132,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 315,
+                "droppedFrames": 0,
+                "decodedFrames": 315
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7120,
+              "signature": 1903585488,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 135,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.958987,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 319,
+                "droppedFrames": 0,
+                "decodedFrames": 319
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 123,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.958987,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 319,
+                "droppedFrames": 0,
+                "decodedFrames": 319
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7120,
+              "signature": 1903585488,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 135,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 185,
+            "delivered": 184,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8194,
+              "height": 720,
+              "mediaTime": 13.96,
+              "presentationTime": 8178.2,
+              "presentedFrames": 192,
+              "processingDuration": 0.0485,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 13.958987,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 319,
+              "droppedFrames": 0,
+              "decodedFrames": 319
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7120,
+            "signature": 1903585488,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 135,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "664d33bbe6ff35c6d8977080653e7ecd2b961a0980f0164bdf4a0fb32fbb1e9a",
+              "bytes": 20850
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "746daea2c5bb64da112c89714824a8b904f464d50ec8949804f70cbdcef35559",
+              "bytes": 171883
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "eee8ed83d1451b2d2d437439f6392dca0914d6d6bb99863458fc6d5ec8ec0d60",
+              "bytes": 433530
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "9aaca111bd10f5715925bd81034fafb9176f3776d8cab73aa76dac8889a214c7",
+              "bytes": 415819
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "363d620e77b781fcaeeef51a8c23a707fa953253a82cc7c5e426286719e8c980",
+              "bytes": 435481
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 9008,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "f1bccac9797b459eba39875e7fa0f91c8453f3d83c7dd19893513736fea9dcba",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.553176,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 92,
+                "droppedFrames": 0,
+                "decodedFrames": 92
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 52,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.41916,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 306,
+                "droppedFrames": 0,
+                "decodedFrames": 306
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 75,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 13.975889,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 320,
+                "droppedFrames": 0,
+                "decodedFrames": 320
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 7122,
+              "signature": 1910063588,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 122,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 14.116325,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 323,
+                "droppedFrames": 0,
+                "decodedFrames": 323
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 129,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 14.116325,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 323,
+                "droppedFrames": 0,
+                "decodedFrames": 323
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 7122,
+              "signature": 1910063588,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 139,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 188,
+            "delivered": 187,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8318.9,
+              "height": 720,
+              "mediaTime": 14.12,
+              "presentationTime": 8303.7,
+              "presentedFrames": 195,
+              "processingDuration": 0.0337,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 14.116325,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 323,
+              "droppedFrames": 0,
+              "decodedFrames": 323
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 7122,
+            "signature": 1910063588,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 139,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "8a513bca933e6cd9cbd3915aa9bc2a490d6aba9961238ed179f76f2970f92d8f",
+              "bytes": 20832
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "746daea2c5bb64da112c89714824a8b904f464d50ec8949804f70cbdcef35559",
+              "bytes": 171883
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "e753963dd147b6b3b88da48ee2e14dd1508525dedf203537c23f27a3290aaddc",
+              "bytes": 433663
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "07f39bf85a1e4330bfdd0c31df9ba1751adb444299d9e7cc992cdeb4ec3fb320",
+              "bytes": 417889
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "2af4ad4d156c240a018cfb76d177c1ccfec56c7ac3c17695fd3924d75f2c33a2",
+              "bytes": 436264
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "webkit",
+          "status": "failed",
+          "duration": 11852,
+          "browser": "26.6",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "f1bccac9797b459eba39875e7fa0f91c8453f3d83c7dd19893513736fea9dcba",
+          "offscreen": {
+            "available": false,
+            "selected": false
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 5.3892925,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 108,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.180938,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 163,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "undefined",
+            "registered": 125,
+            "delivered": 124,
+            "after": "function",
+            "lastMetadata": {
+              "presentationTime": 11179,
+              "expectedDisplayTime": 11212,
+              "width": 640,
+              "height": 360,
+              "mediaTime": 13.3782506,
+              "presentedFrames": 0,
+              "processingDuration": 0
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 640,
+            "cssHeight": 360,
+            "clip": {
+              "x": 8,
+              "y": 8,
+              "width": 640,
+              "height": 360
+            },
+            "time": 13.180938,
+            "connected": true,
+            "media": {
+              "paused": false,
+              "readyState": 4,
+              "totalFrames": 0,
+              "droppedFrames": 0,
+              "decodedFrames": 0
+            },
+            "onDemand": true,
+            "phase": "after-seek",
+            "visible": 10180,
+            "signature": 3637463172,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 163,
+            "observation": "composited-png"
+          },
+          "errors": [
+            "Error: expect(received).not.toBe(expected) // Object.is equality\n\nExpected: not 3637463172\n\n  195 |       const after = await pixels(page, 'after-seek')\n  196 |       expect(after.time).toBeGreaterThanOrEqual(10)\n> 197 |       expect(after.signature).not.toBe(before.signature)\n      |                                   ^\n  198 |       await page.evaluate(() => {\n  199 |         window.art.fullscreenWeb = true\n  200 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:197:35"
+          ],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "f03181b04cf2427c7142f5326486cb727933602fc1683d434449f73c025a0b75",
+              "bytes": 131042
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "0bbc622d7c94114defd009640caadb9d38597aae701c183fcebd4e3d3372c32a",
+              "bytes": 472056
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 14081,
+          "browser": "26.6",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "f1bccac9797b459eba39875e7fa0f91c8453f3d83c7dd19893513736fea9dcba",
+          "offscreen": {
+            "available": false,
+            "selected": false
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 4.145959,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 100,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.231438,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 162,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 14.8457508,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 30295,
+              "signature": 2705561028,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 480,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 15.3447717,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 478,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 15.3447717,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 30295,
+              "signature": 2705561028,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 453,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "undefined",
+            "registered": 121,
+            "delivered": 120,
+            "after": "function",
+            "lastMetadata": {
+              "presentationTime": 12044,
+              "expectedDisplayTime": 12383,
+              "width": 640,
+              "height": 360,
+              "mediaTime": 15.3447717,
+              "presentedFrames": 0,
+              "processingDuration": 0
+            }
+          },
+          "lastPixel": {
+            "width": 2560,
+            "height": 1440,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 15.3447717,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 0,
+              "droppedFrames": 0,
+              "decodedFrames": 0
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 30295,
+            "signature": 2705561028,
+            "screenshotWidth": 2560,
+            "screenshotHeight": 1440,
+            "screenshotElapsed": 453,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "271f70dc13f93616f5ae0c9318908cecc144f9631fa3a626f8f8356bc7897958",
+              "bytes": 43522
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "fee35c80256ad04d4f772e498b46542dae345db823dee431b6dfbcc9396488f4",
+              "bytes": 471887
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "3287ed097ce6c83bbd8277304143c1efa26c58b0d3b64e53ee4fbe775409405e",
+              "bytes": 1300468
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "94b76cd917355fb4d221a853c6409df7f3fc16354395a0a6e940f0d3c7573ab5",
+              "bytes": 1281566
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "53a0e7c6e096bad0bf447801d12a41ac2f5e34ca8393e9e843416765fea2a395",
+              "bytes": 1294363
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "webkit",
+          "status": "failed",
+          "duration": 11642,
+          "browser": "26.6",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "f1bccac9797b459eba39875e7fa0f91c8453f3d83c7dd19893513736fea9dcba",
+          "offscreen": {
+            "available": false,
+            "selected": false
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 5.4120634,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 102,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 13.0578755,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 159,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "undefined",
+            "registered": 119,
+            "delivered": 118,
+            "after": "function",
+            "lastMetadata": {
+              "presentationTime": 10959,
+              "expectedDisplayTime": 11098,
+              "width": 640,
+              "height": 360,
+              "mediaTime": 13.1895422,
+              "presentedFrames": 0,
+              "processingDuration": 0
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 640,
+            "cssHeight": 360,
+            "clip": {
+              "x": 8,
+              "y": 8,
+              "width": 640,
+              "height": 360
+            },
+            "time": 13.0578755,
+            "connected": true,
+            "media": {
+              "paused": false,
+              "readyState": 4,
+              "totalFrames": 0,
+              "droppedFrames": 0,
+              "decodedFrames": 0
+            },
+            "onDemand": true,
+            "phase": "after-seek",
+            "visible": 10180,
+            "signature": 3637463172,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 159,
+            "observation": "composited-png"
+          },
+          "errors": [
+            "Error: expect(received).not.toBe(expected) // Object.is equality\n\nExpected: not 3637463172\n\n  195 |       const after = await pixels(page, 'after-seek')\n  196 |       expect(after.time).toBeGreaterThanOrEqual(10)\n> 197 |       expect(after.signature).not.toBe(before.signature)\n      |                                   ^\n  198 |       await page.evaluate(() => {\n  199 |         window.art.fullscreenWeb = true\n  200 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\jassub-native.spec.js:197:35"
+          ],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "d7d03ab758b038f0177f22ecc1e4f92abcc560b692987012293927e48e18fc05",
+              "bytes": 213865
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "7be26a82ab55777f0b1e1eac652de6dfedc43636d0d028bff4a579837184bf79",
+              "bytes": 471942
+            }
+          ],
+          "attemptErrors": []
+        }
+      ]
+    },
+    {
+      "profile": "Final screenshot-specific 0-30s and 40-110s cues; seek50; asserts initial cue interval and pixels; no timeout increase",
+      "reportPath": "refactor/.cache/jassub09-display-final.json",
+      "sha256": "6c0b83d1d0f5672c9fb43d53c113432a08077fe0c01e057a408f08ad18c304db",
+      "resultsPath": "refactor/.cache/jassub09-display-final-results",
+      "stats": {
+        "startTime": "2026-09-13T19:24:05.556Z",
+        "duration": 101412.722,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 9055,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.581166,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 93,
+                "droppedFrames": 0,
+                "decodedFrames": 93
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 40,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.423873,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 282,
+                "droppedFrames": 0,
+                "decodedFrames": 282
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 70,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.975709,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 296,
+                "droppedFrames": 0,
+                "decodedFrames": 296
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 6597,
+              "signature": 161483676,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 115,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.107292,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 299,
+                "droppedFrames": 0,
+                "decodedFrames": 299
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 119,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.107292,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 299,
+                "droppedFrames": 0,
+                "decodedFrames": 299
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 6597,
+              "signature": 161483676,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 114,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 189,
+            "delivered": 188,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8370.4,
+              "height": 720,
+              "mediaTime": 54.12,
+              "presentationTime": 8354.1,
+              "presentedFrames": 196,
+              "processingDuration": 0.1999,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 54.107292,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 299,
+              "droppedFrames": 0,
+              "decodedFrames": 299
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 6597,
+            "signature": 161483676,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 114,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "8a513bca933e6cd9cbd3915aa9bc2a490d6aba9961238ed179f76f2970f92d8f",
+              "bytes": 20832
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "6f2ef853233ed8cd2af29bc6ecc4bb0b9b503c128371461dcce111f5a0656f12",
+              "bytes": 161709
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "9a2c92fcb06e97c065209fc90ad57647525d44b2880eae2091479dc173ec260d",
+              "bytes": 383710
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "544d4be74b244b233f919a12a415bb721e1179ac2b0e34a8573d8f8bbfbc5248",
+              "bytes": 363588
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "b7cb6ce8024bed9e7a147da6fce38805207124512af37c9f14071d0dad47e56d",
+              "bytes": 383483
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 8820,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.611175,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 94,
+                "droppedFrames": 0,
+                "decodedFrames": 94
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 43,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.42054,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 283,
+                "droppedFrames": 0,
+                "decodedFrames": 283
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 73,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.800143,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 292,
+                "droppedFrames": 0,
+                "decodedFrames": 292
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 6055,
+              "signature": 2649510240,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 132,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.953134,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 296,
+                "droppedFrames": 0,
+                "decodedFrames": 296
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 120,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.953134,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 296,
+                "droppedFrames": 0,
+                "decodedFrames": 296
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 6055,
+              "signature": 2649510240,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 113,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 185,
+            "delivered": 184,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8172.9,
+              "height": 720,
+              "mediaTime": 53.96,
+              "presentationTime": 8157,
+              "presentedFrames": 192,
+              "processingDuration": 0.1969,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 53.953134,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 296,
+              "droppedFrames": 0,
+              "decodedFrames": 296
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 6055,
+            "signature": 2649510240,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 113,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "664d33bbe6ff35c6d8977080653e7ecd2b961a0980f0164bdf4a0fb32fbb1e9a",
+              "bytes": 20850
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "6f2ef853233ed8cd2af29bc6ecc4bb0b9b503c128371461dcce111f5a0656f12",
+              "bytes": 161709
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "fd26382e22be0e55d237171b1bf25b1651b6fb25d912f09f011bfabb57498036",
+              "bytes": 384150
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "69087ca1d5cdafc4f3c4405f2031cae859894fe658755cf2796ab2c5ab3bc086",
+              "bytes": 362027
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "f6ba81cfac0b7fc78d4ba8d907a1add6117883dd930106ce4f6d12c628ffeaa9",
+              "bytes": 380205
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "chromium",
+          "status": "passed",
+          "duration": 9923,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 4.594488,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 118,
+                "droppedFrames": 0,
+                "decodedFrames": 118
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 41,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.396202,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 306,
+                "droppedFrames": 0,
+                "decodedFrames": 306
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 68,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.923175,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 320,
+                "droppedFrames": 0,
+                "decodedFrames": 320
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 6599,
+              "signature": 167961776,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 123,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.062477,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 323,
+                "droppedFrames": 0,
+                "decodedFrames": 323
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 126,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.062477,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 323,
+                "droppedFrames": 0,
+                "decodedFrames": 323
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 6599,
+              "signature": 167961776,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 115,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 213,
+            "delivered": 212,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 9279,
+              "height": 720,
+              "mediaTime": 54.08,
+              "presentationTime": 9262.8,
+              "presentedFrames": 220,
+              "processingDuration": 0.0475,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 54.062477,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 323,
+              "droppedFrames": 0,
+              "decodedFrames": 323
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 6599,
+            "signature": 167961776,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 115,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "8ba81febfee2a53925a195ce023ca0b86ac87af8f7c938b8d68e98774c83538f",
+              "bytes": 17115
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "71f5aa1d5c95a53be03b2b0738c71b2a9a39421f949d5ff6d93251e4785579d1",
+              "bytes": 162003
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "c5d4180047220186de32893f1bf8cfc7170f177506150972d0580b8c560ab716",
+              "bytes": 377722
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "6cc6ea0ac3c680acd69038adc262e990782245592e530a26eeec76037f0497ec",
+              "bytes": 368368
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "b8afb8a8e24ea204a8fd6ec6f5e4392799798202d2309194241b53f5818fc723",
+              "bytes": 386661
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 9775,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.642548,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 90,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 90
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 30,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.246443,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 175,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 175
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 34,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.689996,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 185,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 185
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 6615,
+              "signature": 221220536,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 76,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.770899,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 187,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 187
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 69,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.770899,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 187,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 187
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 6607,
+              "signature": 194556840,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 72,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 165,
+            "delivered": 164,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 8556.18,
+              "height": 720,
+              "mediaTime": 53.76,
+              "presentationTime": 8556.18,
+              "presentedFrames": 293,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 53.770899,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 187,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 187
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 6607,
+            "signature": 194556840,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 72,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "c1c70e3a349c57afab4f489e3d52544b98c4b2af236a29943bfae0f937d749d6",
+              "bytes": 26649
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "18a06091d5f1a9c55f854da8394eecc2eb0853566e8edda337e80594c34fd4e6",
+              "bytes": 217412
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "fa36347e0760fc6ec42d71132286ff84f6614bc1bc5a176124646abbb1040292",
+              "bytes": 541290
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "7efe1ff1a099f1edf0de0926dc67ce47539f6be1ba54a5787bcf4e4fe4c190fa",
+              "bytes": 513668
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "ab696ff7ab4d93f0eb216e82fe604053d2d001baabe8da94c9169c7f453e5902",
+              "bytes": 536502
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 8508,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.368996,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 83,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 83
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1028,
+              "signature": 851219992,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 27,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.222194,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 166,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 166
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 31,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.585994,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 176,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 176
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 6615,
+              "signature": 221220536,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 79,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.70728,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 178,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 178
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 56,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.70728,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 178,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 178
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 6611,
+              "signature": 207888696,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 69,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 158,
+            "delivered": 157,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 7949.64,
+              "height": 720,
+              "mediaTime": 53.72,
+              "presentationTime": 7932.98,
+              "presentedFrames": 277,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 53.70728,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 178,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 178
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 6611,
+            "signature": 207888696,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 69,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "cf0857e7840e476d2a0411ad77a6fe99273095d8f16dea93f9a0af892cda5d37",
+              "bytes": 26658
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "380510726ece09376b5faf3ac661758df12a62d3b2f35cde5bd68e4886b6baa6",
+              "bytes": 217356
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "d8c6dd9525523ad202f5d09b23bcd6c6b7b65c0502d768a77044111be7b8bf9a",
+              "bytes": 547303
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "186eaa67716464ee807b9aa69a9c4288d4c5214dc23864b4193eb95ad25117ef",
+              "bytes": 520972
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "7aa6bcb1efd407e531a46269d2f536b2daa2eb61a2b6b2d9e1154c2d4ea9dff6",
+              "bytes": 543902
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "firefox",
+          "status": "passed",
+          "duration": 8513,
+          "browser": "155.0",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": true,
+            "selected": true
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 3.539741,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 88,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 88
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 1027,
+              "signature": 850394300,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 26,
+              "observation": "composited-png"
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.24975,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 171,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 171
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 2342,
+              "signature": 1938468104,
+              "screenshotWidth": 640,
+              "screenshotHeight": 360,
+              "screenshotElapsed": 33,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.451874,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 177,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 177
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 6633,
+              "signature": 280828012,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 70,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.573164,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 179,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 179
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 60,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 53.573164,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 179,
+                "droppedFrames": 0,
+                "mozPresentedFrames": 179
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 6615,
+              "signature": 221220536,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 68,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "function",
+            "registered": 158,
+            "delivered": 157,
+            "after": "function",
+            "lastMetadata": {
+              "expectedDisplayTime": 7906.56,
+              "height": 720,
+              "mediaTime": 53.56,
+              "presentationTime": 7889.88,
+              "presentedFrames": 282,
+              "width": 1280
+            }
+          },
+          "lastPixel": {
+            "width": 1280,
+            "height": 720,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 53.573164,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 179,
+              "droppedFrames": 0,
+              "mozPresentedFrames": 179
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 6615,
+            "signature": 221220536,
+            "screenshotWidth": 1280,
+            "screenshotHeight": 720,
+            "screenshotElapsed": 68,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "b2f4b840ba5e779edba0588678bc1375e0d18a4d72d51696acf135b67e8d9668",
+              "bytes": 27274
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "33afeefd99e079e2639837386e98c97083c67fce97735a8fe3b4b2fcb123ba27",
+              "bytes": 217259
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "18ebca3b42757fc126b841c1acc2e7788754ffa2a061ec626e083c4c120345f3",
+              "bytes": 549953
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "6a5fc65c423f55867ddf31a7dc8fca4ef298f964ca31faf860d767be4c79e510",
+              "bytes": 528838
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "3940dc69b7620c0e4afcac482e7c4f835ab6c8bef7b4ce236f20c67140186d40",
+              "bytes": 551355
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with candidate core, customCanvas=false, defaultOffscreen=true",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 13904,
+          "browser": "26.6",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": false,
+            "selected": false
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 4.1812715,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 4369,
+              "signature": 1588904296,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 81,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.2288547,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 130,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.4622925,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 27951,
+              "signature": 1535513192,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 471,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.9518342,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 493,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.9518342,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 27887,
+              "signature": 682245096,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 437,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "undefined",
+            "registered": 115,
+            "delivered": 114,
+            "after": "function",
+            "lastMetadata": {
+              "presentationTime": 11821,
+              "expectedDisplayTime": 12161,
+              "width": 640,
+              "height": 360,
+              "mediaTime": 54.9518342,
+              "presentedFrames": 0,
+              "processingDuration": 0
+            }
+          },
+          "lastPixel": {
+            "width": 2560,
+            "height": 1440,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 54.9518342,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 0,
+              "droppedFrames": 0,
+              "decodedFrames": 0
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 27887,
+            "signature": 682245096,
+            "screenshotWidth": 2560,
+            "screenshotHeight": 1440,
+            "screenshotElapsed": 437,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "0153d1d577015dce2964e2d215d2369097e18cf86a88ffde8a9d52c5aa80b5a3",
+              "bytes": 51584
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "53d6fd712b648176c3735d1c1c03f552a6e89e68aa25950613da5020fcd992ec",
+              "bytes": 432628
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "620e53c4c0e4e237f0a66e10989bb345b50f35dc1afb0e3eff9a218931e72a55",
+              "bytes": 1161255
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "3788c302d679a2b58079d20238aba2f6c0d7d9f2073d968617764e2f930acfc0",
+              "bytes": 1144616
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "28d15ee87bd2f7da76db28eb2532ea91d5be2406759ed1698cbe512404b842b8",
+              "bytes": 1180798
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published core, customCanvas=false, defaultOffscreen=true",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 14314,
+          "browser": "26.6",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": false,
+            "selected": false
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 4.2338132,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 4369,
+              "signature": 1588904296,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 109,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.2135422,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 159,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.7810216,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 27903,
+              "signature": 895562312,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 483,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 55.2927093,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 482,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 55.2927093,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 27887,
+              "signature": 682245096,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 459,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "undefined",
+            "registered": 119,
+            "delivered": 118,
+            "after": "function",
+            "lastMetadata": {
+              "presentationTime": 12294,
+              "expectedDisplayTime": 12635,
+              "width": 640,
+              "height": 360,
+              "mediaTime": 55.2927093,
+              "presentedFrames": 0,
+              "processingDuration": 0
+            }
+          },
+          "lastPixel": {
+            "width": 2560,
+            "height": 1440,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 55.2927093,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 0,
+              "droppedFrames": 0,
+              "decodedFrames": 0
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 27887,
+            "signature": 682245096,
+            "screenshotWidth": 2560,
+            "screenshotHeight": 1440,
+            "screenshotElapsed": 459,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "814ff8dfd73108ca2fc3b404e4f50147a191a4257917bdc396e28651c4603c67",
+              "bytes": 51348
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "53d6fd712b648176c3735d1c1c03f552a6e89e68aa25950613da5020fcd992ec",
+              "bytes": 432628
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "c97a620fba6ce7d3b900b8af3273449446d56da7612f7dcb7a49d5a59a8c33ec",
+              "bytes": 1168731
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "19e9ca490e96cc495b96b14aa7911eedd7a7d31c24b92375b5be320bc06ba55f",
+              "bytes": 1146721
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "698afe1cce7fc91a7ca4699182d39669a61381273357cc520d1d4e4b2cd34b9a",
+              "bytes": 1182649
+            }
+          ],
+          "attemptErrors": []
+        },
+        {
+          "title": "JASSUB candidate artifact renders actual WASM subtitles through seek and layout with published-5.3.1-beta.1 core, customCanvas=false, defaultOffscreen=true",
+          "project": "webkit",
+          "status": "passed",
+          "duration": 13765,
+          "browser": "26.6",
+          "platform": "win32",
+          "source": {
+            "artifact": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+            "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+          },
+          "subtitleSha256": "dd882fd3fe1914a3ba4260694360f223b3d74f75e360216221aa1f229ba54e7a",
+          "offscreen": {
+            "available": false,
+            "selected": false
+          },
+          "screenshotReadback": true,
+          "snapshots": [
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 4.0846257,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "before-seek",
+              "visible": 4369,
+              "signature": 1588904296,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 92,
+              "observation": "composited-png"
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "cssWidth": 640,
+              "cssHeight": 360,
+              "clip": {
+                "x": 8,
+                "y": 8,
+                "width": 640,
+                "height": 360
+              },
+              "time": 53.1336881,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "after-seek",
+              "visible": 10180,
+              "signature": 3637463172,
+              "screenshotWidth": 1280,
+              "screenshotHeight": 720,
+              "screenshotElapsed": 156,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.4217091,
+              "connected": true,
+              "media": {
+                "paused": false,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "fullscreen",
+              "visible": 27967,
+              "signature": 1748829896,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 452,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.9010008,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "hidden-negative-control",
+              "visible": 0,
+              "signature": 0,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 460,
+              "observation": "composited-png"
+            },
+            {
+              "width": 2560,
+              "height": 1440,
+              "cssWidth": 1280,
+              "cssHeight": 720,
+              "clip": {
+                "x": 0,
+                "y": 0,
+                "width": 1280,
+                "height": 720
+              },
+              "time": 54.9010008,
+              "connected": true,
+              "media": {
+                "paused": true,
+                "readyState": 4,
+                "totalFrames": 0,
+                "droppedFrames": 0,
+                "decodedFrames": 0
+              },
+              "onDemand": true,
+              "phase": "restored",
+              "visible": 27887,
+              "signature": 682245096,
+              "screenshotWidth": 2560,
+              "screenshotHeight": 1440,
+              "screenshotElapsed": 504,
+              "observation": "composited-png"
+            }
+          ],
+          "frames": {
+            "before": "undefined",
+            "registered": 113,
+            "delivered": 112,
+            "after": "function",
+            "lastMetadata": {
+              "presentationTime": 11393,
+              "expectedDisplayTime": 11469,
+              "width": 640,
+              "height": 360,
+              "mediaTime": 54.9010008,
+              "presentedFrames": 0,
+              "processingDuration": 0
+            }
+          },
+          "lastPixel": {
+            "width": 2560,
+            "height": 1440,
+            "cssWidth": 1280,
+            "cssHeight": 720,
+            "clip": {
+              "x": 0,
+              "y": 0,
+              "width": 1280,
+              "height": 720
+            },
+            "time": 54.9010008,
+            "connected": true,
+            "media": {
+              "paused": true,
+              "readyState": 4,
+              "totalFrames": 0,
+              "droppedFrames": 0,
+              "decodedFrames": 0
+            },
+            "onDemand": true,
+            "phase": "restored",
+            "visible": 27887,
+            "signature": 682245096,
+            "screenshotWidth": 2560,
+            "screenshotHeight": 1440,
+            "screenshotElapsed": 504,
+            "observation": "composited-png"
+          },
+          "errors": [],
+          "screenshots": [
+            {
+              "name": "jassub-display-before-seek",
+              "sha256": "cd952d56d6f8bfc41f26386a3467f32a82aa50085e34aeec22acf2d115a47aa9",
+              "bytes": 56907
+            },
+            {
+              "name": "jassub-display-after-seek",
+              "sha256": "63b4cd4e9d3907e989dfd5c929182eff58e91e11969b2d5a752b7eb003feead6",
+              "bytes": 433047
+            },
+            {
+              "name": "jassub-display-fullscreen",
+              "sha256": "e39bc98ae903ad8533043e200306c8da980e1c2a5f1061964d37300f08044d0d",
+              "bytes": 1160996
+            },
+            {
+              "name": "jassub-display-hidden-negative-control",
+              "sha256": "5094ee2c518e77cd497cfb40d1324e07e291aa14cc85b197b8dadc702a456e40",
+              "bytes": 1141600
+            },
+            {
+              "name": "jassub-display-restored",
+              "sha256": "ecad5630cfc9b2b1849102eeca11bf2ec9f59b1af50c9c1d83d238add7d67ce5",
+              "bytes": 1177477
+            }
+          ],
+          "attemptErrors": []
+        }
+      ]
+    }
+  ]
+}

@@ -605,4 +605,4 @@
 - PKG-DANMUKU-11: [记录](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md) [记录](baselines/danmuku-lifetime-validation.json)
 - PKG-DANMUKU-12: [记录](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md) [记录](baselines/danmuku-frame-sampling-validation.json)
 - PKG-JASSUB-08: [记录](changes/2026-09-14-PKG-JASSUB-08-offscreen.md) [记录](baselines/jassub-offscreen-validation.json) [记录](baselines/jassub-offscreen-patch.json)
-- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json)
+- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json) [记录](changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md) [记录](changes/2026-09-14-PKG-JASSUB-09-display.md) [记录](baselines/jassub-display-validation.json)

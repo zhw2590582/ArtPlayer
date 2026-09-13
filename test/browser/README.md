@@ -205,3 +205,15 @@ transfer use main-thread fillRect and do not verify the Worker/ImageBitmap path.
 The report records these distinctions and never infers a JASSUB fix from a control
 pass. Preserve each raw report/results directory before the next browser command.
 See [the isolation record](../../refactor/changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md).
+
+`ARTPLAYER_JASSUB_SCREENSHOT=true` adds a separate observation path to the native
+JASSUB spec. `jassub-display.js` decodes a clipped composited page PNG using the
+pinned root-only pngjs development dependency; it never copies the transferred
+canvas. This mode uses green ASS glyphs, distinct 0-30s and 40-110s cue windows,
+and seeks to 50s. It checks the initial cue time, visible pixels, changed glyph
+signature, playback advance, fullscreen geometry and a hidden/restored negative
+control. Normal readback fixtures and timeouts stay unchanged. Reported subtitle
+hashes identify the actual selected ASS, not the white baseline. Screenshots are
+attached at named phases; errors from individual polling attempts are retained.
+The fixture's automatic failure screenshot runs after cleanup and may show an
+empty player; use the named pre-cleanup screenshots for visual claims.

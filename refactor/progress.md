@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-JASSUB-09 合成截图验证（doing）
+
+新增显式截图模式，由 Node pngjs@7.0.0 解码实际页面 PNG，不复制转移画布。
+绿色 ASS 字形有 seek 前后签名、播放推进、全屏、隐藏归零和恢复可见断言。
+修正截图用例短字幕窗口导致 WebKit 前置样本过期的问题后，三浏览器与三核心
+最终九项通过。默认 readback 和其红序列保留；早期截图模式也出现 Firefox
+首次像素/全屏失败，不能把本轮全绿解释成停顿已修复。09/05 继续 doing。
+根测试依赖与唯一 Yarn 锁同次更新，frozen 安装、严格工具链、相关 ESLint 和
+工具链反例测试通过。生产源码/公共类型/分发产物未变。
+[变更与中间失败](changes/2026-09-14-PKG-JASSUB-09-display.md)及
+[截图阶段和运行摘要](baselines/jassub-display-validation.json)记录实际覆盖。
+下一步保留 Firefox 未关闭风险继续取证，同时推进其他可独立完成的插件迁移和
+组合验收；本问题尚不足以阻止整项重构的其他实施工作。
+
 ## PKG-JASSUB-09 Firefox 原生绘制诊断（doing）
 
 新增不加载 JASSUB 的 Worker/ImageBitmap 控制，按新核心、已发布核心及无脚本的

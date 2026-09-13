@@ -5652,6 +5652,8 @@
         "refactor/baselines/jassub-hybrid-validation.json",
         "refactor/changes/2026-09-14-PKG-JASSUB-09-firefox-diagnostics.md",
         "refactor/baselines/jassub-firefox-diagnostics.json",
+        "refactor/changes/2026-09-14-PKG-JASSUB-09-display.md",
+        "refactor/baselines/jassub-display-validation.json",
         "test/browser/jassub-platform.spec.js",
         "test/browser/jassub-native.spec.js",
         "test/browser/jassub-hybrid.spec.js"

@@ -19,6 +19,10 @@ CORE-25 默认选项缺陷已修复并通过相同三 Node 与严格打包检查
 ## 锁文件和依赖维护
 
 - 根构建工具固定精确版本并放在 devDependencies；发布包的 dependencies/peer 范围保持原样。
+- PKG-JASSUB-09 新增根 devDependency `pngjs@7.0.0`，在 Node 中解码 Playwright 截图，
+  用实际合成画面与转移画布 readback 对照；不进入发布包。仅新增其精确 Yarn 锁条目，
+  并验证固定 Node/Yarn 的 frozen 安装及严格工具链检查。上游 API 见
+  [pngjs 文档](https://github.com/pngjs/pngjs#sync-api)。
 - ENG-04 新增 typescript-compat（npm:typescript@4.3.5）作为旧编译器消费探针；源码继续使用 typescript 5.9.3。精确 npm alias 也由锁检查保护；实际覆盖与命令见 [类型检查说明](typechecking.md)。
 - 添加根开发依赖使用 `yarn add --dev --exact --ignore-workspace-root-check <name>@<version>`，包级依赖使用 `yarn workspace <name> add ...`；运行依赖升级需要独立兼容证据。
 - manifest 和 yarn.lock 同次提交；不提交 package-lock.json、bun.lock 或第二份安装锁。旧 npm 锁及验证报告保留于 ENG-01 Git 历史，原本地 Yarn 锁也已在忽略缓存中备份。
