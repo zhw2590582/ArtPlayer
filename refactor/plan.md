@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 223 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 224 项，范围 22 个包及工作区/示例。
 
-状态：todo 86 / doing 16 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 87 / doing 16 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,7 +14,7 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, CORE-25 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06 |
@@ -132,6 +132,7 @@
 | CORE-23 | artplayer<br>检查并补齐键盘、焦点与可访问名称 | CORE-13, CORE-14, CORE-17, ENG-05, BASE-04 | 主要控件/设置/模式退出的键盘与焦点回归、名称和字幕可用性检查及必要兼容修正 | 保持旧快捷键和 DOM/CSS 钩子；真实浏览器验证，不以静态属性检查代替交互；处理 BASE-DOM-01 的主要控件 Tab 不可达，保留既有名称与快捷键 | H | done |
 | CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | done |
 | CORE-24 | artplayer<br>修复连续切源的播放意图继承 | CORE-22, PKG-AUDIO-04 | 连续切源保留原播放意图，同时尊重显式暂停与最新来源，回归旧/新 audio | 真实暂停状态的受控测试、重入/取消/失败/销毁、三引擎和 main/legacy 产物验证通过；不恢复过期来源的公开副作用 | H | done |
+| CORE-25 | artplayer<br>修复无 navigator 环境读取默认选项 | CORE-22 | 安全读取默认语言并保留浏览器已有默认值；实际 Node 与发布产物正反例 | 记录旧发布版 ReferenceError；候选在无 navigator 时可读默认选项，浏览器语言和公开类型不回归；不以补全局对象隐藏错误 | M | todo |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -405,7 +406,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
+| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
 | REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
 | REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | todo |
 
@@ -454,7 +455,7 @@
 - ENG-09: [记录](changes/2026-09-12-ENG-09-integration.md) [记录](baselines/engineering-integration.json)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
 - ENG-11: [记录](build-analysis.md) [记录](baselines/bundle-attribution.json) [记录](changes/2026-09-11-ENG-11-build-analysis.md)
-- CI-01: [记录](ci-setup.md) [记录](changes/2026-09-13-CI-01-matrix-summary.md) [记录](baselines/ci-matrix-validation.json)
+- CI-01: [记录](ci-setup.md) [记录](changes/2026-09-13-CI-01-matrix-summary.md) [记录](baselines/ci-matrix-validation.json) [记录](changes/2026-09-13-CI-01-node-consumers.md) [记录](baselines/node-consumer-validation.json)
 - PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)
 - CORE-01: [记录](changes/2026-09-10-CORE-01-typed-utils.md) [记录](baselines/core-utils-validation.json)
 - CORE-02: [记录](changes/2026-09-11-CORE-02-typed-emitter.md) [记录](baselines/emitter-validation.json)
@@ -555,3 +556,4 @@
 - PKG-TOOL-THUMB-03: [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md) [记录](baselines/thumbnail-input-checkpoint.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md) [记录](baselines/thumbnail-lifecycle-validation.json)
 - PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md) [记录](baselines/thumbnail-emitter-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md)
+- CORE-25: [记录](changes/2026-09-13-CI-01-node-consumers.md)

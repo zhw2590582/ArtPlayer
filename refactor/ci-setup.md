@@ -19,7 +19,8 @@
 | `yarn check:contracts --report` | 校验12类契约/22包归属、版本及报告对应；--write更新静态表，详见 [维护说明](contract-coverage.md) |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
 | `yarn check:ci` | 只读校验实际工作流的完整系统矩阵、安装、缓存、报告和最终检查；已接入 ci:check |
-| `yarn test:ci` | CI 汇总真实退出码、工作流破坏反例与全包影响分析，共 37 项 |
+| `yarn test:ci` | CI 汇总退出码、工作流/影响分析反例与隔离运行时校验，共 44 项 |
+| `yarn test:package:runtime` | 标准 Node 重装同一已检查 tarball；须先运行 test:package，其他 Node 使用显式 --expected-node |
 | `yarn ci:build` | 21 库包、i18n、编辑器声明和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
 | `yarn check:impact --report` | 读取实际依赖/验证关系和Git变更，核对workflow必需命令，写CI影响报告；已接入ci:check，见[影响映射](impact-analysis.md) |
 | `yarn build:all` | 保留旧入口，执行 ci:build 后只读 lint |
@@ -38,10 +39,12 @@ Actions 固定完整 SHA，Node 来自 .node-version，Yarn 固定 1.22.22；安
 | --- | --- | --- | --- |
 | checks | Linux、Windows | ci:check、ci:build；Linux 额外执行 actionlint | 45 分钟 |
 | coverage | Linux、Windows | 既有源码映射与生命周期覆盖检查 | 15 分钟 |
-| browser-smoke | Linux、Windows、macOS | 实际 core/chapter 安装产物、Chromium/Firefox/WebKit、iframe history、性能 | 60 分钟 |
+| browser-smoke | Linux、Windows、macOS | 同一 core/chapter tarball 的 Node 20/22/24 消费，三浏览器、iframe history、性能 | 60 分钟 |
 | CI result | Linux | 汇总以上三个作业组，所有结果必须为 success | 5 分钟 |
 
-Node 均使用 .node-version 的 24.21.0。TS 5.9.3、4.3.5 和迁移运行时兼容 5.1.6
+构建与浏览器工具使用 .node-version 的 24.21.0。安装运行时消费分别使用固定 20.19.0、
+22.12.0 和标准 Node，不重新构建候选。它们是根工具 engines 的边界测试点，发布包没有
+声明 Node 下限；更早 Node 和最低工具链干净安装仍需验证。TS 5.9.3、4.3.5 和迁移运行时兼容 5.1.6
 继续由既有类型脚本按各自适用范围运行，不代表最低 Node 或所有包/TS 组合已验收。
 矩阵不设置 fail-fast，单个系统失败后仍尽量收集其他系统证据；显式 bash 保留 tee
 上游命令的失败退出码。影响报告继续扩大核心/共享变更到全生态，当前不缩减必需作业。
@@ -75,7 +78,9 @@ summary.md 和 GitHub Job Summary，不依赖先前下载的 artifact 来判断�
 必须针对实际故障，不以清缓存代替修复锁或构建问题。
 
 本地验证与指纹见 [CI-01 记录](changes/2026-09-13-CI-01-matrix-summary.md)。
-最低 Node 消费/工具环境、全生态安装矩阵和有证据的影响调度仍待 CI-01；CI-04 负责
+三个 Node 的 Windows 安装证据及新发现见 [消费者记录](changes/2026-09-13-CI-01-node-consumers.md)。
+CORE-25 的无 navigator 默认选项缺陷尚未修复，严格 test:package:release 会因此失败。
+更早 Node 消费/最低工具环境、全生态安装矩阵和有证据的影响调度仍待 CI-01；CI-04 负责
 各系统远端运行、冷热缓存、失败/取消演练及 required check 设置。没有新增远端通过证据。
 
 ## Pages 隔离与启用条件

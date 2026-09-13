@@ -31,6 +31,9 @@ for (const [name, mutate] of [
   ['conditional frozen install', w => w.jobs.checks.steps.find(s => s.run?.includes('yarn install --frozen-lockfile')).if = 'false'],
   ['commented frozen install', w => w.jobs.checks.steps.find(s => s.run?.includes('yarn install --frozen-lockfile')).run = '# yarn install --frozen-lockfile --non-interactive'],
   ['conditional Node setup', w => w.jobs.checks.steps.find(s => s.uses?.startsWith('actions/setup-node@')).if = 'false'],
+  ['wrong consumer Node version', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'consumer-node-20').with['node-version'] = '24'],
+  ['skipped installed consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.includes('--expected-node 22.12.0')).if = 'false'],
+  ['browser runtime not restored', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'restore-canonical-node').with = { 'node-version': '22.12.0', 'package-manager-cache': false }],
   ['Pages uploaded by both matrix legs', w => w.jobs.checks.steps.find(s => s.uses?.startsWith('actions/upload-pages-artifact@')).if = 'inputs.pages-artifact && github.ref == \'refs/heads/master\''],
 ]) {
   test(`CI rejects ${name}`, () => {

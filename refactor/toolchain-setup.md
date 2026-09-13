@@ -9,7 +9,11 @@
 3. 执行 `yarn check:toolchain --strict`，核对实际 Node/Yarn、20 个固定开发工具和 22 个 workspace 的声明及传递依赖锁条目。普通检查允许满足最低工具要求的 Node，同时打印标准版本。
 4. 执行 `yarn test:playback`、`yarn test:dash-control`、`yarn build all` 和 `yarn workspace artplayer-vitepress build`。ENG-02 已拆分只读 lint 与 lint:fix；PR/主线入口和独立 Pages 流程见 ci-setup.md。
 
-私有根包最低 Node 为 ^20.19.0 || >=22.12.0，与原本使用的 Vite 7 一致。本轮验证 Node 24.21.0，其他版本矩阵由 CI-01 接续，不能宣称所有最低环境已经通过。
+私有根包最低 Node 为 ^20.19.0 || >=22.12.0，与原本使用的 Vite 7 一致。标准工具链验证
+使用 Node 24.21.0；CI-01 已在 Windows 的 20.19.0/22.12.0/24.21.0 上重装消费相同
+core/chapter tarball，见 [Node 记录](changes/2026-09-13-CI-01-node-consumers.md)。
+这不是在最低 Node 上完成仓库工具链的干净安装/构建测试，也不是发布包的最低 Node 声明。
+CORE-25 默认选项缺陷仍在严格发布检查中阻断；完整工具与消费范围由 CI-01 继续验证。
 
 ## 锁文件和依赖维护
 

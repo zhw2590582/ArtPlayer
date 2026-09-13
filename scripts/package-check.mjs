@@ -88,6 +88,7 @@ export async function checkPackages({ release = false } = {}) {
   const installed = consumerDirectory()
   try {
     const oldRuntime = runtimeConsumer(baseline.dir, { baseline: true })
+    fs.cpSync(path.join(baseline.dir, 'node_modules'), path.join(output, 'published-artifacts'), { recursive: true })
     const packages = []
     for (const name of names) {
       const archive = path.join(output, `${name}.tgz`)
@@ -119,13 +120,17 @@ export async function checkPackages({ release = false } = {}) {
     assert.deepEqual(runtime.observations.api, oldRuntime.observations.api, 'Published API shape/defaults changed')
     const types = typeConsumers(installed)
     const preciseTypes = typeConsumers(installed, { precise: true })
-    const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), node: process.versions.node, packages, runtime, publishedRuntime: oldRuntime, types, preciseTypes, knownTypeBlockers: [...types, ...preciseTypes].reduce((sum, result) => sum + result.diagnostics.length, 0) }
+    const source = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: workspace, encoding: 'utf8' }).trim()
+    const publishedPackages = baseline.releases.map(({ name, version, files }) => ({ name, version, files }))
+    const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), source, toolchain: { yarn: '1.22.22', yarnPath: yarn }, node: process.versions.node, packages, runtime, publishedPackages, publishedRuntime: oldRuntime, types, preciseTypes, knownRuntimeBlockers: runtime.observations.defaultsWithoutNavigator.resolved ? 0 : 1, knownTypeBlockers: [...types, ...preciseTypes].reduce((sum, result) => sum + result.diagnostics.length, 0) }
     writeJson(path.join(output, 'report.json'), report)
     writeJson(path.join(output, 'browser-artifacts.json'), artifacts)
     writeJson(path.join(parent, 'latest.json'), { output: path.relative(workspace, output).replaceAll('\\', '/') })
     console.log(`Installed tarball contracts passed: ${runtime.checks.length} runtime checks; ${types.filter(t => !t.diagnostics.length).length}/${types.length} legacy type modes; ${preciseTypes.filter(t => !t.diagnostics.length).length}/${preciseTypes.length} precise type modes. Report: ${output}`)
-    if (release)
+    if (release) {
       assert.equal(report.knownTypeBlockers, 0, 'Known type blockers remain; this candidate is not release-ready')
+      assert.equal(report.knownRuntimeBlockers, 0, 'Known runtime blockers remain; this candidate is not release-ready')
+    }
     return report
   }
   finally {

@@ -756,7 +756,9 @@
       "evidence": [
         "ci-setup.md",
         "changes/2026-09-13-CI-01-matrix-summary.md",
-        "baselines/ci-matrix-validation.json"
+        "baselines/ci-matrix-validation.json",
+        "changes/2026-09-13-CI-01-node-consumers.md",
+        "baselines/node-consumer-validation.json"
       ]
     },
     {
@@ -4362,7 +4364,8 @@
         "DOC-08",
         "MOD-01",
         "MOD-02",
-        "MOD-03"
+        "MOD-03",
+        "CORE-25"
       ],
       "status": "todo",
       "risk": "H",
@@ -4477,6 +4480,24 @@
         "baselines/factory-compatibility-proposals.json",
         "factory-compatibility-decision.md",
         "changes/2026-09-12-PKG-FACTORY-01-decision.md"
+      ]
+    },
+    {
+      "id": "CORE-25",
+      "phase": "3-4 核心迁移",
+      "title": "修复无 navigator 环境读取默认选项",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "安全读取默认语言并保留浏览器已有默认值；实际 Node 与发布产物正反例",
+      "acceptance": "记录旧发布版 ReferenceError；候选在无 navigator 时可读默认选项，浏览器语言和公开类型不回归；不以补全局对象隐藏错误",
+      "evidence": [
+        "changes/2026-09-13-CI-01-node-consumers.md"
       ]
     }
   ]

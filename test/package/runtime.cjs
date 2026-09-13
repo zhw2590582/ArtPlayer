@@ -186,8 +186,24 @@ const vm = require('node:vm');
     checks.push(id)
   }
   const shape = value => Object.fromEntries(Object.entries(Object.getOwnPropertyDescriptors(value)).map(([key, d]) => [key, { enumerable: d.enumerable, configurable: d.configurable, writable: d.writable, get: typeof d.get, set: typeof d.set, value: typeof d.value }]))
-  observations.api = { static: shape(core), prototype: shape(core.prototype), emitter: shape(core.Emitter.prototype), factory: shape(chapter), defaults: JSON.parse(JSON.stringify(core.option, (_, value) => typeof value === 'function' ? '$function' : value)) }
-  process.stdout.write(JSON.stringify({ checks, observations }))
+  const defaultNavigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator')
+  try {
+    assert(delete globalThis.navigator)
+    // CORE-25 tracks this reproduced published and candidate failure separately.
+    assert.throws(() => core.option, { name: 'ReferenceError', message: 'navigator is not defined' })
+    observations.defaultsWithoutNavigator = { name: 'ReferenceError', message: 'navigator is not defined', historical: !!expected.baseline, resolved: false }
+    check('SSR.defaults-missing-navigator-known-failure', true)
+    Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { language: 'en-US' } })
+    observations.api = { static: shape(core), prototype: shape(core.prototype), emitter: shape(core.Emitter.prototype), factory: shape(chapter), defaults: JSON.parse(JSON.stringify(core.option, (_, value) => typeof value === 'function' ? '$function' : value)) }
+    check('API.defaults-controlled-language', observations.api.defaults.lang === 'en-us')
+  }
+  finally {
+    if (defaultNavigator)
+      Object.defineProperty(globalThis, 'navigator', defaultNavigator)
+    else
+      delete globalThis.navigator
+  }
+  process.stdout.write(JSON.stringify({ node: process.versions.node, checks, observations }))
 })().catch((error) => {
   console.error(error)
   process.exitCode = 1

@@ -1,5 +1,20 @@
 # 进度与证据
 
+## CI-01 Node 消费者矩阵检查点（doing）
+
+标准 Node 24.21.0 构建同一 core/chapter tarball，20.19.0/22.12.0/24.21.0 实际
+offline/frozen 安装逐成员验证，每个运行 36 项候选与 31 项发布观察；五个旧类型和
+八个精确类型模式通过。三个系统 workflow 已接入精确运行时切换，浏览器前恢复标准 Node。
+首次 Node 20 发现无 navigator 读取静态 option 抛错，旧与候选均复现。新增 CORE-25
+与 CORE-DEFAULTS-SSR-01，并加入 REVIEW-01 前置；严格 package:release 已验证因此失败。
+兼容检查成功包括明确的未修复缺陷观察，不能作为发布成功；下一步优先独立修复 CORE-25。
+完整本地 CI 2429 项通过（2031 单元、27 工程、371 基线），定向 44 项、元数据 9 项，
+actionlint/定向 lint 通过。无生产源码/公开类型/依赖/版本改动，无新浏览器或远端运行。
+见[变更](changes/2026-09-13-CI-01-node-consumers.md)和[证据](baselines/node-consumer-validation.json)。
+224 项：121 done、16 doing、87 todo；201 风险。CI-01 的更早 Node/最低工具环境、
+全生态安装/影响调度及 CI-04 远端仍待验收。独立本地检查点，不推送、不发布。
+
+
 ## CI-01 系统矩阵、缓存与结果汇总检查点（doing）
 
 checks 扩为 Linux/Windows，浏览器扩为 Linux/Windows/macOS；coverage 保留双系统。

@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-01",
+  "date": "2026-09-13",
+  "baseCommit": "585e11c53c03b4b12933b21dcfe8c4a117299b2b",
+  "candidateScope": "Accompanying CI-01 working tree; production package code unchanged",
+  "nodeBinaries": [
+    {
+      "node": "20.19.0",
+      "platform": "win-x64",
+      "sha256": "6e3a39787e667d50487f7335c85636c2823a53e636d73c2c841d45da4e57906c",
+      "source": "https://nodejs.org/download/release/v20.19.0/SHASUMS256.txt"
+    },
+    {
+      "node": "22.12.0",
+      "platform": "win-x64",
+      "sha256": "b3b117a08ee61efee09e6fd523ab33c0c018da1b570bde08e4fd914dc1170ed6",
+      "source": "https://nodejs.org/download/release/v22.12.0/SHASUMS256.txt"
+    }
+  ],
+  "build": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "legacyTypeModes": 5,
+    "preciseTypeModes": 8,
+    "knownTypeBlockers": 0,
+    "knownRuntimeBlockers": 1
+  },
+  "runs": [
+    {
+      "node": "20.19.0",
+      "buildNode": "24.21.0",
+      "passed": true,
+      "candidateChecks": [
+        "DIST.cjs",
+        "DIST.cjs-legacy",
+        "DIST.esm",
+        "DIST.esm-default-only",
+        "DIST.esm-legacy",
+        "DIST.runtime-cjs-identity",
+        "DIST.runtime-esm-identity",
+        "DIST.runtime-legacy-identity",
+        "DIST.runtime-shared-statics",
+        "DIST.runtime-types-only",
+        "DIST.global-core",
+        "DIST.amd-core",
+        "DIST.global-core-legacy",
+        "DIST.amd-core-legacy",
+        "DIST.global-chapter",
+        "DIST.amd-chapter",
+        "DIST.global-chapter-legacy",
+        "DIST.amd-chapter-legacy",
+        "SSR.import-template",
+        "SSR.constructor-browser-only",
+        "SSR.custom-ua-umd-legacy",
+        "SSR.custom-ua-esm",
+        "DIST.i18n-cjs-esm-global",
+        "DIST.exports-boundary",
+        "DIST.direct-esm-file",
+        "EVENT.lazy-registry",
+        "EVENT.symbol-number-channels",
+        "EVENT.context-removal",
+        "EVENT.once-throw-consumed",
+        "EVENT.chain-context-arguments",
+        "EVENT.once-reentry",
+        "EVENT.dispatch-snapshot",
+        "EVENT.off-original-once",
+        "EVENT.throw-propagation",
+        "SSR.defaults-missing-navigator-known-failure",
+        "API.defaults-controlled-language"
+      ],
+      "publishedChecks": [
+        "DIST.cjs",
+        "DIST.cjs-legacy",
+        "DIST.esm",
+        "DIST.esm-default-only",
+        "DIST.esm-legacy",
+        "DIST.global-core",
+        "DIST.amd-core",
+        "DIST.global-core-legacy",
+        "DIST.amd-core-legacy",
+        "DIST.global-chapter",
+        "DIST.amd-chapter",
+        "DIST.global-chapter-legacy",
+        "DIST.amd-chapter-legacy",
+        "SSR.import-template",
+        "SSR.constructor-browser-only",
+        "SSR.custom-ua-umd-legacy",
+        "SSR.custom-ua-esm",
+        "DIST.i18n-cjs-esm-global",
+        "DIST.exports-boundary",
+        "DIST.direct-esm-file",
+        "EVENT.lazy-registry",
+        "EVENT.symbol-number-channels",
+        "EVENT.context-removal",
+        "EVENT.once-throw-consumed",
+        "EVENT.chain-context-arguments",
+        "EVENT.once-reentry",
+        "EVENT.dispatch-snapshot",
+        "EVENT.off-original-once",
+        "EVENT.throw-propagation",
+        "SSR.defaults-missing-navigator-known-failure",
+        "API.defaults-controlled-language"
+      ],
+      "unresolved": {
+        "name": "ReferenceError",
+        "message": "navigator is not defined",
+        "historical": false,
+        "resolved": false
+      },
+      "installedPackages": [
+        {
+          "name": "artplayer",
+          "version": "5.4.1",
+          "sha256": "6298aa247ca273fa5fb80297fc49d4434609e611e24a7f24cb37752c6768c214"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "sha256": "53eb3c1bbcc046a28ae499cfb19731eb66a16453bf44eae73e03693bbb510793"
+        }
+      ],
+      "report": {
+        "file": "refactor/.cache/packages/run-oT7iFE/runtime-node-20.19.0.json",
+        "sha256": "19f69281782a34a7829b47bdfbebeaa22a2bcbaef9e1b982bdd615247b136286"
+      },
+      "installLog": {
+        "file": "refactor/.cache/packages/run-oT7iFE/runtime-node-20.19.0-install.log",
+        "sha256": "048cba88c2a0a9c14e1e195ac88af9c4c359b6058672d542c49cdb2c6e4f1e6d"
+      }
+    },
+    {
+      "node": "22.12.0",
+      "buildNode": "24.21.0",
+      "passed": true,
+      "candidateChecks": [
+        "DIST.cjs",
+        "DIST.cjs-legacy",
+        "DIST.esm",
+        "DIST.esm-default-only",
+        "DIST.esm-legacy",
+        "DIST.runtime-cjs-identity",
+        "DIST.runtime-esm-identity",
+        "DIST.runtime-legacy-identity",
+        "DIST.runtime-shared-statics",
+        "DIST.runtime-types-only",
+        "DIST.global-core",
+        "DIST.amd-core",
+        "DIST.global-core-legacy",
+        "DIST.amd-core-legacy",
+        "DIST.global-chapter",
+        "DIST.amd-chapter",
+        "DIST.global-chapter-legacy",
+        "DIST.amd-chapter-legacy",
+        "SSR.import-template",
+        "SSR.constructor-browser-only",
+        "SSR.custom-ua-umd-legacy",
+        "SSR.custom-ua-esm",
+        "DIST.i18n-cjs-esm-global",
+        "DIST.exports-boundary",
+        "DIST.direct-esm-file",
+        "EVENT.lazy-registry",
+        "EVENT.symbol-number-channels",
+        "EVENT.context-removal",
+        "EVENT.once-throw-consumed",
+        "EVENT.chain-context-arguments",
+        "EVENT.once-reentry",
+        "EVENT.dispatch-snapshot",
+        "EVENT.off-original-once",
+        "EVENT.throw-propagation",
+        "SSR.defaults-missing-navigator-known-failure",
+        "API.defaults-controlled-language"
+      ],
+      "publishedChecks": [
+        "DIST.cjs",
+        "DIST.cjs-legacy",
+        "DIST.esm",
+        "DIST.esm-default-only",
+        "DIST.esm-legacy",
+        "DIST.global-core",
+        "DIST.amd-core",
+        "DIST.global-core-legacy",
+        "DIST.amd-core-legacy",
+        "DIST.global-chapter",
+        "DIST.amd-chapter",
+        "DIST.global-chapter-legacy",
+        "DIST.amd-chapter-legacy",
+        "SSR.import-template",
+        "SSR.constructor-browser-only",
+        "SSR.custom-ua-umd-legacy",
+        "SSR.custom-ua-esm",
+        "DIST.i18n-cjs-esm-global",
+        "DIST.exports-boundary",
+        "DIST.direct-esm-file",
+        "EVENT.lazy-registry",
+        "EVENT.symbol-number-channels",
+        "EVENT.context-removal",
+        "EVENT.once-throw-consumed",
+        "EVENT.chain-context-arguments",
+        "EVENT.once-reentry",
+        "EVENT.dispatch-snapshot",
+        "EVENT.off-original-once",
+        "EVENT.throw-propagation",
+        "SSR.defaults-missing-navigator-known-failure",
+        "API.defaults-controlled-language"
+      ],
+      "unresolved": {
+        "name": "ReferenceError",
+        "message": "navigator is not defined",
+        "historical": false,
+        "resolved": false
+      },
+      "installedPackages": [
+        {
+          "name": "artplayer",
+          "version": "5.4.1",
+          "sha256": "6298aa247ca273fa5fb80297fc49d4434609e611e24a7f24cb37752c6768c214"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "sha256": "53eb3c1bbcc046a28ae499cfb19731eb66a16453bf44eae73e03693bbb510793"
+        }
+      ],
+      "report": {
+        "file": "refactor/.cache/packages/run-oT7iFE/runtime-node-22.12.0.json",
+        "sha256": "6014c69d26444d0c1884aa2be5de801351d4b4f120682ecaef1d5d440ff67084"
+      },
+      "installLog": {
+        "file": "refactor/.cache/packages/run-oT7iFE/runtime-node-22.12.0-install.log",
+        "sha256": "0ad1239965a5caa605c43986d81a6efa3778fdc4d5752534edd8b21f1059fe62"
+      }
+    },
+    {
+      "node": "24.21.0",
+      "buildNode": "24.21.0",
+      "passed": true,
+      "candidateChecks": [
+        "DIST.cjs",
+        "DIST.cjs-legacy",
+        "DIST.esm",
+        "DIST.esm-default-only",
+        "DIST.esm-legacy",
+        "DIST.runtime-cjs-identity",
+        "DIST.runtime-esm-identity",
+        "DIST.runtime-legacy-identity",
+        "DIST.runtime-shared-statics",
+        "DIST.runtime-types-only",
+        "DIST.global-core",
+        "DIST.amd-core",
+        "DIST.global-core-legacy",
+        "DIST.amd-core-legacy",
+        "DIST.global-chapter",
+        "DIST.amd-chapter",
+        "DIST.global-chapter-legacy",
+        "DIST.amd-chapter-legacy",
+        "SSR.import-template",
+        "SSR.constructor-browser-only",
+        "SSR.custom-ua-umd-legacy",
+        "SSR.custom-ua-esm",
+        "DIST.i18n-cjs-esm-global",
+        "DIST.exports-boundary",
+        "DIST.direct-esm-file",
+        "EVENT.lazy-registry",
+        "EVENT.symbol-number-channels",
+        "EVENT.context-removal",
+        "EVENT.once-throw-consumed",
+        "EVENT.chain-context-arguments",
+        "EVENT.once-reentry",
+        "EVENT.dispatch-snapshot",
+        "EVENT.off-original-once",
+        "EVENT.throw-propagation",
+        "SSR.defaults-missing-navigator-known-failure",
+        "API.defaults-controlled-language"
+      ],
+      "publishedChecks": [
+        "DIST.cjs",
+        "DIST.cjs-legacy",
+        "DIST.esm",
+        "DIST.esm-default-only",
+        "DIST.esm-legacy",
+        "DIST.global-core",
+        "DIST.amd-core",
+        "DIST.global-core-legacy",
+        "DIST.amd-core-legacy",
+        "DIST.global-chapter",
+        "DIST.amd-chapter",
+        "DIST.global-chapter-legacy",
+        "DIST.amd-chapter-legacy",
+        "SSR.import-template",
+        "SSR.constructor-browser-only",
+        "SSR.custom-ua-umd-legacy",
+        "SSR.custom-ua-esm",
+        "DIST.i18n-cjs-esm-global",
+        "DIST.exports-boundary",
+        "DIST.direct-esm-file",
+        "EVENT.lazy-registry",
+        "EVENT.symbol-number-channels",
+        "EVENT.context-removal",
+        "EVENT.once-throw-consumed",
+        "EVENT.chain-context-arguments",
+        "EVENT.once-reentry",
+        "EVENT.dispatch-snapshot",
+        "EVENT.off-original-once",
+        "EVENT.throw-propagation",
+        "SSR.defaults-missing-navigator-known-failure",
+        "API.defaults-controlled-language"
+      ],
+      "unresolved": {
+        "name": "ReferenceError",
+        "message": "navigator is not defined",
+        "historical": false,
+        "resolved": false
+      },
+      "installedPackages": [
+        {
+          "name": "artplayer",
+          "version": "5.4.1",
+          "sha256": "6298aa247ca273fa5fb80297fc49d4434609e611e24a7f24cb37752c6768c214"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "version": "1.1.0",
+          "sha256": "53eb3c1bbcc046a28ae499cfb19731eb66a16453bf44eae73e03693bbb510793"
+        }
+      ],
+      "report": {
+        "file": "refactor/.cache/packages/run-oT7iFE/runtime-node-24.21.0.json",
+        "sha256": "8ca41aa19f023561500a9956d8c34a873cf438e062214dfe76310218ccf7b3fd"
+      },
+      "installLog": {
+        "file": "refactor/.cache/packages/run-oT7iFE/runtime-node-24.21.0-install.log",
+        "sha256": "973f6f01784e113ec2a4da62c6df6dcb32c99b548f23549cc3bc0eec5280f462"
+      }
+    }
+  ],
+  "firstFailure": {
+    "error": "ReferenceError: navigator is not defined",
+    "result": "reproduced in published and candidate; CORE-25 open",
+    "log": {
+      "file": "refactor/.cache/ci01-node20-runtime.log",
+      "sha256": "2b2074af5e5afaab44530a047656a53d5736b19fb2dfe40dd54af724570ae60f"
+    }
+  },
+  "strictRelease": {
+    "command": "yarn test:package:release",
+    "expectedExitCode": 1,
+    "actualExitCode": 1,
+    "reason": "Known runtime blockers remain",
+    "log": {
+      "file": "refactor/.cache/ci01-node-release-negative.log",
+      "sha256": "6ff96a023493ea284411b725734b2cedf7eac3e4b0602ba458dcb14f09515319"
+    }
+  },
+  "localCI": {
+    "state": "passed",
+    "command": "yarn ci:check",
+    "total": 2429,
+    "unit": 2031,
+    "engineering": 27,
+    "baseline": 371,
+    "seconds": 240.99,
+    "targeted": 44,
+    "metadata": 9,
+    "actionlint": "1.7.12 passed",
+    "explicitLint": "passed"
+  },
+  "remoteActions": null,
+  "releaseReady": false,
+  "limitations": [
+    "Only core/chapter actual package fixture",
+    "Three Windows Node runtimes; hosted OS runs not verified",
+    "Historical and candidate missing-navigator failure is an explicit unresolved observation",
+    "Tooling minimum clean installs and older consumer Node scope remain unverified"
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/ci01-node-ci.log",
+      "sha256": "b753192c80948138e6ef3c063cf68e9a293496c0601340d24c4122d009975071"
+    },
+    {
+      "file": "refactor/.cache/ci01-node-test-ci.log",
+      "sha256": "c0f509f45e12f0fcf71939c520be4770673cb504e7c44622060ce111efd43279"
+    },
+    {
+      "file": "refactor/.cache/ci01-node-metadata.log",
+      "sha256": "7ed48f9eab2ac84ff388255dc87c7e28bcaec5125a5fee1651b9326946901e15"
+    },
+    {
+      "file": "refactor/.cache/ci01-node-actionlint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/ci01-node-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "inputs": [
+    {
+      "file": "scripts/package-runtime.mjs",
+      "sha256": "ecbe917118e67e4c53965002912bf4bded821f6bd6d00db1f3f1a56e62cab732"
+    },
+    {
+      "file": "scripts/package-consumer.mjs",
+      "sha256": "3ab9a6ea73981f777ff7db8a7cb0e54c61b5be43c1bcbc05013423afd1645a25"
+    },
+    {
+      "file": "scripts/package-check.mjs",
+      "sha256": "8b4a65f7f65083104cb0dba6325e622f221574c213f59656367c3c71b610571b"
+    },
+    {
+      "file": "test/package/runtime.cjs",
+      "sha256": "cf70882e29817dacfde9323b54890c3d0ae23eb2536c98ce90d573963de9721f"
+    },
+    {
+      "file": "test/package-runtime.test.js",
+      "sha256": "633e15b760c2ea8b9a0cb3eee49fde353f77a8dda7655595f9bded13e48dc4cb"
+    },
+    {
+      "file": "test/package-check.test.js",
+      "sha256": "e4f41015c81331ef085a158ec0330e82786402aa4f7e0308b7e3b1a95f2a6ff5"
+    },
+    {
+      "file": "refactor/scripts/ci-workflow.mjs",
+      "sha256": "588ad0e032c3e9a16620202a21bd293edfb042954411f58d7352d6fee38a631c"
+    },
+    {
+      "file": "refactor/scripts/ci-workflow.test.mjs",
+      "sha256": "6cac9f185739e9ea7753f7220ddcfa4b708a9699c029b998e2e257f6a04dcdb0"
+    },
+    {
+      "file": ".github/workflows/nodejs.yml",
+      "sha256": "f3f8476f4a35a80845350f83beaba15fdb70690273f9b56e4614b5e048d002bd"
+    },
+    {
+      "file": "package.json",
+      "sha256": "4b68d39f4e8fb3c1634ab11bde8686c48aa277e2bf2775a4bf3472f2d1030aca"
+    }
+  ],
+  "inputByteScope": "Local working-tree bytes; Git checkout line endings may differ"
+}

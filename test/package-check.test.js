@@ -22,7 +22,7 @@ test('Package checks reject missing files, missing wildcard exports and internal
 test('Actual isolated runtime rejects removed default exports and required files', async () => {
   const { dir } = await publishedConsumer()
   try {
-    assert.equal(runtimeConsumer(dir, { baseline: true }).checks.length, 20 + Object.keys(emitterContracts).length)
+    assert.equal(runtimeConsumer(dir, { baseline: true }).checks.length, 22 + Object.keys(emitterContracts).length)
     assert.throws(() => runtimeConsumer(dir), /Command failed/)
     const esm = path.join(dir, 'node_modules/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.mjs')
     const original = fs.readFileSync(esm)

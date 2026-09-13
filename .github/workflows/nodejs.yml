@@ -107,6 +107,30 @@ jobs:
         run: |
           yarn test:package 2>&1 | tee refactor/.cache/ci/package.log
           node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
+      - name: Select Node 20 consumer runtime
+        id: consumer-node-20
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 20.19.0
+          package-manager-cache: false
+      - name: Verify Node 20 installed consumers
+        run: node scripts/package-runtime.mjs --expected-node 20.19.0 2>&1 | tee refactor/.cache/ci/consumer-node-20.log
+      - name: Select Node 22 consumer runtime
+        id: consumer-node-22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22.12.0
+          package-manager-cache: false
+      - name: Verify Node 22 installed consumers
+        run: node scripts/package-runtime.mjs --expected-node 22.12.0 2>&1 | tee refactor/.cache/ci/consumer-node-22.log
+      - name: Restore canonical runtime for browser tools
+        id: restore-canonical-node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - name: Verify canonical installed consumers
+        run: node scripts/package-runtime.mjs --canonical 2>&1 | tee refactor/.cache/ci/consumer-node-canonical.log
       - name: Run all three engines
         run: yarn test:browser 2>&1 | tee refactor/.cache/ci/browser.log
       - name: Verify iframe cached history and interrupted navigation

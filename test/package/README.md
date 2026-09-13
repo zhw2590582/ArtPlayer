@@ -35,8 +35,23 @@ type failures; all five groups now require zero diagnostics. Exact known
 diagnostics are referenced by `known-types.json` and `test/types/known-diagnostics.json`.
 Unexpected errors and unexpectedly removed errors both require investigation.
 Remove a known case when its owning task fixes it; keep frozen release evidence intact.
-`yarn test:package:release` additionally rejects any remaining known type errors.
+`yarn test:package:release` additionally rejects remaining known type and runtime blockers.
 Passing this command alone is not authorization or sufficient evidence to publish.
+
+`scripts/package-runtime.mjs` uses only Node built-ins and can reinstall the exact checked
+tarballs under a different Node. First run `yarn test:package` on the canonical toolchain,
+then use the selected executable with `scripts/package-runtime.mjs --expected-node 20.19.0`
+or `--expected-node 22.12.0`; `yarn test:package:runtime` verifies canonical Node.
+Each run checks HEAD, archive digests, the frozen offline install, installed bytes and
+the actual child version. Reports and failure logs are `runtime-node-<version>.*` in
+the same package output directory. Old reports without source/toolchain fields must
+be rebuilt. CI restores canonical Node before running browser tools.
+
+CORE-25 remains an explicit defect: both published and candidate static defaults throw
+without navigator. The fixture tests that exact failure on every runtime, then uses an
+identical controlled language for default-value comparison and restores the global.
+`knownRuntimeBlockers=1` prevents strict release success; ordinary observation tests
+passing do not mean the defect is fixed. See [Node evidence](../../refactor/changes/2026-09-13-CI-01-node-consumers.md).
 
 The optional core `artplayer/runtime` entry has eight additional strict consumer
 groups: TS 5.1.6 and 5.9.3 each check Node10 CommonJS, NodeNext CJS/ESM and Bundler.

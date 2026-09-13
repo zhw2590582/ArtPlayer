@@ -45,7 +45,7 @@
     "check:toolchain": "node scripts/check-toolchain.mjs",
     "lint:fix": "eslint \"packages/*/{src,public,types,package.json}\" \"scripts/*.{js,mjs}\" \"test/*\" \"docs/assets/ts/*\" \"types/*.d.ts\" \"playwright*.config.js\" --fix",
     "check:plan": "node refactor/scripts/plan.mjs --check",
-    "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js test/declarations.test.js test/editor-types.test.js test/coverage.test.js test/performance-report.test.js test/media-gate.test.js test/ci-summary.test.js",
+    "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js test/declarations.test.js test/editor-types.test.js test/coverage.test.js test/performance-report.test.js test/media-gate.test.js test/ci-summary.test.js test/package-runtime.test.js",
     "test:baseline": "node --test refactor/scripts/*.test.mjs",
     "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:ci && yarn test:contracts && yarn check:contracts --report && yarn check:plan && yarn lint && yarn check:types && yarn typecheck && yarn test",
     "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
@@ -92,7 +92,8 @@
     "test:multiple-subtitles-types-package": "node refactor/scripts/multiple-subtitles-package-types.mjs",
     "test:jassub": "node --test test/jassub.test.js refactor/scripts/jassub-contract.test.mjs",
     "check:ci": "node refactor/scripts/ci-workflow.mjs",
-    "test:ci": "node --test test/ci-summary.test.js refactor/scripts/ci-workflow.test.mjs refactor/scripts/impact.test.mjs"
+    "test:ci": "node --test test/ci-summary.test.js refactor/scripts/ci-workflow.test.mjs refactor/scripts/impact.test.mjs test/package-runtime.test.js",
+    "test:package:runtime": "node scripts/package-runtime.mjs --canonical"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

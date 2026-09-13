@@ -68,6 +68,22 @@ export function validateCIWorkflow(source) {
   }
   const browser = workflow.jobs['browser-smoke']
   assert(browser.steps.some(step => step.run?.startsWith('yarn test:browser:install --with-deps') && !Object.hasOwn(step, 'if')), 'Browser dependencies must install even on cache hits')
+  let consumerIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package'))
+  for (const [id, version, command] of [
+    ['consumer-node-20', '20.19.0', 'node scripts/package-runtime.mjs --expected-node 20.19.0 2>&1 | tee refactor/.cache/ci/consumer-node-20.log'],
+    ['consumer-node-22', '22.12.0', 'node scripts/package-runtime.mjs --expected-node 22.12.0 2>&1 | tee refactor/.cache/ci/consumer-node-22.log'],
+    ['restore-canonical-node', null, 'node scripts/package-runtime.mjs --canonical 2>&1 | tee refactor/.cache/ci/consumer-node-canonical.log'],
+  ]) {
+    const index = browser.steps.findIndex(step => step.id === id)
+    assert(index > consumerIndex, 'Build once before each ordered consumer runtime switch')
+    const step = browser.steps[index]
+    assert(step.uses?.startsWith('actions/setup-node@') && !Object.hasOwn(step, 'if'), 'Consumer Node setup cannot be skipped')
+    assert.deepEqual(step.with, version ? { 'node-version': version, 'package-manager-cache': false } : { 'node-version-file': '.node-version', 'package-manager-cache': false }, 'Use exact consumer versions and restore the canonical browser runtime')
+    const probe = browser.steps[index + 1]
+    assert(probe?.run === command && !Object.hasOwn(probe, 'if'), 'Run the installed consumer on the selected Node')
+    consumerIndex = index + 1
+  }
+  assert(browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser ')) > consumerIndex, 'Browser tools must run after canonical Node restoration')
   const pages = workflow.jobs.checks.steps.find(step => step.uses?.startsWith('actions/upload-pages-artifact@'))
   assert.equal(pages?.if, 'inputs.pages-artifact && github.ref == \'refs/heads/master\' && matrix.os == \'ubuntu-latest\'', 'Only one trusted matrix leg can prepare Pages')
   return { jobs: requiredJobs, systems, summary: summary.name }

@@ -9,6 +9,8 @@ import ts from 'typescript'
 import compat from 'typescript-compat'
 import runtimeCompat from 'typescript-runtime-compat'
 
+export { runtimeConsumer } from './package-runtime.mjs'
+
 export const workspace = fileURLToPath(new URL('../', import.meta.url))
 export const names = ['artplayer', 'artplayer-plugin-chapter']
 export const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'))
@@ -25,13 +27,6 @@ export function removeConsumer(dir) {
   assert.equal(path.dirname(fs.realpathSync(dir)), fs.realpathSync(os.tmpdir()))
   assert(path.basename(dir).startsWith('artplayer-consumer-'), 'Refusing unrelated temporary cleanup')
   fs.rmSync(dir, { recursive: true, force: true })
-}
-
-export function runtimeConsumer(dir, { baseline = false } = {}) {
-  fs.copyFileSync(path.join(workspace, 'test/package/runtime.cjs'), path.join(dir, 'runtime.cjs'))
-  fs.copyFileSync(path.join(workspace, 'test/contracts/emitter.js'), path.join(dir, 'emitter.mjs'))
-  writeJson(path.join(dir, 'expected.json'), { version: readJson(path.join(dir, 'node_modules/artplayer/package.json')).version, baseline })
-  return JSON.parse(run(['runtime.cjs'], dir))
 }
 
 export function typeConsumers(dir, { precise = false } = {}) {
