@@ -37,6 +37,21 @@ The root declaration retains its historical NodeNext ESM namespace shape; use
 `/runtime` for a directly callable default import in that mode. This is an opt-in
 type entry, and does not require changes to existing JavaScript consumers.
 
+## Media access and separate audio
+
+Cross-origin media needs both `moreVideoAttr: { crossOrigin: 'anonymous' }` on
+ArtPlayer and an appropriate `Access-Control-Allow-Origin` response from the media
+server. Set the attribute before loading the source. Without CORS access, the
+default Web Audio route becomes silent even when the video timeline advances;
+Chromium supplies zero PCM and Firefox may supply no chunks. A same-origin URL
+that redirects to an unapproved origin has the same restriction. ASR does not
+change request credentials or bypass browser media security.
+
+ASR captures `art.video`. When used with `artplayer-plugin-audio-track`, the
+independent `audio` element is not mixed into recognition. Muting the main video
+silences its default ASR input even if a consumer separately unmutes that audio
+element. Both plugins keep their existing volume and playback APIs.
+
 ## Maintenance
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the current audio flow, public behavior,

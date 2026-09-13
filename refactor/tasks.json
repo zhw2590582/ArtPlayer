@@ -2714,7 +2714,9 @@
         "baselines/asr-fallback-validation.json",
         "baselines/asr-core.json",
         "baselines/asr-local-core-validation.json",
-        "changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md"
+        "changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md",
+        "baselines/asr-combinations-validation.json",
+        "changes/2026-09-13-PKG-ASR-05-cors-combinations.md"
       ]
     },
     {

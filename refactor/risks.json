@@ -4672,6 +4672,21 @@
       ],
       "compatibleResolution": "Establish an explicit compatible ownership contract for external audio graphs without silently changing default direct-path PCM/mute semantics.",
       "closureCriteria": "Natural Firefox external-owner integration has no duplicate output or has a documented, validated explicit ownership mode; controlled binding rejection alone cannot close this finding."
+    },
+    {
+      "id": "ASR-CORS-01",
+      "title": "Default WebAudio binding silences CORS-cross-origin media that otherwise advances normally",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-ASR-05"
+      ],
+      "evidence": [
+        "test/browser/asr-cors.spec.js",
+        "refactor/baselines/asr-combinations-validation.json"
+      ],
+      "compatibleResolution": "Document required CORS setup and provide an explicitly chosen capture path that never takes over media playback; do not bypass browser security or silently change default PCM semantics.",
+      "closureCriteria": "Authorized capture and same-origin recovery remain valid; an explicit integration avoids direct ownership for restricted input, fails or stays silent without rerouting playback, and is documented with native evidence."
     }
   ]
 }

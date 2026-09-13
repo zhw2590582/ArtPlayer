@@ -212,3 +212,4 @@
 | ASR-VOLUME-01 | resolved / 已复现 | ASR applies media volume twice and squares playback amplitude | PKG-ASR-07 |
 | ASR-FALLBACK-01 | resolved / 已复现 | Captured fallback produces a second audible route even when the video is muted | PKG-ASR-08 |
 | ASR-FOREIGN-01 | open / 已复现 | Firefox permits parallel native media-element owners instead of selecting capture fallback | PKG-ASR-05 |
+| ASR-CORS-01 | open / 已复现 | Default WebAudio binding silences CORS-cross-origin media that otherwise advances normally | PKG-ASR-05 |

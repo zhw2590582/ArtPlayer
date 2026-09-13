@@ -112,6 +112,15 @@ From the repository root:
 - `yarn test:browser test/browser/asr-fallback.spec.js`: native capture/Worklet
   audio with an external media owner, silent ASR output even while muted, stop,
   fresh tracks after restart/source change and independent context cleanup.
+- `yarn test:browser test/browser/asr-cors.spec.js`: CORS-authorized media,
+  opaque direct/redirected media, native zero-output or absent-chunk observations,
+  and restoration after switching to a same-origin source. Default routing keeps
+  the [Web Audio CORS restriction](https://www.w3.org/TR/webaudio-1.0/#MediaElementAudioSourceNode-security);
+  this test does not claim that unsupported cross-origin playback is repaired.
+- `yarn test:browser test/browser/asr-audio-track.spec.js`: separate audio-track
+  ownership, pause/update/stop/destroy and main-video-only PCM. Both plugin orders
+  are exercised in distinct cases. `ARTPLAYER_AUDIO_ARTIFACT` selects a real
+  audio-track distribution alongside `ARTPLAYER_ASR_ARTIFACT`.
 - `yarn typecheck`: includes the package strict/noUncheckedIndexedAccess project.
 - `yarn test:asr-types-package`: packs and installs core/ASR outside the workspace,
   checks frozen 2.0/2.1 consumers and candidate declarations in strict compiler
@@ -127,6 +136,9 @@ From the repository root:
 
 Windows Playwright WebKit 26.6 lacks AudioContext and AudioWorkletNode. Its native
 ASR cases remain explicit skips and do not establish Safari/device compatibility.
-Real fallback track replacement, native volume/mute, CORS, unsupported media and
-physical devices remain PKG-ASR-05 acceptance work. Do not use the demo's external
+Native direct/fallback routing, volume/mute, CORS and audio-track combinations
+have scoped browser evidence. Unsupported media, external-owner integration,
+Safari and physical devices remain PKG-ASR-05 acceptance work. CORS restrictions
+and main-video-only capture are explicit integration boundaries, not a claim
+that every media source can be recognized. Do not use the demo's external
 recognizer service as a prerequisite for local audio verification.

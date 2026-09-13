@@ -116,6 +116,15 @@ const server = http.createServer((req, res) => {
     assert(['GET', 'HEAD'].includes(req.method), 'Unsupported method')
     const url = new URL(req.url, `http://127.0.0.1:${port}`)
     const caseId = url.searchParams.get('case')
+    if (url.pathname === '/test/asr-cors.m4a') {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      send(req, res, files.get('/test/audio-tone.m4a'), url.pathname)
+      return
+    }
+    if (url.pathname === '/test/asr-opaque-redirect') {
+      res.writeHead(302, { Location: `http://localhost:${port}/test/audio-tone.m4a` }).end()
+      return
+    }
     if (url.pathname === '/test/iframe-boundary-redirect') {
       res.writeHead(302, { Location: `http://localhost:${port}/test/iframe-boundary-child.html${url.search}` }).end()
       return

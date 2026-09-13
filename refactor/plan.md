@@ -532,7 +532,7 @@
 - PKG-ASR-02: [记录](changes/2026-09-13-PKG-ASR-02-audio-baseline.md) [记录](baselines/asr-audio-validation.json)
 - PKG-ASR-03: [记录](changes/2026-09-13-PKG-ASR-03-audio-ownership.md) [记录](baselines/asr-ownership-validation.json)
 - PKG-ASR-04: [记录](changes/2026-09-13-PKG-ASR-04-public-types.md) [记录](baselines/asr-types-validation.json) [记录](baselines/asr-type-diagnostics.json)
-- PKG-ASR-05: [记录](baselines/asr-volume-validation.json) [记录](baselines/asr-fallback-validation.json) [记录](baselines/asr-core.json) [记录](baselines/asr-local-core-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md)
+- PKG-ASR-05: [记录](baselines/asr-volume-validation.json) [记录](baselines/asr-fallback-validation.json) [记录](baselines/asr-core.json) [记录](baselines/asr-local-core-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-local-core-checkpoint.md) [记录](baselines/asr-combinations-validation.json) [记录](changes/2026-09-13-PKG-ASR-05-cors-combinations.md)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)

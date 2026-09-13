@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-ASR-05 CORS 与独立音轨检查点
+
+新增跨源允许/不允许/重定向及同源恢复、audio-track组合生命周期与独立音频归属
+验证；source/main/legacy共72过、36项Windows WebKit能力跳过，无失败或重试。
+初次Firefox无回调与Chromium零样本差异已单独记录。默认无CORS媒体会被绑定后
+静音，ASR-CORS-01保持open；不能把边界观察当作修复。见[变更](changes/2026-09-13-PKG-ASR-05-cors-combinations.md)
+与[证据](baselines/asr-combinations-validation.json)。README和架构已说明配置。
+227项：129 done、17 doing、81 todo；209风险。ASR-05继续，显式外部归属、设备
+和完整发行仍待完成。生产代码和产物未改变；没有推送或发布。
+
+
 ## PKG-ASR-05 本地编辑器与相邻核心检查点
 
 真实 npm 5.3.0 核心扩大对照：main 14过/7能力跳过，legacy 6过/3能力跳过。
