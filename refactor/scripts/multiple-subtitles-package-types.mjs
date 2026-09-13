@@ -62,14 +62,24 @@ Promise.all(['artplayer-plugin-multiple-subtitles', 'artplayer-plugin-multiple-s
       for (const [compiler, mode] of (plugin.label === 'candidate' ? candidateModes : historicalModes)) {
         const next = mode.startsWith('nodenext')
         const extension = next ? mode.endsWith('-cjs') ? 'cts' : 'mts' : 'ts'
-        const source = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/multiple-subtitles-public.ts' : 'refactor/fixtures/consumers/multiple-subtitles-published.ts'), 'utf8')
+        let source = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/multiple-subtitles-public.ts' : 'refactor/fixtures/consumers/multiple-subtitles-published.ts'), 'utf8')
+        if (plugin.label === 'candidate' && mode === 'nodenext-esm') {
+          source = source
+            .replace('import legacy from \'artplayer-plugin-multiple-subtitles\'', 'import legacyModule from \'artplayer-plugin-multiple-subtitles\'\nconst legacy = legacyModule.default')
+            .replace('import legacyEntry from \'artplayer-plugin-multiple-subtitles/legacy\'', 'import legacyEntryModule from \'artplayer-plugin-multiple-subtitles/legacy\'\nconst legacyEntry = legacyEntryModule.default')
+        }
+        if (mode.endsWith('-no-interop'))
+          source = source.replace('import runtime from \'artplayer-plugin-multiple-subtitles/runtime\'', 'import runtime = require(\'artplayer-plugin-multiple-subtitles/runtime\')')
         const filename = path.join(consumer, `consumer.${extension}`)
-        const historical = path.join(consumer, `historical.${extension}`)
-        fs.copyFileSync(path.join(workspace, 'refactor/fixtures/consumers/multiple-subtitles-published.ts'), historical)
-        const files = plugin.label === 'candidate' ? [filename, historical] : [filename]
-        if (mode === 'nodenext-cjs' && plugin.label === 'candidate') {
-          const commonjs = path.join(consumer, 'commonjs.cts')
-          fs.writeFileSync(commonjs, `import vtt = require('artplayer-plugin-multiple-subtitles'); import legacy = require('artplayer-plugin-multiple-subtitles/legacy'); import runtime = require('artplayer-plugin-multiple-subtitles/runtime'); vtt.default({subtitles: []}); legacy.default({subtitles: []}); runtime({}); runtime.default({});`)
+        const files = [filename]
+        if (plugin.label === 'candidate' && mode !== 'bundler-esm' && mode !== 'nodenext-esm') {
+          const commonjs = path.join(consumer, `commonjs.${extension}`)
+          fs.writeFileSync(commonjs, `import vtt = require('artplayer-plugin-multiple-subtitles'); import legacy = require('artplayer-plugin-multiple-subtitles/legacy'); import runtime = require('artplayer-plugin-multiple-subtitles/runtime');
+import type Artplayer from 'artplayer'; declare const art: Artplayer;
+const replacement: typeof vtt.default = (_option) => (_art: Artplayer) => ({name: 'multipleSubtitles'});
+const legacyReplacement: typeof legacy.default = replacement;
+vtt.default({subtitles: []}); legacy.default({subtitles: []}); runtime({}); runtime.default({});
+const option: runtime.RuntimeOption = {}; const pending: Promise<runtime.Result> = runtime(option)(art); void pending; void legacyReplacement;`)
           files.push(commonjs)
         }
         const options = { strict: true, noEmit: true, skipLibCheck: false, types: [], esModuleInterop: !mode.endsWith('-no-interop'), target: compiler.ScriptTarget.ES2020, lib: ['lib.es2020.d.ts', 'lib.dom.d.ts'], module: next ? compiler.ModuleKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleKind.ESNext : compiler.ModuleKind.CommonJS, moduleResolution: next ? compiler.ModuleResolutionKind.NodeNext : mode === 'bundler-esm' ? compiler.ModuleResolutionKind.Bundler : compiler.ModuleResolutionKind.NodeJs }
@@ -80,7 +90,7 @@ Promise.all(['artplayer-plugin-multiple-subtitles', 'artplayer-plugin-multiple-s
             const actual = fs.realpathSync(file.fileName)
             assert(actual.startsWith(fs.realpathSync(consumer) + path.sep) || (program.isSourceFileDefaultLibrary(file) && path.dirname(actual) === fs.realpathSync(path.dirname(compiler.sys.getExecutingFilePath()))), `Types escaped installed consumer: ${actual}`)
           }
-          return compiler.getPreEmitDiagnostics(program).map(item => ({ code: item.code, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n') }))
+          return compiler.getPreEmitDiagnostics(program).map(item => ({ code: item.code, line: item.file && item.start !== undefined ? item.file.getLineAndCharacterOfPosition(item.start).line + 1 : null, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n').replaceAll(consumer.replaceAll('\\', '/'), '<consumer>') }))
         }
         const diagnostics = compile(source)
         const historicalFailure = plugin.version === '1.2.0' && mode === 'nodenext-esm'
@@ -88,8 +98,23 @@ Promise.all(['artplayer-plugin-multiple-subtitles', 'artplayer-plugin-multiple-s
         writeJson(path.join(output, `${plugin.label}-${compiler.version}-${mode}-diagnostics.json`), { diagnostics, historicalFailure })
         assert.deepEqual(diagnostics.map(item => item.code), expected, `${plugin.label} ${compiler.version} ${mode}`)
         const invalid = plugin.label === 'candidate' ? compile(source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')) : []
-        if (plugin.label === 'candidate')
-          assert.equal(invalid.length, 12, 'Installed declarations must reject all invalid uses')
+        if (plugin.label === 'candidate') {
+          assert.equal(invalid.length, 16, 'Installed declarations must reject all invalid uses')
+          const expectedLines = []
+          let line = 1
+          for (const text of source.split('\n')) {
+            if (text.trimStart().startsWith('// @ts-expect-error'))
+              expectedLines.push(line)
+            else line++
+          }
+          assert.deepEqual(invalid.map(item => item.line).sort((a, b) => a - b), expectedLines, 'Each invalid statement must fail at its own line')
+        }
+        const published = plugin.label === 'candidate' ? compile(fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/multiple-subtitles-published.ts'), 'utf8')) : diagnostics
+        assert.deepEqual(published.map(item => item.code), (plugin.label === 'candidate' || plugin.version === '1.2.0') && mode === 'nodenext-esm' ? [2322, 2344, 7019, 2349, 2344, 2322, 2344, 2349] : [], 'Preserve exact historical direct-consumer diagnostic codes')
+        const namespace = (plugin.label === 'candidate' || plugin.version === '1.2.0') && mode === 'nodenext-esm'
+          ? compile(fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/multiple-subtitles-published.ts'), 'utf8').replace('import subtitles from \'artplayer-plugin-multiple-subtitles\'', 'import subtitlesModule from \'artplayer-plugin-multiple-subtitles\'\nconst subtitles = subtitlesModule.default'))
+          : []
+        assert.deepEqual(namespace, [], 'Latest published NodeNext namespace remains valid')
         const commonjs = {}
         if (mode === 'node10-commonjs' || mode === 'nodenext-cjs') {
           const fixture = fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/multiple-subtitles-commonjs.ts'), 'utf8')
@@ -105,14 +130,14 @@ Promise.all(['artplayer-plugin-multiple-subtitles', 'artplayer-plugin-multiple-s
             commonjs[form] = { diagnostics, typeChecks: diagnostics.length === 0 }
           }
         }
-        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid, commonjs })
+        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid, published, namespace, commonjs })
       }
     }
     finally {
       removeConsumer(consumer)
     }
   }
-  writeJson(path.join(output, 'report.json'), { suite: 'multiple-subtitles-isolated-package-types', introducedBy: 'PKG-MULTI-SUB-04', scope: 'Three actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline frozen reinstalls and byte identity verified. Expected old NodeNext ESM and CommonJS module extraction failures remain explicit; these do not count as candidate compatibility success. Raw historical export-assignment type compatibility remains unresolved. Full device and distribution acceptance remains separate.', packages, published: candidates.slice(0, 3).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: hash(fs.readFileSync(pkg.archive)), missingEntrypoints: pkg.missingEntrypoints })), matrix })
+  writeJson(path.join(output, 'report.json'), { suite: 'multiple-subtitles-isolated-package-types', introducedBy: 'PKG-MULTI-SUB-04', scope: 'Three actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline frozen reinstalls and byte identity verified. Latest npm 1.2.0 factory shape, synchronous result and NodeNext namespace retained under approved ADR-025; its eight old direct-consumer diagnostics are preserved. Earlier 1.0.0/1.1.0 export-assignment conflicts have documented runtime-entry migration. Runtime asynchronous result and CommonJS namespace types pass independently. Full device and distribution acceptance remains separate.', packages, published: candidates.slice(0, 3).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: hash(fs.readFileSync(pkg.archive)), missingEntrypoints: pkg.missingEntrypoints })), matrix })
   console.log(`Multiple subtitles installed matrix verified: ${matrix.length} cases, including ${matrix.filter(item => item.historicalFailure).length} expected historical declaration failure; ${output}`)
 }
 

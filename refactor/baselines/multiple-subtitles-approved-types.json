@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MULTI-SUB-04",
+  "status": "done",
+  "capturedAt": "2026-09-13T08:59:40.613Z",
+  "policy": "type-compatibility-policy.md",
+  "baseline": "Latest actual npm 1.2.0 root type shape; earlier 1.0.0/1.1.0 conflicts migrated under ADR-025.",
+  "checks": {
+    "isolatedReport": "refactor/.cache/multiple-subtitles-package-types-IHnPqy/report.json",
+    "reportSha256": "7380f5caafae2715d85ba2ad4ca7a00e874bf21ff938f251fa47b27942f1fd55",
+    "candidateArchiveSha256": "6c975939960ec7a9182157a5b817b6440a25ced25935357b816b0aa1c1860b0f",
+    "configurations": 22,
+    "candidatePositiveConfigurations": 7,
+    "invalidStatementsPerCandidateConfiguration": 16,
+    "log": "refactor/.cache/multisub04-approved-types.log",
+    "logSha256": "1d0b0e7fd4c4ed45abffd3ea7fbf513d3b6a301dfb0c46110f7df1680731d695",
+    "focusedTests": 7
+  },
+  "preserves": [
+    "Whole factory replacement in both directions, required arguments and historical sync result.",
+    "Latest published valid NodeNext namespace and plain module replacement, old direct-call diagnostics retained.",
+    "Runtime accurate async result, named types and CommonJS/default identity including old no-interop resolution.",
+    "Isolated actual tarball installation, exact installed bytes, offline frozen reinstall."
+  ],
+  "sourceAndDistChanged": false,
+  "browserRerun": false,
+  "limitations": [
+    "Complete shipped archive/deep-entry and example acceptance remains 06; actual browser/core combinations remain 05.",
+    "Existing runtime/source evidence is linked in the completion note; these checks do not establish devices or final npm release readiness."
+  ]
+}

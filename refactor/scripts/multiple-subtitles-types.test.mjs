@@ -40,8 +40,12 @@ artplayerPluginMultipleSubtitles({ subtitles: [{ url: 1 }] });`
 test('Multiple subtitles public extraction stays exact in five modes while runtime methods need no cast', () => {
   const source = fs.readFileSync('test/types/multiple-subtitles-public.ts', 'utf8')
   for (const [compiler, mode] of modes) {
-    assert.deepEqual(checkConsumer(compiler, mode, source), [], `${compiler.version} ${mode}`)
-    assert.equal(checkConsumer(compiler, mode, source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 12)
+    const adapted = mode === 'nodenext-esm'
+      ? source.replace('import legacy from \'artplayer-plugin-multiple-subtitles\'', 'import legacyModule from \'artplayer-plugin-multiple-subtitles\'\nconst legacy = legacyModule.default')
+          .replace('import legacyEntry from \'artplayer-plugin-multiple-subtitles/legacy\'', 'import legacyEntryModule from \'artplayer-plugin-multiple-subtitles/legacy\'\nconst legacyEntry = legacyEntryModule.default')
+      : source
+    assert.deepEqual(checkConsumer(compiler, mode, adapted), [], `${compiler.version} ${mode}`)
+    assert.equal(checkConsumer(compiler, mode, adapted.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')).length, 16)
   }
 })
 

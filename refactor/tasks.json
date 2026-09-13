@@ -2328,7 +2328,7 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "准确 parser/cue/tree/result 类型与真实异步形状",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
@@ -2336,7 +2336,10 @@
         "baselines/multiple-subtitles-runtime-types.json",
         "changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md",
         "baselines/multiple-subtitles-public-types.json",
-        "changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md"
+        "changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md",
+        "type-compatibility-policy.md",
+        "baselines/multiple-subtitles-approved-types.json",
+        "changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md"
       ]
     },
     {

@@ -7,7 +7,10 @@ Both methods return undefined. Root and legacy declarations retain the historica
 `LegacyResult` for existing extraction and replacement-function consumers. The additive
 `artplayer-plugin-multiple-subtitles/runtime` entry describes the actual `Promise<Result>`
 and selection methods. It shares the root implementation, not another plugin instance.
-The factory has a writable `.default` self alias for historical CommonJS access.
+The factory has a writable `.default` self alias for historical CommonJS access. Only
+`RuntimeFactory` requires that property; adding it to the historical root function type
+would invalidate replacement functions. Root option and registration result remain exact
+to npm 1.2.0; the runtime entry requires an option object but allows omitted `subtitles`.
 
 ## Current module boundaries
 
@@ -31,9 +34,11 @@ The factory has a writable `.default` self alias for historical CommonJS access.
   The pinned upstream reference and full adaptation check are in
   `../../refactor/baselines/multiple-subtitles-vendor/` and
   `../../refactor/scripts/multiple-subtitles-vendor.mjs`.
-- `types/artplayer-plugin-multiple-subtitles.d.ts` owns public data types and the historical
-  callable signature. Root/legacy `.d.mts` and `.d.cts` forward that signature; `runtime.d.*`
-  forwards the precise asynchronous factory. Classic resolution uses typesVersions.
+- `types/artplayer-plugin-multiple-subtitles.d.ts` owns public data types and the latest
+  published function signature. Root/legacy exports use a types-first mapping to this file,
+  preserving the old NodeNext ESM namespace. Runtime `.d.mts` supplies a callable default;
+  runtime `.d.cts` and classic `.d.ts` use export-assignment with merged namespace type
+  aliases. Classic subpath resolution uses typesVersions. Root and runtime share JS files.
 - `scripts/build-ts.js` generates the editor's global factory and named type namespace from
   this declaration through the semantic generator. Never edit the generated editor file.
 - `../../docs/assets/example/multiple.subtitles.js` demonstrates the real plugin name,
@@ -111,7 +116,15 @@ Public declaration tests check exact old extraction/replacement signatures, accu
 types and negative uses with TS 5.9.3 and 4.3.5. The package test packs core and plugin, installs
 outside the workspace and checks Node10/NodeNext/Bundler modes plus real CJS/ESM identities.
 Historical 1.0.0/1.1.0 export-assignment declarations and 1.2.0 default-module declarations
-disagree on raw `import = require` extraction. Task 04 retains that unresolved boundary;
-default-import compatibility must not be presented as proof of every historical module form.
+disagree on raw `import = require` extraction. The approved policy in
+`../../refactor/type-compatibility-policy.md` and ADR-025 prioritizes latest npm 1.2.0.
+Earlier consumers have the explicit runtime-entry migration in README; this is a declared
+type migration, not proof that contradictory historical declarations all work unchanged.
+Installed tests retain eight original NodeNext ESM direct-consumer diagnostics for both
+1.2.0 and the candidate, while a namespace consumer remains valid. Frozen direct/default
+CommonJS consumers preserve each old version's diagnostics as well. Candidate positives
+check both factory-assignment directions and accurate asynchronous runtime methods in
+seven compiler modes, including classic CommonJS without interop. Removing suppression
+comments must reject all 16 invalid statements at their exact lines in every mode.
 Tasks 05/06 still own complete core/device combinations and demo acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.

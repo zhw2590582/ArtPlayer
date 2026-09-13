@@ -4276,7 +4276,7 @@
       "id": "MULTI-SUB-TYPE-01",
       "title": "Declarations omit async registration, tracks/reset and make the subtitles array required",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-MULTI-SUB-04"
       ],
@@ -4290,8 +4290,14 @@
         "refactor/scripts/multiple-subtitles-types.test.mjs",
         "refactor/scripts/multiple-subtitles-package-types.mjs"
       ],
-      "compatibleResolution": "Root/legacy retain 1.2.0 default-module extraction and replaceable synchronous factory types; additive runtime entry exposes accurate Promise and methods; writable default self alias preserves historical valid JS forms. Actual installed old 1.0.0/1.1.0 raw export-assignment extraction conflicts with 1.2.0 declarations and remains awaiting explicit resolution. Do not close on default-import success alone.",
-      "closureCriteria": "Strict old/new consumers and installed type views cover parameters, result methods and factory replacement."
+      "compatibleResolution": "Approved latest npm 1.2.0 root factory/namespace stays exact; additive runtime supplies accurate asynchronous and module forms. Earlier 1.0.0/1.1.0 type conflicts have explicit migration under ADR-025.",
+      "closureCriteria": "Strict old/new consumers and installed type views cover parameters, result methods and factory replacement.",
+      "resolutionEvidence": [
+        "refactor/baselines/multiple-subtitles-approved-types.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md",
+        "refactor/type-compatibility-policy.md"
+      ],
+      "resolutionRationale": "22 isolated installation configurations, seven zero-diagnostic candidate modes with 16 exact invalid statements each, 7 focused tests. Legal latest namespace and complete factory replacements retained, historical incompatible forms recorded. No production JS changed."
     },
     {
       "id": "MULTI-SUB-MERGE-01",
@@ -4368,9 +4374,11 @@
         "refactor/baselines/multiple-subtitles-public-types.json",
         "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md",
         "refactor/scripts/multiple-subtitles-types.test.mjs",
-        "refactor/scripts/multiple-subtitles-package-types.mjs"
+        "refactor/scripts/multiple-subtitles-package-types.mjs",
+        "refactor/baselines/multiple-subtitles-approved-types.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md"
       ],
-      "compatibleResolution": "Root/legacy retain 1.2.0 default-module extraction and replaceable synchronous factory types; additive runtime entry exposes accurate Promise and methods; writable default self alias preserves historical valid JS forms. Actual installed old 1.0.0/1.1.0 raw export-assignment extraction conflicts with 1.2.0 declarations and remains awaiting explicit resolution. Do not close on default-import success alone.",
+      "compatibleResolution": "Approved latest npm 1.2.0 root factory/namespace stays exact; additive runtime supplies accurate asynchronous and module forms. Earlier 1.0.0/1.1.0 type conflicts have explicit migration under ADR-025. Complete shipped archive/deep-entry and example acceptance remains 06; actual browser/core combinations remain 05.",
       "closureCriteria": "Actual installed CJS/ESM/global/legacy consumers and their declarations are verified."
     },
     {

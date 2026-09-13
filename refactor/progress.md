@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-04 Multiple Subtitles 类型兼容实施完成
+
+已落实用户批准的最新npm 1.2.0根类型及较早1.0.0/1.1.0迁移规则；/runtime准确
+描述异步结果和模块形式。22个真实安装配置、7个候选配置正例通过，每配置拒绝
+16个指定反例，7项专项测试含编辑器通过。见[完成记录](changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md)及[证据](baselines/multiple-subtitles-approved-types.json)。
+MULTI-SUB-TYPE-01关闭，MULTI-SUB-EXPORT-01仍保留组合/完整分发验证。源码与dist未变，
+不新增浏览器设备通过声明。228项：135 done、15 doing、78 todo；不推送或发布。
+
+
 ## PKG-VTT-THUMB-04 VTT Thumbnail 类型兼容实施完成
 
 已落实用户批准的最新npm 1.1.0根类型及较早1.0.x迁移规则；/runtime准确
