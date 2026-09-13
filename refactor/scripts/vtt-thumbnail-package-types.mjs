@@ -55,12 +55,15 @@ assert.equal(require('artplayer-plugin-vtt-thumbnail/runtime'), require('artplay
 Promise.all(['artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-vtt-thumbnail/runtime', 'artplayer-plugin-vtt-thumbnail/legacy'].map(name => import(name))).then(([root, runtime, legacy]) => { assert.deepEqual(Object.keys(root), ['default']); assert.deepEqual(Object.keys(runtime), ['default']); assert.equal(runtime.default, root.default); assert.equal(root.default.default, root.default); assert.equal(legacy.default, require('artplayer-plugin-vtt-thumbnail/legacy')); assert.equal(legacy.default.default, legacy.default); }).catch(error => { console.error(error); process.exitCode = 1; });`
         : plugin.version === '1.0.0'
           ? `const assert = require('node:assert/strict'); assert.throws(() => require('artplayer-plugin-vtt-thumbnail'), error => error.name === 'SyntaxError' && error.message.includes('Invalid regular expression')); console.log('Expected historical 1.0.0 invalid runtime syntax preserved');`
-          : `const assert = require('node:assert/strict'); const value = require('artplayer-plugin-vtt-thumbnail'); assert.equal(typeof value, '${plugin.version === '1.1.0' ? 'function' : 'object'}'); assert.equal(typeof (value.default || value)({}), 'function');`)
+          : `const assert = require('node:assert/strict'); const value = require('artplayer-plugin-vtt-thumbnail'); assert.equal(typeof value, '${plugin.version === '1.1.0' ? 'function' : 'object'}'); assert.equal(typeof (value.default || value)({}), 'function'); ${plugin.version === '1.1.0' ? '' : 'assert.throws(() => value({}), { name: \'TypeError\', message: \'value is not a function\' });'}`)
+      if (plugin.version && plugin.version !== '1.0.0')
+        fs.appendFileSync(runtimeFile, `\nassert.equal(typeof value.default, '${plugin.version === '1.1.0' ? 'undefined' : 'function'}');`)
       fs.writeFileSync(path.join(output, `${plugin.label}-runtime.log`), run([runtimeFile], consumer))
       const candidateModes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
       if (plugin.label === 'candidate')
         candidateModes.push([ts, 'node10-commonjs-no-interop'], [compat, 'node10-commonjs-no-interop'])
-      for (const [compiler, mode] of (plugin.label === 'candidate' ? candidateModes : [[ts, 'node10-commonjs'], [compat, 'node10-commonjs']])) {
+      const historicalModes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
+      for (const [compiler, mode] of (plugin.label === 'candidate' ? candidateModes : historicalModes)) {
         const next = mode.startsWith('nodenext')
         const extension = next ? mode.endsWith('-cjs') ? 'cts' : 'mts' : 'ts'
         const source = fs.readFileSync(path.join(workspace, plugin.label === 'candidate' ? 'test/types/vtt-thumbnail-public.ts' : 'refactor/fixtures/consumers/vtt-thumbnail-published.ts'), 'utf8')
@@ -84,22 +87,36 @@ Promise.all(['artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-vtt-thumbnail/r
           return compiler.getPreEmitDiagnostics(program).map(item => ({ code: item.code, message: compiler.flattenDiagnosticMessageText(item.messageText, '\n') }))
         }
         const diagnostics = compile(source)
-        const expected = []
-        const historicalFailure = false
+        const historicalFailure = plugin.version === '1.1.0' && mode === 'nodenext-esm'
+        const expected = historicalFailure ? [2322, 2344, 2349, 2344, 2322, 2344, 2349] : []
         writeJson(path.join(output, `${plugin.label}-${compiler.version}-${mode}-diagnostics.json`), { diagnostics, historicalFailure })
         assert.deepEqual(diagnostics.map(item => item.code), expected, `${plugin.label} ${compiler.version} ${mode}`)
         const invalid = plugin.label === 'candidate' ? compile(source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')) : []
         if (plugin.label === 'candidate')
           assert.equal(invalid.length, 10, 'Installed declarations must reject all invalid uses')
-        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid })
+        const commonjs = {}
+        if (mode === 'node10-commonjs' || mode === 'nodenext-cjs') {
+          const fixture = fs.readFileSync(path.join(workspace, 'refactor/fixtures/consumers/vtt-thumbnail-commonjs.ts'), 'utf8')
+          const oldAssignment = plugin.version?.startsWith('1.0.') === true
+          for (const form of ['direct', 'default']) {
+            const consumer = form === 'direct' ? fixture : fixture.replace('const vtt = plugin', 'const vtt = plugin.default')
+            const diagnostics = compile(consumer)
+            const expected = form === 'default'
+              ? oldAssignment ? [2339] : []
+              : oldAssignment ? [] : [2322, 2344, 2344, compiler === compat ? 2741 : 2322, 2344, 2349]
+            assert.deepEqual(diagnostics.map(item => item.code), expected, `${plugin.label} ${compiler.version} ${mode} require ${form}`)
+            commonjs[form] = { diagnostics, typeChecks: diagnostics.length === 0 }
+          }
+        }
+        matrix.push({ plugin: plugin.label, compiler: compiler.version, mode, historicalFailure, diagnostics, invalid, commonjs })
       }
     }
     finally {
       removeConsumer(consumer)
     }
   }
-  writeJson(path.join(output, 'report.json'), { suite: 'vtt-thumbnail-isolated-package-types', introducedBy: 'PKG-VTT-THUMB-04', scope: 'Five actual published packages (classic default-import consumers on TS 4.3 and 5.9) and packed candidate (seven compiler modes) installed outside the workspace with packed core. Offline/frozen reinstall and byte identity are verified. Candidate provides an opt-in accurate runtime entry; 1.0.0 invalid bundle syntax is retained. Historical NodeNext variants, raw require type replacements, device and full distribution acceptance remain separate.', packages, published: candidates.slice(0, 5).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: hash(fs.readFileSync(pkg.archive)), missingEntrypoints: pkg.missingEntrypoints })), matrix })
-  console.log(`VTT thumbnail installed types passed: ${matrix.length} cases; ${output}`)
+  writeJson(path.join(output, 'report.json'), { suite: 'vtt-thumbnail-isolated-package-types', introducedBy: 'PKG-VTT-THUMB-04', scope: 'Five actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline/frozen reinstall and byte identity are verified. One historical NodeNext ESM declaration failure is expected, not accepted as candidate success. Direct/default import=require extraction and replacement forms reproduce opposing 1.0.x and 1.1.0 declarations; the candidate preserves 1.1.0 forms. The 1.0.x direct module type difference remains unresolved, although old actual CommonJS direct calls already fail. Device and full distribution acceptance remain separate.', packages, published: candidates.slice(0, 5).map(pkg => ({ label: pkg.label, archive: pkg.archive, sha256: hash(fs.readFileSync(pkg.archive)), missingEntrypoints: pkg.missingEntrypoints })), matrix })
+  console.log(`VTT thumbnail installed matrix verified: ${matrix.length} cases, including ${matrix.filter(item => item.historicalFailure).length} expected historical declaration failure; ${output}`)
 }
 
 main().catch((error) => {

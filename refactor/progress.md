@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-VTT-THUMB-04 历史模块形式核对（doing，类型取舍待用户决定）
+
+实际仓库外安装矩阵扩至 32 格默认导入：31 编译通过，1 格复现 1.1.0 NodeNext ESM
+旧声明错误；候选该格通过。另核对 36 个 CommonJS 直接/default 提取和替换形式，
+18 编译通过、18 准确复现两代声明差异，预期失败不等于兼容批准。
+1.0.x 直接模块类型操作虽可通过、真实 CJS 直接调用却失败；1.1.0 改为 default 类型。
+候选保留 1.1.0 类型，并使直接/default 两种 JS 调用均可用；早期纯类型提取仍有迁移差异。
+已测试必需/可选 default 合并方案的具体代价，并向用户请求确认保留最新形状的建议。
+5 项公开类型测试和显式 lint 通过；生产源码/声明/入口/产物不变，复用上一提交的生产
+与浏览器证据，不声称本次重跑全量 CI。见[变更](changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md)
+和[验证](baselines/vtt-thumbnail-module-forms.json)。任务与 TYPE/EXPORT 风险保持未完成。
+222 项：117 done、13 doing、92 todo；独立本地检查点提交，不推送、不发布。
+若决定尚未返回，可先进入依赖已完成的 PKG-MULTI-SUB-01，不以等待暂停整个重构。
+
+
 ## PKG-VTT-THUMB-04 公开类型与安装消费者检查点（doing）
 
 保留 root/legacy 旧参数、同步结果类型及替换工厂赋值，新增 /runtime 表达真实 Promise，

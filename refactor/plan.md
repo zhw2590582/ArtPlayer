@@ -500,7 +500,7 @@
 - PKG-VTT-THUMB-01: [记录](baselines/vtt-thumbnail-release.json) [记录](baselines/vtt-thumbnail-contract.md) [记录](changes/2026-09-13-PKG-VTT-THUMB-01-contract.md)
 - PKG-VTT-THUMB-02: [记录](baselines/vtt-thumbnail-failures.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-02-failures.md)
 - PKG-VTT-THUMB-03: [记录](changes/2026-09-13-PKG-VTT-THUMB-03-resources.md) [记录](baselines/vtt-thumbnail-resources.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-03-parser.md) [记录](baselines/vtt-thumbnail-parser.json)
-- PKG-VTT-THUMB-04: [记录](changes/2026-09-13-PKG-VTT-THUMB-04-runtime-types.md) [记录](baselines/vtt-thumbnail-runtime-types.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md) [记录](baselines/vtt-thumbnail-public-types.json)
+- PKG-VTT-THUMB-04: [记录](changes/2026-09-13-PKG-VTT-THUMB-04-runtime-types.md) [记录](baselines/vtt-thumbnail-runtime-types.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md) [记录](baselines/vtt-thumbnail-public-types.json) [记录](changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md) [记录](baselines/vtt-thumbnail-module-forms.json)
 - PKG-HLS-01: [记录](baselines/hls-control-contract.md) [记录](baselines/hls-control-release.json) [记录](changes/2026-09-11-PKG-HLS-01-contract.md)
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)

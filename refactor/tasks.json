@@ -1929,7 +1929,9 @@
         "changes/2026-09-13-PKG-VTT-THUMB-04-runtime-types.md",
         "baselines/vtt-thumbnail-runtime-types.json",
         "changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md",
-        "baselines/vtt-thumbnail-public-types.json"
+        "baselines/vtt-thumbnail-public-types.json",
+        "changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md",
+        "baselines/vtt-thumbnail-module-forms.json"
       ]
     },
     {

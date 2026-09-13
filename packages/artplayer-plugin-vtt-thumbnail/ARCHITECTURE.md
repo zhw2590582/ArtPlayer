@@ -66,9 +66,13 @@ a type, not an additional runtime global. Do not hand-edit generated editor decl
 
 The installed-consumer command packs both core and plugin, installs outside the workspace,
 verifies member hashes, and repeats an offline frozen install. It tests five actual old npm
-declarations with classic default-import consumers on TS 4.3/5.9 and seven candidate modes.
-Historical NodeNext and raw require type replacement forms still need investigation in 04;
-these checks do not prove all historical compiler/module combinations.
+declarations in five modes on TS 4.3/5.9 and seven candidate modes: 32 default-import cells,
+including one expected 1.1.0 NodeNext ESM declaration failure. Candidate ESM passes that cell.
+Another 36 direct/default CommonJS extraction/replacement forms reproduce the opposing 1.0.x
+export-assignment and 1.1.0 default declaration shapes. Candidate preserves the latter.
+Earlier type-only direct module extraction remains an explicit decision in task 04; a broken
+historical JS direct call does not waive that type-only consumer. See the module-forms change
+record for the concrete required/optional default-property alternatives and migration proposal.
 
 ## Compatibility and intentional fixes
 
@@ -126,5 +130,6 @@ Pure parser comparison can use ARTPLAYER_VTT_PARSER_BASELINE=1, which loads the 
 parser from the 524ddf78 resource checkpoint. Bundle-mode parser tests also run malformed
 payloads and extended registration through the actual factory; pure parsing assertions
 still target source and must not be described as tests of an installed tarball.
-See ../../refactor/baselines/vtt-thumbnail-contract.md and the task 03 change record for
+See ../../refactor/changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md,
+../../refactor/baselines/vtt-thumbnail-contract.md and the task 03 change record for
 historical evidence and outstanding acceptance work.

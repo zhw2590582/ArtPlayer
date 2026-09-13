@@ -53,6 +53,14 @@ const promise: Promise<{name: 'artplayerPluginVttThumbnail'}> = first;
 legacy.default({})(art).name; void [promise, second];`), [])
 })
 
+test('VTT callable CommonJS alternatives expose replacement and optional-default conflicts explicitly', () => {
+  const source = fs.readFileSync('refactor/fixtures/consumers/vtt-thumbnail-export-alternatives.ts', 'utf8')
+  for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [compat, 'node10-commonjs']]) {
+    const diagnostics = checkConsumer(compiler, mode, source)
+    assert.deepEqual(diagnostics.map(item => ({ line: item.line, code: item.code })), [{ line: 4, code: 2322 }, { line: 6, code: 2722 }])
+  }
+})
+
 test('VTT all five historical declarations keep the same default-import consumers and replaceable old factory', async () => {
   const contract = await verifyVttThumbnailContract()
   const consumer = fs.readFileSync('refactor/fixtures/consumers/vtt-thumbnail-published.ts', 'utf8')
