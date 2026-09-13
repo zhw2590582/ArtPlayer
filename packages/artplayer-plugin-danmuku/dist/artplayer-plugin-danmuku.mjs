@@ -4,6 +4,91 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
+function defaultOption() {
+  return {
+    danmuku: [],
+    speed: 5,
+    margin: [10, "25%"],
+    opacity: 1,
+    color: "#FFFFFF",
+    mode: 0,
+    modes: [0, 1, 2],
+    fontSize: 25,
+    antiOverlap: true,
+    synchronousPlayback: false,
+    mount: void 0,
+    heatmap: false,
+    width: 512,
+    points: [],
+    filter: () => true,
+    beforeEmit: () => true,
+    beforeVisible: () => true,
+    visible: true,
+    emitter: true,
+    maxLength: 200,
+    lockTime: 5,
+    theme: "dark",
+    OPACITY: {},
+    FONT_SIZE: {},
+    MARGIN: {},
+    SPEED: {},
+    COLOR: []
+  };
+}
+function optionScheme() {
+  return {
+    danmuku: "array|function|string|promise",
+    speed: "number",
+    margin: "array",
+    opacity: "number",
+    color: "string",
+    mode: "number",
+    modes: "array",
+    fontSize: "number|string",
+    antiOverlap: "boolean",
+    synchronousPlayback: "boolean",
+    mount: "?htmldivelement|string",
+    heatmap: "object|boolean",
+    width: "number",
+    points: "array",
+    filter: "function",
+    beforeEmit: "function",
+    beforeVisible: "function",
+    visible: "boolean",
+    emitter: "boolean",
+    maxLength: "number",
+    lockTime: "number",
+    theme: "string",
+    OPACITY: "object",
+    FONT_SIZE: "object",
+    MARGIN: "object",
+    SPEED: "object",
+    COLOR: "array"
+  };
+}
+function isPromiseInput(value) {
+  return value instanceof Promise || Object.prototype.toString.call(value) === "[object Promise]";
+}
+function optionChanged(previous, update) {
+  return Object.keys(update).some((key) => {
+    const before = previous[key];
+    const after = update[key];
+    if (typeof before === "function" || typeof after === "function" || isPromiseInput(before) || isPromiseInput(after))
+      return before !== after;
+    return JSON.stringify(before) !== JSON.stringify(after);
+  });
+}
+function normalizeOption(previous, update, { defaults, validate, clamp, mount }) {
+  const next = Object.assign({}, defaults, previous, update);
+  validate(next);
+  next.mode = clamp(next.mode, 0, 2);
+  next.speed = clamp(next.speed, 1, 10);
+  next.opacity = clamp(next.opacity, 0, 1);
+  next.lockTime = clamp(next.lockTime, 1, 60);
+  next.maxLength = clamp(next.maxLength, 1, 1e3);
+  next.mount = next.mount || mount;
+  return next;
+}
 function getMode(key) {
   switch (key) {
     case 1:
@@ -45,40 +130,218 @@ function bilibiliDanmuParseFromXml(xmlString) {
 }
 function onmessage({ data }) {
   const { xml, id } = data;
-  if (!id || !xml)
-    return;
   const danmus = bilibiliDanmuParseFromXml(xml);
   globalThis.postMessage({ danmus, id });
 }
-function createWorker() {
-  const workerText = `
-        ${getMode.toString()}
-        ${bilibiliDanmuParseFromXml.toString()}
-        onmessage = ${onmessage.toString()}
-    `;
-  const blob2 = new Blob([workerText], { type: "application/javascript" });
-  return new Worker(URL.createObjectURL(blob2));
+let nextRequest = 0;
+function abortError(signal) {
+  if (signal?.reason !== void 0)
+    return signal.reason;
+  const error = new Error("Bilibili Danmu loading cancelled");
+  error.name = "AbortError";
+  return error;
 }
-function bilibiliDanmuParseFromUrl(url) {
-  return new Promise(async (resolve) => {
-    const res = await fetch(url);
-    const xml = await res.text();
-    try {
-      const worker = createWorker();
-      worker.onmessage = (event) => {
-        const { danmus, id } = event.data;
-        if (!id || !danmus)
-          return;
-        resolve(danmus);
-        worker.terminate();
-      };
-      worker.postMessage({ xml, id: Date.now() });
-    } catch (error) {
-      console.error("Error parsing Bilibili Danmu:", error);
-      const danmus = bilibiliDanmuParseFromXml(xml);
-      resolve(danmus);
+function bilibiliDanmuParseFromUrl(url, { signal, onCancel } = {}) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let worker;
+    let workerUrl;
+    let releaseCancel;
+    const id = ++nextRequest;
+    const cancel = () => finish(void 0, abortError(signal));
+    function releaseWorker() {
+      let error;
+      let failed = false;
+      try {
+        if (worker) {
+          const current = worker;
+          worker = void 0;
+          current.onmessage = null;
+          current.onerror = null;
+          current.onmessageerror = null;
+          current.terminate();
+        }
+      } catch (failure) {
+        error = failure;
+        failed = true;
+      }
+      if (workerUrl !== void 0) {
+        const current = workerUrl;
+        workerUrl = void 0;
+        try {
+          URL.revokeObjectURL(current);
+        } catch (failure) {
+          if (!failed)
+            error = failure;
+          failed = true;
+        }
+      }
+      if (failed)
+        throw error;
     }
+    function finish(value, error) {
+      if (settled)
+        return;
+      settled = true;
+      let failed = arguments.length > 1;
+      signal?.removeEventListener("abort", cancel);
+      releaseCancel?.();
+      try {
+        releaseWorker();
+      } catch (cleanupError) {
+        if (!failed)
+          error = cleanupError;
+        failed = true;
+      }
+      if (failed)
+        reject(error);
+      else resolve(value);
+    }
+    function fallback(xml, error) {
+      if (settled)
+        return;
+      console.error("Error parsing Bilibili Danmu:", error);
+      try {
+        finish(bilibiliDanmuParseFromXml(xml));
+      } catch (failure) {
+        finish(void 0, failure);
+      }
+    }
+    async function read() {
+      const response = signal ? await fetch(url, { signal }) : await fetch(url);
+      if (settled)
+        return;
+      const xml = await response.text();
+      if (settled)
+        return;
+      try {
+        const workerText = `
+          ${getMode.toString()}
+          ${bilibiliDanmuParseFromXml.toString()}
+          onmessage = ${onmessage.toString()}
+        `;
+        workerUrl = URL.createObjectURL(new Blob([workerText], { type: "application/javascript" }));
+        if (settled) {
+          releaseWorker();
+          return;
+        }
+        worker = new Worker(workerUrl);
+        if (settled) {
+          releaseWorker();
+          return;
+        }
+        worker.onmessage = (event) => {
+          if (settled || event.data?.id !== id)
+            return;
+          const { danmus } = event.data;
+          if (!Array.isArray(danmus)) {
+            finish(void 0, new Error("Invalid Bilibili Danmu worker response"));
+            return;
+          }
+          finish(danmus);
+        };
+        worker.onerror = (event) => {
+          event.preventDefault?.();
+          fallback(xml, event.error || event);
+        };
+        worker.onmessageerror = (event) => fallback(xml, event.error || event);
+        worker.postMessage({ xml, id });
+      } catch (error) {
+        fallback(xml, error);
+      }
+    }
+    if (signal?.aborted) {
+      cancel();
+      return;
+    }
+    signal?.addEventListener("abort", cancel);
+    releaseCancel = onCancel?.(cancel);
+    if (settled) {
+      releaseCancel?.();
+      return;
+    }
+    read().catch((error) => finish(void 0, error));
   });
+}
+const inputs = /* @__PURE__ */ new WeakMap();
+const cancelled = /* @__PURE__ */ Symbol("cancelled danmuku input");
+function stateFor(owner) {
+  if (!inputs.has(owner))
+    inputs.set(owner, { closed: false, tasks: /* @__PURE__ */ new Set(), emitting: [] });
+  return inputs.get(owner);
+}
+function inputActive(owner) {
+  const state = stateFor(owner);
+  const task = state.emitting[state.emitting.length - 1];
+  return !state.closed && !owner.art.isDestroy && (!task || task.active());
+}
+function beginInput(owner, replace) {
+  const state = stateFor(owner);
+  if (replace) {
+    for (const task2 of [...state.tasks]) {
+      if (task2.replace)
+        task2.cancel();
+    }
+  }
+  let stopped = state.closed || owner.art.isDestroy;
+  let resolveCancel;
+  const cancellation = new Promise((resolve) => resolveCancel = resolve);
+  const handlers = /* @__PURE__ */ new Set();
+  const controller = typeof AbortController === "function" ? new AbortController() : void 0;
+  const task = {
+    replace,
+    signal: controller?.signal,
+    active: () => !stopped && !state.closed && !owner.art.isDestroy,
+    onCancel(callback) {
+      if (!task.active()) {
+        callback();
+        return () => {
+        };
+      }
+      handlers.add(callback);
+      return () => handlers.delete(callback);
+    },
+    cancel() {
+      if (stopped)
+        return;
+      stopped = true;
+      resolveCancel(cancelled);
+      controller?.abort();
+      for (const callback of [...handlers]) callback();
+      handlers.clear();
+    },
+    wait: (value) => Promise.race([value, cancellation]),
+    emit(danmu) {
+      state.emitting.push(task);
+      try {
+        return owner.emit(danmu);
+      } finally {
+        state.emitting.pop();
+      }
+    },
+    finish() {
+      state.tasks.delete(task);
+      handlers.clear();
+    }
+  };
+  if (stopped)
+    resolveCancel(cancelled);
+  else state.tasks.add(task);
+  return task;
+}
+function cancelInputs(owner) {
+  const state = stateFor(owner);
+  state.closed = true;
+  for (const task of [...state.tasks]) task.cancel();
+}
+function readInput(target, task) {
+  if (typeof target === "function")
+    return { asynchronous: true, value: target() };
+  if (isPromiseInput(target))
+    return { asynchronous: true, value: target };
+  if (typeof target === "string")
+    return { asynchronous: true, value: bilibiliDanmuParseFromUrl(target, task) };
+  return { asynchronous: false, value: Array.isArray(target) ? target : [] };
 }
 const jsContent = '/*!\n * artplayer-plugin-danmuku.js v5.3.0\n * Github: https://github.com/zhw2590582/ArtPlayer\n * (c) 2017-2026 Harvey Zhao\n * Released under the MIT License.\n */\nfunction getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {\n  const maxTop = clientHeight - marginBottom;\n  const danmus = visibles.filter((item) => item.mode === target.mode && item.top <= maxTop).sort((prev, next) => prev.top - next.top);\n  if (danmus.length === 0) {\n    if (target.mode === 2) {\n      return maxTop - target.height;\n    } else {\n      return marginTop;\n    }\n  }\n  danmus.unshift({\n    type: "top",\n    top: 0,\n    left: 0,\n    right: 0,\n    height: marginTop,\n    width: clientWidth,\n    speed: 0,\n    distance: clientWidth\n  });\n  danmus.push({\n    type: "bottom",\n    top: maxTop,\n    left: 0,\n    right: 0,\n    height: marginBottom,\n    width: clientWidth,\n    speed: 0,\n    distance: clientWidth\n  });\n  if (target.mode === 2) {\n    for (let index = danmus.length - 2; index >= 0; index -= 1) {\n      const item = danmus[index];\n      const prev = danmus[index + 1];\n      const itemBottom = item.top + item.height;\n      const diff = prev.top - itemBottom;\n      if (diff >= target.height) {\n        return prev.top - target.height;\n      }\n    }\n  } else {\n    for (let index = 1; index < danmus.length; index += 1) {\n      const item = danmus[index];\n      const prev = danmus[index - 1];\n      const prevBottom = prev.top + prev.height;\n      const diff = item.top - prevBottom;\n      if (diff >= target.height) {\n        return prevBottom;\n      }\n    }\n  }\n  const topMap = [];\n  for (let index = 1; index < danmus.length - 1; index += 1) {\n    const item = danmus[index];\n    if (topMap.length) {\n      const last = topMap[topMap.length - 1];\n      if (last[0].top === item.top) {\n        last.push(item);\n      } else {\n        topMap.push([item]);\n      }\n    } else {\n      topMap.push([item]);\n    }\n  }\n  if (antiOverlap) {\n    switch (target.mode) {\n      case 0: {\n        const result = topMap.find((list) => {\n          return list.every((danmu) => {\n            if (clientWidth < danmu.distance)\n              return false;\n            if (target.speed < danmu.speed)\n              return true;\n            const overlapTime = danmu.right / (target.speed - danmu.speed);\n            if (overlapTime > danmu.time)\n              return true;\n            return false;\n          });\n        });\n        return result && result[0] ? result[0].top : void 0;\n      }\n      // 静止弹幕没有重叠问题\n      case 1:\n      case 2:\n        return void 0;\n    }\n  } else {\n    switch (target.mode) {\n      case 0:\n        topMap.sort((prev, next) => {\n          const nextMinRight = Math.min(...next.map((item) => item.right));\n          const prevMinRight = Math.min(...prev.map((item) => item.right));\n          return nextMinRight * next.length - prevMinRight * prev.length;\n        });\n        break;\n      case 1:\n      case 2:\n        topMap.sort((prev, next) => {\n          const nextMaxWidth = Math.max(...next.map((item) => item.width));\n          const prevMaxWidth = Math.max(...prev.map((item) => item.width));\n          return prevMaxWidth * prev.length - nextMaxWidth * next.length;\n        });\n        break;\n    }\n    return topMap[0][0].top;\n  }\n}\nonmessage = (event) => {\n  const { data } = event;\n  if (!data.id || !data.type)\n    return;\n  const fns = { getDanmuTop };\n  const fn = fns[data.type];\n  const result = fn(data);\n  globalThis.postMessage({\n    result,\n    id: data.id\n  });\n};\n';
 const blob = typeof self !== "undefined" && self.Blob && new Blob(["URL.revokeObjectURL(import.meta.url);", jsContent], { type: "text/javascript;charset=utf-8" });
@@ -119,113 +382,40 @@ class Danmuku {
     this.isHide = false;
     this.timer = null;
     this.index = 0;
+    this.worker = null;
     this.option = Danmuku.option;
     this.states = { wait: [], ready: [], emit: [], stop: [] };
-    this.config(option, true);
-    this.worker = new WorkerWrapper();
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
     this.reset = this.reset.bind(this);
     this.resize = this.resize.bind(this);
     this.destroy = this.destroy.bind(this);
+    inputActive(this);
+    art.on("destroy", this.destroy);
+    try {
+      this.config(option, true);
+      if (!inputActive(this))
+        return;
+      this.worker = new WorkerWrapper();
+    } catch (error) {
+      art.off("destroy", this.destroy);
+      cancelInputs(this);
+      throw error;
+    }
     art.on("video:play", this.start);
     art.on("video:playing", this.start);
     art.on("video:pause", this.stop);
     art.on("video:waiting", this.stop);
-    art.on("destroy", this.destroy);
     art.on("resize", this.resize);
-    this.load();
+    this.load().catch((error) => console.warn("Failed to load initial danmuku:", error));
   }
   // 默认配置
   static get option() {
-    return {
-      danmuku: [],
-      // 弹幕数据
-      speed: 5,
-      // 弹幕持续时间，范围在[1 ~ 10]
-      margin: [10, "25%"],
-      // 弹幕上下边距，支持像素数字和百分比
-      opacity: 1,
-      // 弹幕透明度，范围在[0 ~ 1]
-      color: "#FFFFFF",
-      // 默认弹幕颜色，可以被单独弹幕项覆盖
-      mode: 0,
-      // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
-      modes: [0, 1, 2],
-      // 弹幕可见的模式
-      fontSize: 25,
-      // 弹幕字体大小，支持像素数字和百分比
-      antiOverlap: true,
-      // 弹幕是否防重叠
-      synchronousPlayback: false,
-      // 是否同步播放速度
-      mount: void 0,
-      // 弹幕发射器挂载点, 默认为播放器控制栏中部
-      heatmap: false,
-      // 是否开启热力图
-      width: 512,
-      // 当播放器宽度小于此值时，弹幕发射器置于播放器底部
-      points: [],
-      // 热力图数据
-      filter: () => true,
-      // 弹幕载入前的过滤器，只支持返回布尔值
-      beforeEmit: () => true,
-      // 弹幕发送前的过滤器，支持返回 Promise
-      beforeVisible: () => true,
-      // 弹幕显示前的过滤器，支持返回 Promise
-      visible: true,
-      // 弹幕层是否可见
-      emitter: true,
-      // 是否开启弹幕发射器
-      maxLength: 200,
-      // 弹幕输入框最大长度, 范围在[1 ~ 1000]
-      lockTime: 5,
-      // 输入框锁定时间，范围在[1 ~ 60]
-      theme: "dark",
-      // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
-      OPACITY: {},
-      // 不透明度配置项
-      FONT_SIZE: {},
-      // 弹幕字号配置项
-      MARGIN: {},
-      // 显示区域配置项
-      SPEED: {},
-      // 弹幕速度配置项
-      COLOR: []
-      // 颜色列表配置项
-    };
+    return defaultOption();
   }
   // 配置校验
   static get scheme() {
-    return {
-      danmuku: "array|function|string",
-      speed: "number",
-      margin: "array",
-      opacity: "number",
-      color: "string",
-      mode: "number",
-      modes: "array",
-      fontSize: "number|string",
-      antiOverlap: "boolean",
-      synchronousPlayback: "boolean",
-      mount: "?htmldivelement|string",
-      heatmap: "object|boolean",
-      width: "number",
-      points: "array",
-      filter: "function",
-      beforeEmit: "function",
-      beforeVisible: "function",
-      visible: "boolean",
-      emitter: "boolean",
-      maxLength: "number",
-      lockTime: "number",
-      theme: "string",
-      OPACITY: "object",
-      FONT_SIZE: "object",
-      MARGIN: "object",
-      SPEED: "object",
-      COLOR: "array"
-    };
+    return optionScheme();
   }
   // 初始弹幕样式
   static get cssText() {
@@ -345,40 +535,48 @@ class Danmuku {
   // 加载弹幕
   async load(danmuku) {
     const { errorHandle } = this.utils;
-    let danmus = [];
-    const target = danmuku || this.option.danmuku;
+    const task = beginInput(this, danmuku === void 0);
     try {
-      if (typeof target === "function") {
-        danmus = await target();
-      } else if (target instanceof Promise) {
-        danmus = await target;
-      } else if (typeof target === "string") {
-        danmus = await bilibiliDanmuParseFromUrl(target);
-      } else if (Array.isArray(target)) {
-        danmus = target;
-      }
+      if (!task.active())
+        return this;
+      const target = danmuku || this.option.danmuku;
+      const input = readInput(target, task);
+      const danmus = input.asynchronous ? await task.wait(input.value) : input.value;
+      if (!task.active())
+        return this;
       errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
       if (danmuku === void 0) {
         this.reset();
+        if (!task.active())
+          return this;
         this.queue = [];
         this.states = { wait: [], ready: [], emit: [], stop: [] };
         this.$refs = [];
         this.$danmuku.textContent = "";
       }
       for (let index = 0; index < danmus.length; index++) {
+        if (!task.active())
+          return this;
         const danmu = danmus[index];
-        await this.emit(danmu);
+        await task.emit(danmu);
       }
-      this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
+      if (task.active())
+        this.art.emit("artplayerPluginDanmuku:loaded", this.queue);
     } catch (error) {
+      if (!task.active())
+        return this;
       this.art.emit("artplayerPluginDanmuku:error", error);
       throw error;
+    } finally {
+      task.finish();
     }
     return this;
   }
   // 把原始弹幕转换到弹幕队列
   async emit(danmu) {
     const { clamp } = this.utils;
+    if (!inputActive(this))
+      return this;
     this.validator(danmu, {
       id: "?string",
       // 弹幕唯一标识
@@ -397,7 +595,7 @@ class Danmuku {
     });
     if (!danmu.text.trim())
       return this;
-    if (danmu.time) {
+    if (danmu.time !== void 0) {
       danmu.time = clamp(danmu.time, 0, Infinity);
     } else {
       danmu.time = this.art.currentTime + 0.5;
@@ -414,6 +612,8 @@ class Danmuku {
     if (![0, 1, 2].includes(danmu.mode))
       return this;
     if (!this.option.filter(danmu))
+      return this;
+    if (!inputActive(this))
       return this;
     const item = {
       ...danmu,
@@ -436,28 +636,30 @@ class Danmuku {
   config(option, isInit = false) {
     const { clamp } = this.utils;
     const { $controlsCenter } = this.art.template;
-    const changed = Object.keys(option).some(
-      (key) => JSON.stringify(this.option[key]) !== JSON.stringify(option[key])
-    );
+    const changed = optionChanged(this.option, option);
     if (!changed && !isInit)
       return this;
-    this.option = Object.assign({}, Danmuku.option, this.option, option);
-    this.validator(this.option, Danmuku.scheme);
-    this.option.mode = clamp(this.option.mode, 0, 2);
-    this.option.speed = clamp(this.option.speed, 1, 10);
-    this.option.opacity = clamp(this.option.opacity, 0, 1);
-    this.option.lockTime = clamp(this.option.lockTime, 1, 60);
-    this.option.maxLength = clamp(this.option.maxLength, 1, 1e3);
-    this.option.mount = this.option.mount || $controlsCenter;
+    const next = normalizeOption(this.option, option, {
+      defaults: Danmuku.option,
+      validate: (value) => this.validator(value, Danmuku.scheme),
+      clamp,
+      mount: $controlsCenter
+    });
+    if (!inputActive(this))
+      return this;
+    this.option = next;
     if (option.fontSize) {
       this.reset();
+      if (!inputActive(this))
+        return this;
     }
     if (this.option.visible) {
       this.show();
     } else {
       this.hide();
     }
-    this.art.emit("artplayerPluginDanmuku:config", this.option);
+    if (inputActive(this))
+      this.art.emit("artplayerPluginDanmuku:config", this.option);
     return this;
   }
   // 计算DOM的left值，受到旋屏影响
@@ -688,13 +890,14 @@ class Danmuku {
     return this;
   }
   destroy() {
+    cancelInputs(this);
     this.stop();
-    this.worker.terminate();
+    this.worker?.terminate();
     this.art.off("video:play", this.start);
     this.art.off("video:playing", this.start);
     this.art.off("video:pause", this.stop);
     this.art.off("video:waiting", this.stop);
-    this.art.off("resize", this.reset);
+    this.art.off("resize", this.resize);
     this.art.off("destroy", this.destroy);
     this.art.emit("artplayerPluginDanmuku:destroy");
   }
@@ -1536,8 +1739,8 @@ if (typeof document !== "undefined") {
 function artplayerPluginDanmuku(option) {
   return (art) => {
     const danmuku = new Danmuku(art, option);
-    const setting = new Setting(art, danmuku);
-    if (danmuku.option.heatmap) {
+    const setting = art.isDestroy ? void 0 : new Setting(art, danmuku);
+    if (!art.isDestroy && danmuku.option.heatmap) {
       heatmap(art, danmuku, danmuku.option.heatmap);
     }
     return {
@@ -1548,7 +1751,8 @@ function artplayerPluginDanmuku(option) {
       hide: danmuku.hide.bind(danmuku),
       show: danmuku.show.bind(danmuku),
       reset: danmuku.reset.bind(danmuku),
-      mount: setting.mount.bind(setting),
+      mount: setting ? setting.mount.bind(setting) : () => {
+      },
       get option() {
         return danmuku.option;
       },

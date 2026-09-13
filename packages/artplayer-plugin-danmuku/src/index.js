@@ -5,9 +5,9 @@ import Setting from './setting'
 export default function artplayerPluginDanmuku(option) {
   return (art) => {
     const danmuku = new Danmuku(art, option)
-    const setting = new Setting(art, danmuku)
+    const setting = art.isDestroy ? undefined : new Setting(art, danmuku)
 
-    if (danmuku.option.heatmap) {
+    if (!art.isDestroy && danmuku.option.heatmap) {
       heatmap(art, danmuku, danmuku.option.heatmap)
     }
 
@@ -19,7 +19,7 @@ export default function artplayerPluginDanmuku(option) {
       hide: danmuku.hide.bind(danmuku),
       show: danmuku.show.bind(danmuku),
       reset: danmuku.reset.bind(danmuku),
-      mount: setting.mount.bind(setting),
+      mount: setting ? setting.mount.bind(setting) : () => {},
       get option() {
         return danmuku.option
       },

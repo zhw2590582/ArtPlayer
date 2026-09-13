@@ -1,4 +1,5 @@
-import { bilibiliDanmuParseFromUrl } from './bilibili'
+import { defaultOption, normalizeOption, optionChanged, optionScheme } from './config'
+import { beginInput, cancelInputs, inputActive, readInput } from './input'
 import DanmuWorker from './worker.js?worker&inline'
 
 export default class Danmuku {
@@ -17,18 +18,13 @@ export default class Danmuku {
     this.isHide = false // 是否隐藏
     this.timer = null // 定时器
     this.index = 0 // 弹幕索引
+    this.worker = null
 
     // 格式化后的配置项
     this.option = Danmuku.option
 
     // 弹幕状态池
     this.states = { wait: [], ready: [], emit: [], stop: [] }
-
-    // 初始化配置
-    this.config(option, true)
-
-    // 创建 Web Worker, 用于计算弹幕的 top 值
-    this.worker = new DanmuWorker()
 
     // 绑定公用事件
     this.start = this.start.bind(this)
@@ -37,82 +33,41 @@ export default class Danmuku {
     this.resize = this.resize.bind(this)
     this.destroy = this.destroy.bind(this)
 
+    // 配置事件可同步销毁播放器，先建立输入和销毁边界。
+    inputActive(this)
+    art.on('destroy', this.destroy)
+    try {
+      this.config(option, true)
+      if (!inputActive(this))
+        return
+
+      // 创建 Web Worker, 用于计算弹幕的 top 值
+      this.worker = new DanmuWorker()
+    }
+    catch (error) {
+      art.off('destroy', this.destroy)
+      cancelInputs(this)
+      throw error
+    }
     // 监听事件
     art.on('video:play', this.start)
     art.on('video:playing', this.start)
     art.on('video:pause', this.stop)
     art.on('video:waiting', this.stop)
-    art.on('destroy', this.destroy)
     art.on('resize', this.resize)
 
     // 开始加载弹幕
-    this.load()
+    this.load().catch(error => console.warn('Failed to load initial danmuku:', error))
   }
 
   // 默认配置
   static get option() {
-    return {
-      danmuku: [], // 弹幕数据
-      speed: 5, // 弹幕持续时间，范围在[1 ~ 10]
-      margin: [10, '25%'], // 弹幕上下边距，支持像素数字和百分比
-      opacity: 1, // 弹幕透明度，范围在[0 ~ 1]
-      color: '#FFFFFF', // 默认弹幕颜色，可以被单独弹幕项覆盖
-      mode: 0, // 默认弹幕模式: 0: 滚动，1: 顶部，2: 底部
-      modes: [0, 1, 2], // 弹幕可见的模式
-      fontSize: 25, // 弹幕字体大小，支持像素数字和百分比
-      antiOverlap: true, // 弹幕是否防重叠
-      synchronousPlayback: false, // 是否同步播放速度
-      mount: undefined, // 弹幕发射器挂载点, 默认为播放器控制栏中部
-      heatmap: false, // 是否开启热力图
-      width: 512, // 当播放器宽度小于此值时，弹幕发射器置于播放器底部
-      points: [], // 热力图数据
-      filter: () => true, // 弹幕载入前的过滤器，只支持返回布尔值
-      beforeEmit: () => true, // 弹幕发送前的过滤器，支持返回 Promise
-      beforeVisible: () => true, // 弹幕显示前的过滤器，支持返回 Promise
-      visible: true, // 弹幕层是否可见
-      emitter: true, // 是否开启弹幕发射器
-      maxLength: 200, // 弹幕输入框最大长度, 范围在[1 ~ 1000]
-      lockTime: 5, // 输入框锁定时间，范围在[1 ~ 60]
-      theme: 'dark', // 弹幕主题，支持 dark 和 light，只在自定义挂载时生效
-      OPACITY: {}, // 不透明度配置项
-      FONT_SIZE: {}, // 弹幕字号配置项
-      MARGIN: {}, // 显示区域配置项
-      SPEED: {}, // 弹幕速度配置项
-      COLOR: [], // 颜色列表配置项
-    }
+    return defaultOption()
   }
 
   // 配置校验
   static get scheme() {
-    return {
-      danmuku: 'array|function|string',
-      speed: 'number',
-      margin: 'array',
-      opacity: 'number',
-      color: 'string',
-      mode: 'number',
-      modes: 'array',
-      fontSize: 'number|string',
-      antiOverlap: 'boolean',
-      synchronousPlayback: 'boolean',
-      mount: '?htmldivelement|string',
-      heatmap: 'object|boolean',
-      width: 'number',
-      points: 'array',
-      filter: 'function',
-      beforeEmit: 'function',
-      beforeVisible: 'function',
-      visible: 'boolean',
-      emitter: 'boolean',
-      maxLength: 'number',
-      lockTime: 'number',
-      theme: 'string',
-      OPACITY: 'object',
-      FONT_SIZE: 'object',
-      MARGIN: 'object',
-      SPEED: 'object',
-      COLOR: 'array',
-    }
+    return optionScheme()
   }
 
   // 初始弹幕样式
@@ -264,29 +219,25 @@ export default class Danmuku {
   // 加载弹幕
   async load(danmuku) {
     const { errorHandle } = this.utils
-
-    let danmus = []
-    const target = danmuku || this.option.danmuku
+    const task = beginInput(this, danmuku === undefined)
 
     try {
-      if (typeof target === 'function') {
-        danmus = await target() // 异步函数获取
-      }
-      else if (target instanceof Promise) {
-        danmus = await target // 从 Promise 对象获取
-      }
-      else if (typeof target === 'string') {
-        danmus = await bilibiliDanmuParseFromUrl(target) // 从B站xml链接解析
-      }
-      else if (Array.isArray(target)) {
-        danmus = target // 直接传入数组
-      }
+      if (!task.active())
+        return this
+      const target = danmuku || this.option.danmuku
+      const input = readInput(target, task)
+      // 数组在第一次 await 前提交，空数组的 loaded 保持同步。
+      const danmus = input.asynchronous ? await task.wait(input.value) : input.value
+      if (!task.active())
+        return this
 
       errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result')
 
       // 假如没有传入弹幕参数，则清空弹幕，否则追加弹幕
       if (danmuku === undefined) {
         this.reset() // 重置弹幕
+        if (!task.active())
+          return this
         this.queue = [] // 清空弹幕队列
         this.states = { wait: [], ready: [], emit: [], stop: [] } // 清空弹幕状态池
         this.$refs = [] // 清空弹幕DOM节点池
@@ -295,15 +246,23 @@ export default class Danmuku {
 
       // 逐个验证原始弹幕并转换到弹幕队列
       for (let index = 0; index < danmus.length; index++) {
+        if (!task.active())
+          return this
         const danmu = danmus[index]
-        await this.emit(danmu)
+        await task.emit(danmu)
       }
 
-      this.art.emit('artplayerPluginDanmuku:loaded', this.queue)
+      if (task.active())
+        this.art.emit('artplayerPluginDanmuku:loaded', this.queue)
     }
     catch (error) {
+      if (!task.active())
+        return this
       this.art.emit('artplayerPluginDanmuku:error', error)
       throw error
+    }
+    finally {
+      task.finish()
     }
 
     return this
@@ -312,6 +271,8 @@ export default class Danmuku {
   // 把原始弹幕转换到弹幕队列
   async emit(danmu) {
     const { clamp } = this.utils
+    if (!inputActive(this))
+      return this
 
     this.validator(danmu, {
       id: '?string', // 弹幕唯一标识
@@ -328,7 +289,7 @@ export default class Danmuku {
       return this
 
     // 设置弹幕时间，如果没有则默认为当前时间加 0.5 秒
-    if (danmu.time) {
+    if (danmu.time !== undefined) {
       danmu.time = clamp(danmu.time, 0, Infinity)
     }
     else {
@@ -356,6 +317,8 @@ export default class Danmuku {
 
     // 自定义弹幕过滤函数
     if (!this.option.filter(danmu))
+      return this
+    if (!inputActive(this))
       return this
 
     // 添加自定义属性
@@ -389,28 +352,28 @@ export default class Danmuku {
     const { $controlsCenter } = this.art.template
 
     // 判断配置项是否有变化
-    const changed = Object.keys(option).some(
-      key => JSON.stringify(this.option[key]) !== JSON.stringify(option[key]),
-    )
+    const changed = optionChanged(this.option, option)
 
     // 没有变化则直接返回
     if (!changed && !isInit)
       return this
 
     // 更新配置项
-    this.option = Object.assign({}, Danmuku.option, this.option, option)
-    this.validator(this.option, Danmuku.scheme)
-
-    this.option.mode = clamp(this.option.mode, 0, 2)
-    this.option.speed = clamp(this.option.speed, 1, 10)
-    this.option.opacity = clamp(this.option.opacity, 0, 1)
-    this.option.lockTime = clamp(this.option.lockTime, 1, 60)
-    this.option.maxLength = clamp(this.option.maxLength, 1, 1000)
-    this.option.mount = this.option.mount || $controlsCenter
+    const next = normalizeOption(this.option, option, {
+      defaults: Danmuku.option,
+      validate: value => this.validator(value, Danmuku.scheme),
+      clamp,
+      mount: $controlsCenter,
+    })
+    if (!inputActive(this))
+      return this
+    this.option = next
 
     // 动态配置有字体大小，需要重新渲染
     if (option.fontSize) {
       this.reset()
+      if (!inputActive(this))
+        return this
     }
 
     // 通过配置项控制弹幕的显示和隐藏
@@ -421,7 +384,8 @@ export default class Danmuku {
       this.hide()
     }
 
-    this.art.emit('artplayerPluginDanmuku:config', this.option)
+    if (inputActive(this))
+      this.art.emit('artplayerPluginDanmuku:config', this.option)
 
     return this
   }
@@ -718,13 +682,14 @@ export default class Danmuku {
   }
 
   destroy() {
+    cancelInputs(this)
     this.stop()
-    this.worker.terminate()
+    this.worker?.terminate()
     this.art.off('video:play', this.start)
     this.art.off('video:playing', this.start)
     this.art.off('video:pause', this.stop)
     this.art.off('video:waiting', this.stop)
-    this.art.off('resize', this.reset)
+    this.art.off('resize', this.resize)
     this.art.off('destroy', this.destroy)
     this.art.emit('artplayerPluginDanmuku:destroy')
   }

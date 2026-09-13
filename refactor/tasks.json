@@ -3300,11 +3300,14 @@
         "PKG-DANMUKU-02",
         "CORE-08"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "M",
       "deliverable": "bilibili/input/parser/config 的分层与取消",
       "acceptance": "旧格式、回调、过滤、追加/替换语义保持",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "baselines/danmuku-input-validation.json"
+      ]
     },
     {
       "id": "PKG-DANMUKU-04",
@@ -3317,7 +3320,7 @@
         "PKG-DANMUKU-03",
         "CORE-10"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "danmuku 调度器和确定性时钟测试",
       "acceptance": "seek/暂停/倍率/长时间运行无顺序和碰撞回归",

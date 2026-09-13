@@ -5031,7 +5031,9 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json"
       ],
       "compatibleResolution": "Preserve latest published complete root type contracts and actual legal JS return identities; expose accurate types separately.",
       "closureCriteria": "Installed consumers verify latest root assignments and precise async/getter/mount contracts; initial Promise mismatch has an explicit tested resolution."
@@ -5040,7 +5042,7 @@
       "id": "DANMUKU-INPUT-01",
       "title": "Danmuku replaces time zero with current time plus 0.5 and mutates supplied input objects",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-02",
         "PKG-DANMUKU-03"
@@ -5048,16 +5050,25 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json"
       ],
       "compatibleResolution": "Separate the time-zero defect from observable input object identity/mutation before changing parsing or queue ownership.",
-      "closureCriteria": "Zero, absent, negative and explicit times plus object identity are covered with candidate expectations and compatibility decisions."
+      "closureCriteria": "Zero, absent, negative and explicit times plus object identity are covered with candidate expectations and compatibility decisions.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json",
+        "test/danmuku-input.test.js",
+        "test/browser/danmuku-input.spec.js"
+      ],
+      "resolutionRationale": "Candidate source/main/legacy preserve input mutation and internal returns while explicitly preserving zero and clamping negative time; native browsers confirm zero."
     },
     {
       "id": "DANMUKU-CONFIG-01",
       "title": "Danmuku JSON configuration comparison ignores a replacement filter function",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-02",
         "PKG-DANMUKU-03"
@@ -5065,10 +5076,19 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json"
       ],
       "compatibleResolution": "Compare relevant configuration values without dropping callable properties; retain callback receivers and config event ordering.",
-      "closureCriteria": "Function-only changes take effect, unchanged options remain stable and partial configuration/callback reentry has regression evidence."
+      "closureCriteria": "Function-only changes take effect, unchanged options remain stable and partial configuration/callback reentry has regression evidence.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json",
+        "test/danmuku-input.test.js",
+        "test/browser/danmuku-input.spec.js"
+      ],
+      "resolutionRationale": "Candidate source/main/legacy apply function-only updates, preserve equal plain values and callback receivers, reject invalid updates transactionally, and withstand synchronous reentry; native browsers confirm."
     },
     {
       "id": "DANMUKU-CLEANUP-01",
@@ -5084,7 +5104,9 @@
         "refactor/baselines/danmuku-contract-validation.json",
         "refactor/baselines/danmuku-release.json",
         "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
-        "refactor/baselines/danmuku-browser-validation.json"
+        "refactor/baselines/danmuku-browser-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json"
       ],
       "compatibleResolution": "Track and release exact subscription and timer ownership across settings, renderer and instances.",
       "closureCriteria": "Repeated lifecycle and pending settings actions leave no owned subscriptions, timers or late DOM writes."
@@ -5124,7 +5146,9 @@
         "refactor/baselines/danmuku-failures-validation.json",
         "test/danmuku-failures.test.js",
         "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
-        "refactor/baselines/danmuku-browser-validation.json"
+        "refactor/baselines/danmuku-browser-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
+        "refactor/baselines/danmuku-input-validation.json"
       ],
       "compatibleResolution": "Reproduce load ordering, Bilibili rejection and late worker/visibility paths before defining operation ownership.",
       "closureCriteria": "Failures settle, obsolete results cannot alter new queues or destroyed instances, and worker resources are released with browser evidence."

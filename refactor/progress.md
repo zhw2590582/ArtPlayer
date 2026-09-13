@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-DANMUKU-03 输入、解析和配置源码完成
+
+拆分input/config/XML parser模块，修复过期替换、加载拒绝、资源清理、time0、函数配置
+及初始化销毁/失败；保留同步数组前缀、内部返回身份、追加及回调约定。候选三格式
+各46单测、三格式×两核心×三引擎共72真实浏览器项、旧基线86项通过；正式构建、
+lint和366生产TS/消费者检查通过。首轮产物parser故障夹具误伤已校正，原日志保留。
+见[变更](changes/2026-09-13-PKG-DANMUKU-03-input.md)及[机器证据](baselines/danmuku-input-validation.json)。
+228项：142 done、15 doing、71 todo。04进入时钟/轨道；
+本步仍是JS分层，完整TS归06，旧轨道重叠/Setting/heatmap风险继续。无推送或发布。
+
+
 ## PKG-DANMUKU-02 历史错误和真实浏览器基线完成
 
 42项受控旧缺陷、48项原生Worker/视频/布局/设置及6项300弹幕负载观察通过；所有
