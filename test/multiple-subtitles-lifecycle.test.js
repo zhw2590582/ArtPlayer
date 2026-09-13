@@ -21,7 +21,7 @@ async function flush() {
 }
 function empty(env) {
   assert.equal(env.liveBlobs.size, 0)
-  assert.equal(env.listeners.get('destroy')?.size || 0, 0)
+  for (const listeners of env.listeners.values()) assert.equal(listeners.size, 0)
 }
 
 for (const abortController of [true, false]) {

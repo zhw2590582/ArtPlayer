@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-07 内嵌时间戳与显示修复完成
+
+修复数字时间戳被文本包装成 NaN；合法 VTT class 标记保留原生 processing instruction，
+caption.ts 在既有事件后只展开专用标记，保留后续节点及用户文字，销毁移除监听。
+覆盖顶层/嵌套、开始/中间/末尾、多个毫秒时间戳、冻结树和重复选择；私有类型不再
+允许字符串时间戳。源码/main/legacy 各 37 项通过，本包 267 项通过，双 TS 编译器各
+9 个负例准确拒绝。三入口原生各 36 项共 108 项通过，原生时间精确为 1.250/2.000/3.500 秒。
+最初裸标签可见、删除标记丢后文及 vendor 实体分号问题均保留了实际失败报告。
+时间戳修复后完整 CI 2337 项通过（1987 单元、14 工程、336 基线），严格生产 TS 353 文件。
+正常构建/ESM 入口通过，dist/docs 副本一致；公开声明、依赖、版本和 vendor 源码未改。
+TIMESTAMP 风险关闭；九份历史实体分号问题新增 ENTITY 风险，归 05 独立修复。
+见[变更](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)和[验证](baselines/multiple-subtitles-timestamps.json)。
+223 项：121 done、14 doing、88 todo；198 项风险。独立本地提交，不推送、不发布。
+下一步继续 MULTI-SUB-04 公开声明/异步及旧模块消费者兼容；实体解码和完整设备组合仍待 05。
+
+
 ## PKG-MULTI-SUB-04 严格运行时 TS 检查点（doing）
 
 五个自有模块迁为 TS，新增明确的 Option/Promise Result/Track/host/lifetime 类型；

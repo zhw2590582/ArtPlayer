@@ -166,4 +166,49 @@ for (const core of ['published', 'candidate']) {
     await page.evaluate(() => window.art.destroy(false))
     await evidence(page, testInfo, core, { requests, nativeSourceSwitch: true })
   })
+
+  test(`Multiple subtitles candidate ${core} core: inline timestamps remain native instructions without visible time tags`, async ({ page }, testInfo) => {
+    const timed = 'WEBVTT\n\n00:00.000 --> 00:08.000\n<00:01.250>Before <00:02.000> after<00:03.500>\n'
+    await page.route('**/test/multiple-timed.vtt', route => route.fulfill({ body: timed, contentType: 'text/vtt' }))
+    await prepare(page, core)
+    await page.addStyleTag({ content: '.art-subtitle-timed { color: rgb(255, 0, 0); }' })
+    await page.evaluate(async () => {
+      await window.art.plugins.add(window.artplayerPluginMultipleSubtitles({ subtitles: [{ url: '/test/multiple-timed.vtt', name: 'timed' }] }))
+    })
+    await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(1)
+    const native = await page.evaluate(() => {
+      const cue = window.art.subtitle.cues[0]
+      const fragment = cue.getCueAsHTML()
+      const walker = document.createTreeWalker(fragment, NodeFilter.SHOW_PROCESSING_INSTRUCTION)
+      const timestamps = []
+      while (walker.nextNode()) timestamps.push(walker.currentNode.nodeValue)
+      return { text: cue.text, timestamps }
+    })
+    expect(native.text).toContain('<00:02.000>')
+    expect(native.text).not.toContain('NaN')
+    expect(native.timestamps).toHaveLength(3)
+    await page.locator('#play').click()
+    await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
+    await page.locator('#pause').click()
+    await expect(page.locator('.art-subtitle-timed').first()).toHaveCSS('color', 'rgb(255, 0, 0)')
+    const timedLine = page.locator('.art-subtitle-line').filter({ has: page.locator('.art-subtitle-timed') })
+    const visible = await timedLine.textContent()
+    expect(visible).toContain('Before')
+    expect(visible).toContain('after')
+    expect(visible).not.toMatch(/<(?:\d+:)?\d{2}:\d{2}\.\d{3}>/)
+    // Public cue edits exercise literal display without relying on the vendor's entity decoder.
+    await page.evaluate(() => {
+      window.art.subtitle.cues[0].text += '<div class="art-subtitle-literal">Literal &lt;00:02.000&gt; example</div>'
+      window.art.subtitle.update()
+    })
+    await expect(page.locator('.art-subtitle-literal')).toHaveText('Literal <00:02.000> example')
+    await page.evaluate(() => window.art.plugins.multipleSubtitles.tracks([]))
+    await expect(page.locator('.art-subtitle-timed')).toHaveCount(0)
+    await page.evaluate(() => window.art.plugins.multipleSubtitles.reset())
+    await expect(timedLine).toContainText('Before')
+    await expect(timedLine).not.toContainText(/<(?:\d+:)?\d{2}:\d{2}\.\d{3}>/)
+    await expect(page.locator('.art-subtitle-literal')).toHaveCount(0)
+    await page.evaluate(() => window.art.destroy(false))
+    await evidence(page, testInfo, core, { native, visible })
+  })
 }

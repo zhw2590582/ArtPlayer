@@ -2338,11 +2338,14 @@
       "dependsOn": [
         "PKG-MULTI-SUB-03"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异",
       "acceptance": "旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变",
-      "evidence": []
+      "evidence": [
+        "baselines/multiple-subtitles-timestamps.json",
+        "changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md"
+      ]
     },
     {
       "id": "PKG-MULTI-SUB-05",

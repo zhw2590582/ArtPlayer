@@ -17,8 +17,7 @@ export interface TimestampNode {
 }
 
 export type CueNode = TextNode | ObjectNode | TimestampNode
-// The historical plugin wraps every top-level value, including timestamp nodes.
-export type WrappedNode = TextNode | (Omit<ObjectNode, 'value'> & { value: string }) | { type: 'timestamp', value: string }
+export type WrappedNode = CueNode
 
 export interface Cue<Node = CueNode> {
   id: string

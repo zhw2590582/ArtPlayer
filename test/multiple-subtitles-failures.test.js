@@ -263,4 +263,10 @@ for (const implementation of implementations) {
     await env.factory(options(subtitle()))(env.art)
     assert((await env.latestText()).includes('<NaN:NaN.NaN>'))
   })
+
+  test(`Multiple-subtitles ${implementation.name} failure baseline: entity decoding retains stray semicolons`, async () => {
+    const env = create({ responses: { 'a.vtt': subtitleVtt('Literal &lt;00:02.000&gt; example &amp;') } })
+    await env.factory(options(subtitle()))(env.art)
+    assert(env.utils.unescape(await env.latestText()).includes('Literal <;00:02.000>; example &;'))
+  })
 }

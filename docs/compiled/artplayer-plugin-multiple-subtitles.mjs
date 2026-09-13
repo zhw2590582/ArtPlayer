@@ -55,56 +55,6 @@
  *
  *     d. Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
  */
-function createLifetime(art) {
-  let closed = Boolean(art.isDestroy);
-  const cleanups = /* @__PURE__ */ new Set();
-  let cancel;
-  const cancelled = new Promise((resolve) => {
-    cancel = resolve;
-  });
-  function run(cleanup) {
-    try {
-      cleanup();
-    } catch (error) {
-      console.warn("Failed to clean up multiple subtitles:", error);
-    }
-  }
-  const lifetime = {
-    get closed() {
-      return closed;
-    },
-    own(cleanup) {
-      if (closed)
-        run(cleanup);
-      else
-        cleanups.add(cleanup);
-      return () => cleanups.delete(cleanup);
-    },
-    wait(value) {
-      return Promise.race([value, cancelled]);
-    },
-    dispose() {
-      if (closed)
-        return;
-      closed = true;
-      cancel();
-      const pending = [...cleanups].reverse();
-      cleanups.clear();
-      for (const cleanup of pending)
-        run(cleanup);
-    }
-  };
-  if (!closed) {
-    lifetime.own(() => art.off("destroy", lifetime.dispose));
-    try {
-      art.on("destroy", lifetime.dispose);
-    } catch (error) {
-      lifetime.dispose();
-      throw error;
-    }
-  }
-  return lifetime;
-}
 var defaultCueSettings = {
   direction: "horizontal",
   snapToLines: true,
@@ -849,6 +799,17 @@ var WebVTTSerializer = function() {
     return result;
   };
 };
+const TIMESTAMP_CLASS = "artplayer-multiple-subtitles-timestamp";
+function markTimestamp(node) {
+  return { type: "object", name: "c", classes: [TIMESTAMP_CLASS], children: [node] };
+}
+function markNestedTimestamps(node) {
+  if (node.type === "timestamp")
+    return markTimestamp(node);
+  if (node.type === "object")
+    return { ...node, children: node.children.map(markNestedTimestamps) };
+  return node;
+}
 function parseTracks(vtts, subtitles) {
   const parser = new WebVTTParser();
   return vtts.map((vtt, index) => {
@@ -865,15 +826,83 @@ function serializeTracks(trees) {
         ...cue,
         tree: {
           ...cue.tree,
-          children: cue.tree.children.map((child) => ({
-            ...child,
-            value: `<div class="art-subtitle-${tree.name}">${child.value}</div>`
-          }))
+          children: cue.tree.children.map((child) => {
+            if (child.type === "timestamp")
+              return markTimestamp(child);
+            const value = `<div class="art-subtitle-${tree.name}">${child.value}</div>`;
+            return child.type === "object" ? { ...child, value, children: child.children.map(markNestedTimestamps) } : { ...child, value };
+          })
         }
       });
     }
   }
   return new WebVTTSerializer().serialize(cues);
+}
+function installCaptionView(art, lifetime) {
+  function update() {
+    if (lifetime.closed)
+      return;
+    for (const marker of Array.from(art.template.$subtitle.getElementsByTagName(`c.${TIMESTAMP_CLASS}`))) {
+      const first = marker.firstChild;
+      if (first?.nodeType === 3)
+        first.nodeValue = (first.nodeValue || "").replace(/^<(?:\d+:)?\d{2}:\d{2}\.\d{3}>/, "");
+      marker.replaceWith(...Array.from(marker.childNodes));
+    }
+  }
+  if (lifetime.closed)
+    return;
+  lifetime.own(() => art.off("subtitleAfterUpdate", update));
+  art.on("subtitleAfterUpdate", update);
+}
+function createLifetime(art) {
+  let closed = Boolean(art.isDestroy);
+  const cleanups = /* @__PURE__ */ new Set();
+  let cancel;
+  const cancelled = new Promise((resolve) => {
+    cancel = resolve;
+  });
+  function run(cleanup) {
+    try {
+      cleanup();
+    } catch (error) {
+      console.warn("Failed to clean up multiple subtitles:", error);
+    }
+  }
+  const lifetime = {
+    get closed() {
+      return closed;
+    },
+    own(cleanup) {
+      if (closed)
+        run(cleanup);
+      else
+        cleanups.add(cleanup);
+      return () => cleanups.delete(cleanup);
+    },
+    wait(value) {
+      return Promise.race([value, cancelled]);
+    },
+    dispose() {
+      if (closed)
+        return;
+      closed = true;
+      cancel();
+      const pending = [...cleanups].reverse();
+      cleanups.clear();
+      for (const cleanup of pending)
+        run(cleanup);
+    }
+  };
+  if (!closed) {
+    lifetime.own(() => art.off("destroy", lifetime.dispose));
+    try {
+      art.on("destroy", lifetime.dispose);
+    } catch (error) {
+      lifetime.dispose();
+      throw error;
+    }
+  }
+  return lifetime;
 }
 function createRenderer(art, lifetime, unescape) {
   let current = null;
@@ -1002,6 +1031,7 @@ function artplayerPluginMultipleSubtitles({ subtitles = [] }) {
       if (lifetime.closed)
         return result;
       trees = parseTracks(vtts, subtitles);
+      installCaptionView(art, lifetime);
       setTracks(trees);
       return result;
     } catch (error) {

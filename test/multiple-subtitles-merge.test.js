@@ -74,3 +74,48 @@ test('Multiple subtitles request: real core SRT/ASS conversion and encoded text 
   for (const value of ['SRT text', 'ASS text', 'café', '日本語']) assert(text.includes(value))
   current.emit('destroy')
 })
+
+for (const [text, timestamps] of [
+  ['Before <00:02.000> after', ['<00:02.000>']],
+  ['<00:01.250> one <00:03.500> two', ['<00:01.250>', '<00:03.500>']],
+  ['end <00:07.000>', ['<00:07.000>']],
+  ['甲<00:02.000>乙', ['<00:02.000>']],
+  ['<b>bold <00:02.000> after</b>', ['<00:02.000>']],
+]) {
+  test(`Multiple subtitles timestamps: valid nodes survive selection and reset (${text})`, async () => {
+    const input = `WEBVTT\n\n00:00.000 --> 00:08.000\n${text}\n`
+    const env = multipleSubtitlesEnvironment(candidate, { responses: { 'a.vtt': input, 'b.vtt': subtitleVtt('Other') } })
+    const result = await env.factory({ subtitles: [{ url: 'a.vtt', name: 'a' }, { url: 'b.vtt', name: 'b' }] })(env.art)
+    result.tracks(['a'])
+    const selected = await env.latestText()
+    for (const timestamp of timestamps) assert(selected.includes(timestamp))
+    assert(!selected.includes('NaN'))
+    const reparsed = parseTracks([selected], [{ name: 'reparsed' }])
+    assert.deepEqual(reparsed[0].errors, [])
+    const numbers = []
+    function collect(nodes) {
+      for (const node of nodes) {
+        if (node.type === 'timestamp')
+          numbers.push(node.value)
+        if (node.children)
+          collect(node.children)
+      }
+    }
+    collect(reparsed[0].cues[0].tree.children)
+    assert.equal(numbers.length, timestamps.length)
+    result.tracks(['b'])
+    assert(!(await env.latestText()).includes(timestamps[0]))
+    result.reset()
+    for (const timestamp of timestamps) assert((await env.latestText()).includes(timestamp))
+    env.emit('destroy')
+  })
+}
+
+test('Multiple subtitles timestamps: frozen numeric nodes stay unchanged across duplicate selection', () => {
+  const trees = freeze(parseTracks(['WEBVTT\n\n00:00.000 --> 00:08.000\nBefore <00:02.000> after\n'], [{ name: 'a' }]))
+  const original = JSON.stringify(trees)
+  const output = serializeTracks([trees[0], trees[0]])
+  assert.equal((output.match(/<00:02\.000>/g) || []).length, 2)
+  assert.equal((output.match(/<c\.artplayer-multiple-subtitles-timestamp>/g) || []).length, 2)
+  assert.equal(JSON.stringify(trees), original)
+})

@@ -32,6 +32,6 @@ for (const compiler of [ts, runtimeCompat]) {
     }
     assert.deepEqual(diagnostics(false), [])
     const rejected = diagnostics(true)
-    assert.equal(rejected.length, 8, JSON.stringify(rejected))
+    assert.equal(rejected.length, 9, JSON.stringify(rejected))
   })
 }

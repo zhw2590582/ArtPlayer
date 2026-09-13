@@ -200,4 +200,5 @@
 | MULTI-SUB-EXPORT-01 | open / 已复现 | Older CommonJS default objects conflict with export-assignment declarations; latest exports a direct factory | PKG-MULTI-SUB-04, PKG-MULTI-SUB-06 |
 | MULTI-SUB-HTTP-01 | resolved / 已复现 | HTTP error responses with parseable bodies are installed as subtitles | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-HOST-01 | resolved / 已复现 | Subtitle init rejections are ignored and failed installation or URL replacement leaks or invalidates resources | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
-| MULTI-SUB-TIMESTAMP-01 | open / 已复现 | Text wrappers replace numeric inline cue timestamps and serialize NaN times | PKG-MULTI-SUB-07, PKG-MULTI-SUB-05 |
+| MULTI-SUB-TIMESTAMP-01 | resolved / 已复现 | Text wrappers replace numeric inline cue timestamps and serialize NaN times | PKG-MULTI-SUB-07, PKG-MULTI-SUB-05 |
+| MULTI-SUB-ENTITY-01 | open / 已复现 | Vendored cue entity decoding retains semicolons after lt, gt and amp entities | PKG-MULTI-SUB-05 |

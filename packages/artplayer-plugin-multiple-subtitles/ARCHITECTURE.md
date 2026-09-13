@@ -17,11 +17,12 @@ task PKG-MULTI-SUB-04 owns that compatibility work. Do not infer runtime behavio
   Its cancellation Promise also settles pending operations without AbortController support.
 - `src/render.ts` owns generated Blob URLs and synchronous/async host installation outcomes.
   Reentrant selections and stale host rejections cannot release the latest selected resource.
+- `src/caption.ts` owns a subtitleAfterUpdate listener. It unwraps internal timestamp markers
+  in the custom HTML caption layer, preserving subsequent nodes and literal user text.
 - `src/types.ts` describes the internal Promise result, selected tracks and narrow host/resource
   boundaries; option fields reuse the existing public declaration. It is not a published API.
 - `src/parser.d.ts` describes the vendored parse result and discriminated cue nodes. Parsed
-  numeric timestamps are distinct from the historically wrapped string nodes accepted by the
-  serializer. That wrapping produces invalid inline times; PKG-MULTI-SUB-07 owns its repair.
+  timestamp values must remain numeric in both parsed and serialized trees.
 - `src/parser.js` is vendored WebVTT parser/serializer code with a CC0 dedication. It is not
   owned plugin code to mechanically migrate to TypeScript. Keep it distinct from task 04.
   The pinned upstream reference and full adaptation check are in
@@ -51,6 +52,18 @@ Do not restore the shared escape option on normal destroy: another consumer may 
 The historical failure suite deliberately retains the old outcomes; the candidate lifecycle
 suite verifies their fixes. Preserve parser best-effort behavior independently: invalid-header
 diagnostics can coexist with usable cues, and metadata is intentionally read after download.
+
+Inline timestamp nodes keep their numeric values. The merge layer puts them in valid VTT
+class spans (`c.artplayer-multiple-subtitles-timestamp`), including nested timestamps. Native
+getCueAsHTML retains the processing instructions. ArtPlayer's HTML layer does not interpret
+those tags, so caption.ts removes only the leading instruction within the generated marker
+and unwraps its remaining children. HTML does not pair `<c.class>` with `</c>`; removing the
+whole element would incorrectly discard following caption text. The original cue stays intact.
+This keeps the existing whole-cue display behavior; it does not add karaoke highlighting.
+
+The vendor entity decoder still leaves extra semicolons after standard named entities. Nine
+historical implementations reproduce it; MULTI-SUB-ENTITY-01 remains open for task 05. Do not
+silently alter vendor source or declare entity rendering correct because timestamp tests pass.
 
 ## Vendor boundary and validation
 

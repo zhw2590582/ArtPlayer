@@ -4403,7 +4403,7 @@
       "id": "MULTI-SUB-TIMESTAMP-01",
       "title": "Text wrappers replace numeric inline cue timestamps and serialize NaN times",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-MULTI-SUB-07",
         "PKG-MULTI-SUB-05"
@@ -4411,10 +4411,38 @@
       "evidence": [
         "refactor/baselines/multiple-subtitles-runtime-types.json",
         "refactor/changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md",
-        "test/multiple-subtitles-failures.test.js"
+        "test/multiple-subtitles-failures.test.js",
+        "refactor/baselines/multiple-subtitles-timestamps.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js"
       ],
       "compatibleResolution": "Preserve numeric timestamp nodes while retaining subtitle text, track wrappers and selection contracts; record the intentional repair of invalid legacy output.",
-      "closureCriteria": "Valid inline timestamps and surrounding text survive serialization and native subtitle playback; frozen historical failure remains reproducible and ordinary markup regressions pass."
+      "closureCriteria": "Valid inline timestamps and surrounding text survive serialization and native subtitle playback; frozen historical failure remains reproducible and ordinary markup regressions pass.",
+      "resolutionEvidence": [
+        "refactor/baselines/multiple-subtitles-timestamps.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md",
+        "test/multiple-subtitles-merge.test.js",
+        "test/browser/multiple-subtitles-lifecycle.spec.js",
+        "packages/artplayer-plugin-multiple-subtitles/src/caption.ts"
+      ],
+      "resolutionRationale": "Numeric timestamp nodes serialize inside valid VTT class markers, preserve native processing instructions, and are unwrapped only in the custom caption DOM without deleting subsequent text. Source/main/legacy tests, frozen-tree and timestamp cases, strict negative fixtures, and 108 native cases across both core fixtures pass. Public cue edits verify literal text preservation independently of the unresolved vendor entity bug."
+    },
+    {
+      "id": "MULTI-SUB-ENTITY-01",
+      "title": "Vendored cue entity decoding retains semicolons after lt, gt and amp entities",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "test/multiple-subtitles-failures.test.js",
+        "refactor/baselines/multiple-subtitles-timestamps.json",
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md"
+      ],
+      "compatibleResolution": "Independently fix valid named-entity decoding, documenting the vendor patch and preserving provenance checks and ordinary cue behavior.",
+      "closureCriteria": "Nine historical implementations reproduce the defect; candidate entity/markup regressions and real subtitle display pass, with vendor adaptation and provenance documentation updated."
     }
   ]
 }

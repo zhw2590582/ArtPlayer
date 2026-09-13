@@ -1,5 +1,5 @@
 import type Artplayer from 'artplayer'
-import type { CueNode, TimestampNode } from '../../packages/artplayer-plugin-multiple-subtitles/src/parser'
+import type { CueNode, TimestampNode, WrappedNode } from '../../packages/artplayer-plugin-multiple-subtitles/src/parser'
 import type { Option, Result } from '../../packages/artplayer-plugin-multiple-subtitles/src/types'
 import factory from '../../packages/artplayer-plugin-multiple-subtitles/src/index'
 import createLifetime from '../../packages/artplayer-plugin-multiple-subtitles/src/lifetime'
@@ -52,6 +52,9 @@ void timestamp
 // @ts-expect-error Parsed timestamps are numbers, not wrapped serialized values.
 const wrongTimestamp: TimestampNode = { type: 'timestamp', value: '2' }
 void wrongTimestamp
+// @ts-expect-error Serialized timestamp nodes must also keep numeric values.
+const wrongWrapped: WrappedNode = { type: 'timestamp', value: '<div>2</div>' }
+void wrongWrapped
 const trees = parseTracks(['WEBVTT\n\n'], [{}])
 const vtt: string = serializeTracks(trees)
 void vtt

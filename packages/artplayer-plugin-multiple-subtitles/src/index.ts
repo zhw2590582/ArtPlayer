@@ -1,5 +1,6 @@
 import type Artplayer from 'artplayer'
 import type { Option, Result, Track } from './types'
+import installCaptionView from './caption'
 import createLifetime from './lifetime'
 import { parseTracks, serializeTracks } from './merge'
 import createRenderer from './render'
@@ -33,6 +34,7 @@ export default function artplayerPluginMultipleSubtitles({ subtitles = [] }: Opt
         return result
       // A live completed request yields text; cancellation was checked above.
       trees = parseTracks(vtts as string[], subtitles)
+      installCaptionView(art, lifetime)
       setTracks(trees)
       return result
     }
