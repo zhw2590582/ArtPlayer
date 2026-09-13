@@ -1,7 +1,8 @@
-# Canvas / Ambilight 工厂类型兼容取舍（待确认）
+# Canvas / Ambilight 工厂类型兼容取舍（已确认，待实施）
 
 PKG-FACTORY-01 已复现当前声明的问题，但尚未修改生产声明，不能标记完成。
-本页推荐方案需要用户确认；Ads 的单独类型修正授权不适用于这里。
+2026-09-13用户已接受统一规则，见[确认记录](type-compatibility-policy.md)。本页推荐
+方向已授权；此前Ads单项授权之外的待决状态由此次确认替代，实施和验证仍须完成。
 
 ## 问题与真实发布对照
 
@@ -64,15 +65,14 @@ module.default({})
 
 完整候选声明由 `scripts/factory-assignability.mjs` 的 declaration(pkg, 'latest-default')
 生成。当前它只是可编译的核心签名提案，尚未加入全部命名类型、格式包装和安装验收，
-不属于已经实施或批准的生产修复。
+属于已批准方向，尚不属于已经实施并验证的生产修复。
 
 ## 决策与后续
 
-- 状态：待用户确认是否接受上述 1.0.0 TypeScript 导入迁移；不把大版本升级视为自动授权。
-- 若接受：修改两包声明和包装，补充 RuntimeFactory、全工厂赋值测试、编辑器和包内文档，
+- 状态：用户已明确接受上述较早版本TypeScript导入迁移；不因批准而跳过验证。
+- 下一步：修改两包声明和包装，补充 RuntimeFactory、全工厂赋值测试、编辑器和包内文档，
   重建并执行真实安装消费矩阵；保留逐版本负例，验证 JS 产物与浏览器证据，单独完成任务提交。
-- 若不接受：保留该风险与发布依赖，继续评估显式兼容入口；不把 optional .default、any、
-  skipLibCheck 或删除历史消费者当作修复。
+- 仍不得把optional .default、any、skipLibCheck或删除历史消费者当作修复。
 - PKG-CANVAS-05、PKG-AMBILIGHT-05、REL-01 仍依赖本任务完成。
 
 证据：[编译矩阵](baselines/factory-compatibility-proposals.json)、
