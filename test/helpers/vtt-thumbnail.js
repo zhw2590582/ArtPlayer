@@ -1,7 +1,16 @@
+import fs from 'node:fs'
+import process from 'node:process'
 import vm from 'node:vm'
 import { transform } from 'esbuild'
 import { readMember } from '../../refactor/scripts/releases.mjs'
 import { verifyVttThumbnailContract } from '../../refactor/scripts/vtt-thumbnail-contract.mjs'
+import { compilePackage } from './load.js'
+
+export async function vttThumbnailCandidate() {
+  if (process.env.ARTPLAYER_VTT_THUMBNAIL_BASELINE === '1')
+    return (await vttThumbnailHistorical()).find(item => item.name === 'frozen-workspace-js')
+  return { name: 'candidate', profile: 'current', code: process.env.ARTPLAYER_VTT_THUMBNAIL_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_VTT_THUMBNAIL_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-vtt-thumbnail', 'umd') }
+}
 
 export async function vttThumbnailHistorical() {
   const { baseline, archives, sources } = await verifyVttThumbnailContract()
@@ -41,6 +50,8 @@ export function vttThumbnailEnvironment(implementation, { script = false, mobile
   const timers = new Map()
   const classes = new Set()
   const styles = {}
+  const removed = []
+  const warnings = []
   let nextTimer = 0
   let resolveFetch
   let rejectFetch
@@ -69,7 +80,12 @@ export function vttThumbnailEnvironment(implementation, { script = false, mobile
     } },
     controls: { add(option) {
       controls.push(option)
+      this[option.name] = control
       option.mounted(control)
+      return control
+    }, remove(name) {
+      removed.push(name)
+      delete this[name]
     } },
     on(name, callback) {
       if (!listeners.has(name))
@@ -81,6 +97,8 @@ export function vttThumbnailEnvironment(implementation, { script = false, mobile
   }
   const box = {
     window: {},
+    AbortController,
+    console: { warn(...args) { warnings.push(args) } },
     fetch(...args) {
       requests.push(args)
       return pending || Promise.resolve(response(text))
@@ -111,6 +129,8 @@ export function vttThumbnailEnvironment(implementation, { script = false, mobile
     timers,
     requests,
     progress,
+    removed,
+    warnings,
     resolve(source = text) { resolveFetch(response(source)) },
     reject(error) { rejectFetch(error) },
     async emit(name, ...args) { return Promise.all((listeners.get(name) || []).map(callback => callback(...args))) },

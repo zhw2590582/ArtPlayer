@@ -4151,7 +4151,10 @@
         "refactor/baselines/vtt-thumbnail-contract.md",
         "refactor/scripts/vtt-thumbnail-contract.test.mjs",
         "test/vtt-thumbnail.test.js",
-        "refactor/baselines/vtt-thumbnail-failures.json"
+        "refactor/baselines/vtt-thumbnail-failures.json",
+        "test/vtt-thumbnail-lifecycle.test.js",
+        "test/browser/vtt-thumbnail-lifecycle.spec.js",
+        "refactor/baselines/vtt-thumbnail-resources.json"
       ],
       "compatibleResolution": "Preserve valid cue selection and geometry; test malformed data and standard VTT separately from old compiler defects.",
       "closureCriteria": "Parser fixtures include malformed, empty, real demo VTT, fractional and shared bounds, relative URLs and historical accepted formats."
@@ -4171,7 +4174,10 @@
         "refactor/baselines/vtt-thumbnail-contract.md",
         "refactor/scripts/vtt-thumbnail-contract.test.mjs",
         "test/vtt-thumbnail.test.js",
-        "refactor/baselines/vtt-thumbnail-failures.json"
+        "refactor/baselines/vtt-thumbnail-failures.json",
+        "test/vtt-thumbnail-lifecycle.test.js",
+        "test/browser/vtt-thumbnail-lifecycle.spec.js",
+        "refactor/baselines/vtt-thumbnail-resources.json"
       ],
       "compatibleResolution": "Own requests, listeners, timers and controls per registration without stale writes or cross-instance cleanup.",
       "closureCriteria": "Deferred request, destroy, failure, timer, repeated registration and native core scenarios demonstrate cleanup."

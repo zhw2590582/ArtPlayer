@@ -1,74 +1,46 @@
-import getVttArray from './getVttArray'
+import createLifetime from './lifetime'
+import parseVtt from './parseVtt'
+import createPreview from './preview'
+import requestVtt from './request'
 
 export default function artplayerPluginVttThumbnail(option) {
   return async (art) => {
-    const {
-      constructor: {
-        utils: { setStyle, isMobile, addClass },
-      },
-      template: { $progress },
-    } = art
-
-    let timer = null
-    const thumbnails = await getVttArray(option.vtt)
-
-    function showThumbnails($control, find, width) {
-      setStyle($control, 'backgroundImage', `url(${find.url})`)
-      setStyle($control, 'height', `${find.h}px`)
-      setStyle($control, 'width', `${find.w}px`)
-      setStyle($control, 'backgroundPosition', `-${find.x}px -${find.y}px`)
-      if (width <= find.w / 2) {
-        setStyle($control, 'left', 0)
-      }
-      else if (width > $progress.clientWidth - find.w / 2) {
-        setStyle($control, 'left', `${$progress.clientWidth - find.w}px`)
-      }
-      else {
-        setStyle($control, 'left', `${width - find.w / 2}px`)
-      }
+    const { constructor: { utils: { setStyle, isMobile, addClass } }, template: { $progress } } = art
+    const lifetime = createLifetime(art)
+    const result = { name: 'artplayerPluginVttThumbnail' }
+    try {
+      if (lifetime.closed)
+        return result
+      const url = option.vtt
+      const text = await requestVtt(url, lifetime)
+      if (lifetime.closed)
+        return result
+      const thumbnails = parseVtt(text, url)
+      const preview = createPreview({ lifetime, thumbnails, progress: $progress, duration: () => art.duration, setStyle, isMobile })
+      const style = option.style || {}
+      if (lifetime.closed)
+        return result
+      art.controls.add({
+        name: 'vtt-thumbnail',
+        position: 'top',
+        index: 20,
+        style,
+        mounted(control) {
+          lifetime.own(() => {
+            if (art.controls['vtt-thumbnail'] === control)
+              art.controls.remove('vtt-thumbnail')
+          })
+          if (lifetime.closed)
+            return
+          addClass(control, 'art-control-thumbnails')
+          lifetime.listen('setBar', preview(control))
+        },
+      })
+      return result
     }
-
-    art.controls.add({
-      name: 'vtt-thumbnail',
-      position: 'top',
-      index: 20,
-      style: option.style || {},
-      mounted($control) {
-        addClass($control, 'art-control-thumbnails')
-        art.on('setBar', async (type, percentage, event) => {
-          const isMobileDroging = type === 'played' && event && isMobile
-
-          if (type === 'hover' || isMobileDroging) {
-            const width = $progress.clientWidth * percentage
-            const second = percentage * art.duration
-            setStyle($control, 'display', 'flex')
-
-            const find = thumbnails.find(item => second >= item.start && second <= item.end)
-            if (!find)
-              return setStyle($control, 'display', 'none')
-
-            if (width > 0 && width < $progress.clientWidth) {
-              showThumbnails($control, find, width)
-            }
-            else {
-              if (!isMobile) {
-                setStyle($control, 'display', 'none')
-              }
-            }
-
-            if (isMobileDroging) {
-              clearTimeout(timer)
-              timer = setTimeout(() => {
-                setStyle($control, 'display', 'none')
-              }, 500)
-            }
-          }
-        })
-      },
-    })
-
-    return {
-      name: 'artplayerPluginVttThumbnail',
+    catch (error) {
+      lifetime.dispose()
+      throw error
     }
   }
 }
