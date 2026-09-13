@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-JASSUB-04 自有 TS 与准确类型入口完成
+
+两个自有模块已迁为严格 TS，编译后的 JS 和三种正常构建产物保持上一任务行为。
+实际 npm 两版旧根声明完整保留，新增 /runtime 描述真实同步方法/可选参数，
+修复旧 Node10 legacy 解析与编辑器导出冲突；无 interop 的 CJS 类型引用也通过。
+联合 139 项、源码/main/legacy 各 15 项、406 生产 TS 全仓检查通过；实际两旧包及
+候选的仓库外安装 15 编译器组合通过，新增真实 WASM 查询/修改测试。
+[变更记录](changes/2026-09-14-PKG-JASSUB-04-types.md)和
+[安装与类型证据](baselines/jassub-types-validation.json)保留中间失败及最终候选。
+新增 JASSUB-QUERY-01 有冻结错误复现，交由下一项 07 修复；没有宣称新浏览器
+播放或发布验收。下一步继续 vendor 生命周期/时钟/查询清理，05/06 仍未完成。
+
+
 ## PKG-JASSUB-03 自有注册/清理改造完成
 
 入口与 registration 分离；自定义 canvas、直接实例销毁后的宿主清理、重入与

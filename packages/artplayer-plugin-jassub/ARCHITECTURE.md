@@ -1,7 +1,7 @@
 # JASSUB maintenance
 
-`src/index.js` preserves the lazy factory and delegates registration to
-`src/registration.js`. The registration module constructs the actual vendor object
+`src/index.ts` preserves the lazy factory and delegates registration to
+`src/registration.ts`. The registration module constructs the actual vendor object
 with `{ video: art.video, ...option }`, styles only a vendor-created canvas parent,
 binds host cleanup and synchronously returns `{ name: 'artplayerPluginJassub', instance }`.
 Options remain live until registration; a supplied video wins. This small split keeps
@@ -27,11 +27,27 @@ messages. Keep this third-party file separate from the adapter's TypeScript migr
 files. The local demo explicitly hosts its resources under `docs/assets/jassub/` and selects
 fonts in `docs/assets/example/jassub.js`. Do not move or rename those URLs as an internal cleanup.
 
-`types/artplayer-plugin-jassub.d.ts` currently requires three resource URLs and describes
-resize/setVideo/destroy as Promise-returning. Actual historical methods are synchronous, and
-resize is width/height/top/left/force. Keep the existing declarations until the dedicated public
-type compatibility work has assessed extraction, callbacks and replacement consumers.
-Both option and instance expose extension indexes; they are existing compatibility boundaries.
+`types/artplayer-plugin-jassub.d.ts` preserves the actual npm 1.0.0/1.1.0 declarations,
+including three required resource URLs, Promise-returning resize/setVideo/destroy and
+the historical force-first resize signature. Both option and instance retain their existing
+extension indexes. Do not correct this root file by narrowing fields or adding overloads:
+complete factory assignment and Parameters/ReturnType are compatibility boundaries.
+
+`types/runtime-api.d.ts` separately describes the actual optional options, synchronous
+registration and methods, width/height/top/left/force resize, EventTarget events and
+Worker query/mutation data. `types/runtime.d.ts`, `.d.cts` and `.d.mts` expose it through
+the optional `/runtime` entry; it resolves to the same main/ESM JavaScript as the root.
+There is no second implementation and no new factory.default property. Root/legacy
+types remain unchanged; exact typesVersions mappings support old Node module resolution.
+See [type migration notes](types/README.md) before changing either surface.
+
+`src/jassub.es.d.ts` is a private bridge for the frozen vendor JS, not a public export.
+It adds only the adapter's `_destroyed` read and `_canvasParent.style.zIndex` write to the
+accurate instance. The minimal style contract permits the historical numeric 20, which
+the native DOM setter converts to a string. The owned TS modules depend on RuntimeOption
+and RuntimeResult, while JassubHost needs only video/on/off. The implementation fixture
+checks actual Artplayer assignability. No broad any index, allowJs or ts-nocheck hides
+owned code; the isolated third-party JS remains an explicit provenance/07 exception.
 
 The wrapper matches upstream jassub 1.8.8 apart from formatting and the ESLint header;
 worker JS and default font match that archive byte-for-byte. Local WASM instead matches
@@ -48,6 +64,10 @@ Use the pinned Node/Yarn toolchain:
 
 ```sh
 yarn test:jassub
+yarn test:jassub-types
+yarn test:jassub-types-package
+yarn typecheck
+yarn build:ts artplayer-plugin-jassub
 node --test test/jassub-registration.test.js
 node refactor/scripts/jassub-provenance.test.mjs --network
 yarn build artplayer-plugin-jassub

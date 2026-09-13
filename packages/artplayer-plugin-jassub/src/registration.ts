@@ -1,6 +1,13 @@
+import type { RuntimeOption, RuntimeResult } from '../types/runtime-api.js'
 import JASSUB from './jassub.es.js'
 
-export function registerJassub(art, option) {
+export interface JassubHost {
+  video: HTMLVideoElement
+  on: (name: 'destroy', callback: () => void) => unknown
+  off: (name: 'destroy', callback: () => void) => unknown
+}
+
+export function registerJassub(art: JassubHost, option?: RuntimeOption): RuntimeResult {
   const instance = new JASSUB({ video: art.video, ...option })
   let disposed = false
   const dispose = () => {

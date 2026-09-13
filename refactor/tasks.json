@@ -2477,11 +2477,14 @@
         "ENG-06",
         "CORE-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "JASSUB option/instance 的兼容类型包装，vendor JS 例外记录",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-JASSUB-04-types.md",
+        "baselines/jassub-types-validation.json"
+      ]
     },
     {
       "id": "PKG-JASSUB-05",
@@ -2531,7 +2534,7 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "独立记录 vendor 适配差异；幂等销毁、跨容器 setVideo、构造回滚、逐帧归属和倍率/能力边界",
+      "deliverable": "独立记录 vendor 适配差异；幂等销毁、跨容器 setVideo、构造回滚、逐帧归属和倍率/能力边界；查询 timeout/Worker error 的缺失数据回调及每请求监听器/定时器清理（JASSUB-QUERY-01）",
       "acceptance": "保持公开真实 instance、同步方法与资源路径；保留原 vendor 来源指纹并记录每项实际补丁；候选修复正例和真实字幕/失败/时钟验证通过，未证实设备不得冒充通过",
       "evidence": []
     },

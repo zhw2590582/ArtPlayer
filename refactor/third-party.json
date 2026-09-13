@@ -1258,7 +1258,7 @@
         "PKG-JASSUB-05"
       ],
       "sourceFiles": [
-        "packages/artplayer-plugin-jassub/src/index.js",
+        "packages/artplayer-plugin-jassub/src/index.ts",
         "docs/assets/example/jassub.js"
       ],
       "contract": "Preserve options pass-through, result.instance and worker/wasm/font URLs. Wrapper, worker and WASM must be a verified compatible set.",

@@ -35,3 +35,8 @@ Danmuku的PKG-DANMUKU-06保留实际npm 5.3.0根声明的完整类型形状与�
 points、静态icons和回调receiver；根/legacy/runtime复用原分发实现，不添加不存在
 的factory.default。旧入口用户不需要因本次类型迁移修改代码。切换/runtime是可选
 的准确类型入口，历史声明与运行时的区别见包README；这里没有新增旧类型破坏授权。
+
+JASSUB 的 PKG-JASSUB-04 保留实际 npm 1.0.0/1.1.0 相同的根声明（忽略换行），
+不改变必填资源 URL、旧 resize 参数顺序、Promise 返回声明和扩展索引。新增
+/runtime 描述真实可选参数、同步方法及 Worker 数据，并复用同一运行产物。
+这项实施没有新增旧类型破坏，不声称用户另行批准过 JASSUB 专属类型冲突。

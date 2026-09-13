@@ -27,11 +27,31 @@
       "types": "./types/artplayer-plugin-jassub.d.ts",
       "import": "./dist/artplayer-plugin-jassub.legacy.js",
       "require": "./dist/artplayer-plugin-jassub.legacy.js"
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer-plugin-jassub.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer-plugin-jassub.js"
+      }
     }
   },
   "main": "dist/artplayer-plugin-jassub.js",
   "module": "./dist/artplayer-plugin-jassub.mjs",
   "types": "types/artplayer-plugin-jassub.d.ts",
   "legacy": "dist/artplayer-plugin-jassub.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-jassub.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
+      ]
+    }
+  }
 }
