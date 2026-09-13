@@ -1,16 +1,8 @@
-import $check_off from './img/check_off.svg?raw'
-import $check_on from './img/check_on.svg?raw'
-import $config from './img/config.svg?raw'
-import $mode_0_off from './img/mode_0_off.svg?raw'
-import $mode_0_on from './img/mode_0_on.svg?raw'
-import $mode_1_off from './img/mode_1_off.svg?raw'
-import $mode_1_on from './img/mode_1_on.svg?raw'
-import $mode_2_off from './img/mode_2_off.svg?raw'
-import $mode_2_on from './img/mode_2_on.svg?raw'
-import $off from './img/off.svg?raw'
-import $on from './img/on.svg?raw'
-import $style from './img/style.svg?raw'
-import style from './style.less?inline'
+import SettingLifecycle from './setting-lifecycle'
+import { emitSetting, lockSetting, unlockSetting } from './setting-send'
+import createSlider from './setting-slider'
+import { settingIcons, settingTemplate } from './setting-template'
+import './setting-style'
 
 export default class Setting {
   constructor(art, danmuku) {
@@ -20,7 +12,6 @@ export default class Setting {
 
     const { setStyle } = this.utils
     const { $controlsCenter } = art.template
-    setStyle($controlsCenter, 'display', 'flex')
 
     this.template = {
       $controlsCenter,
@@ -57,46 +48,59 @@ export default class Setting {
     this.isLock = false
     this.timer = null
 
-    this.createTemplate()
-    this.createSliders()
-    this.createEvents()
+    this.lifecycle = new SettingLifecycle(art)
+    this.destroy = this.destroy.bind(this)
+    this.lifecycle.own(() => art.off('destroy', this.destroy))
 
-    this.mount(this.option.mount)
+    try {
+      art.on('destroy', this.destroy)
+      if (!this.lifecycle.active)
+        return
+      this.lifecycle.write($controlsCenter.style, 'display', 'flex', value => setStyle($controlsCenter, 'display', value))
 
-    art.on('resize', () => this.resize())
-    art.on('fullscreen', state => this.onFullscreen(state))
-    art.on('fullscreenWeb', state => this.onFullscreen(state))
+      this.createTemplate()
+      if (!this.lifecycle.active)
+        return
+      this.createSliders()
+      if (!this.lifecycle.active)
+        return
+      this.createEvents()
 
-    art.proxy(this.template.$config, 'mouseenter', () => {
-      this.onMouseEnter({
-        $control: this.template.$config,
-        $panel: this.template.$configPanel,
+      this.mount(this.option.mount)
+      if (!this.lifecycle.active)
+        return
+
+      this.lifecycle.on('resize', () => this.resize())
+      this.lifecycle.on('fullscreen', state => this.onFullscreen(state))
+      this.lifecycle.on('fullscreenWeb', state => this.onFullscreen(state))
+
+      this.lifecycle.proxy(this.template.$config, 'mouseenter', () => {
+        this.onMouseEnter({
+          $control: this.template.$config,
+          $panel: this.template.$configPanel,
+        })
       })
-    })
 
-    art.proxy(this.template.$style, 'mouseenter', () => {
-      this.onMouseEnter({
-        $control: this.template.$style,
-        $panel: this.template.$stylePanel,
+      this.lifecycle.proxy(this.template.$style, 'mouseenter', () => {
+        this.onMouseEnter({
+          $control: this.template.$style,
+          $panel: this.template.$stylePanel,
+        })
       })
-    })
+    }
+    catch (error) {
+      try {
+        this.destroy()
+      }
+      catch (cleanupError) {
+        console.warn('Failed to roll back danmuku setting:', cleanupError)
+      }
+      throw error
+    }
   }
 
   static get icons() {
-    return {
-      $on,
-      $off,
-      $config,
-      $style,
-      $mode_0_off,
-      $mode_0_on,
-      $mode_1_off,
-      $mode_1_on,
-      $mode_2_off,
-      $mode_2_on,
-      $check_on,
-      $check_off,
-    }
+    return settingIcons()
   }
 
   get option() {
@@ -108,100 +112,7 @@ export default class Setting {
   }
 
   get TEMPLATE() {
-    const { option } = this
-    return `
-            <div class="apd-toggle">
-                ${$on}${$off}
-            </div>
-            <div class="apd-config">
-                ${$config}
-                <div class="apd-config-panel">
-                    <div class="apd-config-panel-inner">
-                        <div class="apd-config-mode">
-                            按类型屏蔽
-                            <div class="apd-modes">
-                                <div data-mode="0" class="apd-mode">
-                                    ${$mode_0_off}${$mode_0_on}
-                                    <div>滚动</div>
-                                </div>
-                                <div data-mode="1" class="apd-mode">
-                                    ${$mode_1_off}${$mode_1_on}
-                                    <div>顶部</div>
-                                </div>
-                                <div data-mode="2" class="apd-mode">
-                                    ${$mode_2_off}${$mode_2_on}
-                                    <div>底部</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="apd-config-other">
-                            <div class="apd-other apd-anti-overlap">
-                                ${$check_on}${$check_off}
-                                防止弹幕重叠
-                            </div>
-                            <div class="apd-other apd-sync-video">
-                                ${$check_on}${$check_off}
-                                同步视频速度
-                            </div>
-                        </div>
-                        <div class="apd-config-slider apd-config-opacity">
-                            不透明度
-                            <div class="apd-slider"></div>
-                            <div class="apd-value">未知</div>
-                        </div>
-                        <div class="apd-config-slider apd-config-margin">
-                            显示区域
-                            <div class="apd-slider"></div>
-                            <div class="apd-value">未知</div>
-                        </div>
-                        <div class="apd-config-slider apd-config-fontSize">
-                            弹幕字号
-                            <div class="apd-slider"></div>
-                            <div class="apd-value">未知</div>
-                        </div>
-                        <div class="apd-config-slider apd-config-speed">
-                            弹幕速度
-                            <div class="apd-slider"></div>
-                            <div class="apd-value">未知</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="apd-emitter">
-                <div class="apd-style">
-                    ${$style}
-                    <div class="apd-style-panel">
-                        <div class="apd-style-panel-inner">
-                            <div class="apd-style-mode">
-                                模式
-                                <div class="apd-modes">
-                                    <div data-mode="0" class="apd-mode">
-                                        ${$mode_0_on}
-                                        <div>滚动</div>
-                                    </div>
-                                    <div data-mode="1" class="apd-mode">
-                                        ${$mode_1_on}
-                                        <div>顶部</div>
-                                    </div>
-                                    <div data-mode="2" class="apd-mode">
-                                        ${$mode_2_on}
-                                        <div>底部</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="apd-style-color">
-                                颜色
-                                <div class="apd-colors">
-                                    ${this.COLOR.map(color => `<div data-color="${color}" class="apd-color" style="background-color: ${color}"></div>`).join('')}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input class="apd-input" placeholder="发个友善的弹幕见证当下" autocomplete="off" maxLength="${option.maxLength}" />
-                <div class="apd-send">发送</div>
-            </div>
-        `
+    return settingTemplate.call(this)
   }
 
   get OPACITY() {
@@ -308,6 +219,8 @@ export default class Setting {
   }
 
   append(el, target) {
+    if (!this.lifecycle.active)
+      return
     const { append } = this.utils
     const children = [...el.children]
     if (children.includes(target))
@@ -316,11 +229,13 @@ export default class Setting {
   }
 
   setData(key, value) {
+    if (!this.lifecycle.active)
+      return
     const { $player } = this.art.template
     const { $mount } = this.template
-    $player.dataset[key] = value
+    this.lifecycle.write($player.dataset, key, value)
     if (this.outside) {
-      $mount.dataset[key] = value
+      this.lifecycle.write($mount.dataset, key, value)
     }
   }
 
@@ -328,10 +243,10 @@ export default class Setting {
     const { createElement, tooltip } = this.utils
 
     const $danmuku = createElement('div')
+    this.template.$danmuku = $danmuku
     $danmuku.className = 'artplayer-plugin-danmuku'
     $danmuku.innerHTML = this.TEMPLATE
 
-    this.template.$danmuku = $danmuku
     this.template.$toggle = this.query('.apd-toggle')
     this.template.$config = this.query('.apd-config')
     this.template.$configPanel = this.query('.apd-config-panel')
@@ -355,11 +270,11 @@ export default class Setting {
 
     const { $toggle } = this.template
 
-    this.art.on('artplayerPluginDanmuku:show', () => {
+    this.lifecycle.on('artplayerPluginDanmuku:show', () => {
       tooltip($toggle, '关闭弹幕')
     })
 
-    this.art.on('artplayerPluginDanmuku:hide', () => {
+    this.lifecycle.on('artplayerPluginDanmuku:hide', () => {
       tooltip($toggle, '打开弹幕')
     })
   }
@@ -367,14 +282,14 @@ export default class Setting {
   createEvents() {
     const { $toggle, $configModes, $styleModes, $colors, $antiOverlap, $syncVideo, $send, $input } = this.template
 
-    this.art.proxy($toggle, 'click', () => {
+    this.lifecycle.proxy($toggle, 'click', () => {
       this.danmuku.config({
         visible: !this.option.visible,
       })
       this.reset()
     })
 
-    this.art.proxy($configModes, 'click', (event) => {
+    this.lifecycle.proxy($configModes, 'click', (event) => {
       const $mode = event.target.closest('.apd-mode')
       if (!$mode)
         return
@@ -392,21 +307,21 @@ export default class Setting {
       this.reset()
     })
 
-    this.art.proxy($antiOverlap, 'click', () => {
+    this.lifecycle.proxy($antiOverlap, 'click', () => {
       this.danmuku.config({
         antiOverlap: !this.option.antiOverlap,
       })
       this.reset()
     })
 
-    this.art.proxy($syncVideo, 'click', () => {
+    this.lifecycle.proxy($syncVideo, 'click', () => {
       this.danmuku.config({
         synchronousPlayback: !this.option.synchronousPlayback,
       })
       this.reset()
     })
 
-    this.art.proxy($styleModes, 'click', (event) => {
+    this.lifecycle.proxy($styleModes, 'click', (event) => {
       const $mode = event.target.closest('.apd-mode')
       if (!$mode)
         return
@@ -417,7 +332,7 @@ export default class Setting {
       this.reset()
     })
 
-    this.art.proxy($colors, 'click', (event) => {
+    this.lifecycle.proxy($colors, 'click', (event) => {
       const $color = event.target.closest('.apd-color')
       if (!$color)
         return
@@ -427,9 +342,9 @@ export default class Setting {
       this.reset()
     })
 
-    this.art.proxy($send, 'click', () => this.emit())
+    this.lifecycle.proxy($send, 'click', () => this.emit())
 
-    this.art.proxy($input, 'keypress', (event) => {
+    this.lifecycle.proxy($input, 'keypress', (event) => {
       if (event.key === 'Enter') {
         event.preventDefault()
         this.emit()
@@ -509,79 +424,13 @@ export default class Setting {
     })
   }
 
-  createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
-    const { query, clamp, setStyle } = this.utils
-
-    setStyle(container, 'touch-action', 'none')
-
-    container.innerHTML = `
-            <div class="apd-slider-line">
-                <div class="apd-slider-points">
-                    ${steps.map(() => `<div class="apd-slider-point"></div>`).join('')}
-                </div>
-                <div class="apd-slider-progress"></div>
-            </div>
-            <div class="apd-slider-dot"></div>
-            <div class="apd-slider-steps">
-                ${steps.map(step => (step.hide ? '' : `<div class="apd-slider-step">${step.name}</div>`)).join('')}
-            </div>
-        `
-
-    const $dot = query('.apd-slider-dot', container)
-    const $progress = query('.apd-slider-progress', container)
-
-    let isDroging = false
-
-    function reset(index = findIndex()) {
-      if (index < min || index > max)
-        return
-      const percentage = (index - min) / (max - min)
-      $dot.style.left = `${percentage * 100}%`
-      if (steps.length === 0) {
-        $progress.style.width = $dot.style.left
-      }
-      onChange(index)
-    }
-
-    function updateLeft(event) {
-      const { top, height, left, width } = container.getBoundingClientRect()
-      if (this.art.isRotate) {
-        const value = clamp(event.clientY - top, 0, height)
-        const index = Math.round((value / height) * (max - min) + min)
-        reset(index)
-      }
-      else {
-        const value = clamp(event.clientX - left, 0, width)
-        const index = Math.round((value / width) * (max - min) + min)
-        reset(index)
-      }
-    }
-
-    this.art.proxy(container, 'click', (event) => {
-      updateLeft.call(this, event)
-    })
-
-    this.art.proxy(container, 'pointerdown', (event) => {
-      isDroging = event.button === 0
-    })
-
-    this.art.on('document:pointermove', (event) => {
-      if (isDroging) {
-        updateLeft.call(this, event)
-      }
-    })
-
-    this.art.on('document:pointerup', (event) => {
-      if (isDroging) {
-        isDroging = false
-        updateLeft.call(this, event)
-      }
-    })
-
-    return { reset }
+  createSlider(option) {
+    return createSlider.call(this, option)
   }
 
   onFullscreen(state) {
+    if (!this.lifecycle.active)
+      return
     const { $danmuku, $controlsCenter, $mount } = this.template
     if (this.outside) {
       if (state) {
@@ -597,6 +446,8 @@ export default class Setting {
   }
 
   onMouseEnter({ $control, $panel }) {
+    if (!this.lifecycle.active)
+      return
     const { $player } = this.art.template
     const controlRect = $control.getBoundingClientRect()
     const panelRect = $panel.getBoundingClientRect()
@@ -617,80 +468,21 @@ export default class Setting {
     }
   }
 
-  async emit() {
-    const { $input } = this.template
-
-    const text = $input.value.trim()
-    if (!text.length)
-      return
-    if (this.isLock)
-      return
-    if (this.emitting)
-      return
-
-    const danmu = {
-      text,
-      mode: this.option.mode,
-      color: this.option.color,
-      time: this.art.currentTime,
-    }
-
-    try {
-      this.emitting = true
-      const state = await this.option.beforeEmit(danmu)
-      this.emitting = false
-
-      if (state !== true)
-        return
-
-      danmu.border = true
-      delete danmu.time
-      this.danmuku.emit(danmu)
-      $input.value = ''
-
-      this.lock()
-    }
-    catch (error) {
-      console.error('Error emitting danmuku:', error)
-      this.emitting = false
-    }
+  emit() {
+    return emitSetting(this)
   }
 
   lock() {
-    const { addClass } = this.utils
-    const { $send } = this.template
-
-    this.isLock = true
-    let time = this.option.lockTime
-    $send.textContent = time
-    addClass($send, 'apd-lock')
-
-    const loop = () => {
-      this.timer = setTimeout(() => {
-        if (time === 0) {
-          this.unlock()
-        }
-        else {
-          time -= 1
-          $send.textContent = time
-          loop()
-        }
-      }, 1000)
-    }
-
-    loop()
+    lockSetting(this)
   }
 
   unlock() {
-    const { removeClass } = this.utils
-    const { $send } = this.template
-    clearTimeout(this.timer)
-    this.isLock = false
-    $send.textContent = '发送'
-    removeClass($send, 'apd-lock')
+    unlockSetting(this)
   }
 
   resize() {
+    if (!this.lifecycle.active)
+      return
     if (this.outside)
       return
     if (this.art.fullscreen)
@@ -708,13 +500,16 @@ export default class Setting {
   }
 
   reset() {
+    if (!this.lifecycle.active)
+      return
     const { inverseClass, tooltip } = this.utils
     const { $toggle, $colors } = this.template
 
-    this.slider.opacity.reset()
-    this.slider.margin.reset()
-    this.slider.fontSize.reset()
-    this.slider.speed.reset()
+    for (const slider of Object.values(this.slider)) {
+      slider.reset()
+      if (!this.lifecycle.active)
+        return
+    }
 
     this.setData('danmukuVisible', this.option.visible)
     this.setData('danmukuMode', this.option.mode)
@@ -737,6 +532,8 @@ export default class Setting {
   }
 
   mount(target) {
+    if (!this.lifecycle.active)
+      return
     const { errorHandle } = this.utils
     const $el = typeof target === 'string' ? document.querySelector(target) : target
     errorHandle($el, `Can not find the mount point: ${target}`)
@@ -744,22 +541,17 @@ export default class Setting {
     this.template.$mount = $el
     this.reset()
   }
-}
 
-if (typeof document !== 'undefined') {
-  const id = 'artplayer-plugin-danmuku'
-  let $style = document.getElementById(id)
-  if (!$style) {
-    $style = document.createElement('style')
-    $style.id = id
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        document.head.appendChild($style)
-      })
-    }
-    else {
-      (document.head || document.documentElement).appendChild($style)
-    }
+  destroy() {
+    if (this.lifecycle.closed)
+      return
+    this.lifecycle.close()
+    clearTimeout(this.timer)
+    this.timer = null
+    this.emitting = false
+    this.isLock = false
+    const $danmuku = this.template.$danmuku
+    if ($danmuku?.parentElement)
+      $danmuku.parentElement.removeChild($danmuku)
   }
-  $style.textContent = style
 }

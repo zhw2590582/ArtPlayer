@@ -5094,7 +5094,7 @@
       "id": "DANMUKU-CLEANUP-01",
       "title": "Danmuku removes a different resize callback and retains the settings lock timer on destroy",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-02",
         "PKG-DANMUKU-05"
@@ -5108,10 +5108,20 @@
         "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
         "refactor/baselines/danmuku-input-validation.json",
         "refactor/changes/2026-09-13-PKG-DANMUKU-04-scheduler.md",
-        "refactor/baselines/danmuku-scheduler-validation.json"
+        "refactor/baselines/danmuku-scheduler-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-05-resources.md",
+        "refactor/baselines/danmuku-resources-validation.json"
       ],
       "compatibleResolution": "Track and release exact subscription and timer ownership across settings, renderer and instances.",
-      "closureCriteria": "Repeated lifecycle and pending settings actions leave no owned subscriptions, timers or late DOM writes."
+      "closureCriteria": "Repeated lifecycle and pending settings actions leave no owned subscriptions, timers or late DOM writes.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-05-resources.md",
+        "refactor/baselines/danmuku-resources-validation.json",
+        "test/danmuku-setting.test.js",
+        "test/danmuku-heatmap.test.js",
+        "test/browser/danmuku-resources.spec.js"
+      ],
+      "resolutionRationale": "Exact subscriptions/proxy registry entries, send countdowns, external settings and owned renderer nodes are released; stale sends are cancelled and shared host values restored conditionally. Native two-core source/main/legacy matrices and real docs smoke passed."
     },
     {
       "id": "DANMUKU-TYPE-02",
@@ -5169,7 +5179,7 @@
       "id": "DANMUKU-HEATMAP-01",
       "title": "Danmuku heatmap sampling can become zero and points/instance ownership need browser validation",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-02",
         "PKG-DANMUKU-05"
@@ -5181,10 +5191,20 @@
         "refactor/baselines/danmuku-failures-validation.json",
         "test/danmuku-failures.test.js",
         "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
-        "refactor/baselines/danmuku-browser-validation.json"
+        "refactor/baselines/danmuku-browser-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-05-resources.md",
+        "refactor/baselines/danmuku-resources-validation.json"
       ],
       "compatibleResolution": "Use isolated timeout-protected reproduction for narrow dimensions, then define finite sampling and per-instance rendering.",
-      "closureCriteria": "Narrow widths terminate, points/config behavior is explicit and multiple SVG/control instances remain independent."
+      "closureCriteria": "Narrow widths terminate, points/config behavior is explicit and multiple SVG/control instances remain independent.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-05-resources.md",
+        "refactor/baselines/danmuku-resources-validation.json",
+        "test/danmuku-setting.test.js",
+        "test/danmuku-heatmap.test.js",
+        "test/browser/danmuku-resources.spec.js"
+      ],
+      "resolutionRationale": "Narrow/invalid sampling terminates; exact historical curves and nested point mutation retained; valid large inputs are not capped arbitrarily. Native multi-instance and repeated-bundle gradient isolation preserves the first legacy ID and independent progress/control cleanup."
     },
     {
       "id": "DANMUKU-SOURCE-01",
@@ -5252,6 +5272,22 @@
         "test/browser/danmuku-scheduler.spec.js"
       ],
       "resolutionRationale": "Historical source/main/legacy establish old behavior; source/main/legacy final input and native matrices confirm the one-condition correction. Task03 frozen evidence is preserved."
+    },
+    {
+      "id": "DANMUKU-LOAD-01",
+      "title": "Native lifecycle fixtures sometimes miss timestamp eligibility during concurrent workload; real frame/window behavior needs load evidence",
+      "confirmation": "unverified",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-07"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-05-resources.md",
+        "refactor/baselines/danmuku-resources-validation.json",
+        "test/browser/danmuku-scheduler.spec.js"
+      ],
+      "compatibleResolution": "Capture native RAF/media-time gaps and scheduled/eligible/visible item counts under realistic load before deciding whether the old plus/minus 0.1 second eligibility rule needs a compatible correction.",
+      "closureCriteria": "Real load runs explain missing scheduled items with frame and media evidence, and any confirmed implementation defect has a regression and compatible fix; seeding ready in lifecycle fixtures is not closure evidence."
     }
   ]
 }

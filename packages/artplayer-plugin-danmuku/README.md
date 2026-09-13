@@ -45,6 +45,19 @@ If an error listener synchronously stops, destroys, resets or hides the instance
 the interrupted recovery respects that action. A nested start can recover once
 without the outer call resuming it again or emitting another start event.
 
+## Settings and heatmap cleanup
+
+Destroy removes the plugin's external settings panel, cancels its send countdown
+and prevents an unfinished `beforeEmit` from clearing input or starting another
+send. Other instances and later user changes to their shared mount remain intact.
+The shared stylesheet remains installed for other players. Setting initialization
+failure also releases the already-created plugin Worker.
+
+Heatmap supports narrow containers with a positive sampling step and uses an
+independent gradient for each instance. Its existing points event still changes
+the inner point arrays as before; copy those arrays first if the original values
+must be retained. Removing or replacing its control releases its listeners.
+
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for module ownership, compatibility
 constraints, tests and the remaining staged TypeScript migration.
 

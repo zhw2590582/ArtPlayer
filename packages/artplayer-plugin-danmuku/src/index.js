@@ -5,10 +5,23 @@ import Setting from './setting'
 export default function artplayerPluginDanmuku(option) {
   return (art) => {
     const danmuku = new Danmuku(art, option)
-    const setting = art.isDestroy ? undefined : new Setting(art, danmuku)
-
-    if (!art.isDestroy && danmuku.option.heatmap) {
-      heatmap(art, danmuku, danmuku.option.heatmap)
+    let setting
+    try {
+      setting = art.isDestroy ? undefined : new Setting(art, danmuku)
+      if (!art.isDestroy && danmuku.option.heatmap) {
+        heatmap(art, danmuku, danmuku.option.heatmap)
+      }
+    }
+    catch (error) {
+      try {
+        setting?.destroy()
+      }
+      catch {}
+      try {
+        danmuku.destroy()
+      }
+      catch {}
+      throw error
     }
 
     return {

@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-DANMUKU-05 渲染、设置与热力图完成
+
+拆renderer、Setting模板/滑块/发送/资源/全局样式和heatmap采样/几何/生命周期。
+修复外部DOM、锁计时器、订阅与节点清理、初始化回滚及窄热力图卡死，保留共享宿主
+用户写入、原points mutation、首实例SVG钩子与合法大数据。源码/main/legacy各159项
+联合测试，完整test:danmuku245项、三格式×138共414原生浏览器项通过；冻结安装、
+严格工具链、完整类型检查和正常构建通过。内置浏览器完成现有docs示例播放/暂停/发送。
+关闭CLEANUP-01/HEATMAP-01，见[变更](changes/2026-09-13-PKG-DANMUKU-05-resources.md)及[机器证据](baselines/danmuku-resources-validation.json)。
+228项：144 done、15 doing、69 todo；06进入完整TS。
+真实长负载、发布前复盘仍待对应任务；无推送或发布。
+
+
 ## PKG-DANMUKU-04 时钟、队列与轨道调度完成
 
 拆分scheduler/queue/worker-client，修复多RAF、同毫秒请求串线、取消后续写、

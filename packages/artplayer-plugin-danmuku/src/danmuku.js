@@ -1,6 +1,7 @@
 import { defaultOption, normalizeOption, optionChanged, optionScheme } from './config'
 import { beginInput, cancelInputs, inputActive, readInput } from './input'
 import { filterState, readyItems, setItemState } from './queue'
+import Renderer from './renderer'
 import Scheduler from './scheduler'
 import WorkerClient from './worker-client'
 import DanmuWorker from './worker.js?worker&inline'
@@ -23,6 +24,7 @@ export default class Danmuku {
     this.index = 0 // 弹幕索引
     this.worker = null
     this.workerClient = null
+    this.renderer = new Renderer(this)
     this.scheduler = new Scheduler(this)
 
     // 格式化后的配置项
@@ -158,12 +160,7 @@ export default class Danmuku {
 
   // 获取弹幕DOM节点
   get $ref() {
-    const $ref = this.$refs.pop() || document.createElement('div')
-    $ref.style.cssText = Danmuku.cssText
-    $ref.dataset.mode = ''
-    $ref.dataset.id = ''
-    $ref.className = ''
-    return $ref
+    return this.renderer.acquire()
   }
 
   // 获取准备好发送的弹幕
@@ -173,34 +170,7 @@ export default class Danmuku {
 
   // 可见的弹幕的数据，用于计算下一个弹幕的top值
   get visibles() {
-    const result = []
-    const { clientWidth } = this.$player
-    const clientLeft = this.getLeft(this.$player)
-
-    this.filter('emit', (danmu) => {
-      const top = danmu.$ref.offsetTop
-      const left = this.getLeft(danmu.$ref) - clientLeft
-      const height = danmu.$ref.clientHeight
-      const width = danmu.$ref.clientWidth
-      const distance = left + width
-      const right = clientWidth - distance
-      const speed = distance / danmu.$restTime
-
-      const emit = {}
-      emit.top = top
-      emit.left = left
-      emit.height = height
-      emit.width = width
-      emit.right = right
-      emit.speed = speed
-      emit.distance = distance
-      emit.time = danmu.$restTime
-      emit.mode = danmu.mode
-
-      result.push(emit)
-    })
-
-    return result
+    return this.renderer.visibles
   }
 
   // 计算弹幕速度
@@ -234,8 +204,7 @@ export default class Danmuku {
           return this
         this.queue = [] // 清空弹幕队列
         this.states = { wait: [], ready: [], emit: [], stop: [] } // 清空弹幕状态池
-        this.$refs = [] // 清空弹幕DOM节点池
-        this.$danmuku.textContent = '' // 清空弹幕层
+        this.renderer.clear()
       }
 
       // 逐个验证原始弹幕并转换到弹幕队列
@@ -391,8 +360,7 @@ export default class Danmuku {
 
   // 计算DOM的left值，受到旋屏影响
   getLeft($ref) {
-    const rect = $ref.getBoundingClientRect()
-    return this.isRotate ? rect.top : rect.left
+    return this.renderer.left($ref)
   }
 
   // 复杂运算交给 Web Worker 处理
@@ -417,16 +385,7 @@ export default class Danmuku {
 
   // 重置弹幕到wait状态，回收弹幕DOM节点
   makeWait(danmu) {
-    this.setState(danmu, 'wait')
-    if (danmu.$ref) {
-      danmu.$ref.style.cssText = Danmuku.cssText
-      danmu.$ref.style.visibility = 'hidden'
-      danmu.$ref.style.marginLeft = '0px'
-      danmu.$ref.style.transform = 'translateX(0px)'
-      danmu.$ref.style.transition = 'transform 0s linear 0s'
-      this.$refs.push(danmu.$ref)
-      danmu.$ref = null
-    }
+    this.renderer.makeWait(danmu)
   }
 
   // 实时更新弹幕
@@ -438,76 +397,18 @@ export default class Danmuku {
 
   // 重置正在显示的弹幕: stop/emit 状态的弹幕
   resize() {
-    const { clientWidth } = this.$player
-
-    this.filter('stop', (danmu) => {
-      switch (danmu.mode) {
-        // 滚动的弹幕
-        case 0:
-          danmu.$ref.style.left = `${clientWidth}px`
-          break
-        default:
-          break
-      }
-    })
-
-    this.filter('emit', (danmu) => {
-      danmu.$lastStartTime = Date.now()
-      switch (danmu.mode) {
-        // 滚动的弹幕
-        case 0: {
-          const distance = clientWidth + danmu.$ref.clientWidth
-          danmu.$ref.style.left = `${clientWidth}px`
-          danmu.$ref.style.transform = `translateX(${-distance}px)`
-          danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`
-          break
-        }
-        default:
-          break
-      }
-    })
+    this.renderer.resize()
   }
 
   // 继续弹幕
   continue() {
-    const { clientWidth } = this.$player
-    this.filter('stop', (danmu) => {
-      this.setState(danmu, 'emit') // 转换为emit状态
-      danmu.$lastStartTime = Date.now()
-      switch (danmu.mode) {
-        // 继续滚动的弹幕
-        case 0: {
-          const distance = clientWidth + danmu.$ref.clientWidth
-          danmu.$ref.style.transform = `translateX(${-distance}px)`
-          danmu.$ref.style.transition = `transform ${danmu.$restTime}s linear 0s`
-          break
-        }
-        default:
-          break
-      }
-    })
-
+    this.renderer.continue()
     return this
   }
 
   // 暂停弹幕
   suspend() {
-    const { clientWidth } = this.$player
-    this.filter('emit', (danmu) => {
-      this.setState(danmu, 'stop') // 转换为stop状态
-      switch (danmu.mode) {
-        // 停止滚动的弹幕
-        case 0: {
-          const translateX = clientWidth - (this.getLeft(danmu.$ref) - this.getLeft(this.$player))
-          danmu.$ref.style.transform = `translateX(${-translateX}px)`
-          danmu.$ref.style.transition = 'transform 0s linear 0s'
-          break
-        }
-        default:
-          break
-      }
-    })
-
+    this.renderer.suspend()
     return this
   }
 
@@ -581,6 +482,7 @@ export default class Danmuku {
       }
     }
     finally {
+      this.renderer.destroy()
       this.art.off('video:play', this.start)
       this.art.off('video:playing', this.start)
       this.art.off('video:pause', this.stop)

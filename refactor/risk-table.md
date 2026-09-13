@@ -230,10 +230,11 @@
 | DANMUKU-TYPE-01 | open / 已复现 | Danmuku historical declared results, optional mount and initial Promise input disagree with runtime | PKG-DANMUKU-03, PKG-DANMUKU-06 |
 | DANMUKU-INPUT-01 | resolved / 已复现 | Danmuku replaces time zero with current time plus 0.5 and mutates supplied input objects | PKG-DANMUKU-02, PKG-DANMUKU-03 |
 | DANMUKU-CONFIG-01 | resolved / 已复现 | Danmuku JSON configuration comparison ignores a replacement filter function | PKG-DANMUKU-02, PKG-DANMUKU-03 |
-| DANMUKU-CLEANUP-01 | open / 已复现 | Danmuku removes a different resize callback and retains the settings lock timer on destroy | PKG-DANMUKU-02, PKG-DANMUKU-05 |
+| DANMUKU-CLEANUP-01 | resolved / 已复现 | Danmuku removes a different resize callback and retains the settings lock timer on destroy | PKG-DANMUKU-02, PKG-DANMUKU-05 |
 | DANMUKU-TYPE-02 | open / 源码/产物事实 | Danmuku id, icons, Slider steps, heatmap points and partial configuration drift from declarations | PKG-DANMUKU-05, PKG-DANMUKU-06 |
 | DANMUKU-ASYNC-01 | resolved / 已复现 | Danmuku asynchronous input, worker replies and pending visibility have unverified failure and cancellation paths | PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05 |
-| DANMUKU-HEATMAP-01 | open / 已复现 | Danmuku heatmap sampling can become zero and points/instance ownership need browser validation | PKG-DANMUKU-02, PKG-DANMUKU-05 |
+| DANMUKU-HEATMAP-01 | resolved / 已复现 | Danmuku heatmap sampling can become zero and points/instance ownership need browser validation | PKG-DANMUKU-02, PKG-DANMUKU-05 |
 | DANMUKU-SOURCE-01 | open / 已复现 | Danmuku registry Git associations differ from releases and static icon provenance remains incomplete | PKG-DANMUKU-09 |
 | DANMUKU-TRACK-01 | resolved / 已复现 | Native simultaneous fixed Danmuku comments can overlap with duplicate start loops and repeated Worker IDs | PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-07 |
 | DANMUKU-INPUT-02 | resolved / 已复现 | Intermediate explicit-zero correction regressed accepted NaN timestamp fallback | PKG-DANMUKU-04 |
+| DANMUKU-LOAD-01 | open / 待取证 | Native lifecycle fixtures sometimes miss timestamp eligibility during concurrent workload; real frame/window behavior needs load evidence | PKG-DANMUKU-07 |

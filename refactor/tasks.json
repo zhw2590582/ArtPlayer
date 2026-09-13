@@ -3341,11 +3341,14 @@
         "CORE-14",
         "CORE-18"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "renderer/setting/heatmap/worker 职责及资源归属",
       "acceptance": "mount/icons/设置和 worker 协议保持，销毁无后台工作",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-05-resources.md",
+        "baselines/danmuku-resources-validation.json"
+      ]
     },
     {
       "id": "PKG-DANMUKU-06",
@@ -3359,7 +3362,7 @@
         "ENG-04",
         "ENG-06"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "自有模块、worker 消息、option/item/result 类型",
       "acceptance": "旧参数、扩展字段和事件消费通过，vendored 边界清楚",

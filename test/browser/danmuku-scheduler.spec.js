@@ -133,6 +133,15 @@ async function geometry(page) {
 
 const visibleIds = page => page.evaluate(() => [...new Set(window.danmukuEvidence.events.filter(item => item.event === 'visible' && item.id).map(item => item.id))])
 
+async function queueReady(page, item) {
+  await page.evaluate(async (item) => {
+    const owner = await window.danmukuPlugins[0].emit(item)
+    // These cases verify cancellation/recovery after eligibility. Seed that
+    // precondition; the separate timing/geometry cases still use the media clock.
+    owner.setState(owner.queue[owner.queue.length - 1], 'ready')
+  }, item)
+}
+
 test.afterEach(async ({ page }, testInfo) => {
   await testInfo.attach('danmuku-layout', { contentType: 'application/json', body: JSON.stringify(await geometry(page)) })
   await testInfo.attach('danmuku-native-page', { contentType: 'image/png', body: await page.screenshot() })
@@ -158,6 +167,7 @@ for (const core of ['published', 'candidate']) {
 
     test(`${label}: accepted NaN timestamp keeps the historical current-time fallback`, async ({ page }, testInfo) => {
       const external = await setup(page, core, format, 'modes', testInfo)
+      await page.evaluate(() => window.art.playbackRate = 0.25)
       const numeric = await page.evaluate(async () => {
         const input = { id: 'nan-time', text: 'NAN FALLBACK', mode: 1, time: Number.NaN }
         const expected = window.art.currentTime + 0.5
@@ -176,7 +186,7 @@ for (const core of ['published', 'candidate']) {
     for (const action of ['destroy', 'stop']) {
       test(`${label}: failed recovery respects synchronous ${action} from the error listener`, async ({ page }, testInfo) => {
         const external = await setup(page, core, format, 'modes', testInfo)
-        await page.evaluate(() => window.danmukuPlugins[0].emit({ id: 'recovery-row', text: 'RECOVERY', mode: 1, time: 0.5 }))
+        await queueReady(page, { id: 'recovery-row', text: 'RECOVERY', mode: 1, time: 0.5 })
         await page.click('#play')
         await expect.poll(() => visibleIds(page)).toContain('recovery-row')
         const result = await page.evaluate((action) => {
@@ -216,7 +226,10 @@ for (const core of ['published', 'candidate']) {
     for (const action of ['pause', 'reset', 'seek', 'destroy']) {
       test(`${label}: native ${action} cancels pending visibility without blocking later work`, async ({ page }, testInfo) => {
         const external = await setup(page, core, format, 'modes', testInfo)
-        await page.evaluate(() => window.danmukuPlugins[0].emit({ id: 'obsolete-gate', text: 'GATED', mode: 1, time: 0.5 }))
+        await page.evaluate(async () => {
+          window.art.playbackRate = 0.25
+          await window.danmukuPlugins[0].emit({ id: 'obsolete-gate', text: 'GATED', mode: 1, time: 0.5 })
+        })
         await page.click('#play')
         await expect.poll(() => page.evaluate(() => window.danmukuEvidence.gates.some(item => item.id === 'obsolete-gate'))).toBe(true)
         if (action === 'pause') {
@@ -237,7 +250,7 @@ for (const core of ['published', 'candidate']) {
           await page.evaluate(() => window.danmukuPlugins[0].load())
         }
         if (action !== 'destroy') {
-          await page.evaluate(() => window.danmukuPlugins[0].emit({ id: 'fresh-after-cancel', text: 'FRESH', mode: 1, time: window.art.currentTime + 0.5 }))
+          await queueReady(page, { id: 'fresh-after-cancel', text: 'FRESH', mode: 1 })
           if (action === 'pause')
             await page.click('#play')
           // The old user Promise is still unresolved. A cancelled frame must
@@ -325,7 +338,21 @@ for (const core of ['published', 'candidate']) {
     test(`${label}: native pause seek rate and public reset/load retain historical pool semantics`, async ({ page }, testInfo) => {
       const external = await setup(page, core, format, 'playback', testInfo)
       await page.evaluate(async () => {
-        await window.danmukuPlugins[0].emit({ id: 'moving', text: 'MOVING', mode: 0, time: 0.5 })
+        const owner = await window.danmukuPlugins[0].emit({ id: 'moving', text: 'MOVING', mode: 0, time: 0.5 })
+        const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(owner), 'readys')
+        window.danmukuEvidence.eligibility = []
+        Object.defineProperty(owner, 'readys', {
+          configurable: true,
+          get() {
+            const before = owner.art.currentTime
+            const rows = descriptor.get.call(owner)
+            const samples = window.danmukuEvidence.eligibility
+            if (samples.length < 2000) {
+              samples.push({ wall: performance.now(), before, after: owner.art.currentTime, playing: owner.art.playing, paused: owner.art.template.$video.paused, seeking: owner.art.template.$video.seeking, rate: owner.art.playbackRate, stop: owner.isStop, generation: owner.scheduler.generation, fault: owner.scheduler.fault, ready: rows.map(row => row.id), queue: owner.queue.map(row => ({ id: row.id, time: row.time, state: row.$state })) })
+            }
+            return rows
+          },
+        })
       })
       await page.click('#play')
       await expect.poll(() => visibleIds(page)).toContain('moving')
@@ -431,8 +458,8 @@ for (const core of ['published', 'candidate']) {
       await expect.poll(() => page.evaluate(() => window.danmukuPlayers[1].isReady)).toBe(true)
       await page.evaluate(() => window.danmukuPlayers[0].destroy())
       expect(await page.evaluate(() => window.danmukuEvidence.workers.map(worker => worker.terminated))).toEqual([1, 0])
-      // The released plugin does not dispose external Setting DOM; retain this observation.
-      await expect(mount.locator('.artplayer-plugin-danmuku')).toHaveCount(1)
+      // The candidate owns external Setting DOM and removes it on destruction.
+      await expect(mount.locator('.artplayer-plugin-danmuku')).toHaveCount(0)
       await page.locator('#danmuku-mount-1 .apd-input').fill('SECOND')
       await page.locator('#danmuku-mount-1 .apd-send').click()
       await page.click('#play-second-danmuku')

@@ -20,14 +20,7 @@ export default class Scheduler {
   }
 
   release(operation) {
-    const { danmu, ref } = operation
-    if (ref && danmu.$ref === ref) {
-      ref.style.cssText = this.owner.constructor.cssText
-      ref.style.visibility = 'hidden'
-      this.owner.$refs.push(ref)
-      danmu.$ref = null
-    }
-    operation.ref = null
+    this.owner.renderer.release(operation)
   }
 
   invalidate() {
@@ -108,7 +101,6 @@ export default class Scheduler {
 
   async run(operation) {
     const owner = this.owner
-    const { setStyles } = owner.utils
     if (!owner.art.playing || !this.active(operation))
       return
     owner.filter('emit', (danmu) => {
@@ -141,18 +133,7 @@ export default class Scheduler {
         continue
 
       const { clientWidth, clientHeight } = owner.$player
-      const ref = owner.$ref
-      operation.danmu = danmu
-      operation.ref = ref
-      danmu.$ref = ref
-      ref.textContent = danmu.text
-      owner.$danmuku.appendChild(ref)
-      ref.style.opacity = owner.option.opacity
-      ref.style.fontSize = `${owner.fontSize}px`
-      ref.style.color = danmu.color
-      ref.style.border = danmu.border ? `1px solid ${danmu.color}` : null
-      ref.style.backgroundColor = danmu.border ? 'rgb(0 0 0 / 50%)' : null
-      setStyles(ref, danmu.style)
+      const ref = owner.renderer.prepare(danmu, operation)
       if (!this.active(operation))
         return
       danmu.$lastStartTime = Date.now()
@@ -172,25 +153,7 @@ export default class Scheduler {
         return
       if (top !== undefined) {
         owner.setState(danmu, 'emit')
-        ref.style.top = `${top}px`
-        ref.style.visibility = 'visible'
-        ref.dataset.mode = danmu.mode
-        ref.dataset.id = danmu.id || ''
-        switch (danmu.mode) {
-          case 0:
-            ref.style.left = `${clientWidth}px`
-            ref.style.marginLeft = '0px'
-            ref.style.transform = `translateX(${-distance}px)`
-            ref.style.transition = `transform ${danmu.$restTime}s linear 0s`
-            break
-          case 1:
-          case 2:
-            ref.style.left = '50%'
-            ref.style.marginLeft = `-${ref.clientWidth / 2}px`
-            break
-          default:
-            break
-        }
+        owner.renderer.place(danmu, ref, top, distance, clientWidth)
         operation.ref = null
         owner.art.emit('artplayerPluginDanmuku:visible', danmu)
       }

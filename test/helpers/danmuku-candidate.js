@@ -33,6 +33,24 @@ export function danmukuCandidateEnvironment(implementation, settings = {}) {
     ? { ...implementation, code: `globalThis.Worker = class { constructor() { throw globalThis.__danmukuCandidateWorkerError } };\n${implementation.code}` }
     : implementation
   const env = danmukuEnvironment(initialWorker, settings)
+  const createElement = env.context.document.createElement.bind(env.context.document)
+  const removeChild = function (child) {
+    const index = this.children.indexOf(child)
+    if (index < 0)
+      throw new Error('Cannot remove a node from a different parent')
+    this.children.splice(index, 1)
+    child.parentElement = null
+    return child
+  }
+  env.context.document.createElement = (...args) => {
+    const element = createElement(...args)
+    element.removeChild = removeChild
+    return element
+  }
+  for (const element of Object.values(env.art.template)) {
+    if (element?.children)
+      element.removeChild = removeChild
+  }
   if (settings.initialWorkerError)
     env.context.__danmukuCandidateWorkerError = settings.initialWorkerError
   const consoleWarnings = []

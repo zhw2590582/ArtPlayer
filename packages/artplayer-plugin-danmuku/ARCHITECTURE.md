@@ -15,16 +15,25 @@ repository root. Do not infer runtime contracts from the old declaration file.
 | `src/input.js` | Input forms, replacement ownership, independent append operations, cancellation and synchronous callback reentry |
 | `src/bilibili-parser.js` | Pure legacy-compatible XML fields, mode mapping and entity decoding |
 | `src/bilibili.js` | Fetch and response text, one parser Worker per request, fallback, settlement and Blob URL cleanup |
-| `src/scheduler.js` | One RAF or asynchronous frame, cancellation generations, preparation ownership and failure recovery; DOM preparation moves to a renderer in PKG-DANMUKU-05 |
+| `src/scheduler.js` | One RAF or asynchronous frame, cancellation generations, preparation ownership and failure recovery |
+| `src/renderer.js` | Owned node allocation, preparation, geometry snapshots, placement, pause/resume styling and disposal |
 | `src/queue.js` | Ordered state pools, eligibility and state transitions |
 | `src/worker-client.js` | Track Worker lifecycle, a shared response dispatcher, unique request IDs and pending requests |
 | `src/worker.js` | Track placement Worker; a separate protocol from the XML parser Worker |
-| `src/setting.js` | Settings and emitter UI; lifecycle restructuring follows in PKG-DANMUKU-05 |
-| `src/heatmap.js` | Heatmap rendering; restructuring follows in PKG-DANMUKU-05 |
+| `src/setting.js` | Settings coordinator, configuration controls, mount and fullscreen layout |
+| `src/setting-template.js` | Existing template HTML and static icon values |
+| `src/setting-slider.js` | Slider index, pointer and rotation behavior |
+| `src/setting-send.js` | Pending send, original error outlet and lock countdown |
+| `src/setting-lifecycle.js` | Exact subscription/proxy disposal, cancellation and conditional host-property restoration |
+| `src/setting-style.js` | Shared document style and one pending DOMContentLoaded installation |
+| `src/heatmap.js` | Owned control, progress stops, subscriptions and per-instance gradient |
+| `src/heatmap-sampling.js` | Sorted-time bin counts with historical numeric boundaries |
+| `src/heatmap-geometry.js` | Legacy point normalization, caller-visible point writes and SVG curve calculation |
 
 The package is undergoing staged migration. PKG-DANMUKU-03 separates input and
 configuration responsibilities in JavaScript; PKG-DANMUKU-04 separates scheduling
-and track requests; PKG-DANMUKU-06 converts all owned
+and track requests; PKG-DANMUKU-05 separates rendering and UI resources;
+PKG-DANMUKU-06 converts all owned
 modules and Worker messages to TypeScript and validates installed consumers.
 This intermediate structure is not the final TypeScript or release acceptance.
 
@@ -134,7 +143,61 @@ three modes, strict dense geometry, one request per prepared item, native
 pause/seek/rate and visible-node reuse. Preserve both geometric and protocol
 assertions; unique IDs alone do not prove non-overlapping tracks.
 
-Settings cleanup, heatmap sampling and long-run load behavior still require
-PKG-DANMUKU-05/07. Check task evidence and the risk register before changing
-completion or release status; short native regressions are not package-wide
-stability acceptance.
+Long-run native load behavior still requires PKG-DANMUKU-07. Check task evidence
+and the risk register before changing completion or release status; short native
+regressions are not package-wide stability acceptance.
+
+## Rendering and UI resources
+
+The scheduler owns whether work may proceed; the renderer owns the actual nodes.
+Destroy removes those nodes even when the core retains its HTML. It does not
+remove unrelated children. Replacement loading retains the historical whole-layer
+clear and starts a fresh node pool. Keep cancellation identity checks in the
+scheduler/renderer boundary when moving preparation logic.
+Replacement also removes owned nodes moved outside the layer before releasing
+their ownership records. Unrelated nodes outside the layer are left in place.
+
+Setting registers its destruction boundary before creating UI. Initialization
+failure releases its own resources; the factory also rolls back the previously
+created Danmuku and Worker, preserving the original error. Store exact art
+subscriptions and proxy disposers. On old cores, use `events.remove` when the
+disposer remains registered; calling only the returned function can leave a
+registry entry. A disposal failure must not prevent other owned cleanup.
+
+Pending `beforeEmit` is raced against destruction. Preserve its option receiver
+and strict `true` acceptance. Ordinary send inserts synchronously, clears input
+and starts the existing countdown; observing the emitted Promise must not delay
+that UI behavior. Retain `console.error('Error emitting danmuku:', error)` as the
+existing send-error outlet. Destruction prevents late input writes and timers.
+
+Mount and fullscreen move the same Setting node. Destroy removes only that node.
+Dataset and display writes restore the preceding owner/original value only while
+the current value is still owned. Shared mounts must retain the surviving
+instance, and subsequent user writes must survive. The injected stylesheet is
+document-wide, stays available to other instances and retains import-time
+installation. Pending DOMContentLoaded installation is shared and released once
+it runs; it is not an instance leak.
+
+Heatmap owns its control and listeners. Removal/replacement detaches them and
+must not remove a newer same-name control. The gradient ID is instance-specific;
+the first available `heatmap-solids` and local `heatmap-start`/`heatmap-stop` hooks
+remain, including repeated bundle evaluation. Zero or invalid sampling
+uses a positive default, and invalid dimensions/duration render no SVG. Preserve
+fractional step progression and strict-left/inclusive-right time bins. The
+original points event clones only the outer array and mutates inner y values;
+preserve that observable behavior, including repeated updates.
+
+`test/danmuku-setting.test.js` uses Linkedom and real published core utilities
+for template parsing, selectors, events and lifecycle tests. Linkedom has no
+layout; its measured rectangles are controlled inputs, not browser evidence.
+`test/browser/danmuku-resources.spec.js` covers native external/shared mounts,
+pending sends, timers, retained-core HTML, initialization rollback and independent
+heatmaps. Run it with the scheduler/input specs for source and built artifacts.
+Dedicated recovery/new-continuation cases establish a ready item as a test
+precondition; obsolete gates and NaN use the actual media clock at 0.25 rate.
+These lifecycle preconditions do not establish stress-load timestamp delivery.
+The renderer resource cases also begin with an explicitly eligible row, then
+require native Worker completion and visible DOM before testing replacement or
+destruction. The separate pause/seek/rate case observes the original ready getter
+without changing its result and records bounded native media-time/queue samples
+to distinguish eligibility misses from placement failures.
