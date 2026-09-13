@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-CAST-02 Chromecast 错误基线完成
+
+93项受控历史测试通过，其中65项新增错误/生命周期观察。首次会话结果误用、已就绪
+SDK悬空/多实例覆盖、错图标与销毁后加载、终态遗漏、脱离媒体Promise均已复现并
+登记03修复任务。live选项/回调this/原始SessionState继续保留。见[变更](changes/2026-09-13-PKG-CAST-02-failures.md)
+与[证据](baselines/chromecast-failures-validation.json)。生产仍未改，真实Cast设备与
+远程SDK尚未验证。228项：132 done、17 doing、79 todo；217风险。
+下一步03生产模块与资源修复；已获授权的Canvas/Ambilight类型修复正由两个子代理
+独立实施，父代理协调共享类型检查和编辑器生成。没有推送或发布。
+
+
 ## PKG-CAST-01 Chromecast 契约与来源完成
 
 冻结真实npm1.0.0/1.1.0与9个工作区输入，逐成员、入口及git关联核验通过。1.0.0

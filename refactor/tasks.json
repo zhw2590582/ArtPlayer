@@ -3015,11 +3015,14 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "SDK 脚本加载失败/重入、无设备/拒绝、重复实例与销毁",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-CAST-02-failures.md",
+        "baselines/chromecast-failures-validation.json"
+      ]
     },
     {
       "id": "PKG-CAST-03",

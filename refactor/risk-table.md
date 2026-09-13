@@ -216,3 +216,8 @@
 | ASR-RESTART-01 | resolved / 已复现 | Delayed captured-source restart resumes recognition after a newer pause or stop | PKG-ASR-09 |
 | VENDOR-10 | open / 源码/产物事实 | Chromecast embeds a Font Awesome Pro path with no established redistribution entitlement | PKG-CAST-03, PKG-CAST-06 |
 | CAST-TYPE-01 | open / 源码/产物事实 | Chromecast declarations describe a synchronous name-only registration and omit existing runtime callbacks and query methods | PKG-CAST-04 |
+| CAST-SDK-01 | open / 已复现 | Cast requestSession completion is incorrectly passed to loadMedia as a session | PKG-CAST-03, PKG-CAST-05 |
+| CAST-LOADER-01 | open / 已复现 | Cast readiness waits hang or overwrite each other across ready SDKs, repeated clicks and multiple instances | PKG-CAST-03, PKG-CAST-05 |
+| CAST-LIFE-01 | open / 已复现 | Cast listeners and continuations survive player destruction and update another player icon | PKG-CAST-03, PKG-CAST-05 |
+| CAST-STATE-01 | open / 已复现 | Cast terminal session states leave the normalized callback and icon connected | PKG-CAST-03, PKG-CAST-05 |
+| CAST-ERROR-01 | open / 已复现 | Cast media loading rejection escapes on a detached Promise while the click has already fulfilled | PKG-CAST-03, PKG-CAST-05 |

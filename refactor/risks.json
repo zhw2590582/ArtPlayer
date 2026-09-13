@@ -4745,6 +4745,86 @@
       ],
       "compatibleResolution": "Preserve the latest published root factory type and provide a precise runtime type view; verify valid historical JavaScript module forms independently.",
       "closureCriteria": "Frozen type consumers and replacements pass, accurate async/callback/state declarations work through an additive entry, and actual installed exports are tested."
+    },
+    {
+      "id": "CAST-SDK-01",
+      "title": "Cast requestSession completion is incorrectly passed to loadMedia as a session",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-05"
+      ],
+      "evidence": [
+        "test/chromecast-failures.test.js",
+        "refactor/baselines/chromecast-failures-validation.json"
+      ],
+      "compatibleResolution": "Retrieve the actual current session after request success and validate live instance ownership.",
+      "closureCriteria": "Successful undefined/null request result loads through the current session; absence and refusal preserve appropriate original errors."
+    },
+    {
+      "id": "CAST-LOADER-01",
+      "title": "Cast readiness waits hang or overwrite each other across ready SDKs, repeated clicks and multiple instances",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-05"
+      ],
+      "evidence": [
+        "test/chromecast-failures.test.js",
+        "refactor/baselines/chromecast-failures-validation.json"
+      ],
+      "compatibleResolution": "Coordinate one reusable loader per document with readiness detection, shared pending work and complete error settlement.",
+      "closureCriteria": "Ready, pending, failure, retry, external callback and multiple instances are covered without duplicate scripts or stranded callers."
+    },
+    {
+      "id": "CAST-LIFE-01",
+      "title": "Cast listeners and continuations survive player destruction and update another player icon",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-05"
+      ],
+      "evidence": [
+        "test/chromecast-failures.test.js",
+        "refactor/baselines/chromecast-failures-validation.json"
+      ],
+      "compatibleResolution": "Use per-registration lifecycle ownership, scoped control nodes and obsolete-operation checks without ending a page-shared session.",
+      "closureCriteria": "Destroyed players get no late media loads or callbacks; subscriptions are removed and separate players keep independent UI."
+    },
+    {
+      "id": "CAST-STATE-01",
+      "title": "Cast terminal session states leave the normalized callback and icon connected",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-05"
+      ],
+      "evidence": [
+        "test/chromecast-failures.test.js",
+        "refactor/baselines/chromecast-failures-validation.json"
+      ],
+      "compatibleResolution": "Map terminal states without changing the raw SessionState query API.",
+      "closureCriteria": "Ended and failed states update UI and callbacks while getCastState keeps original SessionState values."
+    },
+    {
+      "id": "CAST-ERROR-01",
+      "title": "Cast media loading rejection escapes on a detached Promise while the click has already fulfilled",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CAST-03",
+        "PKG-CAST-05"
+      ],
+      "evidence": [
+        "test/chromecast-failures.test.js",
+        "refactor/baselines/chromecast-failures-validation.json"
+      ],
+      "compatibleResolution": "Await the complete media-loading chain and preserve one original error notification.",
+      "closureCriteria": "loadMedia failure reaches the click promise exactly once, no orphan rejection or duplicated error callback; success ordering remains documented."
     }
   ]
 }
