@@ -2,8 +2,10 @@
 
 The factory remains `artplayerPluginVttThumbnail(option)`. Its registration function is
 asynchronous and resolves to `{ name: 'artplayerPluginVttThumbnail' }`. Existing public
-declarations still describe a synchronous result; task PKG-VTT-THUMB-04 owns that conflict
-and the public declaration/consumer migration. The seven internal TS files are strict. Do not infer the return shape from those declarations.
+root/legacy declarations retain the historical synchronous result for existing type extraction
+and replacement factories. The optional `/runtime` entry describes the real Promise without
+consumer assertions. Both entries load the same binary and function. The seven internal TS
+files are strict. Never infer synchronous runtime behavior from the compatibility declarations.
 
 ## Modules and ownership
 
@@ -34,14 +36,16 @@ rolled back if initialization throws, preserving the original rejection.
 
 ## Runtime types
 
-`src/types.ts` defines options, result, rectangle/cue data, owned events, cleanup and
+`types/artplayer-plugin-vtt-thumbnail.d.ts` owns Option and Result; `src/types.ts` reexports
+them and defines rectangle/cue data, owned events, cleanup and
 preview inputs. Request cancellation is typed as a void branch; actual registration is
 Promise<Result>. The lifetime accepts only destroy/setBar and uses the core event tuples.
 The preview receives only its required DOM/style/duration inputs.
 
 Assertions are limited to the real Artplayer constructor boundary, validated regex groups
 and loop indexes, the completed four-key rectangle, and native responses after the closed
-check. The latter is valid because native fetch returns Response and cancellation only
+check, plus the recursive `.default` factory alias created by Object.assign. The response
+assertion is valid because native fetch returns Response and cancellation only
 resolves void after closing; malformed custom responses still throw at runtime. Numeric
 rectangle strings are explicitly converted for arithmetic while the zero style write stays
 numeric. No any, unchecked JS or skipLibCheck exception is introduced.
@@ -49,8 +53,22 @@ numeric. No any, unchecked JS or skipLibCheck exception is introduced.
 The package tsconfig also checks test/types/vtt-thumbnail-runtime.ts. It tests the async
 result, required options, CSS/URL types, event tuples, cancellation, readonly state and raw
 rectangle strings, including expected errors. It separately proves the old public result
-is synchronous in declarations; those declarations are not silently corrected in this
-runtime checkpoint. New/old declaration consumers and export aliases remain task 04.
+is synchronous in declarations. `test/types/vtt-thumbnail-public.ts` separately checks exact
+legacy parameter/result/factory extraction, replacement factories and accurate async calls
+through `/runtime`, including negative cases. The source factory explicitly returns Promise;
+its final assertion only describes the self-reference that Object.assign creates.
+
+Root and legacy use paired `.d.mts`/`.d.cts` default declarations. `/runtime` uses an ESM
+default and a CommonJS export assignment, supporting direct and `.default` require calls.
+Classic resolution uses `.d.ts` and typesVersions, including TypeScript 4.3. The generated
+editor global retains the legacy callable type; its RuntimeFactory namespace member is only
+a type, not an additional runtime global. Do not hand-edit generated editor declarations.
+
+The installed-consumer command packs both core and plugin, installs outside the workspace,
+verifies member hashes, and repeats an offline frozen install. It tests five actual old npm
+declarations with classic default-import consumers on TS 4.3/5.9 and seven candidate modes.
+Historical NodeNext and raw require type replacement forms still need investigation in 04;
+these checks do not prove all historical compiler/module combinations.
 
 ## Compatibility and intentional fixes
 
@@ -78,9 +96,11 @@ invalid CSS or partially mounted controls. Each cue has one image/rectangle payl
 multiline subtitle text, timestamp-map offsets and full caption semantics are outside this
 plugin. Empty or comment-only input remains a valid empty preview.
 
-The old 1.0.x export objects, earlier `thumbnails` control name and incorrect declarations
-are separately frozen and remain compatibility work for tasks 04-06. Current runtime work
-does not claim those consumer migrations or the full package refactor are finished.
+The exported callable has a writable self `.default` alias, restoring the usable 1.0.x
+CommonJS default access while retaining direct calls. It does not add a name property to the
+registration Promise. Earlier `thumbnails` control names and remaining historical declaration
+forms are separately frozen and remain compatibility work for tasks 04-06. The full package
+refactor is not yet finished.
 
 ## Verification and future changes
 
@@ -88,6 +108,8 @@ Use Yarn 1.22.22 and the repository's pinned Node version:
 
 ```sh
 yarn test:vtt-thumbnail
+yarn test:vtt-thumbnail-types-package
+yarn build:ts artplayer-plugin-vtt-thumbnail
 yarn test:browser test/browser/vtt-thumbnail-lifecycle.spec.js
 yarn build artplayer-plugin-vtt-thumbnail
 ```

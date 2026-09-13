@@ -11,6 +11,18 @@ async function flush() {
 }
 const count = env => [...env.listeners.values()].reduce((sum, items) => sum + items.length, 0)
 
+test('VTT candidate preserves callable default identity without adding synchronous fields to the registration Promise', async () => {
+  const env = create()
+  assert.equal(env.factory.default, env.factory)
+  assert.equal(env.factory.default.default, env.factory)
+  assert.equal(Object.getOwnPropertyDescriptor(env.factory, 'default').writable, true)
+  const pending = env.factory.default({})(env.art)
+  assert.equal(pending.name, undefined)
+  assert.deepEqual(Object.keys(pending), [])
+  assert.equal((await pending).name, 'artplayerPluginVttThumbnail')
+  await env.emit('destroy')
+})
+
 test('VTT candidate retains asynchronous registration, live style, floored bounds and literal image paths', async () => {
   const env = create({ deferred: true })
   const option = { vtt: '/folder/cues.vtt', style: {} }

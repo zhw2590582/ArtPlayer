@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-VTT-THUMB-04 公开类型与安装消费者检查点（doing）
+
+保留 root/legacy 旧参数、同步结果类型及替换工厂赋值，新增 /runtime 表达真实 Promise，
+两入口复用相同函数。可写 .default 自引用恢复旧 CJS default 调用，Promise 不伪装同步 name。
+公开 Option/Result 与内部实现共用；成对模块声明、classic typesVersions 和编辑器生成同步。
+本包 251 项、三入口各 48 项、原生三入口共 54 项通过；仓库外实际安装五历史包与候选包，
+17 格类型矩阵和 Node 入口身份通过，offline/frozen 重装及成员字节核对通过。
+修复实际 pack 发现的 tsconfig 泄漏。TS 5.9.3/5.1.6 严格正反例通过，完整 CI 2069 项通过。
+见[变更](changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md)和
+[验证](baselines/vtt-thumbnail-public-types.json)。历史 NodeNext/raw require 类型形式仍待 04，
+完整核心/设备、早期控件名与分发/demo 仍待 05/06，TYPE/EXPORT 风险未关闭。
+222 项：117 done、13 doing、92 todo；独立本地检查点提交，不推送、不发布。
+
+
 ## PKG-VTT-THUMB-04 严格运行时 TS 检查点（doing）
 
 六个 JS 实现迁为 TS，另有明确数据/资源类型模块，分包 allowJs=false。TS 5.9.3/5.1.6

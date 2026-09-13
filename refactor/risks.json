@@ -4202,7 +4202,10 @@
         "refactor/baselines/vtt-thumbnail-contract.md",
         "refactor/scripts/vtt-thumbnail-contract.test.mjs",
         "test/types/vtt-thumbnail-runtime.ts",
-        "refactor/baselines/vtt-thumbnail-runtime-types.json"
+        "refactor/baselines/vtt-thumbnail-runtime-types.json",
+        "refactor/changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md",
+        "refactor/baselines/vtt-thumbnail-public-types.json",
+        "refactor/scripts/vtt-thumbnail-package-types.mjs"
       ],
       "compatibleResolution": "Preserve valid consumers and actual async runtime, with explicit decisions for irreconcilable inference changes.",
       "closureCriteria": "Isolated old/new compiler and installed consumers verify options, styles, callback and result forms."
@@ -4220,7 +4223,10 @@
       "evidence": [
         "refactor/baselines/vtt-thumbnail-release.json",
         "refactor/baselines/vtt-thumbnail-contract.md",
-        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs",
+        "refactor/changes/2026-09-13-PKG-VTT-THUMB-04-public-types.md",
+        "refactor/baselines/vtt-thumbnail-public-types.json",
+        "refactor/scripts/vtt-thumbnail-package-types.mjs"
       ],
       "compatibleResolution": "Validate historical import forms and control integrations before selecting compatibility adapters.",
       "closureCriteria": "Actual package consumers and old/new cores prove supported forms; unresolved differences stay explicit."

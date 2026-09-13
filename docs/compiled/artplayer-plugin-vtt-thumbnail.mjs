@@ -77,9 +77,9 @@ function rectangle(text, vttUrl, line) {
   if (values.length !== 4)
     invalid(line, "expected four rectangle coordinates");
   const rect = {};
-  for (let index = 0; index < 4; index++) {
-    const key = match[2][index];
-    const value = values[index];
+  for (let index2 = 0; index2 < 4; index2++) {
+    const key = match[2][index2];
+    const value = values[index2];
     if (!/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(value) || !Number.isFinite(Number(value)))
       invalid(line, "rectangle coordinates must be finite non-negative decimals");
     if ((key === "w" || key === "h") && Number(value) === 0)
@@ -102,49 +102,49 @@ function parseVtt(text, vttUrl = "") {
   if (typeof text !== "string")
     invalid(1, "expected text");
   const lines = text.replace(/^\uFEFF/, "").split(/\r\n|\r|\n/);
-  let index = 0;
+  let index2 = 0;
   function skipEmpty() {
-    while (index < lines.length && !lines[index].trim())
-      index++;
+    while (index2 < lines.length && !lines[index2].trim())
+      index2++;
   }
   skipEmpty();
-  if (index === lines.length)
+  if (index2 === lines.length)
     return [];
-  if (!/^WEBVTT(?:[\t ].*)?$/.test(lines[index].trim()) || lines[index].includes("-->"))
-    invalid(index + 1, "expected WEBVTT header");
-  index++;
+  if (!/^WEBVTT(?:[\t ].*)?$/.test(lines[index2].trim()) || lines[index2].includes("-->"))
+    invalid(index2 + 1, "expected WEBVTT header");
+  index2++;
   const thumbnails = [];
-  while (index < lines.length) {
+  while (index2 < lines.length) {
     skipEmpty();
-    if (index === lines.length)
+    if (index2 === lines.length)
       break;
-    const first = lines[index].trim();
+    const first = lines[index2].trim();
     if (/^NOTE(?:[\t ]|$)/.test(first) || first === "STYLE" || first === "REGION") {
-      while (index < lines.length && lines[index].trim())
-        index++;
+      while (index2 < lines.length && lines[index2].trim())
+        index2++;
       continue;
     }
-    const identifierLine = index + 1;
+    const identifierLine = index2 + 1;
     if (!first.includes("-->")) {
-      index++;
-      if (index === lines.length || !lines[index].trim())
+      index2++;
+      if (index2 === lines.length || !lines[index2].trim())
         invalid(identifierLine, "cue identifier must be followed by timing");
     }
-    const timingLine = index + 1;
-    const timing = lines[index].trim().match(/^([\d:.]+)[\t ]*-->[\t ]*([\d:.]+)(?:[\t ].*)?$/);
+    const timingLine = index2 + 1;
+    const timing = lines[index2].trim().match(/^([\d:.]+)[\t ]*-->[\t ]*([\d:.]+)(?:[\t ].*)?$/);
     if (!timing)
       invalid(timingLine, "invalid cue timing");
     const start = timestamp(timing[1], timingLine);
     const end = timestamp(timing[2], timingLine);
     if (end < start)
       invalid(timingLine, "cue end precedes its start");
-    index++;
+    index2++;
     skipEmpty();
-    if (index === lines.length)
+    if (index2 === lines.length)
       invalid(timingLine, "missing sprite image");
-    const image = rectangle(lines[index].trim(), vttUrl, index + 1);
+    const image = rectangle(lines[index2].trim(), vttUrl, index2 + 1);
     thumbnails.push({ start: Math.floor(start), end: Math.floor(end), ...image });
-    index++;
+    index2++;
   }
   return thumbnails;
 }
@@ -273,6 +273,7 @@ function artplayerPluginVttThumbnail(option) {
     }
   };
 }
+const index = Object.assign(artplayerPluginVttThumbnail, { default: artplayerPluginVttThumbnail });
 export {
-  artplayerPluginVttThumbnail as default
+  index as default
 };

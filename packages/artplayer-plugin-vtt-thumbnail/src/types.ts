@@ -1,14 +1,7 @@
 import type Artplayer from 'artplayer'
 import type { Events, Utils } from 'artplayer'
 
-export interface Option {
-  vtt?: string
-  style?: Partial<CSSStyleDeclaration>
-}
-
-export interface Result {
-  name: 'artplayerPluginVttThumbnail'
-}
+export type { Option, Result } from '../types/artplayer-plugin-vtt-thumbnail'
 
 export interface Rectangle {
   x: string

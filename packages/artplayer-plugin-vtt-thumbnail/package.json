@@ -19,19 +19,49 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
-      "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
-      "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
+      "import": {
+        "types": "./types/artplayer-plugin-vtt-thumbnail.d.mts",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer-plugin-vtt-thumbnail.d.cts",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.js"
+      }
     },
     "./legacy": {
-      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
-      "import": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
-      "require": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+      "import": {
+        "types": "./types/artplayer-plugin-vtt-thumbnail.d.mts",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+      },
+      "require": {
+        "types": "./types/artplayer-plugin-vtt-thumbnail.d.cts",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+      }
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer-plugin-vtt-thumbnail.js"
+      }
     }
   },
   "main": "./dist/artplayer-plugin-vtt-thumbnail.js",
   "module": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
   "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
   "legacy": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-vtt-thumbnail.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
+      ]
+    }
+  }
 }

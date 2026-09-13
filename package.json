@@ -86,7 +86,8 @@
     "test:thumbnail": "node --test test/thumbnail-emitter.test.js test/thumbnail-runtime.test.js test/thumbnail-vendor.test.js test/thumbnail-lifecycle.test.js test/thumbnail-input.test.js test/thumbnail.test.js refactor/scripts/thumbnail-contract.test.mjs refactor/scripts/thumbnail-types.test.mjs",
     "test:thumbnail-types-package": "node refactor/scripts/thumbnail-package-types.mjs",
     "test:auto-thumbnail": "node --test test/auto-thumbnail-frames.test.js test/auto-thumbnail-lifecycle.test.js test/auto-thumbnail.test.js refactor/scripts/auto-thumbnail-contract.test.mjs",
-    "test:vtt-thumbnail": "node --test test/vtt-thumbnail-parser.test.js test/vtt-thumbnail-lifecycle.test.js test/vtt-thumbnail.test.js refactor/scripts/vtt-thumbnail-contract.test.mjs"
+    "test:vtt-thumbnail": "node --test test/vtt-thumbnail-parser.test.js test/vtt-thumbnail-lifecycle.test.js test/vtt-thumbnail.test.js refactor/scripts/vtt-thumbnail-contract.test.mjs refactor/scripts/vtt-thumbnail-types.test.mjs",
+    "test:vtt-thumbnail-types-package": "node refactor/scripts/vtt-thumbnail-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

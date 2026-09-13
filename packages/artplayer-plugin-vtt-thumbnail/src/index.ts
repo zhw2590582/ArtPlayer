@@ -1,11 +1,12 @@
 import type Artplayer from 'artplayer'
+import type { RuntimeFactory } from '../types/artplayer-plugin-vtt-thumbnail'
 import type { Option, Result } from './types'
 import createLifetime from './lifetime'
 import parseVtt from './parseVtt'
 import createPreview from './preview'
 import requestVtt from './request'
 
-export default function artplayerPluginVttThumbnail(option: Option) {
+function artplayerPluginVttThumbnail(option: Option) {
   return async (art: Artplayer): Promise<Result> => {
     const { setStyle, isMobile, addClass } = (art.constructor as typeof Artplayer).utils
     const { $progress } = art.template
@@ -47,3 +48,6 @@ export default function artplayerPluginVttThumbnail(option: Option) {
     }
   }
 }
+
+// Object.assign adds the alias to the same callable referenced by that alias.
+export default Object.assign(artplayerPluginVttThumbnail, { default: artplayerPluginVttThumbnail }) as RuntimeFactory
