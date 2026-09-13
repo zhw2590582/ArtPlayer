@@ -352,15 +352,19 @@
         "docs/assets/jassub/jassub-worker-modern.wasm"
       ],
       "owners": [
-        "PKG-JASSUB-01"
+        "PKG-JASSUB-01",
+        "PKG-JASSUB-06"
       ],
-      "sourceStatus": "Wrapper matches npm jassub 1.8.8 after formatting/ESLint-header adaptation; package/docs worker JS matches exact bytes. WASM files validate but code/data differ from 1.8.8; exact build/source/component graph remains unresolved. See baselines/jassub-contract.md.",
-      "licenseStatus": "Current upstream wrapper LICENSE is MIT; this does not certify linked WASM libraries, fonts, or the exact local build.",
+      "sourceStatus": "Wrapper/worker JS match npm 1.8.8 as previously frozen. Both local WASM binaries exactly match Pages nightly 747e392d7f6fe7c38bbcdfe05c9ada46b0b62daf linked to source 6b19a04ddfbad8f9bfd3237395788dd76218841b, with pinned build files and seven submodules. No independent rebuild. See baselines/jassub-provenance.json.",
+      "licenseStatus": "Matching source LICENSE and nightly COPYRIGHT identified and byte-verified; full component notice assembly, LGPL source/distribution review and full FreeType license remain PKG-JASSUB-06 gates. VENDOR-04 remains open.",
       "upstreamSources": [
         "https://github.com/ThaUnknown/jassub/blob/main/LICENSE",
-        "https://registry.npmjs.org/jassub/-/jassub-1.8.8.tgz"
+        "https://registry.npmjs.org/jassub/-/jassub-1.8.8.tgz",
+        "https://github.com/ThaUnknown/jassub/tree/25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "https://github.com/ThaUnknown/jassub/tree/6b19a04ddfbad8f9bfd3237395788dd76218841b",
+        "https://github.com/ThaUnknown/jassub/commit/747e392d7f6fe7c38bbcdfe05c9ada46b0b62daf"
       ],
-      "upstreamReviewedAt": "2026-09-13",
+      "upstreamReviewedAt": "2026-09-14",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
@@ -409,12 +413,15 @@
       ],
       "owners": [
         "PKG-JASSUB-01",
-        "SITE-01"
+        "SITE-01",
+        "PKG-JASSUB-06"
       ],
-      "sourceStatus": "All 12 font name tables and embedding flags extracted with hashes; default font matches npm jassub 1.8.8. Other embedded notices are source clues only; original acquisition and redistribution evidence remain unresolved. See baselines/jassub-font-metadata.json.",
-      "licenseStatus": "Font redistribution rights are unverified; do not infer licenses from root MIT or font names.",
-      "upstreamSources": [],
-      "upstreamReviewedAt": null,
+      "sourceStatus": "All 11 unique fonts and default alias exactly match historical upstream Pages blobs. Original acquisition/redistribution permissions are not established by that identity. See baselines/jassub-provenance.json.",
+      "licenseStatus": "Five open-font notice assemblies and six unresolved font permissions remain explicit in the supplement. PKG-JASSUB-06 / SITE-01 must resolve actual package/Pages redistribution scope; VENDOR-05 remains open.",
+      "upstreamSources": [
+        "https://github.com/ThaUnknown/jassub/tree/25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1"
+      ],
+      "upstreamReviewedAt": "2026-09-14",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {

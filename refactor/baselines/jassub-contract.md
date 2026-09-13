@@ -1,7 +1,7 @@
 # JASSUB 历史契约与来源检查点
 
-PKG-JASSUB-01 仍为 doing。本记录冻结实现事实，不将尚未确认的 WASM/字体来源或设备
-验证标成完成。输入见 [发布清单](jassub-release.json)、[上游比较源](jassub-vendor.json)
+PKG-JASSUB-01 的来源与契约核对已完成；下面保留首次检查事实，并以末尾来源补充
+更新结论。完整许可通知、字体分发和设备验证未完成。输入见 [发布清单](jassub-release.json)、[上游比较源](jassub-vendor.json)
 和 [字体内嵌元数据](jassub-font-metadata.json)。
 
 ## 来源与分发
@@ -73,4 +73,10 @@ art.destroy 叠加、构造失败清理、custom canvas 等边界仍归 02/03；
 48 项包含七份实现的 42 个受控行为和六项发布/vendor/资源/字体/真实 ESM 检查。
 所有输入均校验实际 tarball 或 Git 哈希。Worker/DOM/SIMD 为受控对象，不能计为真实
 ASS 绘制、WASM 初始化、字体外观、视频时钟/seek/倍率同步或完整浏览器验收。
-下一步继续 WASM 构建及字体授权/通知来源核对；02 再补异常/资源与实际渲染失败基线。
+来源补充已确认两份 WASM 来自 Pages nightly 的精确 Git blob，并关联源码
+6b19a04ddfbad8f9bfd3237395788dd76218841b、构建工作流和七个子模块；11 份字体也
+与历史 Pages 字节一致。与 npm 1.8.8 WASM 不同的历史测试继续保留。
+见 [独立来源数据](jassub-provenance.json) 和
+[补充记录](../changes/2026-09-14-PKG-JASSUB-01-provenance.md)。原取得操作和独立
+WASM 重建未证明。01 完成不关闭 VENDOR-04/05：完整库/字体通知与六份未明确
+字体的发布处理由 06/SITE-01 继续；02 开始异常/资源与实际渲染失败基线。

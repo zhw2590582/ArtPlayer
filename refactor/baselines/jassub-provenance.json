@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "kind": "append-only-provenance-supplement",
+  "capturedAt": "2026-09-13T16:32:55.277Z",
+  "baseline": "refactor/baselines/jassub-release.json",
+  "vendorComparison": "refactor/baselines/jassub-vendor.json",
+  "upstream": {
+    "repository": "https://github.com/ThaUnknown/jassub",
+    "api": "https://api.github.com/repos/ThaUnknown/jassub",
+    "localIntroduction": "f4d99eb09ecd294c676d3bb89902c2ea06fa7990",
+    "pagesSnapshot": {
+      "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+      "sourceCommit": "ca27d60a672612b2b8a80d0728092c2164e32a07",
+      "message": "Update binaries to latest nightly\n\nFrom ca27d60a672612b2b8a80d0728092c2164e32a07",
+      "changedPaths": [
+        "jassub/assets/jassub-worker.js"
+      ],
+      "cachedCommit": "jassub01-demo-commit.json",
+      "cachedTree": "jassub01-historical-demo-tree.json",
+      "tree": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1"
+    },
+    "wasmNightly": {
+      "commit": "747e392d7f6fe7c38bbcdfe05c9ada46b0b62daf",
+      "sourceCommit": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+      "message": "Update binaries to latest nightly\n\nFrom 6b19a04ddfbad8f9bfd3237395788dd76218841b",
+      "cachedCommit": "jassub01-wasm-nightly-commit.txt"
+    },
+    "build": {
+      "sourceCommit": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+      "cachedTree": "jassub01-6b19a04ddfbad8f9bfd3237395788dd76218841b.json",
+      "emsdkImage": "docker.io/emscripten/emsdk:4.0.22",
+      "artifactName": "js",
+      "artifactSource": "dist",
+      "artifactDestination": "jassub/assets",
+      "evidence": [
+        {
+          "path": "Dockerfile",
+          "commit": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+          "bytes": 734,
+          "sha256": "a31a538d5233eed5bc93ac4dd695397b15e05124ecf5314fbfc78e4e644ef2a3",
+          "gitBlob": "812ce6a20d53a0f6b9b7a25b6faaef17ea97cada",
+          "cachedDownload": "jassub01-source-Dockerfile.txt"
+        },
+        {
+          "path": ".gitmodules",
+          "commit": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+          "bytes": 790,
+          "sha256": "d8d1dbf29bef736d2f6ed13fd26bed06c8de7ed5691becab072d01d2d634a62c",
+          "gitBlob": "d748f813634ed83be56feb1702626411b9d124d6",
+          "cachedDownload": "jassub01-source-gitmodules.txt"
+        },
+        {
+          "path": ".github/workflows/emscripten.yml",
+          "commit": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+          "bytes": 1684,
+          "sha256": "ab427152acf8bfbf9059c69d9fe5b7386b9eb38ec3c3213309857ac8dc7d965a",
+          "gitBlob": "cdc72dd411af7f71fc6e94531a1e9706205ca977",
+          "cachedDownload": "jassub01-source-workflow.yml"
+        }
+      ],
+      "submodules": [
+        {
+          "path": "lib/brotli",
+          "commit": "e61745a6b7add50d380cfd7d3883dd6c62fc2c71"
+        },
+        {
+          "path": "lib/expat",
+          "commit": "27d5b8ba1771f916d9cfea2aac6bdac72071dc66"
+        },
+        {
+          "path": "lib/fontconfig",
+          "commit": "d37f97223a4715176c0889e91685dc796457e25f"
+        },
+        {
+          "path": "lib/freetype",
+          "commit": "801cd842e27c85cb1d5000f6397f382ffe295daa"
+        },
+        {
+          "path": "lib/fribidi",
+          "commit": "247fddc3599e3fe7b1b5cc21020c9eb51e662637"
+        },
+        {
+          "path": "lib/harfbuzz",
+          "commit": "afcae83a064843d71d47624bc162e121cc56c08b"
+        },
+        {
+          "path": "lib/libass",
+          "commit": "695509365f152bd28720a0c0e036d46836ee9345"
+        }
+      ],
+      "reproduced": false,
+      "limitations": [
+        "Docker tag, apt dependencies and npm install are not fully locked.",
+        "Checked-in source dist bytes differ from the generated Pages nightly artifacts."
+      ],
+      "tree": "6b19a04ddfbad8f9bfd3237395788dd76218841b"
+    }
+  },
+  "assets": [
+    {
+      "kind": "wasm",
+      "file": "docs/assets/jassub/jassub-worker.wasm",
+      "aliases": [
+        "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm"
+      ],
+      "bytes": 1969100,
+      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+      "gitBlob": "527ccdcaec1fbbed3066525651d8e8970b8373db",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "jassub/assets/jassub-worker.wasm",
+          "jassub/assets/js/jassub-worker.wasm"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-527ccdcaec1fbbed3066525651d8e8970b8373db.bin"
+    },
+    {
+      "kind": "wasm",
+      "file": "docs/assets/jassub/jassub-worker-modern.wasm",
+      "aliases": [
+        "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm"
+      ],
+      "bytes": 2037191,
+      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+      "gitBlob": "6f7fcbb4b5a016054bef1c6e2137dda65e97347a",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "jassub/assets/jassub-worker-modern.wasm",
+          "jassub/assets/js/jassub-worker-modern.wasm"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-6f7fcbb4b5a016054bef1c6e2137dda65e97347a.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/allison-script.regular.otf",
+      "aliases": [],
+      "bytes": 107896,
+      "sha256": "97cd66bb6f89bdd32af2a9592f439536c85aa7553516514e2623bb1e81c65bd6",
+      "gitBlob": "0bfc60accfb3ac9cef6cbf488d3ad9f22574ee5b",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/allison-script.regular.otf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-0bfc60accfb3ac9cef6cbf488d3ad9f22574ee5b.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/architext.regular.ttf",
+      "aliases": [],
+      "bytes": 30568,
+      "sha256": "a6b8e33ce190ee9c871590b982cff37e137b303bb73dcab55ef3ff7154ba143a",
+      "gitBlob": "47791099b9e86b6e9b8d5d216f9a5c27aed39b98",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/architext.regular.ttf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-47791099b9e86b6e9b8d5d216f9a5c27aed39b98.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/arial.ttf",
+      "aliases": [],
+      "bytes": 1036584,
+      "sha256": "c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1",
+      "gitBlob": "8682d94623e575a4ecc9586a35fc909dff37fb2c",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/arial.ttf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-8682d94623e575a4ecc9586a35fc909dff37fb2c.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+      "aliases": [],
+      "bytes": 106684,
+      "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+      "gitBlob": "2c15bdc1b5c88b659b6435dfb3ac32b78d32a3e3",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/Averia Sans Libre Light.ttf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-2c15bdc1b5c88b659b6435dfb3ac32b78d32a3e3.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/Averia Serif Simple Light.ttf",
+      "aliases": [],
+      "bytes": 110612,
+      "sha256": "fb6398238298a7010920e1c216f7b29bc920477bc810f8bcc677ae4e6f411b4b",
+      "gitBlob": "6e1d0952e4dc6140cc32dbc4d9790d04b91dcced",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/Averia Serif Simple Light.ttf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-6e1d0952e4dc6140cc32dbc4d9790d04b91dcced.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/chawp.otf",
+      "aliases": [],
+      "bytes": 122620,
+      "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+      "gitBlob": "8cceee5183cb068903a5f65c63c64deddc74e8d7",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/chawp.otf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-8cceee5183cb068903a5f65c63c64deddc74e8d7.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/default.woff2",
+      "aliases": [
+        "docs/assets/jassub/default.woff2"
+      ],
+      "bytes": 145972,
+      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+      "gitBlob": "a562391696ad477e5a8ad28ef8b4d53c90bb0d42",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/default.woff2",
+          "jassub/assets/default.woff2"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-a562391696ad477e5a8ad28ef8b4d53c90bb0d42.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/FRABK.TTF",
+      "aliases": [],
+      "bytes": 152700,
+      "sha256": "9ad3d0e5ef31c4a9a98cb0e169e4e625286aa34c712add3e001c0100138730d4",
+      "gitBlob": "21c4ecfc553e9fa94ac0c01368ff657f48493ca1",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/FRABK.TTF"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-21c4ecfc553e9fa94ac0c01368ff657f48493ca1.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/Gramond.ttf",
+      "aliases": [],
+      "bytes": 173484,
+      "sha256": "072859788bc577d35df2e852225c52cc5670339a4859d86b5edb96b1724a2177",
+      "gitBlob": "980f0fe8f8c88bb45f6282b8cf8d23929fb89a23",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/Gramond.ttf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-980f0fe8f8c88bb45f6282b8cf8d23929fb89a23.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/Lato-Regular.ttf",
+      "aliases": [],
+      "bytes": 657212,
+      "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+      "gitBlob": "adbfc467d2d0dd5cdf2b942e5d0cf3aab2b73c3a",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/Lato-Regular.ttf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-adbfc467d2d0dd5cdf2b942e5d0cf3aab2b73c3a.bin"
+    },
+    {
+      "kind": "font",
+      "file": "docs/assets/jassub/fonts/SlatePro-Medium.otf",
+      "aliases": [],
+      "bytes": 80944,
+      "sha256": "56aa0fc2878bf782c10e5bba6dc45de1982a572d14ba9e10cd9d5a4414b6171e",
+      "gitBlob": "067b5cb5cbc05045586a4b0a84595c6d132a62a6",
+      "upstream": {
+        "commit": "25d1ea7ca1f827dbed2c8ea539c9bc917ccbfab1",
+        "paths": [
+          "fonts/SlatePro-Medium.otf"
+        ]
+      },
+      "cachedDownload": "jassub01-upstream-067b5cb5cbc05045586a4b0a84595c6d132a62a6.bin"
+    }
+  ],
+  "notices": [
+    {
+      "path": "LICENSE",
+      "commit": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+      "bytes": 1145,
+      "sha256": "b3fbc65487e4b505288c5fca0d86d200e2dc1c7bb33a1476e625c4f0379e598c",
+      "gitBlob": "c046b62eeab3818fced95e6507a0cfddcf92732d",
+      "cachedDownload": "jassub01-license-raw.bin",
+      "npm": {
+        "version": "1.8.8",
+        "member": "package/LICENSE",
+        "bytes": 1167,
+        "sha256": "f300758600ecf59b736407f80f6dc8338a9879a062c6bcb16cc739d14814ec75",
+        "cachedDownload": "jassub01-license-npm.bin",
+        "comparison": "different-bytes-equal-after-crlf-to-lf"
+      }
+    },
+    {
+      "path": "jassub/assets/COPYRIGHT",
+      "commit": "747e392d7f6fe7c38bbcdfe05c9ada46b0b62daf",
+      "bytes": 69206,
+      "sha256": "a921cd41f0f3d715200874319586c970072751dcadaa3237c4fd648452f819d6",
+      "gitBlob": "3e35c600fee96299f8a029849a3dd40c9d63bdf2",
+      "cachedDownload": "jassub01-copyright-raw.bin",
+      "npm": {
+        "version": "1.8.8",
+        "member": "package/dist/COPYRIGHT",
+        "bytes": 70157,
+        "sha256": "420f27cc7703563bb12842b10244f4a4951dc8bbcc5456050e696db96533edfb",
+        "cachedDownload": "jassub01-copyright-npm.bin",
+        "comparison": "different-bytes-equal-after-crlf-to-lf"
+      }
+    }
+  ],
+  "licensing": {
+    "redistributionApproval": false,
+    "completeNoticeAudit": false,
+    "componentNoticeAssembly": "pending",
+    "fullPinnedFreeTypeLicense": "pending",
+    "lgplComponent": "lib/fribidi",
+    "fontSourceIdentity": "all-11-font-files-byte-matched",
+    "openFontNoticeAssembly": [
+      "default.woff2",
+      "Averia Sans Libre Light.ttf",
+      "Averia Serif Simple Light.ttf",
+      "Lato-Regular.ttf",
+      "chawp.otf"
+    ],
+    "unresolvedFontPermission": [
+      "allison-script.regular.otf",
+      "architext.regular.ttf",
+      "arial.ttf",
+      "FRABK.TTF",
+      "Gramond.ttf",
+      "SlatePro-Medium.otf"
+    ],
+    "limitations": [
+      "Public upstream hosting proves object identity, not redistribution authorization.",
+      "Embedded font metadata and fsType are not purchase or redistribution evidence.",
+      "The Arial embedded MIT text covers Hebrew layout logic only.",
+      "The autogenerated component COPYRIGHT contains noisy extracted text and links to the full FTL."
+    ]
+  },
+  "validation": {
+    "offline": "Only recomputes local file hashes and checks frozen metadata. No current remote claim.",
+    "cachedEvidence": "Explicit --cached-evidence rechecks previously downloaded bytes and saved upstream metadata. No fresh network claim.",
+    "network": "Explicit --network fetches pinned upstream trees, commits and blobs; failures fail the test and never fall back to cache.",
+    "previousObservation": {
+      "downloadedAssets": 13,
+      "exactByteMatches": 13,
+      "sourceOfEvidence": "GitHub official Git blob API, base64-decoded bytes"
+    },
+    "browserValidated": false
+  }
+}

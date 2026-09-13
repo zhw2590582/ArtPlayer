@@ -1,0 +1,103 @@
+{
+  "task": "PKG-JASSUB-01",
+  "stage": "contract-and-source-identification",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "baseline": {
+    "file": "refactor/baselines/jassub-provenance.json",
+    "sha256": "4c68b588069b69b350f0cccfa84494c33d72841341f28296b64aa03bfaf59ea2"
+  },
+  "verifier": {
+    "file": "refactor/scripts/jassub-provenance.test.mjs",
+    "sha256": "ed6db8a93a50229143af0ebcaa59578ba17575d79068a10317a22495c3865cc5"
+  },
+  "checks": [
+    {
+      "name": "historical-and-provenance",
+      "log": "refactor/.cache/jassub01-provenance-tests-final.log",
+      "passed": 50,
+      "file": "refactor/.cache/jassub01-provenance-tests-final.log",
+      "sha256": "433c97790a274a79ec3d43a7c86bc9115819102fd95a39b0fa332cdaa860a9f3",
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "saved-evidence-recheck",
+      "log": "refactor/.cache/jassub01-provenance-cache-final.log",
+      "passed": 3,
+      "file": "refactor/.cache/jassub01-provenance-cache-final.log",
+      "sha256": "c19f9b37e5160f44a0474b78a963d458fc9b2db0fca54529f0b29faab7fd2260",
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "fresh-network",
+      "log": "refactor/.cache/jassub01-provenance-network-final.log",
+      "passed": 3,
+      "successfulRequests": 23,
+      "comparedAssets": 13,
+      "file": "refactor/.cache/jassub01-provenance-network-final.log",
+      "sha256": "3a25fd1b397c19731dc009b5511a397609a78e086330a0cc218b93e60b39863b",
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "freshNetworkCompletedAt": "2026-09-13T16:38:47.774Z",
+  "unchangedFrozenBaselines": [
+    {
+      "file": "refactor/baselines/jassub-release.json",
+      "sha256": "b97edb655e7deb5b11b4d69b69291cc8a78abb791f00ddceb3cc9b25a7113925"
+    },
+    {
+      "file": "refactor/baselines/jassub-vendor.json",
+      "sha256": "a04f2e65a4ad250e964ecc03712848989c7eb63953dfbc08808d71768977c4b4"
+    },
+    {
+      "file": "refactor/baselines/jassub-font-metadata.json",
+      "sha256": "6f110c76f204081daa61a20127dd974fbcc476a87882bee195348239e1b85128"
+    }
+  ],
+  "sourceFacts": {
+    "uniqueAssets": 13,
+    "localPathsIncludingAliases": 16,
+    "wasmBuildSource": "6b19a04ddfbad8f9bfd3237395788dd76218841b",
+    "wasmPagesCommit": "747e392d7f6fe7c38bbcdfe05c9ada46b0b62daf",
+    "submodules": 7,
+    "pinnedBuildFiles": 3,
+    "noticesWithExactBytes": 2
+  },
+  "additionalDraftChecks": {
+    "scope": "Subagent cache draft checks before integration; not native/browser tests.",
+    "logs": [
+      {
+        "file": "refactor/.cache/jassub-provenance-offline-verification.log",
+        "sha256": "56accc72ee45a4eed7d53cb044b4ba2e840b1f1732a415e1036435238f323118"
+      },
+      {
+        "file": "refactor/.cache/jassub-provenance-negative-git-blob.log",
+        "sha256": "9fcb8ee4912041582ce46656526365a77c227f14095ec5822a684571b1b9cb8e"
+      },
+      {
+        "file": "refactor/.cache/jassub-provenance-negative-source-link.log",
+        "sha256": "b2215b821a624a1f6626e07c0a19f54fa080cd7d2bdd159752ae1732d7dbffb3"
+      },
+      {
+        "file": "refactor/.cache/jassub-provenance-network-fail-closed.log",
+        "sha256": "ca15852342099ed174e6d52fb1f65bd7c805dfad39403c3c9784a4ea4bfa66c1"
+      }
+    ],
+    "outcomes": [
+      "Offline saved-evidence run passed with fetch prohibited.",
+      "Corrupt Git blob and source-link metadata each exited 1.",
+      "Explicit network mode exited 1 when fetch was prohibited; no cache fallback."
+    ]
+  },
+  "sourceOrApiChanges": false,
+  "nativeBrowserValidation": false,
+  "independentWasmRebuild": false,
+  "remaining": {
+    "VENDOR-04": "PKG-JASSUB-06: complete component notices and linked-library source/distribution review",
+    "VENDOR-05": "PKG-JASSUB-06 / SITE-01: five open-font notices and six unresolved font permissions or reviewed alternatives",
+    "runtime": "PKG-JASSUB-02/03/04/05/06 remain pending"
+  }
+}

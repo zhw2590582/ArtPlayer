@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-JASSUB-01 来源及契约核对完成
+
+两份 WASM 与 11 份字体的上游 blob 已精确匹配，nightly 对应源码、七子模块和
+构建/通知来源明确；新联网验证 23 请求成功，13 字节比较通过。本包联合 50 项
+通过，saved-evidence 三项通过。旧 npm WASM 不匹配事实保留，VENDOR-04/05 仍
+open，完整通知/未明确字体分发由 06/SITE-01 继续。
+[来源补充](changes/2026-09-14-PKG-JASSUB-01-provenance.md)和验证器已落地，生产资源
+未变；02 接着建立异常及资源基线，然后继续自有 adapter TS。此项新增一项 done。
+
 ## PKG-MASK-05 真实模型组合检查点（仍 doing）
 
 main/legacy 各 18 项，三个浏览器引擎和三个核心组合共 36 项通过。实际模型、PNG

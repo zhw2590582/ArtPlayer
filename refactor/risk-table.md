@@ -28,8 +28,8 @@
 | VENDOR-01 | resolved / 源码/产物事实 | screenfull 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-02 | resolved / 源码/产物事实 | hint.css 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-03 | resolved / 已复现 | webvtt-parser 来源、版本与许可闭环 | PKG-MULTI-SUB-01 |
-| VENDOR-04 | open / 源码/产物事实 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01 |
-| VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01 |
+| VENDOR-04 | open / 源码/产物事实 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01, PKG-JASSUB-06 |
+| VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01, PKG-JASSUB-06 |
 | VENDOR-06 | open / 待取证 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05 |
 | VENDOR-07 | open / 待取证 | vconsole 来源、版本与许可闭环 | SITE-01 |
 | VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01 |

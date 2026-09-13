@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 231 项，范围 22 个包及工作区/示例。
 
-状态：todo 65 / doing 15 / blocked 0 / done 151 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 65 / doing 14 / blocked 0 / done 152 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -229,12 +229,12 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传 | H | doing |
+| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传 | H | done |
 | PKG-JASSUB-02 | artplayer-plugin-jassub<br>建立特有行为与错误测试 | PKG-JASSUB-01, ENG-03, ENG-05 | ASS 字体、时钟/seek/倍率/resize、加载失败和销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-JASSUB-03 | artplayer-plugin-jassub<br>整理内部职责与资源 | PKG-JASSUB-02, CORE-15, CORE-16 | 仅整理自有 adapter/销毁；保留第三方文件及来源 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-JASSUB-04 | artplayer-plugin-jassub<br>迁移自有源码和公开类型 | PKG-JASSUB-03, ENG-04, ENG-06, CORE-07 | JASSUB option/instance 的兼容类型包装，vendor JS 例外记录 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-JASSUB-05 | artplayer-plugin-jassub<br>验证新旧核心和组合 | PKG-JASSUB-04, CORE-22 | 真实 worker/WASM 字幕渲染与全屏、旧核心测试 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
-| PKG-JASSUB-06 | artplayer-plugin-jassub<br>验证分发并同步文档 | PKG-JASSUB-05, ENG-07 | jassub.js、外部资源路径、许可和离线失败记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-JASSUB-06 | artplayer-plugin-jassub<br>验证分发并同步文档 | PKG-JASSUB-05, ENG-07 | jassub.js、外部资源路径、许可和离线失败记录；接续 VENDOR-04/05 完整组件/字体通知、LGPL 源码分发核对及六份未明确字体的分发处置 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录；来源身份已由01冻结，完整通知和未明确字体的发布处理必须闭环，不能以来源相同替代许可结论 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-danmuku-mask
 
@@ -531,7 +531,7 @@
 - PKG-MULTI-SUB-03: [记录](baselines/multiple-subtitles-resources.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-03-resources.md)
 - PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md) [记录](baselines/multiple-subtitles-public-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md) [记录](type-compatibility-policy.md) [记录](baselines/multiple-subtitles-approved-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md)
 - PKG-MULTI-SUB-07: [记录](baselines/multiple-subtitles-timestamps.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)
-- PKG-JASSUB-01: [记录](baselines/jassub-release.json) [记录](baselines/jassub-vendor.json) [记录](baselines/jassub-font-metadata.json) [记录](baselines/jassub-contract.md) [记录](baselines/jassub-contract-validation.json) [记录](changes/2026-09-13-PKG-JASSUB-01-baseline.md)
+- PKG-JASSUB-01: [记录](baselines/jassub-release.json) [记录](baselines/jassub-vendor.json) [记录](baselines/jassub-font-metadata.json) [记录](baselines/jassub-contract.md) [记录](baselines/jassub-contract-validation.json) [记录](changes/2026-09-13-PKG-JASSUB-01-baseline.md) [记录](baselines/jassub-provenance.json) [记录](baselines/jassub-provenance-validation.json) [记录](changes/2026-09-14-PKG-JASSUB-01-provenance.md)
 - PKG-MASK-01: [记录](baselines/danmuku-mask-release.json) [记录](baselines/danmuku-mask-registry.json) [记录](baselines/danmuku-mask-contract.md) [记录](baselines/danmuku-mask-contract-validation.json) [记录](changes/2026-09-13-PKG-MASK-01-contract.md)
 - PKG-MASK-02: [记录](changes/2026-09-13-PKG-MASK-02-failures.md) [记录](baselines/danmuku-mask-failures-validation.json)
 - PKG-MASK-03: [记录](changes/2026-09-13-PKG-MASK-03-lifecycle.md) [记录](baselines/danmuku-mask-lifecycle-validation.json)

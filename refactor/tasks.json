@@ -2406,7 +2406,7 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "选项透传、result.instance、vendor 来源、worker/WASM/font 路径",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传",
@@ -2416,7 +2416,10 @@
         "baselines/jassub-font-metadata.json",
         "baselines/jassub-contract.md",
         "baselines/jassub-contract-validation.json",
-        "changes/2026-09-13-PKG-JASSUB-01-baseline.md"
+        "changes/2026-09-13-PKG-JASSUB-01-baseline.md",
+        "baselines/jassub-provenance.json",
+        "baselines/jassub-provenance-validation.json",
+        "changes/2026-09-14-PKG-JASSUB-01-provenance.md"
       ]
     },
     {
@@ -2504,8 +2507,8 @@
       ],
       "status": "todo",
       "risk": "H",
-      "deliverable": "jassub.js、外部资源路径、许可和离线失败记录",
-      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录",
+      "deliverable": "jassub.js、外部资源路径、许可和离线失败记录；接续 VENDOR-04/05 完整组件/字体通知、LGPL 源码分发核对及六份未明确字体的分发处置",
+      "acceptance": "tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录；来源身份已由01冻结，完整通知和未明确字体的发布处理必须闭环，不能以来源相同替代许可结论",
       "evidence": []
     },
     {

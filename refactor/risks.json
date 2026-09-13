@@ -538,7 +538,8 @@
       "confirmation": "source-observed",
       "status": "open",
       "owners": [
-        "PKG-JASSUB-01"
+        "PKG-JASSUB-01",
+        "PKG-JASSUB-06"
       ],
       "evidence": [
         "refactor/third-party.json",
@@ -552,7 +553,10 @@
         "refactor/baselines/jassub-font-metadata.json",
         "refactor/baselines/jassub-contract.md",
         "refactor/baselines/jassub-contract-validation.json",
-        "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md"
+        "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md",
+        "refactor/baselines/jassub-provenance.json",
+        "refactor/baselines/jassub-provenance-validation.json",
+        "refactor/changes/2026-09-14-PKG-JASSUB-01-provenance.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
@@ -564,7 +568,8 @@
       "status": "open",
       "owners": [
         "PKG-JASSUB-01",
-        "SITE-01"
+        "SITE-01",
+        "PKG-JASSUB-06"
       ],
       "evidence": [
         "refactor/third-party.json",
@@ -575,7 +580,10 @@
         "refactor/baselines/jassub-font-metadata.json",
         "refactor/baselines/jassub-contract.md",
         "refactor/baselines/jassub-contract-validation.json",
-        "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md"
+        "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md",
+        "refactor/baselines/jassub-provenance.json",
+        "refactor/baselines/jassub-provenance-validation.json",
+        "refactor/changes/2026-09-14-PKG-JASSUB-01-provenance.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
