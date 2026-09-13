@@ -1,0 +1,23 @@
+{
+  "name": "jassub",
+  "version": "1.8.8",
+  "tarball": "https://registry.npmjs.org/jassub/-/jassub-1.8.8.tgz",
+  "integrity": "sha512-Vtw27Z0/hN2Tm2Qs4HAR+eONwwSD5ULo/hisPvmiaW9Ya6aFCt7esvWQSZy6nvBASbRyKmpghgeioIPqXGHA0Q==",
+  "sha256": "92668938b5f8ca47b26a1641a6dddf649a8c3e72a27bc54c4e7da3558c38b1bf",
+  "files": {
+    "package/LICENSE": "f300758600ecf59b736407f80f6dc8338a9879a062c6bcb16cc739d14814ec75",
+    "package/README.md": "7ffeaeac7d4b4b7eaf7c5eb6cf0b4115f5cf4624dd0890b8198c5e799ef1930a",
+    "package/dist/COPYRIGHT": "420f27cc7703563bb12842b10244f4a4951dc8bbcc5456050e696db96533edfb",
+    "package/dist/default.woff2": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+    "package/dist/jassub-worker-modern.wasm": "465401b1b406e4f010dd2494a9cee47d78a1725b8adc3f381437fd32f0c1e9c2",
+    "package/dist/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+    "package/dist/jassub-worker.wasm": "b6e9d3b1a6318ecfb9728c03a763b1e60796ca59d454820913deec62eebb8927",
+    "package/dist/jassub-worker.wasm.js": "edbffd1c7bf23152dcad837efbe9f488136e47f73e5beebfcd5aa2bddfe9834a",
+    "package/dist/jassub.es.js": "dd25d6534ccf4c7701477518064effcf81af27f1f32bc00aa18a9cf2ff102c62",
+    "package/dist/jassub.umd.js": "ec8f992cfc9b69a435f8cd0fb7a060745184c5dfc5aac68ae3807cb7532c875d",
+    "package/index.d.ts": "56802e69e7c689af6f78c1ecd663a64c03d8b28f52995699e4c759a25870b91b",
+    "package/package.json": "a0b75625530ae19154596f598a62fa0e264dcc9693821571698bcdb504f62903",
+    "package/src/jassub.js": "8a1aac7a02e2c1790cb76867042e1570dc891a3bfd3b8afab2380f5b3cd69d77"
+  },
+  "scope": "Comparison source for the wrapper, worker JS and default font; WASM bytes differ and exact build provenance remains unresolved."
+}

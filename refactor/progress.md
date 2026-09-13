@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-JASSUB-01 发布与来源检查点（doing）
+
+冻结两个真实 npm 版本、12 成员、9 份 Git 文本及本地 worker/WASM/font/ASS/MP4 指纹。
+七份实现 42 项行为与六项契约检查，本包 48 项通过，主 test:unit/baseline 均已接入。
+确认同步注册、真实 instance、live options/video 覆盖和同步方法；声明的必填 URL、
+Promise/resize 参数顺序有已复现差异，TYPE/EXPORT 两项新风险归 04/06。
+wrapper 与 npm jassub 1.8.8 仅格式差异，worker JS/default font 精确匹配；WASM 可校验
+但代码/数据段不同。12 字体元数据已提取，原始来源/通知未闭环，VENDOR-04/05 保持 open。
+完整 CI 2392 项通过（2031 单元、14 工程、347 基线），严格生产 TS 仍 353 文件。
+没有改 JASSUB 生产源码、声明、二进制、字体或版本；没有浏览器 ASS 渲染证据。
+见[契约](baselines/jassub-contract.md)、[验证](baselines/jassub-contract-validation.json)及
+[检查点](changes/2026-09-13-PKG-JASSUB-01-baseline.md)。新增只读字体脚本，检查依赖仅装缓存。
+223 项：121 done、15 doing、87 todo；200 项风险。01 继续来源核对，未标完成。
+独立本地检查点提交，不推送、不发布。多字幕/VTT 类型取舍仍待回复。
+
+
 ## PKG-MULTI-SUB-04 公开类型与仓库外安装检查点（doing）
 
 保留 root/legacy 的旧必填 subtitles、同步 LegacyResult 提取与可替换工厂；新增 runtime

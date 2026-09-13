@@ -1,0 +1,529 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-JASSUB-01",
+  "tools": {
+    "fonttools": "4.60.1",
+    "brotli": "1.1.0"
+  },
+  "scope": "Read-only embedded OpenType names and OS/2 fsType. These are source clues, not proof of original acquisition or redistribution authorization.",
+  "fonts": [
+    {
+      "file": "docs/assets/jassub/default.woff2",
+      "bytes": 145972,
+      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+      "names": {
+        "0": [
+          "Digitized data copyright (c) 2010 Google Corporation. \nCopyright (c) 2012 Red Hat, Inc."
+        ],
+        "1": [
+          "Liberation Sans"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Liberation Sans"
+        ],
+        "5": [
+          "Version 2.00.5"
+        ],
+        "6": [
+          "LiberationSans"
+        ],
+        "8": [
+          "Ascender Corporation"
+        ],
+        "9": [
+          "Steve Matteson"
+        ],
+        "11": [
+          "http://www.ascendercorp.com/"
+        ],
+        "13": [
+          "Licensed under the SIL Open Font License, Version 1.1"
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/allison-script.regular.otf",
+      "bytes": 107896,
+      "sha256": "97cd66bb6f89bdd32af2a9592f439536c85aa7553516514e2623bb1e81c65bd6",
+      "names": {
+        "0": [
+          "Copyright (c) 2019 by Emil Bertell. All rights reserved."
+        ],
+        "1": [
+          "Allison Script"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Allison Script Regular",
+          "AllisonScript-Regular"
+        ],
+        "5": [
+          "Version 1.000"
+        ],
+        "6": [
+          "AllisonScript-Regular"
+        ],
+        "8": [
+          "Emil Bertell"
+        ],
+        "9": [
+          "Emil Bertell"
+        ],
+        "11": [
+          "http://fenotype.com"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/architext.regular.ttf",
+      "bytes": 30568,
+      "sha256": "a6b8e33ce190ee9c871590b982cff37e137b303bb73dcab55ef3ff7154ba143a",
+      "names": {
+        "0": [
+          "\u00a9 Grant Marshall www.marshallarts.co.za  "
+        ],
+        "1": [
+          "Architext"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Architext"
+        ],
+        "5": [
+          "1.0   03/07/21"
+        ],
+        "6": [
+          "Architext"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/arial.ttf",
+      "bytes": 1036584,
+      "sha256": "c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1",
+      "names": {
+        "0": [
+          "\u00a9 2017 The Monotype Corporation. All Rights Reserved. \r\n\r\nHebrew OpenType Layout logic copyright \u00a9 2003 & 2007, Ralph Hancock & John Hudson. This layout logic for Biblical Hebrew is open source software under the MIT License; see embedded license description for details.",
+          "\u00a9 2017 The Monotype Corporation. All Rights Reserved. \r\rHebrew OpenType Layout logic copyright \u00a9 2003 & 2007, Ralph Hancock & John Hudson. This layout logic for Biblical Hebrew is open source software under the MIT License; see embedded license description for details."
+        ],
+        "1": [
+          "Arial"
+        ],
+        "2": [
+          "Arrunta",
+          "Navadno",
+          "Normaali",
+          "Normal",
+          "Normale",
+          "Normalny",
+          "Norm\u00e1l",
+          "Norm\u00e1lne",
+          "Regular",
+          "Standaard",
+          "Standard",
+          "normal",
+          "oby\u010dejn\u00e9",
+          "th\u01b0\u01a1\u0300ng",
+          "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+          "\u041e\u0431\u044b\u0447\u043d\u044b\u0439"
+        ],
+        "4": [
+          "Arial"
+        ],
+        "5": [
+          "Version 7.00"
+        ],
+        "6": [
+          "ArialMT"
+        ],
+        "8": [
+          "The Monotype Corporation"
+        ],
+        "9": [
+          "Monotype Type Drawing Office - Robin Nicholas, Patricia Saunders 1982"
+        ],
+        "13": [
+          "Microsoft supplied font. You may use this font to create, display, and print content as permitted by the license terms or terms of use, of the Microsoft product, service, or content in which this font was included. You may only (i) embed this font in content as permitted by the embedding restrictions included in this font; and (ii) temporarily download this font to a printer or other output device to help print content. Any other use is prohibited.\r\n\r\nThe following license, based on the MIT license (http://en.wikipedia.org/wiki/MIT_License), applies to the OpenType Layout logic for Biblical Hebrew \u201cLayout Logic\u201d as jointly developed by Ralph Hancock and John Hudson. \r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of the OpenType Layout logic for Biblical Hebrew and associated documentation files (the \u201cLayout Logic Software\u201d), to deal in the Layout Logic Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Layout Logic Software, and to permit persons to whom the Layout Logic Software is furnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Layout Logic Software.\r\n\r\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+          "Microsoft supplied font. You may use this font to create, display, and print content as permitted by the license terms or terms of use, of the Microsoft product, service, or content in which this font was included. You may only (i) embed this font in content as permitted by the embedding restrictions included in this font; and (ii) temporarily download this font to a printer or other output device to help print content. Any other use is prohibited.\r\rThe following license, based on the MIT license (http://en.wikipedia.org/wiki/MIT_License), applies to the OpenType Layout logic for Biblical Hebrew \u201cLayout Logic\u201d as jointly developed by Ralph Hancock and John Hudson. \r\rPermission is hereby granted, free of charge, to any person obtaining a copy of the OpenType Layout logic for Biblical Hebrew and associated documentation files (the \u201cLayout Logic Software\u201d), to deal in the Layout Logic Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Layout Logic Software, and to permit persons to whom the Layout Logic Software is furnished to do so, subject to the following conditions:\r\rThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Layout Logic Software.\r\rTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+        ]
+      },
+      "fsType": 8
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+      "bytes": 106684,
+      "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390",
+      "names": {
+        "0": [
+          "Copyright (c) 2011, Dan Sayers (i@iotic.com), with Reserved Font Name 'Averia' and 'Averia Libre'."
+        ],
+        "1": [
+          "Averia Sans Libre Light"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Averia Sans Libre Light"
+        ],
+        "5": [
+          "Version 1.002"
+        ],
+        "6": [
+          "AveriaSansLibre-Light"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is copied below, and is also available with a FAQ at: http://scripts.sil.org/OFL"
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Averia Serif Simple Light.ttf",
+      "bytes": 110612,
+      "sha256": "fb6398238298a7010920e1c216f7b29bc920477bc810f8bcc677ae4e6f411b4b",
+      "names": {
+        "0": [
+          "Copyright (c) 2011, Dan Sayers (i@iotic.com), with Reserved Font Name 'Averia' and 'Averia Libre'."
+        ],
+        "1": [
+          "Averia Serif Simple Light"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Averia Serif Simple Light"
+        ],
+        "5": [
+          "Version 1.002"
+        ],
+        "6": [
+          "AveriaSerifSimple-Light"
+        ],
+        "13": [
+          "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is copied below, and is also available with a FAQ at: http://scripts.sil.org/OFL"
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/chawp.otf",
+      "bytes": 122620,
+      "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6",
+      "names": {
+        "0": [
+          "Copyright (c) 2013 by Ancient Wisdom Productions, Inc.. All rights reserved."
+        ],
+        "1": [
+          "CHAWP"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "CHAWP"
+        ],
+        "5": [
+          "Version 1.000"
+        ],
+        "6": [
+          "CHAWP"
+        ],
+        "8": [
+          "Tyler Finck"
+        ],
+        "9": [
+          "Tyler Finck"
+        ],
+        "11": [
+          "http://www.awpny.com"
+        ],
+        "13": [
+          "OFL"
+        ],
+        "14": [
+          "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL"
+        ]
+      },
+      "fsType": 4
+    },
+    {
+      "file": "docs/assets/jassub/fonts/default.woff2",
+      "bytes": 145972,
+      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+      "names": {
+        "0": [
+          "Digitized data copyright (c) 2010 Google Corporation. \nCopyright (c) 2012 Red Hat, Inc."
+        ],
+        "1": [
+          "Liberation Sans"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Liberation Sans"
+        ],
+        "5": [
+          "Version 2.00.5"
+        ],
+        "6": [
+          "LiberationSans"
+        ],
+        "8": [
+          "Ascender Corporation"
+        ],
+        "9": [
+          "Steve Matteson"
+        ],
+        "11": [
+          "http://www.ascendercorp.com/"
+        ],
+        "13": [
+          "Licensed under the SIL Open Font License, Version 1.1"
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/FRABK.TTF",
+      "bytes": 152700,
+      "sha256": "9ad3d0e5ef31c4a9a98cb0e169e4e625286aa34c712add3e001c0100138730d4",
+      "names": {
+        "0": [
+          " ITC Franklin Gothic is a trademark of The International Typeface Corporation which may be registered in certain jurisdictions. Portions copyright Microsoft Corporation.  All rights reserved."
+        ],
+        "1": [
+          "Franklin Gothic Book"
+        ],
+        "2": [
+          "Arrunta",
+          "Navadno",
+          "Normaali",
+          "Normal",
+          "Normale",
+          "Normalny",
+          "Norm\u00e1l",
+          "Norm\u00e1lne",
+          "Regular",
+          "Standaard",
+          "Standard",
+          "normal",
+          "oby\u010dejn\u00e9",
+          "\u039a\u03b1\u03bd\u03bf\u03bd\u03b9\u03ba\u03ac",
+          "\u041e\u0431\u044b\u0447\u043d\u044b\u0439"
+        ],
+        "4": [
+          "Franklin Gothic Book"
+        ],
+        "5": [
+          "Version 2.01"
+        ],
+        "6": [
+          "FranklinGothic-Book"
+        ],
+        "8": [
+          "International Typeface Corporation"
+        ],
+        "9": [
+          "Victor Caruso"
+        ],
+        "11": [
+          "http://www.itcfonts.com"
+        ],
+        "13": [
+          "Please contact the vendor to learn more about license restrictions."
+        ],
+        "14": [
+          "http://www.itcfonts.com/itc/licensing.html"
+        ]
+      },
+      "fsType": 8
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Gramond.ttf",
+      "bytes": 173484,
+      "sha256": "072859788bc577d35df2e852225c52cc5670339a4859d86b5edb96b1724a2177",
+      "names": {
+        "0": [
+          "Digitized data copyright Monotype Typography, Ltd 1991-1995. All rights reserved. Monotype Garamond\u00ae is a trademark of Monotype Typography, Ltd which may be registered in certain jurisdictions."
+        ],
+        "1": [
+          "Garamond"
+        ],
+        "2": [
+          "Bold",
+          "Fet",
+          "Fett",
+          "F\u00e9lk\u00f6v\u00e9r",
+          "Gras",
+          "Grassetto",
+          "Halvfet",
+          "Kal\u0131n",
+          "Krepko",
+          "Lihavoitu",
+          "Lodia",
+          "Negreta",
+          "Negrita",
+          "Negrito",
+          "Pogrubiony",
+          "Vet",
+          "fed",
+          "tu\u010dn\u00e9",
+          "\u0388\u03bd\u03c4\u03bf\u03bd\u03b1",
+          "\u041f\u043e\u043b\u0443\u0436\u0438\u0440\u043d\u044b\u0439"
+        ],
+        "4": [
+          "Garamond Bold",
+          "Garamond Fet",
+          "Garamond Fett",
+          "Garamond F\u00e9lk\u00f6v\u00e9r",
+          "Garamond Gras",
+          "Garamond Grassetto",
+          "Garamond Halvfet",
+          "Garamond Kal\u0131n",
+          "Garamond Krepko",
+          "Garamond Lihavoitu",
+          "Garamond Lodia",
+          "Garamond Negreta",
+          "Garamond Negrita",
+          "Garamond Negrito",
+          "Garamond Pogrubiony",
+          "Garamond Vet",
+          "Garamond fed",
+          "Garamond tu\u010dn\u00e9",
+          "Garamond \u0388\u03bd\u03c4\u03bf\u03bd\u03b1",
+          "Garamond \u041f\u043e\u043b\u0443\u0436\u0438\u0440\u043d\u044b\u0439"
+        ],
+        "5": [
+          "Version 2.30"
+        ],
+        "6": [
+          "Garamond-Bold"
+        ],
+        "8": [
+          "Monotype Typography, Inc."
+        ],
+        "9": [
+          "Claude Garamond"
+        ],
+        "11": [
+          "http://www.monotype.com/html/mtname/ms_welcome.html"
+        ],
+        "13": [
+          "NOTIFICATION OF LICENSE AGREEMENT\r\n\r\nThis typeface is the property of Monotype Typography and its use by you is covered under the terms of a license agreement. You have obtained this typeface software either directly from Monotype or together with software distributed by one of Monotype\u2019s licensees.\r\n\r\nThis software is a valuable asset of Monotype. Unless you have entered into a specific license agreement granting you additional rights, your use of this software is limited to your workstation for your own publishing use. You may not copy or distribute this software.\r\n\r\nIf you have any question concerning your rights you should review the license agreement you received with the software or contact Monotype for a copy of the license agreement.\r\n\r\nMonotype can be contacted at:\r\n\r\nUSA 847-718-0400  UK 44(0)1737 765959\r\n\r\nFor license terms and usage rights, please visit our web site at www.monotype.com/html/type/license.html\r\n \r\nLizenzbedingungen und Nutzungsrechte finden Sie auf unserer Webseite www.monotype.com/html/type/license.html\r\n\r\nPour plus d'informations concernant les droits d'utilisation et les questions contractuelles, veuillez consultez notre site www.monotype.com/html/type/license.html\r\n\r\nPara obtener informaci\u00f3n acerca de los t\u00e9rminos de licencia y los derechos de uso, visite nuestro sitio en el Web en www.monotype.com/html/type/license.html\r\n\r\nPer le condizioni contrattuali ed i diritti d'uso, visitate il nostro sito web all'indirizzo www.monotype.com/html/type/license.html\r\n"
+        ],
+        "14": [
+          "http://www.monotype.com/html/type/license.html"
+        ]
+      },
+      "fsType": 8
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Lato-Regular.ttf",
+      "bytes": 657212,
+      "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780",
+      "names": {
+        "0": [
+          "Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). "
+        ],
+        "1": [
+          "Lato"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Lato Regular"
+        ],
+        "5": [
+          "Version 2.015; 2015-08-06; http://www.latofonts.com/"
+        ],
+        "6": [
+          "Lato-Regular"
+        ],
+        "8": [
+          "tyPoland Lukasz Dziedzic"
+        ],
+        "9": [
+          "Lukasz Dziedzic with Adam Twardoch and Botio Nikoltchev"
+        ],
+        "11": [
+          "http://www.typoland.com/"
+        ],
+        "13": [
+          "Copyright (c) 2011-2015 by tyPoland Lukasz Dziedzic (http://www.typoland.com/) with Reserved Font Name \"Lato\". Licensed under the SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL). "
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "fsType": 0
+    },
+    {
+      "file": "docs/assets/jassub/fonts/SlatePro-Medium.otf",
+      "bytes": 80944,
+      "sha256": "56aa0fc2878bf782c10e5bba6dc45de1982a572d14ba9e10cd9d5a4414b6171e",
+      "names": {
+        "0": [
+          "Copyright 2006 - 2007 Monotype Imaging Inc. All rights reserved."
+        ],
+        "1": [
+          "Slate Pro",
+          "Slate Pro Medium"
+        ],
+        "2": [
+          "Medium",
+          "Regular"
+        ],
+        "4": [
+          "Slate Pro Medium",
+          "SlatePro-Medium"
+        ],
+        "5": [
+          "Version 1.000"
+        ],
+        "6": [
+          "SlatePro-Medium"
+        ],
+        "9": [
+          "Rod McDonald"
+        ],
+        "11": [
+          "http://www.monotypeimaging.com"
+        ],
+        "13": [
+          "\r\nNOTIFICATION OF LICENSE AGREEMENT \r\n\r\nThis typeface is the property of Monotype Imaging Inc. and its use by you is covered under the terms of a license agreement. You have obtained this typeface software either directly from Monotype Imaging or together with software distributed by one of the licencees of Monotype Imaging. \r\n\r\nThis software is a valuable asset of Monotype Imaging. Unless you have entered into a specific license agreement granting you additional rights, your use of this software is limited to use on up to five (5) workstation for your own publishing use. You may not copy or distribute this software. \r\n\r\nIf you have any questions concerning your rights you should review the license agreement you received with the software or contact Monotype Imaging for a copy of the license agreement. \r\n\r\nGeneral information:\r\nwww.fonts.com\r\n\r\nFor license terms and usage rights, please visit our web site at:\r\nwww.monotypeimaging.com\r\n\r\nLizenzbedingungen und Nutzungsrechte finden Sie auf unserer Webseite:\r\nwww.monotypeimaging.com\r\n\r\nPour plus d'informations concernant les droits d'utilisation et les questions contractuelles, veuillez consultez notre site:\r\nwww.monotypeimaging.com\r\n\r\nPara obtener informaci\u0097n acerca de los t\u008erminos de licencia y los derechos de uso, visite nuestro sitio en el Web en:\r\nwww.monotypeimaging.com\r\n\r\nPer le condizioni contrattuali ed i diritti d'uso, visitate il nostro sito web all'indirizzo:\r\nwww.monotypeimaging.com",
+          "\r\nNOTIFICATION OF LICENSE AGREEMENT \r\n\r\nThis typeface is the property of Monotype Imaging Inc. and its use by you is covered under the terms of a license agreement. You have obtained this typeface software either directly from Monotype Imaging or together with software distributed by one of the licencees of Monotype Imaging. \r\n\r\nThis software is a valuable asset of Monotype Imaging. Unless you have entered into a specific license agreement granting you additional rights, your use of this software is limited to use on up to five (5) workstation for your own publishing use. You may not copy or distribute this software. \r\n\r\nIf you have any questions concerning your rights you should review the license agreement you received with the software or contact Monotype Imaging for a copy of the license agreement. \r\n\r\nGeneral information:\r\nwww.fonts.com\r\n\r\nFor license terms and usage rights, please visit our web site at:\r\nwww.monotypeimaging.com\r\n\r\nLizenzbedingungen und Nutzungsrechte finden Sie auf unserer Webseite:\r\nwww.monotypeimaging.com\r\n\r\nPour plus d'informations concernant les droits d'utilisation et les questions contractuelles, veuillez consultez notre site:\r\nwww.monotypeimaging.com\r\n\r\nPara obtener informaci\u00f3n acerca de los t\u00e9rminos de licencia y los derechos de uso, visite nuestro sitio en el Web en:\r\nwww.monotypeimaging.com\r\n\r\nPer le condizioni contrattuali ed i diritti d'uso, visitate il nostro sito web all'indirizzo:\r\nwww.monotypeimaging.com"
+        ],
+        "14": [
+          "http://www.monotypeimaging.com"
+        ]
+      },
+      "fsType": 4
+    }
+  ]
+}

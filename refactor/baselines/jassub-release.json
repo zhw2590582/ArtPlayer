@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "registry": "https://registry.npmjs.org/artplayer-plugin-jassub",
+  "capturedAt": "2026-09-13T04:17:17.507Z",
+  "sourceCommit": "d44e81ce220d0d4475bf4f0f0c2e02ea5b09402a",
+  "sourceNormalization": "Text Git blobs normalized to LF; asset bytes hashed unchanged.",
+  "source": {
+    "packages/artplayer-plugin-jassub/package.json": "fdbc6dd1441eb9bebc5bbec1a95a2105256febf56bb1160ca672646feb132be1",
+    "packages/artplayer-plugin-jassub/src/index.js": "697c2109b34e23bebb76c118a92ee216ae2e23af84bcb351a2138835b1fbd3dc",
+    "packages/artplayer-plugin-jassub/src/jassub.es.js": "b973508ade00b5b9cea2f299d49f4943003372729be7350b6938e44fddb32038",
+    "packages/artplayer-plugin-jassub/types/artplayer-plugin-jassub.d.ts": "b591ab9895eef714e5bf3db17c805a2c5278c3244f6bbd614c7c02c397a0d450",
+    "packages/artplayer-plugin-jassub/README.md": "20bc5783470c0bc5c9afbb0e067f6d2f49f03d4a7f7dd1c974d047adda478a27",
+    "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a",
+    "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.legacy.js": "0726c96bf0df2aab2662ac8973bb7676a0ca7f8e4cb806aa44cb3ec9de296e64",
+    "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.mjs": "31e4be88838ddd786f1f2180d2662792ac3b2bcce00b7ccac977b59b9d659716",
+    "docs/assets/example/jassub.js": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+  },
+  "assets": [
+    {
+      "file": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
+      "bytes": 2037191,
+      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c"
+    },
+    {
+      "file": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+      "bytes": 31069,
+      "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707"
+    },
+    {
+      "file": "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm",
+      "bytes": 1969100,
+      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0"
+    },
+    {
+      "file": "docs/assets/jassub/default.woff2",
+      "bytes": 145972,
+      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+    },
+    {
+      "file": "docs/assets/jassub/FGOBD.ass",
+      "bytes": 11241131,
+      "sha256": "8f49fb7e72229d3eb491f0eff29db9a2d8312671bc8f1c4701ec2164e562a057"
+    },
+    {
+      "file": "docs/assets/jassub/FGOBD.mp4",
+      "bytes": 26122892,
+      "sha256": "fa39d2623338e3f8a447eda7f259cdb70673634f1294d8b77a2c9972defb207b"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/allison-script.regular.otf",
+      "bytes": 107896,
+      "sha256": "97cd66bb6f89bdd32af2a9592f439536c85aa7553516514e2623bb1e81c65bd6"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/architext.regular.ttf",
+      "bytes": 30568,
+      "sha256": "a6b8e33ce190ee9c871590b982cff37e137b303bb73dcab55ef3ff7154ba143a"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/arial.ttf",
+      "bytes": 1036584,
+      "sha256": "c9b76220a5be42ead4733611e417cd65c5fd8aeaa33eb56576ac378a37d130a1"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Averia Sans Libre Light.ttf",
+      "bytes": 106684,
+      "sha256": "df4ca526f9a941afda1f9c5a275695beb066a531f5b008c1e28ddc2c5f6e4390"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Averia Serif Simple Light.ttf",
+      "bytes": 110612,
+      "sha256": "fb6398238298a7010920e1c216f7b29bc920477bc810f8bcc677ae4e6f411b4b"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/chawp.otf",
+      "bytes": 122620,
+      "sha256": "9107241585a4328ce1438dfeabbfb1a8d0cd513dab6902be9a1a5774eab607c6"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/default.woff2",
+      "bytes": 145972,
+      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/FRABK.TTF",
+      "bytes": 152700,
+      "sha256": "9ad3d0e5ef31c4a9a98cb0e169e4e625286aa34c712add3e001c0100138730d4"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Gramond.ttf",
+      "bytes": 173484,
+      "sha256": "072859788bc577d35df2e852225c52cc5670339a4859d86b5edb96b1724a2177"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/Lato-Regular.ttf",
+      "bytes": 657212,
+      "sha256": "6f6940be0835c3ddec9199e5fc42be4cbc61ebcfd58c623fdf719366253f1780"
+    },
+    {
+      "file": "docs/assets/jassub/fonts/SlatePro-Medium.otf",
+      "bytes": 80944,
+      "sha256": "56aa0fc2878bf782c10e5bba6dc45de1982a572d14ba9e10cd9d5a4414b6171e"
+    },
+    {
+      "file": "docs/assets/jassub/jassub-worker-modern.wasm",
+      "bytes": 2037191,
+      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c"
+    },
+    {
+      "file": "docs/assets/jassub/jassub-worker.js",
+      "bytes": 31069,
+      "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707"
+    },
+    {
+      "file": "docs/assets/jassub/jassub-worker.wasm",
+      "bytes": 1969100,
+      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0"
+    }
+  ],
+  "release": {
+    "name": "artplayer-plugin-jassub",
+    "version": "1.1.0",
+    "published": "2026-03-12T14:19:56.051Z",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-jassub/-/artplayer-plugin-jassub-1.1.0.tgz",
+    "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+    "sha256": "00713b4eee4b90e7dc13d1f2c88bc785f9b62f3903b00be6f7bec738fbb78c57",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "manifest": {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.1.0",
+      "description": "jassub plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-jassub.d.ts",
+          "import": "./dist/artplayer-plugin-jassub.mjs",
+          "require": "./dist/artplayer-plugin-jassub.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-jassub.d.ts",
+          "import": "./dist/artplayer-plugin-jassub.legacy.js",
+          "require": "./dist/artplayer-plugin-jassub.legacy.js"
+        }
+      },
+      "main": "dist/artplayer-plugin-jassub.js",
+      "module": "./dist/artplayer-plugin-jassub.mjs",
+      "types": "types/artplayer-plugin-jassub.d.ts",
+      "legacy": "dist/artplayer-plugin-jassub.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "files": {
+      "package/README.md": "20bc5783470c0bc5c9afbb0e067f6d2f49f03d4a7f7dd1c974d047adda478a27",
+      "package/dist/artplayer-plugin-jassub.js": "271d5284e5246fbd04575526510b3e381e5e60d414c030acecce92fcf2e9b10a",
+      "package/dist/artplayer-plugin-jassub.legacy.js": "0726c96bf0df2aab2662ac8973bb7676a0ca7f8e4cb806aa44cb3ec9de296e64",
+      "package/dist/artplayer-plugin-jassub.mjs": "31e4be88838ddd786f1f2180d2662792ac3b2bcce00b7ccac977b59b9d659716",
+      "package/package.json": "fdbc6dd1441eb9bebc5bbec1a95a2105256febf56bb1160ca672646feb132be1",
+      "package/types/artplayer-plugin-jassub.d.ts": "b591ab9895eef714e5bf3db17c805a2c5278c3244f6bbd614c7c02c397a0d450"
+    },
+    "missingEntrypoints": {},
+    "historicalCore": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "scope": "Source-associated core version only, not verified supported core range."
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.0.0",
+      "published": "2026-01-03T11:09:32.550Z",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-jassub/-/artplayer-plugin-jassub-1.0.0.tgz",
+      "integrity": "sha512-v8O9qXVF728YfQUCtvuSW16U954mDTiYO2QgjBdNSWOZe0o4e/7lN1mrv938lKB//efBCSdmJWjjkspF3TBWhw==",
+      "sha256": "3b46d3ea149af65150cdc42f9ca5eee5fef2893a87bb9ee108050e73849811dc",
+      "registryGitHead": "b69d020c5a5d06e093c63f456ad7d0c7777b0b03",
+      "manifest": {
+        "name": "artplayer-plugin-jassub",
+        "version": "1.0.0",
+        "description": "jassub plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-jassub.d.ts",
+            "import": "./dist/artplayer-plugin-jassub.mjs",
+            "require": "./dist/artplayer-plugin-jassub.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-jassub.d.ts",
+            "import": "./dist/artplayer-plugin-jassub.legacy.js",
+            "require": "./dist/artplayer-plugin-jassub.legacy.js"
+          }
+        },
+        "main": "dist/artplayer-plugin-jassub.js",
+        "module": "./dist/artplayer-plugin-jassub.mjs",
+        "types": "types/artplayer-plugin-jassub.d.ts",
+        "legacy": "dist/artplayer-plugin-jassub.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "files": {
+        "package/README.md": "13bd3f7a1249e99a51f5883727d2be984f52fa08fa17f34e482fe3b29542d079",
+        "package/dist/artplayer-plugin-jassub.js": "5284245ef50b909d9a5f4982e724b86e58357576b98d3ee573afd95320819975",
+        "package/dist/artplayer-plugin-jassub.legacy.js": "d2bfa0f38910b3fc450fbee7237a22a3cc377bb8bff7c2ad38c548cc6c912245",
+        "package/dist/artplayer-plugin-jassub.mjs": "d79a1006a91160264310915011dd288b90e5ad13a70b2d29d6248de09430bd35",
+        "package/package.json": "443d0b77bcdbe914bc8e29402ea409ad54ad721fe2b9d94435ef1d51a7c1bc62",
+        "package/types/artplayer-plugin-jassub.d.ts": "b591ab9895eef714e5bf3db17c805a2c5278c3244f6bbd614c7c02c397a0d450"
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "commit": "b69d020c5a5d06e093c63f456ad7d0c7777b0b03",
+        "file": "packages/artplayer/package.json",
+        "version": "5.3.1-beta.1",
+        "sha256LF": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497",
+        "scope": "Source-associated core version only, not verified supported core range."
+      }
+    }
+  ],
+  "scope": "Both actual published releases, frozen workspace text and local worker/WASM/font/demo asset bytes. Registry Git head is a source clue, not proof of a supported core range or upstream vendor identity."
+}

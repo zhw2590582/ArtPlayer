@@ -535,7 +535,7 @@
     {
       "id": "VENDOR-04",
       "title": "jassub-code-and-workers 来源、版本与许可闭环",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
         "PKG-JASSUB-01"
@@ -546,7 +546,13 @@
         "packages/artplayer-plugin-jassub/worker",
         "docs/assets/jassub/jassub-worker.js",
         "docs/assets/jassub/jassub-worker.wasm",
-        "docs/assets/jassub/jassub-worker-modern.wasm"
+        "docs/assets/jassub/jassub-worker-modern.wasm",
+        "refactor/baselines/jassub-release.json",
+        "refactor/baselines/jassub-vendor.json",
+        "refactor/baselines/jassub-font-metadata.json",
+        "refactor/baselines/jassub-contract.md",
+        "refactor/baselines/jassub-contract-validation.json",
+        "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
@@ -554,7 +560,7 @@
     {
       "id": "VENDOR-05",
       "title": "jassub-font-assets 来源、版本与许可闭环",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
         "PKG-JASSUB-01",
@@ -563,7 +569,13 @@
       "evidence": [
         "refactor/third-party.json",
         "docs/assets/jassub/default.woff2",
-        "docs/assets/jassub/fonts"
+        "docs/assets/jassub/fonts",
+        "refactor/baselines/jassub-release.json",
+        "refactor/baselines/jassub-vendor.json",
+        "refactor/baselines/jassub-font-metadata.json",
+        "refactor/baselines/jassub-contract.md",
+        "refactor/baselines/jassub-contract-validation.json",
+        "refactor/changes/2026-09-13-PKG-JASSUB-01-baseline.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
@@ -4451,6 +4463,39 @@
       ],
       "compatibleResolution": "Independently fix valid named-entity decoding, documenting the vendor patch and preserving provenance checks and ordinary cue behavior.",
       "closureCriteria": "Nine historical implementations reproduce the defect; candidate entity/markup regressions and real subtitle display pass, with vendor adaptation and provenance documentation updated."
+    },
+    {
+      "id": "JASSUB-TYPE-01",
+      "title": "JASSUB declared required URLs, Promise methods and resize parameter order differ from actual historical behavior",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-04"
+      ],
+      "evidence": [
+        "refactor/baselines/jassub-contract.md",
+        "test/jassub.test.js",
+        "refactor/scripts/jassub-contract.test.mjs"
+      ],
+      "compatibleResolution": "Keep synchronous registration and real instance methods while separately preserving old parameter/return extraction and extension indexes. Do not implement the old inaccurate declaration as new runtime behavior.",
+      "closureCriteria": "Strict old/new consumers and actual installed declarations cover option defaults, instance methods, callback/return extraction, resize order and existing extension fields."
+    },
+    {
+      "id": "JASSUB-EXPORT-01",
+      "title": "JASSUB historical CommonJS object.default changes to a direct factory in 1.1.0",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-04",
+        "PKG-JASSUB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/jassub-contract-validation.json",
+        "refactor/baselines/jassub-release.json",
+        "test/jassub.test.js"
+      ],
+      "compatibleResolution": "Preserve actual historical JS default/direct forms and validate their declared module views independently.",
+      "closureCriteria": "Installed CJS/ESM/global/legacy consumers and public types preserve the supported historical forms."
     }
   ]
 }

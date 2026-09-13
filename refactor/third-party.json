@@ -354,12 +354,13 @@
       "owners": [
         "PKG-JASSUB-01"
       ],
-      "sourceStatus": "JASSUB example links upstream; exact wrapper/worker/WASM build version and subcomponent graph not established.",
+      "sourceStatus": "Wrapper matches npm jassub 1.8.8 after formatting/ESLint-header adaptation; package/docs worker JS matches exact bytes. WASM files validate but code/data differ from 1.8.8; exact build/source/component graph remains unresolved. See baselines/jassub-contract.md.",
       "licenseStatus": "Current upstream wrapper LICENSE is MIT; this does not certify linked WASM libraries, fonts, or the exact local build.",
       "upstreamSources": [
-        "https://github.com/ThaUnknown/jassub/blob/main/LICENSE"
+        "https://github.com/ThaUnknown/jassub/blob/main/LICENSE",
+        "https://registry.npmjs.org/jassub/-/jassub-1.8.8.tgz"
       ],
-      "upstreamReviewedAt": "2026-09-10",
+      "upstreamReviewedAt": "2026-09-13",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
@@ -410,7 +411,7 @@
         "PKG-JASSUB-01",
         "SITE-01"
       ],
-      "sourceStatus": "Mixed named font files; version/source provenance unavailable from file names alone.",
+      "sourceStatus": "All 12 font name tables and embedding flags extracted with hashes; default font matches npm jassub 1.8.8. Other embedded notices are source clues only; original acquisition and redistribution evidence remain unresolved. See baselines/jassub-font-metadata.json.",
       "licenseStatus": "Font redistribution rights are unverified; do not infer licenses from root MIT or font names.",
       "upstreamSources": [],
       "upstreamReviewedAt": null,

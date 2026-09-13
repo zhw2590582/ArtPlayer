@@ -2394,11 +2394,18 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "选项透传、result.instance、vendor 来源、worker/WASM/font 路径",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传",
-      "evidence": []
+      "evidence": [
+        "baselines/jassub-release.json",
+        "baselines/jassub-vendor.json",
+        "baselines/jassub-font-metadata.json",
+        "baselines/jassub-contract.md",
+        "baselines/jassub-contract-validation.json",
+        "changes/2026-09-13-PKG-JASSUB-01-baseline.md"
+      ]
     },
     {
       "id": "PKG-JASSUB-02",

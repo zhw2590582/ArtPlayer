@@ -28,8 +28,8 @@
 | VENDOR-01 | resolved / 源码/产物事实 | screenfull 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-02 | resolved / 源码/产物事实 | hint.css 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-03 | resolved / 已复现 | webvtt-parser 来源、版本与许可闭环 | PKG-MULTI-SUB-01 |
-| VENDOR-04 | open / 待取证 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01 |
-| VENDOR-05 | open / 待取证 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01 |
+| VENDOR-04 | open / 源码/产物事实 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01 |
+| VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01 |
 | VENDOR-06 | open / 待取证 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05 |
 | VENDOR-07 | open / 待取证 | vconsole 来源、版本与许可闭环 | SITE-01 |
 | VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01 |
@@ -202,3 +202,5 @@
 | MULTI-SUB-HOST-01 | resolved / 已复现 | Subtitle init rejections are ignored and failed installation or URL replacement leaks or invalidates resources | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-TIMESTAMP-01 | resolved / 已复现 | Text wrappers replace numeric inline cue timestamps and serialize NaN times | PKG-MULTI-SUB-07, PKG-MULTI-SUB-05 |
 | MULTI-SUB-ENTITY-01 | open / 已复现 | Vendored cue entity decoding retains semicolons after lt, gt and amp entities | PKG-MULTI-SUB-05 |
+| JASSUB-TYPE-01 | open / 已复现 | JASSUB declared required URLs, Promise methods and resize parameter order differ from actual historical behavior | PKG-JASSUB-04 |
+| JASSUB-EXPORT-01 | open / 已复现 | JASSUB historical CommonJS object.default changes to a direct factory in 1.1.0 | PKG-JASSUB-04, PKG-JASSUB-06 |

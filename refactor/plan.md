@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 223 项，范围 22 个包及工作区/示例。
 
-状态：todo 88 / doing 14 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 87 / doing 15 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -228,7 +228,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传 | H | todo |
+| PKG-JASSUB-01 | artplayer-plugin-jassub<br>核对包契约与历史用法 | BASE-05 | 选项透传、result.instance、vendor 来源、worker/WASM/font 路径 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 VENDOR-04/05，核对 wrapper/worker/WASM/font 的独立来源与通知，保持资源路径和选项透传 | H | doing |
 | PKG-JASSUB-02 | artplayer-plugin-jassub<br>建立特有行为与错误测试 | PKG-JASSUB-01, ENG-03, ENG-05 | ASS 字体、时钟/seek/倍率/resize、加载失败和销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | todo |
 | PKG-JASSUB-03 | artplayer-plugin-jassub<br>整理内部职责与资源 | PKG-JASSUB-02, CORE-15, CORE-16 | 仅整理自有 adapter/销毁；保留第三方文件及来源 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-JASSUB-04 | artplayer-plugin-jassub<br>迁移自有源码和公开类型 | PKG-JASSUB-03, ENG-04, ENG-06, CORE-07 | JASSUB option/instance 的兼容类型包装，vendor JS 例外记录 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
@@ -517,6 +517,7 @@
 - PKG-MULTI-SUB-03: [记录](baselines/multiple-subtitles-resources.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-03-resources.md)
 - PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md) [记录](baselines/multiple-subtitles-public-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md)
 - PKG-MULTI-SUB-07: [记录](baselines/multiple-subtitles-timestamps.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)
+- PKG-JASSUB-01: [记录](baselines/jassub-release.json) [记录](baselines/jassub-vendor.json) [记录](baselines/jassub-font-metadata.json) [记录](baselines/jassub-contract.md) [记录](baselines/jassub-contract-validation.json) [记录](changes/2026-09-13-PKG-JASSUB-01-baseline.md)
 - PKG-ADS-01: [记录](baselines/ads-release.json) [记录](baselines/ads-contract.md) [记录](baselines/ads-contract-validation.json) [记录](changes/2026-09-12-PKG-ADS-01-contract.md) [记录](scripts/ads-contract.test.mjs)
 - PKG-ADS-02: [记录](changes/2026-09-12-PKG-ADS-02-tests.md) [记录](ads-validation.md) [记录](baselines/ads-validation.json)
 - PKG-ADS-03: [记录](changes/2026-09-12-PKG-ADS-03-lifecycle.md) [记录](ads-validation.md) [记录](baselines/ads-lifecycle-validation.json)

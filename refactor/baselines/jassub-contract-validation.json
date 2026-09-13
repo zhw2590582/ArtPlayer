@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-JASSUB-01",
+  "status": "contract-and-provenance-checkpoint-validated",
+  "parentCommit": "d44e81ce220d0d4475bf4f0f0c2e02ea5b09402a",
+  "checks": [
+    {
+      "command": "yarn test:jassub",
+      "tests": 48,
+      "historicalRuntime": 42,
+      "contract": 6,
+      "file": "refactor/.cache/jassub01-package-final.log",
+      "sha256": "f70a0897db9539a6cf40e37fc6869eb6fb33d32595350b23555250dc901794ce"
+    },
+    {
+      "command": "yarn ci:check",
+      "tests": 2392,
+      "unit": 2031,
+      "engineering": 14,
+      "baseline": 347,
+      "strictProductionTS": 353,
+      "file": "refactor/.cache/jassub01-ci.log",
+      "sha256": "40e23951bda7194fffd310fb14d8f0a87638015bbd94a18e18d6c9aa33e65dca"
+    },
+    {
+      "command": "explicit ESLint",
+      "file": "refactor/.cache/jassub01-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "font metadata extraction with cache-only pinned tools",
+      "tools": {
+        "python": "bundled 3.12",
+        "fonttools": "4.60.1",
+        "brotli": "1.1.0"
+      },
+      "file": "refactor/.cache/jassub01-font-tools-install.log",
+      "sha256": "f71cd9769dfefed0d9af8083155795c77dd4c540258dd1c783ead5dba0202af1"
+    }
+  ],
+  "exports": [
+    {
+      "name": "published-1.1.0-main",
+      "type": "function",
+      "keys": [],
+      "defaultType": "undefined"
+    },
+    {
+      "name": "published-1.1.0-legacy",
+      "type": "function",
+      "keys": [],
+      "defaultType": "undefined"
+    },
+    {
+      "name": "published-1.0.0-main",
+      "type": "object",
+      "keys": [
+        "default"
+      ],
+      "defaultType": "function"
+    },
+    {
+      "name": "published-1.0.0-legacy",
+      "type": "object",
+      "keys": [
+        "default"
+      ],
+      "defaultType": "function"
+    },
+    {
+      "name": "frozen-workspace-source",
+      "type": "object",
+      "keys": [
+        "default"
+      ],
+      "defaultType": "function"
+    },
+    {
+      "name": "frozen-workspace-js",
+      "type": "function",
+      "keys": [],
+      "defaultType": "undefined"
+    },
+    {
+      "name": "frozen-workspace-legacy.js",
+      "type": "function",
+      "keys": [],
+      "defaultType": "undefined"
+    }
+  ],
+  "wasmSections": [
+    {
+      "name": "jassub-worker.wasm",
+      "local": [
+        {
+          "id": 1,
+          "size": 633,
+          "sha256": "79485b4b23b968eefc463bb3a3adabd6e26136e74c56cf84c8c9e8f25c321bf9"
+        },
+        {
+          "id": 2,
+          "size": 216,
+          "sha256": "25a57a6a3fe3583d1d96602fdf0d8bd7f18d29489844a172698d4ad725a21e71"
+        },
+        {
+          "id": 3,
+          "size": 1618,
+          "sha256": "4442c87575ae02eafca8969f6e571c9d1bdcf03329811bb61255b4050da71d1d"
+        },
+        {
+          "id": 4,
+          "size": 7,
+          "sha256": "726ed65c5ec59a1d081332ce302c238fbe9cb661b2fef8cb8b9d9e3ef4f2985d"
+        },
+        {
+          "id": 6,
+          "size": 13,
+          "sha256": "7b46893c04c3ac28872a2651297611eb2c2af3adc8da709f524347396b5faf8d"
+        },
+        {
+          "id": 7,
+          "size": 58,
+          "sha256": "2653238382beb1fc644ca2f2ad5ff496ab746ba15fe73fe571b1a4162b8041dc"
+        },
+        {
+          "id": 8,
+          "size": 2,
+          "sha256": "3629b242adba7b3ceb2b1671781bbf97ac4528828f06615302b3763f9c0d5694"
+        },
+        {
+          "id": 9,
+          "size": 1986,
+          "sha256": "859b7d004cc1d0322a745c95c6c7ff8b274b3c785cfdcc018d4af8b3c7c69ee6"
+        },
+        {
+          "id": 12,
+          "size": 2,
+          "sha256": "6d82d88c2b99bec8e610281530ca069be0388a4dec57a467b32a6fd18b67b784"
+        },
+        {
+          "id": 10,
+          "size": 1429042,
+          "sha256": "8bc110e2216251065bf49786f9f01ad879217d45d13df3d123a9bd8406689914"
+        },
+        {
+          "id": 11,
+          "size": 535485,
+          "sha256": "2a7a807682278ae6f71d4c687432df23c800792effb01b6eedb68c427e27622f"
+        }
+      ],
+      "upstream": [
+        {
+          "id": 1,
+          "size": 633,
+          "sha256": "79485b4b23b968eefc463bb3a3adabd6e26136e74c56cf84c8c9e8f25c321bf9"
+        },
+        {
+          "id": 2,
+          "size": 216,
+          "sha256": "25a57a6a3fe3583d1d96602fdf0d8bd7f18d29489844a172698d4ad725a21e71"
+        },
+        {
+          "id": 3,
+          "size": 1618,
+          "sha256": "4442c87575ae02eafca8969f6e571c9d1bdcf03329811bb61255b4050da71d1d"
+        },
+        {
+          "id": 4,
+          "size": 7,
+          "sha256": "726ed65c5ec59a1d081332ce302c238fbe9cb661b2fef8cb8b9d9e3ef4f2985d"
+        },
+        {
+          "id": 6,
+          "size": 13,
+          "sha256": "3da39da845dc9cd47aafdecf9b23b22172ea2805d566e0a81b115fe428a58996"
+        },
+        {
+          "id": 7,
+          "size": 58,
+          "sha256": "2653238382beb1fc644ca2f2ad5ff496ab746ba15fe73fe571b1a4162b8041dc"
+        },
+        {
+          "id": 8,
+          "size": 2,
+          "sha256": "3629b242adba7b3ceb2b1671781bbf97ac4528828f06615302b3763f9c0d5694"
+        },
+        {
+          "id": 9,
+          "size": 1986,
+          "sha256": "859b7d004cc1d0322a745c95c6c7ff8b274b3c785cfdcc018d4af8b3c7c69ee6"
+        },
+        {
+          "id": 12,
+          "size": 2,
+          "sha256": "0c09b67bcc41802c042b1e78002b25dbd7ce99f4b871e499fe59633df7b6848a"
+        },
+        {
+          "id": 10,
+          "size": 1429093,
+          "sha256": "7e6390f9446b975dd0679f9dfc94109230fdea81daea9c8a2a8a018ac62d8781"
+        },
+        {
+          "id": 11,
+          "size": 535511,
+          "sha256": "0ff8ec6983949e6d37553a06a7da6f9f07c67a24b3bb8ae75050203e3fe32cfa"
+        }
+      ]
+    },
+    {
+      "name": "jassub-worker-modern.wasm",
+      "local": [
+        {
+          "id": 1,
+          "size": 644,
+          "sha256": "200a66233e30abc43c92f60a09d1b27101bbe9c712a4d40d0b02e90d4c932421"
+        },
+        {
+          "id": 2,
+          "size": 216,
+          "sha256": "25a57a6a3fe3583d1d96602fdf0d8bd7f18d29489844a172698d4ad725a21e71"
+        },
+        {
+          "id": 3,
+          "size": 1616,
+          "sha256": "632dfd99ca961cd746829e88e73c263cabc4ef24bc204d9f46667db5bb604b9e"
+        },
+        {
+          "id": 4,
+          "size": 7,
+          "sha256": "726ed65c5ec59a1d081332ce302c238fbe9cb661b2fef8cb8b9d9e3ef4f2985d"
+        },
+        {
+          "id": 6,
+          "size": 13,
+          "sha256": "7b46893c04c3ac28872a2651297611eb2c2af3adc8da709f524347396b5faf8d"
+        },
+        {
+          "id": 7,
+          "size": 58,
+          "sha256": "ce711c976114c2954e5f42071dc72b30b024182826e8e8449b2097534ee14b5a"
+        },
+        {
+          "id": 8,
+          "size": 2,
+          "sha256": "d466368e8e31f09570156d6587d324e68a559765aa56dd3c53f08b27abba3831"
+        },
+        {
+          "id": 9,
+          "size": 1986,
+          "sha256": "595e0c3671ed4942cd8028c351e39c66b21c7aec6bcde55c9e352011b6983f66"
+        },
+        {
+          "id": 12,
+          "size": 2,
+          "sha256": "6d82d88c2b99bec8e610281530ca069be0388a4dec57a467b32a6fd18b67b784"
+        },
+        {
+          "id": 10,
+          "size": 1497124,
+          "sha256": "a4e5b0b8bb699381f969384c058c20b844ce085f550555ff29769657bd1c3b96"
+        },
+        {
+          "id": 11,
+          "size": 535485,
+          "sha256": "ca2b95033623c2b3198f8ce8a8ecb3d71260727c8ccbb037e42ca267ef03d765"
+        }
+      ],
+      "upstream": [
+        {
+          "id": 1,
+          "size": 644,
+          "sha256": "200a66233e30abc43c92f60a09d1b27101bbe9c712a4d40d0b02e90d4c932421"
+        },
+        {
+          "id": 2,
+          "size": 216,
+          "sha256": "25a57a6a3fe3583d1d96602fdf0d8bd7f18d29489844a172698d4ad725a21e71"
+        },
+        {
+          "id": 3,
+          "size": 1616,
+          "sha256": "632dfd99ca961cd746829e88e73c263cabc4ef24bc204d9f46667db5bb604b9e"
+        },
+        {
+          "id": 4,
+          "size": 7,
+          "sha256": "726ed65c5ec59a1d081332ce302c238fbe9cb661b2fef8cb8b9d9e3ef4f2985d"
+        },
+        {
+          "id": 6,
+          "size": 13,
+          "sha256": "3da39da845dc9cd47aafdecf9b23b22172ea2805d566e0a81b115fe428a58996"
+        },
+        {
+          "id": 7,
+          "size": 58,
+          "sha256": "ce711c976114c2954e5f42071dc72b30b024182826e8e8449b2097534ee14b5a"
+        },
+        {
+          "id": 8,
+          "size": 2,
+          "sha256": "d466368e8e31f09570156d6587d324e68a559765aa56dd3c53f08b27abba3831"
+        },
+        {
+          "id": 9,
+          "size": 1986,
+          "sha256": "595e0c3671ed4942cd8028c351e39c66b21c7aec6bcde55c9e352011b6983f66"
+        },
+        {
+          "id": 12,
+          "size": 2,
+          "sha256": "0c09b67bcc41802c042b1e78002b25dbd7ce99f4b871e499fe59633df7b6848a"
+        },
+        {
+          "id": 10,
+          "size": 1497126,
+          "sha256": "c4406cdfd8ca166894b6beee8bdbbdc8efb5287478306389988efc20f26aa7c1"
+        },
+        {
+          "id": 11,
+          "size": 535512,
+          "sha256": "af5af9c253fb605eb87b8c268510826b37e00e8fb3cba6f1ed27751f19bf2cf8"
+        }
+      ]
+    }
+  ],
+  "upstreamComparisons": [
+    {
+      "name": "jassub",
+      "version": "1.8.8",
+      "tarball": "https://registry.npmjs.org/jassub/-/jassub-1.8.8.tgz",
+      "integrity": "sha512-Vtw27Z0/hN2Tm2Qs4HAR+eONwwSD5ULo/hisPvmiaW9Ya6aFCt7esvWQSZy6nvBASbRyKmpghgeioIPqXGHA0Q==",
+      "sha256": "92668938b5f8ca47b26a1641a6dddf649a8c3e72a27bc54c4e7da3558c38b1bf",
+      "members": [
+        "package/LICENSE",
+        "package/README.md",
+        "package/dist/COPYRIGHT",
+        "package/dist/default.woff2",
+        "package/dist/jassub-worker-modern.wasm",
+        "package/dist/jassub-worker.js",
+        "package/dist/jassub-worker.wasm",
+        "package/dist/jassub-worker.wasm.js",
+        "package/dist/jassub.es.js",
+        "package/dist/jassub.umd.js",
+        "package/index.d.ts",
+        "package/package.json",
+        "package/src/jassub.js"
+      ],
+      "matches": [
+        {
+          "member": "package/dist/default.woff2",
+          "file": "docs/assets/jassub/default.woff2",
+          "equal": true,
+          "lfEqual": false,
+          "upstream": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "local": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+        },
+        {
+          "member": "package/dist/jassub-worker.js",
+          "file": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+          "equal": true,
+          "lfEqual": true,
+          "upstream": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+          "local": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707"
+        }
+      ]
+    },
+    {
+      "name": "jassub",
+      "version": "1.8.6",
+      "tarball": "https://registry.npmjs.org/jassub/-/jassub-1.8.6.tgz",
+      "integrity": "sha512-56ZTtjM7LfdKsi7boUN/seNOQSOclLuDWEXxnHO55xNakj95SlBrv36hLyNDw0NmoOtLVeqzbpBU1VxT+ubFpg==",
+      "sha256": "407fdc9267652280aac56a9d2795037960a9f30b524043023662facc5a7dd1f8",
+      "members": [
+        "package/LICENSE",
+        "package/README.md",
+        "package/dist/COPYRIGHT",
+        "package/dist/default.woff2",
+        "package/dist/jassub-worker-modern.wasm",
+        "package/dist/jassub-worker.js",
+        "package/dist/jassub-worker.wasm",
+        "package/dist/jassub-worker.wasm.js",
+        "package/dist/jassub.es.js",
+        "package/dist/jassub.umd.js",
+        "package/index.d.ts",
+        "package/package.json",
+        "package/src/jassub.js"
+      ],
+      "matches": [
+        {
+          "member": "package/dist/default.woff2",
+          "file": "docs/assets/jassub/default.woff2",
+          "equal": true,
+          "lfEqual": false,
+          "upstream": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "local": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+        }
+      ]
+    },
+    {
+      "name": "jassub",
+      "version": "1.8.5",
+      "tarball": "https://registry.npmjs.org/jassub/-/jassub-1.8.5.tgz",
+      "integrity": "sha512-BKf3qureEQcJ0WKi7rSJ86UsQF8hTcQqJaIWcwqezxIVTCOatT+tnShM6fauS0pdjeG4bLLFS2+51xMasl/WCw==",
+      "sha256": "93dfeb3fc3f2140a0c38085be06da38ce8aeddb5892eec01c1e2f4d18114a6dd",
+      "members": [
+        "package/LICENSE",
+        "package/README.md",
+        "package/dist/COPYRIGHT",
+        "package/dist/default.woff2",
+        "package/dist/jassub-worker-modern.wasm",
+        "package/dist/jassub-worker.js",
+        "package/dist/jassub-worker.wasm",
+        "package/dist/jassub-worker.wasm.js",
+        "package/dist/jassub.es.js",
+        "package/dist/jassub.umd.js",
+        "package/index.d.ts",
+        "package/package.json",
+        "package/src/jassub.js"
+      ],
+      "matches": [
+        {
+          "member": "package/dist/default.woff2",
+          "file": "docs/assets/jassub/default.woff2",
+          "equal": true,
+          "lfEqual": false,
+          "upstream": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+          "local": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c"
+        }
+      ]
+    },
+    {
+      "name": "jassub",
+      "version": "2.0.10",
+      "tarball": "https://registry.npmjs.org/jassub/-/jassub-2.0.10.tgz",
+      "integrity": "sha512-xPQt2jlPgDC14TPu8utTllrgMsN4qAD+zKQcmrxVmuF0HxLuXT+9pzh+LgtQMrxDsj2YF1V4U4J/wF630EJD0w==",
+      "sha256": "a37059ac16d6e8ebe35b50c9ee235fb39f077d9ff51bfab8d361a5e3ec9e433b",
+      "members": [
+        "package/LICENSE",
+        "package/README.md",
+        "package/dist/jassub.d.ts",
+        "package/dist/jassub.js",
+        "package/dist/jassub.js.map",
+        "package/dist/wasm/jassub-worker-modern.d.ts",
+        "package/dist/wasm/jassub-worker-modern.js.map",
+        "package/dist/wasm/jassub-worker-modern.wasm",
+        "package/dist/wasm/jassub-worker.d.ts",
+        "package/dist/wasm/jassub-worker.js",
+        "package/dist/wasm/jassub-worker.js.map",
+        "package/dist/wasm/jassub-worker.wasm",
+        "package/dist/wasm/old.js",
+        "package/dist/wasm/types.d.ts",
+        "package/dist/worker/util.d.ts",
+        "package/dist/worker/util.js",
+        "package/dist/worker/util.js.map",
+        "package/dist/worker/webgpu-renderer.d.ts",
+        "package/dist/worker/webgpu-renderer.js",
+        "package/dist/worker/webgpu-renderer.js.map",
+        "package/dist/worker/worker.d.ts",
+        "package/dist/worker/worker.js",
+        "package/dist/worker/worker.js.map",
+        "package/package.json"
+      ],
+      "matches": []
+    }
+  ],
+  "inputs": [
+    {
+      "file": "refactor/baselines/jassub-release.json",
+      "sha256": "b97edb655e7deb5b11b4d69b69291cc8a78abb791f00ddceb3cc9b25a7113925"
+    },
+    {
+      "file": "refactor/baselines/jassub-vendor.json",
+      "sha256": "a04f2e65a4ad250e964ecc03712848989c7eb63953dfbc08808d71768977c4b4"
+    },
+    {
+      "file": "refactor/baselines/jassub-font-metadata.json",
+      "sha256": "6f110c76f204081daa61a20127dd974fbcc476a87882bee195348239e1b85128"
+    },
+    {
+      "file": "test/helpers/jassub.js",
+      "sha256": "16e7506ca140c61526e16bcc748c8f1d559f522950bebfbbbe1014317d7a283d"
+    },
+    {
+      "file": "test/jassub.test.js",
+      "sha256": "ae93edfed7a7593ee9cfc53a63da043154c717bc8094ff3561757af1b77b9d08"
+    },
+    {
+      "file": "refactor/scripts/jassub-contract.mjs",
+      "sha256": "728f8eeb464b57a6983f00039b334be0714ed3dd710bf20a7e64f4219bf892a1"
+    },
+    {
+      "file": "refactor/scripts/jassub-contract.test.mjs",
+      "sha256": "e7ba3bc112331f0334f5c99047e9bf761ef8e91a382ca9775720aa2be5c034d4"
+    },
+    {
+      "file": "refactor/scripts/jassub-font-metadata.py",
+      "sha256": "dfb70c69c2464db49b3c7f1f387721428b4f30d6e5d0a228b849283fbef8dbb4"
+    },
+    {
+      "file": "package.json",
+      "sha256": "49fd72466907785af0cb5375e704095a9dd4e3489fe2accba7001ac8635d0efc"
+    }
+  ],
+  "limits": "No production implementation/type/worker/WASM/font changes or browser render acceptance. Wrapper format equivalence, worker/default-font exact bytes and valid but different WASM are distinguished. Font names and fsType do not prove acquisition or redistribution rights. Task 01 and VENDOR-04/05 remain open; unsupported assumptions are not promoted into a completed migration."
+}
