@@ -1,0 +1,373 @@
+diff --git a/packages/artplayer-plugin-jassub/src/jassub.es.js b/packages/artplayer-plugin-jassub/src/jassub.es.js
+index f5a8f292c..904b40888 100644
+--- a/packages/artplayer-plugin-jassub/src/jassub.es.js
++++ b/packages/artplayer-plugin-jassub/src/jassub.es.js
+@@ -1,25 +1,50 @@
+ /* eslint-disable */
+-typeof HTMLVideoElement < "u" && !("requestVideoFrameCallback" in HTMLVideoElement.prototype) && "getVideoPlaybackQuality" in HTMLVideoElement.prototype && (HTMLVideoElement.prototype._rvfcpolyfillmap = {}, HTMLVideoElement.prototype.requestVideoFrameCallback = function (c) {
+-  const e = performance.now(), t = this.getVideoPlaybackQuality(), s = this.mozPresentedFrames || this.mozPaintedFrames || t.totalVideoFrames - t.droppedVideoFrames, r = (n, a) => {
+-    const i = this.getVideoPlaybackQuality(), h = this.mozPresentedFrames || this.mozPaintedFrames || i.totalVideoFrames - i.droppedVideoFrames;
+-    if (h > s) {
+-      const d = this.mozFrameDelay || i.totalFrameDelay - t.totalFrameDelay || 0, l = a - n;
+-      c(a, {
+-        presentationTime: a + d * 1e3,
+-        expectedDisplayTime: a + l,
+-        width: this.videoWidth,
+-        height: this.videoHeight,
+-        mediaTime: Math.max(0, this.currentTime || 0) + l / 1e3,
+-        presentedFrames: h,
+-        processingDuration: d
+-      }), delete this._rvfcpolyfillmap[e];
+-    } else
+-      this._rvfcpolyfillmap[e] = requestAnimationFrame((d) => r(a, d));
++if (typeof HTMLVideoElement < "u" && !("requestVideoFrameCallback" in HTMLVideoElement.prototype) && "getVideoPlaybackQuality" in HTMLVideoElement.prototype) {
++  HTMLVideoElement.prototype.requestVideoFrameCallback = function (callback) {
++    if (!Object.prototype.hasOwnProperty.call(this, "_rvfcpolyfillmap"))
++      this._rvfcpolyfillmap = {};
++    const id = this._rvfcpolyfillid = (this._rvfcpolyfillid || 0) + 1;
++    const started = performance.now(), initial = this.getVideoPlaybackQuality(), initialTime = this.currentTime;
++    const initialFrames = this.mozPresentedFrames || this.mozPaintedFrames || initial.totalVideoFrames - initial.droppedVideoFrames;
++    const poll = (previous, now) => {
++      if (!(id in this._rvfcpolyfillmap)) return;
++      const quality = this.getVideoPlaybackQuality();
++      const frames = this.mozPresentedFrames || this.mozPaintedFrames || quality.totalVideoFrames - quality.droppedVideoFrames;
++      const advanced = frames > initialFrames;
++      // Some WebKit backends expose quality counters but keep both at zero.
++      // Approximate media-time delivery only there, capped at 30 Hz; never invent frame counts.
++      const mediaFallback = initialFrames === 0 && frames === 0
++        && initial.totalVideoFrames === 0 && initial.droppedVideoFrames === 0
++        && quality.totalVideoFrames === 0 && quality.droppedVideoFrames === 0
++        && Number.isFinite(this.currentTime) && this.currentTime !== initialTime
++        && this.readyState >= 2 && !this.seeking && now - started >= 1000 / 30;
++      if (advanced || mediaFallback) {
++        const delay = this.mozFrameDelay || quality.totalFrameDelay - initial.totalFrameDelay || 0;
++        const elapsed = now - previous;
++        delete this._rvfcpolyfillmap[id];
++        callback(now, {
++          presentationTime: now + delay * 1e3,
++          expectedDisplayTime: now + elapsed,
++          width: this.videoWidth,
++          height: this.videoHeight,
++          mediaTime: mediaFallback && !advanced ? Math.max(0, this.currentTime) : Math.max(0, this.currentTime || 0) + elapsed / 1e3,
++          presentedFrames: frames,
++          processingDuration: delay
++        });
++      } else {
++        this._rvfcpolyfillmap[id] = requestAnimationFrame((time) => poll(now, time));
++      }
++    };
++    this._rvfcpolyfillmap[id] = requestAnimationFrame((time) => poll(started, time));
++    return id;
+   };
+-  return this._rvfcpolyfillmap[e] = requestAnimationFrame((n) => r(e, n)), e;
+-}, HTMLVideoElement.prototype.cancelVideoFrameCallback = function (c) {
+-  cancelAnimationFrame(this._rvfcpolyfillmap[c]), delete this._rvfcpolyfillmap[c];
+-});
++  HTMLVideoElement.prototype.cancelVideoFrameCallback = function (id) {
++    const callbacks = this._rvfcpolyfillmap;
++    if (!callbacks || !(id in callbacks)) return;
++    cancelAnimationFrame(callbacks[id]);
++    delete callbacks[id];
++  };
++}
+ const _ = {
+   bt709: "BT709",
+   // these might not be exactly correct? oops?
+@@ -74,7 +99,11 @@ class o extends EventTarget {
+    * @param {Number} [options.libassGlyphLimit] libass glyph cache memory limit in MiB (approximate).
+    */
+   constructor(e) {
+-    if (super(), !globalThis.Worker)
++    super();
++    this._requests = new Set();
++    let t;
++    try {
++    if (!globalThis.Worker)
+       throw this.destroy("Worker not supported");
+     if (!e)
+       throw this.destroy("No options provided");
+@@ -82,14 +111,15 @@ class o extends EventTarget {
+       new Promise((s) => {
+         this._init = s;
+       });
+-    const t = o._test();
++    t = o._test();
+     if (this._onDemandRender = "requestVideoFrameCallback" in HTMLVideoElement.prototype && (e.onDemandRender ?? !0), this._offscreenRender = "transferControlToOffscreen" in HTMLCanvasElement.prototype && !e.canvas && (e.offscreenRender ?? !0), this.timeOffset = e.timeOffset || 0, this._video = e.video, this._videoHeight = 0, this._videoWidth = 0, this._videoColorSpace = null, this._canvas = e.canvas, this._video && !this._canvas)
+       this._canvasParent = document.createElement("div"), this._canvasParent.className = "JASSUB", this._canvasParent.style.position = "relative", this._canvas = this._createCanvas(), this._video.insertAdjacentElement("afterend", this._canvasParent);
+     else if (!this._canvas)
+       throw this.destroy("Don't know where to render: you should give video or canvas in options.");
+     if (this._bufferCanvas = document.createElement("canvas"), this._bufferCtx = this._bufferCanvas.getContext("2d"), !this._bufferCtx)
+       throw this.destroy("Canvas rendering not supported");
+-    this._canvasctrl = this._offscreenRender ? this._canvas.transferControlToOffscreen() : this._canvas, this._ctx = !this._offscreenRender && this._canvasctrl.getContext("2d"), this._lastRenderTime = 0, this.debug = !!e.debug, this.prescaleFactor = e.prescaleFactor || 1, this.prescaleHeightLimit = e.prescaleHeightLimit || 1080, this.maxRenderHeight = e.maxRenderHeight || 0, this._boundResize = this.resize.bind(this), this._boundTimeUpdate = this._timeupdate.bind(this), this._boundSetRate = this.setRate.bind(this), this._boundUpdateColorSpace = this._updateColorSpace.bind(this), this._video && this.setVideo(e.video), this._onDemandRender && (this.busy = !1, this._lastDemandTime = null), this._worker = new Worker(e.workerUrl || "jassub-worker.js"), this._worker.onmessage = (s) => this._onmessage(s), this._worker.onerror = (s) => this._error(s), t.then(() => {
++    this._canvasctrl = this._offscreenRender ? this._canvas.transferControlToOffscreen() : this._canvas, this._ctx = !this._offscreenRender && this._canvasctrl.getContext("2d"), this._lastRenderTime = 0, this.debug = !!e.debug, this.prescaleFactor = e.prescaleFactor || 1, this.prescaleHeightLimit = e.prescaleHeightLimit || 1080, this.maxRenderHeight = e.maxRenderHeight || 0, this._boundResize = this.resize.bind(this), this._boundTimeUpdate = this._timeupdate.bind(this), this._boundSetRate = () => { if (!this._destroyed) this.setRate(this._video.playbackRate); }, this._boundUpdateColorSpace = this._updateColorSpace.bind(this), this._video && this.setVideo(e.video), this._onDemandRender && (this.busy = !1, this._lastDemandTime = null), this._worker = new Worker(e.workerUrl || "jassub-worker.js"), this._worker.onmessage = (s) => this._onmessage(s), this._worker.onerror = (s) => this._error(s), t.then(() => {
++      if (this._destroyed) return;
+       this._worker.postMessage({
+         target: "init",
+         wasmUrl: o._supportsSIMD && e.modernWasmUrl ? e.modernWasmUrl : e.wasmUrl ?? "jassub-worker.wasm",
+@@ -114,7 +144,14 @@ class o extends EventTarget {
+         useLocalFonts: typeof queryLocalFonts < "u" && (e.useLocalFonts ?? !0),
+         hasBitmapBug: o._hasBitmapBug
+       }), this._offscreenRender === !0 && this.sendMessage("offscreenCanvas", null, [this._canvasctrl]);
++    }).catch((error) => {
++      if (!this._destroyed) this.destroy(error);
+     });
++    } catch (error) {
++      t?.catch(() => {});
++      try { this.destroy(); } catch {}
++      throw error;
++    }
+   }
+   _createCanvas() {
+     return this._canvas = document.createElement("canvas"), this._canvas.style.display = "block", this._canvas.style.position = "absolute", this._canvas.style.pointerEvents = "none", this._canvasParent.appendChild(this._canvas), this._canvas;
+@@ -182,6 +219,7 @@ class o extends EventTarget {
+    * @param  {Boolean} [force=false]
+    */
+   resize(e = 0, t = 0, s = 0, r = 0, n = this._video?.paused) {
++    if (this._destroyed) return;
+     if ((!e || !t) && this._video) {
+       const a = this._getVideoPosition();
+       let i = null;
+@@ -192,7 +230,7 @@ class o extends EventTarget {
+         i = this._computeCanvasSize(a.width || 0, a.height || 0);
+       e = i.width, t = i.height, this._canvasParent && (s = a.y - (this._canvasParent.getBoundingClientRect().top - this._video.getBoundingClientRect().top), r = a.x), this._canvas.style.width = a.width + "px", this._canvas.style.height = a.height + "px";
+     }
+-    this._canvas.style.top = s + "px", this._canvas.style.left = r + "px", n && this.busy === !1 ? this.busy = !0 : n = !1, this.sendMessage("canvas", { width: e, height: t, videoWidth: this._videoWidth || this._video.videoWidth, videoHeight: this._videoHeight || this._video.videoHeight, force: n });
++    this._canvas.style.top = s + "px", this._canvas.style.left = r + "px", n && this.busy === !1 ? this.busy = !0 : n = !1, this.sendMessage("canvas", { width: e, height: t, videoWidth: this._videoWidth || this._video?.videoWidth || e, videoHeight: this._videoHeight || this._video?.videoHeight || t, force: n });
+   }
+   _getVideoPosition(e = this._video.videoWidth, t = this._video.videoHeight) {
+     const s = e / t, { offsetWidth: r, offsetHeight: n } = this._video, a = r / n;
+@@ -212,6 +250,7 @@ class o extends EventTarget {
+     return { width: e, height: t };
+   }
+   _timeupdate({ type: e }) {
++    if (this._destroyed) return;
+     const s = {
+       seeking: !0,
+       waiting: !0,
+@@ -224,7 +263,34 @@ class o extends EventTarget {
+    * @param  {HTMLVideoElement} video
+    */
+   setVideo(e) {
+-    e instanceof HTMLVideoElement ? (this._removeListeners(), this._video = e, this._onDemandRender ? this._video.requestVideoFrameCallback(this._handleRVFC.bind(this)) : (this._playstate = e.paused, e.addEventListener("timeupdate", this._boundTimeUpdate, !1), e.addEventListener("progress", this._boundTimeUpdate, !1), e.addEventListener("waiting", this._boundTimeUpdate, !1), e.addEventListener("seeking", this._boundTimeUpdate, !1), e.addEventListener("playing", this._boundTimeUpdate, !1), e.addEventListener("ratechange", this._boundSetRate, !1), e.addEventListener("resize", this._boundResize, !1)), "VideoFrame" in window && (e.addEventListener("loadedmetadata", this._boundUpdateColorSpace, !1), e.readyState > 2 && this._updateColorSpace()), e.videoWidth > 0 && this.resize(), typeof ResizeObserver < "u" && (this._ro || (this._ro = new ResizeObserver(() => this.resize())), this._ro.observe(e))) : this._error("Video element invalid!");
++    if (this._destroyed) return;
++    if (!(e instanceof HTMLVideoElement)) {
++      this._error("Video element invalid!");
++      return;
++    }
++    this._removeListeners();
++    this._video = e;
++    this._videoWidth = this._videoHeight = 0;
++    this._videoColorSpace = null;
++    if (this._canvasParent && this._canvasParent.parentNode !== e.parentNode)
++      e.insertAdjacentElement("afterend", this._canvasParent);
++    if (this._onDemandRender) this._requestFrame();
++    else {
++      this._playstate = e.paused;
++      for (const name of ["timeupdate", "progress", "waiting", "seeking", "playing"])
++        e.addEventListener(name, this._boundTimeUpdate, false);
++      e.addEventListener("ratechange", this._boundSetRate, false);
++      e.addEventListener("resize", this._boundResize, false);
++    }
++    if ("VideoFrame" in window) {
++      e.addEventListener("loadedmetadata", this._boundUpdateColorSpace, false);
++      if (e.readyState > 2) this._updateColorSpace();
++    }
++    if (e.videoWidth > 0) this.resize();
++    if (typeof ResizeObserver < "u") {
++      this._ro || (this._ro = new ResizeObserver(() => this.resize()));
++      this._ro.observe(e);
++    }
+   }
+   runBenchmark() {
+     this.sendMessage("runBenchmark");
+@@ -316,7 +382,7 @@ class o extends EventTarget {
+   getEvents(e) {
+     this._fetchFromWorker({
+       target: "getEvents"
+-    }, (t, { events: s }) => {
++    }, (t, { events: s } = {}) => {
+       e(t, s);
+     });
+   }
+@@ -391,7 +457,7 @@ class o extends EventTarget {
+   getStyles(e) {
+     this._fetchFromWorker({
+       target: "getStyles"
+-    }, (t, { styles: s }) => {
++    }, (t, { styles: s } = {}) => {
+       e(t, s);
+     });
+   }
+@@ -433,12 +499,22 @@ class o extends EventTarget {
+     }
+   }
+   _unbusy() {
++    if (this._destroyed) return;
+     this._lastDemandTime ? this._demandRender(this._lastDemandTime) : this.busy = !1;
+   }
+   _handleRVFC(e, { mediaTime: t, width: s, height: r }) {
+     if (this._destroyed)
+       return null;
+-    this.busy ? this._lastDemandTime = { mediaTime: t, width: s, height: r } : (this.busy = !0, this._demandRender({ mediaTime: t, width: s, height: r })), this._video.requestVideoFrameCallback(this._handleRVFC.bind(this));
++    this.busy ? this._lastDemandTime = { mediaTime: t, width: s, height: r } : (this.busy = !0, this._demandRender({ mediaTime: t, width: s, height: r })), this._requestFrame();
++  }
++  _requestFrame() {
++    if (this._destroyed || !this._video || this._frameCallback != null) return;
++    const video = this._video, generation = this._videoGeneration;
++    this._frameCallback = video.requestVideoFrameCallback((time, metadata) => {
++      if (this._destroyed || generation !== this._videoGeneration || video !== this._video) return;
++      this._frameCallback = null;
++      this._handleRVFC(time, metadata);
++    });
+   }
+   _demandRender({ mediaTime: e, width: t, height: s }) {
+     this._lastDemandTime = null, (t !== this._videoWidth || s !== this._videoHeight) && (this._videoWidth = t, this._videoHeight = s, this.resize()), this.sendMessage("demand", { time: e + this.timeOffset });
+@@ -456,12 +532,20 @@ class o extends EventTarget {
+     this._canvas.remove(), this._createCanvas(), this._canvasctrl = this._canvas.transferControlToOffscreen(), this._ctx = !1, this.sendMessage("offscreenCanvas", null, [this._canvasctrl]), this.resize(0, 0, 0, 0, !0);
+   }
+   _updateColorSpace() {
+-    this._video.requestVideoFrameCallback(() => {
++    if (this._destroyed || this._colorCallback != null) return;
++    const video = this._video, generation = this._videoGeneration;
++    this._colorCallback = video.requestVideoFrameCallback(() => {
++      if (this._destroyed || generation !== this._videoGeneration || video !== this._video) return;
++      this._colorCallback = null;
++      let frame;
+       try {
+-        const e = new VideoFrame(this._video);
+-        this._videoColorSpace = _[e.colorSpace.matrix], e.close(), this.sendMessage("getColorSpace");
++        frame = new VideoFrame(video);
++        this._videoColorSpace = _[frame.colorSpace.matrix];
++        this.sendMessage("getColorSpace");
+       } catch (e) {
+         console.warn(e);
++      } finally {
++        frame?.close();
+       }
+     });
+   }
+@@ -495,6 +579,7 @@ class o extends EventTarget {
+     return e;
+   }
+   _ready() {
++    if (this._destroyed) return;
+     this._init(), this.dispatchEvent(new CustomEvent("ready"));
+   }
+   /**
+@@ -504,7 +589,10 @@ class o extends EventTarget {
+    * @param  {Transferable[]} [transferable] Array of transferables.
+    */
+   async sendMessage(e, t = {}, s) {
+-    await this._loaded, s ? this._worker.postMessage({
++    if (this._destroyed) return;
++    await this._loaded;
++    if (this._destroyed) return;
++    s ? this._worker.postMessage({
+       target: e,
+       transferable: s,
+       ...t
+@@ -514,23 +602,51 @@ class o extends EventTarget {
+     });
+   }
+   _fetchFromWorker(e, t) {
++    if (this._destroyed) {
++      t(new Error("JASSUB instance destroyed"));
++      return;
++    }
++    const worker = this._worker;
++    let timer, settled = false;
++    const cleanup = () => {
++      worker.removeEventListener("message", onMessage);
++      worker.removeEventListener("error", onError);
++      clearTimeout(timer);
++      this._requests.delete(cancel);
++    };
++    const finish = (error, data) => {
++      if (settled) return;
++      settled = true;
++      cleanup();
++      t(error, data);
++    };
++    const onMessage = ({ data }) => { if (data.target === e.target) finish(null, data); };
++    const onError = (error) => finish(error);
++    const cancel = () => {
++      if (settled) return;
++      settled = true;
++      cleanup();
++      return () => t(new Error("JASSUB instance destroyed"));
++    };
+     try {
+-      const s = e.target, r = setTimeout(() => {
+-        a(new Error("Error: Timeout while try to fetch " + s));
+-      }, 5e3), n = ({ data: i }) => {
+-        i.target === s && (t(null, i), this._worker.removeEventListener("message", n), this._worker.removeEventListener("error", a), clearTimeout(r));
+-      }, a = (i) => {
+-        t(i), this._worker.removeEventListener("message", n), this._worker.removeEventListener("error", a), clearTimeout(r);
+-      };
+-      this._worker.addEventListener("message", n), this._worker.addEventListener("error", a), this._worker.postMessage(e);
++      this._requests.add(cancel);
++      worker.addEventListener("message", onMessage);
++      worker.addEventListener("error", onError);
++      timer = setTimeout(() => onError(new Error("Error: Timeout while try to fetch " + e.target)), 5e3);
++      worker.postMessage(e);
+     } catch (s) {
+-      this._error(s);
++      if (settled) throw s;
++      finish(s);
+     }
+   }
+   _console({ content: e, command: t }) {
+     console[t].apply(console, JSON.parse(e));
+   }
+   _onmessage({ data: e }) {
++    if (this._destroyed) {
++      for (const image of e.images || []) image.image?.close?.();
++      return;
++    }
+     this["_" + e.target] && this["_" + e.target](e);
+   }
+   _error(e) {
+@@ -538,6 +654,12 @@ class o extends EventTarget {
+     return this.dispatchEvent(s), console.error(t), t;
+   }
+   _removeListeners() {
++    this._videoGeneration = (this._videoGeneration || 0) + 1;
++    for (const id of [this._frameCallback, this._colorCallback])
++      if (id != null) this._video?.cancelVideoFrameCallback?.(id);
++    this._frameCallback = this._colorCallback = null;
++    this._lastDemandTime = null;
++    if (this._onDemandRender) this.busy = false;
+     this._video && (this._ro && this._ro.unobserve(this._video), this._ctx && (this._ctx.filter = "none"), this._video.removeEventListener("timeupdate", this._boundTimeUpdate), this._video.removeEventListener("progress", this._boundTimeUpdate), this._video.removeEventListener("waiting", this._boundTimeUpdate), this._video.removeEventListener("seeking", this._boundTimeUpdate), this._video.removeEventListener("playing", this._boundTimeUpdate), this._video.removeEventListener("ratechange", this._boundSetRate), this._video.removeEventListener("resize", this._boundResize), this._video.removeEventListener("loadedmetadata", this._boundUpdateColorSpace));
+   }
+   /**
+@@ -545,7 +667,29 @@ class o extends EventTarget {
+    * @param  {String|Error} [err] Error to throw when destroying.
+    */
+   destroy(e) {
+-    return e && (e = this._error(e)), this._video && this._canvasParent && this._video.parentNode?.removeChild(this._canvasParent), this._destroyed = !0, this._removeListeners(), this.sendMessage("destroy"), this._worker?.terminate(), e;
++    if (this._destroyed) return e && this._error(e);
++    this._destroyed = true;
++    let failure, failed = false;
++    const attempt = (callback) => {
++      try { callback(); } catch (error) { if (!failed) { failure = error; failed = true; } }
++    };
++    if (e) attempt(() => { e = this._error(e); });
++    attempt(() => this._removeListeners());
++    attempt(() => this._ro?.disconnect());
++    attempt(() => this._canvasParent?.remove());
++    this._init?.();
++    const callbacks = [];
++    for (const cancel of [...this._requests || []]) attempt(() => {
++      const notify = cancel();
++      if (notify) callbacks.push(notify);
++    });
++    for (const notify of callbacks) attempt(notify);
++    if (this._worker) {
++      this._worker.onmessage = this._worker.onerror = null;
++      attempt(() => this._worker.terminate());
++    }
++    if (failed) throw failure;
++    return e;
+   }
+ }
+ export {

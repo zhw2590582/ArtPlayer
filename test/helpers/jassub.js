@@ -39,6 +39,7 @@ export function jassubEnvironment(implementation, { script = false, simd = false
     }
 
     appendChild(child) {
+      child.parentNode?.removeChild(child)
       this.children.push(child)
       child.parentNode = this
       return child

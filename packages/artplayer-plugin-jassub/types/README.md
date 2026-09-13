@@ -41,15 +41,18 @@ Switching to `/runtime` intentionally changes type inference. For example,
 `instance.resize(640, 360, 0, 0, true)` describes the actual call order.
 `await instance.destroy()` remains legal JavaScript, but `.then()` on that result
 never worked at runtime. Resource teardown completion is not represented by a Promise.
-The callback error channel is `Error | ErrorEvent | null`; an error may omit the data.
-The currently frozen vendor has a request timeout/error bug that throws before user
-callbacks run. PKG-JASSUB-07 tracks the fix; typing that channel does not fix or guarantee
-callback delivery. Query outputs do not contain the upstream npm declaration's `_index`.
+The callback error channel is `Error | Event | null`; ErrorEvent is included, and real
+CSP Worker failures can deliver a plain Event. Requests clean their listeners/timer
+before calling the consumer once. Destroy settles pending callbacks with an Error and
+undefined data after all request resources are removed, even if another callback throws.
+Query outputs do not contain the upstream npm declaration's `_index`. Issue queries after
+ready; the Worker protocol still identifies responses by target, not a new request ID.
 
 The accurate instance extends EventTarget and preserves its normal listener APIs.
 `destroy(error)` returns the original Error, or converts a nonempty string to Error;
-an empty string is returned unchanged. Repeated direct destruction and construction/
-video clock failures remain separate vendor lifecycle work, documented in ARCHITECTURE.md.
+an empty string is returned unchanged. Direct destruction is idempotent, and queued
+sendMessage operations settle without posting after destruction. Lifecycle and the
+limited media-time fallback for zero frame counters are documented in ARCHITECTURE.md.
 
 NodeNext ESM retains the root declaration's historical CommonJS namespace behavior.
 If existing code uses the root namespace's `.default` to satisfy that declaration,
@@ -59,8 +62,8 @@ Do not invent `jassub.default`: the current JavaScript factory has no self alias
 Older TypeScript resolves `/legacy` and `/runtime` through exact typesVersions mappings.
 Existing direct declaration paths are retained; no wildcard remaps unrelated paths.
 
-Maintain `runtime-api.d.ts` against the frozen wrapper and worker behavior, not a new
-upstream version. Keep CJS/ESM entry aliases synchronized. Run `yarn test:jassub-types`,
+Maintain `runtime-api.d.ts` against the recorded base plus local wrapper patches and
+actual worker behavior, not a new upstream version. Keep CJS/ESM entry aliases synchronized. Run `yarn test:jassub-types`,
 `yarn test:jassub-types-package`, `yarn test:jassub`, and `yarn typecheck` after changes.
 The package runner installs actual historical archives and the candidate outside the
 workspace, checks strict positive/negative consumers, and verifies artifact identity.

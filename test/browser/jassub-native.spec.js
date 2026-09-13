@@ -41,9 +41,25 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
         resources.push({ url: response.url(), status: response.status(), contentType: response.headers()['content-type'] })
     })
     await page.goto(`/test/player.html?core=${core}`)
+    await page.evaluate(() => {
+      window.jassubFramePlatform = { before: typeof HTMLVideoElement.prototype.requestVideoFrameCallback, registered: 0, delivered: 0 }
+    })
     await page.addScriptTag({ content: code })
     await page.evaluate(() => {
-      window.jassubNative = { workers: [], snapshots: [], errors: [] }
+      const frames = window.jassubFramePlatform
+      frames.after = typeof HTMLVideoElement.prototype.requestVideoFrameCallback
+      if (frames.after === 'function') {
+        const request = HTMLVideoElement.prototype.requestVideoFrameCallback
+        HTMLVideoElement.prototype.requestVideoFrameCallback = function (callback) {
+          frames.registered++
+          return request.call(this, function (...args) {
+            frames.delivered++
+            frames.lastMetadata = args[1]
+            return callback.apply(this, args)
+          })
+        }
+      }
+      window.jassubNative = { workers: [], snapshots: [], errors: [], frames }
       const NativeWorker = window.Worker
       window.Worker = class extends NativeWorker {
         constructor(...args) {
@@ -110,7 +126,9 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
               signature = (signature + i * pixels[i]) >>> 0
             }
           }
-          const state = { phase, visible, signature, width: canvas.width, height: canvas.height, cssWidth: rect.width, cssHeight: rect.height, time: window.art.currentTime, connected: canvas.isConnected }
+          const video = window.art.video
+          const quality = video.getVideoPlaybackQuality?.()
+          const state = { phase, visible, signature, width: canvas.width, height: canvas.height, cssWidth: rect.width, cssHeight: rect.height, time: window.art.currentTime, connected: canvas.isConnected, media: { paused: video.paused, readyState: video.readyState, totalFrames: quality?.totalVideoFrames, droppedFrames: quality?.droppedVideoFrames, decodedFrames: video.webkitDecodedFrameCount, mozPresentedFrames: video.mozPresentedFrames }, onDemand: window.jassub._onDemandRender }
           window.jassubNative.lastPixel = state
           if (phase)
             window.jassubNative.snapshots.push(state)

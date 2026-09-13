@@ -41,7 +41,7 @@ instance.addFont(new Uint8Array([0]))
 instance.setDefaultFont('fallback')
 instance.runBenchmark()
 instance.getEvents((failure, events) => {
-  const caught: Error | ErrorEvent | null = failure
+  const caught: Error | Event | null = failure
   const values: AssEvent[] | undefined = events
   if (events) {
     for (const event of events) {

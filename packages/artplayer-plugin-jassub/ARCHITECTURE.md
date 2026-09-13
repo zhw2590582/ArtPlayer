@@ -12,14 +12,33 @@ Caller-supplied canvas nodes remain caller-owned. The adapter does not invent a 
 or delete those nodes; vendor-created containers still get z-index 20. Host cleanup
 dynamically calls the exposed instance's current destroy method, ignores already
 destroyed instances and blocks synchronous reentry. A thrown disposal error is preserved
-and the guard resets for a later attempt. Direct repeated vendor destroy is still a
-separate PKG-JASSUB-07 problem; the adapter does not replace public instance methods.
+and the guard resets for a later attempt. The local vendor patch also makes direct
+destroy idempotent; the adapter does not replace public instance methods.
 
 If styling or host subscription throws after construction, registration independently
 attempts off with the exact callback and instance cleanup, then rethrows the original
 error. Secondary rollback errors do not replace it. An invalid/custom host whose off
 throws may retain an inert callback; failed vendor cleanup is not magically repaired.
-Failures inside the vendor constructor before it returns an instance remain 07 work.
+The vendor constructor rolls back its partially created DOM/listeners/Worker and
+rethrows the original construction error. Asynchronous Worker errors keep their
+existing event channel; callers can explicitly destroy after a loading failure.
+
+The local vendor lifecycle patch gives each video generation ownership of its main
+and color-space frame callbacks. setVideo cancels the previous callbacks, unobserves
+the old element, clears old demand/dimensions and moves its own container to a new
+parent when needed. Already queued callbacks check generation before reading frames
+or scheduling another callback. Color probes close VideoFrame even if reading fails.
+Destroy invalidates the generation, disconnects the observer, removes the actual owned
+container and terminates the Worker once. Caller-owned canvas/video elements remain.
+Capability/init messages and pending sendMessage calls cannot post after destruction.
+
+Each query owns a timer and two Worker listeners. Success, timeout and Worker error
+settle once after cleanup; callbacks receive the original error (including a plain
+native Event for CSP failures). Destroy cleans every request before notifying any
+callback with an Error and undefined data. A throwing callback does not prevent other
+request cleanup or Worker termination; the first exception is rethrown afterward.
+Queries should be issued after ready; this patch does not invent a Worker request-ID
+protocol or change the historical matching of simultaneous same-target responses.
 
 `src/jassub.es.js` owns rendering, media listeners, canvas state, capability checks and worker
 messages. Keep this third-party file separate from the adapter's TypeScript migration.
@@ -41,15 +60,19 @@ There is no second implementation and no new factory.default property. Root/lega
 types remain unchanged; exact typesVersions mappings support old Node module resolution.
 See [type migration notes](types/README.md) before changing either surface.
 
-`src/jassub.es.d.ts` is a private bridge for the frozen vendor JS, not a public export.
+`src/jassub.es.d.ts` is a private bridge for the locally patched vendor JS, not a public export.
 It adds only the adapter's `_destroyed` read and `_canvasParent.style.zIndex` write to the
 accurate instance. The minimal style contract permits the historical numeric 20, which
 the native DOM setter converts to a string. The owned TS modules depend on RuntimeOption
 and RuntimeResult, while JassubHost needs only video/on/off. The implementation fixture
 checks actual Artplayer assignability. No broad any index, allowJs or ts-nocheck hides
-owned code; the isolated third-party JS remains an explicit provenance/07 exception.
+owned code; the isolated third-party JS remains an explicit provenance exception.
 
-The wrapper matches upstream jassub 1.8.8 apart from formatting and the ESLint header;
+The original wrapper matched upstream jassub 1.8.8 apart from formatting and the ESLint header;
+PKG-JASSUB-07 records its local lifecycle/clock patch separately in
+`../../refactor/baselines/jassub-vendor-patch.json` and the accompanying patch file.
+Keep original and patched fingerprints distinct; do not call the changed wrapper an
+unmodified upstream file. The
 worker JS and default font match that archive byte-for-byte. Local WASM instead matches
 the exact Pages nightly blobs associated with source 6b19a04ddfbad8f9bfd3237395788dd76218841b.
 Its build workflow and seven submodule revisions are pinned in the separate
@@ -78,17 +101,28 @@ Provenance tests are offline by default; explicit --network refreshes pinned sou
 asset comparisons and fails on any request error, without substituting cached evidence.
 Set ARTPLAYER_JASSUB_CANDIDATE=1 for current source behavior; ARTPLAYER_JASSUB_ARTIFACT can point
 at a main/legacy artifact. Tests use controlled DOM, Worker and SIMD detection, with actual
-vendor JavaScript. They do not render ASS or execute worker WASM. Real browser, failures,
-repeated destroy and resource cleanup remain later steps. Frozen failure tests now
+vendor JavaScript. The runtime query test also executes complete Worker JS and real WASM
+through controlled transport; it is not a browser Worker. Frozen failure tests
 cover repeated teardown, cross-parent setVideo, custom canvas, Worker construction
 failure, stale video frames and incorrect fallback ratechange payloads. They assert
-the old failures, not candidate fixes. PKG-JASSUB-03 owns adapter cleanup; 07 owns
-separately tracked vendor lifecycle/clock changes and 05 verifies native behavior.
+the old failures, not candidate fixes. Candidate lifecycle and polyfill tests separately
+verify the local patch. PKG-JASSUB-05 retains complete combination/device acceptance.
 
 `yarn test:browser test/browser/jassub-native.spec.js --workers=1` loads the actual
 published wrapper, Worker, WASM and default font with offscreenRender=false.
-Chromium/Firefox render and seek correctly; Windows WebKit's default frame-clock
-path remains a recorded failure. The onDemandRender=false diagnostic does not
-waive the default behavior gate. Native failure recovery, default offscreen mode,
-full devices and sustained resource release remain unverified. See
+Without ARTPLAYER_JASSUB_ARTIFACT this remains a historical test: the published wrapper
+still fails Windows WebKit when its quality counters stay zero. Set that variable to
+the normal candidate build to test the fix. Native RVFC and increasing quality counters
+retain their existing behavior. Only the polyfill's observed all-zero counters can use
+finite changed media time with readyState >= 2 and no active seek; this approximate path
+limits each continuous callback chain to 30 Hz and still reports zero presented frames.
+Paused seek completion is supported; a static paused video does not keep firing.
+Per-video maps and monotonic handles prevent equal-clock callback collisions.
+
+The candidate's default onDemandRender path is tested through playback/seek/layout in
+Chromium/Firefox/WebKit. jassub-lifecycle.spec.js additionally checks actual replacement
+video pixels, numerical fallback playbackRate, repeated teardown, invalid-URL constructor
+rollback and a genuine asynchronous CSP Worker error reaching a pending query. These
+are distinct from default offscreen mode, full devices and sustained memory/GPU release,
+which remain unverified. See
 `../../refactor/baselines/jassub-contract.md` for precise contract and provenance evidence.

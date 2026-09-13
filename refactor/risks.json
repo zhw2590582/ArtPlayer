@@ -5430,7 +5430,7 @@
       "id": "JASSUB-DESTROY-01",
       "title": "Repeated destruction or cross-parent setVideo can throw before JASSUB cleanup",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-02",
         "PKG-JASSUB-03",
@@ -5444,7 +5444,15 @@
         "test/jassub-registration.test.js"
       ],
       "compatibleResolution": "Use actual resource ownership and tolerate direct instance teardown before host teardown. Task03 fixes host cleanup after direct teardown, reentry and retry/rollback. Direct vendor repetition and cross-parent cleanup remain task07 and this risk stays open.",
-      "closureCriteria": "Candidate direct/repeated/host teardown and cross-parent video replacement release container, Worker and listeners without throwing or removing user nodes."
+      "closureCriteria": "Candidate direct/repeated/host teardown and cross-parent video replacement release container, Worker and listeners without throwing or removing user nodes.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "refactor/baselines/jassub-vendor-validation.json",
+        "test/jassub-vendor-lifecycle.test.js",
+        "test/jassub-frame-polyfill.test.js",
+        "test/browser/jassub-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Controlled old-red/candidate-green repeated direct/host teardown and native cross-parent replacement release the actual container, video listeners and Worker once, preserving user nodes."
     },
     {
       "id": "JASSUB-CANVAS-01",
@@ -5475,7 +5483,7 @@
       "id": "JASSUB-CONSTRUCTION-01",
       "title": "Worker construction failure leaves previously allocated JASSUB DOM and listeners",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-02",
         "PKG-JASSUB-07"
@@ -5485,13 +5493,21 @@
         "refactor/baselines/jassub-failures-validation.json"
       ],
       "compatibleResolution": "Roll back each construction phase and rethrow the original error without assuming new returned an instance.",
-      "closureCriteria": "Controlled and native construction failure do not retain owned DOM/listeners/callbacks; original error identity and successful construction remain intact."
+      "closureCriteria": "Controlled and native construction failure do not retain owned DOM/listeners/callbacks; original error identity and successful construction remain intact.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "refactor/baselines/jassub-vendor-validation.json",
+        "test/jassub-vendor-lifecycle.test.js",
+        "test/jassub-frame-polyfill.test.js",
+        "test/browser/jassub-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Original controlled SecurityError identity survives rollback; actual invalid Worker URL produces native SyntaxError and leaves no owned DOM/subscriptions. Late initialization and application messages are cancelled after destruction."
     },
     {
       "id": "JASSUB-VIDEO-FRAME-01",
       "title": "Old video frame callbacks can drive replacement subtitle time and duplicate chains",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-02",
         "PKG-JASSUB-07"
@@ -5501,13 +5517,21 @@
         "refactor/baselines/jassub-failures-validation.json"
       ],
       "compatibleResolution": "Track video generation and callback ownership across setVideo and destroy.",
-      "closureCriteria": "Actually queued old callbacks cannot deliver stale mediaTime or rearm; replacement video owns one loop, with native evidence."
+      "closureCriteria": "Actually queued old callbacks cannot deliver stale mediaTime or rearm; replacement video owns one loop, with native evidence.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "refactor/baselines/jassub-vendor-validation.json",
+        "test/jassub-vendor-lifecycle.test.js",
+        "test/jassub-frame-polyfill.test.js",
+        "test/browser/jassub-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Tests execute callbacks actually removed from a pending queue after setVideo/destroy and reject stale time or rearming. Separate real playback after video replacement renders subtitles and tears down successfully in three browser engines and both main/legacy."
     },
     {
       "id": "JASSUB-RATE-01",
       "title": "Fallback ratechange sends an Event instead of numeric playbackRate",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-02",
         "PKG-JASSUB-07"
@@ -5517,13 +5541,21 @@
         "refactor/baselines/jassub-failures-validation.json"
       ],
       "compatibleResolution": "Adapt event subscription to read the current video rate while retaining direct setRate(number).",
-      "closureCriteria": "Real ratechange and direct calls send numeric values, preserve timing, and avoid stale listeners after source replacement."
+      "closureCriteria": "Real ratechange and direct calls send numeric values, preserve timing, and avoid stale listeners after source replacement.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "refactor/baselines/jassub-vendor-validation.json",
+        "test/jassub-vendor-lifecycle.test.js",
+        "test/jassub-frame-polyfill.test.js",
+        "test/browser/jassub-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Controlled and actual browser ratechange send the numeric current playbackRate; cross-video listener cleanup and the existing direct setRate contract remain covered."
     },
     {
       "id": "JASSUB-NATIVE-FRAME-01",
       "title": "Windows WebKit default frame-clock path does not produce subtitle demands in actual playback",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-02",
         "PKG-JASSUB-07",
@@ -5534,13 +5566,21 @@
         "refactor/baselines/jassub-failures-validation.json"
       ],
       "compatibleResolution": "Investigate native frame delivery and establish a compatible capability response; explicit event-clock success is diagnostic only.",
-      "closureCriteria": "Default native behavior is verified or an explicit reviewed environment limitation is recorded; no silent global fallback or substitution of diagnostic mode for default acceptance."
+      "closureCriteria": "Default native behavior is verified or an explicit reviewed environment limitation is recorded; no silent global fallback or substitution of diagnostic mode for default acceptance.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "refactor/baselines/jassub-vendor-validation.json",
+        "test/jassub-vendor-lifecycle.test.js",
+        "test/jassub-frame-polyfill.test.js",
+        "test/browser/jassub-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Native Windows WebKit zero-counter starvation is reproduced on the published default clock. A narrow media-time fallback only in the polyfill with all-zero quality counters restores default onDemand playback and seek; candidate default and custom-canvas pixel assertions pass. Native RVFC and normally increasing counters retain their paths. Default offscreen and physical devices remain task05."
     },
     {
       "id": "JASSUB-QUERY-01",
       "title": "Subtitle query errors throw before calling the consumer and leave request listeners attached",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-JASSUB-07",
         "PKG-JASSUB-05"
@@ -5550,7 +5590,15 @@
         "test/jassub-runtime.test.js"
       ],
       "compatibleResolution": "Handle absent worker error payloads, release per-request listeners and timers before invoking user callbacks, and preserve successful synchronous query registration and callback data.",
-      "closureCriteria": "Actual vendor timeout and Worker-error paths invoke the consumer exactly once with the original error, leave no request listeners/timers, and successful real-WASM events/styles remain unchanged. Browser error/recovery acceptance remains PKG-JASSUB-05."
+      "closureCriteria": "Actual vendor timeout and Worker-error paths invoke the consumer exactly once with the original error, leave no request listeners/timers, and successful real-WASM events/styles remain unchanged. Browser error/recovery acceptance remains PKG-JASSUB-05.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "refactor/baselines/jassub-vendor-validation.json",
+        "test/jassub-vendor-lifecycle.test.js",
+        "test/jassub-frame-polyfill.test.js",
+        "test/browser/jassub-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Actual wrapper timeout and Worker error invoke once with the original error and clean all request listeners/timers first, including throwing user callbacks. Native CSP plain Event identity is preserved; real WASM queries still succeed. Destroy cancellation settles all pending queries after cleanup; complete error recovery remains task05."
     }
   ]
 }

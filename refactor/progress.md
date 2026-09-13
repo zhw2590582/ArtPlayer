@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-JASSUB-07 vendor 生命周期与默认字幕时钟完成
+
+独立补丁保留原上游身份，修复幂等销毁、构造回滚、跨视频帧归属、数值倍率和
+查询异常清理；Windows WebKit 全零质量计数的默认逐帧停滞有旧失败及候选修复。
+联合 185 项、源码/main/legacy 各 68 项、406 生产 TS 检查通过；实际安装 15 个
+类型矩阵，核心 68/JASSUB 15 成员与候选相符。真实浏览器 51 项通过，包括默认
+onDemand 播放/seek、自定义 canvas、跨父节点换视频、原生构造与 CSP 错误。
+[变更与限制](changes/2026-09-14-PKG-JASSUB-07-vendor.md)和
+[验证记录](baselines/jassub-vendor-validation.json)保留测试时序/CSP/WebKit 的中间
+失败及修正，不冒充设备、默认 offscreen 或完整发布验收。关闭六项已证实风险，
+05/06、VENDOR-04/05 及全局三轮复盘仍保留。下一步继续分包兼容验收与未完成迁移。
+
 ## PKG-JASSUB-04 自有 TS 与准确类型入口完成
 
 两个自有模块已迁为严格 TS，编译后的 JS 和三种正常构建产物保持上一任务行为。

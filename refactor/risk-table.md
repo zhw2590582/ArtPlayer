@@ -242,10 +242,10 @@
 | DANMUKU-TIMING-01 | resolved / 已复现 | Hidden Worker wait is deducted from visible lifetime and can recycle a comment immediately after visible | PKG-DANMUKU-11 |
 | DANMUKU-SAMPLING-01 | resolved / 已复现 | Serial asynchronous placement stops native frame eligibility sampling and delays existing visible expiry | PKG-DANMUKU-12 |
 | MASK-SCHEDULING-01 | open / 已复现 | Native Mask startup can coincide with a missed narrow Danmuku timestamp window | PKG-MASK-05 |
-| JASSUB-DESTROY-01 | open / 已复现 | Repeated destruction or cross-parent setVideo can throw before JASSUB cleanup | PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-07 |
+| JASSUB-DESTROY-01 | resolved / 已复现 | Repeated destruction or cross-parent setVideo can throw before JASSUB cleanup | PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-07 |
 | JASSUB-CANVAS-01 | resolved / 已复现 | Custom canvas registration throws after JASSUB Worker allocation | PKG-JASSUB-02, PKG-JASSUB-03 |
-| JASSUB-CONSTRUCTION-01 | open / 已复现 | Worker construction failure leaves previously allocated JASSUB DOM and listeners | PKG-JASSUB-02, PKG-JASSUB-07 |
-| JASSUB-VIDEO-FRAME-01 | open / 已复现 | Old video frame callbacks can drive replacement subtitle time and duplicate chains | PKG-JASSUB-02, PKG-JASSUB-07 |
-| JASSUB-RATE-01 | open / 已复现 | Fallback ratechange sends an Event instead of numeric playbackRate | PKG-JASSUB-02, PKG-JASSUB-07 |
-| JASSUB-NATIVE-FRAME-01 | open / 已复现 | Windows WebKit default frame-clock path does not produce subtitle demands in actual playback | PKG-JASSUB-02, PKG-JASSUB-07, PKG-JASSUB-05 |
-| JASSUB-QUERY-01 | open / 已复现 | Subtitle query errors throw before calling the consumer and leave request listeners attached | PKG-JASSUB-07, PKG-JASSUB-05 |
+| JASSUB-CONSTRUCTION-01 | resolved / 已复现 | Worker construction failure leaves previously allocated JASSUB DOM and listeners | PKG-JASSUB-02, PKG-JASSUB-07 |
+| JASSUB-VIDEO-FRAME-01 | resolved / 已复现 | Old video frame callbacks can drive replacement subtitle time and duplicate chains | PKG-JASSUB-02, PKG-JASSUB-07 |
+| JASSUB-RATE-01 | resolved / 已复现 | Fallback ratechange sends an Event instead of numeric playbackRate | PKG-JASSUB-02, PKG-JASSUB-07 |
+| JASSUB-NATIVE-FRAME-01 | resolved / 已复现 | Windows WebKit default frame-clock path does not produce subtitle demands in actual playback | PKG-JASSUB-02, PKG-JASSUB-07, PKG-JASSUB-05 |
+| JASSUB-QUERY-01 | resolved / 已复现 | Subtitle query errors throw before calling the consumer and leave request listeners attached | PKG-JASSUB-07, PKG-JASSUB-05 |

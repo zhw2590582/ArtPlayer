@@ -1,0 +1,19 @@
+{
+  "task": "PKG-JASSUB-07",
+  "baselineCommit": "5e445b1af655a1cafbfa3abca62d45207c042936",
+  "file": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+  "originalSha256LF": "b973508ade00b5b9cea2f299d49f4943003372729be7350b6938e44fddb32038",
+  "patchedSha256LF": "1fdcf24d206e8711348dddcb5fe7b656007a9b1d81a992bb497c6d10bd0a2cdb",
+  "patchFile": "refactor/baselines/jassub-vendor.patch",
+  "patchSha256LF": "fe6d429418a676f5d1b9c4daf9cd6a20be27c3a1b18f2a3d691a943188f7bfce",
+  "origin": "Original wrapper matches frozen npm jassub 1.8.8 after format normalization. This is an explicit local patch, not a claim of unchanged upstream bytes.",
+  "changes": [
+    "constructor rollback and cancellation of late initialization",
+    "idempotent destruction and ownership of actual canvas parent",
+    "per-video generations and cancellation for render/color-space callbacks",
+    "numeric fallback playbackRate adapter",
+    "query settlement and cleanup before callbacks, including destroy cancellation",
+    "per-video polyfill IDs/maps and zero-quality-counter media-time fallback capped at 30 Hz per continuous chain"
+  ],
+  "unchanged": "Worker JS, WASM, fonts, resource URLs, root declarations and actual public instance identity remain unchanged. Original provenance manifests are not rewritten."
+}

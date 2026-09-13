@@ -2532,11 +2532,15 @@
         "PKG-JASSUB-03",
         "PKG-JASSUB-02"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "独立记录 vendor 适配差异；幂等销毁、跨容器 setVideo、构造回滚、逐帧归属和倍率/能力边界；查询 timeout/Worker error 的缺失数据回调及每请求监听器/定时器清理（JASSUB-QUERY-01）",
       "acceptance": "保持公开真实 instance、同步方法与资源路径；保留原 vendor 来源指纹并记录每项实际补丁；候选修复正例和真实字幕/失败/时钟验证通过，未证实设备不得冒充通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-JASSUB-07-vendor.md",
+        "baselines/jassub-vendor-validation.json",
+        "baselines/jassub-vendor-patch.json"
+      ]
     },
     {
       "id": "PKG-MASK-01",

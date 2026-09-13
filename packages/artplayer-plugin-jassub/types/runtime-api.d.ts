@@ -88,13 +88,12 @@ export interface AssStyle {
 export type AssEventInput = Partial<AssEvent>
 export type AssStyleInput = Partial<AssStyle>
 
-/** Timeout errors and native Worker error events are separate channels. */
-export type WorkerRequestError = Error | ErrorEvent
+/** Timeout errors and native Worker events (including plain CSP error Events). */
+export type WorkerRequestError = Error | Event
 /**
  * Success supplies null plus an array. Error payloads are absent.
- * The frozen vendor currently throws before notifying this callback on request
- * errors/timeouts; PKG-JASSUB-07 owns that defect. These types do not guarantee
- * callback delivery or claim that the error path has been repaired.
+ * Requests release their listeners/timer before invoking callbacks. Destruction
+ * settles pending requests with an Error; native Worker error Events retain identity.
  */
 export type EventsCallback = (error: WorkerRequestError | null, events?: AssEvent[]) => void
 export type StylesCallback = (error: WorkerRequestError | null, styles?: AssStyle[]) => void
@@ -139,7 +138,7 @@ export interface RuntimeInstance extends EventTarget {
   disableStyleOverride: () => void
   setDefaultFont: (font: string) => void
   addFont: (font: FontSource) => void
-  /** Resolves after posting the message; it is not a Worker-operation acknowledgement. */
+  /** Resolves after posting, or without posting after destruction; not a Worker acknowledgement. */
   sendMessage: (target: string, data?: Record<string, unknown> | null, transferable?: Transferable[]) => Promise<void>
   destroy: (() => void) & ((error: Error) => Error) & ((error: string) => Error | '') & ((error: Error | string | undefined) => Error | '' | undefined)
 
