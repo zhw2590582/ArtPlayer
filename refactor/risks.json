@@ -2874,7 +2874,9 @@
       "evidence": [
         "refactor/baselines/chapter-combinations-checkpoint.json",
         "test/browser/chapter-combinations.spec.js",
-        "refactor/changes/2026-09-12-PKG-CHAPTER-05-combinations.md"
+        "refactor/changes/2026-09-12-PKG-CHAPTER-05-combinations.md",
+        "refactor/changes/2026-09-14-PKG-CHAPTER-05-timing.md",
+        "refactor/baselines/chapter-timing-observations.json"
       ],
       "compatibleResolution": "记录原生事件和绝对/相对时序，进一步区分媒体驱动耗时、夹具和核心源操作；未证明原因前不改核心、不扩大超时或重复到绿灯。",
       "closureCriteria": "确认先前超时的来源并有对应可靠回归；后续单次通过不足以关闭。"

@@ -217,3 +217,11 @@ hashes identify the actual selected ASS, not the white baseline. Screenshots are
 attached at named phases; errors from individual polling attempts are retained.
 The fixture's automatic failure screenshot runs after cleanup and may show an
 empty player; use the named pre-cleanup screenshots for visual claims.
+
+Chapter quality combinations attach `chapter-restart-observations`: completed
+read calls include host wall time/elapsed time and browser monotonic time/origin.
+Public/native chapter events also carry browser timestamps. Preserve those clocks
+when diagnosing a timeout: the historical failure includes a single ~10-second
+evaluate returning an already-recorded restart, not seven seconds of fast empty
+reads. These observations do not expand the timeout or waive the open timing and
+physical-device acceptance in PKG-CHAPTER-05.

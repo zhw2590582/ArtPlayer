@@ -1,0 +1,2780 @@
+{
+  "task": "PKG-CHAPTER-05",
+  "status": "doing",
+  "baselineCommit": "814bdc11db3eac7c104343bf11d05b498e0126a8",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "productionChanges": false,
+  "oldTrace": {
+    "path": "refactor/.cache/chapter05-quality-ready-results/chapter-combinations-candi-ef978-pter-thumbnail-interactions-webkit/trace.zip",
+    "sha256": "f92dd1b14ef8260aecea85594d85120e5ea6efb4bbc36d05bd3c051b9748f9d6",
+    "member": "2-trace.trace",
+    "memberSha256": "71cfbf88dc319b65639581d7249fd5ac83a133e754a2deda637207c441b5400a",
+    "calls": [
+      {
+        "callId": "call@223",
+        "method": "click",
+        "params": {
+          "selector": ".art-control-quality .art-selector-item >> internal:has-text=\"Quality A\"i",
+          "strict": true
+        },
+        "startTime": 22983.947,
+        "endTime": 23566.42,
+        "elapsed": 582.4729999999981
+      },
+      {
+        "callId": "call@225",
+        "method": "evaluateExpression",
+        "params": {
+          "expression": "() => window.art.url.includes('quality=A')",
+          "isFunction": true,
+          "arg": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          }
+        },
+        "startTime": 23571.095,
+        "endTime": 23609.291,
+        "elapsed": 38.19599999999991,
+        "result": {
+          "value": {
+            "b": true
+          }
+        }
+      },
+      {
+        "callId": "call@227",
+        "method": "evaluateExpression",
+        "params": {
+          "expression": "() => window.chapterEvents.filter(event => event.name === 'restart').map(event => event.value)",
+          "isFunction": true,
+          "arg": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          }
+        },
+        "startTime": 23613.322,
+        "endTime": 23616.695,
+        "elapsed": 3.3729999999995925,
+        "result": {
+          "value": {
+            "a": [],
+            "id": 1
+          }
+        }
+      },
+      {
+        "callId": "call@229",
+        "method": "evaluateExpression",
+        "params": {
+          "expression": "() => window.chapterEvents.filter(event => event.name === 'restart').map(event => event.value)",
+          "isFunction": true,
+          "arg": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          }
+        },
+        "startTime": 23735.3,
+        "endTime": 33691.544,
+        "elapsed": 9956.244000000002,
+        "result": {
+          "value": {
+            "a": [
+              {
+                "s": "/test/pattern.mp4?quality=A"
+              }
+            ],
+            "id": 1
+          }
+        }
+      }
+    ]
+  },
+  "interpretation": "The historical restart evaluation took 9956.244ms and returned the expected URL after the 7000ms poll window. This is a long single browser call, not repeated fast empty reads. The old trace has no event timestamps, so it cannot locate when restart fired within that interval or prove media, renderer, transport, tracing or driver causality.",
+  "current": {
+    "reportPath": "refactor/.cache/chapter05-timing-observed.json",
+    "reportSha256": "87d810ba2333b3f940126b9069027adbc416bcf4da95482ab2ccd12e39655f4c",
+    "resultsPath": "refactor/.cache/chapter05-timing-observed-results",
+    "stats": {
+      "startTime": "2026-09-13T19:32:24.329Z",
+      "duration": 51732.130000000005,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "source": {
+      "path": "test/browser/chapter-combinations.spec.js",
+      "sha256": "4dbcb4116239d35a4a97c17a68c684fe68b5d241450befeacc0f5e2152503d67"
+    },
+    "cases": [
+      {
+        "title": "published core + published chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327948221,
+            "elapsed": 3,
+            "at": 1347.5,
+            "timeOrigin": 1789327946876.4,
+            "events": []
+          },
+          {
+            "started": 1789327948338,
+            "elapsed": 4,
+            "at": 1465.1000000238419,
+            "timeOrigin": 1789327946876.4,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2620.900000035763,
+          "timeOrigin": 1789327946876.4,
+          "qualitySelectedAt": 1312,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.006451,
+              "at": 806.8000000119209
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1356.1000000238419
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 59,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 59.10000002384186,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 59.19999998807907,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 136.69999998807907,
+              "time": 0.008687,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 558.6999999880791,
+              "time": 0.411626,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 819.1000000238419,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 819.6000000238419,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 819.6000000238419,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1356,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1356,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1356.300000011921,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1356.300000011921,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1363.4000000357628,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1363.4000000357628,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2253.199999988079,
+              "time": 3.019035,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.386724,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.006451,
+          "restoredTime": 3.006451,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "published core + candidate chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327950907,
+            "elapsed": 2,
+            "at": 1295.5,
+            "timeOrigin": 1789327949613.8,
+            "events": []
+          },
+          {
+            "started": 1789327951014,
+            "elapsed": 5,
+            "at": 1404.6000000238419,
+            "timeOrigin": 1789327949613.8,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2566.199999988079,
+          "timeOrigin": 1789327949613.8,
+          "qualitySelectedAt": 1253.1000000238419,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.006451,
+              "at": 767.8000000119209
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1302.300000011921
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 50,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 50,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 50.10000002384186,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 115.5,
+              "time": 0.010948,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 537.1000000238419,
+              "time": 0.414567,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 782.5,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 782.8000000119209,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 782.8000000119209,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1302.199999988079,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1302.199999988079,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1302.4000000357628,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1302.4000000357628,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1308.5,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1308.5,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2199.699999988079,
+              "time": 3.018173,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.38472,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.006451,
+          "restoredTime": 3.006451,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "candidate core + published chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327953541,
+            "elapsed": 3,
+            "at": 1242.300000011921,
+            "timeOrigin": 1789327952301.6,
+            "events": []
+          },
+          {
+            "started": 1789327953649,
+            "elapsed": 5,
+            "at": 1351.699999988079,
+            "timeOrigin": 1789327952301.6,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2513.899999976158,
+          "timeOrigin": 1789327952301.6,
+          "qualitySelectedAt": 1201.8999999761581,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.006451,
+              "at": 819.1999999880791
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1249.6000000238419
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 64.80000001192093,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 64.89999997615814,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 65,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 145.19999998807907,
+              "time": 0.003213,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 582.3999999761581,
+              "time": 0.422854,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 831.5,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 832.3000000119209,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 832.3000000119209,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1249.5,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1249.5,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1249.6000000238419,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1249.699999988079,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1255.800000011921,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1255.800000011921,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2144.100000023842,
+              "time": 3.017365,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.387287,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.006451,
+          "restoredTime": 3.006451,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "candidate core + candidate chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "chromium",
+        "browser": "153.0.8010.12",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327956241,
+            "elapsed": 2,
+            "at": 1313.1000000238419,
+            "timeOrigin": 1789327954930.2,
+            "events": []
+          },
+          {
+            "started": 1789327956358,
+            "elapsed": 6,
+            "at": 1433.300000011921,
+            "timeOrigin": 1789327954930.2,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2666.800000011921,
+          "timeOrigin": 1789327954930.2,
+          "qualitySelectedAt": 1273.300000011921,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.006451,
+              "at": 789.8000000119209
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1319.1000000238419
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 65.39999997615814,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 65.5,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 65.60000002384186,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 132.30000001192093,
+              "time": 0.009311,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 548.6000000238419,
+              "time": 0.414352,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 801.6999999880791,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 802.1999999880791,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 802.1999999880791,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1319,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1319,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1319.199999988079,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1319.199999988079,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1326.1000000238419,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1326.1000000238419,
+              "time": 3.006451,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2298.699999988079,
+              "time": 3.018449,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.38658,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.006451,
+          "restoredTime": 3.006451,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "published core + published chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "firefox",
+        "browser": "155.0",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327961375,
+            "elapsed": 5,
+            "at": 1885,
+            "timeOrigin": 1789327959492,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 3280,
+          "timeOrigin": 1789327959492,
+          "qualitySelectedAt": 1813,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 1349
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1876
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 347,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 352,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 352,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 586,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 1032,
+              "time": 0.415449,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 1351,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1385,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1385,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1874,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1876,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1876,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1876,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1914,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1914,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2884,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.331226,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0064516129032257,
+          "restoredTime": 3.0064516129032257,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "published core + candidate chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "firefox",
+        "browser": "155.0",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327964470,
+            "elapsed": 7,
+            "at": 1454,
+            "timeOrigin": 1789327963020,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2726,
+          "timeOrigin": 1789327963020,
+          "qualitySelectedAt": 1364,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 956
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1443
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 101,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 105,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 105,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 197,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 639,
+              "time": 0.416666,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 959,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 995,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 995,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1437,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1443,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1444,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1444,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1488,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1488,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2326,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.333332,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0064516129032257,
+          "restoredTime": 3.0064516129032257,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "candidate core + published chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "firefox",
+        "browser": "155.0",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327967445,
+            "elapsed": 5,
+            "at": 1483,
+            "timeOrigin": 1789327965964,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2707,
+          "timeOrigin": 1789327965964,
+          "qualitySelectedAt": 1408,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 964
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1476
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 93,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 96,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 96,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 190,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 634,
+              "time": 0.416666,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 967,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1001,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1001,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1473,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1476,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1476,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1476,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1514,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1514,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2316,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.333332,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0064516129032257,
+          "restoredTime": 3.0064516129032257,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "candidate core + candidate chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "firefox",
+        "browser": "155.0",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327970352,
+            "elapsed": 4,
+            "at": 1465,
+            "timeOrigin": 1789327968888,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 2749,
+          "timeOrigin": 1789327968888,
+          "qualitySelectedAt": 1392,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 960
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 1459
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 91,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 94,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 94,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 183,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 627,
+              "time": 0.416666,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 963,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1000,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1000,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 1454,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "loadeddata",
+              "at": 1459,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "canplay",
+              "at": 1459,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeking",
+              "at": 1459,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 1
+            },
+            {
+              "name": "seeked",
+              "at": 1497,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 1497,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 2345,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.334093,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0064516129032257,
+          "restoredTime": 3.0064516129032257,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "published core + published chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "webkit",
+        "browser": "26.6",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327975963,
+            "elapsed": 6,
+            "at": 3323,
+            "timeOrigin": 1789327972643,
+            "events": []
+          },
+          {
+            "started": 1789327976083,
+            "elapsed": 34,
+            "at": 3469,
+            "timeOrigin": 1789327972643,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 5187,
+          "timeOrigin": 1789327972643,
+          "qualitySelectedAt": 2766,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 2040
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 3346
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 516,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 3
+            },
+            {
+              "name": "loadeddata",
+              "at": 516,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 3
+            },
+            {
+              "name": "canplay",
+              "at": 517,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 3
+            },
+            {
+              "name": "playing",
+              "at": 1039,
+              "time": 0.0172432,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 1640,
+              "time": 0.5396633,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 2057,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 2057,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 2073,
+              "time": 3.0083973,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 3346,
+              "time": 3.0083973,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 3346,
+              "time": 3.0083973,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3346,
+              "time": 3.0083973,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 3376,
+              "time": 0.0013678,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 3378,
+              "time": 0.0013678,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3378,
+              "time": 0.0013678,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 5138,
+              "time": 3.0155155,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.0653343,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0083973,
+          "restoredTime": 0.0013678,
+          "historicalReset": true
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "published core + candidate chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "webkit",
+        "browser": "26.6",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327981623,
+            "elapsed": 43,
+            "at": 3423,
+            "timeOrigin": 1789327978240,
+            "events": []
+          },
+          {
+            "started": 1789327981768,
+            "elapsed": 28,
+            "at": 3554,
+            "timeOrigin": 1789327978240,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 5288,
+          "timeOrigin": 1789327978240,
+          "qualitySelectedAt": 2721,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 2127
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 3438
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 522,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 522,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 522,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 1014,
+              "time": 0.0102306,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 1718,
+              "time": 0.5457894,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 2154,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 2154,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 2170,
+              "time": 3.0071205,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 3437,
+              "time": 3.0071205,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 3438,
+              "time": 3.0071205,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3438,
+              "time": 3.0071205,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 3468,
+              "time": 0.0015402,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 3468,
+              "time": 0.0015402,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3468,
+              "time": 0.0015402,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 5241,
+              "time": 3.0075271,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.0529263,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0071205,
+          "restoredTime": 0.0015402,
+          "historicalReset": true
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "candidate core + published chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "webkit",
+        "browser": "26.6",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327987273,
+            "elapsed": 74,
+            "at": 3409,
+            "timeOrigin": 1789327983878,
+            "events": []
+          },
+          {
+            "started": 1789327987462,
+            "elapsed": 50,
+            "at": 3631,
+            "timeOrigin": 1789327983878,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 5712,
+          "timeOrigin": 1789327983878,
+          "qualitySelectedAt": 2878,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 2127
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 3464
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 547,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 547,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 547,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 1053,
+              "time": 0.0118305,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 1668,
+              "time": 0.5331693,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 2144,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 2160,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 3463,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 3464,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3465,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 3491,
+              "time": 0.0024918,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 3493,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3494,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 3522,
+              "time": 3.0076807,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 3539,
+              "time": 3.0103503,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 5317,
+              "time": 3.0161511,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.4106989,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0076807,
+          "restoredTime": 3.0103503,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      },
+      {
+        "title": "candidate core + candidate chapter: quality switch preserves chapter/thumbnail interactions",
+        "project": "webkit",
+        "browser": "26.6",
+        "status": "passed",
+        "errors": [],
+        "calls": [
+          {
+            "started": 1789327993237,
+            "elapsed": 12,
+            "at": 3326,
+            "timeOrigin": 1789327989919,
+            "events": []
+          },
+          {
+            "started": 1789327993355,
+            "elapsed": 37,
+            "at": 3471,
+            "timeOrigin": 1789327989919,
+            "events": [
+              "/test/pattern.mp4?quality=A"
+            ]
+          }
+        ],
+        "state": {
+          "at": 5563,
+          "timeOrigin": 1789327989919,
+          "qualitySelectedAt": 2713,
+          "events": [
+            {
+              "name": "seek",
+              "value": 3.0064516129032257,
+              "at": 2070
+            },
+            {
+              "name": "restart",
+              "value": "/test/pattern.mp4?quality=A",
+              "at": 3360
+            }
+          ],
+          "nativeEvents": [
+            {
+              "name": "loadedmetadata",
+              "at": 502,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 502,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 503,
+              "time": 0,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 1028,
+              "time": 0.0165811,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": false,
+              "readyState": 4
+            },
+            {
+              "name": "pause",
+              "at": 1644,
+              "time": 0.5404753,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 2089,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 2089,
+              "time": 3.0064516129032257,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 2104,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=B",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadedmetadata",
+              "at": 3359,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "loadeddata",
+              "at": 3360,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3360,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 3388,
+              "time": 0.0018687,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 3389,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "canplay",
+              "at": 3389,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeking",
+              "at": 3420,
+              "time": 3.0079648,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "seeked",
+              "at": 3437,
+              "time": 3.0103005,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": true,
+              "readyState": 4
+            },
+            {
+              "name": "playing",
+              "at": 5151,
+              "time": 3.0190828,
+              "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+              "paused": false,
+              "readyState": 4
+            }
+          ],
+          "time": 3.4315404,
+          "paused": false,
+          "mediaError": null,
+          "source": "http://127.0.0.1:8084/test/pattern.mp4?quality=A",
+          "readyState": 4,
+          "mobileBranch": false,
+          "maxTouchPoints": 0,
+          "chapters": [
+            {
+              "start": "0",
+              "end": "8",
+              "duration": "8",
+              "title": "Updated after quality"
+            }
+          ]
+        },
+        "position": {
+          "before": 3.0079648,
+          "restoredTime": 3.0103005,
+          "historicalReset": false
+        },
+        "sources": {
+          "/candidate/artplayer.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "/candidate/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+            },
+            "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+            "bytes": 8529
+          },
+          "/published/artplayer.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "/published/artplayer-plugin-chapter.js": {
+            "source": {
+              "kind": "npm-release",
+              "version": "1.1.0",
+              "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+              "member": "package/dist/artplayer-plugin-chapter.js"
+            },
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+            "bytes": 4973
+          }
+        }
+      }
+    ]
+  },
+  "limitation": "12 source-built quality/thumbnail cases only. Two published-core WebKit cases retain the historical zero-position observation. Current passes do not explain or close historical CHAPTER-TIMING-01. No new physical device, full chapter/fullscreen/touch matrix, installed artifact or release acceptance."
+}

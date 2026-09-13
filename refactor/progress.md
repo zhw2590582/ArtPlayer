@@ -1,5 +1,15 @@
 # 进度与证据
 
+## PKG-CHAPTER-05 时序取证继续（doing）
+
+复核旧失败 ZIP：一次 restart 数组读取耗时 9956.244 ms，返回时已含目标 URL；
+不能只凭原超时文本认定七秒都未触发 restart。新增公共/原生事件页面时点与
+restart 读取往返耗时，三浏览器四组质量/章节/缩略图组合十二项通过，保留两项
+已发布核心 WebKit 位置归零观察。无生产或依赖变更，CHAPTER-TIMING-01 和物理
+设备缺口保持未关闭，05/06 未完成。详见[记录](changes/2026-09-14-PKG-CHAPTER-05-timing.md)
+及[trace 摘要](baselines/chapter-timing-observations.json)。VAST 的初始化兼容
+选择已再次列为待答复事项，尚未变更默认行为；其他独立实施继续。
+
 ## PKG-JASSUB-09 合成截图验证（doing）
 
 新增显式截图模式，由 Node pngjs@7.0.0 解码实际页面 PNG，不复制转移画布。

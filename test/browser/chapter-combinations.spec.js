@@ -26,9 +26,9 @@ async function openChapter(page, core, chapter) {
       ] })],
     })
     for (const name of ['restart', 'seek', 'fullscreen', 'fullscreenWeb'])
-      window.art.on(name, value => window.chapterEvents.push({ name, value }))
+      window.art.on(name, value => window.chapterEvents.push({ name, value, at: performance.now() }))
     for (const name of ['loadedmetadata', 'loadeddata', 'canplay', 'seeking', 'seeked', 'playing', 'pause', 'error'])
-      window.art.video.addEventListener(name, () => window.chapterMediaEvents.push({ name, time: window.art.currentTime, source: window.art.video.currentSrc, paused: window.art.video.paused, readyState: window.art.video.readyState }))
+      window.art.video.addEventListener(name, () => window.chapterMediaEvents.push({ name, at: performance.now(), time: window.art.currentTime, source: window.art.video.currentSrc, paused: window.art.video.paused, readyState: window.art.video.readyState }))
     document.querySelector('#play').onclick = () => window.art.play()
     document.querySelector('#pause').onclick = () => window.art.pause()
   })
@@ -62,8 +62,30 @@ async function hoverChapter(page, percentage, text) {
   return { box, x, layout }
 }
 
+async function waitForChapterRestart(page, testInfo) {
+  const calls = []
+  try {
+    await expect.poll(async () => {
+      const started = Date.now()
+      const state = await page.evaluate(() => ({
+        at: performance.now(),
+        timeOrigin: performance.timeOrigin,
+        events: window.chapterEvents.filter(event => event.name === 'restart').map(event => event.value),
+      }))
+      calls.push({ started, elapsed: Date.now() - started, ...state })
+      return state.events
+    }).toEqual(['/test/pattern.mp4?quality=A'])
+  }
+  finally {
+    await testInfo.attach('chapter-restart-observations', { contentType: 'application/json', body: JSON.stringify(calls) })
+  }
+}
+
 test.afterEach(async ({ page }, testInfo) => {
   const state = await page.evaluate(() => ({
+    at: performance.now(),
+    timeOrigin: performance.timeOrigin,
+    qualitySelectedAt: window.chapterQualitySelectedAt,
     events: window.chapterEvents,
     nativeEvents: window.chapterMediaEvents,
     time: window.art?.currentTime,
@@ -121,9 +143,10 @@ for (const core of ['published', 'candidate']) {
       expect(await page.locator('.art-chapter .art-progress-played').evaluateAll(nodes => [nodes[0].style.width, nodes[2].style.width])).toEqual(['100%', '0px'])
       await page.locator('.art-control-quality').hover()
       await expect(page.locator('.art-control-quality .art-selector-list')).toHaveCSS('opacity', '1')
+      await page.evaluate(() => window.chapterQualitySelectedAt = performance.now())
       await page.locator('.art-control-quality .art-selector-item').filter({ hasText: 'Quality A' }).click()
       await expect.poll(() => page.evaluate(() => window.art.url.includes('quality=A'))).toBe(true)
-      await expect.poll(() => page.evaluate(() => window.chapterEvents.filter(event => event.name === 'restart').map(event => event.value))).toEqual(['/test/pattern.mp4?quality=A'])
+      await waitForChapterRestart(page, testInfo)
       await expect.poll(() => page.evaluate(() => !window.art.video.seeking && window.art.video.readyState >= 2)).toBe(true)
       const restoredTime = await page.evaluate(() => window.art.currentTime)
       const historicalReset = core === 'published' && browserName === 'webkit'

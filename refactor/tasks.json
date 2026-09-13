@@ -1434,7 +1434,9 @@
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-12-PKG-CHAPTER-05-combinations.md",
-        "baselines/chapter-combinations-checkpoint.json"
+        "baselines/chapter-combinations-checkpoint.json",
+        "changes/2026-09-14-PKG-CHAPTER-05-timing.md",
+        "baselines/chapter-timing-observations.json"
       ]
     },
     {
