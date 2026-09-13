@@ -9,3 +9,5 @@ test/browser/media/dash/*.m4s binary
 test/browser/media/*.m4a binary
 refactor/baselines/core-vendor/*.txt text eol=lf
 refactor/baselines/thumbnail-vendor/* text eol=lf whitespace=-blank-at-eof
+# Preserve the exact upstream WebVTT reference bytes, including license trailing lines.
+refactor/baselines/multiple-subtitles-vendor/* text eol=lf whitespace=-blank-at-eof

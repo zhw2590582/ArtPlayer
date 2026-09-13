@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MULTI-SUB-01",
+  "status": "done",
+  "parentCommit": "0c5bb2bd7ac6d76b0b5f42dcdfb71ccdb31fb8d5",
+  "checks": [
+    {
+      "command": "yarn test:multiple-subtitles",
+      "tests": 53,
+      "pass": 53,
+      "file": "refactor/.cache/multiple-subtitles01-suite.log",
+      "sha256": "36af923592894ee482aacf7af6292ddf3bafac1c571603359b86ab4186f2df5d"
+    },
+    {
+      "command": "pinned upstream parser adaptation and complete license",
+      "result": {
+        "provenance": {
+          "revision": "380cfcce34ba8b472d3a31474874eb72a0e5f460",
+          "packageVersionAtRevision": "2.1.2",
+          "scope": "Pinned comparison revision, not proof of historical acquisition commit. After removing IIFE/global exportify and adding named ESM exports, normalized executable content matches local parser.",
+          "sources": [
+            {
+              "file": "refactor/baselines/multiple-subtitles-vendor/parser.txt",
+              "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/parser.js",
+              "sha256": "35a112e585b7cb1b4fd30350b0e8c8f6d1efa2670a6008c4a6038e07c9f8d727"
+            },
+            {
+              "file": "refactor/baselines/multiple-subtitles-vendor/license.txt",
+              "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/LICENSE.md",
+              "sha256": "6cc655a5df52fefac69058311c090f4e70b7c37b8f6488f9498420a930b8275d"
+            },
+            {
+              "file": "refactor/baselines/multiple-subtitles-vendor/package.json.txt",
+              "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/package.json",
+              "sha256": "d0102b9276839f1136ecafd9527102a28b44643e8ff403b3ddb1e51c04777a7b"
+            }
+          ]
+        },
+        "normalizedSha256": "e71dc5073db409dcb8eef66a0d6bfe6c8d96fa7d157ff51a68decf6f05a7c80f",
+        "localSha256LF": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1",
+        "noticesSha256LF": "50755f38458d41151c7f0b1675c744aa365f0510dc11f53832691ef5c14ce6b6"
+      }
+    },
+    {
+      "command": "yarn build artplayer-plugin-multiple-subtitles",
+      "file": "refactor/.cache/multiple-subtitles01-build.log",
+      "sha256": "81b37121fe29916391a899d047b30ed6ad73faadfe2327474f235c48321cf5b6",
+      "artifacts": {
+        "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js": "fa21ea1ac923cd4d9085828631b9f89988490d0302d3a5436059317a6ebf96d8",
+        "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js": "bd686716cfe2d7b23d1739ae59bc1934cab2d7c346e36f2690f79a439144a8e4",
+        "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs": "a4a04affca97f673b881b20d27641516d854dee734d445c41c4a906777802cd2"
+      }
+    },
+    {
+      "command": "actual yarn pack and standalone headers",
+      "archive": "refactor/.cache/multiple-subtitles01-package-final.tgz",
+      "sha256": "6e83785d8348f021ba5df6e3a1f6828f238b519bd7985e4c1b1c887d6c491e20",
+      "manifest": {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "version": "1.2.0",
+        "description": "multiple subtitles plugin for ArtPlayer",
+        "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+            "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+            "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+            "import": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+            "require": "./dist/artplayer-plugin-multiple-subtitles.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-multiple-subtitles.js",
+        "module": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+        "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+        "legacy": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "members": {
+        "package/ARCHITECTURE.md": "6df20ecf8a537aad42ec44a471b79d612e93e9dc1068ae475d0db78dc6f8d285",
+        "package/README.md": "6b969577a9a842aded237d75de7b502e5a589b93ba6aca1f51d6d64ff8cc5c47",
+        "package/THIRD_PARTY_NOTICES": "50755f38458d41151c7f0b1675c744aa365f0510dc11f53832691ef5c14ce6b6",
+        "package/dist/artplayer-plugin-multiple-subtitles.js": "fa21ea1ac923cd4d9085828631b9f89988490d0302d3a5436059317a6ebf96d8",
+        "package/dist/artplayer-plugin-multiple-subtitles.legacy.js": "bd686716cfe2d7b23d1739ae59bc1934cab2d7c346e36f2690f79a439144a8e4",
+        "package/dist/artplayer-plugin-multiple-subtitles.mjs": "a4a04affca97f673b881b20d27641516d854dee734d445c41c4a906777802cd2",
+        "package/package.json": "77c93bc94154db46bdc2b2a3d02a03421ea0a49af54728bead91896dfae1092a",
+        "package/types/artplayer-plugin-multiple-subtitles.d.ts": "ab5dae1d0bdfcf2515cb842b1d465edf21dd195fe2fc5b0cfe351a8c06eb965c"
+      },
+      "scope": "Actual tarball members and complete notices verified; not an installed consumer or native browser claim."
+    },
+    {
+      "command": "candidate normal behavior source",
+      "tests": 5,
+      "pass": 5,
+      "file": "refactor/.cache/multiple-subtitles01-candidate-source.log",
+      "sha256": "5a9b041f56b47cc464cca0dbd6157a0c20d760488371343fac6ade25123f3aad"
+    },
+    {
+      "command": "candidate normal behavior main",
+      "tests": 5,
+      "pass": 5,
+      "file": "refactor/.cache/multiple-subtitles01-candidate-main.log",
+      "sha256": "bd4f784ac1c78fefd5f70c94198d4f6eeb0c5afb022fcf4f6be9b9400f3acc48"
+    },
+    {
+      "command": "candidate normal behavior legacy",
+      "tests": 5,
+      "pass": 5,
+      "file": "refactor/.cache/multiple-subtitles01-candidate-legacy.log",
+      "sha256": "50ba47e12a7d5f94223cb9797115cf3ddd593fdca9a8b1f828fd132e66864f61"
+    },
+    {
+      "command": "yarn ci:check",
+      "tests": {
+        "unit": 1775,
+        "engineering": 14,
+        "baseline": 334,
+        "total": 2123
+      },
+      "strictProductionTypeScriptFiles": 346,
+      "file": "refactor/.cache/multiple-subtitles01-ci-final.log",
+      "sha256": "b4e02860bdc35bb25db4fd1e4ab36e499346a56d5eaa1abf5071fa8c19c45d06",
+      "registration": "Both new root test files are registered in test:unit; the contract suite is included by test:baseline."
+    },
+    {
+      "command": "explicit lint including new helpers and refactor scripts",
+      "file": "refactor/.cache/multiple-subtitles01-lint-verified.log",
+      "sha256": "ee9dad77469369fbd40e8269ac7cb666ee3790e877977aa5e27e4cd60f1530cb"
+    }
+  ],
+  "publicSourceAndTypes": {
+    "packages/artplayer-plugin-multiple-subtitles/src/index.js": "02d7019e92bed7817d815f04df80605ae0bd94f03e2b8c52022b5f622ba2e2ba",
+    "packages/artplayer-plugin-multiple-subtitles/src/parser.js": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1",
+    "packages/artplayer-plugin-multiple-subtitles/types/artplayer-plugin-multiple-subtitles.d.ts": "6fc3107127b93b5107d679183dadd5740d4b7d5ea2cf2e51d877d576957e1386"
+  },
+  "remaining": "Public type migration, error/lifecycle reproduction, native core/device combinations and complete distribution/demo consumers belong to tasks 02-06. Git core association is not support evidence. The pinned parser revision is a comparison source, not a proven historical acquisition commit."
+}

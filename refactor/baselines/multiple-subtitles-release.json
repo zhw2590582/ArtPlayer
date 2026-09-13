@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-MULTI-SUB-01",
+  "capturedAt": "2026-09-13T01:46:21.521Z",
+  "sourceCommit": "0c5bb2bd7ac6d76b0b5f42dcdfb71ccdb31fb8d5",
+  "registryObservation": {
+    "url": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles",
+    "status": 200,
+    "sha256": "42f87af15439205eb6d3c114039b33a148dd7340d9be5ea859da0bacc02faa26",
+    "versions": [
+      "1.0.0",
+      "1.1.0",
+      "1.2.0"
+    ],
+    "latest": "1.2.0",
+    "workspaceVersion": "1.2.0"
+  },
+  "release": {
+    "name": "artplayer-plugin-multiple-subtitles",
+    "version": "1.2.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/1.2.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/-/artplayer-plugin-multiple-subtitles-1.2.0.tgz",
+    "integrity": "sha512-3mzoHkgKx3KVdxKQBwLkjetPF6WjJtro5uQNdse8FqUeiV0afbywLnP6H8lcDN/Fwgp2VlBknrs2+COiyFdV8g==",
+    "sha256": "a013fbe0772bf560d177449fc80e848c41f16ae2f72ace86f8fb0d5b1000a54e",
+    "archiveBytes": 12209,
+    "publishedAt": "2026-03-12T14:20:38.214Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "c811dabe9b0baa8739497b26ec287ad13beda59f996dec8e96f8d9244b612e86",
+      "package/dist/artplayer-plugin-multiple-subtitles.js": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+      "package/dist/artplayer-plugin-multiple-subtitles.legacy.js": "0b17644827e5b199afe8293093c44bfda571821014ff5b087c7c918c630dcc18",
+      "package/dist/artplayer-plugin-multiple-subtitles.mjs": "e867c64303299a53d2bf6af62cc1e59044f1c7355aeb55e45b15ab2703448cb0",
+      "package/package.json": "3f8b631444e51da259f86d6cc83095df788eb3c41843724ad2a35d8b896b985f",
+      "package/types/artplayer-plugin-multiple-subtitles.d.ts": "6fc3107127b93b5107d679183dadd5740d4b7d5ea2cf2e51d877d576957e1386"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.2.0",
+      "description": "multiple subtitles plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "import": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+          "require": "./dist/artplayer-plugin-multiple-subtitles.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+          "import": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+          "require": "./dist/artplayer-plugin-multiple-subtitles.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-multiple-subtitles.js",
+      "module": "./dist/artplayer-plugin-multiple-subtitles.mjs",
+      "types": "./types/artplayer-plugin-multiple-subtitles.d.ts",
+      "legacy": "./dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "missingEntrypoints": {},
+    "historicalCore": {
+      "version": "5.3.1",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "scope": "Git association only; no npm core integration result is implied."
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.1.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/1.1.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/-/artplayer-plugin-multiple-subtitles-1.1.0.tgz",
+      "integrity": "sha512-gXbCTK09LKfxs4rXv5lkJiiEJj5NDBcAoCD6DMzFLTtw88nZs81Al5HMhvnNfm5lqcmF77LFhk8YYDChSGcWoA==",
+      "sha256": "b5e8cfa9671496b08a6f1377bace4ce557c865335dc2f746156707c03c8d9d16",
+      "archiveBytes": 22044,
+      "publishedAt": "2024-10-19T06:09:16.790Z",
+      "registryGitHead": "9221d42964700e6a3190943d288a6e6822596790",
+      "files": {
+        "package/README.md": "26b4d8914fd19976a1c5e2999a4146cb76a693f32dd874de4d8322b0da52829a",
+        "package/dist/artplayer-plugin-multiple-subtitles.js": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+        "package/dist/artplayer-plugin-multiple-subtitles.legacy.js": "580514627926d94e8e085bc662fed693951250069bb8db6513709753bde33b5a",
+        "package/package.json": "6b044fa3bb2674ab94a930d8df4695dbb484f8b47cfc6b0cc193e820a2b0afd3",
+        "package/src/index.js": "b79aa2ef836902b7b99d80d1789cb3c5c400a8e3b50c01f29114c52be31e3a07",
+        "package/src/parser.js": "ce10bee2c21c59fd32230b253581738b59f103fcd2b350b74a245d630642e777",
+        "package/types/artplayer-plugin-multiple-subtitles.d.ts": "ddd581ac12fc6285f583f2f97c061ef013e6dc0fccab043ca450a9639bb0ea47"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.1.0",
+        "name": "artplayer-plugin-multiple-subtitles",
+        "types": "types/artplayer-plugin-multiple-subtitles.d.ts",
+        "description": "multiple subtitles plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-multiple-subtitles.js",
+        "legacy": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.1.7",
+        "commit": "9221d42964700e6a3190943d288a6e6822596790",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+        "scope": "Git association only; no npm core integration result is implied."
+      }
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/-/artplayer-plugin-multiple-subtitles-1.0.0.tgz",
+      "integrity": "sha512-BF3nQDkXtFXt+TnGZSXM711Sc9b1lIUQEzMjp1YGnI8p+CFbiDW7EJDmRNy3psZXqRoUXVmpZ86FtZjqra8UPw==",
+      "sha256": "9b584f27287dbda1722315c07d05e1d7391453130b8fd9f952669e809e662ef5",
+      "archiveBytes": 22428,
+      "publishedAt": "2024-05-27T03:33:19.759Z",
+      "registryGitHead": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+      "files": {
+        "package/README.md": "734d156e18a2b577d0ca9e85f5599cbb221ffc694195d79a9ccbe4f715224d9d",
+        "package/dist/artplayer-plugin-multiple-subtitles.js": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+        "package/dist/artplayer-plugin-multiple-subtitles.legacy.js": "1ed7790a910dec50846304a8869a8ea3f8ab61fbb49de1afbf7c426312831f12",
+        "package/package.json": "70e5dfbfae4d6e7590223b22651750a65940c006b64faa0b9ac47eaeaad22be0",
+        "package/src/index.js": "ecf74ed0f5f7760f906e818883fbf5a58339b41a13ceb6080e224d4815a94502",
+        "package/src/parser.js": "ce10bee2c21c59fd32230b253581738b59f103fcd2b350b74a245d630642e777",
+        "package/types/artplayer-plugin-multiple-subtitles.d.ts": "33aab7b7c098e39f3a11cfa264c07452b2e3ad0dc3a7a8c8c3c95dae6856bd74"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-plugin-multiple-subtitles",
+        "types": "types/artplayer-plugin-multiple-subtitles.d.ts",
+        "description": "multiple subtitles plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-multiple-subtitles.js",
+        "legacy": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.1.2",
+        "commit": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "aaf3ba9c7beaaea31170cc50e3958c0bb5d779ab4f90b6a213994ce8c9aace36",
+        "scope": "Git association only; no npm core integration result is implied."
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-plugin-multiple-subtitles/package.json": "3f8b631444e51da259f86d6cc83095df788eb3c41843724ad2a35d8b896b985f",
+    "packages/artplayer-plugin-multiple-subtitles/README.md": "c811dabe9b0baa8739497b26ec287ad13beda59f996dec8e96f8d9244b612e86",
+    "packages/artplayer-plugin-multiple-subtitles/src/index.js": "02d7019e92bed7817d815f04df80605ae0bd94f03e2b8c52022b5f622ba2e2ba",
+    "packages/artplayer-plugin-multiple-subtitles/src/parser.js": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1",
+    "packages/artplayer-plugin-multiple-subtitles/types/artplayer-plugin-multiple-subtitles.d.ts": "6fc3107127b93b5107d679183dadd5740d4b7d5ea2cf2e51d877d576957e1386",
+    "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+    "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js": "0b17644827e5b199afe8293093c44bfda571821014ff5b087c7c918c630dcc18",
+    "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs": "e867c64303299a53d2bf6af62cc1e59044f1c7355aeb55e45b15ab2703448cb0",
+    "docs/assets/example/multiple.subtitles.js": "d9ccbd334d4c77f26826144870d6700e4b62f1f00b7f8f49817b3ac2583e5cc4"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "revision": "380cfcce34ba8b472d3a31474874eb72a0e5f460",
+  "packageVersionAtRevision": "2.1.2",
+  "scope": "Pinned comparison revision, not proof of historical acquisition commit. After removing IIFE/global exportify and adding named ESM exports, normalized executable content matches local parser.",
+  "sources": [
+    {
+      "file": "refactor/baselines/multiple-subtitles-vendor/parser.txt",
+      "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/parser.js",
+      "sha256": "35a112e585b7cb1b4fd30350b0e8c8f6d1efa2670a6008c4a6038e07c9f8d727"
+    },
+    {
+      "file": "refactor/baselines/multiple-subtitles-vendor/license.txt",
+      "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/LICENSE.md",
+      "sha256": "6cc655a5df52fefac69058311c090f4e70b7c37b8f6488f9498420a930b8275d"
+    },
+    {
+      "file": "refactor/baselines/multiple-subtitles-vendor/package.json.txt",
+      "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/package.json",
+      "sha256": "d0102b9276839f1136ecafd9527102a28b44643e8ff403b3ddb1e51c04777a7b"
+    }
+  ]
+}

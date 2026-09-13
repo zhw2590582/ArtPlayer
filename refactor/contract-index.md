@@ -334,3 +334,6 @@
 - PUB-artplayer-plugin-vtt-thumbnail-1.0.1: artplayer-plugin-vtt-thumbnail@1.0.1 (published-baseline)；[来源](../refactor/baselines/vtt-thumbnail-release.json) JSON pointer `/previous/1`。
 - PUB-artplayer-plugin-vtt-thumbnail-1.0.2: artplayer-plugin-vtt-thumbnail@1.0.2 (published-baseline)；[来源](../refactor/baselines/vtt-thumbnail-release.json) JSON pointer `/previous/2`。
 - PUB-artplayer-plugin-vtt-thumbnail-1.0.3: artplayer-plugin-vtt-thumbnail@1.0.3 (published-baseline)；[来源](../refactor/baselines/vtt-thumbnail-release.json) JSON pointer `/previous/3`。
+- PUB-artplayer-plugin-multiple-subtitles-1.2.0: artplayer-plugin-multiple-subtitles@1.2.0 (published-baseline)；[来源](../refactor/baselines/multiple-subtitles-release.json) JSON pointer `/release`。
+- PUB-artplayer-plugin-multiple-subtitles-1.1.0: artplayer-plugin-multiple-subtitles@1.1.0 (published-baseline)；[来源](../refactor/baselines/multiple-subtitles-release.json) JSON pointer `/previous/0`。
+- PUB-artplayer-plugin-multiple-subtitles-1.0.0: artplayer-plugin-multiple-subtitles@1.0.0 (published-baseline)；[来源](../refactor/baselines/multiple-subtitles-release.json) JSON pointer `/previous/1`。

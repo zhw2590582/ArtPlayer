@@ -511,8 +511,8 @@
     {
       "id": "VENDOR-03",
       "title": "webvtt-parser 来源、版本与许可闭环",
-      "confirmation": "unverified",
-      "status": "open",
+      "confirmation": "reproduced",
+      "status": "resolved",
       "owners": [
         "PKG-MULTI-SUB-01"
       ],
@@ -521,7 +521,16 @@
         "packages/artplayer-plugin-multiple-subtitles/src/parser.js"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
-      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-01-contract.md",
+        "refactor/baselines/multiple-subtitles-contract-validation.json",
+        "refactor/baselines/multiple-subtitles-vendor/sources.json",
+        "refactor/scripts/multiple-subtitles-vendor.mjs",
+        "test/multiple-subtitles-vendor.test.js",
+        "packages/artplayer-plugin-multiple-subtitles/THIRD_PARTY_NOTICES"
+      ],
+      "resolutionRationale": "Pinned parser/license/manifest revision and exact normalized executable adaptation verified, including old shipped IIFE sources. Full CC0 dedication is present in actual packed package and all standalone bundle headers. Parser/serializer parity and plugin normal contracts pass. Historical acquisition commit remains unknown; pinned revision is the comparison reference. Device coverage remains in package tasks 05/06."
     },
     {
       "id": "VENDOR-04",
@@ -4234,6 +4243,79 @@
       ],
       "compatibleResolution": "Validate historical import forms and control integrations before selecting compatibility adapters.",
       "closureCriteria": "Actual package consumers and old/new cores prove supported forms; unresolved differences stay explicit."
+    },
+    {
+      "id": "MULTI-SUB-TYPE-01",
+      "title": "Declarations omit async registration, tracks/reset and make the subtitles array required",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-04"
+      ],
+      "evidence": [
+        "refactor/baselines/multiple-subtitles-release.json",
+        "refactor/baselines/multiple-subtitles-contract.md",
+        "test/multiple-subtitles.test.js",
+        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve valid old consumers while exposing accurate methods and async types; review onParser variance separately.",
+      "closureCriteria": "Strict old/new consumers and installed type views cover parameters, result methods and factory replacement."
+    },
+    {
+      "id": "MULTI-SUB-MERGE-01",
+      "title": "1.0.0 merges cues by index while later versions concatenate independently timed track cues",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-02",
+        "PKG-MULTI-SUB-03",
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "refactor/baselines/multiple-subtitles-release.json",
+        "refactor/baselines/multiple-subtitles-contract.md",
+        "test/multiple-subtitles.test.js",
+        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+      ],
+      "compatibleResolution": "Keep historical merge profiles explicit and test real overlap/timing before choosing compatibility behavior.",
+      "closureCriteria": "Unaligned lengths, overlap, sorting, names and real subtitle display across supported cores are verified."
+    },
+    {
+      "id": "MULTI-SUB-LIFE-01",
+      "title": "Pending downloads and final object URL have no destroy owner",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-02",
+        "PKG-MULTI-SUB-03",
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "refactor/baselines/multiple-subtitles-release.json",
+        "refactor/baselines/multiple-subtitles-contract.md",
+        "test/multiple-subtitles.test.js",
+        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+      ],
+      "compatibleResolution": "Reproduce stale completion and own requests and URLs without changing public selection methods.",
+      "closureCriteria": "Cancellation, failures, source changes, repeated selection and destroy are verified with native core coverage."
+    },
+    {
+      "id": "MULTI-SUB-EXPORT-01",
+      "title": "Older CommonJS default objects conflict with export-assignment declarations; latest exports a direct factory",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-04",
+        "PKG-MULTI-SUB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/multiple-subtitles-release.json",
+        "refactor/baselines/multiple-subtitles-contract.md",
+        "test/multiple-subtitles.test.js",
+        "refactor/scripts/multiple-subtitles-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve valid historical runtime import forms and explicitly assess type-only extraction conflicts.",
+      "closureCriteria": "Actual installed CJS/ESM/global/legacy consumers and their declarations are verified."
     }
   ]
 }

@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-01 历史契约与 parser 来源完成
+
+冻结三个实际 npm 版本、20 成员与 9 份 Git 输入；53 项本包契约/vendor 测试通过，
+当前源码/main/legacy 各 5 项正常行为通过。区分 1.0.0 按 cue 下标合并与 1.1.0 起连接轨道，
+记录 async/tracks/reset/onParser 声明差异及旧 CJS 形状，后续错误/类型/原生验收仍待 02–06。
+固定 w3c/webvtt.js 比较修订，完整执行体仅封装/导出/格式适配，CC0 全文进入 notices、
+实际 tarball 和三个独立文件头，VENDOR-03 关闭；原始取得修订仍明确未知。
+完整 CI 最终 2123 项通过（含已接入主 test:unit 的 47 项新测试），严格生产 TS 仍 346 文件。
+首次 CI 日志发现两个新测试文件未接入显式清单，已修复后完整重跑，没有沿用较窄结果。
+见[契约](baselines/multiple-subtitles-contract.md)、[验证](baselines/multiple-subtitles-contract-validation.json)
+和[变更](changes/2026-09-13-PKG-MULTI-SUB-01-contract.md)。生产工厂/声明未改，新增 4 项后续风险。
+222 项：118 done、13 doing、91 todo；独立本地任务提交，不推送、不发布。
+下一步 MULTI-SUB-02 复现错误和生命周期。VTT 的历史类型取舍仍待用户决定。
+
+
 ## PKG-VTT-THUMB-04 历史模块形式核对（doing，类型取舍待用户决定）
 
 实际仓库外安装矩阵扩至 32 格默认导入：31 编译通过，1 格复现 1.1.0 NodeNext ESM

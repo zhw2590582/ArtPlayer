@@ -316,13 +316,14 @@
       "owners": [
         "PKG-MULTI-SUB-01"
       ],
-      "sourceStatus": "Local WebVTTParser/Serializer and CC0 header correspond to the upstream family; exact revision/diff unknown.",
-      "licenseStatus": "Local public-domain/CC0 dedication present; upstream repository identifies CC0-1.0.",
+      "sourceStatus": "Pinned 380cfcce34ba8b472d3a31474874eb72a0e5f460 comparison reference; exact normalized executable body matches local ESM and historical shipped IIFE adaptations. Historical acquisition revision remains unknown.",
+      "licenseStatus": "Complete pinned CC0 dedication retained in package notices and actual tarball/standalone main, legacy and ESM banners.",
       "upstreamSources": [
-        "https://github.com/w3c/webvtt.js",
-        "https://raw.githubusercontent.com/w3c/webvtt.js/master/parser.js"
+        "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/parser.js",
+        "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/LICENSE.md",
+        "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/package.json"
       ],
-      "upstreamReviewedAt": "2026-09-10",
+      "upstreamReviewedAt": "2026-09-13",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
@@ -330,6 +331,14 @@
           "algorithm": "sha256-lf",
           "sha256": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1"
         }
+      ],
+      "verificationEvidence": [
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-01-contract.md",
+        "refactor/baselines/multiple-subtitles-contract-validation.json",
+        "refactor/baselines/multiple-subtitles-vendor/sources.json",
+        "refactor/scripts/multiple-subtitles-vendor.mjs",
+        "test/multiple-subtitles-vendor.test.js",
+        "packages/artplayer-plugin-multiple-subtitles/THIRD_PARTY_NOTICES"
       ]
     },
     {

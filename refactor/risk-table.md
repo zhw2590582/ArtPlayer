@@ -27,7 +27,7 @@
 | BASE-MEDIA-01 | open / 待取证 | 示例媒体和字体的完整来源/授权链待核实 | BASE-08, SITE-01, EX-03 |
 | VENDOR-01 | resolved / 源码/产物事实 | screenfull 来源、版本与许可闭环 | CORE-12 |
 | VENDOR-02 | resolved / 源码/产物事实 | hint.css 来源、版本与许可闭环 | CORE-12 |
-| VENDOR-03 | open / 待取证 | webvtt-parser 来源、版本与许可闭环 | PKG-MULTI-SUB-01 |
+| VENDOR-03 | resolved / 已复现 | webvtt-parser 来源、版本与许可闭环 | PKG-MULTI-SUB-01 |
 | VENDOR-04 | open / 待取证 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01 |
 | VENDOR-05 | open / 待取证 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01 |
 | VENDOR-06 | open / 待取证 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05 |
@@ -194,3 +194,7 @@
 | VTT-THUMB-LIFE-01 | open / 已复现 | Fetch completion, setBar listeners and mobile timers have no destroy ownership | PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-05 |
 | VTT-THUMB-TYPE-01 | open / 已复现 | Published declarations falsely describe async registration as a synchronous result | PKG-VTT-THUMB-04 |
 | VTT-THUMB-EXPORT-01 | open / 已复现 | Older CommonJS default objects and thumbnails control names differ from latest direct export and vtt-thumbnail name | PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
+| MULTI-SUB-TYPE-01 | open / 已复现 | Declarations omit async registration, tracks/reset and make the subtitles array required | PKG-MULTI-SUB-04 |
+| MULTI-SUB-MERGE-01 | open / 已复现 | 1.0.0 merges cues by index while later versions concatenate independently timed track cues | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
+| MULTI-SUB-LIFE-01 | open / 源码/产物事实 | Pending downloads and final object URL have no destroy owner | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
+| MULTI-SUB-EXPORT-01 | open / 已复现 | Older CommonJS default objects conflict with export-assignment declarations; latest exports a direct factory | PKG-MULTI-SUB-04, PKG-MULTI-SUB-06 |

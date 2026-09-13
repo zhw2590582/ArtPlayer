@@ -391,10 +391,13 @@
         "API-12": "PKG-MULTI-SUB-02"
       },
       "versionIds": [
-        "WS-artplayer-plugin-multiple-subtitles"
+        "WS-artplayer-plugin-multiple-subtitles",
+        "PUB-artplayer-plugin-multiple-subtitles-1.2.0",
+        "PUB-artplayer-plugin-multiple-subtitles-1.1.0",
+        "PUB-artplayer-plugin-multiple-subtitles-1.0.0"
       ],
       "supportWindow": "not-inferred-from-baseline",
-      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+      "scopeReview": "Three actual npm archives frozen with 20 members and Git core associations. 1.0.0 merges by cue index; 1.1.0+ concatenates tracks. Async methods and onParser declaration mismatches remain explicit. Pinned WebVTT upstream comparison is not evidence of historical acquisition or all core/device support."
     },
     {
       "name": "artplayer-plugin-vast",
@@ -962,6 +965,33 @@
       "file": "refactor/baselines/vtt-thumbnail-release.json",
       "pointer": "/previous/3",
       "archiveSha256": "286ba11db6adaeb85a4b3fef198af9a10ed0a548566d57ef7efa77c4b4f05f83"
+    },
+    {
+      "id": "PUB-artplayer-plugin-multiple-subtitles-1.2.0",
+      "package": "artplayer-plugin-multiple-subtitles",
+      "kind": "published-baseline",
+      "version": "1.2.0",
+      "file": "refactor/baselines/multiple-subtitles-release.json",
+      "pointer": "/release",
+      "archiveSha256": "a013fbe0772bf560d177449fc80e848c41f16ae2f72ace86f8fb0d5b1000a54e"
+    },
+    {
+      "id": "PUB-artplayer-plugin-multiple-subtitles-1.1.0",
+      "package": "artplayer-plugin-multiple-subtitles",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/multiple-subtitles-release.json",
+      "pointer": "/previous/0",
+      "archiveSha256": "b5e8cfa9671496b08a6f1377bace4ce557c865335dc2f746156707c03c8d9d16"
+    },
+    {
+      "id": "PUB-artplayer-plugin-multiple-subtitles-1.0.0",
+      "package": "artplayer-plugin-multiple-subtitles",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/multiple-subtitles-release.json",
+      "pointer": "/previous/1",
+      "archiveSha256": "9b584f27287dbda1722315c07d05e1d7391453130b8fd9f952669e809e662ef5"
     }
   ],
   "cases": [
