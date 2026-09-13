@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 223 项，范围 22 个包及工作区/示例。
 
-状态：todo 87 / doing 15 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 86 / doing 16 / blocked 0 / done 121 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -93,7 +93,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | todo |
+| CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | doing |
 | CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | todo |
 | CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
 | CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
@@ -454,6 +454,7 @@
 - ENG-09: [记录](changes/2026-09-12-ENG-09-integration.md) [记录](baselines/engineering-integration.json)
 - ENG-10: [记录](changes/2026-09-10-ENG-10-test-reliability.md) [记录](test-reliability.md)
 - ENG-11: [记录](build-analysis.md) [记录](baselines/bundle-attribution.json) [记录](changes/2026-09-11-ENG-11-build-analysis.md)
+- CI-01: [记录](ci-setup.md) [记录](changes/2026-09-13-CI-01-matrix-summary.md) [记录](baselines/ci-matrix-validation.json)
 - PILOT-01: [记录](changes/2026-09-10-PILOT-01-chapter.md) [记录](baselines/pilot-validation.json)
 - CORE-01: [记录](changes/2026-09-10-CORE-01-typed-utils.md) [记录](baselines/core-utils-validation.json)
 - CORE-02: [记录](changes/2026-09-11-CORE-02-typed-emitter.md) [记录](baselines/emitter-validation.json)

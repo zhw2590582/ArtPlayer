@@ -21,6 +21,7 @@ rather than assuming a fixed number of microtasks. The published defect observat
 | ------------------- | -------------------------------------------------------------------------------------------------------- |
 | `yarn test:unit`    | Playback and DASH regressions, public contracts against released/current code, and JS/TS fixture loading |
 | `yarn test:node`    | Unit contracts plus toolchain and documentation build failure propagation                                |
+| `yarn test:ci`      | Actual CI summary exit codes, workflow regression guards and repository impact analysis                  |
 | `yarn test`         | Node checks and the committed baseline/tooling tests in refactor/scripts                                 |
 | `yarn ci:check`     | Toolchain, plan, read-only lint, types, then yarn test                                                   |
 | `yarn test:imports` | Existing distribution import smoke examples; run after building                                          |
@@ -41,6 +42,13 @@ Real Hls.js 1.5.17 playback is in `test/browser/hls-control.spec.js`; see its en
 Set `ARTPLAYER_TEST_CORE` to a built `.js`, `.legacy.js` or `.mjs` core file to add a candidate to the same public-contract run, then execute `node --test test/public-behavior.test.js`. An invalid path/export fails the run. This is a narrow event contract check, not isolated package installation or complete API compatibility; ENG-07 owns tarball consumption.
 
 When a production module moves, update its loader mapping and its maintenance documentation, preserving the behavioral assertions. New contracts belong in contracts/; test-specific controlled state belongs in helpers/. Do not modify frozen refactor/fixtures or baseline captures just to pass changed behavior. Record historical defects and candidate fixes separately.
+
+`ci-summary.test.js` exercises the real CLI with success, cancelled and malformed provider data,
+plus missing groups and metadata/environment files. It is included in `test:node`.
+`refactor/scripts/ci-workflow.test.mjs` parses the actual YAML and rejects broken matrix,
+cache, install, report and summary requirements; it is included in `test:baseline`.
+These local tests do not replace hosted runner or branch-protection evidence.
+See [CI operations](../refactor/ci-setup.md) before changing a required job or its cache.
 
 # Real browser tests
 

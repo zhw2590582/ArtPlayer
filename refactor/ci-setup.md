@@ -18,6 +18,8 @@
 | `yarn test:contracts` | 重跑已登记断言的Node文件并采集精确事件/候选指纹，当前44项包含10个索引断言 |
 | `yarn check:contracts --report` | 校验12类契约/22包归属、版本及报告对应；--write更新静态表，详见 [维护说明](contract-coverage.md) |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
+| `yarn check:ci` | 只读校验实际工作流的完整系统矩阵、安装、缓存、报告和最终检查；已接入 ci:check |
+| `yarn test:ci` | CI 汇总真实退出码、工作流破坏反例与全包影响分析，共 37 项 |
 | `yarn ci:build` | 21 库包、i18n、编辑器声明和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
 | `yarn check:impact --report` | 读取实际依赖/验证关系和Git变更，核对workflow必需命令，写CI影响报告；已接入ci:check，见[影响映射](impact-analysis.md) |
 | `yarn build:all` | 保留旧入口，执行 ci:build 后只读 lint |
@@ -26,11 +28,55 @@ scripts/build-docs.js 保留原 npm run build 子命令兼容入口，现在传�
 
 ## PR 和主线
 
-.github/workflows/nodejs.yml 在 PR、master/codex/** push 和手动运行时触发，也供 Pages 复用。Checks and build 作业只授予 contents: read，checkout 不保留 Git 凭据，没有提交、推送、npm 发布或部署步骤。PR/推送取消过期运行，手动部署不被中途取消；初始 Ubuntu 作业限时 30 分钟。
+.github/workflows/nodejs.yml 在 PR、master/codex/** push 和手动运行时触发，也供 Pages 复用。检查作业只授予 contents: read，checkout 不保留 Git 凭据，没有提交、推送、npm 发布或部署步骤。PR/推送取消过期运行；Pages 部署继续使用独立队列。
 
 Actions 固定完整 SHA，Node 来自 .node-version，Yarn 固定 1.22.22；安装使用 frozen-lockfile。actionlint 1.7.12 从官方固定归档取得，先核对提交在 workflow 中的 SHA-256，再执行。没有执行 curl 管道脚本。日志在失败时也尽量上传，包含源码 SHA、工具版本、锁摘要和生成差异概览，保留 14 天。
 
-不缓存 node_modules。ENG-04 已接入类型消费者；ENG-05 新增 macOS 的 `Browser playback smoke` 作业，运行三个浏览器并 always 上传 HTML/JSON、失败截图和 trace。本地 Windows 三浏览器已验证，远端 macOS 作业尚未运行。完整生态矩阵、下载缓存、覆盖率和候选 tarball 汇总由 CI-01 等后续任务扩展。稳定 required 汇总名称由 CI-01/CI-04 核实后设置，不把本地 YAML 当作分支保护已生效。
+## CI-01 当前矩阵与结果汇总
+
+| 作业 | 系统 | 内容 | 超时 |
+| --- | --- | --- | --- |
+| checks | Linux、Windows | ci:check、ci:build；Linux 额外执行 actionlint | 45 分钟 |
+| coverage | Linux、Windows | 既有源码映射与生命周期覆盖检查 | 15 分钟 |
+| browser-smoke | Linux、Windows、macOS | 实际 core/chapter 安装产物、Chromium/Firefox/WebKit、iframe history、性能 | 60 分钟 |
+| CI result | Linux | 汇总以上三个作业组，所有结果必须为 success | 5 分钟 |
+
+Node 均使用 .node-version 的 24.21.0。TS 5.9.3、4.3.5 和迁移运行时兼容 5.1.6
+继续由既有类型脚本按各自适用范围运行，不代表最低 Node 或所有包/TS 组合已验收。
+矩阵不设置 fail-fast，单个系统失败后仍尽量收集其他系统证据；显式 bash 保留 tee
+上游命令的失败退出码。影响报告继续扩大核心/共享变更到全生态，当前不缩减必需作业。
+
+稳定名称为 **CI result**。它以 always() 依赖 checks、coverage、browser-smoke，结构化
+读取 needs；失败、取消、跳过、缺失、错误 JSON 或未知额外作业都失败。增加独立 job 时
+同时修改 ci-summary.mjs 的 requiredJobs、workflow needs、矩阵策略和测试，防止遗漏汇总。
+全局取消/runner 故障下的真实调度仍待 CI-04；本地退出码测试不证明远端作业一定被调度。
+required checks 的实际绑定尚未设置，不能宣称分支保护已经生效。
+
+## 下载缓存、日志与维护
+
+scripts/ci-context.mjs 从真实 checkout、package.json、.node-version 和 yarn.lock 读取
+来源与版本，将绝对缓存目录写入 GITHUB_ENV/OUTPUT，运行信息写入 refactor/.cache/ci/context.json。
+Yarn 缓存与浏览器缓存均按 OS/架构/Node/Yarn/ref/锁隔离，浏览器另绑定 Playwright 版本；
+只缓存下载内容，无宽松 restore-keys、跨 OS 恢复或 node_modules/产物缓存。每次 frozen
+install；浏览器每次 install --with-deps，缓存命中不能替代 Linux 系统依赖安装。
+相关行为依据 [Playwright CI 文档](https://playwright.dev/docs/ci)。
+
+新增 actions/cache 固定 caa296126883cff596d87d8935842f9db880ef25，来自当次核实的
+[官方 v5 ref](https://api.github.com/repos/actions/cache/git/refs/tags/v5)，
+[该提交 action.yml](https://github.com/actions/cache/blob/caa296126883cff596d87d8935842f9db880ef25/action.yml)
+使用 node24；升级时重新核对 tag/SHA、runner 和缓存格式，不使用浮动标签执行。
+本批没有新增 npm 依赖或修改 yarn.lock。
+
+安装/构建/测试日志和已有 HTML/JSON、截图、trace、tarball 由 always 上传步骤留存；
+名称包含系统、run_id 和 run_attempt，保留 14 天。最终脚本独立写 summary.json、
+summary.md 和 GitHub Job Summary，不依赖先前下载的 artifact 来判断作业是否成功。
+下载对应作业 artifact，先核对 context.json 的 source/workflowSource、工具版本和锁摘要，
+再查看失败阶段的日志和浏览器 trace。缓存异常时可删除对应远端 key 后重跑；该动作
+必须针对实际故障，不以清缓存代替修复锁或构建问题。
+
+本地验证与指纹见 [CI-01 记录](changes/2026-09-13-CI-01-matrix-summary.md)。
+最低 Node 消费/工具环境、全生态安装矩阵和有证据的影响调度仍待 CI-01；CI-04 负责
+各系统远端运行、冷热缓存、失败/取消演练及 required check 设置。没有新增远端通过证据。
 
 ## Pages 隔离与启用条件
 

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-01",
+  "date": "2026-09-13",
+  "baseCommit": "2c73e2b105ee55f95e3ffc906ea4ea1f25221622",
+  "candidate": "working tree in the accompanying CI-01 checkpoint commit",
+  "inputs": [
+    {
+      "file": ".github/workflows/nodejs.yml",
+      "sha256": "823cc76c209f4d54fe66d818a5114333a4412fe710796be7d28bb4cb0bd6f5f6"
+    },
+    {
+      "file": "package.json",
+      "sha256": "c6059a5d3dfddbaf31a389b73db252d612cfb14ea64b19cfe0e9657e0340e0cf"
+    },
+    {
+      "file": "scripts/ci-context.mjs",
+      "sha256": "2a59a334ded9079fbcc7892b8203f59a79e252bb4246b66a61f683e347f1d14d"
+    },
+    {
+      "file": "scripts/ci-summary.mjs",
+      "sha256": "8878541a6ddcbcf23d4e6d86612093f8ce605b1a3c9952cb1d8f463343ed5602"
+    },
+    {
+      "file": "refactor/scripts/ci-workflow.mjs",
+      "sha256": "beb14540abe2784db14462d295883da4f04f9cc14b781851b4e64da5e0693671"
+    },
+    {
+      "file": "refactor/scripts/ci-workflow.test.mjs",
+      "sha256": "9323a85ef5cccb43c512ca86701a3984e3587821faf1ded3a82deeb2878fb8fc"
+    },
+    {
+      "file": "test/ci-summary.test.js",
+      "sha256": "fa28903bb90612c108c5cf89223e7de003137a0f0cc168021c97e46770fcd052"
+    }
+  ],
+  "environment": {
+    "os": "Windows",
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "actionlint": "1.7.12"
+  },
+  "focused": {
+    "command": "yarn test:ci",
+    "passed": 37,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ciCheck": {
+    "command": "yarn ci:check",
+    "passed": 2422,
+    "unit": 2031,
+    "engineering": 23,
+    "baseline": 368,
+    "seconds": 244.45
+  },
+  "actionlint": {
+    "exitCode": 0,
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "explicitLint": {
+    "exitCode": 0,
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "logs": [
+    {
+      "file": "refactor/.cache/ci01-focused.log",
+      "sha256": "e76424c6290d7cddb2a50be95bfb32705c51b07f04bc02728c3ed521acf6e2a2",
+      "retention": "local ignored cache; outcome retained in this report"
+    },
+    {
+      "file": "refactor/.cache/ci01-ci.log",
+      "sha256": "71c6d04073d6af4b6fd225693d785c6e157b6cb8216de1a91e3ffb833d2e8383",
+      "retention": "local ignored cache; outcome retained in this report"
+    },
+    {
+      "file": "refactor/.cache/ci01-actionlint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retention": "local ignored cache; outcome retained in this report"
+    },
+    {
+      "file": "refactor/.cache/ci01-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retention": "local ignored cache; outcome retained in this report"
+    },
+    {
+      "file": "refactor/.cache/ci01-package-final.log",
+      "sha256": "b0705f902491cb71954cf8d3f537f9ca05fe027a1cefc2ed93960443443838fc",
+      "retention": "local ignored cache; outcome retained in this report"
+    }
+  ],
+  "cacheAction": {
+    "ref": "refs/tags/v5",
+    "sha": "caa296126883cff596d87d8935842f9db880ef25",
+    "source": "https://api.github.com/repos/actions/cache/git/refs/tags/v5",
+    "runtime": "node24"
+  },
+  "remoteActionsRun": null,
+  "taskComplete": false,
+  "remaining": [
+    "Lowest Node consumer and tooling runtime matrix",
+    "Full ecosystem installed-package/browser scope",
+    "Impact-based selection with equivalent coverage and complete reporting",
+    "CI-04 hosted runner, cache hit/miss, failed PR and required-check evidence"
+  ],
+  "inputByteScope": "Local working-tree bytes; checkout line endings may differ. Only action version comments were added after full ci:check; final actionlint and test:ci reran on the recorded workflow.",
+  "metadata": {
+    "plan": "223 tasks; 121 done, 16 doing, 86 todo",
+    "risks": 200,
+    "testsPassed": 9
+  }
+}

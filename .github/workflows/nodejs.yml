@@ -3,7 +3,7 @@ name: Node CI
 on:
   pull_request:
   push:
-    branches: [master, 'codex/**']
+    branches: [ master, 'codex/**' ]
   workflow_dispatch:
   workflow_call:
     inputs:
@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ ubuntu-latest, windows-latest ]
     defaults:
       run:
         shell: bash
@@ -42,28 +42,37 @@ jobs:
         with:
           node-version-file: .node-version
           package-manager-cache: false
+      - name: Record source and cache inputs
+        id: context
+        run: node scripts/ci-context.mjs
+      - name: Cache locked Yarn downloads
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5 ref verified 2026-09-13; node24
+        with:
+          path: ${{ steps.context.outputs.yarn_cache }}
+          key: yarn-${{ runner.os }}-${{ runner.arch }}-node-${{ steps.context.outputs.node }}-yarn-${{ steps.context.outputs.yarn }}-${{ github.ref }}-${{ hashFiles('yarn.lock') }}
       - name: Install the pinned toolchain and dependencies
         run: |
-          npm install --global --force yarn@1.22.22
-          yarn install --frozen-lockfile --non-interactive
+          npm install --global --force yarn@1.22.22 2>&1 | tee refactor/.cache/ci/toolchain-install.log
+          yarn install --frozen-lockfile --non-interactive 2>&1 | tee refactor/.cache/ci/install.log
           yarn check:toolchain --strict
       - name: Verify source maps and critical lifecycle coverage
-        run: yarn test:coverage
+        run: yarn test:coverage 2>&1 | tee refactor/.cache/ci/coverage.log
       - name: Upload coverage and source-map evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: coverage-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
+            refactor/.cache/ci/
             refactor/.cache/coverage/latest.json
             refactor/.cache/coverage/run-*/
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: warn
   browser-smoke:
-    name: Browser playback smoke
-    runs-on: macos-latest
-    timeout-minutes: 30
+    name: Browser playback (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
     env:
       CI: true
     steps:
@@ -75,28 +84,42 @@ jobs:
         with:
           node-version-file: .node-version
           package-manager-cache: false
+      - name: Record source and cache inputs
+        id: context
+        run: node scripts/ci-context.mjs
+      - name: Cache locked Yarn downloads
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5 ref verified 2026-09-13; node24
+        with:
+          path: ${{ steps.context.outputs.yarn_cache }}
+          key: yarn-${{ runner.os }}-${{ runner.arch }}-node-${{ steps.context.outputs.node }}-yarn-${{ steps.context.outputs.yarn }}-${{ github.ref }}-${{ hashFiles('yarn.lock') }}
       - name: Install the pinned package manager and dependencies
         run: |
-          npm install --global --force yarn@1.22.22
-          yarn install --frozen-lockfile --non-interactive
+          npm install --global --force yarn@1.22.22 2>&1 | tee refactor/.cache/ci/toolchain-install.log
+          yarn install --frozen-lockfile --non-interactive 2>&1 | tee refactor/.cache/ci/install.log
+      - name: Cache versioned browser downloads
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5 ref verified 2026-09-13; node24
+        with:
+          path: ${{ steps.context.outputs.browser_cache }}
+          key: playwright-${{ runner.os }}-${{ runner.arch }}-node-${{ steps.context.outputs.node }}-yarn-${{ steps.context.outputs.yarn }}-${{ github.ref }}-${{ hashFiles('yarn.lock') }}-${{ steps.context.outputs.playwright }}
       - name: Install test browsers
-        run: yarn test:browser:install
+        run: yarn test:browser:install --with-deps 2>&1 | tee refactor/.cache/ci/browser-install.log
       - name: Build and check installed tarballs
         run: |
-          yarn test:package
+          yarn test:package 2>&1 | tee refactor/.cache/ci/package.log
           node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
       - name: Run all three engines
-        run: yarn test:browser
+        run: yarn test:browser 2>&1 | tee refactor/.cache/ci/browser.log
       - name: Verify iframe cached history and interrupted navigation
-        run: yarn test:iframe-history
+        run: yarn test:iframe-history 2>&1 | tee refactor/.cache/ci/iframe-history.log
       - name: Compare installed performance and verify resource cleanup
-        run: yarn test:performance
+        run: yarn test:performance 2>&1 | tee refactor/.cache/ci/performance.log
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: browser-${{ github.run_id }}-${{ github.run_attempt }}
+          name: browser-smoke-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
+            refactor/.cache/ci/
             refactor/.cache/browser/
             refactor/.cache/iframe-history/
             refactor/.cache/performance/
@@ -108,10 +131,21 @@ jobs:
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: warn
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
   checks:
-    name: Checks and build
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    name: Checks and build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     env:
       CI: true
     defaults:
@@ -126,14 +160,23 @@ jobs:
         with:
           node-version-file: .node-version
           package-manager-cache: false
+      - name: Record source and cache inputs
+        id: context
+        run: node scripts/ci-context.mjs
+      - name: Cache locked Yarn downloads
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5 ref verified 2026-09-13; node24
+        with:
+          path: ${{ steps.context.outputs.yarn_cache }}
+          key: yarn-${{ runner.os }}-${{ runner.arch }}-node-${{ steps.context.outputs.node }}-yarn-${{ steps.context.outputs.yarn }}-${{ github.ref }}-${{ hashFiles('yarn.lock') }}
       - name: Install the pinned package manager
-        run: npm install --global --force yarn@1.22.22
+        run: npm install --global --force yarn@1.22.22 2>&1 | tee refactor/.cache/ci/toolchain-install.log
       - name: Validate workflow syntax
         run: |
           curl --fail --silent --show-error --location https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz --output "$RUNNER_TEMP/actionlint.tar.gz"
           printf '%s  %s\n' '8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8' "$RUNNER_TEMP/actionlint.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
           "$RUNNER_TEMP/actionlint" -color
+        if: matrix.os == 'ubuntu-latest'
       - name: Frozen install
         run: |
           mkdir -p refactor/.cache/ci
@@ -155,14 +198,52 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: checks-${{ github.run_id }}-${{ github.run_attempt }}
+          name: checks-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: refactor/.cache/ci/
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: warn
       - name: Prepare Pages artifact
-        if: inputs.pages-artifact && github.ref == 'refs/heads/master'
+        if: inputs.pages-artifact && github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-latest'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: docs
           include-hidden-files: true
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+  ci-result:
+    name: CI result
+    if: always()
+    needs:
+      - checks
+      - coverage
+      - browser-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - name: Require every matrix job to succeed
+        env:
+          ARTPLAYER_CI_NEEDS: ${{ toJSON(needs) }}
+        run: node scripts/ci-summary.mjs
+      - name: Upload final status
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ci-result-${{ github.run_id }}-${{ github.run_attempt }}
+          path: refactor/.cache/ci/
+          include-hidden-files: true
+          retention-days: 14
+          if-no-files-found: warn

@@ -1,5 +1,18 @@
 # 进度与证据
 
+## CI-01 系统矩阵、缓存与结果汇总检查点（doing）
+
+checks 扩为 Linux/Windows，浏览器扩为 Linux/Windows/macOS；coverage 保留双系统。
+固定来源下载缓存、每次冻结安装/浏览器系统依赖、失败日志和稳定 CI result 已实现。
+最终作业只接受所有必需组 success；真实 CLI 和工作流反例共 37 项通过。
+完整本地 ci:check 2422 项通过（2031 单元、23 工程、368 基线），actionlint 与定向 lint 通过。
+见[变更](changes/2026-09-13-CI-01-matrix-summary.md)和[证据](baselines/ci-matrix-validation.json)。
+没有新生产源码/类型/依赖/版本/产物变更，没有新浏览器播放或远端 Actions 运行。
+CI-01 保持 doing：最低 Node 消费环境、全包安装矩阵与影响调度仍待完成；CI-04 验证远端。
+223 项：121 done、16 doing、86 todo；本次未新增或关闭风险。独立本地检查点，不推送、不发布。
+下一步继续消费者运行时矩阵和插件缺口；此前类型决策与第三方来源事项保持未完成。
+
+
 ## PKG-JASSUB-01 发布与来源检查点（doing）
 
 冻结两个真实 npm 版本、12 成员、9 份 Git 文本及本地 worker/WASM/font/ASS/MP4 指纹。

@@ -749,11 +749,15 @@
         "ENG-09",
         "ENG-10"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告",
       "acceptance": "固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯",
-      "evidence": []
+      "evidence": [
+        "ci-setup.md",
+        "changes/2026-09-13-CI-01-matrix-summary.md",
+        "baselines/ci-matrix-validation.json"
+      ]
     },
     {
       "id": "CI-02",
