@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 233 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 234 项，范围 22 个包及工作区/示例。
 
-状态：todo 62 / doing 14 / blocked 0 / done 157 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 62 / doing 15 / blocked 0 / done 157 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -27,7 +27,7 @@
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-05, PKG-DASH-06 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
 | artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06 |
-| artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08 |
+| artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09 |
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
@@ -233,10 +233,11 @@
 | PKG-JASSUB-02 | artplayer-plugin-jassub<br>建立特有行为与错误测试 | PKG-JASSUB-01, ENG-03, ENG-05 | ASS 字体、时钟/seek/倍率/resize、加载失败和销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-JASSUB-03 | artplayer-plugin-jassub<br>整理内部职责与资源 | PKG-JASSUB-02, CORE-15, CORE-16 | 仅整理自有 adapter/销毁；保留第三方文件及来源 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-JASSUB-04 | artplayer-plugin-jassub<br>迁移自有源码和公开类型 | PKG-JASSUB-03, ENG-04, ENG-06, CORE-07 | JASSUB option/instance 的兼容类型包装，vendor JS 例外记录 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-JASSUB-05 | artplayer-plugin-jassub<br>验证新旧核心和组合 | PKG-JASSUB-04, CORE-22, PKG-JASSUB-07, PKG-JASSUB-08 | 真实 worker/WASM 字幕渲染与全屏、旧核心测试 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-JASSUB-05 | artplayer-plugin-jassub<br>验证新旧核心和组合 | PKG-JASSUB-04, CORE-22, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09 | 真实 worker/WASM 字幕渲染与全屏、旧核心测试 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-JASSUB-06 | artplayer-plugin-jassub<br>验证分发并同步文档 | PKG-JASSUB-05, ENG-07 | jassub.js、外部资源路径、许可和离线失败记录；接续 VENDOR-04/05 完整组件/字体通知、LGPL 源码分发核对及六份未明确字体的分发处置 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录；来源身份已由01冻结，完整通知和未明确字体的发布处理必须闭环，不能以来源相同替代许可结论 | H | todo |
 | PKG-JASSUB-07 | artplayer-plugin-jassub<br>修复 vendor 生命周期与字幕时钟 | PKG-JASSUB-03, PKG-JASSUB-02 | 独立记录 vendor 适配差异；幂等销毁、跨容器 setVideo、构造回滚、逐帧归属和倍率/能力边界；查询 timeout/Worker error 的缺失数据回调及每请求监听器/定时器清理（JASSUB-QUERY-01） | 保持公开真实 instance、同步方法与资源路径；保留原 vendor 来源指纹并记录每项实际补丁；候选修复正例和真实字幕/失败/时钟验证通过，未证实设备不得冒充通过 | H | done |
 | PKG-JASSUB-08 | artplayer-plugin-jassub<br>修复默认 offscreen 初始化消息顺序 | PKG-JASSUB-07 | 在释放排队绘制消息前转移初始画布；独立 vendor 补丁、默认模式原生回归和维护文档 | 保留默认能力选择、Worker/资源和公开同步 API；旧红新绿消息顺序测试及真实默认 offscreen 播放/seek/全屏通过，主线程绘制保持 | H | done |
+| PKG-JASSUB-09 | artplayer-plugin-jassub<br>修复 hybrid 迟到绘制与销毁后画布重建 | PKG-JASSUB-08 | 释放旧混合绘制 bitmap，不改变新模式的画布/时钟；销毁后切字幕不重新分配画布；来源补丁、原生排队消息及维护记录 | 旧红新绿验证旧帧不能重建画布/解除新绘制等待；正常 hybrid 绘制保持；真实 Worker/ImageBitmap 交错、主线程及默认模式回归通过，能力缺口明确 | H | doing |
 
 ## 5 包迁移：artplayer-plugin-danmuku-mask
 
@@ -604,3 +605,4 @@
 - PKG-DANMUKU-11: [记录](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md) [记录](baselines/danmuku-lifetime-validation.json)
 - PKG-DANMUKU-12: [记录](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md) [记录](baselines/danmuku-frame-sampling-validation.json)
 - PKG-JASSUB-08: [记录](changes/2026-09-14-PKG-JASSUB-08-offscreen.md) [记录](baselines/jassub-offscreen-validation.json) [记录](baselines/jassub-offscreen-patch.json)
+- PKG-JASSUB-09: [记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md) [记录](baselines/jassub-hybrid-validation.json) [记录](baselines/jassub-hybrid-patch.json)

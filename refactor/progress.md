@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-JASSUB-09 hybrid 归属修复检查点（doing）
+
+修复旧混合帧干扰新 offscreen 画布、被丢弃完成通知导致等待卡死，以及销毁后
+两个切字幕方法重新分配画布。受控 11 项旧产物 7 通过/4 失败，候选全部通过；
+联合 196 项、源码/main/legacy 各 79 项和 15 个实际安装类型组合通过。
+Chromium 实际 Worker/ImageBitmap 跨公开切字幕交错通过，legacy 切换三项和主线程
+九项通过；Firefox matrix=null、WebKit 无转移能力均只算普通切换控制。
+默认 main 最终顺序回归 11 通过/1 Firefox 全屏失败，08 产物同顺序也复现旧核心
+失败；不能归因于并发负载，根因仍待查。09/05 及相关风险不标完成。
+[检查点记录](changes/2026-09-14-PKG-JASSUB-09-hybrid.md)和
+[完整红绿证据](baselines/jassub-hybrid-validation.json)保留中间不完整修复和对照。
+下一步处理 JASSUB-FIREFOX-OFFSCREEN-01，再继续完整分包验收和未完成迁移。
+
 ## PKG-JASSUB-08 默认 offscreen 初始化完成
 
 05 默认模式验收发现 Chromium/Firefox 六项真实页面错误；初始 canvas 消息先于

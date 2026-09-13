@@ -527,9 +527,9 @@ class o extends EventTarget {
   }
   // if the video or track changed, we need to re-attach the offscreen canvas
   _reAttachOffscreen() {
-    if (!this._offscreenRender || !this._ctx)
+    if (this._destroyed || !this._offscreenRender || !this._ctx)
       return null;
-    this._canvas.remove(), this._createCanvas(), this._canvasctrl = this._canvas.transferControlToOffscreen(), this._ctx = !1, this.sendMessage("offscreenCanvas", null, [this._canvasctrl]), this.resize(0, 0, 0, 0, !0);
+    this._canvas.remove(), this._createCanvas(), this._canvasctrl = this._canvas.transferControlToOffscreen(), this._ctx = !1, this.busy = !1, this._lastDemandTime = null, this.sendMessage("offscreenCanvas", null, [this._canvasctrl]), this.resize(0, 0, 0, 0, !0);
   }
   _updateColorSpace() {
     if (this._destroyed || this._colorCallback != null) return;
@@ -559,6 +559,10 @@ class o extends EventTarget {
     !e || !t || e !== t && (this._detachOffscreen(), this._ctx.filter = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='f'><feColorMatrix type='matrix' values='${f[e][t]} 0 0 0 0 0 1 0'/></filter></svg>#f")`);
   }
   _render({ images: e, asyncRender: t, times: s, width: r, height: n, colorSpace: a }) {
+    if (!this._ctx) {
+      for (const image of e) image.image?.close?.();
+      return;
+    }
     this._unbusy(), this.debug && (s.IPCTime = Date.now() - s.JSRenderTime), (this._canvasctrl.width !== r || this._canvasctrl.height !== n) && (this._canvasctrl.width = r, this._canvasctrl.height = n, this._verifyColorSpace({ subtitleColorSpace: a })), this._ctx.clearRect(0, 0, this._canvasctrl.width, this._canvasctrl.height);
     for (const i of e)
       i.image && (t ? (this._ctx.drawImage(i.image, i.x, i.y), i.image.close()) : (this._bufferCanvas.width = i.w, this._bufferCanvas.height = i.h, this._bufferCtx.putImageData(new ImageData(this._fixAlpha(new Uint8ClampedArray(i.image)), i.w, i.h), 0, 0), this._ctx.drawImage(this._bufferCanvas, i.x, i.y)));

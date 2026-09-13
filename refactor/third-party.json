@@ -355,7 +355,8 @@
         "PKG-JASSUB-01",
         "PKG-JASSUB-06",
         "PKG-JASSUB-07",
-        "PKG-JASSUB-08"
+        "PKG-JASSUB-08",
+        "PKG-JASSUB-09"
       ],
       "sourceStatus": "Original wrapper matched npm 1.8.8; PKG-JASSUB-07 now carries an explicitly recorded local lifecycle/clock/query patch (baselines/jassub-vendor-patch.json). Worker JS is unchanged. Both WASM binaries still exactly match Pages nightly 747e392d7f6fe7c38bbcdfe05c9ada46b0b62daf/source 6b19a04ddfbad8f9bfd3237395788dd76218841b. Original wrapper hash, unchanged binaries/fonts, pinned build and submodules remain separately recorded; no independent WASM rebuild.",
       "licenseStatus": "Matching source LICENSE and nightly COPYRIGHT identified and byte-verified; full component notice assembly, LGPL source/distribution review and full FreeType license remain PKG-JASSUB-06 gates. VENDOR-04 remains open.",
@@ -387,7 +388,7 @@
         {
           "path": "packages/artplayer-plugin-jassub/src/jassub.es.js",
           "algorithm": "sha256-lf",
-          "sha256": "6a96af7914f702eb7d6303b466cbe16abddd278040f60cd29f153cdf60e92cb2"
+          "sha256": "60590f2fca6ffded74f96f8a6001a86c32eb38f5e1fae26338cbbb43e93fb70a"
         },
         {
           "path": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
@@ -410,7 +411,11 @@
         "record": "refactor/baselines/jassub-vendor-patch.json",
         "originalSha256LF": "b973508ade00b5b9cea2f299d49f4943003372729be7350b6938e44fddb32038",
         "patchedSha256LF": "1fdcf24d206e8711348dddcb5fe7b656007a9b1d81a992bb497c6d10bd0a2cdb",
-        "followUp": "refactor/baselines/jassub-offscreen-patch.json"
+        "followUp": "refactor/baselines/jassub-offscreen-patch.json",
+        "followUps": [
+          "refactor/baselines/jassub-offscreen-patch.json",
+          "refactor/baselines/jassub-hybrid-patch.json"
+        ]
       }
     },
     {

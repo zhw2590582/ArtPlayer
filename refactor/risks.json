@@ -5621,6 +5621,40 @@
         "test/jassub-offscreen.test.js"
       ],
       "resolutionRationale": "Controlled queue test reproduces pre-fix canvas-before-transfer order. Candidate transfers before opening readiness and passes actual default offscreen Chromium/Firefox playback/seek/layout; Windows WebKit default capability fallback and explicit main-thread/lifecycle regressions remain green. Full device/hybrid/error recovery remains task05."
+    },
+    {
+      "id": "JASSUB-HYBRID-01",
+      "title": "Late hybrid frames mutate the new offscreen canvas or throw; terminal track calls recreate transferred canvases",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-09",
+        "PKG-JASSUB-05"
+      ],
+      "evidence": [
+        "test/jassub-offscreen.test.js",
+        "test/browser/jassub-hybrid.spec.js"
+      ],
+      "compatibleResolution": "Ignore obsolete hybrid render side effects while releasing their bitmaps, and preserve terminal canvas ownership in reattachment.",
+      "closureCriteria": "Controlled and held-native-bitmap red/green cases preserve the newly reattached canvas and pending demand; terminal public track calls allocate nothing, normal hybrid and default/main-thread rendering remain valid. Native capability limitations are recorded."
+    },
+    {
+      "id": "JASSUB-FIREFOX-OFFSCREEN-01",
+      "title": "Windows Firefox default offscreen readback/playback can stall after a preceding subtitle-switch test and web fullscreen",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-JASSUB-09",
+        "PKG-JASSUB-05"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-JASSUB-09-hybrid.md",
+        "refactor/baselines/jassub-hybrid-validation.json",
+        "test/browser/jassub-native.spec.js",
+        "test/browser/jassub-hybrid.spec.js"
+      ],
+      "compatibleResolution": "Isolate native media/compositor/readback and sequence effects without globally disabling default offscreen or deleting assertions. The pre-09 artifact also fails in the same sequence; do not claim the new hybrid guard caused or fixed this separate failure.",
+      "closureCriteria": "Identify and verify a compatible fix or a reviewed precise platform boundary with native controls. Preserve known red sequence and successful standalone comparison; candidate playback/fullscreen pixels and lifetime must be justified, not merely rerun to green."
     }
   ]
 }

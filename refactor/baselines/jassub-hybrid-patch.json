@@ -1,0 +1,11 @@
+{
+  "task": "PKG-JASSUB-09",
+  "baselineCommit": "b4b0276fe9df13218ece21c3ba6a51b42948e16d",
+  "file": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+  "originalSha256LF": "6a96af7914f702eb7d6303b466cbe16abddd278040f60cd29f153cdf60e92cb2",
+  "patchedSha256LF": "60590f2fca6ffded74f96f8a6001a86c32eb38f5e1fae26338cbbb43e93fb70a",
+  "patchFile": "refactor/baselines/jassub-hybrid.patch",
+  "patchSha256LF": "e1ff5591ea38fc66b46140458db93156c66aaaeceacb5ea433021cd8868651eb",
+  "predecessor": "refactor/baselines/jassub-offscreen-patch.json",
+  "purpose": "Release obsolete hybrid bitmaps before any render/scheduler/color-space effect while the display is offscreen; prevent public track calls from recreating canvas after hybrid destruction."
+}

@@ -79,8 +79,17 @@ loaded gate and dispatching the public ready event. Otherwise a queued resize ca
 ask the Worker to return main-thread images while the instance has no main-thread
 context. Duplicate ready delivery must not transfer the same canvas twice. The
 explicit main-thread/custom-canvas and unsupported-capability paths keep their
-existing selection. Later hybrid detach/reattach remains separate and must retain
-its own rendering/lifetime checks. The
+existing selection. Later hybrid detach/reattach remains separate. PKG-JASSUB-09
+records `../../refactor/baselines/jassub-hybrid-patch.json`: when a hybrid render
+arrives after reattachment to offscreen, release its bitmaps before any drawing,
+color-space correction or busy-state mutation. The newly transferred canvas must
+remain owned by the current mode. Reattachment is also terminal after destruction,
+including public setTrack/setTrackByUrl calls. Valid current hybrid frames still
+draw and release their bitmaps normally. A reattachment retires the old busy/demand
+state and requests a forced draw from the newly owned offscreen canvas; dropping
+the old bitmap alone would otherwise leave the renderer waiting forever for its
+discarded completion. Subsequent frame callbacks update the new pending demand.
+The
 worker JS and default font match that archive byte-for-byte. Local WASM instead matches
 the exact Pages nightly blobs associated with source 6b19a04ddfbad8f9bfd3237395788dd76218841b.
 Its build workflow and seven submodule revisions are pinned in the separate
@@ -137,5 +146,14 @@ the browser's actual default selection. The test copies the displayed canvas bit
 to a separate readback canvas, so it supports both transferred and main-thread
 canvases. PKG-JASSUB-08 records default-mode Chromium/Firefox rendering and WebKit's
 capability fallback separately; this does not prove physical Safari/mobile behavior.
+`jassub-hybrid.spec.js` changes actual ASS color-space metadata and holds one native
+Worker ImageBitmap message across a public track switch. It verifies bitmap closure,
+unchanged new canvas ownership and terminal track calls in a real hybrid-capable
+path. Reports distinguish this controlled delivery timing from ordinary playback.
+If native VideoFrame exposes no usable color-space matrix (observed on Windows
+Firefox for this sample), the test verifies ordinary subtitle switching and cleanup
+only; no hybrid coverage is claimed. Windows WebKit without canvas transfer is
+likewise a capability fallback control. Further codec/device/hybrid combinations
+and sustained resource release remain PKG-JASSUB-05.
 See
 `../../refactor/baselines/jassub-contract.md` for precise contract and provenance evidence.

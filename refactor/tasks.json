@@ -2497,7 +2497,8 @@
         "PKG-JASSUB-04",
         "CORE-22",
         "PKG-JASSUB-07",
-        "PKG-JASSUB-08"
+        "PKG-JASSUB-08",
+        "PKG-JASSUB-09"
       ],
       "status": "todo",
       "risk": "H",
@@ -4789,6 +4790,26 @@
         "changes/2026-09-14-PKG-JASSUB-08-offscreen.md",
         "baselines/jassub-offscreen-validation.json",
         "baselines/jassub-offscreen-patch.json"
+      ]
+    },
+    {
+      "id": "PKG-JASSUB-09",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "修复 hybrid 迟到绘制与销毁后画布重建",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-08"
+      ],
+      "status": "doing",
+      "risk": "H",
+      "deliverable": "释放旧混合绘制 bitmap，不改变新模式的画布/时钟；销毁后切字幕不重新分配画布；来源补丁、原生排队消息及维护记录",
+      "acceptance": "旧红新绿验证旧帧不能重建画布/解除新绘制等待；正常 hybrid 绘制保持；真实 Worker/ImageBitmap 交错、主线程及默认模式回归通过，能力缺口明确",
+      "evidence": [
+        "changes/2026-09-14-PKG-JASSUB-09-hybrid.md",
+        "baselines/jassub-hybrid-validation.json",
+        "baselines/jassub-hybrid-patch.json"
       ]
     }
   ]

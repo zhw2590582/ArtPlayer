@@ -110,6 +110,12 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
           ...(canvas ? { canvas } : {}),
         }))
         window.jassub = window.art.plugins.artplayerPluginJassub.instance
+        window.jassubNative.renderCalls = []
+        const render = window.jassub._render
+        window.jassub._render = function (message) {
+          window.jassubNative.renderCalls.push({ context: Boolean(this._ctx), images: message.images.length })
+          return render.call(this, message)
+        }
         window.jassubNative.offscreen = { available: 'transferControlToOffscreen' in HTMLCanvasElement.prototype, selected: window.jassub._offscreenRender }
         window.jassub.addEventListener('error', event => window.jassubNative.errors.push(String(event.error)))
         await new Promise((resolve, reject) => {

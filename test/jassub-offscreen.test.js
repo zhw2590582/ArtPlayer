@@ -67,3 +67,80 @@ for (const option of [{ offscreenRender: false }, 'unsupported', 'custom']) {
     instance.destroy()
   })
 }
+
+test('JASSUB late hybrid render releases transferred bitmaps without drawing or unlocking the new offscreen demand', async () => {
+  const env = environment()
+  const { instance } = env.factory()(env.art)
+  await env.ready()
+  instance._detachOffscreen()
+  await env.flush()
+  instance.setTrack('[Script Info]')
+  instance.busy = true
+  let closed = 0
+  const image = { close() {
+    closed++
+  } }
+  const frame = { target: 'render', images: [{ image, x: 0, y: 0 }], asyncRender: true, width: 640, height: 360 }
+  assert.doesNotThrow(() => env.workers[0].onmessage({ data: frame }))
+  assert.equal(closed, 1)
+  assert.equal(instance.busy, true)
+  assert.equal(instance._ctx, false)
+  instance.destroy()
+})
+
+test('JASSUB current hybrid render still draws and releases its actual bitmap', async () => {
+  const env = environment()
+  const { instance } = env.factory()(env.art)
+  await env.ready()
+  instance._detachOffscreen()
+  await env.flush()
+  const drawn = []
+  let closed = 0
+  const image = { close() {
+    closed++
+  } }
+  instance._ctx.drawImage = (...args) => drawn.push(args)
+  instance.busy = true
+  env.workers[0].onmessage({ data: { target: 'render', images: [{ image, x: 4, y: 5 }], asyncRender: true, width: 640, height: 360 } })
+  assert.deepEqual(drawn, [[image, 4, 5]])
+  assert.equal(closed, 1)
+  assert.equal(instance.busy, false)
+  instance.destroy()
+})
+
+test('JASSUB reattachment replaces a pending hybrid demand with a forced current offscreen draw', async () => {
+  const env = environment()
+  const { instance } = env.factory()(env.art)
+  await env.ready()
+  instance._detachOffscreen()
+  await env.flush()
+  instance.busy = true
+  instance._lastDemandTime = { mediaTime: 1, width: 640, height: 360 }
+  instance.setTrack('[Script Info]')
+  assert.equal(instance._lastDemandTime, null)
+  assert.equal(instance.busy, true)
+  await env.flush()
+  assert.equal(env.workers[0].messages.at(-1).target, 'canvas')
+  assert.equal(env.workers[0].messages.at(-1).force, true)
+  env.workers[0].onmessage({ data: { target: 'unbusy' } })
+  assert.equal(instance.busy, false)
+  instance.destroy()
+})
+
+for (const method of ['setTrack', 'setTrackByUrl']) {
+  test(`JASSUB ${method} after hybrid destruction does not recreate or transfer a canvas`, async () => {
+    const env = environment()
+    const { instance } = env.factory()(env.art)
+    await env.ready()
+    instance._detachOffscreen()
+    await env.flush()
+    instance.destroy()
+    const transferred = env.transferred.length
+    const canvas = instance._canvas
+    assert.equal(instance[method](method === 'setTrack' ? '[Script Info]' : '/next.ass'), undefined)
+    await env.flush()
+    assert.equal(env.transferred.length, transferred)
+    assert.equal(instance._canvas, canvas)
+    assert.equal(env.workers[0].terminated, 1)
+  })
+}
