@@ -2542,11 +2542,14 @@
         "ENG-03",
         "ENG-05"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界",
       "acceptance": "旧版本行为可重跑，成功/失败/切源/销毁有必要断言",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-MASK-02-failures.md",
+        "baselines/danmuku-mask-failures-validation.json"
+      ]
     },
     {
       "id": "PKG-MASK-03",

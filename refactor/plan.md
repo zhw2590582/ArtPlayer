@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 228 项，范围 22 个包及工作区/示例。
 
-状态：todo 73 / doing 16 / blocked 0 / done 139 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 73 / doing 15 / blocked 0 / done 140 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -241,7 +241,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | PKG-MASK-01 | artplayer-plugin-danmuku-mask<br>核对包契约与历史用法 | BASE-05 | 模型参数、start/stop、默认下载路径及 mask 样式 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结；接续 SDK-08，分别核实 Yarn 解析版本、未固定版本的模型 solutionPath 和资源来源 | H | done |
-| PKG-MASK-02 | artplayer-plugin-danmuku-mask<br>建立特有行为与错误测试 | PKG-MASK-01, ENG-03, ENG-05 | 加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | doing |
+| PKG-MASK-02 | artplayer-plugin-danmuku-mask<br>建立特有行为与错误测试 | PKG-MASK-01, ENG-03, ENG-05 | 加载期间停止/销毁、重复启动、推理失败、WebGL/CPU 边界 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-MASK-03 | artplayer-plugin-danmuku-mask<br>整理内部职责与资源 | PKG-MASK-02, CORE-18, PKG-DANMUKU-07 | 模型加载/推理/画布输出分离，阻止重叠推理与过期写入 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | todo |
 | PKG-MASK-04 | artplayer-plugin-danmuku-mask<br>迁移自有源码和公开类型 | PKG-MASK-03, ENG-04, ENG-06, CORE-07 | 模型 adapter、canvas 和选项的精确类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-MASK-05 | artplayer-plugin-danmuku-mask<br>验证新旧核心和组合 | PKG-MASK-04, CORE-22 | 真实模型和 danmuku/seek/全屏组合，GPU 资源释放 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
@@ -530,6 +530,7 @@
 - PKG-MULTI-SUB-07: [记录](baselines/multiple-subtitles-timestamps.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)
 - PKG-JASSUB-01: [记录](baselines/jassub-release.json) [记录](baselines/jassub-vendor.json) [记录](baselines/jassub-font-metadata.json) [记录](baselines/jassub-contract.md) [记录](baselines/jassub-contract-validation.json) [记录](changes/2026-09-13-PKG-JASSUB-01-baseline.md)
 - PKG-MASK-01: [记录](baselines/danmuku-mask-release.json) [记录](baselines/danmuku-mask-registry.json) [记录](baselines/danmuku-mask-contract.md) [记录](baselines/danmuku-mask-contract-validation.json) [记录](changes/2026-09-13-PKG-MASK-01-contract.md)
+- PKG-MASK-02: [记录](changes/2026-09-13-PKG-MASK-02-failures.md) [记录](baselines/danmuku-mask-failures-validation.json)
 - PKG-ASR-01: [记录](changes/2026-09-13-PKG-ASR-01-contracts.md) [记录](baselines/asr-contract.md) [记录](baselines/asr-release.json)
 - PKG-ASR-02: [记录](changes/2026-09-13-PKG-ASR-02-audio-baseline.md) [记录](baselines/asr-audio-validation.json)
 - PKG-ASR-03: [记录](changes/2026-09-13-PKG-ASR-03-audio-ownership.md) [记录](baselines/asr-ownership-validation.json)

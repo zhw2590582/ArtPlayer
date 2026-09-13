@@ -221,11 +221,11 @@
 | CAST-LIFE-01 | resolved / 已复现 | Cast listeners and continuations survive player destruction and update another player icon | PKG-CAST-03, PKG-CAST-05 |
 | CAST-STATE-01 | resolved / 已复现 | Cast terminal session states leave the normalized callback and icon connected | PKG-CAST-03, PKG-CAST-05 |
 | CAST-ERROR-01 | resolved / 已复现 | Cast media loading rejection escapes on a detached Promise while the click has already fulfilled | PKG-CAST-03, PKG-CAST-05 |
-| MASK-LIFETIME-01 | open / 源码/产物事实 | Mask asynchronous initialization and inference continue after stop or destroy | PKG-MASK-02, PKG-MASK-03 |
-| MASK-START-01 | open / 源码/产物事实 | Concurrent Mask start calls can initialize multiple models and create independent RAF chains | PKG-MASK-02, PKG-MASK-03 |
+| MASK-LIFETIME-01 | open / 已复现 | Mask asynchronous initialization and inference continue after stop or destroy | PKG-MASK-02, PKG-MASK-03 |
+| MASK-START-01 | open / 已复现 | Concurrent Mask start calls can initialize multiple models and create independent RAF chains | PKG-MASK-02, PKG-MASK-03 |
 | MASK-MODEL-01 | open / 源码/产物事实 | Published Mask options and installed MediaPipe adapter consume different model settings | PKG-MASK-02, PKG-MASK-04, PKG-MASK-05 |
-| MASK-BACKEND-01 | open / 源码/产物事实 | Mask TensorFlow backend fallback does not establish MediaPipe fallback and failed initialization keeps scheduling | PKG-MASK-02, PKG-MASK-03, PKG-MASK-05 |
-| MASK-DOM-01 | open / 源码/产物事实 | Mask registration and frame processing assume Danmuku DOM, readable frames and a 2D context | PKG-MASK-02, PKG-MASK-03, PKG-MASK-05 |
+| MASK-BACKEND-01 | open / 已复现 | Mask TensorFlow backend fallback does not establish MediaPipe fallback and failed initialization keeps scheduling | PKG-MASK-02, PKG-MASK-03, PKG-MASK-05 |
+| MASK-DOM-01 | open / 已复现 | Mask registration and frame processing assume Danmuku DOM, readable frames and a 2D context | PKG-MASK-02, PKG-MASK-03, PKG-MASK-05 |
 | MASK-NOTICE-01 | open / 源码/产物事实 | Published Mask bundles lack a separate third-party notice despite bundled SDK code | PKG-MASK-06 |
 | DANMUKU-TYPE-01 | open / 已复现 | Danmuku historical declared results, optional mount and initial Promise input disagree with runtime | PKG-DANMUKU-03, PKG-DANMUKU-06 |
 | DANMUKU-INPUT-01 | open / 已复现 | Danmuku replaces time zero with current time plus 0.5 and mutates supplied input objects | PKG-DANMUKU-02, PKG-DANMUKU-03 |

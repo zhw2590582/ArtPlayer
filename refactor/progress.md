@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-MASK-02 生命周期与错误基线完成
+
+54项冻结历史测试及父代理复核通过，覆盖源码和两旧版本三格式的关键生命周期；
+完整失败矩阵聚焦源码/最新main，四个未处理拒绝在独立进程精确取证。归档SDK接缝
+五处callee转换哈希可重放，不能当作真实模型通过。新测试接入test:unit和专属
+yarn test:danmuku-mask；四类风险由源码观察提升为已复现，保持开放待修复。
+见[变更](changes/2026-09-13-PKG-MASK-02-failures.md)与[证据](baselines/danmuku-mask-failures-validation.json)。
+228项：140 done、15 doing、73 todo。Mask03仍等待Danmuku07
+稳定依赖；Danmuku02受控失败和真实浏览器基线继续并行。没有推送或发布。
+
+
 ## PKG-DANMUKU-01 弹幕契约与归档完成
 
 冻结81稳定版目录、15真实归档和28源码/文档/图标输入。44项测试及父代理复核通过；

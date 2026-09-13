@@ -1,0 +1,326 @@
+{
+  "task": "PKG-MASK-02",
+  "sourceCommit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+  "node": "v24.21.0",
+  "inputs": [
+    {
+      "name": "frozen-source",
+      "inputSha256": "2397900688f86bc74bc86a4e870f69478a651bd8df02bba543cdab832773fd6e",
+      "transformedSha256": "5baf9875cfebd4bafad8091471f663f9a914e8ba208420e87b8005874f837228",
+      "source": true,
+      "replacements": []
+    },
+    {
+      "name": "published-1.1.0-main",
+      "archiveSha256": "96682e46cb140a84b164818dd118480d7be42b24afaab390027a25e52e8ae31c",
+      "member": "package/dist/artplayer-plugin-danmuku-mask.js",
+      "inputSha256": "07cebbfbf77f8ec4b2df6a77d7d7300345b86f2993e220ff14e1aae530e4fb31",
+      "transformedSha256": "07cebbfbf77f8ec4b2df6a77d7d7300345b86f2993e220ff14e1aae530e4fb31",
+      "probeSha256": "472b81399c806d2fbfc4abe40e3955017bec498ad1e3966fd894c4776150015f",
+      "counts": {
+        "setBackend": 2,
+        "createSegmenter": 1,
+        "toBinaryMask": 1,
+        "drawMask": 1
+      },
+      "replacements": [
+        {
+          "start": 901335,
+          "end": 901337,
+          "target": "setBackend",
+          "originalSha256": "3c42d9ac9807bbf91745b921d4887371b41b4a52e4e78f0dd127358e967dd4e0"
+        },
+        {
+          "start": 901437,
+          "end": 901439,
+          "target": "setBackend",
+          "originalSha256": "3c42d9ac9807bbf91745b921d4887371b41b4a52e4e78f0dd127358e967dd4e0"
+        },
+        {
+          "start": 901764,
+          "end": 902205,
+          "target": "createSegmenter",
+          "originalSha256": "3d8107811f464ec31d18f7b813a77e95492db7c324f5be67634fc550a4dc9fff"
+        },
+        {
+          "start": 902561,
+          "end": 903452,
+          "target": "toBinaryMask",
+          "originalSha256": "1fa52455c5c212f2b17b7de7b35bec4296492ba60b447d24ec8c7aef3e6734a7"
+        },
+        {
+          "start": 903502,
+          "end": 903504,
+          "target": "drawMask",
+          "originalSha256": "d1ee0b45da3fe74f3ebe628dc12fbd399eda5f374bd184104528a95e0ab5a757"
+        }
+      ]
+    },
+    {
+      "name": "published-1.1.0-legacy",
+      "archiveSha256": "96682e46cb140a84b164818dd118480d7be42b24afaab390027a25e52e8ae31c",
+      "member": "package/dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "inputSha256": "a678a3c0f6d3920bee3b66af9943b3612935028bff61c96677b8eaf8ef7cc8f0",
+      "transformedSha256": "a678a3c0f6d3920bee3b66af9943b3612935028bff61c96677b8eaf8ef7cc8f0",
+      "probeSha256": "c2fef32f4c07c8c52382b638f15b4539ee4d13b425734042b98881d5fe4ab1c9",
+      "counts": {
+        "setBackend": 2,
+        "createSegmenter": 1,
+        "toBinaryMask": 1,
+        "drawMask": 1
+      },
+      "replacements": [
+        {
+          "start": 904198,
+          "end": 904200,
+          "target": "setBackend",
+          "originalSha256": "0041fea20826cea952ac6411b2584c7d09c42dee7be4631e9fe6eadba3963b64"
+        },
+        {
+          "start": 904300,
+          "end": 904302,
+          "target": "setBackend",
+          "originalSha256": "0041fea20826cea952ac6411b2584c7d09c42dee7be4631e9fe6eadba3963b64"
+        },
+        {
+          "start": 904629,
+          "end": 905070,
+          "target": "createSegmenter",
+          "originalSha256": "d98df21622f139a06fde9e766a6bb24dd2919b03e2d4df908b42cedf302289ad"
+        },
+        {
+          "start": 905453,
+          "end": 906344,
+          "target": "toBinaryMask",
+          "originalSha256": "f77e943d57ef12cabd9b2c4cfefb2f88be20fb2169d865d6a1bf81b6ab04720a"
+        },
+        {
+          "start": 906394,
+          "end": 906396,
+          "target": "drawMask",
+          "originalSha256": "69d61997a241e97931db9dd1cfcef218041a752485f5f7956b09766287682da3"
+        }
+      ]
+    },
+    {
+      "name": "published-1.1.0-module",
+      "archiveSha256": "96682e46cb140a84b164818dd118480d7be42b24afaab390027a25e52e8ae31c",
+      "member": "package/dist/artplayer-plugin-danmuku-mask.mjs",
+      "inputSha256": "48f7a449dc9555ab4060a578902b5431701f81b2f093a7cb0526042a8c417400",
+      "transformedSha256": "01b79edcfc8abf85006acb0e1b642636ce9845313fde1d8fb9d39c62a918939f",
+      "probeSha256": "67d5c6dd94e27ce752b772481b66cb2bb0f275630a4ed2ca4642f1f1fde095f2",
+      "counts": {
+        "setBackend": 2,
+        "createSegmenter": 1,
+        "toBinaryMask": 1,
+        "drawMask": 1
+      },
+      "replacements": [
+        {
+          "start": 1725698,
+          "end": 1725708,
+          "target": "setBackend",
+          "originalSha256": "eeb426cebcc7b4b1377849d09fd1d50b3c61d85684675799a258f4e3aae8823a"
+        },
+        {
+          "start": 1725846,
+          "end": 1725856,
+          "target": "setBackend",
+          "originalSha256": "eeb426cebcc7b4b1377849d09fd1d50b3c61d85684675799a258f4e3aae8823a"
+        },
+        {
+          "start": 1726444,
+          "end": 1726446,
+          "target": "createSegmenter",
+          "originalSha256": "8e5202705183bd3a20a29e224499b0f77a8273ee33cd93cca71043c57ad4bdfc"
+        },
+        {
+          "start": 1727942,
+          "end": 1727944,
+          "target": "toBinaryMask",
+          "originalSha256": "799267762dffea91ee7fb9d426a552458f46166208b09d5e8d82b9c318a05d2f"
+        },
+        {
+          "start": 1728116,
+          "end": 1728118,
+          "target": "drawMask",
+          "originalSha256": "38cebf4836a918cb5a42873deff4065fe36689cbfd0a3e862ede3ebff766807e"
+        }
+      ]
+    },
+    {
+      "name": "published-1.0.0-main",
+      "archiveSha256": "8a88f52ae843bed1be01a2e60b82cf886d33582f990a5016d49b1409c3493c4b",
+      "member": "package/dist/artplayer-plugin-danmuku-mask.js",
+      "inputSha256": "940cc240fcdb208427cb25d54180f9b84e0bfa96b5a4d3ba68fa9fb2ad8ffa16",
+      "transformedSha256": "940cc240fcdb208427cb25d54180f9b84e0bfa96b5a4d3ba68fa9fb2ad8ffa16",
+      "probeSha256": "93edf238803b68dc3b3192fdf9c85c12ad13224892e7aaca364394064b1fcc57",
+      "counts": {
+        "setBackend": 2,
+        "createSegmenter": 1,
+        "toBinaryMask": 1,
+        "drawMask": 1
+      },
+      "replacements": [
+        {
+          "start": 2702,
+          "end": 2714,
+          "target": "setBackend",
+          "originalSha256": "7dc39bab39429669a8e1ca50452330036048b7797dd1c10191c52e01b82c788e"
+        },
+        {
+          "start": 2814,
+          "end": 2826,
+          "target": "setBackend",
+          "originalSha256": "7dc39bab39429669a8e1ca50452330036048b7797dd1c10191c52e01b82c788e"
+        },
+        {
+          "start": 3190,
+          "end": 3207,
+          "target": "createSegmenter",
+          "originalSha256": "6b1027a187ae2bfb9960a09621abdf3133be7b2c94244f9b8913c149e5ca6e50"
+        },
+        {
+          "start": 3507,
+          "end": 3521,
+          "target": "toBinaryMask",
+          "originalSha256": "1aa8e213bdfcac558beb18b6c619a17d310ca974e61c97de388317a74f2f64d1"
+        },
+        {
+          "start": 3613,
+          "end": 3623,
+          "target": "drawMask",
+          "originalSha256": "588b57876050ec1c883c40e546f66bf01a3116a3081053d961a09a37fd6da20b"
+        }
+      ]
+    },
+    {
+      "name": "published-1.0.0-legacy",
+      "archiveSha256": "8a88f52ae843bed1be01a2e60b82cf886d33582f990a5016d49b1409c3493c4b",
+      "member": "package/dist/artplayer-plugin-danmuku-mask.legacy.js",
+      "inputSha256": "49da39c368e036f894e623277ce837efa9b7524a040d8ae01e2245b3459c3c9f",
+      "transformedSha256": "49da39c368e036f894e623277ce837efa9b7524a040d8ae01e2245b3459c3c9f",
+      "probeSha256": "fa9ef8f14ce6bc0ec13557f3cc8ccb9cedf4b58a0b93db4983bdbc2106852791",
+      "counts": {
+        "setBackend": 2,
+        "createSegmenter": 1,
+        "toBinaryMask": 1,
+        "drawMask": 1
+      },
+      "replacements": [
+        {
+          "start": 3164,
+          "end": 3176,
+          "target": "setBackend",
+          "originalSha256": "ff79b48a47dfadebba910487f17a3ff7e32347f91af5e66b4f9360227ecc996b"
+        },
+        {
+          "start": 3322,
+          "end": 3334,
+          "target": "setBackend",
+          "originalSha256": "ff79b48a47dfadebba910487f17a3ff7e32347f91af5e66b4f9360227ecc996b"
+        },
+        {
+          "start": 3743,
+          "end": 3760,
+          "target": "createSegmenter",
+          "originalSha256": "d509804e369c2ff85b0463b30708c279397274ebaa58438e1275b9e98ec0a8dc"
+        },
+        {
+          "start": 4567,
+          "end": 4581,
+          "target": "toBinaryMask",
+          "originalSha256": "a4d2ab45b3dc07af8a0474981caa8dd3932885b722e467b18c55647c93602b92"
+        },
+        {
+          "start": 4654,
+          "end": 4664,
+          "target": "drawMask",
+          "originalSha256": "fe3835d5b191fc5d5efb0f08289855ac690bbc17f1553848c1aab292c3e4274c"
+        }
+      ]
+    },
+    {
+      "name": "published-1.0.0-module",
+      "archiveSha256": "8a88f52ae843bed1be01a2e60b82cf886d33582f990a5016d49b1409c3493c4b",
+      "member": "package/dist/artplayer-plugin-danmuku-mask.mjs",
+      "inputSha256": "92ae895c45c3dd39110c3513eb5cb6d99b9249d96b37b7fd1a6437e97febdc8f",
+      "transformedSha256": "dade379e7fe355271e74904022b95f6c8965e33228921224f50eb232a651fec8",
+      "probeSha256": "9b3bacea7a45879c1ba841becf25bf8fea264cfaa2637506eb323048942cf4a7",
+      "counts": {
+        "setBackend": 2,
+        "createSegmenter": 1,
+        "toBinaryMask": 1,
+        "drawMask": 1
+      },
+      "replacements": [
+        {
+          "start": 4608,
+          "end": 4620,
+          "target": "setBackend",
+          "originalSha256": "7dc39bab39429669a8e1ca50452330036048b7797dd1c10191c52e01b82c788e"
+        },
+        {
+          "start": 4748,
+          "end": 4760,
+          "target": "setBackend",
+          "originalSha256": "7dc39bab39429669a8e1ca50452330036048b7797dd1c10191c52e01b82c788e"
+        },
+        {
+          "start": 5215,
+          "end": 5232,
+          "target": "createSegmenter",
+          "originalSha256": "6b1027a187ae2bfb9960a09621abdf3133be7b2c94244f9b8913c149e5ca6e50"
+        },
+        {
+          "start": 5768,
+          "end": 5782,
+          "target": "toBinaryMask",
+          "originalSha256": "1aa8e213bdfcac558beb18b6c619a17d310ca974e61c97de388317a74f2f64d1"
+        },
+        {
+          "start": 5908,
+          "end": 5918,
+          "target": "drawMask",
+          "originalSha256": "588b57876050ec1c883c40e546f66bf01a3116a3081053d961a09a37fd6da20b"
+        }
+      ]
+    }
+  ],
+  "scope": "Frozen owned source and actual archive-derived lifecycle probes. Archive call sites are replaced only at five controlled SDK callee boundaries; module bytes first transformed to CJS. This is not unmodified bundle/model or native ESM/browser/device acceptance.",
+  "candidateAcceptance": false,
+  "expectedTests": 54,
+  "isolatedFatalChildren": 4,
+  "checks": {
+    "nodeTests": {
+      "passed": 54,
+      "failed": 0,
+      "skipped": 0
+    },
+    "lint": "passed",
+    "isolatedFatalChildren": {
+      "count": 4,
+      "expectedExit": 1,
+      "mode": "--unhandled-rejections=strict",
+      "parentGlobalRejectionHandler": false
+    }
+  },
+  "evidence": {
+    "file": "refactor/.cache/danmuku-mask-failures-final.log",
+    "sha256": "c47c1a61a0c802aaa795b5a9fd0c4a84e38e5dbaa69243e4e684b41ed21fbf40"
+  },
+  "toolVersions": {
+    "typescript": "5.9.3",
+    "esbuild": "0.27.7"
+  },
+  "testFiles": [
+    {
+      "file": "test/helpers/danmuku-mask.js",
+      "sha256": "82a5d6990af9bf5910b073b65ab73fdc60a2071e25d2d5f059b1ba35d0b3cd00"
+    },
+    {
+      "file": "test/danmuku-mask-failures.test.js",
+      "sha256": "035c3123b6f01c99e6bd41b825bdd4ed5aa7a5ce7c94285e734ece6c23710bfe"
+    }
+  ]
+}
