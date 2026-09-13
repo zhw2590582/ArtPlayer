@@ -1,9 +1,9 @@
-import type { OptionInput, ResolvedInput, ResolvedOption } from './types'
+import type { DefaultOption, OptionInput, ResolvedInput } from './types'
 import validator from 'option-validator'
 import scheme from '../scheme'
 import { mergeDeep } from '../utils/property'
 
-export default function resolveOption<Input extends OptionInput>(input: Input, defaults: ResolvedOption): ResolvedInput<Input> {
+export default function resolveOption<Input extends OptionInput>(input: Input, defaults: DefaultOption): ResolvedInput<Input> {
   const merged = mergeDeep(defaults, input)
   merged.container = input.container
   // Keep the existing runtime validator. It checks the known schema, not extension data.

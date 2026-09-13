@@ -5,7 +5,7 @@ import type { MediaSurface } from '../media/types'
 import type { PluginFactory } from '../plugins/types'
 import type { SettingItem } from '../setting/types'
 import type { UrlHost } from '../source/types'
-import type { OptionInput, ResolvedOption } from './types'
+import type { DefaultOption, OptionInput, ResolvedOption } from './types'
 import resolveOption from './resolve'
 
 interface RuntimeCallbacks<Host> {
@@ -20,7 +20,7 @@ interface RuntimeCallbacks<Host> {
 
 export type RuntimeOption<Host> = Omit<ResolvedOption, keyof RuntimeCallbacks<Host>> & RuntimeCallbacks<Host>
 
-export default function resolveRuntimeOption<Host>(input: OptionInput, defaults: ResolvedOption): RuntimeOption<Host> {
+export default function resolveRuntimeOption<Host>(input: OptionInput, defaults: DefaultOption): RuntimeOption<Host> {
   // The external declaration facade and internal module views describe the same
   // caller-owned callbacks. Do not wrap, clone or rebind their runtime identity.
   // All non-callback options still derive directly from the validated merge type.

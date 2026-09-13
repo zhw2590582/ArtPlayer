@@ -54,9 +54,9 @@ ENG-PERF-01/02 的后续核心性能工作归 MOD-03，并在 REVIEW-01 重新�
 
 CI-01 后续 Node 20 安装消费发现 CORE-25：静态 option 在没有 navigator 时抛出
 ReferenceError，发布 5.4.0 和当前候选均复现。较新 Node 的全局 navigator 掩盖了它。
-已新增独立修复任务与 REVIEW-01 前置，并使严格 package release 检查阻断。
-本核心阶段的历史完成记录不代表这个后续发现已修复，见
-[Node 消费者记录](changes/2026-09-13-CI-01-node-consumers.md)。
+已由 CORE-25 独立修复并验证三 Node 与三浏览器，严格 package release 检查恢复通过，
+见 [修复记录](changes/2026-09-13-CORE-25-defaults-ssr.md)。此前失败继续保存在
+[Node 消费者记录](changes/2026-09-13-CI-01-node-consumers.md)，历史阶段验收不替代后续发现的验证。
 
 - 各 PKG-*-01/05/06：完整发布基线、支持范围旧核心/新插件、新核心/旧插件、SDK/组合/分发；
   chapter 的本轮四组合不能代替所有包，也不能代替它自己的最终进度/质量/全屏组合任务。

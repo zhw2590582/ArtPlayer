@@ -79,7 +79,8 @@ summary.md 和 GitHub Job Summary，不依赖先前下载的 artifact 来判断�
 
 本地验证与指纹见 [CI-01 记录](changes/2026-09-13-CI-01-matrix-summary.md)。
 三个 Node 的 Windows 安装证据及新发现见 [消费者记录](changes/2026-09-13-CI-01-node-consumers.md)。
-CORE-25 的无 navigator 默认选项缺陷尚未修复，严格 test:package:release 会因此失败。
+CORE-25 已修复无 navigator 默认选项缺陷，严格 test:package:release 的当前 core/chapter
+夹具已通过；此前的失败记录保留，见 [修复证据](changes/2026-09-13-CORE-25-defaults-ssr.md)。
 更早 Node 消费/最低工具环境、全生态安装矩阵和有证据的影响调度仍待 CI-01；CI-04 负责
 各系统远端运行、冷热缓存、失败/取消演练及 required check 设置。没有新增远端通过证据。
 

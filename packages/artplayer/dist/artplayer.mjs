@@ -4304,7 +4304,7 @@ function createDefaults() {
     icons: {},
     cssVar: {},
     customType: {},
-    lang: navigator?.language.toLowerCase()
+    lang: typeof navigator === "undefined" ? void 0 : navigator?.language.toLowerCase()
   };
 }
 function resolveOption(input, defaults2) {

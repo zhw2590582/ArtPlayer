@@ -47,11 +47,12 @@ the actual child version. Reports and failure logs are `runtime-node-<version>.*
 the same package output directory. Old reports without source/toolchain fields must
 be rebuilt. CI restores canonical Node before running browser tools.
 
-CORE-25 remains an explicit defect: both published and candidate static defaults throw
-without navigator. The fixture tests that exact failure on every runtime, then uses an
-identical controlled language for default-value comparison and restores the global.
-`knownRuntimeBlockers=1` prevents strict release success; ordinary observation tests
-passing do not mean the defect is fixed. See [Node evidence](../../refactor/changes/2026-09-13-CI-01-node-consumers.md).
+CORE-25 fixed candidate static defaults without navigator. The fixture preserves the
+published ReferenceError while requiring candidate main/legacy/ESM defaults to succeed,
+then uses an identical controlled language for comparison and restores the global.
+The fixture now reports zero known runtime blockers; it is still only core/chapter
+acceptance, not full release readiness. See [the fix](../../refactor/changes/2026-09-13-CORE-25-defaults-ssr.md)
+and the earlier [Node evidence](../../refactor/changes/2026-09-13-CI-01-node-consumers.md).
 
 The optional core `artplayer/runtime` entry has eight additional strict consumer
 groups: TS 5.1.6 and 5.9.3 each check Node10 CommonJS, NodeNext CJS/ESM and Bundler.

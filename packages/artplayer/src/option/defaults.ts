@@ -1,7 +1,7 @@
-import type { ResolvedOption } from './types'
+import type { DefaultOption } from './types'
 import { isSafari } from '../utils/compatibility'
 
-export default function createDefaults(): ResolvedOption {
+export default function createDefaults(): DefaultOption {
   return {
     id: '',
     container: '#artplayer',
@@ -70,6 +70,6 @@ export default function createDefaults(): ResolvedOption {
     icons: {},
     cssVar: {},
     customType: {},
-    lang: navigator?.language.toLowerCase(),
+    lang: typeof navigator === 'undefined' ? undefined : navigator?.language.toLowerCase(),
   }
 }

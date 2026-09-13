@@ -1,5 +1,31 @@
 import { expect, test } from './fixtures.js'
 
+for (const locale of ['en-US', 'zh-CN']) {
+  test.describe(`default language ${locale}`, () => {
+    test.use({ locale })
+    for (const core of ['published', 'candidate']) {
+      test(`${core}: language defaults follow the browser and explicit language still overrides`, async ({ page }) => {
+        await page.goto(`/test/player.html?core=${core}&chapter=published`)
+        const result = await page.evaluate(() => {
+          const container = document.createElement('div')
+          document.body.append(container)
+          const { Artplayer } = window
+          const initial = new Artplayer({ container })
+          const observed = { browser: navigator.language, defaults: Artplayer.option.lang, instance: initial.option.lang }
+          initial.destroy()
+          document.body.append(container)
+          const explicit = new Artplayer({ container, lang: 'fr' })
+          observed.explicit = explicit.option.lang
+          observed.defaultAfterOverride = Artplayer.option.lang
+          explicit.destroy()
+          return observed
+        })
+        expect(result).toEqual({ browser: locale, defaults: locale.toLowerCase(), instance: locale.toLowerCase(), explicit: 'fr', defaultAfterOverride: locale.toLowerCase() })
+      })
+    }
+  })
+}
+
 for (const core of ['published', 'candidate']) {
   test(`${core}: expanded option input preserves historical JS forms`, async ({ page }) => {
     await page.goto(`/test/player.html?core=${core}&chapter=published`)

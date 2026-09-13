@@ -10,4 +10,8 @@ export interface ResolvedOption extends Omit<Required<OptionInput>, 'proxy' | 's
   thumbnails: Required<Thumbnails>
 }
 
+export interface DefaultOption extends Omit<ResolvedOption, 'lang'> {
+  lang: OptionInput['lang']
+}
+
 export type ResolvedInput<Input extends OptionInput> = ResolvedOption & Omit<Input, keyof OptionInput>

@@ -1,0 +1,704 @@
+{
+  "schemaVersion": 1,
+  "task": "CORE-25",
+  "date": "2026-09-13",
+  "baseCommit": "4a299eb2d4d4123f2b81e086c19ccbfd23bf3c2b",
+  "change": "Guard the absent navigator binding before reading the existing optional language path",
+  "unit": {
+    "before": {
+      "passed": 9,
+      "failed": 1,
+      "error": "ReferenceError: navigator is not defined"
+    },
+    "afterFocused": 16
+  },
+  "ci": {
+    "passed": 2432,
+    "unit": 2033,
+    "engineering": 28,
+    "baseline": 371,
+    "seconds": 240.93
+  },
+  "package": {
+    "name": "artplayer",
+    "version": "5.4.1",
+    "archiveSha256": "9c33c718db08109be7572d8a6ba2201cd2d5a1e6bd0e8845d141f0e5238cc4a3",
+    "legacyTypeModes": 5,
+    "preciseTypeModes": 8,
+    "knownTypeBlockers": 0,
+    "knownRuntimeBlockers": 0,
+    "sourceCopiesRemovedBy": "ENG-12"
+  },
+  "runs": [
+    {
+      "node": "20.19.0",
+      "candidateChecks": 36,
+      "publishedChecks": 31,
+      "defaults": {
+        "historical": false,
+        "resolved": true,
+        "ownLang": true,
+        "langType": "undefined"
+      },
+      "publishedDefaults": {
+        "name": "ReferenceError",
+        "message": "navigator is not defined",
+        "historical": true,
+        "resolved": false
+      },
+      "file": "refactor/.cache/packages/run-DWeEeu/runtime-node-20.19.0.json",
+      "sha256": "2a80dc04c57c76fb0fa61da3bf8e59764264ebf5af67e9535b60000e8f4512d9"
+    },
+    {
+      "node": "22.12.0",
+      "candidateChecks": 36,
+      "publishedChecks": 31,
+      "defaults": {
+        "historical": false,
+        "resolved": true,
+        "ownLang": true,
+        "langType": "undefined"
+      },
+      "publishedDefaults": {
+        "name": "ReferenceError",
+        "message": "navigator is not defined",
+        "historical": true,
+        "resolved": false
+      },
+      "file": "refactor/.cache/packages/run-DWeEeu/runtime-node-22.12.0.json",
+      "sha256": "d0bf3dbbc8c050555d359b495b805f1353bdd7d53c96b42696581eeac6b88244"
+    },
+    {
+      "node": "24.21.0",
+      "candidateChecks": 36,
+      "publishedChecks": 31,
+      "defaults": {
+        "historical": false,
+        "resolved": true,
+        "ownLang": true,
+        "langType": "undefined"
+      },
+      "publishedDefaults": {
+        "name": "ReferenceError",
+        "message": "navigator is not defined",
+        "historical": true,
+        "resolved": false
+      },
+      "file": "refactor/.cache/packages/run-DWeEeu/runtime-node-24.21.0.json",
+      "sha256": "133cedb07f29ed324757aa5e7c492771ca3f1beb7b907323a271029e19c81ffc"
+    }
+  ],
+  "browsers": [
+    {
+      "entry": "source",
+      "passed": 30,
+      "file": "refactor/.cache/core25-browser/source/report.json",
+      "sha256": "828391f7973208461c3a68ab785ef2e87f5cd1ab468ff20c926c131e800eeb4a",
+      "rows": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242"
+        }
+      ]
+    },
+    {
+      "entry": "main",
+      "passed": 30,
+      "file": "refactor/.cache/core25-browser/main/report.json",
+      "sha256": "8a67e34409f89d02ffde591e3e00842ab94e3fd403ef985c1cc9055fc2e9c583",
+      "rows": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+        }
+      ]
+    },
+    {
+      "entry": "legacy",
+      "passed": 30,
+      "file": "refactor/.cache/core25-browser/legacy/report.json",
+      "sha256": "e02ad726266d1524c329445d511d2481ef42a7071b5f8414b7e5720222090db9",
+      "rows": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: expanded option input preserves historical JS forms",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: expanded option input preserves historical JS forms",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: configuration errors occur before mounting and preserve allocation timing",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: container identity, partial defaults, custom fields and normal callbacks",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "published: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "title": "candidate: language defaults follow the browser and explicit language still overrides",
+          "candidateSha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+        }
+      ]
+    }
+  ],
+  "browserLimit": "Windows Playwright engines; not physical Safari or mobile devices",
+  "logs": [
+    {
+      "file": "refactor/.cache/core25-before.log",
+      "sha256": "db374872a1cdf5d0a11616d8286bd992a5dd2ca6c42b56128cf09ffa6db96e2c"
+    },
+    {
+      "file": "refactor/.cache/core25-focused.log",
+      "sha256": "afd16364ac51b390697f830a6c9c602315ab79ec0196c63b01219b45fd1c2301"
+    },
+    {
+      "file": "refactor/.cache/core25-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/core25-package-final.log",
+      "sha256": "5f6aaf334f32a172b2a2be079b71ea0d9e3cb0c8d276c4678761b5e71bb8dd4e"
+    },
+    {
+      "file": "refactor/.cache/core25-ci.log",
+      "sha256": "fe6248a222bf1bf65cfe4cdee2d350ba4231187eeb1fd55e2f1d01ce0e124824"
+    },
+    {
+      "file": "refactor/.cache/core25-build.log",
+      "sha256": "8085c31783906a518aad707bd4b461a0947f756746c3636a0cc1416bfa91a963"
+    }
+  ],
+  "initialBuildFailure": "Vite implicit publicDir copy; independently fixed and committed as ENG-12",
+  "shippedArtifacts": [
+    {
+      "file": "packages/artplayer/dist/artplayer.js",
+      "sha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335",
+      "docsIdentical": true
+    },
+    {
+      "file": "packages/artplayer/dist/artplayer.legacy.js",
+      "sha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04",
+      "docsIdentical": true
+    },
+    {
+      "file": "packages/artplayer/dist/artplayer.mjs",
+      "sha256": "432e2b0ad92009a09743e020bf7c928c8b8f18a52496622b16259ec9ab20059f",
+      "docsIdentical": true
+    }
+  ],
+  "remoteActions": null,
+  "fullReleaseReady": false
+}

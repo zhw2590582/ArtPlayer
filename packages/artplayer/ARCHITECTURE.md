@@ -156,6 +156,16 @@ order. All subsystem assignments and mutable static assignments keep their origi
 order. bootstrap/browser.ts owns global publication, style injection and the deferred
 version log; server imports do none of those browser operations.
 
+option/defaults.ts can be read without browser globals: an absent navigator yields
+an own lang field with value undefined. It still reads browser language on each access
+and returns fresh nested containers. DefaultOption describes this unvalidated state;
+ResolvedOption keeps a required language after the existing validator succeeds.
+Do not treat optional chaining on an undeclared navigator as a presence check or
+weaken the validated I18nHost type. Regression entrypoints are test/options.test.js,
+test/types/options-source.ts, test/package/runtime.cjs and test/browser/options.spec.js.
+The installed fixture checks missing navigator on every Node, including newer versions
+that normally provide it. See refactor/changes/2026-09-13-CORE-25-defaults-ssr.md.
+
 option/runtime.ts is the compatibility boundary between old external callback
 declarations and internal module views. It keeps validated merge behavior, callback
 identity and runtime receivers; it does not wrap callbacks or assert the whole player

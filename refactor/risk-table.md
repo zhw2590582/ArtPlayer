@@ -204,5 +204,5 @@
 | MULTI-SUB-ENTITY-01 | open / 已复现 | Vendored cue entity decoding retains semicolons after lt, gt and amp entities | PKG-MULTI-SUB-05 |
 | JASSUB-TYPE-01 | open / 已复现 | JASSUB declared required URLs, Promise methods and resize parameter order differ from actual historical behavior | PKG-JASSUB-04 |
 | JASSUB-EXPORT-01 | open / 已复现 | JASSUB historical CommonJS object.default changes to a direct factory in 1.1.0 | PKG-JASSUB-04, PKG-JASSUB-06 |
-| CORE-DEFAULTS-SSR-01 | open / 已复现 | Reading static defaults throws when navigator is absent | CORE-25 |
+| CORE-DEFAULTS-SSR-01 | resolved / 已复现 | Reading static defaults throws when navigator is absent | CORE-25 |
 | ENG-DIST-PUBLIC-01 | resolved / 已复现 | Vite copied authored declarations into library distribution | ENG-12 |

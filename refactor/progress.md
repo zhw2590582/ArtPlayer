@@ -1,5 +1,19 @@
 # 进度与证据
 
+## CORE-25 无 navigator 默认选项修复完成
+
+defaults.ts 使用 typeof 保护不存在的全局绑定，保留浏览器语言小写、lang 自有字段及每次
+独立默认对象；构造仍只在浏览器执行。源码反例 9 过/1 失败，修复后定向 16 项通过。
+严格包检查通过，3 个 Node 各 36 候选/31 发布观察，候选默认选项问题清零；旧错误保留。
+三浏览器源码/main/legacy 各 30 项共 90 项通过，英语/中文默认语言与显式覆盖保持一致。
+完整本地 CI 2432 项通过（2033 单元、28 工程、371 基线）。三个正常构建与安装测试
+使用相同 JS 字节，docs 副本一致；公开声明、依赖和版本不变。
+生成时发现的 public 复制另由 ENG-12 提交 4a299eb2d 修复；最终干净 tarball 重新验证。
+见[变更](changes/2026-09-13-CORE-25-defaults-ssr.md)和[证据](baselines/defaults-ssr-validation.json)。
+225 项：123 done、16 doing、86 todo；202 风险，CORE-DEFAULTS-SSR-01 关闭。
+独立本地提交，不推送、不发布；全生态/CI-01/真实远端与最终复盘仍待完成。
+
+
 ## ENG-12 库声明源码复制修复完成
 
 CORE-25 构建期间发现 Vite 默认复制 core/public 到 dist；实际候选 tarball 含 37 个

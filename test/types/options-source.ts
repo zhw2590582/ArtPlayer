@@ -4,6 +4,11 @@ import resolveOption from '../../packages/artplayer/src/option/resolve'
 
 const input: Option = { container: '#player', url: 'video.mp4', subtitle: { encoding: 'utf-8' } }
 const resolved: ResolvedOption = resolveOption(input, createDefaults())
+const defaultLanguage: string | undefined = createDefaults().lang
+const validatedLanguage: string = resolved.lang.toLowerCase()
+void [defaultLanguage, validatedLanguage]
+// @ts-expect-error Unvalidated defaults may have no browser language.
+createDefaults().lang.toLowerCase()
 resolved.subtitle.onVttLoad(resolved.subtitle.url)
 resolved.thumbnails.column.toFixed()
 resolved.volume.toFixed()

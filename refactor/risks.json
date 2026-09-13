@@ -4501,7 +4501,7 @@
       "id": "CORE-DEFAULTS-SSR-01",
       "title": "Reading static defaults throws when navigator is absent",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "CORE-25"
       ],
@@ -4513,7 +4513,12 @@
       ],
       "compatibleResolution": "Read navigator through a guarded global lookup while preserving browser language defaults and public declaration shape.",
       "closureCriteria": "Published failure remains explicit; source and actual installed candidate defaults work without navigator on selected Node versions and browser language behavior stays unchanged.",
-      "workspaceState": "Node 20.19.0 actual installed probe fails with ReferenceError: navigator is not defined. Published 5.4.0 and candidate 5.4.1 both reproduce under explicitly absent navigator on every selected runtime. CI-01 records this known failure, then compares default values under the same controlled en-US navigator; this is not a production fix."
+      "workspaceState": "Node 20.19.0 actual installed probe fails with ReferenceError: navigator is not defined. Published 5.4.0 and candidate 5.4.1 both reproduce under explicitly absent navigator on every selected runtime. CI-01 records this known failure, then compares default values under the same controlled en-US navigator; this is not a production fix.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-CORE-25-defaults-ssr.md",
+        "refactor/baselines/defaults-ssr-validation.json"
+      ],
+      "resolutionRationale": "Candidate source and actual installed main/legacy/ESM defaults work without navigator on Node 20.19.0/22.12.0/24.21.0. Three-engine source/main/legacy browser cases preserve en-US/zh-CN defaults and explicit language overrides; historical failure remains exact. Strict package release now reports zero known runtime blockers for this fixture."
     },
     {
       "id": "ENG-DIST-PUBLIC-01",

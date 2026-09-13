@@ -189,10 +189,21 @@ const vm = require('node:vm');
   const defaultNavigator = Object.getOwnPropertyDescriptor(globalThis, 'navigator')
   try {
     assert(delete globalThis.navigator)
-    // CORE-25 tracks this reproduced published and candidate failure separately.
-    assert.throws(() => core.option, { name: 'ReferenceError', message: 'navigator is not defined' })
-    observations.defaultsWithoutNavigator = { name: 'ReferenceError', message: 'navigator is not defined', historical: !!expected.baseline, resolved: false }
-    check('SSR.defaults-missing-navigator-known-failure', true)
+    if (expected.baseline) {
+      assert.throws(() => core.option, { name: 'ReferenceError', message: 'navigator is not defined' })
+      observations.defaultsWithoutNavigator = { name: 'ReferenceError', message: 'navigator is not defined', historical: true, resolved: false }
+      check('SSR.defaults-missing-navigator-known-failure', true)
+    }
+    else {
+      const defaults = core.option
+      assert.equal(defaults.lang, undefined)
+      assert(Object.hasOwn(defaults, 'lang'))
+      assert.notEqual(core.option, defaults)
+      for (const Class of [esm.default, legacy.default, require('artplayer/legacy')])
+        assert.equal(Class.option.lang, undefined)
+      observations.defaultsWithoutNavigator = { historical: false, resolved: true, ownLang: true, langType: typeof defaults.lang }
+      check('SSR.defaults-without-navigator', true)
+    }
     Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { language: 'en-US' } })
     observations.api = { static: shape(core), prototype: shape(core.prototype), emitter: shape(core.Emitter.prototype), factory: shape(chapter), defaults: JSON.parse(JSON.stringify(core.option, (_, value) => typeof value === 'function' ? '$function' : value)) }
     check('API.defaults-controlled-language', observations.api.defaults.lang === 'en-us')

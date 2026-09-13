@@ -40,6 +40,55 @@ test('default values, keys and nested order match the published getter', () => {
   assert.deepEqual(Object.keys(current.Artplayer.option), Object.keys(published.Artplayer.option))
 })
 
+test('candidate defaults are readable without navigator and keep independent option containers', () => {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator')
+  try {
+    for (const mode of ['absent', 'undefined', 'null']) {
+      assert(delete globalThis.navigator)
+      if (mode !== 'absent')
+        Object.defineProperty(globalThis, 'navigator', { configurable: true, value: mode === 'null' ? null : undefined })
+      const first = current.Artplayer.option
+      const second = current.Artplayer.option
+      assert.equal(first.lang, undefined, mode)
+      assert(Object.hasOwn(first, 'lang'))
+      assert.notEqual(first, second)
+      assert.notEqual(first.subtitle, second.subtitle)
+      assert.deepEqual(first.plugins, [])
+      assert.equal(first.subtitle.onVttLoad('text'), 'text')
+      assert.throws(() => resolveOption({ container: '#player' }, first), /option.lang/)
+      assert.equal(resolveOption({ container: '#player', lang: 'en' }, first).lang, 'en')
+    }
+  }
+  finally {
+    if (descriptor)
+      Object.defineProperty(globalThis, 'navigator', descriptor)
+    else
+      delete globalThis.navigator
+  }
+})
+
+test('candidate defaults read the current browser language on each access without caching it', () => {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, 'navigator')
+  try {
+    let language = 'EN-us'
+    Object.defineProperty(globalThis, 'navigator', { configurable: true, value: {
+      get language() {
+        return language
+      },
+    } })
+    for (const value of ['EN-us', 'zh-CN', '']) {
+      language = value
+      assert.equal(current.Artplayer.option.lang, value.toLowerCase())
+    }
+  }
+  finally {
+    if (descriptor)
+      Object.defineProperty(globalThis, 'navigator', descriptor)
+    else
+      delete globalThis.navigator
+  }
+})
+
 for (const [name, resolve, Artplayer] of [['published', oldResolve, published.Artplayer], ['workspace', resolveOption, current.Artplayer]]) {
   test(`resolved options preserve unknown fields, merge ownership and collection item identity: ${name}`, () => {
     const callback = () => {}
