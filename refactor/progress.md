@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-ASR-03 TS 拆分与音频生命周期完成
+
+生产源码拆为 8 个严格 TS 模块；队列保留半块/尾部，识别回调背压、拒绝恢复、
+初始化去重和代际清理完成。退休 Worklet 消息反例由失败转通过。
+Chromium stop 后不能恢复的原生问题已修复：直接媒体路由由播放器持有到 destroy，
+stop 只停 ASR 并允许重新播放；先准备 Worklet 后绑定视频，失败可真正释放未绑定 context。
+定向 212 项通过，main/legacy 各重跑 25 候选项；严格分包 tsc、lint、正常三格式构建通过。
+最终浏览器源码 12 过/6 能力跳过，main/legacy 各 4 过/2 能力跳过；共 20 过、10 明确
+Windows WebKit 无 WebAudio 跳过。非零 PCM、暂停、切源、stop 重启与 destroy 已实测。
+见[变更](changes/2026-09-13-PKG-ASR-03-audio-ownership.md)和[证据](baselines/asr-ownership-validation.json)。
+225 项：126 done、16 doing、83 todo；205 风险，两项 ASR 音频风险闭环。
+下一步 ASR-04 公共异步类型与安装消费者；完整设备/fallback/音量和发行仍未完成。
+没有重复全量 CI、没有推送或发布。子代理承担独立模块/测试和规范审查，主代理集成验收。
+
+
 ## PKG-ASR-02 音频与错误基线完成
 
 子代理交付并由主代理审查的 133 项音频历史测试通过，连同公开契约/来源共 165 项。

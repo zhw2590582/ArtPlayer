@@ -1240,7 +1240,7 @@
         "EX-03"
       ],
       "sourceFiles": [
-        "packages/artplayer-plugin-asr/src/index.js",
+        "packages/artplayer-plugin-asr/src/index.ts",
         "docs/assets/example/asr.js"
       ],
       "contract": "Core plugin supplies PCM to caller onAudioChunk. Example fetches an external ASR endpoint and opens its returned WebSocket; not an embedded ASR SDK or a verified service.",

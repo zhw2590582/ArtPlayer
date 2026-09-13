@@ -1,0 +1,1361 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-ASR-03",
+  "capturedAt": "2026-09-13T06:43:08.711Z",
+  "baseCommit": "53c295819db004e507b35689a7bdec1955e08396",
+  "production": {
+    "language": "TypeScript",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "modules": 8,
+    "publicDeclarationChanged": false,
+    "dependenciesAdded": [],
+    "versionChanged": false
+  },
+  "unit": {
+    "historicalPublic": 28,
+    "historicalAudio": 133,
+    "provenance": 4,
+    "pureAudio": 20,
+    "candidateLifecycle": 25,
+    "distribution": 2,
+    "totalFocused": 212,
+    "repeatedCandidateArtifacts": {
+      "main": 25,
+      "legacy": 25
+    },
+    "candidateRed": {
+      "retiredPortAfterPauseResume": "Expected new negative PCM but received old positive PCM; fixed recorder identity check"
+    }
+  },
+  "browsers": [
+    {
+      "mode": "source",
+      "passed": 12,
+      "skipped": 6,
+      "file": "refactor/.cache/asr03-browser-source-final-v3/report.json",
+      "sha256": "eb3bcf40ad36448e553c98a9b42988b9a417a231056f2067530cde5b4b7b0638",
+      "rows": [
+        {
+          "title": "ASR 2.0.0 + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "2.0.0",
+            "core": "published",
+            "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+            "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 4,
+            "nonzero": 4,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "a47709732484a2565af8014af97f2b3c953f5a0d5ac424fbbb00df4210f75382"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.0.0 + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "2.0.0",
+            "core": "candidate",
+            "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+            "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 3,
+            "nonzero": 3,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "246313154c06084282eaf7b3df6f83d89974e1997582adc19e83574119a8eba4"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.1.0 + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "2.1.0",
+            "core": "published",
+            "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+            "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 4,
+            "nonzero": 4,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "febb5fd96895faffdab64891ca035bed5af27add24d5a7af690b74861bce1b32"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.1.0 + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "2.1.0",
+            "core": "candidate",
+            "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+            "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 4,
+            "nonzero": 4,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "246fc4e906cf1ac321801c2b39eecb5f6d03a4fd328ff5c674bbe55b2746d317"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "f3a6621365e043a8e2370b6eaa39e94cb9925d3e6615d8e97bd702b71d8a111c",
+            "integrity": null,
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 21,
+            "nonzero": 21,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "2c2484a976c515e7e3f6852f38ac829d9300fca6799b7a5807bfa5800e2f2531"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "f3a6621365e043a8e2370b6eaa39e94cb9925d3e6615d8e97bd702b71d8a111c",
+            "integrity": null,
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 16,
+            "nonzero": 16,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "247b90f3f65dead3740a73a31cef3d53695b3b1400288a30b6515db8b767f3d2"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.0.0 + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "2.0.0",
+            "core": "published",
+            "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+            "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 5,
+            "nonzero": 5,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "6cf045be45860018f43c5504722c537160fb71f2b5f0df4ecb5c484bf0420b83"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.0.0 + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "2.0.0",
+            "core": "candidate",
+            "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+            "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 5,
+            "nonzero": 4,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "bcd50ffe10ce801ca6a0362cf69e9488eb3a55b6d60c98031b8f8fa472c14256"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.1.0 + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "2.1.0",
+            "core": "published",
+            "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+            "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 5,
+            "nonzero": 5,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "fcf3d919299c2c165e3035f34f5bd965a6a6f56e4155dad6fe0f68be95ce9a4e"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.1.0 + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "2.1.0",
+            "core": "candidate",
+            "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+            "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 4,
+            "nonzero": 4,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a"
+            ],
+            "sha256": "b4f12ce7bbd64f29f20e3ec838b1ea8439fd848e8dfcc33b08c001dc113a0eb3"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "f3a6621365e043a8e2370b6eaa39e94cb9925d3e6615d8e97bd702b71d8a111c",
+            "integrity": null,
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 22,
+            "nonzero": 22,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "dcebcb83f5964a081b7bd5f0b03ab0712148f0381ef408d516b0ddef841325d4"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "f3a6621365e043a8e2370b6eaa39e94cb9925d3e6615d8e97bd702b71d8a111c",
+            "integrity": null,
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 18,
+            "nonzero": 17,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "136fdf2be0fb5074c359379857019b67aebf2cfd8edce61d7b8a8db2af3e6726"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR 2.0.0 + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "2.0.0",
+            "core": "published",
+            "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+            "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR 2.0.0 + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "2.0.0",
+            "core": "candidate",
+            "pluginSha256": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+            "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR 2.1.0 + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "2.1.0",
+            "core": "published",
+            "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+            "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR 2.1.0 + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "2.1.0",
+            "core": "candidate",
+            "pluginSha256": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+            "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "f3a6621365e043a8e2370b6eaa39e94cb9925d3e6615d8e97bd702b71d8a111c",
+            "integrity": null,
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "f3a6621365e043a8e2370b6eaa39e94cb9925d3e6615d8e97bd702b71d8a111c",
+            "integrity": null,
+            "candidate": "workspace source",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "main",
+      "passed": 4,
+      "skipped": 2,
+      "file": "refactor/.cache/asr03-browser-main-final-v3/report.json",
+      "sha256": "87108e019cd5fe7fd085d6169e428d09314496e5510dd7dd1e327c7502cdd9fe",
+      "rows": [
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 17,
+            "nonzero": 17,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "c1bf3b72b7684e234804bc8c75f0c54b4aa0b7e3ed9c17db19320349d4c474e6"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 27,
+            "nonzero": 27,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "e53f416557ecec1e46a738de8deedd9dc2b6f2ded3963cd9d1771abe264568cd"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 22,
+            "nonzero": 21,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "d5967d1c8a490517b529938292e1adafe751ddbb6dacae883c2ef453799f8506"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 21,
+            "nonzero": 20,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "b6f205718c51da9a64157b299f87fe3278bffb26a36a0daf40eace9811f3963c"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "legacy",
+      "passed": 4,
+      "skipped": 2,
+      "file": "refactor/.cache/asr03-browser-legacy-final-v3/report.json",
+      "sha256": "affe582473b8748029c93de7993216c80c1a9bb48a6f570f52af630a104d82b8",
+      "rows": [
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 18,
+            "nonzero": 18,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "27a0fa2126c3972e23f02bf003263c48c0270b0d6765634c23788b44b5010f72"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 18,
+            "nonzero": 18,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "7d24b81a28bad9d5f12584df64e8c9cb94f1b62f7ea2f8b45ea8d910e2977c7d"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 18,
+            "nonzero": 17,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "a4af9fb4921b3b2d7d0b0d3452c5ffa4a59652135d7ad1b2dd2a7f3bab0bf783"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "function",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "function"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 17,
+            "nonzero": 16,
+            "sources": [
+              "http://127.0.0.1:8084/test/audio-tone.m4a",
+              "http://127.0.0.1:8084/test/audio-tone.m4a?asr=second"
+            ],
+            "sha256": "4728408786921fae730cc16acd442bc95af3349f59905491896e56b3d590667c"
+          },
+          "annotations": []
+        },
+        {
+          "title": "ASR candidate + published: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "candidate",
+            "core": "published",
+            "pluginSha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "title": "ASR candidate + candidate: native Worklet supplies local PCM with owned stop and destroy",
+          "project": "webkit",
+          "status": "skipped",
+          "browser": "26.6",
+          "inputs": {
+            "version": "candidate",
+            "core": "candidate",
+            "pluginSha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+            "integrity": null,
+            "candidate": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+            "mediaSha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+            "media": "local mono AAC 440 Hz tone",
+            "networkService": false
+          },
+          "capabilities": {
+            "AudioContext": "undefined",
+            "webkitAudioContext": "undefined",
+            "AudioWorkletNode": "undefined"
+          },
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          },
+          "audio": {
+            "chunks": 0,
+            "nonzero": 0,
+            "sources": [],
+            "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit 26.6 has no AudioContext/AudioWorkletNode; native ASR acceptance remains open",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-audio.spec.js",
+                "line": 30,
+                "column": 14
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+      "sha256": "533b60d6348764fa460c2436cc1197b95544051fb4d1ec4d950fec9f88e1c5cb",
+      "bytes": 8862,
+      "docsCopyIdentical": true
+    },
+    {
+      "file": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+      "sha256": "c36ebbea3a4e5f30b2736ffb6a964d45e330b0911f51e32d9cab44397ec16912",
+      "bytes": 9357,
+      "docsCopyIdentical": true
+    },
+    {
+      "file": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.mjs",
+      "sha256": "751201241a848cdc26235334ce7603b174a90bf4ac793ff3f85182b1783f6996",
+      "bytes": 13311,
+      "docsCopyIdentical": true
+    }
+  ],
+  "nativeStopCorrection": {
+    "before": {
+      "file": "refactor/.cache/asr03-browser-restart-before/report.json",
+      "passed": 2,
+      "failed": 2,
+      "skipped": 2,
+      "observation": "Chromium both cores did not resume nonzero PCM after direct context close; Firefox did."
+    },
+    "after": "Direct player-owned audio route remains until terminal destroy; stop/restart reuses one context. Final source/main/legacy browser cases all pass on Chromium and Firefox.",
+    "semantics": "Internal context ownership changed; Promise stop, stopped recognizer and later play remain public behavior."
+  },
+  "limitation": [
+    "Windows WebKit 26.6 native WebAudio unsupported; not Safari/device evidence.",
+    "Installed public TS/module consumers remain PKG-ASR-04.",
+    "Native captured fallback topology, volume/mute, CORS and device matrix remain PKG-ASR-05.",
+    "Queue overload explicitly stops capture after the larger of 60 seconds or two configured chunks; existing subtitles keep their hide deadline; caller cancellation is outside plugin ownership."
+  ],
+  "fullCiRun": false,
+  "releaseReady": false
+}

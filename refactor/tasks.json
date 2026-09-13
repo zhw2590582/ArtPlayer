@@ -2660,11 +2660,14 @@
         "CORE-10",
         "CORE-18"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "AudioContext/Worklet/Stream 生命周期和背压分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-ASR-03-audio-ownership.md",
+        "baselines/asr-ownership-validation.json"
+      ]
     },
     {
       "id": "PKG-ASR-04",

@@ -798,7 +798,7 @@
         "EX-03"
       ],
       "evidence": [
-        "packages/artplayer-plugin-asr/src/index.js",
+        "packages/artplayer-plugin-asr/src/index.ts",
         "docs/assets/example/asr.js"
       ],
       "compatibleResolution": "Core plugin supplies PCM to caller onAudioChunk. Example fetches an external ASR endpoint and opens its returned WebSocket; not an embedded ASR SDK or a verified service.",
@@ -4561,7 +4561,7 @@
       "id": "ASR-CHUNK-01",
       "title": "ASR tick discards underfilled chunks and overrun samples in source",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-ASR-02",
         "PKG-ASR-03"
@@ -4574,13 +4574,20 @@
         "refactor/baselines/asr-audio-validation.json"
       ],
       "compatibleResolution": "Reproduce exact sample loss and retain queue remainders with bounded, ordered callback delivery.",
-      "closureCriteria": "Exact PCM/WAV byte sequence and slow/rejected callback regression tests pass without losing or reordering accepted input."
+      "closureCriteria": "Exact PCM/WAV byte sequence and slow/rejected callback regression tests pass without losing or reordering accepted input.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-ASR-03-audio-ownership.md",
+        "refactor/baselines/asr-ownership-validation.json",
+        "test/asr-lifecycle.test.js",
+        "test/asr-encoding.test.js"
+      ],
+      "resolutionRationale": "Copied linked blocks retain underfilled input and tails; exact byte parity and FIFO tests pass. One callback per generation prevents overlap; rejection recovery and obsolete completions are covered. Exceeding the larger of 60 seconds or two configured chunks pauses capture with an explicit error; long configured intervals remain collectable."
     },
     {
       "id": "ASR-LIFE-01",
       "title": "ASR partial initialization, pause resume and stale callback cleanup need controlled evidence",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-ASR-02",
         "PKG-ASR-03",
@@ -4594,7 +4601,14 @@
         "refactor/baselines/asr-audio-validation.json"
       ],
       "compatibleResolution": "Own pending setup, URLs, source nodes and callbacks across pause, stop, restart and terminal destruction.",
-      "closureCriteria": "Failure/race regression tests plus native WebAudio playback and cleanup evidence prove resource ownership."
+      "closureCriteria": "Failure/race regression tests plus native WebAudio playback and cleanup evidence prove resource ownership.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-ASR-03-audio-ownership.md",
+        "refactor/baselines/asr-ownership-validation.json",
+        "test/asr-lifecycle.test.js",
+        "test/asr-encoding.test.js"
+      ],
+      "resolutionRationale": "Candidate ownership/race regression tests pass, including retired-port delivery and module failure before binding video. Actual Chromium/Firefox source/main/legacy with both cores verify pause, source change, explicit stop/restart and final close. Direct media contexts deliberately remain player-owned until destroy; disposable stream contexts close on stop. General native fallback/volume/device acceptance remains ASR-05 and SDK-11, not claimed by this specific fix."
     }
   ]
 }

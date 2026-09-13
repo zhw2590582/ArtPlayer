@@ -30,7 +30,7 @@ for (const implementation of await asrHistorical()) {
       assert.equal(env.styles.size, 1)
     })
   }
-  test(`ASR ${implementation.name}: append replaces punctuation lines, permits markup, and hide retains content`, () => {
+  test(`ASR ${implementation.name}: append replaces punctuation lines, permits markup, and hide retains content`, async () => {
     const env = asrEnvironment(implementation)
     const result = env.factory()(env.art)
     assert.equal(result.append('One. Two! 三。 Four?'), undefined)
@@ -47,6 +47,9 @@ for (const implementation of await asrHistorical()) {
     result.append('')
     assert.equal(env.layer.innerHTML, '')
     assert.equal(env.layer.style.display, '')
+    const timer = [...env.timeouts.keys()][0]
+    await result.stop()
+    assert.equal([...env.timeouts.keys()][0], timer, 'Stopping audio preserves an existing subtitle hide deadline')
     ;[...env.timeouts.values()][0].callback()
     assert.equal(env.layer.style.display, 'none')
   })

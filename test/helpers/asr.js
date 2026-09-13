@@ -32,6 +32,7 @@ export function asrEnvironment(implementation, { script = false } = {}) {
       return id
     },
     clearTimeout(timer) { timeouts.delete(timer) },
+    clearInterval() {},
     document: {
       getElementById: id => styles.get(id),
       createElement: () => ({}),
@@ -57,6 +58,7 @@ export function asrEnvironment(implementation, { script = false } = {}) {
       return layer
     } },
     on(name, callback) { listeners.set(name, [...listeners.get(name) || [], callback]) },
+    off(name, callback) { listeners.set(name, (listeners.get(name) || []).filter(listener => listener !== callback)) },
   }
   return { context, factory, exported, styles, layer, layers, listeners, timeouts, art, reload: () => vm.runInContext(code, context), emit: name => Promise.all((listeners.get(name) || []).map(callback => callback())) }
 }
