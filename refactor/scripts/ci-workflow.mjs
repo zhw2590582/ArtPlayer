@@ -84,6 +84,9 @@ export function validateCIWorkflow(source) {
     consumerIndex = index + 1
   }
   assert(browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser ')) > consumerIndex, 'Browser tools must run after canonical Node restoration')
+  const reactIndex = browser.steps.findIndex(step => step.run === 'yarn test:react-consumer 2>&1 | tee refactor/.cache/ci/react-consumer.log')
+  assert(reactIndex > consumerIndex && !Object.hasOwn(browser.steps[reactIndex], 'if'), 'Run React installed consumers after restoring canonical Node')
+  assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/react-consumer-*/')), 'Retain React consumer failure evidence')
   const pages = workflow.jobs.checks.steps.find(step => step.uses?.startsWith('actions/upload-pages-artifact@'))
   assert.equal(pages?.if, 'inputs.pages-artifact && github.ref == \'refs/heads/master\' && matrix.os == \'ubuntu-latest\'', 'Only one trusted matrix leg can prepare Pages')
   return { jobs: requiredJobs, systems, summary: summary.name }

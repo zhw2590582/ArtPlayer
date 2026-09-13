@@ -253,3 +253,5 @@
 | JASSUB-HYBRID-01 | open / 已复现 | Late hybrid frames mutate the new offscreen canvas or throw; terminal track calls recreate transferred canvases | PKG-JASSUB-09, PKG-JASSUB-05 |
 | JASSUB-FIREFOX-OFFSCREEN-01 | open / 已复现 | Windows Firefox offscreen readback and asynchronous ImageBitmap creation can stall through seek/layout, including a minimal Worker control | PKG-JASSUB-09, PKG-JASSUB-05 |
 | AUTO-THUMB-CANVAS-01 | resolved / 已复现 | Private thumbnail canvas retains sheet dimensions after completion or cancellation while callbacks retain the element | PKG-AUTO-THUMB-07 |
+| EX-REACT-LIFE-01 | resolved / 已复现 | React getInstance exception leaks the constructed player | EX-01 |
+| EX-REACT-ENTRY-01 | resolved / 源码/产物事实 | React HTML references absent main.jsx instead of the existing TSX entry | EX-01 |

@@ -1,7 +1,9 @@
-import Artplayer, { type Option } from 'artplayer'
+import type Artplayer from 'artplayer'
+import type { Option } from 'artplayer'
 import Player from './Player'
 
 function getInstance(art: Artplayer) {
+  // eslint-disable-next-line no-console
   console.log(art)
 }
 

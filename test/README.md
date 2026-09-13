@@ -2,6 +2,14 @@
 
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
+`yarn test:react-consumer` installs packed core/Danmuku/Document PiP outside the
+workspace and checks the actual React example's strict TSX, development and
+production builds, and native lifecycle/playback in three engines. Its fixture
+is in `test/react/`; unique reports and frozen consumer locks are retained under
+`refactor/.cache/react-consumer-*`. The `--before` control intentionally fails at
+the recorded old wrapper's callback-exception leak. See the example README for
+the compatibility contract and the capabilities covered by other package tasks.
+
 `yarn test:auto-thumbnail-types` checks the preserved npm 1.1.0 declaration,
 accurate `/runtime` Promise types, exact rejected consumer lines, and generated
 editor globals. It also runs in `test:auto-thumbnail` and `test:baseline`.

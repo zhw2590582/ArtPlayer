@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 237 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 238 项，范围 22 个包及工作区/示例。
 
-状态：todo 62 / doing 15 / blocked 0 / done 160 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 62 / doing 15 / blocked 0 / done 161 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -23,7 +23,7 @@
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
 | artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 |
-| artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06 |
+| artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06, ENG-LINT-01 |
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-05, PKG-DASH-06 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
 | artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06 |
@@ -386,7 +386,7 @@
 | SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收 | M | todo |
 | SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | todo |
 | SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
-| EX-01 | example/react.js<br>验证 React 消费者与 TS | CORE-22, ENG-07 | React 挂载/卸载/重挂载、引用和插件样例 | 真实 tarball + TS 消费通过，保留既有 React 集成 API | M | todo |
+| EX-01 | example/react.js, workspace<br>验证 React 消费者与 TS | CORE-22, ENG-07 | React 挂载/卸载/重挂载、引用和插件样例 | 真实 tarball + TS 消费通过，保留既有 React 集成 API | M | done |
 | EX-02 | example/vue.js<br>验证 Vue 消费者与更新卸载 | CORE-22, ENG-07 | Vue 实例/ref、参数更新、卸载及插件样例 | 旧 JS 组件用法无需修改，重复挂载不泄漏 | M | todo |
 | EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01 | H | todo |
 
@@ -412,7 +412,7 @@
 | REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | todo |
 | REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
 | REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致 | H | todo |
-| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
+| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06, ENG-LINT-01 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
 
 ## 8.1 多轮复盘
 
@@ -433,6 +433,12 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | ENG-12 | workspace, artplayer<br>隔离库构建的 public 源码与分发内容 | ENG-03, CORE-21 | 禁用库的隐式 public 复制，拒绝误入包内的 TS 源码，清理生成污染并验证真实构建 | 三格式真实构建和严格 tarball 检查通过；已有声明和所有剩余成员字节不变；文档站使用独立构建 | M | done |
+
+## 2 工程基础
+
+| ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- |
+| ENG-LINT-01 | artplayer-plugin-danmuku-mask, workspace<br>修复 Mask manifest 排序并恢复全仓 lint | PKG-MASK-04 | 仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变 | 根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口 | L | todo |
 
 ## 完成证据与阻塞
 
@@ -598,6 +604,7 @@
 - PKG-TOOL-THUMB-02: [记录](baselines/thumbnail-behavior-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-02-behavior.md)
 - PKG-TOOL-THUMB-03: [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md) [记录](baselines/thumbnail-input-checkpoint.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md) [记录](baselines/thumbnail-lifecycle-validation.json)
 - PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md) [记录](baselines/thumbnail-emitter-validation.json)
+- EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)
 - ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)

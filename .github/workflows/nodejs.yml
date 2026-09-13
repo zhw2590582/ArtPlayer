@@ -131,6 +131,8 @@ jobs:
           package-manager-cache: false
       - name: Verify canonical installed consumers
         run: node scripts/package-runtime.mjs --canonical 2>&1 | tee refactor/.cache/ci/consumer-node-canonical.log
+      - name: Verify React installed consumers
+        run: yarn test:react-consumer 2>&1 | tee refactor/.cache/ci/react-consumer.log
       - name: Run all three engines
         run: yarn test:browser 2>&1 | tee refactor/.cache/ci/browser.log
       - name: Verify iframe cached history and interrupted navigation
@@ -146,6 +148,7 @@ jobs:
             refactor/.cache/ci/
             refactor/.cache/browser/
             refactor/.cache/iframe-history/
+            refactor/.cache/react-consumer-*/
             refactor/.cache/performance/
             refactor/.cache/packages/latest.json
             refactor/.cache/packages/run-*/*.json

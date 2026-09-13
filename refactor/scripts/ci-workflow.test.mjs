@@ -34,6 +34,9 @@ for (const [name, mutate] of [
   ['wrong consumer Node version', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'consumer-node-20').with['node-version'] = '24'],
   ['skipped installed consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.includes('--expected-node 22.12.0')).if = 'false'],
   ['browser runtime not restored', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'restore-canonical-node').with = { 'node-version': '22.12.0', 'package-manager-cache': false }],
+  ['skipped React consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:react-consumer')).if = 'false'],
+  ['removed React consumer', w => w.jobs['browser-smoke'].steps = w.jobs['browser-smoke'].steps.filter(s => !s.run?.startsWith('yarn test:react-consumer'))],
+  ['missing React evidence', w => w.jobs['browser-smoke'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@')).with.path = 'refactor/.cache/ci/'],
   ['Pages uploaded by both matrix legs', w => w.jobs.checks.steps.find(s => s.uses?.startsWith('actions/upload-pages-artifact@')).if = 'inputs.pages-artifact && github.ref == \'refs/heads/master\''],
 ]) {
   test(`CI rejects ${name}`, () => {

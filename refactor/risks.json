@@ -5694,6 +5694,48 @@
         "test/browser/auto-thumbnail-lifecycle.spec.js"
       ],
       "resolutionRationale": "Six controlled regressions fail before and pass after. The frozen main native complete control fails dimensions; candidate main/legacy native lifecycle checks reset the retained canvas and decode final JPEGs after reset. No public options, types, sample positions or caller URLs changed; WebKit early-frame pixels remain separately open."
+    },
+    {
+      "id": "EX-REACT-LIFE-01",
+      "title": "React getInstance exception leaks the constructed player",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "EX-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-EX-01-react-consumer.md",
+        "refactor/baselines/react-consumer-validation.json"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-EX-01-react-consumer.md",
+        "refactor/baselines/react-consumer-validation.json",
+        "refactor/scripts/react-consumer.mjs"
+      ],
+      "compatibleResolution": "The old wrapper leaves one active instance after the React error boundary; the candidate cleans each instance exactly once and propagates the original error in six real browser profiles.",
+      "closureCriteria": "Actual installed consumer and original App entry pass without changing the wrapper props, default configuration or effect dependency contract.",
+      "resolutionRationale": "The old wrapper leaves one active instance after the React error boundary; the candidate cleans each instance exactly once and propagates the original error in six real browser profiles."
+    },
+    {
+      "id": "EX-REACT-ENTRY-01",
+      "title": "React HTML references absent main.jsx instead of the existing TSX entry",
+      "confirmation": "source-observed",
+      "status": "resolved",
+      "owners": [
+        "EX-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-EX-01-react-consumer.md",
+        "refactor/baselines/react-consumer-validation.json"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-EX-01-react-consumer.md",
+        "refactor/baselines/react-consumer-validation.json",
+        "refactor/scripts/react-consumer.mjs"
+      ],
+      "compatibleResolution": "The HTML now loads main.tsx; the unchanged App call builds and loads controlled media in all six installed consumer browser profiles.",
+      "closureCriteria": "Actual installed consumer and original App entry pass without changing the wrapper props, default configuration or effect dependency contract.",
+      "resolutionRationale": "The HTML now loads main.tsx; the unchanged App call builds and loads controlled media in all six installed consumer browser profiles."
     }
   ]
 }

@@ -1,5 +1,20 @@
 # 进度与证据
 
+## EX-01 React 实际消费者完成
+
+修复 React HTML 错误入口，以及 getInstance 抛错时实例泄漏；保留 Partial<Option>、
+可选回调、div 属性、引用变化重建和示例插件/语言覆盖规则。拆出示例配置模块，
+补齐严格 TSX、维护说明和根 Yarn 命令。实际打包安装核心/Danmuku/Document PiP，
+逐文件对照并 frozen 重装；类型不允许从工作区补齐。最终开发/生产 × 三引擎六组
+各 12 类检查通过，包括真实播放/暂停/seek/像素、兄弟实例、卸载重挂载和异常
+清理。固定旧包装控制复现 1 个残留实例。全仓 406 个生产 TS 文件检查、示例
+构建/lint、严格工具链和 frozen 安装通过；47 项 CI 回归通过。GitHub 增加消费
+检查和失败证据上传，远端运行未验证。见[变更](changes/2026-09-14-EX-01-react-consumer.md)
+和[证据](baselines/react-consumer-validation.json)。另有全仓 lint 被未改动 Mask manifest 排序阻断，已登记独立 ENG-LINT-01。
+任务现为 238 项：161 done、15 doing、62 todo；未关闭插件专项任务。
+下一步推进已就绪的 Vue 消费者 EX-02；Auto Thumbnail 首帧与 VAST 兼容选择仍未关闭。
+
+
 ## PKG-AUTO-THUMB-03 渲染/等待诊断检查点（仍 doing）
 
 新增可重跑的 `yarn probe:auto-thumbnail-rendering`，用固定实际 ESM/时间轴媒体

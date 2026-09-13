@@ -4206,17 +4206,22 @@
       "phase": "6 文档与消费者",
       "title": "验证 React 消费者与 TS",
       "scope": [
-        "example/react.js"
+        "example/react.js",
+        "workspace"
       ],
       "dependsOn": [
         "CORE-22",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "React 挂载/卸载/重挂载、引用和插件样例",
       "acceptance": "真实 tarball + TS 消费通过，保留既有 React 集成 API",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-EX-01-react-consumer.md",
+        "baselines/react-consumer-validation.json",
+        "scripts/react-consumer.mjs"
+      ]
     },
     {
       "id": "EX-02",
@@ -4588,7 +4593,8 @@
         "workspace"
       ],
       "dependsOn": [
-        "REL-06"
+        "REL-06",
+        "ENG-LINT-01"
       ],
       "status": "todo",
       "risk": "L",
@@ -4884,6 +4890,23 @@
         "changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md",
         "baselines/auto-thumbnail-alias-validation.json"
       ]
+    },
+    {
+      "id": "ENG-LINT-01",
+      "phase": "2 工程基础",
+      "title": "修复 Mask manifest 排序并恢复全仓 lint",
+      "scope": [
+        "artplayer-plugin-danmuku-mask",
+        "workspace"
+      ],
+      "dependsOn": [
+        "PKG-MASK-04"
+      ],
+      "status": "todo",
+      "risk": "L",
+      "deliverable": "仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变",
+      "acceptance": "根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口",
+      "evidence": []
     }
   ]
 }
