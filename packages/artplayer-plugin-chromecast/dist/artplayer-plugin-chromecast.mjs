@@ -4,173 +4,359 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = src;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.body.appendChild(script);
-  });
-}
-function getMimeType(url) {
+const icon = '<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h17v14h-8M3 11a10 10 0 0 1 10 10M3 16a5 5 0 0 1 5 5"/><circle cx="3" cy="21" r="1" fill="currentColor" stroke="none"/></svg>\r\n';
+const mimeTypes = {
+  mp4: "video/mp4",
+  webm: "video/webm",
+  ogg: "video/ogg",
+  ogv: "video/ogg",
+  mp3: "audio/mp3",
+  wav: "audio/wav",
+  flv: "video/x-flv",
+  mov: "video/quicktime",
+  avi: "video/x-msvideo",
+  wmv: "video/x-ms-wmv",
+  mpd: "application/dash+xml",
+  m3u8: "application/x-mpegURL"
+};
+function loadMedia(sdk, session, option, currentUrl) {
+  const url = option.url || currentUrl;
   const extension = url.split("?")[0].split("#")[0].split(".").pop().toLowerCase();
-  const mimeTypes = {
-    mp4: "video/mp4",
-    webm: "video/webm",
-    ogg: "video/ogg",
-    ogv: "video/ogg",
-    mp3: "audio/mp3",
-    wav: "audio/wav",
-    flv: "video/x-flv",
-    mov: "video/quicktime",
-    avi: "video/x-msvideo",
-    wmv: "video/x-ms-wmv",
-    mpd: "application/dash+xml",
-    m3u8: "application/x-mpegURL"
-  };
-  return mimeTypes[extension] || "application/octet-stream";
+  const info = new sdk.media.MediaInfo(url, option.mimeType || mimeTypes[extension] || "application/octet-stream");
+  return session.loadMedia(new sdk.media.LoadRequest(info));
 }
-function artplayerPluginChromecast(option) {
-  const DEFAULT_ICON = `<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M512 96H64v99c-13-2-26.4-3-40-3H0V96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H288V456c0-13.6-1-27-3-40H512V96zM24 224c128.1 0 232 103.9 232 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM0 344c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24z"/></svg>`;
-  const DEFAULT_SDK = "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1";
-  let isCastInitialized = false;
-  let castSession = null;
-  let castState = null;
-  const updateCastButton = (state) => {
-    const button = document.querySelector(".art-icon-cast");
-    if (button) {
-      switch (state) {
-        case "connected":
-          button.style.color = "red";
-          break;
-        case "connecting":
-        case "disconnecting":
-          button.style.color = "orange";
-          break;
-        case "disconnected":
-        default:
-          button.style.color = "white";
-          break;
+const DEFAULT_SDK = "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1";
+const pending = /* @__PURE__ */ new WeakMap();
+const configured = /* @__PURE__ */ new WeakSet();
+function ready(host) {
+  const framework = host.cast?.framework;
+  const api = host.chrome?.cast;
+  if (typeof framework?.CastContext?.getInstance === "function" && framework.CastContextEventType && framework.SessionState && framework.CastState && typeof api?.media?.MediaInfo === "function" && typeof api.media.LoadRequest === "function" && api.AutoJoinPolicy) {
+    return { framework, media: api.media, autoJoinPolicy: api.AutoJoinPolicy.ORIGIN_SCOPED };
+  }
+}
+function configure(sdk) {
+  const context = sdk.framework.CastContext.getInstance();
+  if (!configured.has(context)) {
+    context.setOptions({ receiverApplicationId: sdk.media.DEFAULT_MEDIA_RECEIVER_APP_ID, autoJoinPolicy: sdk.autoJoinPolicy });
+    configured.add(context);
+  }
+  return context;
+}
+function lease(loading, onReady) {
+  let subscriber;
+  const promise = new Promise((resolve, reject) => {
+    subscriber = { ready: onReady, resolve, reject };
+    loading.subscribers.add(subscriber);
+  });
+  let released = false;
+  return { promise, release: () => {
+    if (released)
+      return;
+    released = true;
+    loading.subscribers.delete(subscriber);
+    subscriber.reject(new Error("Cast initialization cancelled"));
+    if (!loading.subscribers.size)
+      loading.cancel();
+  } };
+}
+function loadSdk(src, onReady) {
+  const host = window;
+  const loaded = ready(host);
+  if (loaded) {
+    const promise = new Promise((resolve, reject) => {
+      try {
+        onReady(loaded);
+        resolve(loaded);
+      } catch (error) {
+        reject(error);
+      }
+    });
+    return { promise, release: () => {
+    } };
+  }
+  const existing = pending.get(host);
+  if (existing)
+    return lease(existing, onReady);
+  const loading = { subscribers: /* @__PURE__ */ new Set(), cancel: () => finish(void 0, new Error("Cast initialization cancelled")) };
+  pending.set(host, loading);
+  const subscription = lease(loading, onReady);
+  const previous = host.__onGCastApiAvailable;
+  let script;
+  let timer;
+  let settled = false;
+  function finish(sdk, error) {
+    if (settled)
+      return;
+    settled = true;
+    if (timer !== void 0)
+      host.clearTimeout(timer);
+    pending.delete(host);
+    if (host.__onGCastApiAvailable === available)
+      host.__onGCastApiAvailable = previous;
+    if (script) {
+      script.onload = null;
+      script.onerror = null;
+      if (!sdk)
+        script.remove();
+    }
+    for (const subscriber of loading.subscribers) {
+      try {
+        if (sdk) {
+          subscriber.ready(sdk);
+          subscriber.resolve(sdk);
+        } else {
+          subscriber.reject(error);
+        }
+      } catch (error2) {
+        subscriber.reject(error2);
       }
     }
-  };
-  const initializeCastApi = () => {
-    return new Promise((resolve, reject) => {
-      window.__onGCastApiAvailable = (isAvailable) => {
-        if (isAvailable) {
-          const context = window.cast.framework.CastContext.getInstance();
-          context.setOptions({
-            receiverApplicationId: window.chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
-            autoJoinPolicy: window.chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-          });
-          context.addEventListener(
-            window.cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
-            (event) => {
-              const SessionState = window.cast.framework.SessionState;
-              castState = event.sessionState;
-              castSession = event.session;
-              switch (event.sessionState) {
-                case SessionState.NO_SESSION:
-                  option.onStateChange?.("disconnected");
-                  updateCastButton("disconnected");
-                  break;
-                case SessionState.SESSION_STARTING:
-                  option.onStateChange?.("connecting");
-                  updateCastButton("connecting");
-                  break;
-                case SessionState.SESSION_STARTED:
-                  option.onStateChange?.("connected");
-                  updateCastButton("connected");
-                  break;
-                case SessionState.SESSION_ENDING:
-                  option.onStateChange?.("disconnecting");
-                  updateCastButton("disconnecting");
-                  break;
-                case SessionState.SESSION_RESUMED:
-                  option.onStateChange?.("connected");
-                  updateCastButton("connected");
-                  break;
-              }
-            }
-          );
-          context.addEventListener(window.cast.framework.CastContextEventType.CAST_STATE_CHANGED, (event) => {
-            const CastState = window.cast.framework.CastState;
-            switch (event.castState) {
-              case CastState.NO_DEVICES_AVAILABLE:
-                option.onCastAvailable?.(false);
-                break;
-              case CastState.NOT_CONNECTED:
-                option.onCastAvailable?.(true);
-                break;
-              case CastState.CONNECTING:
-              case CastState.CONNECTED:
-                option.onCastAvailable?.(true);
-                break;
-            }
-          });
-          isCastInitialized = true;
-          resolve();
-        } else {
-          reject(new Error("Cast API is not available"));
-        }
-      };
-      if (!window.chrome || !window.chrome.cast) {
-        loadScript(option.sdk || DEFAULT_SDK).catch(reject);
-      }
-    });
-  };
-  const castVideo = (art, session) => {
-    const url = option.url || art.option.url;
-    const mediaInfo = new window.chrome.cast.media.MediaInfo(url, option.mimeType || getMimeType(url));
-    const request = new window.chrome.cast.media.LoadRequest(mediaInfo);
-    session.loadMedia(request).then(() => {
-      art.notice.show = "Casting started";
-      option.onCastStart?.();
-    }).catch((error) => {
-      art.notice.show = "Error casting media";
-      option.onError?.(error);
-      throw error;
-    });
-  };
-  return async (art) => {
-    art.controls.add({
-      name: "chromecast",
-      position: "right",
-      tooltip: "Chromecast",
-      html: `<i class="art-icon art-icon-cast">${option.icon || DEFAULT_ICON}</i>`,
-      click: async () => {
-        if (!isCastInitialized) {
-          try {
-            await initializeCastApi();
-          } catch (error) {
-            art.notice.show = "Failed to initialize Cast API";
-            option.onError?.(error);
-            throw error;
-          }
-        }
-        const context = window.cast.framework.CastContext.getInstance();
-        if (castSession) {
-          castVideo(art, castSession);
-        } else {
-          try {
-            const session = await context.requestSession();
-            castVideo(art, session);
-          } catch (error) {
-            art.notice.show = "Error connecting to cast session";
-            option.onError?.(error);
-            throw error;
-          }
-        }
-      }
-    });
-    return {
-      name: "artplayerPluginChromecast",
-      getCastState: () => castState,
-      isCasting: () => castSession !== null
+    loading.subscribers.clear();
+  }
+  function available(value, errorInfo) {
+    try {
+      previous?.call(host, value, errorInfo);
+    } finally {
+      const sdk = value ? ready(host) : void 0;
+      finish(sdk, new Error("Cast API is not available"));
+    }
+  }
+  host.__onGCastApiAvailable = available;
+  try {
+    timer = host.setTimeout(() => finish(void 0, new Error("Timed out initializing Cast API")), 3e4);
+    script = document.createElement("script");
+    script.src = src || DEFAULT_SDK;
+    script.onerror = (error) => finish(void 0, error);
+    script.onload = () => {
+      const sdk = ready(host);
+      if (sdk)
+        finish(sdk);
     };
-  };
+    document.body.appendChild(script);
+  } catch (error) {
+    finish(void 0, error);
+  }
+  return subscription;
 }
+function createController(art, option) {
+  let disposed = false;
+  let sdk;
+  let context;
+  let session = null;
+  let state = null;
+  let activeClick;
+  let releaseLoader;
+  let generation = 0;
+  let operationStarted = false;
+  let cancelOperation;
+  let cancel;
+  const cancelled = new Promise((resolve) => {
+    cancel = () => resolve(void 0);
+  });
+  let element;
+  const active = () => !disposed && !art.isDestroy;
+  const update = (value) => {
+    option.onStateChange?.(value);
+    if (!active())
+      return;
+    const button = element?.querySelector(".art-icon-cast");
+    if (button)
+      button.style.color = value === "connected" ? "red" : value === "connecting" || value === "disconnecting" ? "orange" : "white";
+  };
+  const onSession = (event) => {
+    if (!active() || !sdk)
+      return;
+    state = event.sessionState;
+    const states = sdk.framework.SessionState;
+    if (state === states.NO_SESSION || state === states.SESSION_ENDED || state === states.SESSION_START_FAILED) {
+      if (state !== states.NO_SESSION || operationStarted) {
+        generation++;
+        cancelOperation?.();
+      }
+      session = null;
+      update("disconnected");
+    } else {
+      if (state === states.SESSION_ENDING || session && event.session && event.session !== session) {
+        generation++;
+        cancelOperation?.();
+      }
+      session = event.session || null;
+      if (state === states.SESSION_STARTING)
+        update("connecting");
+      else if (state === states.SESSION_ENDING)
+        update("disconnecting");
+      else if (state === states.SESSION_STARTED || state === states.SESSION_RESUMED)
+        update("connected");
+    }
+  };
+  const onAvailability = (event) => {
+    if (!active() || !sdk)
+      return;
+    const states = sdk.framework.CastState;
+    if (event.castState === states.NO_DEVICES_AVAILABLE)
+      option.onCastAvailable?.(false);
+    else if (event.castState === states.NOT_CONNECTED || event.castState === states.CONNECTING || event.castState === states.CONNECTED)
+      option.onCastAvailable?.(true);
+  };
+  const detach = () => {
+    const ownedContext = context;
+    const ownedSdk = sdk;
+    context = void 0;
+    sdk = void 0;
+    if (ownedContext && ownedSdk) {
+      const events = ownedSdk.framework.CastContextEventType;
+      const errors = [];
+      try {
+        ownedContext.removeEventListener(events.SESSION_STATE_CHANGED, onSession);
+      } catch (error) {
+        errors.push(error);
+      }
+      try {
+        ownedContext.removeEventListener(events.CAST_STATE_CHANGED, onAvailability);
+      } catch (error) {
+        errors.push(error);
+      }
+      if (errors.length)
+        throw errors[0];
+    }
+  };
+  const destroy = () => {
+    if (disposed)
+      return;
+    disposed = true;
+    cancel();
+    const release = releaseLoader;
+    releaseLoader = void 0;
+    const errors = [];
+    for (const cleanup of [release, detach, () => art.off("destroy", destroy)]) {
+      try {
+        cleanup?.();
+      } catch (error) {
+        errors.push(error);
+      }
+    }
+    session = null;
+    element = void 0;
+    if (errors.length)
+      throw errors[0];
+  };
+  async function cast() {
+    const epoch = generation;
+    const currentOperation = () => active() && generation === epoch;
+    let stop;
+    const superseded = new Promise((resolve) => {
+      stop = () => resolve(void 0);
+    });
+    cancelOperation = stop;
+    let failureNotice = "Failed to initialize Cast API";
+    try {
+      if (!sdk || !context) {
+        const loading = loadSdk(option.sdk, (available) => {
+          if (!currentOperation())
+            return;
+          sdk = available;
+          context = configure(sdk);
+          if (!currentOperation())
+            return;
+          const events = sdk.framework.CastContextEventType;
+          try {
+            context.addEventListener(events.SESSION_STATE_CHANGED, onSession);
+            if (active())
+              context.addEventListener(events.CAST_STATE_CHANGED, onAvailability);
+          } catch (error) {
+            try {
+              detach();
+            } catch {
+            }
+            throw error;
+          }
+        });
+        releaseLoader = loading.release;
+        await Promise.race([loading.promise, cancelled, superseded]);
+        loading.release();
+        releaseLoader = void 0;
+      }
+      if (!currentOperation() || !context || !sdk)
+        return;
+      failureNotice = "Error connecting to cast session";
+      operationStarted = true;
+      let current = context.getCurrentSession();
+      if (!currentOperation())
+        return;
+      if (!current) {
+        await Promise.race([context.requestSession(), cancelled, superseded]);
+        if (!currentOperation())
+          return;
+        current = context.getCurrentSession();
+      }
+      if (!currentOperation())
+        return;
+      if (!current)
+        throw new Error("No active Cast session");
+      session = current;
+      failureNotice = "Error casting media";
+      await Promise.race([loadMedia(sdk, current, option, art.option.url), cancelled, superseded]);
+      if (currentOperation()) {
+        art.notice.show = "Casting started";
+        option.onCastStart?.();
+      }
+    } catch (error) {
+      if (currentOperation()) {
+        art.notice.show = failureNotice;
+        option.onError?.(error);
+        throw error;
+      }
+    } finally {
+      releaseLoader?.();
+      releaseLoader = void 0;
+      if (cancelOperation === stop)
+        cancelOperation = void 0;
+      operationStarted = false;
+    }
+  }
+  const click = () => {
+    if (!active())
+      return Promise.resolve();
+    if (!activeClick) {
+      let resolve;
+      let reject;
+      activeClick = new Promise((yes, no) => {
+        resolve = yes;
+        reject = no;
+      });
+      activeClick.catch(() => {
+      });
+      cast().then(() => {
+        activeClick = void 0;
+        resolve();
+      }, (error) => {
+        activeClick = void 0;
+        reject(error);
+      });
+    }
+    return activeClick;
+  };
+  art.controls.add({
+    name: "chromecast",
+    position: "right",
+    tooltip: "Chromecast",
+    html: `<i class="art-icon art-icon-cast">${option.icon || icon}</i>`,
+    mounted(control) {
+      if (active())
+        element = control;
+    },
+    click
+  });
+  art.on("destroy", destroy);
+  if (art.isDestroy)
+    destroy();
+  return { name: "artplayerPluginChromecast", getCastState: () => state, isCasting: () => session !== null };
+}
+function artplayerPluginChromecast(option) {
+  return async (art) => createController(art, option);
+}
+Object.defineProperty(artplayerPluginChromecast, "default", { value: artplayerPluginChromecast, writable: true, configurable: true });
 export {
   artplayerPluginChromecast as default
 };

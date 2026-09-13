@@ -1078,30 +1078,32 @@
       "riskId": "VENDOR-10",
       "inputs": [
         "packages/artplayer-plugin-chromecast/src/cast.svg",
-        "packages/artplayer-plugin-chromecast/src/index.js"
+        "packages/artplayer-plugin-chromecast/src/controller.ts"
       ],
       "owners": [
         "PKG-CAST-03",
         "PKG-CAST-06"
       ],
-      "sourceStatus": "Exact SVG path matches the runtime default icon; source notice identifies Font Awesome Pro 6.5.1.",
-      "licenseStatus": "Commercial License notice exists in cast.svg; repository entitlement and redistribution authorization are not established by the package MIT metadata.",
-      "updatePolicy": "Replace with owned artwork or verify permission before release; preserve user-supplied icon support and icon wrapper classes, retain historical archive evidence.",
+      "sourceStatus": "Former commercial SVG removed. Current cast.svg is an original geometric icon authored for this repository during PKG-CAST-03; controller imports that file directly.",
+      "licenseStatus": "Current original repository artwork follows the package MIT license; no entitlement in or relicensing of the removed Font Awesome Pro artwork is asserted.",
+      "updatePolicy": "Keep original artwork and custom icon/wrapper support; review any replacement provenance and verify actual rebuilt/shipped assets. Historical commercial-source evidence remains immutable.",
       "fingerprints": [
         {
           "path": "packages/artplayer-plugin-chromecast/src/cast.svg",
           "algorithm": "sha256-lf",
-          "sha256": "8c0f9ad82c2d6c70afb70ab5002204c4948dd282fbf52095aed4b07fa8d466d4"
+          "sha256": "48470d66b5874569c54d66889b0ec62c33bf809670d4baf2eded2bfa83d6d726"
         },
         {
-          "path": "packages/artplayer-plugin-chromecast/src/index.js",
+          "path": "packages/artplayer-plugin-chromecast/src/controller.ts",
           "algorithm": "sha256-lf",
-          "sha256": "2ab8967cf7fdbf9fbac8a9afe73713e66047bad7e4d4afc802665ce594fa3274"
+          "sha256": "e61760f082e233da1f4e94ca98c68b4f07357117a66b2b5c448659dd57cb193d"
         }
       ],
       "reviewEvidence": [
         "refactor/baselines/chromecast-release.json",
-        "refactor/changes/2026-09-13-PKG-CAST-01-contracts.md"
+        "refactor/changes/2026-09-13-PKG-CAST-01-contracts.md",
+        "refactor/changes/2026-09-13-PKG-CAST-03-runtime.md",
+        "refactor/baselines/chromecast-runtime-validation.json"
       ]
     }
   ],
@@ -1191,10 +1193,12 @@
         "PKG-CAST-05"
       ],
       "sourceFiles": [
-        "packages/artplayer-plugin-chromecast/src/index.js"
+        "packages/artplayer-plugin-chromecast/src/sdk.ts",
+        "packages/artplayer-plugin-chromecast/src/controller.ts",
+        "packages/artplayer-plugin-chromecast/src/media.ts"
       ],
       "contract": "Default remote cast_sender.js?loadCastFramework=1; sdk URL/options and actual Cast device/session behavior require separate validation.",
-      "validationStatus": "Real 1.0.0/1.1.0 archives and controlled public behavior frozen. Official requestSession completion is not a session; runtime/source gaps proceed through CAST-02/03. No actual SDK bytes, HTTPS sender, receiver, casting or media networking acceptance.",
+      "validationStatus": "Controlled SDK regression and native browser DOM/core tests verified source/main/legacy behavior in CAST03. No actual SDK bytes/version, HTTPS sender, physical receiver, discovery or receiver media networking acceptance; CAST05 remains outstanding.",
       "demoPathsSource": "refactor/baselines/demo-inventory.json"
     },
     {

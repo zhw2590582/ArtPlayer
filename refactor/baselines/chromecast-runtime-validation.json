@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CAST-03",
+  "status": "done",
+  "capturedAt": "2026-09-13T09:12:41.513Z",
+  "frozenSourceCommit": "146b78d5767bba88612184869155a39317794537",
+  "unit": [
+    {
+      "file": "refactor/.cache/chromecast03-combined.log",
+      "tests": 128,
+      "sha256": "9ee410f58d5a4f00b574ab8fabab6237e8befcbee7701ee519f2a029d9709eb0",
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "refactor/.cache/chromecast03-main.log",
+      "tests": 35,
+      "sha256": "31ae3664139c37f89e398364f5ec52d260fa27d6d9fad6a3d15540b23a3be739",
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "refactor/.cache/chromecast03-legacy.log",
+      "tests": 35,
+      "sha256": "f1488bc634c48d744b32f854686fc7a0ecdf2ccfd638c0ce3f9837bcbc5bdcbf",
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "browsers": [
+    {
+      "name": "source-final",
+      "file": "refactor/.cache/chromecast03-browser-source-final/report.json",
+      "sha256": "d59ba138015444168c11f728831ca9369c096282f62323472edce98f75f728d6",
+      "tests": 45,
+      "failures": 0,
+      "skips": 0,
+      "versions": [
+        "chromium: 153.0.8010.12",
+        "firefox: 155.0",
+        "webkit: 26.6"
+      ],
+      "inputSha256": "d973945154aa56dafa4ef0de5425661606cef25f1d363c05120f7764b9e53a94",
+      "sdk": "Controlled SDK; native DOM, actual cores and local video; no real receiver validation."
+    },
+    {
+      "name": "main",
+      "file": "refactor/.cache/chromecast03-browser-main/report.json",
+      "sha256": "23dca701c479232d4fc265a2b7fad657fbfdbded8892be5ff1bc5e34b4b7e963",
+      "tests": 45,
+      "failures": 0,
+      "skips": 0,
+      "versions": [
+        "chromium: 153.0.8010.12",
+        "firefox: 155.0",
+        "webkit: 26.6"
+      ],
+      "inputSha256": "80b12b3081086488c9d80f03979c336d4a6fdb44dca298e218dfeaaadb295d00",
+      "sdk": "Controlled SDK; native DOM, actual cores and local video; no real receiver validation."
+    },
+    {
+      "name": "legacy",
+      "file": "refactor/.cache/chromecast03-browser-legacy/report.json",
+      "sha256": "eebeb37f9e83d9a583d630c81a3685cc0a9be3c99c36f71ea02a9808fcc137b3",
+      "tests": 45,
+      "failures": 0,
+      "skips": 0,
+      "versions": [
+        "chromium: 153.0.8010.12",
+        "firefox: 155.0",
+        "webkit: 26.6"
+      ],
+      "inputSha256": "b21a30852403914a3bf3defc89aff11f2cc23b044ed68ccf667164b477f04172",
+      "sdk": "Controlled SDK; native DOM, actual cores and local video; no real receiver validation."
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js",
+      "copied": "docs/compiled/artplayer-plugin-chromecast.js",
+      "sha256": "80b12b3081086488c9d80f03979c336d4a6fdb44dca298e218dfeaaadb295d00",
+      "bytes": 6096,
+      "previousIconRemoved": true
+    },
+    {
+      "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js",
+      "copied": "docs/compiled/artplayer-plugin-chromecast.legacy.js",
+      "sha256": "b21a30852403914a3bf3defc89aff11f2cc23b044ed68ccf667164b477f04172",
+      "bytes": 6633,
+      "previousIconRemoved": true
+    },
+    {
+      "file": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.mjs",
+      "copied": "docs/compiled/artplayer-plugin-chromecast.mjs",
+      "sha256": "68d81fcab469f74fe9d9740842d989e10144f7ff28c7ade91ed22adee90f44d7",
+      "bytes": 11546,
+      "previousIconRemoved": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "packages/artplayer-plugin-chromecast/src/cast.svg",
+      "algorithm": "sha256-lf",
+      "sha256": "48470d66b5874569c54d66889b0ec62c33bf809670d4baf2eded2bfa83d6d726"
+    },
+    {
+      "path": "packages/artplayer-plugin-chromecast/src/controller.ts",
+      "algorithm": "sha256-lf",
+      "sha256": "e61760f082e233da1f4e94ca98c68b4f07357117a66b2b5c448659dd57cb193d"
+    },
+    {
+      "path": "packages/artplayer-plugin-chromecast/src/index.ts",
+      "algorithm": "sha256-lf",
+      "sha256": "951d8bbaf273c56722d3767a514a3f8a65050122d934612e5c53c8349d1400e7"
+    },
+    {
+      "path": "packages/artplayer-plugin-chromecast/src/media.ts",
+      "algorithm": "sha256-lf",
+      "sha256": "6c16b3cc7b5c570dbb6ae7a4ff9c1492f8e6a07d07662db2b417ff825b7f0dd1"
+    },
+    {
+      "path": "packages/artplayer-plugin-chromecast/src/sdk.ts",
+      "algorithm": "sha256-lf",
+      "sha256": "eee5ff443406c400bd54822b71b20e1bb8a9191e15c625eb329cb3207a01902f"
+    },
+    {
+      "path": "packages/artplayer-plugin-chromecast/src/types.ts",
+      "algorithm": "sha256-lf",
+      "sha256": "9958a32fb20e0ed55b7f0b6d34e02febe67966a972a9055999f5a030d034a178"
+    },
+    {
+      "path": "packages/artplayer-plugin-chromecast/tsconfig.json",
+      "algorithm": "sha256-lf",
+      "sha256": "4e4d4e725a1f49736504f408a1b56abb6a1f1aec9213be890b5db6c7c7a28002"
+    },
+    {
+      "path": "test/browser/chromecast-lifecycle.spec.js",
+      "algorithm": "sha256-lf",
+      "sha256": "8a9b47f899e018cb43d396d58ffc29144c97f5feef753eb9b91df0cf8ecd674e"
+    },
+    {
+      "path": "test/chromecast-runtime.test.js",
+      "algorithm": "sha256-lf",
+      "sha256": "94ce42f8d92f529a7ca93294369f017e6953405a4ea84b3bfbd0bc50f178c67a"
+    }
+  ],
+  "priorFailure": {
+    "file": "refactor/.cache/chromecast03-browser-initial/report.json",
+    "sha256": "fa189b92b0d6b0a0812fdb62bc75fa95e0fce14aabfa02d4323e1d5c7cacba37",
+    "expected": 18,
+    "unexpected": 27,
+    "cause": "Production assumed Control.add returns a node; WebKit test misclassified same-origin Blob URLs. Both corrected without deleting assertions."
+  },
+  "focusedRedGreen": [
+    {
+      "file": "refactor/.cache/chromecast03-mounted-red.log",
+      "sha256": "fbafc237ac36de524f918310a4aa682106c0fe40604f601b918257b58aa6de72"
+    },
+    {
+      "file": "refactor/.cache/chromecast03-mounted-green.log",
+      "sha256": "9e3452207925efed6e2b7e84d7facd51bad61d1d3f10384e41883de2bdba3ef5"
+    }
+  ],
+  "checks": [
+    {
+      "file": "refactor/.cache/chromecast03-build.log",
+      "sha256": "538ecc3cd0d78f3b25f25ba3e3263f7f78988ea9126526d959cb42341bc7a495"
+    },
+    {
+      "file": "refactor/.cache/chromecast03-typecheck.log",
+      "sha256": "881cbc6371263597ec45d5af816997f5d93bdda99045a532df8a04a9cbec7c07"
+    },
+    {
+      "file": "refactor/.cache/chromecast03-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limitations": [
+    "Public declarations still owned by CAST04.",
+    "SDK06/CAST05 real HTTPS sender, Cast SDK, receiver and network playback remain unverified.",
+    "Controlled Windows WebKit is not Safari device evidence.",
+    "Pending loader ownership is shared within one loaded plugin module, not independently loaded copies."
+  ],
+  "releaseReady": false
+}

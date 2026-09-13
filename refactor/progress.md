@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-CAST-03 Chromecast生产重构完成
+
+5个TS模块与35个候选测试落地，SDK等待/会话返回值/过期结果/实例图标/错误Promise
+已修复。真实浏览器进一步发现Control.add返回undefined导致图标不变色，已用mounted
+修复并保留红绿证据。128项历史+候选测试、main/legacy各35项、三形态各45项浏览器
+全部通过；正常构建和366生产TS strict检查通过。原商业SVG换为原创几何图形。
+见[变更](changes/2026-09-13-PKG-CAST-03-runtime.md)及[证据](baselines/chromecast-runtime-validation.json)。
+228项：136 done、14 doing、78 todo。04公开类型、05真实SDK/设备、06分发继续；
+135浏览器项使用受控SDK，不能当作接收设备投屏通过。没有推送或发布。
+
+
 ## PKG-MULTI-SUB-04 Multiple Subtitles 类型兼容实施完成
 
 已落实用户批准的最新npm 1.2.0根类型及较早1.0.0/1.1.0迁移规则；/runtime准确

@@ -3043,11 +3043,14 @@
         "CORE-11",
         "CORE-13"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "SDK singleton/实例订阅/会话与控件职责分离",
       "acceptance": "结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-CAST-03-runtime.md",
+        "baselines/chromecast-runtime-validation.json"
+      ]
     },
     {
       "id": "PKG-CAST-04",
