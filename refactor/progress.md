@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-03 渲染/等待诊断检查点（仍 doing）
+
+新增可重跑的 `yarn probe:auto-thumbnail-rendering`，用固定实际 ESM/时间轴媒体
+对照真实尺寸下四种可见性样式及 current/readyState/loadeddata 事件三种策略。
+最终 Windows WebKit 12 组均未取得唯一紫色首帧；Chromium/Firefox 两个对照正常。
+首个 loadeddata 的交付计数被直接记录，避免将 readyState>=2 误称为已等待事件。
+正确 Firefox 帧的 totalVideoFrames 仍为 0，不能用该计数 >0 构造通用等待条件。
+另外捕获三组旧 seeked 导致的同目标重试，保留全部事件，不把它算作额外采样。
+生产源码、dist 和普通像素断言均未改变；没有采用未通过验证的 CSS/等待修复。
+见[诊断记录](changes/2026-09-14-PKG-AUTO-THUMB-03-rendering-readiness.md)与
+[证据](baselines/auto-thumbnail-rendering-readiness.json)。脚本/lint/工具链及计划
+检查通过只说明诊断可运行，不代表首帧通过。PIXEL-01 和 03 保持未完成，计划
+仍为 237 项：160 done、15 doing、62 todo。后续不再重复这些已否定的简单策略，
+继续定位当前媒体路径和补齐独立的历史消费验证；VAST 默认初始化选择仍待答复。
+
 ## PKG-AUTO-THUMB-09 历史 default 调用兼容完成
 
 通过同一函数上的 default 自引用补齐 1.0.1 的 JavaScript 调用，继续支持 1.1.0

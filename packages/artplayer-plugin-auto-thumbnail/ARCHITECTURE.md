@@ -139,6 +139,17 @@ close this risk based on the later-cell assertions or replace it with a nonblack
 test; legitimate black frames have opaque pixels. Frame timing, additional
 reentry/cleanup boundaries and resource budgets still need the remaining task03 work.
 
+`yarn probe:auto-thumbnail-rendering` captures an isolated diagnostic matrix from
+the current built ESM and the frozen timeline media. It compares intrinsic-size
+hidden/transparent/clipped/visible elements with current readiness, a readyState
+gate, and waiting for the first loadeddata event. The captured Windows WebKit
+profiles all miss the unique first frame; the Chromium/Firefox controls retain it.
+Seek records distinguish an already-ready element from a delivered loadeddata
+event. A zero getVideoPlaybackQuality().totalVideoFrames is also observed in the
+correct Firefox control, so it is not a portable frame-readiness gate. The command
+reports observations, not a passing acceptance suite, and never edits production
+bundles. See refactor's rendering-readiness record before repeating these options.
+
 The frozen eight-second timeline has one unique purple first frame followed by
 red, black, blue and yellow sections. Its command and fingerprint are in
 `refactor/baselines/auto-thumbnail-timeline-media.json`. Reproduce into a new

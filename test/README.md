@@ -15,6 +15,13 @@ runtime types describe the alias without changing the historical root declaratio
 This does not decode video or close all older type-shape, native pixel, or device
 acceptance gaps. Candidate entry types use the same runtime files.
 
+`yarn probe:auto-thumbnail-rendering` is an optional diagnosis command, separate
+from passing test suites. It runs four intrinsic-size rendering modes and three
+readiness strategies in Windows WebKit, plus Chromium/Firefox controls. It records
+raw draw pixels, seek/event ordering, frame counters and exact code/media hashes
+in a new cache directory. Completion of the command does not imply correct pixels:
+the current WebKit first-frame discrepancy remains an open release/refactor risk.
+
 `yarn test:danmuku-mask` runs candidate run cancellation/resource ownership plus
 frozen historical defects and public contracts. Candidate tests also run in
 `test:unit`; their controlled SDK, RAF and canvas hosts do not prove native model

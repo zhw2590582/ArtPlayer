@@ -1797,7 +1797,9 @@
         "baselines/auto-thumbnail-hidden-renderer.json",
         "baselines/auto-thumbnail-timeline-media.json",
         "changes/2026-09-13-PKG-AUTO-THUMB-03-frame-presentation.md",
-        "baselines/auto-thumbnail-frame-presentation.json"
+        "baselines/auto-thumbnail-frame-presentation.json",
+        "changes/2026-09-14-PKG-AUTO-THUMB-03-rendering-readiness.md",
+        "baselines/auto-thumbnail-rendering-readiness.json"
       ]
     },
     {

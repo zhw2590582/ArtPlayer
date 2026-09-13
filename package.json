@@ -107,7 +107,8 @@
     "test:danmuku-types-package": "node refactor/scripts/danmuku-package-types.mjs",
     "test:danmuku-mask-types-package": "node refactor/scripts/danmuku-mask-package-types.mjs",
     "test:auto-thumbnail-types": "node --test refactor/scripts/auto-thumbnail-types.test.mjs",
-    "test:auto-thumbnail-types-package": "node refactor/scripts/auto-thumbnail-package-types.mjs"
+    "test:auto-thumbnail-types-package": "node refactor/scripts/auto-thumbnail-package-types.mjs",
+    "probe:auto-thumbnail-rendering": "node refactor/scripts/auto-thumbnail-rendering-probe.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
