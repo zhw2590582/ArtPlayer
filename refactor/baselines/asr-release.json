@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "registry": "https://registry.npmjs.org/artplayer-plugin-asr",
+  "capturedAt": "2026-09-13T05:57:08.117Z",
+  "sourceCommit": "3b016970f24fea603706a2f4bd50026846f5d939",
+  "sourceNormalization": "Git text normalized to LF; archive members hashed as bytes.",
+  "source": {
+    "packages/artplayer-plugin-asr/package.json": "f0c9fc6c294376c7ed8974556672b077e31fae480bd8e3ecc8b2a060811b29cd",
+    "packages/artplayer-plugin-asr/README.md": "8bc731990d7ab32837af8382a99759ee14b6872dd24065929054a69fdcea2e4e",
+    "packages/artplayer-plugin-asr/src/index.js": "af24a6334298d636235d3af417bdea83444d200563ba6df054b66c53cdaef47f",
+    "packages/artplayer-plugin-asr/src/style.less": "ed40939c1db527bddf98c3e08b8c2e0b1d5a3581804fe2084d1070c9d50af0d6",
+    "packages/artplayer-plugin-asr/types/artplayer-plugin-asr.d.ts": "2d1ecb04f285b5835744d80dbde3c4a2a124bf1f5ffc995d0d775f5725309d0f",
+    "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+    "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js": "8b9f07ce97a8ce2e4f29e41e79257be530fd7a76558369d34c3d7497ea606c33",
+    "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.mjs": "f1c4274541e86544b65936ff470413cfc7001999ebc193969f95c123be48cd61",
+    "docs/assets/example/asr.js": "bb7fd5eee3df887b7e0c72a6f42f74f0253350f9bc884f73cb9c2996f0e35724"
+  },
+  "release": {
+    "name": "artplayer-plugin-asr",
+    "version": "2.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-asr/-/artplayer-plugin-asr-2.1.0.tgz",
+    "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+    "sha256": "8bc3cd93f78ce99e5c09cc546c770a63e8aea5729d3d584134ce04d826b7708b",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "8bc731990d7ab32837af8382a99759ee14b6872dd24065929054a69fdcea2e4e",
+      "package/dist/artplayer-plugin-asr.js": "7f975b131a9ea207f88a157aafec778bc4906230500db9b30f5bbfbf327b251d",
+      "package/dist/artplayer-plugin-asr.legacy.js": "8b9f07ce97a8ce2e4f29e41e79257be530fd7a76558369d34c3d7497ea606c33",
+      "package/dist/artplayer-plugin-asr.mjs": "f1c4274541e86544b65936ff470413cfc7001999ebc193969f95c123be48cd61",
+      "package/package.json": "f0c9fc6c294376c7ed8974556672b077e31fae480bd8e3ecc8b2a060811b29cd",
+      "package/types/artplayer-plugin-asr.d.ts": "2d1ecb04f285b5835744d80dbde3c4a2a124bf1f5ffc995d0d775f5725309d0f"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-asr",
+      "version": "2.1.0",
+      "description": "Asr plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-asr.d.ts",
+          "import": "./dist/artplayer-plugin-asr.mjs",
+          "require": "./dist/artplayer-plugin-asr.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-asr.d.ts",
+          "import": "./dist/artplayer-plugin-asr.legacy.js",
+          "require": "./dist/artplayer-plugin-asr.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-asr.js",
+      "module": "./dist/artplayer-plugin-asr.mjs",
+      "types": "./types/artplayer-plugin-asr.d.ts",
+      "legacy": "./dist/artplayer-plugin-asr.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "historicalCore": {
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "version": "5.3.1",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c"
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "2.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-asr/-/artplayer-plugin-asr-2.0.0.tgz",
+      "integrity": "sha512-nXTf2drMSKnHRbyU9CQ+3o7Jsf1Meam2O9T8LqYakIr18ag/+i71p2x9zdFrLz16Xa6jfQgKeddmU5r3sXp4LA==",
+      "sha256": "faa726b9536306664d935c95367230e0c622bd046faf636fc2dcef4bbce4cd47",
+      "registryGitHead": "ca34b47180c94048ee765ab7e146face737eac1c",
+      "files": {
+        "package/README.md": "24446684a782c4c179516917a42862809164aac1ae9746e21a09da738e19ca42",
+        "package/dist/artplayer-plugin-asr.js": "30c7b1fc92a262cda8c3aba63afea9c6c038f52c057039d1c6aa957baed155b6",
+        "package/dist/artplayer-plugin-asr.legacy.js": "2c2bf48751e4d3cfa88f7313f092d395b61bc0564f6cc44f2c76f0fbcfc66412",
+        "package/dist/artplayer-plugin-asr.mjs": "98ebdec2c66cecd9d19904a2e54e4b645f7c267b569e560d9bcbeee6028b2267",
+        "package/package.json": "7545d9bb95b48aedec45c0345f39dd8f0728a24ffe148a04e3740e1ef50239df",
+        "package/types/artplayer-plugin-asr.d.ts": "2d1ecb04f285b5835744d80dbde3c4a2a124bf1f5ffc995d0d775f5725309d0f"
+      },
+      "manifest": {
+        "name": "artplayer-plugin-asr",
+        "version": "2.0.0",
+        "description": "Asr plugin for ArtPlayer",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "license": "MIT",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ],
+        "exports": {
+          ".": {
+            "types": "./types/artplayer-plugin-asr.d.ts",
+            "import": "./dist/artplayer-plugin-asr.mjs",
+            "require": "./dist/artplayer-plugin-asr.js"
+          },
+          "./legacy": {
+            "types": "./types/artplayer-plugin-asr.d.ts",
+            "import": "./dist/artplayer-plugin-asr.legacy.js",
+            "require": "./dist/artplayer-plugin-asr.legacy.js"
+          }
+        },
+        "main": "./dist/artplayer-plugin-asr.js",
+        "module": "./dist/artplayer-plugin-asr.mjs",
+        "types": "./types/artplayer-plugin-asr.d.ts",
+        "legacy": "./dist/artplayer-plugin-asr.legacy.js",
+        "browserslist": "last 1 Chrome version"
+      },
+      "historicalCore": {
+        "commit": "ca34b47180c94048ee765ab7e146face737eac1c",
+        "file": "packages/artplayer/package.json",
+        "version": "5.3.1-beta.1",
+        "sha256LF": "e1a0a390ec10cd8c1c12006ac6515414ae98a964300dd3e9c288377def948497"
+      }
+    }
+  ]
+}
