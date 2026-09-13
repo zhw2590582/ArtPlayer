@@ -4105,6 +4105,27 @@
       ]
     },
     {
+      "id": "SITE-SMOKE-01",
+      "phase": "6 文档与消费者",
+      "title": "迁移示例生成器并验证真实就绪与清理",
+      "scope": [
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-01"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "TS Markdown 解析/生成与浏览器运行模块；旧命令和 URL、稳定实例就绪 smoke、错误与资源清理",
+      "acceptance": "复现旧 malformed 死循环并保证有限失败；保留全部既有示例内容、生成确定且 check 只读；不再以 100ms 作为成功，验证原生就绪、异常、取消与清理；三浏览器检查，明确延迟交互与全部 233 示例仍需 EX-03",
+      "evidence": [
+        "changes/2026-09-14-SITE-SMOKE-01-documentation-smoke.md",
+        "baselines/docs-smoke-validation.json",
+        "scripts/docs-smoke.test.mjs"
+      ]
+    },
+    {
       "id": "SITE-02",
       "phase": "6 文档与消费者",
       "title": "整理声明与示例生成器",
@@ -4114,7 +4135,8 @@
       "dependsOn": [
         "SITE-01",
         "ENG-04",
-        "ENG-06"
+        "ENG-06",
+        "SITE-SMOKE-01"
       ],
       "status": "todo",
       "risk": "M",

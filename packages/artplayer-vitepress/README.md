@@ -43,8 +43,9 @@ The repository generators have different ownership:
 - `scripts/build-types.mjs`: core public declaration sources to existing `types/`.
 - `scripts/build-ts.js`: standalone editor declarations and the editor library list.
 - `scripts/build-test.js`: extracts Chinese Run Code blocks into `docs/test/test.js`.
-  It is currently a smoke generator with a fixed 100 ms completion delay, not
-  proof of asynchronous playback or plugin success. SITE-02 owns its replacement.
+  The TS implementation in `scripts/docs-smoke/` produces deterministic readiness
+  smoke cases with owned frames, error observation and cleanup. It does not prove
+  complete playback or plugin behavior. See its maintenance README and SITE-SMOKE-01.
 - `scripts/build-i18n.js`: core language source bundles and copies to `docs/compiled/i18n/`.
 - `scripts/build-docs.js`: this VitePress build.
 - `scripts/build-llm.js` and `scripts/trans-docs.js`: explicit remote DeepSeek

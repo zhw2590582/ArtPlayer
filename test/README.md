@@ -2,6 +2,15 @@
 
 Use the pinned Node/Yarn toolchain from `../refactor/toolchain-setup.md`.
 
+`yarn build:test` generates deterministic documentation readiness smoke and its
+source manifest. `yarn check:docs-smoke` is read-only, and
+`yarn typecheck:docs-tools` checks the TS modules and legacy JS command shim.
+`refactor/scripts/docs-smoke.test.mjs` covers the historical malformed-parser loop,
+all 233 current source snippets, stable generation and CLI drift/error handling.
+`test/browser/docs-smoke.spec.js` uses actual core/media in three engines for
+readiness, failures, frame cleanup, storage restoration and repeated execution.
+See `scripts/docs-smoke/README.md` for the explicit limits of readiness smoke.
+
 `yarn test:vue-consumer` checks the actual Vue example with packed core/Danmuku/
 Document PiP in an outside-workspace install. It also installs its pinned Vue
 compiler there, checks all declaration paths for isolation, and runs development

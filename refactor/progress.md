@@ -1,5 +1,20 @@
 # 进度与证据
 
+## SITE-SMOKE-01 示例生成器与就绪检查完成
+
+从 SITE-02 拆出文档示例工具，TS parser/generator/runtime 与严格检查的原 JS
+入口职责分开。固定旧版复现异常围栏无限循环，保留 11 文件 233 段旧示例；
+生成清单和浏览器 bundle 可重复、可只读检查。每例 iframe 等待真实 ready、
+收集同步/异步错误并清理，替换旧固定 100ms 成功。三浏览器共 33 项、生成器
+5 项、完整 baseline 522 项、CI 50 项及 406 生产 TS/消费者检查通过；frozen
+安装、工具链与 lint 通过（根 lint 1 既有 warning）。新增两项根开发类型依赖，
+显式使用主 TS 5.9.3，修复共享 tsc bin 指向兼容 5.1.6 的检查歧义。Windows
+WebKit 原尺寸差异仍保留 DPIP-MEDIA-01；完整 233 例交互/SDK/设备没有计为通过。
+见[变更](changes/2026-09-14-SITE-SMOKE-01-documentation-smoke.md)与
+[证据](baselines/docs-smoke-validation.json)。当前 240 项：165 done、15 doing、
+60 todo。下一步 SITE-02 编辑器声明生成器；VAST 兼容选择、Auto Thumbnail 首帧
+和各包最终验收仍开放。仅本地独立提交，无推送或发布。
+
 ## SITE-01 文档/示例/生成链清点完成
 
 建立当前 22 包、27 Markdown、30 示例、36 HTML、963 声明成员和 204 资产

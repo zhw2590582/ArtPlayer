@@ -17939,7 +17939,7 @@
     {
       "source": "docs/test/index.html",
       "route": "/test/",
-      "sha256Lf": "67132147ebbb63867c05be182ec18fc6c3129df89808bf17819c92cee9a4769c",
+      "sha256Lf": "5f525951d54590c358f060c8a4829abf322dcff89f31a25f3892d9030ad4e4c8",
       "kind": "demo-or-editor",
       "scriptSources": [
         "./chai.js",
@@ -18113,7 +18113,7 @@
     },
     {
       "file": "scripts/build-test.js",
-      "sha256Lf": "1e8ce7bce686b507bcf9f3fd02dfe03102b1940daa0fc14a487abadb909e93c7"
+      "sha256Lf": "b032fc230d716f0f33650113a04564e64b827c7d637bbbf07afa990fa8755027"
     },
     {
       "file": "scripts/build-i18n.js",
@@ -18154,6 +18154,18 @@
     {
       "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
       "sha256Lf": "9b2741347afb49d830dafa2a847625e6b1d6a820e930fb119c91b22dbbcc52d1"
+    },
+    {
+      "file": "scripts/docs-smoke/generator.ts",
+      "sha256Lf": "2ae4144f27b3050869217e437ddca75ccc25897bf78f75efc91dd1f7d2ca3dc2"
+    },
+    {
+      "file": "scripts/docs-smoke/parser.ts",
+      "sha256Lf": "d1f19833124954922849d4f40f853380b0ddd7bbf232f7cdf9c07dd8d6403e1c"
+    },
+    {
+      "file": "scripts/docs-smoke/runtime.ts",
+      "sha256Lf": "9fae3aa1bc6a6ef9728d9a677de9e283d40314022b710b2ecf19a9b951f6291d"
     }
   ],
   "generationCommands": {
@@ -18163,7 +18175,7 @@
     "build:i18n": "node ./scripts/build-i18n.js",
     "build:test": "node ./scripts/build-test.js",
     "build:all": "yarn ci:build && yarn lint",
-    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:docs && yarn test:imports",
+    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:test && yarn build:docs && yarn test:imports",
     "build:types": "node scripts/build-types.mjs --write"
   },
   "siteManifest": {

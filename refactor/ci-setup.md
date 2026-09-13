@@ -6,10 +6,11 @@
 
 | 命令 | 行为 |
 | --- | --- |
-| `yarn lint` | 只读 ESLint，覆盖包源码/声明、JS/MJS 工具、测试和编辑器声明 |
+| `yarn lint` | 只读 ESLint，覆盖包源码/声明、JS/MJS 工具、docs-smoke TS 模块、测试和编辑器声明 |
 | `yarn lint:fix` | 显式自动修复相同范围 |
 | `yarn typecheck` | 根/迁移包严格检查、当前与兼容 TS 消费；历史 NodeNext ESM 错误单独核对，见 typechecking.md |
 | `yarn typecheck:react` / `yarn typecheck:vue` | 原 React TSX / Vue SFC 示例严格检查，ci:check 同时执行对应 lint |
+| `yarn typecheck:docs-tools` / `yarn check:docs-smoke` | 严格检查 TS 示例生成器及 JS 命令门面；只读核对确定性生成的 readiness smoke，ci:check 执行 |
 | `yarn test:react-consumer` / `yarn test:vue-consumer` | 仓库外 tarball 安装、原框架示例、开发/生产三引擎；browser-smoke 执行并上传独立目录，本地证据不代替远端矩阵 |
 | `yarn test:unit` | 原播放/DASH 回归、同夹具的新旧公共契约与 JS/TS loader 验证 |
 | `yarn test:node` | test:unit 加工具链/文档构建回归，保留原 test:playback/test:dash-control 入口 |
@@ -21,9 +22,9 @@
 | `yarn check:contracts --report` | 校验12类契约/22包归属、版本及报告对应；--write更新静态表，详见 [维护说明](contract-coverage.md) |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
 | `yarn check:ci` | 只读校验实际工作流的完整系统矩阵、安装、缓存、报告和最终检查；已接入 ci:check |
-| `yarn test:ci` | CI 汇总退出码、工作流/影响分析反例与隔离运行时校验，共 44 项 |
+| `yarn test:ci` | CI 汇总退出码、工作流/影响分析反例与隔离运行时校验；SITE-SMOKE-01 实测 50 项 |
 | `yarn test:package:runtime` | 标准 Node 重装同一已检查 tarball；须先运行 test:package，其他 Node 使用显式 --expected-node |
-| `yarn ci:build` | 21 库包、i18n、编辑器声明和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
+| `yarn ci:build` | 21 库包、i18n、编辑器声明、文档 readiness smoke 和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
 | `yarn check:impact --report` | 读取实际依赖/验证关系和Git变更，核对workflow必需命令，写CI影响报告；已接入ci:check，见[影响映射](impact-analysis.md) |
 | `yarn build:all` | 保留旧入口，执行 ci:build 后只读 lint |
 

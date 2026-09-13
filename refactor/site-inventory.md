@@ -1,5 +1,10 @@
 # 文档站、示例与生成链清单
 
+SITE-SMOKE-01 后续已将 build:test 拆为 TS 解析、生成和浏览器运行模块，新增
+确定性 examples.json 和 readonly check，替换 100ms done 为实例 ready/错误/清理。
+以下 SITE-01 的旧生成器问题属于历史发现；当前维护入口见
+[docs-smoke README](../scripts/docs-smoke/README.md)。声明生成仍归 SITE-02。
+
 SITE-01 在 `d62ab13a35c756ea567c426d4fbe00d893dd7e2b` 后核对当前源码。
 可重跑清单见 [site-inventory.json](baselines/site-inventory.json)；它登记
 22 包、27 Markdown、30 示例、36 HTML、963 条声明成员和 204 个资产指纹。

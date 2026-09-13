@@ -1,0 +1,584 @@
+{
+  "task": "SITE-SMOKE-01",
+  "baseline": "d74ecc43ccee99dcd2e3090356a6fb761825e6af",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "tools": {
+    "primaryTypeScript": "5.9.3",
+    "historicalSharedTscBin": "5.1.6",
+    "addedRootDevDependencies": {
+      "@types/node": "24.10.0",
+      "@types/markdown-it": "14.1.2"
+    },
+    "productionTsFiles": 406,
+    "workspaces": 22,
+    "pinnedTools": 38,
+    "dependencySelectors": 1470
+  },
+  "selectedExamples": {
+    "examples": 233,
+    "files": 11,
+    "runtimeScripts": 11,
+    "preservedCodeAfterLfNormalization": true,
+    "fullBrowserExecution": false
+  },
+  "parserBefore": {
+    "sourceCommit": "d74ecc43ccee99dcd2e3090356a6fb761825e6af",
+    "reproduction": "Fixed old extractor VM ERR_SCRIPT_EXECUTION_TIMEOUT for malformed snippet; committed test verifies finite new parse and syntax rejection."
+  },
+  "validation": {
+    "baseline": {
+      "file": "refactor/.cache/docs-smoke-baseline.log",
+      "sha256": "364e7e17a40399436e42eef2a9e6a895830fc9abc70f1067050a90df3a097fed",
+      "exitCode": 0,
+      "pass": 522
+    },
+    "targeted": {
+      "file": "refactor/.cache/docs-smoke-tests.log",
+      "sha256": "7170a7bb34967be812c4b20f57e35fa4bf1701e1b4ae5c5adb3c67a81003379f",
+      "exitCode": 0,
+      "pass": 5
+    },
+    "ci": {
+      "file": "refactor/.cache/docs-smoke-ci-tests.log",
+      "sha256": "18ef50db081f0106e31c322e2d836add7866c11f22d53ebf8770a1b4f91a707e",
+      "exitCode": 0,
+      "pass": 50
+    },
+    "productionTypes": {
+      "file": "refactor/.cache/docs-smoke-production-types.log",
+      "sha256": "a57e291b4168679e50533f35ab39b835c66a1dde22ad4b8a045d65db27e14e81",
+      "exitCode": 0
+    },
+    "docsTypes": {
+      "file": "refactor/.cache/docs-smoke-types-final.log",
+      "sha256": "d082eef2f531b831e25fc38c50f2f0727b049b5f1c8c915c67b12fb8c42a80e7",
+      "exitCode": 0
+    },
+    "reactTypes": {
+      "file": "refactor/.cache/docs-smoke-react-types.log",
+      "sha256": "076a3287d3c0eff3c331b25972a92239476928b31b83d84cb6fee512fc8d2ad5",
+      "exitCode": 0
+    },
+    "frozen": {
+      "file": "refactor/.cache/docs-smoke-frozen.log",
+      "sha256": "002782fd8a6091b824463b26b2711b695f7154b6f3cd7b6c7ca4e86e775153e0",
+      "exitCode": 0
+    },
+    "toolchain": {
+      "file": "refactor/.cache/docs-smoke-toolchain.log",
+      "sha256": "ff37a9bff5aeaac042303412efefbcbe0ffc01ae6c615b72e3be4b2bedc522a5",
+      "exitCode": 0
+    },
+    "rootLint": {
+      "file": "refactor/.cache/docs-smoke-root-lint.log",
+      "sha256": "3cc99e4aad769bb1d791f64cfbe2691d46a65b67c1ae7de25ca09e7630033ee5",
+      "exitCode": 0
+    },
+    "targetedLint": {
+      "file": "refactor/.cache/docs-smoke-final-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    "readonlyCheck": {
+      "file": "refactor/.cache/docs-smoke-check.log",
+      "sha256": "c5f08a17633392d6e1680f92db95be60da5e7e3fb029adb69a25f0303a8558bb",
+      "exitCode": 0
+    },
+    "compilerAliasBefore": {
+      "file": "refactor/.cache/docs-smoke-tsc-alias-before.log",
+      "sha256": "b0a1234a8a71fed3658891302f314f246f13c802423c4a16c1e2b802c9df8dea",
+      "exitCode": 2
+    },
+    "browserBefore": {
+      "file": "refactor/.cache/docs-smoke-browser-final.log",
+      "sha256": "3cd781617dcc585c7cb7d5fdc8d3b9345cff9863ba81c2fc85f8d98995d2bb85",
+      "exitCode": 1,
+      "pass": 31
+    },
+    "browserAccepted": {
+      "file": "refactor/.cache/docs-smoke-browser-verified.log",
+      "sha256": "d4c01724c6d5960b33efc242b861553a65da0f7842e6def593e899b1f7387217",
+      "exitCode": 0,
+      "pass": 33
+    }
+  },
+  "rootLintExistingWarnings": 1,
+  "browser": {
+    "file": "refactor/.cache/docs-smoke-browser-accepted/report.json",
+    "sha256": "cc96afc1e1b53e78db3063679bb4505fb19524d720019ad856e270d6bd6397f0",
+    "stats": {
+      "startTime": "2026-09-13T22:43:58.881Z",
+      "duration": 32387.1,
+      "expected": 33,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "readiness smoke uses actual core/media and releases each frame without touching a parent player",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": [
+          {
+            "name": "readiness-0",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          },
+          {
+            "name": "readiness-1",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          },
+          {
+            "name": "readiness-2",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          }
+        ]
+      },
+      {
+        "title": "smoke remains pending beyond 100ms until real media becomes ready",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "generated real documentation cases run with controlled native media",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "parallel calls are rejected while a controlled case is still active",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports synchronous error and removes its frame",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports returned rejection and removes its frame",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports unhandled rejection and removes its frame",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports readiness callback error and removes its frame",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports cleanup error and removes its frame",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "missing script and never-ready examples fail instead of becoming green after a delay",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "frame-owned timers and globals do not survive into the next example",
+        "project": "chromium",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "readiness smoke uses actual core/media and releases each frame without touching a parent player",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": [
+          {
+            "name": "readiness-0",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          },
+          {
+            "name": "readiness-1",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          },
+          {
+            "name": "readiness-2",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          }
+        ]
+      },
+      {
+        "title": "smoke remains pending beyond 100ms until real media becomes ready",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "generated real documentation cases run with controlled native media",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "parallel calls are rejected while a controlled case is still active",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports synchronous error and removes its frame",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports returned rejection and removes its frame",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports unhandled rejection and removes its frame",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports readiness callback error and removes its frame",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports cleanup error and removes its frame",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "missing script and never-ready examples fail instead of becoming green after a delay",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "frame-owned timers and globals do not survive into the next example",
+        "project": "firefox",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "readiness smoke uses actual core/media and releases each frame without touching a parent player",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": [
+          {
+            "name": "readiness-0",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          },
+          {
+            "name": "readiness-1",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          },
+          {
+            "name": "readiness-2",
+            "contentType": "application/json",
+            "content": "{\"id\":\"fixture.md:1\",\"instances\":1,\"ready\":1,\"media\":[{\"readyState\":4,\"width\":320,\"height\":180,\"duration\":8}]}"
+          }
+        ]
+      },
+      {
+        "title": "smoke remains pending beyond 100ms until real media becomes ready",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "generated real documentation cases run with controlled native media",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "parallel calls are rejected while a controlled case is still active",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports synchronous error and removes its frame",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports returned rejection and removes its frame",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports unhandled rejection and removes its frame",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports readiness callback error and removes its frame",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "smoke reports cleanup error and removes its frame",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "missing script and never-ready examples fail instead of becoming green after a delay",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      },
+      {
+        "title": "frame-owned timers and globals do not survive into the next example",
+        "project": "webkit",
+        "status": "expected",
+        "attempts": 1,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "observations": []
+      }
+    ],
+    "before": {
+      "pass": 31,
+      "fail": 2,
+      "reason": "Windows WebKit reports 640x360 layout dimensions for 320x180 media; existing DPIP-MEDIA-01. Exact pairs only, not closed.",
+      "archive": "refactor/.cache/docs-smoke-browser-before-g6DmAA"
+    }
+  },
+  "inputs": {
+    "scripts/build-test.js": {
+      "sha256Lf": "b032fc230d716f0f33650113a04564e64b827c7d637bbbf07afa990fa8755027"
+    },
+    "scripts/tsconfig.docs.json": {
+      "sha256Lf": "8d2adc75cbe68f612cb83c3b4586b547cd33ddb724e0dba2471ea5d160fd20e5"
+    },
+    "scripts/docs-smoke/parser.ts": {
+      "sha256Lf": "d1f19833124954922849d4f40f853380b0ddd7bbf232f7cdf9c07dd8d6403e1c"
+    },
+    "scripts/docs-smoke/generator.ts": {
+      "sha256Lf": "2ae4144f27b3050869217e437ddca75ccc25897bf78f75efc91dd1f7d2ca3dc2"
+    },
+    "scripts/docs-smoke/runtime.ts": {
+      "sha256Lf": "9fae3aa1bc6a6ef9728d9a677de9e283d40314022b710b2ecf19a9b951f6291d"
+    },
+    "refactor/scripts/docs-smoke.test.mjs": {
+      "sha256Lf": "ddb417851665bfc2bd9e3a52c43b0fbc450fcd8eff7e0d63427bd6c2665704d5"
+    },
+    "test/browser/docs-smoke.spec.js": {
+      "sha256Lf": "7e3efb737346da3f9da8daf29f5bd15ad8162bb906ced456002e4c8222d8ed9a"
+    },
+    "docs/test/index.html": {
+      "sha256Lf": "5f525951d54590c358f060c8a4829abf322dcff89f31a25f3892d9030ad4e4c8"
+    },
+    "package.json": {
+      "sha256Lf": "3ef07142a1b5a3141292694e23de7af26d25812ecd2863a7f2a3deb856ce7554"
+    },
+    "yarn.lock": {
+      "sha256Lf": "8139d40cc1a40e4089c1bcf21f9edece6a8726256ba9246775680add45622512"
+    },
+    "packages/artplayer-vitepress/docs/advanced/built-in.md": {
+      "sha256Lf": "332f7b86bdbbb2957fddfd94aa779f3b9c40c172695877d65b4edbdc0e67b39e"
+    },
+    "packages/artplayer-vitepress/docs/advanced/class.md": {
+      "sha256Lf": "1d5c1c53beda9b5d6d40ab94587028e9d57a562b03604cb32e7d049058945ebf"
+    },
+    "packages/artplayer-vitepress/docs/advanced/event.md": {
+      "sha256Lf": "a5b2bf5bba605914efaa76e7a21b16b52575e92e8fe1ec682f46ea0e4faf7a55"
+    },
+    "packages/artplayer-vitepress/docs/advanced/global.md": {
+      "sha256Lf": "d9990b5c0293df1a8ded04044efbd59bdea6d9977bcf2bc0b0f8ee7d3df7d2ba"
+    },
+    "packages/artplayer-vitepress/docs/advanced/plugin.md": {
+      "sha256Lf": "21b4dc45a245d7747fdf0bf0b86548d3bb945a037ac5493f290e81066ba65bb7"
+    },
+    "packages/artplayer-vitepress/docs/advanced/property.md": {
+      "sha256Lf": "0c1a40d37bd3a87c31eb768acae3104286976b7feb0d560c187d31b0805421e6"
+    },
+    "packages/artplayer-vitepress/docs/component/contextmenu.md": {
+      "sha256Lf": "50ee2ef72eca5f0ea4ef42283d98a0f5bd375d661b26f0ccd58d82c5d99aeb4e"
+    },
+    "packages/artplayer-vitepress/docs/component/controls.md": {
+      "sha256Lf": "ef215c3e831835edc002f4e7e22fa1f619435936012684d23d251e78d4d08e79"
+    },
+    "packages/artplayer-vitepress/docs/component/layers.md": {
+      "sha256Lf": "7bc9eea79ab23b1280aa34a7946ab4b98b0a52051e014378609f45fcd1f074ee"
+    },
+    "packages/artplayer-vitepress/docs/component/setting.md": {
+      "sha256Lf": "4387c3b15e32ac3176d4c9279642262073c37df8fb213379eae8cee6d7718a1f"
+    },
+    "packages/artplayer-vitepress/docs/start/option.md": {
+      "sha256Lf": "336c1d69cd484e18fbebd6a029069a0ab734af2a256bb696b6272003a1eadb15"
+    }
+  },
+  "outputs": {
+    "docs/test/test.js": {
+      "sha256Lf": "d56a24949b5b4c97b85abfb8233050b2e62c2869a0c15b1e3ad7c83d4987adfb"
+    },
+    "docs/test/examples.json": {
+      "sha256Lf": "5af15520ebca3d84887391ea8b202fb0de7c2a2809dbe45cdad199f91f9cdf2a"
+    }
+  },
+  "limitations": [
+    "Readiness harness, not complete interaction/playback acceptance of 233 examples.",
+    "No remote SDK endpoint, native Safari/device, manual Chrome/iab or remote CI validation.",
+    "Same-origin iframe is not a security sandbox; storage restoration requires exclusive test origin.",
+    "No push, publication or SITE-02 declaration-generator completion."
+  ]
+}

@@ -1,0 +1,1416 @@
+{
+  "scope": "Chinese Run Code JavaScript; excludes en/plugin/public/.vitepress. Waits for created players to become ready, observes errors until that boundary, then destroys the frame. Not complete feature, delayed-callback or interaction acceptance.",
+  "examples": [
+    {
+      "id": "advanced/built-in.md:12",
+      "file": "advanced/built-in.md",
+      "line": 12,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nconsole.info(art.option);"
+    },
+    {
+      "id": "advanced/built-in.md:33",
+      "file": "advanced/built-in.md",
+      "line": 33,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nconsole.info(art.template);\nconsole.info(art.template.$video);"
+    },
+    {
+      "id": "advanced/built-in.md:60",
+      "file": "advanced/built-in.md",
+      "line": 60,
+      "code": "var container = document.querySelector('.artplayer-app');\n\nvar art = new Artplayer({\n    container: container,\n    url: '/assets/sample/video.mp4',\n});\n\nart.events.proxy(container, 'click', event => {\n\tconsole.info('click', event);\n});\n\nart.events.hover(container, (event) => {\n    console.info('mouseenter', event);\n}, (event) => {\n    console.info('mouseleave', event);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:97",
+      "file": "advanced/built-in.md",
+      "line": 97,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.storage.set('test', { foo: 'bar' });\nconst test = art.storage.get('test');\nconsole.info(test);\nart.storage.del('test');\nart.storage.clear();"
+    },
+    {
+      "id": "advanced/built-in.md:120",
+      "file": "advanced/built-in.md",
+      "line": 120,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.storage.name = 'your-storage-key';\nart.storage.set('test', { foo: 'bar' });"
+    },
+    {
+      "id": "advanced/built-in.md:136",
+      "file": "advanced/built-in.md",
+      "line": 136,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nconsole.info(art.icons.loading);"
+    },
+    {
+      "id": "advanced/built-in.md:160",
+      "file": "advanced/built-in.md",
+      "line": 160,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nconsole.info(art.i18n.get('Play'));\n\nart.i18n.update({\n    'zh-cn': {\n        Play: 'Your Play'\n    }\n});"
+    },
+    {
+      "id": "advanced/built-in.md:188",
+      "file": "advanced/built-in.md",
+      "line": 188,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.notice.show = 'Video Ready To Play';\n})"
+    },
+    {
+      "id": "advanced/built-in.md:217",
+      "file": "advanced/built-in.md",
+      "line": 217,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.layers.add({\n        html: 'Some Text',\n    });\n\n\tsetTimeout(() => {\n\t\tart.layers.show = false;\n\t}, 1000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:252",
+      "file": "advanced/built-in.md",
+      "line": 252,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.controls.add({\n        html: 'Some Text',\n        position: 'left',\n    });\n\n\tsetTimeout(() => {\n\t\tart.controls.show = false;\n\t}, 1000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:288",
+      "file": "advanced/built-in.md",
+      "line": 288,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.contextmenu.add({\n        html: 'Some Text',\n    });\n\n    art.contextmenu.show = true;\n\tsetTimeout(() => {\n\t\tart.contextmenu.show = false;\n\t}, 1000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:325",
+      "file": "advanced/built-in.md",
+      "line": 325,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.subtitle.url = '/assets/sample/subtitle.srt'\n    art.subtitle.style({\n        color: 'red',\n    });\n});"
+    },
+    {
+      "id": "advanced/built-in.md:348",
+      "file": "advanced/built-in.md",
+      "line": 348,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.info.show = true;\n\n    setTimeout(() => {\n        art.info.show = false;\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:372",
+      "file": "advanced/built-in.md",
+      "line": 372,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.loading.show = true;\n\tsetTimeout(() => {\n\t\tart.loading.show = false;\n\t}, 1000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:395",
+      "file": "advanced/built-in.md",
+      "line": 395,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nfunction hotkeyEvent(event) {\n    console.info('click', event);\n}\n\nart.on('ready', () => {\n    art.hotkey.add(32, hotkeyEvent);\n    setTimeout(() => {\n\t\tart.hotkey.remove(32, hotkeyEvent);\n\t}, 5000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:428",
+      "file": "advanced/built-in.md",
+      "line": 428,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.mask.show = false;\n\tsetTimeout(() => {\n\t\tart.mask.show = true;\n\t}, 1000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:454",
+      "file": "advanced/built-in.md",
+      "line": 454,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    flip: true,\n    playbackRate: true,\n    aspectRatio: true,\n    subtitleOffset: true,\n});\n\nart.on('ready', () => {\n    art.setting.show = true;\n\tsetTimeout(() => {\n\t\tart.setting.show = false;\n\t}, 1000);\n});"
+    },
+    {
+      "id": "advanced/built-in.md:485",
+      "file": "advanced/built-in.md",
+      "line": 485,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nfunction myPlugin(art) {\n    console.info(art);\n    return {\n        name: 'myPlugin',\n        something: 'something',\n        doSomething: function () {\n            console.info('doSomething');\n        },\n    };\n}\n\nart.on('ready', () => {\n    art.plugins.add(myPlugin);\n});"
+    },
+    {
+      "id": "advanced/class.md:12",
+      "file": "advanced/class.md",
+      "line": 12,
+      "code": "console.info([...Artplayer.instances]);\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nconsole.info([...Artplayer.instances]);"
+    },
+    {
+      "id": "advanced/class.md:29",
+      "file": "advanced/class.md",
+      "line": 29,
+      "code": "console.info(Artplayer.version);"
+    },
+    {
+      "id": "advanced/class.md:39",
+      "file": "advanced/class.md",
+      "line": 39,
+      "code": "console.info(Artplayer.env);"
+    },
+    {
+      "id": "advanced/class.md:49",
+      "file": "advanced/class.md",
+      "line": 49,
+      "code": "console.info(Artplayer.build);"
+    },
+    {
+      "id": "advanced/class.md:59",
+      "file": "advanced/class.md",
+      "line": 59,
+      "code": "console.info(Artplayer.config);"
+    },
+    {
+      "id": "advanced/class.md:69",
+      "file": "advanced/class.md",
+      "line": 69,
+      "code": "console.info(Artplayer.utils);"
+    },
+    {
+      "id": "advanced/class.md:85",
+      "file": "advanced/class.md",
+      "line": 85,
+      "code": "console.info(Artplayer.scheme);"
+    },
+    {
+      "id": "advanced/class.md:95",
+      "file": "advanced/class.md",
+      "line": 95,
+      "code": "console.info(Artplayer.Emitter);"
+    },
+    {
+      "id": "advanced/class.md:105",
+      "file": "advanced/class.md",
+      "line": 105,
+      "code": "console.info(Artplayer.validator);"
+    },
+    {
+      "id": "advanced/class.md:115",
+      "file": "advanced/class.md",
+      "line": 115,
+      "code": "console.info(Artplayer.kindOf);"
+    },
+    {
+      "id": "advanced/class.md:125",
+      "file": "advanced/class.md",
+      "line": 125,
+      "code": "console.info(Artplayer.html);"
+    },
+    {
+      "id": "advanced/class.md:135",
+      "file": "advanced/class.md",
+      "line": 135,
+      "code": "console.info(Artplayer.option);"
+    },
+    {
+      "id": "advanced/event.md:10",
+      "file": "advanced/event.md",
+      "line": 10,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('video:canplay', () => {\n    console.info('video:canplay');\n});"
+    },
+    {
+      "id": "advanced/event.md:25",
+      "file": "advanced/event.md",
+      "line": 25,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.once('video:canplay', () => {\n    console.info('video:canplay');\n});"
+    },
+    {
+      "id": "advanced/event.md:40",
+      "file": "advanced/event.md",
+      "line": 40,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.emit('focus');"
+    },
+    {
+      "id": "advanced/event.md:53",
+      "file": "advanced/event.md",
+      "line": 53,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nconst onReady = () => {\n    console.info('ready');\n    art.off('ready', onReady);\n}\n\nart.on('ready', onReady);"
+    },
+    {
+      "id": "advanced/event.md:79",
+      "file": "advanced/event.md",
+      "line": 79,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info('ready');\n});"
+    },
+    {
+      "id": "advanced/event.md:96",
+      "file": "advanced/event.md",
+      "line": 96,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.url = '/assets/sample/video.mp4'\n});\n\nart.on('restart', (url) => {\n    console.info('restart', url);\n});"
+    },
+    {
+      "id": "advanced/event.md:117",
+      "file": "advanced/event.md",
+      "line": 117,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('pause', () => {\n    console.info('pause');\n});"
+    },
+    {
+      "id": "advanced/event.md:134",
+      "file": "advanced/event.md",
+      "line": 134,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('play', () => {\n    console.info('play');\n});"
+    },
+    {
+      "id": "advanced/event.md:151",
+      "file": "advanced/event.md",
+      "line": 151,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('hotkey', (event) => {\n    console.info('hotkey', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:168",
+      "file": "advanced/event.md",
+      "line": 168,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.destroy();\n});\n\nart.on('destroy', () => {\n    console.info('destroy');\n});"
+    },
+    {
+      "id": "advanced/event.md:189",
+      "file": "advanced/event.md",
+      "line": 189,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('focus', (event) => {\n    console.info('focus', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:206",
+      "file": "advanced/event.md",
+      "line": 206,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('blur', (event) => {\n    console.info('blur', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:223",
+      "file": "advanced/event.md",
+      "line": 223,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('dblclick', (event) => {\n    console.info('dblclick', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:240",
+      "file": "advanced/event.md",
+      "line": 240,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('click', (event) => {\n    console.info('click', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:257",
+      "file": "advanced/event.md",
+      "line": 257,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/404.mp4',\n});\n\nart.on('error', (error, reconnectTime) => {\n    console.info(error, reconnectTime);\n});"
+    },
+    {
+      "id": "advanced/event.md:274",
+      "file": "advanced/event.md",
+      "line": 274,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('hover', (state, event) => {\n    console.info('hover', state, event);\n});"
+    },
+    {
+      "id": "advanced/event.md:291",
+      "file": "advanced/event.md",
+      "line": 291,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('mousemove', (event) => {\n    console.info('mousemove', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:308",
+      "file": "advanced/event.md",
+      "line": 308,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('resize', () => {\n    console.info('resize');\n});"
+    },
+    {
+      "id": "advanced/event.md:325",
+      "file": "advanced/event.md",
+      "line": 325,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('view', (state) => {\n    console.info('view', state);\n});"
+    },
+    {
+      "id": "advanced/event.md:342",
+      "file": "advanced/event.md",
+      "line": 342,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    lock: true,\n});\n\nart.on('lock', (state) => {\n    console.info('lock', state);\n});"
+    },
+    {
+      "id": "advanced/event.md:360",
+      "file": "advanced/event.md",
+      "line": 360,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    aspectRatio: true,\n    setting: true,\n});\n\nart.on('aspectRatio', (aspectRatio) => {\n    console.info('aspectRatio', aspectRatio);\n});"
+    },
+    {
+      "id": "advanced/event.md:379",
+      "file": "advanced/event.md",
+      "line": 379,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.autoHeight();\n});\n\nart.on('autoHeight', (height) => {\n    console.info('autoHeight', height);\n});"
+    },
+    {
+      "id": "advanced/event.md:400",
+      "file": "advanced/event.md",
+      "line": 400,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoSize: true,\n});\n\nart.on('autoSize', () => {\n    console.info('autoSize');\n});"
+    },
+    {
+      "id": "advanced/event.md:418",
+      "file": "advanced/event.md",
+      "line": 418,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    flip: true,\n    setting: true,\n});\n\nart.on('flip', (flip) => {\n    console.info('flip', flip);\n});"
+    },
+    {
+      "id": "advanced/event.md:437",
+      "file": "advanced/event.md",
+      "line": 437,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fullscreen: true,\n});\n\nart.on('fullscreen', (state) => {\n    console.info('fullscreen', state);\n});"
+    },
+    {
+      "id": "advanced/event.md:455",
+      "file": "advanced/event.md",
+      "line": 455,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n\tart.fullscreen = true;\n});\n\nart.on('fullscreenError', (event) => {\n    console.info('fullscreenError', event);\n});"
+    },
+    {
+      "id": "advanced/event.md:476",
+      "file": "advanced/event.md",
+      "line": 476,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fullscreenWeb: true,\n});\n\nart.on('fullscreenWeb', (state) => {\n    console.info('fullscreenWeb', state);\n});"
+    },
+    {
+      "id": "advanced/event.md:494",
+      "file": "advanced/event.md",
+      "line": 494,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.mini = true;\n});\n\nart.on('mini', (state) => {\n    console.info('mini', state);\n});"
+    },
+    {
+      "id": "advanced/event.md:515",
+      "file": "advanced/event.md",
+      "line": 515,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    pip: true,\n});\n\nart.on('pip', (state) => {\n    console.info('pip', state);\n});"
+    },
+    {
+      "id": "advanced/event.md:533",
+      "file": "advanced/event.md",
+      "line": 533,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    screenshot: true,\n});\n\nart.on('screenshot', (dataUri) => {\n    console.info('screenshot', dataUri);\n});"
+    },
+    {
+      "id": "advanced/event.md:551",
+      "file": "advanced/event.md",
+      "line": 551,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('seek', (currentTime) => {\n    console.info('seek', currentTime);\n});"
+    },
+    {
+      "id": "advanced/event.md:568",
+      "file": "advanced/event.md",
+      "line": 568,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    subtitleOffset: true,\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n    },\n    setting: true,\n});\n\nart.on('subtitleOffset', (offset) => {\n    console.info('subtitleOffset', offset);\n});"
+    },
+    {
+      "id": "advanced/event.md:590",
+      "file": "advanced/event.md",
+      "line": 590,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n    },\n});\n\nart.on('subtitleBeforeUpdate', (cues) => {\n    console.info('subtitleBeforeUpdate', cues);\n});"
+    },
+    {
+      "id": "advanced/event.md:610",
+      "file": "advanced/event.md",
+      "line": 610,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n    },\n});\n\nart.on('subtitleAfterUpdate', (cues) => {\n    console.info('subtitleAfterUpdate', cues);\n});"
+    },
+    {
+      "id": "advanced/event.md:630",
+      "file": "advanced/event.md",
+      "line": 630,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n    },\n});\n\nart.on('subtitleLoad', (option, cues) => {\n    console.info('subtitleLoad', cues, option);\n});"
+    },
+    {
+      "id": "advanced/event.md:650",
+      "file": "advanced/event.md",
+      "line": 650,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('info', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:667",
+      "file": "advanced/event.md",
+      "line": 667,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('layer', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:684",
+      "file": "advanced/event.md",
+      "line": 684,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('loading', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:701",
+      "file": "advanced/event.md",
+      "line": 701,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('mask', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:718",
+      "file": "advanced/event.md",
+      "line": 718,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('subtitle', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:735",
+      "file": "advanced/event.md",
+      "line": 735,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('contextmenu', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:752",
+      "file": "advanced/event.md",
+      "line": 752,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('control', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:769",
+      "file": "advanced/event.md",
+      "line": 769,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n});\n\nart.on('setting', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:787",
+      "file": "advanced/event.md",
+      "line": 787,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('muted', (state) => {\n    console.log(state);\n});"
+    },
+    {
+      "id": "advanced/event.md:804",
+      "file": "advanced/event.md",
+      "line": 804,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('keydown', (event) => {\n    console.log(event.code);\n});"
+    },
+    {
+      "id": "advanced/global.md:12",
+      "file": "advanced/global.md",
+      "line": 12,
+      "code": "Artplayer.DEBUG = true;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:27",
+      "file": "advanced/global.md",
+      "line": 27,
+      "code": "console.log(Artplayer.STYLE);"
+    },
+    {
+      "id": "advanced/global.md:37",
+      "file": "advanced/global.md",
+      "line": 37,
+      "code": "Artplayer.CONTEXTMENU = false;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:52",
+      "file": "advanced/global.md",
+      "line": 52,
+      "code": "Artplayer.NOTICE_TIME = 5000;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:67",
+      "file": "advanced/global.md",
+      "line": 67,
+      "code": "Artplayer.SETTING_WIDTH = 300;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    loop: true,\n    flip: true,\n    playbackRate: true,\n    aspectRatio: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:87",
+      "file": "advanced/global.md",
+      "line": 87,
+      "code": "Artplayer.SETTING_ITEM_WIDTH = 300;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    loop: true,\n    flip: true,\n    playbackRate: true,\n    aspectRatio: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:107",
+      "file": "advanced/global.md",
+      "line": 107,
+      "code": "Artplayer.SETTING_ITEM_HEIGHT = 40;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    loop: true,\n    flip: true,\n    playbackRate: true,\n    aspectRatio: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:127",
+      "file": "advanced/global.md",
+      "line": 127,
+      "code": "Artplayer.RESIZE_TIME = 500;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('resize', () => {\n    console.log('resize');\n});"
+    },
+    {
+      "id": "advanced/global.md:146",
+      "file": "advanced/global.md",
+      "line": 146,
+      "code": "Artplayer.SCROLL_TIME = 500;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('scroll', () => {\n    console.log('scroll');\n});"
+    },
+    {
+      "id": "advanced/global.md:165",
+      "file": "advanced/global.md",
+      "line": 165,
+      "code": "Artplayer.SCROLL_GAP = 100;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('scroll', () => {\n    console.log('scroll');\n});"
+    },
+    {
+      "id": "advanced/global.md:184",
+      "file": "advanced/global.md",
+      "line": 184,
+      "code": "Artplayer.AUTO_PLAYBACK_MAX = 20;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoPlayback: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:200",
+      "file": "advanced/global.md",
+      "line": 200,
+      "code": "Artplayer.AUTO_PLAYBACK_MIN = 10;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoPlayback: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:216",
+      "file": "advanced/global.md",
+      "line": 216,
+      "code": "Artplayer.AUTO_PLAYBACK_TIMEOUT = 5000;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoPlayback: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:232",
+      "file": "advanced/global.md",
+      "line": 232,
+      "code": "Artplayer.RECONNECT_TIME_MAX = 10;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/404.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:247",
+      "file": "advanced/global.md",
+      "line": 247,
+      "code": "Artplayer.RECONNECT_SLEEP_TIME = 3000;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/404.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:262",
+      "file": "advanced/global.md",
+      "line": 262,
+      "code": "Artplayer.CONTROL_HIDE_TIME = 5000;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:277",
+      "file": "advanced/global.md",
+      "line": 277,
+      "code": "Artplayer.DBCLICK_TIME = 500;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('dblclick', () => {\n    console.log('dblclick');\n});"
+    },
+    {
+      "id": "advanced/global.md:296",
+      "file": "advanced/global.md",
+      "line": 296,
+      "code": "Artplayer.DBCLICK_FULLSCREEN = false;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:311",
+      "file": "advanced/global.md",
+      "line": 311,
+      "code": "Artplayer.MOBILE_DBCLICK_PLAY = false;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:326",
+      "file": "advanced/global.md",
+      "line": 326,
+      "code": "Artplayer.MOBILE_CLICK_PLAY = true;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:341",
+      "file": "advanced/global.md",
+      "line": 341,
+      "code": "Artplayer.AUTO_ORIENTATION_TIME = 500;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoOrientation: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:357",
+      "file": "advanced/global.md",
+      "line": 357,
+      "code": "Artplayer.INFO_LOOP_TIME = 2000;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.info.show = true;"
+    },
+    {
+      "id": "advanced/global.md:374",
+      "file": "advanced/global.md",
+      "line": 374,
+      "code": "Artplayer.FAST_FORWARD_VALUE = 5;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fastForward: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:390",
+      "file": "advanced/global.md",
+      "line": 390,
+      "code": "Artplayer.FAST_FORWARD_TIME = 2000;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fastForward: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:406",
+      "file": "advanced/global.md",
+      "line": 406,
+      "code": "Artplayer.TOUCH_MOVE_RATIO = 1;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:421",
+      "file": "advanced/global.md",
+      "line": 421,
+      "code": "Artplayer.VOLUME_STEP = 0.2;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:436",
+      "file": "advanced/global.md",
+      "line": 436,
+      "code": "Artplayer.SEEK_STEP = 10;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:451",
+      "file": "advanced/global.md",
+      "line": 451,
+      "code": "Artplayer.PLAYBACK_RATE = [0.5, 1, 2, 3, 4, 5];\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    playbackRate: true,\n});\n\nart.contextmenu.show = true;\nart.setting.show = true;"
+    },
+    {
+      "id": "advanced/global.md:471",
+      "file": "advanced/global.md",
+      "line": 471,
+      "code": "Artplayer.ASPECT_RATIO = ['default', '1:1', '2:1', '4:3', '6:5'];\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    aspectRatio: true,\n});\n\nart.contextmenu.show = true;\nart.setting.show = true;"
+    },
+    {
+      "id": "advanced/global.md:491",
+      "file": "advanced/global.md",
+      "line": 491,
+      "code": "Artplayer.FLIP = ['normal', 'horizontal'];\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    flip: true,\n});\n\nart.contextmenu.show = true;\nart.setting.show = true;"
+    },
+    {
+      "id": "advanced/global.md:511",
+      "file": "advanced/global.md",
+      "line": 511,
+      "code": "Artplayer.FULLSCREEN_WEB_IN_BODY = false;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fullscreenWeb: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:527",
+      "file": "advanced/global.md",
+      "line": 527,
+      "code": "Artplayer.LOG_VERSION = false;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "advanced/global.md:542",
+      "file": "advanced/global.md",
+      "line": 542,
+      "code": "Artplayer.USE_RAF = true;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    miniProgressBar: true,\n});"
+    },
+    {
+      "id": "advanced/global.md:560",
+      "file": "advanced/global.md",
+      "line": 560,
+      "code": "Artplayer.REMOVE_SRC_WHEN_DESTROY = false;\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\n// 只销毁界面，不主动清空 src\nart.destroy();"
+    },
+    {
+      "id": "advanced/plugin.md:10",
+      "file": "advanced/plugin.md",
+      "line": 10,
+      "code": "function myPlugin(art) {\n    console.info(art);\n    return {\n        name: 'myPlugin',\n        something: 'something',\n        doSomething: function () {\n            console.info('doSomething');\n        },\n    };\n}\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    plugins: [myPlugin],\n});\n\nart.on('ready', () => {\n    console.info(art.plugins.myPlugin);\n});"
+    },
+    {
+      "id": "advanced/plugin.md:37",
+      "file": "advanced/plugin.md",
+      "line": 37,
+      "code": "function myPlugin(art) {\n    console.info(art);\n    return {\n        name: 'myPlugin',\n        something: 'something',\n        doSomething: function () {\n            console.info('doSomething');\n        },\n    };\n}\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.plugins.add(myPlugin);\n\nart.on('ready', () => {\n    console.info(art.plugins.myPlugin);\n});"
+    },
+    {
+      "id": "advanced/plugin.md:65",
+      "file": "advanced/plugin.md",
+      "line": 65,
+      "code": "function adsPlugin(option) {\n    return (art) => {\n        art.layers.add({\n            name: 'ads',\n            html: `<img style=\"width: 100px\" src=\"${option.url}\">`,\n            style: {\n                display: 'none',\n                position: 'absolute',\n                top: '20px',\n                right: '20px',\n            },\n        });\n\n        function show() {\n            art.layers.ads.style.display = 'block';\n        }\n\n        function hide() {\n            art.layers.ads.style.display = 'none';\n        }\n\n        art.controls.add({\n            name: 'hide-ads',\n            position: 'right',\n            html: 'Hide Ads',\n            tooltip: 'Hide Ads',\n            click: hide,\n            style: {\n                marginRight: '20px'\n            }\n        });\n\n        art.controls.add({\n            name: 'show-ads',\n            position: 'right',\n            html: 'Show Ads',\n            tooltip: 'Show Ads',\n            click: show,\n        });\n\n        art.on('play', hide);\n        art.on('pause', show);\n\n        return {\n            name: 'adsPlugin',\n            show,\n            hide\n        };\n    }\n}\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    plugins: [\n        adsPlugin({\n            url: '/assets/sample/layer.png'\n        })\n    ],\n});"
+    },
+    {
+      "id": "advanced/property.md:14",
+      "file": "advanced/property.md",
+      "line": 14,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    muted: true,\n});\n\nart.on('ready', () => {\n    art.play();\n});"
+    },
+    {
+      "id": "advanced/property.md:34",
+      "file": "advanced/property.md",
+      "line": 34,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    muted: true,\n});\n\nart.on('ready', () => {\n    art.play();\n\n    setTimeout(() => {\n        art.pause();\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:58",
+      "file": "advanced/property.md",
+      "line": 58,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    muted: true,\n});\n\nart.on('ready', () => {\n    art.toggle();\n\n    setTimeout(() => {\n        art.toggle();\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:83",
+      "file": "advanced/property.md",
+      "line": 83,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.destroy();\n});"
+    },
+    {
+      "id": "advanced/property.md:104",
+      "file": "advanced/property.md",
+      "line": 104,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    // 仅重置 video，不移除界面\n    art.reset();\n});"
+    },
+    {
+      "id": "advanced/property.md:125",
+      "file": "advanced/property.md",
+      "line": 125,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.seek = 5;\n});"
+    },
+    {
+      "id": "advanced/property.md:145",
+      "file": "advanced/property.md",
+      "line": 145,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.forward = 5;\n});"
+    },
+    {
+      "id": "advanced/property.md:165",
+      "file": "advanced/property.md",
+      "line": 165,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.seek = 5;\n\n    setTimeout(() => {\n        art.backward = 2;\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:189",
+      "file": "advanced/property.md",
+      "line": 189,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.volume);\n    art.volume = 0.5;\n    console.info(art.volume);\n});"
+    },
+    {
+      "id": "advanced/property.md:211",
+      "file": "advanced/property.md",
+      "line": 211,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.url = '/assets/sample/video.mp4?t=0';\n});"
+    },
+    {
+      "id": "advanced/property.md:231",
+      "file": "advanced/property.md",
+      "line": 231,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.seek = 10;\n    setTimeout(() => {\n        art.switch = '/assets/sample/video.mp4?t=0';\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:254",
+      "file": "advanced/property.md",
+      "line": 254,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.seek = 10;\n    setTimeout(() => {\n        art.switchUrl('/assets/sample/video.mp4?t=0');\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:283",
+      "file": "advanced/property.md",
+      "line": 283,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.seek = 10;\n    setTimeout(() => {\n        art.switchQuality('/assets/sample/video.mp4?t=0');\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:306",
+      "file": "advanced/property.md",
+      "line": 306,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.muted);\n    art.muted = true;\n    console.info(art.muted);\n});"
+    },
+    {
+      "id": "advanced/property.md:328",
+      "file": "advanced/property.md",
+      "line": 328,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.currentTime);\n    art.currentTime = 5;\n    console.info(art.currentTime);\n});"
+    },
+    {
+      "id": "advanced/property.md:349",
+      "file": "advanced/property.md",
+      "line": 349,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.duration);\n});"
+    },
+    {
+      "id": "advanced/property.md:374",
+      "file": "advanced/property.md",
+      "line": 374,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.screenshot('your-name');\n});"
+    },
+    {
+      "id": "advanced/property.md:393",
+      "file": "advanced/property.md",
+      "line": 393,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', async () => {\n    const url = await art.getDataURL();\n\tconsole.info(url)\n});"
+    },
+    {
+      "id": "advanced/property.md:413",
+      "file": "advanced/property.md",
+      "line": 413,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', async () => {\n    const url = await art.getBlobUrl();\n    console.info(url);\n});"
+    },
+    {
+      "id": "advanced/property.md:434",
+      "file": "advanced/property.md",
+      "line": 434,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            position: 'right',\n            html: 'Fullscreen Switch',\n            click: function () {\n                art.fullscreen = !art.fullscreen;\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "advanced/property.md:465",
+      "file": "advanced/property.md",
+      "line": 465,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fullscreenWeb: true,\n});\n\nart.on('ready', () => {\n    art.fullscreenWeb = true;\n\n    setTimeout(() => {\n        art.fullscreenWeb = false;\n    }, 3000);\n});"
+    },
+    {
+      "id": "advanced/property.md:490",
+      "file": "advanced/property.md",
+      "line": 490,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            position: 'right',\n            html: 'PIP',\n            click: function () {\n                art.pip = !art.pip;\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "advanced/property.md:521",
+      "file": "advanced/property.md",
+      "line": 521,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    poster: '/assets/sample/poster.jpg',\n});\n\nart.on('ready', () => {\n    console.info(art.poster);\n    art.poster = '/assets/sample/poster.jpg?t=0';\n    console.info(art.poster);\n});"
+    },
+    {
+      "id": "advanced/property.md:544",
+      "file": "advanced/property.md",
+      "line": 544,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.mini = true;\n});"
+    },
+    {
+      "id": "advanced/property.md:564",
+      "file": "advanced/property.md",
+      "line": 564,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    muted: true,\n});\n\nart.on('ready', () => {\n    console.info(art.playing);\n});"
+    },
+    {
+      "id": "advanced/property.md:585",
+      "file": "advanced/property.md",
+      "line": 585,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.state); // 默认 standard\n    art.state = 'mini';\n});"
+    },
+    {
+      "id": "advanced/property.md:605",
+      "file": "advanced/property.md",
+      "line": 605,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.autoSize();\n});"
+    },
+    {
+      "id": "advanced/property.md:624",
+      "file": "advanced/property.md",
+      "line": 624,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(JSON.stringify(art.rect));\n});"
+    },
+    {
+      "id": "advanced/property.md:652",
+      "file": "advanced/property.md",
+      "line": 652,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.width, art.height, art.left, art.top);\n});"
+    },
+    {
+      "id": "advanced/property.md:672",
+      "file": "advanced/property.md",
+      "line": 672,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.flip);\n    art.flip = 'horizontal';\n    console.info(art.flip);\n});"
+    },
+    {
+      "id": "advanced/property.md:694",
+      "file": "advanced/property.md",
+      "line": 694,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.playbackRate);\n    art.playbackRate = 2;\n    console.info(art.playbackRate);\n});"
+    },
+    {
+      "id": "advanced/property.md:716",
+      "file": "advanced/property.md",
+      "line": 716,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.aspectRatio);\n    art.aspectRatio = '16:9';\n    console.info(art.aspectRatio);\n});"
+    },
+    {
+      "id": "advanced/property.md:737",
+      "file": "advanced/property.md",
+      "line": 737,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.autoHeight();\n});\n\nart.on('resize', () => {\n    art.autoHeight();\n});"
+    },
+    {
+      "id": "advanced/property.md:767",
+      "file": "advanced/property.md",
+      "line": 767,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.attr('playsInline'));\n    art.attr('playsInline', true);\n    console.info(art.attr('playsInline'));\n});"
+    },
+    {
+      "id": "advanced/property.md:789",
+      "file": "advanced/property.md",
+      "line": 789,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.type);\n    art.type = 'm3u8';\n    console.info(art.type);\n});"
+    },
+    {
+      "id": "advanced/property.md:811",
+      "file": "advanced/property.md",
+      "line": 811,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.info(art.theme);\n    art.theme = '#000';\n    console.info(art.theme);\n});"
+    },
+    {
+      "id": "advanced/property.md:832",
+      "file": "advanced/property.md",
+      "line": 832,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            position: 'right',\n            html: 'AirPlay',\n            click: function () {\n                art.airplay();\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "advanced/property.md:856",
+      "file": "advanced/property.md",
+      "line": 856,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('video:timeupdate', () => {\n    console.info(art.loaded);\n});"
+    },
+    {
+      "id": "advanced/property.md:875",
+      "file": "advanced/property.md",
+      "line": 875,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('video:timeupdate', () => {\n    console.info(art.loadedTime);\n});"
+    },
+    {
+      "id": "advanced/property.md:894",
+      "file": "advanced/property.md",
+      "line": 894,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.on('video:timeupdate', () => {\n    console.info(art.played);\n});"
+    },
+    {
+      "id": "advanced/property.md:913",
+      "file": "advanced/property.md",
+      "line": 913,
+      "code": "var container = document.querySelector('.artplayer-app');\n\nvar art = new Artplayer({\n\tcontainer: container,\n\turl: '/assets/sample/video.mp4',\n});\n\nart.proxy(container, 'click', event => {\n\tconsole.info(event);\n});"
+    },
+    {
+      "id": "advanced/property.md:940",
+      "file": "advanced/property.md",
+      "line": 940,
+      "code": "var art = new Artplayer({\n\tcontainer: '.artplayer-app',\n\turl: '/assets/sample/video.mp4',\n});\n\nconsole.info(art.query('.art-video'));"
+    },
+    {
+      "id": "advanced/property.md:957",
+      "file": "advanced/property.md",
+      "line": 957,
+      "code": "var art = new Artplayer({\n\tcontainer: '.artplayer-app',\n\turl: '/assets/sample/video.mp4',\n});\n\nconsole.info(art.video);"
+    },
+    {
+      "id": "advanced/property.md:974",
+      "file": "advanced/property.md",
+      "line": 974,
+      "code": "var art = new Artplayer({\n\tcontainer: '.artplayer-app',\n\turl: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    console.log(art.cssVar('--art-theme'));\n    art.cssVar('--art-theme', 'green');\n    console.log(art.cssVar('--art-theme'));\n});"
+    },
+    {
+      "id": "advanced/property.md:996",
+      "file": "advanced/property.md",
+      "line": 996,
+      "code": "var art = new Artplayer({\n\tcontainer: '.artplayer-app',\n\turl: '/assets/sample/video.mp4',\n\tquality: [\n\t\t{\n\t\t\tdefault: true,\n\t\t\thtml: 'SD 480P',\n\t\t\turl: '/assets/sample/video.mp4',\n\t\t},\n\t\t{\n\t\t\thtml: 'HD 720P',\n\t\t\turl: '/assets/sample/video.mp4',\n\t\t},\n\t],\n});\n\nart.on('ready', () => {\n\tsetTimeout(() => {\n\t\tart.quality = [\n\t\t\t{\n\t\t\t\tdefault: true,\n\t\t\t\thtml: '1080P',\n\t\t\t\turl: '/assets/sample/video.mp4',\n\t\t\t},\n\t\t\t{\n\t\t\t\thtml: '4K',\n\t\t\t\turl: '/assets/sample/video.mp4',\n\t\t\t},\n\t\t];\n\t}, 3000);\n})"
+    },
+    {
+      "id": "advanced/property.md:1039",
+      "file": "advanced/property.md",
+      "line": 1039,
+      "code": "var art = new Artplayer({\n\tcontainer: '.artplayer-app',\n\turl: '/assets/sample/video.mp4',\n});\n\nart.on('ready', () => {\n    art.thumbnails = {\n        url: '/assets/sample/thumbnails.png',\n        number: 60,\n        column: 10,\n    };\n});"
+    },
+    {
+      "id": "advanced/property.md:1063",
+      "file": "advanced/property.md",
+      "line": 1063,
+      "code": "var art = new Artplayer({\n\tcontainer: '.artplayer-app',\n\turl: '/assets/sample/video.mp4',\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n    },\n});\n\nart.on('ready', () => {\n    art.subtitleOffset = 1;\n});"
+    },
+    {
+      "id": "component/contextmenu.md:21",
+      "file": "component/contextmenu.md",
+      "line": 21,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    contextmenu: [\n        {\n            name: 'your-menu',\n            html: 'Your Menu',\n            click: function (...args) {\n                console.info(args);\n                art.contextmenu.show = false;\n            },\n        },\n    ],\n});\n\nart.contextmenu.show = true;\n\n// Get the Element of contextmenu by name\nconsole.info(art.contextmenu['your-menu']);"
+    },
+    {
+      "id": "component/contextmenu.md:47",
+      "file": "component/contextmenu.md",
+      "line": 47,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.contextmenu.add({\n    name: 'your-menu',\n    html: 'Your Menu',\n    click: function (...args) {\n        console.info(args);\n        art.contextmenu.show = false;\n    },\n});\n\nart.contextmenu.show = true;\n\n// Get the Element of contextmenu by name\nconsole.info(art.contextmenu['your-menu']);"
+    },
+    {
+      "id": "component/contextmenu.md:72",
+      "file": "component/contextmenu.md",
+      "line": 72,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    contextmenu: [\n        {\n            name: 'your-menu',\n            html: 'Your Menu',\n            click: function (...args) {\n                console.info(args);\n                art.contextmenu.show = false;\n            },\n        },\n    ],\n});\n\nart.contextmenu.show = true;\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Delete the contextmenu by name\n        art.contextmenu.remove('your-menu')\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/contextmenu.md:102",
+      "file": "component/contextmenu.md",
+      "line": 102,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    contextmenu: [\n        {\n            name: 'your-menu',\n            html: 'Your Menu',\n            click: function (...args) {\n                console.info(args);\n                art.contextmenu.show = false;\n            },\n        },\n    ],\n});\n\nart.contextmenu.show = true;\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Update the contextmenu by name\n        art.contextmenu.update({\n            name: 'your-menu',\n            html: 'Your New Menu',\n        })\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/controls.md:24",
+      "file": "component/controls.md",
+      "line": 24,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            name: 'your-button',\n            index: 10,\n            position: 'left',\n            html: 'Your Button',\n            tooltip: 'Your Button',\n            style: {\n                color: 'red',\n            },\n            click: function (...args) {\n                console.info('click', args);\n            },\n            mounted: function (...args) {\n                console.info('mounted', args);\n            },\n        },\n        {\n            name: 'subtitle',\n            position: 'right',\n            html: 'Subtitle',\n            selector: [\n                {\n                    default: true,\n                    html: '<span style=\"color:red\">subtitle 01</span>',\n                },\n                {\n                    html: '<span style=\"color:yellow\">subtitle 02</span>',\n                },\n            ],\n            onSelect: function (item, $dom) {\n                console.info(item, $dom);\n                return 'Your ' + item.html;\n            },\n        },\n    ],\n});\n\n// Get the Element of control by name\nconsole.info(art.controls['your-button']);\nconsole.info(art.controls['subtitle']);"
+    },
+    {
+      "id": "component/controls.md:75",
+      "file": "component/controls.md",
+      "line": 75,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.controls.add({\n    name: 'button1',\n    index: 10,\n    position: 'left',\n    html: 'Your Button',\n    tooltip: 'Your Button',\n    style: {\n        color: 'red',\n    },\n    click: function (...args) {\n        console.info('click', args);\n    },\n    mounted: function (...args) {\n        console.info('mounted', args);\n    },\n});\n\n// Get the Element of control by name\nconsole.info(art.controls['button1']);"
+    },
+    {
+      "id": "component/controls.md:106",
+      "file": "component/controls.md",
+      "line": 106,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            name: 'button1',\n            index: 10,\n            position: 'right',\n            html: 'Your Button',\n            tooltip: 'Your Button',\n            style: {\n                color: 'red',\n            },\n        }\n    ]\n});\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Delete the control by name\n        art.controls.remove('button1');\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/controls.md:136",
+      "file": "component/controls.md",
+      "line": 136,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            name: 'button1',\n            index: 10,\n            position: 'right',\n            html: 'Subtitle',\n            selector: [\n                {\n                    default: true,\n                    html: 'subtitle 01',\n                },\n                {\n                    html: 'subtitle 02',\n                },\n            ],\n        }\n    ]\n});\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Update the control by name\n        art.controls.update({\n            name: 'button1',\n            index: 10,\n            position: 'right',\n            html: 'New Subtitle',\n            selector: [\n                {\n                    default: true,\n                    html: 'new subtitle 01',\n                },\n                {\n                    html: 'new subtitle 02',\n                },\n            ],\n        });\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/layers.md:21",
+      "file": "component/layers.md",
+      "line": 21,
+      "code": "var img = '/assets/sample/layer.png';\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    layers: [\n        {\n            name: 'potser',\n            html: `<img style=\"width: 100px\" src=\"${img}\">`,\n            tooltip: 'Potser Tip',\n            style: {\n                position: 'absolute',\n                top: '50px',\n                right: '50px',\n            },\n            click: function (...args) {\n                console.info('click', args);\n            },\n            mounted: function (...args) {\n                console.info('mounted', args);\n            },\n        },\n    ],\n});\n\n// Get the Element of layer by name\nconsole.info(art.layers['potser']);"
+    },
+    {
+      "id": "component/layers.md:54",
+      "file": "component/layers.md",
+      "line": 54,
+      "code": "var img = '/assets/sample/layer.png';\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});\n\nart.layers.add({\n    name: 'potser',\n    html: `<img style=\"width: 100px\" src=\"${img}\">`,\n    tooltip: 'Potser Tip',\n    style: {\n        position: 'absolute',\n        top: '50px',\n        right: '50px',\n    },\n    click: function (...args) {\n        console.info('click', args);\n    },\n    mounted: function (...args) {\n        console.info('mounted', args);\n    },\n});\n\n// Get the Element of layer by name\nconsole.info(art.layers['potser']);"
+    },
+    {
+      "id": "component/layers.md:86",
+      "file": "component/layers.md",
+      "line": 86,
+      "code": "var img = '/assets/sample/layer.png';\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    layers: [\n        {\n            name: 'potser',\n            html: `<img style=\"width: 100px\" src=\"${img}\">`,\n            style: {\n                position: 'absolute',\n                top: '50px',\n                right: '50px',\n            },\n        },\n    ],\n});\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Delete the layer by name\n        art.layers.remove('potser');\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/layers.md:116",
+      "file": "component/layers.md",
+      "line": 116,
+      "code": "var img = '/assets/sample/layer.png';\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    layers: [\n        {\n            name: 'potser',\n            html: `<img style=\"width: 100px\" src=\"${img}\">`,\n            style: {\n                position: 'absolute',\n                top: '50px',\n                right: '50px',\n            },\n        },\n    ],\n});\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Update the layer by name\n        art.layers.update({\n            name: 'potser',\n            html: `<img style=\"width: 200px\" src=\"${img}\">`,\n            style: {\n                position: 'absolute',\n                top: '50px',\n                left: '50px',\n            },\n        });\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/setting.md:10",
+      "file": "component/setting.md",
+      "line": 10,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n\tsetting: true,\n    flip: true,\n    playbackRate: true,\n    aspectRatio: true,\n    subtitleOffset: true,\n});"
+    },
+    {
+      "id": "component/setting.md:34",
+      "file": "component/setting.md",
+      "line": 34,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            html: 'Button',\n            icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n            tooltip: 'tooltip',\n\t\t\tonClick(item, $dom, event) {\n                console.info(item, $dom, event);\n\t\t\t\treturn 'new tooltip'\n\t\t\t}\n        },\n    ],\n});"
+    },
+    {
+      "id": "component/setting.md:66",
+      "file": "component/setting.md",
+      "line": 66,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            html: 'Subtitle',\n            width: 250,\n            tooltip: 'Subtitle 01',\n            selector: [\n                {\n                    default: true,\n                    html: '<span style=\"color:red\">Subtitle 01</span>',\n                    url: '/assets/sample/subtitle.srt?id=1',\n                },\n                {\n                    html: '<span style=\"color:yellow\">Subtitle 02</span>',\n                    url: '/assets/sample/subtitle.srt?id=2',\n                },\n            ],\n            onSelect: function (item, $dom, event) {\n                console.info(item, $dom, event);\n                art.subtitle.url = item.url;\n                return item.html;\n            },\n        },\n        {\n            html: 'Quality',\n            width: 150,\n            tooltip: '1080P',\n            selector: [\n                {\n                    default: true,\n                    html: '1080P',\n                    url: '/assets/sample/video.mp4?id=1080',\n                },\n                {\n                    html: '720P',\n                    url: '/assets/sample/video.mp4?id=720',\n                },\n                {\n                    html: '360P',\n                    url: '/assets/sample/video.mp4?id=360',\n                },\n            ],\n            onSelect: function (item, $dom, event) {\n                console.info(item, $dom, event);\n                art.switchQuality(item.url, item.html);\n                return item.html;\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "component/setting.md:126",
+      "file": "component/setting.md",
+      "line": 126,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            html: 'Multi-level',\n            selector: [\n                {\n                    html: 'Setting 01',\n                    width: 150,\n                    selector: [\n                        {\n                            html: 'Setting 01 - 01',\n                        },\n                        {\n                            html: 'Setting 01 - 02',\n                        },\n                    ],\n                    onSelect: function (item, $dom, event) {\n                        console.info(item, $dom, event);\n                        return item.html;\n                    },\n                },\n                {\n                    html: 'Setting 02',\n                    width: 150,\n                    selector: [\n                        {\n                            html: 'Setting 02 - 01',\n                        },\n                        {\n                            html: 'Setting 02 - 02',\n                        },\n                    ],\n                    onSelect: function (item, $dom, event) {\n                        console.info(item, $dom, event);\n                        return item.html;\n                    },\n                },\n            ],\n        },\n    ],\n});"
+    },
+    {
+      "id": "component/setting.md:185",
+      "file": "component/setting.md",
+      "line": 185,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            html: 'PIP Mode',\n            tooltip: 'Close',\n            icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n            switch: false,\n            onSwitch: function (item, $dom, event) {\n                console.info(item, $dom, event);\n                const nextState = !item.switch;\n                art.pip = nextState;\n                item.tooltip = nextState ? 'Open' : 'Close';\n                return nextState;\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "component/setting.md:229",
+      "file": "component/setting.md",
+      "line": 229,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            html: 'Slider',\n            tooltip: '5x',\n            icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n            range: [5, 1, 10, 1],\n            onChange: function (item, $dom, event) {\n                console.info(item, $dom, event);\n                return item.range[0] + 'x';\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "component/setting.md:253",
+      "file": "component/setting.md",
+      "line": 253,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n});\n\nart.setting.show = true;\n\nart.setting.add({\n    html: 'Slider',\n    tooltip: '5x',\n    icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n    range: [5, 1, 10, 1],\n});"
+    },
+    {
+      "id": "component/setting.md:274",
+      "file": "component/setting.md",
+      "line": 274,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    flip: true,\n    settings: [\n        {\n            name: 'slider',\n            html: 'Slider',\n            tooltip: '5x',\n            icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n            range: [5, 1, 10, 1],\n        },\n    ],\n});\n\nart.setting.show = true;\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Delete the setting by name\n        art.setting.remove('slider');\n    }, 3000);\n});"
+    },
+    {
+      "id": "component/setting.md:305",
+      "file": "component/setting.md",
+      "line": 305,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            name: 'slider',\n            html: 'Slider',\n            tooltip: '5x',\n            icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n            range: [5, 1, 10, 1],\n        },\n    ],\n});\n\nart.setting.show = true;\n\nart.on('ready', () => {\n    setTimeout(() => {\n        // Update the setting by name\n        art.setting.update({\n            name: 'slider',\n            html: 'PIP Mode',\n            tooltip: 'Close',\n            icon: '<img width=\"22\" height=\"22\" src=\"/assets/img/state.svg\">',\n            switch: false,\n        });\n    }, 3000);\n});"
+    },
+    {
+      "id": "start/option.md:13",
+      "file": "start/option.md",
+      "line": 13,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app', \n    // container: document.querySelector('.artplayer-app'),\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "start/option.md:53",
+      "file": "start/option.md",
+      "line": 53,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "start/option.md:64",
+      "file": "start/option.md",
+      "line": 64,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n});\n\nsetTimeout(() => {\n    art.url = '/assets/sample/video.mp4';\n}, 1000);"
+    },
+    {
+      "id": "start/option.md:92",
+      "file": "start/option.md",
+      "line": 92,
+      "code": "var art = new Artplayer({\n    id: 'your-url-id',\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n});"
+    },
+    {
+      "id": "start/option.md:109",
+      "file": "start/option.md",
+      "line": 109,
+      "code": "var art = new Artplayer(\n    {\n        container: '.artplayer-app',\n        url: '/assets/sample/video.mp4',\n        muted: true,\n    },\n    function onReady(art) {\n        this.play()\n    },\n);"
+    },
+    {
+      "id": "start/option.md:151",
+      "file": "start/option.md",
+      "line": 151,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    poster: '/assets/sample/poster.jpg',\n});"
+    },
+    {
+      "id": "start/option.md:168",
+      "file": "start/option.md",
+      "line": 168,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    theme: '#ffad00',\n});"
+    },
+    {
+      "id": "start/option.md:185",
+      "file": "start/option.md",
+      "line": 185,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    volume: 0.5,\n});"
+    },
+    {
+      "id": "start/option.md:208",
+      "file": "start/option.md",
+      "line": 208,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    isLive: true,\n});"
+    },
+    {
+      "id": "start/option.md:225",
+      "file": "start/option.md",
+      "line": 225,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    muted: true,\n});"
+    },
+    {
+      "id": "start/option.md:242",
+      "file": "start/option.md",
+      "line": 242,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoplay: true,\n    muted: true,\n});"
+    },
+    {
+      "id": "start/option.md:266",
+      "file": "start/option.md",
+      "line": 266,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoSize: true,\n});"
+    },
+    {
+      "id": "start/option.md:283",
+      "file": "start/option.md",
+      "line": 283,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoMini: true,\n});"
+    },
+    {
+      "id": "start/option.md:300",
+      "file": "start/option.md",
+      "line": 300,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    loop: true,\n});"
+    },
+    {
+      "id": "start/option.md:317",
+      "file": "start/option.md",
+      "line": 317,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    flip: true,\n    setting: true,\n});"
+    },
+    {
+      "id": "start/option.md:335",
+      "file": "start/option.md",
+      "line": 335,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    playbackRate: true,\n    setting: true,\n});"
+    },
+    {
+      "id": "start/option.md:353",
+      "file": "start/option.md",
+      "line": 353,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    aspectRatio: true,\n    setting: true,\n});"
+    },
+    {
+      "id": "start/option.md:371",
+      "file": "start/option.md",
+      "line": 371,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    screenshot: true,\n});"
+    },
+    {
+      "id": "start/option.md:394",
+      "file": "start/option.md",
+      "line": 394,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n});"
+    },
+    {
+      "id": "start/option.md:411",
+      "file": "start/option.md",
+      "line": 411,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    hotkey: true,\n});"
+    },
+    {
+      "id": "start/option.md:442",
+      "file": "start/option.md",
+      "line": 442,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    pip: true,\n});"
+    },
+    {
+      "id": "start/option.md:459",
+      "file": "start/option.md",
+      "line": 459,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    mutex: true,\n});"
+    },
+    {
+      "id": "start/option.md:476",
+      "file": "start/option.md",
+      "line": 476,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    backdrop: false, // 关闭毛玻璃效果\n});"
+    },
+    {
+      "id": "start/option.md:493",
+      "file": "start/option.md",
+      "line": 493,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fullscreen: true,\n});"
+    },
+    {
+      "id": "start/option.md:510",
+      "file": "start/option.md",
+      "line": 510,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fullscreenWeb: true,\n});"
+    },
+    {
+      "id": "start/option.md:527",
+      "file": "start/option.md",
+      "line": 527,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    subtitleOffset: true,\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n    },\n    setting: true,\n});"
+    },
+    {
+      "id": "start/option.md:548",
+      "file": "start/option.md",
+      "line": 548,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    miniProgressBar: true,\n});"
+    },
+    {
+      "id": "start/option.md:567",
+      "file": "start/option.md",
+      "line": 567,
+      "code": "var $container = document.querySelector('.artplayer-app');\n$container.innerHTML = Artplayer.html;\n\nvar art = new Artplayer({\n    container: $container,\n    url: '/assets/sample/video.mp4',\n    useSSR: true,\n});"
+    },
+    {
+      "id": "start/option.md:587",
+      "file": "start/option.md",
+      "line": 587,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    playsInline: true,\n});"
+    },
+    {
+      "id": "start/option.md:604",
+      "file": "start/option.md",
+      "line": 604,
+      "code": "var img = '/assets/sample/layer.png';\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    layers: [\n        {\n            name: 'potser',\n            html: `<img style=\"width: 100px\" src=\"${img}\">`,\n            style: {\n                position: 'absolute',\n                top: '20px',\n                right: '20px',\n                opacity: '.9',\n            },\n            click: function (...args) {\n                console.info('click', args);\n                art.layers.show = false;\n            },\n            mounted: function (...args) {\n                console.info('mounted', args);\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "start/option.md:646",
+      "file": "start/option.md",
+      "line": 646,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    setting: true,\n    settings: [\n        {\n            html: 'setting01',\n            selector: [\n                {\n                    html: 'setting01-01',\n                },\n                {\n                    html: 'setting01-02',\n                },\n            ],\n            onSelect: function (...args) {\n                console.info(args);\n            },\n        },\n        {\n            html: 'setting02',\n            selector: [\n                {\n                    html: 'setting02-01',\n                },\n                {\n                    html: 'setting02-02',\n                },\n            ],\n            onSelect: function (...args) {\n                console.info(args);\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "start/option.md:699",
+      "file": "start/option.md",
+      "line": 699,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    contextmenu: [\n        {\n            html: 'your-menu',\n            click: function (...args) {\n                console.info('click', args);\n                art.contextmenu.show = false;\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "start/option.md:730",
+      "file": "start/option.md",
+      "line": 730,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    controls: [\n        {\n            position: 'left',\n            html: 'your-control',\n            tooltip: 'Your Control',\n            style: {\n                color: 'green',\n            },\n            click: function (...args) {\n                console.info('click', args);\n            },\n        },\n    ],\n});"
+    },
+    {
+      "id": "start/option.md:771",
+      "file": "start/option.md",
+      "line": 771,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    quality: [\n        {\n            default: true,\n            html: 'SD 480P',\n            url: '/assets/sample/video.mp4',\n        },\n        {\n            html: 'HD 720P',\n            url: '/assets/sample/video.mp4',\n        },\n    ],\n});"
+    },
+    {
+      "id": "start/option.md:803",
+      "file": "start/option.md",
+      "line": 803,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    highlight: [\n        {\n            time: 60,\n            text: 'One more chance',\n        },\n        {\n            time: 120,\n            text: '谁でもいいはずなのに',\n        },\n        {\n            time: 180,\n            text: '夏の想い出がまわる',\n        },\n        {\n            time: 240,\n            text: 'こんなとこにあるはずもないのに',\n        },\n        {\n            time: 300,\n            text: '－－终わり－－',\n        },\n    ],\n});"
+    },
+    {
+      "id": "start/option.md:841",
+      "file": "start/option.md",
+      "line": 841,
+      "code": "function myPlugin(art) {\n    console.info(art);\n    return {\n        name: 'myPlugin',\n        something: 'something',\n        doSomething: function () {\n            console.info('doSomething');\n        },\n    };\n}\n\nvar art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    plugins: [myPlugin],\n});"
+    },
+    {
+      "id": "start/option.md:878",
+      "file": "start/option.md",
+      "line": 878,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    thumbnails: {\n        url: '/assets/sample/thumbnails.png',\n        number: 60,\n        column: 10,\n    },\n});"
+    },
+    {
+      "id": "start/option.md:915",
+      "file": "start/option.md",
+      "line": 915,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    subtitle: {\n        url: '/assets/sample/subtitle.srt',\n        type: 'srt',\n        encoding: 'utf-8',\n        escape: true,\n        style: {\n            color: '#03A9F4',\n            'font-size': '30px',\n        },\n    },\n});"
+    },
+    {
+      "id": "start/option.md:941",
+      "file": "start/option.md",
+      "line": 941,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    moreVideoAttr: {\n        'webkit-playsinline': true,\n        playsInline: true,\n    },\n});"
+    },
+    {
+      "id": "start/option.md:961",
+      "file": "start/option.md",
+      "line": 961,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    icons: {\n        loading: '<img src=\"/assets/img/ploading.gif\">',\n        state: '<img src=\"/assets/img/state.png\">',\n    },\n});"
+    },
+    {
+      "id": "start/option.md:987",
+      "file": "start/option.md",
+      "line": 987,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.m3u8',\n    type: 'm3u8',\n});"
+    },
+    {
+      "id": "start/option.md:1018",
+      "file": "start/option.md",
+      "line": 1018,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.m3u8',\n    customType: {\n        m3u8: function (video, url, art) {\n            //\n        },\n    },\n});"
+    },
+    {
+      "id": "start/option.md:1039",
+      "file": "start/option.md",
+      "line": 1039,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    lang: 'en',\n});"
+    },
+    {
+      "id": "start/option.md:1064",
+      "file": "start/option.md",
+      "line": 1064,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    lang: 'your-lang',\n    i18n: {\n        'your-lang': {\n            Play: 'Your Play'\n        },\n    },\n});"
+    },
+    {
+      "id": "start/option.md:1081",
+      "file": "start/option.md",
+      "line": 1081,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    i18n: {\n        'zh-cn': {\n            Play: 'Your Play'\n        },\n        'zh-tw': {\n            Play: 'Your Play'\n        },\n    },\n});"
+    },
+    {
+      "id": "start/option.md:1111",
+      "file": "start/option.md",
+      "line": 1111,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    lock: true,\n});"
+    },
+    {
+      "id": "start/option.md:1128",
+      "file": "start/option.md",
+      "line": 1128,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    gesture: false,\n});"
+    },
+    {
+      "id": "start/option.md:1145",
+      "file": "start/option.md",
+      "line": 1145,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    fastForward: true,\n});"
+    },
+    {
+      "id": "start/option.md:1162",
+      "file": "start/option.md",
+      "line": 1162,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    id: 'your-url-id',\n    autoPlayback: true,\n});"
+    },
+    {
+      "id": "start/option.md:1188",
+      "file": "start/option.md",
+      "line": 1188,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    autoOrientation: true,\n});"
+    },
+    {
+      "id": "start/option.md:1205",
+      "file": "start/option.md",
+      "line": 1205,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    airplay: true,\n});"
+    },
+    {
+      "id": "start/option.md:1222",
+      "file": "start/option.md",
+      "line": 1222,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    cssVar: {\n        //\n    },\n});"
+    },
+    {
+      "id": "start/option.md:1247",
+      "file": "start/option.md",
+      "line": 1247,
+      "code": "var art = new Artplayer({\n    container: '.artplayer-app',\n    url: '/assets/sample/video.mp4',\n    proxy: () => document.createElement('video')\n});"
+    }
+  ],
+  "scripts": [
+    "../compiled/artplayer.js",
+    "../compiled/artplayer-plugin-ads.js",
+    "../compiled/artplayer-plugin-danmuku.js",
+    "../compiled/artplayer-plugin-dash-control.js",
+    "../compiled/artplayer-plugin-hls-control.js",
+    "../compiled/artplayer-tool-iframe.js",
+    "../compiled/artplayer-plugin-vtt-thumbnail.js",
+    "../compiled/artplayer-plugin-chapter.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/flv.js/1.6.2/flv.min.js"
+  ]
+}

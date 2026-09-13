@@ -1,5 +1,13 @@
 # Browser regression entry
 
+`docs-smoke.spec.js` verifies the documentation runner in three engines with
+actual core/media, controlled failures and three selected generated snippets.
+It checks pending readiness beyond the former 100ms timer, returned/unhandled
+rejections, ready/destroy errors, missing scripts, deadlines, frame/global/timer
+cleanup and storage restoration. It does not execute all 233 documentation cases
+or prove remote SDKs/features. DPIP-MEDIA-01's exact WebKit intrinsic/layout size
+pairs remain explicit observations; this suite does not close that risk.
+
 `yarn test:browser test/browser/ads.spec.js` tests actual Ads 1.0.6 and candidate code
 with published 4.5.5/5.4.1 and candidate cores using local image/video media. It covers actual
 decoded pixels, countdown, skipping, content restoration, 404 and source replacement.

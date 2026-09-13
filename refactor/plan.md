@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 239 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 240 项，范围 22 个包及工作区/示例。
 
-状态：todo 60 / doing 15 / blocked 0 / done 164 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 60 / doing 15 / blocked 0 / done 165 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -35,7 +35,7 @@
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
-| artplayer-vitepress | 1.1.0 | SITE-01, SITE-02, SITE-03, SITE-04, SITE-05, SITE-06, SITE-07 |
+| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-03, SITE-04, SITE-05, SITE-06, SITE-07 |
 
 ## 0 规划
 
@@ -381,7 +381,8 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | SITE-01 | artplayer-vitepress, workspace<br>清点文档/示例/生成链 | BASE-04, BASE-05 | 中英文文档、插件页面、demo URL、编辑器声明与生成目录清单；六类 HTML 入口、prod/libs/code/example 加载行为及移动重定向 | 所有公开 API/插件有对应页面或明确补充任务；核实 BASE-DEMO-01 的历史 thumbnail 插件来源及 29 示例/36 HTML 路径；明确 BASE-05 所记录站点实际分发与未设 private 的 manifest 意图；接续 VENDOR-05/06/07/08 和 BASE-SITE-01/BASE-MEDIA-01，核对字体、Monaco、vConsole、console bundle 与样本来源及分发范围 | M | done |
-| SITE-02 | artplayer-vitepress<br>整理声明与示例生成器 | SITE-01, ENG-04, ENG-06 | build-ts/build-test 生成链的可验证 TS 脚本 | 不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制；坏代码块解析必须终止，覆盖 malformed 分支不推进 regexp 的回归 | M | todo |
+| SITE-SMOKE-01 | artplayer-vitepress, workspace<br>迁移示例生成器并验证真实就绪与清理 | SITE-01 | TS Markdown 解析/生成与浏览器运行模块；旧命令和 URL、稳定实例就绪 smoke、错误与资源清理 | 复现旧 malformed 死循环并保证有限失败；保留全部既有示例内容、生成确定且 check 只读；不再以 100ms 作为成功，验证原生就绪、异常、取消与清理；三浏览器检查，明确延迟交互与全部 233 示例仍需 EX-03 | M | done |
+| SITE-02 | artplayer-vitepress<br>整理声明与示例生成器 | SITE-01, ENG-04, ENG-06, SITE-SMOKE-01 | build-ts/build-test 生成链的可验证 TS 脚本 | 不靠字符串拼接掩盖声明错误，生成示例有真实断言或仅标 smoke；替换固定 100ms 成功判定，明确异步错误、清理和生成覆盖限制；坏代码块解析必须终止，覆盖 malformed 分支不推进 regexp 的回归 | M | todo |
 | SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向 | M | todo |
 | SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
 | SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-07 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | todo |
@@ -606,6 +607,7 @@
 - PKG-TOOL-THUMB-03: [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-input-checkpoint.md) [记录](baselines/thumbnail-input-checkpoint.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md) [记录](baselines/thumbnail-lifecycle-validation.json)
 - PKG-TOOL-THUMB-04: [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-runtime-types.md) [记录](baselines/thumbnail-runtime-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md) [记录](baselines/thumbnail-public-types-validation.json) [记录](changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md) [记录](baselines/thumbnail-emitter-validation.json)
 - SITE-01: [记录](site-inventory.md) [记录](baselines/site-inventory.json) [记录](baselines/site-provenance.json) [记录](baselines/demo-additions.json) [记录](changes/2026-09-14-SITE-01-site-inventory.md) [记录](baselines/site-inventory-validation.json)
+- SITE-SMOKE-01: [记录](changes/2026-09-14-SITE-SMOKE-01-documentation-smoke.md) [记录](baselines/docs-smoke-validation.json) [记录](scripts/docs-smoke.test.mjs)
 - SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json)
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)
