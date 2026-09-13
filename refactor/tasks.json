@@ -3381,7 +3381,8 @@
       "dependsOn": [
         "PKG-DANMUKU-06",
         "PKG-DANMUKU-10",
-        "PKG-DANMUKU-11"
+        "PKG-DANMUKU-11",
+        "PKG-DANMUKU-12"
       ],
       "status": "doing",
       "risk": "H",
@@ -4700,6 +4701,25 @@
       "evidence": [
         "changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md",
         "baselines/danmuku-lifetime-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-DANMUKU-12",
+      "phase": "5 包迁移：artplayer-plugin-danmuku",
+      "title": "保持异步放置期间的原生帧采样与寿命维护",
+      "scope": [
+        "artplayer-plugin-danmuku"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-11"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "每帧采样与串行dispatcher、代际buffer及回归",
+      "acceptance": "异步等待不丢已到时采样、不延迟既有寿命维护；保留顺序、取消与公开readys窗口",
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md",
+        "baselines/danmuku-frame-sampling-validation.json"
       ]
     }
   ]

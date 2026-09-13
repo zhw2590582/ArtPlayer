@@ -139,3 +139,11 @@ For a timeout, inspect the retained trace before changing the test or implementa
 browser startup and pre-plugin playback delays are different from plugin execution.
 The density regression retains 16000 rows, real playback and SVG/pixel geometry at
 two widths. A diagnostic pass does not waive the full matrix or long-load acceptance.
+
+`danmuku-timing-diagnostic.spec.js` records independent native RAF/media progress
+and the original eligibility getter under an 800ms CPU block or 600ms asynchronous
+visibility callback. Its async case asserts that the candidate retains all three
+rows and serial callbacks; the fixed published baseline retains its missing middle
+row. CPU-block observations remain diagnostic, not no-loss acceptance. Both it and
+`danmuku-lifetime.spec.js` accept the same artifact override. The latter verifies
+the full visible lifetime after a controlled delay to an actual Worker request.

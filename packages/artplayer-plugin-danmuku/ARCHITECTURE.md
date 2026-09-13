@@ -15,7 +15,8 @@ historical declarations, earlier exports and failure evidence are indexed in
 | `src/input.ts` | Input forms, replacement ownership, independent append operations, cancellation and synchronous callback reentry |
 | `src/bilibili-parser.ts` | Pure legacy-compatible XML fields, mode mapping and entity decoding |
 | `src/bilibili.ts` | Fetch and response text, one parser Worker per request, fallback, settlement and Blob URL cleanup |
-| `src/scheduler.ts` | One RAF or asynchronous frame, cancellation generations, preparation ownership and failure recovery |
+| `src/scheduler.ts` | One sampling RAF and one serial asynchronous batch, cancellation generations, preparation ownership and failure recovery |
+| `src/scheduling-buffer.ts` | Identity-based observations and current-batch reservations; ready-before-wait selection without public state mutation |
 | `src/renderer.ts` | Owned node allocation, preparation, geometry snapshots, placement, pause/resume styling and disposal |
 | `src/queue.ts` | Ordered state pools, eligibility and state transitions |
 | `src/worker-client.ts` | Track Worker lifecycle, a shared response dispatcher, unique request IDs and pending requests |
@@ -135,11 +136,30 @@ legacy build targets remain es2020 and es2015; syntax lowering does not polyfill
 
 ## Scheduling ownership
 
-Keep at most one pending RAF or asynchronous preparation frame. Native `play`
+Keep at most one pending RAF and one asynchronous preparation batch. Native `play`
 and `playing` both invoke the existing start path and retain its events, but
 must not create competing loops. Ready items precede wait items; wait selection
 retains the current-time +/- 0.1 second window and state-pool order. Keep the
 existing track algorithm and geometry fields until separately reviewed.
+
+RAF sampling and visible lifetime maintenance continue while `beforeVisible` or
+the Worker is pending. The scheduling buffer stores only actually observed row
+references; it does not sweep elapsed time or modify public wait/ready states.
+The dispatcher remains serial. Reserve every row in its batch until completion,
+so a rejected placement cannot repeatedly jump ahead of later rows in that batch.
+At the next RAF, capture new observations before selecting ready rows followed by
+wait rows, retaining capture order within each group. Identity sets prevent the
+same observed row from entering both the current and pending batch. Cancellation
+clears both sets; an old operation's finally must not clear a newer batch.
+
+This fixes missed eligibility during asynchronous preparation, not timestamps
+crossed while the entire main thread is blocked. The native timing diagnostic
+keeps the unchanged published miss visible beside the candidate regression and
+records CPU-blocked frame gaps without calling them successful load acceptance.
+Sampling still scans the existing state pools on each active frame. Buffer storage
+is bounded by the distinct observed queue rows, not an arbitrary drop limit; this
+does not establish a throughput or memory improvement. Measure dense queues and
+long asynchronous waits in the separate sustained-load acceptance task.
 
 Pause, reset, successful replacement input commit, hide, seeking, destroy and replacing the
 `beforeVisible` callback invalidate unfinished preparation. Cancellation races

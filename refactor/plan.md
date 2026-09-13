@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 230 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 231 项，范围 22 个包及工作区/示例。
 
-状态：todo 68 / doing 15 / blocked 0 / done 147 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 68 / doing 15 / blocked 0 / done 148 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -22,7 +22,7 @@
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06 |
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
-| artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, PKG-DANMUKU-10, PKG-DANMUKU-11 |
+| artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 |
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06 |
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-05, PKG-DASH-06 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
@@ -315,11 +315,12 @@
 | PKG-DANMUKU-04 | artplayer-plugin-danmuku<br>整理时钟、队列与轨道调度 | PKG-DANMUKU-03, CORE-10 | danmuku 调度器和确定性时钟测试 | seek/暂停/倍率/长时间运行无顺序和碰撞回归 | H | done |
 | PKG-DANMUKU-05 | artplayer-plugin-danmuku<br>整理 DOM 渲染、设置、热力图与 worker | PKG-DANMUKU-04, CORE-14, CORE-18 | renderer/setting/heatmap/worker 职责及资源归属 | mount/icons/设置和 worker 协议保持，销毁无后台工作 | H | done |
 | PKG-DANMUKU-06 | artplayer-plugin-danmuku<br>迁移 TS 与公开声明 | PKG-DANMUKU-05, ENG-04, ENG-06 | 自有模块、worker 消息、option/item/result 类型 | 旧参数、扩展字段和事件消费通过，vendored 边界清楚 | H | done |
-| PKG-DANMUKU-07 | artplayer-plugin-danmuku<br>弹幕能力稳定性验收 | PKG-DANMUKU-06, PKG-DANMUKU-10, PKG-DANMUKU-11 | 负载/渲染/资源对比及 mask 可依赖的稳定边界 | 在试点核心中旧插件 API 与关键帧路径通过 | H | doing |
+| PKG-DANMUKU-07 | artplayer-plugin-danmuku<br>弹幕能力稳定性验收 | PKG-DANMUKU-06, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 | 负载/渲染/资源对比及 mask 可依赖的稳定边界 | 在试点核心中旧插件 API 与关键帧路径通过 | H | doing |
 | PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | todo |
 | PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | todo |
 | PKG-DANMUKU-10 | artplayer-plugin-danmuku<br>修复 issue958 密集热力图过高与曲线裁平 | PKG-DANMUKU-05 | 自动密度缩放与曲线边界、历史自定义坐标兼容及真实浏览器红绿证据 | 16000条三种分布在两核心三引擎和source/main/legacy不遮挡；显式轴和自定义points保持旧解释，有单独commit | M | done |
 | PKG-DANMUKU-11 | artplayer-plugin-danmuku<br>修复 Worker 隐藏等待吞掉可见寿命 | PKG-DANMUKU-06 | 成功放置时的可见计时与延迟回复回归 | 真实 Worker 延迟下完整显示寿命；保留暂停/回收/取消和公开契约 | M | done |
+| PKG-DANMUKU-12 | artplayer-plugin-danmuku<br>保持异步放置期间的原生帧采样与寿命维护 | PKG-DANMUKU-11 | 每帧采样与串行dispatcher、代际buffer及回归 | 异步等待不丢已到时采样、不延迟既有寿命维护；保留顺序、取消与公开readys窗口 | H | done |
 
 ## 5 包迁移：artplayer-proxy-canvas
 
@@ -591,3 +592,4 @@
 - PKG-ASR-09: [记录](changes/2026-09-13-PKG-ASR-09-explicit-capture.md) [记录](baselines/asr-explicit-capture-validation.json)
 - PKG-DANMUKU-10: [记录](changes/2026-09-13-PKG-DANMUKU-10-heatmap-density.md) [记录](baselines/danmuku-heatmap-density-validation.json)
 - PKG-DANMUKU-11: [记录](changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md) [记录](baselines/danmuku-lifetime-validation.json)
+- PKG-DANMUKU-12: [记录](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md) [记录](baselines/danmuku-frame-sampling-validation.json)

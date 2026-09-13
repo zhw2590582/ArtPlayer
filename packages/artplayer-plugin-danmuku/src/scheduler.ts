@@ -1,5 +1,6 @@
 import type Danmuku from './danmuku'
 import type { DanmuItem } from './types'
+import SchedulingBuffer from './scheduling-buffer'
 
 const cancelled = Symbol('cancelled danmuku frame')
 
@@ -21,6 +22,7 @@ export default class Scheduler {
   declare running: boolean
   declare fault: boolean
   declare failedItems: Set<DanmuItem>
+  declare buffer: SchedulingBuffer
 
   constructor(owner: Danmuku) {
     this.owner = owner
@@ -32,6 +34,7 @@ export default class Scheduler {
     this.running = false
     this.fault = false
     this.failedItems = new Set()
+    this.buffer = new SchedulingBuffer()
   }
 
   active(operation: FrameOperation) {
@@ -58,6 +61,7 @@ export default class Scheduler {
     }
     this.owner.workerClient?.cancel()
     this.failedItems.clear()
+    this.buffer.clear()
   }
 
   report(error: unknown) {
@@ -95,43 +99,62 @@ export default class Scheduler {
 
   schedule() {
     const owner = this.owner
-    if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null || this.operation)
+    if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null)
       return
     this.frame = window.requestAnimationFrame(() => {
       this.frame = null
       owner.timer = null
       if (this.closed || this.fault || owner.isStop || owner.art.isDestroy)
         return
+      const generation = this.generation
+      try {
+        if (owner.art.playing && !owner.isHide) {
+          owner.filter('emit', (danmu) => {
+            const now = Date.now()
+            danmu.$restTime -= (now - danmu.$lastStartTime) / 1000
+            danmu.$lastStartTime = now
+            if (danmu.$restTime <= 0)
+              owner.makeWait(danmu)
+          })
+          const readys = owner.readys
+          if (generation !== this.generation)
+            return
+          this.buffer.capture(readys, this.failedItems)
+        }
+      }
+      catch (error) {
+        if (generation === this.generation)
+          this.fail(error)
+        return
+      }
+      this.schedule()
+      if (this.operation || !owner.art.playing || owner.isHide)
+        return
+      const readys = this.buffer.take()
+      if (!readys.length)
+        return
       let cancel!: () => void
       const cancellation = new Promise<typeof cancelled>(resolve => cancel = () => resolve(cancelled))
       const operation: FrameOperation = { generation: this.generation, cancel, wait: value => Promise.race([value, cancellation]), ref: null }
       this.operation = operation
-      return this.run(operation).catch((error) => {
+      return this.run(operation, readys).catch((error) => {
         if (this.active(operation))
           this.fail(error)
       }).finally(() => {
         this.release(operation)
         if (this.operation === operation) {
           this.operation = null
-          this.schedule()
+          this.buffer.complete()
         }
       })
     })
     owner.timer = this.frame
   }
 
-  async run(operation: FrameOperation) {
+  async run(operation: FrameOperation, readys: DanmuItem[]) {
     const owner = this.owner
     if (!owner.art.playing || !this.active(operation))
       return
-    owner.filter('emit', (danmu) => {
-      const emitTime = (Date.now() - danmu.$lastStartTime) / 1000
-      danmu.$restTime -= emitTime
-      danmu.$lastStartTime = Date.now()
-      if (danmu.$restTime <= 0)
-        owner.makeWait(danmu)
-    })
-    const readys = owner.readys
     for (const danmu of readys) {
       if (!this.active(operation))
         return

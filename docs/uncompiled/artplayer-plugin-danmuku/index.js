@@ -534,6 +534,39 @@ var artplayerPluginDanmuku = (function() {
       this.nodes.clear();
     }
   }
+  class SchedulingBuffer {
+    constructor() {
+      this.pending = /* @__PURE__ */ new Set();
+      this.reserved = /* @__PURE__ */ new Set();
+    }
+    capture(items, failed) {
+      for (const item of items) {
+        if (!this.reserved.has(item) && !failed.has(item))
+          this.pending.add(item);
+      }
+    }
+    take() {
+      const ready = [];
+      const waiting = [];
+      for (const item of this.pending) {
+        if (item.$state === "ready")
+          ready.push(item);
+        else if (item.$state === "wait")
+          waiting.push(item);
+      }
+      this.pending.clear();
+      const batch = [...ready, ...waiting];
+      this.reserved = new Set(batch);
+      return batch;
+    }
+    complete() {
+      this.reserved.clear();
+    }
+    clear() {
+      this.pending.clear();
+      this.reserved.clear();
+    }
+  }
   const cancelled = /* @__PURE__ */ Symbol("cancelled danmuku frame");
   class Scheduler {
     constructor(owner) {
@@ -546,6 +579,7 @@ var artplayerPluginDanmuku = (function() {
       this.running = false;
       this.fault = false;
       this.failedItems = /* @__PURE__ */ new Set();
+      this.buffer = new SchedulingBuffer();
     }
     active(operation) {
       const owner = this.owner;
@@ -568,6 +602,7 @@ var artplayerPluginDanmuku = (function() {
       }
       this.owner.workerClient?.cancel();
       this.failedItems.clear();
+      this.buffer.clear();
     }
     report(error) {
       try {
@@ -599,42 +634,60 @@ var artplayerPluginDanmuku = (function() {
     }
     schedule() {
       const owner = this.owner;
-      if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null || this.operation)
+      if (!this.running || this.closed || this.fault || owner.art.isDestroy || owner.isStop || this.frame !== null)
         return;
       this.frame = window.requestAnimationFrame(() => {
         this.frame = null;
         owner.timer = null;
         if (this.closed || this.fault || owner.isStop || owner.art.isDestroy)
           return;
+        const generation = this.generation;
+        try {
+          if (owner.art.playing && !owner.isHide) {
+            owner.filter("emit", (danmu) => {
+              const now = Date.now();
+              danmu.$restTime -= (now - danmu.$lastStartTime) / 1e3;
+              danmu.$lastStartTime = now;
+              if (danmu.$restTime <= 0)
+                owner.makeWait(danmu);
+            });
+            const readys2 = owner.readys;
+            if (generation !== this.generation)
+              return;
+            this.buffer.capture(readys2, this.failedItems);
+          }
+        } catch (error) {
+          if (generation === this.generation)
+            this.fail(error);
+          return;
+        }
+        this.schedule();
+        if (this.operation || !owner.art.playing || owner.isHide)
+          return;
+        const readys = this.buffer.take();
+        if (!readys.length)
+          return;
         let cancel;
         const cancellation = new Promise((resolve) => cancel = () => resolve(cancelled));
         const operation = { generation: this.generation, cancel, wait: (value) => Promise.race([value, cancellation]), ref: null };
         this.operation = operation;
-        return this.run(operation).catch((error) => {
+        return this.run(operation, readys).catch((error) => {
           if (this.active(operation))
             this.fail(error);
         }).finally(() => {
           this.release(operation);
           if (this.operation === operation) {
             this.operation = null;
-            this.schedule();
+            this.buffer.complete();
           }
         });
       });
       owner.timer = this.frame;
     }
-    async run(operation) {
+    async run(operation, readys) {
       const owner = this.owner;
       if (!owner.art.playing || !this.active(operation))
         return;
-      owner.filter("emit", (danmu) => {
-        const emitTime = (Date.now() - danmu.$lastStartTime) / 1e3;
-        danmu.$restTime -= emitTime;
-        danmu.$lastStartTime = Date.now();
-        if (danmu.$restTime <= 0)
-          owner.makeWait(danmu);
-      });
-      const readys = owner.readys;
       for (const danmu of readys) {
         if (!this.active(operation))
           return;

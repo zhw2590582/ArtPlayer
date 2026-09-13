@@ -1,0 +1,5359 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-12",
+  "status": "done",
+  "capturedAt": "2026-09-13T14:48:42.435Z",
+  "baselineCommit": "df6a6fe82e25bf7da94b227937ac050123673b74",
+  "implementation": "Continue native RAF eligibility sampling and visible expiry while a single serial batch waits for callbacks or Worker placement. Buffer only observed identities, reserve the whole batch, preserve ready priority and clear both sets on lifecycle invalidation.",
+  "units": [
+    {
+      "file": "refactor/.cache/danmuku12-unit-final.log",
+      "sha256": "33660e0a5d023b6dc3e9d381a5e349fa8bfc3b68b1d0db6086ca5273f2baa508",
+      "tests": 264
+    },
+    {
+      "file": "refactor/.cache/danmuku12-main-unit.log",
+      "sha256": "1d406fb39dc2aa17982e098443de8b04989055610416a259eb5ed7397a51c5da",
+      "tests": 68
+    },
+    {
+      "file": "refactor/.cache/danmuku12-legacy-unit.log",
+      "sha256": "be829c938437f8b61b55ff87936a1eeb2afef1b269513d6ff9ed08f854e896af",
+      "tests": 68
+    }
+  ],
+  "browsers": [
+    {
+      "format": "source",
+      "file": "refactor/.cache/danmuku12-source-browser.json",
+      "sha256": "638663a7f32c36b4028a8ecc0108daf915b9825ad6d76c10beb5c1f56c48d7c4",
+      "stats": {
+        "startTime": "2026-09-13T14:37:57.379Z",
+        "duration": 166963.28,
+        "expected": 102,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "groups": {
+        "chromium/danmuku-lifetime.spec.js": 8,
+        "firefox/danmuku-lifetime.spec.js": 8,
+        "webkit/danmuku-lifetime.spec.js": 8,
+        "chromium/danmuku-scheduler.spec.js": 22,
+        "firefox/danmuku-scheduler.spec.js": 22,
+        "webkit/danmuku-scheduler.spec.js": 22,
+        "chromium/danmuku-timing-diagnostic.spec.js": 4,
+        "firefox/danmuku-timing-diagnostic.spec.js": 4,
+        "webkit/danmuku-timing-diagnostic.spec.js": 4
+      },
+      "versions": {
+        "chromium": {
+          "browser": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "browser": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "browser": "26.6",
+          "platform": "win32"
+        }
+      },
+      "timing": [
+        {
+          "engine": "chromium",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 2.92746,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.978364,
+              "wall": 2217.300000011921
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2213.800000011921,
+              "media": 1.974652,
+              "end": 2213.800000011921
+            },
+            {
+              "id": "sentinel",
+              "start": 2216.699999988079,
+              "media": 1.977857,
+              "end": 2216.699999988079
+            }
+          ],
+          "block": {
+            "start": 813.6999999880791,
+            "end": 1613.699999988079,
+            "before": 0.574074,
+            "after": 0.574074
+          },
+          "frameSamples": 106,
+          "eligibilitySamples": 153,
+          "maximumMediaFrameGapSeconds": 0.8024990000000001,
+          "maximumMediaEligibilityGapSeconds": 0.817824
+        },
+        {
+          "engine": "chromium",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.329449,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.329558,
+              "wall": 1567.4000000357628
+            },
+            {
+              "id": "sentinel",
+              "time": 1.975643,
+              "wall": 2213.800000011921
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 963.4000000357628,
+              "media": 0.724984,
+              "end": 1564.300000011921
+            },
+            {
+              "id": "first",
+              "start": 963.5,
+              "media": 0.72519,
+              "end": 1566.9000000357628
+            },
+            {
+              "id": "sentinel",
+              "start": 2212.699999988079,
+              "media": 1.974545,
+              "end": 2212.699999988079
+            }
+          ],
+          "block": null,
+          "frameSamples": 177,
+          "eligibilitySamples": 160,
+          "maximumMediaFrameGapSeconds": 0.018858000000000263,
+          "maximumMediaEligibilityGapSeconds": 0.616357
+        },
+        {
+          "engine": "chromium",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+          "media": {
+            "time": 2.930457,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.978777,
+              "wall": 2211.399999976158
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2208.099999964237,
+              "media": 1.975196,
+              "end": 2208.099999964237
+            }
+          ],
+          "block": {
+            "start": 808.1999999880791,
+            "end": 1608.199999988079,
+            "before": 0.576456,
+            "after": 0.576456
+          },
+          "frameSamples": 106,
+          "eligibilitySamples": 105,
+          "maximumMediaFrameGapSeconds": 0.799692,
+          "maximumMediaEligibilityGapSeconds": 0.816903
+        },
+        {
+          "engine": "chromium",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+          "media": {
+            "time": 3.36746,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.348717,
+              "wall": 1591.800000011921
+            },
+            {
+              "id": "middle",
+              "time": 1.363202,
+              "wall": 1606
+            },
+            {
+              "id": "sentinel",
+              "time": 1.995347,
+              "wall": 2238.900000035763
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 987.9000000357628,
+              "media": 0.744992,
+              "end": 1588.2000000476837
+            },
+            {
+              "id": "middle",
+              "start": 1604.4000000357628,
+              "media": 1.361567,
+              "end": 1604.4000000357628
+            },
+            {
+              "id": "sentinel",
+              "start": 2237.7000000476837,
+              "media": 1.994015,
+              "end": 2237.7000000476837
+            }
+          ],
+          "block": null,
+          "frameSamples": 178,
+          "eligibilitySamples": 177,
+          "maximumMediaFrameGapSeconds": 0.02043700000000004,
+          "maximumMediaEligibilityGapSeconds": 0.020432999999999923
+        },
+        {
+          "engine": "firefox",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.041539,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.452382,
+              "wall": 1731
+            },
+            {
+              "id": "sentinel",
+              "time": 2.05672,
+              "wall": 2345
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1728,
+              "media": 0.804105,
+              "end": 1728
+            },
+            {
+              "id": "first",
+              "start": 1729,
+              "media": 0.804105,
+              "end": 1729
+            },
+            {
+              "id": "sentinel",
+              "start": 2344,
+              "media": 2.05672,
+              "end": 2344
+            }
+          ],
+          "block": {
+            "start": 926,
+            "end": 1726,
+            "before": 0.64302,
+            "after": 0.64302
+          },
+          "frameSamples": 109,
+          "eligibilitySamples": 123,
+          "maximumMediaFrameGapSeconds": 0.6482770000000001,
+          "maximumMediaEligibilityGapSeconds": 0.6482770000000001
+        },
+        {
+          "engine": "firefox",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.397048,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.418656,
+              "wall": 1986
+            },
+            {
+              "id": "sentinel",
+              "time": 2.064865,
+              "wall": 2624
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1371,
+              "media": 0.812789,
+              "end": 1984
+            },
+            {
+              "id": "first",
+              "start": 1372,
+              "media": 0.812789,
+              "end": 1985
+            },
+            {
+              "id": "sentinel",
+              "start": 2623,
+              "media": 2.064865,
+              "end": 2623
+            }
+          ],
+          "block": null,
+          "frameSamples": 179,
+          "eligibilitySamples": 166,
+          "maximumMediaFrameGapSeconds": 0.04172399999999987,
+          "maximumMediaEligibilityGapSeconds": 0.6058669999999999
+        },
+        {
+          "engine": "firefox",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+          "media": {
+            "time": 2.79071,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.814869,
+              "wall": 2109
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2107,
+              "media": 1.814869,
+              "end": 2107
+            }
+          ],
+          "block": {
+            "start": 679,
+            "end": 1479,
+            "before": 0.396262,
+            "after": 0.396262
+          },
+          "frameSamples": 110,
+          "eligibilitySamples": 110,
+          "maximumMediaFrameGapSeconds": 0.808229,
+          "maximumMediaEligibilityGapSeconds": 0.808229
+        },
+        {
+          "engine": "firefox",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+          "media": {
+            "time": 3.147121,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.163253,
+              "wall": 1489
+            },
+            {
+              "id": "middle",
+              "time": 1.163253,
+              "wall": 1502
+            },
+            {
+              "id": "sentinel",
+              "time": 1.808879,
+              "wall": 2151
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 881,
+              "media": 0.556134,
+              "end": 1488
+            },
+            {
+              "id": "middle",
+              "start": 1499,
+              "media": 1.163253,
+              "end": 1499
+            },
+            {
+              "id": "sentinel",
+              "start": 2149,
+              "media": 1.808879,
+              "end": 2149
+            }
+          ],
+          "block": null,
+          "frameSamples": 178,
+          "eligibilitySamples": 178,
+          "maximumMediaFrameGapSeconds": 0.04195899999999986,
+          "maximumMediaEligibilityGapSeconds": 0.04195899999999986
+        },
+        {
+          "engine": "webkit",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.4317505,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.9018127,
+              "wall": 2959
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2943,
+              "media": 1.8858752,
+              "end": 2943
+            },
+            {
+              "id": "sentinel",
+              "start": 2945,
+              "media": 1.8879586,
+              "end": 2945
+            }
+          ],
+          "block": {
+            "start": 1566,
+            "end": 2366,
+            "before": 0.5079166,
+            "after": 1.3080626
+          },
+          "frameSamples": 57,
+          "eligibilitySamples": 75,
+          "maximumMediaFrameGapSeconds": 0.8441252,
+          "maximumMediaEligibilityGapSeconds": 0.8456877
+        },
+        {
+          "engine": "webkit",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.7236255,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.2917293,
+              "wall": 2615
+            },
+            {
+              "id": "sentinel",
+              "time": 1.9163127,
+              "wall": 3240
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1989,
+              "media": 0.6657292,
+              "end": 2599
+            },
+            {
+              "id": "first",
+              "start": 1989,
+              "media": 0.6658125,
+              "end": 2601
+            },
+            {
+              "id": "sentinel",
+              "start": 3224,
+              "media": 1.9002502,
+              "end": 3224
+            }
+          ],
+          "block": null,
+          "frameSamples": 71,
+          "eligibilitySamples": 64,
+          "maximumMediaFrameGapSeconds": 0.07662499999999994,
+          "maximumMediaEligibilityGapSeconds": 0.6555209999999999
+        },
+        {
+          "engine": "webkit",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+          "media": {
+            "time": 3.4012296,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 2.1464378,
+              "wall": 3223
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 3208,
+              "media": 2.1308127,
+              "end": 3208
+            }
+          ],
+          "block": {
+            "start": 1785,
+            "end": 2585,
+            "before": 0.7081042,
+            "after": 1.5076043
+          },
+          "frameSamples": 52,
+          "eligibilitySamples": 52,
+          "maximumMediaFrameGapSeconds": 0.8436877,
+          "maximumMediaEligibilityGapSeconds": 0.8466250999999999
+        },
+        {
+          "engine": "webkit",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+          "media": {
+            "time": 3.8214797,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.4801877,
+              "wall": 2813
+            },
+            {
+              "id": "middle",
+              "time": 1.5419793,
+              "wall": 2875
+            },
+            {
+              "id": "sentinel",
+              "time": 2.1227919,
+              "wall": 3456
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 2188,
+              "media": 0.8550209,
+              "end": 2799
+            },
+            {
+              "id": "middle",
+              "start": 2860,
+              "media": 1.526521,
+              "end": 2860
+            },
+            {
+              "id": "sentinel",
+              "start": 3440,
+              "media": 2.1075003,
+              "end": 3441
+            }
+          ],
+          "block": null,
+          "frameSamples": 69,
+          "eligibilitySamples": 69,
+          "maximumMediaFrameGapSeconds": 0.07681250000000017,
+          "maximumMediaEligibilityGapSeconds": 0.07679170000000002
+        }
+      ],
+      "lifetimes": [
+        {
+          "engine": "chromium",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310281786,
+                  "wall": 917.3000000119209
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310281786,
+                  "wall": 2419.300000011921
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2419.399999976158,
+                  "clock": 1789310283289,
+                  "startedAt": 1789310281786,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.196252,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2431.199999988079,
+                  "rest": -0.514,
+                  "time": 2.20794
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.34642
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310284436,
+                  "wall": 835.8999999761581
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310284436,
+                  "wall": 2336.5
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2336.699999988079,
+                  "clock": 1789310285937,
+                  "startedAt": 1789310284436,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.189898,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2351.099999964237,
+                  "rest": -0.5149999999999999,
+                  "time": 2.204425
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.325209
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 867.8000000119209
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2369.100000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2369.300000011921,
+                  "clock": 1789310288572,
+                  "startedAt": 1789310288572,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.206378,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3381.199999988079,
+                  "rest": -0.012000000000000774,
+                  "time": 3.218127
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.338697
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 849.1000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2350.100000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2350.399999976158,
+                  "clock": 1789310292190,
+                  "startedAt": 1789310292190,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.189312,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3361.399999976158,
+                  "rest": -0.011000000000000773,
+                  "time": 3.201239
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.32609
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310281786,
+                  "wall": 934.5
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310281786,
+                  "wall": 2436.600000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2436.800000011921,
+                  "clock": 1789310283289,
+                  "startedAt": 1789310281786,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.197465,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2448.600000023842,
+                  "rest": -0.514,
+                  "time": 2.209472
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.348639
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310284470,
+                  "wall": 869
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310284470,
+                  "wall": 2369.5
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2369.7999999523163,
+                  "clock": 1789310285971,
+                  "startedAt": 1789310284470,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.204693,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2382.2999999523163,
+                  "rest": -0.5129999999999999,
+                  "time": 2.217057
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.33954
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 856.6999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2358.399999976158
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2358.599999964237,
+                  "clock": 1789310288606,
+                  "startedAt": 1789310288605,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.190565,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3370.199999988079,
+                  "rest": -0.012000000000000774,
+                  "time": 3.202029
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.3421
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 883.2999999523163
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2384.699999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2385,
+                  "clock": 1789310292275,
+                  "startedAt": 1789310292275,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.196004,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3394,
+                  "rest": -0.00900000000000073,
+                  "time": 3.205147
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.324841
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310326249,
+                  "wall": 1074
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310326249,
+                  "wall": 2574
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2575,
+                  "clock": 1789310327750,
+                  "startedAt": 1789310326249,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.96741,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2589,
+                  "rest": -0.5149999999999999,
+                  "time": 1.96741
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.169548
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310329185,
+                  "wall": 955
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310329185,
+                  "wall": 2470
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2471,
+                  "clock": 1789310330703,
+                  "startedAt": 1789310329184,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.203002,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2485,
+                  "rest": -0.5329999999999999,
+                  "time": 2.243354
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.323759
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 966
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2469
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2470,
+                  "clock": 1789310333525,
+                  "startedAt": 1789310333525,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.210885,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3481,
+                  "rest": -0.011000000000000745,
+                  "time": 3.235062
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.356025
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 686
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2188
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2189,
+                  "clock": 1789310337109,
+                  "startedAt": 1789310337108,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.956462,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3203,
+                  "rest": -0.015000000000000721,
+                  "time": 2.968813
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.132803
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310326816,
+                  "wall": 1190
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310326816,
+                  "wall": 2691
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2692,
+                  "clock": 1789310328317,
+                  "startedAt": 1789310326815,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.97013,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2706,
+                  "rest": -0.516,
+                  "time": 1.97013
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.172733
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310329519,
+                  "wall": 688
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310329519,
+                  "wall": 2189
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2189,
+                  "clock": 1789310331020,
+                  "startedAt": 1789310329518,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.964372,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2203,
+                  "rest": -0.516,
+                  "time": 1.964372
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.126003
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 930
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2451
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2451,
+                  "clock": 1789310333876,
+                  "startedAt": 1789310333875,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.247819,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3462,
+                  "rest": -0.012000000000000774,
+                  "time": 3.227444
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.388946
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 740
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2242
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2242,
+                  "clock": 1789310337527,
+                  "startedAt": 1789310337526,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.965395,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3255,
+                  "rest": -0.014000000000000665,
+                  "time": 3.003596
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.128221
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310374508,
+                  "wall": 1591
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310374508,
+                  "wall": 3113
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 3113,
+                  "clock": 1789310376029,
+                  "startedAt": 1789310374507,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.1433544,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3128,
+                  "rest": -0.538,
+                  "time": 2.1585211
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.7468962
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310378403,
+                  "wall": 1225
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310378403,
+                  "wall": 2745
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2746,
+                  "clock": 1789310379925,
+                  "startedAt": 1789310378403,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0322086,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2777,
+                  "rest": -0.5529999999999999,
+                  "time": 2.0638753
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.5108545
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1283
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2809
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2809,
+                  "clock": 1789310383628,
+                  "startedAt": 1789310383628,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0153961,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3831,
+                  "rest": -0.021000000000000338,
+                  "time": 3.0370004
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4681463
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1260
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2782
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2783,
+                  "clock": 1789310388316,
+                  "startedAt": 1789310388315,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0561253,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3805,
+                  "rest": -0.02400000000000027,
+                  "time": 3.0788962
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5649797
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310375048,
+                  "wall": 1492
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310375048,
+                  "wall": 3007
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 3008,
+                  "clock": 1789310376564,
+                  "startedAt": 1789310375047,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0478336,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3040,
+                  "rest": -0.5489999999999999,
+                  "time": 2.0798752
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.6349795
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310378821,
+                  "wall": 1232
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310378821,
+                  "wall": 2762
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2763,
+                  "clock": 1789310380352,
+                  "startedAt": 1789310378820,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9997711,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2793,
+                  "rest": -0.563,
+                  "time": 2.0301252
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4680003
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1269
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2793
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2794,
+                  "clock": 1789310384114,
+                  "startedAt": 1789310384114,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0322086,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3801,
+                  "rest": -0.00800000000000016,
+                  "time": 3.0399171
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4779172
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1195
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2713
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2714,
+                  "clock": 1789310388758,
+                  "startedAt": 1789310388757,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9770002,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3757,
+                  "rest": -0.04300000000000019,
+                  "time": 3.0199796
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5155213
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "file": "refactor/.cache/danmuku12-main-browser.json",
+      "sha256": "7d1d47f5ae19d7d8d13467fa191b598252ab63c43a88615276f63cca8899baad",
+      "stats": {
+        "startTime": "2026-09-13T14:41:30.453Z",
+        "duration": 165565.724,
+        "expected": 102,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "groups": {
+        "chromium/danmuku-lifetime.spec.js": 8,
+        "firefox/danmuku-lifetime.spec.js": 8,
+        "webkit/danmuku-lifetime.spec.js": 8,
+        "chromium/danmuku-scheduler.spec.js": 22,
+        "firefox/danmuku-scheduler.spec.js": 22,
+        "webkit/danmuku-scheduler.spec.js": 22,
+        "chromium/danmuku-timing-diagnostic.spec.js": 4,
+        "firefox/danmuku-timing-diagnostic.spec.js": 4,
+        "webkit/danmuku-timing-diagnostic.spec.js": 4
+      },
+      "versions": {
+        "chromium": {
+          "browser": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "browser": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "browser": "26.6",
+          "platform": "win32"
+        }
+      },
+      "timing": [
+        {
+          "engine": "chromium",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 2.927968,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.976002,
+              "wall": 2220.699999988079
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2217.5,
+              "media": 1.972721,
+              "end": 2217.5
+            },
+            {
+              "id": "sentinel",
+              "start": 2220.100000023842,
+              "media": 1.975362,
+              "end": 2220.100000023842
+            }
+          ],
+          "block": {
+            "start": 817.6000000238419,
+            "end": 1617.6000000238419,
+            "before": 0.572402,
+            "after": 0.572402
+          },
+          "frameSamples": 106,
+          "eligibilitySamples": 153,
+          "maximumMediaFrameGapSeconds": 0.801645,
+          "maximumMediaEligibilityGapSeconds": 0.816381
+        },
+        {
+          "engine": "chromium",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.308642,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.324644,
+              "wall": 1563.5999999642372
+            },
+            {
+              "id": "sentinel",
+              "time": 1.972052,
+              "wall": 2211.7999999523163
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 960,
+              "media": 0.720319,
+              "end": 1560.2999999523163
+            },
+            {
+              "id": "first",
+              "start": 960,
+              "media": 0.720429,
+              "end": 1562.8999999761581
+            },
+            {
+              "id": "sentinel",
+              "start": 2210.7999999523163,
+              "media": 1.970952,
+              "end": 2210.7999999523163
+            }
+          ],
+          "block": null,
+          "frameSamples": 177,
+          "eligibilitySamples": 161,
+          "maximumMediaFrameGapSeconds": 0.02051999999999987,
+          "maximumMediaEligibilityGapSeconds": 0.6179410000000001
+        },
+        {
+          "engine": "chromium",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+          "media": {
+            "time": 2.927638,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.977772,
+              "wall": 2232.2999999523163
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2229.099999964237,
+              "media": 1.974345,
+              "end": 2229.099999964237
+            }
+          ],
+          "block": {
+            "start": 828.8999999761581,
+            "end": 1628.8999999761581,
+            "before": 0.573754,
+            "after": 0.573754
+          },
+          "frameSamples": 106,
+          "eligibilitySamples": 105,
+          "maximumMediaFrameGapSeconds": 0.801645,
+          "maximumMediaEligibilityGapSeconds": 0.8178599999999999
+        },
+        {
+          "engine": "chromium",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+          "media": {
+            "time": 3.311762,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.330608,
+              "wall": 1578.800000011921
+            },
+            {
+              "id": "middle",
+              "time": 1.341392,
+              "wall": 1591
+            },
+            {
+              "id": "sentinel",
+              "time": 1.977218,
+              "wall": 2226.199999988079
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 973.8000000119209,
+              "media": 0.724432,
+              "end": 1574.800000011921
+            },
+            {
+              "id": "middle",
+              "start": 1590.199999988079,
+              "media": 1.3405,
+              "end": 1590.199999988079
+            },
+            {
+              "id": "sentinel",
+              "start": 2224.800000011921,
+              "media": 1.975849,
+              "end": 2224.900000035763
+            }
+          ],
+          "block": null,
+          "frameSamples": 176,
+          "eligibilitySamples": 175,
+          "maximumMediaFrameGapSeconds": 0.018780999999999937,
+          "maximumMediaEligibilityGapSeconds": 0.01878500000000005
+        },
+        {
+          "engine": "firefox",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.074595,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 2.06307,
+              "wall": 2354
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2348,
+              "media": 2.06307,
+              "end": 2348
+            },
+            {
+              "id": "sentinel",
+              "start": 2351,
+              "media": 2.06307,
+              "end": 2351
+            }
+          ],
+          "block": {
+            "start": 930,
+            "end": 1730,
+            "before": 0.64582,
+            "after": 0.64582
+          },
+          "frameSamples": 111,
+          "eligibilitySamples": 162,
+          "maximumMediaFrameGapSeconds": 0.8078200000000001,
+          "maximumMediaEligibilityGapSeconds": 0.8078200000000001
+        },
+        {
+          "engine": "firefox",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.182381,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.126428,
+              "wall": 1476
+            },
+            {
+              "id": "sentinel",
+              "time": 1.793895,
+              "wall": 2136
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 867,
+              "media": 0.542298,
+              "end": 1474
+            },
+            {
+              "id": "first",
+              "start": 867,
+              "media": 0.542298,
+              "end": 1475
+            },
+            {
+              "id": "sentinel",
+              "start": 2134,
+              "media": 1.793895,
+              "end": 2134
+            }
+          ],
+          "block": null,
+          "frameSamples": 179,
+          "eligibilitySamples": 163,
+          "maximumMediaFrameGapSeconds": 0.043028000000000066,
+          "maximumMediaEligibilityGapSeconds": 0.58413
+        },
+        {
+          "engine": "firefox",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+          "media": {
+            "time": 2.789347,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.205681,
+              "wall": 1495
+            },
+            {
+              "id": "sentinel",
+              "time": 1.813192,
+              "wall": 2109
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1493,
+              "media": 0.560258,
+              "end": 1493
+            },
+            {
+              "id": "sentinel",
+              "start": 2107,
+              "media": 1.813192,
+              "end": 2107
+            }
+          ],
+          "block": {
+            "start": 688,
+            "end": 1488,
+            "before": 0.398515,
+            "after": 0.398515
+          },
+          "frameSamples": 109,
+          "eligibilitySamples": 109,
+          "maximumMediaFrameGapSeconds": 0.645423,
+          "maximumMediaEligibilityGapSeconds": 0.645423
+        },
+        {
+          "engine": "firefox",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+          "media": {
+            "time": 3.376459,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.343112,
+              "wall": 1706
+            },
+            {
+              "id": "middle",
+              "time": 1.383517,
+              "wall": 1722
+            },
+            {
+              "id": "sentinel",
+              "time": 2.042608,
+              "wall": 2392
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1103,
+              "media": 0.772448,
+              "end": 1704
+            },
+            {
+              "id": "middle",
+              "start": 1720,
+              "media": 1.383517,
+              "end": 1720
+            },
+            {
+              "id": "sentinel",
+              "start": 2388,
+              "media": 2.042608,
+              "end": 2388
+            }
+          ],
+          "block": null,
+          "frameSamples": 178,
+          "eligibilitySamples": 178,
+          "maximumMediaFrameGapSeconds": 0.044094999999999995,
+          "maximumMediaEligibilityGapSeconds": 0.044094999999999995
+        },
+        {
+          "engine": "webkit",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.2397921,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 2.0303961,
+              "wall": 3078
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 3061,
+              "media": 2.0142086,
+              "end": 3061
+            },
+            {
+              "id": "sentinel",
+              "start": 3063,
+              "media": 2.0159586,
+              "end": 3063
+            }
+          ],
+          "block": {
+            "start": 1674,
+            "end": 2474,
+            "before": 0.6265625,
+            "after": 1.426396
+          },
+          "frameSamples": 52,
+          "eligibilitySamples": 71,
+          "maximumMediaFrameGapSeconds": 0.8384377,
+          "maximumMediaEligibilityGapSeconds": 0.8310835
+        },
+        {
+          "engine": "webkit",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.674813,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.3558335,
+              "wall": 2462
+            },
+            {
+              "id": "sentinel",
+              "time": 1.9892086,
+              "wall": 3095
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1835,
+              "media": 0.7296667,
+              "end": 2446
+            },
+            {
+              "id": "first",
+              "start": 1835,
+              "media": 0.72975,
+              "end": 2447
+            },
+            {
+              "id": "sentinel",
+              "start": 3080,
+              "media": 1.9743127,
+              "end": 3080
+            }
+          ],
+          "block": null,
+          "frameSamples": 78,
+          "eligibilitySamples": 69,
+          "maximumMediaFrameGapSeconds": 0.0634790999999999,
+          "maximumMediaEligibilityGapSeconds": 0.6265835000000001
+        },
+        {
+          "engine": "webkit",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+          "media": {
+            "time": 3.5370213,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.8971044,
+              "wall": 2890
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2879,
+              "media": 1.8858336,
+              "end": 2879
+            }
+          ],
+          "block": {
+            "start": 1477,
+            "end": 2277,
+            "before": 0.4839792,
+            "after": 1.2832501
+          },
+          "frameSamples": 60,
+          "eligibilitySamples": 60,
+          "maximumMediaFrameGapSeconds": 0.8451251,
+          "maximumMediaEligibilityGapSeconds": 0.8456043000000001
+        },
+        {
+          "engine": "webkit",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+          "media": {
+            "time": 3.7697922,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.3525626,
+              "wall": 2466
+            },
+            {
+              "id": "middle",
+              "time": 1.3981043,
+              "wall": 2511
+            },
+            {
+              "id": "sentinel",
+              "time": 1.9851252,
+              "wall": 3098
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1843,
+              "media": 0.7299792,
+              "end": 2450
+            },
+            {
+              "id": "middle",
+              "start": 2496,
+              "media": 1.3826877,
+              "end": 2496
+            },
+            {
+              "id": "sentinel",
+              "start": 3082,
+              "media": 1.9692503,
+              "end": 3082
+            }
+          ],
+          "block": null,
+          "frameSamples": 81,
+          "eligibilitySamples": 81,
+          "maximumMediaFrameGapSeconds": 0.06310419999999994,
+          "maximumMediaEligibilityGapSeconds": 0.0631250000000001
+        }
+      ],
+      "lifetimes": [
+        {
+          "engine": "chromium",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310494496,
+                  "wall": 946.1000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310494496,
+                  "wall": 2446.699999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2446.899999976158,
+                  "clock": 1789310495997,
+                  "startedAt": 1789310494496,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.209594,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2459.100000023842,
+                  "rest": -0.5129999999999999,
+                  "time": 2.221258
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.375981
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310497162,
+                  "wall": 864
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310497162,
+                  "wall": 2365
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2365.100000023842,
+                  "clock": 1789310498663,
+                  "startedAt": 1789310497161,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.205709,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2377.5,
+                  "rest": -0.514,
+                  "time": 2.218039
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.357914
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 855.6000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2356.800000011921
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2357,
+                  "clock": 1789310501298,
+                  "startedAt": 1789310501298,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.191172,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3368.800000011921,
+                  "rest": -0.012000000000000715,
+                  "time": 3.203335
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.324849
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 852.3000000119209
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2352.800000011921
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2353.099999964237,
+                  "clock": 1789310504914,
+                  "startedAt": 1789310504914,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.188712,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3364.899999976158,
+                  "rest": -0.011000000000000773,
+                  "time": 3.201432
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.340356
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310494496,
+                  "wall": 977.3999999761581
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310494496,
+                  "wall": 2478.199999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2478.199999988079,
+                  "clock": 1789310495997,
+                  "startedAt": 1789310494496,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.223506,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2490.5,
+                  "rest": -0.5129999999999999,
+                  "time": 2.235691
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.389926
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310497195,
+                  "wall": 879.1000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310497195,
+                  "wall": 2381.300000011921
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2382,
+                  "clock": 1789310498698,
+                  "startedAt": 1789310497194,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.207853,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2393.699999988079,
+                  "rest": -0.5149999999999999,
+                  "time": 2.219235
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.340076
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 868.3999999761581
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2369.199999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2369.2999999523163,
+                  "clock": 1789310501329,
+                  "startedAt": 1789310501329,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.190184,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3383.199999988079,
+                  "rest": -0.014000000000000776,
+                  "time": 3.203596
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.341811
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 868.8999999761581
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2369.899999976158
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2370.399999976158,
+                  "clock": 1789310504980,
+                  "startedAt": 1789310504980,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.190859,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3382.300000011921,
+                  "rest": -0.012000000000000774,
+                  "time": 3.200397
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.343703
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310539355,
+                  "wall": 1327
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310539355,
+                  "wall": 2828
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2829,
+                  "clock": 1789310540858,
+                  "startedAt": 1789310539355,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.209193,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2844,
+                  "rest": -0.518,
+                  "time": 2.209193
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.416746
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310542292,
+                  "wall": 923
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310542292,
+                  "wall": 2442
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2442,
+                  "clock": 1789310543811,
+                  "startedAt": 1789310542292,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.243664,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2456,
+                  "rest": -0.5329999999999999,
+                  "time": 2.243664
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.404821
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 683
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2184
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2184,
+                  "clock": 1789310546412,
+                  "startedAt": 1789310546412,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.93051,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3201,
+                  "rest": -0.016000000000000777,
+                  "time": 2.916269
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.118588
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 995
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2516
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2516,
+                  "clock": 1789310550435,
+                  "startedAt": 1789310550434,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.243726,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3529,
+                  "rest": -0.014000000000000665,
+                  "time": 3.252552
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.376035
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310540139,
+                  "wall": 1642
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310540139,
+                  "wall": 3143
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 3144,
+                  "clock": 1789310541642,
+                  "startedAt": 1789310540139,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.20878,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3158,
+                  "rest": -0.518,
+                  "time": 2.20878
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.454134
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310542877,
+                  "wall": 705
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310542877,
+                  "wall": 2206
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2206,
+                  "clock": 1789310544378,
+                  "startedAt": 1789310542876,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.960881,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2220,
+                  "rest": -0.516,
+                  "time": 1.960881
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.123556
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 993
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2512
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2512,
+                  "clock": 1789310547314,
+                  "startedAt": 1789310547314,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.245909,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3527,
+                  "rest": -0.01400000000000072,
+                  "time": 3.256816
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.378915
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 699
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2203
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2203,
+                  "clock": 1789310551001,
+                  "startedAt": 1789310551000,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.960548,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3217,
+                  "rest": -0.015000000000000777,
+                  "time": 2.972176
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.134133
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310587570,
+                  "wall": 1487
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310587570,
+                  "wall": 3012
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 3012,
+                  "clock": 1789310589096,
+                  "startedAt": 1789310587570,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.1061253,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3013,
+                  "rest": -0.5269999999999999,
+                  "time": 2.1071669
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.5065003
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310591234,
+                  "wall": 1259
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310591234,
+                  "wall": 2787
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2788,
+                  "clock": 1789310592762,
+                  "startedAt": 1789310591233,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9757502,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2803,
+                  "rest": -0.544,
+                  "time": 1.9909794
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4398961
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1216
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2718
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2718,
+                  "clock": 1789310596371,
+                  "startedAt": 1789310596371,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0155211,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3738,
+                  "rest": -0.02000000000000038,
+                  "time": 3.0353962
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5593755
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1274
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2799
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2800,
+                  "clock": 1789310601177,
+                  "startedAt": 1789310601176,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0555628,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3840,
+                  "rest": -0.04100000000000015,
+                  "time": 3.0956879
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5549172
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310588092,
+                  "wall": 1283
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310588092,
+                  "wall": 2808
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2809,
+                  "clock": 1789310589617,
+                  "startedAt": 1789310588091,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.9986878,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2840,
+                  "rest": -0.558,
+                  "time": 2.0301461
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.5037711
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310591939,
+                  "wall": 1385
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310591939,
+                  "wall": 2911
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2912,
+                  "clock": 1789310593466,
+                  "startedAt": 1789310591939,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0294377,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2927,
+                  "rest": -0.542,
+                  "time": 2.0442711
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4335212
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1258
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2771
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2771,
+                  "clock": 1789310597119,
+                  "startedAt": 1789310597119,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0330002,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3779,
+                  "rest": -0.009000000000000327,
+                  "time": 3.0415213
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.5511046
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1228
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2758
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2759,
+                  "clock": 1789310601867,
+                  "startedAt": 1789310601867,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0047503,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3780,
+                  "rest": -0.02100000000000024,
+                  "time": 3.0257087
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.472813
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "file": "refactor/.cache/danmuku12-legacy-browser.json",
+      "sha256": "deaa18647cfc5c8cf6760af6c08b681c8ccec64a126efd4eb28f46ce92b0e9d3",
+      "stats": {
+        "startTime": "2026-09-13T14:44:37.774Z",
+        "duration": 163086.084,
+        "expected": 102,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "groups": {
+        "chromium/danmuku-lifetime.spec.js": 8,
+        "firefox/danmuku-lifetime.spec.js": 8,
+        "webkit/danmuku-lifetime.spec.js": 8,
+        "chromium/danmuku-scheduler.spec.js": 22,
+        "firefox/danmuku-scheduler.spec.js": 22,
+        "webkit/danmuku-scheduler.spec.js": 22,
+        "chromium/danmuku-timing-diagnostic.spec.js": 4,
+        "firefox/danmuku-timing-diagnostic.spec.js": 4,
+        "webkit/danmuku-timing-diagnostic.spec.js": 4
+      },
+      "versions": {
+        "chromium": {
+          "browser": "153.0.8010.12",
+          "platform": "win32"
+        },
+        "firefox": {
+          "browser": "155.0",
+          "platform": "win32"
+        },
+        "webkit": {
+          "browser": "26.6",
+          "platform": "win32"
+        }
+      },
+      "timing": [
+        {
+          "engine": "chromium",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 2.964598,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.999277,
+              "wall": 2235.300000011921
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2230.199999988079,
+              "media": 1.993916,
+              "end": 2230.199999988079
+            },
+            {
+              "id": "sentinel",
+              "start": 2234.699999988079,
+              "media": 1.998676,
+              "end": 2234.699999988079
+            }
+          ],
+          "block": {
+            "start": 830.3999999761581,
+            "end": 1630.5,
+            "before": 0.594112,
+            "after": 0.594112
+          },
+          "frameSamples": 107,
+          "eligibilitySamples": 154,
+          "maximumMediaFrameGapSeconds": 0.801437,
+          "maximumMediaEligibilityGapSeconds": 0.816584
+        },
+        {
+          "engine": "chromium",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.342733,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.345095,
+              "wall": 1573.300000011921
+            },
+            {
+              "id": "sentinel",
+              "time": 1.991364,
+              "wall": 2220.199999988079
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 968,
+              "media": 0.73945,
+              "end": 1568.300000011921
+            },
+            {
+              "id": "first",
+              "start": 968.0999999642372,
+              "media": 0.739629,
+              "end": 1572.5999999642372
+            },
+            {
+              "id": "sentinel",
+              "start": 2219,
+              "media": 1.990187,
+              "end": 2219
+            }
+          ],
+          "block": null,
+          "frameSamples": 178,
+          "eligibilitySamples": 162,
+          "maximumMediaFrameGapSeconds": 0.021484999999999976,
+          "maximumMediaEligibilityGapSeconds": 0.6165600000000001
+        },
+        {
+          "engine": "chromium",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+          "media": {
+            "time": 2.946735,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.982528,
+              "wall": 2244
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2235.699999988079,
+              "media": 1.974375,
+              "end": 2235.699999988079
+            }
+          ],
+          "block": {
+            "start": 835.8000000119209,
+            "end": 1635.800000011921,
+            "before": 0.574117,
+            "after": 0.574117
+          },
+          "frameSamples": 107,
+          "eligibilitySamples": 106,
+          "maximumMediaFrameGapSeconds": 0.8021910000000001,
+          "maximumMediaEligibilityGapSeconds": 0.816249
+        },
+        {
+          "engine": "chromium",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+          "media": {
+            "time": 3.363955,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.345711,
+              "wall": 1596.8999999761581
+            },
+            {
+              "id": "middle",
+              "time": 1.359187,
+              "wall": 1610.3999999761581
+            },
+            {
+              "id": "sentinel",
+              "time": 1.993649,
+              "wall": 2244.599999964237
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 992.3000000119209,
+              "media": 0.74129,
+              "end": 1592.5999999642372
+            },
+            {
+              "id": "middle",
+              "start": 1609.5,
+              "media": 1.358197,
+              "end": 1609.5
+            },
+            {
+              "id": "sentinel",
+              "start": 2243.5,
+              "media": 1.992495,
+              "end": 2243.5
+            }
+          ],
+          "block": null,
+          "frameSamples": 178,
+          "eligibilitySamples": 177,
+          "maximumMediaFrameGapSeconds": 0.01941499999999996,
+          "maximumMediaEligibilityGapSeconds": 0.019411999999999985
+        },
+        {
+          "engine": "firefox",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.012673,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.419901,
+              "wall": 1776
+            },
+            {
+              "id": "sentinel",
+              "time": 2.038248,
+              "wall": 2358
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1772,
+              "media": 0.812918,
+              "end": 1772
+            },
+            {
+              "id": "first",
+              "start": 1773,
+              "media": 0.812918,
+              "end": 1773
+            },
+            {
+              "id": "sentinel",
+              "start": 2356,
+              "media": 2.038248,
+              "end": 2356
+            }
+          ],
+          "block": {
+            "start": 972,
+            "end": 1772,
+            "before": 0.651628,
+            "after": 0.651628
+          },
+          "frameSamples": 109,
+          "eligibilitySamples": 123,
+          "maximumMediaFrameGapSeconds": 0.647267,
+          "maximumMediaEligibilityGapSeconds": 0.647267
+        },
+        {
+          "engine": "firefox",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.179478,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.126344,
+              "wall": 1428
+            },
+            {
+              "id": "sentinel",
+              "time": 1.792579,
+              "wall": 2078
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 824,
+              "media": 0.542861,
+              "end": 1425
+            },
+            {
+              "id": "first",
+              "start": 825,
+              "media": 0.542861,
+              "end": 1427
+            },
+            {
+              "id": "sentinel",
+              "start": 2075,
+              "media": 1.792579,
+              "end": 2075
+            }
+          ],
+          "block": null,
+          "frameSamples": 180,
+          "eligibilitySamples": 165,
+          "maximumMediaFrameGapSeconds": 0.04457699999999987,
+          "maximumMediaEligibilityGapSeconds": 0.625421
+        },
+        {
+          "engine": "firefox",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+          "media": {
+            "time": 3.045951,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.467404,
+              "wall": 1778
+            },
+            {
+              "id": "sentinel",
+              "time": 2.036053,
+              "wall": 2360
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1774,
+              "media": 0.780306,
+              "end": 1774
+            },
+            {
+              "id": "sentinel",
+              "start": 2358,
+              "media": 2.036053,
+              "end": 2358
+            }
+          ],
+          "block": {
+            "start": 973,
+            "end": 1773,
+            "before": 0.658945,
+            "after": 0.658945
+          },
+          "frameSamples": 109,
+          "eligibilitySamples": 109,
+          "maximumMediaFrameGapSeconds": 0.6870979999999999,
+          "maximumMediaEligibilityGapSeconds": 0.6870979999999999
+        },
+        {
+          "engine": "firefox",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+          "media": {
+            "time": 3.391447,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.405672,
+              "wall": 1708
+            },
+            {
+              "id": "middle",
+              "time": 1.405672,
+              "wall": 1725
+            },
+            {
+              "id": "sentinel",
+              "time": 2.052401,
+              "wall": 2358
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1105,
+              "media": 0.791406,
+              "end": 1706
+            },
+            {
+              "id": "middle",
+              "start": 1723,
+              "media": 1.405672,
+              "end": 1723
+            },
+            {
+              "id": "sentinel",
+              "start": 2357,
+              "media": 2.052401,
+              "end": 2357
+            }
+          ],
+          "block": null,
+          "frameSamples": 178,
+          "eligibilitySamples": 178,
+          "maximumMediaFrameGapSeconds": 0.044718000000000035,
+          "maximumMediaEligibilityGapSeconds": 0.044718000000000035
+        },
+        {
+          "engine": "webkit",
+          "implementation": "published",
+          "scenario": "main-thread-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.4566463,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 1.8960211,
+              "wall": 2919
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 2903,
+              "media": 1.8802502,
+              "end": 2903
+            },
+            {
+              "id": "sentinel",
+              "start": 2905,
+              "media": 1.8823127,
+              "end": 2905
+            }
+          ],
+          "block": {
+            "start": 1524,
+            "end": 2324,
+            "before": 0.5010625,
+            "after": 1.3006043
+          },
+          "frameSamples": 60,
+          "eligibilitySamples": 80,
+          "maximumMediaFrameGapSeconds": 0.8454376000000001,
+          "maximumMediaEligibilityGapSeconds": 0.8464377000000001
+        },
+        {
+          "engine": "webkit",
+          "implementation": "published",
+          "scenario": "async-visibility-gap",
+          "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+          "media": {
+            "time": 3.6815422,
+            "width": 640
+          },
+          "missing": [
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.3927085,
+              "wall": 2420
+            },
+            {
+              "id": "sentinel",
+              "time": 2.0507294,
+              "wall": 3078
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1789,
+              "media": 0.7622917,
+              "end": 2403
+            },
+            {
+              "id": "first",
+              "start": 1789,
+              "media": 0.7624167,
+              "end": 2405
+            },
+            {
+              "id": "sentinel",
+              "start": 3063,
+              "media": 2.0356044,
+              "end": 3063
+            }
+          ],
+          "block": null,
+          "frameSamples": 82,
+          "eligibilitySamples": 75,
+          "maximumMediaFrameGapSeconds": 0.07720839999999995,
+          "maximumMediaEligibilityGapSeconds": 0.6309376
+        },
+        {
+          "engine": "webkit",
+          "implementation": "candidate",
+          "scenario": "main-thread-gap",
+          "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+          "media": {
+            "time": 3.5506255,
+            "width": 640
+          },
+          "missing": [
+            "first",
+            "middle"
+          ],
+          "visible": [
+            {
+              "id": "sentinel",
+              "time": 2.0344586,
+              "wall": 3098
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "sentinel",
+              "start": 3082,
+              "media": 2.0189169,
+              "end": 3082
+            }
+          ],
+          "block": {
+            "start": 1702,
+            "end": 2502,
+            "before": 0.6387917,
+            "after": 1.4385418
+          },
+          "frameSamples": 59,
+          "eligibilitySamples": 58,
+          "maximumMediaFrameGapSeconds": 0.8430209000000001,
+          "maximumMediaEligibilityGapSeconds": 0.8299168000000001
+        },
+        {
+          "engine": "webkit",
+          "implementation": "candidate",
+          "scenario": "async-visibility-gap",
+          "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+          "media": {
+            "time": 3.6306464,
+            "width": 640
+          },
+          "missing": [],
+          "visible": [
+            {
+              "id": "first",
+              "time": 1.2361668,
+              "wall": 2249
+            },
+            {
+              "id": "middle",
+              "time": 1.2513126,
+              "wall": 2264
+            },
+            {
+              "id": "sentinel",
+              "time": 1.8511877,
+              "wall": 2864
+            }
+          ],
+          "callbacks": [
+            {
+              "id": "first",
+              "start": 1622,
+              "media": 0.6091458,
+              "end": 2233
+            },
+            {
+              "id": "middle",
+              "start": 2249,
+              "media": 1.2367501,
+              "end": 2249
+            },
+            {
+              "id": "sentinel",
+              "start": 2848,
+              "media": 1.8350211,
+              "end": 2848
+            }
+          ],
+          "block": null,
+          "frameSamples": 75,
+          "eligibilitySamples": 74,
+          "maximumMediaFrameGapSeconds": 0.06285420000000008,
+          "maximumMediaEligibilityGapSeconds": 0.06293750000000009
+        }
+      ],
+      "lifetimes": [
+        {
+          "engine": "chromium",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310681755,
+                  "wall": 926.5
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310681755,
+                  "wall": 2428.5
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2428.600000023842,
+                  "clock": 1789310683257,
+                  "startedAt": 1789310681754,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.188303,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2440,
+                  "rest": -0.5149999999999999,
+                  "time": 2.199473
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.340111
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310684422,
+                  "wall": 857.1000000238419
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310684422,
+                  "wall": 2358.600000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2358.800000011921,
+                  "clock": 1789310685923,
+                  "startedAt": 1789310684421,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.188145,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2370.900000035763,
+                  "rest": -0.514,
+                  "time": 2.200535
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.339309
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 857.9000000357628
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2358.600000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2358.900000035763,
+                  "clock": 1789310688573,
+                  "startedAt": 1789310688573,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.19028,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3370.5,
+                  "rest": -0.01200000000000077,
+                  "time": 3.202508
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.34048
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 844.2000000476837
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2345.400000035763
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2345.7000000476837,
+                  "clock": 1789310692208,
+                  "startedAt": 1789310692208,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.187632,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3356.900000035763,
+                  "rest": -0.011000000000000718,
+                  "time": 3.198143
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.335761
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310681806,
+                  "wall": 977.1999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310681806,
+                  "wall": 2478.199999988079
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2478.399999976158,
+                  "clock": 1789310683307,
+                  "startedAt": 1789310681805,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.201384,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2490.699999988079,
+                  "rest": -0.514,
+                  "time": 2.213578
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.352864
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310684489,
+                  "wall": 880.5
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310684489,
+                  "wall": 2382.600000023842
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2383,
+                  "clock": 1789310685991,
+                  "startedAt": 1789310684488,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.206332,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2393.399999976158,
+                  "rest": -0.514,
+                  "time": 2.216587
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.337958
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 887.6999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2388.800000011921
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2388.900000035763,
+                  "clock": 1789310688658,
+                  "startedAt": 1789310688658,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.207755,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3399.100000023842,
+                  "rest": -0.010000000000000713,
+                  "time": 3.218142
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.341319
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "chromium",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 871.1999999880791
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2372.7999999523163
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2373.099999964237,
+                  "clock": 1789310692290,
+                  "startedAt": 1789310692290,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.191114,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3385.199999988079,
+                  "rest": -0.012000000000000663,
+                  "time": 3.202508
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.339863
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310726710,
+                  "wall": 1348
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310726710,
+                  "wall": 2848
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2848,
+                  "clock": 1789310728211,
+                  "startedAt": 1789310726710,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.202561,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2865,
+                  "rest": -0.5169999999999999,
+                  "time": 2.202561
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.485514
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310729429,
+                  "wall": 689
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310729429,
+                  "wall": 2189
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2190,
+                  "clock": 1789310730931,
+                  "startedAt": 1789310729428,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.960545,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2205,
+                  "rest": -0.5169999999999999,
+                  "time": 1.960545
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.127426
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 926
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2436
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2437,
+                  "clock": 1789310733778,
+                  "startedAt": 1789310733778,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.23423,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3440,
+                  "rest": -0.00400000000000067,
+                  "time": 3.211877
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.378465
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 973
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2498
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2499,
+                  "clock": 1789310737726,
+                  "startedAt": 1789310737726,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.245102,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3507,
+                  "rest": -0.009000000000000716,
+                  "time": 3.216582
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.419026
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310727094,
+                  "wall": 1394
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310727094,
+                  "wall": 2897
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2897,
+                  "clock": 1789310728595,
+                  "startedAt": 1789310727093,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.209869,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2911,
+                  "rest": -0.5169999999999999,
+                  "time": 2.209869
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.411424
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310730048,
+                  "wall": 946
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310730048,
+                  "wall": 2465
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2466,
+                  "clock": 1789310731568,
+                  "startedAt": 1789310730046,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.243476,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2477,
+                  "rest": -0.5329999999999999,
+                  "time": 2.243476
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.365025
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 693
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2196
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2196,
+                  "clock": 1789310734152,
+                  "startedAt": 1789310734152,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.965418,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3210,
+                  "rest": -0.013000000000000775,
+                  "time": 2.959995
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.161401
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "firefox",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1032
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2551
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2551,
+                  "clock": 1789310738272,
+                  "startedAt": 1789310738272,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.243267,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3564,
+                  "rest": -0.013000000000000775,
+                  "time": 3.253468
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.377143
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310774371,
+                  "wall": 1296
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310774371,
+                  "wall": 2821
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2821,
+                  "clock": 1789310775896,
+                  "startedAt": 1789310774370,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0179169,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2837,
+                  "rest": -0.542,
+                  "time": 2.0337502
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4498336
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310777978,
+                  "wall": 1247
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310777978,
+                  "wall": 2765
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2765,
+                  "clock": 1789310779496,
+                  "startedAt": 1789310777977,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0440836,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2780,
+                  "rest": -0.534,
+                  "time": 2.0591253
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4725837
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1134
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2659
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2659,
+                  "clock": 1789310783033,
+                  "startedAt": 1789310783032,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 1.9588544,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3703,
+                  "rest": -0.044000000000000275,
+                  "time": 3.0025213
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4496463
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "published core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "published",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1237
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2766
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2767,
+                  "clock": 1789310787798,
+                  "startedAt": 1789310787798,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 2.0242502,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3800,
+                  "rest": -0.03300000000000007,
+                  "time": 3.0573338
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4472505
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / published plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 0,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310775237,
+                  "wall": 1298
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310775237,
+                  "wall": 2818
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2818,
+                  "clock": 1789310776757,
+                  "startedAt": 1789310775236,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0278961,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2819,
+                  "rest": -0.522,
+                  "time": 2.0287086
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.4789378
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / published plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "published",
+            "mode": 1,
+            "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1789310779006,
+                  "wall": 1364
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1789310779006,
+                  "wall": 2894
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2895,
+                  "clock": 1789310780537,
+                  "startedAt": 1789310779006,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9855419,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 2925,
+                  "rest": -0.5609999999999999,
+                  "time": 2.0151044
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 2.3875212
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / candidate plugin / mode 0: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 0,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1299
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2829
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2830,
+                  "clock": 1789310784215,
+                  "startedAt": 1789310784214,
+                  "rest": 1,
+                  "mode": 0,
+                  "time": 2.0701669,
+                  "transition": "transform 1s linear"
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3872,
+                  "rest": -0.042000000000000315,
+                  "time": 3.1119796
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.4830213
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        },
+        {
+          "engine": "webkit",
+          "title": "candidate core / candidate plugin / mode 1: Worker waiting does not consume visible lifetime",
+          "data": {
+            "core": "candidate",
+            "implementation": "candidate",
+            "mode": 1,
+            "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816",
+            "evidence": {
+              "posts": [
+                {
+                  "id": 1,
+                  "wall": 1244
+                }
+              ],
+              "replies": [
+                {
+                  "id": 1,
+                  "wall": 2767
+                }
+              ],
+              "visible": [
+                {
+                  "wall": 2768,
+                  "clock": 1789310788893,
+                  "startedAt": 1789310788892,
+                  "rest": 1,
+                  "mode": 1,
+                  "time": 1.9593544,
+                  "transition": ""
+                }
+              ],
+              "recycled": [
+                {
+                  "wall": 3785,
+                  "rest": -0.0180000000000001,
+                  "time": 2.9761254
+                }
+              ],
+              "video": {
+                "width": 640,
+                "time": 3.3897296
+              }
+            },
+            "scope": "Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation."
+          }
+        }
+      ]
+    }
+  ],
+  "browserScope": "Each format: 66 existing scheduler cases across two cores/three engines, 24 delayed real Worker lifetime cases across two cores/old-new plugins/two modes/three engines, and 12 native timing cases on the candidate core. Timing contains six CPU-block diagnostics, not no-loss acceptance; async candidate cases require all rows and serial callbacks, fixed published cases retain the missing middle row.",
+  "failures": [
+    {
+      "file": "refactor/.cache/danmuku12-unit-red.log",
+      "sha256": "d85646c0c2ca1a41ef9a8d877627134fc3273e1095f1cab81d9cb74a4416e062"
+    },
+    {
+      "file": "refactor/.cache/danmuku12-browser-red.json",
+      "sha256": "3f826a084ea3e2d46168d19a491bd260343e2253afacf76fe2109f093277d882"
+    },
+    {
+      "file": "refactor/.cache/danmuku12-unit-green.log",
+      "sha256": "b75f51e7a688a5cff690ae3ccfb02dc644bef9d3214d08fe8f2ca206b19a7731"
+    }
+  ],
+  "failureExplanation": "Controlled red: three actual defects (sampling RAF absent, missed middle row, delayed visible expiry). Native red: candidate missed middle plus an invalid serial assertion against the published known duplicate play/playing loop; serial assertion limited to candidate, published missing-middle assertion retained. First integration: 65/66 passed; one historical internal RAF=0 expectation updated to RAF=1 with explicit no-second-callback assertion.",
+  "checks": [
+    {
+      "file": "refactor/.cache/danmuku12-build.log",
+      "sha256": "9cdfd48e53a95e7adf737af971d647323c9d4ee033ef79b09ac4dbd69063a013"
+    },
+    {
+      "file": "refactor/.cache/danmuku12-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/danmuku12-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "refactor/.cache/danmuku12-toolchain.log",
+      "sha256": "d06816d9ce41e9e39a30fc309a3473b3040bfe87a31a019608ac09af0c6c59e0"
+    }
+  ],
+  "fingerprints": [
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/scheduler.ts",
+      "sha256": "8b5623a34e81253f08633c0240cf632e23f890b76ebfe96e21da23597cd35447"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/src/scheduling-buffer.ts",
+      "sha256": "0a7eaf5229adcc74a8d9814fbc9a61cb3990045b3e99ac4ad9dc3f65fb9aab2e"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/ARCHITECTURE.md",
+      "sha256": "019b656424a658abe0b4f71a5d017867f0dd480b7eb0c16822fe52e1518b98b6"
+    },
+    {
+      "file": "test/danmuku-scheduler.test.js",
+      "sha256": "a4df3055056561357d6acc6c73b1513b86ef81d6b5b8a9bb8d0a2d5c2ab6679b"
+    },
+    {
+      "file": "test/browser/danmuku-timing-diagnostic.spec.js",
+      "sha256": "54cc56075a879821adea7f18ef70e5220a7b5a808529e04edeaedcbe3e06cbc8"
+    },
+    {
+      "file": "test/browser/danmuku-scheduler.spec.js",
+      "sha256": "ee67bc0f204f1f9090859ed9d1d0cfecc545129fff6278d2f17140b009390519"
+    },
+    {
+      "file": "test/browser/danmuku-lifetime.spec.js",
+      "sha256": "99ad1f1be473035f86549290951856fb00b035d88a50ac4b675fd97bebe1280e"
+    },
+    {
+      "file": "docs/uncompiled/artplayer-plugin-danmuku/index.js",
+      "sha256": "1be701cfcc7053839b08b0bd85f7d98bf47d73782fe8a3305e1971e97a3cbafb"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+      "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-danmuku.js",
+      "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+      "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-danmuku.legacy.js",
+      "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+      "sha256": "356406cda2e3e47376a87c939b76fb7c55f86d7c3829127da625b01241c67a2f"
+    },
+    {
+      "file": "docs/compiled/artplayer-plugin-danmuku.mjs",
+      "sha256": "356406cda2e3e47376a87c939b76fb7c55f86d7c3829127da625b01241c67a2f"
+    }
+  ],
+  "remaining": [
+    "PKG-DANMUKU-07 sustained native load/resource and Mask boundary acceptance",
+    "DANMUKU-LOAD-01",
+    "PKG-DANMUKU-08",
+    "PKG-DANMUKU-09",
+    "Actual device and release review gates"
+  ]
+}

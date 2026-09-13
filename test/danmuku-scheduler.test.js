@@ -93,9 +93,17 @@ test(`${prefix}: repeated play/playing and direct starts preserve events and int
   env.destroy()
 })
 
-test(`${prefix}: additional starts while beforeVisible is pending do not schedule an overlapping frame`, async () => {
+test(`${prefix}: additional starts keep one sampling frame without overlapping beforeVisible or Worker dispatch`, async (t) => {
   const gate = deferred()
-  const { env, plugin, owner } = await fixture({ beforeVisible: () => gate.promise })
+  let calls = 0
+  const { env, plugin, owner, worker } = await fixture({ beforeVisible: () => {
+    calls++
+    return gate.promise
+  } })
+  t.after(() => {
+    env.destroy()
+    gate.resolve(true)
+  })
   await plugin.emit({ text: 'waiting callback', time: 10 })
   env.art.playing = true
   owner.start()
@@ -103,10 +111,279 @@ test(`${prefix}: additional starts while beforeVisible is pending do not schedul
   await env.flush()
   owner.start()
   env.art.emit('video:playing')
-  assert.equal(env.frames.size, 0, 'The existing asynchronous frame owns this generation')
-  env.destroy()
+  assert.equal(env.frames.size, 1, 'One sampler continues while the single dispatcher waits')
+  assert.equal(calls, 1)
+  assert.equal(worker.messages.length, 0)
+  env.frame()
+  await env.flush()
+  assert.equal(env.frames.size, 1)
+  assert.equal(calls, 1, 'Sampling and additional starts cannot duplicate the pending callback')
+  assert.equal(worker.messages.length, 0, 'No placement starts before the pending callback allows it')
+})
+
+test(`${prefix}: sampling dispatcher retains a middle timestamp while the first callback waits`, async (t) => {
+  const gate = deferred()
+  const calls = []
+  const { env, plugin, owner, worker } = await fixture({ beforeVisible: (row) => {
+    calls.push(row.text)
+    return row.text === 'first' ? gate.promise : true
+  } }, { automatic: true })
+  t.after(() => {
+    env.destroy()
+    gate.resolve(true)
+  })
+  await plugin.load([{ text: 'first', time: 10, mode: 1 }, { text: 'middle', time: 10.5, mode: 1 }])
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  env.tick(500)
+  env.art.currentTime = 10.5
+  // Drive only callbacks the implementation actually scheduled; the old single
+  // asynchronous frame has none here and consequently loses this timestamp.
+  if (env.frames.size)
+    env.frame()
+  await env.flush()
+  if (env.frames.size)
+    env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first'], 'Sampling must not run another user callback concurrently')
+  assert.equal(worker.messages.length, 0)
+  assert.equal(owner.queue[1].$state, 'wait', 'Sampling must not rewrite the public state pool')
+  env.tick(500)
+  env.art.currentTime = 11
+  if (env.frames.size)
+    env.frame()
+  await env.flush()
+  assert.equal(owner.readys.includes(owner.queue[1]), false, 'The public getter retains its current-time window')
   gate.resolve(true)
   await env.flush()
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first', 'middle'], 'The observed middle timestamp must be dispatched exactly once after the first batch')
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first', 'middle'])
+  assert.equal(worker.messages.length, 2)
+  assert.equal(new Set(worker.messages.map(item => item.message.id)).size, 2)
+})
+
+test(`${prefix}: sampling dispatcher expires a visible row while another callback remains pending`, async (t) => {
+  const gate = deferred()
+  const { env, plugin, owner, worker } = await fixture({ speed: 1, beforeVisible: row => row.text === 'blocked' ? gate.promise : true }, { automatic: true })
+  t.after(() => {
+    env.destroy()
+    gate.resolve(false)
+  })
+  await plugin.emit({ text: 'visible', time: 10, mode: 1 })
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  const row = owner.queue[0]
+  const ref = row.$ref
+  assert.equal(row.$state, 'emit')
+  await plugin.emit({ text: 'blocked', time: 10.05, mode: 1 })
+  env.tick(50)
+  env.art.currentTime = 10.05
+  env.frame()
+  await env.flush()
+  assert.equal(worker.messages.length, 1)
+  env.tick(1000)
+  env.art.currentTime = 11.05
+  if (env.frames.size)
+    env.frame()
+  await env.flush()
+  assert.equal(row.$state, 'wait', 'A different pending hook must not extend an already visible row lifetime')
+  assert.equal(row.$ref, null)
+  assert.equal(ref.style.visibility, 'hidden')
+  assert.deepEqual(Array.from(owner.$refs), [ref])
+  assert.equal(worker.messages.length, 1, 'The unresolved callback still owns the only dispatcher')
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['visible'])
+})
+
+test(`${prefix}: sampling dispatcher discards buffered observations on lifecycle invalidation`, async (t) => {
+  for (const action of ['seek', 'hide', 'stop', 'reset', 'destroy']) {
+    await t.test(action, async (t) => {
+      const gate = deferred()
+      const calls = []
+      const { env, plugin, owner, worker } = await fixture({ beforeVisible: (row) => {
+        calls.push(row.text)
+        return row.text === 'first' ? gate.promise : true
+      } }, { automatic: true })
+      t.after(() => {
+        if (!env.art.isDestroy)
+          env.destroy()
+        gate.resolve(true)
+      })
+      await plugin.load([{ text: 'first', time: 10, mode: 1 }, { text: 'buffered', time: 10.5, mode: 1 }])
+      env.art.playing = true
+      owner.start()
+      env.frame()
+      await env.flush()
+      env.tick(500)
+      env.art.currentTime = 10.5
+      if (env.frames.size)
+        env.frame()
+      await env.flush()
+      env.tick(500)
+      env.art.currentTime = 11
+      if (action === 'destroy')
+        env.destroy()
+      else owner[action]()
+      gate.resolve(true)
+      await env.flush()
+      if (env.frames.size)
+        env.frame()
+      await env.flush()
+      assert.deepEqual(calls, ['first'])
+      assert.equal(worker.messages.length, 0, 'Invalidated observations must not allocate or place a late row')
+      assert.equal(output(env, 'visible').length, 0)
+      if (action !== 'destroy') {
+        if (action === 'hide')
+          owner.show()
+        owner.start()
+        await plugin.emit({ text: 'fresh', time: 11, mode: 1 })
+        env.frame()
+        await env.flush()
+        assert.deepEqual(calls, ['first', 'fresh'])
+        assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['fresh'])
+        assert.equal(worker.messages.length, 1)
+      }
+    })
+  }
+})
+
+test(`${prefix}: sampling dispatcher does not let a full ready track starve a later wait row in its batch`, async (t) => {
+  const calls = []
+  const { env, plugin, owner, worker } = await fixture({ margin: [10, 10], beforeVisible: (row) => {
+    calls.push(row.text)
+    return true
+  } }, { automatic: true })
+  t.after(() => env.destroy())
+  owner.$player.clientHeight = 40
+  await plugin.emit({ text: 'occupant', time: 10, mode: 1 })
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  await plugin.emit({ text: 'full-ready', time: 10, mode: 1 })
+  env.frame()
+  await env.flush()
+  assert.equal(owner.queue[1].$state, 'ready', 'The real positioning algorithm must defer the occupied track')
+  await plugin.emit({ text: 'later-wait', time: 10, mode: 2 })
+  const previousCalls = calls.length
+  const requests = worker.messages.length
+  env.frame()
+  await env.flush()
+  await env.flush()
+  assert.deepEqual(calls.slice(previousCalls), ['full-ready', 'later-wait'])
+  assert.equal(worker.messages.length, requests + 2)
+  assert.equal(owner.queue[1].$state, 'ready')
+  assert.equal(owner.queue[2].$state, 'emit')
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['occupant', 'later-wait'])
+})
+
+test(`${prefix}: an old finalizer preserves the new generation dispatcher and its sampled pending row`, async (t) => {
+  const oldGate = deferred()
+  const newGate = deferred()
+  const calls = []
+  let firstCalls = 0
+  const { env, plugin, owner, worker } = await fixture({ beforeVisible: (row) => {
+    calls.push(row.text)
+    if (row.text === 'first')
+      return ++firstCalls === 1 ? oldGate.promise : newGate.promise
+    return true
+  } }, { automatic: true })
+  t.after(() => {
+    env.destroy()
+    oldGate.resolve(true)
+    newGate.resolve(true)
+  })
+  await plugin.load([{ text: 'first', time: 10, mode: 1 }, { text: 'new-middle', time: 10.5, mode: 1 }])
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first'])
+
+  owner.seek()
+  // These are actually queued RAF callbacks. Run the new generation and sample
+  // its next row before yielding to the cancelled old dispatcher's microtasks.
+  env.frame()
+  env.tick(500)
+  env.art.currentTime = 10.5
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first', 'first'])
+  assert.equal(worker.messages.length, 0)
+  env.tick(500)
+  env.art.currentTime = 11
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first', 'first'], 'The old finalizer must not release the new pending callback ownership')
+  assert.equal(worker.messages.length, 0)
+
+  newGate.resolve(true)
+  await env.flush()
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first', 'first', 'new-middle'])
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first', 'new-middle'])
+  assert.equal(worker.messages.length, 2)
+  oldGate.resolve(true)
+  await env.flush()
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first', 'new-middle'])
+  assert.equal(worker.messages.length, 2)
+})
+
+test(`${prefix}: sampling dispatcher prioritizes ready over a wait row captured in an earlier frame`, async (t) => {
+  const gate = deferred()
+  const calls = []
+  const { env, plugin, owner, worker } = await fixture({ margin: [10, 10], beforeVisible: (row) => {
+    calls.push(row.text)
+    return row.text === 'blocking' ? gate.promise : true
+  } }, { automatic: true })
+  t.after(() => {
+    env.destroy()
+    gate.resolve(false)
+  })
+  owner.$player.clientHeight = 40
+  await plugin.emit({ text: 'occupant', time: 10, mode: 1 })
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  await plugin.emit({ text: 'full-ready', time: 10, mode: 1 })
+  env.frame()
+  await env.flush()
+  assert.equal(owner.queue[1].$state, 'ready')
+
+  await plugin.emit({ text: 'blocking', time: 10.3, mode: 2 })
+  env.tick(300)
+  env.art.currentTime = 10.3
+  env.frame()
+  await env.flush()
+  await env.flush()
+  assert.equal(calls.at(-1), 'blocking')
+  await plugin.emit({ text: 'earlier-captured-wait', time: 10.8, mode: 2 })
+  env.tick(500)
+  env.art.currentTime = 10.8
+  env.frame()
+  await env.flush()
+  assert.equal(calls.at(-1), 'blocking', 'Sampling must preserve the active batch until its callback settles')
+  assert.equal(owner.queue[3].$state, 'wait')
+
+  gate.resolve(false)
+  await env.flush()
+  const previousCalls = calls.length
+  const previousRequests = worker.messages.length
+  env.frame()
+  await env.flush()
+  await env.flush()
+  assert.deepEqual(calls.slice(previousCalls), ['full-ready', 'earlier-captured-wait'], 'The next batch retains ready priority even when wait was captured first')
+  assert.equal(worker.messages.length, previousRequests + 2)
+  assert.equal(owner.queue[1].$state, 'ready')
+  assert.equal(owner.queue[3].$state, 'emit')
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['occupant', 'earlier-captured-wait'])
 })
 
 for (const action of ['pause', 'destroy', 'reset', 'replace', 'seek', 'hide']) {
@@ -348,7 +625,9 @@ test(`${prefix}: configuring the same beforeVisible callback preserves the pendi
   const configurations = output(env, 'config').length
   plugin.config({ beforeVisible })
   assert.equal(output(env, 'config').length, configurations)
-  assert.equal(env.frames.size, 0)
+  assert.equal(env.frames.size, 1)
+  await env.frame()
+  assert.equal(calls, 1, 'Sampling cannot start a second callback while the first is pending')
   gate.resolve(true)
   await env.flush()
   assert.equal(calls, 1)

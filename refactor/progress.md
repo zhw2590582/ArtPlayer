@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-DANMUKU-12 持续采样与串行放置完成
+
+异步beforeVisible/Worker等待期间继续原生RAF采样和可见寿命维护，以内部身份
+buffer保留真实采到的行；公开readys窗口和状态不改，callback/放置仍串行。
+取消清空待处理引用，旧finally不清新代buffer；同批不重排，后续批保持ready优先。
+完整源码264项、main/legacy各68项单测，以及三格式各102共306项浏览器通过，
+无重试/跳过；后者含CPU阻塞诊断，不能计作任意负载无漏弹幕证明。
+严格分包TS、lint、构建和工具链检查通过。红测、历史双循环差异、内部RAF断言
+更新及准确验证范围见[变更](changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md)
+和[证据](baselines/danmuku-frame-sampling-validation.json)。
+231项：148 done、15 doing、68 todo。关闭DANMUKU-SAMPLING-01；07恢复doing，
+DANMUKU-LOAD-01保留，继续真实持续负载、资源和Mask边界，不跳过后续插件迁移。
+本任务独立本地commit；未推送、未发布。
+
 ## PKG-DANMUKU-11 Worker 等待寿命修复
 
 07负载审查独立发现并复现：隐藏Worker等待超过speed时，刚显示的弹幕下一帧就被

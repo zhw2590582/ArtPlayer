@@ -5346,6 +5346,27 @@
         "refactor/changes/2026-09-13-PKG-DANMUKU-11-visible-lifetime.md"
       ],
       "resolutionRationale": "Three exact controlled modes and real delayed Worker/native video regression establish full visible lifetime, with the unchanged published defect retained and existing scheduling/pause/cancellation checks green."
+    },
+    {
+      "id": "DANMUKU-SAMPLING-01",
+      "title": "Serial asynchronous placement stops native frame eligibility sampling and delays existing visible expiry",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-DANMUKU-12"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md",
+        "test/browser/danmuku-timing-diagnostic.spec.js",
+        "refactor/baselines/danmuku-frame-sampling-validation.json"
+      ],
+      "compatibleResolution": "Keep original per-frame readys semantics and serial callbacks, buffer actually sampled rows by identity, expire visible rows independently, and cancel all buffered work on lifecycle invalidation.",
+      "closureCriteria": "Controlled ordering/expiry/cancellation tests and native media/RAF evidence show sampled rows survive asynchronous waits without parallel callbacks or stale lifecycle emissions.",
+      "resolutionEvidence": [
+        "refactor/baselines/danmuku-frame-sampling-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-12-frame-sampling.md"
+      ],
+      "resolutionRationale": "Controlled red/green tests prove continued observation and expiry with serial callback/Worker ownership, lifecycle clearing and ready priority. Three-format native media/RAF and existing two-core scheduling/lifetime tests pass. CPU-blocked unobserved timestamps and sustained load remain separately tracked."
     }
   ]
 }
