@@ -110,10 +110,6 @@ export class Capture {
     }
   }
 
-  volume(value: number) {
-    this.graph?.volume(value)
-  }
-
   stop(terminal = false) {
     this.terminal ||= terminal
     this.pause()

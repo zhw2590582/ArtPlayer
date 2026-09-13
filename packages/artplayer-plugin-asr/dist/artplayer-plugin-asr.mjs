@@ -109,10 +109,6 @@ class AudioGraph {
     source.connect(gain);
     gain.connect(context.destination);
   }
-  volume(value) {
-    if (this.gain)
-      this.gain.gain.value = value;
-  }
   disconnect() {
     if (this.recorder) {
       this.recorder.port.onmessage = null;
@@ -313,9 +309,6 @@ class Capture {
         this.pending = void 0;
     }
   }
-  volume(value) {
-    this.graph?.volume(value);
-  }
   stop(terminal = false) {
     this.terminal || (this.terminal = terminal);
     this.pause();
@@ -364,21 +357,18 @@ function artplayerPluginAsr(option = {}) {
       throw new Error("Could not create ASR subtitle layer");
     const subtitles = createSubtitles(layer, length, autoHideTimeout);
     const capture = new Capture(art.video, { interval, sampleRate, onAudioChunk }, subtitles.append);
-    const volume = () => capture.volume(art.volume);
     const play = () => capture.start();
     const pause = () => capture.pause();
     const restart = () => capture.restart();
     const stop = () => capture.stop();
     const destroy = () => {
       subtitles.destroy();
-      art.off("video:volumechange", volume);
       art.off("play", play);
       art.off("pause", pause);
       art.off("restart", restart);
       art.off("destroy", destroy);
       return capture.stop(true);
     };
-    art.on("video:volumechange", volume);
     art.on("play", play);
     art.on("pause", pause);
     art.on("restart", restart);

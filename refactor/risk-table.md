@@ -209,3 +209,4 @@
 | ASR-TYPE-01 | resolved / 已复现 | ASR declarations omit asynchronous stop and callback text results | PKG-ASR-04 |
 | ASR-CHUNK-01 | resolved / 已复现 | ASR tick discards underfilled chunks and overrun samples in source | PKG-ASR-02, PKG-ASR-03 |
 | ASR-LIFE-01 | resolved / 已复现 | ASR partial initialization, pause resume and stale callback cleanup need controlled evidence | PKG-ASR-02, PKG-ASR-03, PKG-ASR-05 |
+| ASR-VOLUME-01 | resolved / 已复现 | ASR applies media volume twice and squares playback amplitude | PKG-ASR-07 |

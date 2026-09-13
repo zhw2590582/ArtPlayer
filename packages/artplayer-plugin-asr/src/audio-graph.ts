@@ -111,11 +111,6 @@ export class AudioGraph {
     gain.connect(context.destination)
   }
 
-  volume(value: number) {
-    if (this.gain)
-      this.gain.gain.value = value
-  }
-
   disconnect() {
     if (this.recorder) {
       this.recorder.port.onmessage = null

@@ -2701,7 +2701,8 @@
       ],
       "dependsOn": [
         "PKG-ASR-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-ASR-07"
       ],
       "status": "todo",
       "risk": "H",
@@ -4535,6 +4536,25 @@
       "evidence": [
         "changes/2026-09-13-ENG-12-library-public.md",
         "baselines/library-public-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-ASR-07",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "修复原生播放音量二次衰减",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-04"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "移除重复音量应用；保留新旧原生音频振幅对照及正式产物验收",
+      "acceptance": "Chromium/Firefox 两核心和 source/main/legacy 输出音量线性、静音和 stop/restart 正确；旧版平方衰减单独保留；单元/类型/真实安装通过，不代替设备验收",
+      "evidence": [
+        "changes/2026-09-13-PKG-ASR-07-playback-volume.md",
+        "baselines/asr-volume-validation.json"
       ]
     }
   ]

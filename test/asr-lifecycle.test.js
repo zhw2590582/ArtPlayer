@@ -404,16 +404,16 @@ test('ASR candidate public stop retains the current hide deadline and allows app
   assert.equal(source.connections.length, 0)
 })
 
-test('ASR candidate volume route survives stop and resume without resetting gain', async () => {
+test('ASR candidate playback does not apply media volume a second time before or after stop', async () => {
   const environment = create({}, { capture: false })
   await environment.emit('play')
   environment.art.volume = 0.25
   await environment.emit('video:volumechange')
   await environment.plugin.stop()
   const source = environment.nodes.find(node => node.kind === 'element')
-  assert.equal(source.connections[0].gain.value, 0.25)
+  assert.equal(source.connections[0].gain.value, 1)
   await environment.emit('play')
-  assert.equal(source.connections.find(node => node.kind === 'gain').gain.value, 0.25)
+  assert.equal(source.connections.find(node => node.kind === 'gain').gain.value, 1)
   await environment.emit('destroy')
   assert.equal(environment.contexts[0].closes, 1)
 })

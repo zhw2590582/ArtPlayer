@@ -4617,6 +4617,26 @@
         "test/asr-encoding.test.js"
       ],
       "resolutionRationale": "Candidate ownership/race regression tests pass, including retired-port delivery and module failure before binding video. Actual Chromium/Firefox source/main/legacy with both cores verify pause, source change, explicit stop/restart and final close. Direct media contexts deliberately remain player-owned until destroy; disposable stream contexts close on stop. General native fallback/volume/device acceptance remains ASR-05 and SDK-11, not claimed by this specific fix."
+    },
+    {
+      "id": "ASR-VOLUME-01",
+      "title": "ASR applies media volume twice and squares playback amplitude",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-ASR-07"
+      ],
+      "evidence": [
+        "test/browser/asr-playback.spec.js",
+        "refactor/baselines/asr-volume-validation.json"
+      ],
+      "compatibleResolution": "Retain public volume API and apply it once through the media element.",
+      "closureCriteria": "Native graph amplitude is linear across volume changes, mute and ASR stop/restart; old behavior is separately reproduced.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-ASR-07-playback-volume.md",
+        "refactor/baselines/asr-volume-validation.json"
+      ],
+      "resolutionRationale": "Native Chromium/Firefox source/main/legacy on published and candidate core pass relative-amplitude assertions. Formal 2.1 baseline retains squared amplitude. The fix does not establish physical device or captured-fallback acceptance."
     }
   ]
 }
