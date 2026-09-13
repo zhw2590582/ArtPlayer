@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-DANMUKU-02 历史错误和真实浏览器基线完成
+
+42项受控旧缺陷、48项原生Worker/视频/布局/设置及6项300弹幕负载观察通过；所有
+初轮失败留档。纠正两个测试假设，保留严格非重叠断言；首次测到的实际轨道重叠
+仍为DANMUKU-TRACK-01开放问题，后次48通过不能替代修复。短时heap/帧间隔不是
+长期内存或性能验收。见[变更](changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md)与[机器证据](baselines/danmuku-browser-validation.json)。
+根test:unit接入受控测试，浏览器文件由已有Playwright流程收集。
+228项：141 done、15 doing、72 todo。03开始输入/解析/config
+实施；04调度/05DOM和07负载稳定性继续。无推送或发布。
+
+
 ## PKG-MASK-02 生命周期与错误基线完成
 
 54项冻结历史测试及父代理复核通过，覆盖源码和两旧版本三格式的关键生命周期；

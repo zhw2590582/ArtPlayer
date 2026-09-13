@@ -3278,11 +3278,16 @@
         "ENG-05",
         "ENG-08"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "密集/稀疏弹幕、过滤/异步输入、seek/倍率/重载测试",
       "acceptance": "轨道选择、发射顺序、事件、内存和可视结果可重跑",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-13-PKG-DANMUKU-02-controlled-failures.md",
+        "baselines/danmuku-failures-validation.json",
+        "changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
+        "baselines/danmuku-browser-validation.json"
+      ]
     },
     {
       "id": "PKG-DANMUKU-03",
@@ -3295,7 +3300,7 @@
         "PKG-DANMUKU-02",
         "CORE-08"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "M",
       "deliverable": "bilibili/input/parser/config 的分层与取消",
       "acceptance": "旧格式、回调、过滤、追加/替换语义保持",

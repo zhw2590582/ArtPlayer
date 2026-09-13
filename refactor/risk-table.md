@@ -232,6 +232,7 @@
 | DANMUKU-CONFIG-01 | open / 已复现 | Danmuku JSON configuration comparison ignores a replacement filter function | PKG-DANMUKU-02, PKG-DANMUKU-03 |
 | DANMUKU-CLEANUP-01 | open / 已复现 | Danmuku removes a different resize callback and retains the settings lock timer on destroy | PKG-DANMUKU-02, PKG-DANMUKU-05 |
 | DANMUKU-TYPE-02 | open / 源码/产物事实 | Danmuku id, icons, Slider steps, heatmap points and partial configuration drift from declarations | PKG-DANMUKU-05, PKG-DANMUKU-06 |
-| DANMUKU-ASYNC-01 | open / 源码/产物事实 | Danmuku asynchronous input, worker replies and pending visibility have unverified failure and cancellation paths | PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05 |
-| DANMUKU-HEATMAP-01 | open / 源码/产物事实 | Danmuku heatmap sampling can become zero and points/instance ownership need browser validation | PKG-DANMUKU-02, PKG-DANMUKU-05 |
+| DANMUKU-ASYNC-01 | open / 已复现 | Danmuku asynchronous input, worker replies and pending visibility have unverified failure and cancellation paths | PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05 |
+| DANMUKU-HEATMAP-01 | open / 已复现 | Danmuku heatmap sampling can become zero and points/instance ownership need browser validation | PKG-DANMUKU-02, PKG-DANMUKU-05 |
 | DANMUKU-SOURCE-01 | open / 已复现 | Danmuku registry Git associations differ from releases and static icon provenance remains incomplete | PKG-DANMUKU-09 |
+| DANMUKU-TRACK-01 | open / 已复现 | Native simultaneous fixed Danmuku comments can overlap with duplicate start loops and repeated Worker IDs | PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-07 |

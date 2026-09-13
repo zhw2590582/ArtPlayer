@@ -5082,7 +5082,9 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
+        "refactor/baselines/danmuku-browser-validation.json"
       ],
       "compatibleResolution": "Track and release exact subscription and timer ownership across settings, renderer and instances.",
       "closureCriteria": "Repeated lifecycle and pending settings actions leave no owned subscriptions, timers or late DOM writes."
@@ -5107,7 +5109,7 @@
     {
       "id": "DANMUKU-ASYNC-01",
       "title": "Danmuku asynchronous input, worker replies and pending visibility have unverified failure and cancellation paths",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-DANMUKU-02",
@@ -5118,7 +5120,11 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/baselines/danmuku-failures-validation.json",
+        "test/danmuku-failures.test.js",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
+        "refactor/baselines/danmuku-browser-validation.json"
       ],
       "compatibleResolution": "Reproduce load ordering, Bilibili rejection and late worker/visibility paths before defining operation ownership.",
       "closureCriteria": "Failures settle, obsolete results cannot alter new queues or destroyed instances, and worker resources are released with browser evidence."
@@ -5126,7 +5132,7 @@
     {
       "id": "DANMUKU-HEATMAP-01",
       "title": "Danmuku heatmap sampling can become zero and points/instance ownership need browser validation",
-      "confirmation": "source-observed",
+      "confirmation": "reproduced",
       "status": "open",
       "owners": [
         "PKG-DANMUKU-02",
@@ -5135,7 +5141,11 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/baselines/danmuku-failures-validation.json",
+        "test/danmuku-failures.test.js",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
+        "refactor/baselines/danmuku-browser-validation.json"
       ],
       "compatibleResolution": "Use isolated timeout-protected reproduction for narrow dimensions, then define finite sampling and per-instance rendering.",
       "closureCriteria": "Narrow widths terminate, points/config behavior is explicit and multiple SVG/control instances remain independent."
@@ -5155,6 +5165,25 @@
       ],
       "compatibleResolution": "Use actual archive identity, preserve missing historical Git information and audit icon source/notice obligations.",
       "closureCriteria": "Candidate tarball paths, complete module forms and icon/source provenance are explicitly reviewed; unresolved history is not invented."
+    },
+    {
+      "id": "DANMUKU-TRACK-01",
+      "title": "Native simultaneous fixed Danmuku comments can overlap with duplicate start loops and repeated Worker IDs",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-04",
+        "PKG-DANMUKU-05",
+        "PKG-DANMUKU-07"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-02-browser-baseline.md",
+        "refactor/baselines/danmuku-browser-validation.json",
+        "test/browser/danmuku-baseline.spec.js",
+        "test/danmuku-failures.test.js"
+      ],
+      "compatibleResolution": "Enforce one owned scheduler loop and request correlation before claiming simultaneous native anti-overlap stability; keep strict track geometry tests.",
+      "closureCriteria": "Deterministic duplicate-loop/worker regressions and repeated candidate native simultaneous-load geometry pass without extra nodes or stale state; a later passing old snapshot alone does not close the race."
     }
   ]
 }

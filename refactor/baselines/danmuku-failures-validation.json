@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-02",
+  "scope": "Controlled historical failure subtask only; parent browser/clock/track/load baseline remains required",
+  "wholeTaskComplete": false,
+  "capturedAt": "2026-09-13T09:46:29.424Z",
+  "sourceCommit": "b0cfbfe3a09a84a295a257e45e4577847588d1cb",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "executable": "refactor/.cache/toolchains/node-v24.21.0-win-x64/node.exe"
+  },
+  "inputs": {
+    "test/helpers/danmuku.js": {
+      "sha256LF": "4e4420d6fe7198bd91c7a444f3f82740991181c3a1b2cb8b91b1db6fc759046a"
+    },
+    "test/danmuku-failures.test.js": {
+      "sha256LF": "1d7a4fc988f75239bc33453fe4334c17ab34420b58ae26a33d7fc7471be8bf8f"
+    },
+    "refactor/baselines/danmuku-release.json": {
+      "sha256LF": "82a0ab2e87f108cbb1d09ce1b6647cfefc896d974da1cb60b2668fded18a4b2f"
+    },
+    "refactor/scripts/danmuku-contract.mjs": {
+      "sha256LF": "8ca0996605cfbcd732030708bd67ecedff5018d2b7436fa7247de7bbb39d7573"
+    },
+    "refactor/changes/2026-09-13-PKG-DANMUKU-02-controlled-failures.md": {
+      "sha256LF": "e4373ee55bcd1f96987d6a647663bef9d646e7caa30ba9abf5416202b3873169"
+    }
+  },
+  "tests": {
+    "command": "node --test test/danmuku-failures.test.js",
+    "exitCode": 0,
+    "passed": 42,
+    "failed": 0,
+    "skipped": 0,
+    "log": "refactor/.cache/danmuku02-controlled.log",
+    "logSha256": "5e17966b1cd19f045b1d74d2ac065271ddbaeec44b7c5b533d625f3bd5b05670",
+    "implementationCount": 3,
+    "scenariosPerImplementation": 14
+  },
+  "lint": {
+    "command": "node node_modules/eslint/bin/eslint.js test/helpers/danmuku.js test/danmuku-failures.test.js",
+    "exitCode": 0,
+    "log": "refactor/.cache/danmuku02-controlled-lint.log",
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "execution": {
+    "source": "Immutable Git modules bundled only in memory; Worker import transport controlled, parser actual generated Blob executed in a VM",
+    "main": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+    "legacy": "62db96685c48b8573f0480cead6ac934b1d0382b9fdd0046d17d15d2549c56dc",
+    "validator": "Actual frozen published Artplayer 5.4.0 static validator",
+    "domAndClock": "Controlled, not a browser/layout/playback claim"
+  },
+  "isolatedProcesses": {
+    "directory": "refactor/.cache/danmuku02-controlled/run-9m9V8f",
+    "count": 15,
+    "rejectionProcesses": 9,
+    "rejectionFlags": "--unhandled-rejections=strict",
+    "observation": "uncaughtExceptionMonitor only; errors remain fatal with exit 1 and origin unhandledRejection",
+    "heatmapProcesses": 6,
+    "vmTimeoutMilliseconds": 100,
+    "processTimeoutMilliseconds": 3000,
+    "timeoutScope": "Expected VM timeout only for default sampling at width99; explicit sampling1 completes; outer process timeout fails the test",
+    "reports": [
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/frozen-source-beforeVisible-reject.json",
+        "sha256": "41748d818ad4b20b916140bec42b58687943dec7f1f7faa42e01ef7d57f76b42",
+        "implementation": "frozen-source",
+        "scenario": "beforeVisible-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"beforeVisible-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/frozen-source-fetch-reject.json",
+        "sha256": "8f05b57fe32605ff3233394304d7851760ed8335e7cb2cd4314e3399e54f6efa",
+        "implementation": "frozen-source",
+        "scenario": "fetch-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"fetch-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/frozen-source-heatmap-positive.json",
+        "sha256": "faf1edb2e96a800a7605db93e1266d3cb7304672609843f061ee09484251e841",
+        "implementation": "frozen-source",
+        "scenario": "heatmap-positive",
+        "status": 0,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "heatmap-ready\n{\"stage\":\"complete\"}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/frozen-source-heatmap-zero.json",
+        "sha256": "5d3f166e103cccd2e6ba6b81e6cbcf95454f11c2f15427b41763a73ff4099dd8",
+        "implementation": "frozen-source",
+        "scenario": "heatmap-zero",
+        "status": 0,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "heatmap-ready\n{\"stage\":\"bounded-timeout\",\"code\":\"ERR_SCRIPT_EXECUTION_TIMEOUT\"}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/frozen-source-text-reject.json",
+        "sha256": "261c3206b5180ff0e093b21a842e1bcd1dbcbccea637574c2a15416a75a706ba",
+        "implementation": "frozen-source",
+        "scenario": "text-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"text-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-legacy-beforeVisible-reject.json",
+        "sha256": "6f2c59251bcb37d029eac4e1edd68fb0bedd6499781f045a384e40e0bf2810ef",
+        "implementation": "published-5.3.0-legacy",
+        "scenario": "beforeVisible-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"beforeVisible-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-legacy-fetch-reject.json",
+        "sha256": "76e39a61d50e7a2722ae8fef16672764b91e28d6b8496b7bbd13cdf908418e13",
+        "implementation": "published-5.3.0-legacy",
+        "scenario": "fetch-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"fetch-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-legacy-heatmap-positive.json",
+        "sha256": "3b672dbb6af585b5f260ab3cf2ff294cf52026de192f64dcaa4202b4ae914dd3",
+        "implementation": "published-5.3.0-legacy",
+        "scenario": "heatmap-positive",
+        "status": 0,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "heatmap-ready\n{\"stage\":\"complete\"}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-legacy-heatmap-zero.json",
+        "sha256": "817e3f4f61eb3c5f19096e9a6cc7fe01d5fb4be6756e52ab305de2e51fef7485",
+        "implementation": "published-5.3.0-legacy",
+        "scenario": "heatmap-zero",
+        "status": 0,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "heatmap-ready\n{\"stage\":\"bounded-timeout\",\"code\":\"ERR_SCRIPT_EXECUTION_TIMEOUT\"}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-legacy-text-reject.json",
+        "sha256": "63c38503aad6fc9c0eafecc59e906c441827333d7fa102cae370511aadcd077b",
+        "implementation": "published-5.3.0-legacy",
+        "scenario": "text-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"text-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-main-beforeVisible-reject.json",
+        "sha256": "338d99844c2e05ac121beef206550a0f590c11e6b4caf3f702cce62c68d3c79d",
+        "implementation": "published-5.3.0-main",
+        "scenario": "beforeVisible-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"beforeVisible-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-main-fetch-reject.json",
+        "sha256": "97428c512f7eb613a1102532170b92a395f6845b83e03d4242084ffd69617a45",
+        "implementation": "published-5.3.0-main",
+        "scenario": "fetch-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"fetch-original\",\"settled\":false,\"errors\":0}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-main-heatmap-positive.json",
+        "sha256": "a44cbec41648ea681eb4745561e704596aa0c2e4bc4c4024084701434a0a0fe1",
+        "implementation": "published-5.3.0-main",
+        "scenario": "heatmap-positive",
+        "status": 0,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "heatmap-ready\n{\"stage\":\"complete\"}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-main-heatmap-zero.json",
+        "sha256": "5677249e3b1d26932b27ff8f2a8749c1c6e2d1e409ff090e6d3722ff0660255a",
+        "implementation": "published-5.3.0-main",
+        "scenario": "heatmap-zero",
+        "status": 0,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "heatmap-ready\n{\"stage\":\"bounded-timeout\",\"code\":\"ERR_SCRIPT_EXECUTION_TIMEOUT\"}\n"
+      },
+      {
+        "file": "refactor/.cache/danmuku02-controlled/run-9m9V8f/published-5.3.0-main-text-reject.json",
+        "sha256": "f56b3c1f0d07f269f92a23d7751fc18c6b0b881c5458ddf98a33cdfe1c2c5401",
+        "implementation": "published-5.3.0-main",
+        "scenario": "text-reject",
+        "status": 1,
+        "signal": null,
+        "errorCode": null,
+        "stdout": "{\"stage\":\"fatal\",\"origin\":\"unhandledRejection\",\"error\":\"text-original\",\"settled\":false,\"errors\":0}\n"
+      }
+    ]
+  },
+  "reproduced": [
+    {
+      "id": "DMK-FAIL-01",
+      "issue": "fetch rejection leaves public load pending and skips error event",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-02",
+      "issue": "response.text rejection leaves public load pending and skips error event",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-03",
+      "issue": "beforeVisible rejection becomes an ignored animation callback rejection",
+      "next": "PKG-DANMUKU-04"
+    },
+    {
+      "id": "DMK-FAIL-04",
+      "issue": "width99 default sampling0 does not advance heatmap loop; positive control succeeds",
+      "next": "PKG-DANMUKU-05"
+    },
+    {
+      "id": "DMK-FAIL-05",
+      "issue": "parser Worker error has no handler/settlement or destruction cleanup",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-06",
+      "issue": "actual generated parser ignores empty XML and load remains pending",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-07",
+      "issue": "successful parser does not revoke its Blob URL",
+      "next": "PKG-DANMUKU-05"
+    },
+    {
+      "id": "DMK-FAIL-08",
+      "issue": "parser completion can populate queue and emit loaded after destroy",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-09",
+      "issue": "old replacement load overwrites the newer completed queue",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-10",
+      "issue": "function input resolves and emits loaded after destroy",
+      "next": "PKG-DANMUKU-03"
+    },
+    {
+      "id": "DMK-FAIL-11",
+      "issue": "beforeVisible continuation allocates DOM and attempts terminated-worker post after destroy",
+      "next": "PKG-DANMUKU-04"
+    },
+    {
+      "id": "DMK-FAIL-12",
+      "issue": "already delivered Worker response continuation changes state after destroy",
+      "next": "PKG-DANMUKU-04"
+    },
+    {
+      "id": "DMK-FAIL-13",
+      "issue": "play/playing duplicate loops overwrite response handlers and strand an earlier Promise",
+      "next": "PKG-DANMUKU-04"
+    },
+    {
+      "id": "DMK-FAIL-14",
+      "issue": "pause/destroy leaves a previously scheduled duplicate frame",
+      "next": "PKG-DANMUKU-04"
+    }
+  ],
+  "limitations": [
+    "Historical defect observations must not become candidate normal expectations",
+    "No native browser or server started",
+    "No actual Bilibili/media request, native Worker/CSP, video clock or layout tested",
+    "Late Worker continuation test delivers before terminate and resumes after it; no post-terminate native event guarantee assumed",
+    "Real track/clock/load/performance and visual/browser evidence required for whole task",
+    "No production source/declaration/artifact edits and no publication readiness conclusion"
+  ],
+  "productionChanged": false,
+  "browserValidated": false,
+  "releaseReady": false
+}
