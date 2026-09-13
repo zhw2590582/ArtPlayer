@@ -33,8 +33,8 @@ export function asrAudioEnvironment(implementation, option = {}, capabilities = 
   let nextUrl = 0
   let captures = 0
 
-  function node(kind) {
-    const value = {
+  function node(kind, value = {}) {
+    Object.assign(value, {
       kind,
       connections: [],
       disconnects: 0,
@@ -43,7 +43,7 @@ export function asrAudioEnvironment(implementation, option = {}, capabilities = 
         this.disconnects++
         this.connections = []
       },
-    }
+    })
     nodes.push(value)
     return value
   }
@@ -105,7 +105,8 @@ export function asrAudioEnvironment(implementation, option = {}, capabilities = 
       assert.ok(contexts.includes(context))
       assert.equal(context.state, 'running')
       assert.equal(name, 'recorder-processor')
-      Object.assign(this, node('recorder'), { port: { onmessage: null } })
+      node('recorder', this)
+      this.port = { onmessage: null }
       recorders.push(this)
     }
   }

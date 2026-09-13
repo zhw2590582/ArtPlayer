@@ -2702,13 +2702,17 @@
       "dependsOn": [
         "PKG-ASR-04",
         "CORE-22",
-        "PKG-ASR-07"
+        "PKG-ASR-07",
+        "PKG-ASR-08"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "真实 WebAudio 分块、播放暂停/切源/销毁，不引入网络 ASR",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "baselines/asr-volume-validation.json",
+        "baselines/asr-fallback-validation.json"
+      ]
     },
     {
       "id": "PKG-ASR-06",
@@ -4555,6 +4559,25 @@
       "evidence": [
         "changes/2026-09-13-PKG-ASR-07-playback-volume.md",
         "baselines/asr-volume-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-ASR-08",
+      "phase": "5 包迁移：artplayer-plugin-asr",
+      "title": "修复捕获回退重复播放与静音漏声",
+      "scope": [
+        "artplayer-plugin-asr"
+      ],
+      "dependsOn": [
+        "PKG-ASR-07"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "捕获回退静音输出图、非零PCM与外部播放归属；真实红绿证据及产物验证",
+      "acceptance": "已进入回退后不产生额外输出、静音不漏声、外部播放图不被关闭、stop/restart/换源清理正确；明确Firefox受控拒绝不代表自然选择回退",
+      "evidence": [
+        "changes/2026-09-13-PKG-ASR-08-capture-output.md",
+        "baselines/asr-fallback-validation.json"
       ]
     }
   ]

@@ -34,12 +34,26 @@ continues through its playback gain to the destination. A source switch reuses t
 direct source and replaces the recorder; a captured-stream fallback is closed and
 reacquired because captured tracks can end on source changes.
 
-The playback gain stays at unity. Native media-element source output already
+The direct playback gain stays at unity. Native media-element source output already
 reflects the video's volume and mute; applying the same volume again would turn
-50% volume into 25% output amplitude. PCM also follows the main video's volume
+50% volume into 25% output amplitude. Direct-path PCM also follows the main video's volume
 and becomes silent when that element is muted. Native analyser tests cover the
 linear output ratio, mute, stop and resume on Chromium/Firefox; they do not measure
 physical speakers or establish Safari/device support.
+
+Captured fallback does not own playback. Its source connects only to the recorder,
+whose output connects through a zero-gain sink to the destination to keep processing
+active. It must never reconnect raw captured audio to a speaker branch, including
+after pause/restart. Captured PCM follows captureStream semantics and can remain
+nonzero while the video is muted; that must not create audible ASR output. ASR stop
+and destroy release only their contexts and captured tracks, leaving an external
+owner's media graph intact.
+
+Chromium naturally rejects a second element-source binding. The observed Firefox
+build accepts it and can leave two native owners; that separate integration issue
+remains under ASR-05 review. Firefox fallback tests explicitly force only the binding
+rejection, while retaining native captureStream, tracks, Worklet and analyser nodes.
+They do not establish automatic fallback selection on Firefox.
 
 `stop()` returns `Promise<void>` and releases ASR work. An already displayed
 subtitle retains its original auto-hide deadline; obsolete callbacks cannot add timers.
@@ -95,6 +109,9 @@ From the repository root:
 - `yarn test:browser test/browser/asr-playback.spec.js`: frozen 2.1 output
   attenuation versus candidate linear volume, mute and stop/resume. A native
   unity analyser measures the gain-to-destination route with local audio.
+- `yarn test:browser test/browser/asr-fallback.spec.js`: native capture/Worklet
+  audio with an external media owner, silent ASR output even while muted, stop,
+  fresh tracks after restart/source change and independent context cleanup.
 - `yarn typecheck`: includes the package strict/noUncheckedIndexedAccess project.
 - `yarn test:asr-types-package`: packs and installs core/ASR outside the workspace,
   checks frozen 2.0/2.1 consumers and candidate declarations in strict compiler

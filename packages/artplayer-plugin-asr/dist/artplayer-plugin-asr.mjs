@@ -99,14 +99,16 @@ class AudioGraph {
     this.disconnect();
     const gain = this.gain = previousGain || context.createGain();
     if (!previousGain)
-      gain.gain.value = 1;
+      gain.gain.value = this.direct ? 1 : 0;
     const recorder = this.recorder = new AudioWorkletNode(context, "recorder-processor");
     recorder.port.onmessage = (event) => {
       if (!this.closed && this.recorder === recorder)
         receive(event.data);
     };
     source.connect(recorder);
-    source.connect(gain);
+    if (this.direct)
+      source.connect(gain);
+    else recorder.connect(gain);
     gain.connect(context.destination);
   }
   disconnect() {

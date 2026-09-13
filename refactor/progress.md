@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-ASR-08 回退漏声修复完成，ASR-05 继续
+
+独立审查指出 captureStream 回退额外接扬声器；Chromium 原生两个候选核心确实在
+视频静音后仍有该分支输出。已改 recorder -> gain(0) 静音 sink，非零PCM与外部
+播放图保留；五项先红后绿单测覆盖清理/恢复/换源。最终 source/main/legacy 原生
+52过、26能力跳过，含直接音量与既有采集回归；213定向及两产物各30通过，正常
+构建、strict/lint、重新隔离安装17配置通过。见[变更](changes/2026-09-13-PKG-ASR-08-capture-output.md)
+与[证据](baselines/asr-fallback-validation.json)。
+Firefox自然允许重复源绑定；受控拒绝验证了原生回退，但自动外部归属仍登记为
+ASR-FOREIGN-01 open。不得把它隐藏成回退通过，也不等于 Safari/设备验收完成。
+227项：129 done、17 doing、81 todo；208风险。ASR-05已进入doing，继续真实示例、
+相邻稳定核心、CORS与插件组合/设备。子代理负责独立测试和8082示例验收，主代理
+整合源码、浏览器与提交；没有推送或发布。
+
+
 ## PKG-ASR-07 原生音量修复完成
 
 ASR-05 原生验证发现旧版与候选都重复应用音量：50% 设置只有约25%输出振幅。

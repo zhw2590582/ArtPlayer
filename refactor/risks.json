@@ -4637,6 +4637,41 @@
         "refactor/baselines/asr-volume-validation.json"
       ],
       "resolutionRationale": "Native Chromium/Firefox source/main/legacy on published and candidate core pass relative-amplitude assertions. Formal 2.1 baseline retains squared amplitude. The fix does not establish physical device or captured-fallback acceptance."
+    },
+    {
+      "id": "ASR-FALLBACK-01",
+      "title": "Captured fallback produces a second audible route even when the video is muted",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-ASR-08"
+      ],
+      "evidence": [
+        "test/browser/asr-fallback.spec.js",
+        "refactor/baselines/asr-fallback-validation.json"
+      ],
+      "compatibleResolution": "Keep recognition PCM and external media ownership; remove only the extra ASR speaker output.",
+      "closureCriteria": "Native fallback has zero speaker output and nonzero PCM before/after stop and source change; owned tracks/contexts close without closing the external owner.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-ASR-08-capture-output.md",
+        "refactor/baselines/asr-fallback-validation.json"
+      ],
+      "resolutionRationale": "Native Chromium and controlled-rejection Firefox source/main/legacy with both cores pass. Firefox natural branch selection remains separate ASR-FOREIGN-01."
+    },
+    {
+      "id": "ASR-FOREIGN-01",
+      "title": "Firefox permits parallel native media-element owners instead of selecting capture fallback",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-ASR-05"
+      ],
+      "evidence": [
+        "refactor/baselines/asr-fallback-validation.json",
+        "refactor/changes/2026-09-13-PKG-ASR-08-capture-output.md"
+      ],
+      "compatibleResolution": "Establish an explicit compatible ownership contract for external audio graphs without silently changing default direct-path PCM/mute semantics.",
+      "closureCriteria": "Natural Firefox external-owner integration has no duplicate output or has a documented, validated explicit ownership mode; controlled binding rejection alone cannot close this finding."
     }
   ]
 }
