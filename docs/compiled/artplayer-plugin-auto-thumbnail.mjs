@@ -389,6 +389,7 @@ function artplayerPluginAutoThumbnail(option) {
     return { name: "artplayerPluginAutoThumbnail" };
   };
 }
+artplayerPluginAutoThumbnail.default = artplayerPluginAutoThumbnail;
 export {
   artplayerPluginAutoThumbnail as default
 };

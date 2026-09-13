@@ -4,7 +4,7 @@ import extract from './extraction'
 import { readOptions } from './options'
 import createSession, { cleanupAll } from './session'
 
-export default function artplayerPluginAutoThumbnail(option: ThumbnailOptions) {
+function artplayerPluginAutoThumbnail(option: ThumbnailOptions) {
   return async (art: ThumbnailHost): Promise<Result> => {
     const report = (error: unknown) => console.warn('ArtPlayer auto-thumbnail failed:', error)
     const session = createSession((config) => {
@@ -45,3 +45,7 @@ export default function artplayerPluginAutoThumbnail(option: ThumbnailOptions) {
     return { name: 'artplayerPluginAutoThumbnail' }
   }
 }
+
+artplayerPluginAutoThumbnail.default = artplayerPluginAutoThumbnail
+
+export default artplayerPluginAutoThumbnail

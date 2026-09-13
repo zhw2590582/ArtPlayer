@@ -32,14 +32,62 @@ const declaration = `package/types/${name}.d.ts`
 const normalize = value => value.toString().replaceAll('\r\n', '\n')
 assert.equal(normalize(readMember(candidate.archive, declaration)), normalize(readMember(contract.archives.get('1.1.0'), declaration)))
 const matrix = []
+const olderRuntime = []
 function report() {
   return writeJson(path.join(output, 'report.json'), {
-    task: 'PKG-AUTO-THUMB-08',
+    task: 'PKG-AUTO-THUMB-09',
     node: process.version,
     packages,
     matrix,
+    olderRuntime,
     scope: 'Actual npm 1.1.0 and packed candidate installed outside the workspace. Root historical type shape and conditional runtime entry are checked with exact negative lines. Registration and module identities use installed artifacts; no native extraction or device acceptance is implied.',
   })
+}
+
+for (const release of contract.baseline.previous) {
+  const consumer = consumerDirectory()
+  const archive = contract.archives.get(release.version)
+  const label = `published-${release.version}`
+  try {
+    writeJson(path.join(consumer, 'package.json'), { name: 'auto-thumbnail-old-exports', private: true, dependencies: { [name]: `file:${archive.replaceAll('\\', '/')}` } })
+    fs.writeFileSync(path.join(output, `${label}-install.log`), run([yarn, 'install', '--offline', '--ignore-scripts', '--non-interactive'], consumer))
+    const lock = fs.readFileSync(path.join(consumer, 'yarn.lock'))
+    fs.writeFileSync(path.join(output, `${label}-frozen.log`), run([yarn, 'install', '--offline', '--frozen-lockfile', '--force', '--ignore-scripts', '--non-interactive'], consumer))
+    assert.deepEqual(fs.readFileSync(path.join(consumer, 'yarn.lock')), lock)
+    for (const member of packedFiles(archive))
+      assert.deepEqual(fs.readFileSync(path.join(consumer, 'node_modules', name, member.replace(/^package\//, ''))), readMember(archive, member))
+    const missing = Boolean(release.missingEntrypoints.main)
+    const legacyPath = `${name}/${release.manifest.legacy.replace(/^\.\//, '')}`
+    const probe = path.join(consumer, 'historical.cjs')
+    fs.writeFileSync(probe, missing
+      ? `const assert = require('node:assert/strict');
+assert.throws(() => require('${name}'), {code: 'MODULE_NOT_FOUND'});
+assert.throws(() => require('${legacyPath}'), {code: 'MODULE_NOT_FOUND'});
+console.log('Historical 1.0.0 missing main/legacy confirmed; not runnable distribution.');`
+      : `const assert = require('node:assert/strict');
+(async () => {
+  for (const id of ['${name}', '${legacyPath}']) {
+    const namespace = require(id);
+    assert.deepEqual(Object.keys(namespace), ['default']);
+    assert.throws(() => namespace({}), TypeError);
+    const factory = namespace.default;
+    assert.equal(typeof factory, 'function'); assert.equal(factory.default, undefined);
+    const module = await import(id); assert.equal(module.default, namespace);
+    let subscribed = 0;
+    const result = factory({width: 80, height: 45})({on(name, callback) { assert.equal(name, 'video:loadedmetadata'); assert.equal(typeof callback, 'function'); subscribed++; }});
+    assert(result instanceof Promise);
+    assert.deepEqual(await result, {name: 'artplayerPluginAutoThumbnail'}); assert.equal(subscribed, 1);
+  }
+  console.log('Historical 1.0.1 actual installed default calls and Promise registration passed.');
+})().catch(error => { console.error(error); process.exitCode = 1; });`)
+    const log = run([probe], consumer)
+    fs.writeFileSync(path.join(output, `${label}-runtime.log`), log)
+    olderRuntime.push({ version: release.version, archive, sha256: hash(fs.readFileSync(archive)), missingRuntime: missing, passed: true, log })
+  }
+  finally {
+    report()
+    removeConsumer(consumer)
+  }
 }
 
 for (const plugin of [{ ...contract.baseline.release, archive: contract.archives.get('1.1.0'), label: 'published-1.1.0' }, { ...candidate, label: 'candidate' }]) {
@@ -128,10 +176,10 @@ for (const plugin of [{ ...contract.baseline.release, archive: contract.archives
   const commonjs = names.map(name => require(name));
   const modules = await Promise.all(names.map(name => import(name)));
   for (const factory of [...commonjs, ...modules.map(module => module.default)]) {
-    assert.equal(typeof factory, 'function'); assert.equal(factory.default, undefined);
+    assert.equal(typeof factory, 'function'); assert.equal(factory.default, ${plugin.label === 'candidate' ? 'factory' : 'undefined'});
     const callbacks = new Map();
     const art = { option: {url: '/never-loaded.mp4'}, on(name, callback) { callbacks.set(name, callback); }, off(name, callback) { if (callbacks.get(name) === callback) callbacks.delete(name); } };
-    const pending = factory({})(art);
+    const pending = ${plugin.label === 'candidate' ? 'factory.default' : 'factory'}({})(art);
     assert(pending instanceof Promise); assert.equal(pending.name, undefined);
     assert.deepEqual(await pending, {name: 'artplayerPluginAutoThumbnail'});
     assert(callbacks.has('video:loadedmetadata'));

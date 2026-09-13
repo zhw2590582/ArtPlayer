@@ -4070,14 +4070,17 @@
       "status": "open",
       "owners": [
         "PKG-AUTO-THUMB-04",
-        "PKG-AUTO-THUMB-06"
+        "PKG-AUTO-THUMB-06",
+        "PKG-AUTO-THUMB-09"
       ],
       "evidence": [
         "refactor/baselines/auto-thumbnail-release.json",
         "refactor/baselines/auto-thumbnail-contract.md",
-        "refactor/scripts/auto-thumbnail-contract.test.mjs"
+        "refactor/scripts/auto-thumbnail-contract.test.mjs",
+        "refactor/changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md",
+        "refactor/baselines/auto-thumbnail-alias-validation.json"
       ],
-      "compatibleResolution": "Exercise both old .default calls and direct require calls plus globals, actual ESM and legacy.",
+      "compatibleResolution": "Exercise both old .default calls and direct require calls plus globals, actual ESM and legacy. PKG-AUTO-THUMB-09 restores default JavaScript calls on the same callable and validates actual 1.0.1, 1.1.0 and candidate installs, plus accurate runtime alias types and three-engine native completion. Full old root type/import-shape evidence remains in 04/06.",
       "closureCriteria": "Installed tarballs and matching type consumers retain both usable calling forms with documented entry behavior."
     },
     {

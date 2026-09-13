@@ -41,11 +41,18 @@ coercion behavior but are not advertised as numeric TypeScript options.
 
 The runtime entry supports default ESM imports and CommonJS
 `import autoThumbnail = require('artplayer-plugin-auto-thumbnail/runtime')`.
-It exports the `Option`, `Result`, and `Factory` types. The factory has no
-`.default` self alias and the result has no extraction-completion or destroy API.
+It exports the `Option`, `Result`, `Factory`, and `RuntimeFactory` types. `Factory`
+describes a plain asynchronous registrar factory; `RuntimeFactory` also describes
+the writable `.default` self alias. This alias preserves 1.0.1 JavaScript callers
+using `require('artplayer-plugin-auto-thumbnail').default(...)`, while direct
+1.1.0 calls continue to work. Both use the same function, including `/legacy` and
+the script global. The result has no extraction-completion or destroy API.
 Node10 resolution uses `typesVersions`; modern resolution uses separate ESM/CJS
 declarations. The old root's NodeNext namespace behavior is preserved; `/runtime`
 provides a direct default-import type without changing that old declaration.
+The historical root factory type remains a plain function without a declared
+`.default` property, preserving old type extraction and replacement functions;
+use `/runtime` when type-checking the alias.
 
 Versions 1.0.x used `export =` declarations and advertised `height` instead of
 `number`; 1.1.0 had already changed these types. This refactor retains the actual

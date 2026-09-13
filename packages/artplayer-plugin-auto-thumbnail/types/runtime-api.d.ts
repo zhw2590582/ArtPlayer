@@ -19,3 +19,9 @@ export interface Result {
 
 /** Registration resolves before frame extraction and progressive sheet updates. */
 export type Factory = (option: Option) => (art: Artplayer) => Promise<Result>
+
+/** Both historical CommonJS default calls and direct calls share this function. */
+export interface RuntimeFactory {
+  (option: Option): (art: Artplayer) => Promise<Result>
+  default: RuntimeFactory
+}

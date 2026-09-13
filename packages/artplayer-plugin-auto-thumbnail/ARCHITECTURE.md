@@ -53,7 +53,13 @@ for video processing.
 The original `types/artplayer-plugin-auto-thumbnail.d.ts` remains byte-equivalent
 to npm 1.1.0 after newline normalization. `types/runtime-api.d.ts` owns the precise
 option/result/factory contracts; `runtime.d.mts`, `runtime.d.cts`, and `runtime.d.ts`
-adapt module resolution without adding runtime code or a factory `.default` alias.
+adapt module resolution without adding a separate runtime implementation.
+`src/index.ts` assigns a writable `.default` reference to the same factory,
+preserving both 1.0.1 default calls and 1.1.0 direct calls.
+`Factory` retains the plain asynchronous callable type; `RuntimeFactory` includes
+the recursive alias. TypeScript infers the recursive property from the function
+assignment; no type assertion is needed. The implementation fixture checks both
+the plain Factory and the full RuntimeFactory against the actual exported value.
 The root editor declaration is generated semantically by `yarn build:ts`; its
 historical synchronous callable shape is retained, without mixing default and
 export-assignment syntax. See README for the optional accurate import.
@@ -110,6 +116,10 @@ yarn build artplayer-plugin-auto-thumbnail
 
 `ARTPLAYER_AUTO_THUMBNAIL_BASELINE=1` selects the frozen workspace for candidate
 regression tests. `ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT` selects an actual bundle.
+`test/auto-thumbnail-exports.test.js` checks the factory identity, alias descriptor,
+registration and extraction cleanup through the alias for CommonJS and globals.
+The isolated package runner also installs actual 1.0.1 exports and confirms the
+historical missing 1.0.0 main/legacy files without substituting source-only code.
 Historical contract/failure tests remain separate and continue to reproduce old
 defects; their passing status does not mean those defects should remain.
 

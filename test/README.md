@@ -9,8 +9,11 @@ editor globals. It also runs in `test:auto-thumbnail` and `test:baseline`.
 the actual npm 1.1.0 archive outside the workspace with a packed core. It verifies
 frozen reinstalls, byte identity, conditional declaration resolution, old/current
 compiler consumers, no-interop CommonJS, and installed factory registration.
-This does not decode video or close the older 1.0.x export-shape, native pixel,
-or device acceptance gaps. Candidate entry types use the same runtime files.
+It also installs actual 1.0.1 to verify old `.default` calls and confirms 1.0.0's
+missing main/legacy artifacts. Candidate direct/default calls share a callable;
+runtime types describe the alias without changing the historical root declaration.
+This does not decode video or close all older type-shape, native pixel, or device
+acceptance gaps. Candidate entry types use the same runtime files.
 
 `yarn test:danmuku-mask` runs candidate run cancellation/resource ownership plus
 frozen historical defects and public contracts. Candidate tests also run in

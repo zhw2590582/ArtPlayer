@@ -20,9 +20,10 @@ export const runtimeInvalid = [
   'runtime({ unknown: true })',
   'runtime({})()',
   'pending.name',
-  'runtime.default({})',
+  'runtime.default({ width: false })',
   'const synchronous: Result = pending',
   'const wrong: Factory = (_option) => (_art) => ({name: "artplayerPluginAutoThumbnail"})',
+  'const missingAlias: RuntimeFactory = replacement',
 ]
 
 export function publicSource(mode, raw = false) {

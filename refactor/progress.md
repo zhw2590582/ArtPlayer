@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-09 历史 default 调用兼容完成
+
+通过同一函数上的 default 自引用补齐 1.0.1 的 JavaScript 调用，继续支持 1.1.0
+直接调用。根声明字节未变；/runtime 新增 RuntimeFactory 描述递归别名，保留
+原纯调用 Factory，实际源码无需断言即可通过两类公开类型检查。旧候选两项
+失败、新实现通过；源码联合 165 项、正式 main/legacy 各 60 项通过。实际安装
+验证 1.0.1 default、1.1.0 direct 与候选同函数身份，确认 1.0.0 缺运行文件。
+十组编译配置及三组 no-interop 通过。三引擎 main/legacy 各 18 项原生生命周期
+检查通过，新增 alias-complete 真实抽帧、JPEG 解码和清理；不是首帧像素验收。
+严格包类型、lint、构建副本一致性、frozen 安装与工具链检查通过。见
+[变更](changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md)与
+[验证](baselines/auto-thumbnail-alias-validation.json)。TYPE-01/EXPORT-01 的完整
+历史类型形状仍待 04/06，PIXEL-01 和物理设备仍未关闭。08 的无别名验证保留为
+旧候选快照，不能替代本次新产物证据。全计划 237 项：160 done、15 doing、
+62 todo；03/04/05/06 继续，VAST 初始化兼容选择仍待回复。
+
 ## PKG-AUTO-THUMB-08 公开类型入口完成
 
 保留实际 npm 1.1.0 根声明字节与旧工厂提取/替换形状，新增复用原运行文件的

@@ -1812,7 +1812,8 @@
         "ENG-04",
         "ENG-06",
         "CORE-07",
-        "PKG-AUTO-THUMB-08"
+        "PKG-AUTO-THUMB-08",
+        "PKG-AUTO-THUMB-09"
       ],
       "status": "todo",
       "risk": "H",
@@ -4860,6 +4861,26 @@
       "evidence": [
         "changes/2026-09-14-PKG-AUTO-THUMB-08-types.md",
         "baselines/auto-thumbnail-types-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-09",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "兼容旧 CommonJS default 与直接工厂调用",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "PKG-AUTO-THUMB-08"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "同一 callable 上的 default 自别名，保留最新根声明并补准确 runtime 别名类型；旧/新实际包入口证据",
+      "acceptance": "旧红新绿、直接/default/ESM/legacy/global 调用一致；旧根类型提取不变，公开准确类型与实际别名匹配；不关闭抽帧像素和设备缺口",
+      "evidence": [
+        "changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md",
+        "baselines/auto-thumbnail-alias-validation.json"
       ]
     }
   ]

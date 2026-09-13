@@ -36,7 +36,8 @@ test('Auto Thumbnail runtime types expose only the real asynchronous factory and
   assert.deepEqual(checkConsumer(ts, 'nodenext-cjs', `import runtime = require('artplayer-plugin-auto-thumbnail/runtime');
 import type Artplayer from 'artplayer'; declare const art: Artplayer;
 const option: runtime.Option = {}; const result: Promise<runtime.Result> = runtime(option)(art);
-const factory: runtime.Factory = runtime; void [result, factory];`), [])
+const factory: runtime.Factory = runtime; const alias: runtime.RuntimeFactory = runtime.default;
+const second: Promise<runtime.Result> = alias(option)(art); void [result, factory, second];`), [])
 })
 
 test('Auto Thumbnail generated editor globals replace conflicting export assignments and retain old calls', async () => {
