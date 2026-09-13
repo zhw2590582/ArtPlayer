@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict'
-import fs from 'node:fs'
 // eslint-disable-next-line test/no-import-node-test -- Controlled client faults and real worker geometry use the Node runner.
 import test from 'node:test'
 import vm from 'node:vm'
-import { danmukuCandidate, danmukuCandidateEnvironment } from './helpers/danmuku-candidate.js'
+import { danmukuCandidate, danmukuCandidateEnvironment, danmukuWorkerCode } from './helpers/danmuku-candidate.js'
 import { loadModules } from './helpers/load.js'
 
 const { WorkerClient } = await loadModules({ WorkerClient: 'packages/artplayer-plugin-danmuku/src/worker-client' })
@@ -223,13 +222,18 @@ test('danmuku worker client: independent clients never share pending ownership',
   second.client.dispose()
 })
 
-// Unlike the client double above, this executes the actual unmodified worker
-// script. Numeric geometry inputs are controlled; no browser layout is claimed.
-const workerCode = fs.readFileSync(new URL('../packages/artplayer-plugin-danmuku/src/worker.js', import.meta.url), 'utf8')
+// Unlike the client double above, this executes the actual source or artifact
+// worker. Numeric geometry inputs are controlled; no browser layout is claimed.
+const workerEnvironment = danmukuCandidateEnvironment(implementation)
+workerEnvironment.factory({ danmuku: [] })(workerEnvironment.art)
+const actualWorker = workerEnvironment.workers[0]
+const workerCode = await danmukuWorkerCode(implementation, workerEnvironment, actualWorker)
+workerEnvironment.destroy()
 
 function calculateGeometry(input) {
   const replies = []
-  const context = vm.createContext({ input, postMessage: data => replies.push(data) })
+  const context = vm.createContext({ input, postMessage: data => replies.push(data), URL: { revokeObjectURL() {} }, location: { href: actualWorker.url } })
+  context.self = context
   vm.runInContext(workerCode, context, { timeout: 1000 })
   vm.runInContext('onmessage({ data: input })', context, { timeout: 1000 })
   assert.equal(replies.length, 1)

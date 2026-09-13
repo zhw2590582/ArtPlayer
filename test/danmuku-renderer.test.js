@@ -2,7 +2,9 @@ import assert from 'node:assert/strict'
 // eslint-disable-next-line test/no-import-node-test -- Deterministic owned-node tests use the Node runner.
 import test from 'node:test'
 import { parseHTML } from 'linkedom'
-import Renderer from '../packages/artplayer-plugin-danmuku/src/renderer.js'
+import { loadModules } from './helpers/load.js'
+
+const { Renderer } = await loadModules({ Renderer: 'packages/artplayer-plugin-danmuku/src/renderer' })
 
 function fixture(t) {
   const { document } = parseHTML('<html><body><div id="layer"><i id="foreign"></i></div></body></html>')

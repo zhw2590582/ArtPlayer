@@ -1,13 +1,34 @@
+import type { DanmuInput, DanmuItem, DanmukuArt, DanmukuInput, DanmukuOption, DanmuState, NormalizedDanmu, NormalizedOption } from './types'
+
 import { defaultOption, normalizeOption, optionChanged, optionScheme } from './config'
 import { beginInput, cancelInputs, inputActive, readInput } from './input'
 import { filterState, readyItems, setItemState } from './queue'
 import Renderer from './renderer'
 import Scheduler from './scheduler'
 import WorkerClient from './worker-client'
-import DanmuWorker from './worker.js?worker&inline'
+import DanmuWorker from './worker.ts?worker&inline'
 
 export default class Danmuku {
-  constructor(art, option) {
+  declare ['constructor']: typeof Danmuku
+  declare art: DanmukuArt
+  declare utils: DanmukuArt['constructor']['utils']
+  declare validator: DanmukuArt['constructor']['validator']
+  declare $danmuku: HTMLDivElement
+  declare $player: HTMLDivElement
+  declare queue: DanmuItem[]
+  declare $refs: HTMLDivElement[]
+  declare isStop: boolean
+  declare isHide: boolean
+  declare timer: number | null
+  declare index: number
+  declare worker: Worker | null
+  declare workerClient: WorkerClient | null
+  declare renderer: Renderer
+  declare scheduler: Scheduler
+  declare option: NormalizedOption
+  declare states: Record<DanmuState, DanmuItem[]>
+
+  constructor(art: DanmukuArt, option: DanmukuOption) {
     const { constructor, template } = art
 
     this.utils = constructor.utils // 工具库
@@ -99,8 +120,8 @@ export default class Danmuku {
   }
 
   // 是否在移动端使用了自动旋屏，会影响弹幕的left和top值
-  get isRotate() {
-    return this.art.plugins?.autoOrientation?.state
+  get isRotate(): boolean | undefined {
+    return (this.art.plugins?.autoOrientation as { state?: boolean } | undefined)?.state
   }
 
   // 计算上空白边距
@@ -181,7 +202,7 @@ export default class Danmuku {
   }
 
   // 加载弹幕
-  async load(danmuku) {
+  async load(danmuku?: DanmukuInput) {
     const { errorHandle } = this.utils
     const task = beginInput(this, danmuku === undefined)
 
@@ -196,6 +217,8 @@ export default class Danmuku {
         return this
 
       errorHandle(Array.isArray(danmus), 'Danmuku need return an array as result')
+      // Active input and the runtime validator exclude the cancellation sentinel.
+      const rows = danmus as DanmuInput[]
 
       // 假如没有传入弹幕参数，则清空弹幕，否则追加弹幕
       if (danmuku === undefined) {
@@ -208,10 +231,10 @@ export default class Danmuku {
       }
 
       // 逐个验证原始弹幕并转换到弹幕队列
-      for (let index = 0; index < danmus.length; index++) {
+      for (let index = 0; index < rows.length; index++) {
         if (!task.active())
           return this
-        const danmu = danmus[index]
+        const danmu = rows[index]!
         await task.emit(danmu)
       }
 
@@ -232,7 +255,7 @@ export default class Danmuku {
   }
 
   // 把原始弹幕转换到弹幕队列
-  async emit(danmu) {
+  async emit(danmu: DanmuInput) {
     const { clamp } = this.utils
     if (!inputActive(this))
       return this
@@ -279,7 +302,8 @@ export default class Danmuku {
       return this
 
     // 自定义弹幕过滤函数
-    if (!this.option.filter(danmu))
+    // Validation/defaulting above fills these fields before the public callback.
+    if (!this.option.filter(danmu as NormalizedDanmu))
       return this
     if (!inputActive(this))
       return this
@@ -287,7 +311,7 @@ export default class Danmuku {
     // 添加自定义属性
     const item = {
       ...danmu,
-      $state: 'wait', // 弹幕初始状态
+      $state: 'wait' as const, // 弹幕初始状态
       $index: this.index++, // 弹幕索引
       $ref: null, // 弹幕 DOM 节点
       $restTime: 0, // 弹幕剩余时间
@@ -295,10 +319,10 @@ export default class Danmuku {
     }
 
     // 转换为wait状态
-    this.setState(item, 'wait')
+    this.setState(item as DanmuItem, 'wait')
 
     // 添加到实际弹幕队列
-    this.queue.push(item)
+    this.queue.push(item as DanmuItem)
 
     // 弹幕有四个状态：
     // - wait: 弹幕还未开始显示，没有被添加到 DOM 中
@@ -310,7 +334,7 @@ export default class Danmuku {
   }
 
   // 动态配置
-  config(option, isInit = false) {
+  config(option: DanmukuOption, isInit = false) {
     const { clamp } = this.utils
     const { $controlsCenter } = this.art.template
 
@@ -359,13 +383,14 @@ export default class Danmuku {
   }
 
   // 计算DOM的left值，受到旋屏影响
-  getLeft($ref) {
+  getLeft($ref: HTMLElement): number {
     return this.renderer.left($ref)
   }
 
   // 复杂运算交给 Web Worker 处理
-  postMessage(message = {}) {
-    return this.workerClient.request(message)
+  // Keep the historical empty default; unknown message types receive no reply.
+  postMessage(message: Parameters<WorkerClient['request']>[0] = {} as Parameters<WorkerClient['request']>[0]) {
+    return this.workerClient!.request(message)
   }
 
   createWorker() {
@@ -374,17 +399,17 @@ export default class Danmuku {
   }
 
   // 根据状态获取弹幕
-  filter(state, callback) {
+  filter(state: DanmuState, callback: (danmu: DanmuItem) => void) {
     return filterState(this, state, callback)
   }
 
   // 设置弹幕状态
-  setState(danmu, state) {
+  setState(danmu: DanmuItem, state: DanmuState) {
     setItemState(this, danmu, state)
   }
 
   // 重置弹幕到wait状态，回收弹幕DOM节点
-  makeWait(danmu) {
+  makeWait(danmu: DanmuItem) {
     this.renderer.makeWait(danmu)
   }
 
@@ -454,7 +479,7 @@ export default class Danmuku {
 
   show() {
     this.isHide = false
-    this.$danmuku.style.opacity = 1
+    this.$danmuku.style.opacity = 1 as unknown as string
     this.option.visible = true
     this.art.emit('artplayerPluginDanmuku:show')
     return this
@@ -463,7 +488,7 @@ export default class Danmuku {
   hide() {
     this.isHide = true
     this.scheduler.invalidate()
-    this.$danmuku.style.opacity = 0
+    this.$danmuku.style.opacity = 0 as unknown as string
     this.option.visible = false
     this.art.emit('artplayerPluginDanmuku:hide')
     this.scheduler.schedule()

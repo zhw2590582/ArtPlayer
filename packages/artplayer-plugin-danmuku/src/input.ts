@@ -1,22 +1,45 @@
+import type { DanmuInput, DanmukuInput } from './types'
 import { bilibiliDanmuParseFromUrl } from './bilibili'
 import { isPromiseInput } from './config'
 
-const inputs = new WeakMap()
-const cancelled = Symbol('cancelled danmuku input')
-
-function stateFor(owner) {
-  if (!inputs.has(owner))
-    inputs.set(owner, { closed: false, tasks: new Set(), emitting: [] })
-  return inputs.get(owner)
+interface InputOwner {
+  art: { isDestroy: boolean }
+  emit: (danmu: DanmuInput) => unknown
 }
 
-export function inputActive(owner) {
+export interface InputTask {
+  replace: boolean
+  signal: AbortSignal | undefined
+  active: () => boolean
+  onCancel: (callback: () => void) => () => void
+  cancel: () => void
+  wait: <T>(value: T) => Promise<Awaited<T> | typeof cancelled>
+  emit: (danmu: DanmuInput) => unknown
+  finish: () => void
+}
+
+interface InputState {
+  closed: boolean
+  tasks: Set<InputTask>
+  emitting: InputTask[]
+}
+
+const inputs = new WeakMap<InputOwner, InputState>()
+export const cancelled = Symbol('cancelled danmuku input')
+
+function stateFor(owner: InputOwner): InputState {
+  if (!inputs.has(owner))
+    inputs.set(owner, { closed: false, tasks: new Set(), emitting: [] })
+  return inputs.get(owner)!
+}
+
+export function inputActive(owner: InputOwner) {
   const state = stateFor(owner)
   const task = state.emitting[state.emitting.length - 1]
   return !state.closed && !owner.art.isDestroy && (!task || task.active())
 }
 
-export function beginInput(owner, replace) {
+export function beginInput(owner: InputOwner, replace: boolean): InputTask {
   const state = stateFor(owner)
   if (replace) {
     for (const task of [...state.tasks]) {
@@ -25,11 +48,11 @@ export function beginInput(owner, replace) {
     }
   }
   let stopped = state.closed || owner.art.isDestroy
-  let resolveCancel
-  const cancellation = new Promise(resolve => resolveCancel = resolve)
-  const handlers = new Set()
+  let resolveCancel!: (value: typeof cancelled) => void
+  const cancellation = new Promise<typeof cancelled>(resolve => resolveCancel = resolve)
+  const handlers = new Set<() => void>()
   const controller = typeof AbortController === 'function' ? new AbortController() : undefined
-  const task = {
+  const task: InputTask = {
     replace,
     signal: controller?.signal,
     active: () => !stopped && !state.closed && !owner.art.isDestroy,
@@ -71,13 +94,15 @@ export function beginInput(owner, replace) {
   return task
 }
 
-export function cancelInputs(owner) {
+export function cancelInputs(owner: InputOwner) {
   const state = stateFor(owner)
   state.closed = true
   for (const task of [...state.tasks]) task.cancel()
 }
 
-export function readInput(target, task) {
+export function readInput(target: DanmukuInput, task: InputTask):
+  | { asynchronous: true, value: DanmuInput[] | PromiseLike<DanmuInput[]> }
+  | { asynchronous: false, value: DanmuInput[] } {
   if (typeof target === 'function')
     return { asynchronous: true, value: target() }
   if (isPromiseInput(target))

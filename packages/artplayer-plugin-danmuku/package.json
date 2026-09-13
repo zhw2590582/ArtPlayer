@@ -27,11 +27,31 @@
       "types": "./types/artplayer-plugin-danmuku.d.ts",
       "import": "./dist/artplayer-plugin-danmuku.legacy.js",
       "require": "./dist/artplayer-plugin-danmuku.legacy.js"
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer-plugin-danmuku.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer-plugin-danmuku.js"
+      }
     }
   },
   "main": "./dist/artplayer-plugin-danmuku.js",
   "module": "./dist/artplayer-plugin-danmuku.mjs",
   "types": "./types/artplayer-plugin-danmuku.d.ts",
   "legacy": "./dist/artplayer-plugin-danmuku.legacy.js",
-  "browserslist": "last 1 Chrome version"
+  "browserslist": "last 1 Chrome version",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-danmuku.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
+      ]
+    }
+  }
 }

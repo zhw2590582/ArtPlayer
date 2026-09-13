@@ -661,16 +661,18 @@ var artplayerPluginDanmuku = (function() {
         danmu.$lastStartTime = Date.now();
         danmu.$restTime = owner.speed;
         const distance = clientWidth + ref.clientWidth;
-        const { result: top } = await operation.wait(owner.postMessage({
+        const reply = await operation.wait(owner.postMessage({
           type: "getDanmuTop",
           target: { mode: danmu.mode, height: ref.clientHeight, speed: distance / danmu.$restTime },
           visibles: owner.visibles,
           antiOverlap: owner.option.antiOverlap,
           clientWidth,
           clientHeight,
+          // Valid margins are numeric. Preserve the old raw fallback for unsupported strings.
           marginBottom: owner.marginBottom,
           marginTop: owner.marginTop
         }));
+        const top = typeof reply === "symbol" ? void 0 : reply.result;
         if (!this.active(operation) || danmu.$ref !== ref)
           return;
         if (top !== void 0) {
@@ -944,6 +946,7 @@ var artplayerPluginDanmuku = (function() {
         if (!task.active())
           return this;
         errorHandle(Array.isArray(danmus), "Danmuku need return an array as result");
+        const rows = danmus;
         if (danmuku === void 0) {
           this.reset();
           if (!task.active())
@@ -952,10 +955,10 @@ var artplayerPluginDanmuku = (function() {
           this.states = { wait: [], ready: [], emit: [], stop: [] };
           this.renderer.clear();
         }
-        for (let index = 0; index < danmus.length; index++) {
+        for (let index = 0; index < rows.length; index++) {
           if (!task.active())
             return this;
-          const danmu = danmus[index];
+          const danmu = rows[index];
           await task.emit(danmu);
         }
         if (task.active())
@@ -1070,6 +1073,7 @@ var artplayerPluginDanmuku = (function() {
       return this.renderer.left($ref);
     }
     // 复杂运算交给 Web Worker 处理
+    // Keep the historical empty default; unknown message types receive no reply.
     postMessage(message = {}) {
       return this.workerClient.request(message);
     }
@@ -1235,7 +1239,8 @@ var artplayerPluginDanmuku = (function() {
       smoothing: 0.2,
       flattening: 0.2
     };
-    const options = Object.assign({}, defaults, typeof option === "object" ? option : {});
+    const configured = Object.assign({}, typeof option === "object" ? option : {});
+    const options = Object.assign({}, defaults, configured);
     for (const key of Object.keys(defaults)) {
       if (!Number.isFinite(options[key]))
         options[key] = defaults[key];
@@ -1244,7 +1249,8 @@ var artplayerPluginDanmuku = (function() {
       options.sampling = defaults.sampling;
     if (options.xMin === options.xMax || options.yMin === options.yMax)
       return null;
-    const points = Array.isArray(input) && input.length ? [...input] : sampleHeatmap(queue, width, duration, options.sampling);
+    const hasCustomPoints = Array.isArray(input) && input.length > 0;
+    const points = hasCustomPoints ? [...input] : sampleHeatmap(queue, width, duration, options.sampling);
     if (!points.length || !points.every((point) => Array.isArray(point) && Number.isFinite(point[0]) && Number.isFinite(point[1]))) {
       return null;
     }
@@ -1265,14 +1271,21 @@ var artplayerPluginDanmuku = (function() {
       const y = point[1];
       point[1] = y * (y > yMid ? 1 + options.scale : 1 - options.scale) + options.minHeight;
     }
+    const automatic = !hasCustomPoints && !Number.isFinite(configured.yMin) && !Number.isFinite(configured.yMax);
+    let peak = 0;
+    for (const point of points) peak = Math.max(peak, point[1]);
+    const fitted = automatic && peak > defaults.yMax / 4;
+    if (fitted)
+      options.yMax = peak * 4;
+    const boundY = (value) => fitted ? Math.min(height, Math.max(height * 0.75, value)) : value;
     const controlPoint = (current, previous, next, reverse) => {
       const geometry = line(previous || current, next || current);
       const flat = map(Math.cos(geometry.angle) * options.flattening, 0, 1, 1, 0);
       const angle = geometry.angle * flat + (reverse ? Math.PI : 0);
       const length = geometry.length * options.smoothing;
-      return [current[0] + Math.cos(angle) * length, current[1] + Math.sin(angle) * length];
+      return [current[0] + Math.cos(angle) * length, boundY(current[1] + Math.sin(angle) * length)];
     };
-    const positions = points.map((point) => [map(point[0], options.xMin, options.xMax, 0, width), map(point[1], options.yMin, options.yMax, height, 0)]);
+    const positions = points.map((point) => [map(point[0], options.xMin, options.xMax, 0, width), boundY(map(point[1], options.yMin, options.yMax, height, 0))]);
     if (!positions.every((point) => point.every(Number.isFinite)))
       return null;
     const path = positions.map((point, index, all) => {
@@ -1299,8 +1312,9 @@ var artplayerPluginDanmuku = (function() {
     let closed = false;
     const active = () => !closed && !art.isDestroy;
     function listen(name, callback) {
-      subscriptions.push([name, callback]);
-      art.on(name, callback);
+      const listener = callback;
+      subscriptions.push([name, listener]);
+      art.on(name, listener);
     }
     function dispose(removeControl) {
       if (closed)
@@ -1338,18 +1352,19 @@ var artplayerPluginDanmuku = (function() {
         return;
       start = null;
       stop = null;
-      element.innerHTML = "";
+      const target = element;
+      target.innerHTML = "";
       if (art.option.isLive)
         return;
-      const shape = heatmapGeometry({ width: element.offsetWidth, height: element.offsetHeight, duration: art.duration, queue: danmuku.queue, option, points });
+      const shape = heatmapGeometry({ width: target.offsetWidth, height: target.offsetHeight, duration: art.duration, queue: danmuku.queue, option, points });
       if (!shape || !active())
         return;
-      const document2 = element.ownerDocument;
+      const document2 = target.ownerDocument;
       if (!gradient)
         gradient = document2 ? "heatmap-solids" : `heatmap-solids-${++nextGradient}`;
       while (document2?.getElementById(gradient))
         gradient = `heatmap-solids-${++nextGradient}`;
-      element.innerHTML = `
+      target.innerHTML = `
       <svg viewBox="0 0 ${shape.width} ${shape.height}">
         <defs>
           <linearGradient id="${gradient}" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1362,8 +1377,8 @@ var artplayerPluginDanmuku = (function() {
         <path fill="url(#${gradient})" d="${shape.path}"></path>
       </svg>
     `;
-      start = query("#heatmap-start", element);
-      stop = query("#heatmap-stop", element);
+      start = query("#heatmap-start", target);
+      stop = query("#heatmap-stop", target);
       progress(art.played);
     }
     function update(points) {
@@ -1443,7 +1458,8 @@ var artplayerPluginDanmuku = (function() {
         dispose();
       else this.disposers.add(dispose);
     }
-    write(target, key, value, apply = (value2) => target[key] = value2) {
+    write(host, key, value, apply = (value2) => host[key] = value2) {
+      const target = host;
       if (!this.active)
         return;
       const priority = () => typeof target.getPropertyPriority === "function" ? target.getPropertyPriority(key) : void 0;
@@ -1834,16 +1850,17 @@ var artplayerPluginDanmuku = (function() {
   if (typeof document !== "undefined") {
     const id = "artplayer-plugin-danmuku";
     const pending = /* @__PURE__ */ Symbol.for("artplayer-plugin-danmuku.pending-style");
-    let $style2 = document.getElementById(id) || document[pending];
+    const styleDocument = document;
+    let $style2 = document.getElementById(id) || styleDocument[pending];
     if (!$style2) {
       $style2 = document.createElement("style");
       $style2.id = id;
       if (document.readyState === "loading") {
-        document[pending] = $style2;
+        styleDocument[pending] = $style2;
         const ready = () => {
           document.removeEventListener("DOMContentLoaded", ready);
-          if (document[pending] === $style2)
-            delete document[pending];
+          if (styleDocument[pending] === $style2)
+            delete styleDocument[pending];
           const existing = document.getElementById(id);
           if (existing)
             existing.textContent = $style2.textContent;

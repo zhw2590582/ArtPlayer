@@ -1,22 +1,25 @@
+import type { DanmuItem, HeatmapPoint } from './types'
+
 export const MAX_HEATMAP_POINTS = 0xFFFFFFFF
 
-function upperBound(values, value) {
+function upperBound(values: readonly number[], value: number): number {
   let start = 0
   let end = values.length
   while (start < end) {
     const middle = Math.floor((start + end) / 2)
-    if (values[middle] <= value)
+    // The binary-search interval guarantees middle is an existing index.
+    if (values[middle]! <= value)
       start = middle + 1
     else end = middle
   }
   return start
 }
 
-export function sampleHeatmap(queue, width, duration, sampling) {
+export function sampleHeatmap(queue: readonly Pick<DanmuItem, 'time'>[], width: number, duration: number, sampling: number): HeatmapPoint[] {
   if (!Number.isFinite(width) || width <= 0 || !Number.isFinite(duration) || duration <= 0
     || !Number.isFinite(sampling) || sampling <= 0 || Math.floor(width / sampling) + 1 > MAX_HEATMAP_POINTS) { return [] }
   const times = queue.map(item => item.time).filter(time => typeof time === 'number' && !Number.isNaN(time)).sort((a, b) => a - b)
-  const points = []
+  const points: HeatmapPoint[] = []
   const gap = duration / width
   if (!Number.isFinite(gap))
     return []

@@ -1,3 +1,4 @@
+import type Setting from './setting'
 import $check_off from './img/check_off.svg?raw'
 import $check_on from './img/check_on.svg?raw'
 import $config from './img/config.svg?raw'
@@ -28,7 +29,7 @@ export function settingIcons() {
   }
 }
 
-export function settingTemplate() {
+export function settingTemplate(this: Setting) {
   const { option } = this
   return `
             <div class="apd-toggle">

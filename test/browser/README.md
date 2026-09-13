@@ -128,3 +128,14 @@ both response modes. A passing diagnostic only proves observation plus successfu
 playback after release; inspect its progressed/waiting flags before claiming buffering.
 These capability observation timeouts do not relax the integration assertions.
 Archive the report and results (including traces) before starting another browser suite.
+
+Danmuku input, scheduler, resources and heatmap-density specs accept
+`ARTPLAYER_DANMUKU_ARTIFACT` for a built main/legacy file; unset it to compile the
+current JS/TS entry. Run each format sequentially and wait for the command's final
+exit before copying reports or launching the next format. A visible last test line
+does not prove reporter/trace teardown is finished. These runs share the server port
+and output directory, so simultaneous invocations can corrupt failure evidence.
+For a timeout, inspect the retained trace before changing the test or implementation;
+browser startup and pre-plugin playback delays are different from plugin execution.
+The density regression retains 16000 rows, real playback and SVG/pixel geometry at
+two widths. A diagnostic pass does not waive the full matrix or long-load acceptance.

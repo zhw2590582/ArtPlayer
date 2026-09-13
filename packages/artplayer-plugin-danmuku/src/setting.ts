@@ -1,3 +1,6 @@
+import type Danmuku from './danmuku'
+import type { SettingSlider, SettingTemplate, SliderConfig } from './setting-types'
+import type { DanmukuArt, NormalizedOption, SliderOption } from './types'
 import SettingLifecycle from './setting-lifecycle'
 import { emitSetting, lockSetting, unlockSetting } from './setting-send'
 import createSlider from './setting-slider'
@@ -5,7 +8,17 @@ import { settingIcons, settingTemplate } from './setting-template'
 import './setting-style'
 
 export default class Setting {
-  constructor(art, danmuku) {
+  declare art: DanmukuArt
+  declare danmuku: Danmuku
+  declare utils: DanmukuArt['constructor']['utils']
+  declare template: SettingTemplate
+  declare slider: Record<'opacity' | 'margin' | 'fontSize' | 'speed', SettingSlider>
+  declare emitting: boolean
+  declare isLock: boolean
+  declare timer: ReturnType<typeof setTimeout> | null
+  declare lifecycle: SettingLifecycle
+
+  constructor(art: DanmukuArt, danmuku: Danmuku) {
     this.art = art
     this.danmuku = danmuku
     this.utils = art.constructor.utils
@@ -16,32 +29,32 @@ export default class Setting {
     this.template = {
       $controlsCenter,
       $mount: $controlsCenter,
-      $danmuku: null,
-      $toggle: null,
-      $config: null,
-      $configPanel: null,
-      $configModes: null,
-      $style: null,
-      $stylePanel: null,
-      $styleModes: null,
-      $colors: null,
-      $opacitySlider: null,
-      $opacityValue: null,
-      $marginSlider: null,
-      $marginValue: null,
-      $fontSizeSlider: null,
-      $fontSizeValue: null,
-      $speedSlider: null,
-      $speedValue: null,
-      $input: null,
-      $send: null,
+      $danmuku: null!,
+      $toggle: null!,
+      $config: null!,
+      $configPanel: null!,
+      $configModes: null!,
+      $style: null!,
+      $stylePanel: null!,
+      $styleModes: null!,
+      $colors: null!,
+      $opacitySlider: null!,
+      $opacityValue: null!,
+      $marginSlider: null!,
+      $marginValue: null!,
+      $fontSizeSlider: null!,
+      $fontSizeValue: null!,
+      $speedSlider: null!,
+      $speedValue: null!,
+      $input: null!,
+      $send: null!,
     }
 
     this.slider = {
-      opacity: null,
-      margin: null,
-      fontSize: null,
-      speed: null,
+      opacity: null!,
+      margin: null!,
+      fontSize: null!,
+      speed: null!,
     }
 
     this.emitting = false
@@ -56,7 +69,7 @@ export default class Setting {
       art.on('destroy', this.destroy)
       if (!this.lifecycle.active)
         return
-      this.lifecycle.write($controlsCenter.style, 'display', 'flex', value => setStyle($controlsCenter, 'display', value))
+      this.lifecycle.write($controlsCenter.style, 'display', 'flex', value => setStyle($controlsCenter, 'display', value as string))
 
       this.createTemplate()
       if (!this.lifecycle.active)
@@ -103,7 +116,7 @@ export default class Setting {
     return settingIcons()
   }
 
-  get option() {
+  get option(): NormalizedOption {
     return this.danmuku.option
   }
 
@@ -115,7 +128,7 @@ export default class Setting {
     return settingTemplate.call(this)
   }
 
-  get OPACITY() {
+  get OPACITY(): Required<SliderOption> {
     return {
       min: 0,
       max: 100,
@@ -124,7 +137,7 @@ export default class Setting {
     }
   }
 
-  get FONT_SIZE() {
+  get FONT_SIZE(): Required<SliderOption> {
     return {
       min: 12,
       max: 120,
@@ -133,7 +146,7 @@ export default class Setting {
     }
   }
 
-  get MARGIN() {
+  get MARGIN(): Required<SliderOption<NormalizedOption['margin']>> {
     return {
       min: 0,
       max: 3,
@@ -159,7 +172,7 @@ export default class Setting {
     }
   }
 
-  get SPEED() {
+  get SPEED(): Required<SliderOption> {
     return {
       min: 0,
       max: 4,
@@ -212,13 +225,13 @@ export default class Setting {
         ]
   }
 
-  query(selector) {
+  query<T extends HTMLElement = HTMLDivElement>(selector: string): T {
     const { query } = this.utils
     const { $danmuku } = this.template
-    return query(selector, $danmuku)
+    return query(selector, $danmuku) as T
   }
 
-  append(el, target) {
+  append(el: HTMLElement, target: HTMLElement) {
     if (!this.lifecycle.active)
       return
     const { append } = this.utils
@@ -228,7 +241,7 @@ export default class Setting {
     append(el, target)
   }
 
-  setData(key, value) {
+  setData(key: string, value: string | number | boolean) {
     if (!this.lifecycle.active)
       return
     const { $player } = this.art.template
@@ -265,7 +278,7 @@ export default class Setting {
     this.template.$fontSizeValue = this.query('.apd-config-fontSize .apd-value')
     this.template.$speedSlider = this.query('.apd-config-speed .apd-slider')
     this.template.$speedValue = this.query('.apd-config-speed .apd-value')
-    this.template.$input = this.query('.apd-input')
+    this.template.$input = this.query<HTMLInputElement>('.apd-input')
     this.template.$send = this.query('.apd-send')
 
     const { $toggle } = this.template
@@ -290,7 +303,7 @@ export default class Setting {
     })
 
     this.lifecycle.proxy($configModes, 'click', (event) => {
-      const $mode = event.target.closest('.apd-mode')
+      const $mode = (event.target as HTMLElement).closest<HTMLElement>('.apd-mode')
       if (!$mode)
         return
       const mode = Number($mode.dataset.mode)
@@ -307,14 +320,14 @@ export default class Setting {
       this.reset()
     })
 
-    this.lifecycle.proxy($antiOverlap, 'click', () => {
+    this.lifecycle.proxy($antiOverlap!, 'click', () => {
       this.danmuku.config({
         antiOverlap: !this.option.antiOverlap,
       })
       this.reset()
     })
 
-    this.lifecycle.proxy($syncVideo, 'click', () => {
+    this.lifecycle.proxy($syncVideo!, 'click', () => {
       this.danmuku.config({
         synchronousPlayback: !this.option.synchronousPlayback,
       })
@@ -322,7 +335,7 @@ export default class Setting {
     })
 
     this.lifecycle.proxy($styleModes, 'click', (event) => {
-      const $mode = event.target.closest('.apd-mode')
+      const $mode = (event.target as HTMLElement).closest<HTMLElement>('.apd-mode')
       if (!$mode)
         return
       const mode = Number($mode.dataset.mode)
@@ -333,7 +346,7 @@ export default class Setting {
     })
 
     this.lifecycle.proxy($colors, 'click', (event) => {
-      const $color = event.target.closest('.apd-color')
+      const $color = (event.target as HTMLElement).closest<HTMLElement>('.apd-color')
       if (!$color)
         return
       this.danmuku.config({
@@ -373,7 +386,7 @@ export default class Setting {
       container: this.template.$marginSlider,
       findIndex: () => {
         return this.MARGIN.steps.findIndex(
-          item => item.value[0] === this.option.margin[0] && item.value[1] === this.option.margin[1],
+          item => item.value![0] === this.option.margin[0] && item.value![1] === this.option.margin[1],
         )
       },
       onChange: (index) => {
@@ -381,7 +394,7 @@ export default class Setting {
         if (!margin)
           return
         const { $marginValue } = this.template
-        $marginValue.textContent = margin.name
+        $marginValue.textContent = margin.name as string
         this.danmuku.config({
           margin: margin.value,
         })
@@ -416,7 +429,7 @@ export default class Setting {
         if (!speed)
           return
         const { $speedValue } = this.template
-        $speedValue.textContent = speed.name
+        $speedValue.textContent = speed.name as string
         this.danmuku.config({
           speed: speed.value,
         })
@@ -424,11 +437,11 @@ export default class Setting {
     })
   }
 
-  createSlider(option) {
+  createSlider(option: SliderConfig) {
     return createSlider.call(this, option)
   }
 
-  onFullscreen(state) {
+  onFullscreen(state: boolean) {
     if (!this.lifecycle.active)
       return
     const { $danmuku, $controlsCenter, $mount } = this.template
@@ -445,7 +458,7 @@ export default class Setting {
     }
   }
 
-  onMouseEnter({ $control, $panel }) {
+  onMouseEnter({ $control, $panel }: { $control: HTMLElement, $panel: HTMLElement }) {
     if (!this.lifecycle.active)
       return
     const { $player } = this.art.template
@@ -522,7 +535,7 @@ export default class Setting {
     this.setData('danmukuTheme', this.option.theme)
     this.setData('danmukuEmitter', this.option.emitter)
 
-    const colors = $colors.children
+    const colors = $colors.children as HTMLCollectionOf<HTMLElement>
     const $color = Array.from(colors).find(item => item.dataset.color === this.option.color.toUpperCase())
     $color && inverseClass($color, 'apd-active')
 
@@ -531,14 +544,14 @@ export default class Setting {
     this.resize()
   }
 
-  mount(target) {
+  mount(target: NormalizedOption['mount']) {
     if (!this.lifecycle.active)
       return
     const { errorHandle } = this.utils
-    const $el = typeof target === 'string' ? document.querySelector(target) : target
-    errorHandle($el, `Can not find the mount point: ${target}`)
-    this.append($el, this.template.$danmuku)
-    this.template.$mount = $el
+    const $el = typeof target === 'string' ? document.querySelector<HTMLElement>(target) : target
+    errorHandle($el as unknown as boolean, `Can not find the mount point: ${target}`)
+    this.append($el!, this.template.$danmuku)
+    this.template.$mount = $el!
     this.reset()
   }
 
@@ -546,7 +559,7 @@ export default class Setting {
     if (this.lifecycle.closed)
       return
     this.lifecycle.close()
-    clearTimeout(this.timer)
+    clearTimeout(this.timer as number | undefined)
     this.timer = null
     this.emitting = false
     this.isLock = false

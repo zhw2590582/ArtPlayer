@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "lib": ["ES2020", "ES2021.String", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src/**/*.ts", "../../types/assets.d.ts", "../../types/option-validator.d.ts"]
+}

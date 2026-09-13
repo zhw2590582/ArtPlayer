@@ -6,6 +6,38 @@ Danmuku plugin for ArtPlayer
 
 [https://artplayer.org](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-danmuku/index.js&example=danmuku)
 
+## TypeScript entrypoints
+
+Existing imports from `artplayer-plugin-danmuku` and `/legacy` retain the npm
+5.3.0 declarations. Use `/runtime` for declarations that describe the actual
+factory, asynchronous commands and returned internal owner:
+
+```ts
+import danmuku from 'artplayer-plugin-danmuku/runtime'
+import type { Point, RuntimeOption } from 'artplayer-plugin-danmuku/runtime'
+
+const option: RuntimeOption = { danmuku: [], heatmap: true }
+const points: Point[] = [[0, 10], [200, 20]]
+```
+
+The option object is required; each field is optional. Registration returns the
+plugin facade immediately. `await plugin.emit(row)` and `await plugin.load()`
+return the internal owner, as do synchronous `config/hide/show/reset` commands.
+That owner differs from the registered facade. `mount(target)` returns undefined
+and requires a valid element or selector. The facade's option/state getters
+remain live.
+
+The accurate entrypoint also exposes icon types, callback receivers and an
+explicit `EventMap` of payload tuples. Filters and visibility callbacks receive
+the current option as `this`; `beforeEmit` does too and accepts only strict
+`true`. Importing these types does not automatically alter Artplayer's historical
+event declarations. Custom points use mutable `[number, number]` tuples and
+retain the existing inner-array modifications during rendering.
+
+ESM imports select the existing ESM factory; CommonJS
+`require('artplayer-plugin-danmuku/runtime')` returns the existing callable
+factory directly. No additional runtime implementation is loaded.
+
 ## Loading and configuration
 
 `plugin.load()` reloads the configured input and replaces the queue after input
@@ -66,7 +98,10 @@ finite `heatmap.yMin` or `heatmap.yMax`, and custom points events, retain their
 original coordinate mapping; use these when deliberately controlling the scale.
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for module ownership, compatibility
-constraints, tests and the remaining staged TypeScript migration.
+constraints and editing/verification commands. All owned runtime modules now use
+TypeScript, with shared public runtime data types maintained in
+`types/runtime-shared.d.ts`. Long-duration load tests, combination/distribution
+acceptance and release reviews remain separate unfinished stages.
 
 ## License
 

@@ -1,9 +1,11 @@
-function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
+import type { PlacementMessage, PlacementReply, PlacementRequest, PlacementRow, VisibleDanmu } from './worker-types'
+
+function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }: PlacementRequest): number | undefined {
   // 弹幕最大高度
   const maxTop = clientHeight - marginBottom
 
   // 过滤同模式的弹幕，即每种模式各不影响
-  const danmus = visibles
+  const danmus: PlacementRow[] = visibles
     .filter(item => item.mode === target.mode && item.top <= maxTop)
     .sort((prev, next) => prev.top - next.top)
 
@@ -44,8 +46,8 @@ function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom
   if (target.mode === 2) {
     // 倒序查找
     for (let index = danmus.length - 2; index >= 0; index -= 1) {
-      const item = danmus[index]
-      const prev = danmus[index + 1]
+      const item = danmus[index]!
+      const prev = danmus[index + 1]!
       const itemBottom = item.top + item.height
       const diff = prev.top - itemBottom
       if (diff >= target.height) {
@@ -56,8 +58,8 @@ function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom
   else {
     // 顺序查找
     for (let index = 1; index < danmus.length; index += 1) {
-      const item = danmus[index]
-      const prev = danmus[index - 1]
+      const item = danmus[index]!
+      const prev = danmus[index - 1]!
       const prevBottom = prev.top + prev.height
       const diff = item.top - prevBottom
       if (diff >= target.height) {
@@ -66,12 +68,13 @@ function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom
     }
   }
 
-  const topMap = []
+  const topMap: VisibleDanmu[][] = []
   for (let index = 1; index < danmus.length - 1; index += 1) {
-    const item = danmus[index]
+    // The loop excludes the two virtual boundary rows inserted above.
+    const item = danmus[index] as VisibleDanmu
     if (topMap.length) {
-      const last = topMap[topMap.length - 1]
-      if (last[0].top === item.top) {
+      const last = topMap[topMap.length - 1]!
+      if (last[0]!.top === item.top) {
         last.push(item)
       }
       else {
@@ -131,11 +134,11 @@ function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom
         break
     }
 
-    return topMap[0][0].top
+    return topMap[0]![0]!.top
   }
 }
 
-onmessage = (event) => {
+onmessage = (event: MessageEvent<PlacementMessage>) => {
   const { data } = event
   if (!data.id || !data.type)
     return
@@ -147,5 +150,5 @@ onmessage = (event) => {
   globalThis.postMessage({
     result,
     id: data.id,
-  })
+  } satisfies PlacementReply)
 }

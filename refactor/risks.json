@@ -5023,7 +5023,7 @@
       "id": "DANMUKU-TYPE-01",
       "title": "Danmuku historical declared results, optional mount and initial Promise input disagree with runtime",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-03",
         "PKG-DANMUKU-06"
@@ -5033,10 +5033,17 @@
         "refactor/baselines/danmuku-contract-validation.json",
         "refactor/baselines/danmuku-release.json",
         "refactor/changes/2026-09-13-PKG-DANMUKU-03-input.md",
-        "refactor/baselines/danmuku-input-validation.json"
+        "refactor/baselines/danmuku-input-validation.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-06-types.md",
+        "refactor/baselines/danmuku-types-validation.json"
       ],
       "compatibleResolution": "Preserve latest published complete root type contracts and actual legal JS return identities; expose accurate types separately.",
-      "closureCriteria": "Installed consumers verify latest root assignments and precise async/getter/mount contracts; initial Promise mismatch has an explicit tested resolution."
+      "closureCriteria": "Installed consumers verify latest root assignments and precise async/getter/mount contracts; initial Promise mismatch has an explicit tested resolution.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-06-types.md",
+        "refactor/baselines/danmuku-types-validation.json"
+      ],
+      "resolutionRationale": "Preserved actual npm 5.3.0 complete root/legacy declaration and installed consumer behavior; optional runtime entry describes tested async owner, getter, mount, data, icon and callback contracts. Verified actual implementation assignability and packed/offline-installed current and historical compiler consumers."
     },
     {
       "id": "DANMUKU-INPUT-01",
@@ -5127,7 +5134,7 @@
       "id": "DANMUKU-TYPE-02",
       "title": "Danmuku id, icons, Slider steps, heatmap points and partial configuration drift from declarations",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-05",
         "PKG-DANMUKU-06"
@@ -5135,10 +5142,17 @@
       "evidence": [
         "refactor/baselines/danmuku-contract.md",
         "refactor/baselines/danmuku-contract-validation.json",
-        "refactor/baselines/danmuku-release.json"
+        "refactor/baselines/danmuku-release.json",
+        "refactor/changes/2026-09-13-PKG-DANMUKU-06-types.md",
+        "refactor/baselines/danmuku-types-validation.json"
       ],
       "compatibleResolution": "Validate actual accepted data and static properties, retain root compatibility and document effective fields.",
-      "closureCriteria": "Positive and negative installed consumers and source behavior tests cover these fields without widening away old factory contracts."
+      "closureCriteria": "Positive and negative installed consumers and source behavior tests cover these fields without widening away old factory contracts.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-13-PKG-DANMUKU-06-types.md",
+        "refactor/baselines/danmuku-types-validation.json"
+      ],
+      "resolutionRationale": "Preserved actual npm 5.3.0 complete root/legacy declaration and installed consumer behavior; optional runtime entry describes tested async owner, getter, mount, data, icon and callback contracts. Verified actual implementation assignability and packed/offline-installed current and historical compiler consumers."
     },
     {
       "id": "DANMUKU-ASYNC-01",

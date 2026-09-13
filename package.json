@@ -100,7 +100,9 @@
     "test:chromecast": "node --test test/chromecast.test.js test/chromecast-failures.test.js test/chromecast-runtime.test.js",
     "test:chromecast-types-package": "node refactor/scripts/chromecast-package-types.mjs",
     "test:danmuku-mask": "node --test test/danmuku-mask-failures.test.js refactor/scripts/danmuku-mask-contract.test.mjs",
-    "test:danmuku": "node --test test/danmuku-setting.test.js test/danmuku-heatmap.test.js test/danmuku-renderer.test.js test/danmuku-scheduler.test.js test/danmuku-worker-client.test.js test/danmuku-input.test.js test/danmuku-parser.test.js test/danmuku-failures.test.js refactor/scripts/danmuku-contract.test.mjs"
+    "test:danmuku": "node --test test/danmuku-setting.test.js test/danmuku-heatmap.test.js test/danmuku-renderer.test.js test/danmuku-scheduler.test.js test/danmuku-worker-client.test.js test/danmuku-input.test.js test/danmuku-parser.test.js test/danmuku-failures.test.js refactor/scripts/danmuku-contract.test.mjs",
+    "test:danmuku-types": "node --test refactor/scripts/danmuku-types.test.mjs",
+    "test:danmuku-types-package": "node refactor/scripts/danmuku-package-types.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

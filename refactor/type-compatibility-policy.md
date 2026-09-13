@@ -28,3 +28,10 @@ Chromecast的PKG-CAST-04沿用此规则保留最新npm 1.1.0根声明，不引�
 破坏。1.0.0的export=与1.1.0的default export已有历史差异，分别保留测试证据；
 准确异步注册、回调和查询类型通过新增/runtime提供。此处记录规则的应用，
 不声称用户另行确认过Cast专属问题，也不扩大到未验证的运行时变化。
+
+Danmuku的PKG-DANMUKU-06保留实际npm 5.3.0根声明的完整类型形状与字节（忽略
+换行格式），包括历史同步emit结果、必填danmuku、对象形points和NodeNext ESM的
+既有namespace限制。新增/runtime描述真实Promise/owner结果、可选配置字段、tuple
+points、静态icons和回调receiver；根/legacy/runtime复用原分发实现，不添加不存在
+的factory.default。旧入口用户不需要因本次类型迁移修改代码。切换/runtime是可选
+的准确类型入口，历史声明与运行时的区别见包README；这里没有新增旧类型破坏授权。

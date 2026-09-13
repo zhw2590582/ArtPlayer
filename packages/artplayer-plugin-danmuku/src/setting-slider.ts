@@ -1,10 +1,13 @@
-export default function createSlider({ min, max, container, findIndex, onChange, steps = [] }) {
+import type Setting from './setting'
+import type { SliderConfig } from './setting-types'
+
+export default function createSlider(this: Setting, { min, max, container, findIndex, onChange, steps = [] }: SliderConfig) {
   const { lifecycle } = this
   if (!lifecycle.active)
     return { reset() {} }
   const { query, clamp, setStyle } = this.utils
 
-  setStyle(container, 'touch-action', 'none')
+  setStyle(container, 'touch-action' as keyof CSSStyleDeclaration, 'none')
 
   container.innerHTML = `
             <div class="apd-slider-line">
@@ -19,14 +22,14 @@ export default function createSlider({ min, max, container, findIndex, onChange,
             </div>
         `
 
-  const $dot = query('.apd-slider-dot', container)
-  const $progress = query('.apd-slider-progress', container)
+  const $dot = query<HTMLDivElement>('.apd-slider-dot', container)!
+  const $progress = query<HTMLDivElement>('.apd-slider-progress', container)!
 
   let isDroging = false
 
   lifecycle.own(() => isDroging = false)
 
-  function reset(index) {
+  function reset(index?: number) {
     if (!lifecycle.active)
       return
     if (index === undefined)
@@ -41,7 +44,7 @@ export default function createSlider({ min, max, container, findIndex, onChange,
     onChange(index)
   }
 
-  function updateLeft(event) {
+  function updateLeft(this: Setting, event: MouseEvent) {
     const { top, height, left, width } = container.getBoundingClientRect()
     if (this.art.isRotate) {
       const value = clamp(event.clientY - top, 0, height)

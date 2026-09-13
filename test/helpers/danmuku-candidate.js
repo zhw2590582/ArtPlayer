@@ -1,3 +1,4 @@
+import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
@@ -6,8 +7,31 @@ import { build } from 'esbuild'
 import { ensureArchive, readMember, refactorDir } from '../../refactor/scripts/releases.mjs'
 import { getEntryFile } from '../../scripts/projects.js'
 import { danmukuEnvironment } from './danmuku.js'
+import { resolveSource } from './load.js'
 
 const workspace = fileURLToPath(new URL('../../', import.meta.url))
+let sourceWorker
+
+export async function danmukuWorkerCode(implementation, env, worker) {
+  const blob = env.urls.get(worker.url)
+  if (blob)
+    return blob.text()
+  // Production worker-loader emits a percent-encoded data URL. Execute those
+  // exact shipped bytes instead of silently substituting the current source.
+  const dataPrefix = 'data:text/javascript;charset=utf-8,'
+  if (typeof worker.url === 'string' && worker.url.startsWith(dataPrefix))
+    return decodeURIComponent(worker.url.slice(dataPrefix.length))
+  assert.equal(implementation.name, 'candidate-source', 'Artifact Worker tests must execute the Worker embedded in that artifact')
+  sourceWorker ??= build({
+    entryPoints: [resolveSource('packages/artplayer-plugin-danmuku/src/worker')],
+    bundle: true,
+    write: false,
+    format: 'iife',
+    platform: 'browser',
+    target: 'es2020',
+  }).then(result => result.outputFiles[0].text)
+  return sourceWorker
+}
 
 export async function danmukuCandidate() {
   const coreRelease = JSON.parse(fs.readFileSync(path.join(refactorDir, 'baselines/releases.json'), 'utf8')).releases.find(item => item.name === 'artplayer')

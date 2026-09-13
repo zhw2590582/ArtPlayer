@@ -2,40 +2,100 @@
 
 The compatibility reference is the actual npm 5.3.0 package. Its archive,
 historical declarations, earlier exports and failure evidence are indexed in
-`refactor/baselines/danmuku-release.json` and `danmuku-contract.md` at the
-repository root. Do not infer runtime contracts from the old declaration file.
+`refactor/baselines/danmuku-release.json` and
+`refactor/baselines/danmuku-contract.md` relative to the repository root. Do not infer runtime contracts from the old declaration file.
 
 ## Module responsibilities
 
 | Module | Responsibility |
 | --- | --- |
-| `src/index.js` | Plugin factory, facade getters, bound methods, setting and heatmap composition |
-| `src/danmuku.js` | Internal instance, method return identity, configuration/load commits, event and lifecycle wiring |
-| `src/config.js` | Fresh defaults, validation schema, configuration comparison and normalization |
-| `src/input.js` | Input forms, replacement ownership, independent append operations, cancellation and synchronous callback reentry |
-| `src/bilibili-parser.js` | Pure legacy-compatible XML fields, mode mapping and entity decoding |
-| `src/bilibili.js` | Fetch and response text, one parser Worker per request, fallback, settlement and Blob URL cleanup |
-| `src/scheduler.js` | One RAF or asynchronous frame, cancellation generations, preparation ownership and failure recovery |
-| `src/renderer.js` | Owned node allocation, preparation, geometry snapshots, placement, pause/resume styling and disposal |
-| `src/queue.js` | Ordered state pools, eligibility and state transitions |
-| `src/worker-client.js` | Track Worker lifecycle, a shared response dispatcher, unique request IDs and pending requests |
-| `src/worker.js` | Track placement Worker; a separate protocol from the XML parser Worker |
-| `src/setting.js` | Settings coordinator, configuration controls, mount and fullscreen layout |
-| `src/setting-template.js` | Existing template HTML and static icon values |
-| `src/setting-slider.js` | Slider index, pointer and rotation behavior |
-| `src/setting-send.js` | Pending send, original error outlet and lock countdown |
-| `src/setting-lifecycle.js` | Exact subscription/proxy disposal, cancellation and conditional host-property restoration |
-| `src/setting-style.js` | Shared document style and one pending DOMContentLoaded installation |
-| `src/heatmap.js` | Owned control, progress stops, subscriptions and per-instance gradient |
-| `src/heatmap-sampling.js` | Sorted-time bin counts with historical numeric boundaries |
-| `src/heatmap-geometry.js` | Legacy point normalization, caller-visible point writes and SVG curve calculation |
+| `src/index.ts` | Plugin factory, facade getters, bound methods, setting and heatmap composition |
+| `src/danmuku.ts` | Internal instance, method return identity, configuration/load commits, event and lifecycle wiring |
+| `src/config.ts` | Fresh defaults, validation schema, configuration comparison and normalization |
+| `src/input.ts` | Input forms, replacement ownership, independent append operations, cancellation and synchronous callback reentry |
+| `src/bilibili-parser.ts` | Pure legacy-compatible XML fields, mode mapping and entity decoding |
+| `src/bilibili.ts` | Fetch and response text, one parser Worker per request, fallback, settlement and Blob URL cleanup |
+| `src/scheduler.ts` | One RAF or asynchronous frame, cancellation generations, preparation ownership and failure recovery |
+| `src/renderer.ts` | Owned node allocation, preparation, geometry snapshots, placement, pause/resume styling and disposal |
+| `src/queue.ts` | Ordered state pools, eligibility and state transitions |
+| `src/worker-client.ts` | Track Worker lifecycle, a shared response dispatcher, unique request IDs and pending requests |
+| `src/worker.ts` | Track placement Worker; a separate protocol from the XML parser Worker |
+| `src/setting.ts` | Settings coordinator, configuration controls, mount and fullscreen layout |
+| `src/setting-template.ts` | Existing template HTML and static icon values |
+| `src/setting-slider.ts` | Slider index, pointer and rotation behavior |
+| `src/setting-send.ts` | Pending send, original error outlet and lock countdown |
+| `src/setting-lifecycle.ts` | Exact subscription/proxy disposal, cancellation and conditional host-property restoration |
+| `src/setting-style.ts` | Shared document style and one pending DOMContentLoaded installation |
+| `src/heatmap.ts` | Owned control, progress stops, subscriptions and per-instance gradient |
+| `src/heatmap-sampling.ts` | Sorted-time bin counts with historical numeric boundaries |
+| `src/heatmap-geometry.ts` | Legacy point normalization, caller-visible point writes and SVG curve calculation |
 
-The package is undergoing staged migration. PKG-DANMUKU-03 separates input and
-configuration responsibilities in JavaScript; PKG-DANMUKU-04 separates scheduling
-and track requests; PKG-DANMUKU-05 separates rendering and UI resources;
-PKG-DANMUKU-06 converts all owned
-modules and Worker messages to TypeScript and validates installed consumers.
-This intermediate structure is not the final TypeScript or release acceptance.
+All 20 owned runtime modules use TypeScript. Their responsibilities remain
+separate from public declaration compatibility and from release acceptance.
+The following files contain types only:
+
+| Module | Responsibility |
+| --- | --- |
+| `src/types.ts` | Reexports public runtime data types and defines the internal Artplayer host adapter |
+| `src/worker-types.ts` | Placement requests, replies, visible rows and virtual boundary rows |
+| `src/parser-types.ts` | XML parser results and its independent Worker protocol |
+| `src/setting-types.ts` | Settings template slots and slider integration contracts |
+| `src/worker-assets.d.ts` | Inline placement Worker module declaration |
+| `types/runtime-shared.d.ts` | Single source for accurate option, callback, input, queue, facade, owner and event payload types |
+
+`src/types.ts` imports/reexports `types/runtime-shared.d.ts` with type-only
+syntax. Keep shared option/data definitions there; do not create a second copy
+in production source. Host, DOM and Worker adapter types remain internal. The
+factory composes Danmuku, Setting and heatmap. Danmuku owns queue/state pools and
+coordinates input, renderer and scheduler. Scheduler/renderer refer back to the
+owner with type-only imports; these references add no runtime module cycle.
+The XML parser and heatmap sampling/geometry remain independently testable.
+
+## Declaration entrypoints and type boundaries
+
+The root and `/legacy` declarations retain the exact actual npm 5.3.0 type
+source, including historical inaccuracies and extraction behavior. Edit neither
+to make runtime implementation checks pass. The additive `/runtime` entrypoint
+selects the existing ESM or CommonJS factory with accurate declarations. Its
+`runtime.d.mts` entry exposes ESM type exports; `runtime.d.cts` and the
+`typesVersions` fallback `runtime.d.ts` expose the callable CommonJS factory
+and its type namespace. CommonJS returns the function itself; importing it does
+not add a `factory.default` property.
+
+The argument object is required, while its fields are optional. The registrar
+returns `RuntimeResult` synchronously. Command methods resolve/return `Owner`,
+which is a different object; `emit` is asynchronous even though its initial
+insertion work is synchronous. The facade retains its three live getters and
+requires a valid target for `mount`. Public data includes mutable point tuples,
+typed static icons, normalized filter inputs and queue entries for visibility
+callbacks. Filters and visibility callbacks accept truthy results; sending
+requires strict `true`. Their `this` is the current normalized option. Loader
+functions retain their receiver-free call. `EventMap` supplies named payload
+tuples explicitly; importing `/runtime` does not augment old core event types.
+It contains types only, with no new event bus or runtime export.
+
+Keep these narrow implementation assertions documented when editing them:
+
+- Native style/dataset writes retain their historical numeric and null values.
+  WebIDL performs the conversion; changing source assignments to satisfy DOM
+  declarations could change controlled hosts or observable setters.
+- Emit/stop state pools own allocated nodes. A frame with a non-null reference
+  has its associated item, and release checks node identity. Non-null assertions
+  depend on those invariants; they do not replace lifecycle validation.
+- The legacy public core type describes `constructor` as `Function`. The
+  factory's host adapter narrows it to the existing Artplayer static utilities
+  and validator. It introduces no new core capability or minimum core version.
+- An omitted internal `postMessage` keeps its old empty-message behavior;
+  unsupported margin strings retain the raw historical fallback at the Worker
+  boundary. Placement types describe valid scheduler requests, with explicit
+  compatibility assertions for those exceptional paths. These internal message
+  helpers are not additional methods promised by the public `Owner` interface.
+
+The strict package config disables JavaScript input. Its `ES2021.String` type
+library describes the existing XML `replaceAll` calls; it neither introduces a
+new runtime dependency nor raises the existing browser requirement. Modern and
+legacy build targets remain es2020 and es2015; syntax lowering does not polyfill
+`replaceAll` or other browser APIs.
 
 ## Contracts to retain
 
@@ -125,6 +185,25 @@ Late, unknown and duplicate replies do not settle a different request.
 
 ## Verification and remaining work
 
+Run package commands from the repository root with the pinned Node version and
+Yarn Classic 1.22.22:
+
+| Command | What it checks or produces |
+| --- | --- |
+| `yarn test:danmuku` | Historical and candidate input, parser, Worker, scheduling, rendering, settings and heatmap regressions |
+| `yarn test:danmuku-types` | Frozen root declarations, current/legacy compiler consumers, negative cases, implementation assignability and editor types |
+| `yarn test:danmuku-types-package` | Packed isolated installs, real entrypoints and consumer module/compiler modes; creates local evidence, does not publish |
+| `yarn typecheck` | Strict production sources and the repository consumer type matrix |
+| `yarn build artplayer-plugin-danmuku` | Normal package outputs and copied docs artifacts, including the inline TS Worker |
+| `yarn dev artplayer-plugin-danmuku` | Local demo rebuild for the package |
+
+Edit `src/` for runtime changes, `types/runtime-shared.d.ts` for shared accurate
+data contracts and the corresponding `runtime.d.*` entry for module shape.
+Rebuild artifacts through the package script. The frozen root declaration and
+historical test helpers are compatibility evidence, not generated repair targets.
+Use `refactor/fixtures/implementation/danmuku.ts` when a source/declaration change must
+prove assignability to the actual implementation.
+
 `yarn test:danmuku` runs frozen historical contracts/failures and candidate input,
 parser, scheduler and Worker regressions. The historical helper and archives must remain frozen;
 candidate tests use `test/helpers/danmuku-candidate.js` and may select built
@@ -143,9 +222,11 @@ three modes, strict dense geometry, one request per prepared item, native
 pause/seek/rate and visible-node reuse. Preserve both geometric and protocol
 assertions; unique IDs alone do not prove non-overlapping tracks.
 
-Long-run native load behavior still requires PKG-DANMUKU-07. Check task evidence
-and the risk register before changing completion or release status; short native
-regressions are not package-wide stability acceptance.
+Long-run native load behavior still requires PKG-DANMUKU-07; cross-plugin/core
+combination coverage and final distribution acceptance remain PKG-DANMUKU-08/09.
+Check task evidence and the risk register before changing completion or release
+status. These commands and short native regressions do not establish npm release
+readiness; final checks and release reviews remain separate gates.
 
 ## Rendering and UI resources
 

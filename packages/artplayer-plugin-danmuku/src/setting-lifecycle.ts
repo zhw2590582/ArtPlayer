@@ -1,7 +1,35 @@
-const properties = new WeakMap()
+import type { DanmukuArt } from './types'
+
+type Disposer = () => unknown
+type PropertyValue = string | number | boolean | undefined
+interface PropertyEntry {
+  original: PropertyValue
+  present: boolean
+  priority: string | undefined
+  owners: Map<SettingLifecycle, PropertyValue>
+  apply: (value: PropertyValue) => unknown
+  last?: PropertyValue
+  lastPriority?: string
+}
+interface SettingEvents {
+  'resize': []
+  'fullscreen': [state: boolean]
+  'fullscreenWeb': [state: boolean]
+  'artplayerPluginDanmuku:show': []
+  'artplayerPluginDanmuku:hide': []
+  'document:pointermove': [event: PointerEvent]
+  'document:pointerup': [event: PointerEvent]
+}
+const properties = new WeakMap<object, Map<string, PropertyEntry>>()
 
 export default class SettingLifecycle {
-  constructor(art) {
+  declare art: DanmukuArt
+  declare closed: boolean
+  declare disposers: Set<Disposer>
+  declare cancelled: Promise<void>
+  declare cancel: () => void
+
+  constructor(art: DanmukuArt) {
     this.art = art
     this.closed = false
     this.disposers = new Set()
@@ -12,13 +40,15 @@ export default class SettingLifecycle {
     return !this.closed && !this.art.isDestroy
   }
 
-  own(dispose) {
+  own(dispose: Disposer) {
     if (this.closed)
       dispose()
     else this.disposers.add(dispose)
   }
 
-  write(target, key, value, apply = value => target[key] = value) {
+  write(host: DOMStringMap | CSSStyleDeclaration, key: string, value: PropertyValue, apply: (value: PropertyValue) => unknown = value => (host as unknown as Record<string, PropertyValue>)[key] = value) {
+    // This adapter retains native dataset/style assignment and its WebIDL coercion.
+    const target = host as unknown as Record<string, PropertyValue> & Partial<Pick<CSSStyleDeclaration, 'getPropertyPriority' | 'setProperty'>>
     if (!this.active)
       return
     const priority = () => typeof target.getPropertyPriority === 'function' ? target.getPropertyPriority(key) : undefined
@@ -52,7 +82,7 @@ export default class SettingLifecycle {
             entry.lastPriority = priority()
           }
           else if (entry.priority !== undefined) {
-            target.setProperty(key, entry.original, entry.priority)
+            target.setProperty!(key, entry.original as string, entry.priority)
           }
           else if (entry.present) {
             entry.apply(entry.original)
@@ -75,13 +105,15 @@ export default class SettingLifecycle {
     entry.lastPriority = priority()
   }
 
-  on(name, callback) {
+  on<Name extends keyof SettingEvents>(name: Name, callback: (this: unknown, ...args: SettingEvents[Name]) => unknown) {
     if (!this.active)
       return
+    // Keep the emitter/native callback receiver while consulting this owner.
+    // eslint-disable-next-line ts/no-this-alias
     const lifecycle = this
-    function listener(...args) {
+    function listener(this: unknown, ...args: unknown[]) {
       if (lifecycle.active)
-        return callback.apply(this, args)
+        return callback.apply(this, args as SettingEvents[Name])
     }
     const dispose = () => this.art.off(name, listener)
     this.own(dispose)
@@ -96,18 +128,20 @@ export default class SettingLifecycle {
     }
   }
 
-  proxy(target, name, callback) {
+  proxy<Name extends keyof HTMLElementEventMap>(target: HTMLElement, name: Name, callback: (this: unknown, event: HTMLElementEventMap[Name]) => unknown) {
     if (!this.active)
       return
+    // Keep the emitter/native callback receiver while consulting this owner.
+    // eslint-disable-next-line ts/no-this-alias
     const lifecycle = this
-    function listener(...args) {
+    function listener(this: unknown, ...args: unknown[]) {
       if (lifecycle.active)
-        return callback.apply(this, args)
+        return callback.apply(this, args as [HTMLElementEventMap[Name]])
     }
-    let remove
+    let remove: (() => void) | undefined
     const dispose = () => {
       if (typeof remove === 'function') {
-        const registry = this.art.events
+        const registry = this.art.events as DanmukuArt['events'] & { destroyEvents?: Set<() => void> }
         if (typeof registry?.remove === 'function' && registry.destroyEvents?.has(remove))
           registry.remove(remove)
         else remove()
@@ -128,11 +162,11 @@ export default class SettingLifecycle {
     }
   }
 
-  wait(value) {
+  wait<Value>(value: Value | PromiseLike<Value>) {
     return Promise.race([value, this.cancelled])
   }
 
-  release(dispose) {
+  release(dispose: Disposer) {
     try {
       dispose()
     }

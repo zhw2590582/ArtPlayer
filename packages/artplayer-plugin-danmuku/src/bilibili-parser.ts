@@ -1,4 +1,6 @@
-export function getMode(key) {
+import type { ParsedDanmu, ParserReply, ParserRequest } from './parser-types'
+
+export function getMode(key: number): number {
   switch (key) {
     case 1:
     case 2:
@@ -13,16 +15,16 @@ export function getMode(key) {
   }
 }
 
-export function bilibiliDanmuParseFromXml(xmlString) {
+export function bilibiliDanmuParseFromXml(xmlString: unknown): ParsedDanmu[] {
   if (typeof xmlString !== 'string')
     return []
   const reg = /<d[^>]*?p="(?<p>[^"]+)"[^>]*>(?<text>.*?)<\/d>/gs
   const matches = xmlString.matchAll(reg)
   return Array.from(matches)
     .map((match) => {
-      const attr = match.groups.p.split(',')
+      const attr = match.groups!.p!.split(',')
       if (attr.length >= 8) {
-        const text = match.groups.text
+        const text = match.groups!.text!
           .trim()
           .replaceAll('&quot;', '"')
           .replaceAll('&apos;', '\'')
@@ -38,7 +40,7 @@ export function bilibiliDanmuParseFromXml(xmlString) {
           color: `#${Number(attr[3]).toString(16)}`,
           timestamp: Number(attr[4]),
           pool: Number(attr[5]),
-          userID: attr[6],
+          userID: attr[6]!,
           rowID: Number(attr[7]),
         }
       }
@@ -46,11 +48,11 @@ export function bilibiliDanmuParseFromXml(xmlString) {
         return null
       }
     })
-    .filter(Boolean)
+    .filter(Boolean) as ParsedDanmu[]
 }
 
-export function onmessage({ data }) {
+export function onmessage({ data }: MessageEvent<ParserRequest>) {
   const { xml, id } = data
   const danmus = bilibiliDanmuParseFromXml(xml)
-  globalThis.postMessage({ danmus, id })
+  globalThis.postMessage({ danmus, id } satisfies ParserReply)
 }

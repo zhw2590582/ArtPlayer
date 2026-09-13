@@ -1,15 +1,19 @@
+import type Artplayer from 'artplayer'
+import type { DanmukuArt, DanmukuOption } from './types'
+
 import Danmuku from './danmuku'
 import heatmap from './heatmap'
 import Setting from './setting'
 
-export default function artplayerPluginDanmuku(option) {
-  return (art) => {
-    const danmuku = new Danmuku(art, option)
-    let setting
+export default function artplayerPluginDanmuku(option: DanmukuOption) {
+  return (art: Artplayer) => {
+    // Old declarations type instance.constructor as Function; both supported cores expose these statics.
+    const danmuku = new Danmuku(art as DanmukuArt, option)
+    let setting: Setting | undefined
     try {
-      setting = art.isDestroy ? undefined : new Setting(art, danmuku)
+      setting = art.isDestroy ? undefined : new Setting(art as DanmukuArt, danmuku)
       if (!art.isDestroy && danmuku.option.heatmap) {
-        heatmap(art, danmuku, danmuku.option.heatmap)
+        heatmap(art as DanmukuArt, danmuku, danmuku.option.heatmap)
       }
     }
     catch (error) {
@@ -25,7 +29,7 @@ export default function artplayerPluginDanmuku(option) {
     }
 
     return {
-      name: 'artplayerPluginDanmuku',
+      name: 'artplayerPluginDanmuku' as const,
       emit: danmuku.emit.bind(danmuku),
       load: danmuku.load.bind(danmuku),
       config: danmuku.config.bind(danmuku),

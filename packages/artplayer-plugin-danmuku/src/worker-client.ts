@@ -1,14 +1,22 @@
+import type { PlacementReply, PlacementRequest } from './worker-types'
+
 let nextRequest = 0
 
 export default class WorkerClient {
-  constructor(createWorker, onFailure) {
+  declare pending: Map<number, { resolve: (value: PlacementReply) => void, reject: (error: unknown) => void }>
+  declare closed: boolean
+  declare failed: boolean
+  declare onFailure: (error: unknown) => void
+  declare worker: Worker
+
+  constructor(createWorker: () => Worker, onFailure: (error: unknown) => void) {
     this.pending = new Map()
     this.closed = false
     this.failed = false
     this.onFailure = onFailure
     this.worker = createWorker()
     try {
-      this.worker.onmessage = (event) => {
+      this.worker.onmessage = (event: MessageEvent<PlacementReply>) => {
         const request = this.pending.get(event.data?.id)
         if (!request)
           return
@@ -19,7 +27,7 @@ export default class WorkerClient {
         event.preventDefault?.()
         this.fail(event.error || event)
       }
-      this.worker.onmessageerror = event => this.fail(event.error || event)
+      this.worker.onmessageerror = event => this.fail((event as MessageEvent & { error?: unknown }).error || event)
     }
     catch (error) {
       try {
@@ -30,7 +38,7 @@ export default class WorkerClient {
     }
   }
 
-  request(message) {
+  request(message: PlacementRequest): Promise<PlacementReply> {
     message.id = ++nextRequest
     const { id } = message
     if (this.closed || this.failed)
@@ -46,7 +54,7 @@ export default class WorkerClient {
     })
   }
 
-  fail(error) {
+  fail(error: unknown) {
     if (this.closed || this.failed)
       return
     this.failed = true
@@ -70,8 +78,8 @@ export default class WorkerClient {
     this.closed = true
     this.cancel()
     let failed = false
-    let error
-    const attempt = (callback) => {
+    let error: unknown
+    const attempt = (callback: () => void) => {
       try {
         callback()
       }
@@ -81,7 +89,7 @@ export default class WorkerClient {
         failed = true
       }
     }
-    for (const name of ['onmessage', 'onerror', 'onmessageerror']) {
+    for (const name of ['onmessage', 'onerror', 'onmessageerror'] as const) {
       attempt(() => this.worker[name] = null)
     }
     attempt(() => this.worker.terminate())

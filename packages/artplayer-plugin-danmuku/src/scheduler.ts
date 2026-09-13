@@ -1,7 +1,28 @@
+import type Danmuku from './danmuku'
+import type { DanmuItem } from './types'
+
 const cancelled = Symbol('cancelled danmuku frame')
 
+export interface FrameOperation {
+  generation: number
+  cancel: () => void
+  wait: <T>(value: T | PromiseLike<T>) => Promise<T | typeof cancelled>
+  danmu?: DanmuItem
+  ref: HTMLDivElement | null
+}
+
 export default class Scheduler {
-  constructor(owner) {
+  declare owner: Danmuku
+  declare generation: number
+  declare starts: number
+  declare frame: number | null
+  declare operation: FrameOperation | null
+  declare closed: boolean
+  declare running: boolean
+  declare fault: boolean
+  declare failedItems: Set<DanmuItem>
+
+  constructor(owner: Danmuku) {
     this.owner = owner
     this.generation = 0
     this.starts = 0
@@ -13,13 +34,13 @@ export default class Scheduler {
     this.failedItems = new Set()
   }
 
-  active(operation) {
+  active(operation: FrameOperation) {
     const owner = this.owner
     return !this.closed && !this.fault && !owner.art.isDestroy && !owner.isStop
       && !owner.isHide && operation.generation === this.generation
   }
 
-  release(operation) {
+  release(operation: FrameOperation) {
     this.owner.renderer.release(operation)
   }
 
@@ -39,7 +60,7 @@ export default class Scheduler {
     this.failedItems.clear()
   }
 
-  report(error) {
+  report(error: unknown) {
     try {
       this.owner.art.emit('artplayerPluginDanmuku:error', error)
     }
@@ -48,7 +69,7 @@ export default class Scheduler {
     }
   }
 
-  fail(error) {
+  fail(error: unknown) {
     if (this.closed || this.fault)
       return
     this.fault = true
@@ -81,9 +102,9 @@ export default class Scheduler {
       owner.timer = null
       if (this.closed || this.fault || owner.isStop || owner.art.isDestroy)
         return
-      let cancel
-      const cancellation = new Promise(resolve => cancel = () => resolve(cancelled))
-      const operation = { generation: this.generation, cancel, wait: value => Promise.race([value, cancellation]), ref: null }
+      let cancel!: () => void
+      const cancellation = new Promise<typeof cancelled>(resolve => cancel = () => resolve(cancelled))
+      const operation: FrameOperation = { generation: this.generation, cancel, wait: value => Promise.race([value, cancellation]), ref: null }
       this.operation = operation
       return this.run(operation).catch((error) => {
         if (this.active(operation))
@@ -99,7 +120,7 @@ export default class Scheduler {
     owner.timer = this.frame
   }
 
-  async run(operation) {
+  async run(operation: FrameOperation) {
     const owner = this.owner
     if (!owner.art.playing || !this.active(operation))
       return
@@ -139,16 +160,18 @@ export default class Scheduler {
       danmu.$lastStartTime = Date.now()
       danmu.$restTime = owner.speed
       const distance = clientWidth + ref.clientWidth
-      const { result: top } = await operation.wait(owner.postMessage({
+      const reply = await operation.wait(owner.postMessage({
         type: 'getDanmuTop',
         target: { mode: danmu.mode, height: ref.clientHeight, speed: distance / danmu.$restTime },
         visibles: owner.visibles,
         antiOverlap: owner.option.antiOverlap,
         clientWidth,
         clientHeight,
-        marginBottom: owner.marginBottom,
+        // Valid margins are numeric. Preserve the old raw fallback for unsupported strings.
+        marginBottom: owner.marginBottom as number,
         marginTop: owner.marginTop,
       }))
+      const top = typeof reply === 'symbol' ? undefined : reply.result
       if (!this.active(operation) || danmu.$ref !== ref)
         return
       if (top !== undefined) {

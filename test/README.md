@@ -70,3 +70,15 @@ volume/rate, independent instances and cleanup. Published-only tests retain defe
 See [audio validation](../refactor/audio-validation.md) for actual media tests and limitations.
 
 Document PiP: `yarn test:dpip` runs 48 historical window/DOM/lifecycle cases. Native DOM iframe checks use `yarn test:browser test/browser/dpip.spec.js`; controlled window APIs do not establish native Document PiP support. See [validation notes](../refactor/dpip-validation.md).
+
+Danmuku: `yarn test:danmuku` covers historical behavior and current input, scheduling,
+settings, rendering and heatmap boundaries. `ARTPLAYER_DANMUKU_ARTIFACT` selects a
+built candidate for integration cases; direct internal tests remain source tests.
+The candidate Worker helper executes the selected artifact's Blob or data URL bytes;
+only source-mode controlled imports compile `worker.ts` separately. The frozen
+published helper remains unchanged. `yarn test:danmuku-types` checks the unchanged
+npm root, the optional accurate `/runtime` entry, implementation assignability and
+semantic editor declarations. `yarn test:danmuku-types-package` packs and installs
+the packages outside the workspace, verifies exact member bytes and frozen offline
+reinstallation, and checks historical and current compiler consumers. These type
+checks do not replace the native browser suite or final distribution acceptance.

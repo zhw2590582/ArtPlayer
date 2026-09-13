@@ -1,32 +1,47 @@
+import type { DanmuItem, DanmukuArt, HeatmapOptions, HeatmapPoint } from './types'
 import { heatmapGeometry } from './heatmap-geometry'
 
 let nextGradient = 0
 
-export default function heatmap(art, danmuku, option) {
+type HeatmapArt = Pick<DanmukuArt, 'isDestroy' | 'constructor' | 'on' | 'off' | 'controls' | 'option' | 'duration' | 'played'>
+interface HeatmapEvents {
+  'destroy': []
+  'video:timeupdate': []
+  'setBar': [type: string, percentage: number]
+  'ready': []
+  'resize': []
+  'artplayerPluginDanmuku:loaded': []
+  'artplayerPluginDanmuku:points': [points: HeatmapPoint[]]
+}
+type HeatmapCallback = (...args: unknown[]) => unknown
+
+export default function heatmap(art: HeatmapArt, danmuku: { queue: readonly Pick<DanmuItem, 'time'>[] }, option: boolean | HeatmapOptions): (() => void) | undefined {
   if (art.isDestroy)
     return
   const { query } = art.constructor.utils
-  let gradient
-  const subscriptions = []
-  let element
-  let start
-  let stop
+  let gradient: string | undefined
+  const subscriptions: [keyof HeatmapEvents, HeatmapCallback][] = []
+  let element: HTMLElement | undefined
+  let start: Element | null | undefined
+  let stop: Element | null | undefined
   let closed = false
 
   const active = () => !closed && !art.isDestroy
-  function listen(name, callback) {
-    subscriptions.push([name, callback])
-    art.on(name, callback)
+  function listen<Name extends keyof HeatmapEvents>(name: Name, callback: (...args: HeatmapEvents[Name]) => unknown) {
+    // Core's string-event overload erases payloads; this local map checks each subscription.
+    const listener = callback as HeatmapCallback
+    subscriptions.push([name, listener])
+    art.on(name, listener)
   }
-  function dispose(removeControl) {
+  function dispose(removeControl: boolean) {
     if (closed)
       return
     closed = true
     start = null
     stop = null
-    let failure
+    let failure: unknown
     let failed = false
-    const attempt = (callback) => {
+    const attempt = (callback: () => unknown) => {
       try {
         callback()
       }
@@ -44,29 +59,31 @@ export default function heatmap(art, danmuku, option) {
     if (failed)
       throw failure
   }
-  function progress(value) {
+  function progress(value: number) {
     if (active() && start && stop) {
       start.setAttribute('offset', `${value * 100}%`)
       stop.setAttribute('offset', `${value * 100}%`)
     }
   }
-  function draw(points = []) {
+  function draw(points: HeatmapPoint[] = []) {
     if (!active())
       return
     start = null
     stop = null
-    element.innerHTML = ''
+    // Drawing listeners are registered only after mounted assigns element; dispose closes first.
+    const target = element!
+    target.innerHTML = ''
     if (art.option.isLive)
       return
-    const shape = heatmapGeometry({ width: element.offsetWidth, height: element.offsetHeight, duration: art.duration, queue: danmuku.queue, option, points })
+    const shape = heatmapGeometry({ width: target.offsetWidth, height: target.offsetHeight, duration: art.duration, queue: danmuku.queue, option, points })
     if (!shape || !active())
       return
-    const document = element.ownerDocument
+    const document = target.ownerDocument
     if (!gradient)
       gradient = document ? 'heatmap-solids' : `heatmap-solids-${++nextGradient}`
     while (document?.getElementById(gradient))
       gradient = `heatmap-solids-${++nextGradient}`
-    element.innerHTML = `
+    target.innerHTML = `
       <svg viewBox="0 0 ${shape.width} ${shape.height}">
         <defs>
           <linearGradient id="${gradient}" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -79,11 +96,11 @@ export default function heatmap(art, danmuku, option) {
         <path fill="url(#${gradient})" d="${shape.path}"></path>
       </svg>
     `
-    start = query('#heatmap-start', element)
-    stop = query('#heatmap-stop', element)
+    start = query('#heatmap-start', target)
+    stop = query('#heatmap-stop', target)
     progress(art.played)
   }
-  function update(points) {
+  function update(points?: HeatmapPoint[]) {
     try {
       draw(points)
     }

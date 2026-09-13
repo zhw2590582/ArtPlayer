@@ -1,4 +1,6 @@
-export function defaultOption() {
+import type { DanmukuOption, NormalizedOption } from './types'
+
+export function defaultOption(): NormalizedOption & { fontSize: number, margin: [number, string] } {
   return {
     danmuku: [],
     speed: 5,
@@ -62,21 +64,21 @@ export function optionScheme() {
   }
 }
 
-export function isPromiseInput(value) {
+export function isPromiseInput(value: unknown): value is Promise<unknown> {
   return value instanceof Promise || Object.prototype.toString.call(value) === '[object Promise]'
 }
 
-export function optionChanged(previous, update) {
+export function optionChanged(previous: NormalizedOption, update: DanmukuOption) {
   return Object.keys(update).some((key) => {
-    const before = previous[key]
-    const after = update[key]
+    const before = previous[key as keyof NormalizedOption]
+    const after = update[key as keyof NormalizedOption]
     if (typeof before === 'function' || typeof after === 'function' || isPromiseInput(before) || isPromiseInput(after))
       return before !== after
     return JSON.stringify(before) !== JSON.stringify(after)
   })
 }
 
-export function normalizeOption(previous, update, { defaults, validate, clamp, mount }) {
+export function normalizeOption(previous: NormalizedOption, update: DanmukuOption, { defaults, validate, clamp, mount }: { defaults: NormalizedOption, validate: (value: NormalizedOption) => unknown, clamp: (value: number, min: number, max: number) => number, mount: HTMLDivElement }): NormalizedOption {
   const next = Object.assign({}, defaults, previous, update)
   validate(next)
   next.mode = clamp(next.mode, 0, 2)

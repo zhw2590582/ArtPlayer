@@ -1,17 +1,20 @@
-export async function emitSetting(setting) {
+import type Setting from './setting'
+import type { DanmuInput } from './types'
+
+export async function emitSetting(setting: Setting) {
   const { lifecycle, template: { $input } } = setting
   if (!lifecycle.active)
     return
   const text = $input.value.trim()
   if (!text.length || setting.isLock || setting.emitting)
     return
-  const danmu = {
+  const danmu: DanmuInput = {
     text,
     mode: setting.option.mode,
     color: setting.option.color,
     time: setting.art.currentTime,
   }
-  const report = (error) => {
+  const report = (error: unknown) => {
     if (lifecycle.active)
       console.error('Error emitting danmuku:', error)
   }
@@ -39,15 +42,15 @@ export async function emitSetting(setting) {
   }
 }
 
-export function lockSetting(setting) {
+export function lockSetting(setting: Setting) {
   if (!setting.lifecycle.active)
     return
   const { addClass } = setting.utils
   const { $send } = setting.template
-  clearTimeout(setting.timer)
+  clearTimeout(setting.timer as number | undefined)
   setting.isLock = true
   let time = setting.option.lockTime
-  $send.textContent = time
+  $send.textContent = time as unknown as string
   addClass($send, 'apd-lock')
   const loop = () => {
     setting.timer = setTimeout(() => {
@@ -58,7 +61,7 @@ export function lockSetting(setting) {
       }
       else {
         time -= 1
-        $send.textContent = time
+        $send.textContent = time as unknown as string
         loop()
       }
     }, 1000)
@@ -66,8 +69,8 @@ export function lockSetting(setting) {
   loop()
 }
 
-export function unlockSetting(setting) {
-  clearTimeout(setting.timer)
+export function unlockSetting(setting: Setting) {
+  clearTimeout(setting.timer as number | undefined)
   setting.timer = null
   setting.isLock = false
   if (!setting.lifecycle.active)

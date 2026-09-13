@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict'
-import fs from 'node:fs'
 // eslint-disable-next-line test/no-import-node-test -- Deterministic candidate scheduling uses the Node runner.
 import test from 'node:test'
 import vm from 'node:vm'
-import { danmukuCandidate, danmukuCandidateEnvironment } from './helpers/danmuku-candidate.js'
+import { danmukuCandidate, danmukuCandidateEnvironment, danmukuWorkerCode } from './helpers/danmuku-candidate.js'
 import { deferred } from './helpers/danmuku.js'
 
 const implementation = await danmukuCandidate()
@@ -44,10 +43,7 @@ async function fixture(options = {}, { automatic = false } = {}) {
     return child
   }
   const worker = env.workers[0]
-  const actualBlob = env.urls.get(worker.url)
-  const workerCode = actualBlob
-    ? await actualBlob.text()
-    : fs.readFileSync(new URL('../packages/artplayer-plugin-danmuku/src/worker.js', import.meta.url), 'utf8')
+  const workerCode = await danmukuWorkerCode(implementation, env, worker)
   const responses = []
   const workerContext = vm.createContext({ postMessage: data => responses.push(structuredClone(data)), URL: { revokeObjectURL() {} }, location: { href: worker.url } })
   workerContext.self = workerContext
