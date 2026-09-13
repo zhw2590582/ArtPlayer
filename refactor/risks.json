@@ -4120,6 +4120,91 @@
       "compatibleResolution": "Establish actual decoded-frame readiness for the existing timeline/grid and preserve silent independent extraction; do not waive colored pixel checks as unsupported media.",
       "closureCriteria": "Candidate source and artifacts generate usable sampled pixels on native browser controls with lifecycle checks; supported Safari and core combinations remain explicit final gates.",
       "workspaceState": "The frames module now waits for native presentation and seek completion on capable browsers. Chromium/Firefox source/main/legacy assert all five cells including first purple frame, second red cell, legitimate black and presentation times. Callback-less Windows WebKit first two cells remain diagnostic, later cells asserted; physical Safari/core combinations remain open. 84 native lifecycle/pixel cases passed with explicit held native-frame vs Blob-fallback paths; 19 new Node cases fail 17 ways on prior checkpoint and all 52 current cases pass per candidate. Risk and task03 remain open."
+    },
+    {
+      "id": "VTT-THUMB-DIST-01",
+      "title": "Historical 1.0.0 main/legacy contain invalid regular expressions and cannot load",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VTT-THUMB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/vtt-thumbnail-release.json",
+        "refactor/baselines/vtt-thumbnail-contract.md",
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve archive evidence without reproducing broken entry syntax.",
+      "closureCriteria": "Candidate actual installed main/legacy/ESM/types/global entries work and historical deep paths are reviewed."
+    },
+    {
+      "id": "VTT-THUMB-PARSE-01",
+      "title": "Historical compiled arrows differ from shipped source; parsing floors bounds and assumes alternating lines",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VTT-THUMB-02",
+        "PKG-VTT-THUMB-03"
+      ],
+      "evidence": [
+        "refactor/baselines/vtt-thumbnail-release.json",
+        "refactor/baselines/vtt-thumbnail-contract.md",
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve valid cue selection and geometry; test malformed data and standard VTT separately from old compiler defects.",
+      "closureCriteria": "Parser fixtures include malformed, empty, real demo VTT, fractional and shared bounds, relative URLs and historical accepted formats."
+    },
+    {
+      "id": "VTT-THUMB-LIFE-01",
+      "title": "Fetch completion, setBar listeners and mobile timers have no destroy ownership",
+      "confirmation": "source-observed",
+      "status": "open",
+      "owners": [
+        "PKG-VTT-THUMB-02",
+        "PKG-VTT-THUMB-03",
+        "PKG-VTT-THUMB-05"
+      ],
+      "evidence": [
+        "refactor/baselines/vtt-thumbnail-release.json",
+        "refactor/baselines/vtt-thumbnail-contract.md",
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Own requests, listeners, timers and controls per registration without stale writes or cross-instance cleanup.",
+      "closureCriteria": "Deferred request, destroy, failure, timer, repeated registration and native core scenarios demonstrate cleanup."
+    },
+    {
+      "id": "VTT-THUMB-TYPE-01",
+      "title": "Published declarations falsely describe async registration as a synchronous result",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VTT-THUMB-04"
+      ],
+      "evidence": [
+        "refactor/baselines/vtt-thumbnail-release.json",
+        "refactor/baselines/vtt-thumbnail-contract.md",
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Preserve valid consumers and actual async runtime, with explicit decisions for irreconcilable inference changes.",
+      "closureCriteria": "Isolated old/new compiler and installed consumers verify options, styles, callback and result forms."
+    },
+    {
+      "id": "VTT-THUMB-EXPORT-01",
+      "title": "Older CommonJS default objects and thumbnails control names differ from latest direct export and vtt-thumbnail name",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VTT-THUMB-04",
+        "PKG-VTT-THUMB-05",
+        "PKG-VTT-THUMB-06"
+      ],
+      "evidence": [
+        "refactor/baselines/vtt-thumbnail-release.json",
+        "refactor/baselines/vtt-thumbnail-contract.md",
+        "refactor/scripts/vtt-thumbnail-contract.test.mjs"
+      ],
+      "compatibleResolution": "Validate historical import forms and control integrations before selecting compatibility adapters.",
+      "closureCriteria": "Actual package consumers and old/new cores prove supported forms; unresolved differences stay explicit."
     }
   ]
 }

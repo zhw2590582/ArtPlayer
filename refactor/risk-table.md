@@ -189,3 +189,8 @@
 | AUTO-THUMB-LIFE-01 | open / 已复现 | Extraction tasks, decoder handlers and final object URLs lack source-switch and destroy ownership | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
 | AUTO-THUMB-ENCODE-01 | open / 已复现 | Unserialized encodes include blank output and lack media/canvas/input failure handling | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
 | AUTO-THUMB-PIXEL-01 | open / 已复现 | Historical auto-thumbnail yields black sampled JPEG cells on Windows WebKit while played native video and static JPEG controls yield color | PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-05 |
+| VTT-THUMB-DIST-01 | open / 已复现 | Historical 1.0.0 main/legacy contain invalid regular expressions and cannot load | PKG-VTT-THUMB-06 |
+| VTT-THUMB-PARSE-01 | open / 已复现 | Historical compiled arrows differ from shipped source; parsing floors bounds and assumes alternating lines | PKG-VTT-THUMB-02, PKG-VTT-THUMB-03 |
+| VTT-THUMB-LIFE-01 | open / 源码/产物事实 | Fetch completion, setBar listeners and mobile timers have no destroy ownership | PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-05 |
+| VTT-THUMB-TYPE-01 | open / 已复现 | Published declarations falsely describe async registration as a synchronous result | PKG-VTT-THUMB-04 |
+| VTT-THUMB-EXPORT-01 | open / 已复现 | Older CommonJS default objects and thumbnails control names differ from latest direct export and vtt-thumbnail name | PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |

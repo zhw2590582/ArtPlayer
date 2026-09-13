@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VTT-THUMB-01",
+  "capturedAt": "2026-09-12T23:55:47.965Z",
+  "sourceCommit": "8c57d56f1732e745a4f18f51d735d5c44a203878",
+  "registryObservation": {
+    "url": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail",
+    "status": 200,
+    "sha256": "3c07418004b732ca2af5ada5625a78527a6fc21ee615074d4161b2bcbeecff4d",
+    "versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.0.2",
+      "1.0.3",
+      "1.1.0"
+    ],
+    "latest": "1.1.0",
+    "workspaceVersion": "1.1.0"
+  },
+  "release": {
+    "name": "artplayer-plugin-vtt-thumbnail",
+    "version": "1.1.0",
+    "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/1.1.0",
+    "tarball": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/-/artplayer-plugin-vtt-thumbnail-1.1.0.tgz",
+    "integrity": "sha512-p5HIiaxBEN0CV4FWOWXCfy6hcQL59JuFIGUbQtVg9AcunPg2gJ1cJ8P0HEQ/ngH6tl1/puxrJIKydoAdX5L2dw==",
+    "sha256": "e2df36283538bbffc2c37fe28a8af0fe6fc0fa68a5f6cf93042929ee64d55765",
+    "archiveBytes": 3548,
+    "publishedAt": "2026-03-12T14:20:23.414Z",
+    "registryGitHead": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+    "files": {
+      "package/README.md": "aa10b8b0d740111dc02aa8a0957fbc5a465aadcd4fb792bfe75f0d8e5bd5f4a0",
+      "package/dist/artplayer-plugin-vtt-thumbnail.js": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d",
+      "package/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "ecbd0abe12c537687fb058de552c328c71ced71d911e454d0e37887192e9a291",
+      "package/dist/artplayer-plugin-vtt-thumbnail.mjs": "413af5e4f28d47c659521332042a8347da357b17af39cf08c89ce3347897c618",
+      "package/package.json": "ed37ae39b73b67f6b6a9d43901ac11435f162e06d6a0a7b26c6614bcea0f9a38",
+      "package/types/artplayer-plugin-vtt-thumbnail.d.ts": "c2a010b219e10f56ba7357fd9646479045639b85f91be53405ad0ca1046970c6"
+    },
+    "manifest": {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.1.0",
+      "description": "vtt thumbnail plugin for ArtPlayer",
+      "author": "Harvey Zhao <laozhaochaguan@gmail.com>",
+      "license": "MIT",
+      "homepage": "https://artplayer.org",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+      },
+      "bugs": {
+        "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+      },
+      "keywords": [
+        "html5",
+        "video",
+        "player"
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+          "require": "./dist/artplayer-plugin-vtt-thumbnail.js"
+        },
+        "./legacy": {
+          "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+          "import": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+          "require": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js"
+        }
+      },
+      "main": "./dist/artplayer-plugin-vtt-thumbnail.js",
+      "module": "./dist/artplayer-plugin-vtt-thumbnail.mjs",
+      "types": "./types/artplayer-plugin-vtt-thumbnail.d.ts",
+      "legacy": "./dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+      "browserslist": "last 1 Chrome version"
+    },
+    "missingEntrypoints": {},
+    "historicalCore": {
+      "version": "5.3.1",
+      "commit": "daf133b22630b4a0eecfa3336bbddab0e9119d96",
+      "file": "packages/artplayer/package.json",
+      "sha256LF": "862f3697876fe915dd0ada178da766ce823aae7563ed30b3e5b11b811202929c",
+      "meaning": "Git source association, not a declared or tested supported range."
+    }
+  },
+  "previous": [
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.0.0",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/1.0.0",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/-/artplayer-plugin-vtt-thumbnail-1.0.0.tgz",
+      "integrity": "sha512-tIUblchzZcYgxP7nUQxjr997ejuUWH6Xn8Qe1ls94k+Aoykv3Gq6H54mFpfvik4Cx2TqFER+Cq21bb+9h4nhjQ==",
+      "sha256": "18440510636529d76d97cd653433e65f795173e2e134d24caf0612845328dca1",
+      "archiveBytes": 8616,
+      "publishedAt": "2024-05-27T03:32:55.989Z",
+      "registryGitHead": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+      "files": {
+        "package/README.md": "b678aa0bc562de5eb4cb3f9f9c528974368f77cc445c7ff6ccd8021c9edd4e1d",
+        "package/dist/artplayer-plugin-vtt-thumbnail.js": "b430236fbabdce0edb179658dc4c498b83f52ccb08a4a692f555d296443a3f61",
+        "package/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "94b7ea6e9ff16830eb1200d091b09f515d04020eead8d18c14138a98577d9807",
+        "package/package.json": "e6bce38fc30f859a1edc14c29dbdb36d659993a5d41f725b561c4ef2b0a065c0",
+        "package/src/getVttArray.js": "0407f520a855724a11c5e47b621327edd2777f74f9c00e9b67537c756936a091",
+        "package/src/index.js": "378fdaf2a3010cdd0fe172901f1b81adb30437f13390dbb0c6fe3ad1297d3e48",
+        "package/types/artplayer-plugin-vtt-thumbnail.d.ts": "f3fb89d9e5c64215fb51722f25cce99e51baa3648e001fbab3fdef26de85efc4"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.0",
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+        "description": "vtt thumbnail plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-vtt-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.1.2",
+        "commit": "43309b72cff84344bd61f4de505aee0e10a83e6b",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "aaf3ba9c7beaaea31170cc50e3958c0bb5d779ab4f90b6a213994ce8c9aace36",
+        "meaning": "Git source association, not a declared or tested supported range."
+      }
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.0.1",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/1.0.1",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/-/artplayer-plugin-vtt-thumbnail-1.0.1.tgz",
+      "integrity": "sha512-t+xnYNYl0rhDBRJNOoTEamlQRbXJkIMGj01iuhcVO3OePjd/Ah52lJE+ZjMGD2Bso1BdQhWeYxQuZwGKhcf4nA==",
+      "sha256": "2827599516c48fa17c3e8c917164df8ea3f9a3a5ef2643e079fd0df73a171175",
+      "archiveBytes": 8656,
+      "publishedAt": "2024-06-15T11:55:58.930Z",
+      "registryGitHead": "74460a765e792d79296a7f8072e1159d2899b991",
+      "files": {
+        "package/README.md": "b678aa0bc562de5eb4cb3f9f9c528974368f77cc445c7ff6ccd8021c9edd4e1d",
+        "package/dist/artplayer-plugin-vtt-thumbnail.js": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+        "package/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "15bd66d9820d5517355dccd68178e9e3b64965504a98906c3473dbc62e744434",
+        "package/package.json": "3701442798961615144f6d4d02e7855e2933ce5879e97629b64f2a166b8ba3b3",
+        "package/src/getVttArray.js": "0407f520a855724a11c5e47b621327edd2777f74f9c00e9b67537c756936a091",
+        "package/src/index.js": "b30fb9370b5715511002562bb9fc84a35313a697b78fccd97bb5ebc26c1274b3",
+        "package/types/artplayer-plugin-vtt-thumbnail.d.ts": "f3fb89d9e5c64215fb51722f25cce99e51baa3648e001fbab3fdef26de85efc4"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.1",
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+        "description": "vtt thumbnail plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-vtt-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.1.6",
+        "commit": "74460a765e792d79296a7f8072e1159d2899b991",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "412253a67616ed94c058a4eefdb5f0e7b863f696a92e5ac9e3e82c87ce5aec0d",
+        "meaning": "Git source association, not a declared or tested supported range."
+      }
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.0.2",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/1.0.2",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/-/artplayer-plugin-vtt-thumbnail-1.0.2.tgz",
+      "integrity": "sha512-N7t8QjZUKfeQySWViQ/BdJ0cTBZ50N6WIhuv/bsuUGZNI2BAPlguaOxcVfa+tN2h1xBtbxmafXyA2s02IoiCVA==",
+      "sha256": "a2230637d991731cef5f5f133bcb93a2e41bacb8a1a361b60b5c901a267fcbf1",
+      "archiveBytes": 8661,
+      "publishedAt": "2024-08-31T03:49:59.580Z",
+      "registryGitHead": "c7299b926eb9ee2e5d0070b23621902118c17da6",
+      "files": {
+        "package/README.md": "b678aa0bc562de5eb4cb3f9f9c528974368f77cc445c7ff6ccd8021c9edd4e1d",
+        "package/dist/artplayer-plugin-vtt-thumbnail.js": "d163ee19b42ea0236a94f3eccb402292c5ba9987db03accf967027cc163192b1",
+        "package/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "e11fc1fec96686f966477b8419405bebf86f5a0b6855f8c829feb43e8542879a",
+        "package/package.json": "2ddb70ed39f01191d5e1aa944f1e857153c40e1f1424e09d121b26d322bb5b05",
+        "package/src/getVttArray.js": "0407f520a855724a11c5e47b621327edd2777f74f9c00e9b67537c756936a091",
+        "package/src/index.js": "1be3ae540320b0b974a1ce8a62f5b403678791767df1f10c9d203b80e2c9f3e2",
+        "package/types/artplayer-plugin-vtt-thumbnail.d.ts": "f3fb89d9e5c64215fb51722f25cce99e51baa3648e001fbab3fdef26de85efc4"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.2",
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+        "description": "vtt thumbnail plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-vtt-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.1.7",
+        "commit": "c7299b926eb9ee2e5d0070b23621902118c17da6",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+        "meaning": "Git source association, not a declared or tested supported range."
+      }
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.0.3",
+      "metadataUrl": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/1.0.3",
+      "tarball": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/-/artplayer-plugin-vtt-thumbnail-1.0.3.tgz",
+      "integrity": "sha512-JiwqpQsWUSf1MR+K1kHKsjKRPB4nPDNv80wCXbqYZWQ4/fpobN5J4jn8jZ19n6Dplm4OnIUZi5/huGWOgOcobA==",
+      "sha256": "286ba11db6adaeb85a4b3fef198af9a10ed0a548566d57ef7efa77c4b4f05f83",
+      "archiveBytes": 8698,
+      "publishedAt": "2024-08-31T04:02:06.368Z",
+      "registryGitHead": "44171beb3ad1735a3bb487605a9e540b789a671c",
+      "files": {
+        "package/README.md": "b678aa0bc562de5eb4cb3f9f9c528974368f77cc445c7ff6ccd8021c9edd4e1d",
+        "package/dist/artplayer-plugin-vtt-thumbnail.js": "2c5a97f61cc2c94c7684e7c0fc0bdf3cfad8e641a73cec8e534a1854754d8066",
+        "package/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "ecb68c8cc66a06d5c0f18110bd375ff1dcf3b7e3574af205de3192e7d3932651",
+        "package/package.json": "fc5fd92b9b9b54dfd7aa025ba7896c2895e441796751df14ca90b81f5421d477",
+        "package/src/getVttArray.js": "0407f520a855724a11c5e47b621327edd2777f74f9c00e9b67537c756936a091",
+        "package/src/index.js": "284fc9f0bbd70ab58586b7d4f54c0fba17314bc908d5ff2c91f2c07db8a2ed81",
+        "package/types/artplayer-plugin-vtt-thumbnail.d.ts": "f3fb89d9e5c64215fb51722f25cce99e51baa3648e001fbab3fdef26de85efc4"
+      },
+      "manifest": {
+        "license": "MIT",
+        "version": "1.0.3",
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "types": "types/artplayer-plugin-vtt-thumbnail.d.ts",
+        "description": "vtt thumbnail plugin for ArtPlayer",
+        "main": "dist/artplayer-plugin-vtt-thumbnail.js",
+        "legacy": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "author": "Harvey Zack <laozhaochaguan@gmail.com>",
+        "browserslist": "last 1 Chrome version",
+        "homepage": "https://artplayer.org",
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/zhw2590582/ArtPlayer.git"
+        },
+        "bugs": {
+          "url": "https://github.com/zhw2590582/ArtPlayer/issues"
+        },
+        "keywords": [
+          "html5",
+          "video",
+          "player"
+        ]
+      },
+      "missingEntrypoints": {},
+      "historicalCore": {
+        "version": "5.1.7",
+        "commit": "44171beb3ad1735a3bb487605a9e540b789a671c",
+        "file": "packages/artplayer/package.json",
+        "sha256LF": "8bd532103099c367fb2c289e0d410f144fdeb00b1b62cf850762a24b61e63c8a",
+        "meaning": "Git source association, not a declared or tested supported range."
+      }
+    }
+  ],
+  "source": {
+    "packages/artplayer-plugin-vtt-thumbnail/.npmignore": "46063058e98be55dba5cf5f33d379e73eca048f4126e7af75f8011bab7f09145",
+    "packages/artplayer-plugin-vtt-thumbnail/README.md": "aa10b8b0d740111dc02aa8a0957fbc5a465aadcd4fb792bfe75f0d8e5bd5f4a0",
+    "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.js": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d",
+    "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.legacy.js": "ecbd0abe12c537687fb058de552c328c71ced71d911e454d0e37887192e9a291",
+    "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.mjs": "413af5e4f28d47c659521332042a8347da357b17af39cf08c89ce3347897c618",
+    "packages/artplayer-plugin-vtt-thumbnail/package.json": "ed37ae39b73b67f6b6a9d43901ac11435f162e06d6a0a7b26c6614bcea0f9a38",
+    "packages/artplayer-plugin-vtt-thumbnail/src/getVttArray.js": "5184d98a40017829f4c0b3c7514c22f866cea6bc9aa706e140127b694727d71b",
+    "packages/artplayer-plugin-vtt-thumbnail/src/index.js": "183c0f8f5cab033c3277c3d791b0f555ad5858aeb47c0b829d42487b7de921f2",
+    "packages/artplayer-plugin-vtt-thumbnail/types/artplayer-plugin-vtt-thumbnail.d.ts": "c2a010b219e10f56ba7357fd9646479045639b85f91be53405ad0ca1046970c6",
+    "docs/assets/example/vtt.thumbnail.js": "05465b0da63b23626a3032a9c1f44d3e78ed501a313aaed885ac232ab720ffee"
+  }
+}

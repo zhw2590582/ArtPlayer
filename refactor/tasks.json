@@ -1854,11 +1854,15 @@
       "dependsOn": [
         "BASE-05"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "vtt/style、异步返回、预览控件名与样式契约",
       "acceptance": "源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结",
-      "evidence": []
+      "evidence": [
+        "baselines/vtt-thumbnail-release.json",
+        "baselines/vtt-thumbnail-contract.md",
+        "changes/2026-09-13-PKG-VTT-THUMB-01-contract.md"
+      ]
     },
     {
       "id": "PKG-VTT-THUMB-02",

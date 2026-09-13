@@ -436,10 +436,15 @@
         "API-12": "PKG-VTT-THUMB-02"
       },
       "versionIds": [
-        "WS-artplayer-plugin-vtt-thumbnail"
+        "WS-artplayer-plugin-vtt-thumbnail",
+        "PUB-artplayer-plugin-vtt-thumbnail-1.1.0",
+        "PUB-artplayer-plugin-vtt-thumbnail-1.0.0",
+        "PUB-artplayer-plugin-vtt-thumbnail-1.0.1",
+        "PUB-artplayer-plugin-vtt-thumbnail-1.0.2",
+        "PUB-artplayer-plugin-vtt-thumbnail-1.0.3"
       ],
       "supportWindow": "not-inferred-from-baseline",
-      "scopeReview": "Each public member, callback, option, event and capability requires package contract review; family ownership alone is not exhaustive coverage"
+      "scopeReview": "Five verified actual npm archives; 1.0.0 main/legacy cannot parse, and 1.0.1–1.0.3 compiled timestamp parsing differs from their shipped source. Source-only fixtures and Git core associations are not installed or browser support evidence. See vtt-thumbnail-contract.md."
     },
     {
       "name": "artplayer-proxy-canvas",
@@ -912,6 +917,51 @@
       "file": "refactor/baselines/auto-thumbnail-release.json",
       "pointer": "/previous/1",
       "archiveSha256": "0a907bc8dbf2ef773764645730309b2c95592f84b31f5c4f9cec636d29c0263e"
+    },
+    {
+      "id": "PUB-artplayer-plugin-vtt-thumbnail-1.1.0",
+      "package": "artplayer-plugin-vtt-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.1.0",
+      "file": "refactor/baselines/vtt-thumbnail-release.json",
+      "pointer": "/release",
+      "archiveSha256": "e2df36283538bbffc2c37fe28a8af0fe6fc0fa68a5f6cf93042929ee64d55765"
+    },
+    {
+      "id": "PUB-artplayer-plugin-vtt-thumbnail-1.0.0",
+      "package": "artplayer-plugin-vtt-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.0.0",
+      "file": "refactor/baselines/vtt-thumbnail-release.json",
+      "pointer": "/previous/0",
+      "archiveSha256": "18440510636529d76d97cd653433e65f795173e2e134d24caf0612845328dca1"
+    },
+    {
+      "id": "PUB-artplayer-plugin-vtt-thumbnail-1.0.1",
+      "package": "artplayer-plugin-vtt-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.0.1",
+      "file": "refactor/baselines/vtt-thumbnail-release.json",
+      "pointer": "/previous/1",
+      "archiveSha256": "2827599516c48fa17c3e8c917164df8ea3f9a3a5ef2643e079fd0df73a171175"
+    },
+    {
+      "id": "PUB-artplayer-plugin-vtt-thumbnail-1.0.2",
+      "package": "artplayer-plugin-vtt-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.0.2",
+      "file": "refactor/baselines/vtt-thumbnail-release.json",
+      "pointer": "/previous/2",
+      "archiveSha256": "a2230637d991731cef5f5f133bcb93a2e41bacb8a1a361b60b5c901a267fcbf1"
+    },
+    {
+      "id": "PUB-artplayer-plugin-vtt-thumbnail-1.0.3",
+      "package": "artplayer-plugin-vtt-thumbnail",
+      "kind": "published-baseline",
+      "version": "1.0.3",
+      "file": "refactor/baselines/vtt-thumbnail-release.json",
+      "pointer": "/previous/3",
+      "archiveSha256": "286ba11db6adaeb85a4b3fef198af9a10ed0a548566d57ef7efa77c4b4f05f83"
     }
   ],
   "cases": [

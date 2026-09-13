@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-VTT-THUMB-01",
+  "status": "done",
+  "parentCommit": "8c57d56f1732e745a4f18f51d735d5c44a203878",
+  "checks": [
+    {
+      "command": "node --test refactor/scripts/vtt-thumbnail-contract.test.mjs refactor/scripts/risk-register.test.mjs refactor/scripts/contracts.test.mjs",
+      "result": "pass",
+      "tests": 100,
+      "packageContract": 91,
+      "log": "refactor/.cache/vtt-thumbnail01-targeted.log"
+    },
+    {
+      "command": "yarn ci:check",
+      "result": "pass",
+      "tests": {
+        "unit": 1572,
+        "engineering": 14,
+        "baseline": 323,
+        "total": 1909
+      },
+      "log": "refactor/.cache/vtt-thumbnail01-ci.log",
+      "logSha256": "44cee18b3a0fa8da03ba6a8f2634b31459e2457b110841e41d10cad08a8dda5a"
+    },
+    {
+      "command": "targeted eslint --fix then full CI lint --no-fix",
+      "result": "pass"
+    }
+  ],
+  "archiveScope": {
+    "versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.0.2",
+      "1.0.3",
+      "1.1.0"
+    ],
+    "members": 34,
+    "frozenInputs": 10,
+    "sourceOnly": "1.0.0 shipped source; actual main/legacy cannot load"
+  },
+  "initialFinding": {
+    "tests": 79,
+    "pass": 43,
+    "fail": 36,
+    "cause": "Actual 1.0.1-1.0.3 bundles reject spaces after cue arrows; accepted fixtures are now explicit and separate assertions retain the standard-format failure",
+    "log": "refactor/.cache/vtt-thumbnail01-contract-initial.log"
+  },
+  "limitations": [
+    "Controlled host, not native browser or installed package acceptance",
+    "No supported core range inferred from Git associations",
+    "Production cleanup, parser errors, TS and consumer compatibility remain tasks 02-06"
+  ]
+}

@@ -1,5 +1,15 @@
 # 进度与证据
 
+## PKG-VTT-THUMB-01 历史契约完成
+
+五份真实 npm 归档、34 成员、十份 Git 输入已冻结，91 项包契约及 9 项索引/风险检查通过。
+完整 CI 1909 项（1572 单元、14 工程、323 基线）通过。明确区分 1.0.0 无效运行入口、
+1.0.1–1.0.3 编译解析差异与有效随包源码；当前生产实现未改动。
+见[契约](baselines/vtt-thumbnail-contract.md)、[验证](baselines/vtt-thumbnail-contract-validation.json)、
+[变更](changes/2026-09-13-PKG-VTT-THUMB-01-contract.md)。五项风险保持 open，下一步 02 复现失败/销毁。
+222 项：115 done、12 doing、95 todo；本任务独立本地提交，不推送、不发布。
+
+
 ## PKG-AUTO-THUMB-03 原生帧就绪检查点（doing）
 
 新增frames模块，对支持的浏览器同时等待seek完成与原生帧呈现，补齐取消、超时、
