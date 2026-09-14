@@ -158,7 +158,8 @@
     "test:rollback:mainline": "node scripts/mainline-rehearsal.mjs",
     "check:rollback-inventory": "node refactor/scripts/rollback-inventory.mjs --check",
     "test:rollback:pages": "node scripts/pages-recovery.mjs",
-    "test:rollback:pages:browser": "node test/pages-recovery-browser.mjs"
+    "test:rollback:pages:browser": "node test/pages-recovery-browser.mjs",
+    "test:bun-install": "node refactor/scripts/bun-evaluation.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

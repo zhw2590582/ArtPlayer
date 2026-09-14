@@ -4544,11 +4544,15 @@
       "dependsOn": [
         "ENG-09"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "独立目录的 Bun 安装与 Yarn 冻结基线对比，默认仍为用户选定的 Yarn",
       "acceptance": "Node 测试仍通过；安装与资源一致才决定采用；不改 bundler；不自动替换默认 packageManager 或维护锁文件",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-15-MOD-01-bun-evaluation.md",
+        "baselines/bun-install-validation.json",
+        "bun-evaluation.md"
+      ]
     },
     {
       "id": "MOD-PLUGIN-01",

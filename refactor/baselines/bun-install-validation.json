@@ -1,0 +1,1954 @@
+{
+  "task": "MOD-01",
+  "status": "evaluated-retain-yarn",
+  "capturedAt": "2026-09-14T17:13:15.726Z",
+  "source": "ddf3d6ccbc2fa7a3fa1a25c2b935b9d7045cee5c",
+  "toolchain": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "bun": "1.4.2+744846f84",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "bunAsset": {
+    "path": "refactor/.cache/toolchains/bun-1.4.2/bun-windows-x64.zip",
+    "bytes": 39807510,
+    "sha256": "ce4c17497b2f29712a99d3d53f028de28cd42e3bacb8589599e7f000e49b6405",
+    "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-windows-x64.zip",
+    "digestMatchesGitHubRelease": true
+  },
+  "snapshot": {
+    "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/snapshot.json",
+    "bytes": 1478,
+    "sha256": "3f6acb49fc5fc3bf05f4324d5fd3c2ae83acc414101c426e238ef493aef62551"
+  },
+  "installResults": [
+    {
+      "task": "MOD-01",
+      "phase": "yarn",
+      "source": "ddf3d6ccbc2fa7a3fa1a25c2b935b9d7045cee5c",
+      "node": "24.21.0",
+      "executable": "D:\\github\\ArtPlayer\\refactor\\.cache\\toolchains\\node-v24.21.0-win-x64\\node.exe",
+      "args": [
+        "D:\\github\\ArtPlayer\\refactor\\.cache\\toolchains\\yarn-1.22.22\\package\\bin\\yarn.js",
+        "install",
+        "--frozen-lockfile",
+        "--non-interactive",
+        "--cache-folder",
+        "D:\\github\\ArtPlayer\\refactor\\.cache\\bun-evaluation\\run-rfj8zl\\yarn-cache"
+      ],
+      "durationMs": 22453.925,
+      "exitCode": 0,
+      "signal": null,
+      "sourceFilesUnchanged": true,
+      "bunLock": null,
+      "log": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/yarn-install.log",
+        "bytes": 2601,
+        "sha256": "4318d00542371095c4a519896a51ba26bfc63eff97304b37c3827e306429cbc1"
+      },
+      "coldPackageCache": false,
+      "browserDownloadExcluded": true,
+      "report": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/yarn-install.json",
+        "bytes": 715,
+        "sha256": "0a2e886b8ab2f2bd5a77245210a64d9ebc7aa2f1279f90ad48a6fe9fc66f2a89"
+      }
+    },
+    {
+      "task": "MOD-01",
+      "phase": "bun-frozen",
+      "source": "ddf3d6ccbc2fa7a3fa1a25c2b935b9d7045cee5c",
+      "node": "24.21.0",
+      "executable": "D:\\github\\ArtPlayer\\refactor\\.cache\\toolchains\\bun-1.4.2\\bun-windows-x64\\bun.exe",
+      "args": [
+        "install",
+        "--frozen-lockfile",
+        "--cache-dir",
+        "D:\\github\\ArtPlayer\\refactor\\.cache\\bun-evaluation\\run-Y3QMy1\\bun-frozen-cache",
+        "--backend=copyfile"
+      ],
+      "durationMs": 18547.906,
+      "exitCode": 1,
+      "signal": null,
+      "sourceFilesUnchanged": true,
+      "bunLock": null,
+      "log": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-frozen-install.log",
+        "bytes": 268,
+        "sha256": "d3a9f6c432190aceb3343e88edd06318545443dce779aff41082b718357b436f"
+      },
+      "coldPackageCache": true,
+      "browserDownloadExcluded": true,
+      "report": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-frozen-install.json",
+        "bytes": 638,
+        "sha256": "0755db272e051fe27e154bb75f66cdae37616ef0646a194dac76db69091f6113"
+      }
+    },
+    {
+      "task": "MOD-01",
+      "phase": "bun-migrate",
+      "source": "ddf3d6ccbc2fa7a3fa1a25c2b935b9d7045cee5c",
+      "node": "24.21.0",
+      "executable": "D:\\github\\ArtPlayer\\refactor\\.cache\\toolchains\\bun-1.4.2\\bun-windows-x64\\bun.exe",
+      "args": [
+        "install",
+        "--cache-dir",
+        "D:\\github\\ArtPlayer\\refactor\\.cache\\bun-evaluation\\run-Y3QMy1\\bun-migrate-cache",
+        "--backend=copyfile"
+      ],
+      "durationMs": 58808.5305,
+      "exitCode": 0,
+      "signal": null,
+      "sourceFilesUnchanged": true,
+      "bunLock": "29e02a6fc317bc2a2c23c9b6fd0db5ce7a59208c34b8d2b0db91783fe7694ffa",
+      "log": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-migrate-install.log",
+        "bytes": 1861,
+        "sha256": "0fac1487523e8f27a0513bc7ff2022b8cc3a968fb3fc1c21d4c3ed3314014c76"
+      },
+      "coldPackageCache": true,
+      "browserDownloadExcluded": true,
+      "report": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-migrate-install.json",
+        "bytes": 679,
+        "sha256": "d66a16a15eb0509f2b17dc637bfcb38a9ed558d2e1ec81bc45ce4063e82188c9"
+      }
+    },
+    {
+      "task": "MOD-01",
+      "phase": "bun-repeat",
+      "source": "ddf3d6ccbc2fa7a3fa1a25c2b935b9d7045cee5c",
+      "node": "24.21.0",
+      "executable": "D:\\github\\ArtPlayer\\refactor\\.cache\\toolchains\\bun-1.4.2\\bun-windows-x64\\bun.exe",
+      "args": [
+        "install",
+        "--frozen-lockfile",
+        "--cache-dir",
+        "D:\\github\\ArtPlayer\\refactor\\.cache\\bun-evaluation\\run-Y3QMy1\\bun-migrate-cache",
+        "--backend=copyfile"
+      ],
+      "durationMs": 16130.293000000001,
+      "exitCode": 0,
+      "signal": null,
+      "sourceFilesUnchanged": true,
+      "bunLock": "29e02a6fc317bc2a2c23c9b6fd0db5ce7a59208c34b8d2b0db91783fe7694ffa",
+      "log": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-repeat-install.log",
+        "bytes": 728,
+        "sha256": "382ef5f99eb8a88a2d8311365d17ce286b8717c513822c183f48b1aa102afca5"
+      },
+      "coldPackageCache": false,
+      "browserDownloadExcluded": true,
+      "report": {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-repeat-install.json",
+        "bytes": 711,
+        "sha256": "74b9c920574c31e406d2924ce2615988680a51e588c0eab866e276992ed35952"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "path": "refactor/.cache/mod01-yarn-unit.log",
+      "bytes": 317637,
+      "sha256": "897268e2dd4f500eef27570ddef64064b44303d11f2465d074e678e097cda1d6",
+      "command": "yarn test:unit",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/mod01-bun-unit.log",
+      "bytes": 317738,
+      "sha256": "1e9e6cccec52350993f327a4bdc56f8cfb54021f85cb0e4241abc50005fd50f0",
+      "command": "yarn test:unit",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/mod01-yarn-build.log",
+      "bytes": 15835,
+      "sha256": "ee551a3202d7882c34e8a924644d6ab0f6ae1c007b7b62102224c55e0c8c29a9",
+      "command": "yarn ci:build",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/mod01-bun-build.log",
+      "bytes": 15849,
+      "sha256": "a9bfdf717fd323f33cac187461b8a62833225a097a323c7fd96a9a65d8ff5ceb",
+      "command": "yarn ci:build",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/mod01-yarn-types.log",
+      "bytes": 3065,
+      "sha256": "d581006b9a09ec9f8dd8378c21dc33166022d3059cd5ff26eb9827d14a5ee525",
+      "command": "yarn typecheck",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/mod01-bun-types.log",
+      "bytes": 3065,
+      "sha256": "2b603ed8730d015e50a2f27b6a1b23d5e1b761b81684d6ed7dce8dc146f09625",
+      "command": "yarn typecheck",
+      "exitCode": 0
+    }
+  ],
+  "dependencies": {
+    "task": "MOD-01",
+    "source": "ddf3d6ccbc2fa7a3fa1a25c2b935b9d7045cee5c",
+    "counts": {
+      "yarn": {
+        "packageInstances": 1229,
+        "uniquePackages": 1125,
+        "resolvedEdges": 2356,
+        "uniqueResources": 92
+      },
+      "bun": {
+        "packageInstances": 1439,
+        "uniquePackages": 1135,
+        "resolvedEdges": 2656,
+        "uniqueResources": 90
+      }
+    },
+    "rootToolChanges": [],
+    "packages": {
+      "yarnOnly": [
+        "@algolia/abtesting@1.14.0",
+        "@algolia/client-abtesting@5.48.0",
+        "@algolia/client-analytics@5.48.0",
+        "@algolia/client-common@5.48.0",
+        "@algolia/client-insights@5.48.0",
+        "@algolia/client-personalization@5.48.0",
+        "@algolia/client-query-suggestions@5.48.0",
+        "@algolia/client-search@5.48.0",
+        "@algolia/ingestion@1.48.0",
+        "@algolia/monitoring@1.48.0",
+        "@algolia/recommend@5.48.0",
+        "@algolia/requester-browser-xhr@5.48.0",
+        "@algolia/requester-fetch@5.48.0",
+        "@algolia/requester-node-http@5.48.0",
+        "@iconify-json/simple-icons@1.2.70",
+        "@types/hast@3.0.4",
+        "@ungap/structured-clone@1.3.0",
+        "@vue/devtools-api@7.7.9",
+        "@vue/devtools-kit@7.7.9",
+        "@vue/devtools-shared@7.7.9",
+        "algoliasearch@5.48.0",
+        "copy-anything@4.0.5",
+        "flexsearch@0.8.212",
+        "is-what@5.5.0",
+        "linkify-it@5.0.0",
+        "mdurl@2.0.0",
+        "preact@10.28.3",
+        "property-information@7.1.0",
+        "tabbable@6.4.0"
+      ],
+      "bunOnly": [
+        "@algolia/abtesting@1.25.0",
+        "@algolia/client-abtesting@5.59.0",
+        "@algolia/client-analytics@5.59.0",
+        "@algolia/client-common@5.59.0",
+        "@algolia/client-insights@5.59.0",
+        "@algolia/client-personalization@5.59.0",
+        "@algolia/client-query-suggestions@5.59.0",
+        "@algolia/client-search@5.59.0",
+        "@algolia/ingestion@1.59.0",
+        "@algolia/monitoring@1.59.0",
+        "@algolia/recommend@5.59.0",
+        "@algolia/requester-browser-xhr@5.59.0",
+        "@algolia/requester-fetch@5.59.0",
+        "@algolia/requester-node-http@5.59.0",
+        "@iconify-json/simple-icons@1.2.96",
+        "@jridgewell/sourcemap-codec@1.6.0",
+        "@rollup/rollup-win32-x64-gnu@4.63.3",
+        "@rollup/rollup-win32-x64-msvc@4.63.3",
+        "@types/estree@1.0.9",
+        "@types/hast@3.0.5",
+        "@types/markdown-it@14.2.0",
+        "@ungap/structured-clone@1.4.0",
+        "@vue/devtools-api@7.7.10",
+        "@vue/devtools-kit@7.7.10",
+        "@vue/devtools-shared@7.7.10",
+        "algoliasearch@5.59.0",
+        "brace-expansion@1.1.18",
+        "copy-anything@4.1.0",
+        "flexsearch@0.7.43",
+        "linkify-it@5.0.2",
+        "mdurl@2.1.0",
+        "minimatch@3.1.5",
+        "nanoid@3.3.19",
+        "postcss@8.5.28",
+        "preact@10.29.8",
+        "property-information@7.2.0",
+        "rollup@4.63.3",
+        "search-insights@2.17.3",
+        "tabbable@6.5.0"
+      ]
+    },
+    "requests": {
+      "yarnOnly": [
+        "@algolia/abtesting@1.14.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/abtesting@1.14.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/abtesting@1.14.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/abtesting@1.14.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/autocomplete-preset-algolia@1.17.7 peerDependencies @algolia/client-search@>= 4.9.1 < 6 -> @algolia/client-search@5.48.0",
+        "@algolia/autocomplete-preset-algolia@1.17.7 peerDependencies algoliasearch@>= 4.9.1 < 6 -> algoliasearch@5.48.0",
+        "@algolia/autocomplete-shared@1.17.7 peerDependencies @algolia/client-search@>= 4.9.1 < 6 -> @algolia/client-search@5.48.0",
+        "@algolia/autocomplete-shared@1.17.7 peerDependencies algoliasearch@>= 4.9.1 < 6 -> algoliasearch@5.48.0",
+        "@algolia/client-abtesting@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/client-abtesting@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/client-abtesting@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/client-abtesting@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/client-analytics@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/client-analytics@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/client-analytics@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/client-analytics@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/client-insights@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/client-insights@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/client-insights@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/client-insights@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/client-personalization@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/client-personalization@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/client-personalization@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/client-personalization@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/client-query-suggestions@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/client-query-suggestions@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/client-query-suggestions@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/client-query-suggestions@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/client-search@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/client-search@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/client-search@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/client-search@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/ingestion@1.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/ingestion@1.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/ingestion@1.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/ingestion@1.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/monitoring@1.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/monitoring@1.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/monitoring@1.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/monitoring@1.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/recommend@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/recommend@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "@algolia/recommend@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "@algolia/recommend@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "@algolia/requester-browser-xhr@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/requester-fetch@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@algolia/requester-node-http@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "@docsearch/js@3.8.2 dependencies preact@^10.0.0 -> preact@10.28.3",
+        "@docsearch/react@3.8.2 dependencies algoliasearch@^5.14.2 -> algoliasearch@5.48.0",
+        "@iconify-json/simple-icons@1.2.70 dependencies @iconify/types@* -> @iconify/types@2.0.0",
+        "@shikijs/core@2.5.0 dependencies @types/hast@^3.0.4 -> @types/hast@3.0.4",
+        "@shikijs/types@2.5.0 dependencies @types/hast@^3.0.4 -> @types/hast@3.0.4",
+        "@types/flexsearch@0.7.42 dependencies flexsearch@* -> flexsearch@0.8.212",
+        "@types/hast@3.0.4 dependencies @types/unist@* -> @types/unist@3.0.3",
+        "@vitejs/plugin-vue@5.2.4 peerDependencies vue@^3.2.25 -> vue@3.5.28",
+        "@vue/compiler-core@3.5.13 dependencies @babel/parser@^7.25.3 -> @babel/parser@7.29.0",
+        "@vue/compiler-sfc@3.5.13 dependencies @babel/parser@^7.25.3 -> @babel/parser@7.29.0",
+        "@vue/compiler-sfc@3.5.13 dependencies postcss@^8.4.48 -> postcss@8.5.6",
+        "@vue/devtools-api@7.7.9 dependencies @vue/devtools-kit@^7.7.9 -> @vue/devtools-kit@7.7.9",
+        "@vue/devtools-kit@7.7.9 dependencies @vue/devtools-shared@^7.7.9 -> @vue/devtools-shared@7.7.9",
+        "@vue/devtools-kit@7.7.9 dependencies birpc@^2.3.0 -> birpc@2.9.0",
+        "@vue/devtools-kit@7.7.9 dependencies hookable@^5.5.3 -> hookable@5.5.3",
+        "@vue/devtools-kit@7.7.9 dependencies mitt@^3.0.1 -> mitt@3.0.1",
+        "@vue/devtools-kit@7.7.9 dependencies perfect-debounce@^1.0.0 -> perfect-debounce@1.0.0",
+        "@vue/devtools-kit@7.7.9 dependencies speakingurl@^14.0.1 -> speakingurl@14.0.1",
+        "@vue/devtools-kit@7.7.9 dependencies superjson@^2.2.2 -> superjson@2.2.6",
+        "@vue/devtools-shared@7.7.9 dependencies rfdc@^1.4.1 -> rfdc@1.4.1",
+        "@vueuse/core@12.8.2 dependencies vue@^3.5.13 -> vue@3.5.28",
+        "@vueuse/integrations@12.8.2 dependencies vue@^3.5.13 -> vue@3.5.28",
+        "@vueuse/shared@12.8.2 dependencies vue@^3.5.13 -> vue@3.5.28",
+        "algoliasearch@5.48.0 dependencies @algolia/abtesting@1.14.0 -> @algolia/abtesting@1.14.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-abtesting@5.48.0 -> @algolia/client-abtesting@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-analytics@5.48.0 -> @algolia/client-analytics@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-common@5.48.0 -> @algolia/client-common@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-insights@5.48.0 -> @algolia/client-insights@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-personalization@5.48.0 -> @algolia/client-personalization@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-query-suggestions@5.48.0 -> @algolia/client-query-suggestions@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/client-search@5.48.0 -> @algolia/client-search@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/ingestion@1.48.0 -> @algolia/ingestion@1.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/monitoring@1.48.0 -> @algolia/monitoring@1.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/recommend@5.48.0 -> @algolia/recommend@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/requester-browser-xhr@5.48.0 -> @algolia/requester-browser-xhr@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/requester-fetch@5.48.0 -> @algolia/requester-fetch@5.48.0",
+        "algoliasearch@5.48.0 dependencies @algolia/requester-node-http@5.48.0 -> @algolia/requester-node-http@5.48.0",
+        "copy-anything@4.0.5 dependencies is-what@^5.2.0 -> is-what@5.5.0",
+        "focus-trap@7.8.0 dependencies tabbable@^6.4.0 -> tabbable@6.4.0",
+        "glob@7.2.3 dependencies minimatch@^3.1.1 -> minimatch@3.1.2",
+        "hast-util-to-html@9.0.5 dependencies @types/hast@^3.0.0 -> @types/hast@3.0.4",
+        "hast-util-to-html@9.0.5 dependencies property-information@^7.0.0 -> property-information@7.1.0",
+        "hast-util-whitespace@3.0.0 dependencies @types/hast@^3.0.0 -> @types/hast@3.0.4",
+        "less@4.5.1 optionalDependencies make-dir@^2.1.0 -> make-dir@4.0.0",
+        "linkify-it@5.0.0 dependencies uc.micro@^2.0.0 -> uc.micro@2.1.0",
+        "markdown-it@14.1.0 dependencies linkify-it@^5.0.0 -> linkify-it@5.0.0",
+        "markdown-it@14.1.0 dependencies mdurl@^2.0.0 -> mdurl@2.0.0",
+        "mdast-util-to-hast@13.2.1 dependencies @types/hast@^3.0.0 -> @types/hast@3.0.4",
+        "mdast-util-to-hast@13.2.1 dependencies @ungap/structured-clone@^1.0.0 -> @ungap/structured-clone@1.3.0",
+        "shiki@2.5.0 dependencies @types/hast@^3.0.4 -> @types/hast@3.0.4",
+        "superjson@2.2.6 dependencies copy-anything@^4 -> copy-anything@4.0.5",
+        "vite@5.4.21 dependencies postcss@^8.4.43 -> postcss@8.5.6",
+        "vite@5.4.21 dependencies rollup@^4.20.0 -> rollup@4.57.1",
+        "vitepress-plugin-search@1.0.4-alpha.22 peerDependencies flexsearch@^0.7.31 -> flexsearch@0.8.158",
+        "vitepress-plugin-search@1.0.4-alpha.22 peerDependencies vue@3 -> vue@3.5.13",
+        "vitepress@1.6.3 dependencies @iconify-json/simple-icons@^1.2.21 -> @iconify-json/simple-icons@1.2.70",
+        "vitepress@1.6.3 dependencies @types/markdown-it@^14.1.2 -> @types/markdown-it@14.1.2",
+        "vitepress@1.6.3 dependencies @vue/devtools-api@^7.7.0 -> @vue/devtools-api@7.7.9",
+        "vitepress@1.6.3 dependencies @vue/shared@^3.5.13 -> @vue/shared@3.5.28",
+        "vitepress@1.6.3 dependencies vue@^3.5.13 -> vue@3.5.28"
+      ],
+      "bunOnly": [
+        "@algolia/abtesting@1.25.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/abtesting@1.25.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/abtesting@1.25.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/abtesting@1.25.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/autocomplete-plugin-algolia-insights@1.17.7 peerDependencies search-insights@>= 1 < 3 -> search-insights@2.17.3",
+        "@algolia/autocomplete-preset-algolia@1.17.7 peerDependencies @algolia/client-search@>= 4.9.1 < 6 -> @algolia/client-search@5.59.0",
+        "@algolia/autocomplete-preset-algolia@1.17.7 peerDependencies algoliasearch@>= 4.9.1 < 6 -> algoliasearch@5.59.0",
+        "@algolia/autocomplete-shared@1.17.7 peerDependencies @algolia/client-search@>= 4.9.1 < 6 -> @algolia/client-search@5.59.0",
+        "@algolia/autocomplete-shared@1.17.7 peerDependencies algoliasearch@>= 4.9.1 < 6 -> algoliasearch@5.59.0",
+        "@algolia/client-abtesting@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/client-abtesting@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/client-abtesting@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/client-abtesting@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/client-analytics@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/client-analytics@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/client-analytics@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/client-analytics@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/client-insights@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/client-insights@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/client-insights@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/client-insights@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/client-personalization@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/client-personalization@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/client-personalization@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/client-personalization@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/client-query-suggestions@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/client-query-suggestions@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/client-query-suggestions@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/client-query-suggestions@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/client-search@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/client-search@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/client-search@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/client-search@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/ingestion@1.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/ingestion@1.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/ingestion@1.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/ingestion@1.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/monitoring@1.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/monitoring@1.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/monitoring@1.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/monitoring@1.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/recommend@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/recommend@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "@algolia/recommend@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "@algolia/recommend@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "@algolia/requester-browser-xhr@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/requester-fetch@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@algolia/requester-node-http@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "@docsearch/js@3.8.2 dependencies preact@^10.0.0 -> preact@10.29.8",
+        "@docsearch/react@3.8.2 dependencies algoliasearch@^5.14.2 -> algoliasearch@5.59.0",
+        "@docsearch/react@3.8.2 peerDependencies search-insights@>= 1 < 3 -> search-insights@2.17.3",
+        "@iconify-json/simple-icons@1.2.96 dependencies @iconify/types@* -> @iconify/types@2.0.0",
+        "@shikijs/core@2.5.0 dependencies @types/hast@^3.0.4 -> @types/hast@3.0.5",
+        "@shikijs/types@2.5.0 dependencies @types/hast@^3.0.4 -> @types/hast@3.0.5",
+        "@types/flexsearch@0.7.42 dependencies flexsearch@* -> flexsearch@0.8.158",
+        "@types/hast@3.0.5 dependencies @types/unist@* -> @types/unist@3.0.3",
+        "@types/markdown-it@14.2.0 dependencies @types/linkify-it@^5 -> @types/linkify-it@5.0.0",
+        "@types/markdown-it@14.2.0 dependencies @types/mdurl@^2 -> @types/mdurl@2.0.0",
+        "@vitejs/plugin-vue@5.2.4 peerDependencies vue@^3.2.25 -> vue@3.5.13",
+        "@vue/compiler-core@3.5.13 dependencies @babel/parser@^7.25.3 -> @babel/parser@7.29.8",
+        "@vue/compiler-sfc@3.5.13 dependencies @babel/parser@^7.25.3 -> @babel/parser@7.29.8",
+        "@vue/compiler-sfc@3.5.13 dependencies postcss@^8.4.48 -> postcss@8.5.28",
+        "@vue/devtools-api@7.7.10 dependencies @vue/devtools-kit@^7.7.10 -> @vue/devtools-kit@7.7.10",
+        "@vue/devtools-kit@7.7.10 dependencies @vue/devtools-shared@^7.7.10 -> @vue/devtools-shared@7.7.10",
+        "@vue/devtools-kit@7.7.10 dependencies birpc@^2.3.0 -> birpc@2.9.0",
+        "@vue/devtools-kit@7.7.10 dependencies hookable@^5.5.3 -> hookable@5.5.3",
+        "@vue/devtools-kit@7.7.10 dependencies mitt@^3.0.1 -> mitt@3.0.1",
+        "@vue/devtools-kit@7.7.10 dependencies perfect-debounce@^1.0.0 -> perfect-debounce@1.0.0",
+        "@vue/devtools-kit@7.7.10 dependencies speakingurl@^14.0.1 -> speakingurl@14.0.1",
+        "@vue/devtools-kit@7.7.10 dependencies superjson@^2.2.2 -> superjson@2.2.6",
+        "@vue/devtools-shared@7.7.10 dependencies rfdc@^1.4.1 -> rfdc@1.4.1",
+        "@vueuse/core@12.8.2 dependencies vue@^3.5.13 -> vue@3.5.13",
+        "@vueuse/integrations@12.8.2 dependencies vue@^3.5.13 -> vue@3.5.13",
+        "@vueuse/shared@12.8.2 dependencies vue@^3.5.13 -> vue@3.5.13",
+        "algoliasearch@5.59.0 dependencies @algolia/abtesting@1.25.0 -> @algolia/abtesting@1.25.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-abtesting@5.59.0 -> @algolia/client-abtesting@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-analytics@5.59.0 -> @algolia/client-analytics@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-common@5.59.0 -> @algolia/client-common@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-insights@5.59.0 -> @algolia/client-insights@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-personalization@5.59.0 -> @algolia/client-personalization@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-query-suggestions@5.59.0 -> @algolia/client-query-suggestions@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/client-search@5.59.0 -> @algolia/client-search@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/ingestion@1.59.0 -> @algolia/ingestion@1.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/monitoring@1.59.0 -> @algolia/monitoring@1.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/recommend@5.59.0 -> @algolia/recommend@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/requester-browser-xhr@5.59.0 -> @algolia/requester-browser-xhr@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/requester-fetch@5.59.0 -> @algolia/requester-fetch@5.59.0",
+        "algoliasearch@5.59.0 dependencies @algolia/requester-node-http@5.59.0 -> @algolia/requester-node-http@5.59.0",
+        "brace-expansion@1.1.18 dependencies balanced-match@^1.0.0 -> balanced-match@1.0.2",
+        "brace-expansion@1.1.18 dependencies concat-map@0.0.1 -> concat-map@0.0.1",
+        "focus-trap@7.8.0 dependencies tabbable@^6.4.0 -> tabbable@6.5.0",
+        "glob@7.2.3 dependencies minimatch@^3.1.1 -> minimatch@3.1.5",
+        "hast-util-to-html@9.0.5 dependencies @types/hast@^3.0.0 -> @types/hast@3.0.5",
+        "hast-util-to-html@9.0.5 dependencies property-information@^7.0.0 -> property-information@7.2.0",
+        "hast-util-whitespace@3.0.0 dependencies @types/hast@^3.0.0 -> @types/hast@3.0.5",
+        "less@4.5.1 optionalDependencies make-dir@^2.1.0 -> make-dir@2.1.0",
+        "linkify-it@5.0.2 dependencies uc.micro@^2.0.0 -> uc.micro@2.1.0",
+        "magic-string@0.30.21 dependencies @jridgewell/sourcemap-codec@^1.5.5 -> @jridgewell/sourcemap-codec@1.6.0",
+        "markdown-it@14.1.0 dependencies linkify-it@^5.0.0 -> linkify-it@5.0.2",
+        "markdown-it@14.1.0 dependencies mdurl@^2.0.0 -> mdurl@2.1.0",
+        "mdast-util-to-hast@13.2.1 dependencies @types/hast@^3.0.0 -> @types/hast@3.0.5",
+        "mdast-util-to-hast@13.2.1 dependencies @ungap/structured-clone@^1.0.0 -> @ungap/structured-clone@1.4.0",
+        "minimatch@3.1.5 dependencies brace-expansion@^1.1.7 -> brace-expansion@1.1.18",
+        "postcss@8.5.28 dependencies nanoid@^3.3.18 -> nanoid@3.3.19",
+        "postcss@8.5.28 dependencies picocolors@^1.1.1 -> picocolors@1.1.1",
+        "postcss@8.5.28 dependencies source-map-js@^1.2.1 -> source-map-js@1.2.1",
+        "rollup@4.63.3 dependencies @types/estree@1.0.9 -> @types/estree@1.0.9",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-win32-x64-gnu@4.63.3 -> @rollup/rollup-win32-x64-gnu@4.63.3",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-win32-x64-msvc@4.63.3 -> @rollup/rollup-win32-x64-msvc@4.63.3",
+        "shiki@2.5.0 dependencies @types/hast@^3.0.4 -> @types/hast@3.0.5",
+        "superjson@2.2.6 dependencies copy-anything@^4 -> copy-anything@4.1.0",
+        "vite@5.4.21 dependencies postcss@^8.4.43 -> postcss@8.5.28",
+        "vite@5.4.21 dependencies rollup@^4.20.0 -> rollup@4.63.3",
+        "vitepress-plugin-search@1.0.4-alpha.22 peerDependencies flexsearch@^0.7.31 -> flexsearch@0.7.43",
+        "vitepress-plugin-search@1.0.4-alpha.22 peerDependencies vue@3 -> vue@3.5.28",
+        "vitepress@1.6.3 dependencies @iconify-json/simple-icons@^1.2.21 -> @iconify-json/simple-icons@1.2.96",
+        "vitepress@1.6.3 dependencies @types/markdown-it@^14.1.2 -> @types/markdown-it@14.2.0",
+        "vitepress@1.6.3 dependencies @vue/devtools-api@^7.7.0 -> @vue/devtools-api@7.7.10",
+        "vitepress@1.6.3 dependencies @vue/shared@^3.5.13 -> @vue/shared@3.5.42",
+        "vitepress@1.6.3 dependencies vue@^3.5.13 -> vue@3.5.13"
+      ]
+    },
+    "missing": {
+      "yarnOnly": [
+        "@algolia/autocomplete-plugin-algolia-insights@1.17.7 peerDependencies search-insights@>= 1 < 3 optional=false",
+        "@docsearch/react@3.8.2 peerDependencies search-insights@>= 1 < 3 optional=true"
+      ],
+      "bunOnly": [
+        "preact@10.29.8 peerDependencies preact-render-to-string@>=5 optional=true",
+        "rollup@4.63.3 optionalDependencies @napi-rs/lzma-linux-x64-gnu@1.5.1 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-android-arm-eabi@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-android-arm64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-darwin-arm64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-darwin-x64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-freebsd-arm64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-freebsd-x64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-arm-gnueabihf@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-arm-musleabihf@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-arm64-gnu@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-arm64-musl@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-loong64-gnu@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-loong64-musl@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-ppc64-gnu@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-ppc64-musl@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-riscv64-gnu@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-riscv64-musl@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-s390x-gnu@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-x64-gnu@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-linux-x64-musl@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-openbsd-x64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-openharmony-arm64@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-win32-arm64-msvc@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies @rollup/rollup-win32-ia32-msvc@4.63.3 optional=true",
+        "rollup@4.63.3 optionalDependencies fsevents@~2.3.2 optional=true"
+      ]
+    },
+    "resources": {
+      "yarnOnly": [
+        "@algolia/abtesting@1.14.0 dist/builds/worker.js 16283 fadda369940f1e683fc1b74726a7671aa3e11664122259c05fc2a9b2e22df60d",
+        "@algolia/client-abtesting@5.48.0 dist/builds/worker.js 14318 7770066e9ead7892f6cd1a08fbd34e94ba23e7930aa0c94d40a286089a9a05f8",
+        "@algolia/client-analytics@5.48.0 dist/builds/worker.js 54882 30274697506791f38bfe12d067992d75e838ef29e972df02a96650a41bc048c7",
+        "@algolia/client-insights@5.48.0 dist/builds/worker.js 9818 cb36e574dfcebd07383a072ba78c1fa52dbbf46fa2bfb5be350eae1cbe8fb7bd",
+        "@algolia/client-personalization@5.48.0 dist/builds/worker.js 12077 dd5d7d95d3f291928ae26f14ef07c8add762d2d09742d05bb5e4b7f33eb4ee3a",
+        "@algolia/client-query-suggestions@5.48.0 dist/builds/worker.js 14394 18213e2a3ebe9ffb24f2e9197fc5a81f6a7ff09478684a672efb8b844ae1a378",
+        "@algolia/client-search@5.48.0 dist/builds/worker.js 115694 ad0717fe404879ef60797f827efdd83864a3a628e2d479fd7b511217215aa5b1",
+        "@algolia/ingestion@1.48.0 dist/builds/worker.js 86301 8c9087d3be34848ab28f9a6eabaf1788a6dd9af0d68fe83402a9ba6dfa39815a",
+        "@algolia/monitoring@1.48.0 dist/builds/worker.js 15381 257755febc028cea3de36adabe27946b7225bdeb23eeb36c280980ff69064cf6",
+        "@algolia/recommend@5.48.0 dist/builds/worker.js 18110 6c603b0b3d60740e7d01b3685634e1a509c889ce87b7b7e14c404ed44cc48d6f",
+        "algoliasearch@5.48.0 dist/worker.js 9532 506bb6a5d38c45d111b28b8e62ee922a2d3ae14252c5df892556476594c49e1b",
+        "flexsearch@0.8.212 dist/module-debug/worker.js 4280 883f1cc8ade87cbc982afc68e8ace4641b4568a78b693e585b708dac7e375e3f",
+        "flexsearch@0.8.212 dist/module-debug/worker/worker.js 56 13d6d756e051b16409488032ede54e1470b49c9ad8089f628310b6290368277b",
+        "flexsearch@0.8.212 dist/module-min/worker.js 2281 408ad5524f2e85476b781e58cba0e7a40163066feb82eeaa6707260b2295425c",
+        "flexsearch@0.8.212 dist/module-min/worker/worker.js 52 90c1997cb25fa1de535433fbd1db43ea4ac8f740412583edfd34a1c3afbdab78",
+        "flexsearch@0.8.212 dist/module/worker.js 4134 4fb14d243d1c902df653192bf3a3a45e9d6c095dd6d8e202799ebf727cf4fd5a",
+        "flexsearch@0.8.212 dist/module/worker/worker.js 56 13d6d756e051b16409488032ede54e1470b49c9ad8089f628310b6290368277b",
+        "flexsearch@0.8.212 src/worker.js 6309 f1bc851ba31a03935e11a2993256b01e35b6c134193b3d45c71686ede30147a1",
+        "flexsearch@0.8.212 src/worker/worker.js 59 13fab95a421c044ab769602affe7f75dc2a4044f3715d68816a8a45dea180502"
+      ],
+      "bunOnly": [
+        "@algolia/abtesting@1.25.0 dist/builds/worker.js 30667 f39a910e1fc2e27f9ddae5b9fc3036b552c743b4be5384878efb2e003fa06a18",
+        "@algolia/client-abtesting@5.59.0 dist/builds/worker.js 28207 346094566ee75cf5ef5668143d6d5e6130e819bb9dfce7b0ca08763e2982f7ea",
+        "@algolia/client-analytics@5.59.0 dist/builds/worker.js 127609 81e597c95bc75dc6c52eec56167525f582ef8beded707e48cc8e201a26f38b6a",
+        "@algolia/client-insights@5.59.0 dist/builds/worker.js 17192 910e618f679ef00c820b6cbab162b53f9c7fb9ecd2f76b2bbcc9ae95cc29394d",
+        "@algolia/client-personalization@5.59.0 dist/builds/worker.js 22050 78541e4e0f01b8bb71a1cf7d334ef0ad9cefa47c47fa0e6f5171a1cc9aeba9f6",
+        "@algolia/client-query-suggestions@5.59.0 dist/builds/worker.js 27256 70eb76d6a811e97d601404543f8a61b4f509433bb3aee29188779284693ad376",
+        "@algolia/client-search@5.59.0 dist/builds/worker.js 212763 bb32eedab7350e0e1d8ac4fa25043bb1d75d1a6f33395d3c06aea7e8ae5e76b1",
+        "@algolia/ingestion@1.59.0 dist/builds/worker.js 173626 c3504f540b5a0bdcdc57b6d3d54a722e2be038bb3097426ad95dc469e839fceb",
+        "@algolia/monitoring@1.59.0 dist/builds/worker.js 31128 f7748abdf77539777123f7122ceada833095b3d2cff62e5df4258345a309981d",
+        "@algolia/recommend@5.59.0 dist/builds/worker.js 33627 60bdd3282d03b989fca8e077158329298ce4c888ea6bc62e309c16f914a47b6d",
+        "@rollup/rollup-win32-x64-gnu@4.63.3 rollup.win32-x64-gnu.node 2084352 4ae9b9d3c6add1617ce24f2ee8c08d2ab50f2145fd87eb0e2ea2265e58287b70",
+        "@rollup/rollup-win32-x64-msvc@4.63.3 rollup.win32-x64-msvc.node 2665984 3f7da86abaeb6d8188e3afb2a5ef780b460fa88f47b84b60a4aea7397c4743f0",
+        "algoliasearch@5.59.0 dist/worker.js 10643 8c765c65ac40b5eb3537f6d3b11c544a2fb299965988c13cc4d520ebbeb84c1c",
+        "flexsearch@0.7.43 dist/module-debug/worker/worker.js 56 13d6d756e051b16409488032ede54e1470b49c9ad8089f628310b6290368277b",
+        "flexsearch@0.7.43 dist/module-min/worker/worker.js 52 90c1997cb25fa1de535433fbd1db43ea4ac8f740412583edfd34a1c3afbdab78",
+        "flexsearch@0.7.43 dist/module/worker/worker.js 56 13d6d756e051b16409488032ede54e1470b49c9ad8089f628310b6290368277b",
+        "flexsearch@0.7.43 src/worker/worker.js 59 13fab95a421c044ab769602affe7f75dc2a4044f3715d68816a8a45dea180502"
+      ]
+    },
+    "missingRequired": {
+      "yarn": [],
+      "bun": []
+    },
+    "note": "Physical hoisting differences are excluded from semantic comparisons. Missing optional/platform and peer requests remain explicit; this report alone does not determine build compatibility.",
+    "reports": [
+      {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/yarn-graph.json",
+        "bytes": 1025847,
+        "sha256": "280aa60d5c85acbbd617b8ac09ff390f18044f7ebfdd7335367e3feba33fe2d8"
+      },
+      {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-graph.json",
+        "bytes": 1220986,
+        "sha256": "d89cb3112d1f591d88f842c9d4c89d07244957b421cc3e872ddf6a71813dc041"
+      },
+      {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/bun-repeat-graph.json",
+        "bytes": 1220986,
+        "sha256": "d89cb3112d1f591d88f842c9d4c89d07244957b421cc3e872ddf6a71813dc041"
+      },
+      {
+        "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/comparison.json",
+        "bytes": 34325,
+        "sha256": "4f7cdb00a7924de6a6c38b22cf9b03a7ab0f207d48b9656672f2c9c9c00fada6"
+      }
+    ],
+    "repeatGraphIdentical": true
+  },
+  "lifecycle": {
+    "untrusted": {
+      "path": "refactor/.cache/mod01-bun-untrusted.log",
+      "bytes": 373,
+      "sha256": "440d2f669bfd26b070778f38c68934f08abcab424f072bf95911b8bf12730c04"
+    },
+    "blocked": [
+      "less@4.5.1 postinstall",
+      "nx@20.8.4 postinstall"
+    ],
+    "rootPrepare": "Bun substitutes bun x for npx; Lerna 8.2.4 found no workspace prepare scripts",
+    "scriptsNotManuallyTrusted": true
+  },
+  "licenseMetadata": {
+    "yarn": {
+      "declaredLicenses": [
+        "\"(MIT OR Apache-2.0)\"",
+        "\"(MIT OR CC0-1.0)\"",
+        "\"0BSD\"",
+        "\"Apache-2.0\"",
+        "\"BSD\"",
+        "\"BSD-2-Clause\"",
+        "\"BSD-3-Clause\"",
+        "\"BlueOak-1.0.0\"",
+        "\"CC-BY-3.0\"",
+        "\"CC-BY-4.0\"",
+        "\"CC0-1.0\"",
+        "\"ISC\"",
+        "\"MIT\"",
+        "\"MPL-2.0\"",
+        "\"Python-2.0\"",
+        "null"
+      ],
+      "missing": [
+        "format@0.2.2",
+        "artplayer-vitepress@1.1.0"
+      ]
+    },
+    "bun": {
+      "declaredLicenses": [
+        "\"(MIT OR Apache-2.0)\"",
+        "\"(MIT OR CC0-1.0)\"",
+        "\"0BSD\"",
+        "\"Apache-2.0\"",
+        "\"BSD\"",
+        "\"BSD-2-Clause\"",
+        "\"BSD-3-Clause\"",
+        "\"BlueOak-1.0.0\"",
+        "\"CC-BY-3.0\"",
+        "\"CC-BY-4.0\"",
+        "\"CC0-1.0\"",
+        "\"ISC\"",
+        "\"MIT\"",
+        "\"MPL-2.0\"",
+        "\"Python-2.0\"",
+        "null"
+      ],
+      "missing": [
+        "format@0.2.2",
+        "artplayer-vitepress@1.1.0"
+      ]
+    }
+  },
+  "builds": {
+    "report": {
+      "path": "refactor/.cache/bun-evaluation/run-Y3QMy1/build-comparison.json",
+      "bytes": 228647,
+      "sha256": "0304e5559802480e4cc52988362208626a0dbc3f8df784b176408efea2c03045"
+    },
+    "counts": {
+      "yarn": 534,
+      "bun": 534,
+      "identical": 448
+    },
+    "changedSamePath": 29,
+    "yarnOnly": 57,
+    "bunOnly": 57,
+    "differences": [
+      {
+        "file": "docs/document/404.html",
+        "yarn": {
+          "bytes": 12025,
+          "sha256": "d2746812deccab6105e6a2d9312edf5d369cf42a2e8a4e8cc44b90523de52125"
+        },
+        "bun": {
+          "bytes": 12025,
+          "sha256": "3f58c2149255e02b7aa7179440917a05eda3321f717570a397e4d12033e66a63"
+        }
+      },
+      {
+        "file": "docs/document/advanced/built-in.html",
+        "yarn": {
+          "bytes": 114856,
+          "sha256": "3b5457a5501fc8649ce7135f1ab20b028372d485ffc8f2182dcf1dfad22fdf56"
+        },
+        "bun": {
+          "bytes": 114856,
+          "sha256": "54bf46b674878b5d18616047beb52f4072473ca47ba4d00c0ea2c273ce4d9c6a"
+        }
+      },
+      {
+        "file": "docs/document/advanced/class.html",
+        "yarn": {
+          "bytes": 51378,
+          "sha256": "8f08215106c0e806a2e27c01be4727dc1e2c4a25422869b2a4c5e6e2e1636f3e"
+        },
+        "bun": {
+          "bytes": 51378,
+          "sha256": "eb755fd614f9e870c5cd66530667a2d27e8a292405a4dec03167bf6eed50b331"
+        }
+      },
+      {
+        "file": "docs/document/advanced/event.html",
+        "yarn": {
+          "bytes": 191988,
+          "sha256": "15b98a8ef2a892431186b76d04549cfbcc776c803f2b5ec8ec649ef44cb55c57"
+        },
+        "bun": {
+          "bytes": 191988,
+          "sha256": "e37fcdb43c844d77e0cf61cf0f00f8f49904ed62ac5f0ce8a6252d2bfe952114"
+        }
+      },
+      {
+        "file": "docs/document/advanced/global.html",
+        "yarn": {
+          "bytes": 134272,
+          "sha256": "d36e2cc69344c9ea81e86621391de10364b7c1e07bc84f869989935ff2bc91f7"
+        },
+        "bun": {
+          "bytes": 134272,
+          "sha256": "cf75a931431f7389eeb037a99267c157616d1b8d963ac6519fff9efa0426dd4f"
+        }
+      },
+      {
+        "file": "docs/document/advanced/plugin.html",
+        "yarn": {
+          "bytes": 65154,
+          "sha256": "c694967b7563772b9bd69561c56d6a6006ae321529b383d3f0c947717bcb0889"
+        },
+        "bun": {
+          "bytes": 65154,
+          "sha256": "60a0c750542f5037af8cdb6717a6b75412e7a6caddd533b8b10b409511297f6a"
+        }
+      },
+      {
+        "file": "docs/document/advanced/property.html",
+        "yarn": {
+          "bytes": 208984,
+          "sha256": "a3f385a7dcecfa0cc309585bb7ae0838ef191504fad5e62c3a8e2a25cd7cf047"
+        },
+        "bun": {
+          "bytes": 208984,
+          "sha256": "730c29de11e7246f281eb3b336ae8fbb88029e06c959c5aef21b76da0d2e8ec3"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_built-in.md.DCuQGqS_.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 76634,
+          "sha256": "6dd499dea02fc0d34df2f25254e66ac833715cea9eb55047d532603a6b1eadf0"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_built-in.md.DCuQGqS_.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1488,
+          "sha256": "b85e0cb046f6a21dc254816a1df09fb9254eee71a5b64afdc04eba3d530a4731"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_built-in.md.DbXkhR8l.js",
+        "yarn": {
+          "bytes": 76634,
+          "sha256": "f0a9bb8bb2c6e1372171b59b4ade98320ee6dbd4ac0d7a10aea574ae0fd3e682"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_built-in.md.DbXkhR8l.lean.js",
+        "yarn": {
+          "bytes": 1488,
+          "sha256": "ae56c5b762506a3d862e0f013246981616b60c27248d0b528f797e13a5a4780f"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_class.md.BE9Wp7q6.js",
+        "yarn": {
+          "bytes": 13041,
+          "sha256": "246eb065e39594e8c58db42fd402d8fb958c6a2adc30fbe5267890bb8639bf19"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_class.md.BE9Wp7q6.lean.js",
+        "yarn": {
+          "bytes": 1131,
+          "sha256": "eb91f8c743246f0d730ebfaa15011ba4e61944c4aeb628c1e167c9589bcb22a4"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_class.md.e2RdKcYg.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 13041,
+          "sha256": "a7a9237eedd0b7c04cae70acaf4a21fe64f5d5883885f3e9d9a4b79ace3faec6"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_class.md.e2RdKcYg.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1131,
+          "sha256": "243e224947c77eb8636e3f6e4079b4dfcce9f0ba8cf7999a4e214a3a819a9809"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_event.md.CQQy-EnS.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 154260,
+          "sha256": "ff62c885e8d0bdc18025c1527170d7d0f52b3cb6bd007c512aaf75ed9b688cc0"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_event.md.CQQy-EnS.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 3440,
+          "sha256": "6634e5b5321e4526bd33fe34c278d7f11b635cd62bc7531173cf6ee00c889af1"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_event.md.DoIgqIU9.js",
+        "yarn": {
+          "bytes": 154260,
+          "sha256": "5d765e3d8188466449297ea64d1a2225b12cf2241ca2af55a65d3a8ab8ed6629"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_event.md.DoIgqIU9.lean.js",
+        "yarn": {
+          "bytes": 3440,
+          "sha256": "f17281ea00122b9efd98628fa0a1e4de5a6a33e8fc6bde82c58b17e6e9546d93"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_global.md.DZK_upjc.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 96245,
+          "sha256": "5036e93a6dfb9c288d5f49b4e42e8d66352da9874b78a8d7c6af1dae91386684"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_global.md.DZK_upjc.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 2410,
+          "sha256": "b2f76a4677f9d477b05b38b60003cfb315d9669c2841b41ed7ae09faf263f14f"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_global.md.Db4VcykV.js",
+        "yarn": {
+          "bytes": 96245,
+          "sha256": "558ce4778e9f860f6e8f771a7962323f6a596789aaa096a8f76f0cbfc47bee79"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_global.md.Db4VcykV.lean.js",
+        "yarn": {
+          "bytes": 2410,
+          "sha256": "92cd361f1f7a85ee066f88b63dff40769ea5e1b157fbad4a97f248cde8e79ca4"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_plugin.md.BJXIHKQh.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 26762,
+          "sha256": "5c857b35a4500bd210d4608a8c279730027953fcccd08925945f49fd7e7dbd68"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_plugin.md.BJXIHKQh.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1034,
+          "sha256": "7616fc89d80f8165009c19e6326a0ae025016cac9c45626f718c427e7b705790"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_plugin.md.CVp3Oe2x.js",
+        "yarn": {
+          "bytes": 26762,
+          "sha256": "c8832a505c6be32441314be095bd56c3b16879bb29c33df1983dd8679a607508"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_plugin.md.CVp3Oe2x.lean.js",
+        "yarn": {
+          "bytes": 1034,
+          "sha256": "b806cfe62d14b3c0e155ecbc07f038e46397af9f912ec6681aa3be9b789527be"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_property.md.C_nOKniE.js",
+        "yarn": {
+          "bytes": 171230,
+          "sha256": "214b4f5b54c63e12e50a262e739dabf8052ffeacf21558e2208c0a687d94a4b7"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_property.md.C_nOKniE.lean.js",
+        "yarn": {
+          "bytes": 3170,
+          "sha256": "bd9086aa45d7c3813a299fd3913129feb99208795d37aee4ecd26f63c4ad3e2f"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/advanced_property.md.RNG8hx6T.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 171230,
+          "sha256": "753cef94243b88e62f9bd6c6af73312b7bdd112e0c54553f745cb9d54f9f8c3c"
+        }
+      },
+      {
+        "file": "docs/document/assets/advanced_property.md.RNG8hx6T.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 3170,
+          "sha256": "f9df044943f709cfdfd02f777c618dd7cf4d39f3532751ee2f134365be248a87"
+        }
+      },
+      {
+        "file": "docs/document/assets/app.BGaWXoP8.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1352,
+          "sha256": "f27eddcf65b7125ba519e4eefea17edcd806757530d3bd174315d9bc547e6026"
+        }
+      },
+      {
+        "file": "docs/document/assets/app.CkD0mcCX.js",
+        "yarn": {
+          "bytes": 1352,
+          "sha256": "32040099b9711ffe95196d281edaca37489d7603fe57ad168f1943ffb7827d16"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/chunks/framework.CIzAx-5p.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 104594,
+          "sha256": "fec45a3f258d21188e95a78bb232876de85371ebc159e1e6b26964f86ca6c8de"
+        }
+      },
+      {
+        "file": "docs/document/assets/chunks/framework.xxfEszSJ.js",
+        "yarn": {
+          "bytes": 105345,
+          "sha256": "7eb6ac7593ff4682767d4110a46d15cee6bae469a282b5520d3f3a8a33f5e3e7"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/chunks/theme.DqsiyDQE.js",
+        "yarn": {
+          "bytes": 65381,
+          "sha256": "1675932b9c4ea456819c79f44d886d615f780500e1f278a83d5d741eadc11a1e"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/chunks/theme.ztDrV-P3.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 65381,
+          "sha256": "6af7f33be551c4e40ef7feba7789af0d0e9449ed75b51bb3fe19a787e756f36d"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_contextmenu.md.Eh4hrQqx.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 26390,
+          "sha256": "980059af7df764dd4e8458d6c42636f928b7d76e15fba500d41133fd673c6036"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_contextmenu.md.Eh4hrQqx.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 688,
+          "sha256": "8ec1c89836a53c155938b2926d47eb48503193423e8548c51d01b22a66669edf"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_contextmenu.md.lsIURdc3.js",
+        "yarn": {
+          "bytes": 26390,
+          "sha256": "4419676dd776d1f8de02b9ae34584e342389323c3fea264823e4480af4739702"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_contextmenu.md.lsIURdc3.lean.js",
+        "yarn": {
+          "bytes": 688,
+          "sha256": "504b6cba2f0fc1205bebe61b3afa216df4860890ddbc4a1c65dd49506de48c8e"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_controls.md.CKAl0l5Z.js",
+        "yarn": {
+          "bytes": 38383,
+          "sha256": "c1bcc34e62a7ad1127282d1aee7a619ca973acb4ef3de8f62d7d9824e0a0cfe6"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_controls.md.CKAl0l5Z.lean.js",
+        "yarn": {
+          "bytes": 676,
+          "sha256": "f835499ecdf91c249faa83cc15ad0ed567384f3dc2077d17da6409f56a47563b"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_controls.md.ChSUj9bQ.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 38383,
+          "sha256": "b685deb62226701eb7b23f791b047e19d47590c33d5a725ed14a38fb0099439c"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_controls.md.ChSUj9bQ.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 676,
+          "sha256": "17299393863b52e856c11344d4131db786d7f2a3b762223ad3612ac6f83677c1"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_layers.md.Cg1DCdS0.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 33134,
+          "sha256": "25d7a96e4032d2dd6843726dd9646db92ed46d6acc3bc5e7d5b5e9405fb41c57"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_layers.md.Cg1DCdS0.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 670,
+          "sha256": "9745ae2dd5b7d45439f18b64581725984bd7b4286cc097973ae67ef24023a74a"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_layers.md.D34Y4OkH.js",
+        "yarn": {
+          "bytes": 33134,
+          "sha256": "a5a6dfe892dfc3dbfc52ffd71f246007969575a8ef236d16d553d5b10e8cb6cd"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_layers.md.D34Y4OkH.lean.js",
+        "yarn": {
+          "bytes": 670,
+          "sha256": "599833b0d2304638281be780eb81b8d3c6992d3ddb6bc63df7ca3f8e763762c2"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_setting.md.BX5abfzO.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 72719,
+          "sha256": "3c2deafaf007e2323b9ad32faa3993744a0ee3881657aa456667ab428f0c8797"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_setting.md.BX5abfzO.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 966,
+          "sha256": "f376a8eba1d1779e56ab87dc7ed49bd8637494bd67ed5f1b5b2df9f2e7adff65"
+        }
+      },
+      {
+        "file": "docs/document/assets/component_setting.md.BwCpY3NU.js",
+        "yarn": {
+          "bytes": 72719,
+          "sha256": "6f0d3f5446d421ee41d68b6785ef952ddb86f744e97b2909b2fbda3dad4b5719"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/component_setting.md.BwCpY3NU.lean.js",
+        "yarn": {
+          "bytes": 966,
+          "sha256": "b1ae932dc7f9779ae06df48bd324b53ff2652a0054963af6518ff12ebfd178a6"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_built-in.md.hdUgdBzS.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 77747,
+          "sha256": "44a95541517a88c8ef6342d0c1cf1f9ce049ad9aaa649390aa6915e05622bcf9"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_built-in.md.hdUgdBzS.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1504,
+          "sha256": "c5cef1ddb9852b86e1cea387c1e34e78a895562d15c0eb9395d5aa9ba774643a"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_built-in.md.yQHjIPvf.js",
+        "yarn": {
+          "bytes": 77747,
+          "sha256": "f3f399b43ccb6a4572f55afa77a7396453d93ac167f1d0377a18ee3ceaca03e8"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_built-in.md.yQHjIPvf.lean.js",
+        "yarn": {
+          "bytes": 1504,
+          "sha256": "4207a166594e035e635a2bb303750db89d039f6296d5abff80c1a0eaf86ae438"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_class.md.DT8sr-h4.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 13295,
+          "sha256": "a81ffd8de12ba3f5e515e0e1fd4711288511b24f6d514b5ffe38c53747858e44"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_class.md.DT8sr-h4.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1145,
+          "sha256": "14ae16e9158079eafa1cbf817ac72404bf2497057ea832f4fb98c4913c60db9d"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_class.md.DklNHOdd.js",
+        "yarn": {
+          "bytes": 13295,
+          "sha256": "39f1cb406b3637d9bf6752b39ef9829887d62403f16735a26a5fe8a600c36ca7"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_class.md.DklNHOdd.lean.js",
+        "yarn": {
+          "bytes": 1145,
+          "sha256": "2330a7c10c127ede46894e0c0bc447734d3a20cc116db91498b05aa020f42c09"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_event.md.opkwpdYa.js",
+        "yarn": {
+          "bytes": 155105,
+          "sha256": "e0f4d4ff3609d44f5c2f8d66a250156ebdd37bc99ede49e1043a653ea51061a5"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_event.md.opkwpdYa.lean.js",
+        "yarn": {
+          "bytes": 3475,
+          "sha256": "92e67d90fc7b2674aeda2084a0425276ef603b6cb17499d88a534e3ec4f6bea6"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_event.md.uDixJJlV.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 155105,
+          "sha256": "ab94dd13993dca49e7b1cd3ebf9a2595a12b3d2cbc08e8cb6f0c5b0f7aea68b0"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_event.md.uDixJJlV.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 3475,
+          "sha256": "05b468338932d7d6ba7e64a3c9ace791b2617d7bab7c689b229d061ee3d2c69b"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_global.md.C8Y_RPho.js",
+        "yarn": {
+          "bytes": 96798,
+          "sha256": "7d2e1aaf8e55807e084a9025c8b876da7eaf3373ffd061b2642ae2420b75231b"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_global.md.C8Y_RPho.lean.js",
+        "yarn": {
+          "bytes": 2424,
+          "sha256": "239fd4a1779492c3f95cdfdc13633c7a174fb30536284f873268c03cbe5dd4db"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_global.md.vGdRRtEI.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 96798,
+          "sha256": "92b36388b16c7ea12f90bb2b14722383802d20254f3c09df348944129e682bf8"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_global.md.vGdRRtEI.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 2424,
+          "sha256": "7ae2445711c61459f7c9a9abe69ffae4615007edfbc4a32c59b38f08a37ff285"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_plugin.md.BZI7qNJ4.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 26857,
+          "sha256": "90792aa15dee3e771935e535e395e75f7faf517a2a297b47d245928f1967f796"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_plugin.md.BZI7qNJ4.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 1093,
+          "sha256": "71c83144fcb2f90e72ad7bd3fb1dd1befdef4d58beb35acacdbe5131ab3723c5"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_plugin.md.C22jhoxt.js",
+        "yarn": {
+          "bytes": 26857,
+          "sha256": "261feaebca5bc4d19e4f551643c5e741d372716cce17e80621821e98e9136763"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_plugin.md.C22jhoxt.lean.js",
+        "yarn": {
+          "bytes": 1093,
+          "sha256": "002a58e4e388fdf1cf7a995906a02c7cd2f273a915c56164eb569b2cc7941a94"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_property.md.BBsrm5xX.js",
+        "yarn": {
+          "bytes": 172151,
+          "sha256": "a0c6c748a6609b406dbab8ecf4aad24896246000e4ba57b200b2075a28515638"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_property.md.BBsrm5xX.lean.js",
+        "yarn": {
+          "bytes": 3186,
+          "sha256": "fc66ea262184ca74d68aa83da741247155a23e7acbf1dda2ff5af3a597ea551f"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_advanced_property.md.DM8crqg4.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 172151,
+          "sha256": "efd55ea7773665bae889b56312d3508bb0c255045663dee652244c675da734b6"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_advanced_property.md.DM8crqg4.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 3186,
+          "sha256": "cecc6cb6fd30acf0606fba6d79f2bb0c32f5f252ff5baffc5d229dae90771c10"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_contextmenu.md.BZMIBA5Z.js",
+        "yarn": {
+          "bytes": 26497,
+          "sha256": "11fe0640d84b381d11128e16cfec94458fcafa6a4679b70ad706caae93131c7c"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_contextmenu.md.BZMIBA5Z.lean.js",
+        "yarn": {
+          "bytes": 697,
+          "sha256": "c0c549f909e6f60626e337822bbb67c2569d730efe6a30c234d6842a51d800f3"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_contextmenu.md.DL1sjTMF.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 26497,
+          "sha256": "59d3c59f3976c43d7eb741d5378462338e7a2486ca2a75a9ee7744884c64c2b7"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_contextmenu.md.DL1sjTMF.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 697,
+          "sha256": "7551349193c54fd2a727db4a1360b2e900d2e001c56a83bf077a686a40677e49"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_controls.md.CzJX3V-W.js",
+        "yarn": {
+          "bytes": 38546,
+          "sha256": "a804374da3173fc28172ed360445e71b6de14404248e0f2d7c58e4beabda4060"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_controls.md.CzJX3V-W.lean.js",
+        "yarn": {
+          "bytes": 684,
+          "sha256": "9822ebca2fe18e549e37ffff091e57ddd89340661e90e4f9b2adef9be5a4d349"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_controls.md.QHXYrkiS.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 38546,
+          "sha256": "9b5ecde446dd430d16a8ca7c860614e4ea79e6d6f3585c0204a65527d7818673"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_controls.md.QHXYrkiS.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 684,
+          "sha256": "6d5dbb57766c16120514b70e4a8eed3daca7f0ddec8c27bb00dba01521b75c06"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_layers.md.CMe9ljjt.js",
+        "yarn": {
+          "bytes": 33207,
+          "sha256": "0e2c31e2cc9c7fa36eb72150593d37e6ad694776f5f916092aac53807909d8e6"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_layers.md.CMe9ljjt.lean.js",
+        "yarn": {
+          "bytes": 676,
+          "sha256": "1f195e5fe258317c357ca27f55dc1bc75dc47735388d94eb6ecb2a053e0400f7"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_layers.md.DA419TF2.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 33207,
+          "sha256": "225855f0e3a883ef66239a41003cf2f7f8637f04f81f3c058894f059458c64bb"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_layers.md.DA419TF2.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 676,
+          "sha256": "aba1a444b0fada6c71d57724bea6da2faa84986d2d2fec98055a5b0ab8e2093a"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_setting.md.BEB18u4V.js",
+        "yarn": {
+          "bytes": 72934,
+          "sha256": "4914ef98b1a628caefb35a7dd969c0395f242680b6c71393b66cc8056daad682"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_setting.md.BEB18u4V.lean.js",
+        "yarn": {
+          "bytes": 977,
+          "sha256": "fbbf31a35621fe22611613d050119f490b654dfe9c597ebe4c9e1a74e7b591b7"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_component_setting.md.Bp81ZPIr.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 72934,
+          "sha256": "31b1b197fafc9460710c2d25b1571e8886ff61cccc8b145c080b69733eb8f8b8"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_component_setting.md.Bp81ZPIr.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 977,
+          "sha256": "d5ea99b76d73f1e00f948dd8a30a0292202fb8accf1b19ad760d94607838efdc"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_index.md.BBeGRjus.js",
+        "yarn": {
+          "bytes": 86223,
+          "sha256": "c25690b80ff001fd489dece6bf8e1c761db7263dd2a55a69258cc93061653907"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_index.md.BBeGRjus.lean.js",
+        "yarn": {
+          "bytes": 421,
+          "sha256": "2274b6d6783001a5a386952119aaa06f8922d26bb094a00fe6b76dc75c4d3e1a"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_index.md.HKUlZwVW.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 86223,
+          "sha256": "c67ffb6b768c87db4c096838c323e9b8ee51f114c077f1f6c97dab6110a2cea5"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_index.md.HKUlZwVW.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 421,
+          "sha256": "74c69ab56b830a1ec585dd3abab479191e962b28b80b3bc6c0d24b0622fdc769"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_start_i18n.md.CUrQXJqd.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 19139,
+          "sha256": "c23151ecbe9d58e25f3cd6dcbac67c03d4aee447a6502830f17b4cb6c44de273"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_start_i18n.md.CUrQXJqd.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 431,
+          "sha256": "9f000cc674c6144befda430d7b40b525cd689f1e5f73baee1fc7a5cd4e860421"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_start_i18n.md.DxgNQ6qb.js",
+        "yarn": {
+          "bytes": 19139,
+          "sha256": "0d5293129aaa76c5963aff21373ba6cf7f685efaf2877a2ba04f503d9f1d96d0"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_start_i18n.md.DxgNQ6qb.lean.js",
+        "yarn": {
+          "bytes": 431,
+          "sha256": "444d1cd666f09cfb20ee6fe6ba5f59ac73585fe51afffec3a85ae9df1e2ebc48"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_start_option.md.BIiWVjaU.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 170636,
+          "sha256": "b94791bbd03388e15a079a7ea979a813025cbd56b879f55af2030d1c7e1f1157"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_start_option.md.BIiWVjaU.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 3513,
+          "sha256": "10d9cda8a736d54935ab40f2c044f011021e3e9819161d2b5d976cac5ed9fe0c"
+        }
+      },
+      {
+        "file": "docs/document/assets/en_start_option.md.CTPFIwzU.js",
+        "yarn": {
+          "bytes": 170636,
+          "sha256": "d5508c5e621e34bc54309f006b45f853af9d1a59e303418cc6706c240af9fe7a"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/en_start_option.md.CTPFIwzU.lean.js",
+        "yarn": {
+          "bytes": 3513,
+          "sha256": "94d80a708e97e23f255a34de78d85f06f556fa9f73d99290dbdb78082e81bc54"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/index.md.BDuSx3rH.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 85359,
+          "sha256": "4cd231f71316eaea23b3430e4438bf8b4474d5d6eaeddd67f71e9d336eca87c1"
+        }
+      },
+      {
+        "file": "docs/document/assets/index.md.BDuSx3rH.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 402,
+          "sha256": "2145e925071a369ed21bd931c4f63d4a9e9760aa8d884dbc9e46c678987af6b7"
+        }
+      },
+      {
+        "file": "docs/document/assets/index.md.CvYUO2aO.js",
+        "yarn": {
+          "bytes": 85359,
+          "sha256": "e5e22d8cd12d8fb8f82ac1bd15396392cb80d17952eede90628895df5a977cbd"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/index.md.CvYUO2aO.lean.js",
+        "yarn": {
+          "bytes": 402,
+          "sha256": "b415203b73a4944bf6cf4a599bc676a0b03d339ea4afa03352e33b393b3b1720"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/plugin_danmuku.md.CFjljCkq.js",
+        "yarn": {
+          "bytes": 115520,
+          "sha256": "4551f4565250729905412c7531e52bef25d9bb8e20206173b9c85c42f883c813"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/plugin_danmuku.md.CFjljCkq.lean.js",
+        "yarn": {
+          "bytes": 2006,
+          "sha256": "1bca46300ba9f5be46b901f1cb9d31f2635f99f5b775c60dc4f464c7e6036541"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/plugin_danmuku.md.CYC_HZRz.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 115520,
+          "sha256": "5f43f0ae6b1e73fe1bc0e3e3dbe5e83fe448189cd5696d3645264ea9c7b37377"
+        }
+      },
+      {
+        "file": "docs/document/assets/plugin_danmuku.md.CYC_HZRz.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 2006,
+          "sha256": "670ed7d84cb12a3db199b08d4248116a25dd4f637ee4446f1994d3fd7e178be1"
+        }
+      },
+      {
+        "file": "docs/document/assets/start_i18n.md.D_Yw7TSy.js",
+        "yarn": {
+          "bytes": 18837,
+          "sha256": "dca79f5432843b5a7d302dd89135097e143bf93b8282d22e3c2209930ba4a948"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/start_i18n.md.D_Yw7TSy.lean.js",
+        "yarn": {
+          "bytes": 417,
+          "sha256": "a0c2bbf650f8146f5f2ed0306357a949ec4b85fdcc6dbb6cacef78ef4ab88f96"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/start_i18n.md.GGIqFsxE.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 18837,
+          "sha256": "97dc9a165191648cef18dd3d077cd0bc3376e35c8b667df74539ab6b8529a4ef"
+        }
+      },
+      {
+        "file": "docs/document/assets/start_i18n.md.GGIqFsxE.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 417,
+          "sha256": "d43c757b97721a359e3229b3b71c4bd09d6597e99e39327364f421fcdc75b7c4"
+        }
+      },
+      {
+        "file": "docs/document/assets/start_option.md.BqTXhpbf.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 169440,
+          "sha256": "aca1f25d653e5206a33e5a4694addd4843ee3a1a69a087fe60f1e65dcb012548"
+        }
+      },
+      {
+        "file": "docs/document/assets/start_option.md.BqTXhpbf.lean.js",
+        "yarn": null,
+        "bun": {
+          "bytes": 3503,
+          "sha256": "97ac24c8e4fd1bbda7c137b44288c457cdba7082cc7144bd23adc445b35a924e"
+        }
+      },
+      {
+        "file": "docs/document/assets/start_option.md.DRwrMHeQ.js",
+        "yarn": {
+          "bytes": 169440,
+          "sha256": "a017d51aea2d26dacd15d2af6703081ba24fd60dab4607e82b4d7b4fc02677fc"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/assets/start_option.md.DRwrMHeQ.lean.js",
+        "yarn": {
+          "bytes": 3503,
+          "sha256": "69b423729f399d8467ba699c2853fadfeb9d142f136f875d769d3888cdd4e9e1"
+        },
+        "bun": null
+      },
+      {
+        "file": "docs/document/component/contextmenu.html",
+        "yarn": {
+          "bytes": 64841,
+          "sha256": "8f12babc2bfcf1320038578f8c83c6ca844253471280065c7edf1ba5ea47b7c6"
+        },
+        "bun": {
+          "bytes": 64841,
+          "sha256": "07f04164f3be7b064e98f1da5bd7c3c465a25a32ab27171d2fd61f786dc4c8f5"
+        }
+      },
+      {
+        "file": "docs/document/component/controls.html",
+        "yarn": {
+          "bytes": 76836,
+          "sha256": "8e7fb78e6f84ff361f16048b09429142db3f5cd260256cb9195a632e73994ce2"
+        },
+        "bun": {
+          "bytes": 76836,
+          "sha256": "78bbb00fe6354c0a4abbf5e32dfafc77fa26a037c9ee0e4f6c3a04cfc911d15d"
+        }
+      },
+      {
+        "file": "docs/document/component/layers.html",
+        "yarn": {
+          "bytes": 71563,
+          "sha256": "430bd23e76f269fbd570613ead9ee08610c3704c9b29ae7b3039b8b6af3218df"
+        },
+        "bun": {
+          "bytes": 71563,
+          "sha256": "041b879645ec40d96993558fb7c5c29a6433c60758944d6b6897c1e89eaaf7a1"
+        }
+      },
+      {
+        "file": "docs/document/component/setting.html",
+        "yarn": {
+          "bytes": 111106,
+          "sha256": "649688cd28b05d412bccd05a9bba3bac1f08bcc6368224166bc3dd6f598ee955"
+        },
+        "bun": {
+          "bytes": 111106,
+          "sha256": "a7837bc31a71f66ad6155626bb15632ce458b5aa8a34fc71c3d1d4de30837824"
+        }
+      },
+      {
+        "file": "docs/document/en/advanced/built-in.html",
+        "yarn": {
+          "bytes": 115195,
+          "sha256": "9a5e9e52c97ab80504b31e05e70697ccddb481536017bf64acfef26929a99080"
+        },
+        "bun": {
+          "bytes": 115195,
+          "sha256": "1d873132d1d359e8d6d6dd7293ca78d5268f295739e7a757fc8383990a42c45d"
+        }
+      },
+      {
+        "file": "docs/document/en/advanced/class.html",
+        "yarn": {
+          "bytes": 50858,
+          "sha256": "5f8b839775da559674bb06eb4fd4a8ea6d5cb744973a26ea8ae62f680b2ba86a"
+        },
+        "bun": {
+          "bytes": 50858,
+          "sha256": "88e077e695ccb48756796e87e2f6138e7647f04d9019b478858ca56dc36ad2bf"
+        }
+      },
+      {
+        "file": "docs/document/en/advanced/event.html",
+        "yarn": {
+          "bytes": 192050,
+          "sha256": "73f31ba22e61667757e99d2259cb2f96aa09fcf6bee1e075a990fc9f3a9b725b"
+        },
+        "bun": {
+          "bytes": 192050,
+          "sha256": "1231a8cfe0dbf09874c37548812fff856144b0503f1000718b7488d1e9336278"
+        }
+      },
+      {
+        "file": "docs/document/en/advanced/global.html",
+        "yarn": {
+          "bytes": 134048,
+          "sha256": "a825321af8c360ca29e6d57fc9581c84c0b8e2db3b1c20434b473fa4f185ab1d"
+        },
+        "bun": {
+          "bytes": 134048,
+          "sha256": "410091f41ebe1928d99470cd4e89fd7d637441ae1bb2c8011fe5a226ff618e21"
+        }
+      },
+      {
+        "file": "docs/document/en/advanced/plugin.html",
+        "yarn": {
+          "bytes": 64577,
+          "sha256": "f93d3b24a9e8c37f0b90f37addf6641fd3bfb596641b912e6810ba7433f9b398"
+        },
+        "bun": {
+          "bytes": 64577,
+          "sha256": "7923aa6c34626bb394a5c55639d42316034a3017942444f71129d6ea72969ddc"
+        }
+      },
+      {
+        "file": "docs/document/en/advanced/property.html",
+        "yarn": {
+          "bytes": 209123,
+          "sha256": "513fd0e7814af1c9adec2776e89dc6cef95b48a7f4b691b85eb6053353e0b18f"
+        },
+        "bun": {
+          "bytes": 209123,
+          "sha256": "aefe0ff2a98e807ed49332920ad32ddee616219d46f998c7832683d49ff94ebc"
+        }
+      },
+      {
+        "file": "docs/document/en/component/contextmenu.html",
+        "yarn": {
+          "bytes": 64160,
+          "sha256": "d8f2c6a57f0bf9b492dfacd16d166b72f9d52f3602e73ea44fb671baa0720167"
+        },
+        "bun": {
+          "bytes": 64160,
+          "sha256": "f0de5847a81be0a3037ba8434df02e110ac98880fa89a64d265b25c2dfd3c3f4"
+        }
+      },
+      {
+        "file": "docs/document/en/component/controls.html",
+        "yarn": {
+          "bytes": 76213,
+          "sha256": "251e9811d29a330386fc733fbc85369c0b3fbf2cf292c718e8dc42996b1073f2"
+        },
+        "bun": {
+          "bytes": 76213,
+          "sha256": "44d7cb95d35037847097903938fc4ddd9f090df351a596fad4f817c5653d5391"
+        }
+      },
+      {
+        "file": "docs/document/en/component/layers.html",
+        "yarn": {
+          "bytes": 70849,
+          "sha256": "2101ef35ac7f64d1d2a695c0103d064b5d68beb61a541b8ab4cc0771e5495833"
+        },
+        "bun": {
+          "bytes": 70849,
+          "sha256": "e0f2f39b2d56c276be144933e8e85205eea453fd004acebae2853f9960181a43"
+        }
+      },
+      {
+        "file": "docs/document/en/component/setting.html",
+        "yarn": {
+          "bytes": 110543,
+          "sha256": "b09d6ca0afa5ddcd1729f253f9e982870dbbfe21191fc31388a12a9c1603e59d"
+        },
+        "bun": {
+          "bytes": 110543,
+          "sha256": "b2fd33fa5e47da431f2f5441adb139e2dd40493d57255dcbe2751a97c0c6cea2"
+        }
+      },
+      {
+        "file": "docs/document/en/index.html",
+        "yarn": {
+          "bytes": 123713,
+          "sha256": "b70ba2fea6997467110b84b1546f2734ad5a625c3b79ac2eb67b1f92f5386ee0"
+        },
+        "bun": {
+          "bytes": 123713,
+          "sha256": "141aa57d9212d8334510055ffeebe807281d6bfb68f4648284d866edde73723c"
+        }
+      },
+      {
+        "file": "docs/document/en/start/i18n.html",
+        "yarn": {
+          "bytes": 56854,
+          "sha256": "e3ca0575d02add0fb2e60580a30f380a20abd2a7a1db68e7da54a3f3991ca636"
+        },
+        "bun": {
+          "bytes": 56854,
+          "sha256": "32971a7d8ae87689bd4a8a0302ebf235b990ee5f3095a261ae27ebbf759a4747"
+        }
+      },
+      {
+        "file": "docs/document/en/start/option.html",
+        "yarn": {
+          "bytes": 207480,
+          "sha256": "37fd5bd78a1a1855e6d8a063e3c77f50ad1a9f64bd198837d2e6bc8ff0a47f53"
+        },
+        "bun": {
+          "bytes": 207480,
+          "sha256": "3e87f764a1652d1f209d3338ce13a5df768b57d37ee0ca69d2f509970b58a031"
+        }
+      },
+      {
+        "file": "docs/document/hashmap.json",
+        "yarn": {
+          "bytes": 896,
+          "sha256": "7d51ce7b6ee771bce269576d1732956b5a08172b55a77e74b728454650dae889"
+        },
+        "bun": {
+          "bytes": 896,
+          "sha256": "6ba1dc03f3f5c2b0e7bb9f41187a8e06c3a78b9114a445c903d9bec8cc2cc07b"
+        }
+      },
+      {
+        "file": "docs/document/index.html",
+        "yarn": {
+          "bytes": 123647,
+          "sha256": "5bd31d929b9d023aff65c14e61b89f4b5a6592282a3addb6e9644c58dde652b1"
+        },
+        "bun": {
+          "bytes": 123647,
+          "sha256": "29849d175db28b69350608de1e4b9eb37472aac31b1d2e7df34558d75d72cc70"
+        }
+      },
+      {
+        "file": "docs/document/plugin/danmuku.html",
+        "yarn": {
+          "bytes": 153978,
+          "sha256": "a63ab934e31105fa9a0409049f377cc7488f20d483114a8aa9b8c3e2a89a8c0d"
+        },
+        "bun": {
+          "bytes": 153978,
+          "sha256": "8c5b5e7d48339ef665bb4bb99b4265e9ae32269da6ecd93d22714307ae387bad"
+        }
+      },
+      {
+        "file": "docs/document/start/i18n.html",
+        "yarn": {
+          "bytes": 57343,
+          "sha256": "3b3964f535b43455b891ee988e09e2be1cf36215af78e5b3664e9bbf92a69df9"
+        },
+        "bun": {
+          "bytes": 57343,
+          "sha256": "8ab05492cc3dff17da77d38c71071219a20c9bfb1e4fe285c736f20c51e7e18c"
+        }
+      },
+      {
+        "file": "docs/document/start/option.html",
+        "yarn": {
+          "bytes": 207075,
+          "sha256": "0d98fdc03e41218cbd82f19c7120fb54336c3b175e1562d26356217146af2e03"
+        },
+        "bun": {
+          "bytes": 207075,
+          "sha256": "42efa8033a150dadb29d1a3d3729065cb20498e1d155e2b1019e951ff1be98dc"
+        }
+      }
+    ],
+    "allDifferencesInDocumentation": true
+  },
+  "unchanged": {
+    "rootManifest": true,
+    "rootYarnLock": true,
+    "packageManager": "yarn@1.22.22",
+    "bunLockOnlyInsideEvaluationCheckout": true
+  },
+  "limitations": [
+    "Windows x64 only",
+    "Yarn warm cache and Bun cold cache cannot support a speed comparison",
+    "Initial nested checkout excluded due to ancestor dependency risk",
+    "Browser downloads excluded; frozen release fixtures copied without node_modules",
+    "No Bun runtime or bundler adoption; test scripts run under pinned Node/Yarn",
+    "Build comparison does not isolate every possible source of documentation nondeterminism",
+    "Resource filename matching is scoped, not an exhaustive platform asset inventory",
+    "License fields recorded without claiming a new license approval",
+    "No remote CI, browser or physical device certification, push or publication"
+  ]
+}

@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 262 项，范围 22 个包及工作区/示例。
 
-状态：todo 45 / doing 22 / blocked 0 / done 195 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 44 / doing 22 / blocked 0 / done 196 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -414,7 +414,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| MOD-01 | workspace<br>Bun 固定版本干净安装试点 | ENG-09 | 独立目录的 Bun 安装与 Yarn 冻结基线对比，默认仍为用户选定的 Yarn | Node 测试仍通过；安装与资源一致才决定采用；不改 bundler；不自动替换默认 packageManager 或维护锁文件 | H | todo |
+| MOD-01 | workspace<br>Bun 固定版本干净安装试点 | ENG-09 | 独立目录的 Bun 安装与 Yarn 冻结基线对比，默认仍为用户选定的 Yarn | Node 测试仍通过；安装与资源一致才决定采用；不改 bundler；不自动替换默认 packageManager 或维护锁文件 | H | done |
 | MOD-PLUGIN-01 | workspace<br>迁移插件生成器与类型化模板 | ENG-06, SITE-03 | 保留 create:plugin CLI；纯渲染/文件发布边界、TS 工厂/声明/测试/示例及维护指南 | 防止覆盖现有包或示例；失败回退；生成包可构建并通过严格类型、旧模块消费及测试；不自动修改既有包或运行安装发布 | M | done |
 | MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03, MOD-PLUGIN-01 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | done |
 | MOD-DEV-01 | workspace<br>修复开发服务器失败状态并明确资源生命周期 | MOD-02 | 修复 Servor 占用端口却退出 0 的已复现问题；明确 HTTP/监听/热刷新连接与定时器的启动、失败和关闭责任 | 保持默认 8082、docs 页面、自动刷新和旧 dev 命令；端口冲突退出非零且不终止其他服务，连续启动/停止及编译错误恢复有实际验证；跨平台监听差异单独留证 | M | done |
@@ -653,6 +653,7 @@
 - SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json) [记录](changes/2026-09-14-SITE-07-vendor-notices.md) [记录](baselines/site-notices-checkpoint.json)
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)
+- MOD-01: [记录](changes/2026-09-15-MOD-01-bun-evaluation.md) [记录](baselines/bun-install-validation.json) [记录](bun-evaluation.md)
 - MOD-PLUGIN-01: [记录](changes/2026-09-14-MOD-PLUGIN-01-scaffold.md) [记录](baselines/scaffold-validation.json)
 - MOD-02: [记录](changes/2026-09-14-MOD-02-library-tooling.md) [记录](baselines/library-tooling-validation.json)
 - MOD-DEV-01: [记录](changes/2026-09-14-MOD-DEV-01-dev-server.md) [记录](baselines/dev-server-validation.json)
