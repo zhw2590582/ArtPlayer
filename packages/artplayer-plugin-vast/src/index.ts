@@ -1,9 +1,13 @@
 import type Artplayer from 'artplayer'
-import type { Callback, Result } from './types'
+import type { Callback, CompatibilityOptions, Result } from './types'
 import { loadImaSdk } from './sdk'
 import { createSession } from './session'
 
-function artplayerPluginVast(callback?: Callback) {
+function artplayerPluginVast(callback?: Callback, options: CompatibilityOptions = {}) {
+  const compatibility = options.compatibility
+  if (compatibility !== undefined && compatibility !== 'workspace-1.2')
+    throw new TypeError('Unsupported VAST compatibility mode')
+  const workspaceMode = compatibility === 'workspace-1.2'
   return async (art: Artplayer): Promise<Result> => {
     let disposed = false
     let session: ReturnType<typeof createSession> | undefined
@@ -28,10 +32,15 @@ function artplayerPluginVast(callback?: Callback) {
       if (closed())
         return result
       const utils = (art.constructor as typeof Artplayer).utils
-      session = createSession(art, ima, utils, closed)
+      session = createSession(art, ima, utils, closed, workspaceMode)
       if (closed()) {
         dispose()
         return result
+      }
+      if (!workspaceMode) {
+        session.context.init()
+        if (closed())
+          return result
       }
       if (typeof callback === 'function')
         await callback(session.context)

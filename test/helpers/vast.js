@@ -12,7 +12,8 @@ export async function vastImplementations() {
   const { outputFiles } = await build({ entryPoints: [resolveSource('packages/artplayer-plugin-vast/src/index')], bundle: true, write: false, format: 'cjs', platform: 'browser', external: ['@glomex/vast-ima-player'] })
   const frozen = async source => (await transform(source, { loader: 'js', format: 'cjs', target: 'es2020' })).code
   return [
-    { name: 'source', code: outputFiles[0].text },
+    { name: 'source', published: true, code: outputFiles[0].text },
+    { name: 'source-workspace', options: { compatibility: 'workspace-1.2' }, code: outputFiles[0].text },
     { name: 'published-1.0.0-source', historical: true, published: true, code: await frozen(readMember(archive, 'package/src/index.js').toString()) },
     { name: 'frozen-workspace-1.2.0', historical: true, code: await frozen(contract.sources.get('packages/artplayer-plugin-vast/src/index.js')) },
   ]

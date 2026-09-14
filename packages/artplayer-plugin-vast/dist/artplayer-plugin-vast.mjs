@@ -445,30 +445,54 @@ function createRequest(ima, field, value, config) {
   return request;
 }
 let nextId = 0;
-function createContainer(utils) {
+function createContainer(utils, workspaceMode) {
   const container = utils.createElement("div");
-  container.id = `art-vast-${Date.now()}-${++nextId}`;
+  container.id = `${workspaceMode ? "art-vast-" : "art-"}${Date.now()}-${++nextId}`;
   utils.setStyles(container, {
     position: "absolute",
     inset: "0",
     width: "100%",
     height: "100%",
     zIndex: "150",
-    backgroundColor: "black",
-    display: "none",
-    pointerEvents: "auto"
+    display: "none"
   });
+  if (workspaceMode)
+    utils.setStyles(container, { backgroundColor: "black", pointerEvents: "auto" });
   return container;
 }
-function createSession(art, ima, utils, closed) {
+function createSession(art, ima, utils, closed, workspaceMode) {
   const { $video, $player } = art.template;
   const adsRenderingSettings = new ima.AdsRenderingSettings();
-  adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true;
-  adsRenderingSettings.enablePreloading = true;
+  if (workspaceMode) {
+    adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true;
+    adsRenderingSettings.enablePreloading = true;
+  }
   const playerOptions = new E();
   let current = null;
   let initializing = false;
   let releasing = 0;
+  const context = {
+    art,
+    playUrl: (url, config = {}) => play("adTagUrl", url, config),
+    playRes: (response, config = {}) => play("adsResponse", response, config),
+    init,
+    ima,
+    adsRenderingSettings,
+    playerOptions,
+    imaPlayer: null,
+    id: null,
+    $container: null,
+    get container() {
+      return current?.container || null;
+    }
+  };
+  if (workspaceMode) {
+    Object.defineProperties(context, {
+      imaPlayer: { get: () => current?.player || null },
+      id: { get: () => current?.container.id || null },
+      $container: { get: () => current?.container || null }
+    });
+  }
   const live = (owner) => current === owner && !owner.released && !closed();
   function release(owner) {
     if (current === owner)
@@ -519,7 +543,7 @@ function createSession(art, ima, utils, closed) {
     initializing = true;
     let owner;
     try {
-      owner = { container: createContainer(utils), player: null, listeners: [], playing: false, released: false };
+      owner = { container: createContainer(utils, workspaceMode), player: null, listeners: [], playing: false, released: false };
       current = owner;
       if (!live(owner)) {
         release(owner);
@@ -536,12 +560,13 @@ function createSession(art, ima, utils, closed) {
         return null;
       }
       const allocated = owner;
-      for (const [name, playing] of [
+      const events = workspaceMode ? [
         ["AdContentPauseRequested", true],
         ["AdContentResumeRequested", false],
         ["AdStarted", true],
         ["AdError", false]
-      ]) {
+      ] : [];
+      for (const [name, playing] of events) {
         const callback = (event) => {
           if (!live(allocated))
             return;
@@ -556,6 +581,13 @@ function createSession(art, ima, utils, closed) {
           release(owner);
           return null;
         }
+      }
+      if (!workspaceMode) {
+        Object.defineProperties(context, {
+          imaPlayer: { value: owner.player },
+          id: { value: owner.container.id },
+          $container: { value: owner.container }
+        });
       }
       return owner.player;
     } catch (error) {
@@ -572,7 +604,7 @@ function createSession(art, ima, utils, closed) {
     }
   }
   function play(field, value, config) {
-    if (closed() || current?.playing)
+    if (closed() || workspaceMode && current?.playing)
       return;
     const player = init();
     const owner = current;
@@ -586,24 +618,13 @@ function createSession(art, ima, utils, closed) {
     if (current)
       release(current);
   }
-  const context = {
-    art,
-    playUrl: (url, config = {}) => play("adTagUrl", url, config),
-    playRes: (response, config = {}) => play("adsResponse", response, config),
-    init,
-    ima,
-    adsRenderingSettings,
-    playerOptions,
-    get imaPlayer() {
-      return current?.player || null;
-    },
-    get container() {
-      return current?.container || null;
-    }
-  };
   return { context, destroy };
 }
-function artplayerPluginVast(callback) {
+function artplayerPluginVast(callback, options = {}) {
+  const compatibility = options.compatibility;
+  if (compatibility !== void 0 && compatibility !== "workspace-1.2")
+    throw new TypeError("Unsupported VAST compatibility mode");
+  const workspaceMode = compatibility === "workspace-1.2";
   return async (art) => {
     let disposed = false;
     let session;
@@ -629,10 +650,15 @@ function artplayerPluginVast(callback) {
       if (closed())
         return result;
       const utils = art.constructor.utils;
-      session = createSession(art, ima, utils, closed);
+      session = createSession(art, ima, utils, closed, workspaceMode);
       if (closed()) {
         dispose();
         return result;
+      }
+      if (!workspaceMode) {
+        session.context.init();
+        if (closed())
+          return result;
       }
       if (typeof callback === "function")
         await callback(session.context);

@@ -1,24 +1,34 @@
 # VAST 测试维护
 
-当前完成 PKG-VAST-01/02；生产重构由03/04继续。来源见
+PKG-VAST-03现已落实用户确认的两种初始化模式；公开声明继续由04协调。来源见
 [实际契约](baselines/vast-contract.md)、[VAST/SDK归档](baselines/vast-release.json)
 和 [核心5.1.7归档](baselines/vast-core.json)。工作区1.2.0不是npm发布版本。
 
-03检查点：新增`test/vast-lifecycle.test.js`的15项候选修复断言，冻结工作区全部失败、
+早期03检查点：新增`test/vast-lifecycle.test.js`的15项候选修复断言，冻结工作区全部失败、
 当前5个TS模块全部通过；现有测试共60项Node、117项浏览器通过。覆盖终止/回调失败、
 初始化回滚、活动广告重建、旧事件、配置getter和SDK同步重入；完整CI900项通过。
 该文件已纳入`yarn test:vast`和`test:unit`。实际资源所有权见
 [包内架构](../packages/artplayer-plugin-vast/ARCHITECTURE.md)；
-[初始化冲突](vast-compatibility-decision.md)未决定，03仍doing。以下缺陷清单保留历史
+[初始化冲突](vast-compatibility-decision.md)当时尚未决定。以下缺陷清单保留历史
 来源，不代表候选实现仍包含这些已获可控修复证据的问题；真实IMA验收仍待05。
 
 ## 文件与执行
 
-PKG-VAST-07补回工厂`.default`自身别名，不改变初始化决策。当前`yarn test:vast`
+PKG-VAST-07补回工厂`.default`自身别名，不改变初始化决策。当时`yarn test:vast`
 65项通过；实际main/legacy加ESM各4项导出通过。117项三浏览器检查通过，其中候选
 异步注册场景使用`.default`，其他场景保留直接调用。浏览器仍替换SDK边界，实际
 打包SDK只做无广告的导出/已销毁宿主验证。详见
 [变更](changes/2026-09-14-PKG-VAST-07-default-alias.md)。
+
+2026-09-14用户确认默认保留npm语义、显式选择workspace惰性模式。当前Node82项
+通过，三浏览器×三核心×四插件实现/模式162项通过（99候选，63历史）。主片解码
+是真实浏览器行为，SDK仍受控。首次新增7项Node中5项在原候选失败，修复后新增
+10项全过；首轮浏览器153过9失败来自默认模式仍被旧断言当作工作区显隐，原报告
+保留。修正为各自历史前缀、监听数和显隐责任，并补充回调开始时资源/数据字段
+检查；未删除清理/重建断言。最终源码格式整理后重跑，完整证据见
+[03完成记录](changes/2026-09-14-PKG-VAST-03-compatibility.md)。
+版本以实际附件为准：npm核心5.1.7/5.4.0、候选5.4.1；早期文档把published路径
+写为5.4.1不准确，本轮报告已按来源及实际coreVersion纠正。
 
 - `test/vast-exports.test.js`：源码构建或环境变量指定的实际main/legacy/ESM导出。
   保持现有callable，不宣称复刻旧namespace对象的反射形状；新文件纳入test:vast/test:unit。
@@ -26,9 +36,15 @@ PKG-VAST-07补回工厂`.default`自身别名，不改变初始化决策。当�
   监听、请求、销毁失败和晚到事件；不实现IMA、广告请求或主片暂停恢复。
 - `test/helpers/vast.js`：只在精确的`@glomex/vast-ima-player`导入边界替换SDK。
   当前JS/TS入口可打包加载；两套历史源码必须来自哈希验证的npm归档/Git内容。
+  source与source-workspace是相同编译代码，后者显式传第二参数；published字段
+  表示行为模式，historical才表示历史代码。浏览器附件记录实际选项，避免混计。
   Node宿主仅提供事件和DOM所有权意图，不模拟布局或视频解码。
 - `test/vast.test.js`：共享契约、工作区新增功能、独立的历史缺陷观察。
   修复时为当前候选增加正确行为断言，保留历史缺陷复现，不能把旧缺陷移入共享契约。
+- `test/vast-compatibility.test.js`：对照实际npm源码，验证提前初始化、原数据属性、
+  SDK默认设置、重复请求、回调拒绝/取消、构造重入、销毁重建及显式模式选择。
+  与原生命周期文件一起纳入test:vast/test:unit；后者保留工作区专属getter/四事件
+  故障断言，默认模式由兼容文件和共享/浏览器矩阵覆盖。
 - `test/browser/vast.spec.js`：三真实浏览器×三核心，测试异步注册、加载失败、真实
   DOM显隐、显式清理重建、主片解码/切源和销毁后晚到初始化。SDK仍是同一受控记录器。
 - `refactor/scripts/vast-core.test.mjs`：实际5.1.7 tarball、197成员和发布关联检查。
@@ -54,9 +70,9 @@ VAST-LIFE-01由源码观察提升为受控运行复现，问题如下：
 9. 工作区SDK destroy抛错阻止DOM及引用清理。
 10. 工作区事件注册失败后留下不完整SDK，下一次init错误地认为它已就绪。
 
-03应建立明确的生命周期/SDK/DOM所有权，并区分可重建的显式广告destroy与终止性的
-核心destroy。04处理准确类型、SDK声明依赖和同步误声明；初始化冲突应以发布及
-工作区消费者证据明确处置，Ads的专属类型批准不能扩展到VAST。
+03已建立生命周期/SDK/DOM所有权，区分可重建的显式广告destroy与终止性的核心destroy。
+初始化差异按用户本次独立确认处置；04处理准确类型、SDK声明依赖和同步误声明。
+运行时确认没有扩大Ads类型批准范围，也不自动豁免VAST声明兼容。
 
 ## 验证边界
 
@@ -65,4 +81,4 @@ VAST-LIFE-01由源码观察提升为受控运行复现，问题如下：
 使用精确注入；Node固定Date.now用于同毫秒ID复现，未改变生产时钟。
 
 只有实际VAST外部脚本持续因VPN无法加载时，可按用户授权记录并跳过该网络验证；
-它不豁免类型、生命周期或其他包。到02为止未用该例外。03～06和SDK-07继续开放。
+它不豁免类型、生命周期或其他包。本次未用该例外。04～06和SDK-07继续开放。

@@ -42,7 +42,7 @@ for (const implementation of implementations) {
       calls++
       started.resolve(context)
       await finish.promise
-    })(host.art)
+    }, implementation.options)(host.art)
     attaching.then(() => {
       settled = true
     })
@@ -63,7 +63,7 @@ for (const implementation of implementations) {
     const env = vastEnvironment(implementation, { deferLoad: true })
     const host = env.host()
     let calls = 0
-    const attaching = env.factory(() => calls++)(host.art)
+    const attaching = env.factory(() => calls++, implementation.options)(host.art)
     const failure = new Error('SDK unavailable')
     const rejected = assert.rejects(attaching, error => error === failure)
     env.rejectLoad(failure)
@@ -75,7 +75,7 @@ for (const implementation of implementations) {
 
   test(`${name}: absent callback remains accepted at runtime`, async () => {
     const env = vastEnvironment(implementation)
-    const result = await env.factory()(env.host().art)
+    const result = await env.factory(undefined, implementation.options)(env.host().art)
     assert.equal(result.name, 'artplayerPluginVast')
   })
 
@@ -84,7 +84,7 @@ for (const implementation of implementations) {
     let context
     await env.factory((value) => {
       context = value
-    })(env.host().art)
+    }, implementation.options)(env.host().art)
     assert.equal(context.playUrl('https://example.test/ad.xml'), undefined)
     assert.equal(context.playRes('<VAST version="3.0"/>'), undefined)
     const [player] = env.state.players
@@ -97,7 +97,7 @@ for (const implementation of implementations) {
   test(`${name}: one attach factory creates independent contexts, players and requests`, async () => {
     const env = vastEnvironment(implementation)
     const contexts = []
-    const attach = env.factory(context => contexts.push(context))
+    const attach = env.factory(context => contexts.push(context), implementation.options)
     const one = env.host()
     const two = env.host()
     await Promise.all([attach(one.art), attach(two.art)])
@@ -117,7 +117,7 @@ for (const implementation of implementations) {
     let context
     await env.factory((value) => {
       context = value
-    })(env.host().art)
+    }, implementation.options)(env.host().art)
     assert.throws(() => context.playUrl('/ad.xml'), error => error === failure)
     env.state.playError = null
     context.playUrl('/retry.xml')
@@ -132,7 +132,7 @@ for (const implementation of implementations) {
         if (asynchronous)
           return Promise.reject(failure)
         throw failure
-      })(env.host().art)
+      }, implementation.options)(env.host().art)
       await assert.rejects(attaching, error => error === failure)
     }
   })
@@ -146,7 +146,7 @@ for (const implementation of implementations) {
     let context
     await env.factory((value) => {
       context = value
-    })(host.art)
+    }, implementation.options)(host.art)
     assert.equal(context.imaPlayer, null)
     assert.equal(context.container, null)
     context.playerOptions.custom = 'caller option'
@@ -166,7 +166,7 @@ for (const implementation of implementations) {
     let context
     await env.factory((value) => {
       context = value
-    })(env.host().art)
+    }, implementation.options)(env.host().art)
     const config = Object.assign(Object.create({ inherited: 'legacy field' }), { adTagUrl: '/override.xml', adsResponse: 'override response' })
     context.playUrl('/ignored.xml', config)
     config.adTagUrl = '/changed.xml'
@@ -183,7 +183,7 @@ for (const implementation of implementations) {
     let context
     await env.factory((value) => {
       context = value
-    })(env.host().art)
+    }, implementation.options)(env.host().art)
     context.playUrl('/first.xml')
     const player = context.imaPlayer
     assert.equal(context.container.style.display, 'none')
@@ -211,7 +211,7 @@ for (const implementation of implementations) {
     let context
     const result = await env.factory((value) => {
       context = value
-    })(host.art)
+    }, implementation.options)(host.art)
     const first = context.init()
     assert.equal(result.destroy(), undefined)
     result.destroy()
@@ -232,7 +232,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
   test(`${name} historical: core destroy leaves the SDK allocated`, async () => {
     const env = vastEnvironment(implementation)
     const host = env.host()
-    await env.factory(context => initialize(context))(host.art)
+    await env.factory(context => initialize(context), implementation.options)(host.art)
     const [player] = env.state.players
     host.art.destroy()
     assert.equal(player.destroyCalls, 0)
@@ -246,7 +246,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     const attaching = env.factory((context) => {
       calls++
       initialize(context)
-    })(host.art)
+    }, implementation.options)(host.art)
     host.art.destroy()
     env.resolveLoad()
     await attaching
@@ -262,7 +262,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     await assert.rejects(env.factory((context) => {
       initialize(context)
       return Promise.reject(failure)
-    })(host.art), error => error === failure)
+    }, implementation.options)(host.art), error => error === failure)
     assert.equal(env.state.players[0].destroyCalls, 0)
     assert.equal(host.parent.children.length, 1)
   })
@@ -276,7 +276,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
       started.resolve()
       await finish.promise
       context.playUrl('/late.xml')
-    })(host.art)
+    }, implementation.options)(host.art)
     await started.promise
     host.art.destroy()
     finish.resolve()
@@ -289,7 +289,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     const failure = new Error('constructor failure')
     const env = vastEnvironment(implementation, { constructError: failure })
     const host = env.host()
-    await assert.rejects(env.factory(context => initialize(context))(host.art), error => error === failure)
+    await assert.rejects(env.factory(context => initialize(context), implementation.options)(host.art), error => error === failure)
     assert.equal(host.parent.children.length, 1)
     assert.equal(env.state.players.length, 0)
   })
@@ -298,7 +298,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     const env = vastEnvironment(implementation)
     const one = env.host()
     const two = env.host()
-    const attach = env.factory(context => initialize(context))
+    const attach = env.factory(context => initialize(context), implementation.options)
     await Promise.all([attach(one.art), attach(two.art)])
     assert.equal(one.parent.children[0].id, two.parent.children[0].id)
     assert.notEqual(one.parent.children[0], two.parent.children[0])
@@ -312,7 +312,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     let context
     const result = await env.factory((value) => {
       context = value
-    })(env.host().art)
+    }, implementation.options)(env.host().art)
     context.playUrl('/first.xml')
     context.imaPlayer.emit('AdStarted')
     result.destroy()
@@ -326,7 +326,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     let context
     const result = await env.factory((value) => {
       context = value
-    })(env.host().art)
+    }, implementation.options)(env.host().art)
     const first = context.init()
     const lateStart = [...first.listeners.get('AdStarted')][0]
     result.destroy()
@@ -345,7 +345,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     let context
     const result = await env.factory((value) => {
       context = value
-    })(host.art)
+    }, implementation.options)(host.art)
     const player = context.init()
     assert.throws(() => result.destroy(), error => error === failure)
     assert.equal(context.imaPlayer, player)
@@ -359,7 +359,7 @@ for (const implementation of implementations.filter(item => item.historical)) {
     let context
     await env.factory((value) => {
       context = value
-    })(host.art)
+    }, implementation.options)(host.art)
     assert.throws(() => context.init(), error => error === failure)
     env.state.listenError = null
     const player = context.init()

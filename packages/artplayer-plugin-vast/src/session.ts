@@ -12,15 +12,38 @@ interface Owner {
   released: boolean
 }
 
-export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, closed: () => boolean) {
+export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, closed: () => boolean, workspaceMode: boolean) {
   const { $video, $player } = art.template
   const adsRenderingSettings = new ima.AdsRenderingSettings()
-  adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true
-  adsRenderingSettings.enablePreloading = true
+  if (workspaceMode) {
+    adsRenderingSettings.restoreCustomPlaybackStateOnAdBreakComplete = true
+    adsRenderingSettings.enablePreloading = true
+  }
   const playerOptions = new PlayerOptions()
   let current: Owner | null = null
   let initializing = false
   let releasing = 0
+
+  const context: Context = {
+    art,
+    playUrl: (url, config = {}) => play('adTagUrl', url, config),
+    playRes: (response, config = {}) => play('adsResponse', response, config),
+    init,
+    ima,
+    adsRenderingSettings,
+    playerOptions,
+    imaPlayer: null,
+    id: null,
+    $container: null,
+    get container() { return current?.container || null },
+  }
+  if (workspaceMode) {
+    Object.defineProperties(context, {
+      imaPlayer: { get: () => current?.player || null },
+      id: { get: () => current?.container.id || null },
+      $container: { get: () => current?.container || null },
+    })
+  }
 
   const live = (owner: Owner) => current === owner && !owner.released && !closed()
 
@@ -77,7 +100,7 @@ export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, clo
     initializing = true
     let owner: Owner | undefined
     try {
-      owner = { container: createContainer(utils), player: null, listeners: [], playing: false, released: false }
+      owner = { container: createContainer(utils, workspaceMode), player: null, listeners: [], playing: false, released: false }
       current = owner
       if (!live(owner)) {
         release(owner)
@@ -94,12 +117,15 @@ export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, clo
         return null
       }
       const allocated = owner
-      for (const [name, playing] of [
-        ['AdContentPauseRequested', true],
-        ['AdContentResumeRequested', false],
-        ['AdStarted', true],
-        ['AdError', false],
-      ] as const) {
+      const events = workspaceMode
+        ? [
+            ['AdContentPauseRequested', true],
+            ['AdContentResumeRequested', false],
+            ['AdStarted', true],
+            ['AdError', false],
+          ] as const
+        : []
+      for (const [name, playing] of events) {
         const callback: EventListener = (event) => {
           if (!live(allocated))
             return
@@ -114,6 +140,14 @@ export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, clo
           release(owner)
           return null
         }
+      }
+      if (!workspaceMode) {
+        // Published fields are writable data properties, not the workspace getters.
+        Object.defineProperties(context, {
+          imaPlayer: { value: owner.player },
+          id: { value: owner.container.id },
+          $container: { value: owner.container },
+        })
       }
       return owner.player
     }
@@ -132,7 +166,7 @@ export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, clo
   }
 
   function play(field: 'adTagUrl' | 'adsResponse', value: string, config: RequestConfig): void {
-    if (closed() || current?.playing)
+    if (closed() || (workspaceMode && current?.playing))
       return
     const player = init()
     const owner = current
@@ -149,16 +183,5 @@ export function createSession(art: Artplayer, ima: ImaSdk, utils: Utilities, clo
       release(current)
   }
 
-  const context: Context = {
-    art,
-    playUrl: (url, config = {}) => play('adTagUrl', url, config),
-    playRes: (response, config = {}) => play('adsResponse', response, config),
-    init,
-    ima,
-    adsRenderingSettings,
-    playerOptions,
-    get imaPlayer() { return current?.player || null },
-    get container() { return current?.container || null },
-  }
   return { context, destroy }
 }

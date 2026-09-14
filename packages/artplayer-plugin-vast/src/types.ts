@@ -5,6 +5,10 @@ import type Artplayer from 'artplayer'
 export type Utilities = Pick<typeof Artplayer.utils, 'createElement' | 'setStyles'>
 export type RequestConfig = Record<string, unknown>
 
+export interface CompatibilityOptions {
+  compatibility?: 'workspace-1.2'
+}
+
 export interface Context {
   art: Artplayer
   playUrl: (url: string, config?: RequestConfig) => void
@@ -14,6 +18,8 @@ export interface Context {
   adsRenderingSettings: google.ima.AdsRenderingSettings
   playerOptions: PlayerOptions
   readonly imaPlayer: Player | null
+  readonly id: string | null
+  readonly $container: HTMLDivElement | null
   readonly container: HTMLDivElement | null
 }
 

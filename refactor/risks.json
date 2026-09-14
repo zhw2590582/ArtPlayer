@@ -3255,7 +3255,7 @@
       "id": "VAST-CONTEXT-01",
       "title": "Published VAST callback aliases and eager Player differ from the unpublished lazy workspace",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "accepted-with-scope",
       "owners": [
         "PKG-VAST-02",
         "PKG-VAST-03",
@@ -3266,10 +3266,18 @@
         "refactor/baselines/vast-release.json",
         "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
         "refactor/baselines/vast-contract-validation.json",
+        "refactor/vast-compatibility-decision.md",
+        "refactor/changes/2026-09-14-PKG-VAST-03-compatibility.md",
+        "refactor/baselines/vast-compatibility-validation.json"
+      ],
+      "compatibleResolution": "User accepted npm eager default and explicit workspace-1.2 lazy mode. Published callback data fields, SDK defaults, container styles and request forwarding are preserved; workspace extensions are opt-in.",
+      "closureCriteria": "Published and workspace consumer fixtures cover all callback fields and initialization timing; any irreconcilable behavior has a concrete decision rather than implicit waiver.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-VAST-03-compatibility.md",
+        "refactor/baselines/vast-compatibility-validation.json",
         "refactor/vast-compatibility-decision.md"
       ],
-      "compatibleResolution": "Restore published id/$container access and reconcile eager non-null Player with lazy workspace usage using explicit consumer evidence.",
-      "closureCriteria": "Published and workspace consumer fixtures cover all callback fields and initialization timing; any irreconcilable behavior has a concrete decision rather than implicit waiver."
+      "resolutionRationale": "The mutually exclusive initialization timing is explicitly approved and covered by published/workspace consumer tests. Unpublished lazy callers add the second option; public declarations remain VAST-TYPE-01/task04 and real IMA remains task05."
     },
     {
       "id": "VAST-TYPE-01",
@@ -3312,11 +3320,13 @@
         "refactor/baselines/vast-core.json",
         "refactor/vast-validation.md",
         "refactor/baselines/vast-lifecycle-validation.json",
-        "refactor/changes/2026-09-12-PKG-VAST-03-lifecycle.md"
+        "refactor/changes/2026-09-12-PKG-VAST-03-lifecycle.md",
+        "refactor/changes/2026-09-14-PKG-VAST-03-compatibility.md",
+        "refactor/baselines/vast-compatibility-validation.json"
       ],
       "compatibleResolution": "Reproduce pending SDK/callback destruction, errors, duplicate IDs and stale ad events before adding compatible cleanup and state ownership.",
       "closureCriteria": "Tests prove cleanup during load/callback rejection/core destruction and distinguish explicit plugin recreation from terminal core destruction; vendor media restoration is separately verified.",
-      "workspaceState": "45 Node tests include 16 frozen historical observations across 10 lifecycle/error categories. Real browser core destruction plus late SDK resolution leaves a newly allocated recorder in the detached player across 5.1.7/5.4.1/candidate. Google IMA allocation itself is not simulated as evidence; exact wrapper SDK boundary is controlled. All production fixes remain PKG-VAST-03 work. PKG-VAST-03 checkpoint: 15 candidate lifecycle assertions fail on frozen workspace and pass after TS ownership changes; 117 real browser wrapper checks pass with controlled SDK. Risk stays open pending full compatibility and actual vendor acceptance."
+      "workspaceState": "Task03 runtime ownership and both approved modes pass82 Node and162 real-browser wrapper checks (99 candidate,63 historical), with controlled SDK only. Eager callback errors/cancellation, rollback and explicit recreation are covered. Risk remains open for actual vendor media restoration in task05; no VPN exception was used."
     },
     {
       "id": "VAST-DIST-01",

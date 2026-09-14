@@ -8,11 +8,12 @@ const implementations = await vastImplementations()
 async function setup(page, core, implementation, testInfo, deferLoad = false) {
   await page.goto(`/test/player.html?core=${core}`)
   await page.addScriptTag({ content: `window.createVastSdk = ${createVastSdk.toString()};` })
-  await page.evaluate((deferLoad) => {
+  await page.evaluate(({ deferLoad, options }) => {
     window.vastSdk = window.createVastSdk({ deferLoad })
+    window.vastOptions = options
     window.google = { ima: window.vastSdk.ima }
     window.art = new window.Artplayer({ container: '.player', url: '/test/pattern.mp4', muted: true })
-  }, deferLoad)
+  }, { deferLoad, options: implementation.options })
   await page.addScriptTag({ content: `(() => {
     const module = { exports: {} };
     const exports = module.exports;
@@ -23,7 +24,7 @@ async function setup(page, core, implementation, testInfo, deferLoad = false) {
     ${implementation.code}
     window.artplayerPluginVast = module.exports.default || module.exports;
   })();` })
-  await testInfo.attach('vast-inputs', { contentType: 'application/json', body: JSON.stringify({ core, implementation: implementation.name, sha256: hash(implementation.code), sdk: 'controlled wrapper recorder, no IMA execution' }) })
+  await testInfo.attach('vast-inputs', { contentType: 'application/json', body: JSON.stringify({ core, implementation: implementation.name, options: implementation.options || {}, sha256: hash(implementation.code), sdk: 'controlled wrapper recorder, no IMA execution' }) })
 }
 
 test.afterEach(async ({ page }, testInfo) => {
@@ -62,7 +63,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
           await gate
           context.playUrl('/test/ad-tag.xml')
           context.playRes('<VAST/>')
-        })).then(() => {
+        }, window.vastOptions)).then(() => {
           window.vastDone = true
         })
       }, !implementation.historical)
@@ -71,6 +72,19 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
       await expect.poll(() => page.evaluate(() => window.vastCalls)).toBe(1)
       expect(await page.evaluate(() => window.vastDone)).toBe(false)
       expect(await page.evaluate(() => Object.hasOwn(window.art.plugins, 'artplayerPluginVast'))).toBe(false)
+      const beforeRequests = await page.evaluate(() => {
+        const context = window.vastContext
+        const player = window.vastSdk.state.players[0]
+        return {
+          players: window.vastSdk.state.players.length,
+          allocated: context.imaPlayer !== null,
+          publishedAliases: !!player && context.$container === player.args[2] && context.id === player.args[2].id,
+          writablePlayer: Object.getOwnPropertyDescriptor(context, 'imaPlayer').writable === true,
+          preloading: player?.args[3].enablePreloading === true,
+          background: player?.args[2].style.backgroundColor || '',
+        }
+      })
+      expect(beforeRequests).toEqual({ players: implementation.published ? 1 : 0, allocated: !!implementation.published, publishedAliases: !!implementation.published, writablePlayer: !!implementation.published, preloading: false, background: '' })
       await page.evaluate(() => window.finishVastCallback())
       await page.evaluate(() => window.vastRegistration)
       const result = await page.evaluate(() => ({
@@ -88,7 +102,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
       const result = await page.evaluate(async () => {
         const failure = new Error('controlled SDK failure')
         let calls = 0
-        const registration = window.art.plugins.add(window.artplayerPluginVast(() => calls++))
+        const registration = window.art.plugins.add(window.artplayerPluginVast(() => calls++, window.vastOptions))
         const observed = registration.catch(error => error === failure)
         window.vastSdk.rejectLoad(failure)
         return { sameFailure: await observed, calls, players: window.vastSdk.state.players.length, registered: Object.hasOwn(window.art.plugins, 'artplayerPluginVast') }
@@ -109,7 +123,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
         await page.evaluate(async () => {
           await window.art.plugins.add(window.artplayerPluginVast((context) => {
             window.vastContext = context
-          }))
+          }, window.vastOptions))
           window.vastContext.playUrl('/first.xml')
         })
         const container = page.locator('[id^="art-vast-"]')
@@ -154,7 +168,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
           window.vastRegistration = window.art.plugins.add(window.artplayerPluginVast((context) => {
             window.vastCalls++
             context.playUrl('/late.xml')
-          }))
+          }, window.vastOptions))
           window.art.destroy()
           window.vastSdk.resolveLoad()
         })
@@ -173,7 +187,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
         await setup(page, core, implementation, testInfo, true)
         const state = await page.evaluate(async () => {
           let calls = 0
-          const registration = window.art.plugins.add(window.artplayerPluginVast(() => calls++))
+          const registration = window.art.plugins.add(window.artplayerPluginVast(() => calls++, window.vastOptions))
           window.art.destroy()
           window.vastSdk.resolveLoad()
           await registration
@@ -187,14 +201,21 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
         await page.evaluate(async () => {
           await window.art.plugins.add(window.artplayerPluginVast((context) => {
             window.vastContext = context
-          }))
+          }, window.vastOptions))
           window.vastContext.playUrl('/one.xml')
           const first = window.vastContext.imaPlayer
           window.lateVastEvents = [...first.listeners.values()].flatMap(values => [...values])
           first.emit('AdStarted')
         })
-        const container = page.locator('[id^="art-vast-"]')
-        await expect(container).toBeVisible()
+        const container = page.locator(implementation.published ? '[id^="art-"]' : '[id^="art-vast-"]')
+        await expect(container).toHaveCount(1)
+        expect(await page.evaluate(() => window.lateVastEvents.length)).toBe(implementation.published ? 0 : 4)
+        // The published wrapper delegates overlay visibility to the real SDK.
+        // This recorder does not implement that SDK behavior.
+        if (implementation.published)
+          await expect(container).toBeHidden()
+        else
+          await expect(container).toBeVisible()
         await page.evaluate(() => {
           window.art.plugins.artplayerPluginVast.destroy()
           window.vastContext.playUrl('/two.xml')
@@ -218,11 +239,11 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
           const registration = window.art.plugins.add(window.artplayerPluginVast((context) => {
             context.init()
             return Promise.reject(failure)
-          }))
+          }, window.vastOptions))
           return { sameError: await registration.catch(error => error === failure), destroys: window.vastSdk.state.players[0].destroyCalls, coreDestroyed: window.art.isDestroy }
         })
         expect(result).toEqual({ sameError: true, destroys: 1, coreDestroyed: false })
-        await expect(page.locator('[id^="art-vast-"]')).toHaveCount(0)
+        await expect(page.locator(implementation.published ? '[id^="art-"]' : '[id^="art-vast-"]')).toHaveCount(0)
       })
     }
   }
