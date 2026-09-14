@@ -253,7 +253,14 @@ See refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md for exact limit
 Its combination cases now include frozen/current Danmuku and a bounded 120-row
 load while the actual model continues. `danmuku-combination-load.js` observes
 real media/RAF and cleans up its test listeners; it does not seed eligible rows.
-Candidate completeness failures remain failing under PKG-DANMUKU-MASK-LOAD-01.
+The candidate must deliver all 120 rows exactly once and recycle their references;
+original failures and the PKG-DANMUKU-MASK-LOAD-01 repair remain separate evidence.
+For a Chromium diagnostic only, set `ARTPLAYER_MASK_PROFILE=1` to attach the actual
+CDP CPU profile around the load. This never stops inference or patches the SDK.
+Ordinary format acceptance runs without profiling. Final load snapshots also
+record pending/reserved row IDs to distinguish missed sampling from placement
+backlog. Use `ARTPLAYER_DANMUKU_ARTIFACT` with `ARTPLAYER_MASK_ARTIFACT` to bind both
+candidate plugins to the exact main/legacy files being tested.
 `danmuku-dpip.spec.js` also includes two-window load cases and both plugin versions.
 Frozen-plugin retained DOM, candidate cleanup and unsupported API outcomes remain
 distinct; the old plugin's observed loss is not complete-delivery acceptance.

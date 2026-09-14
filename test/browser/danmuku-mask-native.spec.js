@@ -265,7 +265,23 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
         expect(restored.mode).toBe('alpha')
         await testInfo.attach('actual-combination-page', { body: await page.screenshot(), contentType: 'image/png' })
         const outputsBeforeLoad = await page.evaluate(() => window.maskCombination.times.length)
-        load = await observeDanmukuLoad(page, { label: 'Mask load', requireComplete: implementation === 'candidate' })
+        let profiler
+        if (process.env.ARTPLAYER_MASK_PROFILE === '1') {
+          assert.equal(testInfo.project.name, 'chromium', 'CDP profiling requires the Chromium diagnostic subset')
+          profiler = await page.context().newCDPSession(page)
+          await profiler.send('Profiler.enable')
+          await profiler.send('Profiler.start')
+        }
+        try {
+          load = await observeDanmukuLoad(page, { label: 'Mask load', requireComplete: implementation === 'candidate' })
+        }
+        finally {
+          if (profiler) {
+            const { profile } = await profiler.send('Profiler.stop')
+            await testInfo.attach('mask-cpu-profile', { contentType: 'application/json', body: JSON.stringify(profile) })
+            await profiler.detach()
+          }
+        }
         load.modelOutputs = await page.evaluate(before => window.maskCombination.times.length - before, outputsBeforeLoad)
         expect(load.modelOutputs).toBeGreaterThan(1)
         await page.evaluate(() => window.art.destroy(false))

@@ -19,8 +19,8 @@ test.beforeAll(async () => {
 
 for (const core of ['published', 'candidate']) {
   for (const implementation of ['published', 'candidate']) {
-    for (const mode of [0, 1]) {
-      test(`${core} core / ${implementation} plugin / mode ${mode}: Worker waiting does not consume visible lifetime`, async ({ page }, testInfo) => {
+    for (const [mode, antiOverlap] of [0, 1].flatMap(mode => [true, false].map(antiOverlap => [mode, antiOverlap]))) {
+      test(`${core} core / ${implementation} plugin / mode ${mode} / antiOverlap ${antiOverlap}: placement preserves visible lifetime`, async ({ page }, testInfo) => {
         await page.goto(`/test/player.html?core=${core}`)
         await page.evaluate(() => {
           const evidence = window.lifetimeEvidence = { posts: [], replies: [], visible: [], recycled: [] }
@@ -50,11 +50,11 @@ for (const core of ['published', 'candidate']) {
         await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
         // Install after native playing, then start once. The published duplicate
         // play/playing loop defect is covered elsewhere and is not this timing case.
-        await page.evaluate(async (mode) => {
+        await page.evaluate(async ({ mode, antiOverlap }) => {
           const art = window.art
           const evidence = window.lifetimeEvidence
           art.on('artplayerPluginDanmuku:visible', row => evidence.visible.push({ wall: performance.now(), clock: Date.now(), startedAt: row.$lastStartTime, rest: row.$restTime, mode: row.mode, time: art.currentTime, transition: row.$ref.style.transition }))
-          art.plugins.add(window.artplayerPluginDanmuku({ danmuku: [], speed: 1, antiOverlap: false, heatmap: false, emitter: false }))
+          art.plugins.add(window.artplayerPluginDanmuku({ danmuku: [], speed: 1, antiOverlap, heatmap: false, emitter: false }))
           const plugin = art.plugins.artplayerPluginDanmuku
           const owner = plugin.config({})
           const makeWait = owner.makeWait
@@ -65,16 +65,18 @@ for (const core of ['published', 'candidate']) {
           }
           await plugin.load([{ id: 'delayed', text: 'Full visible lifetime', time: art.currentTime + 0.4, mode }])
           owner.start()
-        }, mode)
+        }, { mode, antiOverlap })
         await expect.poll(() => page.evaluate(() => window.lifetimeEvidence.recycled.length)).toBe(1)
         await page.click('#pause')
         const evidence = await page.evaluate(() => ({ ...window.lifetimeEvidence, video: { width: window.art.video.videoWidth, time: window.art.currentTime } }))
-        await testInfo.attach('danmuku-lifetime', { contentType: 'application/json', body: JSON.stringify({ core, implementation, mode, sha256: hash(code), evidence, scope: 'Native video and real Worker geometry with controlled 1500ms request delay; does not assert naturally occurring Worker starvation.' }) })
-        expect(evidence.posts).toHaveLength(1)
-        expect(evidence.replies).toHaveLength(1)
+        const workerPlacement = implementation === 'published' || antiOverlap
+        await testInfo.attach('danmuku-lifetime', { contentType: 'application/json', body: JSON.stringify({ core, implementation, mode, antiOverlap, workerPlacement, sha256: hash(code), evidence, scope: 'Native video; Worker path has a controlled 1500ms request delay, candidate relaxed path must bypass it. Both candidate paths require full visible lifetime. Does not assert naturally occurring Worker starvation.' }) })
+        expect(evidence.posts).toHaveLength(workerPlacement ? 1 : 0)
+        expect(evidence.replies).toHaveLength(workerPlacement ? 1 : 0)
         expect(evidence.visible).toHaveLength(1)
         expect(evidence.video.width).toBeGreaterThan(0)
-        expect(evidence.replies[0].wall - evidence.posts[0].wall).toBeGreaterThanOrEqual(1400)
+        if (workerPlacement)
+          expect(evidence.replies[0].wall - evidence.posts[0].wall).toBeGreaterThanOrEqual(1400)
         const lifetime = evidence.recycled[0].wall - evidence.visible[0].wall
         if (implementation === 'published') {
           // Preserve the historical defect as explicit evidence, not the candidate contract.

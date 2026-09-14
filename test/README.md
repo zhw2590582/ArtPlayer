@@ -183,7 +183,11 @@ Document PiP: `yarn test:dpip` runs 48 historical window/DOM/lifecycle cases. Na
 
 Danmuku: `yarn test:danmuku` covers historical behavior and current input, scheduling,
 settings, rendering and heatmap boundaries. `ARTPLAYER_DANMUKU_ARTIFACT` selects a
-built candidate for integration cases; direct internal tests remain source tests.
+built main/legacy candidate for integration cases; direct internal tests remain
+source tests. This controlled synchronous VM loader executes CommonJS/UMD scripts,
+not `.mjs` modules. Do not pass ESM bytes to that override or interpret its parser
+failure as a production ESM failure. Actual ESM imports are checked by the isolated
+package consumer; full native distribution coverage remains the package release gate.
 The candidate Worker helper executes the selected artifact's Blob or data URL bytes;
 only source-mode controlled imports compile `worker.ts` separately. The frozen
 published helper remains unchanged. `yarn test:danmuku-types` checks the unchanged

@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 262 项，范围 22 个包及工作区/示例。
 
-状态：todo 49 / doing 21 / blocked 0 / done 192 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 48 / doing 21 / blocked 0 / done 193 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -467,7 +467,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| PKG-DANMUKU-MASK-LOAD-01 | artplayer-plugin-danmuku, artplayer-plugin-danmuku-mask<br>修复真实Mask组合下的弹幕未采样与放置积压 | PKG-DANMUKU-12, PKG-MASK-04, CORE-22 | 分阶段性能/采样诊断、兼容实现修复及新旧核心/产物回归 | 关闭真实模型组合5项密集负载失败和1项负载前漏显，保持回调顺序、显示寿命与生命周期取消；不能以降低负载或关闭模型制造通过 | H | todo |
+| PKG-DANMUKU-MASK-LOAD-01 | artplayer-plugin-danmuku, artplayer-plugin-danmuku-mask<br>修复真实Mask组合下的弹幕未采样与放置积压 | PKG-DANMUKU-12, PKG-MASK-04, CORE-22 | 分阶段性能/采样诊断、兼容实现修复及新旧核心/产物回归 | 关闭真实模型组合5项密集负载失败和1项负载前漏显，保持回调顺序、显示寿命与生命周期取消；不能以降低负载或关闭模型制造通过 | H | done |
 
 ## 完成证据与阻塞
 
@@ -684,4 +684,4 @@
 - CI-BROWSER-01: [记录](changes/2026-09-14-CI-BROWSER-01-scopes.md) [记录](baselines/browser-scope-validation.json)
 - PKG-CHAPTER-HOVER-01: [记录](changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md) [记录](baselines/chapter-hover-validation.json)
 - PKG-CANVAS-SUBTITLE-01: [记录](changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md) [记录](baselines/canvas-subtitles-validation.json)
-- PKG-DANMUKU-MASK-LOAD-01: [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json)
+- PKG-DANMUKU-MASK-LOAD-01: [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md) [记录](baselines/danmuku-mask-load-validation.json)

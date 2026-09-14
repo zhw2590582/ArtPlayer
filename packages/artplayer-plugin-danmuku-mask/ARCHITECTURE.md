@@ -2,10 +2,13 @@
 
 The native combination suite includes both frozen/current Danmuku with three core
 versions and a bounded 20 rows/s load after model readiness. Model output must
-continue during that load. Current Chromium/WebKit delivery failures block the
-combination gate under PKG-DANMUKU-MASK-LOAD-01; Firefox passes do not close them.
-See `refactor/changes/2026-09-14-PKG-DANMUKU-08-combined-load.md` for exact source
-inputs, historical observations and the still-unproven performance cause.
+continue during that load. PKG-DANMUKU-MASK-LOAD-01 addresses Chromium/WebKit
+delivery loss in the Danmuku scheduler; this does not replace or patch the Mask
+model, SDK, backend, video dimensions or inference loop. The optional Chromium
+`ARTPLAYER_MASK_PROFILE=1` capture records actual SDK image conversion cost.
+Keep profiling separate from ordinary timing acceptance. See the original
+failures in `refactor/changes/2026-09-14-PKG-DANMUKU-08-combined-load.md` and the
+repair record in `refactor/changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md`.
 
 The compatibility baseline is the actual npm 1.1.0 package and the earlier
 1.0.0 export shape. Sources and historical failure probes are recorded in

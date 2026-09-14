@@ -5483,13 +5483,15 @@
         "PKG-MASK-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "分阶段性能/采样诊断、兼容实现修复及新旧核心/产物回归",
       "acceptance": "关闭真实模型组合5项密集负载失败和1项负载前漏显，保持回调顺序、显示寿命与生命周期取消；不能以降低负载或关闭模型制造通过",
       "evidence": [
         "changes/2026-09-14-PKG-DANMUKU-08-combined-load.md",
-        "baselines/danmuku-combined-load-validation.json"
+        "baselines/danmuku-combined-load-validation.json",
+        "changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md",
+        "baselines/danmuku-mask-load-validation.json"
       ]
     }
   ]

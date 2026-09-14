@@ -36,7 +36,8 @@ export async function observeDanmukuLoad(page, { label, requireComplete, rate = 
         art.off('artplayerPluginDanmuku:visible', visible)
         art.off('artplayerPluginDanmuku:error', error)
         const loaded = owner.queue.filter(row => ids.has(row.id))
-        const result = { ...state, endWall: host.performance.now(), time: art.currentTime, loaded: loaded.length, waiting: loaded.filter(row => row.$state === 'wait').length, referenced: loaded.filter(row => row.$ref).length, nodes: art.template.$danmuku.children.length, pooled: owner.$refs.length, uniquePool: new Set(owner.$refs).size, decodedWidth: art.video.videoWidth }
+        const buffered = { pending: [...owner.scheduler?.buffer.pending || []].filter(row => ids.has(row.id)).map(row => row.id), reserved: [...owner.scheduler?.buffer.reserved || []].filter(row => ids.has(row.id)).map(row => row.id) }
+        const result = { ...state, endWall: host.performance.now(), time: art.currentTime, loaded: loaded.length, waiting: loaded.filter(row => row.$state === 'wait').length, referenced: loaded.filter(row => row.$ref).length, nodes: art.template.$danmuku.children.length, pooled: owner.$refs.length, uniquePool: new Set(owner.$refs).size, decodedWidth: art.video.videoWidth, buffered }
         window.danmukuCombinationLoadResult = result
         return result
       }

@@ -78,6 +78,149 @@ function geometry(mode = 1) {
   return { type: 'getDanmuTop', target: { mode, height: 20, speed: 148 }, visibles: [], antiOverlap: true, clientWidth: 640, clientHeight: 360, marginTop: 10, marginBottom: 90 }
 }
 
+test(`${prefix}: non-overlap-disabled placement does not queue a Worker round trip and keeps callbacks serial`, async (t) => {
+  const gate = deferred()
+  const calls = []
+  const { env, plugin, owner, worker } = await fixture({ antiOverlap: false, beforeVisible(row) {
+    calls.push(row.text)
+    return row.text === 'first' ? gate.promise : true
+  } })
+  t.after(() => {
+    env.destroy()
+    gate.resolve(false)
+  })
+  await plugin.load([{ text: 'first', time: 10, mode: 1 }, { text: 'second', time: 10, mode: 1 }])
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['first'])
+  gate.resolve(true)
+  await env.flush()
+  assert.deepEqual(calls, ['first', 'second'])
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first', 'second'])
+  assert.equal(worker.messages.length, 0)
+  assert.deepEqual([...owner.queue].map(row => row.$ref.offsetTop), [owner.marginTop, owner.marginTop + 20])
+})
+
+for (const boundary of ['continuous', 'seek', 'stop', 'hide', 'visibility']) {
+  test(`${prefix}: CPU gap recovery respects ${boundary} boundaries and keeps public readys unchanged`, async (t) => {
+    const { env, plugin, owner } = await fixture({}, { automatic: true })
+    t.after(() => env.destroy())
+    const listeners = new Set()
+    const doc = {
+      visibilityState: 'visible',
+      addEventListener(name, fn) {
+        assert.equal(name, 'visibilitychange')
+        listeners.add(fn)
+      },
+      removeEventListener(name, fn) {
+        assert.equal(name, 'visibilitychange')
+        listeners.delete(fn)
+      },
+    }
+    owner.$player.ownerDocument = doc
+    await plugin.load([{ text: 'gap', time: 10.4, mode: 1 }])
+    env.art.playing = true
+    owner.start()
+    env.frame()
+    await env.flush()
+    env.tick(800)
+    env.art.currentTime = 10.8
+    if (boundary === 'seek')
+      env.art.emit('video:seeking')
+    if (boundary === 'stop') {
+      owner.stop()
+      owner.start()
+    }
+    if (boundary === 'hide') {
+      owner.hide()
+      owner.show()
+    }
+    if (boundary === 'visibility') {
+      for (const listener of listeners) listener()
+    }
+    assert.equal(owner.readys.length, 0)
+    env.frame()
+    await env.flush()
+    assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), boundary === 'continuous' ? ['gap'] : [])
+    env.destroy()
+    assert.equal(listeners.size, 0)
+  })
+}
+
+test(`${prefix}: document adoption drops the old catch-up window and transfers visibility ownership`, async (t) => {
+  const { env, plugin, owner } = await fixture({}, { automatic: true })
+  t.after(() => env.destroy())
+  function document() {
+    const listeners = new Set()
+    return {
+      visibilityState: 'visible',
+      listeners,
+      addEventListener: (_name, fn) => listeners.add(fn),
+      removeEventListener: (_name, fn) => listeners.delete(fn),
+    }
+  }
+  const original = document()
+  const adopted = document()
+  owner.$player.ownerDocument = original
+  await plugin.load([{ text: 'before adoption', time: 10.4, mode: 1 }, { text: 'after adoption', time: 11.2, mode: 1 }])
+  env.art.playing = true
+  owner.start()
+  await env.frame()
+  assert.equal(original.listeners.size, 1)
+  owner.$player.ownerDocument = adopted
+  env.tick(800)
+  env.art.currentTime = 10.8
+  await env.frame()
+  assert.equal(original.listeners.size, 0)
+  assert.equal(adopted.listeners.size, 1)
+  assert.equal(output(env, 'visible').length, 0, 'Do not replay rows crossed while adopting another document')
+  env.tick(800)
+  env.art.currentTime = 11.6
+  await env.frame()
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['after adoption'])
+  env.destroy()
+  assert.equal(adopted.listeners.size, 0)
+})
+
+test(`${prefix}: CPU gap recovery ignores newly appended past rows and does not retry an already sampled false callback`, async (t) => {
+  const calls = []
+  const { env, plugin, owner } = await fixture({ beforeVisible(row) {
+    calls.push(row.text)
+    return row.text !== 'declined'
+  } }, { automatic: true })
+  t.after(() => env.destroy())
+  await plugin.load([{ text: 'declined', time: 10, mode: 1 }, { text: 'gap', time: 10.4, mode: 1 }])
+  env.art.playing = true
+  owner.start()
+  env.frame()
+  await env.flush()
+  env.tick(800)
+  env.art.currentTime = 10.8
+  await plugin.load([{ text: 'appended-past', time: 10.3, mode: 1 }])
+  env.frame()
+  await env.flush()
+  assert.deepEqual(calls, ['declined', 'gap'])
+  assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['gap'])
+})
+
+for (const boundary of ['stop', 'hide', 'reset', 'destroy']) {
+  test(`${prefix}: inline relaxed placement honors ${boundary} from the first visible callback`, async (t) => {
+    const { env, plugin, owner, worker } = await fixture({ antiOverlap: false })
+    t.after(() => env.destroy())
+    await plugin.load([{ text: 'first', time: 10, mode: 1 }, { text: 'cancelled', time: 10, mode: 1 }])
+    env.art.on('artplayerPluginDanmuku:visible', () => owner[boundary]())
+    env.art.playing = true
+    owner.start()
+    env.frame()
+    await env.flush()
+    assert.deepEqual(output(env, 'visible').map(event => event.args[0].text), ['first'])
+    assert.equal(worker.messages.length, 0)
+    assert.equal(owner.queue[1].$ref, null)
+  })
+}
+
 test(`${prefix}: repeated play/playing and direct starts preserve events and internal return with only one queued frame`, async () => {
   const { env, owner } = await fixture()
   env.art.playing = true

@@ -93,7 +93,7 @@ for (const implementation of ['published', 'candidate']) {
         const visible = new Set(evidence.visible.map(row => row.id))
         return { ...evidence, rows, missing: rows.filter(row => !visible.has(row.id)).map(row => row.id), media: { time: window.art.currentTime, width: window.art.video.videoWidth } }
       })
-      await testInfo.attach('danmuku-timing-observation', { contentType: 'application/json', body: JSON.stringify({ implementation, scenario, sha256: hash(code), observation, scope: 'Diagnostic only: native timing with controlled load, original readys getter and unmodified queue states. Missing rows are reported, not waived as stability acceptance.' }) })
+      await testInfo.attach('danmuku-timing-observation', { contentType: 'application/json', body: JSON.stringify({ implementation, scenario, sha256: hash(code), observation, scope: 'Native timing with controlled load, original readys getter and unmodified queue states. Candidate must recover both CPU and asynchronous gaps; published CPU loss is observed separately. This is not sustained-load acceptance.' }) })
       expect(observation.media.width).toBeGreaterThan(0)
       expect(observation.rows).toHaveLength(3)
       expect(observation.frames.length).toBeGreaterThan(2)
@@ -110,6 +110,10 @@ for (const implementation of ['published', 'candidate']) {
           for (let index = 1; index < observation.callbacks.length; index++)
             expect(observation.callbacks[index].start).toBeGreaterThanOrEqual(observation.callbacks[index - 1].end)
         }
+      }
+      if (implementation === 'candidate') {
+        expect(observation.missing).toEqual([])
+        expect(observation.visible.map(row => row.id)).toEqual(['first', 'middle', 'sentinel'])
       }
       await page.evaluate(() => window.art.destroy())
     })

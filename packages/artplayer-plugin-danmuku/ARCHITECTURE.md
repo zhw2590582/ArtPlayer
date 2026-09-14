@@ -21,8 +21,10 @@ old-plugin combinations, combined-load performance and devices remain task 08/09
 The actual Mask combination now also tests frozen 5.3.0 and a 20 rows/s post-model
 load. `test/helpers/danmuku-combination-load.js` owns only test RAF/listeners and
 retains observations after failed assertions. Candidate complete delivery remains
-mandatory. Chromium/WebKit failures are tracked by DANMUKU-MASK-LOAD-01 and
-PKG-DANMUKU-MASK-LOAD-01; ordinary playback or Firefox passes cannot close them.
+mandatory. PKG-DANMUKU-MASK-LOAD-01 addresses the original Chromium/WebKit loss
+with continuous-playback sampling and relaxed placement. Preserve the original
+failed reports and rerun the complete model/core/format matrix after changes;
+ordinary playback or Firefox passes alone cannot close that gate.
 
 `danmuku-fullscreen.spec.js` tests all old/current core and plugin pairs in real
 document and CSS web fullscreen, with three fresh player lifetimes per case.
@@ -57,10 +59,12 @@ historical declarations, earlier exports and failure evidence are indexed in
 | `src/bilibili.ts` | Fetch and response text, one parser Worker per request, fallback, settlement and Blob URL cleanup |
 | `src/scheduler.ts` | One sampling RAF and one serial asynchronous batch, cancellation generations, preparation ownership and failure recovery |
 | `src/scheduling-buffer.ts` | Identity-based observations and current-batch reservations; ready-before-wait selection without public state mutation |
+| `src/sampling-window.ts` | Continuous media-time observations, stalled-frame recovery and document visibility ownership |
 | `src/renderer.ts` | Owned node allocation, preparation, geometry snapshots, placement, pause/resume styling and disposal |
 | `src/queue.ts` | Ordered state pools, eligibility and state transitions |
 | `src/worker-client.ts` | Track Worker lifecycle, a shared response dispatcher, unique request IDs and pending requests |
-| `src/worker.ts` | Track placement Worker; a separate protocol from the XML parser Worker |
+| `src/placement.ts` | Shared pure legacy track geometry, used by relaxed placement and the Worker |
+| `src/worker.ts` | Placement Worker message adapter; a separate protocol from the XML parser Worker |
 | `src/setting.ts` | Settings coordinator, configuration controls, mount and fullscreen layout |
 | `src/setting-template.ts` | Existing template HTML and static icon values |
 | `src/setting-slider.ts` | Slider index, pointer and rotation behavior |
@@ -71,7 +75,7 @@ historical declarations, earlier exports and failure evidence are indexed in
 | `src/heatmap-sampling.ts` | Sorted-time bin counts with historical numeric boundaries |
 | `src/heatmap-geometry.ts` | Legacy point normalization, caller-visible point writes and SVG curve calculation |
 
-All 20 owned runtime modules use TypeScript. Their responsibilities remain
+All owned runtime modules use TypeScript. Their responsibilities remain
 separate from public declaration compatibility and from release acceptance.
 The following files contain types only:
 
@@ -191,8 +195,13 @@ retains the current-time +/- 0.1 second window and state-pool order. Keep the
 existing track algorithm and geometry fields until separately reviewed.
 
 RAF sampling and visible lifetime maintenance continue while `beforeVisible` or
-the Worker is pending. The scheduling buffer stores only actually observed row
-references; it does not sweep elapsed time or modify public wait/ready states.
+the Worker is pending. Public `readys` remains the instantaneous +/- 0.1 second
+query. The sampling window also recovers rows crossed between consecutive
+forward media samples, but only if they were already waiting at the earlier
+sample and were not already selected there. It does not replay newly appended
+past rows or retry a false callback merely because time crossed that row.
+The scheduling buffer stores the resulting row references without modifying
+public wait/ready states.
 The dispatcher remains serial. Reserve every row in its batch until completion,
 so a rejected placement cannot repeatedly jump ahead of later rows in that batch.
 At the next RAF, capture new observations before selecting ready rows followed by
@@ -200,14 +209,24 @@ wait rows, retaining capture order within each group. Identity sets prevent the
 same observed row from entering both the current and pending batch. Cancellation
 clears both sets; an old operation's finally must not clear a newer batch.
 
-This fixes missed eligibility during asynchronous preparation, not timestamps
-crossed while the entire main thread is blocked. The native timing diagnostic
-keeps the unchanged published miss visible beside the candidate regression and
-records CPU-blocked frame gaps without calling them successful load acceptance.
-Sampling still scans the existing state pools on each active frame. Buffer storage
-is bounded by the distinct observed queue rows, not an arbitrary drop limit; this
-does not establish a throughput or memory improvement. Measure dense queues and
-long asynchronous waits in the separate sustained-load acceptance task.
+The sampling window clears on scheduler invalidation, seeking, backward or
+invalid media time, hidden documents and document changes. It owns exactly one
+visibility listener on the player's current document, releases it on adoption,
+and removes it on destroy. Visibility changes clear catch-up history without
+cancelling a running user callback. The next visible sample starts a new window.
+This extends PKG-DANMUKU-12 to cover main-thread gaps during continuous playback;
+it is not a promise to replay comments across pause, seek or background periods.
+Sampling still scans existing state pools; retained identities are bounded by
+queue rows rather than an arbitrary drop limit.
+
+After the serial `beforeVisible` callback, `antiOverlap: false` uses the shared
+placement function directly, avoiding a Worker round trip for every row while
+an actual segmentation model competes for the main thread. `antiOverlap: true`
+and the internal `postMessage` helper retain the Worker protocol. Track geometry,
+default options, visible event order, generation checks and visible lifetime
+remain unchanged. Do not duplicate the geometry in either caller or bypass the
+callback cancellation guard. Native model loads and timing diagnostics complement
+the controlled scheduling tests; they do not prove unlimited throughput.
 
 Pause, reset, successful replacement input commit, hide, seeking, destroy and replacing the
 `beforeVisible` callback invalidate unfinished preparation. Cancellation races

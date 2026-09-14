@@ -534,6 +534,155 @@ var artplayerPluginDanmuku = (function() {
       this.nodes.clear();
     }
   }
+  function getDanmuTop({ target, visibles, clientWidth, clientHeight, marginBottom, marginTop, antiOverlap }) {
+    const maxTop = clientHeight - marginBottom;
+    const danmus = visibles.filter((item) => item.mode === target.mode && item.top <= maxTop).sort((prev, next) => prev.top - next.top);
+    if (danmus.length === 0) {
+      if (target.mode === 2) {
+        return maxTop - target.height;
+      } else {
+        return marginTop;
+      }
+    }
+    danmus.unshift({
+      type: "top",
+      top: 0,
+      left: 0,
+      right: 0,
+      height: marginTop,
+      width: clientWidth,
+      speed: 0,
+      distance: clientWidth
+    });
+    danmus.push({
+      type: "bottom",
+      top: maxTop,
+      left: 0,
+      right: 0,
+      height: marginBottom,
+      width: clientWidth,
+      speed: 0,
+      distance: clientWidth
+    });
+    if (target.mode === 2) {
+      for (let index = danmus.length - 2; index >= 0; index -= 1) {
+        const item = danmus[index];
+        const prev = danmus[index + 1];
+        const itemBottom = item.top + item.height;
+        const diff = prev.top - itemBottom;
+        if (diff >= target.height) {
+          return prev.top - target.height;
+        }
+      }
+    } else {
+      for (let index = 1; index < danmus.length; index += 1) {
+        const item = danmus[index];
+        const prev = danmus[index - 1];
+        const prevBottom = prev.top + prev.height;
+        const diff = item.top - prevBottom;
+        if (diff >= target.height) {
+          return prevBottom;
+        }
+      }
+    }
+    const topMap = [];
+    for (let index = 1; index < danmus.length - 1; index += 1) {
+      const item = danmus[index];
+      if (topMap.length) {
+        const last = topMap[topMap.length - 1];
+        if (last[0].top === item.top) {
+          last.push(item);
+        } else {
+          topMap.push([item]);
+        }
+      } else {
+        topMap.push([item]);
+      }
+    }
+    if (antiOverlap) {
+      switch (target.mode) {
+        case 0: {
+          const result = topMap.find((list) => {
+            return list.every((danmu) => {
+              if (clientWidth < danmu.distance)
+                return false;
+              if (target.speed < danmu.speed)
+                return true;
+              const overlapTime = danmu.right / (target.speed - danmu.speed);
+              if (overlapTime > danmu.time)
+                return true;
+              return false;
+            });
+          });
+          return result && result[0] ? result[0].top : void 0;
+        }
+        // 静止弹幕没有重叠问题
+        case 1:
+        case 2:
+          return void 0;
+      }
+    } else {
+      switch (target.mode) {
+        case 0:
+          topMap.sort((prev, next) => {
+            const nextMinRight = Math.min(...next.map((item) => item.right));
+            const prevMinRight = Math.min(...prev.map((item) => item.right));
+            return nextMinRight * next.length - prevMinRight * prev.length;
+          });
+          break;
+        case 1:
+        case 2:
+          topMap.sort((prev, next) => {
+            const nextMaxWidth = Math.max(...next.map((item) => item.width));
+            const prevMaxWidth = Math.max(...prev.map((item) => item.width));
+            return prevMaxWidth * prev.length - nextMaxWidth * next.length;
+          });
+          break;
+      }
+      return topMap[0][0].top;
+    }
+  }
+  class SamplingWindow {
+    constructor() {
+      this.rows = /* @__PURE__ */ new Set();
+      this.waiting = /* @__PURE__ */ new Set();
+      this.visibility = () => this.clear();
+    }
+    capture(owner, rows, time) {
+      const doc = owner.$player.ownerDocument;
+      if (doc !== this.document) {
+        this.document?.removeEventListener("visibilitychange", this.visibility);
+        this.document = doc;
+        doc?.addEventListener("visibilitychange", this.visibility);
+        this.clear();
+      }
+      if (!Number.isFinite(time) || doc?.visibilityState === "hidden" || owner.art.video?.seeking) {
+        this.clear();
+        return rows;
+      }
+      const previousTime = this.time;
+      const previousRows = this.rows;
+      const previousWaiting = this.waiting;
+      this.time = time;
+      this.rows = new Set(rows);
+      this.waiting = new Set(owner.states.wait);
+      if (previousTime === void 0 || time <= previousTime)
+        return rows;
+      const missed = owner.states.wait.filter((row) => previousWaiting.has(row) && !previousRows.has(row) && row.time >= previousTime - 0.1 && row.time < time - 0.1);
+      for (const row of missed) this.rows.add(row);
+      return [...rows.filter((row) => row.$state === "ready"), ...missed, ...rows.filter((row) => row.$state !== "ready")];
+    }
+    clear() {
+      this.time = void 0;
+      this.rows.clear();
+      this.waiting.clear();
+    }
+    destroy() {
+      this.document?.removeEventListener("visibilitychange", this.visibility);
+      this.document = void 0;
+      this.clear();
+    }
+  }
   class SchedulingBuffer {
     constructor() {
       this.pending = /* @__PURE__ */ new Set();
@@ -580,6 +729,7 @@ var artplayerPluginDanmuku = (function() {
       this.fault = false;
       this.failedItems = /* @__PURE__ */ new Set();
       this.buffer = new SchedulingBuffer();
+      this.sampling = new SamplingWindow();
     }
     active(operation) {
       const owner = this.owner;
@@ -603,6 +753,7 @@ var artplayerPluginDanmuku = (function() {
       this.owner.workerClient?.cancel();
       this.failedItems.clear();
       this.buffer.clear();
+      this.sampling.clear();
     }
     report(error) {
       try {
@@ -651,10 +802,11 @@ var artplayerPluginDanmuku = (function() {
               if (danmu.$restTime <= 0)
                 owner.makeWait(danmu);
             });
+            const time = owner.art.currentTime;
             const readys2 = owner.readys;
             if (generation !== this.generation)
               return;
-            this.buffer.capture(readys2, this.failedItems);
+            this.buffer.capture(this.sampling.capture(owner, readys2, time), this.failedItems);
           }
         } catch (error) {
           if (generation === this.generation)
@@ -714,7 +866,7 @@ var artplayerPluginDanmuku = (function() {
         danmu.$lastStartTime = Date.now();
         danmu.$restTime = owner.speed;
         const distance = clientWidth + ref.clientWidth;
-        const reply = await operation.wait(owner.postMessage({
+        const request = {
           type: "getDanmuTop",
           target: { mode: danmu.mode, height: ref.clientHeight, speed: distance / danmu.$restTime },
           visibles: owner.visibles,
@@ -724,7 +876,8 @@ var artplayerPluginDanmuku = (function() {
           // Valid margins are numeric. Preserve the old raw fallback for unsupported strings.
           marginBottom: owner.marginBottom,
           marginTop: owner.marginTop
-        }));
+        };
+        const reply = request.antiOverlap ? await operation.wait(owner.postMessage(request)) : { result: getDanmuTop(request) };
         const top = typeof reply === "symbol" ? void 0 : reply.result;
         if (!this.active(operation) || danmu.$ref !== ref)
           return;
@@ -743,6 +896,7 @@ var artplayerPluginDanmuku = (function() {
     destroy() {
       this.closed = true;
       this.invalidate();
+      this.sampling.destroy();
     }
   }
   let nextRequest = 0;

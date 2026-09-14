@@ -1,5 +1,8 @@
 import type Danmuku from './danmuku'
 import type { DanmuItem } from './types'
+import type { PlacementRequest } from './worker-types'
+import { getDanmuTop } from './placement'
+import SamplingWindow from './sampling-window'
 import SchedulingBuffer from './scheduling-buffer'
 
 const cancelled = Symbol('cancelled danmuku frame')
@@ -23,6 +26,7 @@ export default class Scheduler {
   declare fault: boolean
   declare failedItems: Set<DanmuItem>
   declare buffer: SchedulingBuffer
+  declare sampling: SamplingWindow
 
   constructor(owner: Danmuku) {
     this.owner = owner
@@ -35,6 +39,7 @@ export default class Scheduler {
     this.fault = false
     this.failedItems = new Set()
     this.buffer = new SchedulingBuffer()
+    this.sampling = new SamplingWindow()
   }
 
   active(operation: FrameOperation) {
@@ -62,6 +67,7 @@ export default class Scheduler {
     this.owner.workerClient?.cancel()
     this.failedItems.clear()
     this.buffer.clear()
+    this.sampling.clear()
   }
 
   report(error: unknown) {
@@ -116,10 +122,11 @@ export default class Scheduler {
             if (danmu.$restTime <= 0)
               owner.makeWait(danmu)
           })
+          const time = owner.art.currentTime
           const readys = owner.readys
           if (generation !== this.generation)
             return
-          this.buffer.capture(readys, this.failedItems)
+          this.buffer.capture(this.sampling.capture(owner, readys, time), this.failedItems)
         }
       }
       catch (error) {
@@ -183,7 +190,7 @@ export default class Scheduler {
       danmu.$lastStartTime = Date.now()
       danmu.$restTime = owner.speed
       const distance = clientWidth + ref.clientWidth
-      const reply = await operation.wait(owner.postMessage({
+      const request: PlacementRequest = {
         type: 'getDanmuTop',
         target: { mode: danmu.mode, height: ref.clientHeight, speed: distance / danmu.$restTime },
         visibles: owner.visibles,
@@ -193,7 +200,12 @@ export default class Scheduler {
         // Valid margins are numeric. Preserve the old raw fallback for unsupported strings.
         marginBottom: owner.marginBottom as number,
         marginTop: owner.marginTop,
-      }))
+      }
+      // Relaxed placement is small and deterministic; avoid a Worker round trip per row.
+      // Collision-sensitive placement and the internal postMessage API still use the Worker.
+      const reply = request.antiOverlap
+        ? await operation.wait(owner.postMessage(request))
+        : { result: getDanmuTop(request) }
       const top = typeof reply === 'symbol' ? undefined : reply.result
       if (!this.active(operation) || danmu.$ref !== ref)
         return
@@ -215,5 +227,6 @@ export default class Scheduler {
   destroy() {
     this.closed = true
     this.invalidate()
+    this.sampling.destroy()
   }
 }

@@ -6299,7 +6299,7 @@
       "id": "DANMUKU-MASK-LOAD-01",
       "title": "真实Mask模型运行时弹幕存在未采样窗口及串行放置积压",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DANMUKU-MASK-LOAD-01",
         "PKG-DANMUKU-08",
@@ -6313,7 +6313,16 @@
       ],
       "compatibleResolution": "分析真实模型/绘制/Worker往返成本和未采样、待放置行，保持公共readys与回调顺序、显示寿命及生命周期取消；用独立回归验证兼容修复。",
       "closureCriteria": "原始失败保留并有可解释修复；真实模型下120行完整交付、无活动引用积压，新旧核心和main/legacy以及暂停/seek/hide/destroy回归通过；不降低负载、停模型或扩大等待伪造结果。",
-      "workspaceState": "源码18项12通过6失败：5项候选密集负载不完整，1项Chromium beta核心负载前行未显示。旧插件同环境也漏显，尚未证明是重构回归或定位单一瓶颈。Firefox候选和原生PiP负载通过。"
+      "workspaceState": "连续播放采样窗口补回CPU跨窗行；允许重叠放置直接复用原轨道函数，防重叠和内部消息API仍使用Worker。真实模型源码18、main39、legacy39通过；其中27个候选模型负载全部120行完整交付/回收，pending/reserved为空。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md",
+        "refactor/baselines/danmuku-mask-load-validation.json",
+        "test/danmuku-scheduler.test.js",
+        "test/browser/danmuku-mask-native.spec.js",
+        "test/browser/danmuku-lifetime.spec.js",
+        "test/browser/danmuku-timing-diagnostic.spec.js"
+      ],
+      "resolutionRationale": "原5项负载漏显和1项负载前行失败保留；实际模型/SDK/视频和20条每秒输入、等待预算不变。源与两产物共27项模型负载完整交付；两种放置路径寿命、CPU/异步间隙、新旧核心及取消/文档迁移回归通过。Node source/main/legacy各276通过，源码类型、编辑器/消费者及隔离包12组通过。首次旧Worker假设失败和错误ESM宿主调用单独记录；不冒充ESM完整浏览器验收、帧率提升或全部包发布通过。"
     }
   ]
 }
