@@ -10,7 +10,8 @@ SITE-SMOKE-01 后续已将 build:test 拆为 TS 解析、生成和浏览器运�
 
 SITE-LOAD-01 后续修复并抽取共享 loader、移动入口和 Run Code/语言导航，TS
 来源及生成规则见[浏览器模块](../packages/artplayer-vitepress/browser/README.md)。
-保留本站点生成/翻译流程和桌面剩余 UI 给 SITE-03，完整内容/页面验收给 SITE-04/05。
+SITE-AI-DOCS-01/SITE-BUILD-01 已落实生成、翻译草稿和暂存构建；SITE-03 完成
+桌面 UI 的 TS 模块拆分、实际 TS emit 与资源管理。完整内容/页面验收仍给 SITE-04/05。
 
 SITE-01 在 `d62ab13a35c756ea567c426d4fbe00d893dd7e2b` 后核对当前源码。
 可重跑清单见 [site-inventory.json](baselines/site-inventory.json)；它登记
@@ -57,24 +58,27 @@ SITE-01 在 `d62ab13a35c756ea567c426d4fbe00d893dd7e2b` 后核对当前源码。
 
 `prod` 是 localStorage 键/勾选项，不是已实现的查询参数；只选择核心产物，
 不会重写 libs 中的插件路径。`libs` URI 解码后按换行分隔，依扩展名加载 JS/CSS，
-Promise.all 等待全部完成；这不保证列表中脚本按顺序执行。
+当前 loader 串行加载并缓存成功 URL，失败允许重试，保留列表依赖顺序。
 `example` 优先于 `code`；均不存在时桌面取 index.js，移动取 mobile.js。
 桌面移动重定向保留 location.search。桌面 Run 先发送 `artplayer:example:cleanup`，
-销毁已有实例再 eval；重启将 libs/code 写入 URL。不要把 TS 模式视为严格类型编译证明。
+销毁已有实例后在独立经典函数作用域运行；重启将 libs/code 写入 URL。
+TS 模式先通过实际 Monaco worker 发射 JavaScript，语法错误保留当前实例；
+语义诊断可见但不作为 Run 的阻断条件，不等于发布级严格类型验收。
 
 当前编辑器注入 22 个 d.ts（20 个生态包、核心、i18n），逐个 fetch 后 addExtraLib/createModel。
 来源是核心 public 经 build:types/build:ts，以及各生态包 types 经 build:ts。
+URL 列表生成在 browser/editor-libraries.ts，build:ts 同步生成 common.js。
 仅存在性检查不证明请求成功或 Monaco 诊断有效，真实编辑器验收归 EX-03。
-loadScript 暂时覆盖 window.define：桌面成功/失败均恢复，移动失败分支没有恢复；
-重复运行和加载失败顺序需要 SITE-03 / EX-03 修复与回归。
+loadScript 暂时覆盖 window.define 后在成功/失败/取消时恢复。桌面先等待 Monaco
+实际语言模块就绪，避免其 AMD 加载与外部脚本的临时 define 覆盖竞态。
 
 ## 生成流程和分发
 
 | 命令/脚本 | 输入 → 输出 | 当前边界/责任 |
 | --- | --- | --- |
 | build:types | 核心 public → types | 已有严格生成检查，不手改输出 |
-| build:ts | 核心及插件声明 → assets/ts、common.js 的 libUris | 大部分语义转换，仍有字符串 fallback；SITE-02 |
-| build:test | 中文 Run Code → docs/test/test.js | 排除 en/plugin/public/.vitepress；100ms done 只是 smoke，含生成时间戳；SITE-02 |
+| build:ts | 核心及插件声明 → assets/ts、editor-libraries.ts、生成 UI | 两代编译器整组校验；保持原声明 URL 与选包命令 |
+| build:test | 中文 Run Code → docs/test/test.js、examples.json | TS 解析生成；按真实 ready/error 清理，覆盖范围见 SITE-SMOKE-01 |
 | build:i18n | 核心语言源 → dist/i18n、compiled/i18n | SITE-BUILD-01 暂存全套 UMD/ESM 后替换；保留内置语言/辅助排除 |
 | build:docs | VitePress 源 → docs/document | SITE-BUILD-01 固定 Yarn 子进程、暂存构建、失败回退 |
 | build:llm | 英文文档、实际编辑器声明、示例、声明 notices → docs/llms.txt + manifest | SITE-AI-DOCS-01 离线可复现；check:llm 只读检查 |

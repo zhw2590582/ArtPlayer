@@ -168,3 +168,12 @@ environment used to locate the pinned Yarn executable. The Markdown test uses
 the installed VitePress renderer to reproduce random code-group IDs and verify
 stable IDs, uniqueness and label associations. Built-page browser checks live in
 `test/browser/document-site.spec.js`; their editor destination is intercepted.
+
+## Desktop editor regressions
+
+`yarn test:site-editor` covers frozen old TS execution/file error behavior, latest-run
+ordering, library/compiler failures, FileReader settlement and storage denial.
+`test/browser/site-editor.spec.js` uses the actual Monaco 0.30.1 worker and original
+vendor assets for typed Run, Ctrl-S, imports, preferences, declaration failure,
+language readiness and model disposal. Console Error objects are inspected through
+their arguments: Firefox may serialize their display text as only `Error`.

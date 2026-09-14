@@ -5823,6 +5823,54 @@
         "test/site-markdown.test.js"
       ],
       "resolutionRationale": "Installed renderer reproduces random IDs; wrapper stabilizes page/group/tab identity and label associations. Consecutive full builds have equal tree fingerprints and three browser engines verify actual tab selection and visible blocks."
+    },
+    {
+      "id": "SITE-EDITOR-FAILURE-01",
+      "title": "Desktop editor evaluates raw TypeScript and cannot settle FileReader errors or boot with denied storage",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-03"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-SITE-03-desktop-editor.md",
+        "refactor/baselines/site-editor-validation.json",
+        "test/site-editor.test.js",
+        "test/browser/site-editor.spec.js"
+      ],
+      "compatibleResolution": "Keep existing UI selectors, preference keys, URL and player/plugin APIs; fix internal initialization, failure and TS execution behavior.",
+      "closureCriteria": "Retain old failure evidence and verify candidate actual editor interactions plus deterministic generation and strict types.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-SITE-03-desktop-editor.md",
+        "refactor/baselines/site-editor-validation.json",
+        "test/site-editor.test.js",
+        "test/browser/site-editor.spec.js"
+      ],
+      "resolutionRationale": "Frozen old-source reproductions and candidate Node/browser tests verify TS emit before execution, settled file errors and storage-denied fallback without changing player APIs."
+    },
+    {
+      "id": "SITE-EDITOR-AMD-01",
+      "title": "Late Monaco language AMD initialization races with example dependency loading",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-03"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-SITE-03-desktop-editor.md",
+        "refactor/baselines/site-editor-validation.json",
+        "test/site-editor.test.js",
+        "test/browser/site-editor.spec.js"
+      ],
+      "compatibleResolution": "Keep existing UI selectors, preference keys, URL and player/plugin APIs; fix internal initialization, failure and TS execution behavior.",
+      "closureCriteria": "Retain old failure evidence and verify candidate actual editor interactions plus deterministic generation and strict types.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-SITE-03-desktop-editor.md",
+        "refactor/baselines/site-editor-validation.json",
+        "test/site-editor.test.js",
+        "test/browser/site-editor.spec.js"
+      ],
+      "resolutionRationale": "Initial real WebKit failure retained; await JS/TS language modules before Run and example dependencies. Delayed-module regression passes on all three engines."
     }
   ]
 }

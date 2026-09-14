@@ -1,5 +1,21 @@
 # 进度与证据
 
+## SITE-03 桌面编辑器与生成流程完成
+
+桌面自有 UI 拆为严格 TS 的 bootstrap、Monaco、运行会话、文件导入与设置模块；
+common.js/bootstrap.js 由源码生成，编辑器声明列表移到生成的 TS 单一来源。
+实际 TS worker 编译后运行，修复旧版原样 eval TS、文件读取错误不结算及存储
+被拒时无法启动。三浏览器验证发现并修复 Monaco 语言模块与依赖 loader 的
+AMD 竞态，保留初始失败。原 DOM、偏好键、URL、Run/Ctrl-S 与公共包 API 保留。
+最终浏览器 42、目标集成 21、baseline 522、CI 50 全部通过；严格类型、工具链、
+生成一致性、冻结安装和 lint 通过（1 条既有 warning）。只新增 Monaco0.30.1
+开发类型依赖，既有锁条目、vendor、核心公开声明未变。合成 pagehide 不代替
+真机 BFCache；完整示例/搜索/链接/设备与远端发布验收仍开放。
+见[变更](changes/2026-09-14-SITE-03-desktop-editor.md)和
+[证据](baselines/site-editor-validation.json)。当前 243 项：170 done、15 doing、
+58 todo。下一步 SITE-04 中英文 API 语义核对；Auto Thumbnail/VAST 源码迁移和
+全部插件最终验收仍开放。独立本地提交后审计，无推送或发布。
+
 ## SITE-BUILD-01 构建流程完成
 
 i18n/VitePress 构建完成严格 TS 模块拆分，暂存后替换并保留失败恢复路径；

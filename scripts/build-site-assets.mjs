@@ -11,7 +11,7 @@ const englishPaths = globSync('**/*.md', { cwd: `${root}/docs/en`, posix: true }
 /** @type {Map<string, string>} */
 const outputs = new Map()
 /** @type {[string, string][]} */
-const entries = [['editor-loader.ts', 'docs/assets/js/loader.js'], ['mobile.ts', 'docs/assets/js/mobile.js'], ['navigation.ts', `${root}/docs/public/main.js`]]
+const entries = [['bootstrap.ts', 'docs/assets/js/bootstrap.js'], ['editor.ts', 'docs/assets/js/common.js'], ['editor-loader.ts', 'docs/assets/js/loader.js'], ['mobile.ts', 'docs/assets/js/mobile.js'], ['navigation.ts', `${root}/docs/public/main.js`]]
 for (const [entry, output] of entries) {
   const result = await build({
     ...(entry === 'navigation.ts'

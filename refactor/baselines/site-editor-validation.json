@@ -1,0 +1,169 @@
+{
+  "task": "SITE-03",
+  "baseline": "a468cb2c39e626f7b4f737d0ca60334150deae2b",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "logs": {
+    "unit": {
+      "file": "refactor/.cache/site-editor-tests-final.log",
+      "sha256": "d4189f4e94db6698546a3244198cc683526e18e1db9af7eb2c5cf6f328588681",
+      "exitCode": 0,
+      "pass": 5
+    },
+    "integration": {
+      "file": "refactor/.cache/site-editor-integration.log",
+      "sha256": "a704c43adbef4e0c626d605257da47d928ad3766e98ca803ae616450f39c2eae",
+      "exitCode": 0,
+      "pass": 21
+    },
+    "baseline": {
+      "file": "refactor/.cache/site-editor-test-baseline.log",
+      "sha256": "91e014ad170d1240cef8f52b1399e8239a78d09c036e0e360a32285974f71391",
+      "exitCode": 0,
+      "pass": 522
+    },
+    "ci": {
+      "file": "refactor/.cache/site-editor-test-ci.log",
+      "sha256": "5548f2543f5cf97b1264bd09f0fd40f9d01811c9cca5ce38ffab42628b116b5a",
+      "exitCode": 0,
+      "pass": 50
+    },
+    "lint": {
+      "file": "refactor/.cache/site-editor-lint.log",
+      "sha256": "1067b3ccb58d3adab1bf690433d1174eb224143338b9735ecf58461b0c67f818",
+      "exitCode": 0
+    },
+    "toolchain": {
+      "file": "refactor/.cache/site-editor-check-toolchain.log",
+      "sha256": "2afc9e0561f660653ca354105298d2a161162db823ee2b9d35bbdbd5557a2e27",
+      "exitCode": 0
+    },
+    "browserTypes": {
+      "file": "refactor/.cache/site-editor-browser-types.log",
+      "sha256": "e660a669a597da32a881a1b6fbc85700acf2b890f3dfb080037e08de1b0b5261",
+      "exitCode": 0
+    },
+    "toolTypes": {
+      "file": "refactor/.cache/site-editor-tool-types.log",
+      "sha256": "3423554fc39544b5338814ffda828bda8b71ccd5841a86be422892408819dfa0",
+      "exitCode": 0
+    },
+    "assets": {
+      "file": "refactor/.cache/site-editor-check-site-assets.log",
+      "sha256": "0d1fec774e30162af0e6ae5c7bcec5f8f859835f5a0c1ffebe7ccf77ddb0d81d",
+      "exitCode": 0
+    },
+    "declarations": {
+      "file": "refactor/.cache/site-editor-check-editor-types.log",
+      "sha256": "03b2fe8bf2c1b1d2641c39ed28348ad1b2079d644ec57e3c3e1eee8c35240073",
+      "exitCode": 0
+    },
+    "llm": {
+      "file": "refactor/.cache/site-editor-check-llm.log",
+      "sha256": "e1163bb3dbc38eb5ca3b0d497df6022d14d539452441d288d7a592898562141b",
+      "exitCode": 0
+    },
+    "frozenInstall": {
+      "file": "refactor/.cache/site-editor-frozen-install.log",
+      "sha256": "4d587ec6212d0b874a96da55ebe55670fbd4c9e41642d79459d2b3bae0d87c85",
+      "exitCode": 0
+    },
+    "generation": {
+      "file": "refactor/.cache/site-editor-build-types.log",
+      "sha256": "6a40248ab3422b04f84abed19b3178cb42acdef76f6a51fd5ca7badc27fd667e",
+      "exitCode": 0
+    },
+    "browser": {
+      "file": "refactor/.cache/site-editor-browser-accepted.log",
+      "sha256": "d98249aedb874269171f761dcb52444d2062c8e88ea784ef208abd2d077f7900",
+      "exitCode": 0
+    }
+  },
+  "dependency": {
+    "name": "monaco-editor",
+    "version": "0.30.1",
+    "category": "root devDependency; type-only",
+    "oldLockEntriesIdentical": true,
+    "vendorRuntimeUnchanged": true,
+    "frozenInstallIgnoredScripts": true
+  },
+  "browser": {
+    "file": "refactor/.cache/site-editor-browser-accepted/report.json",
+    "sha256": "294110ebf4005af8ed41c9be4197ca917309ed0329a1263cdfdde8e2df2cc421",
+    "stats": {
+      "startTime": "2026-09-14T01:16:27.513Z",
+      "duration": 31682.62,
+      "expected": 42,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "platform": "win32",
+    "note": "Actual local Monaco/player with controlled media; no manual Chrome session or physical-device acceptance"
+  },
+  "initialFailure": {
+    "file": "refactor/.cache/site-editor-browser-initial/report.json",
+    "sha256": "ba6291978c9143a67903fe4c292a82fe0b6afc3c8b7a47572b4c9a4540ac7860",
+    "stats": {
+      "startTime": "2026-09-14T01:03:18.570Z",
+      "duration": 38071.753,
+      "expected": 33,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "causes": [
+      "Two Firefox Error display-string assertions; actual Error.message used in candidate tests",
+      "Real Monaco lazy language AMD race; await modules before starting dependencies"
+    ]
+  },
+  "unchangedPaths": [
+    "packages/artplayer/src",
+    "packages/artplayer/public",
+    "packages/artplayer/types",
+    "docs/assets/ts",
+    "docs/assets/js/vs",
+    "docs/document",
+    "docs/llms.txt"
+  ],
+  "fingerprints": {
+    "docs/assets/js/bootstrap.js": "a31b05dfda0ffd9011af4fd786d01fb4b81600d34741c944d1f0144c187e357d",
+    "packages/artplayer-vitepress/browser/bootstrap.ts": "134128a545375635a05fae4f1dc5707bcca389e7f2db27dcffb17692a1c728fa",
+    "packages/artplayer-vitepress/browser/editor-files.ts": "09e437a9f70ccc5c4f071cfe6f8a90e11085caa8c26e7707b26dc6d2075a97a4",
+    "packages/artplayer-vitepress/browser/editor-host.ts": "05673be0ca9aea7d890aa4cd84ab372b7d34407bd8ab674f2c0f619996586f03",
+    "packages/artplayer-vitepress/browser/editor-libraries.ts": "da64881b70b187dbc0006937c2bc3759b7aeafda860c1b5c631308ebcb2c15a7",
+    "packages/artplayer-vitepress/browser/editor-monaco.ts": "f51dd01c42a0652a830ae7257ba4432c5c970b91e1f5db585fbbe16d355e004d",
+    "packages/artplayer-vitepress/browser/editor-preferences.ts": "10806adf43737cf0b85de91d1ca4ed988c192ccc6786129f45792c1bc026bed0",
+    "packages/artplayer-vitepress/browser/editor-session.ts": "18ddc8161b1c2f0b1aab431625aaf448a222dddec9e01bb7cb741017772cac14",
+    "packages/artplayer-vitepress/browser/editor.ts": "e27f46bb84abc363a36a3239018168d7ec8d22fe8690cf835a2c354ce54443bd",
+    "test/browser/site-editor.spec.js": "be9a7fdc76a02861041510425fede36b461d8a72b1f47ee14657af91dc221f56",
+    "test/site-editor.test.js": "ccad4960d9540da9ecc3208727d4478469bc69d8f07edff121b7581ce2d14268",
+    "docs/assets/js/common.js": "4ccfc0bba7093a45621e2fe0c9b48cb6da0e6101a2b87a5a0f8785611d2d98fc",
+    "docs/index.html": "bffcef9ee12817d79d41babaa01ea80ba8d44b2aa866b63105f4a453a2722f28",
+    "package.json": "176aa0d3eb248b342470a6bda49ffa8f4be62c1f1fd7af58baad8268766dd061",
+    "packages/artplayer-vitepress/browser/README.md": "2280fc2f0e344de008347cc6421e099e45092f76f4b5b01468933552c1dd5a7f",
+    "packages/artplayer-vitepress/browser/editor-loader.ts": "7cfdc82726d164d450b21680d950ec3f508482f1ab743febee473855248568e1",
+    "packages/artplayer-vitepress/browser/loader.ts": "d5d5c079854f40025be6af457baba863ab8cd37af59c120e811b7f59e5c160b6",
+    "packages/artplayer-vitepress/browser/mobile.ts": "beba095b7fda9fb9aa2c5cd50437ea9e186fa76e700e6e79ee8e9eb67fd86d7d",
+    "packages/artplayer-vitepress/browser/navigation.ts": "1ad87a6bee717f9e62d28c5e6dc382c5c1b43c09c9f10c64e3ef0824f2fbdedc",
+    "packages/artplayer-vitepress/browser/tsconfig.json": "9a1331ca4b311d66df7aca6e5ff8a8e3647e338931e013ffc7df58aaee8f6a0c",
+    "scripts/build-site-assets.mjs": "14effc0e354b8ed2d8c6370861181958058b20cb5e9485b7910fef4346cfc5bb",
+    "scripts/build-ts.js": "153b487736ac9ece1d34bb5fb58c904eb886cb66ce1d7616a1d64a253d991518",
+    "scripts/documentation/corpus.ts": "f4a977ec9b68c86ffa71164f8fd1263fe5ec0081a38586716a096cdfb86d8005",
+    "scripts/editor-declarations/generate.ts": "633fc5c495e8146f79e820357a4a80d656eba8f375b383bb0b2d734fcb1d0e5a",
+    "yarn.lock": "c76ffff6d6098b911487517f231ce758cf1f233ee3b6af79ab6676bf90b869d6"
+  },
+  "limitations": [
+    "Synthetic non-persisted pagehide is not physical BFCache validation",
+    "Already executed user-script globals and in-flight Monaco worker RPC cannot be undone",
+    "Semantic TS diagnostics do not block classic-script execution",
+    "No full example/search/link/vendor-provenance/device/remote-CI/npm acceptance",
+    "Full baseline precedes final status/risk edits; those receive targeted final checks",
+    "Root lint retains one existing generated-declaration warning"
+  ]
+}

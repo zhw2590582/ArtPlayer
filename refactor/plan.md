@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 243 项，范围 22 个包及工作区/示例。
 
-状态：todo 59 / doing 15 / blocked 0 / done 169 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 58 / doing 15 / blocked 0 / done 170 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -386,7 +386,7 @@
 | SITE-LOAD-01 | artplayer-vitepress, workspace<br>修复文档示例加载顺序与导航边界 | SITE-02 | 共享 TS loader、移动入口与 Run Code/语言路由，保留 URL 和使用方式 | 旧版复现 define 丢失和依赖乱序；真实浏览器验证成功/失败恢复、顺序、去重、编码/优先级及 localhost/127 路由和语言跳转；不以此替代 SITE-03 构建/翻译流程 | M | done |
 | SITE-AI-DOCS-01 | artplayer-vitepress, workspace<br>重构可复现 LLM 文档与安全翻译草稿流程 | SITE-LOAD-01, SITE-02 | TS 离线文档聚合、显式远程翻译、草稿校验和可回退应用，保留命令与目标路径 | 默认不读密钥/调用网络；LLM 内容可复现并保留来源；旧翻译破坏性行为有复现；错误/限流/超时/结构损坏/过期/路径越界拒绝且英文文档不丢失；未执行付费翻译不计服务验收 | M | done |
 | SITE-BUILD-01 | artplayer, artplayer-vitepress, workspace<br>重构 i18n 与文档构建的暂存、替换和 Yarn 编排 | SITE-AI-DOCS-01 | 严格 TS 构建模块、编译后替换产物与失败回退，固定 Yarn 子进程和旧构建入口 | 旧 i18n 删除后失败有复现；失败不改变既有产物；语言集合、UMD/ESM/历史别名兼容；文档子进程退出码准确并完成真实 VitePress 构建；不隐式翻译、不修改播放器 API | M | done |
-| SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置 | M | todo |
+| SITE-03 | artplayer-vitepress<br>整理 i18n/文档/LLM 生成流程 | SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01 | build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分 | 原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置 | M | done |
 | SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
 | SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-07 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | todo |
 | SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
@@ -615,6 +615,7 @@
 - SITE-LOAD-01: [记录](changes/2026-09-14-SITE-LOAD-01-site-loading.md) [记录](baselines/site-loading-validation.json)
 - SITE-AI-DOCS-01: [记录](changes/2026-09-14-SITE-AI-DOCS-01-documentation-pipeline.md) [记录](baselines/documentation-pipeline-validation.json)
 - SITE-BUILD-01: [记录](changes/2026-09-14-SITE-BUILD-01-staged-builds.md) [记录](baselines/site-build-validation.json)
+- SITE-03: [记录](changes/2026-09-14-SITE-03-desktop-editor.md) [记录](baselines/site-editor-validation.json)
 - SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json)
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)

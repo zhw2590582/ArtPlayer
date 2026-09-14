@@ -64,8 +64,11 @@ export async function generateEditorDeclarations(selected: string[] = []): Promi
   for (const compiler of [ts, compat as unknown as typeof ts])
     assert.deepEqual(checkStandaloneDeclarations(declarations, compiler), [], `Invalid editor declarations (TS ${compiler.version})`)
   if (!selected.length) {
-    const file = 'docs/assets/js/common.js'
-    outputs.set(file, editorLibUris(fs.readFileSync(file, 'utf8'), [...pluginFiles.sort(), 'artplayer.d.ts', languageFile]))
+    const file = 'packages/artplayer-vitepress/browser/editor-libraries.ts'
+    const code = editorLibUris(fs.readFileSync(file, 'utf8'), [...pluginFiles.sort(), 'artplayer.d.ts', languageFile])
+    const [result] = await eslint.lintText(code, { filePath: file })
+    assert(result && !result.errorCount, 'Invalid editor library manifest')
+    outputs.set(file, result.output || code)
   }
   if (sources.some(file => pluginIdentity(file).packageName === 'artplayer-plugin-vast')) {
     const notices = [['@glomex/vast-ima-player', 'LICENSE'], ['@alugha/ima', 'LICENSE.md']].map(([name, file]) => `${name}\n${fs.readFileSync(path.join('node_modules', name!, file!), 'utf8').replaceAll('\r\n', '\n').trim()}\n`).join('\n')

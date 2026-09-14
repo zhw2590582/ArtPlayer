@@ -5,11 +5,11 @@ import { ownedPath, read, sha256 } from './files.ts'
 
 export function buildCorpus(root: string): Map<string, string> {
   const common = ts.createSourceFile(
-    'common.js',
-    read(ownedPath(root, 'docs/assets/js/common.js')),
+    'editor-libraries.ts',
+    read(ownedPath(root, 'packages/artplayer-vitepress/browser/editor-libraries.ts')),
     ts.ScriptTarget.Latest,
     true,
-    ts.ScriptKind.JS,
+    ts.ScriptKind.TS,
   )
   const declarations: string[] = []
   let lists = 0

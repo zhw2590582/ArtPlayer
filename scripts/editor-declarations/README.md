@@ -22,6 +22,15 @@ Orchestration depends on conversion and validation; conversion does not write.
 Public package declarations remain the source of truth. Do not hand-edit
 `docs/assets/ts/*.d.ts`.
 
+The editor URL list is generated in
+`packages/artplayer-vitepress/browser/editor-libraries.ts`, then imported by the
+desktop TypeScript entry. `common.js` is a generated browser bundle. `build:ts`
+regenerates site assets after successful writes; package selection arguments still
+reach declaration generation. Read-only `check:editor-types` checks the list and
+declarations, while `check:site-assets` independently checks the compiled UI.
+The LLM corpus and site inventory read this source list to avoid using a stale
+compiled UI as the declaration authority.
+
 All selected declarations are formatted in memory using layout-only ESLint fixes,
 then checked together with TypeScript 5.9.3 and 4.3.5, without `skipLibCheck` or
 ambient dependency discovery. This checks cross-package globals too. SDK methods
@@ -44,7 +53,7 @@ Adjacent generated `artplayer-plugin-vast.LICENSE.txt` preserves upstream notice
 This does not settle VAST's runtime default-behavior compatibility decision.
 
 The editor loads 22 declarations: core, 20 ecosystem libraries and i18n. The
-unreferenced legacy `artplayer-plugin-websr.d.ts` asset is not in the `common.js`
+unreferenced legacy `artplayer-plugin-websr.d.ts` asset is not in the canonical
 library list and is not owned or deleted here. Monaco tests follow the actual
 list. AST updates require exactly one array-valued `libUris` declaration; missing
 or ambiguous declarations fail. Package-only builds leave that list alone.
@@ -66,5 +75,7 @@ yarn test:browser test/browser/editor-declarations.spec.js --workers=1
 Browser coverage uses the actual repository Monaco assets, all loaded declarations,
 positive/negative consumers and emitted Chapter code against controlled media.
 VAST is type-checked only: no ad request or SDK/network/device acceptance. Full
-editor UI, routes, example coverage and release reviews remain SITE-03/04/05,
-EX-03 and release tasks. SITE-02 installs no new dependencies.
+editor UI migration and its targeted interaction checks are recorded in SITE-03;
+full routes, example coverage and release reviews remain SITE-04/05, EX-03 and
+release tasks. SITE-02 installs no new dependencies; SITE-03 adds matching
+Monaco 0.30.1 development types without replacing browser vendor assets.

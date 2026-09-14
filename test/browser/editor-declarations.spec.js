@@ -3,7 +3,7 @@ import { hash } from '../../refactor/scripts/releases.mjs'
 import { expect, test } from './fixtures.js'
 
 test('Monaco checks all editor declarations together and runs the Chapter consumer', async ({ page }, testInfo) => {
-  const common = fs.readFileSync('docs/assets/js/common.js', 'utf8')
+  const common = fs.readFileSync('packages/artplayer-vitepress/browser/editor-libraries.ts', 'utf8')
   const list = common.match(/(?:let|const) libUris = \[([\s\S]*?)\]/)?.[1] || ''
   const names = [...list.matchAll(/'\.\/assets\/ts\/([^']+\.d\.ts)'/g)].map(match => match[1])
   expect(names).toHaveLength(22)

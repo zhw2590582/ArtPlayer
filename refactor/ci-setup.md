@@ -134,3 +134,10 @@ Yarn Classic 可执行文件，不再调用 npm。入口仍由 `ci:build` 按原
 新增 `test:site-build`，其测试进入 `test:node`；构建 TS 模块与 VitePress
 稳定代码分组 ID hook 进入根 lint/docs-tools 类型检查。真实本地构建和三浏览器
 页面验证见任务变更记录，远端工作流、Pages 与 npm 验收不因此完成。
+
+## SITE-03 编辑器来源与检查
+
+common.js/bootstrap.js 由 browser 下的 TS 生成，源代码进入 typecheck:site-assets
+和根 lint，产物由 check:site-assets 比较；不再对生成 common.js 应用源码 lint。
+build:ts 生成声明 URL 清单后重建站点浏览器产物，check:editor-types 保持只读。
+新增 test:site-editor 并接入 test:node，新增真实 Monaco 交互测试走现有三引擎矩阵。

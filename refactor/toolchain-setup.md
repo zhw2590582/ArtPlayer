@@ -34,6 +34,11 @@ CORE-25 默认选项缺陷已修复并通过相同三 Node 与严格打包检查
 
 ## 验证记录
 
+SITE-03 新增根开发依赖 `monaco-editor@0.30.1`，仅为桌面编辑器提供与既有
+Monaco 浏览器资产匹配的精确 API 类型。只使用 type import，不替换 vendor
+或加入播放器产物；root yarn.lock 仅增加该版本的一个条目。新增
+`yarn test:site-editor` 验证编辑器状态/读取失败；浏览器检查仍使用原 assets/js/vs。
+
 ENG-01 的 [npm 验证报告](baselines/toolchain-validation.json) 是切换前历史证据，不代表 Yarn 已验证。[Yarn 验证报告](baselines/yarn-validation.json) 记录最终干净冻结安装、20 项 Node 测试、21 库包 63 产物及文档站构建全部通过；63 产物 SHA-256 与 ENG-01 完全相同。保留的旧锁条目版本变化为零，9 个 workspace runtime 依赖解析与 npm 基线一致。搜索 peer 警告由 SITE-05 接续验证。
 
 构建通过不代表运行时、类型、真实浏览器或 npm 发布验收已完成。Chrome 不可用时按 release-reviews.md 使用内置浏览器并注明实际环境。

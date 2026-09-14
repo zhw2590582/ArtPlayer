@@ -23,10 +23,11 @@ use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
 
 Site-owned browser behavior now lives in `browser/`; its README maps the shared
-loader, mobile entry and Run Code/language navigation. `docs/public/main.js` is a
+loader, desktop editor, mobile entry and Run Code/language navigation. `docs/public/main.js` is a
 generated input to VitePress. Run root `yarn build:site-assets` after changes, or
-`yarn check:site-assets` for drift. The existing desktop common.js UI remains a
-separate source pending SITE-03 migration; no player package APIs move here.
+`yarn check:site-assets` for drift. Desktop common.js and bootstrap.js are generated
+from typed modules, with Monaco models/emit, Run ordering, file imports, preferences
+and page cleanup separated by responsibility. No player package APIs move here.
 
 ## Related tooling
 
@@ -87,7 +88,7 @@ Generated `main.js` installs one document click listener under
 editor and recognizes localhost, 127.0.0.1 and IPv6 loopback. First-language
 navigation preserves existing English counterparts and explicit later choices;
 unavailable storage keeps the requested page. See `browser/README.md` for the
-current rules and verified scope. Full VitePress lifecycle remains SITE-03/05.
+current rules and verified scope. Full site/search acceptance remains SITE-05.
 
 ## Delivery and remaining acceptance
 

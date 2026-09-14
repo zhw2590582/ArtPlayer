@@ -230,29 +230,7 @@
     </div>
     <script src="./assets/js/console.js"></script>
     <script src="./assets/js/loader.js"></script>
-    <script>
-        var artplayer = document.createElement('script');
-        var monacoLoader = document.createElement('script');
-        var common = document.createElement('script');
-
-        artplayer.onload = function () {
-            monacoLoader.src = "./assets/js/vs/loader.js";
-            document.body.appendChild(monacoLoader);
-        }
-
-        monacoLoader.onload = function () {
-            common.src = "./assets/js/common.js";
-            document.body.appendChild(common);
-        }
-
-        if (localStorage.getItem('prod') === 'true') {
-            artplayer.src = "./compiled/artplayer.js"
-        } else {
-            artplayer.src = "./uncompiled/artplayer/index.js"
-        }
-
-        document.body.appendChild(artplayer);
-    </script>
+    <script src="./assets/js/bootstrap.js"></script>
     <script>
         var isLocalhost = Boolean(
             window.location.hostname === 'localhost' ||

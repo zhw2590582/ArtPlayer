@@ -17913,12 +17913,13 @@
     {
       "source": "docs/index.html",
       "route": "/",
-      "sha256Lf": "f654fa04c8aea08bc718e96ce2a438f04cc91060b2bb9b2b86f4e1467258fd97",
+      "sha256Lf": "bffcef9ee12817d79d41babaa01ea80ba8d44b2aa866b63105f4a453a2722f28",
       "kind": "demo-or-editor",
       "scriptSources": [
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662",
         "./assets/js/console.js",
-        "./assets/js/loader.js"
+        "./assets/js/loader.js",
+        "./assets/js/bootstrap.js"
       ],
       "status": "not-run",
       "owner": "EX-03"
@@ -18102,7 +18103,7 @@
     },
     {
       "file": "scripts/build-ts.js",
-      "sha256Lf": "1ff2d13f4247bba1818a187eb945a86969f4c4d60245ba5cac8fc0b2b8edd3ba"
+      "sha256Lf": "153b487736ac9ece1d34bb5fb58c904eb886cb66ce1d7616a1d64a253d991518"
     },
     {
       "file": "scripts/editor-types.mjs",
@@ -18138,7 +18139,7 @@
     },
     {
       "file": "docs/assets/js/common.js",
-      "sha256Lf": "c18f72dd5489bdee5b7bd0030c716eab08ac7ea7bd253353eaf406fb8ae2bc14"
+      "sha256Lf": "4ccfc0bba7093a45621e2fe0c9b48cb6da0e6101a2b87a5a0f8785611d2d98fc"
     },
     {
       "file": "docs/assets/js/mobile.js",
@@ -18158,7 +18159,7 @@
     },
     {
       "file": "scripts/build-site-assets.mjs",
-      "sha256Lf": "58c163e16efa901d227045b468f324ac79ad4ab2f8ab8716f10a8ede62091666"
+      "sha256Lf": "14effc0e354b8ed2d8c6370861181958058b20cb5e9485b7910fef4346cfc5bb"
     },
     {
       "file": "scripts/docs-smoke/generator.ts",
@@ -18182,7 +18183,7 @@
     },
     {
       "file": "scripts/editor-declarations/generate.ts",
-      "sha256Lf": "6cf6ee27b2032e9e3a4aef949f2b54ba7bf12e40bed473478f63eb82759c8e5a"
+      "sha256Lf": "633fc5c495e8146f79e820357a4a80d656eba8f375b383bb0b2d734fcb1d0e5a"
     },
     {
       "file": "scripts/editor-declarations/plugin.ts",
@@ -18206,7 +18207,7 @@
     },
     {
       "file": "scripts/documentation/corpus.ts",
-      "sha256Lf": "f916f63822b9e53a26d2017c0004a576c1fbdf0af0f839c296c8e3d2a14bb2c1"
+      "sha256Lf": "f4a977ec9b68c86ffa71164f8fd1263fe5ec0081a38586716a096cdfb86d8005"
     },
     {
       "file": "scripts/documentation/files.ts",
@@ -18241,8 +18242,40 @@
       "sha256Lf": "6d639e25bab97c973940661e2aac6f1034ab53ab1c016310a571ab52392819da"
     },
     {
+      "file": "packages/artplayer-vitepress/browser/bootstrap.ts",
+      "sha256Lf": "134128a545375635a05fae4f1dc5707bcca389e7f2db27dcffb17692a1c728fa"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-files.ts",
+      "sha256Lf": "09e437a9f70ccc5c4f071cfe6f8a90e11085caa8c26e7707b26dc6d2075a97a4"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-host.ts",
+      "sha256Lf": "05673be0ca9aea7d890aa4cd84ab372b7d34407bd8ab674f2c0f619996586f03"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-libraries.ts",
+      "sha256Lf": "da64881b70b187dbc0006937c2bc3759b7aeafda860c1b5c631308ebcb2c15a7"
+    },
+    {
       "file": "packages/artplayer-vitepress/browser/editor-loader.ts",
       "sha256Lf": "7cfdc82726d164d450b21680d950ec3f508482f1ab743febee473855248568e1"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-monaco.ts",
+      "sha256Lf": "f51dd01c42a0652a830ae7257ba4432c5c970b91e1f5db585fbbe16d355e004d"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-preferences.ts",
+      "sha256Lf": "10806adf43737cf0b85de91d1ca4ed988c192ccc6786129f45792c1bc026bed0"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor-session.ts",
+      "sha256Lf": "18ddc8161b1c2f0b1aab431625aaf448a222dddec9e01bb7cb741017772cac14"
+    },
+    {
+      "file": "packages/artplayer-vitepress/browser/editor.ts",
+      "sha256Lf": "e27f46bb84abc363a36a3239018168d7ec8d22fe8690cf835a2c354ce54443bd"
     },
     {
       "file": "packages/artplayer-vitepress/browser/loader.ts",

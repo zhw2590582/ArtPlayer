@@ -258,3 +258,5 @@
 | SITE-TRANS-DATA-01 | resolved / 已复现 | Translation deletes English before requests and repairs valid fences destructively; exhausted rate limits return undefined | SITE-AI-DOCS-01 |
 | SITE-I18N-DATA-01 | resolved / 已复现 | Language build deletes existing distribution before compilation succeeds | SITE-BUILD-01 |
 | SITE-CODE-GROUP-01 | resolved / 已复现 | VitePress code-group random IDs make identical site inputs emit different output hashes | SITE-BUILD-01 |
+| SITE-EDITOR-FAILURE-01 | resolved / 已复现 | Desktop editor evaluates raw TypeScript and cannot settle FileReader errors or boot with denied storage | SITE-03 |
+| SITE-EDITOR-AMD-01 | resolved / 已复现 | Late Monaco language AMD initialization races with example dependency loading | SITE-03 |

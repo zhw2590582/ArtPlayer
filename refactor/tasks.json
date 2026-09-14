@@ -4223,11 +4223,14 @@
         "SITE-AI-DOCS-01",
         "SITE-BUILD-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "build-i18n/build-docs/build-llm/trans-docs 的任务边界和错误处理；桌面 common.js 自有 UI 的 TS 迁移与模块拆分",
       "acceptance": "原命令兼容、生成可复现，翻译步骤不隐式运行远程服务；覆盖移动 loader 失败恢复 define、脚本依赖顺序、localhost/127.0.0.1 Run Code 目标和语言重定向；桌面剩余 UI 完成 TS 职责拆分并回归运行、导入与持久设置",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-SITE-03-desktop-editor.md",
+        "baselines/site-editor-validation.json"
+      ]
     },
     {
       "id": "SITE-04",
