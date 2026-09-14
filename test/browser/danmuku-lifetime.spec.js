@@ -2,9 +2,10 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
+let provenance
 const implementations = new Map()
 test.beforeAll(async () => {
   const release = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/danmuku-release.json', import.meta.url), 'utf8')).release
@@ -12,9 +13,9 @@ test.beforeAll(async () => {
   const bytes = readMember(await ensureArchive(release), member)
   assert.equal(hash(bytes), release.files[member])
   implementations.set('published', bytes.toString())
-  implementations.set('candidate', process.env.ARTPLAYER_DANMUKU_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-danmuku', 'umd'))
+  const candidate = await browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT)
+  provenance = candidate.provenance
+  implementations.set('candidate', candidate.code)
 })
 
 for (const core of ['published', 'candidate']) {
@@ -44,6 +45,7 @@ for (const core of ['published', 'candidate']) {
           }
         })
         const code = implementations.get(implementation)
+        await testInfo.attach('danmuku-selected-input', { contentType: 'application/json', body: JSON.stringify({ implementation, provenance: implementation === 'candidate' ? provenance : { kind: 'published', sha256: hash(code) } }) })
         await page.addScriptTag({ content: code })
         await page.evaluate(() => window.createPlayer('/assets/sample/video.mp4'))
         await page.click('#play')

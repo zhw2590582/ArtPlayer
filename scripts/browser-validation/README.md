@@ -118,3 +118,15 @@ Package worker inventories now participate in input freshness checks. The
 platform control loads no JASSUB; historical failures, capability controls and
 actual rendering must be reported separately. See
 ../../refactor/changes/2026-09-15-CI-01-jassub-installed.md.
+
+Danmuku and Mask add thirteen files, including immutable historical/load controls,
+Worker lifecycle/scheduling, heatmap density, timing/pressure, fullscreen, native
+PiP and actual model composition. Candidate wrappers use installed UMDs; Danmuku
+executes the Worker embedded in that UMD. Each composition records its selected
+Danmuku and PiP/Mask identities. The model is a separately configured local asset
+set, verified against frozen bytes and exposed as local-model-resource in the
+server manifest. Metadata may normalize checkout newlines; executable/model bytes
+may not. Installed runs reject Mask CPU profiling; source diagnostics retain it.
+Actual resource requests, available assets, capability controls and successful
+playback remain separate. See
+../../refactor/changes/2026-09-15-CI-01-danmuku-installed.md for executed results.

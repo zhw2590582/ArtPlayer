@@ -398,3 +398,20 @@ require native Worker completion and visible DOM before testing replacement or
 destruction. The separate pause/seek/rate case observes the original ready getter
 without changing its result and records bounded native media-time/queue samples
 to distinguish eligibility misses from placement failures.
+
+## Installed browser matrix
+
+`yarn test:package --browser` prepares the shared package roster. Set its
+browser-artifacts.json as ARTPLAYER_BROWSER_ARTIFACTS and run
+`yarn test:browser:installed danmuku --workers=2`. Candidate browser loaders
+verify installed UMD bytes and reject conflicting explicit artifacts; the Worker
+remains the one embedded in that bundle. Historical baseline/load suites retain
+their frozen inputs. Source mode still compiles the normal UMD, and controlled
+unit-test bundlers remain separate from native browser execution.
+
+Selected-input attachments record candidate or published identity; PiP and Mask
+combinations identify each selected package separately. Native video, DOM, RAF,
+Worker and fullscreen checks retain existing assertions and timing. Injected
+delays, CPU gaps, bounded pressure and capability fallbacks remain explicitly
+labeled. Collection does not imply a green matrix or sustained device acceptance.
+See ../../refactor/changes/2026-09-15-CI-01-danmuku-installed.md for actual results.

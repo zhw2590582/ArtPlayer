@@ -36,6 +36,9 @@ test('Installed validation rejects diagnostic SDK substitutions and recovery pro
   const candidateOnly = { ...base, ARTPLAYER_MB_BROWSER_CANDIDATE: '1' }
   assert.throws(() => browserInvocation('installed', [], candidateOnly), /retain MediaBunny historical controls/)
   assert.equal(browserInvocation('source', [], candidateOnly).env.ARTPLAYER_MB_BROWSER_CANDIDATE, '1')
+  const profile = { ...base, ARTPLAYER_MASK_PROFILE: '1' }
+  assert.throws(() => browserInvocation('installed', [], profile), /Mask CPU profiling/)
+  assert.equal(browserInvocation('source', [], profile).env.ARTPLAYER_MASK_PROFILE, '1')
   for (const mode of ['upstream4', 'bufferlevel4']) {
     const env = { ...base, ARTPLAYER_DASH_DIAGNOSTIC_SDK: mode }
     assert.throws(() => browserInvocation('installed', [], env), /unchanged DASH SDK/)

@@ -2,42 +2,43 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { observeDanmukuLoad } from '../helpers/danmuku-combination-load.js'
-import { compilePackage } from '../helpers/load.js'
+import { danmukuMaskAssets } from '../helpers/danmuku-mask-assets.js'
 import { expect, test } from './fixtures.js'
 
-const artifact = process.env.ARTPLAYER_MASK_ARTIFACT || 'source UMD'
+let artifact
+let provenance
+let danmukuProvenance
 let code
-const baseline = JSON.parse(fs.readFileSync('refactor/baselines/danmuku-mask-release.json', 'utf8'))
-const assets = baseline.sdk.assets.map(({ file, sha256 }) => {
-  const bytes = fs.readFileSync(file)
-  const actual = hash(bytes)
-  // Git checkout may convert documentation/declaration newlines. Executed model
-  // scripts and binaries must retain their exact fixed bytes.
-  const normalizedLF = /\.(?:md|d\.ts|json)$/.test(file) && actual !== sha256
-  assert.equal(normalizedLF ? hash(bytes.toString().replaceAll('\r\n', '\n')) : actual, sha256, `Model asset differs from fixed source: ${file}`)
-  return { file, sha256: actual, baselineSha256: sha256, normalizedLF }
-})
+const assets = danmukuMaskAssets(process.cwd()).map(resource => resource.source)
 const media = 'docs/assets/sample/steve-jobs.mp4'
-const danmukuFile = process.env.ARTPLAYER_DANMUKU_ARTIFACT || 'source UMD'
+let danmukuFile
 let danmukuCode
 const danmukuImplementations = new Map()
 test.beforeAll(async () => {
-  ;[code, danmukuCode] = await Promise.all([
-    process.env.ARTPLAYER_MASK_ARTIFACT ? fs.readFileSync(artifact, 'utf8') : compilePackage('artplayer-plugin-danmuku-mask', 'umd'),
-    process.env.ARTPLAYER_DANMUKU_ARTIFACT ? fs.readFileSync(danmukuFile, 'utf8') : compilePackage('artplayer-plugin-danmuku', 'umd'),
+  const [mask, danmuku] = await Promise.all([
+    browserCandidate('artplayer-plugin-danmuku-mask', process.env.ARTPLAYER_MASK_ARTIFACT),
+    browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT),
   ])
+  code = mask.code
+  provenance = mask.provenance
+  artifact = provenance.file || provenance.kind
+  danmukuCode = danmuku.code
+  danmukuProvenance = danmuku.provenance
+  danmukuFile = danmukuProvenance.file || danmukuProvenance.kind
   const release = JSON.parse(fs.readFileSync('refactor/baselines/danmuku-release.json', 'utf8')).release
   const member = 'package/dist/artplayer-plugin-danmuku.js'
   const published = readMember(await ensureArchive(release), member)
   assert.equal(hash(published), release.files[member])
   danmukuImplementations.set('published', { file: `npm ${release.version}`, code: published.toString() })
-  danmukuImplementations.set('candidate', { file: danmukuFile, code: danmukuCode })
+  danmukuImplementations.set('candidate', { file: danmukuFile, code: danmukuCode, provenance: danmukuProvenance })
 })
 
 for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
   test(`Mask actual local MediaPipe model renders, stops and restarts with ${core} core`, async ({ page }, testInfo) => {
     test.setTimeout(90000) // Includes two actual model initializations and native video decoding.
+    await testInfo.attach('mask-selected-input', { contentType: 'application/json', body: JSON.stringify({ core, provenance }) })
     const external = []
     const resources = []
     const origin = new URL(testInfo.project.use.baseURL).origin
@@ -132,7 +133,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
     }
     finally {
       const state = await page.evaluate(() => ({ snapshots: window.maskNative?.snapshots, outputs: window.maskNative?.outputs.map(({ canvas, time }) => ({ width: canvas.width, height: canvas.height, time })), video: window.art ? { time: window.art.currentTime, duration: window.art.duration, paused: window.art.video.paused, size: [window.art.video.videoWidth, window.art.video.videoHeight] } : null, mask: window.maskLayer?.style.maskImage?.slice(0, 80) }))
-      await testInfo.attach('actual-model-evidence', { body: JSON.stringify({ artifact, sha256: hash(code), core, assets, media: { file: media, sha256: hash(fs.readFileSync(media)) }, external, resources, state, limitation: 'Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.' }, null, 2), contentType: 'application/json' })
+      await testInfo.attach('actual-model-evidence', { body: JSON.stringify({ artifact, provenance, sha256: hash(code), core, assets, media: { file: media, sha256: hash(fs.readFileSync(media)) }, external, resources, state, limitation: 'Actual SDK/model, native video and output bitmap lifecycle. No assertion of private MediaPipe/GPU closure or Danmuku layout composition.' }, null, 2), contentType: 'application/json' })
       await page.evaluate(() => {
         if (window.art && !window.art.isDestroy)
           window.art.destroy()
@@ -143,6 +144,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
   for (const implementation of ['published', 'candidate']) {
     test(`Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with ${core} core / ${implementation} plugin`, async ({ page }, testInfo) => {
       const danmuku = danmukuImplementations.get(implementation)
+      await testInfo.attach('mask-selected-input', { contentType: 'application/json', body: JSON.stringify({ core, implementation, provenance, danmuku: danmuku.provenance || { kind: 'published', sha256: hash(danmuku.code) } }) })
       test.setTimeout(90000)
       await page.goto(`/test/player.html?core=${core}`)
       await page.addScriptTag({ content: danmuku.code })
@@ -290,7 +292,7 @@ for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
       }
       finally {
         const state = await page.evaluate(() => ({ times: window.maskCombination.times, visible: window.maskCombination.visible, snapshots: window.maskCombination.snapshots, scheduled: window.maskCombination.scheduled, samples: window.maskCombination.samples, seeked: window.maskCombination.seeked, incompleteLoad: window.danmukuCombinationLoadResult }))
-        await testInfo.attach('actual-combination-evidence', { body: JSON.stringify({ core, implementation, mask: { file: artifact, sha256: hash(code) }, danmuku: { file: danmuku.file, sha256: hash(danmuku.code) }, unexpected, state, load, limitation: 'Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. Bounded 20 rows/s after model readiness. No OS fullscreen, GPU completion or device coverage claim.' }, null, 2), contentType: 'application/json' })
+        await testInfo.attach('actual-combination-evidence', { body: JSON.stringify({ core, implementation, mask: { file: artifact, provenance, sha256: hash(code) }, danmuku: { file: danmuku.file, provenance: danmuku.provenance, sha256: hash(danmuku.code) }, unexpected, state, load, limitation: 'Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. Bounded 20 rows/s after model readiness. No OS fullscreen, GPU completion or device coverage claim.' }, null, 2), contentType: 'application/json' })
         await page.evaluate(() => {
           if (window.art && !window.art.isDestroy)
             window.art.destroy()

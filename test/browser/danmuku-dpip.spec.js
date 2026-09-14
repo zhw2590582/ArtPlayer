@@ -2,9 +2,9 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { observeDanmukuLoad } from '../helpers/danmuku-combination-load.js'
 import { dpipCandidate } from '../helpers/dpip.js'
-import { compilePackage } from '../helpers/load.js'
 import { expect, test } from './fixtures.js'
 
 const dpip = await dpipCandidate()
@@ -15,10 +15,8 @@ test.beforeAll(async () => {
   const published = readMember(await ensureArchive(release), member)
   assert.equal(hash(published), release.files[member])
   implementations.set('published', { input: `npm ${release.version}`, code: published.toString() })
-  const candidate = process.env.ARTPLAYER_DANMUKU_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-danmuku', 'umd')
-  implementations.set('candidate', { input: process.env.ARTPLAYER_DANMUKU_ARTIFACT || 'source UMD', code: candidate })
+  const candidate = await browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT)
+  implementations.set('candidate', { input: candidate.provenance.file || candidate.provenance.kind, ...candidate })
 })
 
 for (const core of ['published', 'candidate']) {
@@ -29,9 +27,10 @@ for (const core of ['published', 'candidate']) {
           test.setTimeout(45000) // Two native PiP loads add 16 seconds of actual media progression.
         const input = implementations.get(implementation)
         const danmuku = input.code
+        await testInfo.attach('danmuku-selected-input', { contentType: 'application/json', body: JSON.stringify({ implementation, provenance: input.provenance || { kind: 'published', sha256: hash(danmuku) }, dpip: dpip.provenance || { kind: dpip.name, sha256: hash(dpip.code) } }) })
         await page.goto(`/test/player.html?core=${core}`)
         const supported = await page.evaluate(() => typeof window.documentPictureInPicture?.requestWindow === 'function')
-        const evidence = { core, implementation, ending, supported, danmuku: { input: input.input, sha256: hash(danmuku) }, dpip: { input: dpip.name, sha256: hash(dpip.code) }, outcome: 'incomplete', rounds: [], loads: [] }
+        const evidence = { core, implementation, ending, supported, danmuku: { input: input.input, provenance: input.provenance, sha256: hash(danmuku) }, dpip: { input: dpip.name, provenance: dpip.provenance, sha256: hash(dpip.code) }, outcome: 'incomplete', rounds: [], loads: [] }
         if (!supported) {
           evidence.outcome = 'native-document-pip-unavailable'
           await testInfo.attach('danmuku-dpip', { contentType: 'application/json', body: JSON.stringify(evidence) })

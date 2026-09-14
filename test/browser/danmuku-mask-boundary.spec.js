@@ -1,14 +1,16 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let candidate
+let provenance
 test.beforeAll(async () => {
-  candidate = process.env.ARTPLAYER_DANMUKU_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-danmuku', 'umd')
+  ;({ code: candidate, provenance } = await browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT))
+})
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('danmuku-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
 })
 
 async function setup(page, core, testInfo) {
@@ -79,7 +81,7 @@ async function setup(page, core, testInfo) {
   await page.evaluate(() => window.art.playbackRate = 0.25)
   await testInfo.attach('danmuku-mask-boundary-inputs', {
     contentType: 'application/json',
-    body: JSON.stringify({ core, artifact: process.env.ARTPLAYER_DANMUKU_ARTIFACT || 'source UMD', sha256: hash(candidate), media: '/test/pattern.mp4', scope: 'Shared root-layer identity and CSS preservation with fixed inline SVG mask; native video, DOM, RAF and placement Worker. No Mask SDK/model/end-to-end acceptance. Eligible rows are explicit resource-test preconditions, not timestamp-delivery evidence.' }),
+    body: JSON.stringify({ core, artifact: provenance.file || provenance.kind, sha256: hash(candidate), media: '/test/pattern.mp4', scope: 'Shared root-layer identity and CSS preservation with fixed inline SVG mask; native video, DOM, RAF and placement Worker. No Mask SDK/model/end-to-end acceptance. Eligible rows are explicit resource-test preconditions, not timestamp-delivery evidence.' }),
   })
   return external
 }

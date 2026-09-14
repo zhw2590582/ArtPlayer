@@ -185,3 +185,20 @@ Native acceptance still needs source changes, multiple players, failure recovery
 devices and internal GPU/WASM resources. The default unversioned solutionPath can
 load assets independently of Yarn's SDK resolution. PKG-MASK-05/06 retain the
 real combination and distribution/release gates after source/type migration.
+
+## Installed package and local model validation
+
+`yarn test:package --browser` prepares Mask and Danmuku. With its map in
+ARTPLAYER_BROWSER_ARTIFACTS, `yarn test:browser:installed danmuku-mask-native`
+uses verified installed wrappers and the same fixed local model. The SDK included
+in the bundle and model assets loaded through solutionPath have distinct origins;
+the model is not inside the Mask tarball. The server verifies model bytes before
+serving and records their file/baseline hashes in its manifest. Only metadata
+newline conversion is tolerated; executed scripts and binaries are exact.
+
+Each combination records both wrapper identities; published Danmuku controls
+remain present. Missing/tampered installed bundles cannot rebuild from source.
+Installed mode rejects ARTPLAYER_MASK_PROFILE=1; explicit source profiling remains
+available. Native model output, CSS masking, bounded post-ready load, GPU closure,
+physical devices and redistribution evidence retain their separate gates. See
+../../refactor/changes/2026-09-15-CI-01-danmuku-installed.md for actual results.

@@ -170,3 +170,9 @@ build:ts 生成声明 URL 清单后重建站点浏览器产物，check:editor-ty
 安装准备使用 `yarn test:package --browser`，从 browser-validation/scope.ts 的同一
 包清单生成，不再在工作流复制列表。默认 core/chapter 消费者及显式 --include 保留；
 此选项不表示全生态类型、SDK 或发布准入。
+
+十八包安装清单的弹幕/Mask 子集实跑 399 项耗时 22.5 分钟，见
+[CI-01 记录](changes/2026-09-15-CI-01-danmuku-installed.md)。当前单个
+browser-smoke 仍串行运行全部 source/installed 和其他消费者/性能检查，
+60 分钟预算尚未经过完整远端验证；后续必须分片并核定时长，保留完整用例
+和失败报告。不能从本地子集通过推断整个工作流可在预算内完成。

@@ -1,14 +1,16 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let candidate
+let provenance
 test.beforeAll(async () => {
-  candidate = process.env.ARTPLAYER_DANMUKU_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-danmuku', 'umd')
+  ;({ code: candidate, provenance } = await browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT))
+})
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('danmuku-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
 })
 
 async function setup(page, core, testInfo) {
@@ -60,7 +62,7 @@ async function setup(page, core, testInfo) {
     window.inputPlugin = window.art.plugins.artplayerPluginDanmuku
   })
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
-  await testInfo.attach('danmuku-input-build', { contentType: 'application/json', body: JSON.stringify({ core, artifact: process.env.ARTPLAYER_DANMUKU_ARTIFACT || 'in-memory source UMD', sha256: hash(candidate), worker: 'Native Blob Worker with observation only', media: '/test/pattern.mp4' }) })
+  await testInfo.attach('danmuku-input-build', { contentType: 'application/json', body: JSON.stringify({ core, artifact: provenance.file || provenance.kind, sha256: hash(candidate), worker: 'Native Blob Worker with observation only', media: '/test/pattern.mp4' }) })
   return external
 }
 

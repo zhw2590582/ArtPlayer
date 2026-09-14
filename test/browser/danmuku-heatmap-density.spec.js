@@ -1,14 +1,16 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let candidate
+let provenance
 test.beforeAll(async () => {
-  candidate = process.env.ARTPLAYER_DANMUKU_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-danmuku', 'umd')
+  ;({ code: candidate, provenance } = await browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT))
+})
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('danmuku-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
 })
 
 for (const core of ['published', 'candidate']) {

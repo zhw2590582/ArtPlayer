@@ -1,14 +1,16 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let candidate
+let provenance
 test.beforeAll(async () => {
-  candidate = process.env.ARTPLAYER_DANMUKU_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_DANMUKU_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-danmuku', 'umd')
+  ;({ code: candidate, provenance } = await browserCandidate('artplayer-plugin-danmuku', process.env.ARTPLAYER_DANMUKU_ARTIFACT))
+})
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('danmuku-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
 })
 
 async function setup(page, core, scenario, testInfo) {
@@ -102,7 +104,7 @@ async function setup(page, core, scenario, testInfo) {
     document.querySelector('#play').onclick = () => window.art.play()
   }, { scenario })
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
-  await testInfo.attach('danmuku-resources-inputs', { contentType: 'application/json', body: JSON.stringify({ core, scenario, artifact: process.env.ARTPLAYER_DANMUKU_ARTIFACT || 'source UMD', sha256: hash(candidate), native: 'video, RAF, DOM, Worker; observe the first one-second timer after beforeEmit in the synchronous send continuation, no fake timer clock' }) })
+  await testInfo.attach('danmuku-resources-inputs', { contentType: 'application/json', body: JSON.stringify({ core, scenario, artifact: provenance.file || provenance.kind, sha256: hash(candidate), native: 'video, RAF, DOM, Worker; observe the first one-second timer after beforeEmit in the synchronous send continuation, no fake timer clock' }) })
 }
 
 test.afterEach(async ({ page }, testInfo) => {

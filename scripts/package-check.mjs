@@ -97,6 +97,8 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     'artplayer-plugin-chromecast': async () => (await import('../refactor/scripts/chromecast-contract.mjs')).verifyChromecastContract(),
     'artplayer-proxy-mediabunny': async () => (await import('../refactor/scripts/mb-contract.mjs')).verifyMbContract(),
     'artplayer-plugin-jassub': async () => (await import('../refactor/scripts/jassub-contract.mjs')).verifyJassubContract(),
+    'artplayer-plugin-danmuku': async () => (await import('../refactor/scripts/danmuku-contract.mjs')).verifyDanmukuContract(),
+    'artplayer-plugin-danmuku-mask': async () => (await import('../refactor/scripts/danmuku-mask-contract.mjs')).verifyDanmukuMaskContract(),
     'artplayer-plugin-audio-track': async () => (await import('../refactor/scripts/audio-contract.mjs')).verifyAudioContract(),
     'artplayer-plugin-vtt-thumbnail': async () => (await import('../refactor/scripts/vtt-thumbnail-contract.mjs')).verifyVttThumbnailContract(),
     'artplayer-plugin-multiple-subtitles': async () => (await import('../refactor/scripts/multiple-subtitles-contract.mjs')).verifyMultipleSubtitlesContract(),
