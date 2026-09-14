@@ -9,8 +9,8 @@ step through `ARTPLAYER_BROWSER_ARTIFACTS`. See
 browser scope and the remaining package-specific release gates.
 
 Run `yarn test:package` with the pinned Node and Yarn after a frozen install. The
-default consumer scope is core and chapter. For Ambilight/Canvas/Document PiP/Ads/Audio Track/VTT Thumbnail/Multiple Subtitles/HLS Control/DASH Control/Auto Thumbnail browser work,
-run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles,artplayer-plugin-hls-control,artplayer-plugin-dash-control,artplayer-plugin-auto-thumbnail`.
+default consumer scope is core and chapter. For the shared installed browser scope,
+run `yarn test:package --browser`.
 These four additional packages have reviewed published contracts and use the same
 source snapshot/build/pack/offline-install/frozen-reinstall pipeline. Installed
 files are copied only after archive hash checks. The report explicitly separates
@@ -97,3 +97,7 @@ bundles or contradictory frozen-workspace flags fail instead of rebuilding sourc
 removed historical files, then deliberately removes an actual published default
 export and required entry in an isolated consumer to prove runtime failures are
 detected. It is part of `yarn test:node`.
+
+The --browser option follows the shared installed browser roster automatically;
+do not copy a manual package list into CI. Explicit --include remains supported
+for a deliberate subset. --browser cannot combine with --include or --release.

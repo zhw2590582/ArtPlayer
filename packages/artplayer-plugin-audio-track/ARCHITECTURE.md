@@ -95,7 +95,7 @@ demo still belong to Audio-06. See refactor/baselines/audio-types-validation.jso
 audio-fixture.js records the selected published or candidate input. The older test label "source audio" means the candidate slot; consult audio-inputs.selected for its actual origin. Native WAV capability controls remain separate from decoded AAC acceptance.
 
 The shared `yarn test:browser:installed` roster includes this package after preparing
-the nine-package tarballs with `yarn test:package --include=...`; use the exact command
+the checked tarballs with `yarn test:package --browser`; see the scope rules
 in ../../scripts/browser-validation/README.md. Attachments identify candidate file,
 archive and source hashes. Missing or stale maps fail without source fallback.
 Without a map, source and deliberate artifact checks retain their existing behavior.

@@ -14,8 +14,8 @@ also retains explicit historical and committed-artifact cases; its name does not
 promise that every dependency is rebuilt from current source in every test.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
-`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles,artplayer-plugin-hls-control,artplayer-plugin-dash-control,artplayer-plugin-auto-thumbnail`.
-Both launcher and config validate the selected twelve packages' installed hashes
+`yarn test:package --browser`.
+Both launcher and config validate the selected packages' installed hashes
 and source/build freshness. `scope.ts` lists the currently supported installed
 test files. This is a growing installed subset, not full ecosystem acceptance.
 Source checks remain complete when the installed list grows.
@@ -83,3 +83,17 @@ rejects diagnostic SDK patches/debug replacements and synthetic recovery probes,
 while source diagnostics remain explicit. Auto Thumbnail uses native media/JPEG
 with a stub host and retains its presentation/fallback pixel limitations. See
 ../../refactor/changes/2026-09-15-CI-01-adaptive-installed.md for executed results.
+
+`yarn test:package --browser` derives additional packages from installedPackages
+in scope.ts, so CI preparation and browser preflight share one roster. The default
+command still prepares core/chapter; --include retains explicit subsets. Unknown,
+duplicate, empty or conflicting --browser/--release/--include options fail before
+building. --browser is preparation, never full release acceptance.
+
+ASR adds six native audio/routing/CORS files, including a composition that checks
+ASR and Audio Track identities separately. Historical inputs, unsupported WebAudio
+and deliberately forced fallback branches remain labeled. Chromecast adds its
+controlled SDK lifecycle file with actual core DOM/local media; it does not run
+a Cast receiver. VAST controlled tests externalize and replace a dependency, so
+they are not advertised as installed bundle coverage. Its real IMA suite retains
+its independent gate. See ../../refactor/changes/2026-09-15-CI-01-asr-cast-installed.md.

@@ -1,13 +1,15 @@
 import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
+let provenance
 let code
 test.beforeAll(async () => {
-  expect(process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Explicit source/artifact tests do not represent installed packages').toBeFalsy()
-  code = process.env.ARTPLAYER_ASR_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_ASR_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-asr', 'umd')
+  const candidate = await browserCandidate('artplayer-plugin-asr', process.env.ARTPLAYER_ASR_ARTIFACT)
+  code = candidate.code
+  provenance = candidate.provenance
 })
 
 test.afterEach(async ({ page }, testInfo) => {
@@ -33,7 +35,7 @@ for (const core of ['published', 'candidate']) {
     })
     await page.goto(`/test/player.html?core=${core}`)
     const capabilities = await page.evaluate(() => ({ context: typeof (window.AudioContext || window.webkitAudioContext), worklet: typeof window.AudioWorkletNode, capture: typeof HTMLMediaElement.prototype.captureStream, mozCapture: typeof HTMLMediaElement.prototype.mozCaptureStream }))
-    await testInfo.attach('capture-cors-inputs', { contentType: 'application/json', body: JSON.stringify({ core, capabilities, plugin: process.env.ARTPLAYER_ASR_ARTIFACT || 'workspace source', pluginSha256: hash(code), mediaSha256: hash(fs.readFileSync(new URL('./media/audio-tone.m4a', import.meta.url))), nativeCapture: true, forcedException: false, analyserBinding: false, physicalAudioOutput: false, scope: 'Zero direct bindings and native media clock progression preserve routing; no claim about physical speaker output' }) })
+    await testInfo.attach('capture-cors-inputs', { contentType: 'application/json', body: JSON.stringify({ core, capabilities, provenance, pluginSha256: hash(code), mediaSha256: hash(fs.readFileSync(new URL('./media/audio-tone.m4a', import.meta.url))), nativeCapture: true, forcedException: false, analyserBinding: false, physicalAudioOutput: false, scope: 'Zero direct bindings and native media clock progression preserve routing; no claim about physical speaker output' }) })
     if (capabilities.context === 'undefined') {
       expect(process.platform).toBe('win32')
       expect(testInfo.project.name).toBe('webkit')

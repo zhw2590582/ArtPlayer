@@ -4,7 +4,8 @@ import path from 'node:path'
 import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- This fixture exercises the repository's Node test runner.
 import { test } from 'node:test'
-import { checkFiles, checkPackages, publishedConsumer } from '../scripts/package-check.mjs'
+import { installedPackages } from '../scripts/browser-validation/scope.ts'
+import { checkFiles, checkPackages, packageOptions, publishedConsumer } from '../scripts/package-check.mjs'
 import { removeConsumer, runtimeConsumer } from '../scripts/package-consumer.mjs'
 import { emitterContracts } from './contracts/emitter.js'
 import { ambilightCandidate } from './helpers/ambilight.js'
@@ -14,6 +15,15 @@ import { canvasCandidate } from './helpers/canvas.js'
 import { dpipCandidate } from './helpers/dpip.js'
 import { multipleSubtitlesCandidate } from './helpers/multiple-subtitles.js'
 import { vttThumbnailCandidate } from './helpers/vtt-thumbnail.js'
+
+test('Package CLI keeps legacy defaults and prepares the same roster the browser requires', () => {
+  assert.deepEqual(packageOptions([]), { release: false, include: [] })
+  assert.deepEqual(packageOptions(['--release']), { release: true, include: [] })
+  assert.deepEqual(packageOptions(['--include=artplayer-plugin-asr']), { release: false, include: ['artplayer-plugin-asr'] })
+  assert.deepEqual(['artplayer', 'artplayer-plugin-chapter', ...packageOptions(['--browser']).include], installedPackages)
+  for (const args of [['--browser', '--release'], ['--browser', '--include=artplayer-plugin-asr'], ['--broser'], ['--include='], ['--include=x,x'], ['--include=x', '--include=y'], ['--browser', '--browser']])
+    assert.throws(() => packageOptions(args))
+})
 
 test('Additional browser packages cannot be mistaken for full release consumer acceptance', async () => {
   await assert.rejects(checkPackages({ release: true, include: ['artplayer-plugin-ambilight'] }), /not full release acceptance/)
@@ -41,7 +51,7 @@ test('Explicit installed plugin maps never fall back to source or frozen workspa
     delete process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE
     process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT = 'override.js'
     await assert.rejects(autoThumbnailCandidate(), /cannot override artplayer-plugin-auto-thumbnail artifact/)
-    for (const name of ['artplayer-plugin-hls-control', 'artplayer-plugin-dash-control']) {
+    for (const name of ['artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast']) {
       await assert.rejects(browserCandidate(name), { code: 'ENOENT' })
       await assert.rejects(browserCandidate(name, 'override.js'), new RegExp(`cannot override ${name} artifact`))
     }

@@ -2,14 +2,17 @@ import fs from 'node:fs'
 import process from 'node:process'
 import { verifyAsrContract } from '../../refactor/scripts/asr-contract.mjs'
 import { hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let contract
+let candidateProvenance
 let candidateCode
 test.beforeAll(async () => {
   contract = await verifyAsrContract()
-  candidateCode = process.env.ARTPLAYER_ASR_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_ASR_ARTIFACT) : await compilePackage('artplayer-plugin-asr', 'umd')
+  const candidate = await browserCandidate('artplayer-plugin-asr', process.env.ARTPLAYER_ASR_ARTIFACT)
+  candidateCode = candidate.code
+  candidateProvenance = candidate.provenance
 })
 
 for (const version of ['2.0.0', '2.1.0', 'candidate']) {
@@ -18,7 +21,7 @@ for (const version of ['2.0.0', '2.1.0', 'candidate']) {
       const release = [contract.baseline.release, ...contract.baseline.previous].find(release => release.version === version)
       const code = version === 'candidate' ? candidateCode : readMember(contract.archives.get(version), 'package/dist/artplayer-plugin-asr.js')
       const media = fs.readFileSync(new URL('./media/audio-tone.m4a', import.meta.url))
-      await testInfo.attach('asr-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, pluginSha256: hash(code), integrity: release?.integrity || null, candidate: process.env.ARTPLAYER_ASR_ARTIFACT || 'workspace source', mediaSha256: hash(media), media: 'local mono AAC 440 Hz tone', networkService: false }) })
+      await testInfo.attach('asr-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, pluginSha256: hash(code), selected: version === 'candidate' ? candidateProvenance : { kind: 'published', version, sha256: hash(code) }, integrity: release?.integrity || null, mediaSha256: hash(media), media: 'local mono AAC 440 Hz tone', networkService: false }) })
       await page.goto(`/test/player.html?core=${core}`)
       const capabilities = await page.evaluate(() => ({ AudioContext: typeof window.AudioContext, webkitAudioContext: typeof window.webkitAudioContext, AudioWorkletNode: typeof window.AudioWorkletNode }))
       await testInfo.attach('asr-audio-capabilities', { contentType: 'application/json', body: JSON.stringify(capabilities) })

@@ -1,15 +1,17 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { verifyAsrContract } from '../../refactor/scripts/asr-contract.mjs'
 import { hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let contract
+let candidateProvenance
 let candidateCode
 test.beforeAll(async () => {
   contract = await verifyAsrContract()
-  candidateCode = process.env.ARTPLAYER_ASR_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_ASR_ARTIFACT) : await compilePackage('artplayer-plugin-asr', 'umd')
+  const candidate = await browserCandidate('artplayer-plugin-asr', process.env.ARTPLAYER_ASR_ARTIFACT)
+  candidateCode = candidate.code
+  candidateProvenance = candidate.provenance
 })
 
 for (const { version, captureOnly } of [{ version: '2.1.0', captureOnly: false }, { version: 'candidate', captureOnly: false }, { version: 'candidate', captureOnly: true }]) {
@@ -19,7 +21,7 @@ for (const { version, captureOnly } of [{ version: '2.1.0', captureOnly: false }
       await page.goto(`/test/player.html?core=${core}`)
       const capabilities = await page.evaluate(() => ({ context: typeof AudioContext, worklet: typeof AudioWorkletNode, capture: typeof HTMLMediaElement.prototype.captureStream, mozCapture: typeof HTMLMediaElement.prototype.mozCaptureStream }))
       const forceRejection = testInfo.project.name === 'firefox' && !captureOnly
-      await testInfo.attach('asr-fallback-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, captureOnly, pluginSha256: hash(code), capabilities, forcedException: forceRejection, reason: captureOnly ? 'Explicit capture mode never binds the element; no forced exceptions' : forceRejection ? 'Firefox permits a second native media source; force only binding rejection to reach real captureStream/Worklet' : 'Native duplicate binding rejection', externalContext: 'Native media-element source remains owned and running', physicalOutput: false }) })
+      await testInfo.attach('asr-fallback-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, captureOnly, pluginSha256: hash(code), selected: version === 'candidate' ? candidateProvenance : { kind: 'published', version, sha256: hash(code) }, capabilities, forcedException: forceRejection, reason: captureOnly ? 'Explicit capture mode never binds the element; no forced exceptions' : forceRejection ? 'Firefox permits a second native media source; force only binding rejection to reach real captureStream/Worklet' : 'Native duplicate binding rejection', externalContext: 'Native media-element source remains owned and running', physicalOutput: false }) })
       if (capabilities.context !== 'function') {
         expect(process.platform).toBe('win32')
         expect(testInfo.project.name).toBe('webkit')

@@ -156,3 +156,13 @@ The installed consumer verifier compares both actual historical tarballs and an
 isolated candidate package, validates individual negative statement diagnostics,
 and checks runtime entry identity. The editor declaration is generated semantically
 from the root declaration. Keep internal `tsconfig.json` and source out of npm packs.
+
+## Shared installed browser validation
+
+chromecast-lifecycle.spec.js selects the verified installed bundle. It uses a controlled Cast SDK with real core DOM, clicks and local video; receiver discovery, actual Cast SDK and remote playback remain PKG-CAST-05. The artifact map must not be interpreted as physical device acceptance.
+
+Use `yarn test:package --browser`, then `yarn test:browser:installed`. The common
+roster in scripts/browser-validation/scope.ts drives both preparation and required
+inputs. Explicit artifact overrides are rejected when an installed map is present;
+missing or stale inputs fail without source fallback. Source mode retains deliberate
+artifact selection. See ../../refactor/changes/2026-09-15-CI-01-asr-cast-installed.md.

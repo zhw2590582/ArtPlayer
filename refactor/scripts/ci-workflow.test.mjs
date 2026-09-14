@@ -33,17 +33,20 @@ for (const [name, mutate] of [
   ['conditional Node setup', w => w.jobs.checks.steps.find(s => s.uses?.startsWith('actions/setup-node@')).if = 'false'],
   ['wrong consumer Node version', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'consumer-node-20').with['node-version'] = '24'],
   ['skipped installed consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.includes('--expected-node 22.12.0')).if = 'false'],
-  ['missing browser plugin installation', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --include=')).run = 'echo omitted'],
-  ['missing Document PiP browser installation', (w) => {
-    const step = w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --include='))
-    step.run = step.run.replace(',artplayer-plugin-document-pip', '')
+  ['missing browser plugin installation', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --browser')).run = 'echo omitted'],
+  ['manual partial browser package roster', (w) => {
+    const step = w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --browser'))
+    step.run = step.run.replace('--browser', '--include=artplayer-plugin-ambilight')
   }],
-  ['skipped browser plugin installation', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --include=')).if = 'false'],
+  ['skipped browser plugin installation', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --browser')).if = 'false'],
   ['missing source browser checks', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:browser:source ')).run = 'echo omitted'],
   ['filtered source browser checks', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:browser:source ')).run += ' --grep subset'],
   ['source failure prevents installed evidence', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:browser:installed ')).if = 'success()'],
   ['ignored installed failure', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:browser:installed '))['continue-on-error'] = true],
-  ['missing separate source evidence', w => { const upload = w.jobs['browser-smoke'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@')); upload.with.path = upload.with.path.replace('refactor/.cache/browser-source/\n', '') }],
+  ['missing separate source evidence', (w) => {
+    const upload = w.jobs['browser-smoke'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@'))
+    upload.with.path = upload.with.path.replace('refactor/.cache/browser-source/\n', '')
+  }],
   ['browser runtime not restored', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'restore-canonical-node').with = { 'node-version': '22.12.0', 'package-manager-cache': false }],
   ['skipped React consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:react-consumer')).if = 'false'],
   ['removed React consumer', w => w.jobs['browser-smoke'].steps = w.jobs['browser-smoke'].steps.filter(s => !s.run?.startsWith('yarn test:react-consumer'))],

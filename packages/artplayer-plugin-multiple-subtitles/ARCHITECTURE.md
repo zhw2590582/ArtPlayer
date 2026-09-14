@@ -189,7 +189,7 @@ See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historic
 multipleSubtitlesCandidate uses browser-candidate.js for verified installed bytes. An installed map rejects ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT overrides. Actual historical plugins and no-plugin controls retain their original inputs.
 
 The shared `yarn test:browser:installed` roster includes this package after preparing
-the nine-package tarballs with `yarn test:package --include=...`; use the exact command
+the checked tarballs with `yarn test:package --browser`; see the scope rules
 in ../../scripts/browser-validation/README.md. Attachments identify candidate file,
 archive and source hashes. Missing or stale maps fail without source fallback.
 Without a map, source and deliberate artifact checks retain their existing behavior.

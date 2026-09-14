@@ -140,7 +140,7 @@ jobs:
         # These extra installed packages are required by the browser helpers.
         # Other ecosystem installation/SDK gates remain tracked by CI-01.
         run: |
-          yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles,artplayer-plugin-hls-control,artplayer-plugin-dash-control,artplayer-plugin-auto-thumbnail 2>&1 | tee refactor/.cache/ci/browser-packages.log
+          yarn test:package --browser 2>&1 | tee refactor/.cache/ci/browser-packages.log
           node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
       - name: Run all source browser checks
         if: ${{ !cancelled() }}

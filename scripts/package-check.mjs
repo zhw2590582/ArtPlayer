@@ -5,7 +5,20 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { ensureArchive, hash, readMember } from '../refactor/scripts/releases.mjs'
+import { installedPackages } from './browser-validation/scope.ts'
 import { consumerDirectory, names as defaultNames, readJson, removeConsumer, run, runtimeConsumer, typeConsumers, workspace, writeJson } from './package-consumer.mjs'
+
+export function packageOptions(args) {
+  assert(args.every(arg => ['--release', '--browser'].includes(arg) || arg.startsWith('--include=')), 'Unknown package-check option')
+  const includes = args.filter(arg => arg.startsWith('--include='))
+  assert(includes.length <= 1 && new Set(args).size === args.length, 'Duplicate package-check option')
+  const browser = args.includes('--browser')
+  const release = args.includes('--release')
+  assert(!browser || (!release && includes.length === 0), 'Browser preparation cannot be combined with release or explicit includes')
+  const include = browser ? installedPackages.filter(name => !defaultNames.includes(name)) : includes[0]?.slice('--include='.length).split(',') || []
+  assert(include.every(Boolean) && new Set(include).size === include.length, 'Empty or duplicate additional package')
+  return { release, include }
+}
 
 export function checkFiles(manifest, files, historical = []) {
   for (const field of ['main', 'module', 'types', 'legacy']) {
@@ -80,6 +93,8 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     'artplayer-plugin-hls-control': async () => (await import('../refactor/scripts/hls-contract.mjs')).verifyHlsContract(),
     'artplayer-plugin-dash-control': async () => (await import('../refactor/scripts/dash-contract.mjs')).verifyDashContract(),
     'artplayer-plugin-auto-thumbnail': async () => (await import('../refactor/scripts/auto-thumbnail-contract.mjs')).verifyAutoThumbnailContract(),
+    'artplayer-plugin-asr': async () => (await import('../refactor/scripts/asr-contract.mjs')).verifyAsrContract(),
+    'artplayer-plugin-chromecast': async () => (await import('../refactor/scripts/chromecast-contract.mjs')).verifyChromecastContract(),
     'artplayer-plugin-audio-track': async () => (await import('../refactor/scripts/audio-contract.mjs')).verifyAudioContract(),
     'artplayer-plugin-vtt-thumbnail': async () => (await import('../refactor/scripts/vtt-thumbnail-contract.mjs')).verifyVttThumbnailContract(),
     'artplayer-plugin-multiple-subtitles': async () => (await import('../refactor/scripts/multiple-subtitles-contract.mjs')).verifyMultipleSubtitlesContract(),
@@ -164,8 +179,7 @@ export async function checkPackages({ release = false, include = [] } = {}) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const include = process.argv.find(arg => arg.startsWith('--include='))?.slice('--include='.length).split(',') || []
-  checkPackages({ release: process.argv.includes('--release'), include }).catch((error) => {
+  checkPackages(packageOptions(process.argv.slice(2))).catch((error) => {
     console.error(error)
     process.exitCode = 1
   })

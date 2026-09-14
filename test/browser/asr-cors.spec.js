@@ -2,14 +2,17 @@ import fs from 'node:fs'
 import process from 'node:process'
 import { verifyAsrContract } from '../../refactor/scripts/asr-contract.mjs'
 import { hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let contract
+let candidateProvenance
 let candidateCode
 test.beforeAll(async () => {
   contract = await verifyAsrContract()
-  candidateCode = process.env.ARTPLAYER_ASR_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_ASR_ARTIFACT) : await compilePackage('artplayer-plugin-asr', 'umd')
+  const candidate = await browserCandidate('artplayer-plugin-asr', process.env.ARTPLAYER_ASR_ARTIFACT)
+  candidateCode = candidate.code
+  candidateProvenance = candidate.provenance
 })
 
 for (const version of ['2.1.0', 'candidate']) {
@@ -26,7 +29,7 @@ for (const version of ['2.1.0', 'candidate']) {
           test.skip(true, 'Windows WebKit lacks native WebAudio; this is not Safari CORS acceptance')
         }
         const code = version === 'candidate' ? candidateCode : readMember(contract.archives.get(version), 'package/dist/artplayer-plugin-asr.js')
-        await testInfo.attach('asr-cors-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, scenario, pluginSha256: hash(code), mediaSha256: hash(fs.readFileSync(new URL('./media/audio-tone.m4a', import.meta.url))), physicalAudioOutput: false, securityBypass: false }) })
+        await testInfo.attach('asr-cors-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, scenario, pluginSha256: hash(code), selected: version === 'candidate' ? candidateProvenance : { kind: 'published', version, sha256: hash(code) }, mediaSha256: hash(fs.readFileSync(new URL('./media/audio-tone.m4a', import.meta.url))), physicalAudioOutput: false, securityBypass: false }) })
         const responses = []
         page.on('response', (response) => {
           if (/\/test\/(?:asr-cors\.m4a|audio-tone\.m4a|asr-opaque-redirect)(?:\?|$)/u.test(response.url()))

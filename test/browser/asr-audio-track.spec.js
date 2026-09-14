@@ -1,25 +1,26 @@
 import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let asrCode
 let audioCode
 let inputs
 test.beforeAll(async () => {
-  expect(process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'These source/explicit artifact checks do not represent isolated installed packages').toBeFalsy()
-  asrCode = process.env.ARTPLAYER_ASR_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_ASR_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-asr', 'umd')
-  audioCode = process.env.ARTPLAYER_AUDIO_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_AUDIO_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-audio-track', 'umd')
+  const asr = await browserCandidate('artplayer-plugin-asr', process.env.ARTPLAYER_ASR_ARTIFACT)
+  asrCode = asr.code
+  const audio = await browserCandidate('artplayer-plugin-audio-track', process.env.ARTPLAYER_AUDIO_ARTIFACT)
+  audioCode = audio.code
   const media = fs.readFileSync(new URL('./media/audio-tone.m4a', import.meta.url))
   const manifest = JSON.parse(fs.readFileSync(new URL('./media/audio-tone.json', import.meta.url)))
   expect(hash(media)).toBe(manifest.sha256)
   inputs = {
-    asr: { input: process.env.ARTPLAYER_ASR_ARTIFACT || 'workspace source', sha256: hash(asrCode) },
-    audioTrack: { input: process.env.ARTPLAYER_AUDIO_ARTIFACT || 'workspace source', sha256: hash(audioCode) },
+    asr: { provenance: asr.provenance, sha256: hash(asrCode) },
+    audioTrack: { provenance: audio.provenance, sha256: hash(audioCode) },
     media: { file: 'test/browser/media/audio-tone.m4a', sha256: hash(media), bytes: media.length },
     recognitionService: false,
-    scope: 'Native media/WebAudio composition; not physical speaker, device, or isolated package acceptance',
+    scope: 'Native media/WebAudio composition; not physical speaker or device acceptance',
   }
 })
 

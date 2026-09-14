@@ -159,3 +159,13 @@ Safari and physical devices remain PKG-ASR-05 acceptance work. CORS restrictions
 and main-video-only capture are explicit integration boundaries, not a claim
 that every media source can be recognized. Do not use the demo's external
 recognizer service as a prerequisite for local audio verification.
+
+## Shared installed browser validation
+
+Six browser files select verified installed ASR bytes through browser-candidate.js. The Audio Track combination independently verifies both installed plugins. Published ASR controls retain their frozen archives; attachments distinguish selected published, installed and source inputs. Tests cover native local PCM, direct/capture routing, CORS, volume/mute and ownership. Deliberately forced Firefox binding rejection remains labeled; no recognition service or physical speaker output is claimed.
+
+Use `yarn test:package --browser`, then `yarn test:browser:installed`. The common
+roster in scripts/browser-validation/scope.ts drives both preparation and required
+inputs. Explicit artifact overrides are rejected when an installed map is present;
+missing or stale inputs fail without source fallback. Source mode retains deliberate
+artifact selection. See ../../refactor/changes/2026-09-15-CI-01-asr-cast-installed.md.

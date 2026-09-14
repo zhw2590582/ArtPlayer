@@ -1,14 +1,14 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
+let provenance
 let candidate
 test.beforeAll(async () => {
-  candidate = process.env.ARTPLAYER_CHROMECAST_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_CHROMECAST_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-chromecast', 'umd')
+  const input = await browserCandidate('artplayer-plugin-chromecast', process.env.ARTPLAYER_CHROMECAST_ARTIFACT)
+  candidate = input.code
+  provenance = input.provenance
 })
 
 async function setup(page, core, testInfo, loaded = true) {
@@ -112,7 +112,7 @@ async function setup(page, core, testInfo, loaded = true) {
     }
   }, loaded)
   await expect.poll(() => page.evaluate(() => window.castPlayers.every(art => art.isReady))).toBe(true)
-  await testInfo.attach('chromecast-controlled-browser-inputs', { contentType: 'application/json', body: JSON.stringify({ core, artifact: process.env.ARTPLAYER_CHROMECAST_ARTIFACT || 'candidate source', sha256: hash(candidate), sdk: 'controlled stub; no receiver, discovery, real SDK or Cast media playback acceptance', native: 'ArtPlayer core, DOM controls, browser click dispatch and local video' }) })
+  await testInfo.attach('chromecast-controlled-browser-inputs', { contentType: 'application/json', body: JSON.stringify({ core, provenance, sha256: hash(candidate), sdk: 'controlled stub; no receiver, discovery, real SDK or Cast media playback acceptance', native: 'ArtPlayer core, DOM controls, browser click dispatch and local video' }) })
   return external
 }
 

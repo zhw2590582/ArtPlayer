@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import assert from 'node:assert/strict'
 
 export type BrowserScope = 'source' | 'installed'
-export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail']
+export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast']
 export const installedTests = [
   'playback.spec.js',
   'lifecycle.spec.js',
@@ -36,6 +36,13 @@ export const installedTests = [
   'auto-thumbnail.spec.js',
   'auto-thumbnail-lifecycle.spec.js',
   'auto-thumbnail-pixels.spec.js',
+  'asr-audio.spec.js',
+  'asr-playback.spec.js',
+  'asr-fallback.spec.js',
+  'asr-cors.spec.js',
+  'asr-capture-cors.spec.js',
+  'asr-audio-track.spec.js',
+  'chromecast-lifecycle.spec.js',
 ]
 
 export function browserInvocation(scope: string, args: string[], environment: NodeJS.ProcessEnv) {

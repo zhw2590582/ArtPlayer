@@ -110,7 +110,7 @@ ARTPLAYER_BROWSER_ARTIFACTS is set; it rejects ARTPLAYER_ADS_ARTIFACT overrides
 and never falls back to source on an invalid installation. Each candidate case
 attaches its installed file/archive identity. Without a map, existing explicit
 artifact or source-build selection remains available. See the repository
-scripts/browser-validation/README.md for the six-package preparation command.
+scripts/browser-validation/README.md for the shared `yarn test:package --browser` command.
 This integration does not complete the separate Ads type, visibility or device gates.
 
 Tests distinguish actual media decoding from injected errors/controlled clocks. Baseline and

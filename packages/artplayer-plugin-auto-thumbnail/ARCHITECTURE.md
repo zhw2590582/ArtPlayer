@@ -232,7 +232,7 @@ require the host's existing getter to have every generated-sheet field.
 
 autoThumbnailCandidate reads verified installed bytes through browser-candidate.js. Native video/JPEG lifecycle and pixel files retain their stub player host and exact presentation-callback/fallback limits. The historical file still loads its frozen old artifacts. Installed mode rejects frozen-workspace and explicit-artifact overrides. These are native extraction checks, not full core integration or first-frame acceptance on every engine.
 
-Use the exact twelve-package preparation command and scope rules in
+Use `yarn test:package --browser` and the shared scope rules in
 ../../scripts/browser-validation/README.md. Missing, stale or changed installation
 inputs fail without source fallback. Attachments distinguish selected installed,
 source and published inputs. Source mode retains existing explicit artifact use.

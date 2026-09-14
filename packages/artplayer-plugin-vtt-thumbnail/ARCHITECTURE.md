@@ -165,7 +165,7 @@ historical evidence and outstanding acceptance work.
 vttThumbnailCandidate uses browser-candidate.js for verified installed bytes. An installed map rejects ARTPLAYER_VTT_THUMBNAIL_BASELINE and ARTPLAYER_VTT_THUMBNAIL_ARTIFACT overrides. Frozen published control inputs and their cue-format differences remain explicit.
 
 The shared `yarn test:browser:installed` roster includes this package after preparing
-the nine-package tarballs with `yarn test:package --include=...`; use the exact command
+the checked tarballs with `yarn test:package --browser`; see the scope rules
 in ../../scripts/browser-validation/README.md. Attachments identify candidate file,
 archive and source hashes. Missing or stale maps fail without source fallback.
 Without a map, source and deliberate artifact checks retain their existing behavior.

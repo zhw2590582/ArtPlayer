@@ -2,7 +2,8 @@
 
 浏览器CI现在分别执行 `yarn test:browser:source` 和
 `yarn test:browser:installed`。前者清除继承的安装map并保留全部spec；后者要求已
-核验的core/chapter/Ambilight/Canvas/Document PiP/Ads/Audio Track/VTT Thumbnail/Multiple Subtitles/HLS Control/DASH Control/Auto Thumbnail安装，执行明确列出的installed子集。两步不
+核验的统一包清单，执行明确列出的 installed 子集；清单维护在
+`scripts/browser-validation/scope.ts`。两步不
 吞失败，普通失败后仍保存另一范围的证据，分别上传browser-source/browser-installed。
 入口与报告规则见[维护说明](../scripts/browser-validation/README.md)。source全量
 耗时/60分钟预算、其余插件安装矩阵与远端运行仍待CI-01/CI-04，不计为已通过。
@@ -165,3 +166,7 @@ common.js/bootstrap.js 由 browser 下的 TS 生成，源代码进入 typecheck:
 和根 lint，产物由 check:site-assets 比较；不再对生成 common.js 应用源码 lint。
 build:ts 生成声明 URL 清单后重建站点浏览器产物，check:editor-types 保持只读。
 新增 test:site-editor 并接入 test:node，新增真实 Monaco 交互测试走现有三引擎矩阵。
+
+安装准备使用 `yarn test:package --browser`，从 browser-validation/scope.ts 的同一
+包清单生成，不再在工作流复制列表。默认 core/chapter 消费者及显式 --include 保留；
+此选项不表示全生态类型、SDK 或发布准入。
