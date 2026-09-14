@@ -112,3 +112,13 @@ Animation after entering real fullscreen. It preserves title/opacity/hit-test
 assertions and uses actual installed artifacts in the installed browser scope.
 `ARTPLAYER_CHAPTER_HOVER_BASELINE=1` restores the old immediate coordinate read for
 diagnosis only. This helper corrects test synchronization, not player behavior.
+
+For CHAPTER-TIMING-01, ARTPLAYER_CHAPTER_TIMING_DIAGNOSTICS=1 adds a bounded native
+property/event/heartbeat recorder to the combination suite. The default suite is
+unchanged. `yarn test:chapter-native` runs a separate page with no ArtPlayer script
+to compare metadata restoration and one direct/deferred native correction.
+The unassisted Windows WebKit control currently fails its position assertion;
+these diagnostic cases are not ordinary CI source tests. Native five-second gaps
+remain even with deferred correction, so no timer workaround is in production.
+See refactor/changes/2026-09-15-PKG-CHAPTER-05-native-timing.md for exact commands,
+retained failures, measured boundaries and the still-open device/release gates.

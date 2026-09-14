@@ -2918,11 +2918,13 @@
         "refactor/changes/2026-09-14-PKG-CHAPTER-05-timing.md",
         "refactor/baselines/chapter-timing-observations.json",
         "refactor/baselines/ci-ads-installed-validation.json",
-        "refactor/changes/2026-09-15-CI-01-ads-installed.md"
+        "refactor/changes/2026-09-15-CI-01-ads-installed.md",
+        "refactor/changes/2026-09-15-PKG-CHAPTER-05-native-timing.md",
+        "refactor/baselines/chapter-native-timing-validation.json"
       ],
       "compatibleResolution": "记录原生事件和绝对/相对时序，进一步区分媒体驱动耗时、夹具和核心源操作；未证明原因前不改核心、不扩大超时或重复到绿灯。",
       "closureCriteria": "确认先前超时的来源并有对应可靠回归；后续单次通过不足以关闭。",
-      "workspaceState": "Six-package installed run: WebKit candidate/core Chapter failed after restart while waiting for non-seeking readyState>=2. A trace evaluation took 9939.104 ms and returned false; initial seeked had already fired, followed later by another seeking/canplay. This is a different observed phase from the previous restart timeout; common root cause remains unconfirmed. Keep both failures and investigate without relaxing timeouts."
+      "workspaceState": "Six-package installed run: WebKit candidate/core Chapter failed after restart while waiting for non-seeking readyState>=2. A trace evaluation took 9939.104 ms and returned false; initial seeked had already fired, followed later by another seeking/canplay. This is a different observed phase from the previous restart timeout; common root cause remains unconfirmed. Keep both failures and investigate without relaxing timeouts. Fixed diagnostic runs with/without trace each retain one WebKit combination failure, while observed native getters/setters remain <=2 ms and page heartbeats show roughly five-second gaps. A no-ArtPlayer native video control restores with one correction yet reproduces a similar five-second gap; deferring correction still shows 5104 ms. Exact cause and relation to each earlier ten-second failure remain unconfirmed; no production timer workaround adopted."
     },
     {
       "id": "DASH-SDK-01",

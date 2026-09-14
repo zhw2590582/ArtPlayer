@@ -1,5 +1,7 @@
+import process from 'node:process'
 import { devices } from '@playwright/test'
 import { hoverProgress } from './chapter-hover.ts'
+import { installChapterTiming, readChapterTiming } from './chapter-timing.js'
 import { expect, test } from './fixtures.js'
 
 async function openChapter(page, core, chapter) {
@@ -35,6 +37,8 @@ async function openChapter(page, core, chapter) {
   })
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
   await expect(page.locator('.art-chapter')).toHaveCount(3)
+  if (process.env.ARTPLAYER_CHAPTER_TIMING_DIAGNOSTICS === '1')
+    await installChapterTiming(page)
 }
 
 async function hoverChapter(page, percentage, text) {
@@ -80,6 +84,8 @@ async function waitForChapterRestart(page, testInfo) {
 }
 
 test.afterEach(async ({ page }, testInfo) => {
+  if (process.env.ARTPLAYER_CHAPTER_TIMING_DIAGNOSTICS === '1')
+    await readChapterTiming(page, testInfo)
   const state = await page.evaluate(() => ({
     at: performance.now(),
     timeOrigin: performance.timeOrigin,

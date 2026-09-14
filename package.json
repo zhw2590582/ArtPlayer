@@ -159,7 +159,8 @@
     "check:rollback-inventory": "node refactor/scripts/rollback-inventory.mjs --check",
     "test:rollback:pages": "node scripts/pages-recovery.mjs",
     "test:rollback:pages:browser": "node test/pages-recovery-browser.mjs",
-    "test:bun-install": "node refactor/scripts/bun-evaluation.mjs"
+    "test:bun-install": "node refactor/scripts/bun-evaluation.mjs",
+    "test:chapter-native": "playwright test --config playwright.chapter-native.config.js"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
