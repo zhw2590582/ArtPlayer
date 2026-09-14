@@ -2,7 +2,7 @@
 
 浏览器CI现在分别执行 `yarn test:browser:source` 和
 `yarn test:browser:installed`。前者清除继承的安装map并保留全部spec；后者要求已
-核验的core/chapter/Ambilight/Canvas/Document PiP安装，执行明确列出的installed子集。两步不
+核验的core/chapter/Ambilight/Canvas/Document PiP/Ads安装，执行明确列出的installed子集。两步不
 吞失败，普通失败后仍保存另一范围的证据，分别上传browser-source/browser-installed。
 入口与报告规则见[维护说明](../scripts/browser-validation/README.md)。source全量
 耗时/60分钟预算、其余插件安装矩阵与远端运行仍待CI-01/CI-04，不计为已通过。

@@ -2,12 +2,13 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let published
 let candidate
 let release
+let provenance
 
 test.beforeAll(async () => {
   release = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/ads-release.json', import.meta.url))).release
@@ -15,9 +16,9 @@ test.beforeAll(async () => {
   const bytes = readMember(await ensureArchive(release), member)
   assert.equal(hash(bytes), release.files[member])
   published = bytes.toString()
-  candidate = process.env.ARTPLAYER_ADS_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_ADS_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-ads', 'umd')
+  const input = await browserCandidate('artplayer-plugin-ads', process.env.ARTPLAYER_ADS_ARTIFACT)
+  candidate = input.code
+  provenance = input.provenance
 })
 
 test.afterEach(async ({ page }, testInfo) => {
@@ -45,7 +46,7 @@ async function openAds(page, core, plugin, option, testInfo, start = true) {
   await page.goto(`/test/player.html?core=${core}`)
   const code = plugin === 'published' ? published : candidate
   await page.addScriptTag({ content: code })
-  await testInfo.attach('ads-inputs', { contentType: 'application/json', body: JSON.stringify({ core, plugin, release: plugin === 'published' ? release : undefined, sha256: hash(code), artifact: plugin === 'candidate' ? process.env.ARTPLAYER_ADS_ARTIFACT || 'workspace source build' : undefined }) })
+  await testInfo.attach('ads-inputs', { contentType: 'application/json', body: JSON.stringify({ core, plugin, release: plugin === 'published' ? release : undefined, sha256: hash(code), artifact: plugin === 'candidate' ? provenance : undefined }) })
   await page.evaluate((option) => {
     window.adsEvents = []
     window.art = new window.Artplayer({

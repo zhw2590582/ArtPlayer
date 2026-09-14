@@ -76,6 +76,7 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     'artplayer-plugin-ambilight': async () => (await import('../refactor/scripts/ambilight-contract.mjs')).verifyAmbilightContract(),
     'artplayer-proxy-canvas': async () => (await import('../refactor/scripts/canvas-contract.mjs')).verifyCanvasContract(),
     'artplayer-plugin-document-pip': async () => (await import('../refactor/scripts/dpip-contract.mjs')).verifyDpipContract(),
+    'artplayer-plugin-ads': async () => (await import('../refactor/scripts/ads-contract.mjs')).verifyAdsContract(),
   }
   assert(new Set(include).size === include.length, 'Duplicate additional package')
   const historicalFiles = new Map()

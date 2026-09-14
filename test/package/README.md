@@ -9,9 +9,9 @@ step through `ARTPLAYER_BROWSER_ARTIFACTS`. See
 browser scope and the remaining package-specific release gates.
 
 Run `yarn test:package` with the pinned Node and Yarn after a frozen install. The
-default consumer scope is core and chapter. For Ambilight/Canvas/Document PiP browser work,
-run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip`.
-These three additional packages have reviewed published contracts and use the same
+default consumer scope is core and chapter. For Ambilight/Canvas/Document PiP/Ads browser work,
+run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads`.
+These four additional packages have reviewed published contracts and use the same
 source snapshot/build/pack/offline-install/frozen-reinstall pipeline. Installed
 files are copied only after archive hash checks. The report explicitly separates
 the core/chapter runtime/type scope from the additional browser package scope;

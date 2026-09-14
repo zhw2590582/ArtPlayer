@@ -8,6 +8,7 @@ import { checkFiles, checkPackages, publishedConsumer } from '../scripts/package
 import { removeConsumer, runtimeConsumer } from '../scripts/package-consumer.mjs'
 import { emitterContracts } from './contracts/emitter.js'
 import { ambilightCandidate } from './helpers/ambilight.js'
+import { browserCandidate } from './helpers/browser-candidate.js'
 import { canvasCandidate } from './helpers/canvas.js'
 import { dpipCandidate } from './helpers/dpip.js'
 
@@ -28,6 +29,8 @@ test('Explicit installed plugin maps never fall back to source or frozen workspa
     await assert.rejects(ambilightCandidate(), { code: 'ENOENT' })
     await assert.rejects(canvasCandidate(), { code: 'ENOENT' })
     await assert.rejects(dpipCandidate(), { code: 'ENOENT' })
+    await assert.rejects(browserCandidate('artplayer-plugin-ads'), { code: 'ENOENT' })
+    await assert.rejects(browserCandidate('artplayer-plugin-ads', 'override.js'), /cannot override artplayer-plugin-ads artifact/)
     process.env.ARTPLAYER_AMBILIGHT_BASELINE = '1'
     process.env.ARTPLAYER_CANVAS_BASELINE = '1'
     process.env.ARTPLAYER_DPIP_BASELINE = '1'

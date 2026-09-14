@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import assert from 'node:assert/strict'
 
 export type BrowserScope = 'source' | 'installed'
-export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip']
+export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads']
 export const installedTests = [
   'playback.spec.js',
   'lifecycle.spec.js',
@@ -15,6 +15,8 @@ export const installedTests = [
   'canvas-lifecycle.spec.js',
   'canvas-subtitles.spec.js',
   'canvas-dpip.spec.js',
+  'ads.spec.js',
+  'ads-ui.spec.js',
 ]
 
 export function browserInvocation(scope: string, args: string[], environment: NodeJS.ProcessEnv) {

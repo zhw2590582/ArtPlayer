@@ -14,11 +14,20 @@ also retains explicit historical and committed-artifact cases; its name does not
 promise that every dependency is rebuilt from current source in every test.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
-`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip`.
-Both launcher and config validate the selected five packages' installed hashes
+`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads`.
+Both launcher and config validate the selected six packages' installed hashes
 and source/build freshness. `scope.ts` lists the currently supported installed
 test files. This is a growing installed subset, not full ecosystem acceptance.
 Source checks remain complete when the installed list grows.
+
+Ads media/lifecycle and UI files use `test/helpers/browser-candidate.js` to select
+the verified installed plugin whenever an artifact map is present. An additional
+ARTPLAYER_ADS_ARTIFACT override is rejected instead of mixing candidates. Missing,
+stale or changed installations fail before source compilation; each candidate
+case attaches installed file, archive and source identities. Explicit published
+Ads/core controls still use their frozen old inputs. Without a map the same files
+keep source or explicitly selected artifact behavior. This does not cover VAST,
+Ads editor types, the separate native-visibility suite or physical devices.
 
 `scope.ts` owns the typed scope, package/test roster, argument policy and report
 paths. The two thin Playwright configs preserve the base engine, retry, timeout
@@ -39,6 +48,14 @@ unsupported WebKit Document PiP capability records. See
 per-engine/file counts and limitations; this is not full ecosystem or remote CI.
 Local `--grep`, file names, workers and project options are supported for diagnosis;
 config/output/report overrides and passing with zero tests are rejected.
+
+The six-package Ads expansion ran 426 cases across 13 files: 425 passed and one
+WebKit candidate Chapter quality-readiness check failed. All 171 Ads cases passed,
+including 108 with verified candidate tarballs; this is not a green full suite.
+The trace includes a 9.94-second media-state evaluation and remains open under
+CHAPTER-TIMING-01. A separate targeted Chromium source-build Ads case passed.
+See `../../refactor/baselines/ci-ads-installed-validation.json`; old reports and
+the actual exit 1 remain intact, without retries or increased timeouts.
 
 CI executes both scopes with `if: !cancelled()` and no continue-on-error. An
 ordinary source failure still permits installed evidence, while the failed step

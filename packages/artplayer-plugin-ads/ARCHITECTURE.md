@@ -104,6 +104,15 @@ regressions; `yarn test:browser test/browser/ads.spec.js` covers real local medi
 cores. `yarn typecheck` checks the strict package configuration. `yarn build artplayer-plugin-ads`
 generates main/legacy/ESM through the repository build. Do not hand-edit dist or copied docs assets.
 
+The CI installed browser subset also runs ads.spec.js and ads-ui.spec.js. Their
+shared browser-candidate helper requires a fresh, hash-verified Ads tarball when
+ARTPLAYER_BROWSER_ARTIFACTS is set; it rejects ARTPLAYER_ADS_ARTIFACT overrides
+and never falls back to source on an invalid installation. Each candidate case
+attaches its installed file/archive identity. Without a map, existing explicit
+artifact or source-build selection remains available. See the repository
+scripts/browser-validation/README.md for the six-package preparation command.
+This integration does not complete the separate Ads type, visibility or device gates.
+
 Tests distinguish actual media decoding from injected errors/controlled clocks. Baseline and
 open release gates live in [Ads validation](../../refactor/ads-validation.md). Public declaration
 reconciliation is recorded in PKG-ADS-04; complete historical distribution and demo validation

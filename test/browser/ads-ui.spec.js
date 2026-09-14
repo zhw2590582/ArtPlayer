@@ -1,20 +1,20 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let candidate
+let provenance
 test.beforeAll(async () => {
-  candidate = process.env.ARTPLAYER_ADS_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_ADS_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-ads', 'umd')
+  const input = await browserCandidate('artplayer-plugin-ads', process.env.ARTPLAYER_ADS_ARTIFACT)
+  candidate = input.code
+  provenance = input.provenance
 })
 
 async function setup(page, core, testInfo, option = {}) {
   await page.goto(`/test/player.html?core=${core}`)
   await page.addScriptTag({ content: candidate })
-  await testInfo.attach('ads-ui-inputs', { contentType: 'application/json', body: JSON.stringify({ core, artifact: process.env.ARTPLAYER_ADS_ARTIFACT || 'workspace source build', sha256: hash(candidate) }) })
+  await testInfo.attach('ads-ui-inputs', { contentType: 'application/json', body: JSON.stringify({ core, artifact: provenance, sha256: hash(candidate) }) })
   await page.evaluate((option) => {
     window.adsEvents = []
     window.art = new window.Artplayer({ container: '.player', url: '/test/pattern.mp4', muted: true, mutex: false, plugins: [window.artplayerPluginAds({ html: 'ad', totalDuration: 60, playDuration: 0, ...option })] })
