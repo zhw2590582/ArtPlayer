@@ -1,0 +1,2700 @@
+{
+  "task": "PKG-AUTO-THUMB-11",
+  "date": "2026-09-14",
+  "baselineCommit": "a8d19ce5ef8af8fe4c48424753742e8d78a77962",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "scope": "Independent cleanup under deliberately throwing event-property setters; native normal-lifecycle regression is separate from controlled faults and first-frame acceptance.",
+  "before": {
+    "artifact": {
+      "path": "refactor/.cache/auto-handler-before.js",
+      "sha256": "a9a1704f39ebd2ef6612cc146acf4ebd0d8eeb73764cb852320a85d31438ab01"
+    },
+    "log": {
+      "path": "refactor/.cache/auto-handler-red-final.log",
+      "sha256": "e723e6966a08fb9b7e94becded05574f55ebd1315f817794db087b551db0aded"
+    },
+    "exitCode": 1,
+    "pass": 19,
+    "fail": 8
+  },
+  "tests": [
+    {
+      "log": {
+        "path": "refactor/.cache/auto-handler-green.log",
+        "sha256": "3036e82c097b5aed9afe4f595af22412d51b9301cb7fe15a19049ee0a553bfb8"
+      },
+      "exitCode": 0,
+      "pass": 27,
+      "fail": 0
+    },
+    {
+      "log": {
+        "path": "refactor/.cache/auto-handler-suite.log",
+        "sha256": "e0a8c5bc18a0364c3d7a2920f38333fd4f215a73b6993129ed9632746df5cec7"
+      },
+      "exitCode": 0,
+      "pass": 182,
+      "fail": 0
+    },
+    {
+      "log": {
+        "path": "refactor/.cache/auto-handler-js.log",
+        "sha256": "89d0e6ca56bdf6a072ffdf6164ccf22c9861239cd2dc8adb06a20a6f1e4096d4"
+      },
+      "exitCode": 0,
+      "pass": 27,
+      "fail": 0
+    },
+    {
+      "log": {
+        "path": "refactor/.cache/auto-handler-legacy.js.log",
+        "sha256": "3d4ef5df38bf89dc5f9d6f5c3887c7242f3201a2fb3b38f3fbaed8b706255290"
+      },
+      "exitCode": 0,
+      "pass": 27,
+      "fail": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/src/frames.ts",
+      "sha256": "b3e6a286cee6b365bf0a70abd2ce48f766d6e591f82fba24573ee3fcefe68021"
+    },
+    {
+      "path": "test/auto-thumbnail-frames.test.js",
+      "sha256": "a7a987e37232a5dac8316a5ffdfc9f73ca6c8efd13a5b3b3f9099b4d43ea7eb8"
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+      "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357"
+    },
+    {
+      "path": "docs/compiled/artplayer-plugin-auto-thumbnail.js",
+      "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357"
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c"
+    },
+    {
+      "path": "docs/compiled/artplayer-plugin-auto-thumbnail.legacy.js",
+      "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c"
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+      "sha256": "7c4ea237f03eaae0cbc06b27782ba03ee8e3639ec78f0de03c11841467f22a17"
+    },
+    {
+      "path": "docs/compiled/artplayer-plugin-auto-thumbnail.mjs",
+      "sha256": "7c4ea237f03eaae0cbc06b27782ba03ee8e3639ec78f0de03c11841467f22a17"
+    }
+  ],
+  "browser": {
+    "main": {
+      "report": {
+        "path": "refactor/.cache/auto-handler-main-browser/report.json",
+        "sha256": "8708e65a0215d9264cfd1e54dfbb8fa8462af0dd57da4d3c39c007a12b233649"
+      },
+      "stats": {
+        "startTime": "2026-09-14T06:19:24.911Z",
+        "duration": 13697.495,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "destroy",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "restart",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 4226
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-destroy",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-restart",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": true,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 4226
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "encoding-timeout",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail encoding timed out"
+              ]
+            ],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "destroy",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "restart",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 6752
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-destroy",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-restart",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": true,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 6752
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "encoding-timeout",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail encoding timed out"
+              ]
+            ],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "destroy",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "restart",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 4215
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-destroy",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-restart",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": true,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "encoding-timeout",
+            "useDefault": false,
+            "sha256": "4c8bdd75f49ad0514167e1b67c6941236c27837d09dd1d5d69d0345d69fa0357",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail encoding timed out"
+              ]
+            ],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        }
+      ]
+    },
+    "legacy": {
+      "report": {
+        "path": "refactor/.cache/auto-handler-legacy-browser/report.json",
+        "sha256": "6daaab48303cf3c51be5a39ceb0d816693155134037a908e14e628b47769b3fd"
+      },
+      "stats": {
+        "startTime": "2026-09-14T06:20:19.573Z",
+        "duration": 12821.398,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "destroy",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "restart",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 4226
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-destroy",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-restart",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": true,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 4226
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "native": {
+            "scenario": "encoding-timeout",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 2635
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail encoding timed out"
+              ]
+            ],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "destroy",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "restart",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 6752
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-destroy",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-restart",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 1,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": true,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 6752
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "browser": "155.0",
+          "platform": "win32",
+          "native": {
+            "scenario": "encoding-timeout",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 4076
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail encoding timed out"
+              ]
+            ],
+            "heldFrames": 0,
+            "frameSupport": true,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "destroy",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "restart",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-destroy owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-destroy",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native frame-restart owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "frame-restart",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native alias-complete owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "complete",
+            "useDefault": true,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 1,
+              "updates": 2
+            },
+            "after": {
+              "urls": 1,
+              "updates": 2
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": {
+              "width": 800,
+              "height": 45
+            },
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 2
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              },
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        },
+        {
+          "title": "Auto-thumbnail candidate native encoding-timeout owns decoder and encoded URLs",
+          "project": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "browser": "26.6",
+          "platform": "win32",
+          "native": {
+            "scenario": "encoding-timeout",
+            "useDefault": false,
+            "sha256": "389239c482d89639c70c796f2220a552ed8b1a87062fc5950cb03dc14c2b525c",
+            "scope": "Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.",
+            "before": {
+              "urls": 0,
+              "updates": 0
+            },
+            "after": {
+              "urls": 0,
+              "updates": 0
+            },
+            "video": {
+              "connected": false,
+              "src": null,
+              "readyState": 0,
+              "paused": true,
+              "handlers": [
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "canvasDimensions": [
+              [
+                0,
+                0
+              ]
+            ],
+            "publishedImage": null,
+            "final": {
+              "urls": 0,
+              "listeners": 0,
+              "updates": 0
+            },
+            "blobs": [
+              {
+                "type": "image/jpeg",
+                "bytes": 983
+              }
+            ],
+            "pendingDeadlines": 0,
+            "warnings": [
+              [
+                "ArtPlayer auto-thumbnail failed:",
+                "Error: Auto-thumbnail encoding timed out"
+              ]
+            ],
+            "heldFrames": 0,
+            "frameSupport": false,
+            "result": {
+              "name": "artplayerPluginAutoThumbnail"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "checks": {
+    "packageStrictTypes": "pass",
+    "targetedLint": "pass",
+    "strictToolchain": "pass",
+    "coreDeclarations": {
+      "files": 37,
+      "changed": 0
+    },
+    "build": {
+      "path": "refactor/.cache/auto-handler-build.log",
+      "sha256": "6ace060991a131daf66c3c13fc7a8a5c7581f20577b02ac74dc86c134a5be201"
+    }
+  },
+  "remaining": [
+    "AUTO-THUMB-PIXEL-01",
+    "AUTO-THUMB-LIFE-01",
+    "PKG-AUTO-THUMB-03",
+    "PKG-AUTO-THUMB-04",
+    "PKG-AUTO-THUMB-05",
+    "PKG-AUTO-THUMB-06"
+  ]
+}

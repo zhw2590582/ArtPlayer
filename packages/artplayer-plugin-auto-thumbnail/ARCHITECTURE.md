@@ -52,6 +52,10 @@ for video processing.
   presentation before drawing. Callback identities are invalidated on retry and
   replacement; late/duplicate delivery cannot complete a newer sample. One job
   cleanup handles every frame without accumulating per-frame cleanup closures.
+  It invalidates the pending sample before independently clearing each handler,
+  deadline and frame callback. A throwing event-property setter cannot prevent
+  the remaining releases. The first cleanup error reaches the existing warning
+  path; even a handler that cannot be removed becomes inert after cancellation.
 - `src/types.ts` defines internal configuration, sheet data, the minimal host and
   guarded extraction-job callbacks. `guard` retains argument/result types and the
   inactive undefined result. It shares the opt-in `runtime-api.d.ts` option type;
@@ -206,14 +210,16 @@ red, black, blue and yellow sections. Its command and fingerprint are in
 directory with `ARTPLAYER_FFMPEG` and `node scripts/generate-auto-thumbnail-fixture.mjs
 <new-directory>`; never silently replace the committed fixture.
 
-Task03's internal-type checkpoint has converted the six runtime modules to strict
-TypeScript. Numeric annotations describe the nominal options; no runtime casts or
+The current implementation has eight strict TypeScript modules, including the
+frame reader and encoder split after task03's initial checkpoint. Numeric
+annotations describe the nominal options; no runtime casts or
 normalization were added, so historical coercible JS inputs retain the same
 validation/arithmetic and raw values. Missing options retain the existing behavior.
-Task04 still resolves public declarations, implementation-to-consumer contracts and
-historical CommonJS differences. Task05 verifies old/final cores and actual
+Tasks08/09 supplied the compatible public declarations, implementation assignment
+fixtures and historical CommonJS alias. Task04 still requires the completed task03
+implementation and final migration acceptance. Task05 verifies old/final cores and actual
 devices; task06 covers installed package entries and the real demo/editor. The
-types and package version are unchanged at this checkpoint. Use
+package version remains unchanged. Use
 `refactor/baselines/auto-thumbnail-contract.md` and `auto-thumbnail-failures.md` as
 the historical evidence map; do not regenerate those baselines from this source.
 

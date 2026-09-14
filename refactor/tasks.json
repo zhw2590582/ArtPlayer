@@ -1820,7 +1820,8 @@
         "CORE-07",
         "PKG-AUTO-THUMB-08",
         "PKG-AUTO-THUMB-09",
-        "PKG-AUTO-THUMB-10"
+        "PKG-AUTO-THUMB-10",
+        "PKG-AUTO-THUMB-11"
       ],
       "status": "todo",
       "risk": "H",
@@ -5221,6 +5222,27 @@
       "evidence": [
         "changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md",
         "baselines/multiple-subtitles-ass-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-11",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "保证抽帧事件属性清理异常不截断其他资源释放",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "PKG-AUTO-THUMB-07",
+        "PKG-AUTO-THUMB-10"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "独立清除事件属性、抽帧时限和原生帧回调；首个异常保留，过期回调失效，替换任务可继续",
+      "acceptance": "八个故障注入用例旧红新绿，实际main/legacy抽帧与三浏览器生命周期回归通过；文档和构建同步，首帧及整体资源验收不冒充完成",
+      "evidence": [
+        "changes/2026-09-14-PKG-AUTO-THUMB-11-handler-cleanup.md",
+        "baselines/auto-thumbnail-handler-validation.json"
       ]
     }
   ]

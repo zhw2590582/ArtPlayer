@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 251 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 252 项，范围 22 个包及工作区/示例。
 
-状态：todo 55 / doing 17 / blocked 0 / done 179 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 55 / doing 17 / blocked 0 / done 180 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -19,7 +19,7 @@
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 |
 | artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
-| artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10 |
+| artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11 |
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
 | artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 |
@@ -176,13 +176,14 @@
 | PKG-AUTO-THUMB-01 | artplayer-plugin-auto-thumbnail<br>核对包契约与历史用法 | BASE-05 | url/width/number/scale、异步工厂和渐进缩略图更新 | 源码/声明/README/demo/发布包差异已登记；公开形状和版本范围冻结 | H | done |
 | PKG-AUTO-THUMB-02 | artplayer-plugin-auto-thumbnail<br>建立特有行为与错误测试 | PKG-AUTO-THUMB-01, ENG-03, ENG-05 | 抽帧边界、短视频、失败、连续来源和销毁中的抽帧 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-AUTO-THUMB-03 | artplayer-plugin-auto-thumbnail<br>整理内部职责与资源 | PKG-AUTO-THUMB-02, CORE-09, CORE-19, PKG-AUTO-THUMB-07 | 隐藏 video、seek 队列、canvas 编码与 Blob URL 清理 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | doing |
-| PKG-AUTO-THUMB-04 | artplayer-plugin-auto-thumbnail<br>迁移自有源码和公开类型 | PKG-AUTO-THUMB-03, ENG-04, ENG-06, CORE-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10 | 抽帧结果和真实异步插件返回类型兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
+| PKG-AUTO-THUMB-04 | artplayer-plugin-auto-thumbnail<br>迁移自有源码和公开类型 | PKG-AUTO-THUMB-03, ENG-04, ENG-06, CORE-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11 | 抽帧结果和真实异步插件返回类型兼容 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | todo |
 | PKG-AUTO-THUMB-05 | artplayer-plugin-auto-thumbnail<br>验证新旧核心和组合 | PKG-AUTO-THUMB-04, CORE-22 | 旧核心/候选核心预览、多次加载无过期缩略图覆盖 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-AUTO-THUMB-06 | artplayer-plugin-auto-thumbnail<br>验证分发并同步文档 | PKG-AUTO-THUMB-05, ENG-07 | auto.thumbnail.js、三种产物和内存/URL 证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 | PKG-AUTO-THUMB-07 | artplayer-plugin-auto-thumbnail<br>终止抽帧时清空私有画布像素尺寸 | PKG-AUTO-THUMB-02, CORE-09, CORE-19 | 将私有 canvas 尺寸归入 job 清理；完成、取消、失败及分配重入均有回归，保留已编码 JPEG | 旧红新绿证明保留回调时画布归零，单项清理失败不阻断其他资源；原生取消和完成后 JPEG 仍可解码，原 API/时间公式/类型不变 | M | done |
 | PKG-AUTO-THUMB-08 | artplayer-plugin-auto-thumbnail<br>保留旧声明并提供准确异步类型入口 | PKG-AUTO-THUMB-02, ENG-04, ENG-06, CORE-07 | 保留实际 npm 1.1.0 根声明；新增同实现 /runtime 类型、编辑器声明及隔离安装消费者 | 原 Parameters/ReturnType/替代函数不变；准确 Promise 类型正反例、CJS/ESM 条件入口和声明解析通过；不把像素与设备缺口计为通过 | M | done |
 | PKG-AUTO-THUMB-09 | artplayer-plugin-auto-thumbnail<br>兼容旧 CommonJS default 与直接工厂调用 | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-08 | 同一 callable 上的 default 自别名，保留最新根声明并补准确 runtime 别名类型；旧/新实际包入口证据 | 旧红新绿、直接/default/ESM/legacy/global 调用一致；旧根类型提取不变，公开准确类型与实际别名匹配；不关闭抽帧像素和设备缺口 | M | done |
 | PKG-AUTO-THUMB-10 | artplayer-plugin-auto-thumbnail<br>为渐进 JPEG 编码建立取消时限与独立资源归属 | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-07 | 拆分私有 canvas 编码模块，一次一帧的30秒编码时限，完成/失败/切源/销毁取消；迟到和重复回调无副作用 | 受控回调未返回的旧红新绿、正常JPEG和前一预览保持、同步重入/清理失败有回归；真实三浏览器编码/取消通过，公开时间公式与入口不变，首帧风险独立保留 | M | done |
+| PKG-AUTO-THUMB-11 | artplayer-plugin-auto-thumbnail<br>保证抽帧事件属性清理异常不截断其他资源释放 | PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-10 | 独立清除事件属性、抽帧时限和原生帧回调；首个异常保留，过期回调失效，替换任务可继续 | 八个故障注入用例旧红新绿，实际main/legacy抽帧与三浏览器生命周期回归通过；文档和构建同步，首帧及整体资源验收不冒充完成 | M | done |
 
 ## 5 包迁移：artplayer-plugin-vtt-thumbnail
 
@@ -653,3 +654,4 @@
 - PKG-MULTI-SUB-09: [记录](changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md) [记录](baselines/multiple-subtitles-switch-validation.json)
 - PKG-MULTI-SUB-10: [记录](changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md) [记录](baselines/multiple-subtitles-legacy-validation.json)
 - PKG-MULTI-SUB-11: [记录](changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md) [记录](baselines/multiple-subtitles-ass-validation.json)
+- PKG-AUTO-THUMB-11: [记录](changes/2026-09-14-PKG-AUTO-THUMB-11-handler-cleanup.md) [记录](baselines/auto-thumbnail-handler-validation.json)

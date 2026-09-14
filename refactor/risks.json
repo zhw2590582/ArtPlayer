@@ -4124,7 +4124,8 @@
       "owners": [
         "PKG-AUTO-THUMB-02",
         "PKG-AUTO-THUMB-03",
-        "PKG-AUTO-THUMB-05"
+        "PKG-AUTO-THUMB-05",
+        "PKG-AUTO-THUMB-11"
       ],
       "evidence": [
         "refactor/baselines/auto-thumbnail-release.json",
@@ -4135,11 +4136,14 @@
         "refactor/baselines/auto-thumbnail-failures-validation.json",
         "test/auto-thumbnail-lifecycle.test.js",
         "test/browser/auto-thumbnail-lifecycle.spec.js",
-        "refactor/baselines/auto-thumbnail-lifecycle-checkpoint.json"
+        "refactor/baselines/auto-thumbnail-lifecycle-checkpoint.json",
+        "refactor/changes/2026-09-14-PKG-AUTO-THUMB-11-handler-cleanup.md",
+        "refactor/baselines/auto-thumbnail-handler-validation.json",
+        "test/auto-thumbnail-frames.test.js"
       ],
       "compatibleResolution": "Cancel obsolete work and release owned resources while retaining live options and progressive usable sheet updates.",
       "closureCriteria": "Delayed callbacks, repeated metadata, switching, destroy, multiple instances and failure cleanup are reproduced then pass source/artifacts and native browser checks.",
-      "workspaceState": "Task03 ownership checkpoint: 22 candidate lifecycle regressions fail on frozen source and pass on source/main/legacy; two further explicit-URL short-circuit and duration-snapshot cases preserve historical successes. Final candidate runs have 24 passing cases each; 27 native lifecycle cases verify destroy/restart/completion and URL/decoder cleanup. New index/options/session/extraction modules fix serial encoding, stale callbacks, failure cleanup and selected reentry paths. Pixel/frame correctness, resource budgets and additional boundaries remain for task03; old/final core acceptance remains task05. Risk stays open rather than claiming complete extraction repair."
+      "workspaceState": "Task03 ownership checkpoint: 22 candidate lifecycle regressions fail on frozen source and pass on source/main/legacy; two further explicit-URL short-circuit and duration-snapshot cases preserve historical successes. Final candidate runs have 24 passing cases each; 27 native lifecycle cases verify destroy/restart/completion and URL/decoder cleanup. New index/options/session/extraction modules fix serial encoding, stale callbacks, failure cleanup and selected reentry paths. Pixel/frame correctness, resource budgets and additional boundaries remain for task03; old/final core acceptance remains task05. Risk stays open rather than claiming complete extraction repair. Task11 fixes throwing event-property cleanup skipping deadline/frame cancellation: eight controlled regressions fail on pre-change main and pass source/main/legacy; each actual artifact also passes21 native lifecycle checks. This does not prove spontaneous native setter failure or close remaining resource/pixel/combination gates."
     },
     {
       "id": "AUTO-THUMB-ENCODE-01",

@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-11 抽帧清理异常修复完成
+
+事件属性清除现在与定时器、原生帧回调取消分别执行，单个异常不截断剩余清理。
+八个受控故障用例在旧main全部失败，新源码/main/legacy各27项抽帧回归通过；
+完整插件182项通过，实际main/legacy各21项三浏览器生命周期通过。异常属性由测试
+主动注入，不声称浏览器原生setter自行失败；原生验证使用真实解码和桩宿主。
+严格TS、定向lint、固定工具链、37声明零漂移通过，三格式和docs副本已重建。
+见[变更](changes/2026-09-14-PKG-AUTO-THUMB-11-handler-cleanup.md)与[证据](baselines/auto-thumbnail-handler-validation.json)。252项：180 done、17 doing、55 todo。
+任务03仍doing，04/05/06仍todo，首帧像素与完整资源验收风险保持open。下一步继续
+Auto Thumbnail资源边界与剩余插件工作；首帧需要另一原生后端/设备证据，不能靠延时放宽。
+
 ## PKG-MULTI-SUB-05 切源时序诊断检查点（仍未完成）
 
 新增可选原生属性/事件跟踪和独立恢复事件等待对照。WebKit串行3项、重复9项及

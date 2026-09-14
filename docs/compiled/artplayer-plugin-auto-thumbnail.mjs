@@ -165,17 +165,19 @@ function createFrameReader(job, video) {
   function clear() {
     const previous = pending;
     pending = void 0;
-    video.onloadeddata = null;
-    video.onseeked = null;
-    if (!previous)
-      return;
     const result = cleanupAll([
       () => {
-        if (previous.timer !== null)
+        video.onloadeddata = null;
+      },
+      () => {
+        video.onseeked = null;
+      },
+      () => {
+        if (previous && previous.timer !== null)
           clearTimeout(previous.timer);
       },
       () => {
-        if (previous.frame !== null)
+        if (previous && previous.frame !== null)
           video.cancelVideoFrameCallback(previous.frame);
       }
     ]);

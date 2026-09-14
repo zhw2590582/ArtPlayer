@@ -41,6 +41,60 @@ function closed(env) {
   assert.equal(env.video.src, undefined)
 }
 
+for (const property of ['onloadeddata', 'onseeked']) {
+  for (const scenario of ['destroy', 'restart', 'loadeddata-wait', 'finish']) {
+    test(`Auto-thumbnail frames release independent resources when ${property} cleanup throws during ${scenario}`, async () => {
+      const env = await setup({ readyState: scenario === 'loadeddata-wait' ? 1 : 4 })
+      env.metadata()
+      const handler = env.video[property]
+      const lateSeek = env.video.onseeked
+      const lateLoaded = env.video.onloadeddata
+      const lateFrame = env.frames.get(0)
+      const lateTimer = [...env.timers.values()][0].callback
+      const failure = new Error(`${property} cleanup failed`)
+      Object.defineProperty(env.video, property, {
+        configurable: true,
+        get: () => handler,
+        set(value) {
+          assert.equal(value, null)
+          throw failure
+        },
+      })
+      if (scenario === 'finish') {
+        env.present()
+        env.seeked()
+      }
+      else {
+        env.art.emit(scenario === 'restart' ? 'restart' : 'destroy')
+      }
+      assert.equal(env.frames.size, 0, 'Native frame handles are canceled despite a handler setter failure')
+      assert.equal(env.timers.size, 0, 'The sample deadline is canceled despite a handler setter failure')
+      assert.equal(env.attached.size, 0)
+      assert.equal(env.video.src, undefined)
+      assert.deepEqual(env.canvases.map(canvas => [canvas.width, canvas.height]), [[0, 0]])
+      assert.equal(env.video[property === 'onloadeddata' ? 'onseeked' : 'onloadeddata'], null)
+      assert.ok(env.warnings.some(warning => warning[1] === failure))
+      lateLoaded?.()
+      lateSeek?.()
+      lateFrame?.()
+      lateTimer()
+      assert.equal(env.blobs.length, 0)
+      assert.equal(env.updates.length, 0)
+      assert.equal(env.timers.size, 0)
+      if (scenario === 'restart') {
+        env.art.emit('video:loadedmetadata')
+        env.metadata(env.videos[1])
+        env.seeked(env.videos[1])
+        env.finish()
+        assert.equal(env.updates.length, 1, 'A replacement job still publishes after predecessor cleanup fails')
+      }
+      env.art.emit('destroy')
+      assert.equal(env.urls.size, 0)
+      assert.equal(env.attached.size, 0)
+    })
+  }
+}
+
 test('Auto-thumbnail frames wait for loadeddata before starting presentation-aware seeking', async () => {
   const env = await setup({ readyState: 1 })
   env.metadata()

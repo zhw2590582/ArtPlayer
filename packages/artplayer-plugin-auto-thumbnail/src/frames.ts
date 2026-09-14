@@ -19,17 +19,15 @@ export default function createFrameReader(job: ExtractionJob, video: HTMLVideoEl
   function clear() {
     const previous = pending
     pending = undefined
-    video.onloadeddata = null
-    video.onseeked = null
-    if (!previous)
-      return
     const result = cleanupAll([
+      () => { video.onloadeddata = null },
+      () => { video.onseeked = null },
       () => {
-        if (previous.timer !== null)
+        if (previous && previous.timer !== null)
           clearTimeout(previous.timer)
       },
       () => {
-        if (previous.frame !== null)
+        if (previous && previous.frame !== null)
           video.cancelVideoFrameCallback(previous.frame)
       },
     ])
