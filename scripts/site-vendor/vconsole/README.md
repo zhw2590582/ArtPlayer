@@ -50,8 +50,49 @@ test to reproduce failures; normal CI serves the candidate and expects no errors
 The scroller case holds zero-delay timers to force the late continuation while
 using native rendering, ResizeObserver and RAF; this is explicit fault injection.
 
-This patch does not claim complete upstream lifecycle coverage, device coverage,
-or permission clearance. The upstream LICENSE is distributed verbatim, but its
-missing MIT body and bundled dependency notices remain open in VENDOR-07/SITE-07.
-Do not replace or upgrade the bundle to resolve these issues without separately
-checking entrypoints, logging, CSS and the full dependency notices.
+This patch does not claim complete upstream lifecycle or device coverage. The
+notice set now preserves the original LICENSE, supplies its missing MIT body in a
+separate file, and includes the complete licenses of the verified bundled runtime
+components. Do not upgrade the bundle without reviewing entrypoints, logging,
+CSS and the new dependency notices.
+
+## Historical bundle reconstruction and notices
+
+`refactor/baselines/vconsole-notices-provenance.json` pins 81 original source/config
+files from the commit above, the upstream lockfile, nine notice-bearing component
+archives and the observed runtime resource paths. The original npm bundle was
+reproduced byte for byte using Node 24.21.0 and the frozen upstream npm lockfile.
+No upstream install scripts ran. This is an isolated historical reconstruction;
+ArtPlayer remains on Yarn Classic with its root yarn.lock.
+
+Prepare a checkout of the exact upstream commit inside `refactor/.cache/`, then
+run `npm ci --ignore-scripts --no-audit --no-fund` there. The 81 source/config files
+can also be fetched from fixed raw GitHub URLs using the recorded Git blob IDs
+and SHA-256 values when the source archive host is unavailable. Return to the
+ArtPlayer root and run:
+
+```powershell
+yarn verify:vconsole-source refactor/.cache/<upstream-checkout>
+```
+
+The helper checks every pinned input and dependency version before loading the
+upstream build configuration. It builds only in the ignored checkout, requires
+the exact npm bundle SHA-256, rejects hidden/truncated module statistics, and
+compares all dependency resources and webpack bootstrap modules to the reviewed
+notice set. It never copies the rebuilt bundle over ArtPlayer's patched asset.
+Upstream size warnings and its old Browserslist dataset remain visible; do not
+update the lockfile or dataset to silence them during historical reconstruction.
+
+The eight runtime packages are @babel/runtime, copy-text-to-clipboard, core-js,
+css-loader, mutation-observer, regenerator-runtime, style-loader and svelte.
+Only actual resource paths count: less-loader's appearance in a loader chain does
+not make it a runtime dependency. Webpack's four generated bootstrap modules also
+have a license entry. Mutation-observer's two BSD notices are both retained.
+Other packages' MIT licenses retain their own copyright holders.
+
+The published vConsole header explicitly links the MIT license. The upstream
+LICENSE omits its promised body, so ArtPlayer supplies `MIT-LICENSE` with that
+body and the original Tencent copyright, without pretending it came verbatim
+from the archive. `ATTRIBUTION.md` identifies this assembly, original sources and
+the local lifecycle modifications. These files and all dependency licenses are
+generated into `docs/licenses/vconsole/`; never edit the outputs by hand.

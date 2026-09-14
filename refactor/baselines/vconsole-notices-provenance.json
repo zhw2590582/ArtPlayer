@@ -1,0 +1,795 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "recordedAt": "2026-09-14T21:15:14.896Z",
+  "upstream": {
+    "name": "vconsole",
+    "version": "3.15.0",
+    "commit": "05d80398bae35e793774f74e3c052b4e530e293a",
+    "tarball": "https://registry.npmjs.org/vconsole/-/vconsole-3.15.0.tgz",
+    "integrity": "sha512-8hq7wabPcRucSWQyN7/1tthMawP9JPvM95zgtMHpPknMMMCKj+abpoK7P7oKK4B0qw58C24Mdvo9+raUdpHyVQ==",
+    "archiveSha256": "7ebe6c7a51309a4c1627285c1e26326402874192aea54e7933bbc8b321c97538",
+    "bundleSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+  },
+  "reconstruction": {
+    "node": "24.21.0",
+    "npm": "11.19.0",
+    "install": "npm ci --ignore-scripts --no-audit --no-fund",
+    "scope": "Isolated historical upstream reconstruction in ignored cache; ArtPlayer still uses Yarn 1.22.22 and only root yarn.lock.",
+    "installedPackages": 520,
+    "installExitCode": 0,
+    "buildExitCode": 0,
+    "exactByteMatch": true,
+    "bytes": 282381,
+    "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4",
+    "statsSha256": "5e29d316a6d2158ef24b775270f67b10150fda510649eae27e3017163fca705c",
+    "moduleRecords": 326,
+    "filteredModules": 0,
+    "warnings": [
+      "Unchanged upstream webpack asset/entry size and performance recommendations"
+    ],
+    "sources": [
+      {
+        "path": "babel.config.json",
+        "gitBlob": "af8c106a3b8ad620b930e848abce303624b78ba6",
+        "sha256": "776ffbdb27a4f457141d0a6cdae22796a4db0d1d7a6312648f1e59b95f5c55bd"
+      },
+      {
+        "path": "build/build.typings.js",
+        "gitBlob": "69861e2939bcd266f456b8592f6a0c8bc6be6a06",
+        "sha256": "bb165df362c3fa7bb36a3e9e393aa93ca8c80edf7cf6b94c7a25a77e1aaeedf4"
+      },
+      {
+        "path": "build/dummy.js",
+        "gitBlob": "b1c6ea436a540020ff61f01dea449d5b39367b27",
+        "sha256": "fc00d19bc94e10c24f07bd9be1c2bb24d4978856963c5a68745338ecbf131dfc"
+      },
+      {
+        "path": "build/vendor.d.ts",
+        "gitBlob": "9b948616dcf071569c32893d41b968aa7e36d796",
+        "sha256": "5fccc966a1d5a9116877eb87b130c402157b9be07849fa5da223fda71a836d3f"
+      },
+      {
+        "path": "build/vendor.json",
+        "gitBlob": "96afe665617a58b08dae261ee3684e52039f5d1c",
+        "sha256": "7e8c28ec4d8c3338fe1899d5cb23d08c8d335f7aec4b405a975b560035dd9257"
+      },
+      {
+        "path": "package-lock.json",
+        "gitBlob": "aa240b8251ee8a3bc3517c00fd4dc208788c480a",
+        "sha256": "ef863ffe898bc7e66b40c4bc9be4d6643e95b355df5adb750144631cf874f8e9"
+      },
+      {
+        "path": "package.json",
+        "gitBlob": "ecf0395bbd1b1316d594408a07934c5bbf286508",
+        "sha256": "14db331c45b0c79b5f94611a5f140e6ebd64a1cbe5d1f63b38559d625563ee8e"
+      },
+      {
+        "path": "src/component/icon/icon.less",
+        "gitBlob": "015d8576a12d9795b19858d80549c6c603135c9d",
+        "sha256": "b40f5a687fe4a02e01ee524a925e6444d8394833f8d5e237b06d67904adac3cb"
+      },
+      {
+        "path": "src/component/icon/icon.svelte",
+        "gitBlob": "5caaa3775561b97c1497c48f620fb14862d68f98",
+        "sha256": "98240e230822f9b4d714b384a22172f60d98f70255b489e9c2a018263ba1b814"
+      },
+      {
+        "path": "src/component/icon/iconCopy.svelte",
+        "gitBlob": "9afc17019da92a301becc214aa9b5c7f2dd8d53f",
+        "sha256": "709f0e0e110e114b0f8107810018025ff4a85be6610dc7c2687b7067dc17883f"
+      },
+      {
+        "path": "src/component/recycleScroller/recycleItem.svelte",
+        "gitBlob": "5dd718bb38e0defd4d54fb00f4e4db096e5e3c3d",
+        "sha256": "6763b0685edc06adc972c5f58ffb19c4cf5be88bcc810cd699aab94c3f5fcf8b"
+      },
+      {
+        "path": "src/component/recycleScroller/recycleManager.ts",
+        "gitBlob": "368c0faf0c94bcf678a8171601342672695c566b",
+        "sha256": "b49e06d99a70cacf199a10ff0532bb2fcdf9e366b511a8ab1dc6bf97b6fd21d0"
+      },
+      {
+        "path": "src/component/recycleScroller/recycleScroller.less",
+        "gitBlob": "2c9a73c469f0e6dad82c1df72ee6cc2180fd447e",
+        "sha256": "37cebc600e6a731bb79d7c99fc851518f5552c38101f5e87ff53e6fb054b6d25"
+      },
+      {
+        "path": "src/component/recycleScroller/recycleScroller.svelte",
+        "gitBlob": "fe30208e77c19129f66eaf43b29f2a5e82912ad4",
+        "sha256": "6ba45a377111d6a4cefe5dba6c29b9acf7c2170d7b6b241eb6ac61ddb19e2247"
+      },
+      {
+        "path": "src/component/recycleScroller/scroll/friction.ts",
+        "gitBlob": "6f3c15cf4803334fbf204d39f36d8c63411a6660",
+        "sha256": "b8bde1271cdcfc60d91bf7b99aa99d2f81a17c05d78d2abd6d5b18f0a6f1f912"
+      },
+      {
+        "path": "src/component/recycleScroller/scroll/linear.ts",
+        "gitBlob": "4462a6c6f0adc88720f1a7a17fe6532a8e129ec4",
+        "sha256": "cc8b4fbe9f7a99fe89090e365d44b5b554a01d69136dabe6e4db522b2b8ea77b"
+      },
+      {
+        "path": "src/component/recycleScroller/scroll/scroll.ts",
+        "gitBlob": "98b2dd76ce480d85621360f3b2e27591cc4a7210",
+        "sha256": "80e21fd70b5bb3d5f9e8eaacb6ab6dee317187c0b578d1aa4359743d5da778b0"
+      },
+      {
+        "path": "src/component/recycleScroller/scroll/scrollHandler.ts",
+        "gitBlob": "5fb5b7ff0a79204a29594adceb9c847977aebdea",
+        "sha256": "cd34ef533ba76f1b836d81e0e8282614ee300868f7b2de7e331fe03e21e5be91"
+      },
+      {
+        "path": "src/component/recycleScroller/scroll/spring.ts",
+        "gitBlob": "603a0f137ebf5c333361e65a8053c25a71acf4a8",
+        "sha256": "5b52c98456939cfd2f99cede6132454615bfe4f278e9dca04b86afb01cb4c8e1"
+      },
+      {
+        "path": "src/component/recycleScroller/scroll/touchTracker.ts",
+        "gitBlob": "3e2cef37f5bce69e9755eb60125c950d96d63faf",
+        "sha256": "4021f048fbd14273b98620251f3c10ac73f9be6ac7680bf0e641a3b80043d19c"
+      },
+      {
+        "path": "src/core/core.less",
+        "gitBlob": "1169d85ff3489dbd56fd38dda7dfac4e182af206",
+        "sha256": "9c5839c0b5a3c01011c2783156ddb0c9e02d3cdd4c67610c196f12800718d525"
+      },
+      {
+        "path": "src/core/core.model.ts",
+        "gitBlob": "3297d71a01267ff346a76631143545c534496f15",
+        "sha256": "85a7ebc2536c76ce1fea458fe216b3ca9400f43d1d587731a314a1fe7ea774ba"
+      },
+      {
+        "path": "src/core/core.svelte",
+        "gitBlob": "3729b16065f7bf95ee607a0174d04b6dba7ea074",
+        "sha256": "113eb830e5ce13d5272e65e1e65f4b9360fb38f8959781b05533bbd499754559"
+      },
+      {
+        "path": "src/core/core.ts",
+        "gitBlob": "843db2bf9f93219aa105398e4e6a05933127556b",
+        "sha256": "0da9969d4b76b97d72081780fcaeee9201507eeea63c6680074db132ac1ba239"
+      },
+      {
+        "path": "src/core/options.interface.ts",
+        "gitBlob": "7c63c84255b879aaecaec0ef4edeb6923a68f04f",
+        "sha256": "3bbdf7a69e2d394a324a026f0c211db2d0cf3c6c3b4ce12fda72898042163b96"
+      },
+      {
+        "path": "src/core/style/tabbar.less",
+        "gitBlob": "b0f6838edcc6ca66b3f5548843a8e45bcd160de1",
+        "sha256": "1f244c27b1c3da5c4eb02cacd3a0905a879933eec22af80ff5de1e102f623f1f"
+      },
+      {
+        "path": "src/core/style/theme.less",
+        "gitBlob": "5b1b734a7d044bd0a57385ae4a33f0d092609c4e",
+        "sha256": "183b7fc613778e9f9ac0c6da6ab788104a05d0a4400a006963d5f0bd91d8cd8d"
+      },
+      {
+        "path": "src/core/style/toolbar.less",
+        "gitBlob": "bac064ed610cb88b59342243401384308dcaf578",
+        "sha256": "e0d9f2f4c9b0a639420c8b6aad7da88a7136bc148aa01d977df66116b28e50b7"
+      },
+      {
+        "path": "src/core/style/topbar.less",
+        "gitBlob": "36739a522a7caa9dbc6a8894c99d305f5211e0a4",
+        "sha256": "df62abcf8d38eaddb1f2b659069a77324208a188e0b01def05fe7115d0bbbac9"
+      },
+      {
+        "path": "src/core/style/view.less",
+        "gitBlob": "539cba61d049b700406cfb217ac2f9064debabd1",
+        "sha256": "a076a199cfc51e19ca3de0e0e29c7351c1fc6cf6b48d1e76583e763f8ddaac6f"
+      },
+      {
+        "path": "src/core/switchButton.less",
+        "gitBlob": "d15ab35ac7b1ed0640e9d8b64cf125c13102526a",
+        "sha256": "4151c6d959645e5205ff36495cbe0ee4d066239544ba6716dd259984466719cd"
+      },
+      {
+        "path": "src/core/switchButton.svelte",
+        "gitBlob": "409bc3e846a01e9355e1f1e1ebaf9589b8e85b11",
+        "sha256": "1c1d488296d6514f17319b540a16792fc5629d6c8a6b5d373e766099b7f2276e"
+      },
+      {
+        "path": "src/element/element.model.ts",
+        "gitBlob": "be98163cdb1633fa459913a22a9737831d58d300",
+        "sha256": "6e70a7f01a37d562d89491f52b36cdedddc72bf6cb3e848dd1bb3694ccd567c4"
+      },
+      {
+        "path": "src/element/element.svelte",
+        "gitBlob": "eb4cb42e4203c24a623078ba40349972b0f84af1",
+        "sha256": "6518a7b84e15586cbe981507eafc8590df4685fa75f67cc978abd41c74e17b3e"
+      },
+      {
+        "path": "src/element/element.ts",
+        "gitBlob": "9ed4da578df00a6811990097fbd972fb0e4c0cc3",
+        "sha256": "f868c5139181bff6501a01f9f2a81c465a66c6ac56b0c15b1a08ba20501947b9"
+      },
+      {
+        "path": "src/element/elementNode.less",
+        "gitBlob": "364982b3e998384f7df7717fbb34ad9a4221cc2c",
+        "sha256": "b7aef0bf6ce870eb3316633ede3ef56c17b90f03d85b84bf689f26f34b8a28be"
+      },
+      {
+        "path": "src/element/elementNode.svelte",
+        "gitBlob": "f57c78ae97b0de48b7c008ca3330b0e083297699",
+        "sha256": "208fc090d2bd90e0f39c8a25d1c62c99c6d29a65e3d97133e8c43c62e5e35a0d"
+      },
+      {
+        "path": "src/lib/model.ts",
+        "gitBlob": "1cdd3d3fa78732b1723c8e3d8cd427c88d56c602",
+        "sha256": "5642cd1a2db401847de267e2f612773d7838f80f520a1e717a0c497e1baf4ff1"
+      },
+      {
+        "path": "src/lib/plugin.ts",
+        "gitBlob": "ebe0ca9351b1f2b41282489cbbac386bdfe85777",
+        "sha256": "377678f357f535befb431b229b773fe8199fa22fbdfa83b47d60d34f664200d0"
+      },
+      {
+        "path": "src/lib/pluginExporter.ts",
+        "gitBlob": "fb45df3ae4ba41793b9f97b0b635d84854be9a49",
+        "sha256": "a1b444be8b503cb590fa37575e0cee2bd0eae140ce47f651e04d03658ba3f350"
+      },
+      {
+        "path": "src/lib/query.ts",
+        "gitBlob": "2a7545d31fa94ba8517757752ea2f9b7e3083b81",
+        "sha256": "f6897549721535541fdf560589a6c0000a87ac6281fd489b7648ba11a96a7fc6"
+      },
+      {
+        "path": "src/lib/sveltePlugin.ts",
+        "gitBlob": "5d09da35fb9975ce3d23daadef8e317523eeda81",
+        "sha256": "4fd19b67b114ed084380ab844ec0bb232501a0c84cd7ae659fce96f91a633d26"
+      },
+      {
+        "path": "src/lib/tool.ts",
+        "gitBlob": "e595bef5a26f92b7516a984fb25c8c79c5270dd3",
+        "sha256": "1def9b4067bf83b5cae8db908d33f519903df060d8cff63b818146861313bd1a"
+      },
+      {
+        "path": "src/log/default.ts",
+        "gitBlob": "e025fe3b17ec7d136c3ca7db78afed11f877359e",
+        "sha256": "0889cfb44362fd22a3aa2476a3531d259119f9d8fba23a025a0b586a0ad3bcc3"
+      },
+      {
+        "path": "src/log/log.exporter.ts",
+        "gitBlob": "2eae4d6ffd70d193a0e67121ffc893957a6b0dc8",
+        "sha256": "edf4bd50716d6a77789b34b65aaec10588bb514df53e6512396c0dec652429fc"
+      },
+      {
+        "path": "src/log/log.less",
+        "gitBlob": "3890599267760e6b86625f09a38192b817fd1bae",
+        "sha256": "f395e6ace1074497e9d6b5b2ff211d472471b6d1b82e9d19c5321417772ebcc9"
+      },
+      {
+        "path": "src/log/log.model.ts",
+        "gitBlob": "ea8b2cd3ec2b4f358fcaf37ecce30a6d0539b167",
+        "sha256": "358f60402b8a6148812f1566cb4deb9046559ff3ec2775d8e7954db05bb13c72"
+      },
+      {
+        "path": "src/log/log.store.ts",
+        "gitBlob": "1f93f45585de92e545dabf89b3c669b66e6efab9",
+        "sha256": "5a9cda061defc960ca906e4002921135c4f009c3cc679f898a40dae54309335b"
+      },
+      {
+        "path": "src/log/log.svelte",
+        "gitBlob": "d7d5734f6ecb44e1ce4970d048e62c134b4475e2",
+        "sha256": "218847b496068fdc6bc188ba64d53c629c5db2fc6481ffba7395032ab96eb2b3"
+      },
+      {
+        "path": "src/log/log.ts",
+        "gitBlob": "73c49e46db8eba036226bb200eb3c027aca1dc36",
+        "sha256": "fe1fab061c487efc8523cf7fbc4352ff44f031968b0e842364a139284c3908d6"
+      },
+      {
+        "path": "src/log/logCommand.less",
+        "gitBlob": "7e5eff79aa0719d3e5f215924dedc910d61aa2f6",
+        "sha256": "b5ea59421e114cb2b05a99990b90f625ea3285f471187fa462aca57e2468354f"
+      },
+      {
+        "path": "src/log/logCommand.svelte",
+        "gitBlob": "c703b650e0bb36ad1fd9ce608a45d4f5a57368b6",
+        "sha256": "4459eca94c80aa466ce23e6ced74c29fd19b0fa8eed844101e42621063d7573b"
+      },
+      {
+        "path": "src/log/logRow.less",
+        "gitBlob": "a048c9be3384a33660c781cf1c50a5cd21f3974a",
+        "sha256": "088324d4162587d8a2bf3fe4cf888609f7017a34ffa3c89499a37aec7378fc3d"
+      },
+      {
+        "path": "src/log/logRow.svelte",
+        "gitBlob": "3f4273f88ab6f7f38d0a86df233c14c19717ff58",
+        "sha256": "2eed4afe359aeb49a6bd1d51eb29e3394085be6f4dd170602fce8e247b7e2c5d"
+      },
+      {
+        "path": "src/log/logTool.ts",
+        "gitBlob": "bc57725336045ba095563cc24edde18254616ead",
+        "sha256": "e4706f3fe5be34356fbcaa0c04764f090fa6f0294f3af2adefa88d0a61c804d0"
+      },
+      {
+        "path": "src/log/logTree.less",
+        "gitBlob": "ab8121f8d564f4e101e636fa058de02a90ce13a2",
+        "sha256": "55da1e60bc8a310bf4a5e7490e8dc3009d055b59614573813622b1b86916b219"
+      },
+      {
+        "path": "src/log/logTree.svelte",
+        "gitBlob": "0d8229ae5bd270bbecaaa06679c26e7c5db67111",
+        "sha256": "f237b1d82d98d5eb8e1b4048d749b7121ee9b7a4824f1afea3afb6d195792ab0"
+      },
+      {
+        "path": "src/log/logValue.less",
+        "gitBlob": "da3be4ca585b0ee9de1e557ecb1c739ed0ef1369",
+        "sha256": "09990dd75b3c21aa50716a8672d98d1d8f63be5d4146432148819a78e6442678"
+      },
+      {
+        "path": "src/log/logValue.svelte",
+        "gitBlob": "d747a813895f2b4ebb5aa438a81ce79e3f19bfb2",
+        "sha256": "74d54ad6594921d54cd1bf6df3dd71ac7e4afe05f470b200fcdffd06253cea97"
+      },
+      {
+        "path": "src/log/system.ts",
+        "gitBlob": "3ca46a99758bc0d22001a5b1c6e32419d7478498",
+        "sha256": "3c7dc0a57dc519c26b82754a8848522d1c6ff85381731c88bcda895e28e797b6"
+      },
+      {
+        "path": "src/network/beacon.proxy.ts",
+        "gitBlob": "815e356477b5a31c5892415430aecd89d21bd123",
+        "sha256": "f7552835c4d6fec1f86b175c6c7a7fbb411cdafbec5e8514ffa07cfa2108f8c0"
+      },
+      {
+        "path": "src/network/fetch.proxy.ts",
+        "gitBlob": "4c1089f19d2632529ca97cb4f515cfb2f822e181",
+        "sha256": "61a1dab8ba65d0d758f624032533788e7c9153f983710b023258b315fbccd793"
+      },
+      {
+        "path": "src/network/helper.ts",
+        "gitBlob": "9a5b338494e2d20bf8c6023714737919c5c8d065",
+        "sha256": "93dd4e66976b3214886be82bb39a7049e1d1b534dba33a1e3b992fb12207f892"
+      },
+      {
+        "path": "src/network/network.exporter.ts",
+        "gitBlob": "bfcf28a62917e8caa9e4827eef0ead02d18b703e",
+        "sha256": "a498b8455d45c75f136c6005d1fda437ad1a8e68f44e254579149348ee253a5e"
+      },
+      {
+        "path": "src/network/network.less",
+        "gitBlob": "143d1bc2a92409328f5f5d11437c8976e2ca4a6c",
+        "sha256": "2c8ad4a8ce363d47d3d4a7290d1328cd0db19a6f6469316ae33ad4f78c952764"
+      },
+      {
+        "path": "src/network/network.model.ts",
+        "gitBlob": "5a039354c2790ca17f2597993ff84470d7921b58",
+        "sha256": "4f5ae8206ed0fc146a742586384d8914fca674c29850366521cdc7599f872271"
+      },
+      {
+        "path": "src/network/network.svelte",
+        "gitBlob": "79c25cab35d9562c3d56bed09580a08b0a0d0bda",
+        "sha256": "97984c2f11e62cda217ec098c6c2241a774d0b92aa025ad109635b89786bce1e"
+      },
+      {
+        "path": "src/network/network.ts",
+        "gitBlob": "67451d858e6758007d735c47a391610a78656468",
+        "sha256": "c7e6be6313b994058e3d183e80295bb9e97630ff4d8fd63cbc78a30857633ec4"
+      },
+      {
+        "path": "src/network/requestItem.ts",
+        "gitBlob": "7bb9f2f5256a154ffcbf64797b957103097567db",
+        "sha256": "63d41182c91390a5f9b1572c5abfcec6d77671dcf36a906a8cf769dfb09bf900"
+      },
+      {
+        "path": "src/network/xhr.proxy.ts",
+        "gitBlob": "25ba70b05766e4a657b53f384ad5679a88be9f02",
+        "sha256": "e04d766cff794a87442ee82f4724df8fd8e2b9775e742f445c574cf56695888f"
+      },
+      {
+        "path": "src/storage/storage.cookie.ts",
+        "gitBlob": "24cf3ab229555d31894487289d17b152e0cd95f1",
+        "sha256": "22742a8bc1b8e9cdf107cf0d68abdae30e84a5e98d966bbb0d33dcd934c42057"
+      },
+      {
+        "path": "src/storage/storage.model.ts",
+        "gitBlob": "a40415b0d9cf4ab9402233daa1c64b248fb671b0",
+        "sha256": "3cc10946d7d293e8e7ea3aa78e562357ff5ed8859b0753b73ca77e2349668245"
+      },
+      {
+        "path": "src/storage/storage.svelte",
+        "gitBlob": "b9dd214f7366225a53fd970269cb42ac13aa3588",
+        "sha256": "2853c8687ba4711bd47f02b6f02b465aa9a6f1615ea18ef80781f27b15a13a9b"
+      },
+      {
+        "path": "src/storage/storage.ts",
+        "gitBlob": "95275da37d7ac160c7c75265ca1a90a0377d50e2",
+        "sha256": "855e9633ddc4c6c6156fd0bb3d4301005834b81a339f10618c37a02a2b3ca37f"
+      },
+      {
+        "path": "src/storage/storage.wx.ts",
+        "gitBlob": "bed7badb7048e171213008c1efc386eccbdf365c",
+        "sha256": "21a74f7bc78311e6ab77b67b0e3c75b4eae194699026a82cffd0e9f45104892a"
+      },
+      {
+        "path": "src/styles/var.less",
+        "gitBlob": "038cf16f692ec140feceddf7bb6d9615565e9f38",
+        "sha256": "fe59f23b66be5d7b67bc8143642ed669d171558ed8d2709378404fde1db31c6e"
+      },
+      {
+        "path": "src/types.d.ts",
+        "gitBlob": "f17357717f2edb7dae98321cd627e3c44bf40ce3",
+        "sha256": "73573ca0b3fec1e92406cef58f3de7231940380094f814e7e973692bf0d2b1c2"
+      },
+      {
+        "path": "src/vconsole.ts",
+        "gitBlob": "95fa40572ee48cda89daeb1456d1b44eb28a9449",
+        "sha256": "e589b46f4fdc75c238bfd78e54d125f1606c3c52a07313de55f0c4fec9e14811"
+      },
+      {
+        "path": "tsconfig.json",
+        "gitBlob": "f831bdfd6ddccb3522b740a61a03023b5961f540",
+        "sha256": "45627b4f62b138d120854813364816f04ca4486cdb0a670dce2b988ec0ed16c3"
+      },
+      {
+        "path": "tsconfig.type.json",
+        "gitBlob": "ddb392516fca2254ca0bfaa1686ee49fb2135989",
+        "sha256": "876935b8495d1e47fb114fdc9546bd1e8cde3343d97b1d94f92b02801a00c598"
+      },
+      {
+        "path": "webpack.config.js",
+        "gitBlob": "0ef08d81678678aef4aebce2b2899009b188bad4",
+        "sha256": "7514c55c4c46d1ef5050e804c54bf6c76b89e9bf5a1ee88b3b564ce6b063b176"
+      }
+    ]
+  },
+  "dependencies": [
+    {
+      "name": "@babel/runtime",
+      "version": "7.17.9",
+      "tarball": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.17.9.tgz",
+      "integrity": "sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==",
+      "archiveSha256": "ff7cfac68698985f91b704387077db5dd8e4514d619bcdd83bac8ec5e07a9fbd",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/babel-runtime-LICENSE.txt",
+        "target": "docs/licenses/vconsole/babel-runtime/LICENSE",
+        "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js",
+        "node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js",
+        "node_modules/@babel/runtime/helpers/esm/construct.js",
+        "node_modules/@babel/runtime/helpers/esm/createClass.js",
+        "node_modules/@babel/runtime/helpers/esm/defineProperty.js",
+        "node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js",
+        "node_modules/@babel/runtime/helpers/esm/inheritsLoose.js",
+        "node_modules/@babel/runtime/helpers/esm/isNativeFunction.js",
+        "node_modules/@babel/runtime/helpers/esm/isNativeReflectConstruct.js",
+        "node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js",
+        "node_modules/@babel/runtime/helpers/esm/wrapNativeSuper.js",
+        "node_modules/@babel/runtime/regenerator/index.js"
+      ]
+    },
+    {
+      "name": "core-js",
+      "version": "3.21.1",
+      "tarball": "https://registry.npmjs.org/core-js/-/core-js-3.21.1.tgz",
+      "integrity": "sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==",
+      "archiveSha256": "048cef00c1fbae8ed98ae1e03d6b3f3a23385f401704459577358278e76a78f0",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/core-js-LICENSE.txt",
+        "target": "docs/licenses/vconsole/core-js/LICENSE",
+        "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/core-js/es/promise/index.js",
+        "node_modules/core-js/es/symbol/index.js",
+        "node_modules/core-js/internals/a-callable.js",
+        "node_modules/core-js/internals/a-constructor.js",
+        "node_modules/core-js/internals/a-possible-prototype.js",
+        "node_modules/core-js/internals/add-to-unscopables.js",
+        "node_modules/core-js/internals/an-instance.js",
+        "node_modules/core-js/internals/an-object.js",
+        "node_modules/core-js/internals/array-includes.js",
+        "node_modules/core-js/internals/array-iteration.js",
+        "node_modules/core-js/internals/array-method-has-species-support.js",
+        "node_modules/core-js/internals/array-slice-simple.js",
+        "node_modules/core-js/internals/array-slice.js",
+        "node_modules/core-js/internals/array-species-constructor.js",
+        "node_modules/core-js/internals/array-species-create.js",
+        "node_modules/core-js/internals/check-correctness-of-iteration.js",
+        "node_modules/core-js/internals/classof-raw.js",
+        "node_modules/core-js/internals/classof.js",
+        "node_modules/core-js/internals/clear-error-stack.js",
+        "node_modules/core-js/internals/copy-constructor-properties.js",
+        "node_modules/core-js/internals/correct-prototype-getter.js",
+        "node_modules/core-js/internals/create-iterator-constructor.js",
+        "node_modules/core-js/internals/create-non-enumerable-property.js",
+        "node_modules/core-js/internals/create-property-descriptor.js",
+        "node_modules/core-js/internals/create-property.js",
+        "node_modules/core-js/internals/define-iterator.js",
+        "node_modules/core-js/internals/define-well-known-symbol.js",
+        "node_modules/core-js/internals/descriptors.js",
+        "node_modules/core-js/internals/document-create-element.js",
+        "node_modules/core-js/internals/dom-iterables.js",
+        "node_modules/core-js/internals/dom-token-list-prototype.js",
+        "node_modules/core-js/internals/engine-is-browser.js",
+        "node_modules/core-js/internals/engine-is-ios-pebble.js",
+        "node_modules/core-js/internals/engine-is-ios.js",
+        "node_modules/core-js/internals/engine-is-node.js",
+        "node_modules/core-js/internals/engine-is-webos-webkit.js",
+        "node_modules/core-js/internals/engine-user-agent.js",
+        "node_modules/core-js/internals/engine-v8-version.js",
+        "node_modules/core-js/internals/enum-bug-keys.js",
+        "node_modules/core-js/internals/error-stack-installable.js",
+        "node_modules/core-js/internals/export.js",
+        "node_modules/core-js/internals/fails.js",
+        "node_modules/core-js/internals/function-apply.js",
+        "node_modules/core-js/internals/function-bind-context.js",
+        "node_modules/core-js/internals/function-bind-native.js",
+        "node_modules/core-js/internals/function-call.js",
+        "node_modules/core-js/internals/function-name.js",
+        "node_modules/core-js/internals/function-uncurry-this.js",
+        "node_modules/core-js/internals/get-built-in.js",
+        "node_modules/core-js/internals/get-iterator-method.js",
+        "node_modules/core-js/internals/get-iterator.js",
+        "node_modules/core-js/internals/get-method.js",
+        "node_modules/core-js/internals/global.js",
+        "node_modules/core-js/internals/has-own-property.js",
+        "node_modules/core-js/internals/hidden-keys.js",
+        "node_modules/core-js/internals/host-report-errors.js",
+        "node_modules/core-js/internals/html.js",
+        "node_modules/core-js/internals/ie8-dom-define.js",
+        "node_modules/core-js/internals/indexed-object.js",
+        "node_modules/core-js/internals/inspect-source.js",
+        "node_modules/core-js/internals/install-error-cause.js",
+        "node_modules/core-js/internals/internal-state.js",
+        "node_modules/core-js/internals/is-array-iterator-method.js",
+        "node_modules/core-js/internals/is-array.js",
+        "node_modules/core-js/internals/is-callable.js",
+        "node_modules/core-js/internals/is-constructor.js",
+        "node_modules/core-js/internals/is-forced.js",
+        "node_modules/core-js/internals/is-object.js",
+        "node_modules/core-js/internals/is-pure.js",
+        "node_modules/core-js/internals/is-symbol.js",
+        "node_modules/core-js/internals/iterate.js",
+        "node_modules/core-js/internals/iterator-close.js",
+        "node_modules/core-js/internals/iterators-core.js",
+        "node_modules/core-js/internals/iterators.js",
+        "node_modules/core-js/internals/length-of-array-like.js",
+        "node_modules/core-js/internals/microtask.js",
+        "node_modules/core-js/internals/native-promise-constructor.js",
+        "node_modules/core-js/internals/native-symbol.js",
+        "node_modules/core-js/internals/native-weak-map.js",
+        "node_modules/core-js/internals/new-promise-capability.js",
+        "node_modules/core-js/internals/normalize-string-argument.js",
+        "node_modules/core-js/internals/object-create.js",
+        "node_modules/core-js/internals/object-define-properties.js",
+        "node_modules/core-js/internals/object-define-property.js",
+        "node_modules/core-js/internals/object-get-own-property-descriptor.js",
+        "node_modules/core-js/internals/object-get-own-property-names-external.js",
+        "node_modules/core-js/internals/object-get-own-property-names.js",
+        "node_modules/core-js/internals/object-get-own-property-symbols.js",
+        "node_modules/core-js/internals/object-get-prototype-of.js",
+        "node_modules/core-js/internals/object-is-prototype-of.js",
+        "node_modules/core-js/internals/object-keys-internal.js",
+        "node_modules/core-js/internals/object-keys.js",
+        "node_modules/core-js/internals/object-property-is-enumerable.js",
+        "node_modules/core-js/internals/object-set-prototype-of.js",
+        "node_modules/core-js/internals/object-to-string.js",
+        "node_modules/core-js/internals/ordinary-to-primitive.js",
+        "node_modules/core-js/internals/own-keys.js",
+        "node_modules/core-js/internals/path.js",
+        "node_modules/core-js/internals/perform.js",
+        "node_modules/core-js/internals/promise-resolve.js",
+        "node_modules/core-js/internals/queue.js",
+        "node_modules/core-js/internals/redefine-all.js",
+        "node_modules/core-js/internals/redefine.js",
+        "node_modules/core-js/internals/require-object-coercible.js",
+        "node_modules/core-js/internals/set-global.js",
+        "node_modules/core-js/internals/set-species.js",
+        "node_modules/core-js/internals/set-to-string-tag.js",
+        "node_modules/core-js/internals/shared-key.js",
+        "node_modules/core-js/internals/shared-store.js",
+        "node_modules/core-js/internals/shared.js",
+        "node_modules/core-js/internals/species-constructor.js",
+        "node_modules/core-js/internals/string-multibyte.js",
+        "node_modules/core-js/internals/task.js",
+        "node_modules/core-js/internals/to-absolute-index.js",
+        "node_modules/core-js/internals/to-indexed-object.js",
+        "node_modules/core-js/internals/to-integer-or-infinity.js",
+        "node_modules/core-js/internals/to-length.js",
+        "node_modules/core-js/internals/to-object.js",
+        "node_modules/core-js/internals/to-primitive.js",
+        "node_modules/core-js/internals/to-property-key.js",
+        "node_modules/core-js/internals/to-string-tag-support.js",
+        "node_modules/core-js/internals/to-string.js",
+        "node_modules/core-js/internals/try-to-string.js",
+        "node_modules/core-js/internals/uid.js",
+        "node_modules/core-js/internals/use-symbol-as-uid.js",
+        "node_modules/core-js/internals/v8-prototype-define-bug.js",
+        "node_modules/core-js/internals/validate-arguments-length.js",
+        "node_modules/core-js/internals/well-known-symbol-wrapped.js",
+        "node_modules/core-js/internals/well-known-symbol.js",
+        "node_modules/core-js/modules/es.aggregate-error.js",
+        "node_modules/core-js/modules/es.array.concat.js",
+        "node_modules/core-js/modules/es.array.iterator.js",
+        "node_modules/core-js/modules/es.json.to-string-tag.js",
+        "node_modules/core-js/modules/es.math.to-string-tag.js",
+        "node_modules/core-js/modules/es.object.to-string.js",
+        "node_modules/core-js/modules/es.promise.all-settled.js",
+        "node_modules/core-js/modules/es.promise.any.js",
+        "node_modules/core-js/modules/es.promise.finally.js",
+        "node_modules/core-js/modules/es.promise.js",
+        "node_modules/core-js/modules/es.reflect.to-string-tag.js",
+        "node_modules/core-js/modules/es.string.iterator.js",
+        "node_modules/core-js/modules/es.symbol.async-iterator.js",
+        "node_modules/core-js/modules/es.symbol.description.js",
+        "node_modules/core-js/modules/es.symbol.has-instance.js",
+        "node_modules/core-js/modules/es.symbol.is-concat-spreadable.js",
+        "node_modules/core-js/modules/es.symbol.iterator.js",
+        "node_modules/core-js/modules/es.symbol.js",
+        "node_modules/core-js/modules/es.symbol.match-all.js",
+        "node_modules/core-js/modules/es.symbol.match.js",
+        "node_modules/core-js/modules/es.symbol.replace.js",
+        "node_modules/core-js/modules/es.symbol.search.js",
+        "node_modules/core-js/modules/es.symbol.species.js",
+        "node_modules/core-js/modules/es.symbol.split.js",
+        "node_modules/core-js/modules/es.symbol.to-primitive.js",
+        "node_modules/core-js/modules/es.symbol.to-string-tag.js",
+        "node_modules/core-js/modules/es.symbol.unscopables.js",
+        "node_modules/core-js/modules/web.dom-collections.iterator.js",
+        "node_modules/core-js/stable/promise/index.js",
+        "node_modules/core-js/stable/symbol/index.js"
+      ]
+    },
+    {
+      "name": "copy-text-to-clipboard",
+      "version": "3.0.1",
+      "tarball": "https://registry.npmjs.org/copy-text-to-clipboard/-/copy-text-to-clipboard-3.0.1.tgz",
+      "integrity": "sha512-rvVsHrpFcL4F2P8ihsoLdFHmd404+CMg71S756oRSeQgqk51U3kicGdnvfkrxva0xXH92SjGS62B0XIJsbh+9Q==",
+      "archiveSha256": "f503f0000bfd090c6ab13ff0133f45c454b0601f4693070ab5f9370f6b257f43",
+      "noticeMember": "package/license",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/copy-text-to-clipboard-LICENSE.txt",
+        "target": "docs/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+        "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/copy-text-to-clipboard/index.js"
+      ]
+    },
+    {
+      "name": "mutation-observer",
+      "version": "1.0.3",
+      "tarball": "https://registry.npmjs.org/mutation-observer/-/mutation-observer-1.0.3.tgz",
+      "integrity": "sha512-M/O/4rF2h776hV7qGMZUH3utZLO/jK7p8rnNgGkjKUw8zCGjRQPxB8z6+5l8+VjRUQ3dNYu4vjqXYLr+U8ZVNA==",
+      "archiveSha256": "6fba66a0fc7af58492d5b7b1ced4e8bb639e9cc0b5dbfb6d7981cb102948b882",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/mutation-observer-LICENSE.txt",
+        "target": "docs/licenses/vconsole/mutation-observer/LICENSE",
+        "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+      },
+      "license": "Two BSD 3-clause notices (Automattic and Polymer Authors)",
+      "runtimeResources": [
+        "node_modules/mutation-observer/index.js"
+      ]
+    },
+    {
+      "name": "svelte",
+      "version": "3.47.0",
+      "tarball": "https://registry.npmjs.org/svelte/-/svelte-3.47.0.tgz",
+      "integrity": "sha512-4JaJp3HEoTCGARRWZQIZDUanhYv0iyoHikklVHVLH9xFE9db22g4TDv7CPeNA8HD1JgjXI1vlhR1JZvvhaTu2Q==",
+      "archiveSha256": "d446bc9f1260da0e64b4ff7a002126b432d70f466ae9e5390a4a66ab88fb9bd9",
+      "noticeMember": "package/LICENSE.md",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/svelte-LICENSE.txt",
+        "target": "docs/licenses/vconsole/svelte/LICENSE",
+        "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/svelte/index.mjs",
+        "node_modules/svelte/internal/index.mjs",
+        "node_modules/svelte/store/index.mjs"
+      ]
+    },
+    {
+      "name": "regenerator-runtime",
+      "version": "0.13.9",
+      "tarball": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz",
+      "integrity": "sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==",
+      "archiveSha256": "1a6b5437215dc6558817acfd9f8300f5519475ddc8f9f55bec243c622fd099b8",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/regenerator-runtime-LICENSE.txt",
+        "target": "docs/licenses/vconsole/regenerator-runtime/LICENSE",
+        "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/regenerator-runtime/runtime.js"
+      ]
+    },
+    {
+      "name": "style-loader",
+      "version": "3.3.1",
+      "tarball": "https://registry.npmjs.org/style-loader/-/style-loader-3.3.1.tgz",
+      "integrity": "sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ==",
+      "archiveSha256": "26bccc234f5fe61e39e5e9d6f253bd78208ade1037bed388fc9e5effb06f3627",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/style-loader-LICENSE.txt",
+        "target": "docs/licenses/vconsole/style-loader/LICENSE",
+        "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js",
+        "node_modules/style-loader/dist/runtime/insertBySelector.js",
+        "node_modules/style-loader/dist/runtime/insertStyleElement.js",
+        "node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js",
+        "node_modules/style-loader/dist/runtime/styleDomAPI.js",
+        "node_modules/style-loader/dist/runtime/styleTagTransform.js"
+      ]
+    },
+    {
+      "name": "css-loader",
+      "version": "6.7.1",
+      "tarball": "https://registry.npmjs.org/css-loader/-/css-loader-6.7.1.tgz",
+      "integrity": "sha512-yB5CNFa14MbPJcomwNh3wLThtkZgcNyI2bNMRt8iE5Z8Vwl7f8vQXFAzn2HDOJvtDq2NTZBUGMSUNNyrv3/+cw==",
+      "archiveSha256": "dbca9bdbcb72f7f8e84c715104fb55b66b34dcae75bb09da2770f5743273cfd8",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/css-loader-LICENSE.txt",
+        "target": "docs/licenses/vconsole/css-loader/LICENSE",
+        "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "node_modules/css-loader/dist/runtime/api.js",
+        "node_modules/css-loader/dist/runtime/noSourceMaps.js"
+      ]
+    },
+    {
+      "name": "webpack",
+      "version": "5.72.0",
+      "tarball": "https://registry.npmjs.org/webpack/-/webpack-5.72.0.tgz",
+      "integrity": "sha512-qmSmbspI0Qo5ld49htys8GY9XhS9CGqFoHTsOVAnjBdg0Zn79y135R+k4IR4rKK6+eKaabMhJwiVB7xw0SJu5w==",
+      "archiveSha256": "2aeb4cf8d9fffced8a1fa24183dbe8d6a821c88662db6d2e019365db2fe5731b",
+      "noticeMember": "package/LICENSE",
+      "notice": {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/webpack-LICENSE.txt",
+        "target": "docs/licenses/vconsole/webpack/LICENSE",
+        "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+      },
+      "license": "MIT",
+      "runtimeResources": [
+        "webpack/runtime/compat get default export",
+        "webpack/runtime/define property getters",
+        "webpack/runtime/global",
+        "webpack/runtime/hasOwnProperty shorthand"
+      ]
+    }
+  ],
+  "supplement": {
+    "source": "https://opensource.org/license/mit",
+    "basis": "Original vConsole 3.15.0 bundle explicitly links this MIT license; original Tencent notice is retained. Supplemental MIT body and attribution are authored assemblies, not verbatim upstream files.",
+    "notices": [
+      {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/MIT-LICENSE",
+        "target": "docs/licenses/vconsole/MIT-LICENSE",
+        "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+      },
+      {
+        "source": "refactor/baselines/site-vendor/vconsole-3.15.0/ATTRIBUTION.txt",
+        "target": "docs/licenses/vconsole/ATTRIBUTION.md",
+        "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+      }
+    ]
+  },
+  "limits": [
+    "Build-only dependencies are not claimed to be runtime components; css/style runtime helpers and webpack bootstrap are included.",
+    "Remote source archive host failed DNS; all 81 required source/config files were instead fetched from fixed raw GitHub paths and verified against Git tree blob IDs.",
+    "Real devices and other site components remain separate gates."
+  ]
+}

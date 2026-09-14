@@ -1,5 +1,12 @@
 # 进度与证据
 
+## SITE-07 vConsole 精确重建与完整通知
+
+固定源码/锁文件重建与 npm 3.15.0 逐字节一致；补齐 MIT 正文、署名及九个运行时
+组件的许可。VENDOR-07 本版本来源/通知风险关闭，原生命周期补丁不变。三浏览器
+3/3、工程测试17/17通过，见[记录](changes/2026-09-15-SITE-07-vconsole-notices.md)。
+197/263 完成，SITE-07 仍 doing；继续 console.js、Monaco 复核和其他字体媒体。
+
 ## SITE-07 Codicons 历史字体来源与通知
 
 字体精确匹配官方 npm 0.0.26，补原始许可/README和署名，运行时内容及旧 URL 不变。

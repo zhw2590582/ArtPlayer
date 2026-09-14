@@ -4480,7 +4480,10 @@
         "baselines/site-notices-checkpoint.json",
         "baselines/site-codicons-provenance.json",
         "baselines/site-codicons-validation.json",
-        "changes/2026-09-15-SITE-07-codicons.md"
+        "changes/2026-09-15-SITE-07-codicons.md",
+        "baselines/vconsole-notices-provenance.json",
+        "baselines/vconsole-notices-validation.json",
+        "changes/2026-09-15-SITE-07-vconsole-notices.md"
       ]
     },
     {

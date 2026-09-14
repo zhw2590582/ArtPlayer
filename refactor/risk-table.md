@@ -31,7 +31,7 @@
 | VENDOR-04 | open / 源码/产物事实 | jassub-code-and-workers 来源、版本与许可闭环 | PKG-JASSUB-01, PKG-JASSUB-06 |
 | VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01, PKG-JASSUB-06, SITE-07 |
 | VENDOR-06 | open / 源码/产物事实 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05, SITE-07 |
-| VENDOR-07 | open / 源码/产物事实 | vconsole 来源、版本与许可闭环 | SITE-01, SITE-07 |
+| VENDOR-07 | resolved / 源码/产物事实 | vconsole 来源、版本与许可闭环 | SITE-01, SITE-07 |
 | VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01, SITE-07 |
 | SDK-01 | open / 源码/产物事实 | hls.js 实际集成验证范围 | PKG-HLS-05, EX-03 |
 | SDK-02 | open / 待取证 | dash.js 实际集成验证范围 | PKG-DASH-01, EX-03, PKG-DASH-05 |

@@ -634,7 +634,7 @@
       "id": "VENDOR-07",
       "title": "vconsole 来源、版本与许可闭环",
       "confirmation": "source-observed",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "SITE-01",
         "SITE-07"
@@ -646,11 +646,22 @@
         "refactor/baselines/site-provenance.json",
         "refactor/changes/2026-09-14-SITE-07-vendor-notices.md",
         "refactor/baselines/site-notices-checkpoint.json",
-        "scripts/site-vendor/manifest.json"
+        "scripts/site-vendor/manifest.json",
+        "refactor/baselines/vconsole-notices-provenance.json",
+        "refactor/baselines/vconsole-notices-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-vconsole-notices.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "Upstream 3.15.0 LICENSE copied verbatim but promises an absent MIT body; body and bundled dependency notices remain open. The historical mobile WebKit destruction defect was separately fixed by SITE-VCONSOLE-01; current three-engine site checks retain and pass destruction assertions."
+      "workspaceState": "Fixed-commit sources and original lockfile reproduce npm vConsole 3.15.0 exactly. Untruncated module resources identify eight bundled package runtimes plus webpack bootstrap, whose complete original license texts now ship. The original incomplete LICENSE is preserved and the explicitly referenced MIT body is separately supplied and attributed. Three native browser mobile/log/play/destroy cases serve all notice bytes exactly; the previously fixed local lifecycle patch is unchanged. This closes this vConsole source/notice risk, not whole-site, device or release gates.",
+      "resolutionEvidence": [
+        "refactor/baselines/vconsole-notices-provenance.json",
+        "refactor/baselines/vconsole-notices-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-vconsole-notices.md",
+        "scripts/site-vendor/manifest.json",
+        "scripts/site-vendor/vconsole/reproduce.ts"
+      ],
+      "resolutionRationale": "Fixed-commit sources and original lockfile reproduce npm vConsole 3.15.0 exactly. Untruncated module resources identify eight bundled package runtimes plus webpack bootstrap, whose complete original license texts now ship. The original incomplete LICENSE is preserved and the explicitly referenced MIT body is separately supplied and attributed. Three native browser mobile/log/play/destroy cases serve all notice bytes exactly; the previously fixed local lifecycle patch is unchanged. This closes this vConsole source/notice risk, not whole-site, device or release gates."
     },
     {
       "id": "VENDOR-08",

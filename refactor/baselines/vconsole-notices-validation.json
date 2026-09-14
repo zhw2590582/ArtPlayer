@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "baseCommit": "bf432ed62a8206fd388ab0cbd4052eccc5e7e192",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "reconstruction": {
+    "command": "node scripts/site-vendor/vconsole/reproduce.ts refactor/.cache/site07-vconsole-notices/upstream-build",
+    "exitCode": 0,
+    "exactBundle": true,
+    "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4",
+    "resources": 189,
+    "notices": 9,
+    "warnings": [
+      {
+        "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  vconsole.min.js (276 KiB)",
+        "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  vconsole.min.js (276 KiB)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:134:7\n    at Hook.eval [as callAsync] (eval at create (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:882:27\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\neo-async\\async.js:2818:7\n    at done (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\neo-async\\async.js:3522:9)\n    at alreadyWritten (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:714:8)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:802:19\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\graceful-fs\\graceful-fs.js:123:16\n    at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:96:3)"
+      },
+      {
+        "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  vconsole (276 KiB)\n      vconsole.min.js\n",
+        "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  vconsole (276 KiB)\n      vconsole.min.js\n\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:139:7\n    at Hook.eval [as callAsync] (eval at create (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:882:27\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\neo-async\\async.js:2818:7\n    at done (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\neo-async\\async.js:3522:9)\n    at alreadyWritten (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:714:8)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:802:19\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\graceful-fs\\graceful-fs.js:123:16\n    at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:96:3)"
+      },
+      {
+        "message": "webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/",
+        "stack": "NoAsyncChunksWarning: webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:153:21\n    at Hook.eval [as callAsync] (eval at create (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:882:27\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\neo-async\\async.js:2818:7\n    at done (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\neo-async\\async.js:3522:9)\n    at alreadyWritten (D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:714:8)\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\webpack\\lib\\Compiler.js:802:19\n    at D:\\github\\ArtPlayer\\refactor\\.cache\\site07-vconsole-notices\\upstream-build\\node_modules\\graceful-fs\\graceful-fs.js:123:16\n    at FSReqCallback.readFileAfterClose [as oncomplete] (node:internal/fs/read/context:96:3)"
+      }
+    ],
+    "negative": [
+      {
+        "case": "changed frozen source",
+        "exitCode": 1,
+        "rejectedBeforeBuild": true
+      },
+      {
+        "case": "repository input outside ignored cache",
+        "exitCode": 1,
+        "rejectedBeforeBuild": true
+      }
+    ]
+  },
+  "browser": {
+    "command": "node node_modules/@playwright/test/cli.js test test/browser/site-vendor.spec.js --workers=1",
+    "exitCode": 0,
+    "reportPath": "refactor/.cache/site07-vconsole-notices-browser-report/report.json",
+    "reportSha256": "505aae95946de005cc802cdcb428492f7ac0b6c47b2d5466522d8525b0fec28e",
+    "stats": {
+      "startTime": "2026-09-14T21:18:02.545Z",
+      "duration": 10239.792,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/babel-runtime/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/core-js/LICENSE",
+            "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+            "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/mutation-observer/LICENSE",
+            "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/svelte/LICENSE",
+            "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/style-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/css-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/webpack/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/MIT-LICENSE",
+            "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/ATTRIBUTION.md",
+            "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          }
+        ]
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/babel-runtime/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/core-js/LICENSE",
+            "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+            "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/mutation-observer/LICENSE",
+            "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/svelte/LICENSE",
+            "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/style-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/css-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/webpack/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/MIT-LICENSE",
+            "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/ATTRIBUTION.md",
+            "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          }
+        ]
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/babel-runtime/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/core-js/LICENSE",
+            "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+            "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/mutation-observer/LICENSE",
+            "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/svelte/LICENSE",
+            "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/style-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/css-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/webpack/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/MIT-LICENSE",
+            "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/ATTRIBUTION.md",
+            "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          }
+        ]
+      }
+    ]
+  },
+  "unit": {
+    "command": "node --test test/site-notices.test.js test/vconsole-lifecycle.test.js test/pages-artifact.test.js",
+    "exitCode": 0,
+    "passed": 17,
+    "durationMs": 559.5656,
+    "log": "refactor/.cache/site07-vconsole-notices-tests-final.log"
+  },
+  "checks": [
+    "strict docs-tools TypeScript",
+    "scoped ESLint",
+    "build:site-notices",
+    "check:site-notices",
+    "check:vconsole"
+  ],
+  "runtimeAssetChanged": false,
+  "limitations": [
+    "Windows automated engines with local playback, not physical device or remote CI evidence",
+    "Other SITE-07 components/fonts/media remain independent",
+    "No full-site or full-installed-ecosystem regression run for this notice-only change"
+  ],
+  "rootLint": {
+    "exitCode": 1,
+    "log": "refactor/.cache/site07-vconsole-notices-lint.log",
+    "error": "Pre-existing VAST package.json dependencies/typesVersions key ordering",
+    "warning": "Pre-existing docs/assets/ts/artplayer.d.ts unused namespace disable",
+    "followUp": "Separate engineering fix after this SITE-07 checkpoint"
+  }
+}

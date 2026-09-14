@@ -22,3 +22,4 @@ refactor/baselines/site-vendor/codicons-0.0.26/README.txt -text whitespace=-trai
 docs/licenses/monaco-editor/codicons/LICENSE* -text whitespace=-trailing-space,cr-at-eol
 docs/licenses/monaco-editor/codicons/README.md -text whitespace=-trailing-space,cr-at-eol
 refactor/baselines/site-vendor/codicons-0.0.26/ATTRIBUTION.txt text eol=lf
+refactor/baselines/site-vendor/vconsole-3.15.0/** text eol=lf whitespace=-blank-at-eof

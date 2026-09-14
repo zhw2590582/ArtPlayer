@@ -1,5 +1,10 @@
 # 文档站、示例与生成链清单
 
+2026-09-15后续：vConsole 3.15.0 已由固定源码/锁文件精确重建，补原始声明所引用的
+MIT 正文和九个运行时组件的完整通知；VENDOR-07 关闭。三引擎真实播放/日志/销毁及
+全部 HTTP 通知 3/3 通过。见[当前记录](changes/2026-09-15-SITE-07-vconsole-notices.md)。
+下面的许可缺口描述属于先前检查点；其他站点来源/字体/媒体门槛继续保留。
+
 SITE-07检查点已将Monaco LICENSE/ThirdPartyNotices和vConsole上游LICENSE原文加入
 站点分发，并建立固定文件清单/指纹及只读检查。进一步检查发现vConsole上游文件
 只有许可声明，缺其声称附带的MIT全文；不能把“已取得LICENSE”当成完整许可闭环。

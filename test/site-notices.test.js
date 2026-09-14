@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import { Buffer } from 'node:buffer'
+import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- Verify real notice bytes and failure-before-write behavior.
 import test from 'node:test'
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
@@ -82,4 +84,24 @@ test('Bundled component attribution requires its asset and every upstream notice
   assert.match(fs.readFileSync(path.join(root, 'docs/THIRD_PARTY_NOTICES.md'), 'utf8'), /Included component: icons 1.0.0/)
   fs.writeFileSync(path.join(root, 'ATTRIBUTION'), upstream.toString().replaceAll('\r\n', '\n'))
   assert.throws(() => generateNotices(root, manifest), /Upstream notice changed/)
+})
+
+test('Site notice CLI rejects omitted reviewed components and supplemental vConsole notices', (t) => {
+  const { root } = fixture(t)
+  const manifestPath = path.join(root, 'scripts/site-vendor/manifest.json')
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true })
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md', 'webpack']) {
+    const manifest = structuredClone(original)
+    const group = manifest.groups.find(group => group.name === 'vconsole')
+    if (name === 'webpack')
+      group.components = group.components.filter(component => component.name !== name)
+    else
+      group.notices = group.notices.filter(notice => notice.target !== `docs/licenses/vconsole/${name}`)
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest))
+    const result = spawnSync(process.execPath, [path.resolve('scripts/build-site-notices.mjs')], { cwd: root, encoding: 'utf8' })
+    assert.equal(result.status, 1)
+    assert.match(result.stderr, name === 'webpack' ? /Do not silently drop verified bundled component/ : /Missing vConsole notice/)
+    assert(!fs.existsSync(path.join(root, 'docs')))
+  }
 })

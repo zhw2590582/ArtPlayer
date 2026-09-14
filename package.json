@@ -148,6 +148,7 @@
     "test:site-notices": "node --test test/site-notices.test.js",
     "build:vconsole": "node scripts/build-vconsole.mjs",
     "check:vconsole": "node scripts/build-vconsole.mjs --check",
+    "verify:vconsole-source": "node scripts/site-vendor/vconsole/reproduce.ts",
     "test:vconsole": "node --test test/vconsole-lifecycle.test.js",
     "test:browser:source": "node scripts/browser-check.mjs source",
     "test:browser:installed": "node scripts/browser-check.mjs installed",

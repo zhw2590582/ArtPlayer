@@ -3,8 +3,10 @@
 `manifest.json` pins the already-identified Monaco 0.30.1 and vConsole 3.15.0
 archives, corresponding files and upstream notice texts. It does not clear other
 site dependencies or grant rights to samples/fonts. The vConsole LICENSE is
-preserved verbatim but is incomplete: it promises an MIT copy that is absent.
-Its completion and bundled dependency notices remain open under SITE-07.
+preserved verbatim. A separately identified MIT text supplies the body referenced
+by the original bundle, alongside the full notices for eight bundled dependencies
+and webpack's generated bootstrap. Fixed-source reconstruction verifies their
+identity; see `vconsole/README.md` and `vconsole/reproduce.ts`.
 Monaco's supplied notices lack a Codicons entry. The bundled font now has an
 exact byte match to the official `@vscode/codicons@0.0.26` archive. Its historical
 README, CC BY 4.0 content license and MIT code license are preserved, alongside
@@ -20,7 +22,8 @@ files retain their exact upstream bytes, including final blank lines.
 `../build-site-notices.mjs` provides `yarn build:site-notices` and read-only
 `yarn check:site-notices`. The write command cannot bless altered vendor assets;
 review the new archive and license evidence before changing the manifest. The
-CLI prevents accidentally dropping either verified group or the Codicons component.
+CLI prevents accidentally dropping either verified group, the ten reviewed nested
+components, or vConsole's original license, supplemental MIT body and attribution.
 Component references require their runtime assets and every notice before writing.
 Source notices
 live in `refactor/baselines/site-vendor/`; generated delivery files live under
@@ -52,6 +55,6 @@ members as Buffers. Compare `package/dist/codicon.ttf` directly with `fontPath`,
 and each non-null notice member with its frozen `source`. Do not pipe binary font
 output through PowerShell text redirection. No dependency installation is needed.
 
-Follow-up: finish the broader bundled-component notice audit, then recover the
+Follow-up: finish Monaco's broader bundled-component notice audit, then recover the
 console.js build and resolve remaining fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.

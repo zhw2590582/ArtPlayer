@@ -1029,13 +1029,14 @@
         "SITE-07",
         "SITE-VCONSOLE-01"
       ],
-      "sourceStatus": "Frozen npm 3.15.0 bundle, with reproducible six-hook lifecycle patch; see scripts/site-vendor/vconsole/README.md.",
-      "licenseStatus": "Original npm LICENSE is distributed verbatim but lacks its promised MIT body; bundled dependency notices remain open in VENDOR-07.",
+      "sourceStatus": "Exact 282381-byte reconstruction of npm 3.15.0 from commit 05d80398bae35e793774f74e3c052b4e530e293a and its frozen npm lockfile; 326 untruncated module records establish eight runtime package dependencies and webpack bootstrap. ArtPlayer retains the separate reviewed lifecycle patch.",
+      "licenseStatus": "Original vConsole LICENSE retained; missing referenced MIT text supplied separately with explicit attribution. All nine runtime-component notices are preserved in full, including both mutation-observer BSD notices. Actual HTTP delivery and fingerprints verified; see vconsole-notices-provenance/validation.json.",
       "upstreamSources": [
         "https://registry.npmjs.org/vconsole/-/vconsole-3.15.0.tgz",
-        "https://github.com/Tencent/vConsole/tree/05d80398bae35e793774f74e3c052b4e530e293a"
+        "https://github.com/Tencent/vConsole/tree/05d80398bae35e793774f74e3c052b4e530e293a",
+        "https://opensource.org/license/mit"
       ],
-      "upstreamReviewedAt": "2026-09-14",
+      "upstreamReviewedAt": "2026-09-15",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
