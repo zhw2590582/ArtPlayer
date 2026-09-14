@@ -40,12 +40,15 @@ GitHub PR读取事件里的base SHA，push读取before SHA；初次push的全零
 
 ## CI门槛与能力边界
 
-六项必需命令不能从策略中漏掉：`ci:check`、`ci:build`、`test:package`、
-`test:browser`、`test:coverage`、`test:performance`。固定yaml2.8.2解析实际workflow，
-检查对应job/步骤无条件执行、没有continue-on-error、没有路径过滤，且checkout有
-完整历史。命令被移走、改成echo或增加条件会失败。命令名还必须存在于根scripts。
+八项必需调用不能从策略中漏掉：`ci:check`、`ci:build`、消费者 `test:package`、
+播放作业 `test:package --browser`、`test:browser:source`、`test:browser:installed`、
+`test:coverage`、`test:performance`。两个浏览器范围只传当前矩阵的 `--project`，
+并使用固定 `!cancelled()` 条件在普通失败后继续采证；其余门槛保持无条件步骤。
+固定 yaml 2.8.2 解析实际 workflow，检查对应 job 必需执行、没有 continue-on-error、
+没有路径过滤，且 checkout 有完整历史。命令被移走、改成 echo 或更换执行条件会
+失败。命令名还必须存在于根 scripts；策略单独记录已审查的参数和条件。
 必需命令必须是步骤首个非空、非注释行，只接受独立命令或当前显式bash的固定tee日志
-格式；其他shell包装语法需审查后扩展。条件包装、`|| true`、非bash的tee和YAML布尔
+格式；其他shell包装语法需审查后扩展。任意条件包装、`|| true`、非bash的tee和YAML布尔
 `if: false`均有拒绝反例；checkout本身也不能带条件或允许失败。这是受限结构校验，
 不是通用shell解释器，也不证明脚本内部的测试语义。
 
@@ -53,6 +56,8 @@ GitHub PR读取事件里的base SHA，push读取before SHA；初次push的全零
 
 - `test:package`当前实际只有core/chapter；脚本读取其names数组核对策略，变更范围
   后必须更新声明。其余19个库包完整安装消费仍缺证据，不能因识别为affected而过关。
+  `--browser` 已单独覆盖十八包安装产物及明确列出的浏览器子集，不扩张这个通用
+  Node/类型消费者列表，也不等于十八包全部类型/设备/SDK 组合通过。
 - 覆盖率范围从实际coverage-policy读取；浏览器/性能命令运行已有用例，不代表所有
   包、真实设备、远程SDK已验收。
 - ENG-COVERAGE-01继续把契约、支持版本、测试ID、候选/报告及任务逐项连接；

@@ -10,6 +10,7 @@ import { evaluateJobs, renderSummary, requiredJobs } from '../scripts/ci-summary
 
 const success = () => Object.fromEntries(requiredJobs.map(job => [job, { result: 'success' }]))
 test('CI summary requires every configured group and does not mutate provider results', () => {
+  assert.deepEqual(requiredJobs, ['checks', 'coverage', 'browser-smoke', 'browser-consumers'])
   const needs = success()
   const copy = structuredClone(needs)
   const report = evaluateJobs(needs)

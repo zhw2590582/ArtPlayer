@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-01",
+  "date": "2026-09-15",
+  "sourceHead": "92b04d75c0291d3639b581288d846352c7bbd9f4",
+  "candidate": "Working tree included in the accompanying CI-01 browser matrix checkpoint; code fingerprints normalize LF",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "actionlint": "1.7.12"
+  },
+  "inputs": [
+    {
+      "file": ".github/workflows/nodejs.yml",
+      "sha256LF": "726b7f1f9126b2453123f8537ca4ac466333795b6673b4e7d93aac5e448fa9d0"
+    },
+    {
+      "file": "scripts/ci-summary.mjs",
+      "sha256LF": "993c99d9799bae72f1d97097bea4521c3964db365930a8f166719410f0578f05"
+    },
+    {
+      "file": "test/ci-summary.test.js",
+      "sha256LF": "c7fecee2e4f514bf3cd67ace03485856daa177ab51bee86a11e777577bb47eb9"
+    },
+    {
+      "file": "refactor/scripts/ci-workflow.mjs",
+      "sha256LF": "66353eb9531ae3bd9555b42668ba318d8540c353370cb2ac3f25c62373bf99a4"
+    },
+    {
+      "file": "refactor/scripts/ci-workflow.test.mjs",
+      "sha256LF": "154a65f97ae736667e107dff685fc055ce3e2da5e11f4ac31debd81435e1875f"
+    },
+    {
+      "file": "refactor/scripts/impact-model.mjs",
+      "sha256LF": "d243062448803b245a83a17518a6ef1024bf1b24be63c66f047cc87464e437e9"
+    },
+    {
+      "file": "refactor/scripts/impact.test.mjs",
+      "sha256LF": "5e113a7c733f9642633b082c80175d951e9278859ae966f8a300ef626581edfb"
+    },
+    {
+      "file": "refactor/impact-policy.json",
+      "sha256LF": "e4ab08484dff4bfdc2fcbd89f990a8eb7607e70d58982e121858cb4a1b001f86"
+    },
+    {
+      "file": "scripts/browser-check.mjs",
+      "sha256LF": "4c1dbfb6dc05cf4842ce6568181dcc76e076003ee268e5fe00aff0a771010811"
+    },
+    {
+      "file": "scripts/browser-validation/scope.ts",
+      "sha256LF": "3b0526de3f571bb95c429ff3785277771576bb077924699b04dafaaa886f047d"
+    },
+    {
+      "file": "playwright.config.js",
+      "sha256LF": "df2384f5626252ec933725867e400ec22eb92bc5e6f04873059b32decf2f2d56"
+    },
+    {
+      "file": "playwright.source.config.js",
+      "sha256LF": "00bebb9253de62b827c2e8734b6b54a6a23c56802eafc5d3996b241b5fe82092"
+    },
+    {
+      "file": "playwright.installed.config.js",
+      "sha256LF": "e158a28a91dea09dc5af17cc6f4b204020a6c1f7042c3ba0ecd90677ded0167f"
+    }
+  ],
+  "collection": [
+    {
+      "scope": "source",
+      "exactUnion": true,
+      "noOverlap": true,
+      "cases": 4641,
+      "files": 154,
+      "records": [
+        {
+          "engine": "all",
+          "directory": "refactor/.cache/ci01-browser-matrix-source-all-collection",
+          "reportSha256": "b2e710d6e934c4b580595c09b6ff4eb54358099c85cee486d618385644dd69ea",
+          "invocationSha256": "9b9ebc452ba4886f9398b5f5c1916eae5294b62bc6afc8fdfbae5e252ceb3fab",
+          "args": [
+            "test",
+            "--config=playwright.source.config.js",
+            "--list"
+          ],
+          "exitCode": 0,
+          "cases": 4641,
+          "files": 154,
+          "caseSetSha256": "fb2ab31fc294ffd38f53486c854465adf6848f7157f4f69301640c4c1e10cf8c",
+          "collectionOnly": true
+        },
+        {
+          "engine": "chromium",
+          "directory": "refactor/.cache/ci01-browser-matrix-source-chromium-collection",
+          "reportSha256": "d46893ffcec98aad841c2b8afd3a4aab806aa3c62a973230559fe7a4d551499d",
+          "invocationSha256": "dca7b9af6fc6f8a9a8b1a098fe927845efa6c01f3ba8c544eab9d76011bfc187",
+          "args": [
+            "test",
+            "--config=playwright.source.config.js",
+            "--list",
+            "--project=chromium"
+          ],
+          "exitCode": 0,
+          "cases": 1547,
+          "files": 154,
+          "caseSetSha256": "65f157f3d7bdd27ee89ba5db8a4a4f0caa35d3fac8f8396349e42d16a7fa8cb8",
+          "collectionOnly": true
+        },
+        {
+          "engine": "firefox",
+          "directory": "refactor/.cache/ci01-browser-matrix-source-firefox-collection",
+          "reportSha256": "7e4b49e6203307c177d5d6258d9820e165c8707022a9cb83c6af8a47e892ebbf",
+          "invocationSha256": "94b2d3473db4d254b84710dfde10af95235df208f2cbebcefe2e79c530b9d994",
+          "args": [
+            "test",
+            "--config=playwright.source.config.js",
+            "--list",
+            "--project=firefox"
+          ],
+          "exitCode": 0,
+          "cases": 1547,
+          "files": 154,
+          "caseSetSha256": "f25c545aefe6e3e617844fab7a80ec16457dc98ea8ed651b45b7cef1e9085c67",
+          "collectionOnly": true
+        },
+        {
+          "engine": "webkit",
+          "directory": "refactor/.cache/ci01-browser-matrix-source-webkit-collection",
+          "reportSha256": "7ee2e4f9e87b0c2d34e7173f71dcb2087b19cda206eaaea2e4b343d619f8b0fc",
+          "invocationSha256": "3e1d45a1428b44bd0b7b5b05d5d54124337c771061def338dbf82b44b40dcf45",
+          "args": [
+            "test",
+            "--config=playwright.source.config.js",
+            "--list",
+            "--project=webkit"
+          ],
+          "exitCode": 0,
+          "cases": 1547,
+          "files": 154,
+          "caseSetSha256": "08bfe59e38abf8938a3896f75e90c34606e50d7e42f79608a6a730b267a45bba",
+          "collectionOnly": true
+        }
+      ]
+    },
+    {
+      "scope": "installed",
+      "exactUnion": true,
+      "noOverlap": true,
+      "cases": 1980,
+      "files": 67,
+      "records": [
+        {
+          "engine": "all",
+          "directory": "refactor/.cache/ci01-browser-matrix-installed-all-collection",
+          "reportSha256": "5903ceb4231d6c21706b951e6c2e1faf6bcacb0828021ce72b63118192d05837",
+          "invocationSha256": "31bc2af2f6f93c817c4e66dad0b2401abda2375f0552c93ec018399fe874880b",
+          "args": [
+            "test",
+            "--config=playwright.installed.config.js",
+            "--list"
+          ],
+          "exitCode": 0,
+          "cases": 1980,
+          "files": 67,
+          "caseSetSha256": "05c2abcdc0f42ce5c48e0cb49e9d4c6b9c0f85cd09df4f7cb59e7a27b53cb378",
+          "collectionOnly": true
+        },
+        {
+          "engine": "chromium",
+          "directory": "refactor/.cache/ci01-browser-matrix-installed-chromium-collection",
+          "reportSha256": "585b78a64df866293283349e046f22392755f3173519c2442c42fbb7894ace67",
+          "invocationSha256": "8601b7797b302fd6789d35597a7ba045bcc75815f23990c9652509d50846c1df",
+          "args": [
+            "test",
+            "--config=playwright.installed.config.js",
+            "--list",
+            "--project=chromium"
+          ],
+          "exitCode": 0,
+          "cases": 660,
+          "files": 67,
+          "caseSetSha256": "67efda9f29268152b7f43ee699a54c3c2c157262d961e28a7ea6d6a58a42376f",
+          "collectionOnly": true
+        },
+        {
+          "engine": "firefox",
+          "directory": "refactor/.cache/ci01-browser-matrix-installed-firefox-collection",
+          "reportSha256": "81c6f61b51ca244d96b5d459f920e6fdd156a30ae793f9ce8ba101a3fe7b2279",
+          "invocationSha256": "2a88902ffaf661aeab1bdfc7f7756132974532aecbd962611b9d8c77f4706329",
+          "args": [
+            "test",
+            "--config=playwright.installed.config.js",
+            "--list",
+            "--project=firefox"
+          ],
+          "exitCode": 0,
+          "cases": 660,
+          "files": 67,
+          "caseSetSha256": "6242f6445283fc3907d8bf8bacee09c5ae4a1f87aa5c50c1e6113f0db7250e60",
+          "collectionOnly": true
+        },
+        {
+          "engine": "webkit",
+          "directory": "refactor/.cache/ci01-browser-matrix-installed-webkit-collection",
+          "reportSha256": "e4673bf53807fbc48a721be1218dbeead39831b9a4c02c5038861a3d983ceae3",
+          "invocationSha256": "ee3cfedb2bd72e057ee25c60ae8f31bcc6aeaeaf9f575a55992f4023f8791918",
+          "args": [
+            "test",
+            "--config=playwright.installed.config.js",
+            "--list",
+            "--project=webkit"
+          ],
+          "exitCode": 0,
+          "cases": 660,
+          "files": 67,
+          "caseSetSha256": "faa53758af148e8dde777494d56386c1f0cc8a55bc7821b14f057daba2f3f731",
+          "collectionOnly": true
+        }
+      ]
+    }
+  ],
+  "playback": [
+    {
+      "scope": "source",
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "directory": "refactor/.cache/ci01-browser-matrix-source-chromium-playback",
+      "reportSha256": "2b3903b30fe62fa5c7f7774225195acf6f2ea5fbb322e053cf28e75047b447c4",
+      "invocationSha256": "aab300aed50e5eb2ee5ae5ab90b615c1cc76a631798058354b37473e8b36876a",
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "--project=chromium",
+        "playback.spec.js"
+      ],
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T20:12:36.490Z",
+        "duration": 20470.017,
+        "expected": 25,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": {
+        "asr-playback.spec.js": 6,
+        "auto-playback.spec.js": 15,
+        "playback.spec.js": 4
+      },
+      "core": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.ts"
+        },
+        "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+        "bytes": 378931
+      },
+      "installedPackages": 0,
+      "skips": []
+    },
+    {
+      "scope": "source",
+      "engine": "firefox",
+      "browser": "155.0",
+      "directory": "refactor/.cache/ci01-browser-matrix-source-firefox-playback",
+      "reportSha256": "fb1d902605692c57094bf5fb0890b1fd61a65dbf1492553bd813719f140d4635",
+      "invocationSha256": "639660214b4e91468a82b0c36f32f7e0d99efde027f87df3826d74531246555e",
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "--project=firefox",
+        "playback.spec.js"
+      ],
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T20:12:57.801Z",
+        "duration": 26536.808,
+        "expected": 25,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": {
+        "asr-playback.spec.js": 6,
+        "auto-playback.spec.js": 15,
+        "playback.spec.js": 4
+      },
+      "core": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.ts"
+        },
+        "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+        "bytes": 378931
+      },
+      "installedPackages": 0,
+      "skips": []
+    },
+    {
+      "scope": "source",
+      "engine": "webkit",
+      "browser": "26.6",
+      "directory": "refactor/.cache/ci01-browser-matrix-source-webkit-playback",
+      "reportSha256": "a86da3a1b8f4754bed534c59e29aca993e0e9d1aebc4f661b2a8cbac26c86fd4",
+      "invocationSha256": "70e2732396ca23678490008b4b3a60c7f17121cc1e3acc841cca578b7b92b5f3",
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "--project=webkit",
+        "playback.spec.js"
+      ],
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T20:13:25.154Z",
+        "duration": 20634.668999999998,
+        "expected": 19,
+        "skipped": 6,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": {
+        "asr-playback.spec.js": 6,
+        "auto-playback.spec.js": 15,
+        "playback.spec.js": 4
+      },
+      "core": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.ts"
+        },
+        "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+        "bytes": 378931
+      },
+      "installedPackages": 0,
+      "skips": [
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR 2.1.0 + published-5.3.0: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR 2.1.0 + published: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR 2.1.0 + candidate: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR candidate + published-5.3.0: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR candidate + published: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR candidate + candidate: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "installed",
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "directory": "refactor/.cache/ci01-browser-matrix-installed-chromium-playback",
+      "reportSha256": "8b97bdd6c4975d31ffe0e1ea713da23b2259de68738a1459ecba0f244c05da97",
+      "invocationSha256": "c7ba08cb8c264cfbb8c3bb69d05cf2851c8e5ee75430d80cea4c2f669170fb90",
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "--project=chromium",
+        "playback.spec.js"
+      ],
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T20:13:46.791Z",
+        "duration": 16926.979,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": {
+        "asr-playback.spec.js": 6,
+        "playback.spec.js": 4
+      },
+      "core": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-ifGhEv\\artifacts\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+        "bytes": 208943
+      },
+      "installedPackages": 18,
+      "skips": []
+    },
+    {
+      "scope": "installed",
+      "engine": "firefox",
+      "browser": "155.0",
+      "directory": "refactor/.cache/ci01-browser-matrix-installed-firefox-playback",
+      "reportSha256": "b3b6bd5cde862b6c492e001419dc174203530c170790fa7b33b59c2a32acae15",
+      "invocationSha256": "bd0d1808df00277943b6f9e88ede1014173ddba9156696f013a605e0176b2ce0",
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "--project=firefox",
+        "playback.spec.js"
+      ],
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T20:14:04.746Z",
+        "duration": 20473.375,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": {
+        "asr-playback.spec.js": 6,
+        "playback.spec.js": 4
+      },
+      "core": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-ifGhEv\\artifacts\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+        "bytes": 208943
+      },
+      "installedPackages": 18,
+      "skips": []
+    },
+    {
+      "scope": "installed",
+      "engine": "webkit",
+      "browser": "26.6",
+      "directory": "refactor/.cache/ci01-browser-matrix-installed-webkit-playback",
+      "reportSha256": "f1a25f0d38d5d0f83517e6bcab76fc2e26595570cc08d6280f8bb396772b280e",
+      "invocationSha256": "041150cf613bb3ef5ddf17f88158f5f8b6e231b4b285cc20f214febdf475faac",
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "--project=webkit",
+        "playback.spec.js"
+      ],
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T20:14:26.236Z",
+        "duration": 9805.599,
+        "expected": 4,
+        "skipped": 6,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "files": {
+        "asr-playback.spec.js": 6,
+        "playback.spec.js": 4
+      },
+      "core": {
+        "source": {
+          "kind": "artifact",
+          "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-ifGhEv\\artifacts\\artplayer\\dist\\artplayer.js"
+        },
+        "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+        "bytes": 208943
+      },
+      "installedPackages": 18,
+      "skips": [
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR 2.1.0 + published-5.3.0: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR 2.1.0 + published: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR 2.1.0 + candidate: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR candidate + published-5.3.0: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR candidate + published: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        },
+        {
+          "file": "asr-playback.spec.js",
+          "title": "ASR candidate + candidate: native playback volume and mute",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Windows WebKit lacks native AudioContext/AudioWorkletNode",
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\asr-playback.spec.js",
+                "line": 27,
+                "column": 14
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "ciTests": {
+      "passed": 77,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 5997.7666,
+      "log": "refactor/.cache/ci01-browser-matrix-ci-tests-complete.log",
+      "logSha256": "5ffaa56850d47323810ed061542034e6822dee48ac4cb9fe180b0a4de6c4c5e2"
+    },
+    "actionlint": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-browser-matrix-actionlint.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-browser-matrix-lint.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "workflow": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-browser-matrix-check-ci.log",
+      "logSha256": "aa3b88b3eef95df7b31cf71b72c2f7ac7848f61446c05b7323f938cd3aa0a09e"
+    },
+    "impact": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-browser-matrix-impact.log",
+      "logSha256": "06a3447b7906d7a99cf48c14582cefb16e71a941995bc366e65c16dd10a7ca54"
+    },
+    "toolchain": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-browser-matrix-toolchain.log",
+      "logSha256": "8b974d72fa8aad724a7c501b148cb1c5506c0aa1c7c41cd4a0a1a2ba5b9a307a"
+    }
+  },
+  "preservedFailures": [
+    {
+      "log": "refactor/.cache/ci01-browser-matrix-ci-tests.log",
+      "cause": "Impact policy still required the prior unsplit test:package and test:browser steps; updated explicit jobs, invocations and scope conditions.",
+      "logSha256": "92460d476817b3b32fa3fcff408b266f34e177fb568596383637a995ddfff15e"
+    },
+    {
+      "log": "refactor/.cache/ci01-browser-matrix-ci-tests-fixed.log",
+      "cause": "Impact gate identity used command alone and rejected test:package in two independent jobs; identity now includes job and reviewed arguments with mandatory gate regressions.",
+      "logSha256": "dc37d63f4f98c3d71e9530c72ae1811be2c6ec93d826e91cfc02ed2ef3533714"
+    }
+  ],
+  "limitations": [
+    "Collection-only reports mark cases skipped without executing them; exact set equivalence is not playback acceptance.",
+    "Targeted playback uses the filename regex playback.spec.js: source selects asr-playback, auto-playback and playback; installed selects asr-playback and playback. This is not a full rerun.",
+    "WebKit has twelve existing ASR Web Audio capability skips across the two scopes, not successful ASR playback.",
+    "Local Windows engine runs do not verify remote Linux/macOS execution, cache behavior, runner queueing, cancellation scheduling, billing time or the 60-minute budget.",
+    "No prior Chapter/Audio/DASH/JASSUB failure or physical-device, SDK, type, license or release gate is closed by this CI split.",
+    "CI-01 stays doing; no push, deployment, branch-protection change or publication."
+  ]
+}

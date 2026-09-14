@@ -94,6 +94,23 @@ test('Policy cannot omit core consumers or claim stale installed-package coverag
   assert.throws(repo.model, /scope extraction/)
 })
 
+test('Each split CI invocation remains mandatory even when its sibling uses the same script', (t) => {
+  const repo = fixture(t)
+  const gates = structuredClone(repo.policy.gates)
+  for (let index = 0; index < gates.length; index++) {
+    repo.policy.gates = gates.filter((gate, candidate) => candidate !== index)
+    repo.write('refactor/impact-policy.json', repo.policy)
+    assert.throws(repo.model, /Missing mandatory ecosystem gate/)
+  }
+  repo.policy.gates = [...gates, gates[0]]
+  repo.write('refactor/impact-policy.json', repo.policy)
+  assert.throws(repo.model, /Duplicate impact gate/)
+  repo.policy.gates = structuredClone(gates)
+  repo.policy.gates.find(gate => gate.command === 'yarn test:browser:installed').condition = 'success()'
+  repo.write('refactor/impact-policy.json', repo.policy)
+  assert.throws(repo.model, /Only browser scopes/)
+})
+
 test('Shared/unknown files and computed imports conservatively expand; unsafe or unmapped package paths are rejected', (t) => {
   for (const file of ['yarn.lock', 'scripts/new-build-stage.mjs', 'types/new-boundary.d.ts'])
     assert.equal(analyzeImpact(actual, [file]).affectedPackages.length, 22)
@@ -127,6 +144,10 @@ test('CI workflow cannot silently skip or soften required impact gates', () => {
     (workflow) => { workflow.jobs.checks.steps.find(step => step.run?.startsWith('yarn ci:check')).if = false },
     (workflow) => { workflow.jobs['browser-smoke'].steps.find(step => step.uses?.startsWith('actions/checkout@')).if = false },
     (workflow) => { workflow.jobs['browser-smoke'].steps.find(step => step.uses?.startsWith('actions/checkout@')).with['fetch-depth'] = 1 },
+    (workflow) => { workflow.jobs['browser-smoke'].steps.find(step => step.run?.startsWith('yarn test:browser:source ')).if = 'success()' },
+    (workflow) => { workflow.jobs['browser-smoke'].steps.find(step => step.run?.startsWith('yarn test:browser:installed ')).run += ' --grep subset' },
+    (workflow) => { workflow.jobs['browser-smoke'].steps.find(step => step.run?.startsWith('yarn test:package --browser')).run = 'yarn test:package' },
+    (workflow) => { workflow.jobs['browser-consumers'].steps.find(step => step.run?.startsWith('yarn test:performance ')).run += ' || true' },
   ]) {
     const workflow = YAML.parse(source)
     edit(workflow)

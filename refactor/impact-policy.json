@@ -282,17 +282,38 @@
       "scope": "All library builds, i18n, editor declarations, docs site and existing import suites"
     },
     {
-      "job": "browser-smoke",
+      "job": "browser-consumers",
       "command": "yarn test:package",
       "scope": "Installed core/chapter consumers only; other package installation acceptance remains pending"
     },
     {
       "job": "browser-smoke",
-      "command": "yarn test:browser",
-      "scope": "All existing three-engine browser suites; does not imply every package/device has a suite"
+      "command": "yarn test:package",
+      "arguments": [
+        "--browser"
+      ],
+      "scope": "Prepare the complete reviewed installed browser roster independently for each OS/engine leg"
     },
     {
       "job": "browser-smoke",
+      "command": "yarn test:browser:source",
+      "arguments": [
+        "--project=${{ matrix.browser }}"
+      ],
+      "condition": "${{ !cancelled() }}",
+      "scope": "Complete source test collection across all three engines; source and historical/explicit controls retain their identities"
+    },
+    {
+      "job": "browser-smoke",
+      "command": "yarn test:browser:installed",
+      "arguments": [
+        "--project=${{ matrix.browser }}"
+      ],
+      "condition": "${{ !cancelled() }}",
+      "scope": "Complete declared installed test subset across all three engines; not all-package/device acceptance"
+    },
+    {
+      "job": "browser-consumers",
       "command": "yarn test:performance",
       "scope": "Existing installed performance and resource-cleanup scenarios"
     },

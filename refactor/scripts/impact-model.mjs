@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string -- GitHub matrix expressions are literal workflow policy. */
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -69,7 +70,7 @@ export function analyzeImpact(model, changedFiles) {
     requiredChecks: model.policy.gates,
     requiredCIJobs: [...new Set(model.policy.gates.map(gate => gate.job))].sort(),
     installedConsumerGaps: affectedPackages.filter(name => name !== model.policy.site && !model.policy.installedConsumerPackages.includes(name)),
-    limitation: 'CI gates remain unconditional. This dependency report selects no tests for omission and certifies neither missing package suites nor device/vendor acceptance.',
+    limitation: 'CI jobs remain required; both browser scopes also run after ordinary step failures. This dependency report selects no tests for omission and certifies neither missing package suites nor device/vendor acceptance.',
   }
 }
 
@@ -105,9 +106,18 @@ export function readImpactModel(directory) {
   const read = file => JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8'))
   const policy = read('refactor/impact-policy.json')
   assert.equal(policy.schemaVersion, 1)
-  const gateCommands = policy.gates.map(gate => gate.command)
+  const gateCommands = policy.gates.map(gate => [gate.job, gate.command, ...(gate.arguments || [])].join(' '))
   assert.equal(new Set(gateCommands).size, gateCommands.length, 'Duplicate impact gate')
-  for (const command of ['yarn ci:check', 'yarn ci:build', 'yarn test:package', 'yarn test:browser', 'yarn test:coverage', 'yarn test:performance'])
+  for (const command of [
+    'checks yarn ci:check',
+    'checks yarn ci:build',
+    'browser-consumers yarn test:package',
+    'browser-smoke yarn test:package --browser',
+    'browser-smoke yarn test:browser:source --project=${{ matrix.browser }}',
+    'browser-smoke yarn test:browser:installed --project=${{ matrix.browser }}',
+    'coverage yarn test:coverage',
+    'browser-consumers yarn test:performance',
+  ])
     assert(gateCommands.includes(command), `Missing mandatory ecosystem gate: ${command}`)
   const names = policy.packages.map(pkg => pkg.name).sort()
   assert.equal(new Set(names).size, names.length, 'Duplicate mapped package')
@@ -188,6 +198,10 @@ export function readImpactModel(directory) {
   for (const gate of policy.gates) {
     assert(/^yarn [a-z][\w:-]*$/.test(gate.command), 'Impact gates require an explicit repository script')
     assert(Object.hasOwn(scripts, gate.command.slice(5)), `Missing required command: ${gate.command}`)
+    if (gate.arguments !== undefined)
+      assert(Array.isArray(gate.arguments) && gate.arguments.length === 1 && ['--browser', '--project=${{ matrix.browser }}'].includes(gate.arguments[0]), 'Impact gate arguments must use a reviewed complete browser scope')
+    if (gate.condition !== undefined)
+      assert(gate.condition === '${{ !cancelled() }}' && ['yarn test:browser:source', 'yarn test:browser:installed'].includes(gate.command), 'Only browser scopes may collect evidence after ordinary failures')
   }
   const consumerSource = ts.createSourceFile('package-consumer.mjs', fs.readFileSync(path.join(directory, 'scripts/package-consumer.mjs'), 'utf8'), ts.ScriptTarget.Latest, true)
   const consumerNames = consumerSource.statements.filter(ts.isVariableStatement).flatMap(statement => [...statement.declarationList.declarations]).filter(node => ts.isIdentifier(node.name) && node.name.text === 'names')
@@ -213,17 +227,18 @@ export function validateImpactWorkflow(text, model) {
     const job = workflow.jobs?.[gate.job]
     assert(job && !Object.hasOwn(job, 'if') && !job['continue-on-error'], `Required impact job must not be conditional or allowed to fail: ${gate.job}`)
     const steps = job.steps || []
-    const command = gate.command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const invocation = [gate.command, ...(gate.arguments || [])].join(' ')
+    const command = invocation.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     assert(steps.some((step) => {
-      if (Object.hasOwn(step, 'if') || step['continue-on-error'] || typeof step.run !== 'string')
+      if ((gate.condition ? step.if !== gate.condition : Object.hasOwn(step, 'if')) || step['continue-on-error'] || typeof step.run !== 'string')
         return false
       const shell = step.shell || job.defaults?.run?.shell || workflow.defaults?.run?.shell
       const defaultBash = !shell && /^(?:ubuntu|macos)-/.test(job['runs-on'])
       if (shell !== 'bash' && !defaultBash)
         return false
       const first = step.run.split(/\r?\n/).map(line => line.trim()).find(line => line && !line.startsWith('#'))
-      return first === gate.command || (shell === 'bash' && new RegExp(`^${command} 2>&1 \\| tee refactor/\\.cache/ci/[a-z-]+\\.log$`).test(first))
-    }), `Required unconditional command missing from ${gate.job}: ${gate.command}`)
+      return first === invocation || (shell === 'bash' && new RegExp(`^${command} 2>&1 \\| tee refactor/\\.cache/ci/[a-z-]+\\.log$`).test(first))
+    }), `Required command or execution condition missing from ${gate.job}: ${invocation}`)
     assert(steps.some(step => step.uses?.startsWith('actions/checkout@') && !Object.hasOwn(step, 'if') && !step['continue-on-error'] && step.with?.['fetch-depth'] === 0), `Impact and compatibility checks require full history: ${gate.job}`)
   }
 }

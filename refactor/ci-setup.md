@@ -6,7 +6,8 @@
 `scripts/browser-validation/scope.ts`。两步不
 吞失败，普通失败后仍保存另一范围的证据，分别上传browser-source/browser-installed。
 入口与报告规则见[维护说明](../scripts/browser-validation/README.md)。source全量
-耗时/60分钟预算、其余插件安装矩阵与远端运行仍待CI-01/CI-04，不计为已通过。
+目前按 OS × 引擎拆分播放作业，消费者另行执行；各作业的实际远端耗时/60分钟预算、
+其余插件安装矩阵与远端运行仍待CI-01/CI-04，不计为已通过。
 
 ## 本地命令
 
@@ -27,7 +28,7 @@
 | `yarn check:editor-types` | 只读核对全部编辑器声明、SDK notices 和实际 libUris；主 TS 5.9.3/历史 4.3.5 整组语义检查，ci:check 执行 |
 | `yarn build:site-assets` / `yarn check:site-assets` | 从站点 browser/ TS 生成三个经典脚本；check 只读，root build:docs 先生成；完整 VitePress 构建另行验收 |
 | `yarn typecheck:site-assets` | 严格检查站点 browser/ 模块；生成脚本由 typecheck:docs-tools 的 checkJs 覆盖；均进入 ci:check |
-| `yarn test:react-consumer` / `yarn test:vue-consumer` | 仓库外 tarball 安装、原框架示例、开发/生产三引擎；browser-smoke 执行并上传独立目录，本地证据不代替远端矩阵 |
+| `yarn test:react-consumer` / `yarn test:vue-consumer` | 仓库外 tarball 安装、原框架示例、开发/生产三引擎；browser-consumers 每个系统执行一次并上传独立目录，本地证据不代替远端矩阵 |
 | `yarn test:unit` | 原播放/DASH 回归、同夹具的新旧公共契约与 JS/TS loader 验证 |
 | `yarn test:node` | test:unit 加工具链/文档构建回归，保留原 test:playback/test:dash-control 入口 |
 | `yarn test` | 统一执行 Node 与基线测试，源码/夹具维护入口见仓库 test/README.md |
@@ -38,7 +39,7 @@
 | `yarn check:contracts --report` | 校验12类契约/22包归属、版本及报告对应；--write更新静态表，详见 [维护说明](contract-coverage.md) |
 | `yarn ci:check` | 严格 Node/Yarn/锁检查、计划、只读 lint、类型、Node 和基线测试；允许写忽略缓存，不修改源码 |
 | `yarn check:ci` | 只读校验实际工作流的完整系统矩阵、安装、缓存、报告和最终检查；已接入 ci:check |
-| `yarn test:ci` | CI 汇总退出码、工作流/影响分析反例与隔离运行时校验；SITE-SMOKE-01 实测 50 项 |
+| `yarn test:ci` | CI 汇总退出码、工作流/影响分析反例与隔离运行时校验；CI-01 引擎拆分后实测 77 项 |
 | `yarn test:package:runtime` | 标准 Node 重装同一已检查 tarball；须先运行 test:package，其他 Node 使用显式 --expected-node |
 | `yarn ci:build` | 21 库包、i18n、编辑器声明、文档 readiness smoke 和文档站构建，以及构建后包导入 smoke；会生成 dist 和 docs 内容 |
 | `yarn check:impact --report` | 读取实际依赖/验证关系和Git变更，核对workflow必需命令，写CI影响报告；已接入ci:check，见[影响映射](impact-analysis.md) |
@@ -58,8 +59,9 @@ Actions 固定完整 SHA，Node 来自 .node-version，Yarn 固定 1.22.22；安
 | --- | --- | --- | --- |
 | checks | Linux、Windows | ci:check、ci:build；Linux 额外执行 actionlint | 45 分钟 |
 | coverage | Linux、Windows | 既有源码映射与生命周期覆盖检查 | 15 分钟 |
-| browser-smoke | Linux、Windows、macOS | 同一 core/chapter tarball 的 Node 20/22/24 消费，三浏览器、iframe history、性能 | 60 分钟 |
-| CI result | Linux | 汇总以上三个作业组，所有结果必须为 success | 5 分钟 |
+| browser-smoke | Linux、Windows、macOS × Chromium、Firefox、WebKit | 每个引擎独立打包/冻结安装完整 browser 包清单，再执行该引擎全部 source 与已列出的 installed 用例；9 个组合，最多同时运行 6 个 | 每个组合 60 分钟 |
+| browser-consumers | Linux、Windows、macOS | 同一 core/chapter tarball 的 Node 20/22/24 消费，React/Vue 三引擎、iframe history、性能；每个系统一次，最多同时运行 3 个 | 每个系统 60 分钟 |
+| CI result | Linux | 汇总以上四个作业组，所有结果必须为 success | 5 分钟 |
 
 构建与浏览器工具使用 .node-version 的 24.21.0。安装运行时消费分别使用固定 20.19.0、
 22.12.0 和标准 Node，不重新构建候选。它们是根工具 engines 的边界测试点，发布包没有
@@ -68,11 +70,19 @@ Actions 固定完整 SHA，Node 来自 .node-version，Yarn 固定 1.22.22；安
 矩阵不设置 fail-fast，单个系统失败后仍尽量收集其他系统证据；显式 bash 保留 tee
 上游命令的失败退出码。影响报告继续扩大核心/共享变更到全生态，当前不缩减必需作业。
 
-稳定名称为 **CI result**。它以 always() 依赖 checks、coverage、browser-smoke，结构化
+稳定名称为 **CI result**。它以 always() 依赖 checks、coverage、browser-smoke、browser-consumers，结构化
 读取 needs；失败、取消、跳过、缺失、错误 JSON 或未知额外作业都失败。增加独立 job 时
 同时修改 ci-summary.mjs 的 requiredJobs、workflow needs、矩阵策略和测试，防止遗漏汇总。
 全局取消/runner 故障下的真实调度仍待 CI-04；本地退出码测试不证明远端作业一定被调度。
 required checks 的实际绑定尚未设置，不能宣称分支保护已经生效。
+
+播放与消费者作业互不依赖，避免一组失败阻止另一组采集证据。播放步骤仅传入
+`--project=${{ matrix.browser }}`；不添加 grep、文件过滤、重试或容许失败。
+每个组合内部仍顺序执行 source/installed，使用独立报告目录和端口；不同组合由
+独立 runner 隔离。浏览器 artifact 名包含 OS、引擎、run ID 和 attempt，消费者
+artifact 使用独立前缀。每个 runner 冻结安装和构建自己的产物，代价是增加 runner
+数量和重复打包时间；下载缓存仍使用精确版本键。这是减少单任务串行工作量的调整，
+实际排队时间、总计费分钟和远端速度仍待验证。
 
 ## 下载缓存、日志与维护
 
@@ -172,7 +182,7 @@ build:ts 生成声明 URL 清单后重建站点浏览器产物，check:editor-ty
 此选项不表示全生态类型、SDK 或发布准入。
 
 十八包安装清单的弹幕/Mask 子集实跑 399 项耗时 22.5 分钟，见
-[CI-01 记录](changes/2026-09-15-CI-01-danmuku-installed.md)。当前单个
-browser-smoke 仍串行运行全部 source/installed 和其他消费者/性能检查，
-60 分钟预算尚未经过完整远端验证；后续必须分片并核定时长，保留完整用例
-和失败报告。不能从本地子集通过推断整个工作流可在预算内完成。
+[CI-01 记录](changes/2026-09-15-CI-01-danmuku-installed.md)。随后完成上述引擎与
+消费者拆分，见[拆分记录](changes/2026-09-15-CI-01-browser-matrix.md)。60 分钟预算
+尚未经过完整远端验证；保留完整用例和失败报告，后续依据各组合实测数据决定是否
+还需按文件分片。不能从本地子集通过推断整个工作流可在预算内完成。

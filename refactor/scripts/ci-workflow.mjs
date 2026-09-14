@@ -11,7 +11,9 @@ const systems = {
   'checks': ['ubuntu-latest', 'windows-latest'],
   'coverage': ['ubuntu-latest', 'windows-latest'],
   'browser-smoke': ['ubuntu-latest', 'windows-latest', 'macos-latest'],
+  'browser-consumers': ['ubuntu-latest', 'windows-latest', 'macos-latest'],
 }
+const engines = ['chromium', 'firefox', 'webkit']
 
 export function validateCIWorkflow(source) {
   const workflow = YAML.parse(source, { uniqueKeys: true })
@@ -46,14 +48,14 @@ export function validateCIWorkflow(source) {
       continue
     assert(!Object.hasOwn(job, 'if'), 'Required matrix jobs must not be skipped')
     assert.equal(job['runs-on'], '${{ matrix.os }}')
-    assert.deepEqual(job.strategy.matrix, { os: systems[id] }, 'Do not silently narrow the OS matrix or exclude combinations')
+    assert.deepEqual(job.strategy.matrix, id === 'browser-smoke' ? { os: systems[id], browser: engines } : { os: systems[id] }, 'Do not silently narrow the OS/engine matrix or exclude combinations')
     assert.equal(job.strategy['fail-fast'], false, 'Do not cancel other matrix evidence after a failure')
     assert.equal(job.defaults?.run?.shell, 'bash', 'Tee pipelines require the explicit Actions bash pipefail shell')
     assert(upload.with.name.includes('matrix.os'), 'Matrix artifacts must have distinct names')
     const contextIndex = job.steps.findIndex(step => step.id === 'context' && step.run === 'node scripts/ci-context.mjs' && !Object.hasOwn(step, 'if'))
     assert(contextIndex >= 0, 'Cache inputs must come from the checked source')
     const caches = job.steps.filter(step => step.uses?.startsWith('actions/cache@'))
-    assert.equal(caches.length, id === 'browser-smoke' ? 2 : 1, 'Only explicit Yarn and browser download caches are expected')
+    assert.equal(caches.length, id.startsWith('browser-') ? 2 : 1, 'Only explicit Yarn and browser download caches are expected')
     for (const cache of caches) {
       assert(job.steps.indexOf(cache) > contextIndex, 'Record context before restoring caches')
       assert(!cache.with['restore-keys'] && !cache.with.enableCrossOsArchive, 'Do not restore loosely matched or cross-OS downloads')
@@ -67,33 +69,47 @@ export function validateCIWorkflow(source) {
     assert(installIndex > contextIndex && caches.filter(cache => cache.with.path.includes('yarn_cache')).every(cache => job.steps.indexOf(cache) < installIndex), 'Always perform a frozen install after Yarn cache restore')
   }
   const browser = workflow.jobs['browser-smoke']
-  assert(browser.steps.some(step => step.run?.startsWith('yarn test:browser:install --with-deps') && !Object.hasOwn(step, 'if')), 'Browser dependencies must install even on cache hits')
-  let consumerIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package'))
+  const consumers = workflow.jobs['browser-consumers']
+  for (const job of [browser, consumers]) {
+    assert(!Object.hasOwn(job, 'needs'), 'Playback and consumers must collect independent evidence after sibling failures')
+    assert(job.steps.some(step => step.run === 'yarn test:browser:install --with-deps 2>&1 | tee refactor/.cache/ci/browser-install.log' && !Object.hasOwn(step, 'if')), 'Browser dependencies must install even on cache hits')
+  }
+  assert.equal(browser.strategy['max-parallel'], 6, 'Bound the nine playback legs to six concurrent runners')
+  assert.equal(consumers.strategy['max-parallel'], 3, 'Run consumers once per OS without engine duplication')
+  assert.equal(browser.steps.filter(step => step.uses?.startsWith('actions/setup-node@')).length, 1, 'Playback jobs retain the canonical runtime throughout')
+  let consumerIndex = consumers.steps.findIndex(step => step.run?.startsWith('yarn test:package 2>&1 | tee refactor/.cache/ci/package.log\n'))
+  assert(consumerIndex >= 0 && !Object.hasOwn(consumers.steps[consumerIndex], 'if') && consumers.steps[consumerIndex].run.includes('ARTPLAYER_BROWSER_ARTIFACTS=') && consumers.steps[consumerIndex].run.includes('GITHUB_ENV'), 'Prepare and select the core/chapter consumer artifacts')
   for (const [id, version, command] of [
     ['consumer-node-20', '20.19.0', 'node scripts/package-runtime.mjs --expected-node 20.19.0 2>&1 | tee refactor/.cache/ci/consumer-node-20.log'],
     ['consumer-node-22', '22.12.0', 'node scripts/package-runtime.mjs --expected-node 22.12.0 2>&1 | tee refactor/.cache/ci/consumer-node-22.log'],
     ['restore-canonical-node', null, 'node scripts/package-runtime.mjs --canonical 2>&1 | tee refactor/.cache/ci/consumer-node-canonical.log'],
   ]) {
-    const index = browser.steps.findIndex(step => step.id === id)
+    const index = consumers.steps.findIndex(step => step.id === id)
     assert(index > consumerIndex, 'Build once before each ordered consumer runtime switch')
-    const step = browser.steps[index]
+    const step = consumers.steps[index]
     assert(step.uses?.startsWith('actions/setup-node@') && !Object.hasOwn(step, 'if'), 'Consumer Node setup cannot be skipped')
     assert.deepEqual(step.with, version ? { 'node-version': version, 'package-manager-cache': false } : { 'node-version-file': '.node-version', 'package-manager-cache': false }, 'Use exact consumer versions and restore the canonical browser runtime')
-    const probe = browser.steps[index + 1]
+    const probe = consumers.steps[index + 1]
     assert(probe?.run === command && !Object.hasOwn(probe, 'if'), 'Run the installed consumer on the selected Node')
     consumerIndex = index + 1
   }
-  assert(browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser:source ')) > consumerIndex, 'Browser tools must run after canonical Node restoration')
-  const reactIndex = browser.steps.findIndex(step => step.run === 'yarn test:react-consumer 2>&1 | tee refactor/.cache/ci/react-consumer.log')
-  assert(reactIndex > consumerIndex && !Object.hasOwn(browser.steps[reactIndex], 'if'), 'Run React installed consumers after restoring canonical Node')
-  assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/react-consumer-*/')), 'Retain React consumer failure evidence')
-  const vueIndex = browser.steps.findIndex(step => step.run === 'yarn test:vue-consumer 2>&1 | tee refactor/.cache/ci/vue-consumer.log')
-  assert(vueIndex > consumerIndex && !Object.hasOwn(browser.steps[vueIndex], 'if'), 'Run Vue installed consumers after restoring canonical Node')
-  assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/vue-consumer-*/')), 'Retain Vue consumer failure evidence')
+  const consumerUpload = consumers.steps.find(step => step.uses?.startsWith('actions/upload-artifact@'))
+  for (const [command, log, directory] of [
+    ['test:react-consumer', 'react-consumer', 'react-consumer-*/'],
+    ['test:vue-consumer', 'vue-consumer', 'vue-consumer-*/'],
+    ['test:iframe-history', 'iframe-history', 'iframe-history/'],
+    ['test:performance', 'performance', 'performance/'],
+  ]) {
+    const index = consumers.steps.findIndex(step => step.run === `yarn ${command} 2>&1 | tee refactor/.cache/ci/${log}.log`)
+    assert(index > consumerIndex && !Object.hasOwn(consumers.steps[index], 'if'), 'Run complete consumers after restoring canonical Node')
+    assert(consumerUpload.with.path.split('\n').includes(`refactor/.cache/${directory}`), 'Retain consumer failure evidence')
+    assert(!browser.steps.some(step => step.run?.includes(`yarn ${command}`)), 'Do not repeat all-engine consumers in each playback leg')
+    consumerIndex = index
+  }
   const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --browser '))
-  const sourceEngineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:source 2>&1 | tee refactor/.cache/ci/browser-source.log')
-  const engineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:installed 2>&1 | tee refactor/.cache/ci/browser-installed.log')
-  assert(extraIndex > Math.max(consumerIndex, reactIndex, vueIndex) && extraIndex < engineIndex, 'Prepare the shared installed browser roster after consumer probes and before browser checks')
+  const sourceEngineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:source --project=${{ matrix.browser }} 2>&1 | tee refactor/.cache/ci/browser-source.log')
+  const engineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:installed --project=${{ matrix.browser }} 2>&1 | tee refactor/.cache/ci/browser-installed.log')
+  assert(extraIndex > browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser:install ')) && extraIndex < engineIndex, 'Prepare the shared installed browser roster in every engine job before browser checks')
   assert(!Object.hasOwn(browser.steps[extraIndex], 'if') && browser.steps[extraIndex].run.includes('GITHUB_ENV') && browser.steps[extraIndex].run.includes('ARTPLAYER_BROWSER_ARTIFACTS='), 'Always select the additional installed browser artifact map')
   assert(sourceEngineIndex > extraIndex && sourceEngineIndex < engineIndex, 'Retain complete source checks before the additional installed suite')
   for (const index of [sourceEngineIndex, engineIndex]) {
@@ -101,6 +117,7 @@ export function validateCIWorkflow(source) {
     assert(!browser.steps[index]['continue-on-error'], 'Browser scope failures must fail CI')
   }
   const browserUpload = browser.steps.find(step => step.uses?.startsWith('actions/upload-artifact@'))
+  assert(browserUpload.with.name.includes('matrix.browser'), 'Browser artifacts must be distinct across engines')
   for (const directory of ['refactor/.cache/browser-source/', 'refactor/.cache/browser-installed/'])
     assert(browserUpload.if === 'always()' && browserUpload.with.path.split('\n').includes(directory), 'Retain independent source and installed reports even on failure')
   const pages = workflow.jobs.checks.steps.find(step => step.uses?.startsWith('actions/upload-pages-artifact@'))
@@ -116,7 +133,7 @@ export function validateCIWorkflow(source) {
     assert(index > previous && index < workflow.jobs.checks.steps.indexOf(pages) && workflow.jobs.checks.steps[index].if === pages.if, 'Staged entrypoints require ordered browser installation and verification before upload')
     previous = index
   }
-  return { jobs: requiredJobs, systems, summary: summary.name }
+  return { jobs: requiredJobs, systems, engines, summary: summary.name }
 }
 
 export function validatePagesWorkflow(source) {

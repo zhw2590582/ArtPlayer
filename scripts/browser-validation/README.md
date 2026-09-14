@@ -49,6 +49,17 @@ per-engine/file counts and limitations; this is not full ecosystem or remote CI.
 Local `--grep`, file names, workers and project options are supported for diagnosis;
 config/output/report overrides and passing with zero tests are rejected.
 
+CI runs a complete OS × engine matrix (Linux, Windows, macOS; Chromium, Firefox,
+WebKit). Each playback job prepares `test:package --browser`, then invokes both
+scope launchers with only `--project=${{ matrix.browser }}`. Matrix jobs have
+independent runners, artifact names include the engine, and the final `CI result`
+requires every combination. Node/framework consumers, iframe history and
+performance run once per OS in the separate `browser-consumers` job. This avoids
+repeating their existing three-engine suites for every playback engine. No test
+filter or retry policy changed. Remote timings remain unverified; collection
+equivalence proves coverage selection, not playback success. See
+`../../refactor/changes/2026-09-15-CI-01-browser-matrix.md`.
+
 The six-package Ads expansion ran 426 cases across 13 files: 425 passed and one
 WebKit candidate Chapter quality-readiness check failed. All 171 Ads cases passed,
 including 108 with verified candidate tarballs; this is not a green full suite.

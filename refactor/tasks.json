@@ -776,7 +776,9 @@
         "changes/2026-09-15-CI-01-jassub-installed.md",
         "baselines/ci-jassub-installed-validation.json",
         "changes/2026-09-15-CI-01-danmuku-installed.md",
-        "baselines/ci-danmuku-installed-validation.json"
+          "baselines/ci-danmuku-installed-validation.json",
+          "changes/2026-09-15-CI-01-browser-matrix.md",
+          "baselines/ci-browser-matrix-validation.json"
       ]
     },
     {

@@ -4,7 +4,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { ciContext } from './ci-context.mjs'
 
-export const requiredJobs = ['checks', 'coverage', 'browser-smoke']
+export const requiredJobs = ['checks', 'coverage', 'browser-smoke', 'browser-consumers']
 
 export function evaluateJobs(needs) {
   const object = needs !== null && typeof needs === 'object' && !Array.isArray(needs)
