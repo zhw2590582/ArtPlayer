@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 261 项，范围 22 个包及工作区/示例。
 
-状态：todo 50 / doing 20 / blocked 0 / done 191 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 49 / doing 20 / blocked 0 / done 192 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -219,7 +219,7 @@
 | PKG-DASH-03 | artplayer-plugin-dash-control<br>整理内部职责与资源 | PKG-DASH-02, CORE-11, CORE-14 | 能力适配保留 SDK 4.x 与 5.x，稳定 ID 映射、ABR 状态、UI 清理和生命周期职责分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-DASH-04 | artplayer-plugin-dash-control<br>迁移自有源码和公开类型 | PKG-DASH-03, ENG-04, ENG-06, CORE-07 | dash.js adapter、selector 和回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-DASH-SEEK-01 | artplayer-plugin-dash-control<br>修复 SDK 4.5.2 暂停跳转后的缓冲指标停滞 | PKG-DASH-04 | 按版本和实测空缓冲限定的指标同步、生命周期守卫及真实 SDK 旧红新绿 | 新插件在新旧核心及 Chromium/Firefox 原位置回归通过；不修改 SDK 方法/配置、媒体时间或删除缓冲；旧 SDK 原生缺陷与旧插件限制独立记录，不宣称第三方本体已修复 | H | done |
-| PKG-DASH-MENU-01 | artplayer-plugin-dash-control<br>定位并修复 SDK 刷新期间设置选项不可见 | PKG-DASH-SEEK-01 | 真实 SDK 菜单点击失败根因、对应兼容修复及新旧核心回归 | 保留 legacy/旧核心/SDK5.2.1 的原失败；确定菜单在点击过程中不可见的原因；不靠 force 点击、扩大超时或重复运行覆盖问题；main/legacy 质量与音轨设置及 SDK 刷新组合通过 | H | todo |
+| PKG-DASH-MENU-01 | artplayer-plugin-dash-control<br>定位并修复 SDK 刷新期间设置选项不可见 | PKG-DASH-SEEK-01 | 真实 SDK 菜单点击失败根因、对应兼容修复及新旧核心回归 | 保留 legacy/旧核心/SDK5.2.1 的原失败；确定菜单在点击过程中不可见的原因；不靠 force 点击、扩大超时或重复运行覆盖问题；main/legacy 质量与音轨设置及 SDK 刷新组合通过 | H | done |
 | PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22, PKG-DASH-SEEK-01 | 固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-DASH-06 | artplayer-plugin-dash-control<br>验证分发并同步文档 | PKG-DASH-05, ENG-07, PKG-DASH-MENU-01 | dash.control.js、支持的 dash.js 版本与产物 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
@@ -563,7 +563,7 @@
 - PKG-DASH-03: [记录](changes/2026-09-12-PKG-DASH-03-runtime.md) [记录](baselines/dash-runtime.json) [记录](dash-validation.md)
 - PKG-DASH-04: [记录](changes/2026-09-12-PKG-DASH-04-types.md) [记录](baselines/dash-types-validation.json) [记录](dash-validation.md)
 - PKG-DASH-SEEK-01: [记录](changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md) [记录](baselines/dash-seek-recovery-validation.json)
-- PKG-DASH-MENU-01: [记录](changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md) [记录](baselines/dash-seek-recovery-validation.json)
+- PKG-DASH-MENU-01: [记录](changes/2026-09-14-PKG-DASH-MENU-01-settings-navigation.md) [记录](baselines/dash-menu-validation.json) [记录](dash-validation.md)
 - PKG-DASH-05: [记录](changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md) [记录](baselines/dash-sdk.json) [记录](baselines/dash-sdk-checkpoint.json) [记录](dash-validation.md) [记录](changes/2026-09-12-PKG-DASH-05-sdk-types.md) [记录](baselines/dash-sdk-types-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-sdk-events.md) [记录](baselines/dash-sdk-events-validation.json) [记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md) [记录](baselines/dash-seek-diagnosis.json)
 - PKG-MULTI-SUB-01: [记录](baselines/multiple-subtitles-release.json) [记录](baselines/multiple-subtitles-contract.md) [记录](baselines/multiple-subtitles-contract-validation.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-01-contract.md)
 - PKG-MULTI-SUB-02: [记录](baselines/multiple-subtitles-failures.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-02-failures.md)

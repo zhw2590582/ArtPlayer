@@ -49,5 +49,8 @@ MIT © Harvey Zhao
 
 ## Maintenance
 
+Automatic SDK refresh keeps an open quality or audio settings menu usable while
+updating its selected item. Explicit `update()` keeps its existing behavior.
+
 See [ARCHITECTURE.md](ARCHITECTURE.md) for module ownership, compatibility rules,
 test commands and the remaining real SDK playback validation scope.

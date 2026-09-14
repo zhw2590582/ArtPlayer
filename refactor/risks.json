@@ -6275,7 +6275,7 @@
       "id": "DASH-MENU-01",
       "title": "SDK 5.2.1 播放中设置质量选项在点击时变为不可见",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-DASH-MENU-01",
         "PKG-DASH-05",
@@ -6285,8 +6285,15 @@
         "refactor/changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
         "refactor/baselines/dash-seek-recovery-validation.json"
       ],
-      "compatibleResolution": "最终 legacy 定向矩阵复现：旧核心、新插件、Chromium 的180p选项先不稳定后不可见；保留点击失败与trace。SDK5.2.1不进入4.5.2指标修复分支，但菜单根因及历史来源尚未确定。",
-      "closureCriteria": "定位实际隐藏/刷新时序并提供可复现旧红新绿；新旧核心、main/legacy、质量/音轨、SDK刷新与销毁组合验证，不靠force点击或重跑覆盖失败。"
+      "compatibleResolution": "SDK自动刷新前捕获本插件拥有的打开子菜单，在两项设置更新后按新selector恢复；显式update、关闭/移除/接管以及嵌套更新保持原边界。守卫SDK身份、revision、销毁与菜单所有权。",
+      "closureCriteria": "定位实际隐藏/刷新时序并提供可复现旧红新绿；新旧核心、main/legacy、质量/音轨、SDK刷新与销毁组合验证，不靠force点击或重跑覆盖失败。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-DASH-MENU-01-settings-navigation.md",
+        "refactor/baselines/dash-menu-validation.json",
+        "test/browser/dash-sdk.spec.js",
+        "test/dash-events.test.js"
+      ],
+      "resolutionRationale": "原trace显示设置仍打开但导航退回根面板；真实SDK刷新在四组核心/SDK组合复现相同失败。修复后源码92、main设置32、legacy完整候选92通过，新旧核心/两SDK/两引擎覆盖质量及音轨，原失败与未加force/延长超时的回归均保留。Node446验证三格式及重入/销毁边界；DASH其他SDK/设备/发布风险仍独立开放。"
     }
   ]
 }

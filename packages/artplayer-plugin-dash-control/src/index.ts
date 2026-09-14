@@ -20,7 +20,18 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
     const subscriptions: [EventName, Cleanup][] = []
     const observer = observeSDK<Level, Track>({
       active: dash => !closed && !art.isDestroy && art.dash === dash,
-      refresh: update,
+      refresh() {
+        const dash = art.dash
+        let version = revision
+        const current = () => !closed && !art.isDestroy && art.dash === dash && revision === version
+        const restore = quality.captureNavigation(current) || audio.captureNavigation(current)
+        if (!current())
+          return
+        version++
+        update()
+        if (current())
+          restore?.()
+      },
       reset() {
         const version = ++revision
         clear(() => version === revision)

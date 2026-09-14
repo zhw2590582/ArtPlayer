@@ -1,4 +1,4 @@
-import type { DisplayConfig, Label, MenuHost, MenuModel, SelectorItem, Valid } from './types'
+import type { Cleanup, DisplayConfig, Label, MenuHost, MenuModel, SelectorItem, Valid } from './types'
 
 export function createMenu<Item extends SelectorItem>(art: MenuHost, name: string, icon: string) {
   let current: object | undefined
@@ -70,5 +70,21 @@ export function createMenu<Item extends SelectorItem>(art: MenuHost, name: strin
     }
   }
 
-  return { update, clear }
+  function captureNavigation(active: Valid): Cleanup | undefined {
+    const setting = art.setting
+    const item = setting.find?.(name)
+    const callback = owned.get('setting')
+    if (!active() || !callback || setting.show !== true || item?.onSelect !== callback || !item.selector || setting.active !== item.selector || typeof setting.render !== 'function')
+      return
+    return () => {
+      if (!active() || art.setting !== setting || setting.show !== true || !setting.option || setting.active !== setting.option)
+        return
+      const replacement = setting.find?.(name)
+      const callback = owned.get('setting')
+      if (active() && callback && replacement?.onSelect === callback && replacement.selector)
+        setting.render?.(replacement.selector)
+    }
+  }
+
+  return { update, clear, captureNavigation }
 }

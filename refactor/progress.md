@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-DASH-MENU-01 SDK 刷新设置子菜单修复完成
+
+原legacy设置点击失败的trace显示根面板取代质量子菜单，setting仍显示。
+真实SDK刷新四组旧红用例全部复现；在插件自动refresh中捕获并在两项菜单更新后
+恢复拥有的打开selector，显式update维持旧行为。新旧核心/两SDK/两引擎设置32项
+通过，最终源码完整候选92通过；核验tarball的main设置32、legacy完整候选92通过。
+三格式及源码Node446、仓库外安装/冻结重装与五组类型通过，严格TS/lint通过，
+根lint仍1个既有warning。嵌套update旧版本守卫两项失败补修后通过；销毁和接管不复活。
+
+关闭DASH-MENU-01，原legacy75/1报告与四个新复现均保留，没有force点击、扩大超时
+或覆盖旧失败。辅助提取最初失败后的运行按真实输入计作源码；产物修正后独立验证。
+见[记录](changes/2026-09-14-PKG-DASH-MENU-01-settings-navigation.md)和
+[证据](baselines/dash-menu-validation.json)。261项：192 done、20 doing、49 todo。
+DASH-SEEK-01的裸SDK/旧插件限制、DASH05/06、设备/远端CI及全局发布仍开放。
+本任务独立本地提交并完成提交审计后继续其他插件与组合验收；没有push或发布。
+
 ## PKG-DASH-SEEK-01 暂停跳转缓冲指标修复完成
 
 仅在dash.js 4.5.2真实空缓冲且缓存指标陈旧时同步零值，恢复SDK自身下载调度。

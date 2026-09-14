@@ -330,6 +330,39 @@ for (const version of ['4.5.2', '5.2.1']) {
 for (const core of ['published', 'candidate']) {
   for (const version of ['4.5.2', '5.2.1']) {
     for (const type of ['quality', 'audio']) {
+      test(`${core} core / DASH ${version}: SDK refresh preserves the open ${type} settings panel`, async ({ page }, testInfo) => {
+        await openDash(page, version, core, 'candidate', testInfo)
+        await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
+        await page.locator('#play').click()
+        await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.3)
+        await page.locator('.art-control-setting').click()
+        await page.locator(`[data-name="dash-${type}"]`).click()
+        await page.evaluate((type) => {
+          const { dash } = window.art
+          if (type === 'quality') {
+            dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: false } } } })
+            if (dash.setQualityFor)
+              dash.setQualityFor('video', 1)
+            else
+              dash.setRepresentationForTypeById('video', '1')
+          }
+          else {
+            dash.setCurrentTrack(dash.getTracksFor('audio').find(track => track.lang === 'fr'))
+          }
+        }, type)
+        const changed = type === 'quality' ? '180p' : 'fr'
+        await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(changed)
+        await expect.poll(() => page.evaluate(type => window.art.setting.active === window.art.setting.find(`dash-${type}`).selector, type)).toBe(true)
+        const label = type === 'quality' ? '90p' : 'en'
+        await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()
+        if (type === 'quality')
+          await expect.poll(() => page.evaluate(() => window.art.video.videoHeight)).toBe(90)
+        else
+          await expect.poll(() => page.evaluate(() => window.art.dash.getCurrentTrackFor('audio').lang)).toBe('en')
+        await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(label)
+        expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
+      })
+
       test(`${core} core / DASH ${version}: actual settings ${type} selection survives SDK refresh`, async ({ page }, testInfo) => {
         await openDash(page, version, core, 'candidate', testInfo)
         await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)

@@ -50,6 +50,108 @@ function seekHost() {
   return { ...host, samples, levels, buffers, metrics, seekState: state }
 }
 
+function navigationHost(version) {
+  const host = eventHost(version)
+  const setting = host.art.setting
+  const update = setting.update
+  const renders = []
+  Object.assign(setting, {
+    option: [],
+    active: null,
+    show: true,
+    find: name => host.settings.get(name),
+    render(option) {
+      setting.active = option
+      renders.push(option)
+    },
+    update(option) {
+      update(option)
+      setting.active = setting.option
+    },
+  })
+  return { ...host, renders, open(name) {
+    setting.active = host.settings.get(name).selector
+  } }
+}
+
+for (const { name, sdk, factory } of candidates) {
+  test(`DASH ${sdk} (${name}): automatic refresh retains the owned quality or audio panel after both menu updates`, async () => {
+    for (const name of ['dash-quality', 'dash-audio']) {
+      const host = navigationHost(sdk)
+      factory(bothMenus())(host.art).update()
+      host.open(name)
+      const previous = host.art.setting.active
+      host.fire('qualityChangeRendered')
+      await flush()
+      assert.equal(host.renders.length, 1)
+      assert.equal(host.art.setting.active, host.settings.get(name).selector)
+      assert.notEqual(host.art.setting.active, previous)
+    }
+  })
+
+  test(`DASH ${sdk} (${name}): explicit update and closed or foreign panels retain existing navigation behavior`, async () => {
+    for (const mode of ['explicit', 'closed', 'foreign', 'unavailable', 'removed']) {
+      const host = navigationHost(sdk)
+      const option = bothMenus()
+      const plugin = factory(option)(host.art)
+      plugin.update()
+      host.open('dash-quality')
+      if (mode === 'explicit') {
+        plugin.update()
+      }
+      else {
+        if (mode === 'closed')
+          host.art.setting.show = false
+        if (mode === 'foreign')
+          host.settings.get('dash-quality').onSelect = () => {}
+        if (mode === 'unavailable')
+          delete host.art.setting.render
+        if (mode === 'removed')
+          option.quality.setting = false
+        host.fire('qualityChangeRendered')
+        await flush()
+      }
+      assert.equal(host.renders.length, 0)
+      assert.equal(host.art.setting.active, host.art.setting.option)
+    }
+  })
+
+  test(`DASH ${sdk} (${name}): navigation lookup cannot restore an obsolete refresh after a nested explicit update`, async () => {
+    const host = navigationHost(sdk)
+    const plugin = factory(bothMenus())(host.art)
+    plugin.update()
+    host.open('dash-quality')
+    const find = host.art.setting.find
+    let reads = 0
+    host.art.setting.find = (name) => {
+      if (++reads === 2)
+        plugin.update()
+      return find(name)
+    }
+    host.fire('qualityChangeRendered')
+    await flush()
+    assert.equal(host.renders.length, 0)
+    assert.equal(host.art.setting.active, host.art.setting.option)
+  })
+
+  test(`DASH ${sdk} (${name}): destruction from navigation lookup cannot reopen settings`, async () => {
+    const host = navigationHost(sdk)
+    factory(bothMenus())(host.art).update()
+    host.open('dash-quality')
+    const find = host.art.setting.find
+    let reads = 0
+    host.art.setting.find = (name) => {
+      const result = find(name)
+      if (++reads === 2)
+        host.art.destroy()
+      return result
+    }
+    host.fire('qualityChangeRendered')
+    await flush()
+    assert.equal(host.renders.length, 0)
+  })
+}
+
 for (const { name, factory } of candidates.filter(item => item.sdk === 4)) {
   test(`DASH (${name}): seeking records only measured empty stale metrics without changing SDK methods or media`, () => {
     const host = seekHost()

@@ -2268,13 +2268,14 @@
       "dependsOn": [
         "PKG-DASH-SEEK-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "真实 SDK 菜单点击失败根因、对应兼容修复及新旧核心回归",
       "acceptance": "保留 legacy/旧核心/SDK5.2.1 的原失败；确定菜单在点击过程中不可见的原因；不靠 force 点击、扩大超时或重复运行覆盖问题；main/legacy 质量与音轨设置及 SDK 刷新组合通过",
       "evidence": [
-        "changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
-        "baselines/dash-seek-recovery-validation.json"
+        "changes/2026-09-14-PKG-DASH-MENU-01-settings-navigation.md",
+        "baselines/dash-menu-validation.json",
+        "dash-validation.md"
       ]
     },
     {

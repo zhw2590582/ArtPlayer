@@ -77,7 +77,11 @@ export interface Registry {
   remove: (name: string) => unknown
   check: (item: SelectorItem) => unknown
   cache?: { get?: (name: string) => { option?: { onSelect?: unknown } } | undefined }
-  find?: (name: string) => { onSelect?: unknown } | undefined
+  find?: (name: string) => { onSelect?: unknown, selector?: SelectorItem[] } | null | undefined
+  active?: SelectorItem[] | null
+  option?: SelectorItem[]
+  show?: boolean
+  render?: (option: SelectorItem[]) => unknown
 }
 
 export interface MenuHost {

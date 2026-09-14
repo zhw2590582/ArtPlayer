@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-MENU-01",
+  "baselineCommit": "30f646be97aaa929265392c661fd6cddad2037f9",
+  "rootCause": "SDK automatic refresh calls setting.update for both menus. Core update renders the root panel; the open quality/audio panel loses art-current before the click. Restore the owned panel only after both automatic updates, guarded by SDK identity, update revision and ownership. Explicit update is unchanged.",
+  "originalFailure": {
+    "file": "refactor/.cache/dash-seek-legacy-final-sdk-report/report.json",
+    "sha256": "74a3924972eeb7f3b22a3595bb1d5450088bba025cc83e022066fd3820989d8a",
+    "title": "published core / DASH 5.2.1: actual settings quality selection survives SDK refresh",
+    "project": "chromium",
+    "trace": {
+      "file": "refactor/.cache/dash-seek-legacy-final-sdk-report/results/dash-sdk-published-core-DA-81045-ection-survives-SDK-refresh-chromium/trace.zip",
+      "sha256": "3b3a12dd98abdedb95a4aa0ab74cdb72f51ed132e0df504bd2872d2cd3c6dc4f"
+    },
+    "panelBeforeClickAt": 63311.912,
+    "panelAfterTimeoutAt": 82551.665,
+    "observation": "Settings remain shown; active quality selector is replaced by root settings panel. Controlled real-SDK refresh reproduces the same navigation reset on all four tested core/SDK pairs."
+  },
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "remoteCI": false,
+    "physicalDevices": false
+  },
+  "source": [
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/index.ts",
+      "sha256LF": "e22cfd0a3a2129913278cb2fbb50e2a7b2333cc9bd53647ec764d3f8f4f30ccc"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/menu.ts",
+      "sha256LF": "f5049045ead1d47c6275b0d13fc862b53a90e2accfe99935f641d07757e06428"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/types.ts",
+      "sha256LF": "d812577c7bd877f6998b55747916117da1f400067977292907e3a910e04c239c"
+    },
+    {
+      "file": "test/dash-events.test.js",
+      "sha256LF": "b753e21e068b02fc8176bac1cc804dc3b7daaa59f152cdc1f14ca5b910c8a39a"
+    },
+    {
+      "file": "test/browser/dash-sdk.spec.js",
+      "sha256LF": "e1b2980cfbdd948180308321705e39ca9b8df06d4bde33e421f66abbc5ce2065"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "refactor/.cache/dash-package-types-QIKdVC/runtime/artplayer-plugin-dash-control.js",
+      "member": "package/dist/artplayer-plugin-dash-control.js",
+      "sha256": "2d639a5c6a7044ada2b1d74e5b039d4cc787996b997c5a186a67724848f36c2a",
+      "archiveSha256": "83cd29340bbc6788f9b069d18909fd0344aeb2fa8e12515f92796cfd7bd2fdab"
+    },
+    {
+      "file": "refactor/.cache/dash-package-types-QIKdVC/runtime/artplayer-plugin-dash-control.legacy.js",
+      "member": "package/dist/artplayer-plugin-dash-control.legacy.js",
+      "sha256": "eef089514bf7304c7910e4f093c7c350495458284c6f55871358ae085f504ddc",
+      "archiveSha256": "83cd29340bbc6788f9b069d18909fd0344aeb2fa8e12515f92796cfd7bd2fdab"
+    },
+    {
+      "file": "refactor/.cache/dash-package-types-QIKdVC/runtime/artplayer-plugin-dash-control.mjs",
+      "member": "package/dist/artplayer-plugin-dash-control.mjs",
+      "sha256": "bec1c9fa15fa6b80841517b9afe29da8c63a4d28fc57a6218c869b0c0e407703",
+      "archiveSha256": "83cd29340bbc6788f9b069d18909fd0344aeb2fa8e12515f92796cfd7bd2fdab"
+    }
+  ],
+  "reports": [
+    {
+      "directory": "refactor/.cache/dash-menu-red-report",
+      "reportSha256": "09c08de619c8b1c67c4abbcd36827ed36a94c8424b3cea69422690d9b9fb974f",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--grep",
+          "SDK refresh preserves the open quality",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:21:57.499Z",
+        "duration": 23198.907,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidate": "workspace source build",
+          "candidateSha256": "b9c81fe7223b79775b5c2d3b9dbc79477b7e993201a8412fba81143df39972cf"
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidate": "workspace source build",
+          "candidateSha256": "b9c81fe7223b79775b5c2d3b9dbc79477b7e993201a8412fba81143df39972cf"
+        }
+      ],
+      "failures": [
+        {
+          "title": "published core / DASH 4.5.2: SDK refresh preserves the open quality settings panel",
+          "project": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  353 |         const changed = type === 'quality' ? '180p' : 'fr'\n  354 |         await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(changed)\n> 355 |         await expect.poll(() => page.evaluate(type => window.art.setting.active === window.art.setting.find(`dash-${type}`).selector, type)).toBe(true)\n      |                                                                                                                                              ^\n  356 |         const label = type === 'quality' ? '90p' : 'en'\n  357 |         await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()\n  358 |         if (type === 'quality')\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:355:142"
+          ]
+        },
+        {
+          "title": "published core / DASH 5.2.1: SDK refresh preserves the open quality settings panel",
+          "project": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  353 |         const changed = type === 'quality' ? '180p' : 'fr'\n  354 |         await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(changed)\n> 355 |         await expect.poll(() => page.evaluate(type => window.art.setting.active === window.art.setting.find(`dash-${type}`).selector, type)).toBe(true)\n      |                                                                                                                                              ^\n  356 |         const label = type === 'quality' ? '90p' : 'en'\n  357 |         await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()\n  358 |         if (type === 'quality')\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:355:142"
+          ]
+        },
+        {
+          "title": "candidate core / DASH 4.5.2: SDK refresh preserves the open quality settings panel",
+          "project": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  353 |         const changed = type === 'quality' ? '180p' : 'fr'\n  354 |         await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(changed)\n> 355 |         await expect.poll(() => page.evaluate(type => window.art.setting.active === window.art.setting.find(`dash-${type}`).selector, type)).toBe(true)\n      |                                                                                                                                              ^\n  356 |         const label = type === 'quality' ? '90p' : 'en'\n  357 |         await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()\n  358 |         if (type === 'quality')\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:355:142"
+          ]
+        },
+        {
+          "title": "candidate core / DASH 5.2.1: SDK refresh preserves the open quality settings panel",
+          "project": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  353 |         const changed = type === 'quality' ? '180p' : 'fr'\n  354 |         await expect(page.locator(`.art-control-dash-${type} .art-selector-value`)).toHaveText(changed)\n> 355 |         await expect.poll(() => page.evaluate(type => window.art.setting.active === window.art.setting.find(`dash-${type}`).selector, type)).toBe(true)\n      |                                                                                                                                              ^\n  356 |         const label = type === 'quality' ? '90p' : 'en'\n  357 |         await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()\n  358 |         if (type === 'quality')\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:355:142"
+          ]
+        }
+      ],
+      "menuCases": 4
+    },
+    {
+      "directory": "refactor/.cache/dash-menu-source-green-report",
+      "reportSha256": "f793008f42ccca55b431bba347aca88d79602b17a58eb05384b276881079f63e",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep",
+          "SDK refresh preserves the open|actual settings",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:23:06.427Z",
+        "duration": 41683.534,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidate": "workspace source build",
+          "candidateSha256": "d5fce5ae917ad8fa3e666aceed9a23f626bfbdd89fd73379db56c85e145ae02d"
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidate": "workspace source build",
+          "candidateSha256": "d5fce5ae917ad8fa3e666aceed9a23f626bfbdd89fd73379db56c85e145ae02d"
+        }
+      ],
+      "failures": [],
+      "menuCases": 32
+    },
+    {
+      "directory": "refactor/.cache/dash-menu-source-final-report",
+      "reportSha256": "7385e41e449f203b7c177355d0a16bafc26e798c7c8104b31fad7d47fa689a73",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep-invert",
+          "native SDK track switch|published DASH / 4.5.2",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:26:48.315Z",
+        "duration": 137303.375,
+        "expected": 92,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidate": "workspace source build",
+          "candidateSha256": "5bd2e6b031996c2b42970a790769f6e91752cef76697522d0e57c6d8909fb568"
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidate": "workspace source build",
+          "candidateSha256": "5bd2e6b031996c2b42970a790769f6e91752cef76697522d0e57c6d8909fb568"
+        }
+      ],
+      "failures": [],
+      "menuCases": 32
+    },
+    {
+      "directory": "refactor/.cache/dash-menu-main-report",
+      "reportSha256": "dd4d0ae710851220e7edc007b752d7678c404eb8c7cec4484f925bf81bc74858",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep",
+          "SDK refresh preserves the open|actual settings",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:30:20.600Z",
+        "duration": 41334.104,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-QIKdVC\\runtime\\artplayer-plugin-dash-control.js",
+          "candidateSha256": "2d639a5c6a7044ada2b1d74e5b039d4cc787996b997c5a186a67724848f36c2a"
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-QIKdVC\\runtime\\artplayer-plugin-dash-control.js",
+          "candidateSha256": "2d639a5c6a7044ada2b1d74e5b039d4cc787996b997c5a186a67724848f36c2a"
+        }
+      ],
+      "failures": [],
+      "menuCases": 32
+    },
+    {
+      "directory": "refactor/.cache/dash-menu-legacy-report",
+      "reportSha256": "3f1db2574bbfd759a6382b09b55842444df6db3005902460acf3a6839304840a",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep-invert",
+          "native SDK track switch|published DASH / 4.5.2",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:31:23.841Z",
+        "duration": 136092.201,
+        "expected": 92,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-QIKdVC\\runtime\\artplayer-plugin-dash-control.legacy.js",
+          "candidateSha256": "eef089514bf7304c7910e4f093c7c350495458284c6f55871358ae085f504ddc"
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-QIKdVC\\runtime\\artplayer-plugin-dash-control.legacy.js",
+          "candidateSha256": "eef089514bf7304c7910e4f093c7c350495458284c6f55871358ae085f504ddc"
+        }
+      ],
+      "failures": [],
+      "menuCases": 32
+    }
+  ],
+  "node": {
+    "file": "refactor/.cache/dash-menu-node-artifacts.log",
+    "sha256": "9abf0919778aa5daac80e6951b5f6bc32238a7972389a08bdbdafcf2d065c8e9",
+    "passed": 446,
+    "failed": 0,
+    "skipped": 0,
+    "initialReentrancyFailures": {
+      "file": "refactor/.cache/dash-menu-node-initial.log",
+      "sha256": "ca9a1394e5ab7f64e1e225b9e25eda8e87a9d99472e1b35d26d8d9ef24f2b0b0"
+    }
+  },
+  "types": {
+    "file": "refactor/.cache/dash-package-types-QIKdVC/report.json",
+    "sha256": "5f3fb18d59cb60fcba08e6f6aa43b947f97a0c283d832c1391f66c581ae87b7f",
+    "archives": [
+      {
+        "name": "artplayer",
+        "sha256": "d4a0cc5dcbe015e254b3bce64d505ee4e010792ab70414bcf8d0139d7c413b75"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "sha256": "83cd29340bbc6788f9b069d18909fd0344aeb2fa8e12515f92796cfd7bd2fdab"
+      }
+    ],
+    "matrix": [
+      {
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      }
+    ],
+    "method": "Offline Yarn install and frozen reinstall outside workspace; all installed files match tarball. Browser uses extracted tarball runtime, not a complete installed browser suite."
+  },
+  "checks": {
+    "strictTypeScriptExitCode": 0,
+    "targetedLintExitCode": 0,
+    "rootLint": {
+      "file": "refactor/.cache/dash-menu-lint.log",
+      "sha256": "8f03fe722a69933197e1985dcd5bffe6110fa8c03be9fa9d92313447762ca4bf",
+      "errors": 0,
+      "existingWarnings": 1
+    }
+  },
+  "limitations": [
+    "Full DASH combination and distribution acceptance remains open",
+    "Standalone SDK 4.5.2 and frozen published-plugin failure controls remain unchanged; only these invocations exclude them from the broad candidate matrix",
+    "WebKit MSE capability, physical devices, remote CI and global release reviews are not completed here"
+  ]
+}

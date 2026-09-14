@@ -8,6 +8,19 @@ destroys it, changes its source, or adds a runtime dependency on dash.js.
 
 ## Module map
 
+Automatic SDK refresh captures an open, plugin-owned quality or audio settings
+panel before updating both menus. The menu module restores its new selector only
+if settings remain visible, navigation was reset to the root, and the replacement
+still belongs to this plugin. Restoration runs after both updates because updating
+the sibling menu also resets the core settings view. It uses existing optional
+`find`, `active`, `option`, `show` and `render` capabilities; no core API change or
+new event subscription is required. The entry checks SDK identity, destruction
+and the exact update revision before restoration and during its final lookup.
+Nested explicit updates invalidate the earlier restore. Closed, foreign, removed
+or unsupported panels are not reopened. Explicit public `update()` retains the
+historical navigation behavior. Browser tests drive real SDK selection changes
+while each submenu is open and then select another option through normal clicks.
+
 | File                                       | Responsibility                                                                          |
 | ------------------------------------------ | --------------------------------------------------------------------------------------- |
 | `src/index.ts`                             | Deferred installation, media identity, update revisions, event subscription and cleanup |
@@ -16,7 +29,7 @@ destroys it, changes its source, or adds a runtime dependency on dash.js.
 | `src/seek-buffer.ts`                       | Exact SDK 4.5.2 empty-seek metric recovery and stale/reentrant measurement guards        |
 | `src/types.ts`                             | Narrow internal SDK, host, model and cleanup types                                        |
 | `src/mapping.ts`                           | Names, current item matching, duplicate labels and selector ordering                    |
-| `src/menu.ts`                              | Existing control/setting registries, menu ownership and guarded selection callbacks     |
+| `src/menu.ts`                              | Control/setting ownership, selection callbacks and owned settings navigation             |
 | `src/audio.svg`, `src/quality.svg`         | Existing setting icons                                                                  |
 | `types/artplayer-plugin-dash-control.d.ts` | Public options, generic SDK inputs and callable result               |
 

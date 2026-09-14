@@ -99,3 +99,13 @@ UMD 测试 VM 显式注入宿主 console，以检查原始错误身份；没有�
 跳转4失败，新源码8通过，最终main/legacy各8个严格跳转通过。main完整定向76通过；
 legacy同范围75通过、1个SDK5.2.1设置点击不可见失败，归PKG-DASH-MENU-01继续调查。
 不将局部跳转修复等同于DASH组合/分发验收全部完成。
+
+## 自动刷新设置导航修复
+
+PKG-DASH-MENU-01已确认SDK自动刷新调用setting.update重置根面板，导致打开的
+子菜单失去art-current；在真实SDK四组组合复现。插件现在只为自动刷新捕获并
+恢复仍由自己拥有、仍打开的子菜单，且在质量和音轨两项更新后恢复。显式update
+保持原行为；revision/SDK/销毁/菜单所有权防止陈旧恢复。源码92、main设置32、
+legacy候选92均通过；Node446和五组安装类型通过，原始75/1报告保留。
+见[实施记录](changes/2026-09-14-PKG-DASH-MENU-01-settings-navigation.md)及
+[证据](baselines/dash-menu-validation.json)。DASH-MENU-01关闭，其他SDK/设备/分发门槛不变。
