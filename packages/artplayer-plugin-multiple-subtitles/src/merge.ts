@@ -34,13 +34,16 @@ export function serializeTracks(trees: readonly (Track | undefined)[]): string {
     for (const cue of tree.cues) {
       const children: CueNode[] = []
       for (const child of cue.tree.children) {
-        if (child.type === 'timestamp')
+        if (child.type === 'timestamp') {
           children.push(markTimestamp(child))
-        else children.push(
-          { type: 'text', value: `<div class="art-subtitle-${tree.name}">` },
-          prepareCueNode(child),
-          { type: 'text', value: '</div>' },
-        )
+        }
+        else {
+          children.push(
+            { type: 'text', value: `<div class="art-subtitle-${tree.name}">` },
+            prepareCueNode(child),
+            { type: 'text', value: '</div>' },
+          )
+        }
       }
       cues.push({
         ...cue,

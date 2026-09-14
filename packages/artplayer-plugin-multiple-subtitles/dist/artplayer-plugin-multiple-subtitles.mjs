@@ -55,6 +55,26 @@
  *
  *     d. Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.
  */
+function renderLegacyCaptions(art) {
+  const cues = art.subtitle?.textTrack?.activeCues;
+  if (!cues || cues.length < 2)
+    return;
+  const texts = Array.from(cues, (cue) => "text" in cue && typeof cue.text === "string" ? cue.text : "");
+  const target = art.template.$subtitle;
+  if (art.option?.subtitle?.escape) {
+    target.innerHTML = "";
+    for (const text of texts) {
+      for (const line of text.split(/\r?\n/)) {
+        const element = target.ownerDocument.createElement("div");
+        element.className = "art-subtitle-line";
+        element.textContent = line;
+        target.appendChild(element);
+      }
+    }
+  } else {
+    target.innerHTML = texts.join("");
+  }
+}
 var defaultCueSettings = {
   direction: "horizontal",
   snapToLines: true,
@@ -841,13 +861,15 @@ function serializeTracks(trees) {
     for (const cue of tree.cues) {
       const children = [];
       for (const child of cue.tree.children) {
-        if (child.type === "timestamp")
+        if (child.type === "timestamp") {
           children.push(markTimestamp(child));
-        else children.push(
-          { type: "text", value: `<div class="art-subtitle-${tree.name}">` },
-          prepareCueNode(child),
-          { type: "text", value: "</div>" }
-        );
+        } else {
+          children.push(
+            { type: "text", value: `<div class="art-subtitle-${tree.name}">` },
+            prepareCueNode(child),
+            { type: "text", value: "</div>" }
+          );
+        }
       }
       cues.push({
         ...cue,
@@ -861,9 +883,13 @@ function serializeTracks(trees) {
   return new WebVTTSerializer().serialize(cues);
 }
 function installCaptionView(art, lifetime) {
+  const legacy = !!art.subtitle && "activeCue" in art.subtitle && !("activeCues" in art.subtitle);
+  const event = legacy ? "subtitleUpdate" : "subtitleAfterUpdate";
   function update() {
     if (lifetime.closed)
       return;
+    if (legacy)
+      renderLegacyCaptions(art);
     for (const marker of Array.from(art.template.$subtitle.getElementsByTagName(`c.${TIMESTAMP_CLASS}`))) {
       const first = marker.firstChild;
       if (first?.nodeType === 3)
@@ -873,8 +899,8 @@ function installCaptionView(art, lifetime) {
   }
   if (lifetime.closed)
     return;
-  lifetime.own(() => art.off("subtitleAfterUpdate", update));
-  art.on("subtitleAfterUpdate", update);
+  lifetime.own(() => art.off(event, update));
+  art.on(event, update);
 }
 function createLifetime(art) {
   let closed = Boolean(art.isDestroy);

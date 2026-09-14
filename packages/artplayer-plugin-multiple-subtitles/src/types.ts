@@ -18,6 +18,11 @@ export interface Lifetime {
   dispose: Cleanup
 }
 export type LifetimeHost = Pick<Artplayer, 'isDestroy' | 'on' | 'off'>
+export interface CaptionHost extends Pick<Artplayer, 'on' | 'off'> {
+  template: { $subtitle: HTMLElement }
+  option?: { subtitle?: { escape?: boolean } }
+  subtitle?: { readonly textTrack?: TextTrack }
+}
 export interface RenderHost {
   option: { subtitle?: Subtitle }
   subtitle: { init: (option: Subtitle) => unknown }

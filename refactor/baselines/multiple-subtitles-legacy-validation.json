@@ -1,0 +1,2920 @@
+{
+  "task": "PKG-MULTI-SUB-10",
+  "baselineCommit": "31f9024bffff59cb4f4ee51aef7a2ee011731c62",
+  "recordedAt": "2026-09-14T05:24:36.425Z",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "sources": [
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/caption.ts",
+      "sha256": "95e87b446ca42836162180e0feba8fbf40a452ed8d556c08af9869cd630e2a35"
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/legacy-caption.ts",
+      "sha256": "78a503e86ed69ed14b2ae64107e244eb2cb62bcf99840d311fbdb0ade95f38ec"
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/types.ts",
+      "sha256": "63dbdef79f87d3dd14a31e02928e819747d52ef66d82d60b6d7810884979fedb"
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/merge.ts",
+      "sha256": "d7e222c0a6fbe4bccd4f8b982edc9f5205315d4cbd969c72755752dd95c6b79c"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js",
+      "sha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+      "docsCopy": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.js",
+        "sha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591"
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "sha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+      "docsCopy": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.legacy.js",
+        "sha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5"
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs",
+      "sha256": "0b8866b82b81e58cfcd3535ae27f12da7ecf02e1bc55dbbbe0727ab09066ec5f",
+      "docsCopy": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.mjs",
+        "sha256": "0b8866b82b81e58cfcd3535ae27f12da7ecf02e1bc55dbbbe0727ab09066ec5f"
+      }
+    }
+  ],
+  "tests": [
+    {
+      "path": "test/multiple-subtitles-caption.test.js",
+      "sha256": "7c768aa2734d2caa9149ff3465b1fec9cd6563c148f29f1ba4449a5e97c139eb"
+    },
+    {
+      "path": "test/browser/multiple-subtitles-legacy.spec.js",
+      "sha256": "a27feaa2f8e66767f16238db0c2e6799a18c3ec486892d2e73248a15cc02df06"
+    },
+    {
+      "path": "test/browser/multiple-subtitles-combinations.spec.js",
+      "sha256": "c89c50dda92009d00d1bc1cb3f6b542e5f438c83d3945f345a016a92690ead46"
+    }
+  ],
+  "runs": [
+    {
+      "name": "initial-before",
+      "report": {
+        "path": "refactor/.cache/multi-legacy-before-browser/report.json",
+        "sha256": "812fc344232e4d9d0f5273a13e7e7d8b69e13aba034274eca9d7c86642dec344"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-legacy-before.log",
+        "sha256": "2356a63f70ca222cdd77c4dfebab9a24a39cbc21bd531e1821f7b9a35570336b"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:06:50.173Z",
+        "duration": 19260.803,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m3\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  24 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues || [])\n  25 |     })\n> 26 |     await expect.poll(() => page.evaluate(() => window.art.template.$track.track.cues?.length)).toBe(3)\n     |                                                                                                 ^\n  27 |     await page.evaluate(() => {\n  28 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues)\n  29 |     })\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:26:97"
+          ]
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"B\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n\n\n  42 |     await seek(2.5)\n  43 |     await expect(page.locator('.art-subtitle-a b')).toHaveText('A & safe')\n> 44 |     await expect(page.locator('.art-subtitle-b')).toHaveText('B')\n     |                                                   ^\n  45 |     await expect(page.locator('.art-subtitle-c')).toHaveText('C')\n  46 |     await expect(page.locator('.art-subtitle-a')).toHaveCSS('color', 'rgb(255, 0, 0)')\n  47 |     await expect(page.locator('.art-subtitle-b')).toHaveCSS('color', 'rgb(0, 0, 255)')\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:44:51"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "initial-source",
+      "report": {
+        "path": "refactor/.cache/multi-legacy-source-initial-browser/report.json",
+        "sha256": "f619f39e4c0c68ecc2298472b7cc34262dd19c9c1bdb9c8f22f7aeeb0627b189"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-legacy-source.log",
+        "sha256": "6318210ad5a67b785091ba20389df6cfec587c2e23b48c277d0e9a3e8b567ec4"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:11:56.574Z",
+        "duration": 22863.634000000002,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m3\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  24 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues || [])\n  25 |     })\n> 26 |     await expect.poll(() => page.evaluate(() => window.art.template.$track.track.cues?.length)).toBe(3)\n     |                                                                                                 ^\n  27 |     await page.evaluate(() => {\n  28 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues)\n  29 |     })\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:26:97"
+          ]
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "140d6cd63cb3f7546717297205c4707afbc6d32d1af71071cd068d736f1888fa",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "firefox",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m3\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  24 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues || [])\n  25 |     })\n> 26 |     await expect.poll(() => page.evaluate(() => window.art.template.$track.track.cues?.length)).toBe(3)\n     |                                                                                                 ^\n  27 |     await page.evaluate(() => {\n  28 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues)\n  29 |     })\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:26:97"
+          ]
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "140d6cd63cb3f7546717297205c4707afbc6d32d1af71071cd068d736f1888fa",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "webkit",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m3\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  24 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues || [])\n  25 |     })\n> 26 |     await expect.poll(() => page.evaluate(() => window.art.template.$track.track.cues?.length)).toBe(3)\n     |                                                                                                 ^\n  27 |     await page.evaluate(() => {\n  28 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues)\n  29 |     })\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:26:97"
+          ]
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed VTT/SRT/ASS captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "140d6cd63cb3f7546717297205c4707afbc6d32d1af71071cd068d736f1888fa",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        }
+      ]
+    },
+    {
+      "name": "corrected-before-main",
+      "report": {
+        "path": "refactor/.cache/multi-legacy-before-corrected-browser/report.json",
+        "sha256": "b5287efdbb3971d207cb3f7ad080d73b5a547045fae46fc55d03cee0ce2b61f7"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-legacy-before-corrected.log",
+        "sha256": "39c1c8efe0922118d989c4de71c41178f3d38039cde5299d0704a4f03b6a0b21"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:16:19.819Z",
+        "duration": 10993.687,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"B\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n\n\n  43 |     await seek(2.5)\n  44 |     await expect(page.locator('.art-subtitle-a b')).toHaveText('A & safe')\n> 45 |     await expect(page.locator('.art-subtitle-b')).toHaveText('B')\n     |                                                   ^\n  46 |     await expect(page.locator('.art-subtitle-c')).toHaveText('C')\n  47 |     await expect(page.locator('.art-subtitle-a')).toHaveCSS('color', 'rgb(255, 0, 0)')\n  48 |     await expect(page.locator('.art-subtitle-b')).toHaveCSS('color', 'rgb(0, 0, 255)')\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:45:51"
+          ]
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"B\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n\n\n  43 |     await seek(2.5)\n  44 |     await expect(page.locator('.art-subtitle-a b')).toHaveText('A & safe')\n> 45 |     await expect(page.locator('.art-subtitle-b')).toHaveText('B')\n     |                                                   ^\n  46 |     await expect(page.locator('.art-subtitle-c')).toHaveText('C')\n  47 |     await expect(page.locator('.art-subtitle-a')).toHaveCSS('color', 'rgb(255, 0, 0)')\n  48 |     await expect(page.locator('.art-subtitle-b')).toHaveCSS('color', 'rgb(0, 0, 255)')\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:45:51"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "source-matrix",
+      "report": {
+        "path": "refactor/.cache/multi-legacy-source-final-browser/report.json",
+        "sha256": "57875d296e84187a0364b3163b4315df7a68c74d3f7faa7408448a25e6cb01f0"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-legacy-source-final.log",
+        "sha256": "aeb7c1015f895c0ee71384c99c70a65b83c64a37b87d86add563f3bd97e2203c"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:17:26.077Z",
+        "duration": 106620.633,
+        "expected": 104,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+            "bytes": 378769
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "passed",
+          "historical-paused-offset-defect": {
+            "core": "published-5.3.0",
+            "browser": "155.0",
+            "acceptedAsCorrect": false,
+            "observation": "Published core keeps a stale active caption after paused offsets; candidate must clear it. Dedicated native/offset probes retain exact state."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "passed",
+          "historical-paused-offset-defect": {
+            "core": "published",
+            "browser": "155.0",
+            "acceptedAsCorrect": false,
+            "observation": "Published core keeps a stale active caption after paused offsets; candidate must clear it. Dedicated native/offset probes retain exact state."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"Translation\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n\n\n  100 |     await expect.poll(() => page.evaluate(() => window.art.video.seeking)).toBe(false)\n  101 |     await seek(page, 1.5)\n> 102 |     await expect(page.locator('.art-subtitle-b')).toHaveText('Translation')\n      |                                                   ^\n  103 |     await page.evaluate(() => window.art.plugins.multipleSubtitles.reset())\n  104 |     await expect(page.locator('.art-subtitle-a')).toHaveText('First')\n  105 |     await seek(page, 4.5)\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-combinations.spec.js:102:51"
+          ],
+          "finalState": {
+            "destroyed": false,
+            "paused": true,
+            "time": 0.001494,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              }
+            ],
+            "active": [],
+            "displayed": ""
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published core decodes entities once and preserves literal and semantic tags",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate core decodes entities once and preserves literal and semantic tags",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published core decodes entities once and preserves literal and semantic tags",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate core decodes entities once and preserves literal and semantic tags",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published core decodes entities once and preserves literal and semantic tags",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate core decodes entities once and preserves literal and semantic tags",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "fa3fcfee78fb470342936a49fbc9aa079c8d6c92bd497fc735159382ff137090",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "fa3fcfee78fb470342936a49fbc9aa079c8d6c92bd497fc735159382ff137090",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "fa3fcfee78fb470342936a49fbc9aa079c8d6c92bd497fc735159382ff137090",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "fa3fcfee78fb470342936a49fbc9aa079c8d6c92bd497fc735159382ff137090",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "fa3fcfee78fb470342936a49fbc9aa079c8d6c92bd497fc735159382ff137090",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "fa3fcfee78fb470342936a49fbc9aa079c8d6c92bd497fc735159382ff137090",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: SRT display and selectors survive the resource refactor",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy settles a pending native request before it responds",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: destroy revokes the Blob and retained reset stays inert",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: native HTTP error rejects without installing subtitles",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: video source switching retains cached subtitle selection",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate published core: inline timestamps remain native instructions without visible time tags",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: SRT display and selectors survive the resource refactor",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy settles a pending native request before it responds",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: destroy revokes the Blob and retained reset stays inert",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: native HTTP error rejects without installing subtitles",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: video source switching retains cached subtitle selection",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate candidate core: inline timestamps remain native instructions without visible time tags",
+          "project": "webkit",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "main-matrix",
+      "report": {
+        "path": "refactor/.cache/multi-legacy-main-browser/report.json",
+        "sha256": "dfe8c7cebeeef809243baae8fef65e346e5704755f951ca5426e505e2e26970e"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-legacy-main.log",
+        "sha256": "9095b82400a116d015e182ae693373557f122e71569fa6a71f167e15b072f86f"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:20:11.275Z",
+        "duration": 65992.718,
+        "expected": 62,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+            "bytes": 208931
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+            "bytes": 208931
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+            "bytes": 208931
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "passed",
+          "historical-paused-offset-defect": {
+            "core": "published-5.3.0",
+            "browser": "155.0",
+            "acceptedAsCorrect": false,
+            "observation": "Published core keeps a stale active caption after paused offsets; candidate must clear it. Dedicated native/offset probes retain exact state."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "passed",
+          "historical-paused-offset-defect": {
+            "core": "published",
+            "browser": "155.0",
+            "acceptedAsCorrect": false,
+            "observation": "Published core keeps a stale active caption after paused offsets; candidate must clear it. Dedicated native/offset probes retain exact state."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"Translation\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n\n\n  100 |     await expect.poll(() => page.evaluate(() => window.art.video.seeking)).toBe(false)\n  101 |     await seek(page, 1.5)\n> 102 |     await expect(page.locator('.art-subtitle-b')).toHaveText('Translation')\n      |                                                   ^\n  103 |     await page.evaluate(() => window.art.plugins.multipleSubtitles.reset())\n  104 |     await expect(page.locator('.art-subtitle-a')).toHaveText('First')\n  105 |     await seek(page, 4.5)\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-combinations.spec.js:102:51"
+          ],
+          "finalState": {
+            "destroyed": false,
+            "paused": true,
+            "time": 0.0013657,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              }
+            ],
+            "active": [],
+            "displayed": ""
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "historicalCaptionLoss": true,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "single-active-cue-boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "historicalCaptionLoss": false,
+            "explanation": "1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings."
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        }
+      ]
+    },
+    {
+      "name": "legacy-targeted",
+      "report": {
+        "path": "refactor/.cache/multi-legacy-legacy-browser/report.json",
+        "sha256": "e912c7e083a2285b146f8ef8b1ee26f663c8fdc3cc25c0ac06018419d53345cb"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-legacy-legacy.log",
+        "sha256": "01b1164231597a25b481bdbdf34319cc3b2cea3d5ef093195c916c2e8705fbf1"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:22:01.197Z",
+        "duration": 15049.453,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+            "bytes": 213200
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+            "bytes": 213200
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "core": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+            "bytes": 213200
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles published core decodes entities once and preserves literal and semantic tags",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate core decodes entities once and preserves literal and semantic tags",
+          "project": "chromium",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published core decodes entities once and preserves literal and semantic tags",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate core decodes entities once and preserves literal and semantic tags",
+          "project": "firefox",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles published core decodes entities once and preserves literal and semantic tags",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles candidate core decodes entities once and preserves literal and semantic tags",
+          "project": "webkit",
+          "status": "passed"
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+            "thirdFormat": "vtt",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals",
+            "limitation": "5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11."
+          }
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "path": "refactor/.cache/multi-legacy-tests.log",
+      "sha256": "397f401e2573366a597dd06b53712f1ad3b5f221eab68b4876b727a934825e60"
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-main-unit.log",
+      "sha256": "5dbd61899f64c235a066faf4609abf6d5e05b1736e3ce0167a2a8f94bce801a4"
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-legacy-unit.log",
+      "sha256": "1828fc26b5310a5c3237bbeb1a4110434c7c41a90a83ac3783f6b4942d2037f6"
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-lint.log",
+      "sha256": "0860117ef1fc7c651e87e569721ed5d5fe2f15f746e59d1bd5b28d7cf64e076b"
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-build.log",
+      "sha256": "79ade060e01178ca3064f96cd95e4ee76dfa2b3bcb9bf5c8dbd5841119f390b1"
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-ci.log",
+      "sha256": "427d3d721a680c7c1723af6269299931dc423c71d7bb54afb0f2372c62ab2a20"
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-final-checks.log",
+      "sha256": "4dc52f7db197b24687fd1f1cd6df1eb451cecdb2b043f86ab25cd8fcb1c97682",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/multi-legacy-toolchain-direct-failed.log",
+      "sha256": "23de6d33eafd3123528d9a4f7b3d82131a32ee90e0724eaab8f2446bca9b48da",
+      "exitCode": 1
+    }
+  ],
+  "limits": [
+    "Source105:104 pass/1 old5.4.0 WebKit seek failure; main63:62 pass/same old-host failure. Historical deficiency observations are not compatibility passes.",
+    "Six old-host overlap cases pass in source/main/legacy. Legacy also passes six modern entity cases.",
+    "Initial5.1.2 ASS failure remains task11; later5.1.2 regression uses VTT as its third cue. ASS is proven only on5.1.7 here.",
+    "Desktop Playwright browsers, not physical devices or remote CI. Package05/06 and release gates remain incomplete."
+  ],
+  "toolchainNote": "Initial direct Node invocation correctly rejected missing Yarn user-agent. Final strict check executed through pinned Yarn and passed; no check was relaxed."
+}

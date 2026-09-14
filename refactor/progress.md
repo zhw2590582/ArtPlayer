@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-10 旧核心多条字幕显示适配完成
+
+插件以activeCue/activeCues能力检测选择旧subtitleUpdate或现代subtitleAfterUpdate，
+新增独立legacy-caption模块显示原生全部活动cue；保留对象、独立时间、方法身份、
+旧事件标量和监听顺序，销毁清理，无时钟改写或额外请求。初次回归另发现5.1.2
+发布ASS转换丢换行，单独登记PKG-MULTI-SUB-11；第三轨VTT替代不计作该版本ASS通过。
+调整夹具后旧产物在5.1.2/5.1.7均因第二条缺失失败，新源码/main/legacy各6项旧宿主
+重叠回归通过。全插件300项、实际main/legacy各6项单元、严格TS、lint与CI50项通过。
+源码扩展105项为104通过1旧5.4.0/WebKit切源失败；main63项为62通过同一旧宿主失败；
+legacy12项全通过。历史缺陷观察不算兼容通过。新切源失败仍有1至3秒cue、媒体近零秒，
+说明task09的seeking=false等待不足以保证旧宿主；重新打开SWITCH风险，交由task05继续。
+三格式及docs副本已正常重建，公开声明/依赖/版本未改；见[变更记录](changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md)
+和[验证索引](baselines/multiple-subtitles-legacy-validation.json)。251项：178 done、17 doing、56 todo。
+任务05/06、真实设备及发布门槛仍未完成；下一步先处理task11的旧ASS转换，再继续组合验收。
+
 ## PKG-MULTI-SUB-09 切源显示问题归因完成
 
 失败时字幕cue仍在1至3秒，媒体却停在约0.002秒；新增无插件/候选插件/旧1.2.0

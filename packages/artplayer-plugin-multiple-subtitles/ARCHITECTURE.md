@@ -27,8 +27,17 @@ to npm 1.2.0; the runtime entry requires an option object but allows omitted `su
   Its cancellation Promise also settles pending operations without AbortController support.
 - `src/render.ts` owns generated Blob URLs and synchronous/async host installation outcomes.
   Reentrant selections and stale host rejections cannot release the latest selected resource.
-- `src/caption.ts` owns a subtitleAfterUpdate listener. It unwraps internal timestamp markers
-  in the custom HTML caption layer, preserving subsequent nodes and literal user text.
+- `src/caption.ts` owns one caption listener and unwraps internal timestamp markers.
+  Hosts with `activeCue` but no `activeCues` use the old `subtitleUpdate` event;
+  other hosts keep `subtitleAfterUpdate`. Capability detection never invokes cue getters.
+- `src/legacy-caption.ts` displays every native active cue on those older hosts, in
+  native order, when more than one is active. It preserves cue objects/times and the
+  host's update method and scalar event payload. Single/empty intervals remain core
+  rendered. Later `option.subtitle.escape` changes retain escaped line rendering.
+  It owns no timer or media resource; the caption listener is removed by the lifetime.
+  Old event subscribers still run in registration order: listeners registered before
+  the plugin see the core's first-cue DOM; later listeners see the adapted full view.
+  Custom DOM replacements should therefore run after plugin registration.
 - `src/types.ts` describes selected tracks and narrow host/resource boundaries and reuses public
   runtime option/result types. The private host/resource types are not a published API.
 - `src/parser.d.ts` describes the vendored parse result and discriminated cue nodes. Parsed
@@ -147,9 +156,14 @@ The task05 matrix in `test/browser/multiple-subtitles-combinations.spec.js` adds
 core5.1.2/5.1.7/5.3.0/5.4.0/candidate and actual plugin1.0.0/1.1.0/1.2.0.
 Read native `template.$track.track.cues` for old-core probes: older hosts do not
 provide the later `subtitle.cues` getter. Core5.1.2/5.1.7 only render their first
-active cue; the matrix explicitly records lost simultaneous languages for1.1.0+
-and candidate, while1.0.0's index-merged cue displays both. This remains an open
-compatibility issue, not an approved limitation. CORE-SUBTITLE-OFFSET-01 corrects
+active cue; the matrix explicitly records lost simultaneous languages for published
+1.1.0/1.2.0, while1.0.0's index-merged cue displays both. Task10 adds the candidate
+view adapter without adopting index merging or altering independent cue timings.
+`multiple-subtitles-legacy.spec.js` checks asymmetric three-cue overlaps, HTML/CSS,
+selection/reset and clearing on both old cores. ASS is additionally exercised on
+5.1.7; published5.1.2's malformed ASS converter is separately tracked by task11.
+This adapter does not repair an old browser host's stale native active-cue list.
+CORE-SUBTITLE-OFFSET-01 corrects
 paused offsets in the candidate core; published Firefox hosts retain their exact
 historical defect observations. Task09 traced apparent WebKit5.3.0/5.4.0 caption
 loss to native seeks ending near zero: the cue itself remained intact. A no-plugin

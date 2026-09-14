@@ -266,3 +266,14 @@ syntax failures remain in the historical parser tests. Mobile cases use an Andro
 UA and synthetic DOM touches through the real core handlers, not trusted hardware
 input. Fullscreen mouse placement first waits for the progress control to be stable;
 the earlier hidden-preview screenshot timeout remains in the checkpoint evidence.
+
+`multiple-subtitles-legacy.spec.js` uses real 5.1.2/5.1.7 cores and the candidate
+plugin to check three independently timed captions, VTT/SRT, semantic HTML/CSS,
+the original update method and native cue identities, scalar event payloads,
+repeated updates, selection/reset and empty intervals. It uses ASS for the third
+track on5.1.7; the5.1.2 published converter's malformed VTT remains a separate
+task11 failure and is not covered by substituting a VTT fixture. Use
+`ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT` for actual main/legacy package bytes.
+The combination suite retains explicit published1.1/1.2 overlap-loss observations
+while requiring candidate captions to contain both languages. A passing historical
+observation is not a compatibility pass.

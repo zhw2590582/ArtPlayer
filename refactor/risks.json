@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-14T05:23:17.398Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -4352,7 +4352,8 @@
       "owners": [
         "PKG-MULTI-SUB-02",
         "PKG-MULTI-SUB-03",
-        "PKG-MULTI-SUB-05"
+        "PKG-MULTI-SUB-05",
+        "PKG-MULTI-SUB-10"
       ],
       "evidence": [
         "refactor/baselines/multiple-subtitles-release.json",
@@ -4370,11 +4371,15 @@
         "test/browser/multiple-subtitles-lifecycle.spec.js",
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
         "refactor/baselines/multiple-subtitles-combinations-validation.json",
-        "test/browser/multiple-subtitles-combinations.spec.js"
+        "test/browser/multiple-subtitles-combinations.spec.js",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md",
+        "refactor/baselines/multiple-subtitles-legacy-validation.json",
+        "test/multiple-subtitles-caption.test.js",
+        "test/browser/multiple-subtitles-legacy.spec.js"
       ],
       "compatibleResolution": "Keep historical merge profiles explicit and test real overlap/timing before choosing compatibility behavior.",
       "closureCriteria": "Unaligned lengths, overlap, sorting, names and real subtitle display across supported cores are verified.",
-      "workspaceState": "Native three-engine comparisons on cores5.1.2/5.1.7 show only first active cue displayed for actual plugin1.1.0/1.2.0/candidate; plugin1.0.0 index-merges both languages into one visible cue. Native tracks hold both languages and selecting either alone works. Compatible old-host overlap resolution and complete device coverage remain open."
+      "workspaceState": "Task10 adapts old activeCue-only hosts to display all independently timed native cues. Source/main/legacy regressions cover old5.1.2/5.1.7. Historical1.1/1.2 losses remain explicit; broader profile/device acceptance remains in task05. Old5.1.2 ASS converter is separate task11."
     },
     {
       "id": "MULTI-SUB-LIFE-01",
@@ -6029,10 +6034,10 @@
       "id": "MULTI-SUB-SWITCH-01",
       "title": "Intermittent WebKit core5.3.0 caption loss after selected-track source switch",
       "confirmation": "reproduced",
-      "workspaceState": "Original failing snapshots kept the1..3 cue intact but video time was near0.002. Independent no-plugin and published1.2/current-plugin WebKit traces reproduce5 old-core first-seek misses, with promises sometimes settled during native seeking. Candidate already waits and honors every first seek. Actual main three-engine probes and corrected normal caption sequencing pass; old race observations remain explicit.",
+      "workspaceState": "Reopened during task10: both source and actual-main matrices fail old5.4.0/WebKit caption after switch despite waiting seeking=false. Source failure native time0.001494, intact1..3 cue, active=[]; task09 attribution remains supported but the later-seek workaround is insufficient. Candidate core and old5.1 display regressions pass. Task05 must diagnose remaining old-host ordering, without hiding these failures.",
       "compatibleResolution": "Classify the old-host source/native-seek race separately from caption rendering; preserve immediate-call probes, require candidate first seeks, and wait for real native source completion before independent caption-seek assertions.",
       "closureCriteria": "Root cause classified with targeted evidence, any required fix validated, and changed candidate/old-core combination rerun without hiding the original failure.",
-      "status": "resolved",
+      "status": "open",
       "owners": [
         "PKG-MULTI-SUB-05",
         "PKG-MULTI-SUB-09"
@@ -6045,13 +6050,33 @@
         "refactor/baselines/subtitle-offset-validation.json",
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",
         "refactor/baselines/multiple-subtitles-switch-validation.json",
-        "test/browser/multiple-subtitles-switch.spec.js"
+        "test/browser/multiple-subtitles-switch.spec.js",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md",
+        "refactor/baselines/multiple-subtitles-legacy-validation.json"
       ],
       "resolutionEvidence": [
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",
         "refactor/baselines/multiple-subtitles-switch-validation.json"
       ],
       "resolutionRationale": "No-plugin controls reproduce the same miss and a settled seek restores correct old/new captions without changing plugin data. Candidate source code already provides the necessary readiness guard (BASE-LIFE-44/CORE-19 context). This resolves the suspected plugin-switch defect; it does not approve every historical source call or complete package task05."
+    },
+    {
+      "id": "MULTI-SUB-ASS-01",
+      "title": "Published core5.1.2 ASS converter loses required VTT line breaks",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-11"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md",
+        "refactor/baselines/multiple-subtitles-legacy-validation.json",
+        "refactor/baselines/multiple-subtitles-cores.json",
+        "test/browser/multiple-subtitles-legacy.spec.js"
+      ],
+      "workspaceState": "Initial three-engine regression gets only2/3 native cues on actual5.1.2 main. Tarball source assToVtt preserves newlines while published main collapses template line breaks to spaces.5.1.7 ASS renders. Current display regression uses VTT for third5.1.2 track and explicitly does not claim ASS acceptance.",
+      "compatibleResolution": "Adapt malformed old conversion in the plugin while preserving valid existing converter output and public API.",
+      "closureCriteria": "Frozen actual-output reproduction, compatible conversion fix and real ASS display verified on old/current hosts and shippable formats."
     }
   ]
 }

@@ -172,18 +172,19 @@ for (const core of ['published-5.1.2', 'published-5.1.7']) {
         await window.art.plugins.add(window.multipleFactory({ subtitles: [{ name: 'a', url: '/test/combination.vtt' }, { name: 'b', url: '/test/combination.srt' }] }))
       })
       const indexMerge = implementation.version === '1.0.0'
+      const displaysBoth = indexMerge || implementation.name === 'candidate'
       await expect.poll(() => page.evaluate(() => window.art.template.$track.track.cues?.length)).toBe(indexMerge ? 1 : 2)
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)
       await page.locator('#pause').click()
       await seek(page, 1.5)
       await expect(page.locator('.art-subtitle-a')).toHaveText('First')
-      // This is a deficiency probe, not successful simultaneous-caption acceptance.
-      await expect(page.locator('.art-subtitle-b')).toHaveCount(indexMerge ? 1 : 0)
+      // Historical 1.1/1.2 failures remain observations; candidate must display both.
+      await expect(page.locator('.art-subtitle-b')).toHaveCount(displaysBoth ? 1 : 0)
       const state = await page.evaluate(() => ({ native: Array.from(window.art.template.$track.track.activeCues, cue => cue.getCueAsHTML().textContent), displayed: window.art.template.$subtitle.textContent }))
       expect(state.native).toEqual(indexMerge ? ['FirstTranslation'] : ['First', 'Translation'])
-      expect(state.displayed).toBe(indexMerge ? 'FirstTranslation' : 'First')
-      await testInfo.attach('single-active-cue-boundary', { contentType: 'application/json', body: JSON.stringify({ core, implementation: implementation.name, state, simultaneousCaptionsAccepted: indexMerge, unresolvedCandidateGap: !indexMerge, explanation: '1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes.' }) })
+      expect(state.displayed).toBe(displaysBoth ? 'FirstTranslation' : 'First')
+      await testInfo.attach('single-active-cue-boundary', { contentType: 'application/json', body: JSON.stringify({ core, implementation: implementation.name, state, simultaneousCaptionsAccepted: displaysBoth, historicalCaptionLoss: !displaysBoth, explanation: '1.0.0 combines by array index; 1.1/1.2 retain separate cues but the old core displays only its first. Candidate adapts the old view while retaining separate native timings.' }) })
       await page.evaluate(() => window.art.plugins.multipleSubtitles.tracks(['b']))
       await expect(page.locator('.art-subtitle-b')).toHaveText('Translation')
       await expect(page.locator('.art-subtitle-a')).toHaveCount(0)

@@ -2431,7 +2431,9 @@
         "PKG-MULTI-SUB-05",
         "ENG-07",
         "CORE-SUBTITLE-OFFSET-01",
-        "PKG-MULTI-SUB-09"
+        "PKG-MULTI-SUB-09",
+        "PKG-MULTI-SUB-10",
+        "PKG-MULTI-SUB-11"
       ],
       "status": "todo",
       "risk": "H",
@@ -5179,6 +5181,42 @@
         "changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",
         "baselines/multiple-subtitles-switch-validation.json"
       ]
+    },
+    {
+      "id": "PKG-MULTI-SUB-10",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "适配旧核心的多条活动字幕渲染",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-08",
+        "PKG-MULTI-SUB-09"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "独立旧宿主显示适配、原生异步字幕重叠回归和兼容边界说明",
+      "acceptance": "旧5.1.2/5.1.7复现先红后绿；保持原生cue对象/时间、旧事件标量和方法身份；多格式显示及清理通过，保留其他组合和设备缺口",
+      "evidence": [
+        "changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md",
+        "baselines/multiple-subtitles-legacy-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-MULTI-SUB-11",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "处理旧发布核心 ASS 转换器丢失换行",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-10"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "冻结5.1.2发布/源码转换差异，兼容转换适配与真实ASS字幕回归",
+      "acceptance": "保持已有效转换行为，旧发布ASS缺陷有先红后绿与实际产物证据；不得将VTT替代夹具算作ASS通过",
+      "evidence": []
     }
   ]
 }

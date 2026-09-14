@@ -195,7 +195,7 @@
 | VTT-THUMB-TYPE-01 | resolved / 已复现 | Published declarations falsely describe async registration as a synchronous result | PKG-VTT-THUMB-04 |
 | VTT-THUMB-EXPORT-01 | open / 已复现 | Older CommonJS default objects and thumbnails control names differ from latest direct export and vtt-thumbnail name | PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
 | MULTI-SUB-TYPE-01 | resolved / 已复现 | Declarations omit async registration, tracks/reset and make the subtitles array required | PKG-MULTI-SUB-04 |
-| MULTI-SUB-MERGE-01 | open / 已复现 | 1.0.0 merges cues by index while later versions concatenate independently timed track cues | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
+| MULTI-SUB-MERGE-01 | open / 已复现 | 1.0.0 merges cues by index while later versions concatenate independently timed track cues | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05, PKG-MULTI-SUB-10 |
 | MULTI-SUB-LIFE-01 | open / 已复现 | Pending downloads and final object URL have no destroy owner | PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-EXPORT-01 | open / 已复现 | Older CommonJS default objects conflict with export-assignment declarations; latest exports a direct factory | PKG-MULTI-SUB-04, PKG-MULTI-SUB-06 |
 | MULTI-SUB-HTTP-01 | resolved / 已复现 | HTTP error responses with parseable bodies are installed as subtitles | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
@@ -266,4 +266,5 @@
 | AUTO-THUMB-ENCODE-TIMEOUT-01 | resolved / 源码/产物事实 | Pending JPEG encoding has no bounded lifetime after frame readiness finishes | PKG-AUTO-THUMB-10 |
 | MULTI-SUB-MARKUP-01 | resolved / 已复现 | Semantic cue nodes receive HTML wrappers inside their annotation fields | PKG-MULTI-SUB-08 |
 | MULTI-SUB-OFFSET-01 | resolved / 已复现 | Paused Firefox subtitle offset leaves out-of-time native cues active and captions visible | PKG-MULTI-SUB-05, CORE-SUBTITLE-OFFSET-01 |
-| MULTI-SUB-SWITCH-01 | resolved / 已复现 | Intermittent WebKit core5.3.0 caption loss after selected-track source switch | PKG-MULTI-SUB-05, PKG-MULTI-SUB-09 |
+| MULTI-SUB-SWITCH-01 | open / 已复现 | Intermittent WebKit core5.3.0 caption loss after selected-track source switch | PKG-MULTI-SUB-05, PKG-MULTI-SUB-09 |
+| MULTI-SUB-ASS-01 | open / 已复现 | Published core5.1.2 ASS converter loses required VTT line breaks | PKG-MULTI-SUB-11 |

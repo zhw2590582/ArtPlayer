@@ -1,11 +1,15 @@
-import type Artplayer from 'artplayer'
-import type { Lifetime } from './types'
+import type { CaptionHost, Lifetime } from './types'
+import renderLegacyCaptions from './legacy-caption'
 import { TIMESTAMP_CLASS } from './merge'
 
-export default function installCaptionView(art: Pick<Artplayer, 'on' | 'off' | 'template'>, lifetime: Lifetime): void {
+export default function installCaptionView(art: CaptionHost, lifetime: Lifetime): void {
+  const legacy = !!art.subtitle && 'activeCue' in art.subtitle && !('activeCues' in art.subtitle)
+  const event = legacy ? 'subtitleUpdate' : 'subtitleAfterUpdate'
   function update(): void {
     if (lifetime.closed)
       return
+    if (legacy)
+      renderLegacyCaptions(art)
     // HTML does not pair <c.class> with </c>; unwrap while preserving following caption nodes.
     for (const marker of Array.from(art.template.$subtitle.getElementsByTagName(`c.${TIMESTAMP_CLASS}`))) {
       const first = marker.firstChild
@@ -16,6 +20,6 @@ export default function installCaptionView(art: Pick<Artplayer, 'on' | 'off' | '
   }
   if (lifetime.closed)
     return
-  lifetime.own(() => art.off('subtitleAfterUpdate', update))
-  art.on('subtitleAfterUpdate', update)
+  lifetime.own(() => art.off(event, update))
+  art.on(event, update)
 }

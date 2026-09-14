@@ -1,5 +1,11 @@
 # Tests and fixture ownership
 
+`test/multiple-subtitles-caption.test.js` checks the old-host view adapter with the
+actual plugin bundle: native order, original update identity/scalar event payload,
+escape changes, timestamp cleanup, modern-host isolation and destroy/registration
+failure cleanup. It runs in `test:unit` and `test:multiple-subtitles`, without new
+dependencies. Native cue timing is separately verified in the browser suite.
+
 `test/multiple-subtitles-entities.test.js` checks named entities, literal tags,
 double encoding, nested semantic tags and selection/reset through the real plugin.
 The vendor parity suite stays unchanged: the plugin uses the parser's existing
