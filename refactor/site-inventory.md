@@ -77,12 +77,13 @@ loadScript 暂时覆盖 window.define：桌面成功/失败均恢复，移动失
 | build:test | 中文 Run Code → docs/test/test.js | 排除 en/plugin/public/.vitepress；100ms done 只是 smoke，含生成时间戳；SITE-02 |
 | build:i18n | 核心语言源 → dist/i18n、compiled/i18n | 排除内置语言/发布辅助，逐包构建；SITE-03 |
 | build:docs | VitePress 源 → docs/document | 当前 npm 子进程只是运行脚本；SITE-03 统一 Yarn 编排 |
-| build:llm | 英文文档、编辑器声明、示例 → docs/llms.txt | 明确远程 DeepSeek 操作；SITE-03 |
-| trans-docs.js | 中文 Markdown → 英文 Markdown | 明确远程 DeepSeek 操作；SITE-03 |
+| build:llm | 英文文档、实际编辑器声明、示例、声明 notices → docs/llms.txt + manifest | SITE-AI-DOCS-01 离线可复现；check:llm 只读检查 |
+| trans-docs.js | 中文 Markdown → 草稿 → 经检查应用英文 Markdown | 默认只显示计划；显式 --remote 请求，--validate / --apply 分步处理 |
 
 build:test 的 malformed 分支在 continue 前不推进 regexp，存在同一坏块重复扫描的源码路径；
 SITE-02 必须加入可终止的坏文档反例。未运行该路径或把它计作已修复。
-build:all/ci:build 当前不调用远程翻译或 LLM。SITE-03 应保留这一边界。
+build:all/ci:build 不调用远程翻译；SITE-AI-DOCS-01 将离线 build:llm 纳入
+ci:build，将只读 check:llm 纳入 ci:check。远程草稿与英文质量复核仍单独执行。
 
 `scripts/projects.js` 明确排除 VitePress 的库构建；配置 base=/document/，输出到仓库 docs/document。
 Pages 工作流消费已验证的 docs artifact，部署与检查分离。manifest 未设 private，且没有

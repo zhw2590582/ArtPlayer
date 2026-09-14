@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "generation": "offline-source-preserving",
+  "sources": [
+    {
+      "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+      "sha256Lf": "5d56bce1f12b10363643edb8f655bbda1ed656b9646561c2e422ca9eb9a7b055"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+      "sha256Lf": "57ae1273515faa31ae28672f80a44d7b6f4aee918b59b814c638e3fd311f56ba"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/advanced/event.md",
+      "sha256Lf": "e11360c89bc91ed4f68ce9a40d335c1726ef006a23950d5d9ce4475789aecb7e"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/advanced/global.md",
+      "sha256Lf": "01380ae04fedd94dd91f5f31c51d4894c458dad3268cf38119b54a8fe73ee46c"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+      "sha256Lf": "b6defaab71f22becbc8d3141a2b2ac746c9fbe24eba31326837c2e8ce8b59057"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/advanced/property.md",
+      "sha256Lf": "041d33b8d81cbb928ea07504885ceccab4becf3476bf82120013d5f2840c31b7"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/component/contextmenu.md",
+      "sha256Lf": "df86b1d08d01288e68fa861e3f645109d6305868785a9005906c95dc86280f1f"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/component/controls.md",
+      "sha256Lf": "cd516c25f6d27c52da58e41dd98b360975f1e43b1d42b460ea3a2e21c6a3c2b2"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/component/layers.md",
+      "sha256Lf": "bd8a5d0b996159b1fb563caa9f74cce3bcf97c4bca9eea99f1cd75ceacc6a0d3"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/component/setting.md",
+      "sha256Lf": "652e85b02f9de60ff794cb3527a3e4ae514a3441cacebf340c1a82d09ce06f08"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/index.md",
+      "sha256Lf": "adec563b74e5d690f97a710bf58478d04092f0de199674152e68da817f412ee5"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/start/i18n.md",
+      "sha256Lf": "1551bf939aab1ee942d8480df891640109d18aa9adc016adf1d075bee5ef1de9"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/start/option.md",
+      "sha256Lf": "72776482f31a3240462d72d56912b2e9f96583a12f36b6556abdf379ca1d3fdf"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-ads.d.ts",
+      "sha256Lf": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-ambilight.d.ts",
+      "sha256Lf": "9f06ccb7398053dca642ca369aa47f54cbb3e4dd4d5e252e999e59e496d8eee8"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-asr.d.ts",
+      "sha256Lf": "5096f097636c018bc05c497324c271af3fefaebccda7fa3e9cd43b63477704ad"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-audio-track.d.ts",
+      "sha256Lf": "604af2a3790eb7c583ba150c402dca0a3e458469cc74913b51fee2f3d3882541"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-auto-thumbnail.d.ts",
+      "sha256Lf": "f66bba7f633202c2ef359a989269c643b75d91594364f7ed6fb67f9898aeac03"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-chapter.d.ts",
+      "sha256Lf": "d5bd68579659afa44158c894e12372cedd6f958415ced370a65c294550aa828d"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-chromecast.d.ts",
+      "sha256Lf": "0a0b932081cac0efbcedea28dc1077484963b7f406808378704062661a4c0338"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-danmuku-mask.d.ts",
+      "sha256Lf": "06c6e938876edcc0ac2c8dcd1e1be4596b0f056685a3523d4c9836f2f2f90362"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-danmuku.d.ts",
+      "sha256Lf": "e3421bdbdfc6bea1b0b633300350fff1a745d8bc21c1430b6154a23fa3ad0415"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-dash-control.d.ts",
+      "sha256Lf": "c7e3c83f3377b615e503a270af12915dcc82fe3f2cfabdae396632855a27f73f"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-document-pip.d.ts",
+      "sha256Lf": "42faa0a6549149efd01b46c3c59246bd4dc33f2383b63b04e9f5376de29fdb8e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-hls-control.d.ts",
+      "sha256Lf": "6a623bb6ba4cc0598a3dd1aab5ef7ca4fbae11973a787885eccba10cc7aa2c7c"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-jassub.d.ts",
+      "sha256Lf": "ce713e0a61a81bfc31087ea1a880a99398ef7c2b833e567c91e4e98f5ae6f621"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-multiple-subtitles.d.ts",
+      "sha256Lf": "edb15207df69a695311e849555cf989bfc32da20c2456731b6814de5400567bb"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-vast.d.ts",
+      "sha256Lf": "b21ed9a852b3ec3cc9b409cce08e91905e42abdc1d642acc9b412c33c83287b7"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-vtt-thumbnail.d.ts",
+      "sha256Lf": "d82c0fe08bcf9c60e2a634e9f1fd8ccc75dc8e0ddbfa8262cccaefc9604aa61b"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-proxy-canvas.d.ts",
+      "sha256Lf": "83c408e0724a598f9ff32d68d752f39e03feb69ba4f6a49ba02f9d4df898453e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-proxy-mediabunny.d.ts",
+      "sha256Lf": "acbaa0a25f20ac15b3d79db00b3a16167f84452ab58933110f42dcb3262fbd3e"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-tool-iframe.d.ts",
+      "sha256Lf": "c06c6819146ba64bd6ee498871d9e19ab5a9e88c9cc7bed2c0c4968fa39dfed7"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-tool-thumbnail.d.ts",
+      "sha256Lf": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6"
+    },
+    {
+      "file": "docs/assets/ts/artplayer.d.ts",
+      "sha256Lf": "652c0fdf605e87203526777a05851bd69c95c1660d5ff29eab19c00967c9a985"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-i18n.d.ts",
+      "sha256Lf": "60851e22ea50ed540f1be0f5a110077cdd5e6ab87345a675838f6c6333517405"
+    },
+    {
+      "file": "docs/assets/example/ads.js",
+      "sha256Lf": "c84a97d2b1970c323a0c2538b846312bff38513e10de271fe5f239953da88cd3"
+    },
+    {
+      "file": "docs/assets/example/ambilight.js",
+      "sha256Lf": "f97c1404886ba6474b4e14339c563fd2de50b7d50fdc4c9d59d85a3142a1ad52"
+    },
+    {
+      "file": "docs/assets/example/asr.js",
+      "sha256Lf": "bb7fd5eee3df887b7e0c72a6f42f74f0253350f9bc884f73cb9c2996f0e35724"
+    },
+    {
+      "file": "docs/assets/example/asr.local.js",
+      "sha256Lf": "32371e51ac5f55edaa146002e7e4594ec056bf198db8b1e62e6d68ec2ea48f30"
+    },
+    {
+      "file": "docs/assets/example/audio.track.js",
+      "sha256Lf": "9ed26b2ee006e1a430db68b2a1b308c4801dd3a4cc87c74e8a8f5ccf3456ac8d"
+    },
+    {
+      "file": "docs/assets/example/auto.thumbnail.js",
+      "sha256Lf": "e0f706bbbab8e2d0f3201ea6b91f1d5530c6bb65f5c1745dc8ade9acc6d66295"
+    },
+    {
+      "file": "docs/assets/example/canvas.js",
+      "sha256Lf": "95a971773e93cfb340a07eebcd49e333825f49ce0d167514ad98a188cd027799"
+    },
+    {
+      "file": "docs/assets/example/chapter.js",
+      "sha256Lf": "93f2378a1b7a105721511d34fd632ec7745b4b20c472072c410f76b25383c96b"
+    },
+    {
+      "file": "docs/assets/example/chromecast.js",
+      "sha256Lf": "edd4d232a667a3ca5bae247dca3c557431975b9ae38dc56cc590b57e327d048f"
+    },
+    {
+      "file": "docs/assets/example/danmuku.js",
+      "sha256Lf": "3f91461e2466f13ed4e72e6bd69986461192d8c6a9ca866fa347599f6958e021"
+    },
+    {
+      "file": "docs/assets/example/danmuku.mask.js",
+      "sha256Lf": "c0fe4f2d4cd60738583c4bfeebc24bc3365d8ca382e6f4ff86e1056f5a2729a8"
+    },
+    {
+      "file": "docs/assets/example/dash.control.js",
+      "sha256Lf": "edc4326f03262a222e06bb780aab05c903ee162829dec60970e738c1e260eef2"
+    },
+    {
+      "file": "docs/assets/example/dash.js",
+      "sha256Lf": "49a7837016b6f0e8ac045e6aba7bb95e1997e6fd834243b4c62d0c97a2938776"
+    },
+    {
+      "file": "docs/assets/example/document.pip.js",
+      "sha256Lf": "2600948ff0128e2e77fe08fbefa9be96543d8fcd81421534dfbfe9cb84e91fde"
+    },
+    {
+      "file": "docs/assets/example/flv.js",
+      "sha256Lf": "51e052e5423318aa25c69eae90a5181c1325edf2d0975fa169308eadb6b395eb"
+    },
+    {
+      "file": "docs/assets/example/hls.control.js",
+      "sha256Lf": "b02fd290d79999790501447fad95736642344b9b30af3ccdbe353f80c7d53a6e"
+    },
+    {
+      "file": "docs/assets/example/hls.js",
+      "sha256Lf": "7f82d60442223ced637daa896199607ca9bd52ac50dabbb47c75561f84e9ff48"
+    },
+    {
+      "file": "docs/assets/example/iframe.js",
+      "sha256Lf": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a"
+    },
+    {
+      "file": "docs/assets/example/index.js",
+      "sha256Lf": "7fd8b85433ced107add0e0b3731ef192113435330d976166cbb63992b7625571"
+    },
+    {
+      "file": "docs/assets/example/jassub.js",
+      "sha256Lf": "4c93c554aa0a65ac19c1386bb0cfd9df6545f95b8a6f65541a0db8c072975f6d"
+    },
+    {
+      "file": "docs/assets/example/mediabunny.js",
+      "sha256Lf": "dad4cecb76b2e5ce9164a4da715793911123e8fd2bc4b93f4bcc86a7053bad7d"
+    },
+    {
+      "file": "docs/assets/example/mobile.js",
+      "sha256Lf": "c117fcd0e8b0f3da3745f5b97d2544b52aea49f28a7779704b0455f2a54d00e3"
+    },
+    {
+      "file": "docs/assets/example/mpegts.js",
+      "sha256Lf": "2e819af74536e02fdbccbf3379467dec7b1cf6f3aff7e46c370355320485a482"
+    },
+    {
+      "file": "docs/assets/example/multiple.subtitles.js",
+      "sha256Lf": "d9ccbd334d4c77f26826144870d6700e4b62f1f00b7f8f49817b3ac2583e5cc4"
+    },
+    {
+      "file": "docs/assets/example/setting.test.js",
+      "sha256Lf": "84d6489b87556df556cbf567c9e72895366e0abeba524b9bb67ef9561d1dda60"
+    },
+    {
+      "file": "docs/assets/example/thumbnail.js",
+      "sha256Lf": "e166845905f131dea0979eb77471f5531a59b93ab2dc28fef1b6791adb42fc30"
+    },
+    {
+      "file": "docs/assets/example/tool.thumbnail.js",
+      "sha256Lf": "ef830a5f499e14c09d51aa31aaa0a194ea1f910b27f14ef97c0ca8f67d529a54"
+    },
+    {
+      "file": "docs/assets/example/vast.js",
+      "sha256Lf": "ce93b48fabc2f1fd39fdaa8af3ae9f86a420c9aa65551e2e196d754070f36064"
+    },
+    {
+      "file": "docs/assets/example/vtt.thumbnail.js",
+      "sha256Lf": "05465b0da63b23626a3032a9c1f44d3e78ed501a313aaed885ac232ab720ffee"
+    },
+    {
+      "file": "docs/assets/example/webtorrent.js",
+      "sha256Lf": "11e6541fbaeb2f854b43ed4ea2bea36f411505343dc79a3f3a9ede9d856b2226"
+    },
+    {
+      "file": "docs/assets/ts/artplayer-plugin-vast.LICENSE.txt",
+      "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
+    }
+  ],
+  "outputSha256Lf": "2dac26861645bdf8f449eb8a3b5e197ecf0bb93e124a4f038ef3d71e6783ad08"
+}

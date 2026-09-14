@@ -1,0 +1,148 @@
+{
+  "task": "SITE-AI-DOCS-01",
+  "baseline": "647f3e7f12b1026f7d0de0830080d2d17b23d14d",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "scope": {
+    "corpusSources": 66,
+    "translatedSourceFilesChecked": 13,
+    "newTests": 12,
+    "actualTranslationCalls": 0,
+    "originalDocsUnchanged": true,
+    "playerRuntimeChanged": false,
+    "publicTypesChanged": false,
+    "lockUnchanged": true,
+    "newDependencies": 0
+  },
+  "logs": {
+    "targeted": {
+      "file": "refactor/.cache/ai-docs-targeted.log",
+      "sha256": "a583dd7b803b79f4978e821f4ccc5da20cc71aa937c2221cc35c3926c950f67a",
+      "exitCode": 0,
+      "pass": 18
+    },
+    "finalNewTests": {
+      "file": "refactor/.cache/ai-docs-tests-final.log",
+      "sha256": "004aac934d67c1afcf39bfb8df81a70b47800d3fcab5677671f999ca357f75a9",
+      "exitCode": 0,
+      "pass": 12
+    },
+    "baseline": {
+      "file": "refactor/.cache/ai-docs-baseline.log",
+      "sha256": "5141e44306af3f8ffb9394bd82052130f844b4646f0b6df90e3e35a7ef90ddd6",
+      "exitCode": 0,
+      "pass": 522
+    },
+    "ci": {
+      "file": "refactor/.cache/ai-docs-ci.log",
+      "sha256": "9e694e53f168ec66c0dec0534bf7cf864f04dd1a5cccb8ab57ab26d9a3731b79",
+      "exitCode": 0,
+      "pass": 50
+    },
+    "rootLint": {
+      "file": "refactor/.cache/ai-docs-root-lint.log",
+      "sha256": "ad86c4dffcbe4299d3562782b81dff61e3861c85f67ab1150c54d5ba087972e1",
+      "exitCode": 0
+    },
+    "finalTargetLint": {
+      "file": "refactor/.cache/ai-docs-target-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    "finalTypes": {
+      "file": "refactor/.cache/ai-docs-types-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    "toolchain": {
+      "file": "refactor/.cache/ai-docs-toolchain.log",
+      "sha256": "b7128a2d927b05010f6af07089db147ec84f7c388d29f2d231e93184e5a7e005",
+      "exitCode": 0
+    },
+    "corpus": {
+      "file": "refactor/.cache/ai-docs-corpus.log",
+      "sha256": "e771bcea47e40862939d82de90baff765f8c679dd1b6d8414c6d767257e6543b",
+      "exitCode": 0
+    },
+    "finalRiskAndInventory": {
+      "file": "refactor/.cache/ai-docs-status-final.log",
+      "sha256": "bec1072cc3711bb89e98c717eda1b06c9f476ed0fd13f252238ceca6ff466caf",
+      "exitCode": 0,
+      "pass": 3
+    },
+    "generatedSourceWhitespace": {
+      "file": "refactor/.cache/ai-docs-whitespace.log",
+      "sha256": "068d10caf7b7d2719bfeafc79a704d91bcb7e19b05e2b8b495f106a380da2710",
+      "exitCode": 2
+    }
+  },
+  "sources": [
+    {
+      "file": "scripts/build-llm.js",
+      "sha256": "0de87f528ab5f27aef4a02fa7219818bc9d76797aa1a8015b8f54c4e168fa3d2"
+    },
+    {
+      "file": "scripts/trans-docs.js",
+      "sha256": "126fe0a92d441e065a5db1a69c0492931542c2b66a4f3c1f5b92051bc702d276"
+    },
+    {
+      "file": "scripts/tsconfig.docs.json",
+      "sha256": "381835bb07fc3245b6cbf6077ef74159d2fc75808bea5c074d6af0f9565612ea"
+    },
+    {
+      "file": "package.json",
+      "sha256": "400a1f3aa48f023099eaca0ab35dc686d4b4570f73861d6c3b8046d29fde25ed"
+    },
+    {
+      "file": "test/documentation-pipeline.test.js",
+      "sha256": "29e60c7a2a2f184486b85d1288c4abed6cd9e90cc830dbec347d56b3a3845afe"
+    },
+    {
+      "file": "scripts/documentation/cli.ts",
+      "sha256": "82026bc026adecd3c97b0ee5adbe5b25a4dd1e679b2a7fdecde3f18a96919af6"
+    },
+    {
+      "file": "scripts/documentation/corpus.ts",
+      "sha256": "f916f63822b9e53a26d2017c0004a576c1fbdf0af0f839c296c8e3d2a14bb2c1"
+    },
+    {
+      "file": "scripts/documentation/files.ts",
+      "sha256": "f445f39e96176a754590d6fb336f2df54ca7735cbc8b3b95057f4c2bb1fb3263"
+    },
+    {
+      "file": "scripts/documentation/markdown.ts",
+      "sha256": "8b0f690348ece7f645bc00ece144528656fed069c569e0ae204c773486c34264"
+    },
+    {
+      "file": "scripts/documentation/README.md",
+      "sha256": "fcf5085edb2e9a6dcdedb2515b3a8224ad5d0a940f6de189382da2d50b87b6ad"
+    },
+    {
+      "file": "scripts/documentation/remote.ts",
+      "sha256": "368ae90bea04b267392b6c85cd8a77f0f72986ca0f17eadb0b6c5655d8562f05"
+    },
+    {
+      "file": "scripts/documentation/translation.ts",
+      "sha256": "52dd973ae30341ebebe39c01011b87b0a5f37702297263f10a1417dad2dc10bd"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "docs/llms.txt",
+      "sha256": "2dac26861645bdf8f449eb8a3b5e197ecf0bb93e124a4f038ef3d71e6783ad08"
+    },
+    {
+      "file": "docs/llms.manifest.json",
+      "sha256": "bb9b81870f74706965975b998ecf40a8c8496ad1d6cfe46d049de0d84212bbbf"
+    }
+  ],
+  "outputSha256Lf": "2dac26861645bdf8f449eb8a3b5e197ecf0bb93e124a4f038ef3d71e6783ad08",
+  "limitations": [
+    "No paid/remote translation or English quality acceptance",
+    "Caught apply failures can roll back; process crash/power loss is not a multi-file transaction",
+    "Concurrent writer conflicts are reported, not overwritten",
+    "No browser/device/full VitePress/remote CI/Pages/npm validation in this tool task",
+    "522 baseline tests preceded final risk/status updates, which receive targeted checks",
+    "git diff --check reports original English :::warning trailing space and generated bundle EOF separator; non-corpus source diff check passes. Original Markdown whitespace is intentionally preserved."
+  ]
+}

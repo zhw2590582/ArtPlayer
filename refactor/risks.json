@@ -5753,6 +5753,28 @@
       "compatibleResolution": "The HTML now loads main.tsx; the unchanged App call builds and loads controlled media in all six installed consumer browser profiles.",
       "closureCriteria": "Actual installed consumer and original App entry pass without changing the wrapper props, default configuration or effect dependency contract.",
       "resolutionRationale": "The HTML now loads main.tsx; the unchanged App call builds and loads controlled media in all six installed consumer browser profiles."
+    },
+    {
+      "id": "SITE-TRANS-DATA-01",
+      "title": "Translation deletes English before requests and repairs valid fences destructively; exhausted rate limits return undefined",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-AI-DOCS-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-SITE-AI-DOCS-01-documentation-pipeline.md",
+        "refactor/baselines/documentation-pipeline-validation.json",
+        "test/documentation-pipeline.test.js"
+      ],
+      "compatibleResolution": "Keep CLI paths and translation source scope; make default local, request into isolated drafts, validate and explicitly apply with caught-error rollback. Preserve player public APIs.",
+      "closureCriteria": "Frozen old-function tests reproduce deletion, fence damage and undefined 429; candidate tests retain existing English on failed/damaged/stale requests and verify reviewed apply, rollback, cancellation and bounded request/body lifetime.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-SITE-AI-DOCS-01-documentation-pipeline.md",
+        "refactor/baselines/documentation-pipeline-validation.json",
+        "test/documentation-pipeline.test.js"
+      ],
+      "resolutionRationale": "Twelve candidate regressions pass, including actual 13-file Markdown round-trip and local HTTP stalled body. No live translation was applied. Power loss and hostile concurrent filesystem mutation are explicitly outside transaction guarantees."
     }
   ]
 }

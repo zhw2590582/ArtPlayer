@@ -57,9 +57,13 @@ The repository generators have different ownership:
   complete playback or plugin behavior. See its maintenance README and SITE-SMOKE-01.
 - `scripts/build-i18n.js`: core language source bundles and copies to `docs/compiled/i18n/`.
 - `scripts/build-docs.js`: this VitePress build.
-- `scripts/build-llm.js` and `scripts/trans-docs.js`: explicit remote DeepSeek
-  operations, with a required key. They are not part of `ci:build` or `build:all`.
-  Do not invoke them just to inspect or regenerate local documentation.
+- `scripts/build-llm.js`: offline source-preserving `docs/llms.txt` and fingerprint
+  manifest. `yarn check:llm` checks drift in CI; `ci:build` regenerates after types.
+- `scripts/trans-docs.js`: local plan by default; explicit `--remote` creates a
+  reviewable draft, `--validate <draft>` checks edited drafts, and `--apply <draft>`
+  replaces selected English files with stale-input and rollback checks. Remote
+  translation is never part of CI. See [tool maintenance](../../scripts/documentation/README.md)
+  for the migration from destructive translation, module boundaries and limits.
 
 ## Browser boundaries and ownership
 

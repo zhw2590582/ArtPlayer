@@ -146,3 +146,14 @@ semantic editor declarations. `yarn test:danmuku-types-package` packs and instal
 the packages outside the workspace, verifies exact member bytes and frozen offline
 reinstallation, and checks historical and current compiler consumers. These type
 checks do not replace the native browser suite or final distribution acceptance.
+
+## Documentation pipeline regressions
+
+`node --test test/documentation-pipeline.test.js` covers the frozen old translator's
+delete-before-request, broken fence repair and exhausted 429 behavior; the new
+draft workflow checks failure, worker cancellation/join, reviewed apply, stale
+inputs, path escape, rollback and concurrent edits. Existing source Markdown
+round-trips and the offline source corpus are checked against actual inputs.
+A loopback HTTP server verifies a stalled response body times out. Mock responses
+test bounded retries and invalid data; no paid translation is performed and these
+tests do not certify English prose quality. Included in `test:node`.

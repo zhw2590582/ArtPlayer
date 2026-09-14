@@ -255,3 +255,4 @@
 | AUTO-THUMB-CANVAS-01 | resolved / 已复现 | Private thumbnail canvas retains sheet dimensions after completion or cancellation while callbacks retain the element | PKG-AUTO-THUMB-07 |
 | EX-REACT-LIFE-01 | resolved / 已复现 | React getInstance exception leaks the constructed player | EX-01 |
 | EX-REACT-ENTRY-01 | resolved / 源码/产物事实 | React HTML references absent main.jsx instead of the existing TSX entry | EX-01 |
+| SITE-TRANS-DATA-01 | resolved / 已复现 | Translation deletes English before requests and repairs valid fences destructively; exhausted rate limits return undefined | SITE-AI-DOCS-01 |

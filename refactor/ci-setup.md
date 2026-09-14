@@ -119,3 +119,10 @@ Pages 先调用同一检查/构建 workflow，成功后上传同一次运行生�
 | npm 权限、trusted publisher、候选发布 | 未配置、未执行 | CI-03/CI-04 |
 
 参考：[GitHub Pages 自定义 workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)、[setup-node](https://github.com/actions/setup-node)、[actionlint 1.7.12](https://github.com/rhysd/actionlint/releases/tag/v1.7.12)。本轮已核对选用 Actions 的实际 action.yml 和发布 tag 对应 SHA；后续升级需重新检查。
+
+## SITE-AI-DOCS-01 文档生成补充
+
+`ci:check` 新增 `yarn check:llm`，只读校验 `docs/llms.txt` 和来源指纹清单。
+`ci:build` 在 `build:ts` 后运行离线 `build:llm`，不读取 API key 或请求模型。
+文档 TS 模块进入根 lint 和 docs-tools 严格类型检查，文档流程回归进入
+`test:node`。`trans:docs --remote` 不进入 CI；远端工作流运行结果仍待独立验收。

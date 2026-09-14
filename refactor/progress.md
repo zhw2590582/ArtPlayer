@@ -1,5 +1,22 @@
 # 进度与证据
 
+## SITE-AI-DOCS-01 文档工具完成
+
+将 build-llm/trans-docs 拆为严格 TS 模块，保留旧命令路径。离线 LLM 文件含
+66 个原始来源及指纹清单，生成/只读检查进入 CI；翻译默认只显示计划，显式
+远程操作先生成草稿，校验后应用，捕获写入失败时回滚并保护并发作者修改。
+已复现并修复旧工具先删英文、错误修补代码块及最后 429 返回 undefined。
+新增 12 项测试、目标组合 18 项、完整 baseline 522 项、CI 回归 50 项通过。
+严格类型、工具链和 lint 通过（根 lint 1 条既有 warning）；最终悬空链接修复
+后复跑新测试/目标 lint/类型。当前中英文源文档与起点一致，无远程翻译或
+发布。崩溃/断电不具备跨文件事务保证，英文质量与浏览器验收未计入本任务。
+见[变更](changes/2026-09-14-SITE-AI-DOCS-01-documentation-pipeline.md)和
+[证据](baselines/documentation-pipeline-validation.json)。当前 242 项：168 done、
+15 doing、59 todo。下一步 SITE-03 剩余 i18n/VitePress 编排和桌面 UI 迁移；
+VAST 默认行为、Auto Thumbnail 首帧及各包最终验收保持开放。独立本地提交并
+审计，无推送或发布。
+
+
 ## SITE-LOAD-01 示例加载与导航完成
 
 从 SITE-03 拆出共享 TS loader、移动入口与 Run Code/语言导航；恢复 define 原

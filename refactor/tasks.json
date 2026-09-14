@@ -4169,6 +4169,27 @@
       ]
     },
     {
+      "id": "SITE-AI-DOCS-01",
+      "phase": "6 文档与消费者",
+      "title": "重构可复现 LLM 文档与安全翻译草稿流程",
+      "scope": [
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-LOAD-01",
+        "SITE-02"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "TS 离线文档聚合、显式远程翻译、草稿校验和可回退应用，保留命令与目标路径",
+      "acceptance": "默认不读密钥/调用网络；LLM 内容可复现并保留来源；旧翻译破坏性行为有复现；错误/限流/超时/结构损坏/过期/路径越界拒绝且英文文档不丢失；未执行付费翻译不计服务验收",
+      "evidence": [
+        "changes/2026-09-14-SITE-AI-DOCS-01-documentation-pipeline.md",
+        "baselines/documentation-pipeline-validation.json"
+      ]
+    },
+    {
       "id": "SITE-03",
       "phase": "6 文档与消费者",
       "title": "整理 i18n/文档/LLM 生成流程",
@@ -4177,7 +4198,8 @@
       ],
       "dependsOn": [
         "SITE-02",
-        "SITE-LOAD-01"
+        "SITE-LOAD-01",
+        "SITE-AI-DOCS-01"
       ],
       "status": "todo",
       "risk": "M",

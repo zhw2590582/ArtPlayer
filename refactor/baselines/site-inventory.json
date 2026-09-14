@@ -18126,11 +18126,11 @@
     },
     {
       "file": "scripts/build-llm.js",
-      "sha256Lf": "6159c455938c8a40bb3e570f8160d28aac6a1808ec428023d027f974791edb4e"
+      "sha256Lf": "0de87f528ab5f27aef4a02fa7219818bc9d76797aa1a8015b8f54c4e168fa3d2"
     },
     {
       "file": "scripts/trans-docs.js",
-      "sha256Lf": "c78c685c9d4145cfe7f4cbdc8c24773bba9ea4fa4c2f171b96ef42c269edd581"
+      "sha256Lf": "126fe0a92d441e065a5db1a69c0492931542c2b66a4f3c1f5b92051bc702d276"
     },
     {
       "file": "scripts/projects.js",
@@ -18201,6 +18201,30 @@
       "sha256Lf": "6da9176284b7a697a922b90befa64263e016f12eef483793cc524bdfc028ad05"
     },
     {
+      "file": "scripts/documentation/cli.ts",
+      "sha256Lf": "82026bc026adecd3c97b0ee5adbe5b25a4dd1e679b2a7fdecde3f18a96919af6"
+    },
+    {
+      "file": "scripts/documentation/corpus.ts",
+      "sha256Lf": "f916f63822b9e53a26d2017c0004a576c1fbdf0af0f839c296c8e3d2a14bb2c1"
+    },
+    {
+      "file": "scripts/documentation/files.ts",
+      "sha256Lf": "f445f39e96176a754590d6fb336f2df54ca7735cbc8b3b95057f4c2bb1fb3263"
+    },
+    {
+      "file": "scripts/documentation/markdown.ts",
+      "sha256Lf": "8b0f690348ece7f645bc00ece144528656fed069c569e0ae204c773486c34264"
+    },
+    {
+      "file": "scripts/documentation/remote.ts",
+      "sha256Lf": "368ae90bea04b267392b6c85cd8a77f0f72986ca0f17eadb0b6c5655d8562f05"
+    },
+    {
+      "file": "scripts/documentation/translation.ts",
+      "sha256Lf": "52dd973ae30341ebebe39c01011b87b0a5f37702297263f10a1417dad2dc10bd"
+    },
+    {
       "file": "packages/artplayer-vitepress/browser/editor-loader.ts",
       "sha256Lf": "7cfdc82726d164d450b21680d950ec3f508482f1ab743febee473855248568e1"
     },
@@ -18224,7 +18248,7 @@
     "build:i18n": "node ./scripts/build-i18n.js",
     "build:test": "node ./scripts/build-test.js",
     "build:all": "yarn ci:build && yarn lint",
-    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:test && yarn build:docs && yarn test:imports",
+    "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:llm && yarn build:test && yarn build:docs && yarn test:imports",
     "build:types": "node scripts/build-types.mjs --write"
   },
   "siteManifest": {

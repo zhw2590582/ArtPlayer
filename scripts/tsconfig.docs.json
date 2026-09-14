@@ -17,6 +17,9 @@
     "build-test.js",
     "build-ts.js",
     "build-site-assets.mjs",
+    "build-llm.js",
+    "trans-docs.js",
+    "documentation/**/*.ts",
     "editor-declarations/**/*.ts",
     "editor-types.mjs",
     "plugin-editor-types.mjs"
