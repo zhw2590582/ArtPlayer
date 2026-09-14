@@ -27,6 +27,7 @@
 | [测试与验收](testing.md) | 测试层次、浏览器/消费者矩阵、证据和回归门槛 |
 | [已落实的测试可靠性规则](test-reliability.md) | 历史失败、候选回归、设备缺口、精确异常及等待/重试的执行规则 |
 | [docs 页面与编辑器测试](docs-browser-testing.md) | 复用已有 HTML、加载版本、隔离状态和补强文档 smoke |
+| [控制台迁移边界](console-modernization.md) | console.js 旧全局/实例/DOM 契约、冻结模块和待修复生命周期问题 |
 | [多轮复盘与 npm 准入](release-reviews.md) | Chrome 验证分工、三轮全局复盘、问题闭环和候选发布门槛 |
 | [逐包发布准入台账](release-ledger.md) | 22包候选/证据绑定、源码和产物指纹、任务风险/许可阻断及严格预检 |
 | [回退演练与维护](rollback-rehearsal.md) | 独立核心/插件回退、冻结安装文件检查、真实播放及剩余发布门槛 |

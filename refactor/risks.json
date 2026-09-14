@@ -666,7 +666,7 @@
     {
       "id": "VENDOR-08",
       "title": "console-bundle 来源、版本与许可闭环",
-      "confirmation": "unverified",
+      "confirmation": "source-observed",
       "status": "open",
       "owners": [
         "SITE-01",
@@ -676,10 +676,16 @@
         "refactor/third-party.json",
         "docs/assets/js/console.js",
         "refactor/site-inventory.md",
-        "refactor/baselines/site-provenance.json"
+        "refactor/baselines/site-provenance.json",
+        "refactor/console-modernization.md",
+        "refactor/baselines/site-console-inventory.json",
+        "refactor/baselines/site-console-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
+        "test/browser/site-console.spec.js"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
-      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。"
+      "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
+      "workspaceState": "Frozen 102-module Parcel bundle and real React 17.0.2/global/component/DOM behavior are recorded. Three lifecycle/error defects are separately reproduced. Remaining dependency versions, complete notices and reproducible source remain open; no runtime replacement yet."
     },
     {
       "id": "SDK-01",
@@ -6385,6 +6391,66 @@
         "test/browser/danmuku-timing-diagnostic.spec.js"
       ],
       "resolutionRationale": "原5项负载漏显和1项负载前行失败保留；实际模型/SDK/视频和20条每秒输入、等待预算不变。源与两产物共27项模型负载完整交付；两种放置路径寿命、CPU/异步间隙、新旧核心及取消/文档迁移回归通过。Node source/main/legacy各276通过，源码类型、编辑器/消费者及隔离包12组通过。首次旧Worker假设失败和错误ESM宿主调用单独记录；不冒充ESM完整浏览器验收、帧率提升或全部包发布通过。"
+    },
+    {
+      "id": "CONSOLE-SCROLL-01",
+      "title": "控制台卸载后仍执行滚动回调",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "SITE-CONSOLE-01",
+        "SITE-07"
+      ],
+      "evidence": [
+        "refactor/console-modernization.md",
+        "refactor/baselines/site-console-inventory.json",
+        "refactor/baselines/site-console-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
+        "test/browser/site-console.spec.js"
+      ],
+      "workspaceState": "Native 200ms scroll timeout survives ReactDOM unmount and later fires against the detached console node.",
+      "compatibleResolution": "Cancel pending scroll work and guard obsolete log updates; verify unmount/recreate without retained DOM work.",
+      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。"
+    },
+    {
+      "id": "CONSOLE-OWNERSHIP-01",
+      "title": "多个控制台的全局 hook 所有权冲突",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "SITE-CONSOLE-01",
+        "SITE-07"
+      ],
+      "evidence": [
+        "refactor/console-modernization.md",
+        "refactor/baselines/site-console-inventory.json",
+        "refactor/baselines/site-console-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
+        "test/browser/site-console.spec.js"
+      ],
+      "workspaceState": "Unmounting the first of two viewers unhooks the second viewer and restores a stale first-viewer wrapper; the surviving viewer no longer receives logs.",
+      "compatibleResolution": "Own shared subscriptions explicitly, preserve unrelated wrappers, and test both unmount orders plus same-container reuse.",
+      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。"
+    },
+    {
+      "id": "CONSOLE-ERROR-01",
+      "title": "Firefox/WebKit 控制台丢失原生 Error 消息",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "SITE-CONSOLE-01",
+        "SITE-07"
+      ],
+      "evidence": [
+        "refactor/console-modernization.md",
+        "refactor/baselines/site-console-inventory.json",
+        "refactor/baselines/site-console-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
+        "test/browser/site-console.spec.js"
+      ],
+      "workspaceState": "The bundled error parser converts Error to stack; native Firefox/WebKit stacks omit message, so error-only logs lose their message. Chromium is a positive contrast.",
+      "compatibleResolution": "Preserve error message and stack in the candidate without mutating ordinary log objects; require actual three-engine Error-only rendering tests.",
+      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。"
     }
   ]
 }

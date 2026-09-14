@@ -1,0 +1,502 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "baseCommit": "7cf6f33130621439c11fbbf03f510927c1be5044",
+  "command": "node node_modules/@playwright/test/cli.js test test/browser/site-console.spec.js --workers=1",
+  "exitCode": 0,
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "report": "refactor/.cache/site07-console-baseline-final-report/report.json",
+  "reportSha256": "621644694a33dfe0ebb7d412ebe23f5af0aeb69e7e8f1a014934e869cdfe3ef3",
+  "stats": {
+    "startTime": "2026-09-14T21:48:53.869Z",
+    "duration": 23574.242,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "current console globals, returned component and repeated mount retain their interfaces",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "current console renders levels and raw objects; Clear resets the visible log count",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "current console scrolls new logs and preserves the pointer hover pause",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console globals, returned component and repeated mount retain their interfaces",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console renders levels and raw objects; Clear resets the visible log count",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console scrolls new logs and preserves the pointer hover pause",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console leaves its scheduled scroll callback after unmount",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console loses the remaining viewer when another viewer unmounts",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console error-only rendering loses the message on Firefox and WebKit",
+      "project": "chromium",
+      "status": "passed",
+      "retry": 0,
+      "browser": "153.0.8010.12",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": {
+        "parsed": "Error: native-error-message\n    at eval (eval at evaluate (:311:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+        "message": "native-error-message",
+        "stack": "Error: native-error-message\n    at eval (eval at evaluate (:311:30), <anonymous>:2:26)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+        "text": "Error: native-error-message    at eval (eval at evaluate (:311:30), <anonymous>:2:26)\n\r    at UtilityScript.evaluate (<anonymous>:313:16)\n\r    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+      },
+      "pageErrors": []
+    },
+    {
+      "title": "current console globals, returned component and repeated mount retain their interfaces",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "current console renders levels and raw objects; Clear resets the visible log count",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "current console scrolls new logs and preserves the pointer hover pause",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console globals, returned component and repeated mount retain their interfaces",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console renders levels and raw objects; Clear resets the visible log count",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console scrolls new logs and preserves the pointer hover pause",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console leaves its scheduled scroll callback after unmount",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console loses the remaining viewer when another viewer unmounts",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console error-only rendering loses the message on Firefox and WebKit",
+      "project": "firefox",
+      "status": "passed",
+      "retry": 0,
+      "browser": "155.0",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": {
+        "parsed": "@debugger eval code line 311 > eval:2:26\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+        "message": "native-error-message",
+        "stack": "@debugger eval code line 311 > eval:2:26\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n",
+        "text": "@debugger eval code line 311 > eval:2:26evaluate@debugger eval code:313:16\n\r@debugger eval code:1:44\n\r@debugger eval code:1:62\n\r"
+      },
+      "pageErrors": []
+    },
+    {
+      "title": "current console globals, returned component and repeated mount retain their interfaces",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "current console renders levels and raw objects; Clear resets the visible log count",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "current console scrolls new logs and preserves the pointer hover pause",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": false,
+        "path": "docs/assets/js/console.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console globals, returned component and repeated mount retain their interfaces",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console renders levels and raw objects; Clear resets the visible log count",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "historical console scrolls new logs and preserves the pointer hover pause",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console leaves its scheduled scroll callback after unmount",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console loses the remaining viewer when another viewer unmounts",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": null,
+      "pageErrors": []
+    },
+    {
+      "title": "frozen historical console error-only rendering loses the message on Firefox and WebKit",
+      "project": "webkit",
+      "status": "passed",
+      "retry": 0,
+      "browser": "26.6",
+      "platform": "win32",
+      "input": {
+        "historical": true,
+        "path": "refactor/baselines/site-vendor/console-original.js",
+        "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+      },
+      "historicalError": {
+        "parsed": "@\nevaluate@\n@",
+        "message": "native-error-message",
+        "stack": "@\nevaluate@\n@",
+        "text": "@evaluate@\n\r@"
+      },
+      "pageErrors": []
+    }
+  ],
+  "histories": [
+    {
+      "report": "refactor/.cache/site07-console-baseline-first-report/report.json",
+      "sha256": "8532b32bc4a5f96725710638f6c5c9637ac2518168fba3d61972a6f35856e778",
+      "exitCode": 1,
+      "stats": {
+        "startTime": "2026-09-14T21:38:04.346Z",
+        "duration": 55237.704,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      }
+    },
+    {
+      "report": "refactor/.cache/site07-console-baseline-second-report/report.json",
+      "sha256": "b37aba1415e648489750d76ca2b39ed1d0effaa999513afee1de4c00cf3c8dca",
+      "exitCode": 1,
+      "stats": {
+        "startTime": "2026-09-14T21:40:21.328Z",
+        "duration": 23349.203,
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      }
+    },
+    {
+      "report": "refactor/.cache/site07-console-baseline-third-report/report.json",
+      "sha256": "bf8c46d47f3f86dd289308d70c6b44e6ef3416edd363da2d1191d9949c23daca",
+      "exitCode": 1,
+      "stats": {
+        "startTime": "2026-09-14T21:42:41.627Z",
+        "duration": 23204.088,
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      }
+    },
+    {
+      "report": "refactor/.cache/site07-console-baseline-green-report/report.json",
+      "sha256": "68a0680a90bca568c55298db38d391025883bb9cdd8763b90c209c030c4047e2",
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-09-14T21:44:28.547Z",
+        "duration": 23161.627999999997,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "note": "Passing run before narrowing timer instrumentation to native 200ms scroll callbacks only."
+    }
+  ],
+  "interpretation": "18 common behavior cases plus 9 historical defect-characterization cases. Historical defect tests passing are not candidate remediation. Production bundle is unchanged.",
+  "limits": [
+    "Isolated real DOM/React/console browsers, not main-editor playback or physical devices",
+    "Source dependency/notice closure and candidate migration remain open"
+  ],
+  "instrumentation": "Only 200ms function callbacks are observed; native scheduling, window callback receiver and cancellation remain in use. All other timeouts are forwarded unchanged."
+}

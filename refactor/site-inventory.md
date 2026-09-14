@@ -1,5 +1,9 @@
 # 文档站、示例与生成链清单
 
+console.js 后续已冻结 102 个模块和实际 React/ReactDOM/Parcel/返回组件契约；
+三个浏览器复现卸载回调、多容器丢日志和 Error 消息丢失。源码尚未替换，依赖许可
+仍开放；下一实现任务为 SITE-CONSOLE-01，见[迁移边界](console-modernization.md)。
+
 2026-09-15后续：vConsole 3.15.0 已由固定源码/锁文件精确重建，补原始声明所引用的
 MIT 正文和九个运行时组件的完整通知；VENDOR-07 关闭。三引擎真实播放/日志/销毁及
 全部 HTTP 通知 3/3 通过。见[当前记录](changes/2026-09-15-SITE-07-vconsole-notices.md)。

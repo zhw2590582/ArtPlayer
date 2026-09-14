@@ -395,3 +395,11 @@ The immediate-call ordering probe also remains intact. Record the chosen flags
 alongside artifacts: diagnostic overhead may change an intermittent race, and
 passing the event control must not replace the original failure evidence. The
 combination attachment includes the selected modes and optional native trace.
+
+`site-console.spec.js` characterizes the site's original console bundle, its
+React/ReactDOM/Parcel globals, returned component, object logs, Clear and hover
+scroll behavior. Common contracts run against the current and frozen input.
+Three explicitly historical cases reproduce pending-scroll, multiple-viewer hook
+ownership and native Error-message defects. Passing those cases is not proof of
+candidate fixes. SITE-CONSOLE-01 must add candidate remediation assertions and
+main-editor integration checks; see `refactor/console-modernization.md`.

@@ -32,7 +32,7 @@
 | VENDOR-05 | open / 源码/产物事实 | jassub-font-assets 来源、版本与许可闭环 | PKG-JASSUB-01, SITE-01, PKG-JASSUB-06, SITE-07 |
 | VENDOR-06 | open / 源码/产物事实 | monaco-static-assets 来源、版本与许可闭环 | SITE-01, SITE-05, SITE-07 |
 | VENDOR-07 | resolved / 源码/产物事实 | vconsole 来源、版本与许可闭环 | SITE-01, SITE-07 |
-| VENDOR-08 | open / 待取证 | console-bundle 来源、版本与许可闭环 | SITE-01, SITE-07 |
+| VENDOR-08 | open / 源码/产物事实 | console-bundle 来源、版本与许可闭环 | SITE-01, SITE-07 |
 | SDK-01 | open / 源码/产物事实 | hls.js 实际集成验证范围 | PKG-HLS-05, EX-03 |
 | SDK-02 | open / 待取证 | dash.js 实际集成验证范围 | PKG-DASH-01, EX-03, PKG-DASH-05 |
 | SDK-03 | open / 待取证 | flv.js 实际集成验证范围 | EX-03 |
@@ -276,3 +276,6 @@
 | DPIP-INSTALLED-PROVENANCE-01 | resolved / 已复现 | Document PiP测试加载器忽略显式安装map并回退到源码 | PKG-CANVAS-05, CI-01 |
 | DASH-MENU-01 | resolved / 已复现 | SDK 5.2.1 播放中设置质量选项在点击时变为不可见 | PKG-DASH-MENU-01, PKG-DASH-05, REVIEW-02 |
 | DANMUKU-MASK-LOAD-01 | resolved / 已复现 | 真实Mask模型运行时弹幕存在未采样窗口及串行放置积压 | PKG-DANMUKU-MASK-LOAD-01, PKG-DANMUKU-08, PKG-MASK-05 |
+| CONSOLE-SCROLL-01 | open / 已复现 | 控制台卸载后仍执行滚动回调 | SITE-CONSOLE-01, SITE-07 |
+| CONSOLE-OWNERSHIP-01 | open / 已复现 | 多个控制台的全局 hook 所有权冲突 | SITE-CONSOLE-01, SITE-07 |
+| CONSOLE-ERROR-01 | open / 已复现 | Firefox/WebKit 控制台丢失原生 Error 消息 | SITE-CONSOLE-01, SITE-07 |

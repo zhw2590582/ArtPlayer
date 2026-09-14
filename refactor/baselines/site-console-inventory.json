@@ -1,0 +1,777 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "recordedAt": "2026-09-14T21:47:51.241Z",
+  "source": {
+    "path": "docs/assets/js/console.js",
+    "frozen": "refactor/baselines/site-vendor/console-original.js",
+    "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03",
+    "bytes": 340306,
+    "lastSourceCommit": "5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c",
+    "lastSourceDate": "2021-11-30T20:51:42+08:00",
+    "sourceMap": "/index.js.map",
+    "sourceMapAvailable": false
+  },
+  "globals": [
+    "React",
+    "ReactDOM",
+    "consoleLog",
+    "parcelRequire"
+  ],
+  "versions": {
+    "react": "17.0.2",
+    "reactDom": "17.0.2",
+    "styledComponents": "5.3.3",
+    "consoleFeed": null
+  },
+  "ownedModules": {
+    "entry": "Focm",
+    "view": "W5CS"
+  },
+  "modules": [
+    {
+      "id": "tmkg",
+      "dependencies": {},
+      "functionSha256": "0c8a7bb9f7815db0d7f3a2393e45c384a8ec32212a41720a6c8f04f287ab6c53"
+    },
+    {
+      "id": "awqi",
+      "dependencies": {
+        "object-assign": "tmkg"
+      },
+      "functionSha256": "2c9d811e099097b9dd6d8e1ca4bd5de904cd424bd9bf16af68be64995d42ae55"
+    },
+    {
+      "id": "n8MK",
+      "dependencies": {
+        "./cjs/react.production.min.js": "awqi"
+      },
+      "functionSha256": "ca5bed00136e7357d2ee675fa30d9ca0e97084d08a863599956f09bd617b567b"
+    },
+    {
+      "id": "ydJi",
+      "dependencies": {},
+      "functionSha256": "ef386dd1e4e22e09eb822c54a72d5b059f1c83ee1bfdf28b3bee6446835a3eb3"
+    },
+    {
+      "id": "mH4R",
+      "dependencies": {
+        "./cjs/scheduler.production.min.js": "ydJi"
+      },
+      "functionSha256": "64382f71b357250ff26b8987851cfb51a86c3c1eb651c0b7720fcfec37095b79"
+    },
+    {
+      "id": "i17t",
+      "dependencies": {
+        "react": "n8MK",
+        "object-assign": "tmkg",
+        "scheduler": "mH4R"
+      },
+      "functionSha256": "268f736971d19289ccf019f0a19aa2e01905051a97a0aa090076684448813312"
+    },
+    {
+      "id": "NKHc",
+      "dependencies": {
+        "./cjs/react-dom.production.min.js": "i17t"
+      },
+      "functionSha256": "630236a4c3ee9aa89a8f3ed0e86e8f68754ff06a228635483508c368d6df98cb"
+    },
+    {
+      "id": "L2AO",
+      "dependencies": {},
+      "functionSha256": "90cfb89c5be2798fe8789179a7bdb9570a2ce848d1db19d19b3e5f93ea8ac62a"
+    },
+    {
+      "id": "G3Sv",
+      "dependencies": {},
+      "functionSha256": "7bda3484a62e004df2a9a76423b38b4c4322bed0107b6643e3a9195bf760c4f5"
+    },
+    {
+      "id": "WW8m",
+      "dependencies": {
+        "./setPrototypeOf.js": "G3Sv"
+      },
+      "functionSha256": "04230fef78b283a4226c2bbd5734cede895d8e3e6887796ba0541e284012146f"
+    },
+    {
+      "id": "faen",
+      "dependencies": {},
+      "functionSha256": "436f2447506e7d055974978eb9ee6db6189196352469fe0af0ff05ac4cc21aed"
+    },
+    {
+      "id": "uxSu",
+      "dependencies": {},
+      "functionSha256": "7181780b333686a6378b4df2ac7b2c02408e1ab61b88ed0d86d15caaa5a8a60d"
+    },
+    {
+      "id": "tMFb",
+      "dependencies": {},
+      "functionSha256": "716d680fe754c1d559bc1438d4d90646159bbce8eb1df26c6c483d3cd925796c"
+    },
+    {
+      "id": "kqnl",
+      "dependencies": {
+        "@emotion/sheet": "faen",
+        "@emotion/stylis": "uxSu",
+        "@emotion/weak-memoize": "tMFb"
+      },
+      "functionSha256": "b3e905f7e2213f1e9ef39ec5ee1ae79cf7bde6e9875859316ccf454f12322c53"
+    },
+    {
+      "id": "n0d5",
+      "dependencies": {},
+      "functionSha256": "4ead78b64770e39ed4fc1a919526f6116f82e6ff21a68a48d890e693f01f428b"
+    },
+    {
+      "id": "y4hN",
+      "dependencies": {
+        "./setPrototypeOf.js": "n0d5"
+      },
+      "functionSha256": "873d5bb8ebfb5c3b197ba4d527464c4d1adbe035512abc81c17de17983fa0a88"
+    },
+    {
+      "id": "P6FR",
+      "dependencies": {},
+      "functionSha256": "dad71f1dbffac1c006762f2da977c56006cc402761cc5f95e44f81d4c026e9b9"
+    },
+    {
+      "id": "VvAy",
+      "dependencies": {},
+      "functionSha256": "a4a8d538569b55d9d8593242277f2ecdaf2a70cbf4d2c47ae9439e7b7e891d34"
+    },
+    {
+      "id": "qy56",
+      "dependencies": {},
+      "functionSha256": "4d7176d5b50595f1b78c2eaaa07bb4bc135353b0f176e51f5a09a518d56779fb"
+    },
+    {
+      "id": "AoFs",
+      "dependencies": {},
+      "functionSha256": "7902681f76bfe939fb7bf10e9120e1b2bd2e8a8a88141caf65b1aa5b59f158bd"
+    },
+    {
+      "id": "vL6w",
+      "dependencies": {
+        "@emotion/hash": "VvAy",
+        "@emotion/unitless": "qy56",
+        "@emotion/memoize": "AoFs"
+      },
+      "functionSha256": "f7a59d18ce0fe27c7edc563056b6562049b74567dfe64a055af7ea6358c9c859"
+    },
+    {
+      "id": "aEp8",
+      "dependencies": {
+        "@babel/runtime/helpers/inheritsLoose": "y4hN",
+        "react": "n8MK",
+        "@emotion/cache": "kqnl",
+        "@emotion/utils": "P6FR",
+        "@emotion/serialize": "vL6w"
+      },
+      "functionSha256": "efb78d7a14aa133192dc76f0b96a1170986eab01372393df2d6ba2f17baac480"
+    },
+    {
+      "id": "MaOu",
+      "dependencies": {
+        "@emotion/hash": "VvAy",
+        "@emotion/unitless": "qy56",
+        "@emotion/memoize": "AoFs"
+      },
+      "functionSha256": "f7a59d18ce0fe27c7edc563056b6562049b74567dfe64a055af7ea6358c9c859"
+    },
+    {
+      "id": "gcCv",
+      "dependencies": {
+        "@emotion/serialize": "MaOu"
+      },
+      "functionSha256": "0cbf6bfeeed652c22ac3a6aa6f4641276fb0275fc5c32d0d9e21e6f0c278e0e7"
+    },
+    {
+      "id": "wdCp",
+      "dependencies": {
+        "@babel/runtime/helpers/esm/inheritsLoose": "WW8m",
+        "react": "n8MK",
+        "@emotion/cache": "kqnl",
+        "./emotion-element-04d85134.browser.esm.js": "aEp8",
+        "@emotion/utils": "P6FR",
+        "@emotion/serialize": "vL6w",
+        "@emotion/sheet": "faen",
+        "@emotion/css": "gcCv"
+      },
+      "functionSha256": "96fa25792ef71718696498192339f01a89088f01d4716c0fdfc508aa69e4aae7"
+    },
+    {
+      "id": "cYce",
+      "dependencies": {},
+      "functionSha256": "23be85f2277093f9fb8bd70424110ba14667f7b4651660d700f9fa24e6c6f47a"
+    },
+    {
+      "id": "c6OW",
+      "dependencies": {},
+      "functionSha256": "927705d650328e95cdc1c99e3fd3672a58a4ecdd282758af8031f88429bbe9ea"
+    },
+    {
+      "id": "uXAH",
+      "dependencies": {
+        "./cjs/react-is.production.min.js": "c6OW"
+      },
+      "functionSha256": "22fd62f9e230c1ac4726e10846685fb61df36b6eead0332681a3bde972ef58e9"
+    },
+    {
+      "id": "QDWH",
+      "dependencies": {
+        "react-is": "uXAH"
+      },
+      "functionSha256": "f5a5c5d6094959d64a6b3d5645719f870fdba4b0500267133b9e5c33c61a5965"
+    },
+    {
+      "id": "pufF",
+      "dependencies": {
+        "@babel/runtime/helpers/esm/defineProperty": "L2AO",
+        "react": "n8MK",
+        "@emotion/core": "wdCp",
+        "@emotion/weak-memoize": "tMFb",
+        "@babel/runtime/helpers/esm/extends": "cYce",
+        "hoist-non-react-statics": "QDWH"
+      },
+      "functionSha256": "786089a8f94ddb9a059c8a9bc8aacabbcd5e5428e518ec4460451fb6e7342cab"
+    },
+    {
+      "id": "oBf3",
+      "dependencies": {},
+      "functionSha256": "02f145879ec089f41f42c72d44d8f5051e2586bc0a12a5df6216293c081deb2b"
+    },
+    {
+      "id": "Qkun",
+      "dependencies": {
+        "./lib/ReactPropTypesSecret": "oBf3"
+      },
+      "functionSha256": "684806f11f5fff35eaf6a59841b13be7017c23a34c7131975198f524e916d4bd"
+    },
+    {
+      "id": "MaFS",
+      "dependencies": {
+        "./factoryWithThrowingShims": "Qkun"
+      },
+      "functionSha256": "94a649ca90f71d418b339eb044199dad82c0da8d2dbaae3e3bcd912454004f42"
+    },
+    {
+      "id": "eQ4J",
+      "dependencies": {},
+      "functionSha256": "53a443f2479aca4914f985e3aa8a57d0f78af6710a8d7368870c608d86635249"
+    },
+    {
+      "id": "H5iQ",
+      "dependencies": {},
+      "functionSha256": "625c6f41d623e9800c91624e48a3c6825e21b2e122448c9953b4ec1572f3c959"
+    },
+    {
+      "id": "ibbm",
+      "dependencies": {
+        "is-object": "eQ4J",
+        "is-window": "H5iQ"
+      },
+      "functionSha256": "84ff5cac53f79600e2da61f0ef8bd783cbd52c958fff39a6ecf5df2a7e1ca27e"
+    },
+    {
+      "id": "kuYm",
+      "dependencies": {
+        "react": "n8MK",
+        "prop-types": "MaFS",
+        "is-dom": "ibbm"
+      },
+      "functionSha256": "87bc780fc0fa317dbd0fd564d3fa3f0351c52218ffc5dc7b9fdae43f09bb1b25"
+    },
+    {
+      "id": "VJzx",
+      "dependencies": {
+        "react-inspector": "kuYm"
+      },
+      "functionSha256": "6eec218ad134b9edf730b4a531bd08f734d351dde5dc30b3df37e4ae6b80f014"
+    },
+    {
+      "id": "R69H",
+      "dependencies": {
+        "@emotion/memoize": "AoFs"
+      },
+      "functionSha256": "a2a7c0789be1f89edd675746f69ade28169e4037754af51d468ec16cdd481c30"
+    },
+    {
+      "id": "wvgy",
+      "dependencies": {
+        "@emotion/hash": "VvAy",
+        "@emotion/unitless": "qy56",
+        "@emotion/memoize": "AoFs"
+      },
+      "functionSha256": "f7a59d18ce0fe27c7edc563056b6562049b74567dfe64a055af7ea6358c9c859"
+    },
+    {
+      "id": "TJBs",
+      "dependencies": {
+        "@babel/runtime/helpers/esm/defineProperty": "L2AO",
+        "react": "n8MK",
+        "@emotion/is-prop-valid": "R69H",
+        "@emotion/core": "wdCp",
+        "@emotion/utils": "P6FR",
+        "@emotion/serialize": "wvgy"
+      },
+      "functionSha256": "1aefbaa13b547f2bef074695c846be352b542f75919e90fe33fc2469d79059e7"
+    },
+    {
+      "id": "IX9o",
+      "dependencies": {
+        "@emotion/styled-base": "TJBs"
+      },
+      "functionSha256": "88d9ca826b2b669e9e2e65d62c97e7b1f91a22761e06477f26f1cf7fb32a5203"
+    },
+    {
+      "id": "MnJh",
+      "dependencies": {
+        "@emotion/styled": "IX9o"
+      },
+      "functionSha256": "69c6c3ad28f2f9d541ec9d627987bc1348d392ccf871a8cfbb6e6739f31ac6cd"
+    },
+    {
+      "id": "F6B0",
+      "dependencies": {
+        "./theme": "MnJh"
+      },
+      "functionSha256": "19fd39368e768e4d901a0994fd34cc5c7fd0c0479e4847951c89eae58b7abe01"
+    },
+    {
+      "id": "R2hN",
+      "dependencies": {
+        "../theme": "MnJh"
+      },
+      "functionSha256": "15423cd454cb2c2d1bd3db299f37848400478279bb5ecfd19f0dc4dd50e1f6e4"
+    },
+    {
+      "id": "qZhu",
+      "dependencies": {},
+      "functionSha256": "d960d9096f147d17591c49beabb8142aa71830f6d25a41f46cf614b92eb8448a"
+    },
+    {
+      "id": "AHb4",
+      "dependencies": {},
+      "functionSha256": "14f0c11968810a3dc31efaf77892445d26a9f984bd377524d8df614646d184f8"
+    },
+    {
+      "id": "nqNX",
+      "dependencies": {},
+      "functionSha256": "473cab7f8eacf4cba87002ac3455b54cfc4a1a4596faaafacf2c4ab7a103f959"
+    },
+    {
+      "id": "hbzM",
+      "dependencies": {
+        "./utils": "nqNX"
+      },
+      "functionSha256": "d1d10bfc1e25d48eb046fc9127f795f0e4b8657b5f1714ab395c27dddafacbf2"
+    },
+    {
+      "id": "TQRk",
+      "dependencies": {
+        "./evented-tokenizer": "hbzM"
+      },
+      "functionSha256": "fa69a34887c7235f516dec8c81168c576c0af72062a817d83f5ba284ec43a28b"
+    },
+    {
+      "id": "Hpz9",
+      "dependencies": {
+        "./tokenizer": "TQRk",
+        "./entity-parser": "AHb4",
+        "./html5-named-char-refs": "qZhu"
+      },
+      "functionSha256": "637a2449160ed8180c1bab4d75865f633fe872ba45c6ad328b3c29d9f26da46e"
+    },
+    {
+      "id": "MBv4",
+      "dependencies": {
+        "./simple-html-tokenizer/html5-named-char-refs": "qZhu",
+        "./simple-html-tokenizer/entity-parser": "AHb4",
+        "./simple-html-tokenizer/evented-tokenizer": "hbzM",
+        "./simple-html-tokenizer/tokenizer": "TQRk",
+        "./simple-html-tokenizer/tokenize": "Hpz9"
+      },
+      "functionSha256": "4a99f93a056b7e0a622bded00c7443a36e61cb831c939c2a4ccee310991c41a1"
+    },
+    {
+      "id": "AfnJ",
+      "dependencies": {},
+      "functionSha256": "ea7554d820a1a2be023488b0b16081cd431887f6ffbb686bafcc1e50818a093e"
+    },
+    {
+      "id": "myF7",
+      "dependencies": {},
+      "functionSha256": "dfef6e208c61af7050dabff0084e6c4b48069dea3f1e4fe4545512d8d44932f4"
+    },
+    {
+      "id": "HwYy",
+      "dependencies": {
+        "../utils/class": "AfnJ"
+      },
+      "functionSha256": "2e7e2ee7a0babc970a12b0eaf7ff680a1b1f2ab7f0d542d97dc2309986af951b"
+    },
+    {
+      "id": "VxSs",
+      "dependencies": {},
+      "functionSha256": "5de1fcbb198faa978e9e57466cac4f4c681f5a71b17581ea81d234619f7a6003"
+    },
+    {
+      "id": "lim8",
+      "dependencies": {
+        "./create-token-class": "VxSs",
+        "../../utils/class": "AfnJ"
+      },
+      "functionSha256": "eec0ff23fda1b67e6f1411a03ce035ea5ac701d27791ded73735cb1f459abbed"
+    },
+    {
+      "id": "TlLe",
+      "dependencies": {
+        "./state": "HwYy",
+        "./tokens/text": "lim8"
+      },
+      "functionSha256": "feaa76afdd94b363b523d155a965ad607a89e749a58977e453acac092f9a841a"
+    },
+    {
+      "id": "G3vk",
+      "dependencies": {
+        "./create-token-class": "VxSs",
+        "../../utils/class": "AfnJ",
+        "./text": "lim8"
+      },
+      "functionSha256": "6217962896b72db12e2b66b4fe0e9b5b8def50d059c3d82ec861d058886363f4"
+    },
+    {
+      "id": "Jffm",
+      "dependencies": {
+        "./state": "HwYy",
+        "./tokens/multi": "G3vk",
+        "./tokens/text": "lim8"
+      },
+      "functionSha256": "57114f159b81167a76db067ded19eb08ddb62e05a2d7784f38be0716d6368019"
+    },
+    {
+      "id": "OXlU",
+      "dependencies": {
+        "./linkify/utils/class": "AfnJ",
+        "./linkify/utils/options": "myF7",
+        "./linkify/core/scanner": "TlLe",
+        "./linkify/core/parser": "Jffm"
+      },
+      "functionSha256": "0ab2568846a9210b6cdd3cd6cbc830ab64f81c4ee1994a999262b49c5e1c4b35"
+    },
+    {
+      "id": "Qql5",
+      "dependencies": {
+        "./simple-html-tokenizer": "MBv4",
+        "./linkify": "OXlU"
+      },
+      "functionSha256": "486e352ce399177c145f846583ed3c093502c8909221cf8c4abd0fc00272f3ef"
+    },
+    {
+      "id": "SbWR",
+      "dependencies": {
+        "./lib/linkify-html": "Qql5"
+      },
+      "functionSha256": "27f92823cbe2bb00184c54dd26f3f7ac335a8941ed0ef2557729d57e96872acc"
+    },
+    {
+      "id": "uxdN",
+      "dependencies": {},
+      "functionSha256": "2fb05ca6e138a3f2d4252702100e5503e53d3c5f49e52116ed8c130fbea664f7"
+    },
+    {
+      "id": "SENo",
+      "dependencies": {
+        "./string-utils": "uxdN"
+      },
+      "functionSha256": "195b0f89be386a53f27f9008fde694c7a5cd5c9a821d8be0e91751a3c427fc7d"
+    },
+    {
+      "id": "CwU9",
+      "dependencies": {
+        "linkifyjs/html": "SbWR",
+        "./format-message": "SENo"
+      },
+      "functionSha256": "03a608c3b0e8c2cc30281ff3bf6e58080db0c842fd9be332cbe1f7bd238e283e"
+    },
+    {
+      "id": "ftAA",
+      "dependencies": {
+        "react": "n8MK",
+        "../react-inspector/elements": "R2hN",
+        "../devtools-parser": "CwU9"
+      },
+      "functionSha256": "c24e52466dc6e039f99d3df5cda6fedc47eff1bc7f3e78e65d9d56999eeab328"
+    },
+    {
+      "id": "cf6K",
+      "dependencies": {
+        "react": "n8MK",
+        "./linkify": "OXlU"
+      },
+      "functionSha256": "dc30fb5a86545528394b5b76d01f9e400364913ff4741bbea4d55cc475afe710"
+    },
+    {
+      "id": "h3Cb",
+      "dependencies": {
+        "./lib/linkify-react": "cf6K"
+      },
+      "functionSha256": "23027a939d746bbf56a15901d6edef8a3e608db461203eff1da01cc657380067"
+    },
+    {
+      "id": "swKK",
+      "dependencies": {
+        "react": "n8MK",
+        "linkifyjs/react": "h3Cb"
+      },
+      "functionSha256": "57754959d706841e2ced492334540123cd6ae66ed990339c8b065770ad097f70"
+    },
+    {
+      "id": "j7Pd",
+      "dependencies": {
+        "emotion-theming": "pufF",
+        "react": "n8MK",
+        "react-inspector": "kuYm",
+        "../message-parsers/Error": "swKK",
+        "./elements": "R2hN"
+      },
+      "functionSha256": "b6bf1adc28a95ae204441cb1a2ca32cdc086556f368437da9ccb361afee0b3d3"
+    },
+    {
+      "id": "LmXR",
+      "dependencies": {
+        "react": "n8MK",
+        "emotion-theming": "pufF",
+        "../react-inspector/elements": "R2hN",
+        "linkifyjs/react": "h3Cb",
+        "../react-inspector": "j7Pd"
+      },
+      "functionSha256": "065442ac609c079451f1375cf4c9ff333a5a1b41b1a9fce7bd94ce568017ca22"
+    },
+    {
+      "id": "VMze",
+      "dependencies": {
+        "react": "n8MK",
+        "emotion-theming": "pufF",
+        "./elements": "F6B0",
+        "./message-parsers/Formatted": "ftAA",
+        "./message-parsers/Object": "LmXR",
+        "./message-parsers/Error": "swKK"
+      },
+      "functionSha256": "9a8badde45dc13cd46d55184f2c14ba75ff13ca68cd7e63bb3b992835585b9f5"
+    },
+    {
+      "id": "yCSh",
+      "dependencies": {
+        "react": "n8MK",
+        "emotion-theming": "pufF",
+        "./theme/default": "VJzx",
+        "./elements": "F6B0",
+        "./Message": "VMze"
+      },
+      "functionSha256": "2def4894e7c321b0bd2d303054bd30509822bdbd430c3482572ff6ea0e0cab47"
+    },
+    {
+      "id": "V2JG",
+      "dependencies": {},
+      "functionSha256": "21a438646bbec9068cbfa95ce45d6245c9dc10d178ff1e4572dbc716d94a88d4"
+    },
+    {
+      "id": "kEc0",
+      "dependencies": {},
+      "functionSha256": "9544d9c1799c2f615d73a241d0e7ad3a72499525000bf24a8a0bf5e5018e90d2"
+    },
+    {
+      "id": "tUcB",
+      "dependencies": {},
+      "functionSha256": "298766f23fb9aff2f389ff5ef203ccfeb3ae604a5fa5958fa6132c2bca37cc37"
+    },
+    {
+      "id": "AXxh",
+      "dependencies": {},
+      "functionSha256": "29d1401a97c91b2045a6d10b7bf7ad91542d9b8efe7aaf6c54d5724a8a948a19"
+    },
+    {
+      "id": "KD8b",
+      "dependencies": {
+        "./reducer": "AXxh",
+        "./state": "tUcB"
+      },
+      "functionSha256": "6405157f34bf011a133a3bc3fd0bc9384b3d80108f1c1114569b8349788b68ae"
+    },
+    {
+      "id": "nj54",
+      "dependencies": {},
+      "functionSha256": "99d769e23b31c9cb1749a2f89d8b8c058a2b59d1c302b780969f9f7be0537a69"
+    },
+    {
+      "id": "b9Ac",
+      "dependencies": {
+        "../../store/state": "tUcB",
+        "../../store/dispatch": "KD8b",
+        "../../store/actions": "nj54"
+      },
+      "functionSha256": "c478aa48defbbea5958d6baca921b9a03910dd784911e3167d9fafd492cc1f62"
+    },
+    {
+      "id": "BQYC",
+      "dependencies": {
+        "../../store/state": "tUcB",
+        "../../store/dispatch": "KD8b",
+        "../../store/actions": "nj54"
+      },
+      "functionSha256": "9c34168f6458bef2e4e4fe2841f19f2dfcf3c843e95be9da1db12ce5de2f7bb0"
+    },
+    {
+      "id": "dKro",
+      "dependencies": {},
+      "functionSha256": "408a427f7d74efbd99ac5c8a96686a6bee17255e955fdcaf0fd95a690a8c1eea"
+    },
+    {
+      "id": "RxPG",
+      "dependencies": {
+        "./GUID": "kEc0",
+        "./methods/timing": "b9Ac",
+        "./methods/count": "BQYC",
+        "./methods/assert": "dKro"
+      },
+      "functionSha256": "2bb768f798951b2a3be7c04cd40efa3af51821655ccbd138ae67bb93eecc0ae8"
+    },
+    {
+      "id": "dq61",
+      "dependencies": {},
+      "functionSha256": "60390f8a668368d7a3409c99a4860e7deeb319a08d2c7e09b3d44b36813b667b"
+    },
+    {
+      "id": "XwmA",
+      "dependencies": {},
+      "functionSha256": "e073fa621794dd9a437802f584cd52048025f1c759c750bc0f8fe5256e782887"
+    },
+    {
+      "id": "GDCg",
+      "dependencies": {},
+      "functionSha256": "55a451032cf98addcd343209ec3a950640fcb18f6ced3b141960f4263d7ec2ef"
+    },
+    {
+      "id": "wqxJ",
+      "dependencies": {},
+      "functionSha256": "9ac8d6302ca9325c7d1754ae1d2924a47f36daf1d4ad8442bfbb0a38cd4736ed"
+    },
+    {
+      "id": "HTuI",
+      "dependencies": {},
+      "functionSha256": "173b2515cea210b9d94cff9a9e44c843197db180536910a01eff76673c666f86"
+    },
+    {
+      "id": "Zbbf",
+      "dependencies": {
+        "./arithmetic": "dq61",
+        "./Function": "XwmA",
+        "./HTML": "GDCg",
+        "./Map": "wqxJ",
+        "./replicator": "HTuI"
+      },
+      "functionSha256": "753a8e4bb844a653deb44dea0844fc636816d4a80bf04b4c649d28a546384335"
+    },
+    {
+      "id": "pYO5",
+      "dependencies": {
+        "../definitions/Methods": "V2JG",
+        "./parse": "RxPG",
+        "../Transform": "Zbbf"
+      },
+      "functionSha256": "9a3ef89ad43432a69bbe77248584a3bcee9836aba174a6d05c5ee13ea178c268"
+    },
+    {
+      "id": "aGBs",
+      "dependencies": {},
+      "functionSha256": "1ce3610caafbe54c9d3cbf624f9494463585df7ce8696562fafd2be0ab7f167f"
+    },
+    {
+      "id": "m6b6",
+      "dependencies": {
+        "./Component": "yCSh",
+        "./Hook": "pYO5",
+        "./Unhook": "aGBs",
+        "./Transform": "Zbbf"
+      },
+      "functionSha256": "96edec478d03f73642245a483328debe082c70ac6ca6ae5686694f633e3dbf09"
+    },
+    {
+      "id": "H1RQ",
+      "dependencies": {
+        "./cjs/react-is.production.min.js": "c6OW"
+      },
+      "functionSha256": "22fd62f9e230c1ac4726e10846685fb61df36b6eead0332681a3bde972ef58e9"
+    },
+    {
+      "id": "NKxe",
+      "dependencies": {},
+      "functionSha256": "4d87c4f3dcf54cafe26291faebf7c1d2cdc6d4a32c2a5613e6fae18af9fda9bd"
+    },
+    {
+      "id": "m5O0",
+      "dependencies": {
+        "@emotion/memoize": "AoFs"
+      },
+      "functionSha256": "a2a7c0789be1f89edd675746f69ade28169e4037754af51d468ec16cdd481c30"
+    },
+    {
+      "id": "dwcU",
+      "dependencies": {
+        "./cjs/react-is.production.min.js": "c6OW"
+      },
+      "functionSha256": "22fd62f9e230c1ac4726e10846685fb61df36b6eead0332681a3bde972ef58e9"
+    },
+    {
+      "id": "LCQI",
+      "dependencies": {
+        "react-is": "dwcU"
+      },
+      "functionSha256": "f5a5c5d6094959d64a6b3d5645719f870fdba4b0500267133b9e5c33c61a5965"
+    },
+    {
+      "id": "KIG8",
+      "dependencies": {},
+      "functionSha256": "054b1a0680b675546d1d0afcd0a6d3d957916c69b66053faa88b3aa8323fb69f"
+    },
+    {
+      "id": "tFSs",
+      "dependencies": {
+        "react-is": "H1RQ",
+        "react": "n8MK",
+        "shallowequal": "NKxe",
+        "@emotion/stylis": "uxSu",
+        "@emotion/unitless": "qy56",
+        "@emotion/is-prop-valid": "m5O0",
+        "hoist-non-react-statics": "LCQI",
+        "process": "KIG8"
+      },
+      "functionSha256": "8f76ab108448bcb48044e7a56516e621110ffc1d23d6847ef3db4d1cdf5e1d7b"
+    },
+    {
+      "id": "W5CS",
+      "dependencies": {
+        "react": "n8MK",
+        "console-feed": "m6b6",
+        "styled-components": "tFSs"
+      },
+      "functionSha256": "f36bac0db49da9d3aea95088012192a532f735fc4baf29ab1ea717c2f70f369a"
+    },
+    {
+      "id": "Focm",
+      "dependencies": {
+        "react": "n8MK",
+        "react-dom": "NKHc",
+        "./Console": "W5CS"
+      },
+      "functionSha256": "7b3371c4118ef5979dafd5df01caccb5af7b79df7d0ebf0e589475b941440b1f"
+    }
+  ],
+  "limits": [
+    "React/ReactDOM confirmed in actual browsers; styled-components version is present in the bundle",
+    "Other dependency versions and complete notices are not verified",
+    "The static dependency map is closed within this bundle; this does not establish complete upstream provenance",
+    "console-feed 3.2.2 is only a chronological comparison candidate; it is not assigned as the verified bundled version"
+  ]
+}
