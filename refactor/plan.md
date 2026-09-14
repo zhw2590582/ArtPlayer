@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 261 项，范围 22 个包及工作区/示例。
 
-状态：todo 49 / doing 20 / blocked 0 / done 192 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 48 / doing 21 / blocked 0 / done 192 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -335,7 +335,7 @@
 | PKG-DANMUKU-05 | artplayer-plugin-danmuku<br>整理 DOM 渲染、设置、热力图与 worker | PKG-DANMUKU-04, CORE-14, CORE-18 | renderer/setting/heatmap/worker 职责及资源归属 | mount/icons/设置和 worker 协议保持，销毁无后台工作 | H | done |
 | PKG-DANMUKU-06 | artplayer-plugin-danmuku<br>迁移 TS 与公开声明 | PKG-DANMUKU-05, ENG-04, ENG-06 | 自有模块、worker 消息、option/item/result 类型 | 旧参数、扩展字段和事件消费通过，vendored 边界清楚 | H | done |
 | PKG-DANMUKU-07 | artplayer-plugin-danmuku<br>弹幕能力稳定性验收 | PKG-DANMUKU-06, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 | 负载/渲染/资源对比及 mask 可依赖的稳定边界 | 在试点核心中旧插件 API 与关键帧路径通过 | H | done |
-| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | todo |
+| PKG-DANMUKU-08 | artplayer-plugin-danmuku<br>完成新旧核心与组合验收 | PKG-DANMUKU-07, CORE-22 | 最终核心/旧核心、mask/fullscreen/PiP 组合报告 | 性能无未解释退化，反复装卸无累计资源 | H | doing |
 | PKG-DANMUKU-09 | artplayer-plugin-danmuku<br>完成分发、示例与文档 | PKG-DANMUKU-08, ENG-07 | danmuku.js、README、声明、worker 与产物 | tarball 和静态 icons 等旧调用通过，有独立回退版本 | H | todo |
 | PKG-DANMUKU-10 | artplayer-plugin-danmuku<br>修复 issue958 密集热力图过高与曲线裁平 | PKG-DANMUKU-05 | 自动密度缩放与曲线边界、历史自定义坐标兼容及真实浏览器红绿证据 | 16000条三种分布在两核心三引擎和source/main/legacy不遮挡；显式轴和自定义points保持旧解释，有单独commit | M | done |
 | PKG-DANMUKU-11 | artplayer-plugin-danmuku<br>修复 Worker 隐藏等待吞掉可见寿命 | PKG-DANMUKU-06 | 成功放置时的可见计时与延迟回复回归 | 真实 Worker 延迟下完整显示寿命；保留暂停/回收/取消和公开契约 | M | done |
@@ -611,6 +611,7 @@
 - PKG-DANMUKU-05: [记录](changes/2026-09-13-PKG-DANMUKU-05-resources.md) [记录](baselines/danmuku-resources-validation.json)
 - PKG-DANMUKU-06: [记录](changes/2026-09-13-PKG-DANMUKU-06-types.md) [记录](baselines/danmuku-types-validation.json)
 - PKG-DANMUKU-07: [记录](changes/2026-09-13-PKG-DANMUKU-07-stability.md) [记录](baselines/danmuku-stability-validation.json) [记录](danmuku-stability.md)
+- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json)
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)

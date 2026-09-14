@@ -1,5 +1,20 @@
 # Danmuku maintenance map
 
+`test/browser/danmuku-dpip.spec.js` exercises the candidate with old/current cores
+in two sequential native Document PiP windows. It checks timestamp-delivered text,
+adopted layer and heatmap nodes, stylesheet layout, one surviving track Worker,
+close/native-close/destroy cleanup, and no retained scheduling operation. Native
+API absence is reported separately; it does not simulate a popup or count as
+playback evidence. This is not a background-throttling or device benchmark.
+Set `ARTPLAYER_DANMUKU_ARTIFACT` and `ARTPLAYER_DPIP_ARTIFACT` together to check
+the corresponding built formats; both loaded hashes appear in each attachment.
+
+The actual Mask/model combination in `danmuku-mask-native.spec.js` now compiles
+both plugins from source by default. `ARTPLAYER_MASK_ARTIFACT` and
+`ARTPLAYER_DANMUKU_ARTIFACT` override them independently and fail on missing files.
+Do not substitute a stale dist file for source checks. Full old-plugin/core,
+OS fullscreen, installation, performance and device acceptance remain task 08/09.
+
 The compatibility reference is the actual npm 5.3.0 package. Its archive,
 historical declarations, earlier exports and failure evidence are indexed in
 `refactor/baselines/danmuku-release.json` and

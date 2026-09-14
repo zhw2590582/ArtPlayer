@@ -2,10 +2,11 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
+import { compilePackage } from '../helpers/load.js'
 import { expect, test } from './fixtures.js'
 
-const artifact = process.env.ARTPLAYER_MASK_ARTIFACT || 'packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js'
-const code = fs.readFileSync(artifact, 'utf8')
+const artifact = process.env.ARTPLAYER_MASK_ARTIFACT || 'source UMD'
+let code
 const baseline = JSON.parse(fs.readFileSync('refactor/baselines/danmuku-mask-release.json', 'utf8'))
 const assets = baseline.sdk.assets.map(({ file, sha256 }) => {
   const bytes = fs.readFileSync(file)
@@ -17,8 +18,14 @@ const assets = baseline.sdk.assets.map(({ file, sha256 }) => {
   return { file, sha256: actual, baselineSha256: sha256, normalizedLF }
 })
 const media = 'docs/assets/sample/steve-jobs.mp4'
-const danmukuFile = 'packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js'
-const danmukuCode = fs.readFileSync(danmukuFile, 'utf8')
+const danmukuFile = process.env.ARTPLAYER_DANMUKU_ARTIFACT || 'source UMD'
+let danmukuCode
+test.beforeAll(async () => {
+  ;[code, danmukuCode] = await Promise.all([
+    process.env.ARTPLAYER_MASK_ARTIFACT ? fs.readFileSync(artifact, 'utf8') : compilePackage('artplayer-plugin-danmuku-mask', 'umd'),
+    process.env.ARTPLAYER_DANMUKU_ARTIFACT ? fs.readFileSync(danmukuFile, 'utf8') : compilePackage('artplayer-plugin-danmuku', 'umd'),
+  ])
+})
 
 for (const core of ['candidate', 'published', 'published-5.3.1-beta.1']) {
   test(`Mask actual local MediaPipe model renders, stops and restarts with ${core} core`, async ({ page }, testInfo) => {

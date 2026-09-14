@@ -165,7 +165,10 @@ by its original player. Native shared TensorFlow backend state remains unverifie
 `yarn test:browser test/browser/danmuku-mask-native.spec.js --workers=1` now covers
 actual local model loading, bitmap alpha and owned canvas cleanup, new/old cores,
 real Danmuku delivery after model readiness, pause/seek and CSS web fullscreen.
-Set ARTPLAYER_MASK_ARTIFACT to the legacy global build for the second format.
+Both Mask and Danmuku compile from current source by default. Set
+ARTPLAYER_MASK_ARTIFACT and ARTPLAYER_DANMUKU_ARTIFACT to explicit global builds
+for artifact verification; attachments record both inputs and hashes. Missing
+specified files are errors, not a source or dist fallback.
 Archive each report before another browser run. The startup timestamp diagnostic
 can still miss a row; do not interpret the post-ready assertions as losslessness.
 Native acceptance still needs source changes, multiple players, failure recovery,

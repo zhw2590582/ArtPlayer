@@ -1,0 +1,4459 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-08",
+  "status": "doing",
+  "sourceHead": "88ce836f85aa61ffa9ccabc456b1803738551692",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "remoteCI": false,
+    "physicalDevices": false
+  },
+  "reports": [
+    {
+      "directory": "refactor/.cache/danmuku08-dpip-first-report",
+      "reportSha256": "09d91e1753522ab2db6f285a2480df25149a2e6bad4dff02003f9f342380f5fc",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/danmuku-dpip.spec.js",
+          "--project=chromium",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:40:41.294Z",
+        "duration": 13558.078,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12"
+      ],
+      "cases": [
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.435215,
+                "rowTime": 0.966179,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.654868,
+                "rowTime": 2.145704,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.406876,
+                "rowTime": 0.921645,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.627949,
+                "rowTime": 2.136451,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "failed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "incomplete",
+            "rounds": [
+              {
+                "time": 1.421031,
+                "rowTime": 0.939968,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.607384,
+                "rowTime": 2.138844,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.419284,
+                "rowTime": 0.932283,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.61724,
+                "rowTime": 2.128995,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.390163,
+                "rowTime": 0.923458,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.595984,
+                "rowTime": 2.103801,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "failed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "incomplete",
+            "rounds": [
+              {
+                "time": 1.434772,
+                "rowTime": 0.941113,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.62372,
+                "rowTime": 2.138908,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/danmuku08-dpip-source-report",
+      "reportSha256": "02a1278018835cee8082c0a220a231d94ab64d01aba57403d8e8091a253e0150",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/danmuku-dpip.spec.js",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:42:11.819Z",
+        "duration": 29996.204999999998,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0",
+        "26.6"
+      ],
+      "cases": [
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.445957,
+                "rowTime": 0.953052,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.690424,
+                "rowTime": 2.215201,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.43265,
+                "rowTime": 0.937979,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.632418,
+                "rowTime": 2.150428,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.417788,
+                "rowTime": 0.937489,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.617973,
+                "rowTime": 2.136396,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.416423,
+                "rowTime": 0.930878,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.66119,
+                "rowTime": 2.161417,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.427304,
+                "rowTime": 0.955005,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.641046,
+                "rowTime": 2.169035,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.416353,
+                "rowTime": 0.923541,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.593799,
+                "rowTime": 2.121174,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.585016,
+                "rowTime": 1.126636,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.961702,
+                "rowTime": 2.502664,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.627166,
+                "rowTime": 1.126482,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.045169,
+                "rowTime": 2.544339,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.502111,
+                "rowTime": 1.001469,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.878184,
+                "rowTime": 2.377739,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.418166,
+                "rowTime": 0.959635,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.847473,
+                "rowTime": 2.360287,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 0.876231,
+                "rowTime": 0.876231,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.286327,
+                "rowTime": 1.794029,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.083591,
+                "rowTime": 1.083591,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.503077,
+                "rowTime": 2.00229,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": false,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": false,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": false,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": false,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": false,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": false,
+            "danmuku": {
+              "input": "source UMD",
+              "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+            },
+            "dpip": {
+              "input": "candidate-source",
+              "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/danmuku08-mask-source-report",
+      "reportSha256": "26e1c77f02b189791df924f8461de8e8344392c47fa283e69b72837172f3cb4f",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/danmuku-mask-native.spec.js",
+          "--grep",
+          "actual model and Danmuku",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:42:59.202Z",
+        "duration": 76161.96399999999,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0",
+        "26.6"
+      ],
+      "cases": [
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "project": "chromium",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 10.171764,
+              "outputs": 22,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 12.589617,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 24.474152,
+              "outputs": 60,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "project": "chromium",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.278593,
+              "outputs": 24,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 11.231041,
+              "outputs": 37,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 37,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 23.791785,
+              "outputs": 63,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "project": "chromium",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 10.260373,
+              "outputs": 22,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 12.716265,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 35,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 24.427409,
+              "outputs": 60,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "project": "firefox",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.98156,
+              "outputs": 23,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 10.589032,
+              "outputs": 30,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 30,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.821848,
+              "outputs": 57,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "project": "firefox",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.058839,
+              "outputs": 25,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.706386,
+              "outputs": 33,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 33,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.69966,
+              "outputs": 58,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "project": "firefox",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 9.124328,
+              "outputs": 24,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.487631,
+              "outputs": 31,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 31,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.777108,
+              "outputs": 56,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.133331298828125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.133331298828125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with candidate core",
+          "project": "webkit",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.6547923,
+              "outputs": 19,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.2970632,
+              "outputs": 29,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 29,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.9371879,
+              "outputs": 41,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published core",
+          "project": "webkit",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.3106255,
+              "outputs": 17,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 8.9746048,
+              "outputs": 28,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 28,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.6071461,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        },
+        {
+          "title": "Mask actual model and Danmuku share the layer through pause, seek and web fullscreen with published-5.3.1-beta.1 core",
+          "project": "webkit",
+          "status": "passed",
+          "mask": {
+            "file": "source UMD",
+            "sha256": "2b4c117b0c2ccf52258877c697a3d83908a23fe3b5c8d698728b98de470c0045"
+          },
+          "danmuku": {
+            "file": "source UMD",
+            "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66"
+          },
+          "snapshots": [
+            {
+              "phase": "playing",
+              "time": 8.7341464,
+              "outputs": 20,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "paused",
+              "time": 9.3471465,
+              "outputs": 30,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            },
+            {
+              "phase": "fullscreen-paused",
+              "time": 20,
+              "outputs": 30,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 1280,
+              "height": 720,
+              "fullscreenWeb": true
+            },
+            {
+              "phase": "restored",
+              "time": 21.6147712,
+              "outputs": 40,
+              "sameLayer": true,
+              "mask": true,
+              "mode": "alpha",
+              "width": 640,
+              "height": 360,
+              "fullscreenWeb": false
+            }
+          ],
+          "visible": [
+            {
+              "text": "Ready mask combination",
+              "connected": true,
+              "inLayer": true,
+              "width": 275,
+              "height": 28.125,
+              "display": "block"
+            },
+            {
+              "text": "After seek and visibility",
+              "connected": true,
+              "inLayer": true,
+              "width": 312.5,
+              "height": 28.125,
+              "display": "block"
+            }
+          ],
+          "unexpectedRequests": [],
+          "limitation": "Actual model, native media, timestamp-delivered Danmuku and CSS web fullscreen. No OS fullscreen, GPU completion or device coverage claim."
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/danmuku08-dpip-main-report",
+      "reportSha256": "bb87090d3821e5fe531082bd3a870f99550cf1a851ec5c310bebb40e97cf3c05",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/danmuku-dpip.spec.js",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:45:05.405Z",
+        "duration": 29714.63,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0",
+        "26.6"
+      ],
+      "cases": [
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.456489,
+                "rowTime": 0.954924,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.892963,
+                "rowTime": 2.385711,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.423795,
+                "rowTime": 0.940088,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.725758,
+                "rowTime": 2.237489,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.427241,
+                "rowTime": 0.937195,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.841129,
+                "rowTime": 2.335442,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.451135,
+                "rowTime": 0.954788,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.893012,
+                "rowTime": 2.385739,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.426194,
+                "rowTime": 0.923101,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.744991,
+                "rowTime": 2.236901,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.421234,
+                "rowTime": 0.938771,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.817074,
+                "rowTime": 2.336923,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.808849,
+                "rowTime": 1.278405,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.253587,
+                "rowTime": 2.753336,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.58524,
+                "rowTime": 1.126536,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.961857,
+                "rowTime": 2.459762,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.501859,
+                "rowTime": 1.001301,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.461329,
+                "rowTime": 2.419539,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.41842,
+                "rowTime": 0.917743,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.878461,
+                "rowTime": 2.335747,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.626924,
+                "rowTime": 1.126396,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.086827,
+                "rowTime": 2.584589,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.668728,
+                "rowTime": 1.168326,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.139533,
+                "rowTime": 2.649911,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.js",
+              "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/danmuku08-dpip-legacy-report",
+      "reportSha256": "8eb447aa107d0888c0dae923e497a17d0accbc39a56416653c793e780a444be9",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/danmuku-dpip.spec.js",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:46:44.068Z",
+        "duration": 31132.126999999997,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browsers": [
+        "153.0.8010.12",
+        "155.0",
+        "26.6"
+      ],
+      "cases": [
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.442985,
+                "rowTime": 0.951769,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.8731,
+                "rowTime": 2.366626,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.426777,
+                "rowTime": 0.938991,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.731402,
+                "rowTime": 2.236765,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.443372,
+                "rowTime": 0.941433,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.901485,
+                "rowTime": 2.419621,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.443549,
+                "rowTime": 0.956645,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.871602,
+                "rowTime": 2.350939,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.423645,
+                "rowTime": 0.923922,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.731974,
+                "rowTime": 2.237398,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "chromium",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.443734,
+                "rowTime": 0.938813,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.914678,
+                "rowTime": 2.417824,
+                "width": 112.5,
+                "height": 28.125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.502081,
+                "rowTime": 0.959733,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.961633,
+                "rowTime": 2.462608,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.668618,
+                "rowTime": 1.168426,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.211737,
+                "rowTime": 2.669546,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.627217,
+                "rowTime": 1.129422,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.128328,
+                "rowTime": 2.626561,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.460322,
+                "rowTime": 1.001558,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 2.961461,
+                "rowTime": 2.461057,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.668535,
+                "rowTime": 1.168362,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.097152,
+                "rowTime": 2.56743,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true,
+                false
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "firefox",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": true,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-playback-danmuku-and-cleanup-passed",
+            "rounds": [
+              {
+                "time": 1.58527,
+                "rowTime": 1.084648,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 1
+                  }
+                ]
+              },
+              {
+                "time": 3.042827,
+                "rowTime": 2.54439,
+                "width": 112.5,
+                "height": 28.133331298828125,
+                "adopted": true,
+                "inLayer": true,
+                "position": "absolute",
+                "player": true,
+                "heatmap": true,
+                "workers": [
+                  {
+                    "terminated": 0,
+                    "replies": 2
+                  }
+                ]
+              }
+            ],
+            "final": {
+              "active": false,
+              "workers": [
+                {
+                  "terminated": 1,
+                  "replies": 2
+                }
+              ],
+              "errors": [],
+              "events": [
+                true,
+                false,
+                true
+              ],
+              "frame": null,
+              "operation": null,
+              "nodes": 0,
+              "settings": 0,
+              "placeholders": 0
+            }
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "native-close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "published: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "published",
+            "ending": "destroy",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP native-close",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "native-close",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        },
+        {
+          "title": "candidate: Danmuku, heatmap and Worker survive native Document PiP destroy",
+          "project": "webkit",
+          "status": "passed",
+          "evidence": {
+            "core": "candidate",
+            "ending": "destroy",
+            "supported": false,
+            "danmuku": {
+              "input": "D:\\github\\ArtPlayer\\packages\\artplayer-plugin-danmuku\\dist\\artplayer-plugin-danmuku.legacy.js",
+              "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+            },
+            "dpip": {
+              "input": "candidate-artifact",
+              "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+            },
+            "outcome": "native-document-pip-unavailable",
+            "rounds": []
+          }
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+      "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+      "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+    },
+    {
+      "file": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+      "sha256": "356406cda2e3e47376a87c939b76fb7c55f86d7c3829127da625b01241c67a2f"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.js",
+      "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.legacy.js",
+      "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+    },
+    {
+      "file": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.mjs",
+      "sha256": "541b4ad6e1cbadd9156ee1f317559c97b9fddae37668ef32046f1fa47c392ec2"
+    }
+  ],
+  "source": [
+    {
+      "file": "test/browser/danmuku-dpip.spec.js",
+      "sha256LF": "41da7b3a3db3d8237f80e22e74ad1608c675e830d95644ed2bd007667851bf5e"
+    },
+    {
+      "file": "test/browser/danmuku-mask-native.spec.js",
+      "sha256LF": "a3a83684a28747e7e985b9b30b26d779589ba3fd94c4d8a8cf6977139d4e7126"
+    }
+  ],
+  "initialFailureResolution": "Both failures expected a public false event during destruction. Existing Canvas native-PiP test and Document PiP lifecycle contract suppress post-destroy events. Corrected expected sequence only; retained original reports and all cleanup assertions. No production change.",
+  "limitations": [
+    "Six WebKit cases per PiP run report API unavailability, not native playback success",
+    "Two sequential native windows per live player; not repeated player mounting or background/physical-device performance evidence",
+    "Source PiP pass predates the extra visible-text assertion and screenshot; main and legacy include both",
+    "Mask source regression uses actual model with CSS web fullscreen; not OS fullscreen, GPU/WASM closure or full distribution proof",
+    "Old published Danmuku combinations, OS fullscreen, complete installation distribution and final performance comparison remain in task 08/09"
+  ]
+}

@@ -3556,11 +3556,14 @@
         "PKG-DANMUKU-07",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "最终核心/旧核心、mask/fullscreen/PiP 组合报告",
       "acceptance": "性能无未解释退化，反复装卸无累计资源",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md",
+        "baselines/danmuku-combination-checkpoint.json"
+      ]
     },
     {
       "id": "PKG-DANMUKU-09",

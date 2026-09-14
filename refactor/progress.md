@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-DANMUKU-08 原生画中画与真实 Mask 组合检查点（仍 doing）
+
+新增新旧核心中的两次原生Document PiP开窗，按媒体时间显示弹幕，检查图层/热力图
+跨文档归属、Worker复用、播放继续及关闭/原生关闭/销毁后的RAF、operation、DOM回收。
+源码/main/legacy各18项退出0：每份12原生播放+6WebKit API不可用记录，不能混计。
+main/legacy另有可见文本断言及截图；已查看原生窗口视频、弹幕与发送栏布局。
+首轮4/2失败为错误要求destroy后的关闭事件，按已有DPiP/Canvas契约修正，资源断言保留。
+
+真实Mask组合默认输入从已有dist改为当前Mask/Danmuku源码，保留两个显式产物覆盖。
+本地真实模型、三核心三引擎暂停/seek/网页全屏9项通过；两插件重新构建产物未变，
+专项lint通过。见[记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md)与
+[证据](baselines/danmuku-combination-checkpoint.json)。261项：192 done、21 doing、48 todo。
+旧插件完整组合、OS全屏、反复装卸/组合性能及最终安装分发仍待08/09接续，不标完成。
+本检查点独立本地提交并核验提交审计；无push/部署/发布。
+
 ## PKG-DASH-MENU-01 SDK 刷新设置子菜单修复完成
 
 原legacy设置点击失败的trace显示根面板取代质量子菜单，setting仍显示。
