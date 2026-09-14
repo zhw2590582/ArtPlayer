@@ -1,5 +1,13 @@
 # Installed package checks
 
+`historicalDistributionFiles()` in `scripts/package-check.mjs` distinguishes a
+same-name npm release from the Iframe package rename. Iframe verifies the real
+plugin archive plus the frozen tool workspace, then requires all four original
+tool dist/type paths. Missing verified workspace members fail packing; legacy
+plugin/helper filenames remain a separate distribution gate. This does not
+change the generic core/chapter runtime/type consumer scope. The shared browser
+roster now also checks the installed Iframe tool in five browser test files.
+
 For independent core/plugin rollback, run `yarn test:package` then
 `yarn test:rollback`. The seven-step rehearsal restores frozen consumer locks,
 checks complete installed file inventories and runtime entrypoints, and saves

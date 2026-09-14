@@ -4,8 +4,9 @@ import path from 'node:path'
 import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- This fixture exercises the repository's Node test runner.
 import { test } from 'node:test'
+import { verifyIframeContract } from '../refactor/scripts/iframe-contract.mjs'
 import { installedPackages } from '../scripts/browser-validation/scope.ts'
-import { checkFiles, checkPackages, packageOptions, publishedConsumer } from '../scripts/package-check.mjs'
+import { checkFiles, checkPackages, historicalDistributionFiles, packageOptions, publishedConsumer } from '../scripts/package-check.mjs'
 import { removeConsumer, runtimeConsumer } from '../scripts/package-consumer.mjs'
 import { emitterContracts } from './contracts/emitter.js'
 import { ambilightCandidate } from './helpers/ambilight.js'
@@ -13,6 +14,7 @@ import { autoThumbnailCandidate } from './helpers/auto-thumbnail.js'
 import { browserCandidate } from './helpers/browser-candidate.js'
 import { canvasCandidate } from './helpers/canvas.js'
 import { dpipCandidate } from './helpers/dpip.js'
+import { iframeBrowserCandidate, iframeCandidate } from './helpers/iframe.js'
 import { mbCandidate } from './helpers/mediabunny.js'
 import { multipleSubtitlesCandidate } from './helpers/multiple-subtitles.js'
 import { vttThumbnailCandidate } from './helpers/vtt-thumbnail.js'
@@ -30,10 +32,30 @@ test('Additional browser packages cannot be mistaken for full release consumer a
   await assert.rejects(checkPackages({ release: true, include: ['artplayer-plugin-ambilight'] }), /not full release acceptance/)
 })
 
+test('Iframe installation preserves verified tool paths without inventing a renamed npm archive', async () => {
+  const contract = await verifyIframeContract()
+  const expected = ['package/dist/artplayer-tool-iframe.js', 'package/dist/artplayer-tool-iframe.legacy.js', 'package/dist/artplayer-tool-iframe.mjs', 'package/types/artplayer-tool-iframe.d.ts']
+  assert.deepEqual(historicalDistributionFiles('artplayer-tool-iframe', contract).sort(), expected)
+  assert.throws(() => historicalDistributionFiles('artplayer-unreviewed-name', contract), /renamed package/)
+  for (const member of expected) {
+    const file = member.replace('package/', 'packages/artplayer-tool-iframe/')
+    const sources = new Map(contract.sources)
+    sources.delete(file)
+    assert.throws(() => historicalDistributionFiles('artplayer-tool-iframe', { ...contract, sources }), /Missing verified iframe/)
+    const baseline = structuredClone(contract.baseline)
+    delete baseline.source[file]
+    assert.throws(() => historicalDistributionFiles('artplayer-tool-iframe', { ...contract, baseline }), /Missing .* file/)
+  }
+  const baseline = structuredClone(contract.baseline)
+  baseline.release.name = 'artplayer-tool-iframe'
+  assert.throws(() => historicalDistributionFiles('artplayer-tool-iframe', { ...contract, baseline }), /distinct published predecessor/)
+})
+
 test('Explicit installed plugin maps never fall back to source or frozen workspace', async () => {
   const keys = ['ARTPLAYER_BROWSER_ARTIFACTS', 'ARTPLAYER_AMBILIGHT_BASELINE', 'ARTPLAYER_CANVAS_BASELINE', 'ARTPLAYER_DPIP_BASELINE', 'ARTPLAYER_DPIP_ARTIFACT', 'ARTPLAYER_VTT_THUMBNAIL_BASELINE', 'ARTPLAYER_VTT_THUMBNAIL_ARTIFACT', 'ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT']
   keys.push('ARTPLAYER_AUTO_THUMBNAIL_BASELINE', 'ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT')
   keys.push('ARTPLAYER_MB_BASELINE', 'ARTPLAYER_MB_ARTIFACT')
+  keys.push('ARTPLAYER_IFRAME_BASELINE', 'ARTPLAYER_IFRAME_ARTIFACT')
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   try {
     process.env.ARTPLAYER_BROWSER_ARTIFACTS = path.resolve('refactor/.cache/absent-installed-plugin-map.json')
@@ -49,6 +71,15 @@ test('Explicit installed plugin maps never fall back to source or frozen workspa
     delete process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT
     delete process.env.ARTPLAYER_MB_BASELINE
     delete process.env.ARTPLAYER_MB_ARTIFACT
+    delete process.env.ARTPLAYER_IFRAME_BASELINE
+    delete process.env.ARTPLAYER_IFRAME_ARTIFACT
+    await assert.rejects(iframeBrowserCandidate(), { code: 'ENOENT' })
+    assert.equal((await iframeCandidate()).provenance.kind, 'source-build', 'Existing unit/history helpers do not consume the core-only map as a tool artifact')
+    process.env.ARTPLAYER_IFRAME_BASELINE = '1'
+    await assert.rejects(iframeBrowserCandidate(), /cannot use the frozen workspace/)
+    delete process.env.ARTPLAYER_IFRAME_BASELINE
+    process.env.ARTPLAYER_IFRAME_ARTIFACT = 'override.js'
+    await assert.rejects(iframeBrowserCandidate(), /cannot override artplayer-tool-iframe artifact/)
     await assert.rejects(mbCandidate(), { code: 'ENOENT' })
     process.env.ARTPLAYER_MB_BASELINE = '1'
     await assert.rejects(mbCandidate(), /cannot use the frozen workspace/)

@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { iframeCandidate, iframeHistorical } from '../helpers/iframe.js'
+import { iframeBrowserCandidate, iframeHistorical } from '../helpers/iframe.js'
 import { expect, test } from './fixtures.js'
 
-const implementation = await iframeCandidate()
+const implementation = await iframeBrowserCandidate()
 const scenarios = ['inject-before-load', 'duplicate-inject', 'attribute-navigation', 'child-navigation', 'rapid-navigation', 'same-source-reload', 'fragment-navigation', 'attribute-fragment', 'stale-packets', 'history-back', 'srcdoc-navigation']
 const childHtml = fs.readFileSync(new URL('./iframe-boundary-child.html', import.meta.url), 'utf8')
 
@@ -222,7 +222,7 @@ for (const relation of ['same-origin', 'cross-origin', 'opaque-origin']) {
         }
         const timeline = await page.evaluate(() => window.timeline)
         expect(await page.evaluate(() => window.callbacks.some(packet => packet.type === 'artplayer-tool-iframe:session'))).toBe(false)
-        await testInfo.attach('iframe-navigation', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), relation, scenario, parentOrigin, childOrigin, result, timeline, scope: 'Actual native frame navigation and postMessage; history-back records actual pageshow.persisted rather than assuming bfcache. Delayed-load barrier forces injection before load. Stale-packet tests replay old metadata from the controlled current frame to isolate document filtering. No media/player integration.' }) })
+        await testInfo.attach('iframe-navigation', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), provenance: implementation.provenance || null, relation, scenario, parentOrigin, childOrigin, result, timeline, scope: 'Actual native frame navigation and postMessage; history-back records actual pageshow.persisted rather than assuming bfcache. Delayed-load barrier forces injection before load. Stale-packet tests replay old metadata from the controlled current frame to isolate document filtering. No media/player integration.' }) })
       }
       finally {
         releaseBarrier?.()
@@ -278,7 +278,7 @@ for (const historical of (await iframeHistorical()).filter(item => ['published-a
         expect(result.states.new.value).toBe('2')
         expect(result.states.old.error).toBe('The iframe document has changed')
         expect(result.pending).toBe(0)
-        await testInfo.attach('iframe-navigation', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), relation, scenario: 'legacy-child-source-change', child: { name: historical.name, sha256: hash(historical.code) }, parentOrigin, childOrigin, result, scope: 'Actual source attribute navigation with an immutable historical child. No document metadata or internal child navigation protection is claimed for an unchanged legacy peer.' }) })
+        await testInfo.attach('iframe-navigation', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), provenance: implementation.provenance || null, relation, scenario: 'legacy-child-source-change', child: { name: historical.name, sha256: hash(historical.code) }, parentOrigin, childOrigin, result, scope: 'Actual source attribute navigation with an immutable historical child. No document metadata or internal child navigation protection is claimed for an unchanged legacy peer.' }) })
       }
       finally {
         await page.evaluate(() => {

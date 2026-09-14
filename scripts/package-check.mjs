@@ -43,6 +43,22 @@ export function checkFiles(manifest, files, historical = []) {
   assert(!files.includes('package/tsconfig.json'), 'Implementation tsconfig leaked into package')
 }
 
+export function historicalDistributionFiles(name, { baseline, sources }) {
+  if (name !== 'artplayer-tool-iframe') {
+    assert.equal(baseline.release.name, name, 'Review renamed package distribution separately')
+    return Object.keys(baseline.release.files)
+  }
+  assert.equal(baseline.release.name, 'artplayer-plugin-iframe', 'Iframe keeps its distinct published predecessor')
+  const prefix = `packages/${name}/`
+  const manifest = JSON.parse(sources.get(`${prefix}package.json`))
+  assert.equal(manifest.name, name, 'Iframe distribution must use the frozen tool manifest')
+  const files = Object.keys(baseline.source).filter(file => file.startsWith(`${prefix}dist/`) || file.startsWith(`${prefix}types/`))
+  assert(files.length > 0 && files.every(file => sources.has(file)), 'Missing verified iframe workspace distribution')
+  const members = files.map(file => `package/${file.slice(prefix.length)}`)
+  checkFiles(manifest, members)
+  return members
+}
+
 export function packedFiles(archive) {
   const args = { encoding: 'utf8', windowsHide: true }
   const names = execFileSync('tar', ['-tzf', archive], args).trim().split(/\r?\n/)
@@ -99,6 +115,7 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     'artplayer-plugin-jassub': async () => (await import('../refactor/scripts/jassub-contract.mjs')).verifyJassubContract(),
     'artplayer-plugin-danmuku': async () => (await import('../refactor/scripts/danmuku-contract.mjs')).verifyDanmukuContract(),
     'artplayer-plugin-danmuku-mask': async () => (await import('../refactor/scripts/danmuku-mask-contract.mjs')).verifyDanmukuMaskContract(),
+    'artplayer-tool-iframe': async () => (await import('../refactor/scripts/iframe-contract.mjs')).verifyIframeContract(),
     'artplayer-plugin-audio-track': async () => (await import('../refactor/scripts/audio-contract.mjs')).verifyAudioContract(),
     'artplayer-plugin-vtt-thumbnail': async () => (await import('../refactor/scripts/vtt-thumbnail-contract.mjs')).verifyVttThumbnailContract(),
     'artplayer-plugin-multiple-subtitles': async () => (await import('../refactor/scripts/multiple-subtitles-contract.mjs')).verifyMultipleSubtitlesContract(),
@@ -108,7 +125,7 @@ export async function checkPackages({ release = false, include = [] } = {}) {
   for (const name of include) {
     assert(Object.hasOwn(supported, name), `Additional package needs a reviewed contract: ${name}`)
     const contract = await supported[name]()
-    historicalFiles.set(name, Object.keys(contract.baseline.release.files))
+    historicalFiles.set(name, historicalDistributionFiles(name, contract))
   }
   const names = [...defaultNames, ...include]
   const parent = path.join(workspace, 'refactor/.cache/packages')

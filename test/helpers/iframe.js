@@ -1,14 +1,26 @@
+import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import vm from 'node:vm'
 import { verifyIframeContract } from '../../refactor/scripts/iframe-contract.mjs'
-import { readMember } from '../../refactor/scripts/releases.mjs'
+import { hash, readMember } from '../../refactor/scripts/releases.mjs'
+import { browserCandidate } from './browser-candidate.js'
 import { compilePackage } from './load.js'
 
 export async function iframeCandidate() {
   if (process.env.ARTPLAYER_IFRAME_BASELINE === '1')
     return (await iframeHistorical()).find(item => item.name === 'workspace.js')
-  return { name: process.env.ARTPLAYER_IFRAME_ARTIFACT ? 'candidate-artifact' : 'candidate-source', global: 'ArtplayerToolIframe', namespace: false, code: process.env.ARTPLAYER_IFRAME_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_IFRAME_ARTIFACT, 'utf8') : await compilePackage('artplayer-tool-iframe', 'umd') }
+  const artifact = process.env.ARTPLAYER_IFRAME_ARTIFACT
+  const code = artifact ? fs.readFileSync(artifact, 'utf8') : await compilePackage('artplayer-tool-iframe', 'umd')
+  return { name: artifact ? 'candidate-artifact' : 'candidate-source', global: 'ArtplayerToolIframe', namespace: false, code, provenance: { kind: artifact ? 'explicit-artifact' : 'source-build', file: artifact || null, sha256: hash(code) } }
+}
+
+export async function iframeBrowserCandidate() {
+  if (!process.env.ARTPLAYER_BROWSER_ARTIFACTS)
+    return iframeCandidate()
+  assert(process.env.ARTPLAYER_IFRAME_BASELINE !== '1', 'Installed Iframe cannot use the frozen workspace')
+  const loaded = await browserCandidate('artplayer-tool-iframe', process.env.ARTPLAYER_IFRAME_ARTIFACT)
+  return { name: 'candidate-installed', global: 'ArtplayerToolIframe', namespace: false, ...loaded }
 }
 
 export async function iframeHistorical() {

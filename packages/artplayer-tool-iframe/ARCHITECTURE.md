@@ -212,3 +212,28 @@ Physical devices, native Firefox/WebKit cached restoration and final distributio
 remain separate gates. Desktop evidence does not establish the old helper or
 package-name migration. See ADR-026 and the task 05 history checkpoint for the
 exact fixture, automation limitations and source/main/legacy evidence.
+
+## Installed browser checks
+
+`yarn test:package --browser` includes this tool in the shared installed roster.
+The pack checker verifies the real `artplayer-plugin-iframe@1.0.0` archive and
+the frozen workspace independently. The tool's required dist/type filenames
+come from its verified workspace manifest and files; the old plugin/helper
+names are not silently treated as releases of the tool. Publishing or restoring
+the predecessor package remains a separate distribution decision.
+
+The five `test/browser/iframe*.spec.js` files use `iframeBrowserCandidate()` from
+`test/helpers/iframe.js`. With an installed map it must load the verified tool
+UMD, reject an explicit artifact or frozen-workspace override, and record the
+package/file/archive/source identity for each candidate parent and child.
+Without a map the same tests retain their source and historical controls.
+`iframeCandidate()` keeps its existing unit/history semantics: history may
+inherit a core-only map, which does not select a tool build. Do not merge these
+two fixture entrypoints or claim the separate BFCache suite used an installed
+tool when it used a source/explicit tool. Browser scope configuration rejects
+diagnostic flags that would remove historical Iframe rows.
+
+The installed tests cover protocol, peer/document boundaries, native navigation,
+old/new player combinations and the real docs editor. They do not replace the
+special `test:iframe-history` browser channel or physical-device evidence. See
+`../../refactor/changes/2026-09-15-CI-01-iframe-installed.md` for measured results.

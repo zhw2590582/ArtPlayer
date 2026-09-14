@@ -5,9 +5,15 @@
 核验的统一包清单，执行明确列出的 installed 子集；清单维护在
 `scripts/browser-validation/scope.ts`。两步不
 吞失败，普通失败后仍保存另一范围的证据，分别上传browser-source/browser-installed。
-入口与报告规则见[维护说明](../scripts/browser-validation/README.md)。source全量
+入口与报告规则见[维护说明](../scripts/browser-validation/README.md)。
 目前按 OS × 引擎拆分播放作业，消费者另行执行；各作业的实际远端耗时/60分钟预算、
 其余插件安装矩阵与远端运行仍待CI-01/CI-04，不计为已通过。
+
+Iframe 接入后共同安装清单含十九包；新增五文件本地三引擎 426/426 通过，
+完整 installed collection 为 72 文件/2,406 项，见
+[安装记录](changes/2026-09-15-CI-01-iframe-installed.md)。原 browser-consumers 的
+history 仍保留源码/显式工具加核心 map 的独立语义，不因新增安装清单而自动
+宣称 BFCache 已使用安装工具验收。
 
 ## 本地命令
 

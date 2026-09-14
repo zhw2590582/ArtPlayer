@@ -1,9 +1,9 @@
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { iframeCandidate, iframeHistorical } from '../helpers/iframe.js'
+import { iframeBrowserCandidate, iframeHistorical } from '../helpers/iframe.js'
 import { expect, test } from './fixtures.js'
 
-const candidate = { ...await iframeCandidate(), lifecycle: true }
+const candidate = { ...await iframeBrowserCandidate(), lifecycle: true }
 const implementations = process.env.ARTPLAYER_IFRAME_LIFECYCLE_ONLY === '1'
   ? [candidate]
   : [...(await iframeHistorical()).filter(item => item.global !== 'ArtplayerHelperIframe'), candidate]
@@ -213,7 +213,7 @@ for (const implementation of implementations) {
           }
           const packets = await page.evaluate(() => window.packets)
           expect(packets.filter(packet => packet.fromChild).every(packet => packet.origin === childOrigin)).toBe(true)
-          await testInfo.attach('iframe-behavior', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), relation, scenario, parentOrigin, childOrigin, foreignOrigin, result, packets, lifecycleAcceptance: Boolean(implementation.lifecycle), scope: 'Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet.' }) })
+          await testInfo.attach('iframe-behavior', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), provenance: implementation.provenance || null, relation, scenario, parentOrigin, childOrigin, foreignOrigin, result, packets, lifecycleAcceptance: Boolean(implementation.lifecycle), scope: 'Actual browser iframe WindowProxy/source/origin and postMessage. Local route fulfills immutable library bytes. Date.now is controlled for collision and distinct clone-failure IDs. Only the deliberate child error/DataCloneError is intercepted. Historical defects are asserted for historical rows; lifecycle acceptance requires cleanup and absence of uncaught clone errors. Navigation and trust are not candidate acceptance yet.' }) })
         }
         finally {
           await page.evaluate(() => {

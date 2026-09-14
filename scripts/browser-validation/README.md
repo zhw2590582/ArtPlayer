@@ -20,6 +20,15 @@ and source/build freshness. `scope.ts` lists the currently supported installed
 test files. This is a growing installed subset, not full ecosystem acceptance.
 Source checks remain complete when the installed list grows.
 
+Iframe adds five installed files through `iframeBrowserCandidate()`. Its actual
+published predecessor is `artplayer-plugin-iframe`; required current tool paths
+are checked against the frozen workspace manifest rather than invented npm tool
+contents. Candidate parent/child evidence includes installed provenance, while
+historical rows retain their own names and bytes. Installed scope rejects the
+Iframe baseline/lifecycle-only/boundaries-only diagnostic flags. The separate
+history server still uses `iframeCandidate()` and may receive a core-only map;
+its source/explicit tool selection has not become installed-tool acceptance.
+
 Ads media/lifecycle and UI files use `test/helpers/browser-candidate.js` to select
 the verified installed plugin whenever an artifact map is present. An additional
 ARTPLAYER_ADS_ARTIFACT override is rejected instead of mixing candidates. Missing,

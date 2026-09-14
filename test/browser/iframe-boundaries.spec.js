@@ -1,9 +1,9 @@
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { iframeCandidate, iframeHistorical } from '../helpers/iframe.js'
+import { iframeBrowserCandidate, iframeHistorical } from '../helpers/iframe.js'
 import { expect, test } from './fixtures.js'
 
-const candidate = await iframeCandidate()
+const candidate = await iframeBrowserCandidate()
 const old = (await iframeHistorical()).filter(item => ['published-artplayer-plugin-iframe.js', 'workspace.js'].includes(item.name))
 const cases = ['same-origin', 'cross-origin', 'opaque-origin', 'redirect'].flatMap(relation => ['parent-guard', 'child-guard', 'malformed'].map(scenario => ({ relation, scenario, parent: candidate, child: candidate })))
 if (process.env.ARTPLAYER_IFRAME_BOUNDARIES_ONLY !== '1') {
@@ -139,7 +139,7 @@ for (const item of cases) {
       }
       const packets = await page.evaluate(() => window.packets)
       expect(packets.filter(packet => packet.fromChild).every(packet => packet.origin === eventOrigin)).toBe(true)
-      await testInfo.attach('iframe-boundary', { contentType: 'application/json', body: JSON.stringify({ relation: item.relation, scenario: item.scenario, parent: { name: item.parent.name, sha256: hash(item.parent.code) }, child: { name: item.child.name, sha256: hash(item.child.code) }, parentOrigin, initialUrl, childUrl, eventOrigin, redirects, result, packets, scope: 'Actual window peers and native source/origin. Redirect is an HTTP 302 from the local test server; opaque peer is sandbox allow-scripts. Mixed-version rows cover normal wire compatibility only, not security of an unchanged historical peer. No player/media integration.' }) })
+      await testInfo.attach('iframe-boundary', { contentType: 'application/json', body: JSON.stringify({ relation: item.relation, scenario: item.scenario, parent: { name: item.parent.name, sha256: hash(item.parent.code), provenance: item.parent.provenance || null }, child: { name: item.child.name, sha256: hash(item.child.code), provenance: item.child.provenance || null }, parentOrigin, initialUrl, childUrl, eventOrigin, redirects, result, packets, scope: 'Actual window peers and native source/origin. Redirect is an HTTP 302 from the local test server; opaque peer is sandbox allow-scripts. Mixed-version rows cover normal wire compatibility only, not security of an unchanged historical peer. No player/media integration.' }) })
     }
     finally {
       await page.evaluate(() => {

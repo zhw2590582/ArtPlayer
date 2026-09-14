@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { iframeCandidate } from '../helpers/iframe.js'
+import { iframeBrowserCandidate } from '../helpers/iframe.js'
 import { expect, test } from './fixtures.js'
 
-const candidate = await iframeCandidate()
+const candidate = await iframeBrowserCandidate()
 
 test('Iframe docs editor Run releases the previous tool and its pending requests', async ({ page }, testInfo) => {
   await page.route('https://pagead2.googlesyndication.com/**', route => route.fulfill({ contentType: 'text/javascript', body: '' }))
@@ -67,6 +67,6 @@ test('Iframe docs editor Run releases the previous tool and its pending requests
   await expect.poll(() => page.evaluate(() => window.exampleFinished)).toBe(true)
   expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)
   expect(await page.evaluate(() => window.previousPlayers.every(art => art.isDestroy))).toBe(true)
-  await testInfo.attach('iframe-editor', { contentType: 'application/json', body: JSON.stringify({ candidateSha256: hash(candidate.code), files: Object.fromEntries(['docs/index.html', 'docs/iframe.html', 'docs/assets/example/iframe.js', 'docs/assets/js/common.js'].map(file => [file, hash(fs.readFileSync(file))])), scope: 'Actual docs index, local Monaco and Run button. Only the iframe constructor is observed through a test subclass; external advertising script is stubbed in this test only. No physical-device/BFCache claim.' }) })
+  await testInfo.attach('iframe-editor', { contentType: 'application/json', body: JSON.stringify({ candidateSha256: hash(candidate.code), provenance: candidate.provenance || null, files: Object.fromEntries(['docs/index.html', 'docs/iframe.html', 'docs/assets/example/iframe.js', 'docs/assets/js/common.js'].map(file => [file, hash(fs.readFileSync(file))])), scope: 'Actual docs index, local Monaco and Run button. Only the iframe constructor is observed through a test subclass; external advertising script is stubbed in this test only. No physical-device/BFCache claim.' }) })
   await page.evaluate(() => window.demoTools.forEach(tool => tool.destroy()))
 })

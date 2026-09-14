@@ -39,6 +39,11 @@ test('Installed validation rejects diagnostic SDK substitutions and recovery pro
   const profile = { ...base, ARTPLAYER_MASK_PROFILE: '1' }
   assert.throws(() => browserInvocation('installed', [], profile), /Mask CPU profiling/)
   assert.equal(browserInvocation('source', [], profile).env.ARTPLAYER_MASK_PROFILE, '1')
+  for (const name of ['ARTPLAYER_IFRAME_BASELINE', 'ARTPLAYER_IFRAME_LIFECYCLE_ONLY', 'ARTPLAYER_IFRAME_BOUNDARIES_ONLY']) {
+    const env = { ...base, [name]: '1' }
+    assert.throws(() => browserInvocation('installed', [], env), /retain Iframe candidate and historical controls/)
+    assert.equal(browserInvocation('source', [], env).env[name], '1')
+  }
   for (const mode of ['upstream4', 'bufferlevel4']) {
     const env = { ...base, ARTPLAYER_DASH_DIAGNOSTIC_SDK: mode }
     assert.throws(() => browserInvocation('installed', [], env), /unchanged DASH SDK/)

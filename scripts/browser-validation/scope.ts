@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import assert from 'node:assert/strict'
 
 export type BrowserScope = 'source' | 'installed'
-export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast', 'artplayer-proxy-mediabunny', 'artplayer-plugin-jassub', 'artplayer-plugin-danmuku', 'artplayer-plugin-danmuku-mask']
+export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast', 'artplayer-proxy-mediabunny', 'artplayer-plugin-jassub', 'artplayer-plugin-danmuku', 'artplayer-plugin-danmuku-mask', 'artplayer-tool-iframe']
 export const installedTests = [
   'playback.spec.js',
   'lifecycle.spec.js',
@@ -71,6 +71,11 @@ export const installedTests = [
   'danmuku-scheduler.spec.js',
   'danmuku-stability.spec.js',
   'danmuku-timing-diagnostic.spec.js',
+  'iframe.spec.js',
+  'iframe-boundaries.spec.js',
+  'iframe-navigation.spec.js',
+  'iframe-player.spec.js',
+  'iframe-editor.spec.js',
 ]
 
 export function browserInvocation(scope: string, args: string[], environment: NodeJS.ProcessEnv) {
@@ -84,6 +89,7 @@ export function browserInvocation(scope: string, args: string[], environment: No
     assert(env.ARTPLAYER_BROWSER_ARTIFACTS, 'Installed browser checks require ARTPLAYER_BROWSER_ARTIFACTS')
     assert(env.ARTPLAYER_MB_BROWSER_CANDIDATE !== '1', 'Installed browser checks must retain MediaBunny historical controls')
     assert(env.ARTPLAYER_MASK_PROFILE !== '1', 'Installed browser checks cannot enable Mask CPU profiling')
+    assert(!['ARTPLAYER_IFRAME_BASELINE', 'ARTPLAYER_IFRAME_LIFECYCLE_ONLY', 'ARTPLAYER_IFRAME_BOUNDARIES_ONLY'].some(name => env[name] === '1'), 'Installed browser checks must retain Iframe candidate and historical controls')
     assert(!env.ARTPLAYER_DASH_DIAGNOSTIC_SDK || env.ARTPLAYER_DASH_DIAGNOSTIC_SDK === 'none', 'Installed browser checks require the unchanged DASH SDK')
     assert(!['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'].some(name => env[name] === '1'), 'Installed browser checks cannot use DASH recovery diagnostics')
   }

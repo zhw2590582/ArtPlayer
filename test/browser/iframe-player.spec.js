@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { iframeCandidate, iframeHistorical } from '../helpers/iframe.js'
+import { iframeBrowserCandidate, iframeHistorical } from '../helpers/iframe.js'
 import { expect, test } from './fixtures.js'
 
-const candidate = await iframeCandidate()
+const candidate = await iframeBrowserCandidate()
 const published = (await iframeHistorical()).find(item => item.name === 'published-artplayer-plugin-iframe.js')
 const demo = fs.readFileSync('docs/assets/example/iframe.js', 'utf8')
 const childHtml = fs.readFileSync('docs/iframe.html', 'utf8')
@@ -116,7 +116,7 @@ for (const core of ['published-4.5.9', 'published', 'candidate']) {
             return 17
           }))
           expect(afterDestroy).toBe(17)
-          await testInfo.attach('iframe-player', { contentType: 'application/json', body: JSON.stringify({ core, coreSha256: hash(coreBytes), parent: { name: parentTool.name, sha256: hash(parentTool.code) }, child: { name: childTool.name, sha256: hash(childTool.code) }, relation, initial, seek, switched, destroyed, events, demoSha256: hash(demo), adaptedDemoSha256: hash(adaptedDemo), childHtmlSha256: hash(childHtml), scope: 'Actual docs iframe.html, parent example and CSS in a minimal parent harness; only source URL and explicit test-only old global-name aliases are adapted. Actual media plays/seeks/switches, fullscreenWeb control sends messages and both core/tool lifetimes are tested independently. No complete Monaco/device/BFCache claim.' }) })
+          await testInfo.attach('iframe-player', { contentType: 'application/json', body: JSON.stringify({ core, coreSha256: hash(coreBytes), parent: { name: parentTool.name, sha256: hash(parentTool.code), provenance: parentTool.provenance || null }, child: { name: childTool.name, sha256: hash(childTool.code), provenance: childTool.provenance || null }, relation, initial, seek, switched, destroyed, events, demoSha256: hash(demo), adaptedDemoSha256: hash(adaptedDemo), childHtmlSha256: hash(childHtml), scope: 'Actual docs iframe.html, parent example and CSS in a minimal parent harness; only source URL and explicit test-only old global-name aliases are adapted. Actual media plays/seeks/switches, fullscreenWeb control sends messages and both core/tool lifetimes are tested independently. No complete Monaco/device/BFCache claim.' }) })
         }
         finally {
           if (child && !child.isDetached()) {

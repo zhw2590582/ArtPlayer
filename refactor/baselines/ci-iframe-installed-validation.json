@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-01",
+  "date": "2026-09-15",
+  "sourceHead": "4a9ef16b168eecc1f39b08290415d76a25852314",
+  "candidate": "Working tree in the accompanying Iframe installed-browser checkpoint; executable fingerprints normalize LF",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "inputs": [
+    {
+      "file": "scripts/package-check.mjs",
+      "sha256LF": "fbab857fd7565dad953b7c0387bd31bb19f986e1e5f6adc5525b2e76e25923b0"
+    },
+    {
+      "file": "scripts/browser-validation/scope.ts",
+      "sha256LF": "510e857438df5dcd410a4506f074b3864b8eb1e8f05a32acfbca1ff9056ddf3f"
+    },
+    {
+      "file": "test/helpers/iframe.js",
+      "sha256LF": "46549ef9b090cd69605582b6d011900ad60068b97ce75b0df821194319b1d93e"
+    },
+    {
+      "file": "test/package-check.test.js",
+      "sha256LF": "81717f7f9dfd46b99d90d84135cfb53181e3453ab9e3d18dd350c101d8781766"
+    },
+    {
+      "file": "test/browser-validation.test.js",
+      "sha256LF": "d1598e4393b4bb2e4d1e590b6c9744a47cf6aaff7c0086f9fb8d3eb38644cf8c"
+    },
+    {
+      "file": "test/browser/iframe.spec.js",
+      "sha256LF": "bfa55adb681caef7dcc2ede58f75230f1af281591a2868624522511fa9507baa"
+    },
+    {
+      "file": "test/browser/iframe-boundaries.spec.js",
+      "sha256LF": "11cce4e116abc0f0d34aa2e84c736071064e7ffaf403bfb294375d60e8c545d1"
+    },
+    {
+      "file": "test/browser/iframe-navigation.spec.js",
+      "sha256LF": "eae9fa7e840d79bd60b3ab9966517768d7975bc6988a7a6f4ef50723bc017309"
+    },
+    {
+      "file": "test/browser/iframe-player.spec.js",
+      "sha256LF": "09cd9b63f56b62d403cdfba187d4c854a25a922913623633efe843234667756c"
+    },
+    {
+      "file": "test/browser/iframe-editor.spec.js",
+      "sha256LF": "fe8865c82287001cc6432a6b9aece8359c1bd5a8298e2386b0db14eb3882b60a"
+    }
+  ],
+  "packages": {
+    "directory": "refactor/.cache/packages/run-qBFP13",
+    "reportSha256": "58dbe13edcf4a8f529ee973868c6125cbf13b3cfd3a2515c17cf9b2c95c2cfa3",
+    "count": 19,
+    "names": [
+      "artplayer",
+      "artplayer-plugin-chapter",
+      "artplayer-plugin-ambilight",
+      "artplayer-proxy-canvas",
+      "artplayer-plugin-document-pip",
+      "artplayer-plugin-ads",
+      "artplayer-plugin-audio-track",
+      "artplayer-plugin-vtt-thumbnail",
+      "artplayer-plugin-multiple-subtitles",
+      "artplayer-plugin-hls-control",
+      "artplayer-plugin-dash-control",
+      "artplayer-plugin-auto-thumbnail",
+      "artplayer-plugin-asr",
+      "artplayer-plugin-chromecast",
+      "artplayer-proxy-mediabunny",
+      "artplayer-plugin-jassub",
+      "artplayer-plugin-danmuku",
+      "artplayer-plugin-danmuku-mask",
+      "artplayer-tool-iframe"
+    ],
+    "tool": {
+      "name": "artplayer-tool-iframe",
+      "version": "1.1.0",
+      "archive": "artplayer-tool-iframe.tgz",
+      "sha256": "e8df09c3edd98de8fa0c731f2cf8769b243560a74d02bddd3e924f8079053365",
+      "files": {
+        "package/ARCHITECTURE.md": "dcb0d58fd02730a7a2cc620e4e7e934fae22dbbf85cc9a6eae21ee5ac2cba167",
+        "package/README.md": "ef5af60bcb831667a78cc3421f6e3c7b5d9a50b3d2e571c5cd02d46fc533e9ce",
+        "package/dist/artplayer-tool-iframe.js": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+        "package/dist/artplayer-tool-iframe.legacy.js": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+        "package/dist/artplayer-tool-iframe.mjs": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83",
+        "package/package.json": "0de9c86eeb3f9a2fb46f9297105b5beddb8d6164163ffaa9874cf5cd68ba7a58",
+        "package/types/artplayer-tool-iframe.d.cts": "66850135f45c81d4bd7a0de33b6a2f63a655de9000f2698f43660039727919f3",
+        "package/types/artplayer-tool-iframe.d.mts": "cd394fd68e61fab3c4474daab29852a3f87dd0086b007e7937106871272676fb",
+        "package/types/artplayer-tool-iframe.d.ts": "e760de22559caf7ffff48d7c5713485bf9f0ddbe876a93080295fb6106535bfa"
+      }
+    },
+    "exitCode": 0,
+    "wallSeconds": 118.17,
+    "genericConsumerScope": [
+      "artplayer",
+      "artplayer-plugin-chapter"
+    ],
+    "baseline": "Verified npm artplayer-plugin-iframe@1.0.0 plus frozen artplayer-tool-iframe workspace at 40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f; distinct package identities"
+  },
+  "collection": {
+    "directory": "refactor/.cache/ci01-iframe-collection-report",
+    "reportSha256": "71d7ae92094a1cac3327619a0ac25c91a75c4d5bb6e3b8a9b4c0beee70e9108c",
+    "cases": 2406,
+    "files": 72,
+    "perEngine": {
+      "chromium": 802,
+      "firefox": 802,
+      "webkit": 802
+    },
+    "collectionOnly": true
+  },
+  "installed": {
+    "directory": "refactor/.cache/ci01-iframe-installed-report",
+    "reportSha256": "0b69259f917ad79a32b9ea65b9d7ca36d91941ea6bf42a2d83e8e6b1786f1c29",
+    "invocationSha256": "b383fcf488927f9a5bbaa57d1c4d24fb4b558351487ae1043a25918f3d8edf0e",
+    "args": [
+      "test",
+      "--config=playwright.installed.config.js",
+      "iframe",
+      "--workers=2"
+    ],
+    "result": {
+      "scope": "installed",
+      "exitCode": 0,
+      "signal": null,
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "iframe",
+        "--workers=2"
+      ]
+    },
+    "stats": {
+      "startTime": "2026-09-14T20:25:57.627Z",
+      "duration": 279343.054,
+      "expected": 426,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "files": {
+      "chromium/iframe-boundaries.spec.js": {
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "firefox/iframe-boundaries.spec.js": {
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "webkit/iframe-boundaries.spec.js": {
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "chromium/iframe-editor.spec.js": {
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "firefox/iframe-editor.spec.js": {
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "webkit/iframe-editor.spec.js": {
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "chromium/iframe-navigation.spec.js": {
+        "expected": 39,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "firefox/iframe-navigation.spec.js": {
+        "expected": 39,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "webkit/iframe-navigation.spec.js": {
+        "expected": 39,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "chromium/iframe-player.spec.js": {
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "firefox/iframe-player.spec.js": {
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "webkit/iframe-player.spec.js": {
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "chromium/iframe.spec.js": {
+        "expected": 58,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "firefox/iframe.spec.js": {
+        "expected": 58,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "webkit/iframe.spec.js": {
+        "expected": 58,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "casesWithCandidateIdentity": 264,
+    "identityRecords": 318,
+    "identityCountsByProject": {
+      "chromium": 106,
+      "firefox": 106,
+      "webkit": 106
+    },
+    "failures": []
+  },
+  "source": {
+    "directory": "refactor/.cache/ci01-iframe-source-report",
+    "reportSha256": "071cba96f1289cd4064bd777265e9c0c8ecab868c8cca77698f615a35236cb28",
+    "invocationSha256": "e2bd4beb7fee90c66918cd54cd84fcf479b88be3a7d51c01ea99816b90fb2cce",
+    "args": [
+      "test",
+      "--config=playwright.source.config.js",
+      "--project=chromium",
+      "--workers=2",
+      "--grep",
+      "(Iframe docs editor Run|Iframe player candidate/same-origin/candidate-source/candidate-source|Iframe document same-origin/attribute-navigation/candidate-source)"
+    ],
+    "result": {
+      "scope": "source",
+      "exitCode": 0,
+      "signal": null,
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "--project=chromium",
+        "--workers=2",
+        "--grep",
+        "(Iframe docs editor Run|Iframe player candidate/same-origin/candidate-source/candidate-source|Iframe document same-origin/attribute-navigation/candidate-source)"
+      ]
+    },
+    "stats": {
+      "startTime": "2026-09-14T20:31:13.013Z",
+      "duration": 34660.732,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browsers": {
+      "chromium": "153.0.8010.12"
+    },
+    "files": {
+      "chromium/iframe-editor.spec.js": {
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "chromium/iframe-navigation.spec.js": {
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "chromium/iframe-player.spec.js": {
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "casesWithCandidateIdentity": 3,
+    "identityRecords": 4,
+    "identityCountsByProject": {
+      "chromium": 4
+    },
+    "failures": []
+  },
+  "verification": {
+    "tests": {
+      "passed": 113,
+      "failed": 0,
+      "durationMs": 3402.3125,
+      "log": "refactor/.cache/ci01-iframe-tests.log",
+      "logSha256": "cf9dfd8f04bbd1bd5b458fdba9f99661fce167917fd5683d4db8e4c5dee044d5"
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-iframe-lint.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "libraryTypes": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-iframe-types.log",
+      "logSha256": "62ec4acffe7f959331ef7e06a10ebd9bc15263dc4c0624aedaed71e65e96c397"
+    },
+    "docsToolsTypes": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-iframe-docs-types.log",
+      "logSha256": "4ee15d1ddc61e077c26ded3c173c50a332ff4bc31c883febc247eba00f6826f3"
+    },
+    "toolchain": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-iframe-toolchain.log",
+      "logSha256": "0f342a63471393db876e60cb17b1e8ea4d21c2724848e8c50a05eba519ddcae6"
+    },
+    "ci": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-iframe-ci.log",
+      "logSha256": "2a42b55e8510c2b958e9dbd0cc99a359e6e80e6a1e1a3ddf0a27590ca3eb9741"
+    }
+  },
+  "limitations": [
+    "Collection is not a full run of all installed tests.",
+    "Candidate identity records can count both parent and child; they are not unique test counts. Pure historical rows preserve immutable predecessor/workspace inputs.",
+    "The separate BFCache/history server retains its source/explicit tool semantics and is not covered by this installed-tool claim.",
+    "No new npm package identity, helper alias, public API, type, dependency or version change; predecessor distribution decisions remain separate.",
+    "No remote OS matrix, physical-device or release-review/publication acceptance; CI-01 and PKG-IFRAME-05 remain in progress."
+  ]
+}
