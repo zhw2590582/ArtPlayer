@@ -74,6 +74,8 @@ export function runTypechecks() {
     console.log(`Strict project passed: ${relative(config)} (${result.files.length} root files)`)
   }
   for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'bundler-esm'], [ts, 'nodenext-esm'], [compat, 'node10-commonjs']]) {
+    for (const fixture of ['test/types/vast-runtime.ts', 'refactor/fixtures/consumers/vast-published.ts'])
+      assert.deepEqual(checkConsumer(compiler, mode, fs.readFileSync(path.join(root, fixture), 'utf8')), [], `VAST consumer failed: TS ${compiler.version} ${mode}`)
     for (const source of [autoThumbnailPublic(mode), autoThumbnailRuntime(mode)])
       assert.deepEqual(checkConsumer(compiler, mode, source), [], `Auto Thumbnail consumer failed: TS ${compiler.version} ${mode}`)
     for (const fixture of ['test/types/asr-public.ts', mode === 'nodenext-esm' ? 'refactor/fixtures/consumers/asr-esm-namespace.ts' : 'refactor/fixtures/consumers/asr-published.ts']) {

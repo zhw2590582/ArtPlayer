@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import { test } from 'node:test'
 import { ESLint } from 'eslint'
 import compat from 'typescript-compat'
+import { verifyVastContract } from '../refactor/scripts/vast-contract.mjs'
 import { vastSdkDeclarations } from '../scripts/editor-declarations/dependencies.ts'
 import { editorLibUris, generateEditorDeclarations } from '../scripts/editor-declarations/generate.ts'
 import { checkStandaloneDeclarations } from '../scripts/editor-declarations/validation.ts'
@@ -24,11 +25,14 @@ test('editor declarations are reproducible, standalone and preserve constructor/
   assert.throws(() => asGlobalDeclaration('export { default } from "./missing"', 'Artplayer'), /unresolved exports/)
 })
 
-test('Chapter and VAST editor consumers preserve SDK types, optional Window hook and named results', () => {
+test('Chapter and historical workspace VAST editor consumers preserve SDK types, optional Window hook and named results', async () => {
+  const contract = await verifyVastContract()
   const core = fs.readFileSync('docs/assets/ts/artplayer.d.ts', 'utf8')
   const generated = new Map([['artplayer.d.ts', core]])
   for (const [suffix, global] of [['chapter', 'artplayerPluginChapter'], ['vast', 'artplayerPluginVast']]) {
-    const source = fs.readFileSync(`packages/artplayer-plugin-${suffix}/types/artplayer-plugin-${suffix}.d.ts`, 'utf8')
+    const source = suffix === 'vast'
+      ? contract.sources.get('packages/artplayer-plugin-vast/types/artplayer-plugin-vast.d.ts')
+      : fs.readFileSync(`packages/artplayer-plugin-${suffix}/types/artplayer-plugin-${suffix}.d.ts`, 'utf8')
     const old = `${source.replace(/^import.*$/gim, '')}\nexport = ${global};\nexport as namespace ${global};\n`
     const diagnostics = checkPluginEditorDeclaration(old, core)
     assert(diagnostics.some(item => item.code === 2309))

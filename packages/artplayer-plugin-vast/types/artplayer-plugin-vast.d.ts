@@ -1,36 +1,20 @@
-import type { Player, PlayerOptions } from '@glomex/vast-ima-player'
-import type Artplayer from 'artplayer'
+import type Artplayer from 'artplayer';
 
-declare global {
-  interface Window {
-    artplayerPluginVast?: typeof artplayerPluginVast
-  }
-}
+export = artplayerPluginVast;
+export as namespace artplayerPluginVast;
 
-type PlayUrlFn = (url: string, config?: any) => void
-type PlayResFn = (res: string, config?: any) => void
+type Option = (params: {
+    art: Artplayer;
+    id: string;
+    ima: any;
+    imaPlayer: any;
+    $container: HTMLDivElement;
+    playUrl: (url: string) => void;
+    playRes: (res: string) => void;
+}) => void;
 
-interface VastPluginContext {
-  art: Artplayer
-  ima: any
-  imaPlayer: Player | null
-  playUrl: PlayUrlFn
-  playRes: PlayResFn
-  init: () => Player
-  adsRenderingSettings: any
-  playerOptions: PlayerOptions
-  container: HTMLDivElement | null
-}
+type Result = {
+    name: 'artplayerPluginVast';
+};
 
-export type ArtplayerPluginVastOption = (params: VastPluginContext) => void | Promise<void>
-
-export interface ArtplayerPluginVastInstance {
-  name: 'artplayerPluginVast'
-  destroy?: () => void
-}
-
-declare function artplayerPluginVast(
-  option: ArtplayerPluginVastOption,
-): (art: Artplayer) => ArtplayerPluginVastInstance
-
-export default artplayerPluginVast
+declare const artplayerPluginVast: (option: Option) => (art: Artplayer) => Result;

@@ -121,6 +121,7 @@ function generateCommonJSPluginEditor(source: ts.SourceFile, name: string) {
   let exported = false
   let global = false
   let classExport = false
+  let inlineFactory = false
   for (const node of source.statements) {
     if (ts.isImportDeclaration(node)) {
       assert(ts.isStringLiteral(node.moduleSpecifier) && node.importClause?.isTypeOnly && !node.importClause.namedBindings && node.importClause.name?.text === 'Artplayer' && node.moduleSpecifier.text === 'artplayer', 'Unsupported CommonJS plugin editor import')
@@ -142,9 +143,13 @@ function generateCommonJSPluginEditor(source: ts.SourceFile, name: string) {
       const definition = definitions[0]
       assert(definition && ts.isIdentifier(definition.name) && definition.type)
       assert.equal(definition.name.text, name)
-      assert(ts.isTypeReferenceNode(definition.type) && ts.isQualifiedName(definition.type.typeName)
-        && ts.isIdentifier(definition.type.typeName.left) && definition.type.typeName.left.text === name && definition.type.typeName.right.text === 'Factory', 'Editor export must use its public Factory interface')
+      inlineFactory = ts.isFunctionTypeNode(definition.type)
+      assert(inlineFactory || (ts.isTypeReferenceNode(definition.type) && ts.isQualifiedName(definition.type.typeName)
+        && ts.isIdentifier(definition.type.typeName.left) && definition.type.typeName.left.text === name && definition.type.typeName.right.text === 'Factory'), 'Editor export must use its public Factory interface or an inline function type')
       callable = true
+    }
+    else if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
+      assert(!node.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword), 'CommonJS local types must remain private')
     }
     else if (ts.isExportAssignment(node)) {
       assert(node.isExportEquals && ts.isIdentifier(node.expression) && node.expression.text === name, 'Unexpected CommonJS plugin export')
@@ -159,10 +164,11 @@ function generateCommonJSPluginEditor(source: ts.SourceFile, name: string) {
     }
     statements.push(node)
   }
-  assert(namespace && callable && exported && global, 'Incomplete CommonJS plugin editor declaration')
+  assert((namespace || inlineFactory) && callable && exported && global, 'Incomplete CommonJS plugin editor declaration')
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed })
-  const bridge = classExport ? '' : '/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */\n'
-  return `// Generated from the package public declaration by yarn build:ts. Do not edit.\n${bridge}${statements.map(node => printer.printNode(ts.EmitHint.Unspecified, node, source)).join('\n')}\n`
+  const bridge = classExport || !namespace ? '' : '/* eslint-disable ts/no-redeclare -- Callable and public type namespace intentionally merge. */\n'
+  const historical = inlineFactory ? '/* eslint-disable ts/no-use-before-define, ts/consistent-type-definitions -- Preserve historical export ordering and private aliases. */\n' : ''
+  return `// Generated from the package public declaration by yarn build:ts. Do not edit.\n${bridge}${historical}${statements.map(node => printer.printNode(ts.EmitHint.Unspecified, node, source)).join('\n')}\n`
 }
 
 export function checkPluginEditorDeclaration(code: string, core: string, consumer = '', compiler: typeof ts = ts) {

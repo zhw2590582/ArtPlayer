@@ -3112,11 +3112,16 @@
         "CORE-07",
         "PKG-VAST-07"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "IMA/context/Promise 真实类型，外部 SDK 动态对象限定边界；修复 @alugha/ima 声明依赖链，保留 export= 和 require.default 消费；同步错误声明的兼容决策单列",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-VAST-04-types.md",
+        "baselines/vast-types-validation.json",
+        "vast-type-decision.md",
+        "vast-validation.md"
+      ]
     },
     {
       "id": "PKG-VAST-05",

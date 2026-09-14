@@ -25,8 +25,40 @@ artplayerPluginVast((context) => {
 The callback may be asynchronous. Core destruction releases the ad session and prevents
 later requests or recreation. Explicit plugin `destroy()` allows a new ad session while
 the core is alive. See the architecture guide for mode-specific fields and defaults.
-Public TypeScript declarations for the second argument are still being reconciled in
-PKG-VAST-04; these are JavaScript usage examples, not completed declaration acceptance.
+## TypeScript
+
+The root and `/legacy` declarations preserve npm 1.0.0's historical factory shape,
+including its required callback, `any` SDK fields and inaccurate synchronous result.
+Registration has always been asynchronous: await it even when using the old declarations.
+
+Use `/runtime` for accurate SDK types, Promise results, optional callbacks and the
+compatibility option. This entry uses the same JavaScript implementation:
+
+```ts
+import vast from 'artplayer-plugin-vast/runtime'
+
+vast(({ imaPlayer }) => {
+  // The default mode allocates this player before the callback.
+  imaPlayer.addEventListener('AdStarted', onAdStarted)
+})
+
+vast((context) => {
+  context.playerOptions.autoResize = false
+  context.init()?.addEventListener('AdStarted', onAdStarted)
+}, { compatibility: 'workspace-1.2' })
+```
+
+Code using unpublished workspace types should move its imports to `/runtime` as well.
+`ArtplayerPluginVastOption` describes the workspace callback; `ArtplayerPluginVastInstance`
+describes the awaited result with `destroy()`. A workspace resource getter can be null,
+and `init()` returns null after core destruction. Default data fields retain the last
+allocation after release; retaining their values does not keep that allocation alive.
+
+CommonJS TypeScript without interop can use
+`import vast = require('artplayer-plugin-vast/runtime')`. Both `vast` and `vast.default`
+are typed there. The old root declaration intentionally keeps its original factory
+type without adding a required `.default` member, so plain replacement functions and
+historical `Parameters`/`ReturnType` extraction remain compatible.
 
 ## Maintenance
 

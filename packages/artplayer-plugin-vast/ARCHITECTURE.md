@@ -1,7 +1,7 @@
 # VAST implementation and maintenance
 
-The runtime follows the accepted published-versus-workspace initialization decision.
-Public declaration reconciliation and real IMA validation remain separate release gates.
+The runtime and public types follow the accepted published-versus-workspace decisions.
+Real IMA validation and full distribution acceptance remain separate release gates.
 
 ## Module map
 
@@ -17,8 +17,13 @@ Public declaration reconciliation and real IMA validation remain separate releas
   active-ad request suppression; default mode delegates those behaviors to the SDK.
 - `src/view.ts` creates each mode's historical overlay styles and distinct per-module container
   IDs, including multiple instances initialized in the same millisecond.
-- `src/types.ts` describes the implementation context and SDK boundary. Public legacy
-  declarations in `types/` remain separate pending PKG-VAST-04 reconciliation.
+- `src/types.ts` imports shared fields from `types/runtime-api.d.ts` for the implementation
+  context, request configuration and result, and adds only private utilities/callback typing.
+- `types/artplayer-plugin-vast.d.ts` is the exact npm1.0.0 declaration compatibility surface.
+  `types/runtime-api.d.ts` is the accurate SDK/context/Promise source; runtime.d.ts/.d.cts
+  expose CJS types, while runtime.d.mts exposes native ESM types. All resolve to the same
+  runtime artifacts. CJS declarations intentionally duplicate a small export facade;
+  changes must keep runtime.d.ts and runtime.d.cts identical.
 
 Dependency direction is entry -> session -> SDK/view/types. The session passes the
 original `art` through the callback for compatibility; only template elements are
@@ -36,7 +41,7 @@ secondary cleanup failures are logged without replacing the original error.
 Explicit plugin `destroy()` releases the current ad session, resets active-ad state,
 and permits a later `init`/`playUrl`/`playRes` while the core remains alive. Core destroy
 and failed attachment are terminal: request methods are inert and `init()` returns
-null. Public declaration accuracy for this invalid-lifetime case belongs to04.
+null. The accurate runtime declaration includes that terminal null result.
 
 Each session has an owner identity. Its callbacks verify that identity and core
 liveness before changing visibility. Cleanup detaches the current owner and clears
@@ -73,7 +78,8 @@ resource ownership. Never use a retained disposed SDK as an active session.
 Both modes retain void request methods, async registration and SDK/callback rejection.
 The old `require(...).default(...)` call and current callable export remain available;
 this does not recreate the old namespace object's reflection shape. Contradictory
-public return declarations and the new second-argument declaration remain task04.
+historical return declarations remain unchanged at the root; `/runtime` supplies the
+accurate Promise, both mode-specific contexts and the second argument.
 See [the accepted decision](../../refactor/vast-compatibility-decision.md).
 
 Overlay IDs use the historical `art-` default prefix or `art-vast-` workspace prefix,
@@ -103,9 +109,17 @@ import, using an already destroyed host to verify registration without loading a
 Set `ARTPLAYER_VAST_ARTIFACT` and `ARTPLAYER_VAST_ESM_ARTIFACT` to test actual build
 files; otherwise it builds source via the repository helper. The live alias path
 uses the controlled SDK in `test/vast.test.js` and the browser registration case.
-Public alias declarations and complete installed entry validation remain04/06.
+Accurate alias types are exposed only by `/runtime`; the root remains a pure historical
+factory type. Installed root/legacy/runtime imports and strict SDK type dependency
+resolution are checked by `yarn test:vast-types-package`. This does not replace task06's
+complete browser/distribution acceptance.
 
 For state or cleanup changes start in session, for callback timing in entry, and for
 SDK request fields in sdk. Keep Node candidate assertions, historical observations,
 browser counterparts and [test maintenance](../../refactor/vast-validation.md) aligned.
-Actual IMA/media/device validation remains05, public types04, and full distribution06.
+`yarn test:vast-types` verifies unchanged root bytes, historical type conflicts, negative
+runtime consumers and editor generation in TS5.9.3/4.3.5. `yarn build:ts artplayer-plugin-vast`
+regenerates the root-compatible editor global. Frozen workspace editor tests continue to
+exercise the SDK declaration bundler; they are labelled historical. Public migration
+is documented in [the accepted type decision](../../refactor/vast-type-decision.md).
+Actual IMA/media/device validation remains05 and full distribution06.

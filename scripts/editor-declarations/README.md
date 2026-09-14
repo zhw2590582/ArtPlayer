@@ -44,13 +44,18 @@ package consumer tests still use them. Core retains its existing bundler and
 private definitions namespace. Plugins preserve callable/default aliases and
 exported type namespaces. Unsupported imports/re-exports and invalid syntax fail.
 
-VAST's `Player` and `PlayerOptions` come from the installed, lockfile-pinned
+Historical workspace VAST's `Player` and `PlayerOptions` come from the installed, lockfile-pinned
 `@glomex/vast-ima-player` 1.21.2 and `@alugha/ima` 2.1.0 declarations. A dedicated
 type-only SDK entry avoids bundling a second copy of the linked workspace core.
 SDK types stay in the plugin's module-private definitions namespace, not global
 runtime values. The optional Window hook and required callback remain unchanged.
 Adjacent generated `artplayer-plugin-vast.LICENSE.txt` preserves upstream notices.
-This does not settle VAST's runtime default-behavior compatibility decision.
+PKG-VAST-04 restores the published npm1.0.0 root declaration and editor global under
+the user's explicit type decision. The CommonJS generator supports its inline factory
+and module-private aliases, preserving the old required callback and field types.
+Current root generation does not expose the workspace SDK types or Window augmentation;
+the historical fixture still verifies that generator path. Accurate module consumers use
+VAST's `/runtime` declarations. Real IMA verification remains separate.
 
 The editor loads 22 declarations: core, 20 ecosystem libraries and i18n. The
 unreferenced legacy `artplayer-plugin-websr.d.ts` asset is not in the canonical

@@ -1,5 +1,25 @@
 # 进度与证据
 
+## PKG-VAST-04 公开类型协调及安装消费者完成
+
+用户单独确认保留npm1.0.0根类型、工作区TS用法迁移/runtime。根/legacy声明原文
+保留；准确入口覆盖Promise、SDK字段、两种模式的可空性/可写性、可选callback和
+default别名。内部Context/Result/配置引用同一准确定义。README/架构/迁移决策同步。
+
+实际旧包与最终候选在仓库外离线安装并强制frozen重装，14组编译模式全部通过，
+检查所有安装成员/解析路径；最终核心+VAST共79个成员与当前文件一致。发现并修复
+VAST打包带入内部tsconfig。编辑器生成器支持旧版内联工厂，保留冻结工作区SDK
+生成测试；三浏览器Monaco正反例和主片解码均通过，未执行广告SDK。
+
+20项类型/编辑器/工程、82项VAST运行回归通过，全项目typecheck通过415生产TS
+文件；正常构建与上一步运行时产物一致。初始生成器/样式/打包错误、历史反例漏计
+均有失败记录。见[变更](changes/2026-09-14-PKG-VAST-04-types.md)、
+[证据](baselines/vast-types-validation.json)和[类型决定](vast-type-decision.md)。
+
+04完成、类型风险按用户明确取舍限定接受；262项为195 done、20 doing、47 todo。
+VAST剩05真实IMA/组合与06完整分发，LIFE/DIST和SDK风险继续开放。独立本地提交并
+先核验提交审计，未push/publish；其他包、设备、远端CI及发布复盘不据此标完成。
+
 ## PKG-VAST-03 已确认初始化策略与运行时资源整理完成
 
 用户于2026-09-14明确接受npm提前初始化默认、显式workspace-1.2惰性模式。

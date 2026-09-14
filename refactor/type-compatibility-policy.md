@@ -40,3 +40,9 @@ JASSUB 的 PKG-JASSUB-04 保留实际 npm 1.0.0/1.1.0 相同的根声明（忽�
 不改变必填资源 URL、旧 resize 参数顺序、Promise 返回声明和扩展索引。新增
 /runtime 描述真实可选参数、同步方法及 Worker 数据，并复用同一运行产物。
 这项实施没有新增旧类型破坏，不声称用户另行批准过 JASSUB 专属类型冲突。
+
+VAST的PKG-VAST-04在2026-09-14取得独立确认：用户接受“保留 npm 根类型，工作区
+类型迁移到 /runtime”。根/legacy保留实际npm1.0.0的export=、必需callback、any
+SDK字段及同步历史结果；/runtime提供准确Promise、两种初始化模式及SDK类型。
+未发布工作区的回调类型、命名类型和根导入形状按[vast-type-decision.md](vast-type-decision.md)
+迁移。本次批准独立于VAST初始化时机批准，不是将此前四包授权自动扩大。

@@ -1,6 +1,7 @@
 # VAST 测试维护
 
-PKG-VAST-03现已落实用户确认的两种初始化模式；公开声明继续由04协调。来源见
+PKG-VAST-03已落实用户确认的两种初始化模式；04按独立类型确认提供准确/runtime。
+来源见
 [实际契约](baselines/vast-contract.md)、[VAST/SDK归档](baselines/vast-release.json)
 和 [核心5.1.7归档](baselines/vast-core.json)。工作区1.2.0不是npm发布版本。
 
@@ -13,6 +14,17 @@ PKG-VAST-03现已落实用户确认的两种初始化模式；公开声明继续
 来源，不代表候选实现仍包含这些已获可控修复证据的问题；真实IMA验收仍待05。
 
 ## 文件与执行
+
+PKG-VAST-04新增`yarn test:vast-types`和`yarn test:vast-types-package`。根声明与
+实际npm1.0.0原文一致，/runtime与同一JS产物绑定；TS5.9.3/4.3.5、CommonJS、
+NodeNext、Bundler、关闭interop共14组实际安装消费通过。安装后强制frozen重装、
+成员哈希与解析路径隔离均检查；14条runtime反例逐行断言错误，不能只统计数量。
+主项目`yarn typecheck`也接入根/准确消费样例，baseline测试自动发现vast-types。
+
+编辑器CommonJS生成器补齐旧VAST的内联工厂与局部type；当前global回归npm旧类型，
+冻结工作区的SDK生成路径仍独立测试。三真实浏览器的Monaco消费生成声明、拒绝
+错误输入，并运行主片解码样例均通过；不执行广告SDK。正式VAST运行回归82通过，
+类型/编辑器/工程20通过。见[04记录](changes/2026-09-14-PKG-VAST-04-types.md)。
 
 PKG-VAST-07补回工厂`.default`自身别名，不改变初始化决策。当时`yarn test:vast`
 65项通过；实际main/legacy加ESM各4项导出通过。117项三浏览器检查通过，其中候选
@@ -81,4 +93,4 @@ VAST-LIFE-01由源码观察提升为受控运行复现，问题如下：
 使用精确注入；Node固定Date.now用于同毫秒ID复现，未改变生产时钟。
 
 只有实际VAST外部脚本持续因VPN无法加载时，可按用户授权记录并跳过该网络验证；
-它不豁免类型、生命周期或其他包。本次未用该例外。04～06和SDK-07继续开放。
+它不豁免类型、生命周期或其他包。本次未用该例外。05/06和SDK-07继续开放。

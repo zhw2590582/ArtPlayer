@@ -3283,7 +3283,7 @@
       "id": "VAST-TYPE-01",
       "title": "VAST declares an async factory as synchronous and imports an unavailable SDK type dependency",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "accepted-with-scope",
       "owners": [
         "PKG-VAST-04",
         "PKG-VAST-06"
@@ -3294,11 +3294,20 @@
         "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
         "refactor/baselines/vast-contract-validation.json",
         "refactor/baselines/vast-lifecycle-validation.json",
-        "refactor/changes/2026-09-12-PKG-VAST-03-lifecycle.md"
+        "refactor/changes/2026-09-12-PKG-VAST-03-lifecycle.md",
+        "refactor/changes/2026-09-14-PKG-VAST-04-types.md",
+        "refactor/baselines/vast-types-validation.json",
+        "refactor/vast-type-decision.md"
       ],
       "compatibleResolution": "Provide accurate Promise/context/IMA types and a self-contained installed declaration chain while checking legacy export= and consumers.",
       "closureCriteria": "Strict isolated package consumers pass without skipLibCheck; synchronous Result inference differences are reproduced and resolved or separately approved. Ads approval does not apply.",
-      "workspaceState": "Direct @alugha/ima2.1.0 removes the two TS2307 diagnostics in TS5.9.3 and4.3.5; public synchronous Result mismatch and isolated packaged declaration validation remain04/06."
+      "workspaceState": "Task04 complete: root npm bytes and exact factory relationships preserved; CJS/ESM runtime types, editor consumers, old/current compiler positives and per-line negatives pass. Runtime public types share Context/Result/config with implementation. Full media and distribution acceptance remain05/06.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-VAST-04-types.md",
+        "refactor/baselines/vast-types-validation.json",
+        "refactor/vast-type-decision.md"
+      ],
+      "resolutionRationale": "User separately accepted npm1.0.0 root compatibility types and /runtime accurate Promise/SDK/context types, with unpublished workspace migration. Fourteen actual isolated installation/compiler cases pass without skipLibCheck and enforce SDK dependency resolution; root historical inaccuracy is disclosed, not presented as runtime truth."
     },
     {
       "id": "VAST-LIFE-01",
@@ -3345,11 +3354,13 @@
         "refactor/baselines/vast-contract-validation.json",
         "refactor/changes/2026-09-14-PKG-VAST-07-default-alias.md",
         "refactor/baselines/vast-alias-validation.json",
-        "test/vast-exports.test.js"
+        "test/vast-exports.test.js",
+        "refactor/changes/2026-09-14-PKG-VAST-04-types.md",
+        "refactor/baselines/vast-types-validation.json"
       ],
       "compatibleResolution": "Preserve require(pkg).default alongside callable factory, script global and current ESM/legacy paths.",
       "closureCriteria": "Real packed main/legacy/ESM, historical deep imports, export= consumers and local demo/editor all pass with immutable published comparisons.",
-      "workspaceState": "Task07 restores historical JavaScript .default calls using a callable self-alias. Final four-format tests fail on pre-change main/ESM and pass produced main+ESM and legacy+ESM.65 Node and117 controlled-SDK browser checks pass. Old namespace reflection shape, public declarations, deep paths and installed distribution remain04/06; this risk stays open."
+      "workspaceState": "Task07 preserves old JavaScript default calls. Task04 adds accurate typed default on /runtime, actual isolated root/legacy/runtime imports and native ESM identity checks; preserves npm root types. Historical deep paths, complete browser distribution and old namespace reflection distinction remain task06; risk stays open."
     },
     {
       "id": "AMBILIGHT-LIFE-01",

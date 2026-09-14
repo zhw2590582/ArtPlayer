@@ -148,7 +148,7 @@
 | ADS-MEDIA-01 | open / 已复现 | Ads metadata 与 play 拒绝、隐藏页媒体状态和内容恢复仍缺真实验证 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
 | ADS-UI-01 | resolved / 已复现 | Ads 零等待跳过与初始状态不符，全屏图标/外部状态需核验 | PKG-ADS-02, PKG-ADS-03, PKG-ADS-05 |
 | VAST-CONTEXT-01 | accepted-with-scope / 已复现 | Published VAST callback aliases and eager Player differ from the unpublished lazy workspace | PKG-VAST-02, PKG-VAST-03, PKG-VAST-04 |
-| VAST-TYPE-01 | open / 已复现 | VAST declares an async factory as synchronous and imports an unavailable SDK type dependency | PKG-VAST-04, PKG-VAST-06 |
+| VAST-TYPE-01 | accepted-with-scope / 已复现 | VAST declares an async factory as synchronous and imports an unavailable SDK type dependency | PKG-VAST-04, PKG-VAST-06 |
 | VAST-LIFE-01 | open / 已复现 | VAST SDK and container lack core destruction ownership and pending work cancellation | PKG-VAST-02, PKG-VAST-03, PKG-VAST-05 |
 | VAST-DIST-01 | open / 已复现 | Published VAST CommonJS default namespace differs from the current callable distribution | PKG-VAST-04, PKG-VAST-06, PKG-VAST-07 |
 | AMBILIGHT-LIFE-01 | open / 已复现 | Ambilight sampling and RAF/DOM ownership lack terminal/error handling | PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-05 |

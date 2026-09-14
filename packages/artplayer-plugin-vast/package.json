@@ -27,6 +27,16 @@
       "types": "./types/artplayer-plugin-vast.d.ts",
       "import": "./dist/artplayer-plugin-vast.legacy.js",
       "require": "./dist/artplayer-plugin-vast.legacy.js"
+    },
+    "./runtime": {
+      "import": {
+        "types": "./types/runtime.d.mts",
+        "default": "./dist/artplayer-plugin-vast.mjs"
+      },
+      "require": {
+        "types": "./types/runtime.d.cts",
+        "default": "./dist/artplayer-plugin-vast.js"
+      }
     }
   },
   "main": "./dist/artplayer-plugin-vast.js",
@@ -37,5 +47,15 @@
   "dependencies": {
     "@alugha/ima": "2.1.0",
     "@glomex/vast-ima-player": "^1.21.2"
+  },
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "types/artplayer-plugin-vast.d.ts"
+      ],
+      "runtime": [
+        "types/runtime.d.ts"
+      ]
+    }
   }
 }

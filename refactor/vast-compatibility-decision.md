@@ -60,6 +60,6 @@ art-vast-；两者增加单模块递增后缀修复同毫秒ID碰撞，不恢复
 
 PKG-VAST-03已落实默认模式、显式工作区模式与发布字段，82项Node、162项三浏览器
 受控SDK检查通过；初始化风险按本次用户决定限定接受。详见
-[完成记录](changes/2026-09-14-PKG-VAST-03-compatibility.md)。实际IMA播放和公开声明
-尚未完成。此前Ads的类型推导批准与本次VAST运行时决定分别记录；未来类型协调
-继续以实际发布声明为基线。
+[完成记录](changes/2026-09-14-PKG-VAST-03-compatibility.md)。公开声明随后按
+[独立类型确认](vast-type-decision.md)恢复npm根类型并提供准确/runtime入口；实际IMA
+播放仍未验收。此前Ads的类型批准、本次运行时决定和随后VAST类型决定分别记录。
