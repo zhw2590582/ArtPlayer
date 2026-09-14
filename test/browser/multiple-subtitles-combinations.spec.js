@@ -84,6 +84,7 @@ for (const core of cores.filter(core => !['published-5.1.2', 'published-5.1.7'].
     })
     await page.locator('#play').click()
     await expect.poll(() => page.evaluate(() => (document.fullscreenElement || document.webkitFullscreenElement) === window.art.template.$player)).toBe(true)
+    await expect.poll(() => page.evaluate(() => window.fullscreenEvents)).toEqual([true])
     await expect(page.locator('.art-subtitle-a')).toBeVisible()
     expect(await page.evaluate(() => (document.fullscreenElement || document.webkitFullscreenElement).contains(window.art.template.$subtitle))).toBe(true)
     await page.evaluate(() => {
@@ -94,6 +95,9 @@ for (const core of cores.filter(core => !['published-5.1.2', 'published-5.1.7'].
     await expect(page.locator('.art-subtitle-a')).toHaveCount(0)
     await expect(page.locator('.art-subtitle-b')).toHaveText('Translation')
     await page.evaluate(() => window.art.switchUrl('/test/pattern.mp4?subtitles-combination'))
+    // Old core promises can settle during their native restoration seek.
+    // The immediate-seek path is retained separately in multiple-subtitles-switch.spec.js.
+    await expect.poll(() => page.evaluate(() => window.art.video.seeking)).toBe(false)
     await seek(page, 1.5)
     await expect(page.locator('.art-subtitle-b')).toHaveText('Translation')
     await page.evaluate(() => window.art.plugins.multipleSubtitles.reset())

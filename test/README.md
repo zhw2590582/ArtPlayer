@@ -221,7 +221,8 @@ Explicit single-active-cue probes record historical and candidate overlap defect
 their passing assertions do not mean simultaneous captions are compatible.
 Candidate paused Firefox offsets are corrected by CORE-SUBTITLE-OFFSET-01. Old
 Firefox hosts retain explicit defect observations; their behavior is not silently
-counted as correct. WebKit source-switch failures remain under investigation.
+counted as correct. Task09 classified the apparent WebKit source-switch caption
+loss as an old-host seek landing near zero, reproducible without any plugin.
 See `refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md` before changing
 expectations. Reports include native active cues and rendered text. The new frozen
 5.1.2 core route verifies archive integrity and member hashes before serving.
@@ -235,3 +236,11 @@ without creating an Artplayer instance to compare native timing edits, cue
 reinsertion and mode toggling. It records actual time within the required interval,
 not a fabricated millisecond-exact seek landing. These diagnostic observations
 do not claim every native engine strategy is correct.
+
+`multiple-subtitles-switch.spec.js` records source Promise settlement, native
+currentTime writes/events and actual seek landing with no plugin, candidate and
+published1.2.0. Old first-seek misses are retained as observations; every candidate
+first seek must land. The caption combination fixture separately waits for native
+source seeking to finish and for fullscreen-enter notification before testing
+subsequent commands. It retains exact caption and enter/exit order assertions;
+do not add delays or plugin retries to cover old core readiness behavior.

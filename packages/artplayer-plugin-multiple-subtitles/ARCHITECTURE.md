@@ -151,9 +151,12 @@ active cue; the matrix explicitly records lost simultaneous languages for1.1.0+
 and candidate, while1.0.0's index-merged cue displays both. This remains an open
 compatibility issue, not an approved limitation. CORE-SUBTITLE-OFFSET-01 corrects
 paused offsets in the candidate core; published Firefox hosts retain their exact
-historical defect observations. WebKit5.3.0/5.4.0 source-switch failures remain
-under task05 investigation. See its change and validation JSON for original failures
-and the independent core offset change for the corrected candidate evidence.
+historical defect observations. Task09 traced apparent WebKit5.3.0/5.4.0 caption
+loss to native seeks ending near zero: the cue itself remained intact. A no-plugin
+control reproduces the same old-host problem. Candidate core already waits for
+source seeking to complete. The ordering probe retains immediate old calls, while
+caption combinations wait for native seeking to settle before an independent seek.
+See task09's change/validation record and the core offset change for precise scope.
 The matrix is runnable with `yarn test:browser test/browser/multiple-subtitles-combinations.spec.js`;
 do not replace these failures with skips or count boundary observations as acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.

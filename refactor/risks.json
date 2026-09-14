@@ -6028,21 +6028,30 @@
     {
       "id": "MULTI-SUB-SWITCH-01",
       "title": "Intermittent WebKit core5.3.0 caption loss after selected-track source switch",
-      "confirmation": "unverified",
-      "workspaceState": "One Windows WebKit26.6 run lost Translation after switchUrl and seek1.5; diagnostic rerun passed without a production change. Root cause and reproducibility are unresolved; do not mark accepted or fixed. Expanded153 offset/lifecycle run again lost the selected caption after source switch on published5.3.0 and5.4.0 in WebKit, while candidate core passed. Root cause remains unclassified; the offset fix does not close this issue.",
-      "compatibleResolution": "Inspect native track loading and source-switch ordering with deterministic state evidence; distinguish historical host failure from fixture ordering and candidate regression.",
+      "confirmation": "reproduced",
+      "workspaceState": "Original failing snapshots kept the1..3 cue intact but video time was near0.002. Independent no-plugin and published1.2/current-plugin WebKit traces reproduce5 old-core first-seek misses, with promises sometimes settled during native seeking. Candidate already waits and honors every first seek. Actual main three-engine probes and corrected normal caption sequencing pass; old race observations remain explicit.",
+      "compatibleResolution": "Classify the old-host source/native-seek race separately from caption rendering; preserve immediate-call probes, require candidate first seeks, and wait for real native source completion before independent caption-seek assertions.",
       "closureCriteria": "Root cause classified with targeted evidence, any required fix validated, and changed candidate/old-core combination rerun without hiding the original failure.",
-      "status": "open",
+      "status": "resolved",
       "owners": [
-        "PKG-MULTI-SUB-05"
+        "PKG-MULTI-SUB-05",
+        "PKG-MULTI-SUB-09"
       ],
       "evidence": [
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
         "refactor/baselines/multiple-subtitles-combinations-validation.json",
         "test/browser/multiple-subtitles-combinations.spec.js",
         "refactor/changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md",
-        "refactor/baselines/subtitle-offset-validation.json"
-      ]
+        "refactor/baselines/subtitle-offset-validation.json",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",
+        "refactor/baselines/multiple-subtitles-switch-validation.json",
+        "test/browser/multiple-subtitles-switch.spec.js"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",
+        "refactor/baselines/multiple-subtitles-switch-validation.json"
+      ],
+      "resolutionRationale": "No-plugin controls reproduce the same miss and a settled seek restores correct old/new captions without changing plugin data. Candidate source code already provides the necessary readiness guard (BASE-LIFE-44/CORE-19 context). This resolves the suspected plugin-switch defect; it does not approve every historical source call or complete package task05."
     }
   ]
 }

@@ -2430,7 +2430,8 @@
       "dependsOn": [
         "PKG-MULTI-SUB-05",
         "ENG-07",
-        "CORE-SUBTITLE-OFFSET-01"
+        "CORE-SUBTITLE-OFFSET-01",
+        "PKG-MULTI-SUB-09"
       ],
       "status": "todo",
       "risk": "H",
@@ -5156,6 +5157,27 @@
       "evidence": [
         "changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md",
         "baselines/subtitle-offset-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-MULTI-SUB-09",
+      "phase": "5 包迁移：artplayer-plugin-multiple-subtitles",
+      "title": "定位旧核心切源寻址与字幕显示边界",
+      "scope": [
+        "artplayer-plugin-multiple-subtitles",
+        "artplayer"
+      ],
+      "dependsOn": [
+        "PKG-MULTI-SUB-08",
+        "CORE-19"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "无插件及旧新插件对照、真实事件轨迹、原切源失败归因和组合测试顺序",
+      "acceptance": "保留旧核心立即寻址观察，候选首次寻址与正常字幕组合通过；不把原生时钟失败误归为字幕丢失",
+      "evidence": [
+        "changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",
+        "baselines/multiple-subtitles-switch-validation.json"
       ]
     }
   ]

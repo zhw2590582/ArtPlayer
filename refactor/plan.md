@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 248 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 249 项，范围 22 个包及工作区/示例。
 
-状态：todo 55 / doing 17 / blocked 0 / done 176 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 55 / doing 17 / blocked 0 / done 177 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,7 +14,7 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12, CORE-SUBTITLE-OFFSET-01 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 |
@@ -28,7 +28,7 @@
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
 | artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09 |
-| artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06 |
+| artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06, PKG-MULTI-SUB-09 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
 | artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01 |
@@ -229,7 +229,8 @@
 | PKG-MULTI-SUB-07 | artplayer-plugin-multiple-subtitles<br>修复字幕内嵌时间戳序列化 | PKG-MULTI-SUB-03 | 保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异 | 旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变 | H | done |
 | PKG-MULTI-SUB-08 | artplayer-plugin-multiple-subtitles<br>修复字幕实体解码与嵌套标签包装 | PKG-MULTI-SUB-04, PKG-MULTI-SUB-07 | 使用解析器既有实体表入口修复多余分号；保护字面文本并以兄弟节点包装标签，保留CSS钩子和时间戳 | 冻结旧实现复现、实体/双重编码/标签/选择重置回归、新旧核心真实字幕显示通过；vendor原文与来源校验不变，类型/分发兼容 | M | done |
 | PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07, CORE-SUBTITLE-OFFSET-01 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-MULTI-SUB-09 | artplayer-plugin-multiple-subtitles, artplayer<br>定位旧核心切源寻址与字幕显示边界 | PKG-MULTI-SUB-08, CORE-19 | 无插件及旧新插件对照、真实事件轨迹、原切源失败归因和组合测试顺序 | 保留旧核心立即寻址观察，候选首次寻址与正常字幕组合通过；不把原生时钟失败误归为字幕丢失 | M | done |
 
 ## 5 包迁移：artplayer-plugin-jassub
 
@@ -647,3 +648,4 @@
 - PKG-AUTO-THUMB-10: [记录](changes/2026-09-14-PKG-AUTO-THUMB-10-encoding.md) [记录](baselines/auto-thumbnail-encoding-validation.json)
 - ENG-LINT-01: [记录](changes/2026-09-14-ENG-LINT-01-manifest-order.md) [记录](baselines/manifest-lint-validation.json)
 - CORE-SUBTITLE-OFFSET-01: [记录](changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md) [记录](baselines/subtitle-offset-validation.json)
+- PKG-MULTI-SUB-09: [记录](changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md) [记录](baselines/multiple-subtitles-switch-validation.json)
