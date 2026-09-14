@@ -1963,11 +1963,15 @@
         "PKG-VTT-THUMB-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "M",
       "deliverable": "鼠标和移动进度、全屏、切源、chapter 组合",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-VTT-THUMB-05-combinations.md",
+        "baselines/vtt-thumbnail-combinations.json",
+        "baselines/vtt-thumbnail-core.json"
+      ]
     },
     {
       "id": "PKG-VTT-THUMB-06",

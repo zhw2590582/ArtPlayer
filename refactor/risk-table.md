@@ -260,3 +260,4 @@
 | SITE-CODE-GROUP-01 | resolved / 已复现 | VitePress code-group random IDs make identical site inputs emit different output hashes | SITE-BUILD-01 |
 | SITE-EDITOR-FAILURE-01 | resolved / 已复现 | Desktop editor evaluates raw TypeScript and cannot settle FileReader errors or boot with denied storage | SITE-03 |
 | SITE-EDITOR-AMD-01 | resolved / 已复现 | Late Monaco language AMD initialization races with example dependency loading | SITE-03 |
+| VTT-CORE-NAME-01 | open / 已复现 | Published VTT 1.0.1 control name conflicts with the core placeholder introduced in 5.1.7 | PKG-VTT-THUMB-05, REL-08 |

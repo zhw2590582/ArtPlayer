@@ -245,3 +245,14 @@ when diagnosing a timeout: the historical failure includes a single ~10-second
 evaluate returning an already-recorded restart, not seven seconds of fast empty
 reads. These observations do not expand the timeout or waive the open timing and
 physical-device acceptance in PKG-CHAPTER-05.
+
+VTT combination tests verify actual preview screenshot pixels, Chapter coexistence,
+native/web fullscreen, source switching and cleanup across five recorded core
+inputs. The 5.1.6 server route verifies its frozen npm archive/member fingerprints.
+Historical 1.0.1 has a distinct valid 5.1.6 pair and explicit later-core name-conflict
+tests; expected historical failures are not compatibility passes. Later 1.0.x
+compiled bundles receive their documented compact-arrow fixture, while ordinary
+syntax failures remain in the historical parser tests. Mobile cases use an Android
+UA and synthetic DOM touches through the real core handlers, not trusted hardware
+input. Fullscreen mouse placement first waits for the progress control to be stable;
+the earlier hidden-preview screenshot timeout remains in the checkpoint evidence.

@@ -5873,6 +5873,25 @@
         "test/browser/site-editor.spec.js"
       ],
       "resolutionRationale": "Initial real WebKit failure retained; await JS/TS language modules before Run and example dependencies. Delayed-module regression passes on all three engines."
+    },
+    {
+      "id": "VTT-CORE-NAME-01",
+      "title": "Published VTT 1.0.1 control name conflicts with the core placeholder introduced in 5.1.7",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-VTT-THUMB-05",
+        "REL-08"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-VTT-THUMB-05-combinations.md",
+        "refactor/baselines/vtt-thumbnail-combinations.json",
+        "refactor/baselines/vtt-thumbnail-core.json",
+        "test/browser/vtt-thumbnail-combinations.spec.js"
+      ],
+      "compatibleResolution": "Preserve current vtt-thumbnail and reserved core control identities; distinguish the actual working 1.0.1/5.1.6 pair from the already failing 5.1.7/5.4.0/candidate pair. Decide the supported historical pairing/migration or a compatible accommodation during release review without hiding duplicate-control failures.",
+      "closureCriteria": "Historical working and failing browser pairs remain reproducible; any claimed accommodation preserves reserved-control ownership and duplicate-registration contracts, or an explicit reviewed historical support/migration boundary is recorded.",
+      "workspaceState": "Final three-engine suite passes nine assertions of this historical rejection, not nine successful compatibility cells. No production control behavior was changed."
     }
   ]
 }

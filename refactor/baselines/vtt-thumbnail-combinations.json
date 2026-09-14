@@ -1,0 +1,2370 @@
+{
+  "task": "PKG-VTT-THUMB-05",
+  "status": "doing",
+  "baseline": "4fa5c68be9d2d0d60d725c2a87b8d92a4dc8a85a",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "final": {
+    "file": "refactor/.cache/vtt-combinations-final/report.json",
+    "sha256": "ac0b574b23e7a408f566412ffbbcd7bc81e5aa5df5f31fd7ee686659ae162554",
+    "stats": {
+      "startTime": "2026-09-14T01:51:11.495Z",
+      "duration": 52487.413,
+      "expected": 69,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "inputs": {
+      "/candidate/artplayer.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer\\src\\index.ts"
+        },
+        "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+        "bytes": 378117
+      },
+      "/candidate/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "workspace-build",
+          "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+        },
+        "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+        "bytes": 8529
+      },
+      "/published/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "/published/artplayer-plugin-chapter.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "1.1.0",
+          "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+          "member": "package/dist/artplayer-plugin-chapter.js"
+        },
+        "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+        "bytes": 4973
+      },
+      "/published-4.5.5/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "4.5.5",
+          "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+        "bytes": 153582
+      },
+      "/published-5.1.7/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.1.7",
+          "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+        "bytes": 155940
+      },
+      "/published-4.5.9/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "4.5.9",
+          "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+        "bytes": 156408
+      },
+      "/published-5.3.0/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.3.0",
+          "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+        "bytes": 159238
+      },
+      "/published-5.1.6/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.1.6",
+          "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+        "bytes": 155714
+      },
+      "/published-5.3.1-beta.1/artplayer.js": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.3.1-beta.1",
+          "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+        "bytes": 159458
+      }
+    },
+    "cases": [
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.1-main / published-5.1.6: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / published-5.1.7: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / published: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / candidate: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.1-main / published-5.1.6: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / published-5.1.7: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / published: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / candidate: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.1-main / published-5.1.6: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / published-5.1.7: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / published: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT 1.0.1 / candidate: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+        "engine": "chromium",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+        "engine": "firefox",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      },
+      {
+        "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+        "engine": "webkit",
+        "status": "passed",
+        "errors": []
+      }
+    ],
+    "attachments": [
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-red-cell",
+        "sha256": "74b030da45d33bbd9fdf5330a9a1dbfc6a6f77ef2d790c05cbec222f51046cc3",
+        "bytes": 242
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-blue-cell",
+        "sha256": "189f4b9020a0019e7391624e37f6412184d25d95907f156fefe19d1f8d6842cc",
+        "bytes": 246
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.7",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-red-cell",
+        "sha256": "74b030da45d33bbd9fdf5330a9a1dbfc6a6f77ef2d790c05cbec222f51046cc3",
+        "bytes": 242
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-blue-cell",
+        "sha256": "189f4b9020a0019e7391624e37f6412184d25d95907f156fefe19d1f8d6842cc",
+        "bytes": 246
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.3.0",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-red-cell",
+        "sha256": "74b030da45d33bbd9fdf5330a9a1dbfc6a6f77ef2d790c05cbec222f51046cc3",
+        "bytes": 242
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-blue-cell",
+        "sha256": "189f4b9020a0019e7391624e37f6412184d25d95907f156fefe19d1f8d6842cc",
+        "bytes": 246
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-red-cell",
+        "sha256": "74b030da45d33bbd9fdf5330a9a1dbfc6a6f77ef2d790c05cbec222f51046cc3",
+        "bytes": 242
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-blue-cell",
+        "sha256": "189f4b9020a0019e7391624e37f6412184d25d95907f156fefe19d1f8d6842cc",
+        "bytes": 246
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-red-cell",
+        "sha256": "74b030da45d33bbd9fdf5330a9a1dbfc6a6f77ef2d790c05cbec222f51046cc3",
+        "bytes": 242
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "name": "vtt-blue-cell",
+        "sha256": "189f4b9020a0019e7391624e37f6412184d25d95907f156fefe19d1f8d6842cc",
+        "bytes": 246
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.1.0-main",
+          "sha256": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.1-main / published-5.1.6: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.0.2-main",
+          "sha256": "d163ee19b42ea0236a94f3eccb402292c5ba9987db03accf967027cc163192b1",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.0.3-main",
+          "sha256": "2c5a97f61cc2c94c7684e7c0fc0bdf3cfad8e641a73cec8e534a1854754d8066",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / published-5.1.7: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "chromium",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "published-5.1.7",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / published: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "chromium",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "published",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / candidate: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "chromium",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "candidate",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-red-cell",
+        "sha256": "0df5f779b9341de9e398c9ae92e43cf2d6205d5b1a59e82525f78003a384be83",
+        "bytes": 274
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-blue-cell",
+        "sha256": "1911bb3ec606ac29c159d60f3a646892789633f42183a5ccf9617144e4d90c82",
+        "bytes": 313
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.7",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-red-cell",
+        "sha256": "0df5f779b9341de9e398c9ae92e43cf2d6205d5b1a59e82525f78003a384be83",
+        "bytes": 274
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-blue-cell",
+        "sha256": "1911bb3ec606ac29c159d60f3a646892789633f42183a5ccf9617144e4d90c82",
+        "bytes": 313
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.3.0",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-red-cell",
+        "sha256": "0df5f779b9341de9e398c9ae92e43cf2d6205d5b1a59e82525f78003a384be83",
+        "bytes": 274
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-blue-cell",
+        "sha256": "1911bb3ec606ac29c159d60f3a646892789633f42183a5ccf9617144e4d90c82",
+        "bytes": 313
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-red-cell",
+        "sha256": "0df5f779b9341de9e398c9ae92e43cf2d6205d5b1a59e82525f78003a384be83",
+        "bytes": 274
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-blue-cell",
+        "sha256": "1911bb3ec606ac29c159d60f3a646892789633f42183a5ccf9617144e4d90c82",
+        "bytes": 313
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-red-cell",
+        "sha256": "0df5f779b9341de9e398c9ae92e43cf2d6205d5b1a59e82525f78003a384be83",
+        "bytes": 274
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "firefox",
+        "name": "vtt-blue-cell",
+        "sha256": "1911bb3ec606ac29c159d60f3a646892789633f42183a5ccf9617144e4d90c82",
+        "bytes": 313
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.1.0-main",
+          "sha256": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.1-main / published-5.1.6: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.0.2-main",
+          "sha256": "d163ee19b42ea0236a94f3eccb402292c5ba9987db03accf967027cc163192b1",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.0.3-main",
+          "sha256": "2c5a97f61cc2c94c7684e7c0fc0bdf3cfad8e641a73cec8e534a1854754d8066",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / published-5.1.7: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "firefox",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "published-5.1.7",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / published: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "firefox",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "published",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / candidate: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "firefox",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "candidate",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-red-cell",
+        "sha256": "94f3278184b434f1cb40ae6863beebaae565f41d92dff677032d9e2c895a9ff3",
+        "bytes": 890
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-blue-cell",
+        "sha256": "1030f7362464dcd3496f9585dfd0e876630c7cc854e05cf89a96bdd5bf6904ed",
+        "bytes": 911
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.7",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-red-cell",
+        "sha256": "94f3278184b434f1cb40ae6863beebaae565f41d92dff677032d9e2c895a9ff3",
+        "bytes": 890
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-blue-cell",
+        "sha256": "1030f7362464dcd3496f9585dfd0e876630c7cc854e05cf89a96bdd5bf6904ed",
+        "bytes": 911
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.3.0",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-red-cell",
+        "sha256": "94f3278184b434f1cb40ae6863beebaae565f41d92dff677032d9e2c895a9ff3",
+        "bytes": 890
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-blue-cell",
+        "sha256": "1030f7362464dcd3496f9585dfd0e876630c7cc854e05cf89a96bdd5bf6904ed",
+        "bytes": 911
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-red-cell",
+        "sha256": "94f3278184b434f1cb40ae6863beebaae565f41d92dff677032d9e2c895a9ff3",
+        "bytes": 890
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-blue-cell",
+        "sha256": "1030f7362464dcd3496f9585dfd0e876630c7cc854e05cf89a96bdd5bf6904ed",
+        "bytes": 911
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-red-cell",
+        "sha256": "94f3278184b434f1cb40ae6863beebaae565f41d92dff677032d9e2c895a9ff3",
+        "bytes": 890
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "webkit",
+        "name": "vtt-blue-cell",
+        "sha256": "1030f7362464dcd3496f9585dfd0e876630c7cc854e05cf89a96bdd5bf6904ed",
+        "bytes": 911
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.1.0-main",
+          "sha256": "2d8e22cbd191bdac5a6c711b641590c2f8a90ba1aae185dd0e02a00baf000f8d",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.1-main / published-5.1.6: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.0.2-main",
+          "sha256": "d163ee19b42ea0236a94f3eccb402292c5ba9987db03accf967027cc163192b1",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "published-1.0.3-main",
+          "sha256": "2c5a97f61cc2c94c7684e7c0fc0bdf3cfad8e641a73cec8e534a1854754d8066",
+          "cueFormat": "historical compact arrow; ordinary-space failures retained separately",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / published-5.1.7: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "webkit",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "published-5.1.7",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / published: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "webkit",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "published",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT 1.0.1 / candidate: pre-existing reserved thumbnails name conflict is retained as historical evidence",
+        "engine": "webkit",
+        "name": "vtt-historical-conflict",
+        "data": {
+          "core": "candidate",
+          "plugin": "published-1.0.1-main",
+          "sha256": "d247f01b72f6bc51e3107006296ae6d198f4478a6d3dd350bc8741221a1ea5ea",
+          "state": {
+            "error": "Can't add an existing [thumbnails] to the [control]",
+            "sameReservedControl": true
+          },
+          "scope": "Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.1.6",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.7",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.1.7",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.3.0",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.3.0",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "chromium",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "candidate",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.1.6",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.7",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.1.7",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.3.0",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.3.0",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "firefox",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "candidate",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.6",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.6: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.1.6",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.1.7",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.1.7: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.1.7",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published-5.3.0",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published-5.3.0: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published-5.3.0",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "published",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / published: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "published",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-combination-inputs",
+        "data": {
+          "core": "candidate",
+          "implementation": "candidate",
+          "sha256": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "cueFormat": "standard spaced arrow",
+          "mobile": "desktop unless test declares an emulated user agent; no physical-device inference"
+        }
+      },
+      {
+        "title": "VTT candidate / candidate: emulated mobile drag routes through core progress and releases hiding timer",
+        "engine": "webkit",
+        "name": "vtt-mobile-event-integration",
+        "data": {
+          "core": "candidate",
+          "sample": {
+            "mobile": true,
+            "events": [
+              {
+                "type": "played",
+                "percentage": 0.25,
+                "nativeType": "touchstart"
+              },
+              {
+                "type": "played",
+                "percentage": 0.734375,
+                "nativeType": "touchmove"
+              }
+            ],
+            "position": "-80px 0px",
+            "display": "flex",
+            "time": 5.875,
+            "duration": 8
+          },
+          "scope": "Android user agent and synthetic DOM touch payloads through actual core handlers; native media seek and real hide timer. Not trusted OS touch, real Android, or iOS Safari acceptance."
+        }
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "chromium",
+        "name": "selected-sprite",
+        "sha256": "31e53420af42118d4824811656010e9154f814c35afe6fa4afea145572e76cf1",
+        "bytes": 971
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "chromium",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "pixels": [
+            [
+              255,
+              0,
+              0,
+              255
+            ],
+            [
+              0,
+              0,
+              255,
+              255
+            ]
+          ]
+        }
+      },
+      {
+        "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "chromium",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "recoveredAfter": {
+            "name": "TypeError",
+            "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+          }
+        }
+      },
+      {
+        "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+        "engine": "chromium",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "nativeAbort": true
+        }
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "chromium",
+        "name": "selected-sprite",
+        "sha256": "31e53420af42118d4824811656010e9154f814c35afe6fa4afea145572e76cf1",
+        "bytes": 971
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "chromium",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "pixels": [
+            [
+              255,
+              0,
+              0,
+              255
+            ],
+            [
+              0,
+              0,
+              255,
+              255
+            ]
+          ]
+        }
+      },
+      {
+        "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "chromium",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "recoveredAfter": {
+            "name": "TypeError",
+            "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+          }
+        }
+      },
+      {
+        "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+        "engine": "chromium",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "nativeAbort": true
+        }
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "firefox",
+        "name": "selected-sprite",
+        "sha256": "371f6856cc1c6b8b0dfe9adfc4ef32d5d6a7fcb7733a2714640a46428e4859e4",
+        "bytes": 1030
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "firefox",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "pixels": [
+            [
+              255,
+              0,
+              0,
+              255
+            ],
+            [
+              0,
+              0,
+              255,
+              255
+            ]
+          ]
+        }
+      },
+      {
+        "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "firefox",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "recoveredAfter": {
+            "name": "TypeError",
+            "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+          }
+        }
+      },
+      {
+        "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+        "engine": "firefox",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "nativeAbort": true
+        }
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "firefox",
+        "name": "selected-sprite",
+        "sha256": "371f6856cc1c6b8b0dfe9adfc4ef32d5d6a7fcb7733a2714640a46428e4859e4",
+        "bytes": 1030
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "firefox",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "pixels": [
+            [
+              255,
+              0,
+              0,
+              255
+            ],
+            [
+              0,
+              0,
+              255,
+              255
+            ]
+          ]
+        }
+      },
+      {
+        "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "firefox",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "recoveredAfter": {
+            "name": "TypeError",
+            "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+          }
+        }
+      },
+      {
+        "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+        "engine": "firefox",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "nativeAbort": true
+        }
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "webkit",
+        "name": "selected-sprite",
+        "sha256": "1813f0288c493ea00e5cbdf5a869876f7fd281f6b300c21756bda468578b2fe1",
+        "bytes": 2651
+      },
+      {
+        "title": "VTT native published core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "webkit",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "pixels": [
+            [
+              255,
+              0,
+              0,
+              255
+            ],
+            [
+              0,
+              0,
+              255,
+              255
+            ]
+          ]
+        }
+      },
+      {
+        "title": "VTT native published core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "webkit",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "recoveredAfter": {
+            "name": "TypeError",
+            "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+          }
+        }
+      },
+      {
+        "title": "VTT native published core: destroy aborts a pending native fetch and settles registration",
+        "engine": "webkit",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "published",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "nativeAbort": true
+        }
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "webkit",
+        "name": "selected-sprite",
+        "sha256": "1813f0288c493ea00e5cbdf5a869876f7fd281f6b300c21756bda468578b2fe1",
+        "bytes": 2651
+      },
+      {
+        "title": "VTT native candidate core: real progress hover selects sprite regions and destroy removes owned UI",
+        "engine": "webkit",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "pixels": [
+            [
+              255,
+              0,
+              0,
+              255
+            ],
+            [
+              0,
+              0,
+              255,
+              255
+            ]
+          ]
+        }
+      },
+      {
+        "title": "VTT native candidate core: malformed sprite rejects before mounting and a corrected registration recovers",
+        "engine": "webkit",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "recoveredAfter": {
+            "name": "TypeError",
+            "message": "Invalid VTT thumbnail at line 4: rectangle coordinates must be finite non-negative decimals"
+          }
+        }
+      },
+      {
+        "title": "VTT native candidate core: destroy aborts a pending native fetch and settles registration",
+        "engine": "webkit",
+        "name": "vtt-candidate",
+        "data": {
+          "core": "candidate",
+          "implementation": "04a472a60d199ea580490f5223d76de26bf25ca48134a4578446852d79dd9ac5",
+          "nativeAbort": true
+        }
+      }
+    ]
+  },
+  "initialFailure": {
+    "file": "refactor/.cache/vtt-combinations-initial/report.json",
+    "sha256": "0a15f0c933f5da9633eeb87e172db3b5262d9262954423ea9709817ba0316d8b",
+    "stats": {
+      "startTime": "2026-09-14T01:42:14.517Z",
+      "duration": 43140.433000000005,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 18,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'composedPath')\n    at R (http://127.0.0.1:8084/published/artplayer.js:7:7893)\n    at C (http://127.0.0.1:8084/published/artplayer.js:7:6740)\n    at http://127.0.0.1:8084/published/artplayer.js:7:19093\n    at Kt.emit (http://127.0.0.1:8084/published/artplayer.js:7:130191)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at R (http://127.0.0.1:8084/published/artplayer.js:7:7893)\n    at C (http://127.0.0.1:8084/published/artplayer.js:7:6740)\n    at http://127.0.0.1:8084/published/artplayer.js:7:19093\n    at Kt.emit (http://127.0.0.1:8084/published/artplayer.js:7:130191)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:61:18"
+        ]
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'composedPath')\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:61:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'composedPath')\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at async <anonymous>:337:30\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at async <anonymous>:337:30\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.1-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: ArtPlayerError: Can't add an existing [thumbnails] to the [control]\n    at errorHandle (http://127.0.0.1:8084/candidate/artplayer.js:729:13)\n    at Control.add (http://127.0.0.1:8084/candidate/artplayer.js:1349:7)\n    at Control.add (http://127.0.0.1:8084/candidate/artplayer.js:3139:13)\n    at Artplayer.<anonymous> (<anonymous>:8:1533)\n    at async eval (eval at evaluate (:311:30), <anonymous>:3:5)\n    at async <anonymous>:337:30\n    at errorHandle (http://127.0.0.1:8084/candidate/artplayer.js:729:13)\n    at Control.add (http://127.0.0.1:8084/candidate/artplayer.js:1349:7)\n    at Control.add (http://127.0.0.1:8084/candidate/artplayer.js:3139:13)\n    at Artplayer.<anonymous> (<anonymous>:8:1533)\n    at async eval (eval at evaluate (:311:30), <anonymous>:3:5)\n    at async <anonymous>:337:30\n    at install (D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:27:14)\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:91:22"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'composedPath')\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at async <anonymous>:337:30\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at async <anonymous>:337:30\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "chromium",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'composedPath')\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at async <anonymous>:337:30\n    at getComposedPath (http://127.0.0.1:8084/candidate/artplayer.js:477:15)\n    at includeFromEvent (http://127.0.0.1:8084/candidate/artplayer.js:490:12)\n    at setBar (http://127.0.0.1:8084/candidate/artplayer.js:2426:13)\n    at guarded (http://127.0.0.1:8084/candidate/artplayer.js:461:16)\n    at Artplayer.emit (http://127.0.0.1:8084/candidate/artplayer.js:9317:18)\n    at eval (eval at evaluate (:311:30), <anonymous>:3:20)\n    at async <anonymous>:337:30\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: can't access property \"composedPath\", t is undefined\nR@http://127.0.0.1:8084/published/artplayer.js:7:7891\nC@http://127.0.0.1:8084/published/artplayer.js:7:6740\nmt/</mounted/<@http://127.0.0.1:8084/published/artplayer.js:7:19093\nemit@http://127.0.0.1:8084/published/artplayer.js:7:130191\n@debugger eval code line 311 > eval:3:20\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at R@http://127.0.0.1:8084/published/artplayer.js:7:7891\n    at C@http://127.0.0.1:8084/published/artplayer.js:7:6740\n    at mt/</mounted/<@http://127.0.0.1:8084/published/artplayer.js:7:19093\n    at emit@http://127.0.0.1:8084/published/artplayer.js:7:130191\n    at @debugger eval code line 311 > eval:3:20\n    at evaluate@debugger eval code:313:16\n    at @debugger eval code:1:44\n    at @debugger eval code:1:62\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:61:18"
+        ]
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, web fullscreen and source switch",
+        "engine": "firefox",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: can't access property \"composedPath\", event is undefined\ngetComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\nincludeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\nsetBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\nguarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\nemit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n@debugger eval code line 311 > eval:3:20\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at getComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\n    at includeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\n    at setBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\n    at guarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\n    at emit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n    at @debugger eval code line 311 > eval:3:20\n    at evaluate@debugger eval code:313:16\n    at @debugger eval code:1:44\n    at @debugger eval code:1:62\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:61:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: can't access property \"composedPath\", event is undefined\ngetComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\nincludeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\nsetBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\nguarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\nemit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n@debugger eval code line 311 > eval:3:20\nasync*evaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at getComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\n    at includeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\n    at setBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\n    at guarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\n    at emit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n    at @debugger eval code line 311 > eval:3:20\n    at async*evaluate@debugger eval code:313:16\n    at @debugger eval code:1:44\n    at @debugger eval code:1:62\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.1-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: Can't add an existing [thumbnails] to the [control]\nerrorHandle@http://127.0.0.1:8084/candidate/artplayer.js:729:13\nadd@http://127.0.0.1:8084/candidate/artplayer.js:1349:18\nadd@http://127.0.0.1:8084/candidate/artplayer.js:3139:13\n.YTqB2</l/<@http://127.0.0.1:8084/test/player.html?core=candidate line 7 > injectedScript:8:1533\nasync*add@http://127.0.0.1:8084/candidate/artplayer.js:7213:29\n@debugger eval code line 311 > eval:3:30\nevaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at errorHandle@http://127.0.0.1:8084/candidate/artplayer.js:729:13\n    at add@http://127.0.0.1:8084/candidate/artplayer.js:1349:18\n    at add@http://127.0.0.1:8084/candidate/artplayer.js:3139:13\n    at .YTqB2</l/<@http://127.0.0.1:8084/test/player.html?core=candidate line 7 > injectedScript:8:1533\n    at async*add@http://127.0.0.1:8084/candidate/artplayer.js:7213:29\n    at @debugger eval code line 311 > eval:3:30\n    at evaluate@debugger eval code:313:16\n    at @debugger eval code:1:44\n    at @debugger eval code:1:62\n    at install (D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:27:14)\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:91:22"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: can't access property \"composedPath\", event is undefined\ngetComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\nincludeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\nsetBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\nguarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\nemit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n@debugger eval code line 311 > eval:3:20\nasync*evaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at getComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\n    at includeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\n    at setBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\n    at guarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\n    at emit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n    at @debugger eval code line 311 > eval:3:20\n    at async*evaluate@debugger eval code:313:16\n    at @debugger eval code:1:44\n    at @debugger eval code:1:62\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "firefox",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: can't access property \"composedPath\", event is undefined\ngetComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\nincludeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\nsetBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\nguarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\nemit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n@debugger eval code line 311 > eval:3:20\nasync*evaluate@debugger eval code:313:16\n@debugger eval code:1:44\n@debugger eval code:1:62\n\n    at getComposedPath@http://127.0.0.1:8084/candidate/artplayer.js:477:9\n    at includeFromEvent@http://127.0.0.1:8084/candidate/artplayer.js:490:12\n    at setBar@http://127.0.0.1:8084/candidate/artplayer.js:2426:29\n    at guarded@http://127.0.0.1:8084/candidate/artplayer.js:461:16\n    at emit@http://127.0.0.1:8084/candidate/artplayer.js:9317:18\n    at @debugger eval code line 311 > eval:3:20\n    at async*evaluate@debugger eval code:313:16\n    at @debugger eval code:1:44\n    at @debugger eval code:1:62\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT candidate / published: actual sprite pixels, chapter, web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: undefined is not an object (evaluating 't.composedPath')\n\n  59 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  60 |       await page.click('#pause')\n> 61 |       await page.evaluate(() => {\n     |                  ^\n  62 |         window.art.fullscreenWeb = true\n  63 |         window.art.emit('setBar', 'hover', 0.5)\n  64 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:61:18"
+        ]
+      },
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, web fullscreen and source switch",
+        "engine": "webkit",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: undefined is not an object (evaluating 'event.composedPath')\n\n  59 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  60 |       await page.click('#pause')\n> 61 |       await page.evaluate(() => {\n     |                  ^\n  62 |         window.art.fullscreenWeb = true\n  63 |         window.art.emit('setBar', 'hover', 0.5)\n  64 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:61:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.1.0-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: undefined is not an object (evaluating 'event.composedPath')\n\n   98 |       expect(centerPixel(await preview.screenshot())).toEqual([0, 0, 255, 255])\n   99 |       expect(await page.evaluate(name => window.art.controls[name] === window.vttControl, name)).toBe(true)\n> 100 |       await page.evaluate(async () => {\n      |                  ^\n  101 |         await window.art.switchUrl('/test/pattern.mp4?old-plugin')\n  102 |         window.art.emit('setBar', 'hover', 0.25)\n  103 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.1-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: ArtPlayerError: Can't add an existing [thumbnails] to the [control]\n\n  25 |   await page.goto(`/test/player.html?core=${core}`)\n  26 |   await page.addScriptTag({ content: `(() => { const module = { exports: {} }; const exports = module.exports; ${implementation.code}; window.vttFactory = module.exports.default || module.exports; })();` })\n> 27 |   await page.evaluate(async () => {\n     |              ^\n  28 |     window.createPlayer('/test/pattern.mp4', true)\n  29 |     await window.art.plugins.add(window.vttFactory({ vtt: '/test/vtt-combination/cues.vtt' }))\n  30 |     window.vttControl = window.art.controls['vtt-thumbnail'] || window.art.controls.thumbnails\n    at install (D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:27:14)\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:91:22"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.2-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: undefined is not an object (evaluating 'event.composedPath')\n\n   98 |       expect(centerPixel(await preview.screenshot())).toEqual([0, 0, 255, 255])\n   99 |       expect(await page.evaluate(name => window.art.controls[name] === window.vttControl, name)).toBe(true)\n> 100 |       await page.evaluate(async () => {\n      |                  ^\n  101 |         await window.art.switchUrl('/test/pattern.mp4?old-plugin')\n  102 |         window.art.emit('setBar', 'hover', 0.25)\n  103 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      },
+      {
+        "title": "VTT published-1.0.3-main / candidate core: legal old calls preserve preview and control identity",
+        "engine": "webkit",
+        "status": "failed",
+        "errors": [
+          "Error: page.evaluate: TypeError: undefined is not an object (evaluating 'event.composedPath')\n\n   98 |       expect(centerPixel(await preview.screenshot())).toEqual([0, 0, 255, 255])\n   99 |       expect(await page.evaluate(name => window.art.controls[name] === window.vttControl, name)).toBe(true)\n> 100 |       await page.evaluate(async () => {\n      |                  ^\n  101 |         await window.art.switchUrl('/test/pattern.mp4?old-plugin')\n  102 |         window.art.emit('setBar', 'hover', 0.25)\n  103 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:100:18"
+        ]
+      }
+    ],
+    "disposition": "15 test calls omitted the newer hover handler event argument; replaced with real pointer movement. Three VTT 1.0.1 reserved-control failures now have separate historical-pair assertions and remain an open compatibility boundary."
+  },
+  "fullscreenFailure": {
+    "file": "refactor/.cache/vtt-combinations-fullscreen-initial/report.json",
+    "sha256": "3b6f94eac15d0d7a4107387773e233a484f093fa1fb8d85a6971f060094a49b2",
+    "stats": {
+      "startTime": "2026-09-14T01:48:33.902Z",
+      "duration": 48057.633,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "VTT candidate / candidate: actual sprite pixels, chapter, native/web fullscreen and source switch",
+        "engine": "chromium",
+        "status": "timedOut",
+        "errors": [
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+          "Error: page.evaluate: Target page, context or browser has been closed\n\n  103 |     }\n  104 |     finally {\n> 105 |       await page.evaluate(() => {\n      |                  ^\n  106 |         if (!window.art.isDestroy)\n  107 |           window.art.destroy()\n  108 |       })\n    at D:\\github\\ArtPlayer\\test\\browser\\vtt-thumbnail-combinations.spec.js:105:18"
+        ]
+      }
+    ],
+    "disposition": "Chromium candidate native fullscreen entered, but screenshot began on a hidden preview and timed out. Stable/actionable progress hover and explicit visible/background assertions added. Final pass is not a production fix claim."
+  },
+  "logs": {
+    "test-vtt-thumbnail": {
+      "file": "refactor/.cache/vtt-combinations-test-vtt-thumbnail.log",
+      "sha256": "b88962cddfba564b766f53419fbfb75e2e6bc33a9f83d0c2aa817e71d6e18ac3",
+      "exitCode": 0,
+      "pass": 252
+    },
+    "test-ci": {
+      "file": "refactor/.cache/vtt-combinations-test-ci.log",
+      "sha256": "39043cfb0f7bf8f8aa1f0e9945608c182f95c6d55af78cab4a4bbc48267688b1",
+      "exitCode": 0,
+      "pass": 50
+    },
+    "lint": {
+      "file": "refactor/.cache/vtt-combinations-lint.log",
+      "sha256": "1c10938a596c4460ac4cc741c953128b2251b60837ed7c8c0963746fab5a1fd6",
+      "exitCode": 0
+    }
+  },
+  "protectedPathsUnchanged": [
+    "packages/artplayer/src",
+    "packages/artplayer/public",
+    "packages/artplayer-plugin-vtt-thumbnail/src",
+    "packages/artplayer-plugin-vtt-thumbnail/types",
+    "packages/artplayer-plugin-vtt-thumbnail/dist",
+    "package.json",
+    "yarn.lock"
+  ],
+  "changes": {
+    "newDependencies": 0,
+    "newCoreFixture": {
+      "file": "refactor/baselines/vtt-thumbnail-core.json",
+      "sha256": "8a6380a5c20069fe84369bcbf44ffe60ff76c3b09c9a670a4e51951002d350fc",
+      "version": "5.1.6",
+      "members": 197
+    },
+    "test": {
+      "file": "test/browser/vtt-thumbnail-combinations.spec.js",
+      "sha256": "c6775432b057dc099da7e84e1c0cede77faeef12e0ee518d8ea0a5a10717a6dc"
+    },
+    "server": {
+      "file": "test/browser/server.mjs",
+      "sha256": "cefab86a57900a32999cb26e65bf13f6aa354fe0d46a92618174869311dd67c8"
+    }
+  },
+  "counts": {
+    "finalPassingAssertions": 69,
+    "expectedHistoricalIncompatibilityCases": 9,
+    "successfulBehaviorCases": 60,
+    "physicalMobileProfiles": 0
+  },
+  "limitations": [
+    "Synthetic DOM touch payloads under an Android UA are not trusted OS input or physical Android/iOS",
+    "No installed tarball/legacy/ESM/actual editor acceptance in this checkpoint",
+    "Core 5.3.0 is an adjacent stable control, not npm 5.3.1",
+    "VTT 1.0.1 reserved control conflict remains open; do not call its failure assertions compatible",
+    "Final core candidate contents must be revalidated before publication",
+    "One initial fullscreen screenshot timeout is retained; final pass does not identify every cause"
+  ]
+}

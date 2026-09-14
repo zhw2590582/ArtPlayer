@@ -57,6 +57,13 @@ JavaScript default access, the direct factory, and legacy distribution entrypoin
 See [ARCHITECTURE.md](ARCHITECTURE.md) for module ownership, testing commands and remaining
 compatibility validation.
 
+The old 1.0.1 JavaScript bundle registers a control named `thumbnails`. It works
+with the tested core 5.1.6, but conflicts with the built-in control reserved by
+core 5.1.7 and later tested cores (5.4.0 and the refactor candidate). The current
+plugin uses `vtt-thumbnail`; retain that name when integrating custom controls.
+This documented historical combination failure predates the refactor. Native
+desktop tests and emulated touch checks do not certify physical mobile devices.
+
 ## License
 
 MIT © Harvey Zhao

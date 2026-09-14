@@ -110,8 +110,13 @@ plugin. Empty or comment-only input remains a valid empty preview.
 
 The exported callable has a writable self `.default` alias, restoring the usable 1.0.x
 CommonJS default access while retaining direct calls. It does not add a name property to the
-registration Promise. Earlier `thumbnails` control names are separately frozen and remain
-combination/distribution work for tasks 05-06. The approved declaration migration does not
+registration Promise. The old 1.0.1 plugin uses `thumbnails`, which works with the
+recorded 5.1.6 core. Core 5.1.7 already reserves that name, and the actual 1.0.1
+bundle rejects registration on 5.1.7, 5.4.0 and the candidate core. These reproduced
+historical failures are not successful compatibility cells. Later plugins and
+this candidate use `vtt-thumbnail`; do not silently replace the core's reserved
+control or introduce an alias over it. This pairing remains part of task05/release
+review. The approved declaration migration does not
 complete the remaining package or device acceptance.
 
 ## Verification and future changes
@@ -123,14 +128,27 @@ yarn test:vtt-thumbnail
 yarn test:vtt-thumbnail-types-package
 yarn build:ts artplayer-plugin-vtt-thumbnail
 yarn test:browser test/browser/vtt-thumbnail-lifecycle.spec.js
+yarn test:browser test/browser/vtt-thumbnail-combinations.spec.js
 yarn build artplayer-plugin-vtt-thumbnail
 ```
 
 The unit helper can load actual main/legacy files with ARTPLAYER_VTT_THUMBNAIL_ARTIFACT or
 the frozen former implementation with ARTPLAYER_VTT_THUMBNAIL_BASELINE=1. Historical tests
 are distinct from candidate expectations. Browser tests use real published/candidate cores,
-native fetch/abort, mouse hover, sprite decoding and cleanup. Their scope is not full old
-core/device coverage, installed tarballs, mobile Safari or the online editor.
+native fetch/abort, mouse hover, sprite decoding and cleanup. The task05 combination
+checkpoint adds actual DOM screenshot pixels, Chapter coexistence, web/native
+fullscreen and source switch against core 5.1.6, 5.1.7, 5.3.0, 5.4.0 and candidate.
+The 5.3.0 archive is an adjacent stable comparison, not the unpublished 5.3.1
+source-associated version. Historical 1.0.2/1.0.3/1.1.0 main bundles run with
+candidate core; 1.0.1 runs with 5.1.6 and retains its later-core failure tests.
+Compact-arrow input for 1.0.x compiled artifacts is labeled explicitly; ordinary
+arrow parser failures remain in the existing historical contract tests.
+
+Mobile integration uses an Android user agent and synthetic DOM touch payloads
+through actual core handlers with real media seeking and the 500ms hide timer.
+It is not trusted OS input, physical Android or Safari/iOS verification. Task05
+remains open for required device evidence and historical-pair disposition;
+installed main/legacy/ESM consumers and the actual local editor remain task06/EX-03.
 
 Modify parsing in parseVtt, requests in request, layout/timers in preview, and ownership in
 lifetime. Preserve the normal/failure lifecycle tests alongside any parser improvements.
