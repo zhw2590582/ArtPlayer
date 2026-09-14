@@ -55,6 +55,13 @@ is in `test/react/`; unique reports and frozen consumer locks are retained under
 the recorded old wrapper's callback-exception leak. See the example README for
 the compatibility contract and the capabilities covered by other package tasks.
 
+`test/auto-thumbnail-encoding.test.js` verifies a separate30-second JPEG deadline,
+withheld and duplicate callbacks, replacement/destruction, synchronous completion
+and timer cleanup failures. It runs in `test:auto-thumbnail` and `test:unit`.
+Native lifecycle tests deliberately hold an actual JPEG callback and invoke the
+captured deadline; that proves cleanup with native resources, not a spontaneous
+encoder hang. First-frame pixel and device limitations remain separate gates.
+
 `yarn test:auto-thumbnail-types` checks the preserved npm 1.1.0 declaration,
 accurate `/runtime` Promise types, exact rejected consumer lines, and generated
 editor globals. It also runs in `test:auto-thumbnail` and `test:baseline`.

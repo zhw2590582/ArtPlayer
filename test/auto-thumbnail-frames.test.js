@@ -71,7 +71,7 @@ for (const order of ['seek-first', 'frame-first']) {
       env.present()
     else env.seeked()
     assert.equal(env.blobs.length, 1)
-    assert.equal(env.timers.size, 0)
+    assert.equal(env.timers.size, 1, 'Encoding now owns a deadline after the frame wait ends')
     seeked()
     frame()
     assert.equal(env.blobs.length, 1)

@@ -5940,6 +5940,28 @@
         "test/browser/library-development.spec.js"
       ],
       "resolutionRationale": "Exact port binding rejects with EADDRINUSE; CLI propagates exit1. Explicit close/done owns HTTP sockets, file pipelines, source/docs watchers, SSE heartbeat and active builds. Eight node tests and six Windows real-browser cases cover the stated defect and lifecycle scope without stopping unrelated services."
+    },
+    {
+      "id": "AUTO-THUMB-ENCODE-TIMEOUT-01",
+      "title": "Pending JPEG encoding has no bounded lifetime after frame readiness finishes",
+      "confirmation": "source-observed",
+      "status": "resolved",
+      "owners": [
+        "PKG-AUTO-THUMB-10"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-AUTO-THUMB-10-encoding.md",
+        "refactor/baselines/auto-thumbnail-encoding-validation.json"
+      ],
+      "compatibleResolution": "Preserve normal progressive JPEG publication and prior previews; add an explicit30-second encoding deadline with cancellation and stale callback protection.",
+      "closureCriteria": "Withheld callback ownership, timeout/late delivery, completion/restart/destroy and registration/cleanup reentry have regression coverage; native JPEG/resource and built artifact checks pass without waiving pixel/device gates.",
+      "workspaceState": "Source inspection and six controlled old failures show no encoding deadline. Dedicated encoder now owns one30-second timer, clears it before publication and releases the job on expiry. This is a bounded-resource policy, not proof of a spontaneous native encoder hang. Initial metadata/network and aggregate budgets remain separate.",
+      "resolutionEvidence": [
+        "refactor/baselines/auto-thumbnail-encoding-validation.json",
+        "test/auto-thumbnail-encoding.test.js",
+        "test/browser/auto-thumbnail-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Nine controlled cases and real native JPEG tests cover held/late callbacks and decoder/canvas disposal. Actual production UMD passes11 Node and9 browser checks; previous preview survives timeout. Very slow encoding can now be discarded explicitly; public options, registration and frame-time formula remain intact."
     }
   ]
 }

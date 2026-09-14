@@ -1819,7 +1819,8 @@
         "ENG-06",
         "CORE-07",
         "PKG-AUTO-THUMB-08",
-        "PKG-AUTO-THUMB-09"
+        "PKG-AUTO-THUMB-09",
+        "PKG-AUTO-THUMB-10"
       ],
       "status": "todo",
       "risk": "H",
@@ -5069,6 +5070,26 @@
       "evidence": [
         "changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md",
         "baselines/auto-thumbnail-alias-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-10",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "为渐进 JPEG 编码建立取消时限与独立资源归属",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "PKG-AUTO-THUMB-07"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "拆分私有 canvas 编码模块，一次一帧的30秒编码时限，完成/失败/切源/销毁取消；迟到和重复回调无副作用",
+      "acceptance": "受控回调未返回的旧红新绿、正常JPEG和前一预览保持、同步重入/清理失败有回归；真实三浏览器编码/取消通过，公开时间公式与入口不变，首帧风险独立保留",
+      "evidence": [
+        "changes/2026-09-14-PKG-AUTO-THUMB-10-encoding.md",
+        "baselines/auto-thumbnail-encoding-validation.json"
       ]
     },
     {

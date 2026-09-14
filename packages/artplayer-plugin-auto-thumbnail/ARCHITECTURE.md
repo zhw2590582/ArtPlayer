@@ -31,6 +31,14 @@ for video processing.
   after each dimension write; synchronous destruction cannot reallocate the sheet.
   Previously encoded JPEG Blobs/URLs retain their independent bytes. This controls
   canvas dimensions, not the browser's precise GPU/encoder reclamation time.
+- `src/encoding.ts` owns one pending JPEG operation, its30-second deadline and
+  once-only completion. It clears that deadline before publishing or starting the
+  next sample, and ignores callbacks from an earlier operation. One job cleanup
+  handles all encodes rather than adding a cleanup closure for every frame.
+  Timeout disposes the job and retains the last usable preview; the browser's
+  toBlob work itself cannot be canceled. Late Blob delivery cannot publish after
+  timeout, replacement or destruction. Synchronous callbacks and timer-registration
+  reentry also keep timer ownership intact.
 - `src/video.ts` creates and owns the hidden media element. It is attached to the
   document root because detached media loses drawable pixels on Windows WebKit.
   `visibility:hidden` preserves its rendered box; `display:none` and a 1px box do
@@ -87,7 +95,14 @@ the current time can match even when the drawable first frame is stale.
 Each pending data/seek/presentation wait has a 30-second deadline. Expiry cancels
 its callback and decoder, reports through the existing warning path, and retains
 the last usable preview. This is a per-sample readiness deadline, not a complete
-network, encoder, background-tab or aggregate resource policy.
+network, background-tab or aggregate resource policy. PKG-AUTO-THUMB-10 adds a
+separate30-second encoding deadline starting just before toBlob. This is an
+intentional bound on formerly unbounded pending encoding; it does not shorten the
+frame wait or change the public frame-time formula. Very slow encodes can now
+warn and retain the last preview instead of retaining the decoder indefinitely.
+Initial metadata/network acquisition remains governed by media errors and session
+cancellation, not this encoding deadline. Neither timeout guarantees browser-level
+GPU/encoder reclamation or exact background-tab wall-clock scheduling.
 
 The previous empty first encode is removed. Encoding is serial, duplicate native
 callbacks are consumed once, and source replacement/destruction invalidates old
@@ -113,6 +128,13 @@ yarn test:browser test/browser/auto-thumbnail-lifecycle.spec.js
 yarn test:browser test/browser/auto-thumbnail-pixels.spec.js
 yarn build artplayer-plugin-auto-thumbnail
 ```
+
+`test/auto-thumbnail-encoding.test.js` controls withheld/late callbacks and timer
+delivery; it does not reproduce a spontaneous native encoder hang. The browser
+lifecycle case performs actual JPEG encoding, deliberately withholds its callback,
+then invokes the captured deadline to check real decoder/canvas cleanup. It does
+not claim a measured30-second browser stall. Existing complete/restart/destroy
+cases retain actual encoded Blob and image-decode checks.
 
 `ARTPLAYER_AUTO_THUMBNAIL_BASELINE=1` selects the frozen workspace for candidate
 regression tests. `ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT` selects an actual bundle.

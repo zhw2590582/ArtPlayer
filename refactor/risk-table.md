@@ -263,3 +263,4 @@
 | VTT-CORE-NAME-01 | open / 已复现 | Published VTT 1.0.1 control name conflicts with the core placeholder introduced in 5.1.7 | PKG-VTT-THUMB-05, REL-08 |
 | SCAFFOLD-OUTPUT-01 | resolved / 已复现 | Plugin generation overwrites existing examples and links to a different example name | MOD-PLUGIN-01 |
 | DEV-SERVOR-PORT-01 | resolved / 已复现 | Servor exits the entire dev process with status zero when the requested port is occupied | MOD-DEV-01 |
+| AUTO-THUMB-ENCODE-TIMEOUT-01 | resolved / 源码/产物事实 | Pending JPEG encoding has no bounded lifetime after frame readiness finishes | PKG-AUTO-THUMB-10 |

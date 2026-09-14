@@ -3,7 +3,7 @@ import { autoThumbnailCandidate } from '../helpers/auto-thumbnail.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await autoThumbnailCandidate()
-for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame-restart', 'alias-complete']) {
+for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame-restart', 'alias-complete', 'encoding-timeout']) {
   const useDefault = variant === 'alias-complete'
   const scenario = useDefault ? 'complete' : variant
   test(`Auto-thumbnail candidate native ${variant} owns decoder and encoded URLs`, async ({ page }, testInfo) => {
@@ -11,11 +11,25 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
     await page.setContent('<!doctype html><div></div>')
     await page.addScriptTag({ content: implementation.code })
     await page.evaluate(async ({ scenario, useDefault }) => {
-      const probe = window.probe = { videos: [], canvases: [], updates: [], urls: new Set(), blobs: [], frames: [], frameSupport: false, listeners: new Map(), hold: scenario !== 'complete' }
+      const probe = window.probe = { videos: [], canvases: [], updates: [], urls: new Set(), blobs: [], frames: [], timers: new Map(), warnings: [], frameSupport: false, listeners: new Map(), hold: scenario !== 'complete' }
       const createElement = document.createElement.bind(document)
       const createUrl = URL.createObjectURL.bind(URL)
       const revokeUrl = URL.revokeObjectURL.bind(URL)
       const toBlob = HTMLCanvasElement.prototype.toBlob
+      const schedule = window.setTimeout
+      const clear = window.clearTimeout
+      const warn = console.warn
+      window.setTimeout = (callback, delay, ...args) => {
+        const id = schedule(callback, delay, ...args)
+        if (delay === 30000)
+          probe.timers.set(id, { callback, delay })
+        return id
+      }
+      window.clearTimeout = (id) => {
+        probe.timers.delete(id)
+        clear(id)
+      }
+      console.warn = (...args) => probe.warnings.push(args.map(String))
       document.createElement = function (name, ...args) {
         const element = createElement(name, ...args)
         if (name === 'canvas')
@@ -33,6 +47,7 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
         return element
       }
       HTMLCanvasElement.prototype.toBlob = function (callback, type) {
+        probe.encodingDeadline = [...probe.timers.values()][0]
         return toBlob.call(this, (blob) => {
           const record = { blob, callback }
           probe.blobs.push(record)
@@ -54,6 +69,9 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
         HTMLCanvasElement.prototype.toBlob = toBlob
         URL.createObjectURL = createUrl
         URL.revokeObjectURL = revokeUrl
+        window.setTimeout = schedule
+        window.clearTimeout = clear
+        console.warn = warn
       }
       probe.art = {
         option: { url: '/test/pattern.mp4' },
@@ -85,7 +103,12 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
       const probe = window.probe
       const before = { urls: probe.urls.size, updates: probe.updates.length }
       if (scenario !== 'complete') {
-        probe.art.emit(scenario.replace('frame-', ''))
+        if (scenario === 'encoding-timeout') {
+          if (!probe.encodingDeadline || probe.encodingDeadline.delay !== 30000)
+            throw new Error('No owned encoding deadline')
+          probe.encodingDeadline.callback()
+        }
+        else probe.art.emit(scenario.replace('frame-', ''))
         if (probe.blobs[0]) {
           probe.blobs[0].callback(probe.blobs[0].blob)
           probe.blobs[0].callback(probe.blobs[0].blob)
@@ -111,10 +134,16 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
       const final = { urls: probe.urls.size, listeners: [...probe.listeners.values()].reduce((sum, set) => sum + set.size, 0), updates: probe.updates.length }
       const blobs = probe.blobs.map(({ blob }) => ({ type: blob.type, bytes: blob.size }))
       probe.restore()
-      return { before, after, video, canvasDimensions, publishedImage, final, blobs, heldFrames: probe.frames.length, frameSupport: probe.frameSupport, result: probe.result }
+      return { before, after, video, canvasDimensions, publishedImage, final, blobs, pendingDeadlines: probe.timers.size, warnings: probe.warnings, heldFrames: probe.frames.length, frameSupport: probe.frameSupport, result: probe.result }
     }, scenario)
     await testInfo.attach('auto-thumbnail-candidate-native-lifecycle', { contentType: 'application/json', body: JSON.stringify({ scenario, useDefault, sha256: hash(implementation.code), scope: 'Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.', ...state }) })
     expect(state.result).toEqual({ name: 'artplayerPluginAutoThumbnail' })
+    expect(state.pendingDeadlines).toBe(0)
+    if (scenario === 'encoding-timeout') {
+      expect(state.warnings).toHaveLength(1)
+      expect(state.warnings[0][1]).toContain('encoding timed out')
+    }
+    else expect(state.warnings).toEqual([])
     expect(state.before).toEqual(scenario === 'complete' ? { urls: 1, updates: 2 } : { urls: 0, updates: 0 })
     expect(state.after).toEqual(state.before)
     expect(state.video).toEqual({ connected: false, src: null, readyState: 0, paused: true, handlers: [true, true, true, true] })

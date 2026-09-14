@@ -1,0 +1,172 @@
+{
+  "task": "PKG-AUTO-THUMB-10",
+  "date": "2026-09-14",
+  "baselineCommit": "afb632d16fec59aaa871d7efb116e2817b81032f",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "platform": "win32",
+  "before": {
+    "artifact": {
+      "path": "refactor/.cache/auto-thumbnail-encoding-before.js",
+      "sha256": "67dbd91228888e1a19d055b1cf2f6514f51fa63c2dfc36aa485c220631383f98"
+    },
+    "log": {
+      "path": "refactor/.cache/auto-encoding-before.log",
+      "sha256": "40d6d9aa4e960ce0a53a573679a684257663ab6b302229bc4d43ff59fc66279e"
+    },
+    "passed": 0,
+    "failed": 6,
+    "interpretation": "Controlled callback withholding; missing encoding deadline, not spontaneous native encoder failure",
+    "finalTests": {
+      "path": "refactor/.cache/auto-encoding-before-final-tests.log",
+      "sha256": "86e73e5c30fde4bab7636629e6cb6d669834c313de8da23699030d717523f2d3",
+      "exitCode": 1,
+      "passed": 1,
+      "failed": 8
+    }
+  },
+  "policy": {
+    "encodingDeadlineMs": 30000,
+    "starts": "Immediately before canvas.toBlob",
+    "timeout": "Dispose job and warn; retain previous preview; ignore late Blob",
+    "underlyingEncoderCancellation": false,
+    "initialMetadataDeadline": false
+  },
+  "sources": [
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/src/encoding.ts",
+      "sha256": "5fc75397162c86f5906c19c94c9aba873c45ec8a370bc4489570ca653ff73300"
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/src/extraction.ts",
+      "sha256": "9d6867fda068f60f3dde51db67cc86486da1fc0cfc0d17cb166dd417c7b55567"
+    }
+  ],
+  "tests": [
+    {
+      "path": "test/auto-thumbnail-encoding.test.js",
+      "sha256": "f47c7dca135253c125b6fe569b0252db019c6ad1059571152c9a7929735299f3"
+    },
+    {
+      "path": "test/auto-thumbnail-frames.test.js",
+      "sha256": "0b635d194a76a2934181e806e35f1e9086cdda906738f4149e3ebecda6d7c3f5"
+    },
+    {
+      "path": "test/browser/auto-thumbnail-lifecycle.spec.js",
+      "sha256": "125bd6fafe3c4ff5dc9c4799755d6557c51918689fcb37d6945c2e53ba298df8"
+    }
+  ],
+  "results": [
+    {
+      "path": "refactor/.cache/auto-encoding-final-tests.log",
+      "sha256": "5eea1838306cff9404cda7522ad4642de19d8a22315770f8068f559161e78c6d",
+      "passed": 174,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "refactor/.cache/auto-encoding-artifact.log",
+      "sha256": "ef295aec9ba6612ab81b54c731e3928290fbe51bcaf8224a9a2289003c78ccf5",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "refactor/.cache/auto-encoding-ci.log",
+      "sha256": "220c84faf14a65929d194a54a4990dddae0c947e1b7f568d71435f8eb8f6aa86",
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "browsers": [
+    {
+      "path": "refactor/.cache/auto-encoding-browser/report.json",
+      "sha256": "a7cca4a03097db41aaa45e0728c7e76d0d9abe70f8dbe9fed562b74b90d51aef",
+      "stats": {
+        "startTime": "2026-09-14T03:48:18.577Z",
+        "duration": 31836.841,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "scope": "21 lifecycle and6 pixel cases; callback-less first-frame limitation retained"
+    },
+    {
+      "path": "refactor/.cache/auto-encoding-artifact-browser/report.json",
+      "sha256": "bc09dfaedcb4f47b97c45a905e9ba4db69512d9249c5394068374eb529d61306",
+      "stats": {
+        "startTime": "2026-09-14T03:51:07.923Z",
+        "duration": 12860.902999999998,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "scope": "Actual built UMD: complete, default-alias complete and controlled encoding-timeout in all3 engines"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+      "sha256": "a9a1704f39ebd2ef6612cc146acf4ebd0d8eeb73764cb852320a85d31438ab01",
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-auto-thumbnail.js",
+        "sha256": "a9a1704f39ebd2ef6612cc146acf4ebd0d8eeb73764cb852320a85d31438ab01"
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+      "sha256": "452b1c0d4d6658fa96b4bff57ad0f40fa60ad309caaca1fd81d0a75aadb89325",
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-auto-thumbnail.legacy.js",
+        "sha256": "452b1c0d4d6658fa96b4bff57ad0f40fa60ad309caaca1fd81d0a75aadb89325"
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+      "sha256": "5e5020abcbee5a5a260ea657ec123bfe50bb8d926f0131431b42c21f8bec5d43",
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-auto-thumbnail.mjs",
+        "sha256": "5e5020abcbee5a5a260ea657ec123bfe50bb8d926f0131431b42c21f8bec5d43"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "path": "refactor/.cache/auto-encoding-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/auto-encoding-lint-final.log",
+      "sha256": "b66f33ce5b38fbf22d5b05efd1cdb9b47e5278aca38ad0e37aff64e5fbd0d6b8",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/auto-encoding-build.log",
+      "sha256": "c66ec03fdd0ca2c75912b6f6a1be3a65dba27b023e1d69197849519d2e28e716",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/auto-encoding-final.log",
+      "sha256": "56acd0fdc584d70e39cdc84da9e7a27d2be06fb3b8296775e275e2d42a294b23",
+      "exitCode": 0
+    }
+  ],
+  "initialLintFailure": {
+    "path": "refactor/.cache/auto-encoding-lint.log",
+    "sha256": "93b74fb75b81ade20affb57e9de7ad99183a7f699e8dc58604f34dcdb6ec42ca"
+  },
+  "limits": [
+    "Native browser timeout case deliberately withholds an actual JPEG callback and invokes the captured timer; no measured30s stall claim",
+    "AUTO-THUMB-PIXEL-01 and task03 remain open",
+    "Windows local evidence, not remote CI or physical devices",
+    "No new dependency, public declaration or version change; no publication"
+  ],
+  "initialRiskValidationFailure": {
+    "path": "refactor/.cache/auto-encoding-risk-initial.log",
+    "sha256": "8af6f39925880a154278e1688fcde0883bd8ef17c9bb78b8414cc2780721ee14"
+  }
+}

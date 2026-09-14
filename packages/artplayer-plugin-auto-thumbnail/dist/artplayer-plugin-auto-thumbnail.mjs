@@ -4,6 +4,40 @@
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
  */
+function createEncoder(job, canvas) {
+  let pending;
+  function clear() {
+    const previous = pending;
+    pending = void 0;
+    if (previous && previous.timer !== null)
+      clearTimeout(previous.timer);
+  }
+  job.own(clear);
+  return (publish) => {
+    if (!job.active())
+      return;
+    if (pending)
+      throw new Error("Auto-thumbnail encoding is already pending");
+    const current = { timer: null };
+    pending = current;
+    const active = () => job.active() && pending === current;
+    current.timer = setTimeout(job.guard(() => {
+      if (active())
+        throw new Error("Auto-thumbnail encoding timed out");
+    }), 3e4);
+    if (!active()) {
+      clearTimeout(current.timer);
+      return;
+    }
+    canvas.toBlob(job.guard((blob) => {
+      if (!active())
+        return;
+      clear();
+      if (job.active())
+        publish(blob);
+    }), "image/jpeg");
+  };
+}
 function cleanupAll(actions) {
   let failure;
   let failed = false;
@@ -321,6 +355,7 @@ function extract(job, config) {
     if (!job.active())
       return;
     const readFrame = createFrameReader(job, video);
+    const encode = createEncoder(job, canvas);
     let index = 0;
     const seek = job.guard(() => {
       if (index >= config.number) {
@@ -331,17 +366,13 @@ function extract(job, config) {
         ctx.drawImage(video, index % 10 * config.width, Math.floor(index / 10) * height, config.width, height);
         if (!job.active())
           return;
-        let delivered = false;
-        canvas.toBlob(job.guard((blob) => {
-          if (delivered)
-            return;
-          delivered = true;
+        encode((blob) => {
           job.publish(blob, { height, column: 10, number: config.number, width: config.width, scale: config.scale });
           if (job.active()) {
             index += 1;
             seek();
           }
-        }), "image/jpeg");
+        });
       }));
     });
     seek();

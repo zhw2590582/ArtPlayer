@@ -1,4 +1,5 @@
 import type { ExtractionConfig, ExtractionJob } from './types'
+import createEncoder from './encoding'
 import createFrameReader from './frames'
 import { sheetSize } from './options'
 import createVideo from './video'
@@ -47,6 +48,7 @@ export default function extract(job: ExtractionJob, config: ExtractionConfig) {
     if (!job.active())
       return
     const readFrame = createFrameReader(job, video)
+    const encode = createEncoder(job, canvas)
     let index = 0
     const seek = job.guard(() => {
       if (index >= config.number) {
@@ -57,17 +59,13 @@ export default function extract(job: ExtractionJob, config: ExtractionConfig) {
         ctx.drawImage(video, (index % 10) * config.width, Math.floor(index / 10) * height, config.width, height)
         if (!job.active())
           return
-        let delivered = false
-        canvas.toBlob(job.guard((blob) => {
-          if (delivered)
-            return
-          delivered = true
+        encode((blob) => {
           job.publish(blob, { height, column: 10, number: config.number, width: config.width, scale: config.scale })
           if (job.active()) {
             index += 1
             seek()
           }
-        }), 'image/jpeg')
+        })
       }))
     })
     seek()
