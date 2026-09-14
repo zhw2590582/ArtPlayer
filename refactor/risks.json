@@ -6169,12 +6169,13 @@
     },
     {
       "id": "VCONSOLE-LIFECYCLE-01",
-      "title": "vConsole 3.15.0 mobile destruction can leave a callback updating a removed log store",
+      "title": "vConsole delayed log, panel and scroller work outlives its owner",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "SITE-07",
-        "SITE-05"
+        "SITE-05",
+        "SITE-VCONSOLE-01"
       ],
       "evidence": [
         "refactor/changes/2026-09-14-SITE-07-vendor-notices.md",
@@ -6184,7 +6185,14 @@
       ],
       "compatibleResolution": "Reproduce the exact delayed callback from fixed upstream source and preserve logging/global/CSS behavior while preventing work on a removed store; do not remove destruction checks or catch page errors to pass.",
       "closureCriteria": "A deterministic old-build failure and fixed native three-engine logging/destruction checks with no late errors, plus maintainable source/build provenance and required notices.",
-      "workspaceState": "First native check: desktop worker 3/3 and mobile Chromium/Firefox pass; WebKit mobile page fails with undefined is not an object (evaluating s.O.get(n).update) after destruction. Upstream log model schedules RAF and reads Store.get(id).update while unbindPlugin deletes the store; exact causal callback remains to isolate."
+      "workspaceState": "Frozen original deterministically fails 12 lifecycle cases across three engines; candidate passes 21 including actual mobile logging/playback. The six pinned replacements fix RAF ownership, panel identity and two scroller resumptions.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md",
+        "refactor/baselines/vconsole-lifecycle-validation.json",
+        "scripts/site-vendor/vconsole/README.md",
+        "test/browser/vconsole-lifecycle.spec.js"
+      ],
+      "resolutionRationale": "Runtime lifecycle regression is fixed and old/native evidence retained. Original notices remain distributed; the distinct missing license body/dependency notices remain open under VENDOR-07 and SITE-07, without treating this runtime fix as clearance."
     }
   ]
 }

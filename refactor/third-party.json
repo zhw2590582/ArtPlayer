@@ -1018,19 +1018,30 @@
       "id": "vconsole",
       "riskId": "VENDOR-07",
       "inputs": [
-        "docs/assets/js/vconsole.min.js"
+        "docs/assets/js/vconsole.min.js",
+        "scripts/site-vendor/vconsole/upstream.js"
       ],
       "owners": [
-        "SITE-01"
+        "SITE-01",
+        "SITE-07",
+        "SITE-VCONSOLE-01"
       ],
-      "sourceStatus": "Local header identifies vConsole 3.15.0 and Tencent copyright.",
-      "licenseStatus": "Local header identifies MIT; original tarball correspondence and deployment notices not yet verified.",
-      "upstreamSources": [],
-      "upstreamReviewedAt": null,
+      "sourceStatus": "Frozen npm 3.15.0 bundle, with reproducible six-hook lifecycle patch; see scripts/site-vendor/vconsole/README.md.",
+      "licenseStatus": "Original npm LICENSE is distributed verbatim but lacks its promised MIT body; bundled dependency notices remain open in VENDOR-07.",
+      "upstreamSources": [
+        "https://registry.npmjs.org/vconsole/-/vconsole-3.15.0.tgz",
+        "https://github.com/Tencent/vConsole/tree/05d80398bae35e793774f74e3c052b4e530e293a"
+      ],
+      "upstreamReviewedAt": "2026-09-14",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {
           "path": "docs/assets/js/vconsole.min.js",
+          "algorithm": "sha256-lf",
+          "sha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+        },
+        {
+          "path": "scripts/site-vendor/vconsole/upstream.js",
           "algorithm": "sha256-lf",
           "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
         }

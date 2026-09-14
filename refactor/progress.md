@@ -1,5 +1,19 @@
 # 进度与证据
 
+## SITE-VCONSOLE-01 站点控制台生命周期修复完成
+
+冻结 vConsole 3.15.0 原始 bundle，以严格 TS 和六个唯一构建替换点修复日志 RAF、
+同名面板替换、销毁后虚拟列表布局续段。原版最终对照 12 失败/6 通过，候选三引擎
+21 项全通过，包含实际 mobile 页面播放、可见日志和 AMD/CommonJS 入口。早期
+测试前置条件/选择器错误与候选暴露的额外异常均留档，没有跳过销毁或吞页面错误。
+40 项单元/CI 回归、严格工具链、冻结安装、docs-tools TS、根 lint（1 条既有 warning）
+通过；生成与只读检查接入 CI 的 notices 前置步骤。新增依赖为零，仍使用 Yarn。
+见[变更](changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md)与
+[证据](baselines/vconsole-lifecycle-validation.json)。256项：187 done、18 doing、51 todo。
+VCONSOLE-LIFECYCLE-01 运行时风险已处理；VENDOR-07 的完整许可/依赖 notices、
+Monaco 字体和其他资产仍 open，SITE-07 仍 doing。没有远端运行、部署、push/publish。
+下一步继续站点来源/许可及剩余包验收；VAST/缩略图工具历史默认行为选择仍待回复。
+
 ## SITE-07 固定vendor来源与notice生成检查点（仍doing）
 
 新增Monaco0.30.1/vConsole3.15.0的100文件固定指纹、TS生成器和只读检查，三份上游

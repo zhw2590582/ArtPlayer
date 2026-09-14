@@ -4329,7 +4329,8 @@
         "SITE-04",
         "EX-01",
         "EX-02",
-        "SITE-07"
+        "SITE-07",
+        "SITE-VCONSOLE-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -5323,6 +5324,26 @@
       "evidence": [
         "changes/2026-09-14-ENG-13-observation-window.md",
         "baselines/observation-window-validation.json"
+      ]
+    },
+    {
+      "id": "SITE-VCONSOLE-01",
+      "phase": "6 文档与消费者",
+      "title": "修复 vConsole 日志帧与延迟面板销毁竞态",
+      "scope": [
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-01"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "冻结上游 bundle 的可复现 TS 生命周期补丁、旧红新绿回归、来源及生成检查；销毁后虚拟列表布局续段停止",
+      "acceptance": "最后日志插件移除后取消 RAF 并隔离旧队列；延迟面板不得写入已销毁或替换插件；三引擎移动页与 UMD 入口通过，维护声明与原有许可缺口分别记录；原生 ResizeObserver 布局与挂起 timer 旧红新绿",
+      "evidence": [
+        "changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md",
+        "baselines/vconsole-lifecycle-validation.json"
       ]
     }
   ]

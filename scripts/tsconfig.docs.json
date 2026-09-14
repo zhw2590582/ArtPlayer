@@ -28,6 +28,7 @@
     "build-site-notices.mjs",
     "build-i18n.js",
     "build-docs.js",
-    "../packages/artplayer-vitepress/build/**/*.ts"
+    "../packages/artplayer-vitepress/build/**/*.ts",
+    "build-vconsole.mjs"
   ]
 }

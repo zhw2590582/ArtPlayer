@@ -1,0 +1,1670 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-VCONSOLE-01",
+  "date": "2026-09-14",
+  "scope": "Fixed vendor lifecycle work only; SITE-07 license and other asset gates remain open",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "typescript": "5.9.3",
+    "esbuild": "0.27.7",
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "realDevices": false,
+    "remoteCI": false
+  },
+  "inputs": [
+    {
+      "path": "scripts/site-vendor/vconsole/upstream.js",
+      "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+    },
+    {
+      "path": "scripts/site-vendor/vconsole/lifecycle.ts",
+      "sha256": "df7687aa1c9bbf116398b7e2c470b70ae3027875bc4c3ba3d71adcf8537aeb57"
+    },
+    {
+      "path": "scripts/site-vendor/vconsole/build.ts",
+      "sha256": "4173be0b974a065bc10e4ad07b881edccc312b113415d5366674a5f79b25a191"
+    },
+    {
+      "path": "docs/assets/js/vconsole.min.js",
+      "sha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+    },
+    {
+      "path": "test/browser/vconsole-lifecycle.spec.js",
+      "sha256": "f50f3ca104529f61ba98c8cdad8fd1f0cd5136afc03c4823cd4038829c7222f3"
+    },
+    {
+      "path": "test/browser/site-vendor.spec.js",
+      "sha256": "78d092b16d7edb1e65bd741799440985ec35b2db098ae5922a637d9e79d7c7c1"
+    },
+    {
+      "path": "test/vconsole-lifecycle.test.js",
+      "sha256": "10d42287193a94d48e710c2ebeb8324afcd0e15e3e7e0d48b5b5583098842de4"
+    }
+  ],
+  "baseline": {
+    "path": "refactor/.cache/vconsole-lifecycle-red-final-browser/report.json",
+    "sha256": "f688763c65b8f52f3d4938bfbd11d8033ba7565f05a9db05e3a2f4f1e7b45bcd",
+    "stats": {
+      "startTime": "2026-09-14T09:25:57.281Z",
+      "duration": 20957.192,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 12,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "browser": "chromium",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=false",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\n  65 |     await testInfo.attach('vconsole-lifecycle', { contentType: 'application/json', body: JSON.stringify({ result, errors, browser: browser.version(), artifactSha256: createHash('sha256').update(fs.readFileSync(artifact)).digest('hex') }) })\n  66 |     expect(result.scheduled).toBeGreaterThan(0)\n> 67 |     expect(result.cancelled).toBeGreaterThan(0)\n     |                              ^\n  68 |     expect(errors).toEqual([])\n  69 |     expect(result.staleErrors).toEqual([])\n  70 |     expect(result.roots).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:67:30",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 1,
+                  "cancelled": 0,
+                  "staleErrors": [],
+                  "logs": "",
+                  "roots": 0
+                },
+                "errors": [
+                  "Cannot read properties of undefined (reading 'update')",
+                  "Cannot read properties of null (reading 'insertAdjacentElement')"
+                ],
+                "browser": "153.0.8010.12",
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=true",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\n  65 |     await testInfo.attach('vconsole-lifecycle', { contentType: 'application/json', body: JSON.stringify({ result, errors, browser: browser.version(), artifactSha256: createHash('sha256').update(fs.readFileSync(artifact)).digest('hex') }) })\n  66 |     expect(result.scheduled).toBeGreaterThan(0)\n> 67 |     expect(result.cancelled).toBeGreaterThan(0)\n     |                              ^\n  68 |     expect(errors).toEqual([])\n  69 |     expect(result.staleErrors).toEqual([])\n  70 |     expect(result.roots).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:67:30",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 2,
+                  "cancelled": 0,
+                  "staleErrors": [],
+                  "logs": "vConsole  Log AllLogInfoWarnError  Empty  No Prompted   OK    Filter       stale-before-destroy             fresh-after-recreate          No Prompted   OK    Filter  ClearTopBottom Hide",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "153.0.8010.12",
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole removed plugin panels cannot attach to a replacement with the same id",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 0\n+ Received  + 1\n\n  Array [\n+   \"stale-panel\",\n    \"fresh-panel\",\n  ]\n\n   99 |     return panels\n  100 |   })\n> 101 |   expect(result).toEqual(['fresh-panel'])\n      |                  ^\n  102 |   expect(errors).toEqual([])\n  103 | })\n  104 |\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:101:18",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole retains amd factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole retains commonjs factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole scroller resumes pending layout work safely after destruction",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 23\n\n- Array []\n+ Array [\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of null (reading 'style')\",\n+   \"Cannot read properties of n",
+            "observations": [
+              {
+                "result": {
+                  "pending": 22,
+                  "rows": 21,
+                  "roots": 0
+                },
+                "errors": [
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')",
+                  "Cannot read properties of null (reading 'style')"
+                ],
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=false",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\n  65 |     await testInfo.attach('vconsole-lifecycle', { contentType: 'application/json', body: JSON.stringify({ result, errors, browser: browser.version(), artifactSha256: createHash('sha256').update(fs.readFileSync(artifact)).digest('hex') }) })\n  66 |     expect(result.scheduled).toBeGreaterThan(0)\n> 67 |     expect(result.cancelled).toBeGreaterThan(0)\n     |                              ^\n  68 |     expect(errors).toEqual([])\n  69 |     expect(result.staleErrors).toEqual([])\n  70 |     expect(result.roots).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:67:30",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 1,
+                  "cancelled": 0,
+                  "staleErrors": [],
+                  "logs": "",
+                  "roots": 0
+                },
+                "errors": [
+                  "can't access property \"update\", s.O.get(...) is undefined",
+                  "can't access property \"insertAdjacentElement\", e is null"
+                ],
+                "browser": "155.0",
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=true",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\n  65 |     await testInfo.attach('vconsole-lifecycle', { contentType: 'application/json', body: JSON.stringify({ result, errors, browser: browser.version(), artifactSha256: createHash('sha256').update(fs.readFileSync(artifact)).digest('hex') }) })\n  66 |     expect(result.scheduled).toBeGreaterThan(0)\n> 67 |     expect(result.cancelled).toBeGreaterThan(0)\n     |                              ^\n  68 |     expect(errors).toEqual([])\n  69 |     expect(result.staleErrors).toEqual([])\n  70 |     expect(result.roots).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:67:30",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 2,
+                  "cancelled": 0,
+                  "staleErrors": [],
+                  "logs": "vConsole  Log AllLogInfoWarnError  Empty  No Prompted   OK    Filter       stale-before-destroy             fresh-after-recreate          No Prompted   OK    Filter  ClearTopBottom Hide",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "155.0",
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole removed plugin panels cannot attach to a replacement with the same id",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 0\n+ Received  + 1\n\n  Array [\n+   \"stale-panel\",\n    \"fresh-panel\",\n  ]\n\n   99 |     return panels\n  100 |   })\n> 101 |   expect(result).toEqual(['fresh-panel'])\n      |                  ^\n  102 |   expect(errors).toEqual([])\n  103 | })\n  104 |\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:101:18",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole retains amd factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole retains commonjs factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole scroller resumes pending layout work safely after destruction",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 31\n\n- Array []\n+ Array [\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style\\\", s is null\",\n+   \"can't access property \\\"style",
+            "observations": [
+              {
+                "result": {
+                  "pending": 30,
+                  "rows": 21,
+                  "roots": 0
+                },
+                "errors": [
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null",
+                  "can't access property \"style\", s is null"
+                ],
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=false",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\n  65 |     await testInfo.attach('vconsole-lifecycle', { contentType: 'application/json', body: JSON.stringify({ result, errors, browser: browser.version(), artifactSha256: createHash('sha256').update(fs.readFileSync(artifact)).digest('hex') }) })\n  66 |     expect(result.scheduled).toBeGreaterThan(0)\n> 67 |     expect(result.cancelled).toBeGreaterThan(0)\n     |                              ^\n  68 |     expect(errors).toEqual([])\n  69 |     expect(result.staleErrors).toEqual([])\n  70 |     expect(result.roots).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:67:30",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 1,
+                  "cancelled": 0,
+                  "staleErrors": [],
+                  "logs": "",
+                  "roots": 0
+                },
+                "errors": [
+                  "undefined is not an object (evaluating 's.O.get(n).update')",
+                  "null is not an object (evaluating 'e.insertAdjacentElement')"
+                ],
+                "browser": "26.6",
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=true",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\n  65 |     await testInfo.attach('vconsole-lifecycle', { contentType: 'application/json', body: JSON.stringify({ result, errors, browser: browser.version(), artifactSha256: createHash('sha256').update(fs.readFileSync(artifact)).digest('hex') }) })\n  66 |     expect(result.scheduled).toBeGreaterThan(0)\n> 67 |     expect(result.cancelled).toBeGreaterThan(0)\n     |                              ^\n  68 |     expect(errors).toEqual([])\n  69 |     expect(result.staleErrors).toEqual([])\n  70 |     expect(result.roots).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:67:30",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 2,
+                  "cancelled": 0,
+                  "staleErrors": [],
+                  "logs": "vConsole  Log AllLogInfoWarnError  Empty  No Prompted   OK    Filter       stale-before-destroy             fresh-after-recreate          No Prompted   OK    Filter  ClearTopBottom Hide",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "26.6",
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole removed plugin panels cannot attach to a replacement with the same id",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 0\n+ Received  + 1\n\n  Array [\n+   \"stale-panel\",\n    \"fresh-panel\",\n  ]\n\n   99 |     return panels\n  100 |   })\n> 101 |   expect(result).toEqual(['fresh-panel'])\n      |                  ^\n  102 |   expect(errors).toEqual([])\n  103 | })\n  104 |\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:101:18",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole retains amd factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole retains commonjs factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole scroller resumes pending layout work safely after destruction",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 1\n+ Received  + 3\n\n- Array []\n+ Array [\n+   \"TypeError: null is not an object (evaluating 's.style')\",\n+ ]\n\n  173 |   expect(result.rows).toBeGreaterThan(0)\n  174 |   expect(result.roots).toBe(0)\n> 175 |   expect(errors).toEqual([])\n      |                  ^\n  176 | })\n  177 |\n    at D:\\github\\ArtPlayer\\test\\browser\\vconsole-lifecycle.spec.js:175:18",
+            "observations": [
+              {
+                "result": {
+                  "pending": 22,
+                  "rows": 21,
+                  "roots": 0
+                },
+                "errors": [
+                  "TypeError: null is not an object (evaluating 's.style')"
+                ],
+                "artifactSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "candidate": {
+    "path": "refactor/.cache/vconsole-lifecycle-green-final-browser/report.json",
+    "sha256": "19ce449dc1e0e5cf8f40052793efc3ee92029c70ee5557f2b6563da9bb8abccb",
+    "stats": {
+      "startTime": "2026-09-14T09:27:07.582Z",
+      "duration": 16382.290999999997,
+      "expected": 21,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "browser": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              [
+                {
+                  "component": "vconsole",
+                  "version": "3.15.0",
+                  "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+                  "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+                },
+                {
+                  "component": "monaco-editor",
+                  "version": "0.30.1",
+                  "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+                  "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+                },
+                {
+                  "component": "monaco-editor",
+                  "version": "0.30.1",
+                  "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+                  "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+                }
+              ],
+              {
+                "browser": "153.0.8010.12",
+                "platform": "win32",
+                "manifest": {
+                  "kind": "artplayer-browser-test",
+                  "resources": {
+                    "/candidate/artplayer.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931
+                    },
+                    "/compiled/artplayer.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931,
+                      "aliasOf": "/candidate/artplayer.js"
+                    },
+                    "/uncompiled/artplayer/index.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931,
+                      "aliasOf": "/candidate/artplayer.js"
+                    },
+                    "/candidate/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529
+                    },
+                    "/compiled/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529,
+                      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                    },
+                    "/uncompiled/artplayer-plugin-chapter/index.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529,
+                      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                    },
+                    "/published/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.4.0",
+                        "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                      "bytes": 134037
+                    },
+                    "/published/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "1.1.0",
+                        "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                        "member": "package/dist/artplayer-plugin-chapter.js"
+                      },
+                      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                      "bytes": 4973
+                    },
+                    "/test/pattern.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/pattern.mp4"
+                      },
+                      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                      "bytes": 251538
+                    },
+                    "/test/pattern.webm": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/pattern.webm"
+                      },
+                      "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                      "bytes": 162073
+                    },
+                    "/published-4.5.5/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "4.5.5",
+                        "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                      "bytes": 153582
+                    },
+                    "/published-5.1.7/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.7",
+                        "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                      "bytes": 155940
+                    },
+                    "/published-4.5.9/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "4.5.9",
+                        "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                      "bytes": 156408
+                    },
+                    "/published-5.3.0/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.3.0",
+                        "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                      "bytes": 159238
+                    },
+                    "/published-5.1.6/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.6",
+                        "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                      "bytes": 155714
+                    },
+                    "/published-5.1.2/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.2",
+                        "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                      "bytes": 154583
+                    },
+                    "/test/audio-tone.m4a": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/audio-tone.m4a"
+                      },
+                      "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                      "bytes": 132436
+                    },
+                    "/test/thumbnail-pattern.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/thumbnail-pattern.mp4"
+                      },
+                      "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                      "bytes": 752916
+                    },
+                    "/test/auto-thumbnail-timeline.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                      },
+                      "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                      "bytes": 8602
+                    },
+                    "/test/declaration-cues.vtt": {
+                      "source": {
+                        "kind": "test-subtitles",
+                        "file": "test/browser/media/declaration-cues.vtt"
+                      },
+                      "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                      "bytes": 54
+                    },
+                    "/test/thumbnail-grid.svg": {
+                      "source": {
+                        "kind": "test-thumbnail-grid",
+                        "file": "test/browser/media/thumbnail-grid.svg"
+                      },
+                      "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                      "bytes": 14969
+                    },
+                    "/test/legacy-safe-area.js": {
+                      "source": {
+                        "kind": "frozen-own-source",
+                        "file": "test/helpers/legacy-safe-area.js",
+                        "commit": "ccf77c4e"
+                      },
+                      "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                      "bytes": 795
+                    },
+                    "/test/iframe-boundary-child.html": {
+                      "source": {
+                        "kind": "iframe-fixture",
+                        "file": "test/browser/iframe-boundary-child.html"
+                      },
+                      "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                      "bytes": 1451
+                    },
+                    "/published-5.3.1-beta.1/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.3.1-beta.1",
+                        "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                      "bytes": 159458
+                    },
+                    "/assets/sample/video.mp4": {
+                      "source": {
+                        "kind": "docs-media",
+                        "file": "docs/assets/sample/video.mp4"
+                      },
+                      "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                      "bytes": 5818706
+                    },
+                    "/test/performance.js": {
+                      "source": {
+                        "kind": "adapted-baseline-fixture",
+                        "file": "refactor/fixtures/performance.js"
+                      },
+                      "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                      "bytes": 9251
+                    }
+                  }
+                },
+                "state": {
+                  "url": "http://127.0.0.1:8084/mobile.html?code=window.art%20%3D%20new%20Artplayer(%7Bcontainer%3A%22.artplayer-app%22%2Curl%3A%22%2Ftest%2Fpattern.mp4%22%2Cmuted%3Atrue%7D)%3B%20console.log(%22site-vendor-verified-message%22)%3B",
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                  "media": null
+                },
+                "errors": [],
+                "consoleErrors": [],
+                "failedRequests": [
+                  {
+                    "url": "http://127.0.0.1:8084/test/pattern.mp4",
+                    "resourceType": "media",
+                    "failure": {
+                      "errorText": "net::ERR_ABORTED"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              [
+                {
+                  "component": "vconsole",
+                  "version": "3.15.0",
+                  "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+                  "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+                },
+                {
+                  "component": "monaco-editor",
+                  "version": "0.30.1",
+                  "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+                  "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+                },
+                {
+                  "component": "monaco-editor",
+                  "version": "0.30.1",
+                  "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+                  "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+                }
+              ],
+              {
+                "browser": "155.0",
+                "platform": "win32",
+                "manifest": {
+                  "kind": "artplayer-browser-test",
+                  "resources": {
+                    "/candidate/artplayer.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931
+                    },
+                    "/compiled/artplayer.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931,
+                      "aliasOf": "/candidate/artplayer.js"
+                    },
+                    "/uncompiled/artplayer/index.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931,
+                      "aliasOf": "/candidate/artplayer.js"
+                    },
+                    "/candidate/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529
+                    },
+                    "/compiled/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529,
+                      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                    },
+                    "/uncompiled/artplayer-plugin-chapter/index.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529,
+                      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                    },
+                    "/published/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.4.0",
+                        "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                      "bytes": 134037
+                    },
+                    "/published/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "1.1.0",
+                        "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                        "member": "package/dist/artplayer-plugin-chapter.js"
+                      },
+                      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                      "bytes": 4973
+                    },
+                    "/test/pattern.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/pattern.mp4"
+                      },
+                      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                      "bytes": 251538
+                    },
+                    "/test/pattern.webm": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/pattern.webm"
+                      },
+                      "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                      "bytes": 162073
+                    },
+                    "/published-4.5.5/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "4.5.5",
+                        "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                      "bytes": 153582
+                    },
+                    "/published-5.1.7/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.7",
+                        "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                      "bytes": 155940
+                    },
+                    "/published-4.5.9/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "4.5.9",
+                        "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                      "bytes": 156408
+                    },
+                    "/published-5.3.0/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.3.0",
+                        "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                      "bytes": 159238
+                    },
+                    "/published-5.1.6/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.6",
+                        "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                      "bytes": 155714
+                    },
+                    "/published-5.1.2/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.2",
+                        "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                      "bytes": 154583
+                    },
+                    "/test/audio-tone.m4a": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/audio-tone.m4a"
+                      },
+                      "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                      "bytes": 132436
+                    },
+                    "/test/thumbnail-pattern.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/thumbnail-pattern.mp4"
+                      },
+                      "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                      "bytes": 752916
+                    },
+                    "/test/auto-thumbnail-timeline.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                      },
+                      "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                      "bytes": 8602
+                    },
+                    "/test/declaration-cues.vtt": {
+                      "source": {
+                        "kind": "test-subtitles",
+                        "file": "test/browser/media/declaration-cues.vtt"
+                      },
+                      "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                      "bytes": 54
+                    },
+                    "/test/thumbnail-grid.svg": {
+                      "source": {
+                        "kind": "test-thumbnail-grid",
+                        "file": "test/browser/media/thumbnail-grid.svg"
+                      },
+                      "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                      "bytes": 14969
+                    },
+                    "/test/legacy-safe-area.js": {
+                      "source": {
+                        "kind": "frozen-own-source",
+                        "file": "test/helpers/legacy-safe-area.js",
+                        "commit": "ccf77c4e"
+                      },
+                      "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                      "bytes": 795
+                    },
+                    "/test/iframe-boundary-child.html": {
+                      "source": {
+                        "kind": "iframe-fixture",
+                        "file": "test/browser/iframe-boundary-child.html"
+                      },
+                      "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                      "bytes": 1451
+                    },
+                    "/published-5.3.1-beta.1/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.3.1-beta.1",
+                        "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                      "bytes": 159458
+                    },
+                    "/assets/sample/video.mp4": {
+                      "source": {
+                        "kind": "docs-media",
+                        "file": "docs/assets/sample/video.mp4"
+                      },
+                      "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                      "bytes": 5818706
+                    },
+                    "/test/performance.js": {
+                      "source": {
+                        "kind": "adapted-baseline-fixture",
+                        "file": "refactor/fixtures/performance.js"
+                      },
+                      "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                      "bytes": 9251
+                    }
+                  }
+                },
+                "state": {
+                  "url": "http://127.0.0.1:8084/mobile.html?code=window.art%20%3D%20new%20Artplayer(%7Bcontainer%3A%22.artplayer-app%22%2Curl%3A%22%2Ftest%2Fpattern.mp4%22%2Cmuted%3Atrue%7D)%3B%20console.log(%22site-vendor-verified-message%22)%3B",
+                  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0",
+                  "media": null
+                },
+                "errors": [],
+                "consoleErrors": [],
+                "failedRequests": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              [
+                {
+                  "component": "vconsole",
+                  "version": "3.15.0",
+                  "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+                  "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+                },
+                {
+                  "component": "monaco-editor",
+                  "version": "0.30.1",
+                  "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+                  "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+                },
+                {
+                  "component": "monaco-editor",
+                  "version": "0.30.1",
+                  "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+                  "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+                }
+              ],
+              {
+                "browser": "26.6",
+                "platform": "win32",
+                "manifest": {
+                  "kind": "artplayer-browser-test",
+                  "resources": {
+                    "/candidate/artplayer.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931
+                    },
+                    "/compiled/artplayer.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931,
+                      "aliasOf": "/candidate/artplayer.js"
+                    },
+                    "/uncompiled/artplayer/index.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer\\src\\index.ts"
+                      },
+                      "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+                      "bytes": 378931,
+                      "aliasOf": "/candidate/artplayer.js"
+                    },
+                    "/candidate/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529
+                    },
+                    "/compiled/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529,
+                      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                    },
+                    "/uncompiled/artplayer-plugin-chapter/index.js": {
+                      "source": {
+                        "kind": "workspace-build",
+                        "entry": "packages\\artplayer-plugin-chapter\\src\\index.ts"
+                      },
+                      "sha256": "1a8eb891d3690e2526e78a2e53183a25367b1d02a5fd349d821548edb731ee3a",
+                      "bytes": 8529,
+                      "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                    },
+                    "/published/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.4.0",
+                        "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                      "bytes": 134037
+                    },
+                    "/published/artplayer-plugin-chapter.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "1.1.0",
+                        "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                        "member": "package/dist/artplayer-plugin-chapter.js"
+                      },
+                      "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                      "bytes": 4973
+                    },
+                    "/test/pattern.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/pattern.mp4"
+                      },
+                      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                      "bytes": 251538
+                    },
+                    "/test/pattern.webm": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/pattern.webm"
+                      },
+                      "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                      "bytes": 162073
+                    },
+                    "/published-4.5.5/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "4.5.5",
+                        "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                      "bytes": 153582
+                    },
+                    "/published-5.1.7/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.7",
+                        "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                      "bytes": 155940
+                    },
+                    "/published-4.5.9/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "4.5.9",
+                        "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                      "bytes": 156408
+                    },
+                    "/published-5.3.0/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.3.0",
+                        "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                      "bytes": 159238
+                    },
+                    "/published-5.1.6/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.6",
+                        "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                      "bytes": 155714
+                    },
+                    "/published-5.1.2/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.1.2",
+                        "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                      "bytes": 154583
+                    },
+                    "/test/audio-tone.m4a": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/audio-tone.m4a"
+                      },
+                      "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                      "bytes": 132436
+                    },
+                    "/test/thumbnail-pattern.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/thumbnail-pattern.mp4"
+                      },
+                      "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                      "bytes": 752916
+                    },
+                    "/test/auto-thumbnail-timeline.mp4": {
+                      "source": {
+                        "kind": "generated-media",
+                        "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                      },
+                      "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                      "bytes": 8602
+                    },
+                    "/test/declaration-cues.vtt": {
+                      "source": {
+                        "kind": "test-subtitles",
+                        "file": "test/browser/media/declaration-cues.vtt"
+                      },
+                      "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                      "bytes": 54
+                    },
+                    "/test/thumbnail-grid.svg": {
+                      "source": {
+                        "kind": "test-thumbnail-grid",
+                        "file": "test/browser/media/thumbnail-grid.svg"
+                      },
+                      "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                      "bytes": 14969
+                    },
+                    "/test/legacy-safe-area.js": {
+                      "source": {
+                        "kind": "frozen-own-source",
+                        "file": "test/helpers/legacy-safe-area.js",
+                        "commit": "ccf77c4e"
+                      },
+                      "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                      "bytes": 795
+                    },
+                    "/test/iframe-boundary-child.html": {
+                      "source": {
+                        "kind": "iframe-fixture",
+                        "file": "test/browser/iframe-boundary-child.html"
+                      },
+                      "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                      "bytes": 1451
+                    },
+                    "/published-5.3.1-beta.1/artplayer.js": {
+                      "source": {
+                        "kind": "npm-release",
+                        "version": "5.3.1-beta.1",
+                        "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                        "member": "package/dist/artplayer.js"
+                      },
+                      "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                      "bytes": 159458
+                    },
+                    "/assets/sample/video.mp4": {
+                      "source": {
+                        "kind": "docs-media",
+                        "file": "docs/assets/sample/video.mp4"
+                      },
+                      "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                      "bytes": 5818706
+                    },
+                    "/test/performance.js": {
+                      "source": {
+                        "kind": "adapted-baseline-fixture",
+                        "file": "refactor/fixtures/performance.js"
+                      },
+                      "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                      "bytes": 9251
+                    }
+                  }
+                },
+                "state": {
+                  "url": "http://127.0.0.1:8084/mobile.html?code=window.art%20%3D%20new%20Artplayer(%7Bcontainer%3A%22.artplayer-app%22%2Curl%3A%22%2Ftest%2Fpattern.mp4%22%2Cmuted%3Atrue%7D)%3B%20console.log(%22site-vendor-verified-message%22)%3B",
+                  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+                  "media": null
+                },
+                "errors": [],
+                "consoleErrors": [],
+                "failedRequests": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=false",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 1,
+                  "cancelled": 1,
+                  "staleErrors": [],
+                  "logs": "",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "153.0.8010.12",
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=true",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 2,
+                  "cancelled": 1,
+                  "staleErrors": [],
+                  "logs": "vConsole  Log AllLogInfoWarnError       fresh-after-recreate          No Prompted   OK    Filter  ClearTopBottom Hide",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "153.0.8010.12",
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole removed plugin panels cannot attach to a replacement with the same id",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole retains amd factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole retains commonjs factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "chromium",
+        "title": "vConsole scroller resumes pending layout work safely after destruction",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "pending": 22,
+                  "rows": 21,
+                  "roots": 0
+                },
+                "errors": [],
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=false",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 1,
+                  "cancelled": 1,
+                  "staleErrors": [],
+                  "logs": "",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "155.0",
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=true",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 2,
+                  "cancelled": 1,
+                  "staleErrors": [],
+                  "logs": "vConsole  Log AllLogInfoWarnError       fresh-after-recreate          No Prompted   OK    Filter  ClearTopBottom Hide",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "155.0",
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole removed plugin panels cannot attach to a replacement with the same id",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole retains amd factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole retains commonjs factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "firefox",
+        "title": "vConsole scroller resumes pending layout work safely after destruction",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "pending": 30,
+                  "rows": 21,
+                  "roots": 0
+                },
+                "errors": [],
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=false",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 1,
+                  "cancelled": 1,
+                  "staleErrors": [],
+                  "logs": "",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "26.6",
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole cancels queued logging on last plugin removal, recreate=true",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "scheduled": 2,
+                  "cancelled": 1,
+                  "staleErrors": [],
+                  "logs": "vConsole  Log AllLogInfoWarnError       fresh-after-recreate          No Prompted   OK    Filter  ClearTopBottom Hide",
+                  "roots": 0
+                },
+                "errors": [],
+                "browser": "26.6",
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole removed plugin panels cannot attach to a replacement with the same id",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole retains amd factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole retains commonjs factory and private patch state",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": []
+          }
+        ]
+      },
+      {
+        "browser": "webkit",
+        "title": "vConsole scroller resumes pending layout work safely after destruction",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "errors": "",
+            "observations": [
+              {
+                "result": {
+                  "pending": 22,
+                  "rows": 21,
+                  "roots": 0
+                },
+                "errors": [],
+                "artifactSha256": "3d1b8c3aff5f415ccf3bdc3cdcec6e01cff5b4c64d4558c078ca33d003f616ac"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "unitAndCI": {
+      "passed": 40,
+      "failed": 0,
+      "log": "refactor/.cache/vconsole-final-checks.log"
+    },
+    "frozenInstall": "refactor/.cache/vconsole-frozen-install.log",
+    "lint": {
+      "log": "refactor/.cache/vconsole-root-lint.log",
+      "errors": 0,
+      "warnings": 1,
+      "note": "Existing docs/assets/ts/artplayer.d.ts unused eslint-disable warning"
+    },
+    "typecheckDocsTools": "passed",
+    "strictToolchain": "passed",
+    "ciConfiguration": "passed"
+  },
+  "history": [
+    "refactor/.cache/vconsole-lifecycle-red-browser",
+    "refactor/.cache/vconsole-lifecycle-first-patch-browser",
+    "refactor/.cache/vconsole-lifecycle-second-patch-browser",
+    "refactor/.cache/vconsole-lifecycle-final-red-browser",
+    "refactor/.cache/vconsole-lifecycle-scroller-discovery-browser",
+    "refactor/.cache/vconsole-lifecycle-red-v2-browser",
+    "refactor/.cache/vconsole-lifecycle-green-v2-browser"
+  ],
+  "limits": [
+    "Scroller test uses held zero-delay timers, after actual visible logging, to force pending layout continuations after destroy.",
+    "Cancelled RAF callbacks are deliberately replayed to test generation isolation.",
+    "No claim of full upstream lifecycle coverage; no dependency license closure, publishing or deployment."
+  ]
+}

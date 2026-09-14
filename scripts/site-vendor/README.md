@@ -29,11 +29,11 @@ own fingerprinted site. `.gitattributes` preserves text bytes across Windows/Lin
 `yarn test:site-notices` tests missing/extra/modified assets, changed or incomplete
 inputs, path escape and read-only output drift. The browser fixture
 `test/browser/site-vendor.spec.js` checks actual mobile logging, native playback,
-HTTP notice contents and destruction. Its WebKit destruction error is a real
-open vendor issue; do not skip the test or catch the page error to turn it green.
+HTTP notice contents and destruction. The fixed-source lifecycle patch and its
+old-build reproduction are maintained in `vconsole/README.md`; generated asset
+checks run before the notice checks. Do not skip destruction or catch page errors.
 Existing desktop TypeScript editor tests cover the real Monaco worker and Run.
 
-Follow-up: reproduce the pending vConsole log-store callback after destruction,
-restore complete licensing from fixed upstream evidence, then recover the
+Follow-up: restore complete licensing from fixed upstream evidence, then recover the
 console.js build and resolve remaining fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.
