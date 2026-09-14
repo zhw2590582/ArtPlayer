@@ -34,6 +34,7 @@
 | [全包大版本策略](version-policy.md) | 每包分别升级一个 major 的目标清单、兼容要求和版本落地步骤 |
 | [已实现的 CI 入口](ci-setup.md) | Yarn 检查/构建、只读 lint、Pages 隔离及远端待验收状态 |
 | [GitHub CI/CD](github-ci-cd.md) | PR/兼容矩阵、构建报告、Pages、npm 发布及远端准入验证 |
+| [Pages部署与恢复](pages-deployment.md) | 独立暂存、旧URL/域名预检、只读远端快照与人工切换恢复顺序 |
 | [AI 协作流程](ai-workflow.md) | AI 接续工作、任务边界、验证、记录和交接模板 |
 | [每任务提交审计](commit-audit.md) | 实际Git状态迁移、独立提交、初始例外、分支合并和CI报告 |
 | [全包影响映射](impact-analysis.md) | 变更范围、依赖/验证关系、必需CI命令及尚缺的包验证 |

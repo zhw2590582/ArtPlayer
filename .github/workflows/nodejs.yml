@@ -215,6 +215,16 @@ jobs:
         run: yarn ci:check 2>&1 | tee refactor/.cache/ci/check.log
       - name: Build libraries and documentation
         run: yarn ci:build 2>&1 | tee refactor/.cache/ci/build.log
+      - name: Validate and stage Pages paths
+        id: pages
+        if: inputs.pages-artifact && github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-latest'
+        run: yarn prepare:pages 2>&1 | tee refactor/.cache/ci/pages.log
+      - name: Install staged Pages browser dependencies
+        if: inputs.pages-artifact && github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-latest'
+        run: yarn test:browser:install --with-deps 2>&1 | tee refactor/.cache/ci/pages-browser-install.log
+      - name: Verify staged Pages entrypoints
+        if: inputs.pages-artifact && github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-latest'
+        run: yarn test:pages:browser 2>&1 | tee refactor/.cache/ci/pages-browser.log
       - name: Record source and tool versions
         if: always()
         run: |
@@ -229,7 +239,10 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: checks-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: refactor/.cache/ci/
+          path: |
+            refactor/.cache/ci/
+            refactor/.cache/pages/run-*/report.json
+            refactor/.cache/pages/run-*/browser.json
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: warn
@@ -237,7 +250,7 @@ jobs:
         if: inputs.pages-artifact && github.ref == 'refs/heads/master' && matrix.os == 'ubuntu-latest'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: docs
+          path: ${{ steps.pages.outputs.site }}
           include-hidden-files: true
     strategy:
       fail-fast: false

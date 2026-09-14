@@ -92,8 +92,42 @@ export function validateCIWorkflow(source) {
   assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/vue-consumer-*/')), 'Retain Vue consumer failure evidence')
   const pages = workflow.jobs.checks.steps.find(step => step.uses?.startsWith('actions/upload-pages-artifact@'))
   assert.equal(pages?.if, 'inputs.pages-artifact && github.ref == \'refs/heads/master\' && matrix.os == \'ubuntu-latest\'', 'Only one trusted matrix leg can prepare Pages')
+  const prepareIndex = workflow.jobs.checks.steps.findIndex(step => step.id === 'pages')
+  const prepare = workflow.jobs.checks.steps[prepareIndex]
+  assert(prepare && prepare.if === pages.if && prepare.run === 'yarn prepare:pages 2>&1 | tee refactor/.cache/ci/pages.log', 'Pages upload needs the matching strict preparation step')
+  assert(prepareIndex > workflow.jobs.checks.steps.findIndex(step => step.run?.startsWith('yarn ci:build ')) && prepareIndex < workflow.jobs.checks.steps.indexOf(pages), 'Build, preflight and upload must be ordered')
+  assert.equal(pages.with.path, '${{ steps.pages.outputs.site }}', 'Upload the exact validated site, never the working docs tree')
+  let previous = prepareIndex
+  for (const command of ['yarn test:browser:install --with-deps 2>&1 | tee refactor/.cache/ci/pages-browser-install.log', 'yarn test:pages:browser 2>&1 | tee refactor/.cache/ci/pages-browser.log']) {
+    const index = workflow.jobs.checks.steps.findIndex(step => step.run === command)
+    assert(index > previous && index < workflow.jobs.checks.steps.indexOf(pages) && workflow.jobs.checks.steps[index].if === pages.if, 'Staged entrypoints require ordered browser installation and verification before upload')
+    previous = index
+  }
   return { jobs: requiredJobs, systems, summary: summary.name }
 }
 
+export function validatePagesWorkflow(source) {
+  const workflow = YAML.parse(source, { uniqueKeys: true })
+  assert.deepEqual(Object.keys(workflow.on), ['workflow_dispatch'], 'Pages needs an explicit trusted dispatch')
+  assert.deepEqual(workflow.permissions, { contents: 'read' })
+  assert.deepEqual(workflow.concurrency, { 'group': 'pages', 'cancel-in-progress': false })
+  assert.deepEqual(Object.keys(workflow.jobs).sort(), ['deploy', 'validate'])
+  const { validate, deploy } = workflow.jobs
+  for (const job of [validate, deploy]) {
+    assert.equal(job.if, 'github.ref == \'refs/heads/master\' && vars.PAGES_DEPLOY_ENABLED == \'true\'')
+    assert(!job['continue-on-error'])
+  }
+  assert.equal(validate.uses, './.github/workflows/nodejs.yml')
+  assert.deepEqual(validate.with, { 'pages-artifact': true })
+  assert.equal(deploy.needs, 'validate', 'Deploy only after every reusable CI job succeeds')
+  assert.deepEqual(deploy.permissions, { 'pages': 'write', 'id-token': 'write' })
+  assert.equal(deploy.environment.name, 'github-pages')
+  assert.equal(deploy['timeout-minutes'], 10)
+  assert.equal(deploy.steps.length, 1, 'Deploy must not execute or rebuild downloaded code')
+  assert.match(deploy.steps[0].uses, /^actions\/deploy-pages@[a-f0-9]{40}$/)
+  assert(!deploy.steps[0].if && !deploy.steps[0]['continue-on-error'] && !deploy.steps[0].with, 'Use the validated current-run Pages artifact without overrides')
+  return { dispatch: 'master', deployment: 'github-pages', enabledBy: 'PAGES_DEPLOY_ENABLED' }
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url))
-  console.log(JSON.stringify(validateCIWorkflow(fs.readFileSync('.github/workflows/nodejs.yml', 'utf8'))))
+  console.log(JSON.stringify({ ci: validateCIWorkflow(fs.readFileSync('.github/workflows/nodejs.yml', 'utf8')), pages: validatePagesWorkflow(fs.readFileSync('.github/workflows/pages.yml', 'utf8')) }))

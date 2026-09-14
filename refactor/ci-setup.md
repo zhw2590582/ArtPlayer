@@ -97,6 +97,13 @@ CORE-25 已修复无 navigator 默认选项缺陷，严格 test:package:release 
 
 ## Pages 隔离与启用条件
 
+CI-02已实现独立暂存与旧路径预检，并验证21个重新构建的uncompiled入口、63个
+compiled/dist匹配和6项三浏览器暂存播放检查。上传路径为prepare:pages的精确输出，
+不再直接上传工作区docs；新增脚本和回退说明见[Pages部署](pages-deployment.md)。
+2026-09-14只读API确认线上仍为gh-pages根目录的legacy部署，域名github.artplayer.org；
+环境允许master/gh-pages，启用变量查询404，状态未知。后面的初始记录保留为历史背景，
+其“远端未知”描述不代表本次没有读取配置；CI-04实际部署/切换仍未验证。
+
 ENG-07 将浏览器候选改为 `yarn test:package` 实际打包并安装后的文件，使用输出映射禁止
 回退到源码。安装/构建日志、tarball、成员指纹和浏览器结果一并上传，构建快照的 node_modules
 链接不上传。初始包范围为 core/chapter；PKG-CHAPTER-04 已将这两个包的已知类型诊断清零，

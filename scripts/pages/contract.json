@@ -1,0 +1,32 @@
+{
+  "domain": "github.artplayer.org",
+  "requiredPaths": [
+    "index.html",
+    "mobile.html",
+    "esm.html",
+    "iframe.html",
+    "i18n.html",
+    ".nojekyll",
+    "CNAME",
+    "ads.txt",
+    "googlebcdef0d1e9238554.html",
+    "document/index.html",
+    "document/en/index.html",
+    "document/start/option.html",
+    "document/en/start/option.html",
+    "test/index.html",
+    "test/test.js",
+    "assets/js/bootstrap.js",
+    "assets/js/common.js",
+    "assets/js/mobile.js",
+    "compiled/artplayer.js",
+    "compiled/artplayer.legacy.js",
+    "compiled/artplayer.mjs",
+    "compiled/i18n/zh-tw.js",
+    "compiled/i18n/id.mjs",
+    "uncompiled/artplayer/index.js",
+    "uncompiled/artplayer-tool-iframe/index.js",
+    "llms.txt",
+    "llms.manifest.json"
+  ]
+}

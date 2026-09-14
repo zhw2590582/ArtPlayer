@@ -773,11 +773,15 @@
         "ENG-02",
         "SITE-03"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南",
       "acceptance": "部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-CI-02-pages-artifact.md",
+        "baselines/pages-artifact-validation.json",
+        "pages-deployment.md"
+      ]
     },
     {
       "id": "CI-03",

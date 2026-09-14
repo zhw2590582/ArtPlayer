@@ -6,5 +6,5 @@
     "allowImportingTsExtensions": true,
     "checkJs": true
   },
-  "include": ["library/**/*.ts", "build.js", "dev.js", "utils.js", "projects.js", "rebuild.js", "build-analysis.mjs"]
+  "include": ["library/**/*.ts", "pages/**/*.ts", "prepare-pages.mjs", "build.js", "dev.js", "utils.js", "projects.js", "rebuild.js", "build-analysis.mjs"]
 }

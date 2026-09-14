@@ -1,5 +1,19 @@
 # 进度与证据
 
+## CI-02 Pages产物预检与恢复流程完成
+
+生产构建后的独立暂存目录重新生成21个旧uncompiled入口，验证63个compiled/dist
+匹配、域名/隐藏文件/旧路径，登记546个文件指纹；工作流只上传该步骤输出，且必须
+经过暂存入口三浏览器验证和全部CI作业。55项CI回归、严格TS、lint/actionlint通过，
+最终6项demo/ESM原生播放、章节更新、网页全屏和销毁检查通过。前几轮媒体服务/
+网络错误断言导致的失败全部留档，不改变产品、不放宽候选断言来掩盖故障。
+只读API确认当前线上仍是gh-pages分支根目录legacy部署，域名github.artplayer.org；
+环境允许master/gh-pages，启用变量404仍未知。七个关键路径HEAD200，旧提交ZIP
+已保存。没有远端写入、部署、push或publish。见[变更](changes/2026-09-14-CI-02-pages-artifact.md)、
+[证据](baselines/pages-artifact-validation.json)与[恢复说明](pages-deployment.md)。
+255项：186 done、17 doing、52 todo。CI-04保留实际切换/远端运行/发布后验收，插件、
+站点、设备及复盘门槛未关闭。Chapter桌面记录已核对，时序疑点和真机缺口继续保持doing。
+
 ## MOD-03 核心热路径测量与优化完成
 
 完成检查点23a4f22b7后的剩余验收：原生存储三引擎三组旧新9项、安装包布局/设置
