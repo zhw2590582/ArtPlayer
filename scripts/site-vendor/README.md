@@ -1,6 +1,6 @@
 # Frozen site vendor notices
 
-`manifest.json` pins the already-identified Monaco 0.30.1 and vConsole 3.15.0
+`manifest.json` pins the already-identified Monaco 0.30.1, vConsole 3.15.0 and console
 archives, corresponding files and upstream notice texts. It does not clear other
 site dependencies or grant rights to samples/fonts. The vConsole LICENSE is
 preserved verbatim. A separately identified MIT text supplies the body referenced
@@ -22,8 +22,9 @@ files retain their exact upstream bytes, including final blank lines.
 `../build-site-notices.mjs` provides `yarn build:site-notices` and read-only
 `yarn check:site-notices`. The write command cannot bless altered vendor assets;
 review the new archive and license evidence before changing the manifest. The
-CLI prevents accidentally dropping either verified group, the ten reviewed nested
-components, or vConsole's original license, supplemental MIT body and attribution.
+CLI prevents accidentally dropping any of the three groups, the ten reviewed
+Monaco/vConsole components, the 35 identified console components or their notice
+count, and vConsole's original license, supplemental MIT body and attribution.
 Component references require their runtime assets and every notice before writing.
 Source notices
 live in `refactor/baselines/site-vendor/`; generated delivery files live under
@@ -58,7 +59,9 @@ output through PowerShell text redirection. No dependency installation is needed
 The desktop console's owned TS entry/view and lifecycle now build through
 `build:console` / `check:console`; see [console maintenance](console/README.md).
 Its other 100 Parcel modules remain frozen and now reproduce exactly from fixed
-archives, including the Parcel loader. Full embedded attribution/notices remain open.
+archives, including the Parcel loader. Its 33 package/loader licenses and two
+embedded license headers now ship under `docs/licenses/console/`. Full embedded
+attribution remains open; the generated index explicitly preserves that boundary.
 
 Follow-up: finish Monaco's broader bundled-component notice audit, the console
 embedded attribution/notices and remaining fonts/media. Do not upgrade these assets

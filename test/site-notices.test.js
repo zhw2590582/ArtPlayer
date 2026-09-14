@@ -105,3 +105,26 @@ test('Site notice CLI rejects omitted reviewed components and supplemental vCons
     assert(!fs.existsSync(path.join(root, 'docs')))
   }
 })
+
+test('Console notice CLI rejects omitted package or embedded attribution before writing', (t) => {
+  const { root } = fixture(t)
+  const manifestPath = path.join(root, 'scripts/site-vendor/manifest.json')
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true })
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  for (const name of ['console-feed', 'parcel-bundler', 'styled-components', 'chromium-string-utils', 'stylis-rule-sheet']) {
+    for (const field of ['components', 'notices']) {
+      const manifest = structuredClone(original)
+      const group = manifest.groups.find(group => group.name === 'console')
+      const component = group.components.find(component => component.name === name)
+      if (field === 'components')
+        group.components = group.components.filter(item => item !== component)
+      else
+        group.notices = group.notices.filter(notice => !component.notices.includes(notice.target))
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest))
+      const result = spawnSync(process.execPath, [path.resolve('scripts/build-site-notices.mjs')], { cwd: root, encoding: 'utf8' })
+      assert.equal(result.status, 1)
+      assert.match(result.stderr, field === 'components' ? /Do not silently drop verified console/ : /Missing reviewed console notice/)
+      assert(!fs.existsSync(path.join(root, 'docs')))
+    }
+  }
+})

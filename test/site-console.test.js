@@ -7,11 +7,32 @@ import process from 'node:process'
 import test from 'node:test'
 import ts from 'typescript'
 import { generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
+import { extractNotice } from '../scripts/site-vendor/console/embedded-notices.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from '../scripts/site-vendor/console/provenance.ts'
 import { reconstructModule, verifyPrelude } from '../scripts/site-vendor/console/reconstruction.ts'
 import { errorArgument } from '../scripts/site-vendor/console/runtime/errors.ts'
 import { css } from '../scripts/site-vendor/console/runtime/style.ts'
 import { createSubscriptions } from '../scripts/site-vendor/console/runtime/subscriptions.ts'
+
+test('Embedded notices retain exact headers and reject missing or changed mapped sources', () => {
+  const source = '// Copyright owner\n// Full permission and disclaimer.\nconst value = 1;'
+  const text = '// Copyright owner\n// Full permission and disclaimer.\n'
+  const bytes = Buffer.from(source)
+  const notice = { archive: 'fixture', member: 'index.js', memberSha256: hash(bytes), sourceSha256: hash(source), start: '// Copyright owner', end: '// Full permission and disclaimer.\n', source: 'LICENSE', sha256: hash(text) }
+  assert.equal(extractNotice(bytes, notice), text)
+  assert.throws(() => extractNotice(Buffer.from(`${source}\n`), notice), /archive member changed/)
+  assert.throws(() => extractNotice(bytes, { ...notice, end: 'absent' }), /Missing notice end/)
+  assert.throws(() => extractNotice(bytes, { ...notice, sha256: hash('shortened') }), /excerpt changed/)
+  const map = { sources: ['../src/plugin.js'], sourcesContent: [source] }
+  const mapped = Buffer.from(JSON.stringify(map))
+  const mappedNotice = { ...notice, mapSource: map.sources[0], memberSha256: hash(mapped) }
+  assert.equal(extractNotice(mapped, mappedNotice), text)
+  assert.throws(() => extractNotice(mapped, { ...mappedNotice, mapSource: 'missing.js' }), /map source/)
+  for (const changed of [{ ...map, sourcesContent: [null] }, { sources: [...map.sources, ...map.sources], sourcesContent: [source, source] }, { ...map, sourcesContent: ['changed'] }]) {
+    const changedBytes = Buffer.from(JSON.stringify(changed))
+    assert.throws(() => extractNotice(changedBytes, { ...mappedNotice, memberSha256: hash(changedBytes) }), /source content|map source|source changed/)
+  }
+})
 
 function fixture() {
   const jobs = new Map()

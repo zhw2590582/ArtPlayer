@@ -1,3 +1,4 @@
+import type { EmbeddedNotice } from './embedded-notices.ts'
 import type { Archive, External, Source } from './provenance.ts'
 import type { BabelRuntime, EsmSource } from './reconstruction.ts'
 import assert from 'node:assert/strict'
@@ -8,6 +9,7 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { extractNotice } from './embedded-notices.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from './provenance.ts'
 import { reconstructModule, verifyPrelude } from './reconstruction.ts'
 
@@ -168,4 +170,12 @@ for (const notice of esm.supplementalNotices) {
     assert.equal(hash(bytes), notice.sha256, 'Upstream supplemental notice changed')
   }
 }
-console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, unresolved: 0, licenseClosure: false }))
+const embedded: { notices: EmbeddedNotice[] } = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-embedded-notices.json'), 'utf8'))
+assert.equal(embedded.notices.length, 2, 'Incomplete reviewed embedded notice scope')
+assert.equal(new Set(embedded.notices.map(notice => notice.source)).size, 2, 'Duplicate embedded notice source')
+for (const notice of embedded.notices) {
+  assert(archiveIds.has(notice.archive) || notice.archive === 'console-feed-3.2.2', 'Unknown embedded notice archive')
+  const text = extractNotice(readMember(`${notice.archive}.tgz`, notice.member), notice)
+  assert.equal(fs.readFileSync(path.join(root, notice.source), 'utf8'), text, 'Frozen embedded notice changed')
+}
+console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, unresolved: 0, licenseClosure: false }))

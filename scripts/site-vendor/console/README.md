@@ -132,3 +132,26 @@ The fetch command verifies that immutable upstream text through GitHub's Content
 API too (the raw URL had connection resets); both URLs and the blob ID are
 recorded, and decoded content must match the same hash. Offline mode checks
 the frozen bytes. Full embedded-component attribution remains open.
+
+## Public notice delivery and embedded sources
+
+The site manifest now delivers all 32 runtime package licenses, Parcel's loader
+license, and two embedded headers through `yarn build:site-notices`. The hashes
+are tied to the current generated console asset. `check:console` must run before
+`check:site-notices`; adapter changes require an explicit manifest fingerprint
+update after runtime validation. No runtime code is appended by the notice build.
+
+`embedded-notices.ts` extracts exact license comment blocks from verified archive
+members, or from a unique source in the member's source map. It verifies member,
+source and excerpt hashes, without removing comment markers or changing lines.
+`reproduce.ts` compares those excerpts with the preserved files. The record is
+`refactor/baselines/console-embedded-notices.json`; Chromium's complete BSD header
+comes from console-feed string-utils, and Sultan Tarimo's MIT header comes from
+styled-components' rule-sheet source map. Both are independently attributed in
+the public index and protected by the notice CLI's omission checks.
+
+This is partial embedded review. The record lists replicator, simple-html-tokenizer,
+Emotion stylis/hash/cache, the Component Stack Overflow reference, and Babel/
+regenerator inside react-inspector as follow-ups. Source-map names and comment
+links are leads, not proof of a particular upstream version or complete notice
+coverage. Do not close VENDOR-08 solely because all Parcel modules reproduce.

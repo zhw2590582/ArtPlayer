@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-14T23:20:00.640Z",
+  "baseCommit": "63e4e8ad9206049c48bd2e2aee05166c05bed8d7",
+  "node": "v24.21.0",
+  "sourceFingerprint": {
+    "manifestSha256": "ba103e8ec004b5670dec9ee096edaa84d7b72da08b97e2807eac87dcc911420e",
+    "embeddedRecordSha256": "f11b0c4e903b448cacef60493c4991f79679ad67d68e9a2dcd18d0545c7fa150",
+    "consoleSha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678"
+  },
+  "unit": {
+    "command": "node --test test/site-console.test.js test/site-notices.test.js",
+    "passed": 20,
+    "failed": 0,
+    "log": "refactor/.cache/console-notices-tests.log"
+  },
+  "reproduction": {
+    "exactModules": 100,
+    "embeddedNotices": 2,
+    "licenseClosure": false,
+    "log": "refactor/.cache/console-notices-reproduce.log"
+  },
+  "browser": {
+    "command": "node node_modules/@playwright/test/cli.js test test/browser/site-vendor.spec.js --workers=1",
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "9a3c46a1b5c40514f4ba8a6733249d3b8d771c1cdaac1634b676b9d24cd7619d",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ],
+    "noticeFilesPerEngine": 53
+  },
+  "checks": [
+    "docs-tools strict TypeScript",
+    "scoped ESLint after three style corrections",
+    "build-site-notices --check",
+    "build-console --check"
+  ],
+  "limits": [
+    "Embedded attribution review remains incomplete; see console-embedded-notices.json",
+    "HTTPS integrations fulfilled by fixture; only local real pages and playback verified",
+    "Windows desktop engines are not physical mobile device evidence",
+    "No runtime, lockfile, push, deployment or publication change"
+  ]
+}

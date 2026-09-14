@@ -4494,7 +4494,10 @@
         "baselines/console-commonjs-provenance.json",
         "changes/2026-09-15-SITE-07-console-commonjs.md",
         "baselines/console-esm-provenance.json",
-        "changes/2026-09-15-SITE-07-console-esm.md"
+        "changes/2026-09-15-SITE-07-console-esm.md",
+        "baselines/console-embedded-notices.json",
+        "baselines/console-notices-validation.json",
+        "changes/2026-09-15-SITE-07-console-notices.md"
       ]
     },
     {

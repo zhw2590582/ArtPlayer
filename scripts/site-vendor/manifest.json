@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "scope": "Frozen source identities and verbatim upstream notice texts for Monaco/vConsole. This is not clearance of all bundled components, the console bundle, fonts, media or other site assets.",
+  "scope": "Frozen source identities and verbatim upstream notice texts for Monaco, vConsole and the legacy console bundle. Embedded component attribution, fonts, media and other site provenance gates remain open; this inventory is not publication clearance.",
   "groups": [
     {
       "name": "vconsole",
@@ -936,6 +936,586 @@
             "docs/licenses/monaco-editor/codicons/LICENSE-CODE",
             "docs/licenses/monaco-editor/codicons/README.md",
             "docs/licenses/monaco-editor/codicons/ATTRIBUTION.md"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "console",
+      "version": "legacy-vendor-with-TS-adapter",
+      "tarball": "https://github.com/zhw2590582/ArtPlayer/blob/5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c/docs/assets/js/console.js",
+      "review": "The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Package license texts and two embedded license headers below are preserved verbatim. Embedded attribution review is still incomplete; this inventory is not publication clearance.",
+      "roots": [
+        "docs/assets/js/console.js"
+      ],
+      "files": [
+        {
+          "path": "docs/assets/js/console.js",
+          "sha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678",
+          "mode": "lf-text"
+        }
+      ],
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-feed-3.2.2-LICENSE.txt",
+          "target": "docs/licenses/console/console-feed/console-feed-3.2.2-LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/react-17.0.2-LICENSE.txt",
+          "target": "docs/licenses/console/react/react-17.0.2-LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/react-dom-17.0.2-LICENSE.txt",
+          "target": "docs/licenses/console/react-dom/react-dom-17.0.2-LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/scheduler-0.20.2-LICENSE.txt",
+          "target": "docs/licenses/console/scheduler/scheduler-0.20.2-LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/object-assign-4.1.1-license.txt",
+          "target": "docs/licenses/console/object-assign/object-assign-4.1.1-license",
+          "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/react-is-16.13.1-LICENSE.txt",
+          "target": "docs/licenses/console/react-is/react-is-16.13.1-LICENSE",
+          "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/prop-types-15.7.2-LICENSE.txt",
+          "target": "docs/licenses/console/prop-types/prop-types-15.7.2-LICENSE",
+          "sha256": "f657f99d3fb9647db92628e96007aabb46e5f04f33e49999075aab8e250ca7ce"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/shallowequal-1.1.0-LICENSE.txt",
+          "target": "docs/licenses/console/shallowequal/shallowequal-1.1.0-LICENSE",
+          "sha256": "709e45bb17277819ce27e9abe5dc8e56fe93081e54adb6e6385517f28aa11ac4"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/process-0.11.10-LICENSE.txt",
+          "target": "docs/licenses/console/process/process-0.11.10-LICENSE",
+          "sha256": "59a400d04c5078579acc27ddd6452c1bdf763f9506e01364700935fbb1a7c91b"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/hoist-non-react-statics-3.3.2-LICENSE.md.txt",
+          "target": "docs/licenses/console/hoist-non-react-statics/hoist-non-react-statics-3.3.2-LICENSE.md",
+          "sha256": "eb32ff0ec52b6ea86e3d3e06c6ad1b68ee03798b6729af13919f6d5c14b368f3"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/is-dom-1.1.0-LICENSE.txt",
+          "target": "docs/licenses/console/is-dom/is-dom-1.1.0-LICENSE",
+          "sha256": "ba38703a10a53a91d4ff87bc1d930714104ead8d53f3f86936b7772c440be96f"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/is-object-1.0.2-LICENSE.txt",
+          "target": "docs/licenses/console/is-object/is-object-1.0.2-LICENSE",
+          "sha256": "950429b35f82e225a613a0638e7933855a4ce05172bd36dc060093ba58793bbe"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/is-window-1.0.2-LICENSE.txt",
+          "target": "docs/licenses/console/is-window/is-window-1.0.2-LICENSE",
+          "sha256": "6f19793f004670a8c873dde23d0f970eb32dd3bba8078980a42a4fb71cb1a048"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-commonjs/linkifyjs-2.1.9-LICENSE.txt",
+          "target": "docs/licenses/console/linkifyjs/linkifyjs-2.1.9-LICENSE",
+          "sha256": "c66691e7e051cf0e1538a2c7d33f337b1dfe37bb0726724917dd1ceaf043a2df"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-core-10.3.0-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-core/emotion-core-10.3.0-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-css-10.0.27-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-css/emotion-css-10.0.27-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-cache-10.0.29-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-cache/emotion-cache-10.0.29-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-styled-10.0.27-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-styled/emotion-styled-10.0.27-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-styled-base-10.3.0-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-styled-base/emotion-styled-base-10.3.0-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-theming-10.3.0-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-theming/emotion-theming-10.3.0-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/styled-components-5.3.3-UPSTREAM-LICENSE.txt",
+          "target": "docs/licenses/console/styled-components/styled-components-5.3.3-UPSTREAM-LICENSE",
+          "sha256": "5b893305a717230e5b0024ff5ca3eec1dc05ba600c9b140730488d97ce56f1e6"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/babel-runtime-7.16.3-LICENSE.txt",
+          "target": "docs/licenses/console/babel-runtime/babel-runtime-7.16.3-LICENSE",
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-sheet-0.9.4-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-sheet/emotion-sheet-0.9.4-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-stylis-0.8.5-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-stylis/emotion-stylis-0.8.5-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-weak-memoize-0.2.5-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-weak-memoize/emotion-weak-memoize-0.2.5-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-utils-0.11.3-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-utils/emotion-utils-0.11.3-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-hash-0.8.0-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-hash/emotion-hash-0.8.0-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-unitless-0.7.5-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-unitless/emotion-unitless-0.7.5-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-memoize-0.7.4-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-memoize/emotion-memoize-0.7.4-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-serialize-0.11.16-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-serialize/emotion-serialize-0.11.16-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-is-prop-valid-0.8.8-LICENSE.txt",
+          "target": "docs/licenses/console/emotion-is-prop-valid/emotion-is-prop-valid-0.8.8-LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/react-inspector-5.1.1-LICENSE.txt",
+          "target": "docs/licenses/console/react-inspector/react-inspector-5.1.1-LICENSE",
+          "sha256": "62d1c62e4b7eaee1a57e4a27b5cf6f2c0dc554b88326fc40bc512f150b340deb"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/parcel-bundler-1.12.5-LICENSE.txt",
+          "target": "docs/licenses/console/parcel-bundler/parcel-bundler-1.12.5-LICENSE",
+          "sha256": "5cfba9d5711264d45a2431a53c79f597cef12720cc7c764db2602daa92d0bd2a"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-embedded/chromium-string-utils-LICENSE.txt",
+          "target": "docs/licenses/console/chromium-string-utils/LICENSE",
+          "sha256": "7a209dd1b94cabdb5ea9c6f9164b9546ffa5daaa671e7767d49510db055f5c51"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-embedded/stylis-rule-sheet-LICENSE.txt",
+          "target": "docs/licenses/console/stylis-rule-sheet/LICENSE",
+          "sha256": "99a75da65634b772687781c054ffe679569c1770c398f96427677899fe0ca8d7"
+        }
+      ],
+      "components": [
+        {
+          "name": "console-feed",
+          "version": "3.2.2",
+          "tarball": "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/console-feed/console-feed-3.2.2-LICENSE"
+          ]
+        },
+        {
+          "name": "react",
+          "version": "17.0.2",
+          "tarball": "https://registry.npmjs.org/react/-/react-17.0.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/react/react-17.0.2-LICENSE"
+          ]
+        },
+        {
+          "name": "react-dom",
+          "version": "17.0.2",
+          "tarball": "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/react-dom/react-dom-17.0.2-LICENSE"
+          ]
+        },
+        {
+          "name": "scheduler",
+          "version": "0.20.2",
+          "tarball": "https://registry.npmjs.org/scheduler/-/scheduler-0.20.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/scheduler/scheduler-0.20.2-LICENSE"
+          ]
+        },
+        {
+          "name": "object-assign",
+          "version": "4.1.1",
+          "tarball": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/object-assign/object-assign-4.1.1-license"
+          ]
+        },
+        {
+          "name": "react-is",
+          "version": "16.13.1",
+          "tarball": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/react-is/react-is-16.13.1-LICENSE"
+          ]
+        },
+        {
+          "name": "prop-types",
+          "version": "15.7.2",
+          "tarball": "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/prop-types/prop-types-15.7.2-LICENSE"
+          ]
+        },
+        {
+          "name": "shallowequal",
+          "version": "1.1.0",
+          "tarball": "https://registry.npmjs.org/shallowequal/-/shallowequal-1.1.0.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/shallowequal/shallowequal-1.1.0-LICENSE"
+          ]
+        },
+        {
+          "name": "process",
+          "version": "0.11.10",
+          "tarball": "https://registry.npmjs.org/process/-/process-0.11.10.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/process/process-0.11.10-LICENSE"
+          ]
+        },
+        {
+          "name": "hoist-non-react-statics",
+          "version": "3.3.2",
+          "tarball": "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/hoist-non-react-statics/hoist-non-react-statics-3.3.2-LICENSE.md"
+          ]
+        },
+        {
+          "name": "is-dom",
+          "version": "1.1.0",
+          "tarball": "https://registry.npmjs.org/is-dom/-/is-dom-1.1.0.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/is-dom/is-dom-1.1.0-LICENSE"
+          ]
+        },
+        {
+          "name": "is-object",
+          "version": "1.0.2",
+          "tarball": "https://registry.npmjs.org/is-object/-/is-object-1.0.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/is-object/is-object-1.0.2-LICENSE"
+          ]
+        },
+        {
+          "name": "is-window",
+          "version": "1.0.2",
+          "tarball": "https://registry.npmjs.org/is-window/-/is-window-1.0.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/is-window/is-window-1.0.2-LICENSE"
+          ]
+        },
+        {
+          "name": "linkifyjs",
+          "version": "2.1.9",
+          "tarball": "https://registry.npmjs.org/linkifyjs/-/linkifyjs-2.1.9.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/linkifyjs/linkifyjs-2.1.9-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/core",
+          "version": "10.3.0",
+          "tarball": "https://registry.npmjs.org/@emotion/core/-/core-10.3.0.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-core/emotion-core-10.3.0-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/css",
+          "version": "10.0.27",
+          "tarball": "https://registry.npmjs.org/@emotion/css/-/css-10.0.27.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-css/emotion-css-10.0.27-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/cache",
+          "version": "10.0.29",
+          "tarball": "https://registry.npmjs.org/@emotion/cache/-/cache-10.0.29.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-cache/emotion-cache-10.0.29-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/styled",
+          "version": "10.0.27",
+          "tarball": "https://registry.npmjs.org/@emotion/styled/-/styled-10.0.27.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-styled/emotion-styled-10.0.27-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/styled-base",
+          "version": "10.3.0",
+          "tarball": "https://registry.npmjs.org/@emotion/styled-base/-/styled-base-10.3.0.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-styled-base/emotion-styled-base-10.3.0-LICENSE"
+          ]
+        },
+        {
+          "name": "emotion-theming",
+          "version": "10.3.0",
+          "tarball": "https://registry.npmjs.org/emotion-theming/-/emotion-theming-10.3.0.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-theming/emotion-theming-10.3.0-LICENSE"
+          ]
+        },
+        {
+          "name": "styled-components",
+          "version": "5.3.3",
+          "tarball": "https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/styled-components/styled-components-5.3.3-UPSTREAM-LICENSE"
+          ]
+        },
+        {
+          "name": "@babel/runtime",
+          "version": "7.16.3",
+          "tarball": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.16.3.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/babel-runtime/babel-runtime-7.16.3-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/sheet",
+          "version": "0.9.4",
+          "tarball": "https://registry.npmjs.org/@emotion/sheet/-/sheet-0.9.4.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-sheet/emotion-sheet-0.9.4-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/stylis",
+          "version": "0.8.5",
+          "tarball": "https://registry.npmjs.org/@emotion/stylis/-/stylis-0.8.5.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-stylis/emotion-stylis-0.8.5-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/weak-memoize",
+          "version": "0.2.5",
+          "tarball": "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-weak-memoize/emotion-weak-memoize-0.2.5-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/utils",
+          "version": "0.11.3",
+          "tarball": "https://registry.npmjs.org/@emotion/utils/-/utils-0.11.3.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-utils/emotion-utils-0.11.3-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/hash",
+          "version": "0.8.0",
+          "tarball": "https://registry.npmjs.org/@emotion/hash/-/hash-0.8.0.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-hash/emotion-hash-0.8.0-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/unitless",
+          "version": "0.7.5",
+          "tarball": "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-unitless/emotion-unitless-0.7.5-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/memoize",
+          "version": "0.7.4",
+          "tarball": "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.7.4.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-memoize/emotion-memoize-0.7.4-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/serialize",
+          "version": "0.11.16",
+          "tarball": "https://registry.npmjs.org/@emotion/serialize/-/serialize-0.11.16.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-serialize/emotion-serialize-0.11.16-LICENSE"
+          ]
+        },
+        {
+          "name": "@emotion/is-prop-valid",
+          "version": "0.8.8",
+          "tarball": "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/emotion-is-prop-valid/emotion-is-prop-valid-0.8.8-LICENSE"
+          ]
+        },
+        {
+          "name": "react-inspector",
+          "version": "5.1.1",
+          "tarball": "https://registry.npmjs.org/react-inspector/-/react-inspector-5.1.1.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/react-inspector/react-inspector-5.1.1-LICENSE"
+          ]
+        },
+        {
+          "name": "parcel-bundler",
+          "version": "1.12.5",
+          "tarball": "https://registry.npmjs.org/parcel-bundler/-/parcel-bundler-1.12.5.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/parcel-bundler/parcel-bundler-1.12.5-LICENSE"
+          ]
+        },
+        {
+          "name": "chromium-string-utils",
+          "version": "embedded in console-feed-3.2.2",
+          "tarball": "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/chromium-string-utils/LICENSE"
+          ]
+        },
+        {
+          "name": "stylis-rule-sheet",
+          "version": "embedded in styled-components-5.3.3",
+          "tarball": "https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/stylis-rule-sheet/LICENSE"
           ]
         }
       ]

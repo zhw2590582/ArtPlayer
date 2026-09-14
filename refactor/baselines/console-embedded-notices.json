@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "notices": [
+    {
+      "archive": "console-feed-3.2.2",
+      "member": "package/lib/Component/devtools-parser/string-utils.js",
+      "start": "// Copyright 2014 The Chromium Authors.",
+      "end": "// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+      "memberSha256": "1daafcdb9cdeab609e5c4561903d821acd46b6edac8a84bbaf93fc710ce3e99d",
+      "sourceSha256": "1daafcdb9cdeab609e5c4561903d821acd46b6edac8a84bbaf93fc710ce3e99d",
+      "source": "refactor/baselines/site-vendor/console-embedded/chromium-string-utils-LICENSE.txt",
+      "sha256": "7a209dd1b94cabdb5ea9c6f9164b9546ffa5daaa671e7767d49510db055f5c51"
+    },
+    {
+      "archive": "styled-components-5.3.3",
+      "member": "package/dist/styled-components.browser.esm.js.map",
+      "mapSource": "../src/utils/stylisPluginInsertRule.js",
+      "start": "/**\n * MIT License",
+      "end": " */\n",
+      "memberSha256": "582683de52b70c913c6265acf7ade913a53a69d569216f951990c220db28ed44",
+      "sourceSha256": "76ff20854b816d05778c864647dfb9b300d8f5fc4f1df5f4d774ffa47a340871",
+      "source": "refactor/baselines/site-vendor/console-embedded/stylis-rule-sheet-LICENSE.txt",
+      "sha256": "99a75da65634b772687781c054ffe679569c1770c398f96427677899fe0ca8d7"
+    }
+  ],
+  "review": {
+    "status": "partial",
+    "confirmed": [
+      "Chromium copyright and full BSD conditions in console-feed source",
+      "Sultan Tarimo MIT header in styled-components embedded rule-sheet source"
+    ],
+    "pending": [
+      "console-feed replicator upstream attribution",
+      "linkifyjs simple-html-tokenizer attribution",
+      "Emotion stylis/hash and cache rule-sheet attribution",
+      "react-inspector embedded Babel/regenerator source and notices",
+      "console-feed Component Stack Overflow attribution and any additional embedded sources"
+    ]
+  }
+}
