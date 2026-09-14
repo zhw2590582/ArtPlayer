@@ -219,8 +219,19 @@ VTT/SRT selection, offsets/fullscreen/source changes and multi-instance URL
 ownership. Old1.0.0/1.1.0/1.2.0 factories run unchanged on the candidate core.
 Explicit single-active-cue probes record historical and candidate overlap defects;
 their passing assertions do not mean simultaneous captions are compatible.
-Paused Firefox offset checks remain failing pending a production fix, and the
-original WebKit source-switch failure is retained despite a passing rerun.
+Candidate paused Firefox offsets are corrected by CORE-SUBTITLE-OFFSET-01. Old
+Firefox hosts retain explicit defect observations; their behavior is not silently
+counted as correct. WebKit source-switch failures remain under investigation.
 See `refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md` before changing
 expectations. Reports include native active cues and rendered text. The new frozen
 5.1.2 core route verifies archive integrity and member hashes before serving.
+
+`subtitle-offset.spec.js` checks current/actual published core offset behavior,
+including synchronous native/public/rendered captions, identical cue objects,
+unchanged media time, disabled mode and resumed playback. The published Firefox
+branch asserts the original incorrect captions; the candidate must have the correct
+membership and order. `subtitle-offset-native.spec.js` loads a real HTML track
+without creating an Artplayer instance to compare native timing edits, cue
+reinsertion and mode toggling. It records actual time within the required interval,
+not a fabricated millisecond-exact seek landing. These diagnostic observations
+do not claim every native engine strategy is correct.

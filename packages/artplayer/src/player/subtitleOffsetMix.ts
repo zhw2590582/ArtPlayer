@@ -1,4 +1,5 @@
 import type { SubtitleOffsetHost } from '../subtitle/types'
+import { refreshPausedCues } from '../subtitle/timing'
 import { clamp, def } from '../utils'
 
 export default function subtitleOffsetMix(art: SubtitleOffsetHost): void {
@@ -21,6 +22,7 @@ export default function subtitleOffsetMix(art: SubtitleOffsetHost): void {
         cue.startTime = clamp(cue.originalStartTime + offset, 0, art.duration)
         cue.endTime = clamp(cue.originalEndTime + offset, 0, art.duration)
       }
+      refreshPausedCues(template.$track.track, template.$video, cues)
       art.subtitle.update()
       notice.show = `${i18n.get('Subtitle Offset')}: ${value}s`
       art.emit('subtitleOffset', value)

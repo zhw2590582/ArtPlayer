@@ -670,6 +670,18 @@ transport cancellation, conversion, ownership, native DOM events and cue renderi
 The offset mixin remains the player property entry, with original cue bounds retained
 on native cue objects. Validation evidence and remaining release gates live in refactor/.
 
+timing.ts handles native active-cue invalidation after a paused offset edit. Some
+engines retain the old membership even after cue timestamps change. It compares
+the expected current interval/order to native activeCues and, only on mismatch,
+removes and re-adds the original cue objects in their captured order. The mixin
+then performs the existing update, notice and subtitleOffset emission. It does
+not seek media, replace cues, toggle track mode or allocate background work.
+Playing, disabled and capability-limited hosts retain their existing path. A
+mode-toggle workaround was rejected because Firefox reordered tied cues during
+successive offsets. Tests in subtitle-offset.spec.js verify synchronous native,
+public and rendered membership, identity, order, disabled state and resumed play;
+subtitle-offset-native.spec.js is an independent native video/track probe.
+
 request.ts races work against scope closure. Superseded requests settle undefined even
 when the transport ignores AbortSignal; active failures reject. state.ts owns request
 and track scopes and only generated object URLs. A caller-owned URL is never revoked.

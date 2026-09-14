@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { test as it } from 'node:test'
 import { loadModules } from './helpers/load.js'
 
-const { ResourceScope, SubtitleRequest, parseSubtitle, subtitleOffsetMix, beginLifecycle, initSubtitleState, replaceSubtitleTrack } = await loadModules({
+const { ResourceScope, SubtitleRequest, parseSubtitle, subtitleOffsetMix, beginLifecycle, initSubtitleState, replaceSubtitleTrack, refreshPausedCues } = await loadModules({
   ResourceScope: 'packages/artplayer/src/lifecycle/scope',
   SubtitleRequest: 'packages/artplayer/src/subtitle/request',
   parseSubtitle: { file: 'packages/artplayer/src/subtitle/parse', name: 'parseSubtitle' },
@@ -11,6 +11,7 @@ const { ResourceScope, SubtitleRequest, parseSubtitle, subtitleOffsetMix, beginL
   beginLifecycle: { file: 'packages/artplayer/src/lifecycle/instance', name: 'beginLifecycle' },
   initSubtitleState: { file: 'packages/artplayer/src/subtitle/state', name: 'initSubtitleState' },
   replaceSubtitleTrack: { file: 'packages/artplayer/src/subtitle/track', name: 'replaceSubtitleTrack' },
+  refreshPausedCues: { file: 'packages/artplayer/src/subtitle/timing', name: 'refreshPausedCues' },
 })
 
 it('subtitle track attribute failure releases its new scope and preserves the original error', () => {
@@ -169,4 +170,84 @@ it('subtitle offsets with no cues retain the default state and do not notify', (
   art.subtitleOffset = 1
   assert.equal(art.subtitleOffset, 0)
   assert.equal(Object.hasOwn(art.notice, 'show'), false)
+})
+
+it('paused offsets refresh stale native membership before rendering and notifying, preserving cue identity', () => {
+  const cues = [{ startTime: 1, endTime: 3, text: 'First' }, { startTime: 4, endTime: 6, text: 'Later' }]
+  const video = { paused: true, currentTime: 1.5 }
+  const events = []
+  let active = [cues[0]]
+  const indexed = [...cues]
+  const track = {
+    mode: 'hidden',
+    removeCue(cue) {
+      events.push(['remove', cue.text])
+      indexed.splice(indexed.indexOf(cue), 1)
+      active = active.filter(item => item !== cue)
+    },
+    addCue(cue) {
+      events.push(['add', cue.text])
+      indexed.push(cue)
+      active = indexed.filter(cue => cue.startTime <= video.currentTime && video.currentTime < cue.endTime)
+    },
+    get activeCues() { return active },
+  }
+  const art = { template: { $track: { track }, $video: video }, duration: 8, subtitle: { cues, update() {
+    events.push(active.map(cue => cue.text))
+  } }, notice: {}, i18n: { get: key => key }, emit: (...args) => events.push(args) }
+  subtitleOffsetMix(art)
+  art.subtitleOffset = 1
+  const reindex = [['remove', 'First'], ['remove', 'Later'], ['add', 'First'], ['add', 'Later']]
+  assert.deepEqual(events, [...reindex, [], ['subtitleOffset', 1]])
+  events.length = 0
+  art.subtitleOffset = -3
+  assert.deepEqual(events, [...reindex, ['Later'], ['subtitleOffset', -3]])
+  assert.equal(active[0], cues[1])
+  assert.equal(video.currentTime, 1.5)
+  assert.equal(video.paused, true)
+  assert.equal(track.mode, 'hidden')
+  assert.deepEqual(indexed, cues)
+})
+
+it('paused refresh detects wrong members even when active counts match and preserves showing mode', () => {
+  const expired = { startTime: 0, endTime: 1 }
+  const current = { startTime: 1, endTime: 2 }
+  const writes = []
+  const track = { mode: 'showing', activeCues: [expired], removeCue: cue => writes.push(['remove', cue]), addCue: cue => writes.push(['add', cue]) }
+  Object.defineProperty(track, 'mode', { get: () => 'showing', set: () => assert.fail('must retain mode') })
+  refreshPausedCues(track, { paused: true, currentTime: 1 }, [expired, current])
+  assert.deepEqual(writes, [['remove', expired], ['remove', current], ['add', expired], ['add', current]])
+})
+
+it('paused refresh preserves correct overlap membership without toggling a native track', () => {
+  const cues = [{ startTime: 0, endTime: 2 }, { startTime: 1, endTime: 3 }]
+  const track = { mode: 'hidden', removeCue() {
+    assert.fail('unnecessary native invalidation')
+  }, activeCues: cues }
+  refreshPausedCues(track, { paused: true, currentTime: 1.5 }, cues)
+})
+
+it('paused refresh reindexes tied cues when native membership is correct but order drifted', () => {
+  const first = { startTime: 0, endTime: 2 }
+  const second = { startTime: 0, endTime: 2 }
+  const added = []
+  const track = { mode: 'hidden', activeCues: [second, first], removeCue() {}, addCue: cue => added.push(cue) }
+  refreshPausedCues(track, { paused: true, currentTime: 1 }, [first, second])
+  assert.deepEqual(added, [first, second])
+})
+
+it('paused refresh does not enable disabled tracks or intervene in playing and limited media hosts', () => {
+  for (const [mode, video] of [['disabled', { paused: true, currentTime: 1.5 }], ['hidden', { paused: false, currentTime: 1.5 }], ['hidden', undefined], ['hidden', { paused: true }], ['hidden', { paused: true, currentTime: Number.NaN }]]) {
+    const track = {
+      get mode() { return mode },
+      set mode(_value) {
+        assert.fail('unexpected track change')
+      },
+      get activeCues() {
+        assert.fail('unexpected cue inspection')
+      },
+    }
+    refreshPausedCues(track, video, [])
+  }
+  refreshPausedCues(undefined, { paused: true, currentTime: 1 }, [])
 })

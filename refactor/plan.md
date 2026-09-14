@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 247 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 248 项，范围 22 个包及工作区/示例。
 
-状态：todo 55 / doing 17 / blocked 0 / done 175 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 55 / doing 17 / blocked 0 / done 176 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,7 +14,7 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12, CORE-SUBTITLE-OFFSET-01 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 |
@@ -133,6 +133,7 @@
 | CORE-22 | artplayer<br>核心阶段完整验收 | CORE-21, CORE-23, PILOT-01, ENG-08, ENG-10, ENG-11 | 核心与旧插件的可自动化完整回归、资源/性能及明确外部验证缺口 | 核心自动化和公开差异处置通过；真实环境缺口链接包集成/REL 门槛，阶段完成不代表可公开发布 | H | done |
 | CORE-24 | artplayer<br>修复连续切源的播放意图继承 | CORE-22, PKG-AUDIO-04 | 连续切源保留原播放意图，同时尊重显式暂停与最新来源，回归旧/新 audio | 真实暂停状态的受控测试、重入/取消/失败/销毁、三引擎和 main/legacy 产物验证通过；不恢复过期来源的公开副作用 | H | done |
 | CORE-25 | artplayer<br>修复无 navigator 环境读取默认选项 | CORE-22, ENG-12 | 安全读取默认语言并保留浏览器已有默认值；实际 Node 与发布产物正反例 | 记录旧发布版 ReferenceError；候选在无 navigator 时可读默认选项，浏览器语言和公开类型不回归；不以补全局对象隐藏错误 | M | done |
+| CORE-SUBTITLE-OFFSET-01 | artplayer<br>修复暂停偏移后的原生活动字幕刷新 | CORE-15, CORE-22 | 暂停字幕偏移的原生轨道一致性修复、兼容回归和维护说明 | 保持cue对象、顺序、媒体时间、模式和公开事件；真实浏览器正负偏移及生命周期通过，历史缺陷单列 | H | done |
 
 ## 5 包迁移：artplayer-plugin-chapter
 
@@ -228,7 +229,7 @@
 | PKG-MULTI-SUB-07 | artplayer-plugin-multiple-subtitles<br>修复字幕内嵌时间戳序列化 | PKG-MULTI-SUB-03 | 保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异 | 旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变 | H | done |
 | PKG-MULTI-SUB-08 | artplayer-plugin-multiple-subtitles<br>修复字幕实体解码与嵌套标签包装 | PKG-MULTI-SUB-04, PKG-MULTI-SUB-07 | 使用解析器既有实体表入口修复多余分号；保护字面文本并以兄弟节点包装标签，保留CSS钩子和时间戳 | 冻结旧实现复现、实体/双重编码/标签/选择重置回归、新旧核心真实字幕显示通过；vendor原文与来源校验不变，类型/分发兼容 | M | done |
 | PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
-| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07, CORE-SUBTITLE-OFFSET-01 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-jassub
 
@@ -645,3 +646,4 @@
 - PKG-AUTO-THUMB-09: [记录](changes/2026-09-14-PKG-AUTO-THUMB-09-alias.md) [记录](baselines/auto-thumbnail-alias-validation.json)
 - PKG-AUTO-THUMB-10: [记录](changes/2026-09-14-PKG-AUTO-THUMB-10-encoding.md) [记录](baselines/auto-thumbnail-encoding-validation.json)
 - ENG-LINT-01: [记录](changes/2026-09-14-ENG-LINT-01-manifest-order.md) [记录](baselines/manifest-lint-validation.json)
+- CORE-SUBTITLE-OFFSET-01: [记录](changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md) [记录](baselines/subtitle-offset-validation.json)

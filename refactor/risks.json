@@ -6001,24 +6001,35 @@
       "id": "MULTI-SUB-OFFSET-01",
       "title": "Paused Firefox subtitle offset leaves out-of-time native cues active and captions visible",
       "confirmation": "reproduced",
-      "workspaceState": "Two runs on Firefox155 with cores5.3.0/5.4.0/candidate: paused at1.5, subtitleOffset=1 changes start/end to2/4 but native activeCues and HTML still contain both captions after the assertion timeout. Candidate assertion remains failing. No production correction yet.",
+      "workspaceState": "Native Firefox155 probe confirms stale paused membership. Candidate reinserts original cue objects only when paused membership/order is inconsistent; mode toggling was rejected after tied-caption reversal. Real main and legacy pass current paused positive/negative/reset offsets, disabled tracks and resumed playback in all3 engines. Published cores remain immutable defect observations, and package task05 still owns old-host combination acceptance.",
       "compatibleResolution": "Reduce native timing invalidation and ensure offset updates render the correct active captions without seeking media or changing public timing and event contracts.",
       "closureCriteria": "Candidate paused positive/negative/reset offsets refresh correctly, transitions and lifecycle regressions pass; historical behavior and actual old-core compatibility are separately documented.",
-      "status": "open",
+      "status": "resolved",
       "owners": [
-        "PKG-MULTI-SUB-05"
+        "PKG-MULTI-SUB-05",
+        "CORE-SUBTITLE-OFFSET-01"
       ],
       "evidence": [
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
         "refactor/baselines/multiple-subtitles-combinations-validation.json",
-        "test/browser/multiple-subtitles-combinations.spec.js"
-      ]
+        "test/browser/multiple-subtitles-combinations.spec.js",
+        "refactor/changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md",
+        "refactor/baselines/subtitle-offset-validation.json",
+        "test/browser/subtitle-offset-native.spec.js",
+        "test/browser/subtitle-offset.spec.js",
+        "test/subtitle.test.js"
+      ],
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md",
+        "refactor/baselines/subtitle-offset-validation.json"
+      ],
+      "resolutionRationale": "Candidate core fix passes focused native/public/rendered membership, identity/order/time/mode/event and lifecycle checks, with actual main/legacy evidence. Historical Firefox failures are separately asserted and documented; closing this candidate defect does not approve all old-core combinations."
     },
     {
       "id": "MULTI-SUB-SWITCH-01",
       "title": "Intermittent WebKit core5.3.0 caption loss after selected-track source switch",
       "confirmation": "unverified",
-      "workspaceState": "One Windows WebKit26.6 run lost Translation after switchUrl and seek1.5; diagnostic rerun passed without a production change. Root cause and reproducibility are unresolved; do not mark accepted or fixed.",
+      "workspaceState": "One Windows WebKit26.6 run lost Translation after switchUrl and seek1.5; diagnostic rerun passed without a production change. Root cause and reproducibility are unresolved; do not mark accepted or fixed. Expanded153 offset/lifecycle run again lost the selected caption after source switch on published5.3.0 and5.4.0 in WebKit, while candidate core passed. Root cause remains unclassified; the offset fix does not close this issue.",
       "compatibleResolution": "Inspect native track loading and source-switch ordering with deterministic state evidence; distinguish historical host failure from fixture ordering and candidate regression.",
       "closureCriteria": "Root cause classified with targeted evidence, any required fix validated, and changed candidate/old-core combination rerun without hiding the original failure.",
       "status": "open",
@@ -6028,7 +6039,9 @@
       "evidence": [
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
         "refactor/baselines/multiple-subtitles-combinations-validation.json",
-        "test/browser/multiple-subtitles-combinations.spec.js"
+        "test/browser/multiple-subtitles-combinations.spec.js",
+        "refactor/changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md",
+        "refactor/baselines/subtitle-offset-validation.json"
       ]
     }
   ]

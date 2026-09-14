@@ -2429,7 +2429,8 @@
       ],
       "dependsOn": [
         "PKG-MULTI-SUB-05",
-        "ENG-07"
+        "ENG-07",
+        "CORE-SUBTITLE-OFFSET-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -5135,6 +5136,26 @@
       "evidence": [
         "changes/2026-09-14-ENG-LINT-01-manifest-order.md",
         "baselines/manifest-lint-validation.json"
+      ]
+    },
+    {
+      "id": "CORE-SUBTITLE-OFFSET-01",
+      "phase": "3-4 核心迁移",
+      "title": "修复暂停偏移后的原生活动字幕刷新",
+      "scope": [
+        "artplayer"
+      ],
+      "dependsOn": [
+        "CORE-15",
+        "CORE-22"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "暂停字幕偏移的原生轨道一致性修复、兼容回归和维护说明",
+      "acceptance": "保持cue对象、顺序、媒体时间、模式和公开事件；真实浏览器正负偏移及生命周期通过，历史缺陷单列",
+      "evidence": [
+        "changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md",
+        "baselines/subtitle-offset-validation.json"
       ]
     }
   ]

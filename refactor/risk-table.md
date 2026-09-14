@@ -265,5 +265,5 @@
 | DEV-SERVOR-PORT-01 | resolved / 已复现 | Servor exits the entire dev process with status zero when the requested port is occupied | MOD-DEV-01 |
 | AUTO-THUMB-ENCODE-TIMEOUT-01 | resolved / 源码/产物事实 | Pending JPEG encoding has no bounded lifetime after frame readiness finishes | PKG-AUTO-THUMB-10 |
 | MULTI-SUB-MARKUP-01 | resolved / 已复现 | Semantic cue nodes receive HTML wrappers inside their annotation fields | PKG-MULTI-SUB-08 |
-| MULTI-SUB-OFFSET-01 | open / 已复现 | Paused Firefox subtitle offset leaves out-of-time native cues active and captions visible | PKG-MULTI-SUB-05 |
+| MULTI-SUB-OFFSET-01 | resolved / 已复现 | Paused Firefox subtitle offset leaves out-of-time native cues active and captions visible | PKG-MULTI-SUB-05, CORE-SUBTITLE-OFFSET-01 |
 | MULTI-SUB-SWITCH-01 | open / 待取证 | Intermittent WebKit core5.3.0 caption loss after selected-track source switch | PKG-MULTI-SUB-05 |

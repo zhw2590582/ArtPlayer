@@ -149,9 +149,11 @@ Read native `template.$track.track.cues` for old-core probes: older hosts do not
 provide the later `subtitle.cues` getter. Core5.1.2/5.1.7 only render their first
 active cue; the matrix explicitly records lost simultaneous languages for1.1.0+
 and candidate, while1.0.0's index-merged cue displays both. This remains an open
-compatibility issue, not an approved limitation. Firefox paused offset assertions
-currently fail on old and candidate cores; a WebKit5.3.0 source-switch failure is
-intermittent. See the task05 change and validation JSON for exact failed runs.
+compatibility issue, not an approved limitation. CORE-SUBTITLE-OFFSET-01 corrects
+paused offsets in the candidate core; published Firefox hosts retain their exact
+historical defect observations. WebKit5.3.0/5.4.0 source-switch failures remain
+under task05 investigation. See its change and validation JSON for original failures
+and the independent core offset change for the corrected candidate evidence.
 The matrix is runnable with `yarn test:browser test/browser/multiple-subtitles-combinations.spec.js`;
 do not replace these failures with skips or count boundary observations as acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.

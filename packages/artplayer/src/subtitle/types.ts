@@ -36,7 +36,7 @@ export interface SubtitleView {
 }
 
 export interface SubtitleOffsetHost {
-  template: { $track?: SubtitleTrack | null }
+  template: { $track?: SubtitleTrack | null, $video?: { paused?: boolean, currentTime?: number } }
   subtitle: { readonly cues: SubtitleCue[], update: () => void }
   readonly duration: number
   notice: NoticeSink

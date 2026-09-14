@@ -6180,6 +6180,19 @@ function stateMix(art) {
     }
   });
 }
+function refreshPausedCues(track, video, cues) {
+  if (!track || track.mode === "disabled" || !video?.paused || !Number.isFinite(video.currentTime))
+    return;
+  const time2 = video.currentTime;
+  const expected = cues.filter((cue) => cue.startTime <= time2 && time2 < cue.endTime);
+  const active2 = Array.from(track.activeCues || []);
+  if (expected.length === active2.length && expected.every((cue, index) => active2[index] === cue))
+    return;
+  for (const cue of cues)
+    track.removeCue(cue);
+  for (const cue of cues)
+    track.addCue(cue);
+}
 function subtitleOffsetMix(art) {
   const { notice, i18n, template } = art;
   def(art, "subtitleOffset", {
@@ -6199,6 +6212,7 @@ function subtitleOffsetMix(art) {
         cue.startTime = clamp(cue.originalStartTime + offset, 0, art.duration);
         cue.endTime = clamp(cue.originalEndTime + offset, 0, art.duration);
       }
+      refreshPausedCues(template.$track.track, template.$video, cues);
       art.subtitle.update();
       notice.show = `${i18n.get("Subtitle Offset")}: ${value}s`;
       art.emit("subtitleOffset", value);
