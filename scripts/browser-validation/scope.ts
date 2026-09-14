@@ -9,6 +9,7 @@ export const installedTests = [
   'initialization.spec.js',
   'chapter.spec.js',
   'chapter-combinations.spec.js',
+  'chapter-hover.spec.js',
   'ambilight-lifecycle.spec.js',
   'ambilight-proxy.spec.js',
   'canvas-lifecycle.spec.js',

@@ -1,4 +1,5 @@
 import { devices } from '@playwright/test'
+import { hoverProgress } from './chapter-hover.ts'
 import { expect, test } from './fixtures.js'
 
 async function openChapter(page, core, chapter) {
@@ -37,10 +38,7 @@ async function openChapter(page, core, chapter) {
 }
 
 async function hoverChapter(page, percentage, text) {
-  const inner = page.locator('.art-control-progress-inner')
-  const box = await inner.boundingBox()
-  const x = Math.round(box.x + box.width * percentage)
-  await page.mouse.move(x, box.y + box.height / 2)
+  const { box, x } = await hoverProgress(page, percentage)
   await expect(page.locator('.art-chapter-title')).toHaveText(text)
   await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')
   await expect(page.locator('.art-control-thumbnails')).toBeVisible()

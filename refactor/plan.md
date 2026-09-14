@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 258 项，范围 22 个包及工作区/示例。
 
-状态：todo 51 / doing 19 / blocked 0 / done 188 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 50 / doing 19 / blocked 0 / done 189 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -146,7 +146,7 @@
 | PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06 | 承接 03 的自有源码 TS 化，完善公开 Chapters/Option/Result 与 update 推导，关闭声明模块解析和旧消费差异 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；处理 BASE-TYPE-01/03，保持运行时和新旧 TS 模块解析消费 | M | done |
 | PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | doing |
 | PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07, PKG-CHAPTER-HOVER-01 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
-| PKG-CHAPTER-HOVER-01 | artplayer-plugin-chapter<br>定位并修复原生全屏章节悬停时序 | PKG-CHAPTER-04, CI-BROWSER-01 | 原生全屏动态几何与指针时序复现、针对根因的修复和真实浏览器回归 | 解释 Chromium 旧核心+新章节的 opacity 失败；保留标题、缩略图和全屏退出断言，不以重试或扩大等待掩盖；区分测试同步与生产缺陷 | M | todo |
+| PKG-CHAPTER-HOVER-01 | artplayer-plugin-chapter<br>定位并修复原生全屏章节悬停时序 | PKG-CHAPTER-04, CI-BROWSER-01 | 原生全屏动态几何与指针时序复现、针对根因的修复和真实浏览器回归 | 解释 Chromium 旧核心+新章节的 opacity 失败；保留标题、缩略图和全屏退出断言，不以重试或扩大等待掩盖；区分测试同步与生产缺陷 | M | done |
 
 ## 5 包迁移：artplayer-plugin-ambilight
 
@@ -669,4 +669,4 @@
 - ENG-13: [记录](changes/2026-09-14-ENG-13-observation-window.md) [记录](baselines/observation-window-validation.json)
 - SITE-VCONSOLE-01: [记录](changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md) [记录](baselines/vconsole-lifecycle-validation.json)
 - CI-BROWSER-01: [记录](changes/2026-09-14-CI-BROWSER-01-scopes.md) [记录](baselines/browser-scope-validation.json)
-- PKG-CHAPTER-HOVER-01: [记录](changes/2026-09-14-CI-BROWSER-01-scopes.md) [记录](baselines/browser-scope-validation.json)
+- PKG-CHAPTER-HOVER-01: [记录](changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md) [记录](baselines/chapter-hover-validation.json)

@@ -271,4 +271,4 @@
 | JASSUB-RENDER-RESOURCES-01 | resolved / 已复现 | Main-thread async rendering leaves received ImageBitmaps open when native canvas operations throw | PKG-JASSUB-10 |
 | ENG-PERF-OBS-01 | resolved / 已复现 | A nominal 350 ms resource observation can record only 349 ms and fail the required minimum | ENG-13 |
 | VCONSOLE-LIFECYCLE-01 | resolved / 已复现 | vConsole delayed log, panel and scroller work outlives its owner | SITE-07, SITE-05, SITE-VCONSOLE-01 |
-| CHAPTER-FULLSCREEN-GEOMETRY-01 | open / 已复现 | Chromium 原生全屏后章节 hover 标题曾出现后又隐藏 | PKG-CHAPTER-05, PKG-CHAPTER-HOVER-01 |
+| CHAPTER-FULLSCREEN-GEOMETRY-01 | resolved / 已复现 | Chromium 原生全屏后章节 hover 标题曾出现后又隐藏 | PKG-CHAPTER-05, PKG-CHAPTER-HOVER-01 |

@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-CHAPTER-HOVER-01 全屏悬停测试同步完成
+
+原始 installed 224/1 失败保持归档。受控原生进度条移动实验确认立即读取坐标
+可让指针落在终态进度条外：首版旧步骤4失败/2通过，等待actionability后6通过。
+审查发现WebKit hit-test与最终矩形不一致，补强数值边界后baseline六项全部失败，
+默认路径main/legacy各六项通过；保留首版报告，不把hit-test等同于几何正确。
+共享TS helper先等待几何稳定再读取box；保留文字、opacity、缩略图、边界和
+全屏退出断言，不更改生产代码或超时。完整main/legacy各66通过，实际安装
+字节、新旧核心/插件组合及三桌面引擎均有报告；原run精确调度不能重放。
+严格TS、专项lint、根lint（0错误/1既有warning）、4项runner测试、工具链通过。
+见[变更](changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md)和
+[证据](baselines/chapter-hover-validation.json)。258项：189 done、19 doing、50 todo。
+CHAPTER-FULLSCREEN-GEOMETRY-01按测试同步关闭；CHAPTER-TIMING-01、真机及
+Chapter-05/06仍未完成。没有远端CI、push或发布；本任务独立本地提交后审计。
+
 ## CI-BROWSER-01 源码/安装浏览器范围隔离完成
 
 复现全局安装map使HLS源码用例beforeAll直接失败；新source入口清除继承map后实际

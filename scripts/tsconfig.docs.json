@@ -30,6 +30,7 @@
     "build-docs.js",
     "../packages/artplayer-vitepress/build/**/*.ts",
     "build-vconsole.mjs",
-    "browser-validation/**/*.ts"
+    "browser-validation/**/*.ts",
+    "../test/browser/chapter-hover.ts"
   ]
 }

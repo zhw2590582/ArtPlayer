@@ -6198,7 +6198,7 @@
       "id": "CHAPTER-FULLSCREEN-GEOMETRY-01",
       "title": "Chromium 原生全屏后章节 hover 标题曾出现后又隐藏",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-CHAPTER-05",
         "PKG-CHAPTER-HOVER-01"
@@ -6210,7 +6210,14 @@
       ],
       "compatibleResolution": "核对原生全屏布局/controls transition 与鼠标坐标的时序；根据实际根因修复测试同步或生产实现，保持旧接口。",
       "closureCriteria": "保留原失败并取得可解释的旧红新绿/稳定真实浏览器证据，不用重试、延时扩大或移除 opacity 断言关闭。",
-      "workspaceState": "Installed 225-case run with two workers: 224 pass, published 5.4.0 core + candidate Chapter Chromium fullscreen case fails at hoverChapter opacity. Text assertion initially passes, opacity falls from 0.279 to 0 and title clears. Trace mouse=(640,665.9921875); screenshot is fullscreen1280x720. Geometry transition is a hypothesis; production defect versus test synchronization remains unverified."
+      "workspaceState": "Shared typed hover helper waits for actionability before coordinate sampling. Production package bytes are unchanged; report-bound old/new core/plugin combinations cover main and legacy on three desktop engines. Physical devices and Chapter-05/06 acceptance remain open.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md",
+        "refactor/baselines/chapter-hover-validation.json",
+        "test/browser/chapter-hover.ts",
+        "test/browser/chapter-hover.spec.js"
+      ],
+      "resolutionRationale": "The immediate bounding-box read permits stale pointer coordinates while progress transforms move. Initial hit-test control gives 4 failures/2 passes before and 6 passes after waiting for locator stability. WebKit hit tests disagree with the final rectangle, so additional explicit bounds assertions were added: baseline 6 failures, stable main/legacy 6 passes each. Complete main/legacy chapter combination suites retain title, opacity, thumbnails and fullscreen assertions (66 passes each). This closes the identified test synchronization race, not all possible production fullscreen defects or CHAPTER-TIMING-01. Original 224/1 failure remains archived; its exact scheduler cannot be replayed."
     }
   ]
 }

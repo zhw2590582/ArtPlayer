@@ -1,5 +1,25 @@
 # Browser regression entry
 
+Chapter pointer geometry is shared by `chapter-hover.ts` and the combination
+suite. It awaits locator actionability with `hover({ trial: true })` before
+reading coordinates; `art.fullscreen` can become true while controls still move.
+The motion regression enters native fullscreen and adds a controlled 600ms Web
+Animation to reproduce stale coordinates. It checks the final hit target, chapter
+text and opacity without changing production CSS or increasing assertion timeouts.
+It also requires pointer x/y to lie within the final inner rectangle; WebKit's
+initial hit-test alone reported a hit outside that recorded rectangle.
+Use `ARTPLAYER_CHAPTER_HOVER_BASELINE=1` to rerun the old immediate-read path;
+this diagnostic intentionally fails on affected engines and is not an acceptance
+mode. Both files belong to source and installed scopes. For installed runs:
+
+```sh
+# Set ARTPLAYER_BROWSER_ARTIFACTS to a verified installation map first.
+yarn test:browser:installed test/browser/chapter-combinations.spec.js test/browser/chapter-hover.spec.js --workers=2
+```
+
+See `refactor/baselines/chapter-hover-validation.json` for the original failure,
+controlled red/green observations and actual execution limits.
+
 CI uses `yarn test:browser:source` for the complete source suite and
 `yarn test:browser:installed` for the reviewed installed-package subset. The source
 launcher clears inherited ARTPLAYER_BROWSER_ARTIFACTS; the installed launcher and

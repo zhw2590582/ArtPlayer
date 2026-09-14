@@ -1,0 +1,1608 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-CHAPTER-HOVER-01",
+  "date": "2026-09-14",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "conclusion": "The test read coordinates during progress motion. A native-animation control reproduces stale pointer coordinates with unchanged installed player bytes; awaiting actionability before reading coordinates fixes that control. The original failure has the same disappearing title and transitional pointer geometry; the exact original scheduling is not replayed.",
+  "scope": "Test synchronization only; no production runtime, public API, DOM/CSS, or installed package bytes changed.",
+  "limitations": [
+    "Controlled Web Animation is intentional fault injection, not a claim about native transition duration.",
+    "Desktop browser engines and touch emulation are not physical devices.",
+    "CHAPTER-TIMING-01 and Chapter final integration/distribution tasks remain open.",
+    "No remote CI, full source-suite run, or npm publication."
+  ],
+  "reports": [
+    {
+      "directory": "refactor/.cache/ci-browser-installed-full-report",
+      "purpose": "original installed integration failure",
+      "reportSha256": "b3220ff7b8e29b796f428b0295507fe22ad9033ad9f5627898d6ee0d33cb3011",
+      "stats": {
+        "startTime": "2026-09-14T10:00:23.507Z",
+        "duration": 161182.12099999998,
+        "expected": 224,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "--workers=2"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.js",
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.js",
+            "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.js",
+            "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [
+        {
+          "title": "published core + candidate chapter: fullscreen keeps hover geometry and exits cleanly",
+          "browser": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCSS\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-chapter-title')\nExpected: \u001b[32m\"1\"\u001b[39m\nReceived: \u001b[31m\"0\"\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCSS\" locator('.art-chapter-title') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-chapter-title')\u001b[22m\n\u001b[2m    - locator resolved to <div class=\"art-chapter-title\"></div>\u001b[22m\n\u001b[2m    - unexpected value \"0.279014\"\u001b[22m\n\u001b[2m    - locator resolved to <div class=\"art-chapter-title\"></div>\u001b[22m\n\u001b[2m    - unexpected value \"0.00171983\"\u001b[22m\n\u001b[2m    16 × locator resolved to <div class=\"art-chapter-title\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  43 |   await page.mouse.move(x, box.y + box.height / 2)\n  44 |   await expect(page.locator('.art-chapter-title')).toHaveText(text)\n> 45 |   await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n     |                                                    ^\n  46 |   await expect(page.locator('.art-control-thumbnails')).toBeVisible()\n  47 |   await expect.poll(() => page.evaluate(() => window.art.controls.thumbnails.style.backgroundImage)).not.toBe('')\n  48 |   const layout = await page.evaluate(() => {\n    at hoverChapter (D:\\github\\ArtPlayer\\test\\browser\\chapter-combinations.spec.js:45:52)\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-combinations.spec.js:180:33"
+          ]
+        }
+      ],
+      "observations": []
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-motion-red-report",
+      "purpose": "immediate coordinate read; controlled native animation",
+      "reportSha256": "c1c991888e83d82e5077542fedb901e1ac2c2e1f3ffcde70ac26d85328d0c989",
+      "stats": {
+        "startTime": "2026-09-14T10:14:21.083Z",
+        "duration": 17075.045,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=1"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.js",
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.js",
+            "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.js",
+            "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [
+        {
+          "title": "published: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     await expect(page.locator('.art-chapter-title')).toHaveText('Middle')\n  36 |     await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n  37 |     await page.locator('.art-control-fullscreen').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "candidate: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     await expect(page.locator('.art-chapter-title')).toHaveText('Middle')\n  36 |     await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n  37 |     await page.locator('.art-control-fullscreen').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "published: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "firefox",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     await expect(page.locator('.art-chapter-title')).toHaveText('Middle')\n  36 |     await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n  37 |     await page.locator('.art-control-fullscreen').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "candidate: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "firefox",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     await expect(page.locator('.art-chapter-title')).toHaveText('Middle')\n  36 |     await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n  37 |     await page.locator('.art-control-fullscreen').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 590.340576171875,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 594.340576171875
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 590.3410034179688,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 594.3410034179688
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 640.004150390625,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 644.004150390625
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 638.3360595703125,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 642.3360595703125
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 592.2999877929688,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 596.2999877929688
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 592.2000122070312,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 596.2000122070312
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-motion-green-report",
+      "purpose": "stable actionability; controlled native animation",
+      "reportSha256": "0edded4ca02b494404f978b971a5bdd445ca21beead3bc4f5cb788114f5d821b",
+      "stats": {
+        "startTime": "2026-09-14T10:18:16.301Z",
+        "duration": 19123.172,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=1"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.js",
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.js",
+            "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.js",
+            "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-combinations-main-report",
+      "purpose": "main installed chapter combinations and motion",
+      "reportSha256": "681214ef1a9fc81c65f56e70c396a920600a0109b271b6496c7233b33023472d",
+      "stats": {
+        "startTime": "2026-09-14T10:19:06.290Z",
+        "duration": 85751.219,
+        "expected": 66,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-combinations.spec.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=2"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.js",
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.js",
+            "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.js",
+            "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-combinations-legacy-report",
+      "purpose": "legacy installed chapter combinations and motion",
+      "reportSha256": "8a80d8ed7a880988696b2407cc0d45964205b09befcd0687e1eb43ead63237c8",
+      "stats": {
+        "startTime": "2026-09-14T10:21:21.189Z",
+        "duration": 88985.99799999999,
+        "expected": 66,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-combinations.spec.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=2"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts-legacy.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.legacy.js",
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.legacy.js",
+            "sha256": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.legacy.js",
+            "sha256": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.legacy.js",
+            "sha256": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-bounds-red-report",
+      "purpose": "baseline with explicit final rectangle bounds",
+      "reportSha256": "daf08a260b28e8fc4d4cab736e8c267eaab61bd0717ce7db275488cfbe300371",
+      "stats": {
+        "startTime": "2026-09-14T10:25:19.790Z",
+        "duration": 19375.537,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=1"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.js",
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.js",
+            "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.js",
+            "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [
+        {
+          "title": "published: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, baseline: process.env.ARTPLAYER_CHAPTER_HOVER_BASELINE === '1', pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     expect(pointer.x).toBeGreaterThanOrEqual(layout.x)\n  36 |     expect(pointer.x).toBeLessThanOrEqual(layout.x + layout.width)\n  37 |     expect(pointer.y).toBeGreaterThanOrEqual(layout.y)\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "candidate: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, baseline: process.env.ARTPLAYER_CHAPTER_HOVER_BASELINE === '1', pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     expect(pointer.x).toBeGreaterThanOrEqual(layout.x)\n  36 |     expect(pointer.x).toBeLessThanOrEqual(layout.x + layout.width)\n  37 |     expect(pointer.y).toBeGreaterThanOrEqual(layout.y)\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "published: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "firefox",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, baseline: process.env.ARTPLAYER_CHAPTER_HOVER_BASELINE === '1', pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     expect(pointer.x).toBeGreaterThanOrEqual(layout.x)\n  36 |     expect(pointer.x).toBeLessThanOrEqual(layout.x + layout.width)\n  37 |     expect(pointer.y).toBeGreaterThanOrEqual(layout.y)\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "candidate: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "firefox",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  32 |     }, pointer)\n  33 |     await testInfo.attach('chapter-hover-motion', { contentType: 'application/json', body: JSON.stringify({ core, baseline: process.env.ARTPLAYER_CHAPTER_HOVER_BASELINE === '1', pointer, layout, motion: 'controlled native Web Animation after actual fullscreen; no media or hit-test mocks' }) })\n> 34 |     expect(layout.pointerInside).toBe(true)\n     |                                  ^\n  35 |     expect(pointer.x).toBeGreaterThanOrEqual(layout.x)\n  36 |     expect(pointer.x).toBeLessThanOrEqual(layout.x + layout.width)\n  37 |     expect(pointer.y).toBeGreaterThanOrEqual(layout.y)\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:34:34"
+          ]
+        },
+        {
+          "title": "published: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "webkit",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m647\u001b[39m\nReceived:    \u001b[31m599\u001b[39m\n\n  35 |     expect(pointer.x).toBeGreaterThanOrEqual(layout.x)\n  36 |     expect(pointer.x).toBeLessThanOrEqual(layout.x + layout.width)\n> 37 |     expect(pointer.y).toBeGreaterThanOrEqual(layout.y)\n     |                       ^\n  38 |     expect(pointer.y).toBeLessThanOrEqual(layout.y + layout.height)\n  39 |     await expect(page.locator('.art-chapter-title')).toHaveText('Middle')\n  40 |     await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:37:23"
+          ]
+        },
+        {
+          "title": "candidate: chapter hover waits for a moving fullscreen progress bar",
+          "browser": "webkit",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m647\u001b[39m\nReceived:    \u001b[31m606.2999877929688\u001b[39m\n\n  35 |     expect(pointer.x).toBeGreaterThanOrEqual(layout.x)\n  36 |     expect(pointer.x).toBeLessThanOrEqual(layout.x + layout.width)\n> 37 |     expect(pointer.y).toBeGreaterThanOrEqual(layout.y)\n     |                       ^\n  38 |     expect(pointer.y).toBeLessThanOrEqual(layout.y + layout.height)\n  39 |     await expect(page.locator('.art-chapter-title')).toHaveText('Middle')\n  40 |     await expect(page.locator('.art-chapter-title')).toHaveCSS('opacity', '1')\n    at D:\\github\\ArtPlayer\\test\\browser\\chapter-hover.spec.js:37:23"
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "baseline": true,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 590.336669921875,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 594.336669921875
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "baseline": true,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 590.4988403320312,
+              "width": 1260,
+              "height": 7.6875
+            },
+            "x": 640,
+            "y": 594.3425903320312
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "baseline": true,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 638.3333129882812,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 642.3333129882812
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "baseline": true,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 640.12939453125,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 644.12939453125
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": false,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "baseline": true,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 595,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 599
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "baseline": true,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 602.2999877929688,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 606.2999877929688
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-bounds-main-report",
+      "purpose": "main stable pointer with explicit final rectangle bounds",
+      "reportSha256": "ab3c0db9168e03d88f45a01dcd467e2c9a719f4177155af9c500f91bf7b7f942",
+      "stats": {
+        "startTime": "2026-09-14T10:26:20.236Z",
+        "duration": 19154.688,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=1"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.js",
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.js",
+            "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.js",
+            "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.js",
+            "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/chapter-hover-bounds-legacy-report",
+      "purpose": "legacy stable pointer with explicit final rectangle bounds",
+      "reportSha256": "350b280112c6959d7faba35e5dc8ef6f7e7dffa55d9a36b91e80a51e5439c624",
+      "stats": {
+        "startTime": "2026-09-14T10:27:06.527Z",
+        "duration": 18531.621,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/chapter-hover.spec.js",
+          "--workers=1"
+        ]
+      },
+      "invocation": {
+        "scope": "installed",
+        "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-IIEOt4\\browser-artifacts-legacy.json",
+        "node": "24.21.0",
+        "inputs": [
+          {
+            "name": "artplayer",
+            "member": "package/dist/artplayer.legacy.js",
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "archiveSha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454"
+          },
+          {
+            "name": "artplayer-plugin-chapter",
+            "member": "package/dist/artplayer-plugin-chapter.legacy.js",
+            "sha256": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef",
+            "archiveSha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05"
+          },
+          {
+            "name": "artplayer-plugin-ambilight",
+            "member": "package/dist/artplayer-plugin-ambilight.legacy.js",
+            "sha256": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d",
+            "archiveSha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7"
+          },
+          {
+            "name": "artplayer-proxy-canvas",
+            "member": "package/dist/artplayer-proxy-canvas.legacy.js",
+            "sha256": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97",
+            "archiveSha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d"
+          }
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "failures": [],
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 640,
+            "y": 651
+          },
+          "layout": {
+            "x": 10,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 10,
+              "y": 695,
+              "width": 1346,
+              "height": 8
+            },
+            "x": 683,
+            "y": 699
+          },
+          "layout": {
+            "x": 10,
+            "y": 695,
+            "width": 1346,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "baseline": false,
+          "pointer": {
+            "box": {
+              "x": 1,
+              "y": 647,
+              "width": 1260,
+              "height": 8
+            },
+            "x": 631,
+            "y": 651
+          },
+          "layout": {
+            "x": 1,
+            "y": 647,
+            "width": 1260,
+            "height": 8,
+            "pointerInside": true,
+            "title": "Middle"
+          },
+          "motion": "controlled native Web Animation after actual fullscreen; no media or hit-test mocks"
+        }
+      ]
+    }
+  ]
+}

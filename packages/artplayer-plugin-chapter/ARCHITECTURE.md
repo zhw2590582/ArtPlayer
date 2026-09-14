@@ -103,3 +103,12 @@ bridges; typesVersions provides the legacy subpath to old resolvers. All bridges
 refer to one contract and runtime import paths stay unchanged. The frozen
 published baseline is under refactor/baselines; never overwrite it with candidate
 behavior. Physical device, full editor and final release checks remain separate tasks.
+
+The combination suite uses `test/browser/chapter-hover.ts` to wait for Playwright
+actionability/stable geometry before reading progress coordinates. Fullscreen state
+alone does not mean the bottom controls have finished their CSS transition.
+`chapter-hover.spec.js` exercises this boundary with an intentional native Web
+Animation after entering real fullscreen. It preserves title/opacity/hit-test
+assertions and uses actual installed artifacts in the installed browser scope.
+`ARTPLAYER_CHAPTER_HOVER_BASELINE=1` restores the old immediate coordinate read for
+diagnosis only. This helper corrects test synchronization, not player behavior.
