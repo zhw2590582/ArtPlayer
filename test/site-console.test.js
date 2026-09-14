@@ -215,3 +215,23 @@ test('Console provenance requires exact source, compiler output, dependency mapp
   modules.set('child', { ...child, body: 'changed' })
   assert.throws(() => verifyModules(modules, sources, external, read, source => source), /Frozen module changed/)
 })
+
+test('Console provenance verifies multiple archive roots without merging their relative module ownership', () => {
+  const modules = new Map([
+    ['m6b6', { id: 'm6b6', body: 'exports.a=1;', dependencies: { react: 'react' } }],
+    ['react', { id: 'react', body: 'exports.b=2;', dependencies: {} }],
+  ])
+  const sources = [...modules.values()].map(module => ({ id: module.id, archive: module.id, member: 'package/index.js', sourceSha256: hash(module.body), generatedSha256: hash(module.body), bodySha256: hash(module.body) }))
+  const external = [{ from: 'm6b6', dependency: 'react', id: 'react' }]
+  const read = (member, source) => {
+    assert.equal(member, 'package/index.js')
+    assert.equal(source.archive, source.id)
+    return modules.get(source.id).body
+  }
+  const options = { roots: ['m6b6', 'react'], sourcePrefix: 'package/' }
+  assert.equal(verifyModules(modules, sources, external, read, code => code, options), 2)
+  assert.throws(() => verifyModules(modules, sources, external, read, code => code, { ...options, roots: ['m6b6'] }), /Unreachable/)
+  assert.throws(() => verifyModules(modules, sources, external, read, code => code, { ...options, roots: ['m6b6', 'm6b6'] }), /Invalid source roots/)
+  modules.get('m6b6').dependencies = { './index': 'react' }
+  assert.throws(() => verifyModules(modules, sources, [], read, code => code, options), /Relative dependency changed archives/)
+})

@@ -4,7 +4,7 @@ import path from 'node:path'
 import ts from 'typescript'
 
 export interface Module { id: string, body: string, dependencies: Record<string, string> }
-export interface Source { id: string, member: string, sourceSha256: string, generatedSha256: string, bodySha256: string }
+export interface Source { id: string, member: string, sourceSha256: string, generatedSha256: string, bodySha256: string, archive?: string }
 export interface External { from: string, dependency: string, id: string }
 export interface Archive { name: string, version: string, tarball: string, integrity: string, sha256: string }
 export const hash = (bytes: string | Uint8Array) => createHash('sha256').update(bytes).digest('hex')
@@ -46,7 +46,7 @@ export function parcelModules(text: string): Map<string, Module> {
   return result
 }
 
-export function verifyModules(modules: Map<string, Module>, sources: Source[], external: External[], read: (member: string) => string, compile: (source: string) => string) {
+export function verifyModules<S extends Source>(modules: Map<string, Module>, sources: S[], external: External[], read: (member: string, item: S) => string, compile: (source: string, item: S) => string, options = { roots: ['m6b6'], sourcePrefix: 'package/lib/' }) {
   const mapped = new Map(sources.map(source => [source.id, source]))
   assert.equal(mapped.size, sources.length, 'Duplicate source mapping')
   const visited = new Set<string>()
@@ -57,11 +57,11 @@ export function verifyModules(modules: Map<string, Module>, sources: Source[], e
     const item = mapped.get(id)
     const module = modules.get(id)
     assert(item && module, `Missing console-feed module mapping: ${id}`)
-    assert(item.member.startsWith('package/lib/') && item.member.endsWith('.js') && path.posix.normalize(item.member) === item.member, 'Invalid source member')
+    assert(item.member.startsWith(options.sourcePrefix) && item.member.endsWith('.js') && path.posix.normalize(item.member) === item.member, 'Invalid source member')
     visited.add(id)
-    const source = read(item.member)
+    const source = read(item.member, item)
     assert.equal(hash(source), item.sourceSha256, `Source changed: ${item.member}`)
-    const compiled = compile(source)
+    const compiled = compile(source, item)
     assert.equal(hash(compiled), item.generatedSha256, `Compiler output changed: ${id}`)
     assert.equal(hash(module.body), item.bodySha256, `Frozen module changed: ${id}`)
     assert.equal(compiled, module.body, `Rebuilt module differs: ${id}`)
@@ -74,10 +74,12 @@ export function verifyModules(modules: Map<string, Module>, sources: Source[], e
       const base = path.posix.join(path.posix.dirname(item.member), dependency)
       const target = mapped.get(child)?.member
       assert(target && [base, `${base}.js`, `${base}/index.js`].includes(target), `Source dependency mapping changed: ${id} ${dependency}`)
+      assert.equal(item.archive, mapped.get(child)?.archive, `Relative dependency changed archives: ${id} ${dependency}`)
       visit(child)
     }
   }
-  visit('m6b6')
+  assert(options.roots.length && new Set(options.roots).size === options.roots.length, 'Invalid source roots')
+  options.roots.forEach(visit)
   assert.equal(visited.size, sources.length, 'Unreachable source mapping')
   assert.deepEqual(dependencies, external, 'External dependency boundary changed')
   return visited.size

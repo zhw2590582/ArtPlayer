@@ -1060,12 +1060,25 @@
       "owners": [
         "SITE-01"
       ],
-      "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03; 102-module map, Focm entry/W5CS view, React 17.0.2 globals and styled-components 5.3.3 literal identified. Full dependency versions and source reconstruction remain open. SITE-CONSOLE-01 replaces only Focm/W5CS bodies from owned TS and removes the missing source-map trailer; other 100 modules and runtime remain byte-for-byte frozen. Full vendor provenance remains open. Official console-feed 3.2.2 archive reproduces all 32 relative-import module bodies exactly with verified Terser 3.17.0/Parcel 1.12.5 transform settings; 68 vendor modules and wrapper remain. This does not recover the original lockfile or establish a unique installed version.",
-      "licenseStatus": "Official console-feed 3.2.2 MIT LICENSE preserved verbatim, including Facebook attribution. Embedded replicator and all external/remaining component notices still require review; no full closure.",
+      "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03 has 102 modules. SITE-CONSOLE-01 replaces only owned Focm/W5CS bodies and removes the missing map trailer. Of the 100 retained vendor modules, 32 console-feed and 41 commonjs modules exactly reproduce from 14 official npm archives with a verified historical transform. The remaining 27, Parcel wrapper and original full lockfile remain unverified; exact source matches do not establish unique installed versions.",
+      "licenseStatus": "Original notices from console-feed and 13 additional archives preserved verbatim under site-vendor, with checked archive/member hashes. Complete embedded/external component attribution and public console notices remain open.",
       "upstreamSources": [
         "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
         "https://registry.npmjs.org/terser/-/terser-3.17.0.tgz",
-        "https://registry.npmjs.org/parcel-bundler/-/parcel-bundler-1.12.5.tgz"
+        "https://registry.npmjs.org/parcel-bundler/-/parcel-bundler-1.12.5.tgz",
+        "https://registry.npmjs.org/react/-/react-17.0.2.tgz",
+        "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz",
+        "https://registry.npmjs.org/scheduler/-/scheduler-0.20.2.tgz",
+        "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+        "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+        "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz",
+        "https://registry.npmjs.org/shallowequal/-/shallowequal-1.1.0.tgz",
+        "https://registry.npmjs.org/process/-/process-0.11.10.tgz",
+        "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz",
+        "https://registry.npmjs.org/is-dom/-/is-dom-1.1.0.tgz",
+        "https://registry.npmjs.org/is-object/-/is-object-1.0.2.tgz",
+        "https://registry.npmjs.org/is-window/-/is-window-1.0.2.tgz",
+        "https://registry.npmjs.org/linkifyjs/-/linkifyjs-2.1.9.tgz"
       ],
       "upstreamReviewedAt": null,
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",

@@ -72,8 +72,11 @@ remain SITE-07 / VENDOR-08; this build does not close them. See
 
 `refactor/baselines/console-feed-provenance.json` maps all 32 modules reachable
 through relative imports from m6b6 to the official console-feed 3.2.2 archive.
-Their rebuilt bodies exactly match the frozen bundle. The 68 remaining vendor
-modules and Parcel wrapper need further provenance; this does not establish a
+Their rebuilt bodies exactly match the frozen bundle. The separate
+`console-commonjs-provenance.json` adds 41 exact modules from 13 official archives:
+React/ReactDOM, scheduler, object-assign, react-is, prop-types, shallowequal,
+process, hoist-non-react-statics, is-dom/is-object/is-window and linkifyjs.
+The 27 remaining vendor modules and Parcel wrapper need further provenance; this does not establish a
 unique original installed version or recover its missing lockfile.
 
 ```sh
@@ -82,19 +85,30 @@ node scripts/site-vendor/console/reproduce.ts
 yarn test:site-console
 ```
 
-The first command downloads two pinned npm archives into the dedicated ignored
+The first command downloads 15 pinned npm archives into the dedicated ignored
 `refactor/.cache/console-feed-reproduction/` directory. The second uses that cache
 offline. Both verify SHA-512 SRI, archive SHA-256, source member fingerprints,
-compiler bytes and exact output. They load Terser 3.17.0 as a historical build
+compiler bytes, original notice bytes and exact output of all 73 identified
+modules. They load Terser 3.17.0 as a historical build
 tool with the already installed source-map 0.6.1; they do not install dependencies,
 change Yarn or execute the archived console-feed runtime. Canonical Node is required.
 The minification recipe is recovered from Parcel 1.12.5's archive; this proves a
 reproducing transform, not that the original author used precisely that Parcel
 version. `provenance.ts` separately verifies complete traversal, relative source
 mapping and external dependency boundaries. Missing, unreachable, duplicate or
-changed evidence fails instead of silently shrinking the comparison.
+changed evidence fails instead of silently shrinking the comparison. Multiple
+package roots are explicit, relative edges must stay in the same archive, and
+the remaining module IDs are checked as a complete list. Production entrypoints
+use the pinned-source process.env.NODE_ENV substitution. The process shim's
+single process.browser assignment is removed following Parcel's original visitor;
+this is checked against exact source/output bytes, not a general JS rewrite.
 
 The archived LICENSE is preserved verbatim with its Facebook attribution under
 `refactor/baselines/site-vendor/console-feed-3.2.2-LICENSE.txt`. Do not rewrite it
 or infer it covers every embedded/external component. Complete notices remain
 open, including the bundled replicator and remaining dependencies.
+The other 13 archives' LICENSE texts are also frozen under
+`refactor/baselines/site-vendor/console-commonjs/`, with exact bytes preserved by
+Git attributes. They are source evidence; complete site notice delivery still
+requires the remaining component review. React-inspector 5.1.1's CJS file did
+not match; its ESM conversion remains an investigation, not an accepted source.

@@ -685,11 +685,13 @@
         "refactor/baselines/console-feed-provenance.json",
         "refactor/changes/2026-09-15-SITE-07-console-feed-source.md",
         "scripts/site-vendor/console/provenance.ts",
-        "scripts/site-vendor/console/reproduce.ts"
+        "scripts/site-vendor/console/reproduce.ts",
+        "refactor/baselines/console-commonjs-provenance.json",
+        "refactor/changes/2026-09-15-SITE-07-console-commonjs.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "32 console-feed modules match official 3.2.2 archive exactly under a verified historical transform. Other 68 vendor modules, Parcel wrapper, original lockfile and complete attribution remain open. Runtime files unchanged in this checkpoint."
+      "workspaceState": "73/100 vendor module bodies match official archives exactly: console-feed 32 and commonjs components 41. Remaining 27 modules, Parcel wrapper, original full lockfile and complete attribution remain open; runtime unchanged."
     },
     {
       "id": "SDK-01",

@@ -13,6 +13,9 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
 - console-feed 的 32 个模块现已用官方 3.2.2 归档精确重建，见
   [来源记录](baselines/console-feed-provenance.json)。这证明源码匹配，不代表找回
   原始 lockfile 或证明唯一安装版本；其余传递依赖和完整许可仍待核查。
+- React/ReactDOM、scheduler、react-is、Linkify 等 13 个官方归档又精确重建 41 个
+  模块，累计 73/100；其成员/许可原文、环境变换和剩余 27 个 ID 见
+  [CommonJS 来源](baselines/console-commonjs-provenance.json)。仍不代表完整许可闭环。
 - 原末尾指向不存在的 /index.js.map。原始 bundle 和模块指纹见
   [冻结来源](baselines/site-console-inventory.json)。
 
