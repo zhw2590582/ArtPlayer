@@ -4488,7 +4488,9 @@
         "console-modernization.md",
         "baselines/site-console-inventory.json",
         "baselines/site-console-validation.json",
-        "changes/2026-09-15-SITE-07-console-baseline.md"
+        "changes/2026-09-15-SITE-07-console-baseline.md",
+        "baselines/console-feed-provenance.json",
+        "changes/2026-09-15-SITE-07-console-feed-source.md"
       ]
     },
     {

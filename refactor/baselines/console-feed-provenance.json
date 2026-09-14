@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "recordedAt": "2026-09-14T22:23:26.058Z",
+  "frozen": {
+    "path": "refactor/baselines/site-vendor/console-original.js",
+    "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+  },
+  "archive": {
+    "name": "console-feed",
+    "version": "3.2.2",
+    "tarball": "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
+    "integrity": "sha512-/DxoNG48E+eIMhD9/lBftpJoFQI1e5TOXCwmwG9VIMXAVJPDyGRoY844eClkZBC4b4Ae24ndua6ui/E0jfrH9Q==",
+    "sha256": "3e02b8e4603fab1bc67d6cf99331a2b9470ea448fbcb3c6ef66615b03385f772"
+  },
+  "compiler": {
+    "archive": {
+      "name": "terser",
+      "version": "3.17.0",
+      "tarball": "https://registry.npmjs.org/terser/-/terser-3.17.0.tgz",
+      "integrity": "sha512-/FQzzPJmCpjAH9Xvk2paiWrFq+5M6aVOf+2KRbwhByISDX/EujxsK+BAvrhb6H+2rtrLCHK9N01wO014vrIwVQ==",
+      "sha256": "42e8fc6a9d1d11762cf1e8ce4c378bce2eaeea28578dd112a58de34a0a9cef8d"
+    },
+    "member": "package/dist/bundle.min.js",
+    "sha256": "6dfee6a315a7928b6fc06fb306037c528fa11a3e8413b5608722a0eca2fa08db",
+    "sourceMapVersion": "0.6.1",
+    "options": {
+      "warnings": true,
+      "safari10": true,
+      "mangle": {
+        "toplevel": true
+      }
+    },
+    "recipeSource": {
+      "archive": {
+        "name": "parcel-bundler",
+        "version": "1.12.5",
+        "tarball": "https://registry.npmjs.org/parcel-bundler/-/parcel-bundler-1.12.5.tgz",
+        "integrity": "sha512-hpku8mW67U6PXQIenW6NBbphBOMb8XzW6B9r093DUhYj5GN2FUB/CXCiz5hKoPYUsusZ35BpProH8AUF9bh5IQ==",
+        "sha256": "2999bb924723fe5d33dea65361c5d235e79912f778b712f30382eb4e9d156406"
+      },
+      "member": "package/src/transforms/terser.js",
+      "sha256": "508d575d7428119cafc1a1edcc6a9f8e05653e9901cf04ee3b909145ecdb6147"
+    },
+    "limitation": "This is an exact reproducing transform, not recovery of the original full Parcel lockfile or proof of a uniquely installed version."
+  },
+  "sources": [
+    {
+      "id": "m6b6",
+      "member": "package/lib/index.js",
+      "sourceSha256": "b0b79bae841edf4084e7f884da4aab9349f0d9e7af656fadda6ad26b8e4dd916",
+      "generatedSha256": "5be990ed02829d295cc31a6e3fde121dffc53a4b663d70af4954c9ae75d40c79",
+      "bodySha256": "5be990ed02829d295cc31a6e3fde121dffc53a4b663d70af4954c9ae75d40c79"
+    },
+    {
+      "id": "yCSh",
+      "member": "package/lib/Component/index.js",
+      "sourceSha256": "c8b99fb95f5272ad6f4e152945e19dca6023f28b34e9c2bf0dda68738c978cf1",
+      "generatedSha256": "803744445c69187b7d762e67b72f20585dcbf9908ee5fd026907aafb4acbab58",
+      "bodySha256": "803744445c69187b7d762e67b72f20585dcbf9908ee5fd026907aafb4acbab58"
+    },
+    {
+      "id": "VJzx",
+      "member": "package/lib/Component/theme/default.js",
+      "sourceSha256": "525ea614eed82fa24bc61ec8fb208067b463395bb9f69dca0ace0fe97530475e",
+      "generatedSha256": "af79c6085e219d832215950b61b7876848a58a7ae5c9220fe744c8a894bcbc78",
+      "bodySha256": "af79c6085e219d832215950b61b7876848a58a7ae5c9220fe744c8a894bcbc78"
+    },
+    {
+      "id": "F6B0",
+      "member": "package/lib/Component/elements.js",
+      "sourceSha256": "b50350173c6c177caa7117011e8a9f811f040f8091bb0b0d4c6156d8a88bf3e7",
+      "generatedSha256": "04e268efa37ec3e22087dfec429bd9d2f36c8df17d538e2861b48c6ffa8ed176",
+      "bodySha256": "04e268efa37ec3e22087dfec429bd9d2f36c8df17d538e2861b48c6ffa8ed176"
+    },
+    {
+      "id": "MnJh",
+      "member": "package/lib/Component/theme/index.js",
+      "sourceSha256": "bffac1fce38fae8b48c7085a3223ed83c669c1f8e9a76cc3ecc2612b241868a5",
+      "generatedSha256": "215cc714ebd19bcd842cde8acb83585958ba6989953055c1c5ca5fa65c8617c6",
+      "bodySha256": "215cc714ebd19bcd842cde8acb83585958ba6989953055c1c5ca5fa65c8617c6"
+    },
+    {
+      "id": "VMze",
+      "member": "package/lib/Component/Message.js",
+      "sourceSha256": "21aa511c431b49b99fd19014a34b5fc2364f4789529986e7ac5dbfb2731330dd",
+      "generatedSha256": "d83cc7fadffee9335a9aadf788a21162d3cd4a02c7748396001b5d6eb1a6fd70",
+      "bodySha256": "d83cc7fadffee9335a9aadf788a21162d3cd4a02c7748396001b5d6eb1a6fd70"
+    },
+    {
+      "id": "ftAA",
+      "member": "package/lib/Component/message-parsers/Formatted.js",
+      "sourceSha256": "c2f5771a1b1f074f9aa173efecb6599ba7b7a3ccfdb35113b97c2611334259a2",
+      "generatedSha256": "dc618144a1803b7f1c7981a2b2d309af45773864510f2c180167c84df33dfbdd",
+      "bodySha256": "dc618144a1803b7f1c7981a2b2d309af45773864510f2c180167c84df33dfbdd"
+    },
+    {
+      "id": "R2hN",
+      "member": "package/lib/Component/react-inspector/elements.js",
+      "sourceSha256": "3db15ae3f770a3278a829fecaecb3e527c2294344a115f3123774a5865c5cebf",
+      "generatedSha256": "977afb19a0ac303a0bc51cf530bb8243ae08def67de7a270ffb33796fc8fa27d",
+      "bodySha256": "977afb19a0ac303a0bc51cf530bb8243ae08def67de7a270ffb33796fc8fa27d"
+    },
+    {
+      "id": "CwU9",
+      "member": "package/lib/Component/devtools-parser/index.js",
+      "sourceSha256": "79932dab131a76a6bc4288b69674cc348680cbc700acd1b3ff8f3b675c6f4a8d",
+      "generatedSha256": "f634855517a582f02f585c9e7c5bf9edb0dee11be8bf2cc3109dd4ec82e6de83",
+      "bodySha256": "f634855517a582f02f585c9e7c5bf9edb0dee11be8bf2cc3109dd4ec82e6de83"
+    },
+    {
+      "id": "SENo",
+      "member": "package/lib/Component/devtools-parser/format-message.js",
+      "sourceSha256": "9d989597b6c3d30ca84baac5f67e2014a6bac48ab5d1260dbce40cba7568155a",
+      "generatedSha256": "c5c66a439a3626150db2f3530874dddbffe88c420140802e0cdb2531ae2c976c",
+      "bodySha256": "c5c66a439a3626150db2f3530874dddbffe88c420140802e0cdb2531ae2c976c"
+    },
+    {
+      "id": "uxdN",
+      "member": "package/lib/Component/devtools-parser/string-utils.js",
+      "sourceSha256": "1daafcdb9cdeab609e5c4561903d821acd46b6edac8a84bbaf93fc710ce3e99d",
+      "generatedSha256": "5aa9396d427f60f0ad543a58692b3b1e7888bfe75d32113cc28aabdbc21f8307",
+      "bodySha256": "5aa9396d427f60f0ad543a58692b3b1e7888bfe75d32113cc28aabdbc21f8307"
+    },
+    {
+      "id": "LmXR",
+      "member": "package/lib/Component/message-parsers/Object.js",
+      "sourceSha256": "10009010bdc053a6c15e2e083457082f4fbff6ebab15f4a2efc02422f3a5b203",
+      "generatedSha256": "8d908461fa424ffa99856a00f06a26900d65d5333879e8ba0248075eb5cbd4a8",
+      "bodySha256": "8d908461fa424ffa99856a00f06a26900d65d5333879e8ba0248075eb5cbd4a8"
+    },
+    {
+      "id": "j7Pd",
+      "member": "package/lib/Component/react-inspector/index.js",
+      "sourceSha256": "17de610ab22242607699955f71df7b6ae3f35e0017da51106e090864a80bf42f",
+      "generatedSha256": "0a6438f055de8fd999d686155b8b021099125c06f92728f7cd6c20c6bf5e403c",
+      "bodySha256": "0a6438f055de8fd999d686155b8b021099125c06f92728f7cd6c20c6bf5e403c"
+    },
+    {
+      "id": "swKK",
+      "member": "package/lib/Component/message-parsers/Error.js",
+      "sourceSha256": "d13f4124372f1d5941e968c8d3403372056b3479668889acbd1768bb73bbe080",
+      "generatedSha256": "aa196768776c196a76dd1c4cc61bbd667159a12e13ec58a14d8e10ea09409be9",
+      "bodySha256": "aa196768776c196a76dd1c4cc61bbd667159a12e13ec58a14d8e10ea09409be9"
+    },
+    {
+      "id": "pYO5",
+      "member": "package/lib/Hook/index.js",
+      "sourceSha256": "63243dff52752b4c8552924f486e93483bfdc0cb7739692d897fa799ac7abd0e",
+      "generatedSha256": "5475966f1b782a13aab14c65db35ffc6e1e2d1f4a74e535323babf4459eaabfb",
+      "bodySha256": "5475966f1b782a13aab14c65db35ffc6e1e2d1f4a74e535323babf4459eaabfb"
+    },
+    {
+      "id": "V2JG",
+      "member": "package/lib/definitions/Methods.js",
+      "sourceSha256": "3e0373b4760fcb01db1ae5b6d03f9640b699dd87cda382113081b5f97f59a822",
+      "generatedSha256": "4476f5ab9cb1d0fa4d8b30cdda836398c84ebab3083bd6eabb1eb8a218756b6f",
+      "bodySha256": "4476f5ab9cb1d0fa4d8b30cdda836398c84ebab3083bd6eabb1eb8a218756b6f"
+    },
+    {
+      "id": "RxPG",
+      "member": "package/lib/Hook/parse/index.js",
+      "sourceSha256": "bd8edf290bd950f1630be5a8a1c9c2f844bdf32f43df1fb2aba119d35e01ada4",
+      "generatedSha256": "8b055b5ad031122364b701efe0dbd37749a04dc1e968fc389b515ba9662058b7",
+      "bodySha256": "8b055b5ad031122364b701efe0dbd37749a04dc1e968fc389b515ba9662058b7"
+    },
+    {
+      "id": "kEc0",
+      "member": "package/lib/Hook/parse/GUID.js",
+      "sourceSha256": "78dca26cc852b8d05c422197318a00cab1ff065c3a82ff12f6d586ca50e60dde",
+      "generatedSha256": "f61e1118796bd5329c893f7aa870f1d1f9439eff6cc2e0a9f329f1624494cb3f",
+      "bodySha256": "f61e1118796bd5329c893f7aa870f1d1f9439eff6cc2e0a9f329f1624494cb3f"
+    },
+    {
+      "id": "b9Ac",
+      "member": "package/lib/Hook/parse/methods/timing.js",
+      "sourceSha256": "3ec9b76ba0ee3ef27753162fa720a33770cfe19cbc15316f26b406a3417d33ef",
+      "generatedSha256": "4ef00880c4faebabcc2296d4b0d5af3687599c44cf9ebc18b9f5d640a81bc557",
+      "bodySha256": "4ef00880c4faebabcc2296d4b0d5af3687599c44cf9ebc18b9f5d640a81bc557"
+    },
+    {
+      "id": "tUcB",
+      "member": "package/lib/Hook/store/state.js",
+      "sourceSha256": "5e94f4ebb046796ccaf2424941c716e12fe454c3eb7982ee896b6a7a115a5666",
+      "generatedSha256": "063cbbd0e15bf5f66ea9839b1aef22c645e83c847106950bfba22a49c5e6aaeb",
+      "bodySha256": "063cbbd0e15bf5f66ea9839b1aef22c645e83c847106950bfba22a49c5e6aaeb"
+    },
+    {
+      "id": "KD8b",
+      "member": "package/lib/Hook/store/dispatch.js",
+      "sourceSha256": "9422017cb57271d022b942f9cb5595e784e5e882940dda4234f458ed85c3c9f3",
+      "generatedSha256": "0cad70e5ae872d671ce41ec0ba3f07047b2eb31a2cb7c6dec7af14ef6874c125",
+      "bodySha256": "0cad70e5ae872d671ce41ec0ba3f07047b2eb31a2cb7c6dec7af14ef6874c125"
+    },
+    {
+      "id": "AXxh",
+      "member": "package/lib/Hook/store/reducer.js",
+      "sourceSha256": "d2c1e1dd8424c8adf7c41ac87dbf0d1515851927a300706bb463c1136dd113b8",
+      "generatedSha256": "5a20f5f349cfe5341d8d7b91556012fa5eb7862b7727f323aed50746bfd2dd23",
+      "bodySha256": "5a20f5f349cfe5341d8d7b91556012fa5eb7862b7727f323aed50746bfd2dd23"
+    },
+    {
+      "id": "nj54",
+      "member": "package/lib/Hook/store/actions.js",
+      "sourceSha256": "d94d4e1ac65d9ec2f44bf7bbddcd381f00fe6462e5b8ffc3efbad9339be24a3f",
+      "generatedSha256": "abce408bb92e92c9adf097ac3984e5d052c9c8f5d3e69c03404341b82a94466e",
+      "bodySha256": "abce408bb92e92c9adf097ac3984e5d052c9c8f5d3e69c03404341b82a94466e"
+    },
+    {
+      "id": "BQYC",
+      "member": "package/lib/Hook/parse/methods/count.js",
+      "sourceSha256": "61fb64e0ce485f19b058d505d84a60ee63fa4069c235577f7da4ae3824f18881",
+      "generatedSha256": "bd7e9e0250873cc7aa48af4733c7f2efc1f48dda58c8e6198a335395f0616183",
+      "bodySha256": "bd7e9e0250873cc7aa48af4733c7f2efc1f48dda58c8e6198a335395f0616183"
+    },
+    {
+      "id": "dKro",
+      "member": "package/lib/Hook/parse/methods/assert.js",
+      "sourceSha256": "1d80efcffc998c08ce30aceb3fb880222fbc604304363829a88bd06a4efb5847",
+      "generatedSha256": "25730ae6159aeb1da85ce13a63ef7f36fe12f9e86c8a5f39eab5278f2531ea9c",
+      "bodySha256": "25730ae6159aeb1da85ce13a63ef7f36fe12f9e86c8a5f39eab5278f2531ea9c"
+    },
+    {
+      "id": "Zbbf",
+      "member": "package/lib/Transform/index.js",
+      "sourceSha256": "87c7c0f901c7c3fe461cbddf344dda85e0bbac09808bf1224ff3dfa034b371c9",
+      "generatedSha256": "a6e8f7ee72f2bfa0747c4cc0fb8aea6df3f2c2b362248d6d64c39e70b3109f46",
+      "bodySha256": "a6e8f7ee72f2bfa0747c4cc0fb8aea6df3f2c2b362248d6d64c39e70b3109f46"
+    },
+    {
+      "id": "dq61",
+      "member": "package/lib/Transform/arithmetic.js",
+      "sourceSha256": "e8a6d77a65fc8ae73cdc5b221c4ee75d72ce32a2b8acf544796b72c55936827b",
+      "generatedSha256": "02b98dd6f320c114767fa8fcf8a470907df7f8091a41d84430007209c1d6b181",
+      "bodySha256": "02b98dd6f320c114767fa8fcf8a470907df7f8091a41d84430007209c1d6b181"
+    },
+    {
+      "id": "XwmA",
+      "member": "package/lib/Transform/Function.js",
+      "sourceSha256": "10a220fd9dd6f14e0af03f552316ed1cf12d61846956fb989d419661dbea0de0",
+      "generatedSha256": "199b2c52101cf2f9bbfc33ff516eca6e7e7fff077ba41b52a427ca8ef960b5b7",
+      "bodySha256": "199b2c52101cf2f9bbfc33ff516eca6e7e7fff077ba41b52a427ca8ef960b5b7"
+    },
+    {
+      "id": "GDCg",
+      "member": "package/lib/Transform/HTML.js",
+      "sourceSha256": "de476cec047de1da472ccfc766535ed4bc627ebf168a85f8ad4d5e35b13fa834",
+      "generatedSha256": "70dd97167ccc13b9be60eea8a24a2bdcea122c6688c9fb58e4e63e721f40b72f",
+      "bodySha256": "70dd97167ccc13b9be60eea8a24a2bdcea122c6688c9fb58e4e63e721f40b72f"
+    },
+    {
+      "id": "wqxJ",
+      "member": "package/lib/Transform/Map.js",
+      "sourceSha256": "cc9c19079569321216ce6ccd3bee4d4821e68882d3123d01b67bf8df7701b4d4",
+      "generatedSha256": "f5bb3bb16f6971cfa779dc7acc02f74b4bf9cb2e81c5872df3336d4f4ab41e82",
+      "bodySha256": "f5bb3bb16f6971cfa779dc7acc02f74b4bf9cb2e81c5872df3336d4f4ab41e82"
+    },
+    {
+      "id": "HTuI",
+      "member": "package/lib/Transform/replicator/index.js",
+      "sourceSha256": "33ea546afdd46833594d7cdccbfc45dc654b8e9fa737d9ee5d940b6f164dba6b",
+      "generatedSha256": "97f6bd7b15087b2a042d3d4fb8abfaa8c7add5f18ac7e5eff767988708bbdc3a",
+      "bodySha256": "97f6bd7b15087b2a042d3d4fb8abfaa8c7add5f18ac7e5eff767988708bbdc3a"
+    },
+    {
+      "id": "aGBs",
+      "member": "package/lib/Unhook/index.js",
+      "sourceSha256": "47e84dcb6c2a0a752eb778e8fab484d1efd363c0284fde0b1fa28a4b6d98503c",
+      "generatedSha256": "91261579fb7d4bada1cd6e09f660397d4cff10838e100157ea375e48ec38d365",
+      "bodySha256": "91261579fb7d4bada1cd6e09f660397d4cff10838e100157ea375e48ec38d365"
+    }
+  ],
+  "external": [
+    {
+      "from": "yCSh",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "yCSh",
+      "dependency": "emotion-theming",
+      "id": "pufF"
+    },
+    {
+      "from": "VJzx",
+      "dependency": "react-inspector",
+      "id": "kuYm"
+    },
+    {
+      "from": "MnJh",
+      "dependency": "@emotion/styled",
+      "id": "IX9o"
+    },
+    {
+      "from": "VMze",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "VMze",
+      "dependency": "emotion-theming",
+      "id": "pufF"
+    },
+    {
+      "from": "ftAA",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "CwU9",
+      "dependency": "linkifyjs/html",
+      "id": "SbWR"
+    },
+    {
+      "from": "LmXR",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "LmXR",
+      "dependency": "emotion-theming",
+      "id": "pufF"
+    },
+    {
+      "from": "LmXR",
+      "dependency": "linkifyjs/react",
+      "id": "h3Cb"
+    },
+    {
+      "from": "j7Pd",
+      "dependency": "emotion-theming",
+      "id": "pufF"
+    },
+    {
+      "from": "j7Pd",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "j7Pd",
+      "dependency": "react-inspector",
+      "id": "kuYm"
+    },
+    {
+      "from": "swKK",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "swKK",
+      "dependency": "linkifyjs/react",
+      "id": "h3Cb"
+    }
+  ],
+  "notice": {
+    "source": "refactor/baselines/site-vendor/console-feed-3.2.2-LICENSE.txt",
+    "member": "package/LICENSE",
+    "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85",
+    "status": "Preserved verbatim upstream MIT text and Facebook attribution. Full bundled-component provenance/attribution remains open, including embedded replicator and all external dependencies."
+  },
+  "limits": [
+    "32 console-feed module bodies match; 68 other vendor modules and the Parcel wrapper still require complete attribution/provenance.",
+    "No complete license closure or runtime update.",
+    "No execution of archived console-feed runtime during reconstruction."
+  ]
+}

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { Buffer } from 'node:buffer'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import process from 'node:process'
@@ -6,6 +7,7 @@ import process from 'node:process'
 import test from 'node:test'
 import ts from 'typescript'
 import { generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
+import { hash, parcelModules, verifyArchive, verifyModules } from '../scripts/site-vendor/console/provenance.ts'
 import { errorArgument } from '../scripts/site-vendor/console/runtime/errors.ts'
 import { css } from '../scripts/site-vendor/console/runtime/style.ts'
 import { createSubscriptions } from '../scripts/site-vendor/console/runtime/subscriptions.ts'
@@ -174,4 +176,42 @@ test('Console build changes only the two owned module bodies and is deterministi
   assert.equal(candidate, await generateConsole(process.cwd()))
   assert.notEqual(candidate, source)
   assert.throws(() => moduleRanges('var unrelated = 1'), /Missing owned/)
+})
+
+test('Console provenance rejects altered archive bytes and non-SHA512 integrity', () => {
+  const bytes = Buffer.from('verified archive')
+  const archive = { name: 'fixture', sha256: hash(bytes), integrity: `sha512-${createHash('sha512').update(bytes).digest('base64')}` }
+  verifyArchive(bytes, archive)
+  assert.throws(() => verifyArchive(Buffer.from('changed archive'), archive), /integrity changed/)
+  assert.throws(() => verifyArchive(bytes, { ...archive, sha256: 'wrong' }), /bytes changed/)
+  assert.throws(() => verifyArchive(bytes, { ...archive, integrity: 'sha1-weak' }), /Expected SHA-512/)
+})
+
+test('Console provenance extracts the frozen 102 modules without executing vendor code', () => {
+  const source = fs.readFileSync('refactor/baselines/site-vendor/console-original.js', 'utf8')
+  const modules = parcelModules(source)
+  assert.equal(modules.size, 102)
+  assert.equal(modules.get('m6b6').dependencies['./Hook'], 'pYO5')
+  assert.throws(() => parcelModules('const unrelated = 1'), /Missing Parcel/)
+  assert.throws(() => parcelModules('({"Focm":[function(){},{}],"Focm":[function(){},{}]})'), /Duplicate Parcel module/)
+})
+
+test('Console provenance requires exact source, compiler output, dependency mapping and complete reachability', () => {
+  const root = { id: 'm6b6', body: 'exports.value=1;', dependencies: { './child': 'child', 'react': 'react' } }
+  const child = { id: 'child', body: 'exports.child=2;', dependencies: {} }
+  const modules = new Map([root, child, { id: 'react', body: '', dependencies: {} }].map(module => [module.id, module]))
+  const sources = [root, child].map(module => ({ id: module.id, member: `package/lib/${module.id === 'm6b6' ? 'index' : module.id}.js`, sourceSha256: hash(module.body), generatedSha256: hash(module.body), bodySha256: hash(module.body) }))
+  const external = [{ from: 'm6b6', dependency: 'react', id: 'react' }]
+  const read = member => member.endsWith('index.js') ? root.body : child.body
+  assert.equal(verifyModules(modules, sources, external, read, source => source), 2)
+  assert.throws(() => verifyModules(modules, sources, external, () => 'changed', source => source), /Source changed/)
+  assert.throws(() => verifyModules(modules, sources, external, read, () => 'changed'), /Compiler output changed/)
+  assert.throws(() => verifyModules(modules, [sources[0]], external, read, source => source), /Source dependency mapping changed/)
+  assert.throws(() => verifyModules(modules, [...sources, sources[0]], external, read, source => source), /Duplicate source/)
+  assert.throws(() => verifyModules(modules, [...sources, { ...sources[0], id: 'unused' }], external, read, source => source), /Unreachable/)
+  assert.throws(() => verifyModules(modules, sources, [], read, source => source), /External dependency boundary/)
+  const bad = [{ ...sources[0], member: 'package/lib/../escape.js' }, sources[1]]
+  assert.throws(() => verifyModules(modules, bad, external, read, source => source), /Invalid source member/)
+  modules.set('child', { ...child, body: 'changed' })
+  assert.throws(() => verifyModules(modules, sources, external, read, source => source), /Frozen module changed/)
 })

@@ -10,8 +10,9 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
 - Focm 是自有安装入口，W5CS 是自有 React 控制台视图，其余模块须继续溯源。
 - 实际全局包括 React、ReactDOM、consoleLog 和 parcelRequire。React/ReactDOM
   均为 17.0.2，styled-components bundle 声明版本 5.3.3。
-- console-feed 的包版本不能只凭年代推定；npm 当时最新版本 3.2.2 是待比对候选，
-  本批没有确认它就是当前捆绑版本，也没有确认全部传递依赖的版本与许可。
+- console-feed 的 32 个模块现已用官方 3.2.2 归档精确重建，见
+  [来源记录](baselines/console-feed-provenance.json)。这证明源码匹配，不代表找回
+  原始 lockfile 或证明唯一安装版本；其余传递依赖和完整许可仍待核查。
 - 原末尾指向不存在的 /index.js.map。原始 bundle 和模块指纹见
   [冻结来源](baselines/site-console-inventory.json)。
 

@@ -67,3 +67,34 @@ No new dependency is required. Existing esbuild 0.27.7 and TypeScript 5.9.3 prov
 generation and structural parsing. Full console dependency provenance and notices
 remain SITE-07 / VENDOR-08; this build does not close them. See
 `refactor/console-modernization.md` for contracts and evidence.
+
+## Historical source reconstruction
+
+`refactor/baselines/console-feed-provenance.json` maps all 32 modules reachable
+through relative imports from m6b6 to the official console-feed 3.2.2 archive.
+Their rebuilt bodies exactly match the frozen bundle. The 68 remaining vendor
+modules and Parcel wrapper need further provenance; this does not establish a
+unique original installed version or recover its missing lockfile.
+
+```sh
+node scripts/site-vendor/console/reproduce.ts --fetch
+node scripts/site-vendor/console/reproduce.ts
+yarn test:site-console
+```
+
+The first command downloads two pinned npm archives into the dedicated ignored
+`refactor/.cache/console-feed-reproduction/` directory. The second uses that cache
+offline. Both verify SHA-512 SRI, archive SHA-256, source member fingerprints,
+compiler bytes and exact output. They load Terser 3.17.0 as a historical build
+tool with the already installed source-map 0.6.1; they do not install dependencies,
+change Yarn or execute the archived console-feed runtime. Canonical Node is required.
+The minification recipe is recovered from Parcel 1.12.5's archive; this proves a
+reproducing transform, not that the original author used precisely that Parcel
+version. `provenance.ts` separately verifies complete traversal, relative source
+mapping and external dependency boundaries. Missing, unreachable, duplicate or
+changed evidence fails instead of silently shrinking the comparison.
+
+The archived LICENSE is preserved verbatim with its Facebook attribution under
+`refactor/baselines/site-vendor/console-feed-3.2.2-LICENSE.txt`. Do not rewrite it
+or infer it covers every embedded/external component. Complete notices remain
+open, including the bundled replicator and remaining dependencies.

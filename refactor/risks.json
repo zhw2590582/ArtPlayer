@@ -681,11 +681,15 @@
         "refactor/baselines/site-console-inventory.json",
         "refactor/baselines/site-console-validation.json",
         "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
-        "test/browser/site-console.spec.js"
+        "test/browser/site-console.spec.js",
+        "refactor/baselines/console-feed-provenance.json",
+        "refactor/changes/2026-09-15-SITE-07-console-feed-source.md",
+        "scripts/site-vendor/console/provenance.ts",
+        "scripts/site-vendor/console/reproduce.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "Frozen 102-module Parcel bundle and real React 17.0.2/global/component/DOM behavior are recorded. Three lifecycle/error defects are separately reproduced. Remaining dependency versions, complete notices and reproducible source remain open; no runtime replacement yet."
+      "workspaceState": "32 console-feed modules match official 3.2.2 archive exactly under a verified historical transform. Other 68 vendor modules, Parcel wrapper, original lockfile and complete attribution remain open. Runtime files unchanged in this checkpoint."
     },
     {
       "id": "SDK-01",

@@ -1060,9 +1060,13 @@
       "owners": [
         "SITE-01"
       ],
-      "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03; 102-module map, Focm entry/W5CS view, React 17.0.2 globals and styled-components 5.3.3 literal identified. Full dependency versions and source reconstruction remain open. SITE-CONSOLE-01 replaces only Focm/W5CS bodies from owned TS and removes the missing source-map trailer; other 100 modules and runtime remain byte-for-byte frozen. Full vendor provenance remains open.",
-      "licenseStatus": "Root MIT is not sufficient evidence for all bundled components; inventory and notices pending.",
-      "upstreamSources": [],
+      "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03; 102-module map, Focm entry/W5CS view, React 17.0.2 globals and styled-components 5.3.3 literal identified. Full dependency versions and source reconstruction remain open. SITE-CONSOLE-01 replaces only Focm/W5CS bodies from owned TS and removes the missing source-map trailer; other 100 modules and runtime remain byte-for-byte frozen. Full vendor provenance remains open. Official console-feed 3.2.2 archive reproduces all 32 relative-import module bodies exactly with verified Terser 3.17.0/Parcel 1.12.5 transform settings; 68 vendor modules and wrapper remain. This does not recover the original lockfile or establish a unique installed version.",
+      "licenseStatus": "Official console-feed 3.2.2 MIT LICENSE preserved verbatim, including Facebook attribution. Embedded replicator and all external/remaining component notices still require review; no full closure.",
+      "upstreamSources": [
+        "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
+        "https://registry.npmjs.org/terser/-/terser-3.17.0.tgz",
+        "https://registry.npmjs.org/parcel-bundler/-/parcel-bundler-1.12.5.tgz"
+      ],
       "upstreamReviewedAt": null,
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
