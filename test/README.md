@@ -157,3 +157,14 @@ round-trips and the offline source corpus are checked against actual inputs.
 A loopback HTTP server verifies a stalled response body times out. Mock responses
 test bounded retries and invalid data; no paid translation is performed and these
 tests do not certify English prose quality. Included in `test:node`.
+
+## Site build regressions
+
+`yarn test:site-build` covers i18n compile failure, staged replacement and rollback,
+concurrent build/output conflicts, retained backups, actual language dictionaries
+and globals in four module modes, and a real Yarn documentation fixture child.
+Use this Yarn script instead of `yarn node`, which does not supply the lifecycle
+environment used to locate the pinned Yarn executable. The Markdown test uses
+the installed VitePress renderer to reproduce random code-group IDs and verify
+stable IDs, uniqueness and label associations. Built-page browser checks live in
+`test/browser/document-site.spec.js`; their editor destination is intercepted.

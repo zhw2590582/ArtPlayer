@@ -4190,6 +4190,27 @@
       ]
     },
     {
+      "id": "SITE-BUILD-01",
+      "phase": "6 文档与消费者",
+      "title": "重构 i18n 与文档构建的暂存、替换和 Yarn 编排",
+      "scope": [
+        "artplayer",
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "SITE-AI-DOCS-01"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "严格 TS 构建模块、编译后替换产物与失败回退，固定 Yarn 子进程和旧构建入口",
+      "acceptance": "旧 i18n 删除后失败有复现；失败不改变既有产物；语言集合、UMD/ESM/历史别名兼容；文档子进程退出码准确并完成真实 VitePress 构建；不隐式翻译、不修改播放器 API",
+      "evidence": [
+        "changes/2026-09-14-SITE-BUILD-01-staged-builds.md",
+        "baselines/site-build-validation.json"
+      ]
+    },
+    {
       "id": "SITE-03",
       "phase": "6 文档与消费者",
       "title": "整理 i18n/文档/LLM 生成流程",
@@ -4199,7 +4220,8 @@
       "dependsOn": [
         "SITE-02",
         "SITE-LOAD-01",
-        "SITE-AI-DOCS-01"
+        "SITE-AI-DOCS-01",
+        "SITE-BUILD-01"
       ],
       "status": "todo",
       "risk": "M",

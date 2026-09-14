@@ -256,3 +256,5 @@
 | EX-REACT-LIFE-01 | resolved / 已复现 | React getInstance exception leaks the constructed player | EX-01 |
 | EX-REACT-ENTRY-01 | resolved / 源码/产物事实 | React HTML references absent main.jsx instead of the existing TSX entry | EX-01 |
 | SITE-TRANS-DATA-01 | resolved / 已复现 | Translation deletes English before requests and repairs valid fences destructively; exhausted rate limits return undefined | SITE-AI-DOCS-01 |
+| SITE-I18N-DATA-01 | resolved / 已复现 | Language build deletes existing distribution before compilation succeeds | SITE-BUILD-01 |
+| SITE-CODE-GROUP-01 | resolved / 已复现 | VitePress code-group random IDs make identical site inputs emit different output hashes | SITE-BUILD-01 |

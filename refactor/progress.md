@@ -1,5 +1,22 @@
 # 进度与证据
 
+## SITE-BUILD-01 构建流程完成
+
+i18n/VitePress 构建完成严格 TS 模块拆分，暂存后替换并保留失败恢复路径；
+文档子进程固定使用当前 Yarn1.22.22，保留退出码。11 语言的 22 个 UMD/ESM
+文件在两处输出与起点 Git 内容一致，四类导出/历史别名验证通过。实际完整
+文档构建发现随机 code-group ID 导致哈希不稳定，已用本地 renderer hook 修复，
+连续两次构建树指纹一致。生成 docs/document 已同步源码。
+7 项目标测试、522 baseline、50 CI、严格类型/工具链/lint 通过（1 既有 warning）。
+三浏览器最终 6 项验证中英文深层页面、Run Code 目标和代码组切换；目标编辑器
+为受控接收页，完整编辑器/搜索/链接/设备仍另行验收。初次测试入口问题和随机
+ID 的失败证据保留。目录替换/进程崩溃的限制与恢复说明见模块 README。
+见[变更](changes/2026-09-14-SITE-BUILD-01-staged-builds.md)和
+[证据](baselines/site-build-validation.json)。当前 243 项：169 done、15 doing、
+59 todo。下一步 SITE-03 桌面 common.js UI 的 TS 迁移；其它包开放问题不变。
+本任务独立本地提交后审计，不推送、不发布。
+
+
 ## SITE-AI-DOCS-01 文档工具完成
 
 将 build-llm/trans-docs 拆为严格 TS 模块，保留旧命令路径。离线 LLM 文件含

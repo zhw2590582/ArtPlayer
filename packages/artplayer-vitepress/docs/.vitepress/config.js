@@ -1,3 +1,5 @@
+import { stableCodeGroups } from '../../build/markdown.ts'
+
 /**
  * @type {import('vitepress').UserConfig}
  */
@@ -180,6 +182,7 @@ const config = {
   },
   markdown: {
     lineNumbers: true,
+    config: stableCodeGroups,
   },
   head: [
     [

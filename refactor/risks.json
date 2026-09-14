@@ -5775,6 +5775,54 @@
         "test/documentation-pipeline.test.js"
       ],
       "resolutionRationale": "Twelve candidate regressions pass, including actual 13-file Markdown round-trip and local HTTP stalled body. No live translation was applied. Power loss and hostile concurrent filesystem mutation are explicitly outside transaction guarantees."
+    },
+    {
+      "id": "SITE-I18N-DATA-01",
+      "title": "Language build deletes existing distribution before compilation succeeds",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-BUILD-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-SITE-BUILD-01-staged-builds.md",
+        "refactor/baselines/site-build-validation.json",
+        "test/site-build.test.js",
+        "test/site-build.test.js"
+      ],
+      "compatibleResolution": "Preserve commands, language exports and UI classes while correcting internal failure and generation behavior.",
+      "closureCriteria": "Retain old reproduction and candidate filesystem/renderer evidence; verify actual build outputs and relevant consumer/UI contracts.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-SITE-BUILD-01-staged-builds.md",
+        "refactor/baselines/site-build-validation.json",
+        "test/site-build.test.js",
+        "test/site-build.test.js"
+      ],
+      "resolutionRationale": "Frozen old function loses prior output on first compile failure; staged candidate keeps both directories intact and recovers caught rename failures, retaining backups on concurrent conflicts."
+    },
+    {
+      "id": "SITE-CODE-GROUP-01",
+      "title": "VitePress code-group random IDs make identical site inputs emit different output hashes",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "SITE-BUILD-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-SITE-BUILD-01-staged-builds.md",
+        "refactor/baselines/site-build-validation.json",
+        "test/site-build.test.js",
+        "test/site-markdown.test.js"
+      ],
+      "compatibleResolution": "Preserve commands, language exports and UI classes while correcting internal failure and generation behavior.",
+      "closureCriteria": "Retain old reproduction and candidate filesystem/renderer evidence; verify actual build outputs and relevant consumer/UI contracts.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-SITE-BUILD-01-staged-builds.md",
+        "refactor/baselines/site-build-validation.json",
+        "test/site-build.test.js",
+        "test/site-markdown.test.js"
+      ],
+      "resolutionRationale": "Installed renderer reproduces random IDs; wrapper stabilizes page/group/tab identity and label associations. Consecutive full builds have equal tree fingerprints and three browser engines verify actual tab selection and visible blocks."
     }
   ]
 }

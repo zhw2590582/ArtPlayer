@@ -1,0 +1,53 @@
+import { expect, test } from './fixtures.js'
+
+for (const language of ['zh', 'en']) {
+  test(`built documentation loads ${language} deep pages and opens Run Code with encoded source`, async ({
+    page,
+    context,
+  }) => {
+    await page.route('https://**/*', route =>
+      route.fulfill({ status: 200, body: '' }))
+    await context.route('http://127.0.0.1:8082/**', route =>
+      route.fulfill({
+        contentType: 'text/html',
+        body: '<title>Run Code destination</title>',
+      }))
+    await page.addInitScript(() => localStorage.setItem('lang-init', 'true'))
+    const failedAssets = []
+    page.on('response', (response) => {
+      if (response.url().includes('/document/') && response.status() >= 400)
+        failedAssets.push(response.url())
+    })
+    const prefix = language === 'en' ? '/document/en' : '/document'
+    await page.goto(`${prefix}/start/option.html`, {
+      waitUntil: 'networkidle',
+    })
+    await expect(page.locator('h1')).toContainText(
+      language === 'en' ? 'Basic Options' : '基础选项',
+    )
+    const button = page.locator('[classname="run-code"]').first()
+    await expect(button).toBeVisible()
+    const popupPromise = context.waitForEvent('page')
+    await button.click()
+    const popup = await popupPromise
+    await popup.waitForLoadState('domcontentloaded')
+    const target = new URL(popup.url())
+    expect(target.hostname).toBe('127.0.0.1')
+    expect(target.port).toBe('8082')
+    expect(target.searchParams.get('code')).toContain('new Artplayer')
+    await popup.close()
+    await page.goto(`${prefix}/advanced/event.html`, {
+      waitUntil: 'networkidle',
+    })
+    await expect(page.locator('h1')).toContainText(
+      language === 'en' ? 'Instance Events' : '实例事件',
+    )
+    expect(failedAssets).toEqual([])
+    await page.goto(`${prefix}/`, { waitUntil: 'networkidle' })
+    const group = page.locator('.vp-code-group').first()
+    await group.locator('.tabs label').nth(1).click()
+    await expect(group.locator('input[type="radio"]').nth(1)).toBeChecked()
+    await expect(group.locator('.blocks > div').nth(1)).toBeVisible()
+    await expect(group.locator('.blocks > div').first()).toBeHidden()
+  })
+}

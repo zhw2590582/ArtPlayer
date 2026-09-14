@@ -40,9 +40,11 @@ yarn workspace artplayer-vitepress preview
 node refactor/scripts/site-inventory.mjs --check
 ```
 
-`build:docs` currently delegates through `npm run build` to this workspace's
-VitePress script. This does not install dependencies or create another lockfile;
-the command orchestration will be modernized in SITE-03.
+`build:docs` uses the current pinned Yarn executable to run this workspace's
+VitePress script into a temporary directory. A successful build replaces the
+generated site, with backups for caught replacement failures. See
+[build maintenance](../../scripts/site-build/README.md) for module ownership,
+failure recovery and the explicit limits of directory replacement.
 
 The repository generators have different ownership:
 
@@ -55,8 +57,9 @@ The repository generators have different ownership:
   The TS implementation in `scripts/docs-smoke/` produces deterministic readiness
   smoke cases with owned frames, error observation and cleanup. It does not prove
   complete playback or plugin behavior. See its maintenance README and SITE-SMOKE-01.
-- `scripts/build-i18n.js`: core language source bundles and copies to `docs/compiled/i18n/`.
-- `scripts/build-docs.js`: this VitePress build.
+- `scripts/build-i18n.js`: typed standalone language builds, staged before replacing
+  distribution and `docs/compiled/i18n/` together; legacy globals and paths remain.
+- `scripts/build-docs.js`: this VitePress build through pinned Yarn and staged output.
 - `scripts/build-llm.js`: offline source-preserving `docs/llms.txt` and fingerprint
   manifest. `yarn check:llm` checks drift in CI; `ci:build` regenerates after types.
 - `scripts/trans-docs.js`: local plan by default; explicit `--remote` creates a

@@ -1,15 +1,7 @@
 import process from 'node:process'
-import spawn from 'cross-spawn'
+import { buildDocumentation, BuildExitError } from './site-build/docs.ts'
 
-const proc = spawn('npm', ['run', 'build'], {
-  cwd: './packages/artplayer-vitepress/',
-  stdio: 'inherit',
-})
-
-proc.on('error', (error) => {
+await buildDocumentation(process.cwd()).catch((error) => {
   console.error(error.message)
-  process.exitCode = 1
-})
-proc.on('close', (code) => {
-  process.exitCode = code ?? 1
+  process.exitCode = error instanceof BuildExitError ? error.code : 1
 })

@@ -75,8 +75,8 @@ loadScript 暂时覆盖 window.define：桌面成功/失败均恢复，移动失
 | build:types | 核心 public → types | 已有严格生成检查，不手改输出 |
 | build:ts | 核心及插件声明 → assets/ts、common.js 的 libUris | 大部分语义转换，仍有字符串 fallback；SITE-02 |
 | build:test | 中文 Run Code → docs/test/test.js | 排除 en/plugin/public/.vitepress；100ms done 只是 smoke，含生成时间戳；SITE-02 |
-| build:i18n | 核心语言源 → dist/i18n、compiled/i18n | 排除内置语言/发布辅助，逐包构建；SITE-03 |
-| build:docs | VitePress 源 → docs/document | 当前 npm 子进程只是运行脚本；SITE-03 统一 Yarn 编排 |
+| build:i18n | 核心语言源 → dist/i18n、compiled/i18n | SITE-BUILD-01 暂存全套 UMD/ESM 后替换；保留内置语言/辅助排除 |
+| build:docs | VitePress 源 → docs/document | SITE-BUILD-01 固定 Yarn 子进程、暂存构建、失败回退 |
 | build:llm | 英文文档、实际编辑器声明、示例、声明 notices → docs/llms.txt + manifest | SITE-AI-DOCS-01 离线可复现；check:llm 只读检查 |
 | trans-docs.js | 中文 Markdown → 草稿 → 经检查应用英文 Markdown | 默认只显示计划；显式 --remote 请求，--validate / --apply 分步处理 |
 

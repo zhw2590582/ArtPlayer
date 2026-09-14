@@ -126,3 +126,11 @@ Pages 先调用同一检查/构建 workflow，成功后上传同一次运行生�
 `ci:build` 在 `build:ts` 后运行离线 `build:llm`，不读取 API key 或请求模型。
 文档 TS 模块进入根 lint 和 docs-tools 严格类型检查，文档流程回归进入
 `test:node`。`trans:docs --remote` 不进入 CI；远端工作流运行结果仍待独立验收。
+
+## SITE-BUILD-01 构建编排补充
+
+`build:i18n` 和 `build:docs` 先暂存再替换固定生成目录；文档子进程使用当前
+Yarn Classic 可执行文件，不再调用 npm。入口仍由 `ci:build` 按原顺序调用。
+新增 `test:site-build`，其测试进入 `test:node`；构建 TS 模块与 VitePress
+稳定代码分组 ID hook 进入根 lint/docs-tools 类型检查。真实本地构建和三浏览器
+页面验证见任务变更记录，远端工作流、Pages 与 npm 验收不因此完成。
