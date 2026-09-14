@@ -1,0 +1,1904 @@
+{
+  "task": "PKG-AUTO-THUMB-03",
+  "status": "doing",
+  "baselineCommit": "772d79a67196ff61dc1e90499c275fee936cb942",
+  "outcome": "Native first-frame defect reproduced without plugin; production fix remains unproven",
+  "script": {
+    "file": "refactor/scripts/auto-thumbnail-native-probe.mjs",
+    "sha256": "448c701a8b91ecd352da349ac6afca3ba20e3abc234fe508fbb5289b8d6933cc"
+  },
+  "final": {
+    "report": {
+      "file": "refactor/.cache/auto-thumbnail-native-1n8pV4/report.json",
+      "sha256": "bc686de7b8eac909fc3f28684bc4801ec9ad2c8848cbe0b9d1e05428f48d9192"
+    },
+    "log": {
+      "file": "refactor/.cache/auto-native-probe-final.log",
+      "sha256": "7c6a890751dace746348c545689bcd8341aff6f709c4059877624fa1b7cdb2c9"
+    },
+    "capturedAt": "2026-09-14T03:37:51.659Z",
+    "node": "v24.21.0",
+    "platform": "win32",
+    "ffmpegVersion": "ffmpeg version 2025-11-12-git-6cdd2cbe32-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+    "args": [
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-i",
+      "test/browser/media/auto-thumbnail-timeline.mp4",
+      "-map",
+      "0:v:0",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-pix_fmt",
+      "yuv420p",
+      "-bf",
+      "0",
+      "-g",
+      "30",
+      "-crf",
+      "18",
+      "-movflags",
+      "+faststart",
+      "refactor\\.cache\\auto-thumbnail-native-1n8pV4\\no-b-frames.mp4"
+    ],
+    "media": [
+      {
+        "file": "refactor\\.cache\\auto-thumbnail-native-1n8pV4\\original.mp4",
+        "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "profile": "High",
+              "has_b_frames": 2,
+              "time_base": "1/15360",
+              "start_time": "0.000000",
+              "duration": "8.000000"
+            }
+          ]
+        },
+        "ffmpegFirstPixel": [
+          128,
+          0,
+          128,
+          255
+        ]
+      },
+      {
+        "file": "refactor\\.cache\\auto-thumbnail-native-1n8pV4\\no-b-frames.mp4",
+        "sha256": "d08af99bc5021eedd4c32112e3f0b7d08c85bd35da39711362a71a9a9274ce3e",
+        "metadata": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "profile": "High",
+              "has_b_frames": 0,
+              "time_base": "1/15360",
+              "start_time": "0.000000",
+              "duration": "8.000000"
+            }
+          ]
+        },
+        "ffmpegFirstPixel": [
+          128,
+          0,
+          128,
+          255
+        ]
+      }
+    ],
+    "results": [
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "file": "original.mp4",
+        "mode": "paused",
+        "purpleSamples": 0,
+        "mediaError": 0,
+        "supportsFrames": false,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 411,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 1328,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "file": "original.mp4",
+        "mode": "visible-paused",
+        "purpleSamples": 0,
+        "mediaError": 0,
+        "supportsFrames": false,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 440,
+          "time": 0,
+          "readyState": 2,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 1364,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            238,
+            14,
+            14,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "238,14,14,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "file": "original.mp4",
+        "mode": "play-pause",
+        "purpleSamples": 0,
+        "mediaError": 0,
+        "supportsFrames": false,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 415,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 1321,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "play",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "playing",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "pause",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "file": "no-b-frames.mp4",
+        "mode": "paused",
+        "purpleSamples": 0,
+        "mediaError": 0,
+        "supportsFrames": false,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 410,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 1332,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "file": "no-b-frames.mp4",
+        "mode": "visible-paused",
+        "purpleSamples": 0,
+        "mediaError": 0,
+        "supportsFrames": false,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 388,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 1298,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "file": "no-b-frames.mp4",
+        "mode": "play-pause",
+        "purpleSamples": 0,
+        "mediaError": 0,
+        "supportsFrames": false,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 426,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 1334,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "play",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "playing",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "pause",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "file": "original.mp4",
+        "mode": "paused",
+        "purpleSamples": 30,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 52.19999998807907,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 556.6000000238419,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            127,
+            0,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "127,0,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "file": "original.mp4",
+        "mode": "visible-paused",
+        "purpleSamples": 30,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 4.899999976158142,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 514.8000000119209,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            127,
+            0,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "127,0,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "file": "original.mp4",
+        "mode": "play-pause",
+        "purpleSamples": 30,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 4.400000035762787,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 510.9000000357628,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            127,
+            0,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "127,0,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "play",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "playing",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "pause",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "file": "no-b-frames.mp4",
+        "mode": "paused",
+        "purpleSamples": 30,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 4.5,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 508,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            127,
+            0,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "127,0,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "file": "no-b-frames.mp4",
+        "mode": "visible-paused",
+        "purpleSamples": 30,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 5.800000011920929,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 513.5,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            127,
+            0,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "127,0,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "file": "no-b-frames.mp4",
+        "mode": "play-pause",
+        "purpleSamples": 30,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 5.899999976158142,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "last": {
+          "elapsed": 509.39999997615814,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            127,
+            0,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "0,0,0,0",
+          "127,0,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "play",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "playing",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "pause",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "file": "original.mp4",
+        "mode": "paused",
+        "purpleSamples": 31,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 18,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "last": {
+          "elapsed": 540,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "137,19,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "file": "original.mp4",
+        "mode": "visible-paused",
+        "purpleSamples": 31,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 14,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "last": {
+          "elapsed": 524,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "137,19,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "file": "original.mp4",
+        "mode": "play-pause",
+        "purpleSamples": 31,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 14,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "last": {
+          "elapsed": 537,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "137,19,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "play",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "playing",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "pause",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "file": "no-b-frames.mp4",
+        "mode": "paused",
+        "purpleSamples": 31,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 32,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "last": {
+          "elapsed": 554,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "137,19,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "file": "no-b-frames.mp4",
+        "mode": "visible-paused",
+        "purpleSamples": 31,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 12,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "last": {
+          "elapsed": 537,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "137,19,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "file": "no-b-frames.mp4",
+        "mode": "play-pause",
+        "purpleSamples": 31,
+        "mediaError": 0,
+        "supportsFrames": true,
+        "sampleCount": 31,
+        "first": {
+          "elapsed": 15,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "last": {
+          "elapsed": 559,
+          "time": 0,
+          "readyState": 4,
+          "paused": true,
+          "seeking": false,
+          "rgba": [
+            137,
+            19,
+            126,
+            255
+          ]
+        },
+        "uniqueRGBA": [
+          "137,19,126,255"
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "paused": true
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "play",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "playing",
+            "time": 0,
+            "paused": false
+          },
+          {
+            "name": "pause",
+            "time": 0,
+            "paused": true
+          }
+        ]
+      }
+    ]
+  },
+  "earlierNativeLog": {
+    "file": "refactor/.cache/auto-native-probe-initial.log",
+    "sha256": "96df2a72e766e01555b7c4985db437a81e6431c712bab10adf7d5c43dd58bcf8"
+  },
+  "exploratoryImportFailure": {
+    "file": "refactor/.cache/auto-clock-probe.log",
+    "sha256": "918d343cf558e6a887da687f39e6648a0dca81ccc9fd990a9fe7a548c929e689"
+  },
+  "exploratoryProbes": [
+    {
+      "name": "clock",
+      "report": {
+        "file": "refactor/.cache/auto-thumbnail-clock-first-seek-hBU230/report.json",
+        "sha256": "e83affa0c89be1d61ef707e188e744b022bf2dd5c57a99503939b566ba9bc9f6"
+      },
+      "log": {
+        "file": "refactor/.cache/auto-clock-probe-second.log",
+        "sha256": "6b4c088e23cadc26f9ac82b05dec26ad7d30c7af3cd3d31d9203e4d12f716ea5"
+      },
+      "generator": {
+        "file": "refactor/.cache/auto-clock-probe.mjs",
+        "sha256": "02dd2abde85025895c5dada5099e5681b25aae5a06df7c14f8c884068d853a57"
+      },
+      "generatedRunner": {
+        "file": "refactor/.cache/auto-clock-generated.mjs",
+        "sha256": "9ac05243e63dd1c5ba4612ac986c15851c64f49a0d90f8755cd06ae9af70e05f"
+      },
+      "results": [
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "rate-zero",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "ba3c6fd443ebbd50624c7c402e4eb5337cbbd72c0d8648853f0d72174100994d"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "slow-clock",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0008537,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "e15c5dd8c027384835a8c9b84323ef9133d1c3253cad183e06adbdb3c169da8c"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "fast-zero",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0014379,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "927735ef099f7a8c9d9c8c98bf08044844b60cfa313e69795ba65adcf5bf17f4"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "playing-zero",
+          "outcome": "timeout",
+          "firstFrameMatches": false,
+          "firstDraw": null,
+          "codeSha256": "7359a1f6aa6b978c94dbcd6caf015bcd34b9e4d760f3880fc84dce285180f3ee"
+        },
+        {
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "variant": "rate-zero",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "ba3c6fd443ebbd50624c7c402e4eb5337cbbd72c0d8648853f0d72174100994d"
+        },
+        {
+          "engine": "firefox",
+          "browser": "155.0",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "firefox",
+          "browser": "155.0",
+          "variant": "rate-zero",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "ba3c6fd443ebbd50624c7c402e4eb5337cbbd72c0d8648853f0d72174100994d"
+        }
+      ]
+    },
+    {
+      "name": "offset",
+      "report": {
+        "file": "refactor/.cache/auto-thumbnail-offset-first-seek-NuuxYe/report.json",
+        "sha256": "33315efd20a10dd31af5a6a9ad8255012a71de5e5d65e0d836292705f51873c2"
+      },
+      "log": {
+        "file": "refactor/.cache/auto-offset-probe.log",
+        "sha256": "2cdffa5c5e42160a6f586132cbc2668a9439f3485ae2d188e70b7ca873b049e0"
+      },
+      "generator": {
+        "file": "refactor/.cache/auto-offset-probe.mjs",
+        "sha256": "01258392dea7d8b46ec1353b8805c180ee83bb872a840f0fd5f6d5ccbfa6086b"
+      },
+      "generatedRunner": {
+        "file": "refactor/.cache/auto-offset-generated.mjs",
+        "sha256": "df48ee2b5fbfbfac882326449d551a7cdadbc4fb48c4abb0f3846c3d36366432"
+      },
+      "results": [
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "epsilon",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0013635,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "b8b8a8cacdcbea0796144f07e4dd0a6be4f5075be8b242a7a45ca4219463fd5b"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "millisecond",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0005088,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "22fae830686901f5cbe45ad5b095f0228454d1a3a76967852543e9eb5862b06d"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "half-frame",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0021867,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6a59def246096f03b664166dd9111128d5dfab374b913af6e23507b319cd5cef"
+        },
+        {
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "variant": "epsilon",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0.000001,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "b8b8a8cacdcbea0796144f07e4dd0a6be4f5075be8b242a7a45ca4219463fd5b"
+        },
+        {
+          "engine": "firefox",
+          "browser": "155.0",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "firefox",
+          "browser": "155.0",
+          "variant": "epsilon",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0.000001,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "b8b8a8cacdcbea0796144f07e4dd0a6be4f5075be8b242a7a45ca4219463fd5b"
+        }
+      ]
+    },
+    {
+      "name": "layout",
+      "report": {
+        "file": "refactor/.cache/auto-thumbnail-layout-first-seek-GubiAN/report.json",
+        "sha256": "7f89eee1352e16ee8a20f390e1052c18338f4b1baaa3a3356a283178316e76d0"
+      },
+      "log": {
+        "file": "refactor/.cache/auto-layout-probe.log",
+        "sha256": "41e83c785348abb7b4de1b8a0a2b569880b18302e793ad77fa57d8436a0e9366"
+      },
+      "generator": {
+        "file": "refactor/.cache/auto-layout-probe.mjs",
+        "sha256": "bb48890ad01bf1b98f624381b1f692dd08329c672492d4842867c455f628f981"
+      },
+      "generatedRunner": {
+        "file": "refactor/.cache/auto-layout-generated.mjs",
+        "sha256": "68484ecb8316a61c1037ee246deb61793c3f2f819f811413e1b1d4a4c5edcc16"
+      },
+      "results": [
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "layout-before-src",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "808efa8818d5f317a92777ada48d39dfaadb9c6eba63845ff42b606dadfc60c8"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "paint-before-src",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0022993,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "45a48611d5e887f2957a35b4e95ef13ac6d69a5a0a29b64e70accd49a39481e1"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "layout-metadata",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0020653,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "d2277236eaf1eeda7c81e2e60475461b66e584a27c16c8df3533c778e2936472"
+        },
+        {
+          "engine": "webkit",
+          "browser": "26.6",
+          "variant": "paint-metadata",
+          "outcome": "completed",
+          "firstFrameMatches": false,
+          "firstDraw": {
+            "time": 0.0011836,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "86a958c31466f1b361572f64e76ad0706ae7a401802cefee53a3951190a4df5e"
+        },
+        {
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "chromium",
+          "browser": "153.0.8010.12",
+          "variant": "layout-before-src",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "808efa8818d5f317a92777ada48d39dfaadb9c6eba63845ff42b606dadfc60c8"
+        },
+        {
+          "engine": "firefox",
+          "browser": "155.0",
+          "variant": "current",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+        },
+        {
+          "engine": "firefox",
+          "browser": "155.0",
+          "variant": "layout-before-src",
+          "outcome": "completed",
+          "firstFrameMatches": true,
+          "firstDraw": {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          "codeSha256": "808efa8818d5f317a92777ada48d39dfaadb9c6eba63845ff42b606dadfc60c8"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "lint": {
+      "file": "refactor/.cache/auto-native-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    "nativeCases": 18,
+    "webkitFirstFrameFailures": 6,
+    "successfulEngineControls": 12,
+    "planAndRisk": {
+      "file": "refactor/.cache/auto-native-final.log",
+      "sha256": "db44816eb60ba734d6c5991b7031e9a4f4d30bce467f5fbf699c0cf30f52fe85",
+      "exitCode": 0
+    }
+  },
+  "limitations": [
+    "Windows host only; not exact Safari/device diagnosis",
+    "Original acceptance pixels/media unchanged; no-B-frame media is only a diagnostic control",
+    "No production source or declaration change",
+    "No task completion or risk closure",
+    "Current upstream source is contextual, not an exact installed binary match",
+    "Cached exploratory variants are not production lifecycle implementations"
+  ]
+}

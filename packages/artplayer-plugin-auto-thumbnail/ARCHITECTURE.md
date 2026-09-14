@@ -158,6 +158,26 @@ These variants still fail the unique-first-frame check on the recorded Windows
 WebKit host. They are diagnostic page-owned callbacks, not production fixes or
 cancellation code. See refactor's first-seek checkpoint before repeating them.
 
+`yarn probe:auto-thumbnail-native` removes ArtPlayer and this plugin entirely.
+It serves the frozen timeline with the owned dev server, plus a diagnostic H.264
+transcode with B frames disabled, and samples native video/canvas in hidden paused,
+visible paused and hidden play-then-immediately-pause modes. It verifies both
+files' first purple pixel with FFmpeg before browser capture. FFmpeg/FFprobe must
+be installed (optional FFMPEG/FFPROBE executable paths); exact version, arguments,
+media hashes, browser versions, events and all31 samples are recorded in an ignored
+cache directory. It does not replace the acceptance fixture or add an npm dependency.
+
+The Windows18-case capture still misses the first purple frame in all6 WebKit
+cases without any plugin code; Chromium/Firefox controls recover it. The visible
+original video can remain at currentTime0 while canvas exposes the later red
+frame. This narrows investigation to the native surface on that tested host, but
+does not certify all Safari versions or excuse plugin pixel gates. Exploratory
+rate0/slow-rate, fastSeek, tiny first-seek offsets and pre-load/metadata layout or
+paint waits did not fix it either. The next useful pixel evidence is the same
+native/candidate case on another supported backend/device or a decoded-frame
+path with explicit timestamps, not another arbitrary wait. See the native-decoder
+checkpoint in refactor; AUTO-THUMB-PIXEL-01 and task03 remain open.
+
 The frozen eight-second timeline has one unique purple first frame followed by
 red, black, blue and yellow sections. Its command and fingerprint are in
 `refactor/baselines/auto-thumbnail-timeline-media.json`. Reproduce into a new

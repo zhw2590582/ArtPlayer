@@ -132,7 +132,8 @@
     "test:scaffold": "node --test test/plugin-scaffold.test.js",
     "typecheck:library": "node node_modules/typescript/bin/tsc -p scripts/tsconfig.library.json --noEmit",
     "test:library": "node --test refactor/scripts/build.test.mjs test/library-build.test.js test/performance-report.test.js test/plugin-scaffold.test.js test/dev-server.test.js",
-    "test:dev-server": "node --test test/dev-server.test.js"
+    "test:dev-server": "node --test test/dev-server.test.js",
+    "probe:auto-thumbnail-native": "node refactor/scripts/auto-thumbnail-native-probe.mjs"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

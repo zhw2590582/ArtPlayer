@@ -1801,7 +1801,9 @@
         "changes/2026-09-14-PKG-AUTO-THUMB-03-rendering-readiness.md",
         "baselines/auto-thumbnail-rendering-readiness.json",
         "changes/2026-09-14-PKG-AUTO-THUMB-03-first-seek.md",
-        "baselines/auto-thumbnail-first-seek.json"
+        "baselines/auto-thumbnail-first-seek.json",
+        "changes/2026-09-14-PKG-AUTO-THUMB-03-native-decoder.md",
+        "baselines/auto-thumbnail-native-decoder.json"
       ]
     },
     {

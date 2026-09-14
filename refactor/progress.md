@@ -1,5 +1,19 @@
 # 进度与证据
 
+## Auto Thumbnail 原生首帧边界检查点
+
+新增独立 video/canvas 诊断，完全不加载 ArtPlayer 或插件。冻结原视频不变，另用
+FFmpeg生成无B帧对照，确认两文件首帧均为紫色。Windows三引擎/两文件/三模式
+共18组：WebKit26.6六组均未得到紫色，Chromium/Firefox十二组得到；可见视频也
+会在currentTime0读到后续红帧。此证据将问题缩小到该宿主的原生画面路径，不能
+推断所有Safari或标为修复。速率、微小seek偏移和布局/绘制等待的探索同样无效，
+没有采用绕过首帧断言的方案。命令、实际FFmpeg/浏览器版本、事件/像素和报告指纹
+见[检查点](changes/2026-09-14-PKG-AUTO-THUMB-03-native-decoder.md)和[证据](baselines/auto-thumbnail-native-decoder.json)。
+源码/类型/分发与像素验收未改，仅新增诊断脚本和文档；目标lint与计划/风险检查
+通过。PKG-AUTO-THUMB-03/AUTO-THUMB-PIXEL-01保持开放，245项/173 done不变。
+下一步按原生边界选择其他支持后端/设备取证，同时继续该包的资源与异步边界审查；
+不重复追加任意等待。VAST默认行为选择仍待答复。本地检查点提交，无推送/发布。
+
 ## MOD-DEV-01 自有开发服务器与关闭流程完成
 
 HTTP、静态资源与 SSE 拆为严格 TS 模块，修复 Servor4.0.2 端口占用却退出0的
