@@ -1,6 +1,6 @@
 # 文档站 console.js 的兼容迁移边界
 
-SITE-07 先冻结原始 bundle 和浏览器契约，后续实现由 SITE-CONSOLE-01 负责。
+SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有 TS 模块及三项修复。
 不能将 consoleLog 替换成一个只打印字符串的新面板，就声称旧接口已兼容。
 
 ## 已核实的现状
@@ -30,7 +30,7 @@ SITE-07 先冻结原始 bundle 和浏览器契约，后续实现由 SITE-CONSOLE
 冻结文件 [console-original.js](baselines/site-vendor/console-original.js) 仅作为旧行为
 对照，不进入站点分发。测试校验其 SHA-256；后续不得覆盖旧文件来制造差分通过。
 
-## 已复现、尚未修复的问题
+## 旧版已复现、候选已修复的问题
 
 1. **CONSOLE-SCROLL-01**：add 安排 200ms 滚动回调；卸载后未取消，回调仍访问已移除
    视图。使用真实定时器、原 ReactDOM 卸载和 DOM 验证，三个引擎均可复现。
@@ -40,7 +40,7 @@ SITE-07 先冻结原始 bundle 和浏览器契约，后续实现由 SITE-CONSOLE
    WebKit 的原生 Error.stack 不含 message，界面丢失消息。Chromium 为有消息的对照。
    普通对象保留引用，但 Error 已被旧 parser 转成字符串，不能误称仍保留 Error 身份。
 
-## 实施顺序
+## 已执行的实施顺序
 
 1. 从已冻结自有入口/视图恢复可维护 TS，拆开安装、日志订阅/状态、视图与资源清理。
    结合固定第三方边界建立构建/check，保留旧入口和已观测全局，不引入 React 版本混用。
@@ -52,6 +52,29 @@ SITE-07 先冻结原始 bundle 和浏览器契约，后续实现由 SITE-CONSOLE
    检查构建字节和依赖隔离，并完成包内架构、问题、生成说明。
 5. SITE-07 继续完成全部第三方来源/版本与完整许可。来源未确认时不得关闭 VENDOR-08；
    旧 vendor 的冻结不等于许可审查通过，也不等于完成其可复现来源恢复。
+
+## 实施结果与边界
+
+安装、组件、共享订阅、错误适配、样式、类型和构建分别维护，见
+[模块地图](../scripts/site-vendor/console/README.md)。构建仅替换 Focm/W5CS 的函数体，
+保留其余 100 模块、依赖表和 Parcel runtime；移除无实际文件的 sourceMappingURL。
+样式解码值与旧模块逐字比较，React/ReactDOM 仍为 17.0.2。没有新增依赖。
+
+单一 hook owner 在多个视图间共享计数/计时解析，最后卸载时取消队列并有条件恢复
+原方法；外部后来安装的 wrapper 保留。滚动回调由组件持有并在卸载时取消。
+原生 Error 缺少消息头时适配显示，保留完整堆栈且不修改对象；普通对象仍保持引用。
+新增可选 consoleLog.unmount 供编辑器非 persisted pagehide 清理，原调用返回组件
+及重复挂载行为保留。旧的 command/result 不存在时，卸载恢复为不存在，不遗留 undefined
+自有属性；这属于方法描述符清理修正，不为这些非原生方法新增调用能力。
+
+候选回归在旧生产脚本上先得到 11 失败/1 通过（Chromium 错误消息原已正常）。
+修复后首轮 57 通过；补编辑器清理后最终组合 63 通过，另加共享状态解析 3 通过，
+均无跳过或重试。六项单元及十项编辑器/notice 测试通过，两组严格 TS 和生成漂移
+检查通过。完整输入指纹、引擎版本和结果见
+[验证记录](baselines/site-console01-validation.json)。
+
+受控 persisted pagehide 事件不代替真实设备 BFCache；第三方来源/许可仍由
+SITE-07 / VENDOR-08 跟踪。本次没有远端 CI、部署或 npm 发布验收。
 
 当前 [site-console.spec.js](../test/browser/site-console.spec.js) 含两种输入的共同
 行为，以及三个仅指向冻结旧版的问题复现。历史问题用例通过意味着问题仍可复现，

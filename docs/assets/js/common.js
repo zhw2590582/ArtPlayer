@@ -297,6 +297,9 @@
     host.consoleLog(output);
     const controller = new AbortController();
     const cleanups = [];
+    cleanups.push(() => {
+      host.consoleLog.unmount?.(output);
+    });
     const listen = (target, type, callback) => {
       target.addEventListener(type, callback);
       cleanups.push(() => target.removeEventListener(type, callback));

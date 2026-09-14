@@ -25,7 +25,7 @@ export type EditorHost = Window & {
   }
   monaco: typeof Monaco
   require: AmdLoader
-  consoleLog: (element: HTMLElement) => void
+  consoleLog: ((element: HTMLElement) => unknown) & { unmount?: (element: HTMLElement) => boolean }
   ArtplayerDocsLoader: ReturnType<typeof createLibraryLoader> & {
     exampleSource: typeof exampleSource
     parameters: typeof parameters

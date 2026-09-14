@@ -61,6 +61,9 @@ The repository generators have different ownership:
 - `scripts/build-i18n.js`: typed standalone language builds, staged before replacing
   distribution and `docs/compiled/i18n/` together; legacy globals and paths remain.
 - `scripts/build-docs.js`: this VitePress build through pinned Yarn and staged output.
+- `scripts/build-console.mjs`: owned desktop console TS entry/view and shared log
+  lifecycle, keeping the original React/Parcel runtime. Run `build:console` after
+  edits and `check:console` for drift. See [console maintenance](../../scripts/site-vendor/console/README.md).
 - `scripts/build-llm.js`: offline source-preserving `docs/llms.txt` and fingerprint
   manifest. `yarn check:llm` checks drift in CI; `ci:build` regenerates after types.
 - `scripts/trans-docs.js`: local plan by default; explicit `--remote` creates a
@@ -94,8 +97,8 @@ current rules and verified scope. Full site/search acceptance remains SITE-05.
 
 SITE-07 now checks frozen Monaco/vConsole files and generates verbatim upstream
 texts under `docs/licenses/` with `build:site-notices` / `check:site-notices`.
-See `scripts/site-vendor/README.md`: the vConsole upstream LICENSE is incomplete,
-and its WebKit destruction regression remains open. The notices index explicitly
+See `scripts/site-vendor/README.md`: vConsole sources/notices and its destruction
+fix now have separate evidence. The notices index explicitly
 does not clear the console bundle, fonts, media or the rest of the site.
 
 `scripts/projects.js` excludes this workspace from the 21 library builds.

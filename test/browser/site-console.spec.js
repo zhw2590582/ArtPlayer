@@ -172,3 +172,125 @@ test('frozen historical console error-only rendering loses the message on Firefo
     expect(result.text).not.toContain(result.message)
   await testInfo.attach('historical-error-rendering', { contentType: 'application/json', body: JSON.stringify(result) })
 })
+
+test('candidate console cancels pending scroll and log work on unmount and survives remount', async ({ page }, testInfo) => {
+  await setup(page, testInfo, false)
+  expect(await page.evaluate(() => {
+    window.viewer.add({ method: 'log', data: ['pending-scroll'] })
+    window.console.log('queued-before-unmount')
+    window.ReactDOM.unmountComponentAtNode(document.querySelector('#first'))
+    const pending = window.scrollTimers.size
+    window.viewer = window.consoleLog(document.querySelector('#first'))
+    window.console.log('after-remount')
+    return pending
+  })).toBe(0)
+  await expect(page.locator('.console-header-number')).toHaveText('1')
+  await expect(page.locator('.console-component')).toHaveText('after-remount')
+})
+
+for (const removeFirst of [true, false]) {
+  test(`candidate console retains the surviving viewer when removing ${removeFirst ? 'first' : 'second'}`, async ({ page }, testInfo) => {
+    await setup(page, testInfo, false)
+    await page.evaluate(() => {
+      window.otherViewer = window.consoleLog(document.querySelector('#second'))
+      window.console.log('both-mounted')
+    })
+    await expect(page.locator('#first .console-header-number')).toHaveText('1')
+    await expect(page.locator('#second .console-header-number')).toHaveText('1')
+    await page.evaluate((first) => {
+      window.ReactDOM.unmountComponentAtNode(document.querySelector(first ? '#first' : '#second'))
+      window.console.log('survivor-log')
+    }, removeFirst)
+    const remaining = removeFirst ? '#second' : '#first'
+    await expect(page.locator(`${remaining} .console-header-number`)).toHaveText('2')
+    await expect(page.locator(`${remaining} .console-component`)).toContainText('survivor-log')
+    expect(await page.evaluate((selector) => {
+      window.ReactDOM.unmountComponentAtNode(document.querySelector(selector))
+      return window.console.log === window.originalConsole.log
+    }, remaining)).toBe(true)
+  })
+}
+
+test('candidate console keeps native Error message and stack visible without modifying Error', async ({ page }, testInfo) => {
+  await setup(page, testInfo, false)
+  await page.evaluate(() => {
+    window.nativeError = new Error('candidate-error-message')
+    window.originalStack = window.nativeError.stack
+    window.console.error(window.nativeError)
+  })
+  await expect(page.locator('.console-header-number')).toHaveText('1')
+  await expect(page.locator('.console-component')).toContainText('candidate-error-message')
+  expect(await page.evaluate(() => window.nativeError.stack === window.originalStack)).toBe(true)
+  const stack = await page.evaluate(() => window.originalStack)
+  for (const line of stack.trim().split('\n'))
+    await expect(page.locator('.console-component')).toContainText(line.trim())
+})
+
+test('candidate console leaves later external wrappers intact and remounts without duplicate forwarding', async ({ page }, testInfo) => {
+  await setup(page, testInfo, false)
+  await page.evaluate(() => {
+    const own = window.console.log
+    window.externalCalls = 0
+    window.external = function (...args) {
+      window.externalCalls++
+      return own.apply(this, args)
+    }
+    window.console.log = window.external
+    window.consoleLog.unmount(document.querySelector('#first'))
+    window.console.log('no-viewer')
+    window.viewer = window.consoleLog(document.querySelector('#first'))
+    window.console.log('remounted')
+  })
+  await expect(page.locator('.console-header-number')).toHaveText('1')
+  await expect(page.locator('.console-component')).toHaveText('remounted')
+  expect(await page.evaluate(() => {
+    window.consoleLog.unmount(document.querySelector('#first'))
+    return { calls: window.externalCalls, retained: window.console.log === window.external }
+  })).toEqual({ calls: 2, retained: true })
+})
+
+test('editor retains console on persisted pagehide and releases it on final pagehide', async ({ page }) => {
+  await page.route('https://**/*', route => route.fulfill({ status: 200, body: '' }))
+  await page.goto('/?code=window.console.log("editor-initial")')
+  await expect(page.locator('.console-component')).toContainText('editor-initial')
+  const before = await page.locator('.console-header-number').textContent()
+  await page.evaluate(() => {
+    window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true }))
+    window.console.log('persisted-live')
+  })
+  await expect(page.locator('.console-component')).toContainText('persisted-live')
+  await expect(page.locator('.console-header-number')).toHaveText(String(Number(before) + 1))
+  await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: false })))
+  await expect(page.locator('.console-header')).toHaveCount(0)
+  expect(await page.evaluate(() => 'feed' in window.console)).toBe(false)
+})
+
+test('candidate console parses stateful methods once for shared viewers', async ({ page }, testInfo) => {
+  await setup(page, testInfo, false)
+  await page.evaluate(() => {
+    window.otherViewer = window.consoleLog(document.querySelector('#second'))
+    window.console.count('shared-count')
+    window.console.count('shared-count')
+    window.console.assert(true, 'must-not-log')
+    window.console.assert(false, 'visible-assertion')
+    window.console.time('shared-time')
+    window.console.timeEnd('shared-time')
+  })
+  await expect(page.locator('#first .console-header-number')).toHaveText('4')
+  await expect(page.locator('#second .console-header-number')).toHaveText('4')
+  const result = await page.evaluate(() => ({
+    a: window.viewer.state.logs,
+    b: window.otherViewer.state.logs,
+    sameRecords: window.viewer.state.logs.every((row, index) => row === window.otherViewer.state.logs[index]),
+  }))
+  expect(result.a).toEqual(result.b)
+  expect(result.sameRecords).toBe(true)
+  expect(JSON.stringify(result.a)).toContain('shared-count: 1')
+  expect(JSON.stringify(result.a)).toContain('shared-count: 2')
+  await expect(page.locator('#first .console-component')).toContainText('visible-assertion')
+  await expect(page.locator('#first .console-component')).not.toContainText('must-not-log')
+  await page.evaluate(() => window.console.clear())
+  await expect(page.locator('#first .console-header-number')).toHaveText('5')
+  await expect(page.locator('#second .console-header-number')).toHaveText('5')
+  expect(await page.evaluate(() => window.viewer.state.logs.at(-1).method)).toBe('clear')
+})

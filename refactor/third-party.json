@@ -1060,7 +1060,7 @@
       "owners": [
         "SITE-01"
       ],
-      "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03; 102-module map, Focm entry/W5CS view, React 17.0.2 globals and styled-components 5.3.3 literal identified. Full dependency versions and source reconstruction remain open.",
+      "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03; 102-module map, Focm entry/W5CS view, React 17.0.2 globals and styled-components 5.3.3 literal identified. Full dependency versions and source reconstruction remain open. SITE-CONSOLE-01 replaces only Focm/W5CS bodies from owned TS and removes the missing source-map trailer; other 100 modules and runtime remain byte-for-byte frozen. Full vendor provenance remains open.",
       "licenseStatus": "Root MIT is not sufficient evidence for all bundled components; inventory and notices pending.",
       "upstreamSources": [],
       "upstreamReviewedAt": null,
@@ -1069,7 +1069,7 @@
         {
           "path": "docs/assets/js/console.js",
           "algorithm": "sha256-lf",
-          "sha256": "e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03"
+          "sha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678"
         }
       ]
     },

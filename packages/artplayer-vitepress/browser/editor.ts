@@ -25,6 +25,9 @@ export async function installEditor(host: EditorHost): Promise<void> {
   host.consoleLog(output)
   const controller = new AbortController()
   const cleanups: (() => void)[] = []
+  cleanups.push(() => {
+    host.consoleLog.unmount?.(output)
+  })
   const listen = (
     target: EventTarget,
     type: string,

@@ -70,7 +70,9 @@ Imports preserve sequential JS/CSS insertion and the last lowercased `[name]` la
 Unsupported extensions are ignored; local labels are not persistable dependency URLs.
 File errors now reject, cancellation removes handlers, and batches are serialized.
 On non-persisted pagehide the editor cleans listeners, models, declaration libraries,
-FileReaders, imported nodes and players. Executed script globals cannot be undone by
+FileReaders, imported nodes, players and the desktop console viewer. The optional
+`consoleLog.unmount` adapter releases its hook and pending work; older console
+bundles without the adapter remain loadable. Executed script globals cannot be undone by
 removing script nodes. Persisted pagehide keeps state; synthetic lifecycle tests do
 not certify physical-device BFCache behavior.
 

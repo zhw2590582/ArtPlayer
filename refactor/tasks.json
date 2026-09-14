@@ -5612,13 +5612,14 @@
       "dependsOn": [
         "SITE-03"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
       "deliverable": "从冻结 console.js 恢复自有入口/视图的 TS 模块、受控第三方边界与可验证构建；修复滚动回调、多容器 hook 所有权和原生 Error 消息丢失",
       "acceptance": "保留 consoleLog 返回组件、React/ReactDOM/Parcel 全局及 DOM/CSS/日志对象语义；旧版复现与候选正确行为分开验证；多容器、卸载/重挂、外部 hook、错误/滚动及真实编辑器组合通过；架构与生成文档同批更新，不以冻结 vendor 代替 SITE-07 许可闭环",
       "evidence": [
         "console-modernization.md",
-        "baselines/site-console-validation.json"
+        "changes/2026-09-15-SITE-CONSOLE-01-typescript.md",
+        "baselines/site-console01-validation.json"
       ]
     }
   ]

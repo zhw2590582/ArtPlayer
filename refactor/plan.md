@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 265 项，范围 22 个包及工作区/示例。
 
-状态：todo 45 / doing 22 / blocked 0 / done 198 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 44 / doing 22 / blocked 0 / done 199 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -410,7 +410,7 @@
 | EX-02 | example/vue.js, workspace<br>验证 Vue 消费者与更新卸载 | CORE-22, ENG-07 | Vue 实例/ref、参数更新、卸载及插件样例 | 旧 JS 组件用法无需修改，重复挂载不泄漏 | M | done |
 | EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01 | H | todo |
 | SITE-VCONSOLE-01 | artplayer-vitepress, workspace<br>修复 vConsole 日志帧与延迟面板销毁竞态 | SITE-01 | 冻结上游 bundle 的可复现 TS 生命周期补丁、旧红新绿回归、来源及生成检查；销毁后虚拟列表布局续段停止 | 最后日志插件移除后取消 RAF 并隔离旧队列；延迟面板不得写入已销毁或替换插件；三引擎移动页与 UMD 入口通过，维护声明与原有许可缺口分别记录；原生 ResizeObserver 布局与挂起 timer 旧红新绿 | M | done |
-| SITE-CONSOLE-01 | artplayer-vitepress, workspace<br>迁移控制台自有 TS 源码并修复日志生命周期 | SITE-03 | 从冻结 console.js 恢复自有入口/视图的 TS 模块、受控第三方边界与可验证构建；修复滚动回调、多容器 hook 所有权和原生 Error 消息丢失 | 保留 consoleLog 返回组件、React/ReactDOM/Parcel 全局及 DOM/CSS/日志对象语义；旧版复现与候选正确行为分开验证；多容器、卸载/重挂、外部 hook、错误/滚动及真实编辑器组合通过；架构与生成文档同批更新，不以冻结 vendor 代替 SITE-07 许可闭环 | H | todo |
+| SITE-CONSOLE-01 | artplayer-vitepress, workspace<br>迁移控制台自有 TS 源码并修复日志生命周期 | SITE-03 | 从冻结 console.js 恢复自有入口/视图的 TS 模块、受控第三方边界与可验证构建；修复滚动回调、多容器 hook 所有权和原生 Error 消息丢失 | 保留 consoleLog 返回组件、React/ReactDOM/Parcel 全局及 DOM/CSS/日志对象语义；旧版复现与候选正确行为分开验证；多容器、卸载/重挂、外部 hook、错误/滚动及真实编辑器组合通过；架构与生成文档同批更新，不以冻结 vendor 代替 SITE-07 许可闭环 | H | done |
 
 ## 7 工具链与性能
 
@@ -694,4 +694,4 @@
 - PKG-DANMUKU-MASK-LOAD-01: [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md) [记录](baselines/danmuku-mask-load-validation.json)
 - PKG-HLS-PACK-01: [记录](changes/2026-09-15-PKG-HLS-PACK-01-config.md) [记录](baselines/hls-pack-config-validation.json)
 - ENG-LINT-02: [记录](changes/2026-09-15-ENG-LINT-02-clean-checks.md) [记录](baselines/eng-lint02-validation.json)
-- SITE-CONSOLE-01: [记录](console-modernization.md) [记录](baselines/site-console-validation.json)
+- SITE-CONSOLE-01: [记录](console-modernization.md) [记录](changes/2026-09-15-SITE-CONSOLE-01-typescript.md) [记录](baselines/site-console01-validation.json)

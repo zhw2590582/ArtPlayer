@@ -6396,7 +6396,7 @@
       "id": "CONSOLE-SCROLL-01",
       "title": "控制台卸载后仍执行滚动回调",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "SITE-CONSOLE-01",
         "SITE-07"
@@ -6408,15 +6408,23 @@
         "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
         "test/browser/site-console.spec.js"
       ],
-      "workspaceState": "Native 200ms scroll timeout survives ReactDOM unmount and later fires against the detached console node.",
+      "workspaceState": "Owned TS console lifecycle and error adaptation implemented; frozen historical reproduction and candidate regression remain separate.",
       "compatibleResolution": "Cancel pending scroll work and guard obsolete log updates; verify unmount/recreate without retained DOM work.",
-      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。"
+      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-SITE-CONSOLE-01-typescript.md",
+        "refactor/baselines/site-console01-validation.json",
+        "test/browser/site-console.spec.js",
+        "test/site-console.test.js",
+        "scripts/site-vendor/console/README.md"
+      ],
+      "resolutionRationale": "Candidate behavior failed on the original bundle (11 failed/1 passed); final browser/editor matrix 63 passed plus shared parser 3 passed across Chromium/Firefox/WebKit. Units, strict types and generation checks pass. Preserves React17, old component return, raw objects, exact CSS and 100 vendor module bodies. Physical BFCache and complete third-party provenance remain separate."
     },
     {
       "id": "CONSOLE-OWNERSHIP-01",
       "title": "多个控制台的全局 hook 所有权冲突",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "SITE-CONSOLE-01",
         "SITE-07"
@@ -6428,15 +6436,23 @@
         "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
         "test/browser/site-console.spec.js"
       ],
-      "workspaceState": "Unmounting the first of two viewers unhooks the second viewer and restores a stale first-viewer wrapper; the surviving viewer no longer receives logs.",
+      "workspaceState": "Owned TS console lifecycle and error adaptation implemented; frozen historical reproduction and candidate regression remain separate.",
       "compatibleResolution": "Own shared subscriptions explicitly, preserve unrelated wrappers, and test both unmount orders plus same-container reuse.",
-      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。"
+      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-SITE-CONSOLE-01-typescript.md",
+        "refactor/baselines/site-console01-validation.json",
+        "test/browser/site-console.spec.js",
+        "test/site-console.test.js",
+        "scripts/site-vendor/console/README.md"
+      ],
+      "resolutionRationale": "Candidate behavior failed on the original bundle (11 failed/1 passed); final browser/editor matrix 63 passed plus shared parser 3 passed across Chromium/Firefox/WebKit. Units, strict types and generation checks pass. Preserves React17, old component return, raw objects, exact CSS and 100 vendor module bodies. Physical BFCache and complete third-party provenance remain separate."
     },
     {
       "id": "CONSOLE-ERROR-01",
       "title": "Firefox/WebKit 控制台丢失原生 Error 消息",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "SITE-CONSOLE-01",
         "SITE-07"
@@ -6448,9 +6464,17 @@
         "refactor/changes/2026-09-15-SITE-07-console-baseline.md",
         "test/browser/site-console.spec.js"
       ],
-      "workspaceState": "The bundled error parser converts Error to stack; native Firefox/WebKit stacks omit message, so error-only logs lose their message. Chromium is a positive contrast.",
+      "workspaceState": "Owned TS console lifecycle and error adaptation implemented; frozen historical reproduction and candidate regression remain separate.",
       "compatibleResolution": "Preserve error message and stack in the candidate without mutating ordinary log objects; require actual three-engine Error-only rendering tests.",
-      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。"
+      "closureCriteria": "新候选修复和真实浏览器回归通过，冻结旧版仍可复现；同时验证原控制台接口和资源释放，不把历史缺陷测试通过当作修复。",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-SITE-CONSOLE-01-typescript.md",
+        "refactor/baselines/site-console01-validation.json",
+        "test/browser/site-console.spec.js",
+        "test/site-console.test.js",
+        "scripts/site-vendor/console/README.md"
+      ],
+      "resolutionRationale": "Candidate behavior failed on the original bundle (11 failed/1 passed); final browser/editor matrix 63 passed plus shared parser 3 passed across Chromium/Firefox/WebKit. Units, strict types and generation checks pass. Preserves React17, old component return, raw objects, exact CSS and 100 vendor module bodies. Physical BFCache and complete third-party provenance remain separate."
     }
   ]
 }

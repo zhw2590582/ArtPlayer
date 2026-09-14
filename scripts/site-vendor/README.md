@@ -55,6 +55,10 @@ members as Buffers. Compare `package/dist/codicon.ttf` directly with `fontPath`,
 and each non-null notice member with its frozen `source`. Do not pipe binary font
 output through PowerShell text redirection. No dependency installation is needed.
 
-Follow-up: finish Monaco's broader bundled-component notice audit, then recover the
-console.js build and resolve remaining fonts/media. Do not upgrade these assets
+The desktop console's owned TS entry/view and lifecycle now build through
+`build:console` / `check:console`; see [console maintenance](console/README.md).
+Its other 100 Parcel modules remain frozen pending full provenance and notices.
+
+Follow-up: finish Monaco's broader bundled-component notice audit, the console
+vendor provenance and remaining fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.
