@@ -127,3 +127,10 @@ For unresolved Firefox grouped-stream diagnostics, use
 `--observe-workers` uses the same native-worker observer as the integration suite. Each run retains
 its own report and trace files. See the HLS-SDK-01 in-progress record: one target crash and a separate
 group-switch stall remain unclassified. Passing diagnostic repetitions are not release evidence.
+
+The diagnostic runner records host-side failure/crash phases. Optional
+`--capture-before-destroy` saves media/SDK events outside the page before teardown;
+it adds an evaluate and may change timing, so it is off by default. Direct ordinary
+HTTP without ArtPlayer/plugin or a Worker observer still reproduced crashes with
+both reset-first and SDK-first teardown. A passing no-worker control does not
+replace worker acceptance. See the 2026-09-14 HTTP teardown checkpoint in refactor.

@@ -548,7 +548,7 @@
 - PKG-HLS-02: [记录](hls-validation.md) [记录](baselines/hls-sdk.json) [记录](baselines/hls-validation.json) [记录](changes/2026-09-11-PKG-HLS-02-tests.md)
 - PKG-HLS-03: [记录](changes/2026-09-12-PKG-HLS-03-modules.md) [记录](baselines/hls-modules-validation.json) [记录](hls-validation.md)
 - PKG-HLS-04: [记录](changes/2026-09-12-PKG-HLS-04-types.md) [记录](baselines/hls-types-validation.json) [记录](hls-validation.md)
-- PKG-HLS-SDK-01: [记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md) [记录](baselines/hls-sdk-validation.json) [记录](baselines/hls-sdk-diagnostics.json)
+- PKG-HLS-SDK-01: [记录](changes/2026-09-12-PKG-HLS-SDK-01-integration.md) [记录](baselines/hls-sdk-validation.json) [记录](baselines/hls-sdk-diagnostics.json) [记录](changes/2026-09-14-PKG-HLS-SDK-01-http-teardown.md) [记录](baselines/hls-http-teardown-validation.json)
 - PKG-DASH-01: [记录](changes/2026-09-12-PKG-DASH-01-contract.md) [记录](baselines/dash-control-contract.md) [记录](baselines/dash-control-release.json)
 - PKG-DASH-02: [记录](changes/2026-09-12-PKG-DASH-02-tests.md) [记录](dash-validation.md) [记录](baselines/dash-validation.json)
 - PKG-DASH-03: [记录](changes/2026-09-12-PKG-DASH-03-runtime.md) [记录](baselines/dash-runtime.json) [记录](dash-validation.md)

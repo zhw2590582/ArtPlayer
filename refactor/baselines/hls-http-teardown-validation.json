@@ -1,0 +1,1393 @@
+{
+  "task": "PKG-HLS-SDK-01",
+  "status": "doing",
+  "date": "2026-09-14",
+  "baselineCommit": "fe5534ac2429ac67702ca9d4121b4ab8603cb278",
+  "node": "24.21.0",
+  "platform": "win32",
+  "runner": {
+    "path": "refactor/scripts/hls-sdk-diagnostic.mjs",
+    "sha256": "242d047469d23ad0a95b200b392516ad1a9ff99c6957a58f2d0db9304dc7f62c"
+  },
+  "runs": [
+    {
+      "report": {
+        "path": "refactor/.cache/hls-direct-tdfGV8/report.json",
+        "sha256": "f7ecff1ecd1b20b79fba17173b9d08067f9ac98796d6c930ac90f609220dc04e"
+      },
+      "log": {
+        "path": "refactor/.cache/hls-http-native-worker.log",
+        "sha256": "d4323ec8a25526e399c9e725e74c20174c4040bb945a64d1cbf96deefec03e3b"
+      },
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 10,
+        "transport": "http",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "runnerSHA256": "ba7b2e1c6decde696a64f9b877c0e6624c0a694f3b888d4e9a68b20295f41a4d",
+        "observerSHA256": "8ecd23a41293b7b6b065a077ba352fff0007ba07f41ce5f84943ac5f546a1cc1",
+        "browserVersion": "155.0"
+      },
+      "inputs": {
+        "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+        "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+        "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+        "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+        "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+        "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+        "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+        "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+        "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+        "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+        "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+        "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+        "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+        "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+        "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+        "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+        "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+        "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+        "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+        "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+        "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+        "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+        "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+        "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+        "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+        "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+        "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+        "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+        "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+        "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+        "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+        "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+        "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+        "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+      },
+      "passed": 9,
+      "failed": 1,
+      "cases": [
+        {
+          "iteration": 0,
+          "status": "failed",
+          "errors": [
+            "page crashed"
+          ],
+          "failure": "page.evaluate: Target crashed ",
+          "requests": [],
+          "stateError": "page.evaluate: Target crashed ",
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/0.zip",
+            "sha256": "a66dffa6500a0a7ad46dc6b4bba0cdc51b1989eb25524db280484f9e8fa395ed"
+          }
+        },
+        {
+          "iteration": 1,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:12028/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/1.zip",
+            "sha256": "906e34159fa1909a6773e2bcbf37689f62cadfe4c124de4c0d8b7d03f0adfa73"
+          }
+        },
+        {
+          "iteration": 2,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/2.zip",
+            "sha256": "d9b07d3849a92808d7306a2da12499228c6a054202eb57466009c762dd9a7e1b"
+          }
+        },
+        {
+          "iteration": 3,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/3.zip",
+            "sha256": "836de60fb7bfa732fc9e0d8c61b3aefd0405a13ba18b63a9dcdc6de25f3f931d"
+          }
+        },
+        {
+          "iteration": 4,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/4.zip",
+            "sha256": "d66db4a5e2564a6a87b2ea0bb0f75cdefc11477acdbb2ff013873dcef32471c9"
+          }
+        },
+        {
+          "iteration": 5,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:12028/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/5.zip",
+            "sha256": "f4e8ec3821bb52c13c475ddb4f80e1ca7811eff3cfbb0150f4cbb62c771ecc3a"
+          }
+        },
+        {
+          "iteration": 6,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/6.zip",
+            "sha256": "dbdec0c46d522ebdf880e3ab2eddf9ccc4d9127e5850c8aefa2e0aa028c70edb"
+          }
+        },
+        {
+          "iteration": 7,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/7.zip",
+            "sha256": "9d24392bec338e7590b881ac85ef0fb1aff46886bca4c283fe9590a109ce2dd7"
+          }
+        },
+        {
+          "iteration": 8,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/8.zip",
+            "sha256": "ea344d95309e7ac2468aa253f660bdc96bb24a47d285aab7dd2d61dd7ea60f98"
+          }
+        },
+        {
+          "iteration": 9,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-tdfGV8/9.zip",
+            "sha256": "02cea025933b343de85cadbf6390c7eb26a131be6d63b5148fd875228fbbcd60"
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "refactor/.cache/hls-direct-cDcwNa/report.json",
+        "sha256": "9d95e79db4815f1b444babe0e81e4e176fcf2f4c224b32d225c991df3bf81f68"
+      },
+      "log": {
+        "path": "refactor/.cache/hls-http-no-worker.log",
+        "sha256": "3d736b26fbfc4c31c22992ffb8ee84ab983a01f9e1487f31c042341527f9916e"
+      },
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 10,
+        "transport": "http",
+        "teardown": "reset-first",
+        "worker": false,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "runnerSHA256": "ba7b2e1c6decde696a64f9b877c0e6624c0a694f3b888d4e9a68b20295f41a4d",
+        "observerSHA256": "8ecd23a41293b7b6b065a077ba352fff0007ba07f41ce5f84943ac5f546a1cc1",
+        "browserVersion": "155.0"
+      },
+      "inputs": {
+        "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+        "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+        "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+        "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+        "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+        "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+        "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+        "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+        "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+        "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+        "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+        "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+        "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+        "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+        "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+        "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+        "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+        "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+        "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+        "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+        "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+        "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+        "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+        "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+        "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+        "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+        "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+        "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+        "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+        "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+        "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+        "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+        "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+        "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+      },
+      "passed": 10,
+      "failed": 0,
+      "cases": [
+        {
+          "iteration": 0,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/french-01.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/0.zip",
+            "sha256": "abc94ab90d8222f0ea1855ed004a273f7ef08080f0e1673a6033234b2bdebd6e"
+          }
+        },
+        {
+          "iteration": 1,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/french-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:6945/english-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:6945/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/1.zip",
+            "sha256": "e8f2ee8362a65d488e078b82952ab9f8732d09a1733588e94fa7d7bef7290735"
+          }
+        },
+        {
+          "iteration": 2,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/english-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/2.zip",
+            "sha256": "25c4521fd9d21f04a94d518ec62a86afef41e661c01f2a989bc62786bfe62d43"
+          }
+        },
+        {
+          "iteration": 3,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/english-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:6945/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/3.zip",
+            "sha256": "0a435d48b37d13a7aad7aa1b6995aa0a9290d036ddcb2a62974ca9df7fe313be"
+          }
+        },
+        {
+          "iteration": 4,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/french-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/4.zip",
+            "sha256": "4ebfb2ece2c3dab3925c3d5040601a7d0688f0437e0d7ca88cb09228f04d4b33"
+          }
+        },
+        {
+          "iteration": 5,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/5.zip",
+            "sha256": "c47cc3825a95fda1c0113d17d47a93cbe27a9f7261ef715dfc6c8457348b9225"
+          }
+        },
+        {
+          "iteration": 6,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/french-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:6945/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/6.zip",
+            "sha256": "22716ec1e98eef8f0e9ad772198efc622ffa8a680f87aa7ca735bfab12817d25"
+          }
+        },
+        {
+          "iteration": 7,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/7.zip",
+            "sha256": "fd07f93c70c6c35da88d756d59fad36d627f207c92461d622eb985b9f60ee009"
+          }
+        },
+        {
+          "iteration": 8,
+          "status": "passed",
+          "errors": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:6945/english-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            },
+            {
+              "url": "http://127.0.0.1:6945/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/8.zip",
+            "sha256": "276bd083dbac2d082d2fe437b00712d42e57f04794add8ac8c04a5bdd84ad7a0"
+          }
+        },
+        {
+          "iteration": 9,
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-cDcwNa/9.zip",
+            "sha256": "c625dc7ee7dda5469be741eb444df5f7ab56fe33ce959a272ee5157bad7a19ef"
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "refactor/.cache/hls-direct-sJWo5B/report.json",
+        "sha256": "da317d375a35b9385dbe8894eb9d1181078b521a329d045d400e75844ebb79e7"
+      },
+      "log": {
+        "path": "refactor/.cache/hls-http-capture-reset.log",
+        "sha256": "08d4465dfea213c7d1bf91d126f00ff87b043a15840a76bd81291faf1a191de3"
+      },
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 5,
+        "transport": "http",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "captureBeforeDestroy": true,
+        "runnerSHA256": "7ec3709a6d81f77e2fb31c8840c1098d76d53157658e40ce7d6f12dbee6d6a77",
+        "observerSHA256": "8ecd23a41293b7b6b065a077ba352fff0007ba07f41ce5f84943ac5f546a1cc1",
+        "browserVersion": "155.0"
+      },
+      "inputs": {
+        "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+        "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+        "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+        "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+        "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+        "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+        "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+        "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+        "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+        "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+        "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+        "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+        "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+        "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+        "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+        "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+        "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+        "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+        "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+        "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+        "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+        "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+        "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+        "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+        "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+        "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+        "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+        "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+        "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+        "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+        "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+        "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+        "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+        "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+      },
+      "passed": 5,
+      "failed": 0,
+      "cases": [
+        {
+          "iteration": 0,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:8523/low-05.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "beforeDestroy": {
+            "coreLoaded": "undefined",
+            "pluginLoaded": "undefined",
+            "media": {
+              "time": 1.583515,
+              "readyState": 3,
+              "height": 180,
+              "paused": false,
+              "buffered": [],
+              "seekable": [
+                [
+                  0,
+                  12.032
+                ]
+              ]
+            },
+            "sdk": {
+              "version": "1.5.17",
+              "workerEnabled": true,
+              "level": 1,
+              "audioTrack": 0
+            },
+            "eventCount": 63
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-sJWo5B/0.zip",
+            "sha256": "0fa4adf01ca0ca18d2aada1ae0c9f46a5db37582280982b39992c6af912214f8"
+          }
+        },
+        {
+          "iteration": 1,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "beforeDestroy": {
+            "coreLoaded": "undefined",
+            "pluginLoaded": "undefined",
+            "media": {
+              "time": 1.569606,
+              "readyState": 3,
+              "height": 180,
+              "paused": false,
+              "buffered": [],
+              "seekable": [
+                [
+                  0,
+                  12.032
+                ]
+              ]
+            },
+            "sdk": {
+              "version": "1.5.17",
+              "workerEnabled": true,
+              "level": 1,
+              "audioTrack": 0
+            },
+            "eventCount": 63
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-sJWo5B/1.zip",
+            "sha256": "c101392df41e019f5642c45f21dfbdd73dc635f9450235e17f18ceb1e246abd0"
+          }
+        },
+        {
+          "iteration": 2,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:8523/low-05.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "beforeDestroy": {
+            "coreLoaded": "undefined",
+            "pluginLoaded": "undefined",
+            "media": {
+              "time": 1.54036,
+              "readyState": 3,
+              "height": 180,
+              "paused": false,
+              "buffered": [],
+              "seekable": [
+                [
+                  0,
+                  12.032
+                ]
+              ]
+            },
+            "sdk": {
+              "version": "1.5.17",
+              "workerEnabled": true,
+              "level": 1,
+              "audioTrack": 0
+            },
+            "eventCount": 63
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-sJWo5B/2.zip",
+            "sha256": "1ed426033638db1edfa46dc4f640becd879ad6d54646db5c6c4c8aafdb9aeaf9"
+          }
+        },
+        {
+          "iteration": 3,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:8523/low-05.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "beforeDestroy": {
+            "coreLoaded": "undefined",
+            "pluginLoaded": "undefined",
+            "media": {
+              "time": 1.547831,
+              "readyState": 3,
+              "height": 180,
+              "paused": false,
+              "buffered": [],
+              "seekable": [
+                [
+                  0,
+                  12.032
+                ]
+              ]
+            },
+            "sdk": {
+              "version": "1.5.17",
+              "workerEnabled": true,
+              "level": 1,
+              "audioTrack": 0
+            },
+            "eventCount": 63
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-sJWo5B/3.zip",
+            "sha256": "00b57c2e5ee602e43b17128f4d117323ea1f64880a904015789b7d36ba5c7ea6"
+          }
+        },
+        {
+          "iteration": 4,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "beforeDestroy": {
+            "coreLoaded": "undefined",
+            "pluginLoaded": "undefined",
+            "media": {
+              "time": 1.500287,
+              "readyState": 3,
+              "height": 180,
+              "paused": false,
+              "buffered": [],
+              "seekable": [
+                [
+                  0,
+                  12.032
+                ]
+              ]
+            },
+            "sdk": {
+              "version": "1.5.17",
+              "workerEnabled": true,
+              "level": 1,
+              "audioTrack": 0
+            },
+            "eventCount": 63
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-sJWo5B/4.zip",
+            "sha256": "5ea2ce78411f6a65f86dde94d6374bd2664357e777bbd0aa7958a28bea60ac22"
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "refactor/.cache/hls-direct-M4IsYM/report.json",
+        "sha256": "b688810041f262c5a1662ff841dc0e73f4e0f7b8a2781e0a48206ee4d6d3a02c"
+      },
+      "log": {
+        "path": "refactor/.cache/hls-http-phase-reset.log",
+        "sha256": "7d9283be4570e44b11eae37da3d5734ae5645512d123c324f6d51ab20bb8ef43"
+      },
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 5,
+        "transport": "http",
+        "teardown": "reset-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "captureBeforeDestroy": false,
+        "runnerSHA256": "242d047469d23ad0a95b200b392516ad1a9ff99c6957a58f2d0db9304dc7f62c",
+        "observerSHA256": "8ecd23a41293b7b6b065a077ba352fff0007ba07f41ce5f84943ac5f546a1cc1",
+        "browserVersion": "155.0"
+      },
+      "inputs": {
+        "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+        "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+        "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+        "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+        "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+        "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+        "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+        "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+        "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+        "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+        "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+        "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+        "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+        "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+        "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+        "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+        "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+        "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+        "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+        "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+        "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+        "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+        "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+        "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+        "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+        "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+        "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+        "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+        "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+        "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+        "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+        "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+        "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+        "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+      },
+      "passed": 4,
+      "failed": 1,
+      "cases": [
+        {
+          "iteration": 0,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:4035/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-M4IsYM/0.zip",
+            "sha256": "ef3f306a1200472e26d934a5d5020755699b36059add452edca412435aaa74fa"
+          }
+        },
+        {
+          "iteration": 1,
+          "status": "failed",
+          "errors": [
+            "page crashed"
+          ],
+          "failure": "page.evaluate: Target crashed ",
+          "failurePhase": "final-state",
+          "crashes": [
+            {
+              "phase": "final-state",
+              "at": "2026-09-14T06:37:35.031Z"
+            }
+          ],
+          "requests": [],
+          "stateError": "page.evaluate: Target crashed ",
+          "trace": {
+            "path": "refactor/.cache/hls-direct-M4IsYM/1.zip",
+            "sha256": "7bffcfc87585446b73ba770fc7bfc3f3bb4df0254801cd07e5a04707b3181f0f"
+          }
+        },
+        {
+          "iteration": 2,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-M4IsYM/2.zip",
+            "sha256": "ae4dea37a754b44567aaea02e8b247d7b40cdbdbc96b2628dde13b14ffbe88c4"
+          }
+        },
+        {
+          "iteration": 3,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-M4IsYM/3.zip",
+            "sha256": "53250f5704fa72ace0b4baea310ba80fdf2575f4863f310f70e8812702e35676"
+          }
+        },
+        {
+          "iteration": 4,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-M4IsYM/4.zip",
+            "sha256": "4f6842bcfeb9c3824673de511d1ae1171072d7935e7f834e4c102aeb41c4b54c"
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "refactor/.cache/hls-direct-AuZoXW/report.json",
+        "sha256": "d1d494005fe7e9cba9f60090a7cd90961a5ad5b02500f82977e6826030e97f77"
+      },
+      "log": {
+        "path": "refactor/.cache/hls-http-phase-sdk-first.log",
+        "sha256": "1886bfcf7025a148a9c438dc91a170e7384f7cdc51fb8d4f0bb07f5e3b218dfb"
+      },
+      "settings": {
+        "version": "1.5.17",
+        "iterations": 5,
+        "transport": "http",
+        "teardown": "sdk-first",
+        "worker": true,
+        "host": "direct",
+        "plugin": false,
+        "sdkLogs": false,
+        "workerObserver": false,
+        "captureBeforeDestroy": false,
+        "runnerSHA256": "242d047469d23ad0a95b200b392516ad1a9ff99c6957a58f2d0db9304dc7f62c",
+        "observerSHA256": "8ecd23a41293b7b6b065a077ba352fff0007ba07f41ce5f84943ac5f546a1cc1",
+        "browserVersion": "155.0"
+      },
+      "inputs": {
+        "/english-00.mpegts": "cc599f7c270385e85c28f710a34c5bd90b09d4d27adb3b1e6af3de65584b8207",
+        "/english-01.mpegts": "01b17c28defc8a8ebf4978c5236eb759d80521a1cb840898095c35dac420cec5",
+        "/english-02.mpegts": "90751b8b5abedd6b2f2e4eb83ccd609098ec7f2901163aaebf977cb9a11c46eb",
+        "/english-03.mpegts": "9b1d86b7b261df66dbdace4ef1e846796cd710ffb72b22fc69532c1fe7d1c55e",
+        "/english-04.mpegts": "dbfddd4f997942dd0b912f4c8bdbc5c11ee2a3fc51ac67df48d3aed2756715b9",
+        "/english-05.mpegts": "9b53790d4f50f172852b7d4ff51bdd4bedd39e4c7a1efbfe734edf7b9a68a533",
+        "/english-06.mpegts": "50baaa5e9fe7ca49b22c4d0817c44103b3edc763aee7f1b17d22f796d4189d4a",
+        "/english.m3u8": "5aae9d117d458f65f7febae68555ea4e48b2055b4cfb123fb919e385a1edda21",
+        "/french-00.mpegts": "7278acd094bc7caeeeea424a2c11ac4285fc45a8becb6c8ec55068f295ae35cd",
+        "/french-01.mpegts": "e9464d109e36a53d7f151442b544d47ce79324bbaa805e0a98f171621c9c7a13",
+        "/french-02.mpegts": "3ac48cab6aac942950b59f79ac6bd950dcae425f14821b83b1b5bb72d6815eb0",
+        "/french-03.mpegts": "906f2d8b1f29bb7d57240b145563bab975d8f7dfff78cebd1505b6d2a3feb43b",
+        "/french-04.mpegts": "cbf82876118d41af254bdef51f6cd08d842e8c6edf53250667fad2b8088e3601",
+        "/french-05.mpegts": "a91e564ec54d845837217c45b8e25b08fe208f2b5f97562f513baabd515427d9",
+        "/french-06.mpegts": "2c8edc11b06bacf1e62c4db67594ce187aa93e0241012011ebcf587b64ccff46",
+        "/french.m3u8": "6f7fb3eacb944597fa3105cb6d708eac3a8dc413e1706a11b6fb0e631214634e",
+        "/high-00.mpegts": "c5a8faac85b0594818255117696dce43fda6b363df40e2f3ffc453bd236cc833",
+        "/high-01.mpegts": "5714640c3f17d86c56036453dc17d45f871af63b461318c43527af3482f8661c",
+        "/high-02.mpegts": "fea1cbfb199bc867a322c7a646d43594a1d0d1d23fa0bcb6e770f2669b489440",
+        "/high-03.mpegts": "4a74a28e7ad6bc626358e32365a0b07df1da82c92753e28032983e22404958b5",
+        "/high-04.mpegts": "d04889b3b996d3e79c12bc297f9577690d3ae4f4172cdc0484b584954dab789c",
+        "/high-05.mpegts": "36ee0c64b8c3637d0e2282c611e9250650ac493440095fc2efbe9de1c54add15",
+        "/high.m3u8": "672c0e8b99242be05b16fc747a00715b2c25579b1ecc1623c0579fa34f0cb11d",
+        "/low-00.mpegts": "cbd62f5f4641cbe188a15640139bea393b5927fce600ff7513ef9ade9b33fb62",
+        "/low-01.mpegts": "f7821fba38c63f5d80daef21cdd3430880bdc9fd5f5adfa939ed6481106c2507",
+        "/low-02.mpegts": "3dc93f9f0fd065678b01fc6c568c12350e9ab0b324d1e0fa0e9f77787da7e7d2",
+        "/low-03.mpegts": "d94c8913f7fde98161550041287529b90a58d537d6083d4382540c5fce0b430b",
+        "/low-04.mpegts": "11596c59b547c2ff23bbba1f70e15f061a3e87bbdc1f4f59daa9b5279a6003af",
+        "/low-05.mpegts": "5c6ec25a69fdad73a23cfbc34f0f3c6d8abe44592650c92fa9110a38d6bd9e45",
+        "/low.m3u8": "404a8d868ed2af3598269aee89caba0563c2805dac223fe4c00c9a9eda73554f",
+        "/master.m3u8": "f226bd38f3c76714ada2b5a6866ad1cb39b041023e4a18d971d175f26f917e38",
+        "/video-only.m3u8": "3d7bb9069f6218191dc65745389bf1ab0ba6d5ed66cbd14e2cf30211913da3fc",
+        "/grouped.m3u8": "02c7482a012645a60014d429873f785e94c9a54f13f94f0b82597c7627173bfc",
+        "/hls.js": "484054e8cd03d3f6d1781fb7f402bdc318d8a4c527f933a95c624e27cc9a9470",
+        "/": "7abea2bb98110fb12f13773621338e2dd70804ecb5ac896febb5ef57db2bc386"
+      },
+      "passed": 3,
+      "failed": 2,
+      "cases": [
+        {
+          "iteration": 0,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:10077/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-AuZoXW/0.zip",
+            "sha256": "bd180e027ac4a98e9ba4e607eb954bf23e33a878e20d67857ef724c75b7410bc"
+          }
+        },
+        {
+          "iteration": 1,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:10077/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-AuZoXW/1.zip",
+            "sha256": "700dd062eff6184bcece51034631a9e02bb4919f3bdfe563d3611832d366153c"
+          }
+        },
+        {
+          "iteration": 2,
+          "status": "failed",
+          "errors": [
+            "page crashed"
+          ],
+          "failure": "page.evaluate: Target crashed ",
+          "failurePhase": "final-state",
+          "crashes": [
+            {
+              "phase": "final-state",
+              "at": "2026-09-14T06:38:17.974Z"
+            }
+          ],
+          "requests": [
+            {
+              "url": "http://127.0.0.1:10077/low-02.mpegts",
+              "error": {
+                "errorText": "NS_BINDING_ABORTED"
+              }
+            }
+          ],
+          "stateError": "page.evaluate: Target crashed ",
+          "trace": {
+            "path": "refactor/.cache/hls-direct-AuZoXW/2.zip",
+            "sha256": "2df5a0798fea1928b3a73a99de9ad2d17826fbfe82715e48e693c3b9980940d1"
+          }
+        },
+        {
+          "iteration": 3,
+          "status": "passed",
+          "errors": [],
+          "crashes": [],
+          "requests": [],
+          "coreLoaded": "undefined",
+          "pluginLoaded": "undefined",
+          "finalMedia": {
+            "time": 0,
+            "readyState": 0,
+            "height": 0,
+            "paused": true,
+            "buffered": [],
+            "seekable": []
+          },
+          "trace": {
+            "path": "refactor/.cache/hls-direct-AuZoXW/3.zip",
+            "sha256": "2b736b7b960dcda1a37a36a4487fd38d08b5a23906471676d49b219fff884bad"
+          }
+        },
+        {
+          "iteration": 4,
+          "status": "failed",
+          "errors": [
+            "page crashed"
+          ],
+          "failure": "page.evaluate: Target crashed ",
+          "failurePhase": "final-state",
+          "crashes": [
+            {
+              "phase": "final-state",
+              "at": "2026-09-14T06:38:22.285Z"
+            }
+          ],
+          "requests": [],
+          "stateError": "page.evaluate: Target crashed ",
+          "trace": {
+            "path": "refactor/.cache/hls-direct-AuZoXW/4.zip",
+            "sha256": "05609adf0a319f084b79f215036e43a615669efddd55d50e94736bb52325e28e"
+          }
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "passed": 31,
+    "failed": 4
+  },
+  "browserSource": {
+    "archive": {
+      "path": "C:/Users/laozh/AppData/Local/ms-playwright/firefox-1543/firefox/omni.ja",
+      "sha256": "b98ceacd96e964cb480aab6860308aaab5b9a8733014524edec9652b0e707a9d"
+    },
+    "member": "chrome/juggler/content/TargetRegistry.js",
+    "extracted": {
+      "path": "refactor/.cache/hls-firefox-target-registry.js",
+      "sha256": "f6065707d12f8788a6d916df36b4a7043adbe18caa97333ca63befd772820c0e"
+    },
+    "lines": [
+      {
+        "line": 139,
+        "text": "    Services.obs.addObserver({"
+      },
+      {
+        "line": 140,
+        "text": "      observe: (subject, topic, data) => {"
+      },
+      {
+        "line": 141,
+        "text": "        const browser = subject.ownerElement;"
+      },
+      {
+        "line": 142,
+        "text": "        if (!browser)"
+      },
+      {
+        "line": 143,
+        "text": "          return;"
+      },
+      {
+        "line": 144,
+        "text": "        const target = this._browserToTarget.get(browser);"
+      },
+      {
+        "line": 145,
+        "text": "        if (!target)"
+      },
+      {
+        "line": 146,
+        "text": "          return;"
+      },
+      {
+        "line": 147,
+        "text": "        target.emit(PageTarget.Events.Crashed);"
+      },
+      {
+        "line": 148,
+        "text": "        target.dispose();"
+      },
+      {
+        "line": 149,
+        "text": "      }"
+      },
+      {
+        "line": 150,
+        "text": "    }, 'oop-frameloader-crashed');"
+      }
+    ],
+    "interpretation": "The logged target-disposal observer is registered for oop-frameloader-crashed. No native minidump or responsible component is established."
+  },
+  "checks": {
+    "lint": "pass",
+    "sdkArchiveTest": {
+      "path": "refactor/.cache/hls-http-matrix-check.log",
+      "sha256": "73a3b7ee063be7e2f17cbe452a5fb0670ab044b0926df538b6b0e860baaec76f"
+    }
+  },
+  "limits": [
+    "Direct native video only; no old/new core or plugin acceptance in these runs",
+    "No Worker observer or route interception, but tracing/media event instrumentation and browser DEBUG logging remain",
+    "No-worker and extra snapshot controls are not valid substitutes for worker/default timing gates",
+    "SDK-first also failed; do not change production destroy order based on prior passing controls",
+    "HLS-CRASH-01 and HLS-PLAYBACK-01 remain open"
+  ]
+}

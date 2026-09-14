@@ -1,5 +1,17 @@
 # 进度与证据
 
+## PKG-HLS-SDK-01 普通HTTP销毁诊断检查点（仍未完成）
+
+直接原生video、Hls1.5.17、Firefox155.0、普通HTTP且无ArtPlayer/插件/Worker观察器，
+35次诊断31通过4失败。关闭Worker的10次及可选销毁前快照5次通过不能替代正常验收；
+先销毁SDK也失败2/5，因此不能把销毁顺序当作修复。新增主机侧阶段记录，三次有阶段
+证据的崩溃发生在destroy已返回后的最终状态读取。当前Firefox调试源码接收到
+oop-frameloader-crashed，但没有原生堆栈来确定责任组件；SWGL警告两种控制均存在。
+见[检查点](changes/2026-09-14-PKG-HLS-SDK-01-http-teardown.md)及[证据](baselines/hls-http-teardown-validation.json)。只改诊断/文档，生产和产物未变。
+脚本lint和SDK归档验证通过，原崩溃/切组失败均保留，SDK-01仍doing；253项统计不变。
+下一步需要Firefox原生崩溃诊断或更小MSE复现，切组卡住独立排查。VAST初始化选择仍待
+用户回复，继续不依赖这些决定的包验收工作；不改核心销毁顺序或放宽worker门槛。
+
 ## PKG-VAST-07 旧default调用兼容完成
 
 VAST入口增加default自身别名，恢复旧require(...).default调用并保留现有直接调用。

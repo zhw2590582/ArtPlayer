@@ -10,7 +10,7 @@ import { observeWorkers } from '../../test/helpers/worker-observer.js'
 import { ensureArchive, hash, readMember, refactorDir } from './releases.mjs'
 
 // Direct SDK control: no ArtPlayer or plugin is loaded, and no worker output is substituted.
-export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false } = {}) {
+export async function diagnose({ version = '1.7.2', iterations = 5, transport = 'http', teardown = 'reset-first', worker = true, host = 'direct', plugin = false, sdkLogs = false, workerObserver = false, captureBeforeDestroy = false } = {}) {
   const runnerSHA256 = hash(fs.readFileSync(new URL(import.meta.url)))
   const observerSHA256 = hash(fs.readFileSync(new URL('../../test/helpers/worker-observer.js', import.meta.url)))
   assert(Number.isInteger(iterations) && iterations > 0 && iterations <= 50)
@@ -66,10 +66,13 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
       await context.tracing.start({ screenshots: true, snapshots: true, sources: true })
       const page = await context.newPage()
       const wait = predicate => expect.poll(() => page.evaluate(predicate), { timeout: 7000 }).toBe(true)
-      const entry = { iteration, status: 'running', errors: [], requests: [] }
+      const entry = { iteration, status: 'running', errors: [], requests: [], phase: 'setup', crashes: [] }
       results.push(entry)
       page.on('pageerror', error => entry.errors.push(error.message))
-      page.on('crash', () => entry.errors.push('page crashed'))
+      page.on('crash', () => {
+        entry.errors.push('page crashed')
+        entry.crashes.push({ phase: entry.phase, at: new Date().toISOString() })
+      })
       page.on('requestfailed', request => entry.requests.push({ url: request.url(), error: request.failure() }))
       if (transport === 'route') {
         await page.route('**/*.m3u8', route => serveRoute(route))
@@ -163,9 +166,11 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
             },
           }
         }, { worker, teardown, host, plugin, sdkLogs })
+        entry.phase = 'initial-playback'
         await wait(() => window.direct.video?.readyState >= 3)
         await page.evaluate(() => window.direct.video.play())
         await wait(() => window.direct.video.currentTime > 0.3)
+        entry.phase = 'low-group'
         await page.evaluate(() => {
           window.direct.hls.currentLevel = 0
         })
@@ -175,19 +180,28 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
           window.direct.hls.audioTrack = 1
         })
         await wait(() => window.direct.records.some(item => item.at >= window.direct.mark && item.event === 'AUDIO_TRACK_SWITCHED' && item.data.id === 1))
+        entry.phase = 'high-group'
         await page.evaluate(() => {
           window.direct.hls.currentLevel = 1
         })
         await wait(() => window.direct.video.videoHeight === 180 && window.direct.hls.audioTrack === 0)
+        entry.phase = 'commentary-track'
         await page.evaluate(() => {
           window.direct.hls.audioTrack = 2
         })
         await wait(() => window.direct.records.some(item => item.event === 'AUDIO_TRACK_SWITCHED' && item.data.id === 2))
+        entry.phase = 'return-low-group'
         await page.evaluate(() => {
           window.direct.hls.currentLevel = 0
         })
         await wait(() => window.direct.hls.audioTracks.length === 2)
+        if (captureBeforeDestroy) {
+          entry.phase = 'capture-before-destroy'
+          entry.beforeDestroy = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, media: window.direct.state(), sdk: { version: window.Hls.version, workerEnabled: window.direct.hls.config.enableWorker, level: window.direct.hls.currentLevel, audioTrack: window.direct.hls.audioTrack }, events: window.direct.records }))
+        }
+        entry.phase = 'destroy-call'
         await page.evaluate(() => window.direct.destroy())
+        entry.phase = 'after-destroy-state'
         await page.evaluate(() => window.direct.state())
         assert.deepEqual(entry.errors, [])
         entry.status = 'passed'
@@ -198,15 +212,20 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
         await page.screenshot({ path: path.join(directory, `${iteration}.png`) }).catch(() => {})
       }
       finally {
+        entry.failurePhase = entry.status === 'failed' ? entry.phase : undefined
+        entry.phase = 'final-state'
         entry.state = await page.evaluate(() => ({ coreLoaded: typeof window.Artplayer, pluginLoaded: typeof window.artplayerPluginHlsControl, workers: window.workerEvidence, media: window.direct?.state(), events: window.direct?.records, sdk: { version: window.Hls?.version, level: window.direct?.hls.currentLevel, audioTrack: window.direct?.hls.audioTrack } })).catch(error => ({ error: error.message }))
+        entry.phase = 'trace-stop'
         await context.tracing.stop({ path: path.join(directory, `${iteration}.zip`) }).catch((error) => {
           entry.traceError = error.message
         })
+        entry.phase = 'context-close'
         await context.close().catch((error) => {
           entry.closeError = error.message
         })
         if (entry.state.error || entry.errors.length || entry.traceError || entry.closeError) {
           entry.status = 'failed'
+          entry.failurePhase ||= entry.crashes[0]?.phase || (entry.state.error ? 'final-state' : entry.traceError ? 'trace-stop' : 'context-close')
           entry.failure ||= entry.state.error || entry.traceError || entry.closeError || entry.errors.join('; ')
         }
       }
@@ -217,14 +236,14 @@ export async function diagnose({ version = '1.7.2', iterations = 5, transport = 
     await browser?.close()
     server.closeAllConnections()
     await new Promise(resolve => server.close(resolve))
-    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version, iterations, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, runnerSHA256, observerSHA256, browserVersion, release, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
+    fs.writeFileSync(path.join(directory, 'report.json'), `${JSON.stringify({ version, iterations, transport, teardown, worker, host, plugin, sdkLogs, workerObserver, captureBeforeDestroy, runnerSHA256, observerSHA256, browserVersion, release, inputs: Object.fromEntries([...files].map(([file, bytes]) => [file, hash(bytes)])), results }, null, 2)}\n`)
     console.log(`Diagnostic report: ${directory}`)
   }
   return results
 }
 
-const { values } = parseArgs({ options: { 'version': { type: 'string', default: '1.7.2' }, 'iterations': { type: 'string', default: '5' }, 'transport': { type: 'string', default: 'http' }, 'teardown': { type: 'string', default: 'reset-first' }, 'no-worker': { type: 'boolean', default: false }, 'host': { type: 'string', default: 'direct' }, 'plugin': { type: 'boolean', default: false }, 'sdk-logs': { type: 'boolean', default: false }, 'observe-workers': { type: 'boolean', default: false } } })
-diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'] }).then((results) => {
+const { values } = parseArgs({ options: { 'version': { type: 'string', default: '1.7.2' }, 'iterations': { type: 'string', default: '5' }, 'transport': { type: 'string', default: 'http' }, 'teardown': { type: 'string', default: 'reset-first' }, 'no-worker': { type: 'boolean', default: false }, 'host': { type: 'string', default: 'direct' }, 'plugin': { type: 'boolean', default: false }, 'sdk-logs': { type: 'boolean', default: false }, 'observe-workers': { type: 'boolean', default: false }, 'capture-before-destroy': { type: 'boolean', default: false } } })
+diagnose({ version: values.version, iterations: Number(values.iterations), transport: values.transport, teardown: values.teardown, worker: !values['no-worker'], host: values.host, plugin: values.plugin, sdkLogs: values['sdk-logs'], workerObserver: values['observe-workers'], captureBeforeDestroy: values['capture-before-destroy'] }).then((results) => {
   process.exitCode = results.some(result => result.status !== 'passed') ? 1 : 0
 }).catch((error) => {
   console.error(error)
