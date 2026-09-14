@@ -1,0 +1,351 @@
+{
+  "task": "PKG-MULTI-SUB-08",
+  "date": "2026-09-14",
+  "baselineCommit": "4acf85ea696a99f05fce71089711bc4a4ca0d5b6",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "platform": "win32",
+  "before": {
+    "artifact": {
+      "path": "refactor/.cache/multiple-subtitles-entities-before.js",
+      "sha256": "8ad5ddfa1ee1d79f7183b7a5fade748ca2093ceba7b467ec19b5b79ad129a249"
+    },
+    "initial": {
+      "path": "refactor/.cache/multi-entities-before.log",
+      "sha256": "cbe8d2bbb32db2682856e35ede9dd5600e9280b04efa148d2f75aea69b8eb716",
+      "passed": 0,
+      "failed": 5
+    },
+    "final": {
+      "path": "refactor/.cache/multi-entities-before-final.log",
+      "sha256": "0c56f858e5b0b42fb208f7505423b85a2013385bedf84aa9bb5f2749b3c71682",
+      "passed": 3,
+      "failed": 8
+    }
+  },
+  "sources": [
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/merge.ts",
+      "sha256": "e41514f3a62833d9e42bee20e693b5a13fb42cfb3ea2a08f0821bbcb2d450cfd"
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/text.ts",
+      "sha256": "15660d74726e36831939799d72e8126ede3e3becd22ba9cc2127db4277171d0f"
+    }
+  ],
+  "tests": [
+    {
+      "path": "test/multiple-subtitles-entities.test.js",
+      "sha256": "23ff2ca0561a26347bb2602c1fb69b34bf5d664ad23c5c8877bccb383e66861e"
+    },
+    {
+      "path": "test/multiple-subtitles-merge.test.js",
+      "sha256": "c7a7ac447ad76e559d5710a590054599412806db6f4282fd2a856fa05092f533"
+    },
+    {
+      "path": "test/multiple-subtitles-failures.test.js",
+      "sha256": "d987af07a2c42ade51c6bd7b8eb2441191e748e5ddf7f3be5cbf4809a8be034f"
+    },
+    {
+      "path": "test/browser/multiple-subtitles-entities.spec.js",
+      "sha256": "cdc9dfc23900761c8110581ee81ad9f17c5796e03190c154b21cbdcb686c806e"
+    }
+  ],
+  "vendor": {
+    "unchangedFromBaseline": true,
+    "sha256LF": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1",
+    "check": {
+      "provenance": {
+        "revision": "380cfcce34ba8b472d3a31474874eb72a0e5f460",
+        "packageVersionAtRevision": "2.1.2",
+        "scope": "Pinned comparison revision, not proof of historical acquisition commit. After removing IIFE/global exportify and adding named ESM exports, normalized executable content matches local parser.",
+        "sources": [
+          {
+            "file": "refactor/baselines/multiple-subtitles-vendor/parser.txt",
+            "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/parser.js",
+            "sha256": "35a112e585b7cb1b4fd30350b0e8c8f6d1efa2670a6008c4a6038e07c9f8d727"
+          },
+          {
+            "file": "refactor/baselines/multiple-subtitles-vendor/license.txt",
+            "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/LICENSE.md",
+            "sha256": "6cc655a5df52fefac69058311c090f4e70b7c37b8f6488f9498420a930b8275d"
+          },
+          {
+            "file": "refactor/baselines/multiple-subtitles-vendor/package.json.txt",
+            "upstream": "https://raw.githubusercontent.com/w3c/webvtt.js/380cfcce34ba8b472d3a31474874eb72a0e5f460/package.json",
+            "sha256": "d0102b9276839f1136ecafd9527102a28b44643e8ff403b3ddb1e51c04777a7b"
+          }
+        ]
+      },
+      "normalizedSha256": "e71dc5073db409dcb8eef66a0d6bfe6c8d96fa7d157ff51a68decf6f05a7c80f",
+      "localSha256LF": "ba582074d57fa2d72880e6e4253fe14646787916b2b68e2a1e748e685cf96ab1",
+      "noticesSha256LF": "50755f38458d41151c7f0b1675c744aa365f0510dc11f53832691ef5c14ce6b6"
+    }
+  },
+  "results": [
+    {
+      "path": "refactor/.cache/multi-entities-suite-final.log",
+      "sha256": "2d38f2518283940e4d898823093a0959f6095c82883d97b1726874e20209beec",
+      "passed": 294,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "refactor/.cache/multi-entities-main.log",
+      "sha256": "9eec0b8e567456842a4678da1ce57099c8c2faba98e0cc42b2d85e290afd037b",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "refactor/.cache/multi-entities-legacy.log",
+      "sha256": "9eeb325f9df16ab584a8f722c4e31cc92411f776061d4ad5252bfcabbb830673",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "path": "refactor/.cache/multi-entities-ci.log",
+      "sha256": "c37a11d7fc5dca6e2dc84f308611fd26653a10d6b6528b62063f4aea5ccc58e6",
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "browsers": [
+    {
+      "path": "refactor/.cache/multi-entities-source-browser/report.json",
+      "sha256": "accb4d48bda22f45b1ea8ece707532dbdc84bc31b65b787340ad1bf77b5fe4a3",
+      "stats": {
+        "startTime": "2026-09-14T04:03:29.211Z",
+        "duration": 50430.384999999995,
+        "expected": 42,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "observations": [
+        {
+          "project": "chromium",
+          "core": "published",
+          "browser": "153.0.8010.12",
+          "pluginSha256": "475afec2cd440de885520c6aee4165a7453fce8e03a920a7d809b8fe93db510c",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "chromium",
+          "core": "candidate",
+          "browser": "153.0.8010.12",
+          "pluginSha256": "475afec2cd440de885520c6aee4165a7453fce8e03a920a7d809b8fe93db510c",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "firefox",
+          "core": "published",
+          "browser": "155.0",
+          "pluginSha256": "475afec2cd440de885520c6aee4165a7453fce8e03a920a7d809b8fe93db510c",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "firefox",
+          "core": "candidate",
+          "browser": "155.0",
+          "pluginSha256": "475afec2cd440de885520c6aee4165a7453fce8e03a920a7d809b8fe93db510c",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "webkit",
+          "core": "published",
+          "browser": "26.6",
+          "pluginSha256": "475afec2cd440de885520c6aee4165a7453fce8e03a920a7d809b8fe93db510c",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "webkit",
+          "core": "candidate",
+          "browser": "26.6",
+          "pluginSha256": "475afec2cd440de885520c6aee4165a7453fce8e03a920a7d809b8fe93db510c",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        }
+      ],
+      "scope": "Source entity and lifecycle tests; final equivalent wrapper loop separately covered by full Node and actual artifact browser run"
+    },
+    {
+      "path": "refactor/.cache/multi-entities-artifact-browser/report.json",
+      "sha256": "0f8d3c53fd5616814ee9bf9cba1afb197dd3b956c0b5e84a8ce9cb390fcc1140",
+      "stats": {
+        "startTime": "2026-09-14T04:07:08.987Z",
+        "duration": 15602.046,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "observations": [
+        {
+          "project": "chromium",
+          "core": "published",
+          "browser": "153.0.8010.12",
+          "pluginSha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "chromium",
+          "core": "candidate",
+          "browser": "153.0.8010.12",
+          "pluginSha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "firefox",
+          "core": "published",
+          "browser": "155.0",
+          "pluginSha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "firefox",
+          "core": "candidate",
+          "browser": "155.0",
+          "pluginSha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "webkit",
+          "core": "published",
+          "browser": "26.6",
+          "pluginSha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        },
+        {
+          "project": "webkit",
+          "core": "candidate",
+          "browser": "26.6",
+          "pluginSha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+          "native": [
+            "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+            "bold & safe tail <i>"
+          ],
+          "literal": "A & < > ‎ ‏   | <b>literal</b> | &lt;",
+          "scope": "Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only"
+        }
+      ],
+      "scope": "Actual main UMD, published/candidate core, native fragment and HTML caption text"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js",
+      "sha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b",
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.js",
+        "sha256": "e2192514ab4836a04c56420fa8c260efa657e2afa32f299d0cf7786c91adc39b"
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "sha256": "6e3716ea5e70a028b4fdb6648d1f8be151364bd6fd798719e3a5809924457c6e",
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.legacy.js",
+        "sha256": "6e3716ea5e70a028b4fdb6648d1f8be151364bd6fd798719e3a5809924457c6e"
+      }
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs",
+      "sha256": "8d1f36140e6c4ca64d6330621fd421f1323ed9fb58434a797cfa2afae6205b39",
+      "docs": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.mjs",
+        "sha256": "8d1f36140e6c4ca64d6330621fd421f1323ed9fb58434a797cfa2afae6205b39"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "path": "refactor/.cache/multi-entities-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/multi-entities-build.log",
+      "sha256": "d352d68782fddd9e62989746c6e4f1a8e0310069115f6d779bdd13663cddfbfc",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/multi-entities-lint-final.log",
+      "sha256": "c5b143fd109b076988b84670ce8fc536d4069edf71a512ad2990f926c63baaa1",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/multi-entities-final.log",
+      "sha256": "e3bd33003aa4d5b47edd8da0966a1830656a4279e3b1cf519541e11bff9509ba",
+      "exitCode": 0
+    }
+  ],
+  "initialLintFailure": {
+    "path": "refactor/.cache/multi-entities-lint-initial.log",
+    "sha256": "9202a274e0cca24968f932d2fac2a31ba602f652897d083b454573042bd68772"
+  },
+  "scope": [
+    "Fix six existing named entities via configured vendor table; preserve lenient aliases and vendor body",
+    "Escape literal cue text through existing onVttLoad pipeline; wrap semantic nodes outside annotation fields",
+    "Nine historical implementations still reproduce entity and malformed-tag defects",
+    "Public types, factory alias, Promise/selection ordering unchanged",
+    "Desktop Windows engines only; full old-core/device/distribution gates remain tasks05/06",
+    "No new dependency, lock/version change, push or publication"
+  ]
+}

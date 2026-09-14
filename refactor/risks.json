@@ -4521,17 +4521,26 @@
       "id": "MULTI-SUB-ENTITY-01",
       "title": "Vendored cue entity decoding retains semicolons after lt, gt and amp entities",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
-        "PKG-MULTI-SUB-05"
+        "PKG-MULTI-SUB-05",
+        "PKG-MULTI-SUB-08"
       ],
       "evidence": [
         "test/multiple-subtitles-failures.test.js",
         "refactor/baselines/multiple-subtitles-timestamps.json",
-        "refactor/changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md"
+        "refactor/changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-08-entities.md",
+        "refactor/baselines/multiple-subtitles-entities-validation.json"
       ],
-      "compatibleResolution": "Independently fix valid named-entity decoding, documenting the vendor patch and preserving provenance checks and ordinary cue behavior.",
-      "closureCriteria": "Nine historical implementations reproduce the defect; candidate entity/markup regressions and real subtitle display pass, with vendor adaptation and provenance documentation updated."
+      "compatibleResolution": "Supply exact named entities through the existing parser constructor option, preserve historical lenient aliases and the frozen vendor body, and protect literal text through serialization/unescape.",
+      "closureCriteria": "Nine historical implementations reproduce the defect; candidate entity/markup regressions and real subtitle display pass, with vendor adaptation and provenance documentation updated.",
+      "workspaceState": "Nine historical implementations retain stray semicolons; candidate table adapter and text escaping fix six named references, double encoding and literal tags. Actual native VTT and HTML display pass in all3 Windows engines on published/candidate cores. Complete historical-core/device combinations remain task05.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-08-entities.md",
+        "refactor/baselines/multiple-subtitles-entities-validation.json"
+      ],
+      "resolutionRationale": "Eleven focused cases,294 package tests,42 source browser and6 actual built-main browser cases pass. The parser executable body is unchanged and its full upstream adaptation/notices checks remain enforced; the authored configuration adapter resolves the plugin defect without a vendor patch."
     },
     {
       "id": "JASSUB-TYPE-01",
@@ -5962,6 +5971,28 @@
         "test/browser/auto-thumbnail-lifecycle.spec.js"
       ],
       "resolutionRationale": "Nine controlled cases and real native JPEG tests cover held/late callbacks and decoder/canvas disposal. Actual production UMD passes11 Node and9 browser checks; previous preview survives timeout. Very slow encoding can now be discarded explicitly; public options, registration and frame-time formula remain intact."
+    },
+    {
+      "id": "MULTI-SUB-MARKUP-01",
+      "title": "Semantic cue nodes receive HTML wrappers inside their annotation fields",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-MULTI-SUB-08"
+      ],
+      "evidence": [
+        "test/multiple-subtitles-failures.test.js",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-08-entities.md",
+        "refactor/baselines/multiple-subtitles-entities-validation.json"
+      ],
+      "compatibleResolution": "Wrap prepared cue nodes with sibling opening/closing nodes, retaining annotations, CSS hooks, nested timestamps and escaped literal text.",
+      "closureCriteria": "Nine historical implementations reproduce malformed b attributes and undefined text; candidate tag/text/selection/reset and real published/candidate core display pass.",
+      "workspaceState": "Nine frozen implementations serialize malformed b attributes containing an undefined wrapper. Authored merge now wraps nodes outside annotations. Vendor and public types are unchanged.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-08-entities.md",
+        "refactor/baselines/multiple-subtitles-entities-validation.json"
+      ],
+      "resolutionRationale": "Historical regressions retain old output; corrected b/c/v/ruby and text cases plus actual b/literal-tag native/HTML display pass. Immutable trees, timestamps and lifecycle tests remain green."
     }
   ]
 }

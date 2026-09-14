@@ -201,7 +201,7 @@
 | MULTI-SUB-HTTP-01 | resolved / 已复现 | HTTP error responses with parseable bodies are installed as subtitles | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-HOST-01 | resolved / 已复现 | Subtitle init rejections are ignored and failed installation or URL replacement leaks or invalidates resources | PKG-MULTI-SUB-03, PKG-MULTI-SUB-05 |
 | MULTI-SUB-TIMESTAMP-01 | resolved / 已复现 | Text wrappers replace numeric inline cue timestamps and serialize NaN times | PKG-MULTI-SUB-07, PKG-MULTI-SUB-05 |
-| MULTI-SUB-ENTITY-01 | open / 已复现 | Vendored cue entity decoding retains semicolons after lt, gt and amp entities | PKG-MULTI-SUB-05 |
+| MULTI-SUB-ENTITY-01 | resolved / 已复现 | Vendored cue entity decoding retains semicolons after lt, gt and amp entities | PKG-MULTI-SUB-05, PKG-MULTI-SUB-08 |
 | JASSUB-TYPE-01 | open / 已复现 | JASSUB declared required URLs, Promise methods and resize parameter order differ from actual historical behavior | PKG-JASSUB-04 |
 | JASSUB-EXPORT-01 | open / 已复现 | JASSUB historical CommonJS object.default changes to a direct factory in 1.1.0 | PKG-JASSUB-04, PKG-JASSUB-06 |
 | CORE-DEFAULTS-SSR-01 | resolved / 已复现 | Reading static defaults throws when navigator is absent | CORE-25 |
@@ -264,3 +264,4 @@
 | SCAFFOLD-OUTPUT-01 | resolved / 已复现 | Plugin generation overwrites existing examples and links to a different example name | MOD-PLUGIN-01 |
 | DEV-SERVOR-PORT-01 | resolved / 已复现 | Servor exits the entire dev process with status zero when the requested port is occupied | MOD-DEV-01 |
 | AUTO-THUMB-ENCODE-TIMEOUT-01 | resolved / 源码/产物事实 | Pending JPEG encoding has no bounded lifetime after frame readiness finishes | PKG-AUTO-THUMB-10 |
+| MULTI-SUB-MARKUP-01 | resolved / 已复现 | Semantic cue nodes receive HTML wrappers inside their annotation fields | PKG-MULTI-SUB-08 |

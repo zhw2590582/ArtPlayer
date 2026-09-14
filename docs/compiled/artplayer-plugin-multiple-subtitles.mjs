@@ -799,19 +799,36 @@ var WebVTTSerializer = function() {
     return result;
   };
 };
+const cueEntities = {
+  "&amp": "&",
+  "&amp;": "&",
+  "&lt": "<",
+  "&lt;": "<",
+  "&gt": ">",
+  "&gt;": ">",
+  "&lrm": "‎",
+  "&lrm;": "‎",
+  "&rlm": "‏",
+  "&rlm;": "‏",
+  "&nbsp": " ",
+  "&nbsp;": " "
+};
+function escapeCueText(value) {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 const TIMESTAMP_CLASS = "artplayer-multiple-subtitles-timestamp";
 function markTimestamp(node) {
   return { type: "object", name: "c", classes: [TIMESTAMP_CLASS], children: [node] };
 }
-function markNestedTimestamps(node) {
+function prepareCueNode(node) {
   if (node.type === "timestamp")
     return markTimestamp(node);
   if (node.type === "object")
-    return { ...node, children: node.children.map(markNestedTimestamps) };
-  return node;
+    return { ...node, children: node.children.map(prepareCueNode) };
+  return { ...node, value: escapeCueText(node.value) };
 }
 function parseTracks(vtts, subtitles) {
-  const parser = new WebVTTParser();
+  const parser = new WebVTTParser(cueEntities);
   return vtts.map((vtt, index2) => {
     const tree = parser.parse(vtt, "metadata");
     return { ...tree, url: subtitles[index2].url, name: subtitles[index2].name };
@@ -822,16 +839,21 @@ function serializeTracks(trees) {
   for (const selected of trees) {
     const tree = selected;
     for (const cue of tree.cues) {
+      const children = [];
+      for (const child of cue.tree.children) {
+        if (child.type === "timestamp")
+          children.push(markTimestamp(child));
+        else children.push(
+          { type: "text", value: `<div class="art-subtitle-${tree.name}">` },
+          prepareCueNode(child),
+          { type: "text", value: "</div>" }
+        );
+      }
       cues.push({
         ...cue,
         tree: {
           ...cue.tree,
-          children: cue.tree.children.map((child) => {
-            if (child.type === "timestamp")
-              return markTimestamp(child);
-            const value = `<div class="art-subtitle-${tree.name}">${child.value}</div>`;
-            return child.type === "object" ? { ...child, value, children: child.children.map(markNestedTimestamps) } : { ...child, value };
-          })
+          children
         }
       });
     }

@@ -31,13 +31,9 @@ test('Multiple subtitles merge: repeated selection serializes frozen trees witho
   assert.equal(JSON.stringify(trees), original)
 })
 
-test('Multiple subtitles merge: actual released serializer output is preserved for text, markup and timing cases', async () => {
+test('Multiple subtitles merge: released serializer output is preserved outside corrected text escaping and tag wrappers', async () => {
   const samples = [
-    subtitleVtt('A & B < C > D'),
-    subtitleVtt('<b>bold</b> tail'),
-    subtitleVtt('<c.red>color</c> <i>italic</i>'),
-    subtitleVtt('<v Speaker>voice</v>'),
-    subtitleVtt('<ruby>text<rt>note</rt></ruby>'),
+    subtitleVtt('Plain text'),
     subtitleVtt('line one\nline two'),
     'WEBVTT\n\n00:02.000 --> 00:05.000\nLater\n\n00:00.000 --> 00:03.000\nEarlier\n',
     subtitleVtt('best effort').replace('WEBVTT', 'BAD HEADER'),

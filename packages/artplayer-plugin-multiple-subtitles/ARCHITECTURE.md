@@ -19,6 +19,10 @@ to npm 1.2.0; the runtime entry requires an option object but allows omitted `su
   to the existing core utils. Failure aborts the request; registration failure closes siblings.
 - `src/merge.ts` parses metadata and serializes selected cues without mutating parsed trees.
   It depends only on the vendor parser, not the player or browser resource APIs.
+- `src/text.ts` supplies the vendor's existing entity-table option with both exact
+  semicolon-terminated references and historical lenient aliases. It also protects
+  literal cue text through the later onVttLoad unescape and HTML caption parsing.
+  No vendor implementation patch is needed; parser.js and its provenance remain intact.
 - `src/lifetime.ts` owns the destroy listener, request cancellation and resource callbacks.
   Its cancellation Promise also settles pending operations without AbortController support.
 - `src/render.ts` owns generated Blob URLs and synchronous/async host installation outcomes.
@@ -47,7 +51,7 @@ to npm 1.2.0; the runtime entry requires an option object but allows omitted `su
 All tracks download concurrently and decode through TextDecoder. Explicit type wins over
 the URL extension; SRT/ASS conversion delegates to existing core utils. `onParser` appears
 in declarations but is not called. Parsing runs in metadata mode. Each track's top-level
-cue text receives a name-based div in a copied cue; merging concatenates cue arrays by track
+cue node receives a name-based div in a copied cue; merging concatenates cue arrays by track
 order, whereas 1.0.0 merged by cue index and retained the first track's timestamps.
 
 Each selection serializes VTT and allocates a text/vtt Blob before replacing the preceding
@@ -73,15 +77,27 @@ and unwraps its remaining children. HTML does not pair `<c.class>` with `</c>`; 
 whole element would incorrectly discard following caption text. The original cue stays intact.
 This keeps the existing whole-cue display behavior; it does not add karaoke highlighting.
 
-The vendor entity decoder still leaves extra semicolons after standard named entities. Nine
-historical implementations reproduce it; MULTI-SUB-ENTITY-01 remains open for task 05. Do not
-silently alter vendor source or declare entity rendering correct because timestamp tests pass.
+The vendor default entity table still has its historical semicolon bug, preserved
+in the unmodified vendor file and its upstream parity tests. The plugin now supplies
+exact amp/lt/gt/lrm/rlm/nbsp references through the existing constructor option.
+Historical partial/bare-name handling remains via the old aliases; numeric and
+unknown references are left to the parser. Entity decoding runs once, not repeatedly.
+
+Literal text is escaped separately from semantic cue tags before the serializer's
+outer escaping. The renderer's existing onVttLoad unescape removes only that outer
+layer, leaving escaped literal tags/timestamps for native VTT and HTML display.
+Wrappers are sibling text nodes around the prepared node; they are never assigned
+to a b/i/c/v/ruby node's annotation field. This fixes malformed tag attributes and
+visible undefined while preserving CSS hooks, actual markup and numeric timestamps.
+Native/custom display, nested entities and selection/reset regressions belong to
+PKG-MULTI-SUB-08; it does not complete all historical core/device combinations.
 
 ## Vendor boundary and validation
 
 The comparison revision is w3c/webvtt.js `380cfcce34ba8b472d3a31474874eb72a0e5f460`.
 This is not proof of the original acquisition commit. Its execution body matches local
 code after replacing the IIFE/global exports with named ESM exports and normalizing format.
+The plugin-side entity table is a configuration adapter, not a change to that body.
 Older shipped sources keep the IIFE. Preserve the CC0 source header and complete
 THIRD_PARTY_NOTICES; the normal build places notices in all standalone bundle headers.
 

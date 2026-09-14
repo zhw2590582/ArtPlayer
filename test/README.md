@@ -1,5 +1,13 @@
 # Tests and fixture ownership
 
+`test/multiple-subtitles-entities.test.js` checks named entities, literal tags,
+double encoding, nested semantic tags and selection/reset through the real plugin.
+The vendor parity suite stays unchanged: the plugin uses the parser's existing
+entity-table option. Historical malformed-tag and stray-semicolon tests continue
+to assert old defects; corrected cases have explicit rendering expectations instead
+of treating those old serialized bytes as a required contract. Browser entity
+tests compare native VTT fragments and actual HTML captions on both core variants.
+
 `yarn test:library` runs actual library builds, build-input freshness checks and the
 scaffold's generated consumers. The new build modules live in `scripts/library/`;
 `yarn typecheck:library` checks them and the retained JS/MJS entrypoints. Browser

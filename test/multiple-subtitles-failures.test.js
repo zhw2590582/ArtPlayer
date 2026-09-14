@@ -269,4 +269,10 @@ for (const implementation of implementations) {
     await env.factory(options(subtitle()))(env.art)
     assert(env.utils.unescape(await env.latestText()).includes('Literal <;00:02.000>; example &;'))
   })
+
+  test(`Multiple-subtitles ${implementation.name} failure baseline: semantic tag wrappers become malformed attributes`, async () => {
+    const env = create({ responses: { 'a.vtt': subtitleVtt('<b>bold</b>') } })
+    await env.factory(options(subtitle()))(env.art)
+    assert(env.utils.unescape(await env.latestText()).includes('<b <div class="art-subtitle-a">undefined</div>>bold</b>'))
+  })
 }
