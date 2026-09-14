@@ -142,3 +142,15 @@ extends the repository root and must not ship to consumers. PKG-HLS-PACK-01
 compares real Yarn archives before/after the exclusion: all distribution and
 declaration bytes must remain identical, with every historical entry retained.
 See ../../refactor/changes/2026-09-15-PKG-HLS-PACK-01-config.md.
+
+## Shared installed browser scope
+
+hls-control.spec.js uses a frozen SDK without workers; hls-sdk.spec.js uses the frozen SDK version matrix and real workers. Both select verified installed plugin bytes and retain published plugin controls.
+
+Use the exact twelve-package preparation command and scope rules in
+../../scripts/browser-validation/README.md. Missing, stale or changed installation
+inputs fail without source fallback. Attachments distinguish selected installed,
+source and published inputs. Source mode retains existing explicit artifact use.
+The generic Node/type consumer remains core/chapter-only. Module forms, physical
+devices, editor demos and release readiness retain their separate package gates.
+See ../../refactor/changes/2026-09-15-CI-01-adaptive-installed.md for actual results.

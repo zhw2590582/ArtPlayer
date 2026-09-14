@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let sdkCode
@@ -38,11 +38,8 @@ test.beforeAll(async () => {
   }
   sdkCode = await code(sdk.release, 'package/dist/hls.min.js')
   publishedCode = await code(plugin.release, 'package/dist/artplayer-plugin-hls-control.js')
-  // This task exercises source builds. Installed artifacts are a separate HLS-06 gate.
-  assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'HLS source fixture cannot masquerade as an installed plugin')
-  sourceCode = process.env.ARTPLAYER_HLS_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_HLS_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-hls-control', 'umd')
+  const candidate = await browserCandidate('artplayer-plugin-hls-control', process.env.ARTPLAYER_HLS_ARTIFACT)
+  sourceCode = candidate.code
   const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
   media = new Map()
   for (const [name, expected] of Object.entries(manifest.files)) {
@@ -52,11 +49,11 @@ test.beforeAll(async () => {
     assert.equal(bytes.length, expected.bytes)
     media.set(name, bytes)
   }
-  evidence = { sdk: sdk.release, plugin: plugin.release, sourceSHA256: hash(sourceCode), candidate: process.env.ARTPLAYER_HLS_ARTIFACT || 'workspace source build', media: manifest, limitations: ['SDK worker disabled', 'local deterministic media', 'not an isolated installed package', 'no physical device certification'] }
+  evidence = { sdk: sdk.release, plugin: plugin.release, sourceSHA256: hash(sourceCode), candidate: candidate.provenance, media: manifest, limitations: ['SDK worker disabled', 'local deterministic media', 'no physical device certification'] }
 })
 
 async function openHls(page, core, plugin, testInfo, manifest = 'master.m3u8') {
-  await testInfo.attach('hls-inputs', { contentType: 'application/json', body: JSON.stringify(evidence) })
+  await testInfo.attach('hls-inputs', { contentType: 'application/json', body: JSON.stringify({ ...evidence, core, plugin, selected: plugin === 'published' ? { kind: 'published', sha256: hash(publishedCode) } : evidence.candidate }) })
   await page.route('**/hls-fixture/**', async (route) => {
     const name = new URL(route.request().url()).pathname.split('/').at(-1)
     const bytes = media.get(name)

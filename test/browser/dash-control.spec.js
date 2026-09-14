@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 let publishedCode
@@ -14,9 +14,9 @@ test.beforeAll(async () => {
   const bytes = readMember(await ensureArchive(release), member)
   assert.equal(hash(bytes), release.files[member])
   publishedCode = bytes.toString()
-  assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Controlled DASH source tests do not represent installed SDK/package acceptance')
-  sourceCode = process.env.ARTPLAYER_DASH_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_DASH_ARTIFACT, 'utf8') : await compilePackage(release.name, 'umd')
-  evidence = { published: release, sourceSHA256: hash(sourceCode), candidate: process.env.ARTPLAYER_DASH_ARTIFACT || 'workspace source build', scope: 'Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation.' }
+  const candidate = await browserCandidate(release.name, process.env.ARTPLAYER_DASH_ARTIFACT)
+  sourceCode = candidate.code
+  evidence = { published: release, sourceSHA256: hash(sourceCode), candidate: candidate.provenance, scope: 'Real ArtPlayer DOM and native MP4 with controlled SDK methods. No dash.js instance, MPD, ABR or adaptive media validation.' }
 })
 test.afterEach(async ({ page }, testInfo) => {
   const state = await page.evaluate(() => ({
@@ -37,7 +37,7 @@ test.afterEach(async ({ page }, testInfo) => {
   }
 })
 async function openDash(page, core, plugin, sdk, testInfo) {
-  await testInfo.attach('controlled-dash-inputs', { contentType: 'application/json', body: JSON.stringify(evidence) })
+  await testInfo.attach('controlled-dash-inputs', { contentType: 'application/json', body: JSON.stringify({ ...evidence, core, plugin, selected: plugin === 'published' ? { kind: 'published', sha256: hash(publishedCode) } : evidence.candidate }) })
   await page.goto(`/test/player.html?core=${core}`)
   await page.addScriptTag({ content: plugin === 'published' ? publishedCode : sourceCode })
   await page.evaluate((sdk) => {

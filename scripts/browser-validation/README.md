@@ -14,8 +14,8 @@ also retains explicit historical and committed-artifact cases; its name does not
 promise that every dependency is rebuilt from current source in every test.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
-`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles`.
-Both launcher and config validate the selected nine packages' installed hashes
+`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles,artplayer-plugin-hls-control,artplayer-plugin-dash-control,artplayer-plugin-auto-thumbnail`.
+Both launcher and config validate the selected twelve packages' installed hashes
 and source/build freshness. `scope.ts` lists the currently supported installed
 test files. This is a growing installed subset, not full ecosystem acceptance.
 Source checks remain complete when the installed list grows.
@@ -74,3 +74,12 @@ not be counted as successful feature acceptance. Shared Node/type consumers reta
 the core/chapter scope. See ../../refactor/changes/2026-09-15-CI-01-subtitles-installed.md
 for the executed subset and results; extending collection does not revalidate the
 previous Chapter failure or establish a green complete matrix.
+
+HLS Control, DASH Control and Auto Thumbnail add seven installed files. HLS/DASH
+real SDK cases retain frozen release and media hashes; controlled DASH DOM cases
+are separate from adaptive playback. DASH SDK capability probes do not load the
+plugin; dash-plugin-inputs identifies actual plugin integration. Installed mode
+rejects diagnostic SDK patches/debug replacements and synthetic recovery probes,
+while source diagnostics remain explicit. Auto Thumbnail uses native media/JPEG
+with a stub host and retains its presentation/fallback pixel limitations. See
+../../refactor/changes/2026-09-15-CI-01-adaptive-installed.md for executed results.

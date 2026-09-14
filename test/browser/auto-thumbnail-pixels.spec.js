@@ -91,6 +91,7 @@ for (const media of ['auto-thumbnail-timeline', 'pattern']) {
     })
     await testInfo.attach('auto-thumbnail-candidate-hidden-pixels', { contentType: 'application/json', body: JSON.stringify({
       sha256: hash(implementation.code),
+      provenance: implementation.provenance,
       media,
       scope: 'All five cells are asserted where native frame presentation callbacks are available. Without that capability only cells 2-4 are asserted, with cells 0-1 recorded as unresolved diagnostics under AUTO-THUMB-PIXEL-01. Native HTTP/JPEG and a stub player host, not a core integration.',
       ...state,

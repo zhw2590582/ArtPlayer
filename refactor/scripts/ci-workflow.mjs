@@ -90,7 +90,7 @@ export function validateCIWorkflow(source) {
   const vueIndex = browser.steps.findIndex(step => step.run === 'yarn test:vue-consumer 2>&1 | tee refactor/.cache/ci/vue-consumer.log')
   assert(vueIndex > consumerIndex && !Object.hasOwn(browser.steps[vueIndex], 'if'), 'Run Vue installed consumers after restoring canonical Node')
   assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/vue-consumer-*/')), 'Retain Vue consumer failure evidence')
-  const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles '))
+  const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles,artplayer-plugin-hls-control,artplayer-plugin-dash-control,artplayer-plugin-auto-thumbnail '))
   const sourceEngineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:source 2>&1 | tee refactor/.cache/ci/browser-source.log')
   const engineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:installed 2>&1 | tee refactor/.cache/ci/browser-installed.log')
   assert(extraIndex > Math.max(consumerIndex, reactIndex, vueIndex) && extraIndex < engineIndex, 'Prepare installed Ambilight/Canvas/Document PiP/Ads after consumer probes and before browser checks')

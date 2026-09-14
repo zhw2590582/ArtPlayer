@@ -8,6 +8,7 @@ import { checkFiles, checkPackages, publishedConsumer } from '../scripts/package
 import { removeConsumer, runtimeConsumer } from '../scripts/package-consumer.mjs'
 import { emitterContracts } from './contracts/emitter.js'
 import { ambilightCandidate } from './helpers/ambilight.js'
+import { autoThumbnailCandidate } from './helpers/auto-thumbnail.js'
 import { browserCandidate } from './helpers/browser-candidate.js'
 import { canvasCandidate } from './helpers/canvas.js'
 import { dpipCandidate } from './helpers/dpip.js'
@@ -20,6 +21,7 @@ test('Additional browser packages cannot be mistaken for full release consumer a
 
 test('Explicit installed plugin maps never fall back to source or frozen workspace', async () => {
   const keys = ['ARTPLAYER_BROWSER_ARTIFACTS', 'ARTPLAYER_AMBILIGHT_BASELINE', 'ARTPLAYER_CANVAS_BASELINE', 'ARTPLAYER_DPIP_BASELINE', 'ARTPLAYER_DPIP_ARTIFACT', 'ARTPLAYER_VTT_THUMBNAIL_BASELINE', 'ARTPLAYER_VTT_THUMBNAIL_ARTIFACT', 'ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT']
+  keys.push('ARTPLAYER_AUTO_THUMBNAIL_BASELINE', 'ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT')
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   try {
     process.env.ARTPLAYER_BROWSER_ARTIFACTS = path.resolve('refactor/.cache/absent-installed-plugin-map.json')
@@ -31,6 +33,18 @@ test('Explicit installed plugin maps never fall back to source or frozen workspa
     delete process.env.ARTPLAYER_VTT_THUMBNAIL_BASELINE
     delete process.env.ARTPLAYER_VTT_THUMBNAIL_ARTIFACT
     delete process.env.ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT
+    delete process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE
+    delete process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT
+    await assert.rejects(autoThumbnailCandidate(), { code: 'ENOENT' })
+    process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE = '1'
+    await assert.rejects(autoThumbnailCandidate(), /cannot use the frozen workspace/)
+    delete process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE
+    process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT = 'override.js'
+    await assert.rejects(autoThumbnailCandidate(), /cannot override artplayer-plugin-auto-thumbnail artifact/)
+    for (const name of ['artplayer-plugin-hls-control', 'artplayer-plugin-dash-control']) {
+      await assert.rejects(browserCandidate(name), { code: 'ENOENT' })
+      await assert.rejects(browserCandidate(name, 'override.js'), new RegExp(`cannot override ${name} artifact`))
+    }
     await assert.rejects(ambilightCandidate(), { code: 'ENOENT' })
     await assert.rejects(canvasCandidate(), { code: 'ENOENT' })
     await assert.rejects(dpipCandidate(), { code: 'ENOENT' })

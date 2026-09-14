@@ -9,8 +9,8 @@ step through `ARTPLAYER_BROWSER_ARTIFACTS`. See
 browser scope and the remaining package-specific release gates.
 
 Run `yarn test:package` with the pinned Node and Yarn after a frozen install. The
-default consumer scope is core and chapter. For Ambilight/Canvas/Document PiP/Ads/Audio Track/VTT Thumbnail/Multiple Subtitles browser work,
-run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles`.
+default consumer scope is core and chapter. For Ambilight/Canvas/Document PiP/Ads/Audio Track/VTT Thumbnail/Multiple Subtitles/HLS Control/DASH Control/Auto Thumbnail browser work,
+run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles,artplayer-plugin-hls-control,artplayer-plugin-dash-control,artplayer-plugin-auto-thumbnail`.
 These four additional packages have reviewed published contracts and use the same
 source snapshot/build/pack/offline-install/frozen-reinstall pipeline. Installed
 files are copied only after archive hash checks. The report explicitly separates

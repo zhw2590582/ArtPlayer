@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { observeDashBuffers } from './dash-buffer-observer.js'
 import { probeBufferGetter, probeBufferMetric } from './dash-seek-diagnostics.js'
 import { expect, test } from './fixtures.js'
@@ -10,6 +10,7 @@ import { expect, test } from './fixtures.js'
 const sdks = new Map()
 const media = new Map()
 let candidate
+let candidateProvenance
 let published
 let mediaManifest
 let pluginRelease
@@ -18,6 +19,7 @@ assert(['none', 'upstream4', 'bufferlevel4'].includes(diagnosticSDK), 'Unknown d
 const recoveryModes = ['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'].filter(name => process.env[name] === '1')
 assert(recoveryModes.length <= 1, 'Choose only one DASH recovery diagnostic')
 assert(!recoveryModes.length || diagnosticSDK === 'none', 'Recovery diagnostics require the unchanged published SDK')
+assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS || (diagnosticSDK === 'none' && recoveryModes.length === 0), 'Installed DASH checks cannot use SDK or recovery diagnostics')
 
 test.beforeAll(async () => {
   const baseline = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/dash-sdk.json', import.meta.url)))
@@ -44,7 +46,9 @@ test.beforeAll(async () => {
   const bytes = readMember(await ensureArchive(pluginRelease), 'package/dist/artplayer-plugin-dash-control.js')
   assert.equal(hash(bytes), pluginRelease.files['package/dist/artplayer-plugin-dash-control.js'])
   published = bytes.toString()
-  candidate = process.env.ARTPLAYER_DASH_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_DASH_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-dash-control', 'umd')
+  const input = await browserCandidate('artplayer-plugin-dash-control', process.env.ARTPLAYER_DASH_ARTIFACT)
+  candidate = input.code
+  candidateProvenance = input.provenance
   mediaManifest = JSON.parse(fs.readFileSync(new URL('./media/dash/manifest.json', import.meta.url)))
   for (const [name, expected] of Object.entries(mediaManifest.files)) {
     assert(/^[\w.-]+$/.test(name))
@@ -116,7 +120,7 @@ async function loadSDK(page, version, core, testInfo) {
   await page.evaluate(observeDashBuffers)
   await page.addScriptTag({ content: sdk.code })
   const capability = await page.evaluate(() => ({ sdk: window.dashjs.supportsMediaSource(), mse: typeof window.MediaSource, managed: typeof window.ManagedMediaSource, avc: Boolean(window.MediaSource?.isTypeSupported('video/mp4; codecs="avc1.42c01e"')), aac: Boolean(window.MediaSource?.isTypeSupported('audio/mp4; codecs="mp4a.40.2"')) }))
-  await testInfo.attach('dash-sdk-inputs', { contentType: 'application/json', body: JSON.stringify({ sdk: sdk.release, codeMember: sdk.diagnostic?.member || sdk.codeMember, diagnostic: sdk.diagnostic, pluginRelease, candidateSHA256: hash(candidate), candidate: process.env.ARTPLAYER_DASH_ARTIFACT || 'workspace source build', media: mediaManifest, capability }) })
+  await testInfo.attach('dash-sdk-inputs', { contentType: 'application/json', body: JSON.stringify({ sdk: sdk.release, codeMember: sdk.diagnostic?.member || sdk.codeMember, diagnostic: sdk.diagnostic, pluginRelease, candidateSHA256: hash(candidate), availableCandidate: candidateProvenance, pluginLoaded: false, media: mediaManifest, capability }) })
   return capability
 }
 
@@ -124,6 +128,7 @@ async function openDash(page, version, core, plugin, testInfo) {
   const capability = await loadSDK(page, version, core, testInfo)
   test.skip(!capability.sdk, 'Actual SDK reports no MediaSource support; this engine has no DASH playback acceptance')
   await routeMedia(page)
+  await testInfo.attach('dash-plugin-inputs', { contentType: 'application/json', body: JSON.stringify({ version, core, plugin, selected: plugin === 'published' ? { kind: 'published', sha256: hash(published) } : candidateProvenance }) })
   await page.addScriptTag({ content: plugin === 'published' ? published : candidate })
   await page.evaluate(() => {
     window.sdkErrors = []

@@ -3080,10 +3080,13 @@
         "refactor/changes/2026-09-14-CI-01-source-chromium.md",
         "refactor/baselines/ci-source-chromium-validation.json",
         "refactor/changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
-        "refactor/baselines/dash-seek-recovery-validation.json"
+        "refactor/baselines/dash-seek-recovery-validation.json",
+        "refactor/changes/2026-09-15-CI-01-adaptive-installed.md",
+        "refactor/baselines/ci-adaptive-installed-validation.json"
       ],
       "compatibleResolution": "PKG-DASH-SEEK-01 已在候选插件按精确版本和真实空缓冲同步 SDK 指标，新旧核心及两引擎严格跳转通过。裸 SDK 4.5.2 和冻结旧插件仍保留原始失败；不伪造媒体事件、不偏移 seek、不强制升级 SDK，完整组合及发布验收仍开放。",
-      "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。"
+      "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。",
+      "workspaceState": "CI-01 十二包安装扩展中，裸 SDK 4.5.2 在 Chromium/Firefox 的恢复时间仍为 6，原断言大于 6.2 失败；候选插件集成通过不关闭裸 SDK 原始缺陷，完整失败报告保留。"
     },
     {
       "id": "ADS-TYPE-01",
@@ -4259,11 +4262,13 @@
         "refactor/changes/2026-09-14-PKG-AUTO-THUMB-03-first-seek.md",
         "refactor/baselines/auto-thumbnail-first-seek.json",
         "refactor/changes/2026-09-14-PKG-AUTO-THUMB-03-native-decoder.md",
-        "refactor/baselines/auto-thumbnail-native-decoder.json"
+        "refactor/baselines/auto-thumbnail-native-decoder.json",
+        "refactor/changes/2026-09-15-CI-01-adaptive-installed.md",
+        "refactor/baselines/ci-adaptive-installed-validation.json"
       ],
       "compatibleResolution": "Establish actual decoded-frame readiness for the existing timeline/grid and preserve silent independent extraction; do not waive colored pixel checks as unsupported media. Intrinsic-size hidden/opacity/clip/visible rendering crossed with current/readyState/first-loadeddata-event strategies still misses the unique first frame in all 12 Windows WebKit profiles. Correct Firefox frames retain totalVideoFrames=0, so that counter cannot be a portable readiness gate. Do not reintroduce these unvalidated workarounds. First-seek diagnostics additionally exclude drawing the first loadeddata frame without seek, one/two RAF waits, post-seek RAF waits and verified forward/back seeking on the recorded Windows WebKit host. The warm comparison first had an invalid stale-event completion, then a timeout; final bounded retries verify actual [1,1,0] seeking and still miss purple. Controls retain purple. These are exclusions, not production fixes.",
       "closureCriteria": "Candidate source and artifacts generate usable sampled pixels on native browser controls with lifecycle checks; supported Safari and core combinations remain explicit final gates.",
-      "workspaceState": "The frames module now waits for native presentation and seek completion on capable browsers. Chromium/Firefox source/main/legacy assert all five cells including first purple frame, second red cell, legitimate black and presentation times. Callback-less Windows WebKit first two cells remain diagnostic, later cells asserted; physical Safari/core combinations remain open. 84 native lifecycle/pixel cases passed with explicit held native-frame vs Blob-fallback paths; 19 new Node cases fail 17 ways on prior checkpoint and all 52 current cases pass per candidate. Risk and task03 remain open. Native-only18-case Windows probe also misses the purple first frame in all6 WebKit26.6 cases (hidden/visible paused and immediate play-pause, original and no-B-frame H.264);12 Chromium/Firefox controls recover it. No ArtPlayer/plugin is imported, narrowing but not resolving the native surface boundary. Rate/offset/layout explorations failed and must not be reintroduced as assumed fixes."
+      "workspaceState": "The frames module now waits for native presentation and seek completion on capable browsers. Chromium/Firefox source/main/legacy assert all five cells including first purple frame, second red cell, legitimate black and presentation times. Callback-less Windows WebKit first two cells remain diagnostic, later cells asserted; physical Safari/core combinations remain open. 84 native lifecycle/pixel cases passed with explicit held native-frame vs Blob-fallback paths; 19 new Node cases fail 17 ways on prior checkpoint and all 52 current cases pass per candidate. Risk and task03 remain open. Native-only18-case Windows probe also misses the purple first frame in all6 WebKit26.6 cases (hidden/visible paused and immediate play-pause, original and no-B-frame H.264);12 Chromium/Firefox controls recover it. No ArtPlayer/plugin is imported, narrowing but not resolving the native surface boundary. Rate/offset/layout explorations failed and must not be reintroduced as assumed fixes. CI-01 实际安装候选三引擎生命周期/像素 27 项通过；Windows WebKit 两个像素用例仍明确仅验证后面三格，首两格为诊断。没有将此结果用于关闭原首帧风险或认定完整核心组合。"
     },
     {
       "id": "VTT-THUMB-DIST-01",

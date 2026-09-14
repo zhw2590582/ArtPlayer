@@ -3,22 +3,22 @@ import { Buffer } from 'node:buffer'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { observeWorkers } from '../helpers/worker-observer.js'
 import { expect, test } from './fixtures.js'
 
 const matrix = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/hls-sdk-matrix.json', import.meta.url)))
 const grouped = fs.readFileSync(new URL('./fixtures/hls-grouped.m3u8', import.meta.url), 'utf8')
 let candidate
+let candidateProvenance
 let published
 const sdks = new Map()
 const media = new Map()
 
 test.beforeAll(async () => {
-  assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'HLS installed artifact map remains a separate HLS-06 gate')
-  candidate = process.env.ARTPLAYER_HLS_ARTIFACT
-    ? fs.readFileSync(process.env.ARTPLAYER_HLS_ARTIFACT, 'utf8')
-    : await compilePackage('artplayer-plugin-hls-control', 'umd')
+  const input = await browserCandidate('artplayer-plugin-hls-control', process.env.ARTPLAYER_HLS_ARTIFACT)
+  candidate = input.code
+  candidateProvenance = input.provenance
   const baseline = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/hls-control-release.json', import.meta.url)))
   const bytes = readMember(await ensureArchive(baseline.release), 'package/dist/artplayer-plugin-hls-control.js')
   assert.equal(hash(bytes), baseline.release.files['package/dist/artplayer-plugin-hls-control.js'])
@@ -55,7 +55,7 @@ test.afterEach(async ({ page }, testInfo) => {
 })
 
 async function open(page, testInfo, release, core, plugin = 'candidate', manifest = 'master.m3u8') {
-  await testInfo.attach('hls-sdk-inputs', { contentType: 'application/json', body: JSON.stringify({ sdk: release, core, plugin, pluginSHA256: hash(plugin === 'candidate' ? candidate : published), candidate: process.env.ARTPLAYER_HLS_ARTIFACT || 'workspace source build', media: Object.fromEntries([...media].map(([name, bytes]) => [name, hash(bytes)])), enableWorker: true }) })
+  await testInfo.attach('hls-sdk-inputs', { contentType: 'application/json', body: JSON.stringify({ sdk: release, core, plugin, pluginSHA256: hash(plugin === 'candidate' ? candidate : published), selected: plugin === 'candidate' ? candidateProvenance : { kind: 'published', sha256: hash(published) }, media: Object.fromEntries([...media].map(([name, bytes]) => [name, hash(bytes)])), enableWorker: true }) })
   await page.route('**/hls-sdk-fixture/**', async (route) => {
     const name = new URL(route.request().url()).pathname.split('/').at(-1)
     const bytes = media.get(name)

@@ -31,6 +31,18 @@ test('Browser invocation rejects ambiguous scopes and output/configuration overr
     assert.throws(() => browserInvocation('source', [flag], {}), /Do not override/)
 })
 
+test('Installed validation rejects diagnostic SDK substitutions and recovery probes', () => {
+  const base = { ARTPLAYER_BROWSER_ARTIFACTS: '/installed/map.json' }
+  for (const mode of ['upstream4', 'bufferlevel4']) {
+    const env = { ...base, ARTPLAYER_DASH_DIAGNOSTIC_SDK: mode }
+    assert.throws(() => browserInvocation('installed', [], env), /unchanged DASH SDK/)
+    assert.equal(browserInvocation('source', [], env).env.ARTPLAYER_DASH_DIAGNOSTIC_SDK, mode)
+  }
+  for (const name of ['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'])
+    assert.throws(() => browserInvocation('installed', [], { ...base, [name]: '1' }), /recovery diagnostics/)
+  assert.equal(browserInvocation('installed', [], { ...base, ARTPLAYER_DASH_DIAGNOSTIC_SDK: 'none' }).env.ARTPLAYER_DASH_DIAGNOSTIC_SDK, 'none')
+})
+
 for (const code of [0, 17]) {
   test(`Browser runner preserves actual child exit ${code} and source input identity`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'artplayer-browser-runner-'))

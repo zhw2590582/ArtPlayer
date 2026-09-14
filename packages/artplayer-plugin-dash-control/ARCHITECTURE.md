@@ -213,3 +213,15 @@ controls and strict candidate recovery with new/old core versions. Node tests
 cover invalid measurements, missing capabilities, SDK replacement, teardown,
 reentrancy, identity changes and error recovery. Standalone old SDK/old-plugin
 limitations, physical devices and full release acceptance remain separately tracked.
+
+## Shared installed browser scope
+
+dash-control.spec.js exercises native MP4 and real core DOM with controlled SDK methods. dash-sdk.spec.js loads the actual frozen dash.js 4.5.2/5.2.1 SDKs and MPD fixtures. Its SDK capability attachment does not claim a plugin was loaded; dash-plugin-inputs records the selected plugin only in integration cases. Installed mode rejects diagnostic SDK substitutions and synthetic recovery probes.
+
+Use the exact twelve-package preparation command and scope rules in
+../../scripts/browser-validation/README.md. Missing, stale or changed installation
+inputs fail without source fallback. Attachments distinguish selected installed,
+source and published inputs. Source mode retains existing explicit artifact use.
+The generic Node/type consumer remains core/chapter-only. Module forms, physical
+devices, editor demos and release readiness retain their separate package gates.
+See ../../refactor/changes/2026-09-15-CI-01-adaptive-installed.md for actual results.

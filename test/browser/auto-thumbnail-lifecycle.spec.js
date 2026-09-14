@@ -108,7 +108,9 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
             throw new Error('No owned encoding deadline')
           probe.encodingDeadline.callback()
         }
-        else probe.art.emit(scenario.replace('frame-', ''))
+        else {
+          probe.art.emit(scenario.replace('frame-', ''))
+        }
         if (probe.blobs[0]) {
           probe.blobs[0].callback(probe.blobs[0].blob)
           probe.blobs[0].callback(probe.blobs[0].blob)
@@ -136,14 +138,16 @@ for (const variant of ['destroy', 'restart', 'complete', 'frame-destroy', 'frame
       probe.restore()
       return { before, after, video, canvasDimensions, publishedImage, final, blobs, pendingDeadlines: probe.timers.size, warnings: probe.warnings, heldFrames: probe.frames.length, frameSupport: probe.frameSupport, result: probe.result }
     }, scenario)
-    await testInfo.attach('auto-thumbnail-candidate-native-lifecycle', { contentType: 'application/json', body: JSON.stringify({ scenario, useDefault, sha256: hash(implementation.code), scope: 'Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.', ...state }) })
+    await testInfo.attach('auto-thumbnail-candidate-native-lifecycle', { contentType: 'application/json', body: JSON.stringify({ scenario, useDefault, sha256: hash(implementation.code), provenance: implementation.provenance, scope: 'Actual HTTP decoding/seek/JPEG and held native presentation callback lifecycle with a stub player host. Frame scenarios use a held Blob fallback only when native frame callbacks are absent. Pixel acceptance is separate; AUTO-THUMB-PIXEL-01 remains open.', ...state }) })
     expect(state.result).toEqual({ name: 'artplayerPluginAutoThumbnail' })
     expect(state.pendingDeadlines).toBe(0)
     if (scenario === 'encoding-timeout') {
       expect(state.warnings).toHaveLength(1)
       expect(state.warnings[0][1]).toContain('encoding timed out')
     }
-    else expect(state.warnings).toEqual([])
+    else {
+      expect(state.warnings).toEqual([])
+    }
     expect(state.before).toEqual(scenario === 'complete' ? { urls: 1, updates: 2 } : { urls: 0, updates: 0 })
     expect(state.after).toEqual(state.before)
     expect(state.video).toEqual({ connected: false, src: null, readyState: 0, paused: true, handlers: [true, true, true, true] })

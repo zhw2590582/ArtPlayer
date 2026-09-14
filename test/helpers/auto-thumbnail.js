@@ -1,10 +1,10 @@
-import fs from 'node:fs'
+import assert from 'node:assert/strict'
 import process from 'node:process'
 import vm from 'node:vm'
 import { transform } from 'esbuild'
 import { verifyAutoThumbnailContract } from '../../refactor/scripts/auto-thumbnail-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from './load.js'
+import { browserCandidate } from './browser-candidate.js'
 
 export async function autoThumbnailHistorical() {
   const { baseline, archives, sources } = await verifyAutoThumbnailContract()
@@ -26,9 +26,11 @@ export async function autoThumbnailHistorical() {
 }
 
 export async function autoThumbnailCandidate() {
-  if (process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE === '1')
+  if (process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE === '1') {
+    assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Installed auto-thumbnail checks cannot use the frozen workspace')
     return (await autoThumbnailHistorical()).find(item => item.name === 'frozen-workspace-js')
-  return { name: 'candidate', code: process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-auto-thumbnail', 'umd') }
+  }
+  return { name: 'candidate', ...await browserCandidate('artplayer-plugin-auto-thumbnail', process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT) }
 }
 
 // Controlled media events and deferred encodes are not evidence of native decoding.
