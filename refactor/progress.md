@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-JASSUB-10 绘制异常后的位图释放完成
+
+主线程asyncRender在清屏、调整尺寸或绘制抛错时，现在通过finally释放整批收到的
+ImageBitmap，保留原生异常及同步缓冲区路径。冻结旧main四项受控释放回归失败，
+三浏览器以真实Worker/WASM位图及原生副本注入InvalidStateError也复现剩余位图
+未释放。候选全包201项通过，main/legacy运行时组各69项；两种产物各12项真实
+主线程字幕播放/seek/布局/销毁和异常恢复通过。修正测试的busy/force调用顺序后，
+旧产物用最终测试仍三项失败；未修改生产调度或延长超时。
+见[变更](changes/2026-09-14-PKG-JASSUB-10-render-resources.md)及
+[证据](baselines/jassub-render-validation.json)。四段vendor补丁来源链、三种构建及
+docs副本、严格TS、37份核心声明无漂移、定向lint和工具链检查通过。
+254项：183 done、17 doing、54 todo。09/05及Firefox默认offscreen停顿保持未关闭；
+此项不代表JASSUB整体、设备、远端CI或发布验收完成。下一步继续剩余包验收和
+原生绘制问题定位；不把本次主线程资源修复当作默认绘制停顿的解决方案。
+
 ## REL-08 逐包发布准入台账完成
 
 建立22包历史分发、独立major目标、能力/回退和候选证据登记。新增纯模型及只读

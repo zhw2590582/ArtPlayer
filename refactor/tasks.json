@@ -2548,7 +2548,8 @@
         "CORE-22",
         "PKG-JASSUB-07",
         "PKG-JASSUB-08",
-        "PKG-JASSUB-09"
+        "PKG-JASSUB-09",
+        "PKG-JASSUB-10"
       ],
       "status": "todo",
       "risk": "H",
@@ -5271,6 +5272,26 @@
       "evidence": [
         "changes/2026-09-14-PKG-VAST-07-default-alias.md",
         "baselines/vast-alias-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-JASSUB-10",
+      "phase": "5 包迁移：artplayer-plugin-jassub",
+      "title": "释放绘制异常后的整批 ImageBitmap",
+      "scope": [
+        "artplayer-plugin-jassub"
+      ],
+      "dependsOn": [
+        "PKG-JASSUB-08"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "主线程异步绘制异常时释放整批位图；同步路径保持；原生异常/恢复测试和可逆vendor补丁记录",
+      "acceptance": "旧红新绿验证清屏、尺寸和首/后续绘制异常的释放及原异常传播；真实Worker位图和原生Canvas异常后恢复字幕；源码/main/legacy回归、类型、来源及构建通过",
+      "evidence": [
+        "changes/2026-09-14-PKG-JASSUB-10-render-resources.md",
+        "baselines/jassub-render-validation.json",
+        "baselines/jassub-render-patch.json"
       ]
     }
   ]

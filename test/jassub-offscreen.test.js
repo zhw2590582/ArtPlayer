@@ -144,3 +144,54 @@ for (const method of ['setTrack', 'setTrackByUrl']) {
     assert.equal(env.workers[0].terminated, 1)
   })
 }
+
+for (const phase of ['clear', 'first-image', 'second-image', 'resize']) {
+  test(`JASSUB releases every received bitmap when rendering fails during ${phase}`, async () => {
+    const env = environment(false)
+    const { instance } = env.factory({ offscreenRender: false })(env.art)
+    await env.ready()
+    const failure = new Error(`render ${phase}`)
+    const closed = [0, 0, 0]
+    const images = closed.map((_, index) => ({
+      image: { close() { closed[index]++ } },
+      x: index,
+      y: 0,
+    }))
+    let draws = 0
+    instance._ctx.drawImage = () => {
+      draws++
+      if (draws === (phase === 'first-image' ? 1 : phase === 'second-image' ? 2 : 0))
+        throw failure
+    }
+    if (phase === 'clear')
+      instance._ctx.clearRect = () => { throw failure }
+    if (phase === 'resize') {
+      Object.defineProperty(instance._canvasctrl, 'width', {
+        configurable: true,
+        get() { return 300 },
+        set() { throw failure },
+      })
+    }
+    try {
+      assert.throws(() => env.workers[0].onmessage({ data: { target: 'render', images, asyncRender: true, width: 640, height: 360 } }), error => error === failure)
+      assert.deepEqual(closed, [1, 1, 1])
+      assert.equal(draws, phase === 'first-image' ? 1 : phase === 'second-image' ? 2 : 0)
+    }
+    finally {
+      instance.destroy()
+    }
+  })
+}
+
+test('JASSUB synchronous pixel buffers are drawn without bitmap disposal', async () => {
+  const env = environment(false)
+  const { instance } = env.factory({ offscreenRender: false })(env.art)
+  await env.ready()
+  const image = new Uint8ClampedArray([0, 255, 0, 255]).buffer
+  image.close = () => assert.fail('Synchronous buffers are not owned ImageBitmaps')
+  const draws = []
+  instance._ctx.drawImage = (...args) => draws.push(args)
+  env.workers[0].onmessage({ data: { target: 'render', images: [{ image, x: 2, y: 3, w: 1, h: 1 }], asyncRender: false, width: 640, height: 360 } })
+  assert.deepEqual(draws, [[instance._bufferCanvas, 2, 3]])
+  instance.destroy()
+})

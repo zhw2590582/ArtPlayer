@@ -563,9 +563,13 @@ class o extends EventTarget {
       for (const image of e) image.image?.close?.();
       return;
     }
-    this._unbusy(), this.debug && (s.IPCTime = Date.now() - s.JSRenderTime), (this._canvasctrl.width !== r || this._canvasctrl.height !== n) && (this._canvasctrl.width = r, this._canvasctrl.height = n, this._verifyColorSpace({ subtitleColorSpace: a })), this._ctx.clearRect(0, 0, this._canvasctrl.width, this._canvasctrl.height);
-    for (const i of e)
-      i.image && (t ? (this._ctx.drawImage(i.image, i.x, i.y), i.image.close()) : (this._bufferCanvas.width = i.w, this._bufferCanvas.height = i.h, this._bufferCtx.putImageData(new ImageData(this._fixAlpha(new Uint8ClampedArray(i.image)), i.w, i.h), 0, 0), this._ctx.drawImage(this._bufferCanvas, i.x, i.y)));
+    try {
+      this._unbusy(), this.debug && (s.IPCTime = Date.now() - s.JSRenderTime), (this._canvasctrl.width !== r || this._canvasctrl.height !== n) && (this._canvasctrl.width = r, this._canvasctrl.height = n, this._verifyColorSpace({ subtitleColorSpace: a })), this._ctx.clearRect(0, 0, this._canvasctrl.width, this._canvasctrl.height);
+      for (const i of e)
+        i.image && (t ? this._ctx.drawImage(i.image, i.x, i.y) : (this._bufferCanvas.width = i.w, this._bufferCanvas.height = i.h, this._bufferCtx.putImageData(new ImageData(this._fixAlpha(new Uint8ClampedArray(i.image)), i.w, i.h), 0, 0), this._ctx.drawImage(this._bufferCanvas, i.x, i.y)));
+    } finally {
+      if (t) for (const i of e) i.image?.close();
+    }
     if (this.debug) {
       s.JSRenderTime = Date.now() - s.JSRenderTime - s.IPCTime;
       let i = 0;

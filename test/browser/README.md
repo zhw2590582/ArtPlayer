@@ -216,6 +216,13 @@ asserts it remains connected after destroy(false). The native report records the
 artifact hash and both mode choices. This does not change the default published
 baseline or establish ESM/offscreen/device acceptance.
 
+`jassub-render-failure.spec.js` uses an actual Worker/WASM bitmap and native copies.
+It intentionally closes one bitmap to provoke native Canvas InvalidStateError,
+checks release of the entire batch, then pauses and waits for pending demand before
+public resize(force) verifies a visible subtitle again. Select actual main/legacy
+with ARTPLAYER_JASSUB_ARTIFACT. This main-thread fault injection does not reproduce
+spontaneous Worker corruption or resolve the separate Firefox offscreen stall.
+
 JASSUB Firefox diagnostics retain the canonical failing cases. Set
 `ARTPLAYER_JASSUB_OFFSCREEN=default` to exercise native capability selection.
 `ARTPLAYER_JASSUB_ASYNC_RENDER=false` explicitly selects synchronous rendering;

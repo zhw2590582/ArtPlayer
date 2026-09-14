@@ -1,0 +1,11 @@
+{
+  "task": "PKG-JASSUB-10",
+  "baselineCommit": "04060aa8b6b5cf070bac0c6a9d50eb329fab9719",
+  "file": "packages/artplayer-plugin-jassub/src/jassub.es.js",
+  "originalSha256LF": "60590f2fca6ffded74f96f8a6001a86c32eb38f5e1fae26338cbbb43e93fb70a",
+  "patchedSha256LF": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+  "patchFile": "refactor/baselines/jassub-render.patch",
+  "patchSha256LF": "4de7af48eef2839e3b569592586132cca7c2a1ff0222a1fe14a06835ed11cb74",
+  "predecessor": "refactor/baselines/jassub-hybrid-patch.json",
+  "purpose": "Release the complete async bitmap batch on native canvas rendering failure while preserving the exception and synchronous ImageData path."
+}

@@ -6,7 +6,7 @@ import test from 'node:test'
 import { hash } from './releases.mjs'
 
 test('JASSUB local vendor patch retains its exact original, changed source and reversible patch identity', () => {
-  const records = ['vendor', 'offscreen', 'hybrid'].map(name => JSON.parse(fs.readFileSync(`refactor/baselines/jassub-${name}-patch.json`, 'utf8')))
+  const records = ['vendor', 'offscreen', 'hybrid', 'render'].map(name => JSON.parse(fs.readFileSync(`refactor/baselines/jassub-${name}-patch.json`, 'utf8')))
   for (const [index, record] of records.entries()) {
     const next = records[index + 1]
     const original = execFileSync('git', ['show', `${record.baselineCommit}:${record.file}`], { encoding: 'utf8' }).replaceAll('\r\n', '\n')

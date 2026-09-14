@@ -42,6 +42,16 @@ protocol or change the historical matching of simultaneous same-target responses
 
 `src/jassub.es.js` owns rendering, media listeners, canvas state, capability checks and worker
 messages. Keep this third-party file separate from the adapter's TypeScript migration.
+PKG-JASSUB-10 adds `refactor/baselines/jassub-render-patch.json` to the patch chain.
+An asynchronous main-thread render owns the entire received ImageBitmap batch.
+A finally block closes every bitmap even when resizing, clearing or drawing fails;
+the original native rendering exception still escapes. Normal drawing releases the
+batch before debug reporting. Synchronous ImageData buffers are not ImageBitmaps
+and are not closed. This does not alter Worker messages, async/offscreen defaults,
+or resolve the separate Firefox offscreen stall. `jassub-offscreen.test.js` covers
+failure positions and the synchronous path; `jassub-render-failure.spec.js` uses
+an actual Worker/WASM bitmap, native copies and an intentionally closed bitmap
+to verify native draw failure, batch release and a subsequent visible subtitle.
 `worker/` contains worker/WASM files; the actual 1.0.0/1.1.0 npm packages do not ship those
 files. The local demo explicitly hosts its resources under `docs/assets/jassub/` and selects
 fonts in `docs/assets/example/jassub.js`. Do not move or rename those URLs as an internal cleanup.

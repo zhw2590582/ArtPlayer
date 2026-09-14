@@ -388,7 +388,7 @@
         {
           "path": "packages/artplayer-plugin-jassub/src/jassub.es.js",
           "algorithm": "sha256-lf",
-          "sha256": "60590f2fca6ffded74f96f8a6001a86c32eb38f5e1fae26338cbbb43e93fb70a"
+          "sha256": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696"
         },
         {
           "path": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
@@ -414,7 +414,8 @@
         "followUp": "refactor/baselines/jassub-offscreen-patch.json",
         "followUps": [
           "refactor/baselines/jassub-offscreen-patch.json",
-          "refactor/baselines/jassub-hybrid-patch.json"
+          "refactor/baselines/jassub-hybrid-patch.json",
+          "refactor/baselines/jassub-render-patch.json"
         ]
       }
     },
