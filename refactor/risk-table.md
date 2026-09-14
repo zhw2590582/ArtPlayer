@@ -273,3 +273,4 @@
 | VCONSOLE-LIFECYCLE-01 | resolved / 已复现 | vConsole delayed log, panel and scroller work outlives its owner | SITE-07, SITE-05, SITE-VCONSOLE-01 |
 | CHAPTER-FULLSCREEN-GEOMETRY-01 | resolved / 已复现 | Chromium 原生全屏后章节 hover 标题曾出现后又隐藏 | PKG-CHAPTER-05, PKG-CHAPTER-HOVER-01 |
 | CANVAS-SUBTITLE-01 | resolved / 已复现 | Canvas底层video缺初始字幕轨道且普通Canvas挂载不能加载原生字幕 | PKG-CANVAS-SUBTITLE-01, PKG-CANVAS-05 |
+| DPIP-INSTALLED-PROVENANCE-01 | resolved / 已复现 | Document PiP测试加载器忽略显式安装map并回退到源码 | PKG-CANVAS-05, CI-01 |

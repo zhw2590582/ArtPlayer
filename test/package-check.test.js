@@ -9,25 +9,34 @@ import { removeConsumer, runtimeConsumer } from '../scripts/package-consumer.mjs
 import { emitterContracts } from './contracts/emitter.js'
 import { ambilightCandidate } from './helpers/ambilight.js'
 import { canvasCandidate } from './helpers/canvas.js'
+import { dpipCandidate } from './helpers/dpip.js'
 
 test('Additional browser packages cannot be mistaken for full release consumer acceptance', async () => {
   await assert.rejects(checkPackages({ release: true, include: ['artplayer-plugin-ambilight'] }), /not full release acceptance/)
 })
 
 test('Explicit installed plugin maps never fall back to source or frozen workspace', async () => {
-  const keys = ['ARTPLAYER_BROWSER_ARTIFACTS', 'ARTPLAYER_AMBILIGHT_BASELINE', 'ARTPLAYER_CANVAS_BASELINE']
+  const keys = ['ARTPLAYER_BROWSER_ARTIFACTS', 'ARTPLAYER_AMBILIGHT_BASELINE', 'ARTPLAYER_CANVAS_BASELINE', 'ARTPLAYER_DPIP_BASELINE', 'ARTPLAYER_DPIP_ARTIFACT']
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   try {
     process.env.ARTPLAYER_BROWSER_ARTIFACTS = path.resolve('refactor/.cache/absent-installed-plugin-map.json')
     assert(!fs.existsSync(process.env.ARTPLAYER_BROWSER_ARTIFACTS))
     delete process.env.ARTPLAYER_AMBILIGHT_BASELINE
     delete process.env.ARTPLAYER_CANVAS_BASELINE
+    delete process.env.ARTPLAYER_DPIP_BASELINE
+    delete process.env.ARTPLAYER_DPIP_ARTIFACT
     await assert.rejects(ambilightCandidate(), { code: 'ENOENT' })
     await assert.rejects(canvasCandidate(), { code: 'ENOENT' })
+    await assert.rejects(dpipCandidate(), { code: 'ENOENT' })
     process.env.ARTPLAYER_AMBILIGHT_BASELINE = '1'
     process.env.ARTPLAYER_CANVAS_BASELINE = '1'
+    process.env.ARTPLAYER_DPIP_BASELINE = '1'
     await assert.rejects(ambilightCandidate(), /cannot use the frozen workspace/)
     await assert.rejects(canvasCandidate(), /cannot use the frozen workspace/)
+    await assert.rejects(dpipCandidate(), /cannot use the frozen workspace/)
+    delete process.env.ARTPLAYER_DPIP_BASELINE
+    process.env.ARTPLAYER_DPIP_ARTIFACT = 'override.js'
+    await assert.rejects(dpipCandidate(), /cannot override Document PiP artifact/)
   }
   finally {
     for (const key of keys) {

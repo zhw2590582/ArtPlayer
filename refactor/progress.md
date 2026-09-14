@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-CANVAS-05 原生 PiP 与五包安装检查点（仍 doing）
+
+源码首轮18项：Chromium/Firefox实际原生窗口12通过，WebKit仅6项API不可用记录。
+Canvas、底层video与track一起移入窗口，播放/绘制继续，暂停seek字幕正确；插件
+关闭、原生关闭和销毁均恢复/释放节点、窗口、占位与RAF。不是iframe模拟。
+进一步把Document PiP加入已核验安装包注册与CI：五包离线安装/冻结重装和指纹检查
+通过，main/legacy各51项成功退出（各12原生PiP+6不可用+33其他组合）。
+修复dpip加载器忽略安装map回退源码的问题：旧Node测试3通过1失败，修正后工程/
+工作流46通过；DPIP-INSTALLED-PROVENANCE-01按该证据关闭。缺map/缺包/陈旧输入及
+冲突覆盖均不允许源码替代。严格工具TS、lint（1既有warning）、actionlint/工具链通过。
+见[检查点](changes/2026-09-14-PKG-CANVAS-05-native-pip.md)和
+[证据](baselines/canvas-dpip-validation.json)。259项：190 done、20 doing、49 todo。
+Canvas真机/后台节流、DPIP完整消费者/设备、完整远端CI和发布仍开放；没有生产
+运行时修改、依赖新增、push、部署或发布。该检查点独立提交后审计再继续下一步。
+
 ## PKG-CANVAS-SUBTITLE-01 原生字幕轨道修复完成
 
 新旧核心三引擎复现 Canvas 字幕为空。先前说明需修正：初始失败中的 $track

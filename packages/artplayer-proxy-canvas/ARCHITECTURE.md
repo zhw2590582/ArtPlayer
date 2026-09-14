@@ -106,3 +106,10 @@ single-track ownership, ordinary Canvas child insertion/removal and escaped inse
 after destroy on old/new cores. It also belongs to the installed browser scope;
 keep its bytes and native engine provenance with the lifecycle report.
 See `refactor/canvas-validation.md` and the task evidence for actual outcomes and limitations.
+
+`canvas-dpip.spec.js` follows the same Canvas, backing video and native subtitle
+track into actual Document PiP windows. It covers playback/draw advancement,
+paused subtitle seeking and close/native-close/destroy resource ownership. The
+installed scope requires Document PiP's own verified package bytes as well; a
+source helper may not fill a missing installed package. Unsupported native APIs
+are recorded separately and never treated as native playback evidence.

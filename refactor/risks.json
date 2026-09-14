@@ -6241,6 +6241,30 @@
         "test/browser/canvas-subtitles.spec.js"
       ],
       "resolutionRationale": "Initial candidate and routing-only controls each fail all six subtitle cases. Bootstrap + insertion adaptation passes; npm 1.1.0 independently fails all six. Expanded native source tests pass 24; installed main and legacy pass 33 each; final six pass after adding baseline selection. Captions also visibly render in the local demo. This fixes subtitle capability/insertion only; broader Canvas integration remains open."
+    },
+    {
+      "id": "DPIP-INSTALLED-PROVENANCE-01",
+      "title": "Document PiP测试加载器忽略显式安装map并回退到源码",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-CANVAS-05",
+        "CI-01"
+      ],
+      "evidence": [
+        "test/package-check.test.js",
+        "refactor/baselines/canvas-dpip-validation.json"
+      ],
+      "compatibleResolution": "使用已安装文件及source/build指纹，缺输入拒绝执行；保留独立source模式。",
+      "closureCriteria": "缺安装map旧红新绿，实际五包main/legacy原生组合与工作流配置验证。",
+      "workspaceState": "Explicit map takes precedence; DPIP frozen/artifact overrides conflict instead of overriding installed provenance. Current CI prepares five packages before browser scopes.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-CANVAS-05-native-pip.md",
+        "refactor/baselines/canvas-dpip-validation.json",
+        "test/helpers/dpip.js",
+        "refactor/scripts/ci-workflow.test.mjs"
+      ],
+      "resolutionRationale": "Old loader test reports missing expected rejection; updated loader rejects missing/stale maps and conflicting modes. Five-package isolated build/pack/install supplies main and legacy native PiP tests with package hashes. Local workflow mutation protects the required DPIP preparation; remote runs remain unverified."
     }
   ]
 }

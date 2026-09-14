@@ -34,6 +34,10 @@ for (const [name, mutate] of [
   ['wrong consumer Node version', w => w.jobs['browser-smoke'].steps.find(s => s.id === 'consumer-node-20').with['node-version'] = '24'],
   ['skipped installed consumer', w => w.jobs['browser-smoke'].steps.find(s => s.run?.includes('--expected-node 22.12.0')).if = 'false'],
   ['missing browser plugin installation', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --include=')).run = 'echo omitted'],
+  ['missing Document PiP browser installation', (w) => {
+    const step = w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --include='))
+    step.run = step.run.replace(',artplayer-plugin-document-pip', '')
+  }],
   ['skipped browser plugin installation', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:package --include=')).if = 'false'],
   ['missing source browser checks', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:browser:source ')).run = 'echo omitted'],
   ['filtered source browser checks', w => w.jobs['browser-smoke'].steps.find(s => s.run?.startsWith('yarn test:browser:source ')).run += ' --grep subset'],

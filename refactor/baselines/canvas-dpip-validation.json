@@ -1,0 +1,2280 @@
+{
+  "task": "PKG-CANVAS-05",
+  "status": "doing",
+  "date": "2026-09-14",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "reports": [
+    {
+      "directory": "refactor/.cache/canvas-dpip-source-report",
+      "sha256": "171fda8ba6082d8eae0acdcf8920d607b62349e6a5b6bb3471dc179b81e18cf8",
+      "stats": {
+        "startTime": "2026-09-14T10:54:43.011Z",
+        "duration": 24945.471,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/canvas-dpip.spec.js",
+          "--workers=1"
+        ]
+      },
+      "inputs": [],
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "nativeCases": 12,
+      "unavailableCases": 6,
+      "records": [
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.337776,
+            "draws": 21
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 39,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 39,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.299013,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 35,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 35,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.28948,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.306242,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.304979,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.291426,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.416666,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 54,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 54,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 16
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 51,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 51,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 16
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 25,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 25,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.374999,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 57,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 57,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.499999,
+            "draws": 25
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 46,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 46,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 16
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-source",
+            "sha256": "3d4887505ccc68d683f4805ebae25a8f383e13da82b3f213dc134900752c3bb6"
+          },
+          "dpip": {
+            "name": "candidate-source",
+            "sha256": "2daf44990a250f1122ce38481f3ed8c41d2f8c65a0d5ed99ab2633e46b703db1"
+          },
+          "outcome": "native-document-pip-unavailable"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/canvas-dpip-installed-main-report",
+      "sha256": "549db0da6c59e26f5b391b2c70036f8d2fffa1c2744c5aefed1b475a9fa8634e",
+      "stats": {
+        "startTime": "2026-09-14T10:59:43.092Z",
+        "duration": 73515.901,
+        "expected": 51,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/canvas-dpip.spec.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "test/browser/canvas-lifecycle.spec.js",
+          "test/browser/ambilight-proxy.spec.js",
+          "--workers=1"
+        ]
+      },
+      "inputs": [
+        {
+          "name": "artplayer",
+          "member": "package/dist/artplayer.js",
+          "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+          "archiveSha256": "60edd42a29e939632568851018cf0e230eb60fb54a2597c0877d496795bbcc6e"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+          "archiveSha256": "784c581410185908ea66aadaf06336970117e06f16dd4c66a618b196bfaba698"
+        },
+        {
+          "name": "artplayer-plugin-ambilight",
+          "member": "package/dist/artplayer-plugin-ambilight.js",
+          "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+          "archiveSha256": "7e88a0c9a643612f54e1674c1406c2bb7d18b1dd1f6fc05e7f49749301b310f3"
+        },
+        {
+          "name": "artplayer-proxy-canvas",
+          "member": "package/dist/artplayer-proxy-canvas.js",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "archiveSha256": "074e51779de545d46f234e2052e05de63c0f1189c031b08c0b23702b6ceb5325"
+        },
+        {
+          "name": "artplayer-plugin-document-pip",
+          "member": "package/dist/artplayer-plugin-document-pip.js",
+          "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+          "archiveSha256": "5caf75a1de5af1b19a133be6d35e3573b25783ae376d15af3846cef392f17b7c"
+        }
+      ],
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "nativeCases": 12,
+      "unavailableCases": 6,
+      "records": [
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.308638,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.306925,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 35,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 35,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.30837,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 28,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 28,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.320015,
+            "draws": 20
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 37,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 37,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.309014,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.291057,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 17
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 52,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 52,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 15
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.416666,
+            "draws": 20
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 33,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 33,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.374999,
+            "draws": 17
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 52,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 52,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 17
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 52,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 52,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.374999,
+            "draws": 17
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+          },
+          "outcome": "native-document-pip-unavailable"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/canvas-dpip-installed-legacy-report",
+      "sha256": "8013645129c01e409c179a45406bab9bb2267a915ecde7dd02f23869dcbdd5f6",
+      "stats": {
+        "startTime": "2026-09-14T11:02:08.402Z",
+        "duration": 70739.78600000001,
+        "expected": 51,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/canvas-dpip.spec.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "test/browser/canvas-lifecycle.spec.js",
+          "test/browser/ambilight-proxy.spec.js",
+          "--workers=1"
+        ]
+      },
+      "inputs": [
+        {
+          "name": "artplayer",
+          "member": "package/dist/artplayer.legacy.js",
+          "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+          "archiveSha256": "60edd42a29e939632568851018cf0e230eb60fb54a2597c0877d496795bbcc6e"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "member": "package/dist/artplayer-plugin-chapter.legacy.js",
+          "sha256": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef",
+          "archiveSha256": "784c581410185908ea66aadaf06336970117e06f16dd4c66a618b196bfaba698"
+        },
+        {
+          "name": "artplayer-plugin-ambilight",
+          "member": "package/dist/artplayer-plugin-ambilight.legacy.js",
+          "sha256": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d",
+          "archiveSha256": "7e88a0c9a643612f54e1674c1406c2bb7d18b1dd1f6fc05e7f49749301b310f3"
+        },
+        {
+          "name": "artplayer-proxy-canvas",
+          "member": "package/dist/artplayer-proxy-canvas.legacy.js",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "archiveSha256": "074e51779de545d46f234e2052e05de63c0f1189c031b08c0b23702b6ceb5325"
+        },
+        {
+          "name": "artplayer-plugin-document-pip",
+          "member": "package/dist/artplayer-plugin-document-pip.legacy.js",
+          "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356",
+          "archiveSha256": "5caf75a1de5af1b19a133be6d35e3573b25783ae376d15af3846cef392f17b7c"
+        }
+      ],
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "nativeCases": 12,
+      "unavailableCases": 6,
+      "records": [
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.306795,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 35,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 35,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.292589,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 35,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 35,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.292246,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.306536,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.290253,
+            "draws": 18
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 35,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 35,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "chromium",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.302723,
+            "draws": 19
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 28,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 28,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.458332,
+            "draws": 22
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 42,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 42,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.458332,
+            "draws": 23
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 43,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 43,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.499999,
+            "draws": 25
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 36,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 36,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.333332,
+            "draws": 16
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 35,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 35,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.458332,
+            "draws": 24
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 59,
+            "placeholders": 0,
+            "events": [
+              true,
+              false
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 59,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "firefox",
+          "supported": true,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-window-playback-subtitles-and-cleanup",
+          "entered": {
+            "active": true,
+            "sameCanvas": true,
+            "playerAdopted": true,
+            "videoAdopted": true,
+            "trackAdopted": true,
+            "time": 0.374999,
+            "draws": 16
+          },
+          "final": {
+            "active": false,
+            "connected": false,
+            "paused": true,
+            "src": null,
+            "pending": 0,
+            "draws": 27,
+            "placeholders": 0,
+            "events": [
+              true
+            ],
+            "errors": []
+          },
+          "observed": {
+            "active": false,
+            "paused": true,
+            "time": 0,
+            "draws": 27,
+            "subtitle": "\n                                PiP caption\n                            ",
+            "errors": [],
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "core": "published",
+          "ending": "close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "published",
+          "ending": "native-close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "published",
+          "ending": "destroy",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "native-close",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-document-pip-unavailable"
+        },
+        {
+          "core": "candidate",
+          "ending": "destroy",
+          "browserName": "webkit",
+          "supported": false,
+          "canvas": {
+            "name": "candidate-installed",
+            "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326"
+          },
+          "dpip": {
+            "name": "candidate-installed",
+            "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+          },
+          "outcome": "native-document-pip-unavailable"
+        }
+      ]
+    }
+  ],
+  "package": {
+    "directory": "refactor/.cache/packages/run-z8nBqx",
+    "sha256": "a762ae5ad3211b6b371935891651ac055e5afedfaab086f95a7a1782d6681f22",
+    "packages": [
+      {
+        "name": "artplayer",
+        "sha256": "60edd42a29e939632568851018cf0e230eb60fb54a2597c0877d496795bbcc6e"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "sha256": "784c581410185908ea66aadaf06336970117e06f16dd4c66a618b196bfaba698"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "sha256": "7e88a0c9a643612f54e1674c1406c2bb7d18b1dd1f6fc05e7f49749301b310f3"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "sha256": "074e51779de545d46f234e2052e05de63c0f1189c031b08c0b23702b6ceb5325"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "sha256": "5caf75a1de5af1b19a133be6d35e3573b25783ae376d15af3846cef392f17b7c"
+      }
+    ],
+    "consumerScope": "36 runtime and 5 legacy/8 precise type groups cover core/chapter; extra packages have build/pack/install/hash checks, not full consumer acceptance."
+  },
+  "loader": {
+    "original": {
+      "log": "refactor/.cache/canvas-dpip-loader-red.log",
+      "sha256": "281b6ec03bcc81253ca3464c0f8762292f58e1ede3d0496a4370c56f80ddc306",
+      "tests": 4,
+      "pass": 3,
+      "fail": 1,
+      "reason": "dpipCandidate silently built source despite an explicit absent installed map."
+    },
+    "fixed": {
+      "log": "refactor/.cache/canvas-dpip-engineering.log",
+      "sha256": "ccdd04e50a5d3b55cf7800825084f82ac63fe8fb200daabfcb158fbd4ef52731",
+      "tests": 46,
+      "pass": 46,
+      "scope": "Package loader/file contracts, runner and CI workflow; includes missing DPIP installation mutation."
+    }
+  },
+  "checks": {
+    "strictToolsTypes": true,
+    "targetedLint": true,
+    "rootLint": "0 errors, one existing generated declaration warning",
+    "actionlint": true,
+    "strictToolchain": true
+  },
+  "limitations": [
+    "Windows desktop engines only, no physical Safari or mobile devices.",
+    "WebKit lacks native Document PiP here; its six returns are capability records, not native playback passes.",
+    "No remote CI execution or cancellation verification.",
+    "No full ecosystem installed suite, type acceptance for Document PiP or full publication audit in this checkpoint.",
+    "No production runtime change, dependency addition, push, deployment or npm publication."
+  ]
+}

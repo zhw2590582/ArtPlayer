@@ -89,3 +89,9 @@ plugin 1.1.0; candidate core's event-document focus checks fix this independentl
 Candidate web fullscreen stays in the current ownerDocument body and restores
 its captured placement. This does not prove native fullscreen availability inside
 PiP, background throttling or physical-device support; PKG-DPIP-05 stays open.
+
+`canvas-dpip.spec.js` additionally checks native Canvas video/track adoption,
+subtitle seeking and all three close/destroy endings. Its installed mode requires
+the verified five-package map, including Document PiP; the helper rejects missing
+maps, stale inputs and conflicting source/artifact overrides. This is integration
+evidence, not full package release acceptance or physical-device evidence.

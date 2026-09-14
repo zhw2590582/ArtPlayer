@@ -8,14 +8,22 @@ import { build, transform } from 'esbuild'
 import less from 'less'
 import { verifyDpipContract } from '../../refactor/scripts/dpip-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { verifyInstalledArtifacts } from '../../scripts/installed-artifacts.mjs'
 import { getEntryFile } from '../../scripts/projects.js'
 
 export async function dpipCandidate() {
+  const root = fileURLToPath(new URL('../../', import.meta.url))
+  if (process.env.ARTPLAYER_BROWSER_ARTIFACTS) {
+    assert.notEqual(process.env.ARTPLAYER_DPIP_BASELINE, '1', 'Installed candidate cannot use the frozen workspace')
+    assert(!process.env.ARTPLAYER_DPIP_ARTIFACT, 'Installed candidate cannot override Document PiP artifact')
+    const { inputs } = verifyInstalledArtifacts(root, process.env.ARTPLAYER_BROWSER_ARTIFACTS, ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-document-pip'])
+    const input = inputs.find(item => item.name === 'artplayer-plugin-document-pip')
+    return { name: 'candidate-installed', code: await fs.readFile(input.file, 'utf8'), provenance: input }
+  }
   if (process.env.ARTPLAYER_DPIP_BASELINE === '1')
     return (await dpipHistorical()).find(item => item.name === 'frozen-workspace')
   if (process.env.ARTPLAYER_DPIP_ARTIFACT)
     return { name: 'candidate-artifact', code: await fs.readFile(process.env.ARTPLAYER_DPIP_ARTIFACT, 'utf8') }
-  const root = fileURLToPath(new URL('../../', import.meta.url))
   const output = await build({ entryPoints: [getEntryFile(path.join(root, 'packages/artplayer-plugin-document-pip'))], bundle: true, write: false, format: 'cjs', target: 'es2020', plugins: [{
     name: 'dpip-less-inline',
     setup(build) {

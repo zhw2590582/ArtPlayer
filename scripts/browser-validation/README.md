@@ -7,8 +7,8 @@ mislabel source/explicit-vendor SDK tests. The caller's environment is untouched
 Other deliberate fixture switches retain their existing meaning.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
-`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas`.
-Both launcher and config validate the selected four packages' installed hashes
+`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip`.
+Both launcher and config validate the selected five packages' installed hashes
 and source/build freshness. `scope.ts` lists the currently supported installed
 test files. This is a growing installed subset, not full ecosystem acceptance.
 Source checks remain complete when the installed list grows.

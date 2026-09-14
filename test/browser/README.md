@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`canvas-dpip.spec.js` tests actual native windows with the Canvas video and subtitle
+track, continued playback, paused cue seeking and close/native-close/destroy.
+Chromium/Firefox native outcomes and WebKit API-unavailable outcomes must be
+counted separately. The installed scope requires five verified packages, including
+Document PiP; `dpipCandidate` cannot substitute a source build for a missing map.
+
 `canvas-subtitles.spec.js` covers native track bootstrap/load/seek/replacement and
 cleanup on old/new cores, including ordinary Canvas child operations. It is part
 of both browser scopes. `ARTPLAYER_CANVAS_SUBTITLE_BASELINE=1.1.0` runs the exact

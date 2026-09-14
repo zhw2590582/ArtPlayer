@@ -90,10 +90,10 @@ export function validateCIWorkflow(source) {
   const vueIndex = browser.steps.findIndex(step => step.run === 'yarn test:vue-consumer 2>&1 | tee refactor/.cache/ci/vue-consumer.log')
   assert(vueIndex > consumerIndex && !Object.hasOwn(browser.steps[vueIndex], 'if'), 'Run Vue installed consumers after restoring canonical Node')
   assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/vue-consumer-*/')), 'Retain Vue consumer failure evidence')
-  const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas '))
+  const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip '))
   const sourceEngineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:source 2>&1 | tee refactor/.cache/ci/browser-source.log')
   const engineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:installed 2>&1 | tee refactor/.cache/ci/browser-installed.log')
-  assert(extraIndex > Math.max(consumerIndex, reactIndex, vueIndex) && extraIndex < engineIndex, 'Prepare installed Ambilight/Canvas after consumer probes and before browser checks')
+  assert(extraIndex > Math.max(consumerIndex, reactIndex, vueIndex) && extraIndex < engineIndex, 'Prepare installed Ambilight/Canvas/Document PiP after consumer probes and before browser checks')
   assert(!Object.hasOwn(browser.steps[extraIndex], 'if') && browser.steps[extraIndex].run.includes('GITHUB_ENV') && browser.steps[extraIndex].run.includes('ARTPLAYER_BROWSER_ARTIFACTS='), 'Always select the additional installed browser artifact map')
   assert(sourceEngineIndex > extraIndex && sourceEngineIndex < engineIndex, 'Retain complete source checks before the additional installed suite')
   for (const index of [sourceEngineIndex, engineIndex]) {
