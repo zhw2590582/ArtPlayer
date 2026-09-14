@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-05 切源时序诊断检查点（仍未完成）
+
+新增可选原生属性/事件跟踪和独立恢复事件等待对照。WebKit串行3项、重复9项及
+三引擎被动事件矩阵105项通过断言，但旧核心仍提前结算，WebKit恢复seeked晚30至50ms；
+候选核心会等待恢复。关闭诊断后63项中62通过，旧5.3.0/WebKit再次停在0.0015139秒，
+字幕cue仍完整；没有获得失败瞬间的原生写入轨迹，不能据带诊断的通过结果关闭风险。
+显式等待metadata后的原生恢复seeked对照27项通过，仅说明完成恢复后的字幕路径有效，
+不修改默认测试路径或旧公共API。即时调用探针、此前失败和MULTI-SUB-SWITCH-01保持open。
+见[检查点](changes/2026-09-14-PKG-MULTI-SUB-05-seek-diagnostics.md)和
+[证据](baselines/multiple-subtitles-seek-diagnostics.json)。本轮仅测试和文档修改，产物未变，
+脚本lint/CI50/计划风险检查通过；仍为179 done、17 doing、55 todo。task05/06未完成。
+保留原生失败时序定位入口；下一轮转回Auto Thumbnail剩余源码整理，再继续包级组合门槛。
+
 ## PKG-MULTI-SUB-11 旧发布核心 ASS 转换适配完成
 
 实际5.1.2 tarball证明只有main转换器丢失模板换行，同版legacy与源码正确；新增

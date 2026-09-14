@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-14T05:41:02.580Z",
+  "updatedAt": "2026-09-14T06:00:35.506Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -6034,7 +6034,7 @@
       "id": "MULTI-SUB-SWITCH-01",
       "title": "Intermittent WebKit core5.3.0 caption loss after selected-track source switch",
       "confirmation": "reproduced",
-      "workspaceState": "Reopened during task10: both source and actual-main matrices fail old5.4.0/WebKit caption after switch despite waiting seeking=false. Source failure native time0.001494, intact1..3 cue, active=[]; task09 attribution remains supported but the later-seek workaround is insufficient. Candidate core and old5.1 display regressions pass. Task05 must diagnose remaining old-host ordering, without hiding these failures.",
+      "workspaceState": "Still open after task11: property traces3+9 and passive105 cases pass while confirming early old-core settlement; default untraced63 has another near-zero seek miss on5.3.0/WebKit (time0.0015139, intact1..3 cue, no active cue). No failing native-write trace yet. Opt-in metadata/restoration-seeked control passes27 cases but is not a production/API fix; default and immediate-call probes remain unchanged. Candidate source guarantees pass. Task05 still owns remaining diagnosis and acceptance.",
       "compatibleResolution": "Classify the old-host source/native-seek race separately from caption rendering; preserve immediate-call probes, require candidate first seeks, and wait for real native source completion before independent caption-seek assertions.",
       "closureCriteria": "Root cause classified with targeted evidence, any required fix validated, and changed candidate/old-core combination rerun without hiding the original failure.",
       "status": "open",
@@ -6052,7 +6052,11 @@
         "refactor/baselines/multiple-subtitles-switch-validation.json",
         "test/browser/multiple-subtitles-switch.spec.js",
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md",
-        "refactor/baselines/multiple-subtitles-legacy-validation.json"
+        "refactor/baselines/multiple-subtitles-legacy-validation.json",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-seek-diagnostics.md",
+        "refactor/baselines/multiple-subtitles-seek-diagnostics.json",
+        "test/browser/source-seek-diagnostics.js",
+        "test/browser/source-restoration.js"
       ],
       "resolutionEvidence": [
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md",

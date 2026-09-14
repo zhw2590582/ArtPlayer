@@ -283,3 +283,21 @@ multiline text/HTML, overlapping translation, selection/reset and empty interval
 on5.1.2/5.1.7/5.3.0/5.4.0/candidate. The attachment records the unchanged original
 host converter output alongside actual native cues and browser/artifact hashes.
 It covers desktop video/track playback, not full ASS layout or physical devices.
+
+The multiple-subtitles combination suite has opt-in source-seek diagnostics:
+
+- `ARTPLAYER_SOURCE_SEEK_TRACE=events` records native and public events, clocks,
+  duration, active cues and switch settlement without replacing media properties.
+- `ARTPLAYER_SOURCE_SEEK_TRACE=1` additionally forwards native `currentTime` and
+  `playbackRate` accessors while recording writes/stacks. The page owns these
+  diagnostic listeners and descriptors; do not use this helper in production.
+- `ARTPLAYER_SOURCE_RESTORE_EVENT=1` selects a separate control that installs a
+  metadata listener before switching and, when restoration is seeking, waits for
+  its native seeked event as well as the original switch Promise. This tests caption
+  behavior after restoration; it does not repair the old public switch contract.
+
+With no flags, the original Promise plus seeking-property path remains unchanged.
+The immediate-call ordering probe also remains intact. Record the chosen flags
+alongside artifacts: diagnostic overhead may change an intermittent race, and
+passing the event control must not replace the original failure evidence. The
+combination attachment includes the selected modes and optional native trace.

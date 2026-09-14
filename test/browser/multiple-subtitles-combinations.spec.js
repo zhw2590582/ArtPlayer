@@ -1,6 +1,9 @@
+import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
 import { multipleSubtitlesCandidate, multipleSubtitlesHistorical } from '../helpers/multiple-subtitles.js'
 import { expect, test } from './fixtures.js'
+import { switchAfterNativeRestoration } from './source-restoration.js'
+import { installSeekDiagnostics } from './source-seek-diagnostics.js'
 
 const candidate = await multipleSubtitlesCandidate()
 const historical = (await multipleSubtitlesHistorical()).filter(item => /^published-.*-main$/.test(item.name))
@@ -15,7 +18,7 @@ test.afterEach(async ({ page }, testInfo) => {
       return null
     const track = art.template.$track?.track
     const read = cue => ({ start: cue.startTime, end: cue.endTime, text: cue.text })
-    return { destroyed: art.isDestroy, paused: art.video.paused, time: art.currentTime, offset: art.subtitleOffset, cues: Array.from(track?.cues || [], read), active: Array.from(track?.activeCues || [], read), displayed: art.template.$subtitle?.textContent }
+    return { destroyed: art.isDestroy, paused: art.video.paused, time: art.currentTime, seeking: art.video.seeking, duration: art.video.duration, readyState: art.video.readyState, offset: art.subtitleOffset, cues: Array.from(track?.cues || [], read), active: Array.from(track?.activeCues || [], read), displayed: art.template.$subtitle?.textContent, trace: window.sourceSeekTrace }
   })
   await testInfo.attach('multiple-combination-final-state', { contentType: 'application/json', body: JSON.stringify(state) })
 })
@@ -27,7 +30,9 @@ async function prepare(page, core, implementation, browser, testInfo) {
   await page.addScriptTag({ content: `(() => { const module = { exports: {} }; const exports = module.exports; ${implementation.code}; window.multipleFactory = module.exports.default || module.exports; })();` })
   await page.evaluate(() => window.createPlayer('/test/pattern.mp4'))
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
-  await testInfo.attach('multiple-combination-inputs', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation.name, pluginSha256: hash(implementation.code), browser: browser.version(), scope: 'Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim' }) })
+  if (['1', 'events'].includes(process.env.ARTPLAYER_SOURCE_SEEK_TRACE))
+    await installSeekDiagnostics(page, process.env.ARTPLAYER_SOURCE_SEEK_TRACE === '1')
+  await testInfo.attach('multiple-combination-inputs', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation.name, pluginSha256: hash(implementation.code), browser: browser.version(), traceMode: process.env.ARTPLAYER_SOURCE_SEEK_TRACE || 'off', sourceRestoration: process.env.ARTPLAYER_SOURCE_RESTORE_EVENT === '1' ? 'native-event-control' : 'promise-and-seeking-property', scope: 'Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim' }) })
 }
 
 async function seek(page, time) {
@@ -94,7 +99,22 @@ for (const core of cores.filter(core => !['published-5.1.2', 'published-5.1.7'].
     await page.evaluate(() => window.art.plugins.multipleSubtitles.tracks(['b']))
     await expect(page.locator('.art-subtitle-a')).toHaveCount(0)
     await expect(page.locator('.art-subtitle-b')).toHaveText('Translation')
-    await page.evaluate(() => window.art.switchUrl('/test/pattern.mp4?subtitles-combination'))
+    if (process.env.ARTPLAYER_SOURCE_RESTORE_EVENT === '1') {
+      await switchAfterNativeRestoration(page, '/test/pattern.mp4?subtitles-combination')
+    }
+    else {
+      await page.evaluate(() => {
+        window.recordSourceSeek?.('before-switch')
+        const pending = window.art.switchUrl('/test/pattern.mp4?subtitles-combination')
+        if (window.recordSourceSeek) {
+          void pending.then(
+            () => window.recordSourceSeek('switch-resolved'),
+            error => window.recordSourceSeek('switch-rejected', String(error)),
+          )
+        }
+        return pending
+      })
+    }
     // Old core promises can settle during their native restoration seek.
     // The immediate-seek path is retained separately in multiple-subtitles-switch.spec.js.
     await expect.poll(() => page.evaluate(() => window.art.video.seeking)).toBe(false)

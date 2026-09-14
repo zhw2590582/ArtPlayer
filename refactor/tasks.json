@@ -2417,7 +2417,9 @@
       "evidence": [
         "changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
         "baselines/multiple-subtitles-combinations-validation.json",
-        "baselines/multiple-subtitles-cores.json"
+        "baselines/multiple-subtitles-cores.json",
+        "changes/2026-09-14-PKG-MULTI-SUB-05-seek-diagnostics.md",
+        "baselines/multiple-subtitles-seek-diagnostics.json"
       ]
     },
     {
