@@ -1,0 +1,2152 @@
+{
+  "task": "PKG-AUTO-THUMB-03",
+  "status": "doing",
+  "baseline": "2f130c58f14b1f3ff847568ae9cf144a75f450fe",
+  "script": {
+    "file": "refactor/scripts/auto-thumbnail-rendering-probe.mjs",
+    "sha256": "deb4859d90106642806921452b4bde8add8abc9a007a28d637d83d93347e7891"
+  },
+  "final": {
+    "file": "refactor/.cache/auto-thumbnail-first-seek-3Lx4HU/report.json",
+    "sha256": "6646be77435d85d663d57e46052f773b2a7e848ea9511d5285425755420e5f49",
+    "log": {
+      "file": "refactor/.cache/auto-thumbnail-first-seek-verified.log",
+      "sha256": "f353335e255378db7c43b21e75000cc5701949e4cca99dc5e2df6de75651304c",
+      "exitCode": 0
+    },
+    "capturedAt": "2026-09-14T01:34:27.011Z",
+    "environment": {
+      "node": "v24.21.0",
+      "platform": "win32",
+      "arch": "x64"
+    },
+    "sourceSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302",
+    "mediaSha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+    "results": [
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "current",
+        "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302",
+        "firstFrameMatches": false,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.601947,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.203187,
+            "rgba": [
+              16,
+              16,
+              16,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8021196,
+            "rgba": [
+              16,
+              15,
+              239,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4018972,
+            "rgba": [
+              235,
+              236,
+              12,
+              255
+            ],
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0017428,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.601947,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.203187,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 4.8,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.8021196,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4018972,
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 0,
+            "loadedData": 0,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": false
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "loaded-no-seek",
+        "codeSha256": "0133763db291e764e68e176ba812efb74ba44484cb4b6a129c3988e264deb4c5",
+        "firstFrameMatches": false,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6023167,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2010318,
+            "rgba": [
+              16,
+              16,
+              16,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8018166,
+            "rgba": [
+              16,
+              15,
+              239,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4017129,
+            "rgba": [
+              235,
+              236,
+              12,
+              255
+            ],
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0015839,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6023167,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.2010318,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.8018166,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4017129,
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": false
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "loaded-no-seek-raf",
+        "codeSha256": "dcc5e257a121797e7bc47393429ef673af244352aa0d74e4cab140eac8516362",
+        "firstFrameMatches": false,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6015508,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.20158,
+            "rgba": [
+              16,
+              16,
+              16,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8018519,
+            "rgba": [
+              16,
+              15,
+              239,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4014429,
+            "rgba": [
+              235,
+              236,
+              12,
+              255
+            ],
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0024854,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6015508,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1.6015508,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.20158,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.8018519,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4014429,
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": false
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "loaded-no-seek-two-raf",
+        "codeSha256": "5ae706b39c4238ad1f69b4d006529e22fd21eba67af72333abc9a8f684c2207a",
+        "firstFrameMatches": false,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6036271,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2010334,
+            "rgba": [
+              16,
+              16,
+              16,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.801358,
+            "rgba": [
+              16,
+              15,
+              239,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4030411,
+            "rgba": [
+              235,
+              236,
+              12,
+              255
+            ],
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0018133,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6036271,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.2010334,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.801358,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4030411,
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": false
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "seek-two-raf",
+        "codeSha256": "8ea80f6740f2caafc9a22d0a19e54b136505bb443939047fab1cd170672788a5",
+        "firstFrameMatches": false,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0.0019222,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6018068,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2018834,
+            "rgba": [
+              16,
+              16,
+              16,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.801805,
+            "rgba": [
+              16,
+              15,
+              239,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4020051,
+            "rgba": [
+              235,
+              236,
+              12,
+              255
+            ],
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0019222,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6018068,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.2018834,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.801805,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4020051,
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 0,
+            "loadedData": 0,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": false
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "warm-backseek",
+        "codeSha256": "d626ea5a64bac572dd38254117ebf85bfd9cb0b3007e2b5de7b76c578db5b2ea",
+        "firstFrameMatches": false,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0.0015944,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6026046,
+            "rgba": [
+              238,
+              14,
+              14,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2024689,
+            "rgba": [
+              16,
+              16,
+              16,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8037234,
+            "rgba": [
+              16,
+              15,
+              239,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.401974,
+            "rgba": [
+              235,
+              236,
+              12,
+              255
+            ],
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 1,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0013982,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.0012077,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0.0015944,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1.6026046,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6026046,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.2024689,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.8037234,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.401974,
+            "readyState": 3,
+            "decoded": 0,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 1,
+            "loadedData": 0,
+            "readyState": 4
+          },
+          {
+            "target": 1,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 0,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": false
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "current",
+        "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302",
+        "firstFrameMatches": true,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6,
+            "rgba": [
+              254,
+              0,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 26,
+            "total": 26,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2,
+            "rgba": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 36,
+            "total": 36,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8,
+            "rgba": [
+              0,
+              0,
+              253,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 64,
+            "total": 64,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4,
+            "rgba": [
+              255,
+              255,
+              2,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 80,
+            "total": 80,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 1,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 1,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4
+          },
+          {
+            "name": "seeked",
+            "time": 1.6,
+            "readyState": 4,
+            "decoded": 26,
+            "total": 26
+          },
+          {
+            "name": "canplay",
+            "time": 1.6,
+            "readyState": 4,
+            "decoded": 26,
+            "total": 26
+          },
+          {
+            "name": "seeked",
+            "time": 3.2,
+            "readyState": 4,
+            "decoded": 36,
+            "total": 36
+          },
+          {
+            "name": "canplay",
+            "time": 3.2,
+            "readyState": 4,
+            "decoded": 36,
+            "total": 36
+          },
+          {
+            "name": "seeked",
+            "time": 4.8,
+            "readyState": 4,
+            "decoded": 64,
+            "total": 64
+          },
+          {
+            "name": "canplay",
+            "time": 4.8,
+            "readyState": 4,
+            "decoded": 64,
+            "total": 64
+          },
+          {
+            "name": "seeked",
+            "time": 6.4,
+            "readyState": 4,
+            "decoded": 80,
+            "total": 80
+          },
+          {
+            "name": "canplay",
+            "time": 6.4,
+            "readyState": 4,
+            "decoded": 80,
+            "total": 80
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 0,
+            "loadedData": 0,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": true
+      },
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "warm-backseek",
+        "codeSha256": "d626ea5a64bac572dd38254117ebf85bfd9cb0b3007e2b5de7b76c578db5b2ea",
+        "firstFrameMatches": true,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              127,
+              0,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 8,
+            "total": 8,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6,
+            "rgba": [
+              254,
+              0,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 30,
+            "total": 30,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2,
+            "rgba": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 40,
+            "total": 40,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8,
+            "rgba": [
+              0,
+              0,
+              253,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 68,
+            "total": 68,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4,
+            "rgba": [
+              255,
+              255,
+              2,
+              255
+            ],
+            "readyState": 4,
+            "decoded": 84,
+            "total": 84,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 1,
+            "readyState": 1,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1,
+            "readyState": 1,
+            "decoded": 0,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1,
+            "readyState": 4,
+            "decoded": 4,
+            "total": 4
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 1,
+            "decoded": 4,
+            "total": 4
+          },
+          {
+            "name": "seeked",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 8,
+            "total": 8
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "decoded": 8,
+            "total": 8
+          },
+          {
+            "name": "seeked",
+            "time": 1.6,
+            "readyState": 4,
+            "decoded": 30,
+            "total": 30
+          },
+          {
+            "name": "canplay",
+            "time": 1.6,
+            "readyState": 4,
+            "decoded": 30,
+            "total": 30
+          },
+          {
+            "name": "seeked",
+            "time": 3.2,
+            "readyState": 4,
+            "decoded": 40,
+            "total": 40
+          },
+          {
+            "name": "canplay",
+            "time": 3.2,
+            "readyState": 4,
+            "decoded": 40,
+            "total": 40
+          },
+          {
+            "name": "seeked",
+            "time": 4.8,
+            "readyState": 4,
+            "decoded": 68,
+            "total": 68
+          },
+          {
+            "name": "canplay",
+            "time": 4.8,
+            "readyState": 4,
+            "decoded": 68,
+            "total": 68
+          },
+          {
+            "name": "seeked",
+            "time": 6.4,
+            "readyState": 4,
+            "decoded": 84,
+            "total": 84
+          },
+          {
+            "name": "canplay",
+            "time": 6.4,
+            "readyState": 4,
+            "decoded": 84,
+            "total": 84
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 1,
+            "loadedData": 0,
+            "readyState": 4
+          },
+          {
+            "target": 0,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": true
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "current",
+        "codeSha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302",
+        "firstFrameMatches": true,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6,
+            "rgba": [
+              255,
+              24,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2,
+            "rgba": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8,
+            "rgba": [
+              0,
+              14,
+              253,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4,
+            "rgba": [
+              255,
+              241,
+              2,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 1,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1.6,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.2,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 3.2,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.8,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 4.8,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 6.4,
+            "readyState": 4,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 0,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": true
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "style": "hidden",
+        "css": "visibility:hidden;",
+        "readiness": "warm-backseek",
+        "codeSha256": "d626ea5a64bac572dd38254117ebf85bfd9cb0b3007e2b5de7b76c578db5b2ea",
+        "firstFrameMatches": true,
+        "outcome": "completed",
+        "draws": [
+          {
+            "time": 0,
+            "rgba": [
+              137,
+              19,
+              126,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 1.6,
+            "rgba": [
+              255,
+              24,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 3.2,
+            "rgba": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 4.8,
+            "rgba": [
+              0,
+              14,
+              253,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          },
+          {
+            "time": 6.4,
+            "rgba": [
+              255,
+              241,
+              2,
+              255
+            ],
+            "readyState": 4,
+            "total": 0,
+            "box": {
+              "width": 320,
+              "height": 180
+            }
+          }
+        ],
+        "events": [
+          {
+            "name": "loadedmetadata",
+            "time": 0,
+            "readyState": 1,
+            "total": 0
+          },
+          {
+            "name": "loadeddata",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 0,
+            "readyState": 1,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 0,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 1.6,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 1.6,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 3.2,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 3.2,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 4.8,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 4.8,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "seeked",
+            "time": 6.4,
+            "readyState": 4,
+            "total": 0
+          },
+          {
+            "name": "canplay",
+            "time": 6.4,
+            "readyState": 4,
+            "total": 0
+          }
+        ],
+        "warnings": [],
+        "seeks": [
+          {
+            "target": 1,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 0,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 1.6,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 3.2,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 4.8,
+            "loadedData": 1,
+            "readyState": 4
+          },
+          {
+            "target": 6.4,
+            "loadedData": 1,
+            "readyState": 4
+          }
+        ],
+        "supportsFrames": true
+      }
+    ],
+    "scope": "Diagnostic capture, not acceptance. WebKit baseline, first loadeddata drawing without seek, one/two animation-frame waits, two-frame post-seek wait and warm forward/back seek. Native currentTime setter instrumentation includes every actual seek. Chromium/Firefox current-code controls retain native presentation callbacks. Production files remain unchanged; pending diagnostic RAF callbacks are page-owned, not a production cancellation implementation."
+  },
+  "ordinaryMode": {
+    "file": "refactor/.cache/auto-thumbnail-rendering-HuntLy/report.json",
+    "sha256": "448ac0a37f214ffe63f77fd9ccc4a8df066cb1a66a4d37998d0b618f3a5edb55",
+    "log": {
+      "file": "refactor/.cache/auto-thumbnail-first-seek-default-mode.log",
+      "sha256": "79aa69f87a201c395ada62d013306382aa59e4ecc1bcf6f8e49e8d72c0f95c77",
+      "exitCode": 0
+    },
+    "profiles": 14,
+    "outcomes": [
+      {
+        "engine": "webkit",
+        "style": "hidden",
+        "readiness": "current",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "hidden",
+        "readiness": "ready-state",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "hidden",
+        "readiness": "loaded-event",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "opacity",
+        "readiness": "current",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "opacity",
+        "readiness": "ready-state",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "opacity",
+        "readiness": "loaded-event",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "clip",
+        "readiness": "current",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "clip",
+        "readiness": "ready-state",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "clip",
+        "readiness": "loaded-event",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "visible",
+        "readiness": "current",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "visible",
+        "readiness": "ready-state",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "webkit",
+        "style": "visible",
+        "readiness": "loaded-event",
+        "outcome": "completed",
+        "firstFrameMatches": false
+      },
+      {
+        "engine": "chromium",
+        "style": "hidden",
+        "readiness": "current",
+        "outcome": "completed",
+        "firstFrameMatches": true
+      },
+      {
+        "engine": "firefox",
+        "style": "hidden",
+        "readiness": "current",
+        "outcome": "completed",
+        "firstFrameMatches": true
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "file": "refactor/.cache/auto-thumbnail-first-seek-YDpgJA/report.json",
+      "sha256": "14965a28e98778d0a2a87388400fbe2a055655dc8827767e534be9cc55e289cd",
+      "limit": "Warm attempt falsely completed on a stale zero event; actual setter trace has no backward seek. Not a valid warm/back comparison."
+    },
+    {
+      "file": "refactor/.cache/auto-thumbnail-first-seek-zog3fO/report.json",
+      "sha256": "573c83fc1d29fe6b79e5154f81eabe79399c5757fa138968aad56859aec4a414",
+      "limit": "Warm seek waits for target correctly but does not retry stale events; WebKit hit eight-second diagnostic timeout without a draw."
+    }
+  ],
+  "protectedPathsUnchanged": [
+    "packages/artplayer-plugin-auto-thumbnail/src",
+    "packages/artplayer-plugin-auto-thumbnail/types",
+    "packages/artplayer-plugin-auto-thumbnail/dist",
+    "test/browser/auto-thumbnail-pixels.spec.js"
+  ],
+  "conclusion": "All six final WebKit profiles miss the unique first purple frame; Chromium/Firefox baseline and warm controls retain it. Do not adopt tested variants as production fixes. No package completion or device acceptance."
+}

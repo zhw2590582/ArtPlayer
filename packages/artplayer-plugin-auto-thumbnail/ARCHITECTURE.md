@@ -150,6 +150,14 @@ correct Firefox control, so it is not a portable frame-readiness gate. The comma
 reports observations, not a passing acceptance suite, and never edits production
 bundles. See refactor's rendering-readiness record before repeating these options.
 
+`yarn probe:auto-thumbnail-rendering --first-seek` separately compares initial
+loadeddata drawing without a seek, one/two animation-frame waits, delayed post-seek
+drawing and a completed forward/back seek. Native setter instrumentation records
+actual seek targets; the warm variant must reach one second before seeking zero.
+These variants still fail the unique-first-frame check on the recorded Windows
+WebKit host. They are diagnostic page-owned callbacks, not production fixes or
+cancellation code. See refactor's first-seek checkpoint before repeating them.
+
 The frozen eight-second timeline has one unique purple first frame followed by
 red, black, blue and yellow sections. Its command and fingerprint are in
 `refactor/baselines/auto-thumbnail-timeline-media.json`. Reproduce into a new

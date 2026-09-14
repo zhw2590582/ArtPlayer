@@ -1,5 +1,18 @@
 # 进度与证据
 
+
+## Auto Thumbnail 首次 seek 诊断检查点
+
+SITE-04 的全包文档核对依赖尚未完成的 Auto Thumbnail/VAST 迁移，本轮先回到
+PKG-AUTO-THUMB-03。新增 --first-seek 诊断，保留唯一紫色首帧和真实 setter
+记录。最终十组中 WebKit 六组均完成抽帧但首帧错误；Chromium/Firefox 各两组
+控制正确。去掉首次 seek、延迟绘制与核实完成的前进/回零都不能作为修复。
+迟到零点事件使最初 warm 探针没有实际回零；已修正观测并保留无效/超时报告。
+普通十四组诊断也完成；生产源码、产物和像素断言未改。任务/风险仍开放，
+不是整包验收通过。见[检查点](changes/2026-09-14-PKG-AUTO-THUMB-03-first-seek.md)和[证据](baselines/auto-thumbnail-first-seek.json)。
+任务数保持 243 / 170 done。下一步推进已满足依赖的 VTT Thumbnail 新旧核心
+组合验收；SITE-04 保持 todo，不跳过其依赖。本地检查点提交，无推送/发布。
+
 ## SITE-03 桌面编辑器与生成流程完成
 
 桌面自有 UI 拆为严格 TS 的 bootstrap、Monaco、运行会话、文件导入与设置模块；
