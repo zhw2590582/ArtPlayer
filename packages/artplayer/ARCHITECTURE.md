@@ -95,6 +95,15 @@ fields. Raw reads return unknown, including historically accepted JSON primitive
 this is not schema validation. Read errors use settings by reference, write errors
 update that fallback, and successful native reads do not merge it. Changing that
 failure policy requires an explicit compatibility decision rather than a type cast.
+Successful native reads return independently parsed objects, including nested
+records; they must not become a shared mutable cache. Playback recording reads
+the times member, then Storage.set reads the latest complete envelope before
+merging. A custom public get can change unrelated settings between those calls.
+Any future reduction of reads must preserve both independent results and those
+interleaved settings. `test/browser/storage-performance.spec.js` checks these
+behaviors against published and installed candidates using native localStorage,
+and records separate uninstrumented synthetic-event timings and operation counts.
+It does not prove atomicity across concurrent browser processes.
 
 utils/dom.ts is a compatibility export surface. dom/tree.ts owns node/query/class
 operations; dom/styles.ts owns native style conversion; dom/event-path.ts owns

@@ -4537,13 +4537,15 @@
         "CORE-22",
         "ENG-08"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "M",
       "deliverable": "DOM 读写、进度更新、持久化、初始化的测量与改进",
       "acceptance": "相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益",
       "evidence": [
         "changes/2026-09-14-MOD-03-slider-updates.md",
-        "baselines/slider-updates-validation.json"
+        "baselines/slider-updates-validation.json",
+        "changes/2026-09-14-MOD-03-performance-acceptance.md",
+        "baselines/core-performance-validation.json"
       ]
     },
     {

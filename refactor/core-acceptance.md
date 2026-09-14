@@ -46,7 +46,10 @@ yarn test:browser，以及同一安装包的 yarn test:performance。legacy 必�
 进入运行时包。CORE-22 已移除设置导航的重复扫描和构造中的一次强制控件布局；不夸大其收益，
 也不将原始 gzip/计时阈值上调。native load/DOM 销毁成本不通过异步延迟清理转移出计时区间。
 
-ENG-PERF-01/02 的后续核心性能工作归 MOD-03，并在 REVIEW-01 重新审查。它们保持 open，
+MOD-03已完成进度ARIA写入优化、原生存储契约/成本测量、初始化采样、布局复核及
+三引擎实际安装包的三组配对，见[收尾记录](changes/2026-09-14-MOD-03-performance-acceptance.md)。
+存储缓存方案因对象隔离和同步交错写入的兼容约束而未采用；保留变慢组及原始失败。
+ENG-PERF-01/02 的后续审查归 REVIEW-01。它们保持 open，
 表示不能批准发布，也不能宣称性能已经全面达标；保留相同设备媒体三组配对和原始样本。
 核心结构及兼容自动化阶段的交付不删除这些任务、风险或后续依赖。
 
@@ -62,7 +65,7 @@ ReferenceError，发布 5.4.0 和当前候选均复现。较新 Node 的全局 n
   chapter 的本轮四组合不能代替所有包，也不能代替它自己的最终进度/质量/全屏组合任务。
 - EX-01/02/03 与 SITE：React/Vue、全部 demo/在线编辑器及远端资源；核心 Monaco 场景不是全站验收。
 - REL-03、REVIEW-02：物理 Apple/Android、原生 PiP/AirPlay/方向/触摸、外部 SDK、codec/模型及压力环境。
-- ENG/MOD 后续任务：完整 GitHub CI/CD、覆盖/提交索引、剩余脚本、性能优化及工具链采用决策。
+- ENG/MOD 后续任务：完整 GitHub CI/CD、覆盖/提交索引、剩余脚本及工具链采用决策；性能风险继续在复盘审查。
 - REL-09/02 和 REVIEW-01/02/03：逐包下一个 major、最终 tarball、三轮全项目复盘及发布批准。
 
 包内 ARCHITECTURE.md 是实际源码地图；本目录保存迁移与验收记录。

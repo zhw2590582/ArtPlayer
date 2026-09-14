@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 255 项，范围 22 个包及工作区/示例。
 
-状态：todo 53 / doing 18 / blocked 0 / done 184 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 53 / doing 17 / blocked 0 / done 185 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -412,7 +412,7 @@
 | MOD-PLUGIN-01 | workspace<br>迁移插件生成器与类型化模板 | ENG-06, SITE-03 | 保留 create:plugin CLI；纯渲染/文件发布边界、TS 工厂/声明/测试/示例及维护指南 | 防止覆盖现有包或示例；失败回退；生成包可构建并通过严格类型、旧模块消费及测试；不自动修改既有包或运行安装发布 | M | done |
 | MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03, MOD-PLUGIN-01 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | done |
 | MOD-DEV-01 | workspace<br>修复开发服务器失败状态并明确资源生命周期 | MOD-02 | 修复 Servor 占用端口却退出 0 的已复现问题；明确 HTTP/监听/热刷新连接与定时器的启动、失败和关闭责任 | 保持默认 8082、docs 页面、自动刷新和旧 dev 命令；端口冲突退出非零且不终止其他服务，连续启动/停止及编译错误恢复有实际验证；跨平台监听差异单独留证 | M | done |
-| MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益 | M | doing |
+| MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益 | M | done |
 | MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | todo |
 | MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-01, MOD-02, MOD-03, MOD-04, MOD-DEV-01 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
 
@@ -637,7 +637,7 @@
 - MOD-PLUGIN-01: [记录](changes/2026-09-14-MOD-PLUGIN-01-scaffold.md) [记录](baselines/scaffold-validation.json)
 - MOD-02: [记录](changes/2026-09-14-MOD-02-library-tooling.md) [记录](baselines/library-tooling-validation.json)
 - MOD-DEV-01: [记录](changes/2026-09-14-MOD-DEV-01-dev-server.md) [记录](baselines/dev-server-validation.json)
-- MOD-03: [记录](changes/2026-09-14-MOD-03-slider-updates.md) [记录](baselines/slider-updates-validation.json)
+- MOD-03: [记录](changes/2026-09-14-MOD-03-slider-updates.md) [记录](baselines/slider-updates-validation.json) [记录](changes/2026-09-14-MOD-03-performance-acceptance.md) [记录](baselines/core-performance-validation.json)
 - REL-08: [记录](changes/2026-09-14-REL-08-release-ledger.md) [记录](baselines/release-ledger-validation.json) [记录](release-ledger.md) [记录](release-ledger.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)

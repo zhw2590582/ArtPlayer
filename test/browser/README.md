@@ -231,6 +231,14 @@ Five timings of 1000 synthetic paused updates follow a 300-update warmup; operat
 counts and actual playback are measured separately. Keep raw samples and do not
 interpret these diagnostics as full initialization/resource or playback-FPS gates.
 
+`storage-performance.spec.js` compares published and candidate playback records
+in three alternating groups with actual video and localStorage. It records five
+100-event timing samples separately from Storage/JSON instrumentation, verifies
+fresh nested read results and interleaved unrelated settings, and checks paused
+updates. Saved media time must fall between native reads immediately around the
+refresh; exact equality with a later read is invalid when the clock advances.
+This is a synchronous public-get interleaving test, not a multi-process race test.
+
 JASSUB Firefox diagnostics retain the canonical failing cases. Set
 `ARTPLAYER_JASSUB_OFFSCREEN=default` to exercise native capability selection.
 `ARTPLAYER_JASSUB_ASYNC_RENDER=false` explicitly selects synchronous rendering;
