@@ -7,5 +7,6 @@ assert(process.argv.slice(2).every(arg => arg === '--check'), 'Use yarn build:si
 /** @type {import('./site-vendor/notices.ts').VendorManifest} */
 const manifest = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
 assert.deepEqual(manifest.groups.map(group => group.name).sort(), ['monaco-editor', 'vconsole'], 'Do not silently drop a verified site component')
+assert.deepEqual(manifest.groups.flatMap(group => (group.components || []).map(component => component.name)), ['@vscode/codicons'], 'Do not silently drop the verified Codicons attribution')
 const count = writeOrCheckNotices(process.cwd(), manifest, process.argv.includes('--check'))
 console.log(`Verified site notices: ${count} outputs; Monaco/vConsole only, other provenance gates remain open.`)

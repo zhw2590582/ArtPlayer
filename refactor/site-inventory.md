@@ -3,7 +3,10 @@
 SITE-07检查点已将Monaco LICENSE/ThirdPartyNotices和vConsole上游LICENSE原文加入
 站点分发，并建立固定文件清单/指纹及只读检查。进一步检查发现vConsole上游文件
 只有许可声明，缺其声称附带的MIT全文；不能把“已取得LICENSE”当成完整许可闭环。
-Monaco真实TS worker三引擎通过；vConsole销毁在WebKit出现未处理回调错误，继续登记。
+Monaco真实TS worker三引擎通过；旧vConsole销毁错误已由SITE-VCONSOLE-01修复。
+2026-09-15：Codicons字体精确匹配npm0.0.26，其历史许可、README和署名已随站点分发；
+真实三引擎6/6包含编辑器、播放、销毁及HTTP原文/字体指纹。详见
+[Codicons记录](changes/2026-09-15-SITE-07-codicons.md)。其余组件和字体媒体仍须复核。
 原始SITE-01清单及下面的历史未分发描述保留，当前入口见scripts/site-vendor/README.md。
 
 SITE-SMOKE-01 后续已将 build:test 拆为 TS 解析、生成和浏览器运行模块，新增

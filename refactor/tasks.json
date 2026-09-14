@@ -4477,7 +4477,10 @@
         "site-inventory.md",
         "baselines/site-provenance.json",
         "changes/2026-09-14-SITE-07-vendor-notices.md",
-        "baselines/site-notices-checkpoint.json"
+        "baselines/site-notices-checkpoint.json",
+        "baselines/site-codicons-provenance.json",
+        "baselines/site-codicons-validation.json",
+        "changes/2026-09-15-SITE-07-codicons.md"
       ]
     },
     {

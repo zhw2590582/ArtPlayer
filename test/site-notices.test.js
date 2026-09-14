@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { Buffer } from 'node:buffer'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -55,4 +56,30 @@ test('Site notice paths cannot escape or silently omit the component license', (
   }
   manifest.groups[0].notices = []
   assert.throws(() => generateNotices(root, manifest), /Missing upstream/)
+})
+
+test('Bundled component attribution requires its asset and every upstream notice before writing', (t) => {
+  const { root, manifest } = fixture(t)
+  const group = manifest.groups[0]
+  const component = { name: 'icons', version: '1.0.0', tarball: group.tarball, assets: ['assets/code.js'], notices: [group.notices[0].target] }
+  group.components = [component]
+  const upstream = Buffer.from('Upstream attribution\r\n\r\n')
+  fs.writeFileSync(path.join(root, 'ATTRIBUTION'), upstream)
+  const attribution = { source: 'ATTRIBUTION', target: 'docs/licenses/fixture/icons/ATTRIBUTION', sha256: hash(upstream) }
+  group.notices.push(attribution)
+  component.notices.push(attribution.target)
+  group.notices.pop()
+  assert.throws(() => writeOrCheckNotices(root, manifest, false), /Missing component notice/)
+  assert(!fs.existsSync(path.join(root, 'docs')))
+  group.notices.push(attribution)
+  component.assets = ['assets/absent.ttf']
+  assert.throws(() => generateNotices(root, manifest), /Missing component asset/)
+  component.assets = []
+  assert.throws(() => generateNotices(root, manifest), /Missing component evidence/)
+  component.assets = ['assets/code.js']
+  assert.equal(writeOrCheckNotices(root, manifest, false), 3)
+  assert(fs.readFileSync(path.join(root, attribution.target)).equals(upstream))
+  assert.match(fs.readFileSync(path.join(root, 'docs/THIRD_PARTY_NOTICES.md'), 'utf8'), /Included component: icons 1.0.0/)
+  fs.writeFileSync(path.join(root, 'ATTRIBUTION'), upstream.toString().replaceAll('\r\n', '\n'))
+  assert.throws(() => generateNotices(root, manifest), /Upstream notice changed/)
 })

@@ -744,9 +744,45 @@
           "source": "refactor/baselines/site-vendor/monaco-editor-ThirdPartyNotices.txt.txt",
           "target": "docs/licenses/monaco-editor/ThirdPartyNotices.txt",
           "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/codicons-0.0.26/LICENSE",
+          "target": "docs/licenses/monaco-editor/codicons/LICENSE",
+          "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/codicons-0.0.26/LICENSE-CODE",
+          "target": "docs/licenses/monaco-editor/codicons/LICENSE-CODE",
+          "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/codicons-0.0.26/README.txt",
+          "target": "docs/licenses/monaco-editor/codicons/README.md",
+          "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/codicons-0.0.26/ATTRIBUTION.txt",
+          "target": "docs/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+          "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
         }
       ],
-      "review": "The upstream Monaco LICENSE and ThirdPartyNotices are retained in full. The included codicon.ttf still needs matching Codicons version/attribution evidence; the Monaco package license alone does not close that font review."
+      "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
+      "components": [
+        {
+          "name": "@vscode/codicons",
+          "version": "0.0.26",
+          "tarball": "https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz",
+          "assets": [
+            "docs/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/codicons/LICENSE",
+            "docs/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "docs/licenses/monaco-editor/codicons/README.md",
+            "docs/licenses/monaco-editor/codicons/ATTRIBUTION.md"
+          ]
+        }
+      ]
     }
   ]
 }

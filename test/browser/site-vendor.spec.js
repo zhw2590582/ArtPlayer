@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import { expect, test } from './fixtures.js'
 
@@ -21,6 +22,13 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
     }
   }
   await testInfo.attach('verified-vendor-notices', { contentType: 'application/json', body: JSON.stringify(notices) })
+  const provenance = JSON.parse(fs.readFileSync('refactor/baselines/site-codicons-provenance.json', 'utf8'))
+  const font = await request.get(`/${provenance.fontPath.slice('docs/'.length)}`)
+  expect(font.status()).toBe(200)
+  expect(createHash('sha256').update(await font.body()).digest('hex')).toBe(provenance.comparisons[0].fontSha256)
+  const index = await request.get('/THIRD_PARTY_NOTICES.md')
+  expect(index.status()).toBe(200)
+  expect(await index.text()).toContain('Included component: @vscode/codicons 0.0.26')
   await page.evaluate(() => {
     window.vConsole.destroy()
     window.art.destroy()

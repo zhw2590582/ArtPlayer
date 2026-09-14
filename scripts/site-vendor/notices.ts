@@ -5,7 +5,14 @@ import path from 'node:path'
 
 interface Asset { path: string, sha256: string, mode: string }
 interface Notice { source: string, target: string, sha256: string }
-interface Group { name: string, version: string, tarball: string, review?: string, roots: string[], files: Asset[], notices: Notice[] }
+interface Component {
+  name: string
+  version: string
+  tarball: string
+  assets: string[]
+  notices: string[]
+}
+interface Group { name: string, version: string, tarball: string, review?: string, roots: string[], files: Asset[], notices: Notice[], components?: Component[] }
 export interface VendorManifest { schemaVersion: number, scope: string, groups: Group[] }
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex')
 
@@ -44,6 +51,14 @@ export function generateNotices(root: string, manifest: VendorManifest): Map<str
     summary.push(`## ${group.name} ${group.version}`, '', `Source: ${group.tarball}`, '')
     if (group.review)
       summary.push(group.review, '')
+    for (const component of group.components || []) {
+      assert(component.assets.length > 0 && component.notices.length > 0, `Missing component evidence: ${component.name}`)
+      for (const asset of component.assets)
+        assert(group.files.some(file => file.path === asset), `Missing component asset: ${asset}`)
+      for (const target of component.notices)
+        assert(group.notices.some(notice => notice.target === target), `Missing component notice: ${target}`)
+      summary.push(`Included component: ${component.name} ${component.version}`, '', `Source: ${component.tarball}`, '')
+    }
     for (const notice of group.notices) {
       const bytes = fs.readFileSync(resolve(root, notice.source))
       assert.equal(hash(bytes), notice.sha256, `Upstream notice changed: ${notice.source}`)

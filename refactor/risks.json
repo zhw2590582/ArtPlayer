@@ -621,11 +621,14 @@
         "refactor/baselines/site-provenance.json",
         "refactor/changes/2026-09-14-SITE-07-vendor-notices.md",
         "refactor/baselines/site-notices-checkpoint.json",
-        "scripts/site-vendor/manifest.json"
+        "scripts/site-vendor/manifest.json",
+        "refactor/baselines/site-codicons-provenance.json",
+        "refactor/baselines/site-codicons-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-codicons.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "Monaco 0.30.1 runtime fingerprints and complete upstream LICENSE/ThirdPartyNotices now ship with the site; all three desktop TypeScript worker cases pass. Closure review found no Codicons entry in those notices, while the separate Microsoft Codicons source distinguishes content CC-BY-4.0 from code MIT. Exact bundled codicon.ttf version and attribution mapping remain to verify; do not infer full font clearance from Monaco MIT."
+      "workspaceState": "Monaco 0.30.1 inventory and original LICENSE/ThirdPartyNotices remain verified. Bundled codicon.ttf exactly matches official @vscode/codicons 0.0.26; historical CC BY 4.0 content license, MIT code license, README and added attribution now ship verbatim. Three-engine editor/mobile/native playback and HTTP notice/font checks pass 6/6. The Codicons gap is addressed; broader bundled-component notice completeness review remains open before closing VENDOR-06."
     },
     {
       "id": "VENDOR-07",
@@ -647,7 +650,7 @@
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "Upstream 3.15.0 LICENSE copied verbatim but contains only the MIT declaration and a promise of a license copy; actual MIT body is absent. Completeness and bundled dependency notices remain open; mobile WebKit destruction also produces a log-store update page error."
+      "workspaceState": "Upstream 3.15.0 LICENSE copied verbatim but promises an absent MIT body; body and bundled dependency notices remain open. The historical mobile WebKit destruction defect was separately fixed by SITE-VCONSOLE-01; current three-engine site checks retain and pass destruction assertions."
     },
     {
       "id": "VENDOR-08",

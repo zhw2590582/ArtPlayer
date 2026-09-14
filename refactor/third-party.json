@@ -511,10 +511,13 @@
         "SITE-01",
         "SITE-05"
       ],
-      "sourceStatus": "Local headers name Monaco build 0.30.1 (829382514cb1065f5ebb90f436e1c6103e153953).",
-      "licenseStatus": "Headers identify MIT; editor.main also includes third-party notices such as DOMPurify. Full component/notice closure is pending.",
-      "upstreamSources": [],
-      "upstreamReviewedAt": null,
+      "sourceStatus": "Monaco 0.30.1 verified against official npm archive: 98 byte-exact files, one CSS newline-only difference. The bundled font additionally matches @vscode/codicons 0.0.26 exactly; see site-codicons-provenance.json.",
+      "licenseStatus": "Full Monaco LICENSE/ThirdPartyNotices and Codicons 0.0.26 historical LICENSE, LICENSE-CODE, README plus attribution are distributed and HTTP verified. Broader bundled-component notice completeness audit remains under VENDOR-06; do not infer permission for other fonts or media.",
+      "upstreamSources": [
+        "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+        "https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz"
+      ],
+      "upstreamReviewedAt": "2026-09-15",
       "updatePolicy": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "fingerprints": [
         {

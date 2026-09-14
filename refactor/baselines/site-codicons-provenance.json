@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-09-14T21:01:12.866Z",
+  "source": "Official npm registry tarballs; sha512 integrity and sha1 verified before reading members; SHA-256 and direct Buffer equality establish the font match. Pinned GitHub pages were unavailable through web browsing and are not the evidence basis.",
+  "package": "@vscode/codicons",
+  "fontPath": "docs/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+  "comparisons": [
+    {
+      "version": "0.0.26",
+      "gitHead": "e4d1223d4145fe465db4930aae646ec0e45a4a87",
+      "published": "2021-11-04T18:10:09.013Z",
+      "tarball": "https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz",
+      "integrity": "sha512-GrYFJPbZ+hRM3NUVdAIpDepWkYCizVb13a6pJDAhckElDvaf4UCmNpuBS4MSydXNK63Ccts0XpvJ6JOW+/aU1g==",
+      "archiveSha256": "174dde2f6751999ed239ecc37cd25cb28d18f27d516594fd6221bb5b21e38c66",
+      "fontMember": "package/dist/codicon.ttf",
+      "fontSha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c",
+      "siteFontSha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c",
+      "exactMatch": true,
+      "noticeMembers": [
+        "package/LICENSE",
+        "package/LICENSE-CODE",
+        "package/README.md"
+      ]
+    },
+    {
+      "version": "0.0.25",
+      "gitHead": "4476b59e2764186d33b4d360f1d85f791df2d565",
+      "published": "2021-10-04T17:02:44.924Z",
+      "tarball": "https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.25.tgz",
+      "integrity": "sha512-uqPhTdADjwoCh5Ufbv0M6TZiiP2mqbfJVB4grhVx1k+YeP03LDMOHBWPsNwGKn4/0S5Mq9o1w1GeftvR031Gzg==",
+      "archiveSha256": "e9775cbf2d1fb972b55872657749a786397fb3299eee8e927e079841b13e21b5",
+      "fontMember": "package/dist/codicon.ttf",
+      "fontSha256": "d86f69b1b7b8c99ce1ce613286cbc226a4c7562dd90ec6c89dd2b55f639feb6e",
+      "siteFontSha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c",
+      "exactMatch": false,
+      "noticeMembers": [
+        "package/LICENSE",
+        "package/LICENSE-CODE",
+        "package/README.md"
+      ]
+    }
+  ],
+  "notices": [
+    {
+      "source": "refactor/baselines/site-vendor/codicons-0.0.26/LICENSE",
+      "target": "docs/licenses/monaco-editor/codicons/LICENSE",
+      "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f",
+      "member": "package/LICENSE"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/codicons-0.0.26/LICENSE-CODE",
+      "target": "docs/licenses/monaco-editor/codicons/LICENSE-CODE",
+      "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b",
+      "member": "package/LICENSE-CODE"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/codicons-0.0.26/README.txt",
+      "target": "docs/licenses/monaco-editor/codicons/README.md",
+      "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689",
+      "member": "package/README.md"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/codicons-0.0.26/ATTRIBUTION.txt",
+      "target": "docs/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+      "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f",
+      "member": null
+    }
+  ],
+  "runtimeChanged": false
+}

@@ -5,9 +5,11 @@ archives, corresponding files and upstream notice texts. It does not clear other
 site dependencies or grant rights to samples/fonts. The vConsole LICENSE is
 preserved verbatim but is incomplete: it promises an MIT copy that is absent.
 Its completion and bundled dependency notices remain open under SITE-07.
-Monaco's supplied notices also lack a Codicons entry. Match the included font to
-its historical source and attribution before claiming the font review complete;
-the Monaco MIT statement does not establish the separate font's license.
+Monaco's supplied notices lack a Codicons entry. The bundled font now has an
+exact byte match to the official `@vscode/codicons@0.0.26` archive. Its historical
+README, CC BY 4.0 content license and MIT code license are preserved, alongside
+ArtPlayer's attribution, in `docs/licenses/monaco-editor/codicons/`. This evidence
+does not derive the font license from Monaco's MIT statement or today's Codicons.
 
 `notices.ts` validates the exact file inventory and fingerprints before preparing
 outputs. JavaScript/CSS comparisons normalize CRLF to LF; font bytes are exact.
@@ -18,13 +20,20 @@ files retain their exact upstream bytes, including final blank lines.
 `../build-site-notices.mjs` provides `yarn build:site-notices` and read-only
 `yarn check:site-notices`. The write command cannot bless altered vendor assets;
 review the new archive and license evidence before changing the manifest. The
-CLI prevents accidentally dropping either verified component. Source notices
+CLI prevents accidentally dropping either verified group or the Codicons component.
+Component references require their runtime assets and every notice before writing.
+Source notices
 live in `refactor/baselines/site-vendor/`; generated delivery files live under
 `docs/licenses/` with an explicitly limited `docs/THIRD_PARTY_NOTICES.md` index.
 
 CI runs the read-only check before building, and generation during ci:build.
 Library builds remain independent. Pages preparation copies the notices into its
 own fingerprinted site. `.gitattributes` preserves text bytes across Windows/Linux.
+The historical Codicons files use explicit `-text` overrides to retain archive
+CRLF bytes. Their frozen README source uses `.txt` to avoid interpreting upstream
+repository links as local refactor links; delivery restores `README.md` unchanged.
+Only these immutable upstream paths allow their original trailing whitespace;
+the notice hash check, rather than formatting, protects their contents.
 
 `yarn test:site-notices` tests missing/extra/modified assets, changed or incomplete
 inputs, path escape and read-only output drift. The browser fixture
@@ -34,6 +43,15 @@ old-build reproduction are maintained in `vconsole/README.md`; generated asset
 checks run before the notice checks. Do not skip destruction or catch page errors.
 Existing desktop TypeScript editor tests cover the real Monaco worker and Run.
 
-Follow-up: restore complete licensing from fixed upstream evidence, then recover the
+The Codicons archive identity, integrity, notice members and negative comparison
+with version 0.0.25 are recorded in `refactor/baselines/site-codicons-provenance.json`.
+For an independent reproduction, download the pinned `comparisons[0].tarball` into
+an ignored cache directory. In Node, verify its SHA-512 SRI and SHA-256 against
+that record before using `execFileSync('tar', ['-xOzf', archive, member])` to read
+members as Buffers. Compare `package/dist/codicon.ttf` directly with `fontPath`,
+and each non-null notice member with its frozen `source`. Do not pipe binary font
+output through PowerShell text redirection. No dependency installation is needed.
+
+Follow-up: finish the broader bundled-component notice audit, then recover the
 console.js build and resolve remaining fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.

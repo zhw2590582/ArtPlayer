@@ -16,7 +16,15 @@ The 3.15.0 upstream LICENSE declares MIT but omits the promised full license tex
 
 Source: https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz
 
-The upstream Monaco LICENSE and ThirdPartyNotices are retained in full. The included codicon.ttf still needs matching Codicons version/attribution evidence; the Monaco package license alone does not close that font review.
+The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.
+
+Included component: @vscode/codicons 0.0.26
+
+Source: https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz
 
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
+- licenses/monaco-editor/codicons/LICENSE
+- licenses/monaco-editor/codicons/LICENSE-CODE
+- licenses/monaco-editor/codicons/README.md
+- licenses/monaco-editor/codicons/ATTRIBUTION.md

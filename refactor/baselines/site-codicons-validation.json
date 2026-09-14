@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "baseCommit": "a4234230e68cb74ea3bfe061e86449fced79eddd",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "browser": {
+    "command": "node node_modules/@playwright/test/cli.js test test/browser/site-vendor.spec.js test/browser/site-editor.spec.js --grep 'mobile vConsole|desktop TypeScript mode' --workers=1",
+    "exitCode": 0,
+    "reportPath": "refactor/.cache/site07-codicons-browser-report/report.json",
+    "reportSha256": "bda7191e7c528d5966a3b67bdb38422ea66bf597eb36db01c86a13277afc4fc3",
+    "stats": {
+      "startTime": "2026-09-14T21:02:17.295Z",
+      "duration": 22720.412999999997,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "desktop TypeScript mode emits and runs typed code, Ctrl-S reruns and invalid syntax keeps the current player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        },
+        "notices": null
+      },
+      {
+        "title": "desktop TypeScript mode emits and runs typed code, Ctrl-S reruns and invalid syntax keeps the current player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        },
+        "notices": null
+      },
+      {
+        "title": "desktop TypeScript mode emits and runs typed code, Ctrl-S reruns and invalid syntax keeps the current player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        },
+        "notices": null
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        },
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          }
+        ]
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        },
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          }
+        ]
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "core": {
+          "source": {
+            "kind": "workspace-build",
+            "entry": "packages\\artplayer\\src\\index.ts"
+          },
+          "sha256": "5139cabd5abf9b92684ee2dcdaa620c4db7f67c0cb1aa3f654435d739468bf9d",
+          "bytes": 378931
+        },
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          }
+        ]
+      }
+    ]
+  },
+  "unit": {
+    "command": "node --test test/site-notices.test.js test/vconsole-lifecycle.test.js test/pages-artifact.test.js",
+    "exitCode": 0,
+    "passed": 16,
+    "durationMs": 470.0127,
+    "log": "refactor/.cache/site07-codicons-tests.log"
+  },
+  "checks": [
+    "strict docs-tools TypeScript",
+    "scoped source/test ESLint",
+    "build:site-notices",
+    "check:site-notices"
+  ],
+  "limitations": [
+    "Source-built core; not a new full installed package run",
+    "Windows automated engines; not physical mobile or remote CI/Pages evidence",
+    "Codicons source/attribution gap addressed; broader site component notices and fonts/media remain under SITE-07"
+  ]
+}
