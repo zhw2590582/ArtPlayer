@@ -1,5 +1,16 @@
 # 进度与证据
 
+## CI-01 五包安装范围完整回归检查点
+
+HEAD 37ebb7a03 上执行无文件/项目过滤的 installed suite，双worker三引擎，
+255项成功退出、0失败/跳过/重试，199.505秒。11文件覆盖当前五包范围，之前
+章节全屏悬停失败没有再现。12项Canvas原生PiP播放通过，另6项WebKit仅记录
+API不可用，不能混称播放通过。原225项中的失败报告保留，main安装输入摘要
+和逐引擎/文件计数见[证据](baselines/ci-installed-full-validation.json)及
+[变更](changes/2026-09-14-CI-01-installed-full.md)。CI-01保持doing；完整source、
+其他包安装、完整legacy、远端Actions和真机仍未验收。259项状态不变：190 done、
+20 doing、49 todo。没有生产源码/依赖修改，也没有push、部署或发布。
+
 ## PKG-CANVAS-05 原生 PiP 与五包安装检查点（仍 doing）
 
 源码首轮18项：Chromium/Firefox实际原生窗口12通过，WebKit仅6项API不可用记录。

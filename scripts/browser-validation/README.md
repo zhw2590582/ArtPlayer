@@ -25,6 +25,11 @@ local reports before rerunning the same scope. Invocation JSON records arguments
 and artifact identity; result JSON records the child's actual exit. Preflight
 errors occur before starting Playwright and remain in the terminal/CI tee log.
 Listing tests with `--list` is collection evidence only, not playback validation.
+The complete five-package installed main subset was run on Windows with two
+workers: 255 successful cases across 11 files and three engines, including six
+unsupported WebKit Document PiP capability records. See
+`../../refactor/baselines/ci-installed-full-validation.json` for the exact inputs,
+per-engine/file counts and limitations; this is not full ecosystem or remote CI.
 Local `--grep`, file names, workers and project options are supported for diagnosis;
 config/output/report overrides and passing with zero tests are rejected.
 

@@ -1,0 +1,499 @@
+{
+  "task": "CI-01",
+  "status": "doing",
+  "sourceHead": "37ebb7a034c0b1723ce7839f875cb6b110a88b3b",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "remoteCI": false,
+    "physicalDevices": false
+  },
+  "directory": "refactor/.cache/ci-installed-five-package-full-report",
+  "reportSha256": "7aaa5bf85029ffe84653abc938f33606d725109f24633969d98b9ddbae8a782f",
+  "result": {
+    "scope": "installed",
+    "exitCode": 0,
+    "signal": null,
+    "args": [
+      "test",
+      "--config=playwright.installed.config.js",
+      "--workers=2"
+    ]
+  },
+  "stats": {
+    "startTime": "2026-09-14T11:09:14.031Z",
+    "duration": 199505.321,
+    "expected": 255,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "inputPackages": [
+    {
+      "name": "artplayer",
+      "member": "package/dist/artplayer.js",
+      "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+      "archiveSha256": "60edd42a29e939632568851018cf0e230eb60fb54a2597c0877d496795bbcc6e"
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "member": "package/dist/artplayer-plugin-chapter.js",
+      "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+      "archiveSha256": "784c581410185908ea66aadaf06336970117e06f16dd4c66a618b196bfaba698"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "member": "package/dist/artplayer-plugin-ambilight.js",
+      "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+      "archiveSha256": "7e88a0c9a643612f54e1674c1406c2bb7d18b1dd1f6fc05e7f49749301b310f3"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "member": "package/dist/artplayer-proxy-canvas.js",
+      "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+      "archiveSha256": "074e51779de545d46f234e2052e05de63c0f1189c031b08c0b23702b6ceb5325"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "member": "package/dist/artplayer-plugin-document-pip.js",
+      "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a",
+      "archiveSha256": "5caf75a1de5af1b19a133be6d35e3573b25783ae376d15af3846cef392f17b7c"
+    }
+  ],
+  "groups": [
+    {
+      "engine": "chromium",
+      "file": "ambilight-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2687
+    },
+    {
+      "engine": "firefox",
+      "file": "ambilight-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6946
+    },
+    {
+      "engine": "webkit",
+      "file": "ambilight-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 54876
+    },
+    {
+      "engine": "chromium",
+      "file": "ambilight-proxy.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1280
+    },
+    {
+      "engine": "firefox",
+      "file": "ambilight-proxy.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2674
+    },
+    {
+      "engine": "webkit",
+      "file": "ambilight-proxy.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14024
+    },
+    {
+      "engine": "chromium",
+      "file": "canvas-dpip.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5508
+    },
+    {
+      "engine": "firefox",
+      "file": "canvas-dpip.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10210
+    },
+    {
+      "engine": "webkit",
+      "file": "canvas-dpip.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2241
+    },
+    {
+      "engine": "chromium",
+      "file": "canvas-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3313
+    },
+    {
+      "engine": "firefox",
+      "file": "canvas-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6976
+    },
+    {
+      "engine": "webkit",
+      "file": "canvas-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14718
+    },
+    {
+      "engine": "chromium",
+      "file": "canvas-subtitles.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 997
+    },
+    {
+      "engine": "firefox",
+      "file": "canvas-subtitles.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2289
+    },
+    {
+      "engine": "webkit",
+      "file": "canvas-subtitles.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6655
+    },
+    {
+      "engine": "chromium",
+      "file": "chapter-combinations.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 25688
+    },
+    {
+      "engine": "firefox",
+      "file": "chapter-combinations.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 33115
+    },
+    {
+      "engine": "webkit",
+      "file": "chapter-combinations.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 91022
+    },
+    {
+      "engine": "chromium",
+      "file": "chapter-hover.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3401
+    },
+    {
+      "engine": "firefox",
+      "file": "chapter-hover.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3874
+    },
+    {
+      "engine": "webkit",
+      "file": "chapter-hover.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7294
+    },
+    {
+      "engine": "chromium",
+      "file": "chapter.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3702
+    },
+    {
+      "engine": "firefox",
+      "file": "chapter.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11185
+    },
+    {
+      "engine": "webkit",
+      "file": "chapter.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20264
+    },
+    {
+      "engine": "chromium",
+      "file": "initialization.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1880
+    },
+    {
+      "engine": "firefox",
+      "file": "initialization.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5963
+    },
+    {
+      "engine": "webkit",
+      "file": "initialization.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5534
+    },
+    {
+      "engine": "chromium",
+      "file": "lifecycle.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1642
+    },
+    {
+      "engine": "firefox",
+      "file": "lifecycle.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6150
+    },
+    {
+      "engine": "webkit",
+      "file": "lifecycle.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5320
+    },
+    {
+      "engine": "chromium",
+      "file": "playback.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3605
+    },
+    {
+      "engine": "firefox",
+      "file": "playback.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5081
+    },
+    {
+      "engine": "webkit",
+      "file": "playback.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10708
+    }
+  ],
+  "capabilities": [
+    {
+      "core": "published",
+      "ending": "close",
+      "engine": "chromium",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "published",
+      "ending": "native-close",
+      "engine": "chromium",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "published",
+      "ending": "destroy",
+      "engine": "chromium",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "candidate",
+      "ending": "close",
+      "engine": "chromium",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "candidate",
+      "ending": "native-close",
+      "engine": "chromium",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "candidate",
+      "ending": "destroy",
+      "engine": "chromium",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "published",
+      "ending": "close",
+      "engine": "firefox",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "published",
+      "ending": "native-close",
+      "engine": "firefox",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "published",
+      "ending": "destroy",
+      "engine": "firefox",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "candidate",
+      "ending": "close",
+      "engine": "firefox",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "candidate",
+      "ending": "native-close",
+      "engine": "firefox",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "candidate",
+      "ending": "destroy",
+      "engine": "firefox",
+      "outcome": "native-window-playback-subtitles-and-cleanup"
+    },
+    {
+      "core": "published",
+      "ending": "close",
+      "engine": "webkit",
+      "outcome": "native-document-pip-unavailable"
+    },
+    {
+      "core": "published",
+      "ending": "native-close",
+      "engine": "webkit",
+      "outcome": "native-document-pip-unavailable"
+    },
+    {
+      "core": "published",
+      "ending": "destroy",
+      "engine": "webkit",
+      "outcome": "native-document-pip-unavailable"
+    },
+    {
+      "core": "candidate",
+      "ending": "close",
+      "engine": "webkit",
+      "outcome": "native-document-pip-unavailable"
+    },
+    {
+      "core": "candidate",
+      "ending": "native-close",
+      "engine": "webkit",
+      "outcome": "native-document-pip-unavailable"
+    },
+    {
+      "core": "candidate",
+      "ending": "destroy",
+      "engine": "webkit",
+      "outcome": "native-document-pip-unavailable"
+    }
+  ],
+  "failures": [],
+  "suiteErrors": [],
+  "previous": {
+    "directory": "refactor/.cache/ci-browser-installed-full-report",
+    "reportSha256": "b3220ff7b8e29b796f428b0295507fe22ad9033ad9f5627898d6ee0d33cb3011",
+    "stats": {
+      "startTime": "2026-09-14T10:00:23.507Z",
+      "duration": 161182.12099999998,
+      "expected": 224,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "scope": "Earlier four-package 225-case run retained with its original Chromium chapter hover failure."
+  },
+  "limitations": [
+    "This is the complete current installed subset, not all 22 ecosystem packages.",
+    "Source suite, actual Actions OS matrix and physical devices are not executed by this run.",
+    "WebKit Document PiP returns are unsupported capability records, not native playback successes.",
+    "Installed main format only in this complete run; targeted main and legacy combinations retain separate evidence."
+  ]
+}
