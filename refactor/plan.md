@@ -658,7 +658,7 @@
 - MOD-DEV-01: [记录](changes/2026-09-14-MOD-DEV-01-dev-server.md) [记录](baselines/dev-server-validation.json)
 - MOD-03: [记录](changes/2026-09-14-MOD-03-slider-updates.md) [记录](baselines/slider-updates-validation.json) [记录](changes/2026-09-14-MOD-03-performance-acceptance.md) [记录](baselines/core-performance-validation.json)
 - REL-08: [记录](changes/2026-09-14-REL-08-release-ledger.md) [记录](baselines/release-ledger-validation.json) [记录](release-ledger.md) [记录](release-ledger.json)
-- REL-04: [记录](changes/2026-09-15-REL-04-consumer-checkpoint.md) [记录](rollback-rehearsal.md) [记录](baselines/rollback-consumer-validation.json)
+- REL-04: [记录](changes/2026-09-15-REL-04-consumer-checkpoint.md) [记录](rollback-rehearsal.md) [记录](baselines/rollback-consumer-validation.json) [记录](changes/2026-09-15-REL-04-workflows-checkpoint.md) [记录](rollback-inventory.md) [记录](baselines/rollback-workflows-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)
 - ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)

@@ -1,0 +1,642 @@
+{
+  "task": "REL-04",
+  "status": "checkpoint",
+  "capturedAt": "2026-09-14T16:27:46.622Z",
+  "source": "aa29dc9212cca5ec61d90ee8145e2b2c173cf23b",
+  "toolchain": {
+    "node": "24.21.0",
+    "yarn": "1.22.22"
+  },
+  "iframe": {
+    "command": "yarn test:rollback:iframe",
+    "report": "refactor/.cache/iframe-rollback/run-6AFtyo/report.json",
+    "sha256": "c93fe7a9ffea5653ad3b5769ee70e69082da37bbd883fd0f1641ab848d494811",
+    "task": "REL-04",
+    "capturedAt": "2026-09-14T16:26:50.781Z",
+    "source": "aa29dc9212cca5ec61d90ee8145e2b2c173cf23b",
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "passed": true,
+    "scope": "Old package name and application imports restored together; independent renamed-package installation rehearsal",
+    "profiles": {
+      "old": {
+        "name": "artplayer-plugin-iframe",
+        "version": "1.0.0",
+        "archive": "refactor/.cache/releases/artplayer-plugin-iframe-1.0.0.tgz",
+        "sha256": "16dc92aa84d93bd99bc0a34815dc49f1609fafc1ff255eb353ea893e70b5f91f",
+        "lockSha256": "a2d4f7ebecc41729792b66392971384eb497cf27c261d87c3f6cfe7c29b03e6a",
+        "applicationSha256": "9e869c95f4907957ff820828afd1ba6f13457e46aeb790f93c5bb619a725a315",
+        "files": {
+          "package/README.md": "52c0a1199b6529d60ce8f4414984f9bd1bc3a8daa5bb6cfec8f0aae0c8338e46",
+          "package/dist/artplayer-helper-iframe.js": "47730ed608f0637594549b9762c01191686a4a55b3bd467132304a016d227f4a",
+          "package/dist/artplayer-helper-iframe.legacy.js": "f4c3b11806cad6d984f03a2d9de63deba78cbe538ffe4044a106b0dddc5d4197",
+          "package/dist/artplayer-plugin-iframe.js": "df469c3e4582b127f35798494d0845f1fc4ca2d19bbaf01b918492e035479745",
+          "package/dist/artplayer-plugin-iframe.legacy.js": "15299cb5c848cc61614f7573a802443d69b7c6d0a938a1867835c7cbb4884edd",
+          "package/package.json": "563a6c8407753b92b86319a5e6d9d567525146c32cb010b45b0d88ff481859f6",
+          "package/src/index.js": "2e0b9efeedef0d6c4f2d2b526db35f634cd02af044e4e28dd1a0b26a5b9a02bf",
+          "package/types/artplayer-plugin-iframe.d.ts": "d55d99a2488d60892a0ab82882dc96a0f373dab0c3d2a3cee978bc35aa7c2d0c"
+        }
+      },
+      "candidate": {
+        "name": "artplayer-tool-iframe",
+        "version": "1.1.0",
+        "archive": "refactor/.cache/iframe-rollback/run-6AFtyo/candidate.tgz",
+        "sha256": "0e803ab0c653e82f9e310712d9929a56d4b781d9ccfadc50fe741c28fd2d25f1",
+        "lockSha256": "657b0a2f29c651b10f6ceb37eb84ac3d27b3ce5de949b74dc59c748b564b2634",
+        "applicationSha256": "360e8113b39489aef5a4ecafc0ce798db77b75035694653514c82da671d4782e",
+        "files": {
+          "package/ARCHITECTURE.md": "dcb0d58fd02730a7a2cc620e4e7e934fae22dbbf85cc9a6eae21ee5ac2cba167",
+          "package/README.md": "ef5af60bcb831667a78cc3421f6e3c7b5d9a50b3d2e571c5cd02d46fc533e9ce",
+          "package/dist/artplayer-tool-iframe.js": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6",
+          "package/dist/artplayer-tool-iframe.legacy.js": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a",
+          "package/dist/artplayer-tool-iframe.mjs": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83",
+          "package/package.json": "0de9c86eeb3f9a2fb46f9297105b5beddb8d6164163ffaa9874cf5cd68ba7a58",
+          "package/types/artplayer-tool-iframe.d.cts": "66850135f45c81d4bd7a0de33b6a2f63a655de9000f2698f43660039727919f3",
+          "package/types/artplayer-tool-iframe.d.mts": "cd394fd68e61fab3c4474daab29852a3f87dd0086b007e7937106871272676fb",
+          "package/types/artplayer-tool-iframe.d.ts": "e760de22559caf7ffff48d7c5713485bf9f0ddbe876a93080295fb6106535bfa"
+        }
+      }
+    },
+    "steps": [
+      {
+        "action": "install-predecessor",
+        "profile": "old",
+        "installed": {
+          "name": "artplayer-plugin-iframe",
+          "version": "1.0.0",
+          "archiveSha256": "16dc92aa84d93bd99bc0a34815dc49f1609fafc1ff255eb353ea893e70b5f91f",
+          "verifiedMembers": 8
+        },
+        "runtime": "old import and helper restored",
+        "types": {
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "diagnostics": []
+        },
+        "otherPackageRemoved": true,
+        "applicationRestored": true
+      },
+      {
+        "action": "upgrade-renamed-package",
+        "profile": "candidate",
+        "installed": {
+          "name": "artplayer-tool-iframe",
+          "version": "1.1.0",
+          "archiveSha256": "0e803ab0c653e82f9e310712d9929a56d4b781d9ccfadc50fe741c28fd2d25f1",
+          "verifiedMembers": 9
+        },
+        "runtime": "candidate import and legacy verified",
+        "types": {
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "diagnostics": []
+        },
+        "otherPackageRemoved": true,
+        "applicationRestored": true
+      },
+      {
+        "action": "restore-predecessor",
+        "profile": "old",
+        "installed": {
+          "name": "artplayer-plugin-iframe",
+          "version": "1.0.0",
+          "archiveSha256": "16dc92aa84d93bd99bc0a34815dc49f1609fafc1ff255eb353ea893e70b5f91f",
+          "verifiedMembers": 8
+        },
+        "runtime": "old import and helper restored",
+        "types": {
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "diagnostics": []
+        },
+        "otherPackageRemoved": true,
+        "applicationRestored": true
+      }
+    ],
+    "aliasNegative": {
+      "passed": true,
+      "result": "old tarball under new dependency key does not preserve candidate constructor/legacy",
+      "scope": "Local file dependency key alias, not npm registry alias resolution"
+    }
+  },
+  "mainline": {
+    "command": "yarn test:rollback:mainline",
+    "report": "refactor/.cache/mainline-rehearsal/run-zTEWy5/report.json",
+    "sha256": "59ee81a3ead7d04a8c8cbb6f097ba4755643ec49a7bf710ab092e13f4f617fcb",
+    "patch": {
+      "path": "refactor/.cache/mainline-rehearsal/run-zTEWy5/resolved.patch",
+      "sha256": "debee370777d5d3175affe6c9406c4e1897c5b11d60590c12dabc41a533bdfc3"
+    },
+    "bundle": {
+      "path": "refactor/.cache/mainline-rehearsal/run-zTEWy5/rehearsal.bundle",
+      "sha256": "a5fe84987a8efa44b70693b08c91e0d0d955ea53f194291c156153fe080c72f2"
+    },
+    "task": "REL-04",
+    "capturedAt": "2026-09-14T16:24:22.347Z",
+    "source": "aa29dc9212cca5ec61d90ee8145e2b2c173cf23b",
+    "node": "24.21.0",
+    "passed": true,
+    "scope": "Synthetic isolated JS-to-TS modify/delete conflict; no production fix or remote mutation",
+    "steps": [
+      {
+        "executable": "git",
+        "args": [
+          "init",
+          "--initial-branch=master"
+        ],
+        "status": 0,
+        "stdout": "Initialized empty Git repository in C:/Users/laozh/AppData/Local/Temp/artplayer-consumer-Etvdz1/.git/\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "config",
+          "user.name",
+          "ArtPlayer isolated rehearsal"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "config",
+          "user.email",
+          "rehearsal@example.invalid"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "config",
+          "commit.gpgsign",
+          "false"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "config",
+          "core.autocrlf",
+          "false"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "add",
+          "."
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "commit",
+          "-m",
+          "fixture: original JavaScript implementation"
+        ],
+        "status": 0,
+        "stdout": "[master (root-commit) a10e48e] fixture: original JavaScript implementation\n 3 files changed, 9 insertions(+)\n create mode 100644 consumer.mjs\n create mode 100644 package.json\n create mode 100644 src/retry.js\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD"
+        ],
+        "status": 0,
+        "stdout": "a10e48e0c1f7a712fd602d5d8afcacef9a5e68b0\n",
+        "stderr": ""
+      },
+      {
+        "executable": "node",
+        "args": [
+          "consumer.mjs"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n\r\n-2 !== 0\r\n\r\n    at file:///C:/Users/laozh/AppData/Local/Temp/artplayer-consumer-Etvdz1/consumer.mjs:4:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: -2,\r\n  expected: 0,\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "switch",
+          "-c",
+          "codex/rehearsal"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": "Switched to a new branch 'codex/rehearsal'\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "add",
+          "."
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "commit",
+          "-m",
+          "fixture: split retry policy into TypeScript modules"
+        ],
+        "status": 0,
+        "stdout": "[codex/rehearsal 61a9230] fixture: split retry policy into TypeScript modules\n 4 files changed, 4 insertions(+), 4 deletions(-)\n create mode 100644 src/normalize.ts\n delete mode 100644 src/retry.js\n create mode 100644 src/retry.ts\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD"
+        ],
+        "status": 0,
+        "stdout": "61a92304ff91bfb87f6c1a08765276187b227cf3\n",
+        "stderr": ""
+      },
+      {
+        "executable": "node",
+        "args": [
+          "consumer.mjs"
+        ],
+        "status": 1,
+        "stdout": "",
+        "stderr": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\r\n\r\n-2 !== 0\r\n\r\n    at file:///C:/Users/laozh/AppData/Local/Temp/artplayer-consumer-Etvdz1/consumer.mjs:4:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: -2,\r\n  expected: 0,\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "switch",
+          "master"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'master'\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "add",
+          "src/retry.js"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "commit",
+          "-m",
+          "fixture: clamp negative retry limits"
+        ],
+        "status": 0,
+        "stdout": "[master fb62f91] fixture: clamp negative retry limits\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD"
+        ],
+        "status": 0,
+        "stdout": "fb62f918310b9cd01ca6deddff6acbb1eecd55c9\n",
+        "stderr": ""
+      },
+      {
+        "executable": "node",
+        "args": [
+          "consumer.mjs"
+        ],
+        "status": 0,
+        "stdout": "retry limit regression passed\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "switch",
+          "codex/rehearsal"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'codex/rehearsal'\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "status",
+          "--porcelain"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD^{tree}"
+        ],
+        "status": 0,
+        "stdout": "9ed1ebc390513ca0f09c3c4fc20700b38fc2e614\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "cherry-pick",
+          "-x",
+          "fb62f918310b9cd01ca6deddff6acbb1eecd55c9"
+        ],
+        "status": 1,
+        "stdout": "CONFLICT (modify/delete): src/retry.js deleted in HEAD and modified in fb62f91 (fixture: clamp negative retry limits).  Version fb62f91 (fixture: clamp negative retry limits) of src/retry.js left in tree.\n",
+        "stderr": "error: could not apply fb62f91... fixture: clamp negative retry limits\nhint: After resolving the conflicts, mark them with\nhint: \"git add/rm <pathspec>\", then run\nhint: \"git cherry-pick --continue\".\nhint: You can instead skip this commit with \"git cherry-pick --skip\".\nhint: To abort and get back to the state before \"git cherry-pick\",\nhint: run \"git cherry-pick --abort\".\nhint: Disable this message with \"git config set advice.mergeConflict false\"\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "ls-files",
+          "--unmerged"
+        ],
+        "status": 0,
+        "stdout": "100644 44a1d3c1960ca191cb02699472e845df31381af2 1\tsrc/retry.js\n100644 826028d2df226a0d8c67fd275fbe689ae86b39c7 3\tsrc/retry.js\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "CHERRY_PICK_HEAD"
+        ],
+        "status": 0,
+        "stdout": "fb62f918310b9cd01ca6deddff6acbb1eecd55c9\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "cherry-pick",
+          "--abort"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD"
+        ],
+        "status": 0,
+        "stdout": "61a92304ff91bfb87f6c1a08765276187b227cf3\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD^{tree}"
+        ],
+        "status": 0,
+        "stdout": "9ed1ebc390513ca0f09c3c4fc20700b38fc2e614\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "status",
+          "--porcelain"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "cherry-pick",
+          "-x",
+          "fb62f918310b9cd01ca6deddff6acbb1eecd55c9"
+        ],
+        "status": 1,
+        "stdout": "CONFLICT (modify/delete): src/retry.js deleted in HEAD and modified in fb62f91 (fixture: clamp negative retry limits).  Version fb62f91 (fixture: clamp negative retry limits) of src/retry.js left in tree.\n",
+        "stderr": "error: could not apply fb62f91... fixture: clamp negative retry limits\nhint: After resolving the conflicts, mark them with\nhint: \"git add/rm <pathspec>\", then run\nhint: \"git cherry-pick --continue\".\nhint: You can instead skip this commit with \"git cherry-pick --skip\".\nhint: To abort and get back to the state before \"git cherry-pick\",\nhint: run \"git cherry-pick --abort\".\nhint: Disable this message with \"git config set advice.mergeConflict false\"\n"
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rm",
+          "src/retry.js"
+        ],
+        "status": 0,
+        "stdout": "rm 'src/retry.js'\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "add",
+          "src/normalize.ts"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "node",
+        "args": [
+          "consumer.mjs"
+        ],
+        "status": 0,
+        "stdout": "retry limit regression passed\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "-c",
+          "core.editor=true",
+          "cherry-pick",
+          "--continue"
+        ],
+        "status": 0,
+        "stdout": "[codex/rehearsal db16876] fixture: clamp negative retry limits\n Date: Tue Sep 15 00:24:23 2026 +0800\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "rev-parse",
+          "HEAD"
+        ],
+        "status": 0,
+        "stdout": "db16876b0622d8dd6337a2bebcf7bca9e743fa31\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "log",
+          "-1",
+          "--format=%B"
+        ],
+        "status": 0,
+        "stdout": "fixture: clamp negative retry limits\n\n(cherry picked from commit fb62f918310b9cd01ca6deddff6acbb1eecd55c9)\n\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "status",
+          "--porcelain"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "ls-files",
+          "src/retry.js"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "node",
+        "args": [
+          "consumer.mjs"
+        ],
+        "status": 0,
+        "stdout": "retry limit regression passed\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "show",
+          "--format=fuller",
+          "--binary",
+          "db16876b0622d8dd6337a2bebcf7bca9e743fa31"
+        ],
+        "status": 0,
+        "stdout": "commit db16876b0622d8dd6337a2bebcf7bca9e743fa31\nAuthor:     ArtPlayer isolated rehearsal <rehearsal@example.invalid>\nAuthorDate: Tue Sep 15 00:24:23 2026 +0800\nCommit:     ArtPlayer isolated rehearsal <rehearsal@example.invalid>\nCommitDate: Tue Sep 15 00:24:24 2026 +0800\n\n    fixture: clamp negative retry limits\n    \n    (cherry picked from commit fb62f918310b9cd01ca6deddff6acbb1eecd55c9)\n\ndiff --git a/src/normalize.ts b/src/normalize.ts\nindex 74a0d7c..2251bcd 100644\n--- a/src/normalize.ts\n+++ b/src/normalize.ts\n@@ -1 +1 @@\n-export const normalizeLimit = (value: number): number => Math.trunc(value);\n+export const normalizeLimit = (value: number): number => Math.max(0, Math.trunc(value));\n",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "bundle",
+          "create",
+          "D:\\github\\ArtPlayer\\refactor\\.cache\\mainline-rehearsal\\run-zTEWy5\\rehearsal.bundle",
+          "--all"
+        ],
+        "status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "executable": "git",
+        "args": [
+          "bundle",
+          "verify",
+          "D:\\github\\ArtPlayer\\refactor\\.cache\\mainline-rehearsal\\run-zTEWy5\\rehearsal.bundle"
+        ],
+        "status": 0,
+        "stdout": "The bundle contains these 3 refs:\ndb16876b0622d8dd6337a2bebcf7bca9e743fa31 refs/heads/codex/rehearsal\nfb62f918310b9cd01ca6deddff6acbb1eecd55c9 refs/heads/master\ndb16876b0622d8dd6337a2bebcf7bca9e743fa31 HEAD\nThe bundle records a complete history.\nThe bundle uses this hash algorithm: sha1\n",
+        "stderr": "D:/github/ArtPlayer/refactor/.cache/mainline-rehearsal/run-zTEWy5/rehearsal.bundle is okay\n"
+      }
+    ],
+    "commits": {
+      "base": "a10e48e0c1f7a712fd602d5d8afcacef9a5e68b0",
+      "migrated": "61a92304ff91bfb87f6c1a08765276187b227cf3",
+      "fix": "fb62f918310b9cd01ca6deddff6acbb1eecd55c9",
+      "resolved": "db16876b0622d8dd6337a2bebcf7bca9e743fa31"
+    },
+    "abort": {
+      "restoredCommit": "61a92304ff91bfb87f6c1a08765276187b227cf3",
+      "restoredTree": "9ed1ebc390513ca0f09c3c4fc20700b38fc2e614",
+      "clean": true
+    },
+    "resolution": {
+      "source": "src/retry.js",
+      "destination": "src/normalize.ts",
+      "obsoleteFileAbsent": true,
+      "regressionPassed": true,
+      "attributed": true
+    }
+  },
+  "inventory": {
+    "command": "yarn check:rollback-inventory",
+    "packages": 22,
+    "verifiedArchives": 20,
+    "file": "refactor/baselines/rollback-inventory.json",
+    "sha256": "33d083badfc54f4be5be42518b03fb499062ab724bc4f4ebb3c1dec32b9bfb8a",
+    "deferredArtifacts": [
+      {
+        "name": "artplayer-tool-thumbnail",
+        "status": "complete-rollback-artifact-required"
+      },
+      {
+        "name": "artplayer-vitepress",
+        "status": "previous-deployment-artifact-required"
+      }
+    ]
+  },
+  "realRepository": {
+    "command": "git fetch origin master",
+    "log": "refactor/.cache/rel04-mainline-fetch-final.log",
+    "exitCode": 0,
+    "master": "40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f",
+    "ahead": 257,
+    "behind": 0,
+    "incomingFixes": [],
+    "cherryPicksApplied": []
+  },
+  "engineering": {
+    "status": "passed",
+    "log": "refactor/.cache/rel04-workflows-engineering.log",
+    "exitCode": 0,
+    "commands": [
+      "scoped ESLint for three workflow modules",
+      "node --test test/rollback-files.test.js test/package-runtime.test.js refactor/scripts/ci-workflow.test.mjs",
+      "yarn check:rollback-inventory",
+      "yarn check:toolchain --strict",
+      "node refactor/scripts/plan.mjs --check",
+      "git diff --check"
+    ]
+  },
+  "limitations": [
+    "REL-04 remains doing: complete Thumbnail fallback and Pages recovery evidence remain.",
+    "Iframe browser/device acceptance remains in PKG-IFRAME-05; these are real installation/import/type checks.",
+    "Conflict exercise is synthetic and does not claim a production retry bug or repair.",
+    "Registry mutable tags and current availability were not queried or changed.",
+    "All final publication batches must bind actual next-major candidates and repeat relevant rollback checks.",
+    "No dependencies, production source, root lock, distribution outputs, remote CI runs, push, tag or deployment changes."
+  ]
+}

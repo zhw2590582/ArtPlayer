@@ -1,0 +1,647 @@
+{
+  "task": "REL-04",
+  "source": "refactor/release-ledger.json and frozen historical archives",
+  "registryAvailabilityRefreshed": false,
+  "mutableTagPolicy": "Use exact versions and saved lock/artifact hashes. No latest/next/rollback tag is assumed or changed.",
+  "packages": [
+    {
+      "name": "artplayer",
+      "targetVersion": "6.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/releases.json",
+        "selector": "releases.0",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {
+        "option-validator": "^2.0.6"
+      },
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer",
+        "version": "5.4.0",
+        "tarball": "https://registry.npmjs.org/artplayer/-/artplayer-5.4.0.tgz",
+        "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+        "sha256": "42b269a66b9658d53f9a92572bb36d656ea9af56254a387b3a69c7ddea43979e",
+        "memberCount": 41,
+        "dependencies": {
+          "option-validator": "^2.0.6"
+        },
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer": "5.4.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "targetVersion": "3.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/ads-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-ads",
+        "version": "1.0.6",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-ads/-/artplayer-plugin-ads-1.0.6.tgz",
+        "integrity": "sha512-KMGGf7lhgj6DQXHPOg28jWYkVmDfOZJ4Gr4iF28Wy2GXNPh2ZJtlsFQ2IuWqXCElRPvSLzYK5HugF0OUnVszaw==",
+        "sha256": "ff132ff8a7108d8b26421621e4aac1d7edf8c99099a5ab4fd2190bd79b8636cd",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-ads": "1.0.6"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/ambilight-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-ambilight",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-ambilight/-/artplayer-plugin-ambilight-1.1.0.tgz",
+        "integrity": "sha512-FkMI7bn9HovJMfEdgkKbo7/vPt6vrzcpELTaC/vM7B99FPSMWzAf6GAE0xnNxU3KibYcBV5gXnBgvHgpG2xq2A==",
+        "sha256": "e95bd60fd7bce52142cf0041bad811452305029cbe1129c7d89246eb260c5c86",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-ambilight": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "targetVersion": "3.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/asr-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-asr",
+        "version": "2.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-asr/-/artplayer-plugin-asr-2.1.0.tgz",
+        "integrity": "sha512-15gXff458PAx9LeJxKzZEvmpFhfwKUfSLgb1Mfr7Xb/ZGsnE+6EA7ezTnO5S55W5mFExjv/e95iOIXP4ijuruQ==",
+        "sha256": "8bc3cd93f78ce99e5c09cc546c770a63e8aea5729d3d584134ce04d826b7708b",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-asr": "2.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/audio-track-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-audio-track",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-audio-track/-/artplayer-plugin-audio-track-1.1.0.tgz",
+        "integrity": "sha512-pvvHvTSqC2+sBelwYyjAv2CVmaQgG9KpX+i96t/e8oyZRX/JuepC9iSVIp7GzB3AtliFzhVamksT+8lXvD3RCg==",
+        "sha256": "7e84f6a2f4bfada428a77ef04b749bf3db53e0149fa1afe7bf5749d925e801ff",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-audio-track": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/auto-thumbnail-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-auto-thumbnail/-/artplayer-plugin-auto-thumbnail-1.1.0.tgz",
+        "integrity": "sha512-ALrcLv+qEDime+R8p4628RZTfMGlrpX6d7PLIQaYWsQEN3lPzVjcVcARCFpqnFI8gvRdqt21w72sJphf50xtVw==",
+        "sha256": "5ea83d4e45d42fdaf42d3e37b6c666857872adaa276ab329c74edcdaa3c1a978",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-auto-thumbnail": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/releases.json",
+        "selector": "releases.1",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-chapter",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-chapter/-/artplayer-plugin-chapter-1.1.0.tgz",
+        "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+        "sha256": "4c3173661854ff96f643a479c0f1c2db7ce9e54681523bd059a7dd9bd77eeada",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-chapter": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/chromecast-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-chromecast",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-chromecast/-/artplayer-plugin-chromecast-1.1.0.tgz",
+        "integrity": "sha512-3xrHj1CHe0Tt8gNMUB9A1epuW4OrbPsa1T9MNFy4AfQsjhYAhWAmef6hYu1GdHdADDybXBtVHP50gQ+EW+ddcw==",
+        "sha256": "1941d41055ee02deaa343cbf9eaf714495cb9f04883f57966f5b27f128117c30",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-chromecast": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "targetVersion": "6.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/danmuku-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-danmuku",
+        "version": "5.3.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku/-/artplayer-plugin-danmuku-5.3.0.tgz",
+        "integrity": "sha512-a76bU1cWEZr53hD1X8IHfOzS4QawGHn8dQ3fIYyJ5TsyhTSnznhi2WzkS8M7LL3H02ekXRZTUFan9+9EERk12g==",
+        "sha256": "1abb76460790d85a26590b8b911eb1301fd720885f96c73432060416a38dcb0e",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-danmuku": "5.3.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/danmuku-mask-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {
+        "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+        "@tensorflow-models/body-segmentation": "^1.0.2",
+        "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+        "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+        "@tensorflow/tfjs-converter": "^4.21.0",
+        "@tensorflow/tfjs-core": "^4.21.0"
+      },
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-danmuku-mask",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-danmuku-mask/-/artplayer-plugin-danmuku-mask-1.1.0.tgz",
+        "integrity": "sha512-VBmmwtNLj0TKYz9lWbyQ7A8osQHdyDiPMazP9g1UZbLyw/rMJ3qRclMgszRpZHN9hod0dQl2iYSJDoaqu3hGOQ==",
+        "sha256": "96682e46cb140a84b164818dd118480d7be42b24afaab390027a25e52e8ae31c",
+        "memberCount": 6,
+        "dependencies": {
+          "@mediapipe/selfie_segmentation": "^0.1.1675465747",
+          "@tensorflow-models/body-segmentation": "^1.0.2",
+          "@tensorflow/tfjs-backend-cpu": "^4.21.0",
+          "@tensorflow/tfjs-backend-webgl": "^4.21.0",
+          "@tensorflow/tfjs-converter": "^4.21.0",
+          "@tensorflow/tfjs-core": "^4.21.0"
+        },
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-danmuku-mask": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/dash-control-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-dash-control",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-dash-control/-/artplayer-plugin-dash-control-1.1.0.tgz",
+        "integrity": "sha512-EssRkzYXWcln3a6nAzi4ESacBhzMih8s0bzdjXuvBBCh2UFmvK99ITD5E+0cuU8i5ZzIQGQSdce1/gANTrX0BQ==",
+        "sha256": "f4047a569d99b6a7de57b3719b7ad40109f2a1d360566a840f50ab32aacefcd9",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-dash-control": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/dpip-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-document-pip",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-document-pip/-/artplayer-plugin-document-pip-1.1.0.tgz",
+        "integrity": "sha512-+HCrlO+bQwBrig1bI/IIxgGvbcG7i+aNHAnR5vLqB+RdyIY+FKCHyEe0o9yZREnbYOe0XJVqjv2buEVrouzdoQ==",
+        "sha256": "b864befea9aff84b3352782a9670ebe72ff073606fec7cdc31d31e92a5ad6d8a",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-document-pip": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/hls-control-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-hls-control",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-hls-control/-/artplayer-plugin-hls-control-1.1.0.tgz",
+        "integrity": "sha512-lWN5oUOWDorWFHdzKcmy9Z8eHcf5f5EcUGDrxBsZBX7aEL5dGRlHPQ5+wqQEizr38D9PYPfTI/nCyun2yFopEw==",
+        "sha256": "598c354d78d3cb77965136fa61dfc0f94cdea6906a91a30781c1acef2b0c3e8b",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-hls-control": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/jassub-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-jassub",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-jassub/-/artplayer-plugin-jassub-1.1.0.tgz",
+        "integrity": "sha512-vQwEtZMmkwr5utbxfUAeE/gRccl2nfcz+SYP2Subn/L8cVIFdMXWMgicm7ZkPVtAoBbCav7p0yP4pwXkCKMzAg==",
+        "sha256": "00713b4eee4b90e7dc13d1f2c88bc785f9b62f3903b00be6f7bec738fbb78c57",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-jassub": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/multiple-subtitles-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "version": "1.2.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-multiple-subtitles/-/artplayer-plugin-multiple-subtitles-1.2.0.tgz",
+        "integrity": "sha512-3mzoHkgKx3KVdxKQBwLkjetPF6WjJtro5uQNdse8FqUeiV0afbywLnP6H8lcDN/Fwgp2VlBknrs2+COiyFdV8g==",
+        "sha256": "a013fbe0772bf560d177449fc80e848c41f16ae2f72ace86f8fb0d5b1000a54e",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-multiple-subtitles": "1.2.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/vast-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {
+        "@alugha/ima": "2.1.0",
+        "@glomex/vast-ima-player": "^1.21.2"
+      },
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-vast",
+        "version": "1.0.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-vast/-/artplayer-plugin-vast-1.0.0.tgz",
+        "integrity": "sha512-6ia0BYlZMBUAbvfqPq6RD3kvCP/Vpnqjs4zgzcio0CUh3a/iJkp+caKFOFjROfilbL+B0lXUiA7U1kS9KqEwTg==",
+        "sha256": "35681d60fa3fa09b92f0f30887e39c73cf55e7b14d51a1c38fccbc6c1f253bab",
+        "memberCount": 6,
+        "dependencies": {
+          "@glomex/vast-ima-player": "^1.21.0"
+        },
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-vast": "1.0.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/vtt-thumbnail-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-vtt-thumbnail/-/artplayer-plugin-vtt-thumbnail-1.1.0.tgz",
+        "integrity": "sha512-p5HIiaxBEN0CV4FWOWXCfy6hcQL59JuFIGUbQtVg9AcunPg2gJ1cJ8P0HEQ/ngH6tl1/puxrJIKydoAdX5L2dw==",
+        "sha256": "e2df36283538bbffc2c37fe28a8af0fe6fc0fa68a5f6cf93042929ee64d55765",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-vtt-thumbnail": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/canvas-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-proxy-canvas",
+        "version": "1.1.0",
+        "tarball": "https://registry.npmjs.org/artplayer-proxy-canvas/-/artplayer-proxy-canvas-1.1.0.tgz",
+        "integrity": "sha512-lOq22z+xX2DcpokDSMQrDTk4VGDwUaQm9SovQ0GlhgmvMBdxRBDlvv6QrVxFUFsiGUjXEdx9TmtzdiW38dlxiQ==",
+        "sha256": "348c1d6671f79d0e0dbf2bb15875a1e6d60d00b73cde833c018bec7e4be96c8e",
+        "memberCount": 6,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-proxy-canvas": "1.1.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/mb-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "currentDependencies": {
+        "mediabunny": "^1.43.1"
+      },
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-proxy-mediabunny",
+        "version": "1.2.0",
+        "tarball": "https://registry.npmjs.org/artplayer-proxy-mediabunny/-/artplayer-proxy-mediabunny-1.2.0.tgz",
+        "integrity": "sha512-uSKkJFvd5Y2XxPPhwtPM5k9qq3xScbWnO/9fOfC8S+Liz8f8nT/iyA2eynU3maVcHZbJgA3PHZm0r6RRmSkefg==",
+        "sha256": "acb016166059183917a6de2e03a65ad77b09997fc9fb62513d751a24467ca76c",
+        "memberCount": 6,
+        "dependencies": {
+          "mediabunny": "^1.43.1"
+        },
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-proxy-mediabunny": "1.2.0"
+      },
+      "restore": "Restore the saved application manifest/lock and matching artifacts, then frozen-install the previous exact version with its tested core/plugin combination.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "targetVersion": "2.0.0",
+      "distribution": "renamed-npm",
+      "history": {
+        "file": "refactor/baselines/iframe-release.json",
+        "selector": "release",
+        "publishedName": "artplayer-plugin-iframe",
+        "rationale": "Frozen published predecessor and documented rename commit; candidate keeps current workspace name. Registry target availability still requires REL-01."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "previous": {
+        "name": "artplayer-plugin-iframe",
+        "version": "1.0.0",
+        "tarball": "https://registry.npmjs.org/artplayer-plugin-iframe/-/artplayer-plugin-iframe-1.0.0.tgz",
+        "integrity": "sha512-9eh5NVjZ8/Vxl0ojZxnMY6IlYxCVVfyGH2Rzl7uYDJnGc8NQ4y9vMN/gVh1h8R2m5qaYm7/XDo/45O9a7hDiKg==",
+        "sha256": "16dc92aa84d93bd99bc0a34815dc49f1609fafc1ff255eb353ea893e70b5f91f",
+        "memberCount": 8,
+        "dependencies": {},
+        "peerDependencies": {},
+        "optionalDependencies": {}
+      },
+      "exactDependency": {
+        "artplayer-plugin-iframe": "1.0.0"
+      },
+      "restore": "Restore application import code, old package name and saved lock together; npm alias alone does not restore the old export/helper surface.",
+      "status": "archive-verified-batch-rehearsal-required"
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "targetVersion": "5.0.0",
+      "distribution": "recovered-npm",
+      "history": {
+        "file": "refactor/baselines/thumbnail-release.json",
+        "selector": "recovered",
+        "rationale": "Recovered CDN/Git bytes only; original registry tarball and complete archive unavailable. Not an intact rollback artifact."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "restore": "No intact historical npm tarball. Preserve a complete pre-upgrade application/artifact snapshot and verify it before any candidate deployment.",
+      "status": "complete-rollback-artifact-required",
+      "evidence": "refactor/baselines/thumbnail-release.json"
+    },
+    {
+      "name": "artplayer-vitepress",
+      "targetVersion": "2.0.0",
+      "distribution": "site",
+      "history": {
+        "file": "refactor/baselines/site-provenance.json",
+        "rationale": "Existing docs/site build and URL distribution. No npm publication is inferred."
+      },
+      "currentDependencies": {},
+      "currentPeers": {},
+      "currentOptionalDependencies": {},
+      "restore": "Previously verified Pages artifact, exact source SHA and URL map; npm rollback does not apply.",
+      "status": "previous-deployment-artifact-required",
+      "evidence": "refactor/pages-deployment.md"
+    }
+  ]
+}

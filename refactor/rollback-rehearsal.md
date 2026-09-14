@@ -61,10 +61,55 @@ ENG-07 而被拒绝；保留该门槛，回退使用独立验证入口。
 详见 [机器证据](baselines/rollback-consumer-validation.json) 和
 [检查点](changes/2026-09-15-REL-04-consumer-checkpoint.md)。
 
-尚需：22 包逐包旧版本/tag/依赖恢复表、iframe 更名前后消费者回退、主线修改与
-JS→TS 冲突同步/中止演练。已执行 `git fetch origin master`，当时 master 没有
-新增待同步提交；这不等于验证过冲突解决。
+后续检查点已补齐[22 包恢复清单](rollback-inventory.md)、iframe 更名安装回退以及
+JS→TS 冲突同步/中止演练。`yarn check:rollback-inventory` 校验生成表并重新检查
+20 份完整冻结 archive；CI 的 `ci:check` 同样运行该检查。缺失 tarball 时只按
+冻结 registry URL/完整性恢复缓存，不查询或跟随 latest。
+
+## iframe 更名回退
+
+运行 `yarn test:rollback:iframe`。`scripts/iframe-rollback.mjs` 在隔离构建快照内
+用正常构建器打包当前 tool 包，并从冻结来源验证旧 plugin 包。先准备两套应用
+manifest、lock 和导入代码，再在同一仓库外消费者中依次安装旧包、升级新包、恢复
+旧包。检查完整成员、冻结锁、应用代码哈希和被替换包目录确实消失；各步另有实际
+require/helper/legacy 及 TS 5.9.3 strict 消费者验证。
+
+实际旧包 `artplayer-plugin-iframe@1.0.0` 的根 require 返回对象，构造类位于
+`.default`，并有独立 helper 文件；新 tool 包根 require 直接返回类。负例已实际
+把旧 tarball 安装在新的依赖键下，确认构造和 `/legacy` 均无法沿用新版写法。
+这是本地 file 依赖键映射验证，没有声称执行过 registry 的 npm alias 协议。
+回退要恢复应用导入代码和包名/锁，不能只换版本或别名。
+
+输出为 `refactor/.cache/iframe-rollback/run-*`，包括两套锁、应用代码、构建及
+安装日志和报告。该演练覆盖安装/导出/类型恢复，iframe 真机和跨窗媒体测试仍由
+PKG-IFRAME-05 承担，不借此关闭其门槛。
+
+## 主线修复同步与中止
+
+运行 `yarn test:rollback:mainline`。`scripts/mainline-rehearsal.mjs` 在仓库外创建
+独立 Git 仓库，合成 JS 计算模块迁移至两个 TS 模块后，主线修复旧文件的情形。
+它实际复现负数计算的断言失败、cherry-pick 的 modify/delete 冲突；先中止并验证
+HEAD/tree/工作区完全恢复，再次应用并把修复移入 TS 计算模块。最终回归通过、旧 JS
+文件不存在、提交中保留 `cherry-pick -x` 来源。原仓库没有被切换分支或 cherry-pick。
+
+Git fixture 只使用目录内身份配置，禁用全局配置；所有命令/退出码、断言、冲突内容、
+最终 patch 和可验证 Git bundle 保存到 `refactor/.cache/mainline-rehearsal/run-*`。
+失败也写报告，并清理已验证的临时消费者目录。该合成演练验证工作流，不代表发现或
+修复了真实 ArtPlayer 重试逻辑问题。
+
+实际同步时先 `git fetch origin master`，记录 `git rev-list --left-right --count
+HEAD...origin/master` 及修复 SHA，再审查每个上游 diff。找出迁移后的责任模块，
+为原缺陷补可重跑回归，在隔离工作树应用 `git cherry-pick -x <已核实修复SHA>`。
+发生冲突时审查 `git status`、`git ls-files --unmerged` 和上游完整 diff，不能为
+结束冲突而直接恢复已淘汰 JS 文件。修复迁移后的对应模块、暂存明确文件、运行相关
+单元/类型/浏览器检查，再 `git cherry-pick --continue`。无法正确落地则
+`git cherry-pick --abort`，核对原 HEAD/tree 和工作区状态后登记待同步项。
+每个实际修复仍建立任务、保留上游归属、独立提交并通过提交审计。
+
+本次再次 fetch 后 master 仍无新增提交；真实仓库没有需要应用的修复。冻结起点和
+当前差分记录在[后续检查点证据](baselines/rollback-workflows-validation.json)。
 
 Thumbnail 的完整旧 npm tarball 缺失、文档站的真实部署恢复继续受原有发布门槛
-约束。正式每批需要重新绑定实际 next-major 候选及旧包产物并重跑对应验证。
+约束，REL-04 保持 doing，继续准备完整回退替代产物/站点恢复证据。正式每批需要
+重新绑定实际 next-major 候选及旧包产物并重跑对应验证。
 不执行 npm tag 修改、unpublish、推送或部署，不把本演练当作这些动作的授权。

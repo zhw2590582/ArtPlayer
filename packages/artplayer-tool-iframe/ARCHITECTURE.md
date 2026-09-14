@@ -1,5 +1,13 @@
 # Iframe maintenance map
 
+Package-name rollback must restore the application imports and saved dependency
+lock together. The old plugin package exposes a CommonJS namespace with `.default`
+and distinct helper files; installing its tarball under the current tool dependency
+key does not preserve the current constructor or `/legacy` imports. The isolated
+build/install/type rehearsal is `yarn test:rollback:iframe`; see
+[rollback maintenance](../../refactor/rollback-rehearsal.md). This does not replace
+the package's cross-window, playback or device acceptance.
+
 `src/index.ts` owns the existing class, constructor validation, bound parent
 message listener, child injection/execution protocol and public callbacks.
 `src/requests.ts` owns request IDs, pending promises, injection polling and

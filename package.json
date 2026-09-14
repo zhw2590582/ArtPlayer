@@ -47,7 +47,7 @@
     "check:plan": "node refactor/scripts/plan.mjs --check",
     "test:node": "yarn test:unit && node --test test/toolchain.test.js test/build-docs.test.js test/package-check.test.js test/declarations.test.js test/editor-types.test.js test/coverage.test.js test/performance-report.test.js test/media-gate.test.js test/ci-summary.test.js test/package-runtime.test.js test/library-build.test.js test/site-loading.test.js test/documentation-pipeline.test.js test/site-build.test.js test/site-markdown.test.js test/site-editor.test.js test/plugin-scaffold.test.js test/dev-server.test.js test/pages-artifact.test.js test/site-notices.test.js test/vconsole-lifecycle.test.js test/browser-validation.test.js test/rollback-files.test.js",
     "test:baseline": "node --test refactor/scripts/*.test.mjs",
-    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:ci && yarn test:contracts && yarn check:contracts --report && yarn check:plan && yarn check:release-ledger && yarn lint && yarn typecheck:library && yarn typecheck:scaffold && yarn typecheck:docs-tools && yarn check:docs-smoke && yarn check:editor-types && yarn check:llm && yarn check:vconsole && yarn check:site-notices && yarn typecheck:site-assets && yarn check:site-assets && yarn check:types && yarn typecheck && yarn typecheck:react && yarn lint:react && yarn typecheck:vue && yarn lint:vue && yarn test",
+    "ci:check": "yarn check:toolchain --strict && yarn check:commits --report && yarn check:impact --report && yarn check:ci && yarn test:contracts && yarn check:contracts --report && yarn check:plan && yarn check:release-ledger && yarn check:rollback-inventory && yarn lint && yarn typecheck:library && yarn typecheck:scaffold && yarn typecheck:docs-tools && yarn check:docs-smoke && yarn check:editor-types && yarn check:llm && yarn check:vconsole && yarn check:site-notices && yarn typecheck:site-assets && yarn check:site-assets && yarn check:types && yarn typecheck && yarn typecheck:react && yarn lint:react && yarn typecheck:vue && yarn lint:vue && yarn test",
     "ci:build": "yarn build:types && yarn build all && yarn build:i18n && yarn build:ts && yarn build:llm && yarn build:vconsole && yarn build:site-notices && yarn build:test && yarn build:docs && yarn test:imports",
     "test:imports": "node --test test/esm.test.js test/i18n.test.js test/ssr.test.js test/asr-distribution.test.js",
     "typecheck": "node scripts/typecheck.mjs",
@@ -153,7 +153,10 @@
     "test:browser:installed": "node scripts/browser-check.mjs installed",
     "test:vast-types": "node --test refactor/scripts/vast-types.test.mjs",
     "test:vast-types-package": "node refactor/scripts/vast-package-types.mjs",
-    "test:vast-native": "playwright test --config playwright.vast-native.config.js"
+    "test:vast-native": "playwright test --config playwright.vast-native.config.js",
+    "test:rollback:iframe": "node scripts/iframe-rollback.mjs",
+    "test:rollback:mainline": "node scripts/mainline-rehearsal.mjs",
+    "check:rollback-inventory": "node refactor/scripts/rollback-inventory.mjs --check"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {
