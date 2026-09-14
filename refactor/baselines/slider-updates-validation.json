@@ -1,0 +1,5729 @@
+{
+  "task": "MOD-03",
+  "status": "checkpoint-doing",
+  "baselineCommit": "7b0e1d156b8e21e422200ee345afa63950f9d5a2",
+  "capturedAt": "2026-09-14T07:42:17.810Z",
+  "scope": "Avoid duplicate dynamic ARIA writes in the shared progress/volume slider; remaining MOD-03 scope stays open.",
+  "toolchain": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "baselineKind": "Committed prechange refactor artifacts, not npm release and not full BASE-06 installed-package performance acceptance",
+  "bundles": [
+    {
+      "format": "js",
+      "before": {
+        "path": "refactor/.cache/mod03-before/artplayer.js",
+        "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+        "raw": 208931,
+        "gzip9": 58746,
+        "brotli6": 53648
+      },
+      "candidate": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+        "raw": 208943,
+        "gzip9": 58756,
+        "brotli6": 53660
+      },
+      "docs": {
+        "path": "docs/compiled/artplayer.js",
+        "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6"
+      },
+      "delta": {
+        "raw": 12,
+        "gzip9": 10,
+        "brotli6": 12
+      }
+    },
+    {
+      "format": "legacy.js",
+      "before": {
+        "path": "refactor/.cache/mod03-before/artplayer.legacy.js",
+        "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+        "raw": 213200,
+        "gzip9": 59984,
+        "brotli6": 54707
+      },
+      "candidate": {
+        "path": "packages/artplayer/dist/artplayer.legacy.js",
+        "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+        "raw": 213212,
+        "gzip9": 60001,
+        "brotli6": 54718
+      },
+      "docs": {
+        "path": "docs/compiled/artplayer.legacy.js",
+        "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449"
+      },
+      "delta": {
+        "raw": 12,
+        "gzip9": 17,
+        "brotli6": 11
+      }
+    },
+    {
+      "format": "mjs",
+      "before": {
+        "path": "refactor/.cache/mod03-before/artplayer.mjs",
+        "sha256": "f339a244d523618dac84248103cd0c629411629ee460e0e21eab1484d44fd418",
+        "raw": 363421,
+        "gzip9": 77611,
+        "brotli6": 70408
+      },
+      "candidate": {
+        "path": "packages/artplayer/dist/artplayer.mjs",
+        "sha256": "265bca0ad3f8373acc84333c19cdded0cbd6b309ede9e51c0bec35685c77eebd",
+        "raw": 363575,
+        "gzip9": 77645,
+        "brotli6": 70452
+      },
+      "docs": {
+        "path": "docs/compiled/artplayer.mjs",
+        "sha256": "265bca0ad3f8373acc84333c19cdded0cbd6b309ede9e51c0bec35685c77eebd"
+      },
+      "delta": {
+        "raw": 154,
+        "gzip9": 34,
+        "brotli6": 44
+      }
+    }
+  ],
+  "paired": [
+    {
+      "format": "main",
+      "engine": "chromium",
+      "group": 1,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 4.900000035762787,
+          "samplesMs": [
+            6.5,
+            4.400000035762787,
+            4.899999976158142,
+            5.199999988079071,
+            4.900000035762787
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 3.200000047683716,
+          "samplesMs": [
+            5.200000047683716,
+            3.299999952316284,
+            3.200000047683716,
+            3.199999988079071,
+            3.199999988079071
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "chromium",
+      "group": 2,
+      "order": [
+        "candidate",
+        "before"
+      ],
+      "measurements": [
+        {
+          "variant": "candidate",
+          "medianMs": 3.400000035762787,
+          "samplesMs": [
+            4,
+            3.400000035762787,
+            3.399999976158142,
+            4.300000011920929,
+            3.300000011920929
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        },
+        {
+          "variant": "before",
+          "medianMs": 4.599999964237213,
+          "samplesMs": [
+            5.600000023841858,
+            4.300000011920929,
+            4.599999964237213,
+            4.100000023841858,
+            4.899999976158142
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "chromium",
+      "group": 3,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 5.200000047683716,
+          "samplesMs": [
+            5.399999976158142,
+            4.700000047683716,
+            4.299999952316284,
+            5.200000047683716,
+            5.5
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 3.599999964237213,
+          "samplesMs": [
+            4.300000011920929,
+            3.199999988079071,
+            4,
+            3.599999964237213,
+            3.300000011920929
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "firefox",
+      "group": 1,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 9,
+          "samplesMs": [
+            11,
+            11,
+            8,
+            9,
+            9
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            12,
+            8,
+            7,
+            8,
+            8
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "firefox",
+      "group": 2,
+      "order": [
+        "candidate",
+        "before"
+      ],
+      "measurements": [
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            10,
+            8,
+            8,
+            8,
+            7
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        },
+        {
+          "variant": "before",
+          "medianMs": 10,
+          "samplesMs": [
+            12,
+            12,
+            10,
+            9,
+            10
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "firefox",
+      "group": 3,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 10,
+          "samplesMs": [
+            12,
+            10,
+            10,
+            9,
+            10
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 7,
+          "samplesMs": [
+            7,
+            10,
+            7,
+            7,
+            6
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "webkit",
+      "group": 1,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 10,
+          "samplesMs": [
+            10,
+            10,
+            9,
+            8,
+            10
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 5,
+          "nativeWrites": 25
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            9,
+            7,
+            7,
+            8,
+            9
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 5,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "webkit",
+      "group": 2,
+      "order": [
+        "candidate",
+        "before"
+      ],
+      "measurements": [
+        {
+          "variant": "candidate",
+          "medianMs": 10,
+          "samplesMs": [
+            10,
+            9,
+            14,
+            11,
+            7
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 4
+        },
+        {
+          "variant": "before",
+          "medianMs": 9,
+          "samplesMs": [
+            12,
+            9,
+            9,
+            9,
+            10
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        }
+      ]
+    },
+    {
+      "format": "main",
+      "engine": "webkit",
+      "group": 3,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 9,
+          "samplesMs": [
+            12,
+            9,
+            9,
+            12,
+            8
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 5,
+          "nativeWrites": 25
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 7,
+          "samplesMs": [
+            9,
+            8,
+            7,
+            7,
+            7
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "chromium",
+      "group": 1,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 4.699999988079071,
+          "samplesMs": [
+            6.100000023841858,
+            4.399999976158142,
+            4.300000011920929,
+            4.699999988079071,
+            4.700000047683716
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 3.699999988079071,
+          "samplesMs": [
+            4.899999976158142,
+            3.400000035762787,
+            3.399999976158142,
+            3.699999988079071,
+            4.400000035762787
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "chromium",
+      "group": 2,
+      "order": [
+        "candidate",
+        "before"
+      ],
+      "measurements": [
+        {
+          "variant": "candidate",
+          "medianMs": 3.699999988079071,
+          "samplesMs": [
+            7.399999976158142,
+            3.900000035762787,
+            3.5,
+            3.399999976158142,
+            3.699999988079071
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        },
+        {
+          "variant": "before",
+          "medianMs": 4.699999988079071,
+          "samplesMs": [
+            6.100000023841858,
+            4.699999988079071,
+            4.5,
+            4.300000011920929,
+            5.399999976158142
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "chromium",
+      "group": 3,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 4.600000023841858,
+          "samplesMs": [
+            5.699999988079071,
+            4.600000023841858,
+            4.5,
+            4.399999976158142,
+            4.900000035762787
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 3.300000011920929,
+          "samplesMs": [
+            4.600000023841858,
+            3.899999976158142,
+            3.300000011920929,
+            3.300000011920929,
+            3.299999952316284
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "firefox",
+      "group": 1,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 10,
+          "samplesMs": [
+            11,
+            10,
+            10,
+            8,
+            11
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            10,
+            8,
+            8,
+            7,
+            7
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "firefox",
+      "group": 2,
+      "order": [
+        "candidate",
+        "before"
+      ],
+      "measurements": [
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            10,
+            8,
+            7,
+            7,
+            8
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        },
+        {
+          "variant": "before",
+          "medianMs": 10,
+          "samplesMs": [
+            16,
+            10,
+            10,
+            10,
+            15
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "firefox",
+      "group": 3,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 9,
+          "samplesMs": [
+            12,
+            10,
+            9,
+            9,
+            9
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            10,
+            8,
+            8,
+            7,
+            7
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 5
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "webkit",
+      "group": 1,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 10,
+          "samplesMs": [
+            11,
+            9,
+            9,
+            11,
+            10
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 10,
+          "samplesMs": [
+            10,
+            9,
+            9,
+            11,
+            11
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 4
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "webkit",
+      "group": 2,
+      "order": [
+        "candidate",
+        "before"
+      ],
+      "measurements": [
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            8,
+            7,
+            8,
+            6,
+            8
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 4,
+          "nativeWrites": 4
+        },
+        {
+          "variant": "before",
+          "medianMs": 9,
+          "samplesMs": [
+            13,
+            10,
+            9,
+            9,
+            9
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 4,
+          "nativeWrites": 20
+        }
+      ]
+    },
+    {
+      "format": "legacy",
+      "engine": "webkit",
+      "group": 3,
+      "order": [
+        "before",
+        "candidate"
+      ],
+      "measurements": [
+        {
+          "variant": "before",
+          "medianMs": 9,
+          "samplesMs": [
+            10,
+            9,
+            9,
+            8,
+            10
+          ],
+          "duplicateWrites": 500,
+          "repairWrites": 5,
+          "nativeEvents": 3,
+          "nativeWrites": 15
+        },
+        {
+          "variant": "candidate",
+          "medianMs": 8,
+          "samplesMs": [
+            9,
+            8,
+            8,
+            7,
+            8
+          ],
+          "duplicateWrites": 0,
+          "repairWrites": 2,
+          "nativeEvents": 3,
+          "nativeWrites": 4
+        }
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "path": "refactor/.cache/mod03-slider-main-browser/report.json",
+      "sha256": "2e0e35405ddc1011262fc9852503980dbfdf653b4c081702a57202bfc062aaa5",
+      "stats": {
+        "startTime": "2026-09-14T07:36:37.826Z",
+        "duration": 39165.786,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "slider DOM updates and duplicate-event timing group 1",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 0,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.388369",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.388369",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  6.5,
+                  4.400000035762787,
+                  4.899999976158142,
+                  5.199999988079071,
+                  4.900000035762787
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.388369,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.295629,
+                "time": 1.295629
+              }
+            },
+            {
+              "group": 0,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.372872",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.372872",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  5.200000047683716,
+                  3.299999952316284,
+                  3.200000047683716,
+                  3.199999988079071,
+                  3.199999988079071
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.372872,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.279712,
+                "time": 1.279712
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 2",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 1,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.379443",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.379443",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  4,
+                  3.400000035762787,
+                  3.399999976158142,
+                  4.300000011920929,
+                  3.300000011920929
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.379443,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.287311,
+                "time": 1.287311
+              }
+            },
+            {
+              "group": 1,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.37311",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.37311",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  5.600000023841858,
+                  4.300000011920929,
+                  4.599999964237213,
+                  4.100000023841858,
+                  4.899999976158142
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.37311,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.267875,
+                "time": 1.267875
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 3",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 2,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.378889",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.378889",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  5.399999976158142,
+                  4.700000047683716,
+                  4.299999952316284,
+                  5.200000047683716,
+                  5.5
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.378889,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.282,
+                "time": 1.282
+              }
+            },
+            {
+              "group": 2,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.387884",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.387884",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  4.300000011920929,
+                  3.199999988079071,
+                  4,
+                  3.599999964237213,
+                  3.300000011920929
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.387884,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.281384,
+                "time": 1.281384
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 1",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 0,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  11,
+                  11,
+                  8,
+                  9,
+                  9
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.297388,
+                "time": 1.297388
+              }
+            },
+            {
+              "group": 0,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  12,
+                  8,
+                  7,
+                  8,
+                  8
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.260061,
+                "time": 1.260061
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 2",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 1,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  8,
+                  8,
+                  8,
+                  7
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.256794,
+                "time": 1.256794
+              }
+            },
+            {
+              "group": 1,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.376936",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.376936",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  12,
+                  12,
+                  10,
+                  9,
+                  10
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.376936,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.297026,
+                "time": 1.297026
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 3",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 2,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  12,
+                  10,
+                  10,
+                  9,
+                  10
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.291666,
+                "time": 1.291666
+              }
+            },
+            {
+              "group": 2,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  7,
+                  10,
+                  7,
+                  7,
+                  6
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.281069,
+                "time": 1.281069
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 1",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 0,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.398851",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.398851",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  10,
+                  9,
+                  8,
+                  10
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.398851,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 5,
+                "value": 1.3656078,
+                "time": 1.3656078
+              }
+            },
+            {
+              "group": 0,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4095747",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4095747",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  9,
+                  7,
+                  7,
+                  8,
+                  9
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.4095747,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 5,
+                "value": 1.3515124,
+                "time": 1.3515124
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 2",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 1,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.438058",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.438058",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  9,
+                  14,
+                  11,
+                  7
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.438058,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.2363568,
+                "time": 1.4162548
+              }
+            },
+            {
+              "group": 1,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.3977688",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.3977688",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  12,
+                  9,
+                  9,
+                  9,
+                  10
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.3977688,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.2018563,
+                "time": 1.3291055
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 3",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 2,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.js",
+                "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4455457",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4455457",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  12,
+                  9,
+                  9,
+                  12,
+                  8
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.4455457,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 5,
+                "value": 1.4421424,
+                "time": 1.4421424
+              }
+            },
+            {
+              "group": 2,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.477486",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.477486",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  9,
+                  8,
+                  7,
+                  7,
+                  7
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.477486,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.2707069,
+                "time": 1.4547945
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "refactor/.cache/mod03-slider-legacy-browser/report.json",
+      "sha256": "0f6327e9ebeeda21c9419dababc5741de76c8b9a3e1ca01750fad9a94fb1bc53",
+      "stats": {
+        "startTime": "2026-09-14T07:37:37.380Z",
+        "duration": 49825.219,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 1",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 0,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.38959",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.38959",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  6.100000023841858,
+                  4.399999976158142,
+                  4.300000011920929,
+                  4.699999988079071,
+                  4.700000047683716
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.38959,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.292999,
+                "time": 1.292999
+              }
+            },
+            {
+              "group": 0,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.393779",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.393779",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  4.899999976158142,
+                  3.400000035762787,
+                  3.399999976158142,
+                  3.699999988079071,
+                  4.400000035762787
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.393779,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.287892,
+                "time": 1.287892
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 2",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 1,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.376205",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.376205",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  7.399999976158142,
+                  3.900000035762787,
+                  3.5,
+                  3.399999976158142,
+                  3.699999988079071
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.376205,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.262107,
+                "time": 1.262107
+              }
+            },
+            {
+              "group": 1,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.375872",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.375872",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  6.100000023841858,
+                  4.699999988079071,
+                  4.5,
+                  4.300000011920929,
+                  5.399999976158142
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.375872,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.27255,
+                "time": 1.27255
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 3",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 2,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.376111",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.376111",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  5.699999988079071,
+                  4.600000023841858,
+                  4.5,
+                  4.399999976158142,
+                  4.900000035762787
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.376111,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.26178,
+                "time": 1.26178
+              }
+            },
+            {
+              "group": 2,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.378364",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.378364",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  4.600000023841858,
+                  3.899999976158142,
+                  3.300000011920929,
+                  3.300000011920929,
+                  3.299999952316284
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.378364,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.263189,
+                "time": 1.263189
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 1",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 0,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  11,
+                  10,
+                  10,
+                  8,
+                  11
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.257276,
+                "time": 1.257276
+              }
+            },
+            {
+              "group": 0,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  8,
+                  8,
+                  7,
+                  7
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.295731,
+                "time": 1.295731
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 2",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 1,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.371342",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.371342",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  8,
+                  7,
+                  7,
+                  8
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.371342,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.300681,
+                "time": 1.300681
+              }
+            },
+            {
+              "group": 1,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  16,
+                  10,
+                  10,
+                  10,
+                  15
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.252663,
+                "time": 1.252663
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 3",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 2,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.374999",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  12,
+                  10,
+                  9,
+                  9,
+                  9
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.374999,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.252004,
+                "time": 1.252004
+              }
+            },
+            {
+              "group": 2,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.371576",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.371576",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  8,
+                  8,
+                  7,
+                  7
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.371576,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.304275,
+                "time": 1.304275
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 1",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 0,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4348779",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4348779",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  11,
+                  9,
+                  9,
+                  11,
+                  10
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.4348779,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.2387675,
+                "time": 1.3842581
+              }
+            },
+            {
+              "group": 0,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4070797",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4070797",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  9,
+                  9,
+                  11,
+                  11
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.4070797,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.207569,
+                "time": 1.3413159
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 2",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 1,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.474904",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.474904",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  8,
+                  7,
+                  8,
+                  6,
+                  8
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.474904,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 4,
+                "value": 1.2691324,
+                "time": 1.4220057
+              }
+            },
+            {
+              "group": 1,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4812965",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4812965",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  13,
+                  10,
+                  9,
+                  9,
+                  9
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.4812965,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 4,
+                "value": 1.2795014,
+                "time": 1.4115242
+              }
+            }
+          ]
+        },
+        {
+          "title": "slider DOM updates and duplicate-event timing group 3",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+            },
+            "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+            "bytes": 213212
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": [],
+          "paired": [
+            {
+              "group": 2,
+              "variant": "before",
+              "before": {
+                "file": "refactor/.cache/mod03-before/artplayer.legacy.js",
+                "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87"
+              },
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4073174",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4073174",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  10,
+                  9,
+                  9,
+                  8,
+                  10
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 101,
+                "time": 0.4073174,
+                "duration": 8,
+                "duplicateWrites": 500,
+                "duplicateAttributes": {
+                  "aria-disabled": 100,
+                  "aria-valuemin": 100,
+                  "aria-valuemax": 100,
+                  "aria-valuenow": 100,
+                  "aria-valuetext": 100
+                }
+              },
+              "native": {
+                "updates": [
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-disabled",
+                  "aria-valuemin",
+                  "aria-valuemax",
+                  "aria-valuenow",
+                  "aria-valuetext"
+                ],
+                "events": 3,
+                "value": 1.1979713,
+                "time": 1.3307028
+              }
+            },
+            {
+              "group": 2,
+              "variant": "candidate",
+              "before": null,
+              "result": {
+                "initial": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4730629",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "final": {
+                  "aria-disabled": "false",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "8",
+                  "aria-valuenow": "0.4730629",
+                  "aria-valuetext": "00:00 / 00:08"
+                },
+                "timings": [
+                  9,
+                  8,
+                  8,
+                  7,
+                  8
+                ],
+                "repaired": [
+                  "aria-disabled",
+                  "aria-valuemax"
+                ],
+                "events": 101,
+                "time": 0.4730629,
+                "duration": 8,
+                "duplicateWrites": 0,
+                "duplicateAttributes": {}
+              },
+              "native": {
+                "updates": [
+                  "aria-valuenow",
+                  "aria-valuenow",
+                  "aria-valuetext",
+                  "aria-valuenow"
+                ],
+                "events": 3,
+                "value": 1.2689435,
+                "time": 1.4406914
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "refactor/.cache/mod03-slider-main-regression-browser/report.json",
+      "sha256": "578b7b664cb4a5c5a66caad163c394cc95cd52569b96ea5720b535d96aa4f6f6",
+      "stats": {
+        "startTime": "2026-09-14T07:38:43.674Z",
+        "duration": 62307.825000000004,
+        "expected": 54,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress is the first control, seeks with owned keys and follows actual media time",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: volume panel opens from keyboard focus and the slider unmutes without seeking",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: unknown duration disables progress until metadata returns and labels use i18n",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress removal and volume destruction inside callbacks cancel pending writes",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through remove cannot continue an obsolete seek",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through destroy cannot continue an obsolete seek",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through source cannot continue an obsolete seek",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: real progress click keeps setBar before seek and clamps the edges",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: a progress drag ends when its source is replaced and can restart on the new source",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: a caller-owned media Blob URL remains readable after switching and destroying the player",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through remove cannot continue an obsolete seek",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through destroy cannot continue an obsolete seek",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through source cannot continue an obsolete seek",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: real progress click keeps setBar before seek and clamps the edges",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: a progress drag ends when its source is replaced and can restart on the new source",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: a caller-owned media Blob URL remains readable after switching and destroying the player",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+          "engine": "chromium",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "153.0.8010.12",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through remove cannot continue an obsolete seek",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through destroy cannot continue an obsolete seek",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through source cannot continue an obsolete seek",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: real progress click keeps setBar before seek and clamps the edges",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: a progress drag ends when its source is replaced and can restart on the new source",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: a caller-owned media Blob URL remains readable after switching and destroying the player",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through remove cannot continue an obsolete seek",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through destroy cannot continue an obsolete seek",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through source cannot continue an obsolete seek",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: real progress click keeps setBar before seek and clamps the edges",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: a progress drag ends when its source is replaced and can restart on the new source",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: a caller-owned media Blob URL remains readable after switching and destroying the player",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+          "engine": "firefox",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "155.0",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through remove cannot continue an obsolete seek",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through destroy cannot continue an obsolete seek",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: progress click reentry through source cannot continue an obsolete seek",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: real progress click keeps setBar before seek and clamps the edges",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: a progress drag ends when its source is replaced and can restart on the new source",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: a caller-owned media Blob URL remains readable after switching and destroying the player",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "published: quality selectors retain default labels, source position and empty-array behavior",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through remove cannot continue an obsolete seek",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through destroy cannot continue an obsolete seek",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: progress click reentry through source cannot continue an obsolete seek",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: real progress click keeps setBar before seek and clamps the edges",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: a progress drag ends when its source is replaced and can restart on the new source",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: a caller-owned media Blob URL remains readable after switching and destroying the player",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        },
+        {
+          "title": "candidate: quality selectors retain default labels, source position and empty-array behavior",
+          "engine": "webkit",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "environment": {
+            "version": "26.6",
+            "platform": "win32",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15"
+          },
+          "candidate": {
+            "source": {
+              "kind": "artifact",
+              "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+            },
+            "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+            "bytes": 208943
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          },
+          "errorsObserved": []
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "packages/artplayer/src/accessibility/slider.ts",
+      "sha256": "cfc9237d8db8fe7db3c4a0201ae83f0c4027603e647636545ba7b7e891fef5dd"
+    },
+    {
+      "path": "packages/artplayer/ARCHITECTURE.md",
+      "sha256": "05259771cc2dea2db1b0068c0297e70413ebb6c6edc5594a62d2f94f897615e3"
+    },
+    {
+      "path": "test/accessibility-slider.test.js",
+      "sha256": "ea65558915d109af8144b655a64eaceb85c05135236eebc2c009b769b131f23d"
+    },
+    {
+      "path": "test/browser/slider-updates.spec.js",
+      "sha256": "52adcf194b3d1e2adc151bcfe9b6aa3f92c341a8859d23c8349330126c9daa5e"
+    },
+    {
+      "path": "test/browser/accessibility-slider.spec.js",
+      "sha256": "b88aa23fc1b76e3a902150a8a9d4a801531f397b0a27120b4741baf67f82bc47"
+    },
+    {
+      "path": "test/browser/progress-quality.spec.js",
+      "sha256": "824596e3f0f1a7d8304ca7fed38de4f00b2f967eb87fd48346ad714fbb2e280f"
+    }
+  ],
+  "validation": [
+    {
+      "command": "node --test test/accessibility-slider.test.js, before source edit",
+      "passed": 10,
+      "failed": 1,
+      "expectedFailure": true,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-red.log",
+        "sha256": "3868036e5a0531ab5dc5cf489ef473d7f2f5e1c790d7d2eff3bb148e732b7346"
+      }
+    },
+    {
+      "command": "node --test test/accessibility-slider.test.js, candidate",
+      "passed": 11,
+      "failed": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-source.log",
+        "sha256": "0b516f47e9a62a01c8b43f0d987a80320b65dccd36ed97f6382f04a0d5ec3e3b"
+      }
+    },
+    {
+      "command": "yarn test:unit",
+      "passed": 2859,
+      "failed": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-unit.log",
+        "sha256": "f5617a2bda27ad02ccb0622278961bb0678d44be0bcb127c2e9654e4ead89c54"
+      }
+    },
+    {
+      "command": "tsc -p packages/artplayer/tsconfig.json --noEmit",
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-types.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "Targeted read-only ESLint",
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "command": "yarn build artplayer --analyze; yarn build:i18n",
+      "exitCode": 0,
+      "logs": [
+        {
+          "path": "refactor/.cache/mod03-slider-build.log",
+          "sha256": "ba2794f0be82b70fc31623b1e940b115c8b2e44bf62c7c02fcfea962b4176e52"
+        },
+        {
+          "path": "refactor/.cache/mod03-slider-i18n.log",
+          "sha256": "c0b69404ad90764833c50c79213fe88298f8df6fb0cca2105c0284116e44fb3d"
+        }
+      ],
+      "analysis": {
+        "output": "refactor/.cache/build-analysis/run-ZCa9p0"
+      }
+    },
+    {
+      "command": "yarn check:types",
+      "files": 37,
+      "changed": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-declarations.log",
+        "sha256": "d69fc0fa4d8b5ed887e7f642f31d7d02915380dbe7e8c62824e9178bf7bcf690"
+      }
+    },
+    {
+      "command": "yarn check:toolchain --strict",
+      "exitCode": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-toolchain.log",
+        "sha256": "ce0ffab3b90a6a2cfd13278130f803e7f04a3916b2cb6fafcc0dd37edcb6bb0e"
+      }
+    },
+    {
+      "command": "node --test refactor/scripts/risk-register.test.mjs",
+      "passed": 2,
+      "failed": 0,
+      "log": {
+        "path": "refactor/.cache/mod03-slider-risk-check.log",
+        "sha256": "b3c774cec44da6a13374aa5dbc2b31b42c8c0280209927d9eed55543701f498a"
+      }
+    }
+  ],
+  "browserCommands": {
+    "main": "ARTPLAYER_BROWSER_ARTIFACTS=refactor/.cache/mod03-slider-main-map.json; ARTPLAYER_SLIDER_BASELINE=refactor/.cache/mod03-before/artplayer.js; yarn test:browser test/browser/slider-updates.spec.js --workers=1",
+    "legacy": "ARTPLAYER_BROWSER_ARTIFACTS=refactor/.cache/mod03-slider-legacy-map.json; ARTPLAYER_SLIDER_BASELINE=refactor/.cache/mod03-before/artplayer.legacy.js; yarn test:browser test/browser/slider-updates.spec.js test/browser/accessibility-slider.spec.js --workers=1",
+    "regression": "ARTPLAYER_BROWSER_ARTIFACTS=refactor/.cache/mod03-slider-main-map.json; baseline unset; yarn test:browser test/browser/accessibility-slider.spec.js test/browser/progress-quality.spec.js --workers=1"
+  },
+  "limits": [
+    "18 paired cases cover two formats and three groups per engine; each pair has two runs. Remaining 66 ordinary browser cases include historical baselines, not all candidate tests.",
+    "Timings use 300 warmup and five samples of 1000 synthetic paused timeupdate calls. No mutation observer in the timed loop; browser timer precision still limits interpretation.",
+    "Separate native playback checks confirm live ARIA values; playback windows have slightly different event counts.",
+    "Some timed groups are slower; no total playback FPS or broad performance gain is claimed.",
+    "MutationObserver no longer receives redundant equal-value ARIA records; all public media/setBar events and final ARIA values remain.",
+    "Storage cadence, layout/initialization profiling and full actual-installed BASE-06 pairing remain for MOD-03. ENG-PERF-01/02 stay open.",
+    "No public types, dependencies, versions, physical devices, remote CI or publication changed.",
+    "Committed summaries aggregate identical duplicate mutation names by attribute; complete original records remain in the archived raw Playwright reports with their SHA-256. Raw timing samples are retained in this summary."
+  ]
+}

@@ -40,6 +40,41 @@ function fixture() {
   return { scope, element, range, values, update }
 }
 
+test('slider refreshes live values without rewriting unchanged ARIA attributes', () => {
+  const f = fixture()
+  const writes = []
+  const setAttribute = f.element.setAttribute.bind(f.element)
+  f.element.setAttribute = (name, value) => {
+    writes.push([name, value])
+    setAttribute(name, value)
+  }
+  let reads = 0
+  f.range.text = (value) => {
+    reads++
+    return `${Math.floor(value)}%`
+  }
+  f.update()
+  f.update()
+  assert.equal(reads, 2)
+  assert.deepEqual(writes, [])
+  f.range.value = 50.25
+  f.update()
+  assert.deepEqual(writes.splice(0), [['aria-valuenow', '50.25']])
+  f.range.value = 51
+  f.update()
+  assert.deepEqual(writes.splice(0), [['aria-valuenow', '51'], ['aria-valuetext', '51%']])
+  // Read the actual DOM each time; callers can edit or remove these attributes.
+  setAttribute('aria-valuemax', '999')
+  f.element.attributes.delete('aria-disabled')
+  f.update()
+  assert.deepEqual(writes.splice(0), [['aria-disabled', 'false'], ['aria-valuemax', '100']])
+  f.scope.dispose()
+  f.range.value = 75
+  f.update()
+  assert.equal(reads, 5)
+  assert.deepEqual(writes, [])
+})
+
 test('slider keys repeat, clamp and expose the value actually written', () => {
   const f = fixture()
   for (const [key, value] of [['ArrowRight', 55], ['ArrowUp', 60], ['ArrowLeft', 55], ['ArrowDown', 50], ['PageUp', 100], ['PageDown', 50], ['Home', 0], ['End', 100], ['ArrowUp', 100]]) {

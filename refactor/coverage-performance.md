@@ -2,6 +2,11 @@
 
 本文由 ENG-08 维护。覆盖率和资源/性能配对链路已通过工程验收，见 [冻结证据](baselines/quality-validation.json)。报告工具通过不等于核心或发布验收通过。
 
+MOD-03的[slider更新检查点](changes/2026-09-14-MOD-03-slider-updates.md)增加了正式
+main/legacy三组交替的重复事件诊断，减少不变ARIA属性写入。其合成事件计时与
+真实播放的DOM记录分开保存；不替代下文要求的实际安装包初始化/资源配对，也
+不关闭既有体积/计时风险。新候选的完整门槛仍须重新执行。
+
 ## Node 单元覆盖率
 
 使用固定 Node 24.21.0、Yarn 1.22.22，运行 `yarn test:coverage`。新增开发依赖 c8 12.0.0 仅在仓库测试中使用，不进入发布包的运行时依赖。版本由根 package.json 和 yarn.lock 固定。

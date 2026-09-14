@@ -1369,7 +1369,17 @@ entry scope. Native focus updates existing isFocus/isInput flags without emittin
 extra public pointer focus/blur events. `style/accessibility.less` supplies visible
 focus and keyboard control-bar visibility without changing existing class hooks.
 
-`accessibility/slider.ts` owns range keyboard input and ARIA state. Arrow keys use
+`accessibility/slider.ts` owns range keyboard input and ARIA state. Each refresh
+still reads the live range and formats its text, but compares each ARIA value with
+the actual DOM before writing. There is no cross-event value cache: external
+attribute changes/removals are repaired by the next update. This avoids duplicate
+attribute mutations on repeated timeupdate/volumechange without changing media
+events, keyboard writes, range validation or closed-scope behavior. The
+`slider-updates.spec.js` browser check records duplicate-event mutation counts and
+native playback updates; optional ARTPLAYER_SLIDER_BASELINE supplies a prechange
+artifact for three alternating paired groups. Synthetic paused-event timings are
+diagnostic, not overall playback or initialization performance acceptance.
+Arrow keys use
 the configured step, PageUp/PageDown use ten steps, and Home/End select endpoints.
 Unavailable or non-finite ranges remain focusable but disabled; their navigation
 keys cannot fall through to player shortcuts. Values and accessible text follow

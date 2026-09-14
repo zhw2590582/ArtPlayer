@@ -2268,6 +2268,10 @@ function installProgressInteractions(art, $control) {
   }
 }
 const directions = /* @__PURE__ */ new Map([["ArrowRight", 1], ["ArrowUp", 1], ["ArrowLeft", -1], ["ArrowDown", -1], ["PageUp", 10], ["PageDown", -10]]);
+function updateAttribute(element, name, value) {
+  if (element.getAttribute(name) !== value)
+    element.setAttribute(name, value);
+}
 function keyboardSlider(scope, element, label, read, write, orientation = "horizontal") {
   const valid = (range) => [range.min, range.max, range.value, range.step].every(Number.isFinite) && range.max > range.min && range.step > 0;
   const clamp2 = (value, range) => Math.min(range.max, Math.max(range.min, value));
@@ -2277,11 +2281,11 @@ function keyboardSlider(scope, element, label, read, write, orientation = "horiz
     const range = read();
     const enabled = valid(range);
     const value = enabled ? clamp2(range.value, range) : 0;
-    element.setAttribute("aria-disabled", String(!enabled));
-    element.setAttribute("aria-valuemin", String(enabled ? range.min : 0));
-    element.setAttribute("aria-valuemax", String(enabled ? range.max : 0));
-    element.setAttribute("aria-valuenow", String(value));
-    element.setAttribute("aria-valuetext", range.text(value));
+    updateAttribute(element, "aria-disabled", String(!enabled));
+    updateAttribute(element, "aria-valuemin", String(enabled ? range.min : 0));
+    updateAttribute(element, "aria-valuemax", String(enabled ? range.max : 0));
+    updateAttribute(element, "aria-valuenow", String(value));
+    updateAttribute(element, "aria-valuetext", range.text(value));
   };
   if (scope.closed)
     return update;

@@ -223,6 +223,14 @@ public resize(force) verifies a visible subtitle again. Select actual main/legac
 with ARTPLAYER_JASSUB_ARTIFACT. This main-thread fault injection does not reproduce
 spontaneous Worker corruption or resolve the separate Firefox offscreen stall.
 
+`slider-updates.spec.js` checks live progress ARIA, external attribute repair and
+duplicate-event mutation counts. ARTPLAYER_SLIDER_BASELINE optionally supplies a
+prechange core script for three alternating paired groups. The regular candidate
+comes from the browser server, including ARTPLAYER_BROWSER_ARTIFACTS when supplied.
+Five timings of 1000 synthetic paused updates follow a 300-update warmup; operation
+counts and actual playback are measured separately. Keep raw samples and do not
+interpret these diagnostics as full initialization/resource or playback-FPS gates.
+
 JASSUB Firefox diagnostics retain the canonical failing cases. Set
 `ARTPLAYER_JASSUB_OFFSCREEN=default` to exercise native capability selection.
 `ARTPLAYER_JASSUB_ASYNC_RENDER=false` explicitly selects synchronous rendering;
