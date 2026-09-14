@@ -5,7 +5,7 @@ import base from './playwright.config.js'
 
 assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Native VAST source validation does not accept unrelated artifact maps')
 export default defineConfig(base, {
-  testMatch: ['**/vast.native.js', '**/vast-recovery.native.js'],
+  testMatch: ['**/vast.native.js', '**/vast-recovery.native.js', '**/vast-skip.native.js'],
   timeout: 30000,
   workers: 1,
   outputDir: 'refactor/.cache/vast-native/results',

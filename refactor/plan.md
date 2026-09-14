@@ -602,7 +602,7 @@
 - PKG-VAST-02: [记录](changes/2026-09-12-PKG-VAST-02-tests.md) [记录](baselines/vast-behavior-validation.json) [记录](baselines/vast-core.json) [记录](vast-validation.md)
 - PKG-VAST-03: [记录](changes/2026-09-12-PKG-VAST-03-lifecycle.md) [记录](baselines/vast-lifecycle-validation.json) [记录](vast-compatibility-decision.md) [记录](changes/2026-09-14-PKG-VAST-03-compatibility.md) [记录](baselines/vast-compatibility-validation.json)
 - PKG-VAST-04: [记录](changes/2026-09-14-PKG-VAST-04-types.md) [记录](baselines/vast-types-validation.json) [记录](vast-type-decision.md) [记录](vast-validation.md)
-- PKG-VAST-05: [记录](changes/2026-09-14-PKG-VAST-05-native-checkpoint.md) [记录](baselines/vast-native-validation.json)
+- PKG-VAST-05: [记录](changes/2026-09-14-PKG-VAST-05-native-checkpoint.md) [记录](baselines/vast-native-validation.json) [记录](changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md) [记录](baselines/vast-skip-validation.json)
 - PKG-CAST-01: [记录](baselines/chromecast-release.json) [记录](baselines/chromecast-contract.md) [记录](baselines/chromecast-contract-validation.json) [记录](changes/2026-09-13-PKG-CAST-01-contracts.md)
 - PKG-CAST-02: [记录](changes/2026-09-13-PKG-CAST-02-failures.md) [记录](baselines/chromecast-failures-validation.json)
 - PKG-CAST-03: [记录](changes/2026-09-13-PKG-CAST-03-runtime.md) [记录](baselines/chromecast-runtime-validation.json)

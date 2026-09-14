@@ -1,0 +1,1595 @@
+{
+  "task": "PKG-VAST-05",
+  "status": "doing",
+  "date": "2026-09-14T15:54:25.981Z",
+  "sourceCommit": "75da50a454eeb41b67858526d02ce0f590b92d8b",
+  "productionChanged": false,
+  "vpnExceptionUsed": false,
+  "reports": [
+    {
+      "file": "refactor/.cache/vast05-skip-first-report/report.json",
+      "sha256": "592bfee1c87fdc1a7f3ee43482ffc02ddcf6f89e6d194e3dc740208e38ab2a84",
+      "stats": {
+        "startTime": "2026-09-14T15:42:25.921Z",
+        "duration": 66004.132,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA npm-default requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "timedOut",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdError",
+                "at": 9042.300000011921,
+                "time": 5.034082,
+                "paused": false,
+                "error": "There was a problem requesting ads from the server."
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 26.012737,
+                "width": 640,
+                "paused": false
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "errors": [
+            "Test timeout of 30000ms exceeded.",
+            "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n  29 |     })\n  30 |     const beforeAd = await page.evaluate(() => window.art.currentTime)\n> 31 |     const responsePromise = page.waitForResponse(response => response.url().endsWith('/test/vast-skippable.xml'))\n     |                                  ^\n  32 |     await page.locator('#play').click()\n  33 |     const response = await responsePromise\n  34 |     expect(response.status()).toBe(200)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:31:34"
+          ],
+          "consoleErrors": [
+            "Access to fetch at 'http://127.0.0.1:8084/test/vast-skippable.xml' from origin 'http://imasdk.googleapis.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "Access to fetch at 'http://127.0.0.1:8084/test/vast-skippable.xml' from origin 'http://imasdk.googleapis.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."
+          ],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "04ae498d312511cb6738e1cd4ccc5070a4525845f0a266fc1d726eae5a4c4808",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA workspace-1.2 requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "timedOut",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdError",
+                "at": 7622.399999976158,
+                "time": 5.964329,
+                "paused": false,
+                "error": "No adsManagerLoadedEvent within 5000ms."
+              },
+              {
+                "type": "AdError",
+                "at": 7642,
+                "time": 5.982995,
+                "paused": false,
+                "error": "There was a problem requesting ads from the server."
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 28.353584,
+                "width": 640,
+                "paused": false
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "errors": [
+            "Test timeout of 30000ms exceeded.",
+            "Error: page.waitForResponse: Test timeout of 30000ms exceeded.\n\n  29 |     })\n  30 |     const beforeAd = await page.evaluate(() => window.art.currentTime)\n> 31 |     const responsePromise = page.waitForResponse(response => response.url().endsWith('/test/vast-skippable.xml'))\n     |                                  ^\n  32 |     await page.locator('#play').click()\n  33 |     const response = await responsePromise\n  34 |     expect(response.status()).toBe(200)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:31:34"
+          ],
+          "consoleErrors": [
+            "VAST Ad Error: {error: i2: No adsManagerLoadedEvent within 5000ms.\n    at <anonymous>:221:18}",
+            "Access to fetch at 'http://127.0.0.1:8084/test/vast-skippable.xml' from origin 'http://imasdk.googleapis.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "Access to fetch at 'http://127.0.0.1:8084/test/vast-skippable.xml' from origin 'http://imasdk.googleapis.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+            "VAST Ad Error: {error: i2: There was a problem requesting ads from the server.\n    at e2.B (<anonymous>:410:36)\n    at e2.…}"
+          ],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "04ae498d312511cb6738e1cd4ccc5070a4525845f0a266fc1d726eae5a4c4808",
+            "bytes": 760
+          }
+        }
+      ]
+    },
+    {
+      "file": "refactor/.cache/vast05-skip-cors-report/report.json",
+      "sha256": "61b9f016766107d24bfd4a511298c5a3ca312c4a1de96c0a9fe32c9e4f2d5688",
+      "stats": {
+        "startTime": "2026-09-14T15:44:29.083Z",
+        "duration": 43585.581,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA npm-default requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 7350.400000035763,
+                "time": 5.135506,
+                "paused": true
+              },
+              {
+                "type": "AdStarted",
+                "at": 7375.300000011921,
+                "time": 5.135506,
+                "paused": true
+              },
+              {
+                "type": "AdComplete",
+                "at": 11449.700000047684,
+                "time": 5.135506,
+                "paused": true
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 11452.5,
+                "time": 5.135506,
+                "paused": true
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 7.449357,
+                "width": 640,
+                "paused": false
+              },
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "xmlSha256": "04ae498d312511cb6738e1cd4ccc5070a4525845f0a266fc1d726eae5a4c4808",
+          "errors": [
+            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  51 |       }\n  52 |       return false\n> 53 |     }).toBe(true)\n     |        ^\n  54 |     await testInfo.attach('native-vast-skip-button.png', { contentType: 'image/png', body: await page.screenshot() })\n  55 |     await skipButton.click()\n  56 |     await expect.poll(() => page.evaluate(() => window.skipEvents.filter(event => event.type === 'AdSkipped').length)).toBe(1)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:53:8"
+          ],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "04ae498d312511cb6738e1cd4ccc5070a4525845f0a266fc1d726eae5a4c4808",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA workspace-1.2 requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 17888.599999964237,
+                "time": 2.712263,
+                "paused": true
+              },
+              {
+                "type": "AdStarted",
+                "at": 17914.399999976158,
+                "time": 2.712263,
+                "paused": true
+              },
+              {
+                "type": "AdComplete",
+                "at": 21990.19999998808,
+                "time": 2.712263,
+                "paused": true
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 21993,
+                "time": 2.712263,
+                "paused": true
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 5.02871,
+                "width": 640,
+                "paused": false
+              },
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "xmlSha256": "04ae498d312511cb6738e1cd4ccc5070a4525845f0a266fc1d726eae5a4c4808",
+          "errors": [
+            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  51 |       }\n  52 |       return false\n> 53 |     }).toBe(true)\n     |        ^\n  54 |     await testInfo.attach('native-vast-skip-button.png', { contentType: 'image/png', body: await page.screenshot() })\n  55 |     await skipButton.click()\n  56 |     await expect.poll(() => page.evaluate(() => window.skipEvents.filter(event => event.type === 'AdSkipped').length)).toBe(1)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:53:8"
+          ],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "04ae498d312511cb6738e1cd4ccc5070a4525845f0a266fc1d726eae5a4c4808",
+            "bytes": 760
+          }
+        }
+      ]
+    },
+    {
+      "file": "refactor/.cache/vast05-skip-countdown-report/report.json",
+      "sha256": "e135865451e52a2e0553710f7a18302a61ec7ae4eccc3064b7e5ccd38aed1f6b",
+      "stats": {
+        "startTime": "2026-09-14T15:47:12.273Z",
+        "duration": 36801.609,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA npm-default requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdError",
+                "at": 8420.800000011921,
+                "time": 5.92161,
+                "paused": false,
+                "error": "No adsManagerLoadedEvent within 5000ms."
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 7.94346,
+                "width": 640,
+                "paused": false
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "errors": [
+            "TimeoutError: page.waitForResponse: Timeout 7000ms exceeded while waiting for event \"response\"\n\n  29 |     })\n  30 |     const beforeAd = await page.evaluate(() => window.art.currentTime)\n> 31 |     const responsePromise = page.waitForResponse(response => response.url().endsWith('/test/vast-skippable.xml'), { timeout: 7000 })\n     |                                  ^\n  32 |     await page.locator('#play').click()\n  33 |     const response = await responsePromise\n  34 |     expect(response.status()).toBe(200)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:31:34"
+          ],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA workspace-1.2 requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 12190.099999964237,
+                "time": 5.523727,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 12214.099999964237,
+                "time": 5.523727,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 17236.899999976158,
+                "time": 5.523727,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 5.523727,
+                "width": 640,
+                "paused": true
+              },
+              {
+                "src": "http://127.0.0.1:8084/test/pattern.mp4?skippable=1",
+                "time": 7.550633,
+                "width": 320,
+                "paused": false
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [
+            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 1\nReceived: 0\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  55 |     await testInfo.attach('native-vast-skip-button.png', { contentType: 'image/png', body: await page.screenshot() })\n  56 |     await skipButton.click()\n> 57 |     await expect.poll(() => page.evaluate(() => window.skipEvents.filter(event => event.type === 'AdSkipped').length)).toBe(1)\n     |                                                                                                                        ^\n  58 |     await expect.poll(() => page.evaluate(() => window.skipEvents.some(event => event.type === 'AdContentResumeRequested'))).toBe(true)\n  59 |     await expect(page.locator('[id^=\"art-\"]')).toBeHidden()\n  60 |     await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(beforeAd + 0.2)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:57:120"
+          ],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        }
+      ]
+    },
+    {
+      "file": "refactor/.cache/vast05-skip-final-report/report.json",
+      "sha256": "dfed93e80ea01c09fdd87bc2bfd112be28ba087705edbda64d08f2b7024eb4c1",
+      "stats": {
+        "startTime": "2026-09-14T15:48:49.453Z",
+        "duration": 78324.46500000001,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA npm-default requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdError",
+                "at": 9416.699999988079,
+                "time": 5.932711,
+                "paused": false,
+                "error": "No adsManagerLoadedEvent within 5000ms."
+              },
+              {
+                "type": "AdContentPauseRequested",
+                "at": 9681.099999964237,
+                "time": 6.196551,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 9705.199999988079,
+                "time": 6.196551,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 14732.599999964237,
+                "time": 6.196551,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 14988.299999952316,
+                "time": 6.196551,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 14991.799999952316,
+                "time": 6.196551,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": [
+              {
+                "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                "time": 6.305583,
+                "width": 640,
+                "paused": false
+              },
+              {
+                "src": "http://127.0.0.1:8084/test/pattern.mp4?skippable=1",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              },
+              {
+                "src": "",
+                "time": 0,
+                "width": 0,
+                "paused": true
+              }
+            ]
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [
+            "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 10\n\n- Array []\n+ Array [\n+   Object {\n+     \"at\": 9416.699999988079,\n+     \"error\": \"No adsManagerLoadedEvent within 5000ms.\",\n+     \"paused\": false,\n+     \"skipOffset\": undefined,\n+     \"time\": 5.932711,\n+     \"type\": \"AdError\",\n+   },\n+ ]\n\n  62 |     const state = await page.evaluate(() => ({ events: window.skipEvents, time: window.art.currentTime, paused: window.art.template.$video.paused, imaVersion: window.google.ima.VERSION }))\n  63 |     expect(state.paused).toBe(false)\n> 64 |     expect(state.events.filter(event => event.type === 'AdError' || event.type === 'AdComplete')).toEqual([])\n     |                                                                                                   ^\n  65 |     await testInfo.attach('native-vast-skip', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(code), xmlSha256: hash(xml), mediaSha256: hash(fs.readFileSync('test/browser/media/pattern.mp4')), compatibility: compatibility || 'npm-default', beforeAd, ...state }) })\n  66 |     await page.evaluate(() => window.art.destroy())\n  67 |     await expect(page.locator('[id^=\"art-\"]')).toHaveCount(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast-skip.native.js:64:99"
+          ],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA workspace-1.2 requests playUrl and skips through the SDK button",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 5147.599999964237,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 5182,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 10212,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 10447.199999988079,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 10450.800000011921,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": []
+          },
+          "success": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "mediaSha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "compatibility": "workspace-1.2",
+            "beforeAd": 0.858536,
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 5147.599999964237,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 5182,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 10212,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 10447.199999988079,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 10450.800000011921,
+                "time": 3.46906,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "time": 3.5351,
+            "paused": false,
+            "imaVersion": "3.789.0"
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA npm-default requests playUrl and skips through the SDK button",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 6206,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 6237,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 11276,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 11578,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 11583,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": []
+          },
+          "success": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "mediaSha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "compatibility": "npm-default",
+            "beforeAd": 0.908701,
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 6206,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 6237,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 11276,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 11578,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 11583,
+                "time": 2.844527,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "time": 2.844527,
+            "paused": false,
+            "imaVersion": "3.789.0"
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA workspace-1.2 requests playUrl and skips through the SDK button",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 4533,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 4557,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 9807,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 10891,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 10897,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": []
+          },
+          "success": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "mediaSha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "compatibility": "workspace-1.2",
+            "beforeAd": 0.9087,
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 4533,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 4557,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 9807,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 10891,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 10897,
+                "time": 2.919877,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "time": 2.961824,
+            "paused": false,
+            "imaVersion": "3.789.0"
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA npm-default requests playUrl and skips through the SDK button",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 3169,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 3353,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 8578,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 9786,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 9830,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": []
+          },
+          "success": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "mediaSha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "compatibility": "npm-default",
+            "beforeAd": 0.9757709,
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 3169,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 3353,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 8578,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 9786,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 9830,
+                "time": 2.1891878,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "time": 2.4265628,
+            "paused": false,
+            "imaVersion": "3.789.0"
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA workspace-1.2 requests playUrl and skips through the SDK button",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 2894,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 3104,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 8350,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 9470,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 9511,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "imaVersion": "3.789.0",
+            "videos": []
+          },
+          "success": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "mediaSha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "compatibility": "workspace-1.2",
+            "beforeAd": 1.0175834,
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 2894,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdStarted",
+                "at": 3104,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkippableStateChanged",
+                "at": 8350,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdSkipped",
+                "at": 9470,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 9511,
+                "time": 1.5732918,
+                "paused": true,
+                "skipOffset": 5
+              }
+            ],
+            "time": 1.8828336,
+            "paused": false,
+            "imaVersion": "3.789.0"
+          },
+          "xmlSha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        }
+      ]
+    },
+    {
+      "file": "refactor/.cache/vast05-webkit-probe-report/report.json",
+      "sha256": "a6218a08036214e8c2b94d7ff2c725e9801879276f0f0607d7718e6f0a7a39ae",
+      "stats": {
+        "startTime": "2026-09-14T15:51:11.607Z",
+        "duration": 37577.504,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "registration": "ready",
+            "imaVersion": "3.789.0",
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 2789,
+                "contentTime": 1.6561252,
+                "contentPaused": true
+              },
+              {
+                "type": "AdStarted",
+                "at": 3007,
+                "contentTime": 1.6561252,
+                "contentPaused": true
+              },
+              {
+                "type": "AdComplete",
+                "at": 7177,
+                "contentTime": 1.6561252,
+                "contentPaused": true
+              },
+              {
+                "type": "MediaResumed",
+                "at": 7226,
+                "contentTime": 1.6561252,
+                "contentPaused": true
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 7226,
+                "contentTime": 1.6561252,
+                "contentPaused": true
+              },
+              {
+                "type": "AdAllAdsCompleted",
+                "at": 7228,
+                "contentTime": 1.7100002,
+                "contentPaused": false
+              }
+            ],
+            "mediaSamples": [
+              {
+                "at": 3511,
+                "videos": [
+                  {
+                    "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                    "declaredSrc": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                    "width": 640,
+                    "height": 360,
+                    "time": 1.6561252,
+                    "readyState": 4,
+                    "paused": true
+                  },
+                  {
+                    "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                    "declaredSrc": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                    "width": 640,
+                    "height": 360,
+                    "time": 0.4703743,
+                    "readyState": 4,
+                    "paused": false
+                  },
+                  {
+                    "src": "",
+                    "declaredSrc": "",
+                    "width": 0,
+                    "height": 0,
+                    "time": 0,
+                    "readyState": 0,
+                    "paused": true
+                  }
+                ]
+              }
+            ],
+            "videos": [],
+            "coreVersion": "5.4.1"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "registration": "ready",
+            "imaVersion": "3.789.0",
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 2843,
+                "contentTime": 1.6087085,
+                "contentPaused": true
+              },
+              {
+                "type": "AdStarted",
+                "at": 3050,
+                "contentTime": 1.6087085,
+                "contentPaused": true
+              },
+              {
+                "type": "AdComplete",
+                "at": 7192,
+                "contentTime": 1.6087085,
+                "contentPaused": true
+              },
+              {
+                "type": "MediaResumed",
+                "at": 7239,
+                "contentTime": 1.6087085,
+                "contentPaused": true
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 7239,
+                "contentTime": 1.6087085,
+                "contentPaused": true
+              },
+              {
+                "type": "AdAllAdsCompleted",
+                "at": 7241,
+                "contentTime": 1.6600002,
+                "contentPaused": false
+              }
+            ],
+            "mediaSamples": [
+              {
+                "at": 3552,
+                "videos": [
+                  {
+                    "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                    "declaredSrc": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                    "width": 640,
+                    "height": 360,
+                    "time": 1.6087085,
+                    "readyState": 4,
+                    "paused": true
+                  },
+                  {
+                    "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                    "declaredSrc": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                    "width": 640,
+                    "height": 360,
+                    "time": 0.4867701,
+                    "readyState": 4,
+                    "paused": false
+                  },
+                  {
+                    "src": "",
+                    "declaredSrc": "",
+                    "width": 0,
+                    "height": 0,
+                    "time": 0,
+                    "readyState": 0,
+                    "paused": true
+                  }
+                ]
+              }
+            ],
+            "videos": [],
+            "coreVersion": "5.4.1"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "state": {
+            "registration": "ready",
+            "imaVersion": "3.789.0",
+            "events": [
+              {
+                "type": "AdContentPauseRequested",
+                "at": 2577,
+                "contentTime": 1.5936669,
+                "contentPaused": true
+              },
+              {
+                "type": "AdStarted",
+                "at": 2772,
+                "contentTime": 1.5936669,
+                "contentPaused": true
+              },
+              {
+                "type": "AdComplete",
+                "at": 6934,
+                "contentTime": 1.5936669,
+                "contentPaused": true
+              },
+              {
+                "type": "MediaResumed",
+                "at": 6980,
+                "contentTime": 1.5936669,
+                "contentPaused": true
+              },
+              {
+                "type": "AdContentResumeRequested",
+                "at": 6980,
+                "contentTime": 1.5936669,
+                "contentPaused": true
+              },
+              {
+                "type": "AdAllAdsCompleted",
+                "at": 6982,
+                "contentTime": 1.6200002,
+                "contentPaused": false
+              }
+            ],
+            "mediaSamples": [
+              {
+                "at": 3258,
+                "videos": [
+                  {
+                    "src": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                    "declaredSrc": "http://127.0.0.1:8084/assets/sample/video.mp4",
+                    "width": 640,
+                    "height": 360,
+                    "time": 1.5936669,
+                    "readyState": 4,
+                    "paused": true
+                  },
+                  {
+                    "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                    "declaredSrc": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                    "width": 640,
+                    "height": 360,
+                    "time": 0.4528326,
+                    "readyState": 4,
+                    "paused": false
+                  },
+                  {
+                    "src": "",
+                    "declaredSrc": "",
+                    "width": 0,
+                    "height": 0,
+                    "time": 0,
+                    "readyState": 0,
+                    "paused": true
+                  }
+                ]
+              }
+            ],
+            "videos": [],
+            "coreVersion": "5.4.1"
+          },
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        }
+      ]
+    },
+    {
+      "file": "refactor/.cache/vast05-server-regression-report/report.json",
+      "sha256": "3a0fa9c8fd175c534172db9eadc49920c61776bda59c792fa9cc65f52301a3c1",
+      "stats": {
+        "startTime": "2026-09-14T15:52:29.830Z",
+        "duration": 16864.015,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "published: real playback, pause, seek, switch and destroy",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "candidate: real playback, pause, seek, switch and destroy",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "controlled HTTP media failure emits a real video error",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "Range, media identity and docs candidate routes",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "published: real playback, pause, seek, switch and destroy",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "candidate: real playback, pause, seek, switch and destroy",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "controlled HTTP media failure emits a real video error",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "Range, media identity and docs candidate routes",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "published: real playback, pause, seek, switch and destroy",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "candidate: real playback, pause, seek, switch and destroy",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "controlled HTTP media failure emits a real video error",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        },
+        {
+          "title": "Range, media identity and docs candidate routes",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "consoleErrors": [],
+          "fixture": {
+            "source": {
+              "kind": "local-vast-fixture",
+              "file": "test/browser/vast-fixture.mjs"
+            },
+            "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+            "bytes": 760
+          }
+        }
+      ]
+    }
+  ],
+  "files": {
+    "test/browser/vast-fixture.mjs": "87427a98f815fd70f12ee2399e68360536f1b625c49a2798c357f81537179682",
+    "test/browser/vast-skip.native.js": "c95060b38e675cf1cb7a0e8ad0a3b322b49d24803cd2644c0aa21e7e54da463a",
+    "test/browser/vast.native.js": "f2155b9d5a3a1a840cbec7d79d19c1589a5ddbdd5d7cbb5e4c28ca54847b6e6a",
+    "test/browser/server.mjs": "17b7ea3db2c8e21115346d62f307d45253599307bf7f68052f41af864ab8ebe5",
+    "playwright.vast-native.config.js": "eebfca76d96cc9d84f8d9ece20aee32d1dd4826373e18ed31ae80a98f3173474",
+    "test/browser/media/pattern.mp4": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233"
+  },
+  "historicalWebkit": {
+    "previousFailureRetained": true,
+    "trace": "refactor/.cache/vast05-native-final-report/results/vast.native.js-real-IMA-ca-70929-T-media-and-resumes-content-webkit/trace.zip",
+    "image": "refactor/.cache/vast05-old-webkit-ad.jpg",
+    "imageSha256": "4f6f2b540152d0a9a0d3dcf36bd259b9bc1ffd0d47142ac509128a4da7bc5a99",
+    "observed": "Trace screenshot shows Linear Ad at00:00:00,12. Actual AdComplete/content resume events occurred, while the prior video polling predicate never became true. Three fixed diagnostic repetitions passed with unchanged predicate and additional raw media samples; root cause remains unproven."
+  },
+  "remaining": [
+    "Keep prior SDK9000/late load and historical failures open; this is not a green full matrix.",
+    "Real physical iOS/Android evidence remains required.",
+    "Exact native package/distribution validation remains task06.",
+    "Short4-second ad with1-second skipoffset did not expose skip state; do not generalize the8-second/5-second case to every ad."
+  ]
+}

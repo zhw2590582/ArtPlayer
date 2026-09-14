@@ -3140,7 +3140,9 @@
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-14-PKG-VAST-05-native-checkpoint.md",
-        "baselines/vast-native-validation.json"
+        "baselines/vast-native-validation.json",
+        "changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md",
+        "baselines/vast-skip-validation.json"
       ]
     },
     {

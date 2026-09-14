@@ -11,6 +11,7 @@ import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases
 import { performanceHtml, performanceScript } from '../../scripts/performance-fixture.mjs'
 import { getEntryFile } from '../../scripts/projects.js'
 import { getGlobalName, getViteBuildConfig } from '../../scripts/utils.js'
+import { skippableVast } from './vast-fixture.mjs'
 
 const workspace = fileURLToPath(new URL('../../', import.meta.url))
 
@@ -94,7 +95,8 @@ add('/test/audio-tone.m4a', fs.readFileSync(path.join(workspace, 'test/browser/m
 add('/test/thumbnail-pattern.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-pattern.mp4')), { kind: 'generated-media', file: 'test/browser/media/thumbnail-pattern.mp4' })
 add('/test/auto-thumbnail-timeline.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/auto-thumbnail-timeline.mp4')), { kind: 'generated-media', file: 'test/browser/media/auto-thumbnail-timeline.mp4' })
 
-const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.mp4': 'video/mp4', '.m4a': 'audio/mp4', '.webm': 'video/webm', '.vtt': 'text/vtt', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.wasm': 'application/wasm', '.woff2': 'font/woff2' }
+const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.xml': 'application/xml', '.css': 'text/css', '.mp4': 'video/mp4', '.m4a': 'audio/mp4', '.webm': 'video/webm', '.vtt': 'text/vtt', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.wasm': 'application/wasm', '.woff2': 'font/woff2' }
+add('/test/vast-skippable.xml', Buffer.from(skippableVast(`http://127.0.0.1:${port}`)), { kind: 'local-vast-fixture', file: 'test/browser/vast-fixture.mjs' })
 add('/test/declaration-cues.vtt', fs.readFileSync(path.join(workspace, 'test/browser/media/declaration-cues.vtt')), { kind: 'test-subtitles', file: 'test/browser/media/declaration-cues.vtt' })
 add('/test/thumbnail-grid.svg', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-grid.svg')), { kind: 'test-thumbnail-grid', file: 'test/browser/media/thumbnail-grid.svg' })
 add('/test/legacy-safe-area.js', fs.readFileSync(path.join(workspace, 'test/helpers/legacy-safe-area.js')), { kind: 'frozen-own-source', file: 'test/helpers/legacy-safe-area.js', commit: 'ccf77c4e' })
@@ -170,6 +172,11 @@ const server = http.createServer((req, res) => {
       return
     }
     if (files.has(url.pathname)) {
+      if (url.pathname === '/test/vast-skippable.xml' && ['http://imasdk.googleapis.com', 'https://imasdk.googleapis.com'].includes(req.headers.origin)) {
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
+        res.setHeader('Access-Control-Allow-Credentials', 'true')
+        res.setHeader('Vary', 'Origin')
+      }
       send(req, res, files.get(url.pathname), url.pathname)
       return
     }

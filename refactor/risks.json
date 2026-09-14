@@ -777,11 +777,13 @@
         "refactor/vast-validation.md",
         "refactor/baselines/vast-behavior-validation.json",
         "refactor/changes/2026-09-14-PKG-VAST-05-native-checkpoint.md",
-        "refactor/baselines/vast-native-validation.json"
+        "refactor/baselines/vast-native-validation.json",
+        "refactor/changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md",
+        "refactor/baselines/vast-skip-validation.json"
       ],
       "compatibleResolution": "@glomex/vast-ima-player loadImaSdk loads external IMA; preserve event/content/ad state and teardown, do not equate mocks with vendor service acceptance.",
       "closureCriteria": "固定 SDK/外部资源版本和环境；成功/失败/切换/销毁有真实证据，设备和网络限制逐项记录。",
-      "workspaceState": "Real IMA3.789.0 executes with immutable npm1.0.0/candidate bundles: final27 desktop combinations22 passed5 failed; error303 recovery/recreation/active-ad destruction6 passed. Initial27 were23 passed4 failed and are preserved. SDK9000/late loading and historical WebKit ad-frame failures remain open. IAB SDK200 but bridge document ERR_BLOCKED_BY_CLIENT; physical devices/playUrl/skip not accepted. No VPN exception or timeout widening/retry-to-green."
+      "workspaceState": "Real IMA3.789.0 executes with immutable npm1.0.0/candidate bundles: final27 desktop combinations22 passed5 failed; error303 recovery/recreation/active-ad destruction6 passed. Initial27 were23 passed4 failed and are preserved. SDK9000/late loading and historical WebKit ad-frame failures remain open. IAB SDK200 but bridge document ERR_BLOCKED_BY_CLIENT; physical devices/playUrl/skip not accepted. No VPN exception or timeout widening/retry-to-green. Native playUrl/IMA skip UI adds5/6 passes (one9000 failure despite later skip), shared server12/12 passes. Historical WebKit trace contains real ad frames; three fixed raw-media diagnostic runs passed without changing the assertion, so the original intermittent failure is not closed."
     },
     {
       "id": "SDK-08",
@@ -3335,11 +3337,13 @@
         "refactor/changes/2026-09-14-PKG-VAST-03-compatibility.md",
         "refactor/baselines/vast-compatibility-validation.json",
         "refactor/changes/2026-09-14-PKG-VAST-05-native-checkpoint.md",
-        "refactor/baselines/vast-native-validation.json"
+        "refactor/baselines/vast-native-validation.json",
+        "refactor/changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md",
+        "refactor/baselines/vast-skip-validation.json"
       ],
       "compatibleResolution": "Reproduce pending SDK/callback destruction, errors, duplicate IDs and stale ad events before adding compatible cleanup and state ownership.",
       "closureCriteria": "Tests prove cleanup during load/callback rejection/core destruction and distinguish explicit plugin recreation from terminal core destruction; vendor media restoration is separately verified.",
-      "workspaceState": "Task03 controlled82 Node/162 browser checks remain valid; task05 adds6 real IMA303 recovery/recreation/active-ad core destruction passes across three engines/two modes. Native full combination failures, devices and remaining ad lifecycle paths keep this risk open; no claim of complete vendor/device acceptance."
+      "workspaceState": "Task03 controlled82 Node/162 browser checks remain valid; task05 adds6 real IMA303 recovery/recreation/active-ad core destruction passes across three engines/two modes. Native full combination failures, devices and remaining ad lifecycle paths keep this risk open; no claim of complete vendor/device acceptance. Native playUrl/IMA skip UI adds5/6 passes (one9000 failure despite later skip), shared server12/12 passes. Historical WebKit trace contains real ad frames; three fixed raw-media diagnostic runs passed without changing the assertion, so the original intermittent failure is not closed."
     },
     {
       "id": "VAST-DIST-01",

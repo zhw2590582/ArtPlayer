@@ -1,5 +1,14 @@
 # 进度与证据
 
+## PKG-VAST-05 增补真实playUrl和SDK跳过按钮
+
+真实HTTP标签、广告解码、跳过事件/按钮点击及主片恢复最终5/6通过；Chromium默认
+项虽完成跳过/恢复，因先出现SDK9000仍判失败。修复测试资源CORS与倒计时按钮
+误判，保留三轮失败，不修改生产代码。共享服务播放/切源/错误/Range回归12/12。
+旧WebKit失败trace确有广告画面；新增原始video采样后固定3次诊断通过，原失败
+仍未关闭。见[记录](changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md)和
+[证据](baselines/vast-skip-validation.json)。05保持doing，任务总数和完成数不变。
+
 ## PKG-VAST-05 真实 IMA 桌面验证检查点，仍进行中
 
 新增独立`test:vast-native`，真实远端IMA3.789.0与本地广告媒体，不替换SDK。

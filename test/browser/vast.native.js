@@ -17,6 +17,7 @@ test.afterEach(async ({ page }, testInfo) => {
     error: window.nativeVastError,
     imaVersion: window.google?.ima?.VERSION,
     events: window.nativeVastEvents,
+    mediaSamples: window.nativeVastMediaSamples,
     videos: [...document.querySelectorAll('video')].map(video => ({ src: video.currentSrc, time: video.currentTime, duration: video.duration, width: video.videoWidth, height: video.videoHeight, paused: video.paused, ended: video.ended })),
     containerConnected: window.nativeVastContext?.container?.isConnected,
     coreVersion: window.Artplayer?.version,
@@ -41,6 +42,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
       await page.evaluate(({ compatibility, historical }) => {
         window.nativeVastHistorical = historical
         window.nativeVastEvents = []
+        window.nativeVastMediaSamples = []
         window.nativeVastRegistration = 'pending'
         window.createPlayer('/assets/sample/video.mp4')
         const factory = window.artplayerPluginVast.default || window.artplayerPluginVast
@@ -81,7 +83,11 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
       await page.locator('#play').click()
       await expect.poll(() => page.evaluate(() => window.nativeVastEvents.some(event => event.type === 'AdStarted'))).toBe(true)
       await expect(page.locator('[id^="art-"]')).toBeVisible()
-      await expect.poll(() => page.evaluate(() => [...document.querySelectorAll('video')].some(video => video.currentSrc.includes('/assets/vast/linear-video.mp4') && video.videoWidth > 0 && video.videoHeight > 0 && video.currentTime > 0))).toBe(true)
+      await expect.poll(() => page.evaluate(() => {
+        const videos = [...document.querySelectorAll('video')].map(video => ({ src: video.currentSrc, declaredSrc: video.src, width: video.videoWidth, height: video.videoHeight, time: video.currentTime, readyState: video.readyState, paused: video.paused }))
+        window.nativeVastMediaSamples.push({ at: performance.now(), videos })
+        return videos.some(video => video.src.includes('/assets/vast/linear-video.mp4') && video.width > 0 && video.height > 0 && video.time > 0)
+      })).toBe(true)
       const decodedAd = await page.evaluate(() => [...document.querySelectorAll('video')].map(video => ({ src: video.currentSrc, width: video.videoWidth, height: video.videoHeight, time: video.currentTime })).filter(video => video.src.includes('/assets/vast/linear-video.mp4')))
       expect(decodedAd.some(video => video.width > 0 && video.height > 0)).toBe(true)
       expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)

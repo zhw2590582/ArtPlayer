@@ -128,4 +128,9 @@ availability is an explicit environment gate. No SDK boundary is substituted.
 Reports include bundle/media hashes, XML, SDK/browser versions, event order, decoded
 ad frames and resumed content state. See the validation record for actual results;
 adding this command does not establish device or final distribution acceptance.
+The native skip case requests a local HTTP VAST tag via `playUrl`, verifies its
+response and clicks IMA's own enabled skip button after the skippable event. Its
+countdown already has an accessible skip name; visibility alone is insufficient.
+The local XML server permits only IMA origins on that fixture route. Native SDK
+timeouts remain failures even when a late ad subsequently plays or skips correctly.
 Physical device validation remains05 and full distribution06.
