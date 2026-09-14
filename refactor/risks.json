@@ -5779,7 +5779,9 @@
         "refactor/baselines/jassub-display-validation.json",
         "test/browser/jassub-platform.spec.js",
         "test/browser/jassub-native.spec.js",
-        "test/browser/jassub-hybrid.spec.js"
+        "test/browser/jassub-hybrid.spec.js",
+        "refactor/changes/2026-09-15-CI-01-jassub-installed.md",
+        "refactor/baselines/ci-jassub-installed-validation.json"
       ],
       "compatibleResolution": "Isolate native media/compositor/readback and sequence effects without globally disabling default offscreen or deleting assertions. The pre-09 artifact also fails in the same sequence; do not claim the new hybrid guard caused or fixed this separate failure.",
       "closureCriteria": "Identify and verify a compatible fix or a reviewed precise platform boundary with native controls. Preserve known red sequence and successful standalone comparison; candidate playback/fullscreen pixels and lifetime must be justified, not merely rerun to green."

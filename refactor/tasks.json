@@ -772,7 +772,9 @@
         "changes/2026-09-15-CI-01-asr-cast-installed.md",
         "baselines/ci-asr-cast-installed-validation.json",
         "changes/2026-09-15-CI-01-mediabunny-installed.md",
-        "baselines/ci-mediabunny-installed-validation.json"
+        "baselines/ci-mediabunny-installed-validation.json",
+        "changes/2026-09-15-CI-01-jassub-installed.md",
+        "baselines/ci-jassub-installed-validation.json"
       ]
     },
     {

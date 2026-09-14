@@ -11,6 +11,7 @@ import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases
 import { performanceHtml, performanceScript } from '../../scripts/performance-fixture.mjs'
 import { getEntryFile } from '../../scripts/projects.js'
 import { getGlobalName, getViteBuildConfig } from '../../scripts/utils.js'
+import { jassubAssets } from '../helpers/jassub-assets.js'
 import { skippableVast } from './vast-fixture.mjs'
 
 const workspace = fileURLToPath(new URL('../../', import.meta.url))
@@ -28,6 +29,10 @@ function add(route, bytes, source) {
 // An explicit artifact map takes precedence over source builds and never falls back.
 const mapFile = process.env.ARTPLAYER_BROWSER_ARTIFACTS
 const overrides = mapFile ? JSON.parse(fs.readFileSync(mapFile, 'utf8')) : {}
+if (Object.hasOwn(overrides, 'artplayer-plugin-jassub')) {
+  for (const resource of jassubAssets(workspace, mapFile))
+    add(resource.route, resource.bytes, resource.source)
+}
 for (const name of ['artplayer', 'artplayer-plugin-chapter']) {
   const route = `/candidate/${name}.js`
   if (mapFile) {

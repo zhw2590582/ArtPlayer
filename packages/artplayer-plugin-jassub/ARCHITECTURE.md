@@ -167,3 +167,24 @@ likewise a capability fallback control. Further codec/device/hybrid combinations
 and sustained resource release remain PKG-JASSUB-05.
 See
 `../../refactor/baselines/jassub-contract.md` for precise contract and provenance evidence.
+
+## Installed browser inputs
+
+`yarn test:package --browser` includes this package and its worker directory. Set
+ARTPLAYER_BROWSER_ARTIFACTS to the generated map and run
+`yarn test:browser:installed jassub --workers=2`. The installed matrix retains
+the published native-render control and adds the installed candidate for all three
+core versions. Lifecycle, hybrid and render-failure suites use the verified
+installed candidate; without a map they build current source, unless an explicit
+artifact is selected. The native-render suite retains its historical default in
+source mode. The platform suite has no JASSUB wrapper/WASM and is a control only.
+
+The browser server maps the three worker/WASM URLs to installed package files,
+checking archive digests and frozen resource baselines. The font remains a separate
+local resource with its own fixed digest; it is not packaged by this plugin.
+Worker source inventory joins src/public freshness checks. Actual HTTP response
+and byte identities are exposed in the server manifest; a missing/mutated installed
+worker cannot fall back to docs assets. These routes preserve the test URLs and
+do not change package exports, distributed bytes, resource defaults or licensing.
+Published WebKit rendering defects and physical/GPU/notice gates remain distinct
+from candidate results; see the CI checkpoint for actual execution.

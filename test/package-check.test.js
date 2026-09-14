@@ -61,7 +61,7 @@ test('Explicit installed plugin maps never fall back to source or frozen workspa
     delete process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE
     process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT = 'override.js'
     await assert.rejects(autoThumbnailCandidate(), /cannot override artplayer-plugin-auto-thumbnail artifact/)
-    for (const name of ['artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast']) {
+    for (const name of ['artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast', 'artplayer-plugin-jassub']) {
       await assert.rejects(browserCandidate(name), { code: 'ENOENT' })
       await assert.rejects(browserCandidate(name, 'override.js'), new RegExp(`cannot override ${name} artifact`))
     }

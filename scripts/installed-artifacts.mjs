@@ -40,7 +40,7 @@ export function verifyInstalledArtifacts(root, mapFile, names = ['artplayer', 'a
     const member = `package/dist/${path.basename(file)}`
     assert.equal(hash(fs.readFileSync(file)), pkg.files[member], `Installed browser artifact changed: ${name}`)
     const sourceHashes = {}
-    for (const folder of ['src', 'public']) {
+    for (const folder of ['src', 'public', 'worker']) {
       const current = path.join(root, 'packages', name, folder)
       const snapshot = path.join(directory, 'build/packages', name, folder)
       if (!fs.existsSync(current)) {

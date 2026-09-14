@@ -106,3 +106,15 @@ Available-input attachments list possible inputs; per-observation provenance
 identifies the selected one. Native media/decoding, controlled races, API absence
 and physical/long-run verification remain separate. See
 ../../refactor/changes/2026-09-15-CI-01-mediabunny-installed.md for actual results.
+
+JASSUB adds its native rendering, lifecycle, hybrid, render-failure and platform
+control files. The native-render file retains published inputs and adds installed
+candidates; its source-mode historical default stays unchanged. Three other
+wrapper suites build source unless an installed map or explicit artifact selects
+them. Installed worker JS and both WASM files are served at the existing URLs,
+with archived-member and frozen-resource hashes verified before serving. The
+local font is identified separately; it is not part of the plugin tarball.
+Package worker inventories now participate in input freshness checks. The
+platform control loads no JASSUB; historical failures, capability controls and
+actual rendering must be reported separately. See
+../../refactor/changes/2026-09-15-CI-01-jassub-installed.md.

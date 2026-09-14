@@ -1,10 +1,14 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
-const artifact = process.env.ARTPLAYER_JASSUB_ARTIFACT || 'packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js'
-const code = fs.readFileSync(artifact, 'utf8')
+const { code, provenance } = await browserCandidate('artplayer-plugin-jassub', process.env.ARTPLAYER_JASSUB_ARTIFACT)
+const artifact = provenance.file || 'source-build'
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('jassub-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
+})
 const subtitle = `[Script Info]
 ScriptType: v4.00+
 PlayResX: 640
@@ -152,7 +156,7 @@ test('JASSUB actual subtitle color-space transitions tolerate a queued native hy
       }
       return { available: probe.available, selected: probe.selected, matrix: probe.matrix, sent: probe.sent, received: probe.received, late: probe.late, terminal: probe.terminal, errors: probe.errors, busy: window.jassub.busy, lastDemand: window.jassub._lastDemandTime }
     })
-    await testInfo.attach('jassub-native-hybrid', { body: JSON.stringify({ artifact, sha256: hash(code), state, limitation: 'Actual Worker/WASM/ASS color-space transition and native ImageBitmap; one received render is held and delivered after synchronous public setTrack to reproduce a queued message. Not unmodified event timing, GPU endurance or physical-device evidence.' }), contentType: 'application/json' })
+    await testInfo.attach('jassub-native-hybrid', { body: JSON.stringify({ artifact, provenance, sha256: hash(code), state, limitation: 'Actual Worker/WASM/ASS color-space transition and native ImageBitmap; one received render is held and delivered after synchronous public setTrack to reproduce a queued message. Not unmodified event timing, GPU endurance or physical-device evidence.' }), contentType: 'application/json' })
     await page.evaluate(() => {
       if (!window.art.isDestroy)
         window.art.destroy()

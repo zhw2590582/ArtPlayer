@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { Buffer } from 'node:buffer'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
@@ -10,6 +11,7 @@ import { verifyInstalledArtifacts } from '../scripts/installed-artifacts.mjs'
 import { verifyPerformanceArtifacts } from '../scripts/performance-artifacts.mjs'
 import { performanceHtml, performanceScript, waitForObservation } from '../scripts/performance-fixture.mjs'
 import { validatePairedPerformance } from '../scripts/performance-report.mjs'
+import { jassubAssets } from './helpers/jassub-assets.js'
 
 const baseline = JSON.parse(fs.readFileSync(new URL('../refactor/baselines/performance.json', import.meta.url), 'utf8')).runs[0]
 function fixture() {
@@ -129,7 +131,7 @@ test('performance refuses stale sources, build tools and altered installed bundl
     write(path.join(root, file), content)
     write(path.join(snapshot, file), content)
   }
-  const names = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight']
+  const names = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-plugin-jassub']
   const packages = names.map((name) => {
     const entry = `packages/${name}/src/index.ts`
     write(path.join(root, entry), 'export default 1\n')
@@ -142,11 +144,48 @@ test('performance refuses stale sources, build tools and altered installed bundl
     return { name, sha256: 'archive fixture', files: { [`package/dist/${name}.js`]: hash(bytes) } }
   })
   const map = path.join(output, 'browser-artifacts.json')
+  const jassub = packages.find(pkg => pkg.name === 'artplayer-plugin-jassub')
+  const assets = ['jassub-worker.js', 'jassub-worker.wasm', 'jassub-worker-modern.wasm', 'default.woff2'].map((name) => {
+    const worker = name !== 'default.woff2'
+    const file = worker ? `packages/artplayer-plugin-jassub/worker/${name}` : `docs/assets/jassub/${name}`
+    const bytes = Buffer.from(`fixture ${name}`)
+    write(path.join(root, file), bytes)
+    if (worker) {
+      write(path.join(snapshot, file), bytes)
+      write(path.join(output, `artifacts/artplayer-plugin-jassub/worker/${name}`), bytes)
+      jassub.files[`package/worker/${name}`] = hash(bytes)
+    }
+    return { file, sha256: hash(bytes) }
+  })
+  write(path.join(root, 'refactor/baselines/jassub-release.json'), JSON.stringify({ assets }))
   write(map, JSON.stringify(Object.fromEntries(names.map(name => [name, `artifacts/${name}/dist/${name}.js`]))))
   write(path.join(output, 'report.json'), JSON.stringify({ task: 'ENG-07', knownTypeBlockers: 0, node: process.versions.node, packages }))
   assert.equal(verifyPerformanceArtifacts(root, map).inputs.length, 2)
   assert.equal(verifyPerformanceArtifacts(root, map).packages.length, 2)
-  assert.equal(verifyInstalledArtifacts(root, map, names).inputs.length, 3)
+  assert.equal(verifyInstalledArtifacts(root, map, names).inputs.length, 4)
+  assert.deepEqual(jassubAssets(root, map).map(item => item.source.kind), ['installed-resource', 'installed-resource', 'installed-resource', 'local-resource'])
+  assert(jassubAssets(root).every(item => item.source.kind === 'local-resource'))
+  const worker = path.join(root, assets[0].file)
+  const originalWorker = fs.readFileSync(worker)
+  write(worker, 'stale worker')
+  assert.throws(() => jassubAssets(root, map), /Stale package source/)
+  write(worker, originalWorker)
+  const installedWorker = path.join(output, 'artifacts/artplayer-plugin-jassub/worker/jassub-worker.js')
+  write(installedWorker, 'tampered installed worker')
+  assert.throws(() => jassubAssets(root, map), /resource differs from baseline/)
+  write(installedWorker, originalWorker)
+  const reportFile = path.join(output, 'report.json')
+  const originalReport = fs.readFileSync(reportFile)
+  const missingMember = JSON.parse(originalReport)
+  delete missingMember.packages.find(pkg => pkg.name === 'artplayer-plugin-jassub').files['package/worker/jassub-worker.js']
+  write(reportFile, JSON.stringify(missingMember))
+  assert.throws(() => jassubAssets(root, map), /resource differs from archive/)
+  write(reportFile, originalReport)
+  const font = path.join(root, assets[3].file)
+  const originalFont = fs.readFileSync(font)
+  write(font, 'wrong font')
+  assert.throws(() => jassubAssets(root, map), /resource differs from baseline/)
+  write(font, originalFont)
   assert.throws(() => verifyInstalledArtifacts(root, map, [...names, 'artplayer-proxy-canvas']), /Missing installed package/)
   const pluginSource = path.join(root, 'packages/artplayer-plugin-ambilight/src/index.ts')
   write(pluginSource, 'export default 2\n')

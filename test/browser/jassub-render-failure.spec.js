@@ -1,10 +1,14 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
-const artifact = process.env.ARTPLAYER_JASSUB_ARTIFACT || 'packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js'
-const code = fs.readFileSync(artifact, 'utf8')
+const { code, provenance } = await browserCandidate('artplayer-plugin-jassub', process.env.ARTPLAYER_JASSUB_ARTIFACT)
+const artifact = provenance.file || 'source-build'
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('jassub-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
+})
 const subtitle = `[Script Info]
 ScriptType: v4.00+
 PlayResX: 640
@@ -76,7 +80,7 @@ test('JASSUB closes the entire bitmap batch after a native draw failure and rend
       probe.holding = false
       return { before, after, failure, asyncRender: event.data.asyncRender }
     })
-    await testInfo.attach('bitmap-failure', { contentType: 'application/json', body: JSON.stringify({ artifact, sha256: hash(code), evidence, limitation: 'Actual JASSUB Worker/WASM bitmap, plus two native bitmap copies. Deliberately closing the first bitmap injects a native draw error; this does not claim spontaneous Worker corruption or Firefox offscreen recovery.' }) })
+    await testInfo.attach('bitmap-failure', { contentType: 'application/json', body: JSON.stringify({ artifact, provenance, sha256: hash(code), evidence, limitation: 'Actual JASSUB Worker/WASM bitmap, plus two native bitmap copies. Deliberately closing the first bitmap injects a native draw error; this does not claim spontaneous Worker corruption or Firefox offscreen recovery.' }) })
     expect(evidence.before.every(width => width > 0)).toBe(true)
     expect(evidence.asyncRender).toBe(true)
     expect(evidence.failure?.name).toBe('InvalidStateError')

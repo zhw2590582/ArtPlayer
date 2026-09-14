@@ -1,10 +1,14 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import { hash } from '../../refactor/scripts/releases.mjs'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
-const artifact = process.env.ARTPLAYER_JASSUB_ARTIFACT || 'packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js'
-const code = fs.readFileSync(artifact, 'utf8')
+const { code, provenance } = await browserCandidate('artplayer-plugin-jassub', process.env.ARTPLAYER_JASSUB_ARTIFACT)
+const artifact = provenance.file || 'source-build'
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('jassub-selected-input', { contentType: 'application/json', body: JSON.stringify({ browserName, provenance }) })
+})
 const subtitles = `[Script Info]
 ScriptType: v4.00+
 PlayResX: 640
@@ -116,7 +120,7 @@ for (const onDemandRender of [true, false]) {
       expect(state.errors).toEqual([])
       if (!onDemandRender)
         expect(state.sent.some(message => message.target === 'video' && message.rate === 1.5)).toBe(true)
-      await testInfo.attach('jassub-native-lifecycle', { body: JSON.stringify({ artifact, sha256: hash(code), onDemandRender, state }), contentType: 'application/json' })
+      await testInfo.attach('jassub-native-lifecycle', { body: JSON.stringify({ artifact, provenance, sha256: hash(code), onDemandRender, state }), contentType: 'application/json' })
     }
     finally {
       await page.evaluate(() => {
@@ -158,7 +162,7 @@ test('JASSUB actual invalid Worker URL construction releases the newly created c
   expect(state.error?.name).toBe('SyntaxError')
   expect(state.activeListeners).toBe(0)
   expect(state.ownedContainers).toBe(0)
-  await testInfo.attach('jassub-native-construction-failure', { body: JSON.stringify({ artifact, sha256: hash(code), state }), contentType: 'application/json' })
+  await testInfo.attach('jassub-native-construction-failure', { body: JSON.stringify({ artifact, provenance, sha256: hash(code), state }), contentType: 'application/json' })
 })
 
 test('JASSUB native asynchronous CSP Worker error reaches a pending query and explicit destruction cleans up', async ({ page }, testInfo) => {
@@ -186,5 +190,5 @@ test('JASSUB native asynchronous CSP Worker error reaches a pending query and ex
   expect(state.calls).toBe(1)
   expect(state.terminated).toBe(1)
   expect(state.ownedContainers).toBe(0)
-  await testInfo.attach('jassub-native-worker-error', { body: JSON.stringify({ artifact, sha256: hash(code), state }), contentType: 'application/json' })
+  await testInfo.attach('jassub-native-worker-error', { body: JSON.stringify({ artifact, provenance, sha256: hash(code), state }), contentType: 'application/json' })
 })
