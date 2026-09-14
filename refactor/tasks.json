@@ -4478,11 +4478,14 @@
       "dependsOn": [
         "MOD-02"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "修复 Servor 占用端口却退出 0 的已复现问题；明确 HTTP/监听/热刷新连接与定时器的启动、失败和关闭责任",
       "acceptance": "保持默认 8082、docs 页面、自动刷新和旧 dev 命令；端口冲突退出非零且不终止其他服务，连续启动/停止及编译错误恢复有实际验证；跨平台监听差异单独留证",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-MOD-DEV-01-dev-server.md",
+        "baselines/dev-server-validation.json"
+      ]
     },
     {
       "id": "MOD-03",

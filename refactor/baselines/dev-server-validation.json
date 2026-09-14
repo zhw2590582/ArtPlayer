@@ -1,0 +1,247 @@
+{
+  "task": "MOD-DEV-01",
+  "date": "2026-09-14",
+  "baselineCommit": "401d4cdd6557a69f9cfaf564f2b68f8589e526e2",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "platform": "win32",
+  "dependency": {
+    "name": "mrmime",
+    "version": "2.0.1",
+    "category": "root devDependency",
+    "license": "MIT",
+    "purpose": "MIME lookup only",
+    "lockEntriesAdded": 1,
+    "frozenInstall": "--frozen-lockfile --ignore-scripts",
+    "postinstallExecuted": false
+  },
+  "historicalFailure": {
+    "task": "MOD-DEV-01",
+    "node": "v24.21.0",
+    "servor": "4.0.2",
+    "occupiedPort": 12671,
+    "code": 0,
+    "signal": null,
+    "output": "[ERR] The port you have specified is already in use!\n",
+    "interpretation": "Historical upstream defect reproduction, not candidate success: an occupied requested port exits the entire process with status zero."
+  },
+  "candidate": {
+    "occupiedPortExit": 1,
+    "originalServiceStillResponds": true,
+    "repeatedSamePortLifetimes": 3,
+    "newNodeTests": 8,
+    "cancelledDownloadBytes": 16777216,
+    "heartbeatTest": "Controlled clock; other HTTP and SSE lifecycle tests use real sockets"
+  },
+  "results": [
+    {
+      "file": "refactor/.cache/dev-server-library.log",
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "abd6fca7249b64a63f9351b1b53f207dac1083fd8d713e23b39bf6e9c1e3f9ee"
+    },
+    {
+      "file": "refactor/.cache/dev-server-ci.log",
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "04e732cfccb07be92ccdedf5ddc8133b4861f0b631128419c2319183f1aee515"
+    },
+    {
+      "file": "refactor/.cache/dev-server-baseline.log",
+      "passed": 522,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "a9e44d6c3487319a9b7fbb9058df7a79e3625daf3abb3e4e9cd23c00508e54bd"
+    }
+  ],
+  "logs": [
+    {
+      "file": "refactor/.cache/dev-server-tests-final.log",
+      "sha256": "6cd260af733aa6220d4bf5aeea2307d9140aed7cee9ddb85040c1540c4bcabd3"
+    },
+    {
+      "file": "refactor/.cache/dev-server-types.log",
+      "sha256": "b8ce65e8a25624581da20e526f95117a989ea5c5c3033cc1a3a6861e6cec5f36"
+    },
+    {
+      "file": "refactor/.cache/dev-server-lint-final.log",
+      "sha256": "ccc1f36e43545ccdfb7aef1d55d40496c343ff10c6036c8fd961f378efc48d48"
+    },
+    {
+      "file": "refactor/.cache/dev-server-toolchain.log",
+      "sha256": "1059b56fdfb592beff8f39768d64ad13df19bc9a550a9444a943133278aefb3a"
+    },
+    {
+      "file": "refactor/.cache/dev-server-frozen-install.log",
+      "sha256": "4d0bee94ffb5dd5ee805368049bf45d89de83d9edfbb8fa46deee26977902a33"
+    },
+    {
+      "file": "refactor/.cache/dev-server-browser-verified.log",
+      "sha256": "eda334fa0841c12e815aedfe5aad7c92efaeb0afdb5c01864fdc358ac332829a"
+    },
+    {
+      "file": "refactor/.cache/dev-server-final.log",
+      "sha256": "9062d987689bda3d5285bf51c175350bd938bcbb92db3b86f994d9174a72bf00"
+    }
+  ],
+  "sources": [
+    {
+      "file": "scripts/dev.js",
+      "sha256": "4ef37e14e38ef1219c1f0dd9f477c91142bc222449805b560ed3b210b068655e"
+    },
+    {
+      "file": "scripts/library/development.ts",
+      "sha256": "202d1cfa5cc5ba7a5ee474a5a7e36afaf028b7be834516ab0be5cc97a3a53f71"
+    },
+    {
+      "file": "scripts/library/server.ts",
+      "sha256": "389303abf965e5b8a1138de194b766457f625bf06438b50e48fb388d8a537dfd"
+    },
+    {
+      "file": "scripts/library/assets.ts",
+      "sha256": "639c8137ccce15f903267e066e5dc55b4776c76bdfcfe5550599b15dc17e0f2e"
+    },
+    {
+      "file": "scripts/library/reload.ts",
+      "sha256": "0ee863e38c3065826d6432656e7c7d52ab4326733109195ad57ac6583fc6da58"
+    },
+    {
+      "file": "scripts/library/config.ts",
+      "sha256": "2017a781a78e227e8ecfd98af56ea9d3ae91f4f033f36b371e0efac1995a1aec"
+    },
+    {
+      "file": "scripts/library/vendor.d.ts",
+      "sha256": "af37a4c6bf37fde5c8eff862668f188eb1f3e9e3c12c3d46f563af78bd8b385f"
+    },
+    {
+      "file": "test/dev-server.test.js",
+      "sha256": "9cdb6c7911c036fff84b42edc95cfb039430b618f1ac0c48a736da8c2f646595"
+    },
+    {
+      "file": "test/browser/library-development.spec.js",
+      "sha256": "33e3cd93c726b9b8f3a14d7a98ee7962c0bcc749ac56f6bd9b048b28d7440e7d"
+    },
+    {
+      "file": "package.json",
+      "sha256": "85dcb9c9692d823364ca79d501249aa6e017521b4cd5e720cb1fc2561e0571db"
+    },
+    {
+      "file": "yarn.lock",
+      "sha256": "aa33cfc38c7933ab53ce626a911fdafd7b14023e45f93ca37bf7f2f6a1d3ecce"
+    }
+  ],
+  "browser": {
+    "file": "refactor/.cache/dev-server-browser-verified/report.json",
+    "sha256": "f23105cace080f11a97faaa1992f45cf196bd2fd7c5281f9ef7a0ca7930e5aa2",
+    "stats": {
+      "startTime": "2026-09-14T03:27:04.872Z",
+      "duration": 24092.995,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "actualDocs": [
+      {
+        "engine": "chromium",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "inputs": [
+          {
+            "file": "docs/uncompiled/artplayer/index.js",
+            "sha256": "a7b9baf492208d8b9b8f56644389b90d23f74df204139ea619efdd667da5ea83"
+          },
+          {
+            "file": "docs/assets/sample/video.mp4",
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        ],
+        "frameAlpha": 255,
+        "state": {
+          "version": "5.4.1",
+          "typed": 17,
+          "currentTime": 2,
+          "paused": true,
+          "width": 640,
+          "height": 360,
+          "error": 0,
+          "editorModels": 23
+        }
+      },
+      {
+        "engine": "firefox",
+        "browser": "155.0",
+        "platform": "win32",
+        "inputs": [
+          {
+            "file": "docs/uncompiled/artplayer/index.js",
+            "sha256": "a7b9baf492208d8b9b8f56644389b90d23f74df204139ea619efdd667da5ea83"
+          },
+          {
+            "file": "docs/assets/sample/video.mp4",
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        ],
+        "frameAlpha": 255,
+        "state": {
+          "version": "5.4.1",
+          "typed": 17,
+          "currentTime": 2,
+          "paused": true,
+          "width": 640,
+          "height": 360,
+          "error": 0,
+          "editorModels": 23
+        }
+      },
+      {
+        "engine": "webkit",
+        "browser": "26.6",
+        "platform": "win32",
+        "inputs": [
+          {
+            "file": "docs/uncompiled/artplayer/index.js",
+            "sha256": "a7b9baf492208d8b9b8f56644389b90d23f74df204139ea619efdd667da5ea83"
+          },
+          {
+            "file": "docs/assets/sample/video.mp4",
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        ],
+        "frameAlpha": 255,
+        "state": {
+          "version": "5.4.1",
+          "typed": 17,
+          "currentTime": 2,
+          "paused": true,
+          "width": 538,
+          "height": 303,
+          "error": 0,
+          "editorModels": 23
+        }
+      }
+    ],
+    "cliShutdown": "IPC emits SIGTERM in child, natural process exit0; not native Unix signal delivery",
+    "fixture": "Real CLI TS/Less/SVG/worker, automatic source/docs reload and compiler failure recovery"
+  },
+  "earlierAttempts": [
+    {
+      "file": "refactor/.cache/dev-server-tests-initial.log",
+      "sha256": "31e84f1014fde74a7c3c0f07a399572c0fb0b2a610d8bd6ee7350165ebf4101c"
+    },
+    {
+      "file": "refactor/.cache/dev-server-browser-docs-initial.log",
+      "sha256": "f60dd2a5b1d59d5dd87519e313d20bf0ab34446a7f3f3ef79b62e16da86a88fb"
+    }
+  ],
+  "limits": [
+    "Windows local runs only; remote OS CI and physical devices remain separate gates",
+    "Docs playback uses tracked core5.4.1, not a newly built release candidate",
+    "Analytics and ads inert in browser fixture",
+    "Build/source/config dependency changes outside selected src still require restart",
+    "Frozen install skipped lifecycle scripts",
+    "No push, publication or package artifact regeneration"
+  ]
+}

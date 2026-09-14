@@ -2,7 +2,9 @@
 
 `yarn typecheck:library` 检查 scripts/library 的生产构建、开发、配置、banner、
 分析、包选择和重建队列，同时检查旧 JS/MJS 门面。Vite 配置使用已安装的官方
-类型；vendor.d.ts 只描述实际消费的 prompts2.4.2/Servor4.0.2 调用，不声明全 SDK。
+类型；vendor.d.ts 只描述实际消费的 prompts2.4.2/Servor4.0.2 openBrowser 调用，
+不声明全 SDK。MOD-DEV-01 的 HTTP/assets/SSE 模块也在同一严格检查内；
+mrmime2.0.1 使用自带声明，Node HTTP/stream/watch 使用固定 Node 类型。
 
 `yarn typecheck:scaffold` 检查 scripts/plugin 的严格 TS 模块及旧 JS 命令入口。
 模板本身保留占位符，`yarn test:scaffold` 对实际渲染包执行源码检查和

@@ -1,10 +1,14 @@
 # Browser regression entry
 
-`library-development.spec.js` starts the actual typed development runner on an
-isolated fixture port. It checks generated TS/Less/SVG/inline-worker assets,
+`library-development.spec.js` starts the actual JS dev CLI and typed runner on an
+atomically assigned fixture port. It checks generated TS/Less/SVG/inline-worker assets,
 automatic reload on edits and recovery after a compiler error in all three
 engines. It owns and stops only its child server, never the user's port 8082
-session. This is development-tool validation, not media playback acceptance.
+session. SIGTERM must settle the child naturally with exit0. Its second case serves
+actual docs/Monaco, executes TypeScript and plays/pauses/seeks a local MP4, checking
+a decoded canvas frame. The attachment records browser/version, OS and actual
+core/media hashes; the tracked core5.4.1 asset is not a new release candidate.
+Analytics/ads are inert routes; real-device and remote OS checks remain separate.
 
 `site-loading.spec.js` covers actual desktop/mobile loading, dependency order,
 failure/retry/AMD restoration, example priority, repeated Run and stale responses,

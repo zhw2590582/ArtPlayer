@@ -13,6 +13,7 @@
 | `yarn typecheck:docs-tools` / `yarn check:docs-smoke` | 严格检查 TS 示例/声明生成器及 JS/MJS 门面；只读核对确定性生成的 readiness smoke，ci:check 执行 |
 | `yarn typecheck:scaffold` / `yarn test:scaffold` | 严格检查插件生成器与旧 JS 入口；生成包真实构建/类型/分发消费和写入失败回归；分别接入 ci:check 与 test:node |
 | `yarn typecheck:library` / `yarn test:library` | 严格检查库构建/开发 TS 与旧门面；复用真实资源构建、分发、性能证据和生成器回归；类型检查接入 ci:check |
+| `yarn test:dev-server` | 自有 HTTP/SSE 生命周期、端口冲突退出码、Range/HEAD/gzip、取消与重复启动回归；接入 test:node 和 test:library，真实 docs/CLI 检查进入既有三引擎 browser 矩阵 |
 | `yarn check:editor-types` | 只读核对全部编辑器声明、SDK notices 和实际 libUris；主 TS 5.9.3/历史 4.3.5 整组语义检查，ci:check 执行 |
 | `yarn build:site-assets` / `yarn check:site-assets` | 从站点 browser/ TS 生成三个经典脚本；check 只读，root build:docs 先生成；完整 VitePress 构建另行验收 |
 | `yarn typecheck:site-assets` | 严格检查站点 browser/ 模块；生成脚本由 typecheck:docs-tools 的 checkJs 覆盖；均进入 ci:check |

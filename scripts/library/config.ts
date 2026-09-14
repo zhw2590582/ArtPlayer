@@ -3,7 +3,7 @@ import { bannerPlugin, workerBannerPlugin } from './banner.ts'
 
 export interface LibraryConfigOptions {
   entry: string
-  outDir: string
+  outDir?: string
   name: string
   format: LibraryFormats
   fileName: string

@@ -5,6 +5,13 @@ scaffold's generated consumers. The new build modules live in `scripts/library/`
 `yarn typecheck:library` checks them and the retained JS/MJS entrypoints. Browser
 development/watch/error-recovery coverage is `browser/library-development.spec.js`.
 
+`yarn test:dev-server` covers actual HTTP ranges/HEAD/gzip, root containment,
+occupied-port CLI failure without stopping the existing server, repeated same-port
+reuse with SSE connections, aborted downloads and startup/build cancellation.
+A controlled-clock test checks heartbeat cleanup separately from real sockets.
+It is included in `test:node` and `test:library`; the browser suite also verifies
+actual docs/Monaco TypeScript execution and local media playback through this server.
+
 `yarn test:scaffold` covers old plugin-generator defects, exclusive writes and
 rollback, the historical CLI path, and actual generated package builds and type
 consumers. It runs in ignored fixtures without adding a workspace or real demo;

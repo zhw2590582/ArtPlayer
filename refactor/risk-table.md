@@ -262,4 +262,4 @@
 | SITE-EDITOR-AMD-01 | resolved / 已复现 | Late Monaco language AMD initialization races with example dependency loading | SITE-03 |
 | VTT-CORE-NAME-01 | open / 已复现 | Published VTT 1.0.1 control name conflicts with the core placeholder introduced in 5.1.7 | PKG-VTT-THUMB-05, REL-08 |
 | SCAFFOLD-OUTPUT-01 | resolved / 已复现 | Plugin generation overwrites existing examples and links to a different example name | MOD-PLUGIN-01 |
-| DEV-SERVOR-PORT-01 | open / 已复现 | Servor exits the entire dev process with status zero when the requested port is occupied | MOD-DEV-01 |
+| DEV-SERVOR-PORT-01 | resolved / 已复现 | Servor exits the entire dev process with status zero when the requested port is occupied | MOD-DEV-01 |

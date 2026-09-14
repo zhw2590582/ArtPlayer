@@ -5919,7 +5919,7 @@
       "id": "DEV-SERVOR-PORT-01",
       "title": "Servor exits the entire dev process with status zero when the requested port is occupied",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "MOD-DEV-01"
       ],
@@ -5930,7 +5930,14 @@
       ],
       "compatibleResolution": "Preserve the default dev URL and CLI while reporting startup failures with nonzero status, without stopping another service. Define ownership of HTTP, watch and reload resources.",
       "closureCriteria": "Real occupied-port and repeated startup/shutdown checks pass for the candidate; build, reload and error recovery remain compatible. Separate source-observed resource ownership limitations from reproduced leaks.",
-      "workspaceState": "Pinned Servor4.0.2 probe prints the occupied-port error and exits0. TS migration retains that upstream behavior; MOD-DEV-01 must resolve it before the final tooling decision. Servor has no exposed close handle; this is a source observation, not a measured leak."
+      "workspaceState": "Owned HTTP/watch/SSE session replaces Servor HTTP. Real occupied-port CLI exits1 and leaves original service alive; repeated same-port shutdown/restart, cancellation, automatic reload and compiler recovery pass on Windows. Remote OS validation remains a separate release gate.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-MOD-DEV-01-dev-server.md",
+        "refactor/baselines/dev-server-validation.json",
+        "test/dev-server.test.js",
+        "test/browser/library-development.spec.js"
+      ],
+      "resolutionRationale": "Exact port binding rejects with EADDRINUSE; CLI propagates exit1. Explicit close/done owns HTTP sockets, file pipelines, source/docs watchers, SSE heartbeat and active builds. Eight node tests and six Windows real-browser cases cover the stated defect and lifecycle scope without stopping unrelated services."
     }
   ]
 }

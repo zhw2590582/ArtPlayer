@@ -1,5 +1,20 @@
 # 进度与证据
 
+## MOD-DEV-01 自有开发服务器与关闭流程完成
+
+HTTP、静态资源与 SSE 拆为严格 TS 模块，修复 Servor4.0.2 端口占用却退出0的
+已复现问题。旧 dev 命令/默认8082保留，新增可选 ARTPLAYER_DEV_PORT；冲突退出1，
+原服务继续运行。关闭负责监听器、连接、文件流、心跳/防抖与构建中的异步工作；
+编译错误可恢复，成功构建和 docs HTML 修改均验证自动刷新。根开发依赖新增
+mrmime2.0.1 仅查 MIME，Yarn冻结安装通过；Lerna/安装钩子/包源码与产物未改。
+26项库工具、522项baseline、50项CI通过，严格类型与工具链通过，lint 1既有warning。
+Windows三引擎最终6项通过，包括真实JS命令关闭、Monaco运行TS和本地MP4
+播放/暂停/跳转/解码帧；实际tracked核心5.4.1不等于新npm候选，远端OS与真机
+门槛仍保留。失败尝试和最终报告分开存档。详见[记录](changes/2026-09-14-MOD-DEV-01-dev-server.md)
+和[证据](baselines/dev-server-validation.json)。关闭DEV-SERVOR-PORT-01，245项变为
+173 done、16 doing、56 todo。独立本地提交后核实审计；无推送或发布。
+下一步继续 Auto Thumbnail/VAST 等未完成包与组合验证，VAST默认行为选择仍待答复。
+
 ## MOD-02 库构建与开发脚本 TS 迁移完成
 
 旧 build/dev/utils/projects/rebuild/build-analysis 入口保留，实现拆为严格 TS

@@ -8,15 +8,6 @@ declare module 'prompts' {
   }): Promise<{ value?: string }>
 }
 
-declare module 'servor' {
-  export default function servor(options: {
-    root: string
-    fallback: string
-    reload: boolean
-    port: number
-  }): Promise<{ url: string }>
-}
-
 declare module 'servor/utils/openBrowser.js' {
   export default function openBrowser(url: string): true | undefined
 }

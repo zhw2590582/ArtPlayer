@@ -6,8 +6,9 @@ MOD-PLUGIN-01 将 `yarn create:plugin` 的实现拆为严格 TS 渲染/文件写
 运行 `yarn typecheck:scaffold` 与 `yarn test:scaffold`，具体限制和模块地图见
 [生成器维护指南](../scripts/plugin/README.md)。MOD-02 将剩余库构建/开发实现移到
 scripts/library 的严格 TS 模块，保留旧命令/模块入口；其模块地图与生命周期限制见
-[库工具维护指南](../scripts/library/README.md)。Servor 端口失败状态和关闭责任由
-MOD-DEV-01 继续处理，不因 TS 迁移而豁免。
+[库工具维护指南](../scripts/library/README.md)。MOD-DEV-01 将 HTTP、静态文件和
+SSE 拆为自有 TS 模块，修复端口失败退出码并明确关闭责任；根开发依赖
+mrmime 2.0.1 只负责 MIME 名称，Servor 仅保留打开浏览器的 helper。
 
 ENG-06 保留原来的 Vite 7.3.6、Terser、三种库产物及路径，增加选包参数和 TS 入口；未切换 bundler 或运行时依赖。固定工具链仍为 Node 24.21.0 / Yarn 1.22.22。
 
@@ -47,6 +48,14 @@ JS 包使用 src/index.js，TS 包使用 src/index.ts；必须恰有一个入口
 Vite 支持 TS 转译，但不替代类型检查，源码检查继续运行 yarn typecheck。[Vite 7 的 TS 说明](https://v7.vite.dev/guide/features#typescript) 对此有明确区分。此任务没有将生产 JS 改名为 TS，也没有生成新公开声明；ENG-07 与包迁移任务继续负责声明和 tarball 验收。
 
 dev 仍监听所选包的 src 目录，包外共享文件/tsconfig/依赖变化需要重启；不宣称已做完整依赖图热更新。错误会打印并保留监听，修复后重建；--no-open 仅禁止自动启动外部浏览器，访问地址不变。实际验证中源码修改和错误恢复后手动刷新页面确认了新结果。
+
+MOD-DEV-01 的自动化测试直接验证自动刷新、真实 JS CLI 的 SIGTERM 自然退出、
+连续复用同一端口，以及实际 docs/Monaco 的 TS 执行和本地 MP4 播放/跳转。
+默认 8082 不变；可设置 ARTPLAYER_DEV_PORT=0 让测试原子分配端口，或指定其他
+固定端口。冲突/无效值退出非零，不停止原服务。会话 close/done 管理源文件与
+docs 监听器、HTTP 请求/连接、SSE 心跳及正在运行的构建；修改生命周期时先跑
+`yarn test:dev-server`，再跑 `library-development.spec.js` 三引擎。
+详细修正与边界见[记录](changes/2026-09-14-MOD-DEV-01-dev-server.md)。
 
 ## 本次发现的 AMD 构建缺陷
 
