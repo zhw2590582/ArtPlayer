@@ -19,20 +19,41 @@
   ],
   "exports": {
     ".": {
-      "types": "./types/artplayer-plugin-{{name}}.d.ts",
-      "import": "./dist/artplayer-plugin-{{name}}.mjs",
-      "require": "./dist/artplayer-plugin-{{name}}.js"
+      "import": {
+        "types": "./types/artplayer-plugin-{{name}}.d.mts",
+        "default": "./dist/artplayer-plugin-{{name}}.mjs"
+      },
+      "require": {
+        "types": "./types/artplayer-plugin-{{name}}.d.ts",
+        "default": "./dist/artplayer-plugin-{{name}}.js"
+      },
+      "default": "./dist/artplayer-plugin-{{name}}.js"
     },
     "./legacy": {
-      "types": "./types/artplayer-plugin-{{name}}.d.ts",
-      "import": "./dist/artplayer-plugin-{{name}}.legacy.js",
-      "require": "./dist/artplayer-plugin-{{name}}.legacy.js"
-
-    }
+      "import": {
+        "types": "./types/artplayer-plugin-{{name}}.d.mts",
+        "default": "./dist/artplayer-plugin-{{name}}.legacy.js"
+      },
+      "require": {
+        "types": "./types/artplayer-plugin-{{name}}.d.ts",
+        "default": "./dist/artplayer-plugin-{{name}}.legacy.js"
+      },
+      "default": "./dist/artplayer-plugin-{{name}}.legacy.js"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
   },
   "main": "dist/artplayer-plugin-{{name}}.js",
   "module": "./dist/artplayer-plugin-{{name}}.mjs",
   "types": "types/artplayer-plugin-{{name}}.d.ts",
   "legacy": "dist/artplayer-plugin-{{name}}.legacy.js",
+  "files": ["README.md", "dist", "types"],
+  "scripts": {
+    "typecheck": "node ../../node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/plugin.test.mjs"
+  },
+  "peerDependencies": {
+    "artplayer": "*"
+  },
   "browserslist": "last 1 Chrome version"
 }

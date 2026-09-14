@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "lib": ["ES2022", "DOM"],
+    "allowImportingTsExtensions": true,
+    "checkJs": true
+  },
+  "include": ["plugin/*.ts", "plugin/create.js"]
+}

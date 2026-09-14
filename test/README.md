@@ -1,5 +1,11 @@
 # Tests and fixture ownership
 
+`yarn test:scaffold` covers old plugin-generator defects, exclusive writes and
+rollback, the historical CLI path, and actual generated package builds and type
+consumers. It runs in ignored fixtures without adding a workspace or real demo;
+see `scripts/plugin/README.md`. `yarn typecheck:scaffold` checks its TS modules and
+JS command shim. Both are wired into the existing Node/CI checks.
+
 `site-loading.test.js` freezes the old mobile loader's failure/race reproduction
 and checks shared loader ownership, retries/cancellation, query encoding and
 language rules. Actual local pages and Monaco are covered by site-loading.spec.js.

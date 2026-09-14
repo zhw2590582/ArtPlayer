@@ -1,5 +1,20 @@
 # 进度与证据
 
+## MOD-PLUGIN-01 插件生成器与 TS 模板完成
+
+生成器拆为严格 TS 的模板渲染、文件写入和 CLI，保留 create.js 旧命令入口及
+合法命名规则。冻结旧脚本复现示例覆盖和 README 链接不匹配；候选拒绝覆盖，
+失败时回退自己的未修改文件，保留外部修改并报告恢复路径。生成 TS 工厂、
+CJS/ESM 声明、三格式分发消费测试和维护指南，不改既有包或添加真实 workspace。
+11 项目标测试、522 项 baseline、50 项 CI 回归通过；生成包 lint 零 warning，
+源码及新旧编译器严格检查通过，全仓 lint 保留 1 条既有 warning。初始子进程
+测试报告问题及模板格式失败日志保留；详见[变更记录](changes/2026-09-14-MOD-PLUGIN-01-scaffold.md)
+和[证据](baselines/scaffold-validation.json)。没有新增依赖、安装、推送或发布。
+DOM 证据是 linkedom，不是未来插件功能的真实播放验收；文件写入不承诺进程
+被杀后的自动恢复。244 项变为 171 done、16 doing、57 todo。下一步 MOD-02
+继续 dev/build/utils 等剩余工程脚本；VAST 默认行为选择仍待用户答复。
+
+
 ## VTT Thumbnail 五核心组合检查点
 
 PKG-VTT-THUMB-05 进入 doing。冻结真实核心5.1.6的197成员，和已有5.1.7、

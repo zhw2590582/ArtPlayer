@@ -1,0 +1,160 @@
+{
+  "task": "MOD-PLUGIN-01",
+  "date": "2026-09-14",
+  "baselineCommit": "07d5bfef2e815e8038362bb836b9c496c7ef9862",
+  "environment": {
+    "os": "Windows",
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "typescript": "5.9.3",
+    "classicTypescript": "4.3.5"
+  },
+  "results": {
+    "scaffold": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ci": {
+      "passed": 50,
+      "failed": 0
+    },
+    "strictTypes": "passed",
+    "toolchain": "passed",
+    "lint": {
+      "errors": 0,
+      "warnings": 1,
+      "existingWarning": "docs/assets/ts/artplayer.d.ts unused ts/no-namespace directive"
+    },
+    "generatedPackage": {
+      "formats": [
+        "UMD es2020",
+        "UMD es2015 legacy",
+        "ESM es2020"
+      ],
+      "exports": [
+        "ESM default",
+        "CommonJS direct and .default",
+        "legacy ESM and CommonJS"
+      ],
+      "types": [
+        "strict source",
+        "TS5.9.3 NodeNext .mts/.cts",
+        "TS4.3.5 classic positive/negative"
+      ],
+      "lint": "zero warnings",
+      "dom": "linkedom duplicate stylesheet and no-DOM imports"
+    },
+    "baseline": {
+      "passed": 522,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "limitations": [
+    "No real browser playback or remote CI execution",
+    "No new real workspace; integration output is an ignored fixture",
+    "No all-files atomicity or killed-process recovery",
+    "No new dependencies or changes to yarn.lock"
+  ],
+  "sourceFiles": [
+    {
+      "path": "scripts/plugin/create.js",
+      "sha256": "ebc413b32037561698efd3c19776681cca57f259f09fab86e8d06d419b9a6647"
+    },
+    {
+      "path": "scripts/plugin/cli.ts",
+      "sha256": "0aa466a75c6e808ab652ca5409134e8618c1b0d96908c4a27362927c2f5084e4"
+    },
+    {
+      "path": "scripts/plugin/render.ts",
+      "sha256": "339485dd33bb6bf1e2602f89d65d88e6a4aea6aa4133f19c64b6cda9de466090"
+    },
+    {
+      "path": "scripts/plugin/publish.ts",
+      "sha256": "41604d49c22c5e30e69c17a4664055c2cd6442de473b85e3550a5cc96c6aca0f"
+    },
+    {
+      "path": "scripts/tsconfig.scaffold.json",
+      "sha256": "54388f6b1cc1c4173fcce70bbacd9512469f89bb19145be6aeb8c66eb6bd6fbc"
+    },
+    {
+      "path": "scripts/plugin/template/package.json",
+      "sha256": "3a8b700ba7f662cba8324678743339acdc1db33b7f9e7f37908971ff7125c982"
+    },
+    {
+      "path": "scripts/plugin/template/src/index.ts.tpl",
+      "sha256": "53183f3a3476c1c3225cf57c167b4bd24df7d5c46949b38889ebbe9326fceb72"
+    },
+    {
+      "path": "scripts/plugin/template/src/stylesheet.ts.tpl",
+      "sha256": "c9239de63c8b3a675fb0f8b1bd9f1a33544cae29864b8d16076a379ad89a5427"
+    },
+    {
+      "path": "scripts/plugin/template/src/assets.d.ts.tpl",
+      "sha256": "abc216473dd0869001b5a88ed7add80f0449e71d1d3af872a6df9631f96e4641"
+    },
+    {
+      "path": "scripts/plugin/template/src/style.less",
+      "sha256": "64c690eacbc33b44517d1fe84c53dbce3b76d97ed54ea273c6400119b46033d2"
+    },
+    {
+      "path": "scripts/plugin/template/types/api.d.ts.tpl",
+      "sha256": "24dd42ddae63405c6752528077b435f8ee398bc233efaab064707475a049b48a"
+    },
+    {
+      "path": "scripts/plugin/template/types/artplayer-plugin-{{name}}.d.ts.tpl",
+      "sha256": "82d68fc8311076f9e9466fb0e73927390501770dc02d2fdc828a637638f69949"
+    },
+    {
+      "path": "scripts/plugin/template/types/artplayer-plugin-{{name}}.d.mts.tpl",
+      "sha256": "63dbe5a3e754f380abb7de53e3d8de7074d424892b4f724465111c139cb65b71"
+    },
+    {
+      "path": "scripts/plugin/template/test/plugin.test.mjs.tpl",
+      "sha256": "e60bf566d665ac0d77a4d41899f26b01a24acf2516204e285f87c763f5b6ff57"
+    },
+    {
+      "path": "scripts/plugin/template/tsconfig.json",
+      "sha256": "528081768e5c3a6361dd0a2cfc59f953257caeae70bd5305b2db2fe4d98009ad"
+    },
+    {
+      "path": "test/plugin-scaffold.test.js",
+      "sha256": "ac9580ea49e937abc5129324ee5de930320dea59ba556f71ad9b1612a224f981"
+    }
+  ],
+  "logs": [
+    {
+      "path": "refactor/.cache/scaffold-initial.log",
+      "sha256": "6cd75297d36e46b1e4f9e462d296383dd76304d2befed6c6662d1fe21e74f5f0"
+    },
+    {
+      "path": "refactor/.cache/scaffold-generated-lint-initial.log",
+      "sha256": "99d420f2c2e4a76248b59bb8593297f127337d4eb5ddb81463e9e4ea80269bbc"
+    },
+    {
+      "path": "refactor/.cache/scaffold-final.log",
+      "sha256": "8505990bf0131dfa3598fa985cdbc7e294c6a62a2f1e905c864a082ac63f0179"
+    },
+    {
+      "path": "refactor/.cache/scaffold-types.log",
+      "sha256": "4bff36c4b15e17ba27c5065a7db072e324500a827be1e11ebb60d370271ff336"
+    },
+    {
+      "path": "refactor/.cache/scaffold-lint.log",
+      "sha256": "928ec73d5f8ea3b16e4bc051293d425692bd393df790abecb9ee320adecdff62"
+    },
+    {
+      "path": "refactor/.cache/scaffold-ci.log",
+      "sha256": "6cd851ff61057e007c24ff0898578c42dabb634096cb8b45d36bde7fd3114be0"
+    },
+    {
+      "path": "refactor/.cache/scaffold-toolchain.log",
+      "sha256": "1d5e2306c57bc1e90ae5625e0924e56cde9e27eb3cf89c64bfe735a36dd42863"
+    },
+    {
+      "path": "refactor/.cache/scaffold-baseline.log",
+      "sha256": "2ef047976b63d707e3e4fde2e3475b4d0b53c699c6120826870f0bec3816d971"
+    }
+  ]
+}

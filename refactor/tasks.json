@@ -4428,6 +4428,26 @@
       "evidence": []
     },
     {
+      "id": "MOD-PLUGIN-01",
+      "phase": "7 工具链与性能",
+      "title": "迁移插件生成器与类型化模板",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-06",
+        "SITE-03"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "保留 create:plugin CLI；纯渲染/文件发布边界、TS 工厂/声明/测试/示例及维护指南",
+      "acceptance": "防止覆盖现有包或示例；失败回退；生成包可构建并通过严格类型、旧模块消费及测试；不自动修改既有包或运行安装发布",
+      "evidence": [
+        "changes/2026-09-14-MOD-PLUGIN-01-scaffold.md",
+        "baselines/scaffold-validation.json"
+      ]
+    },
+    {
       "id": "MOD-02",
       "phase": "7 工具链与性能",
       "title": "整理剩余开发/构建脚本与插件模板",
@@ -4436,7 +4456,8 @@
       ],
       "dependsOn": [
         "ENG-06",
-        "SITE-03"
+        "SITE-03",
+        "MOD-PLUGIN-01"
       ],
       "status": "todo",
       "risk": "M",

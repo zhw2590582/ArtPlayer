@@ -11,6 +11,7 @@
 | `yarn typecheck` | 根/迁移包严格检查、当前与兼容 TS 消费；历史 NodeNext ESM 错误单独核对，见 typechecking.md |
 | `yarn typecheck:react` / `yarn typecheck:vue` | 原 React TSX / Vue SFC 示例严格检查，ci:check 同时执行对应 lint |
 | `yarn typecheck:docs-tools` / `yarn check:docs-smoke` | 严格检查 TS 示例/声明生成器及 JS/MJS 门面；只读核对确定性生成的 readiness smoke，ci:check 执行 |
+| `yarn typecheck:scaffold` / `yarn test:scaffold` | 严格检查插件生成器与旧 JS 入口；生成包真实构建/类型/分发消费和写入失败回归；分别接入 ci:check 与 test:node |
 | `yarn check:editor-types` | 只读核对全部编辑器声明、SDK notices 和实际 libUris；主 TS 5.9.3/历史 4.3.5 整组语义检查，ci:check 执行 |
 | `yarn build:site-assets` / `yarn check:site-assets` | 从站点 browser/ TS 生成三个经典脚本；check 只读，root build:docs 先生成；完整 VitePress 构建另行验收 |
 | `yarn typecheck:site-assets` | 严格检查站点 browser/ 模块；生成脚本由 typecheck:docs-tools 的 checkJs 覆盖；均进入 ci:check |

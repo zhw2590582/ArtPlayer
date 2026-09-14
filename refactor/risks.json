@@ -5892,6 +5892,28 @@
       "compatibleResolution": "Preserve current vtt-thumbnail and reserved core control identities; distinguish the actual working 1.0.1/5.1.6 pair from the already failing 5.1.7/5.4.0/candidate pair. Decide the supported historical pairing/migration or a compatible accommodation during release review without hiding duplicate-control failures.",
       "closureCriteria": "Historical working and failing browser pairs remain reproducible; any claimed accommodation preserves reserved-control ownership and duplicate-registration contracts, or an explicit reviewed historical support/migration boundary is recorded.",
       "workspaceState": "Final three-engine suite passes nine assertions of this historical rejection, not nine successful compatibility cells. No production control behavior was changed."
+    },
+    {
+      "id": "SCAFFOLD-OUTPUT-01",
+      "title": "Plugin generation overwrites existing examples and links to a different example name",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "MOD-PLUGIN-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-MOD-PLUGIN-01-scaffold.md",
+        "refactor/baselines/scaffold-validation.json",
+        "test/plugin-scaffold.test.js"
+      ],
+      "compatibleResolution": "Keep valid CLI and package/global/example names; reject existing outputs and generate the README from the actual example name.",
+      "closureCriteria": "Reproduce both historical defects and verify candidate collision/rollback behavior and a built typed package.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-MOD-PLUGIN-01-scaffold.md",
+        "refactor/baselines/scaffold-validation.json",
+        "test/plugin-scaffold.test.js"
+      ],
+      "resolutionRationale": "Frozen old generator reproduces overwrite and mismatched URL. Candidate refuses old or concurrent output, preserves external edits on rollback, generates matching dotted URLs and passes actual three-format package consumers and strict types."
     }
   ]
 }

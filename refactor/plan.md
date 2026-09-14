@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 243 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 244 项，范围 22 个包及工作区/示例。
 
-状态：todo 57 / doing 16 / blocked 0 / done 170 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 57 / doing 16 / blocked 0 / done 171 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -400,7 +400,8 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | MOD-01 | workspace<br>Bun 固定版本干净安装试点 | ENG-09 | 独立目录的 Bun 安装与 Yarn 冻结基线对比，默认仍为用户选定的 Yarn | Node 测试仍通过；安装与资源一致才决定采用；不改 bundler；不自动替换默认 packageManager 或维护锁文件 | H | todo |
-| MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | todo |
+| MOD-PLUGIN-01 | workspace<br>迁移插件生成器与类型化模板 | ENG-06, SITE-03 | 保留 create:plugin CLI；纯渲染/文件发布边界、TS 工厂/声明/测试/示例及维护指南 | 防止覆盖现有包或示例；失败回退；生成包可构建并通过严格类型、旧模块消费及测试；不自动修改既有包或运行安装发布 | M | done |
+| MOD-02 | workspace<br>整理剩余开发/构建脚本与插件模板 | ENG-06, SITE-03, MOD-PLUGIN-01 | dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API | 旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证 | M | todo |
 | MOD-03 | workspace<br>测量并优化核心热路径 | CORE-22, ENG-08 | DOM 读写、进度更新、持久化、初始化的测量与改进 | 相同设备媒体多次比较，契约不变，收益及无效尝试记录；复用 BASE-06 的原始样本与测量限制，至少三组同环境旧新配对，不以单次变快宣称收益 | M | todo |
 | MOD-04 | workspace<br>测量并优化重型插件/proxy | PKG-DANMUKU-09, PKG-MASK-06, PKG-MB-10, ENG-08 | 帧/队列/推理/音画同步与资源长期运行比较 | 不改默认算法/阈值，性能改善有证据；无收益则保留旧实现 | M | todo |
 | MOD-05 | workspace<br>完成工具链与性能采用决策 | MOD-01, MOD-02, MOD-03, MOD-04 | 最终 runtime/packageManager/构建配置及性能台账 | 干净安装和全包检查通过；Bun 未采用有理由，不为状态强行切换 | M | todo |
@@ -620,6 +621,7 @@
 - SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json)
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)
+- MOD-PLUGIN-01: [记录](changes/2026-09-14-MOD-PLUGIN-01-scaffold.md) [记录](baselines/scaffold-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)
 - ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)

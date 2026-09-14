@@ -1,5 +1,10 @@
 # 已实现的类型检查与迁移入口
 
+`yarn typecheck:scaffold` 检查 scripts/plugin 的严格 TS 模块及旧 JS 命令入口。
+模板本身保留占位符，`yarn test:scaffold` 对实际渲染包执行源码检查和
+TS 5.9.3 NodeNext / TS 4.3.5 classic 消费者正反例；生成声明地图见
+[插件生成器维护指南](../scripts/plugin/README.md)。
+
 PKG-ADS-04 已协调公开声明：根入口保留历史输入，/runtime 使用准确输入，同一 JS
 实现不进行字符串时长转换。CJS/ESM 桥、五种消费者模式、实际旧声明对照与真实 Monaco
 生成运行已接入。`ads-source.ts` 检查源码与公开工厂的赋值关系；`ads.ts` 包含十个

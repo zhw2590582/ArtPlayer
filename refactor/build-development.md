@@ -1,5 +1,12 @@
 # 已实现的 JS/TS 构建与开发入口
 
+MOD-PLUGIN-01 将 `yarn create:plugin` 的实现拆为严格 TS 渲染/文件写入/CLI，
+保留旧 JS 命令入口。生成 TS 工厂、CJS/ESM 声明、分发消费测试与维护文档；
+拒绝覆盖既有包/示例，失败时回退自己的写入并保留外部修改。
+运行 `yarn typecheck:scaffold` 与 `yarn test:scaffold`，具体限制和模块地图见
+[生成器维护指南](../scripts/plugin/README.md)。MOD-02 继续负责 dev/build/utils，
+本子任务不代表全部工程脚本已经迁移。
+
 ENG-06 保留原来的 Vite 7.3.6、Terser、三种库产物及路径，增加选包参数和 TS 入口；未切换 bundler 或运行时依赖。固定工具链仍为 Node 24.21.0 / Yarn 1.22.22。
 
 ENG-12 将库配置的 publicDir 设为 false，防止 core/public 的声明源码被复制到 dist。
