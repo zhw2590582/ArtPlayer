@@ -135,7 +135,14 @@ jobs:
         run: yarn test:react-consumer 2>&1 | tee refactor/.cache/ci/react-consumer.log
       - name: Verify Vue installed consumers
         run: yarn test:vue-consumer 2>&1 | tee refactor/.cache/ci/vue-consumer.log
-      - name: Run all three engines
+      - name: Prepare installed browser plugin packages
+        # Node/framework consumers above retain their two-package fixture scope.
+        # These extra installed packages are required by the browser helpers.
+        # Other ecosystem installation/SDK gates remain tracked by CI-01.
+        run: |
+          yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas 2>&1 | tee refactor/.cache/ci/browser-packages.log
+          node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
+      - name: Run installed browser checks
         run: yarn test:browser 2>&1 | tee refactor/.cache/ci/browser.log
       - name: Verify iframe cached history and interrupted navigation
         run: yarn test:iframe-history 2>&1 | tee refactor/.cache/ci/iframe-history.log

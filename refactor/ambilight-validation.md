@@ -1,5 +1,19 @@
 # Ambilight 测试维护
 
+## 已安装产物检查点
+
+`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas`
+生成包含两包的实际隔离安装及 browser-artifacts.json。把该路径传给
+ARTPLAYER_BROWSER_ARTIFACTS 后，Ambilight/Canvas helper 校验当前源码与构建快照
+及安装文件摘要，不回退内存构建。原生生命周期/代理组合测试可直接复用；同目录
+的 legacy map 必须指向 tarball 中已登记的 legacy 文件。
+
+现代45项、增强组合销毁断言后的现代9项、legacy45项三引擎全部通过；49+57+10项
+专项/工程检查通过。两个原生 RAF owner 的销毁后归零和 proxy 绘制停止都有断言。
+见[安装证据](baselines/ambilight-installed-validation.json)与
+[检查点记录](changes/2026-09-14-PKG-AMBILIGHT-05-installed-combination.md)。
+05仍doing，物理移动设备与完整分发验收未完成；以下早期记录保留其当时范围。
+
 先读 [发布契约](baselines/ambilight-contract.md)。ambilight-release.json冻结两个真实
 发布及工作区Git来源，verifyAmbilightContract逐成员核对，不随候选更新历史哈希。
 

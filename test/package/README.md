@@ -1,8 +1,14 @@
 # Installed package checks
 
 Run `yarn test:package` with the pinned Node and Yarn after a frozen install. The
-initial scope is core and chapter; extend `names` in `scripts/package-consumer.mjs`
-and add package-specific consumers when migrating another package.
+default consumer scope is core and chapter. For Ambilight/Canvas browser work,
+run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas`.
+These two additional packages have reviewed published contracts and use the same
+source snapshot/build/pack/offline-install/frozen-reinstall pipeline. Installed
+files are copied only after archive hash checks. The report explicitly separates
+the core/chapter runtime/type scope from the additional browser package scope;
+`--release` rejects additional packages until complete consumer coverage exists.
+Other packages need a reviewed contract and their own consumers before inclusion.
 
 `scripts/package-check.mjs` copies source into an ignored build snapshot, rebuilds
 all three formats and core languages using repository scripts, and runs Yarn pack.
@@ -71,6 +77,13 @@ validation set `ARTPLAYER_BROWSER_ARTIFACTS` to that run's `browser-artifacts.js
 and run `yarn test:browser`. The service then uses installed package bytes without
 falling back to source. CI performs this sequence and uploads only reports and
 artifacts, excluding the build snapshot's node_modules link.
+
+`scripts/installed-artifacts.mjs` verifies selected packages against the installed
+report and the current source/build inputs; performance retains its existing
+two-package wrapper. Ambilight and Canvas browser helpers use this verifier when
+an artifact map is supplied, including optional legacy maps pointing to checked
+legacy members in the same installation. Missing packages, stale source, modified
+bundles or contradictory frozen-workspace flags fail instead of rebuilding source.
 
 `test/package-check.test.js` verifies missing targets, leaked configuration and
 removed historical files, then deliberately removes an actual published default

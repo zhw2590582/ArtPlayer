@@ -5,7 +5,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { ensureArchive, hash, readMember } from '../refactor/scripts/releases.mjs'
-import { consumerDirectory, names, readJson, removeConsumer, run, runtimeConsumer, typeConsumers, workspace, writeJson } from './package-consumer.mjs'
+import { consumerDirectory, names as defaultNames, readJson, removeConsumer, run, runtimeConsumer, typeConsumers, workspace, writeJson } from './package-consumer.mjs'
 
 export function checkFiles(manifest, files, historical = []) {
   for (const field of ['main', 'module', 'types', 'legacy']) {
@@ -67,10 +67,23 @@ export async function publishedConsumer() {
   }
 }
 
-export async function checkPackages({ release = false } = {}) {
+export async function checkPackages({ release = false, include = [] } = {}) {
+  assert(!release || include.length === 0, 'Additional package browser preparation is not full release acceptance')
   assert.equal(process.env.npm_config_user_agent?.split(' ')[0], 'yarn/1.22.22', 'Run yarn test:package with the pinned Yarn')
   const yarn = process.env.npm_execpath
   assert(yarn && fs.existsSync(yarn), 'Missing Yarn executable')
+  const supported = {
+    'artplayer-plugin-ambilight': async () => (await import('../refactor/scripts/ambilight-contract.mjs')).verifyAmbilightContract(),
+    'artplayer-proxy-canvas': async () => (await import('../refactor/scripts/canvas-contract.mjs')).verifyCanvasContract(),
+  }
+  assert(new Set(include).size === include.length, 'Duplicate additional package')
+  const historicalFiles = new Map()
+  for (const name of include) {
+    assert(Object.hasOwn(supported, name), `Additional package needs a reviewed contract: ${name}`)
+    const contract = await supported[name]()
+    historicalFiles.set(name, Object.keys(contract.baseline.release.files))
+  }
+  const names = [...defaultNames, ...include]
   const parent = path.join(workspace, 'refactor/.cache/packages')
   fs.mkdirSync(parent, { recursive: true })
   const output = fs.mkdtempSync(path.join(parent, 'run-'))
@@ -98,7 +111,7 @@ export async function checkPackages({ release = false } = {}) {
       const manifest = JSON.parse(readMember(archive, 'package/package.json'))
       assert.equal(manifest.name, name)
       assert(!['preinstall', 'install', 'postinstall'].some(hook => manifest.scripts?.[hook]), 'Add lifecycle fixtures before accepting install hooks')
-      checkFiles(manifest, files, Object.keys(baseline.releases.find(r => r.name === name).files))
+      checkFiles(manifest, files, historicalFiles.get(name) || Object.keys(baseline.releases.find(r => r.name === name).files))
       packages.push({ name, version: manifest.version, archive: path.basename(archive), sha256: hash(fs.readFileSync(archive)), files: Object.fromEntries(files.map(file => [file, hash(readMember(archive, file))])) })
     }
     writeJson(path.join(installed, 'package.json'), { private: true, name: 'artplayer-isolated-consumer', dependencies: Object.fromEntries(packages.map(pkg => [pkg.name, `file:${path.join(output, pkg.archive).replaceAll('\\', '/')}`])) })
@@ -123,11 +136,13 @@ export async function checkPackages({ release = false } = {}) {
     const preciseTypes = typeConsumers(installed, { precise: true })
     const source = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: workspace, encoding: 'utf8' }).trim()
     const publishedPackages = baseline.releases.map(({ name, version, files }) => ({ name, version, files }))
-    const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), source, toolchain: { yarn: '1.22.22', yarnPath: yarn }, node: process.versions.node, packages, runtime, publishedPackages, publishedRuntime: oldRuntime, types, preciseTypes, knownRuntimeBlockers: runtime.observations.defaultsWithoutNavigator.resolved ? 0 : 1, knownTypeBlockers: [...types, ...preciseTypes].reduce((sum, result) => sum + result.diagnostics.length, 0) }
+    const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), source, toolchain: { yarn: '1.22.22', yarnPath: yarn }, node: process.versions.node, packages, runtimeScope: defaultNames, typeScope: defaultNames, additionalBrowserPackages: include, runtime, publishedPackages, publishedRuntime: oldRuntime, types, preciseTypes, knownRuntimeBlockers: runtime.observations.defaultsWithoutNavigator.resolved ? 0 : 1, knownTypeBlockers: [...types, ...preciseTypes].reduce((sum, result) => sum + result.diagnostics.length, 0) }
     writeJson(path.join(output, 'report.json'), report)
     writeJson(path.join(output, 'browser-artifacts.json'), artifacts)
     writeJson(path.join(parent, 'latest.json'), { output: path.relative(workspace, output).replaceAll('\\', '/') })
     console.log(`Installed tarball contracts passed: ${runtime.checks.length} runtime checks; ${types.filter(t => !t.diagnostics.length).length}/${types.length} legacy type modes; ${preciseTypes.filter(t => !t.diagnostics.length).length}/${preciseTypes.length} precise type modes. Report: ${output}`)
+    if (include.length)
+      console.log(`Runtime/type fixture scope: ${defaultNames.join(', ')}. Additional packages require their own consumer and browser acceptance: ${include.join(', ')}.`)
     if (release) {
       assert.equal(report.knownTypeBlockers, 0, 'Known type blockers remain; this candidate is not release-ready')
       assert.equal(report.knownRuntimeBlockers, 0, 'Known runtime blockers remain; this candidate is not release-ready')
@@ -141,7 +156,8 @@ export async function checkPackages({ release = false } = {}) {
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  checkPackages({ release: process.argv.includes('--release') }).catch((error) => {
+  const include = process.argv.find(arg => arg.startsWith('--include='))?.slice('--include='.length).split(',') || []
+  checkPackages({ release: process.argv.includes('--release'), include }).catch((error) => {
     console.error(error)
     process.exitCode = 1
   })

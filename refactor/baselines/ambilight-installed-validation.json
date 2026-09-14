@@ -1,0 +1,732 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AMBILIGHT-05",
+  "status": "checkpoint",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "physicalDevices": false,
+    "remoteCI": false
+  },
+  "packageRuns": [
+    {
+      "path": "refactor/.cache/packages/run-IstjHZ",
+      "reportSha256": "ac1d90ef3fe400d81bfc3dda9ee3098c611d6bf0f8a51c59f233210b40459568"
+    },
+    {
+      "path": "refactor/.cache/packages/run-IIEOt4",
+      "reportSha256": "6efd5011592a1f2d81b785934c5365f6bb3cd4d05568a40c8465e9255b2df2a1"
+    }
+  ],
+  "packages": [
+    {
+      "name": "artplayer",
+      "archive": "artplayer.tgz",
+      "sha256": "a4e53c0c08850e02585c025581af30c8a91f3c8871471375d2228ffc246fd454",
+      "changedSinceInitialRun": [],
+      "runtime": {
+        "package/dist/artplayer.js": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+        "package/dist/artplayer.legacy.js": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+        "package/dist/artplayer.mjs": "265bca0ad3f8373acc84333c19cdded0cbd6b309ede9e51c0bec35685c77eebd",
+        "package/dist/i18n/ar.js": "bd0bef65f4f7dc3f8ed562904cc6fa9071ff4537fb64c1e0fc3d554141bcd3cb",
+        "package/dist/i18n/ar.mjs": "59310b7bbeea83bbb7d73aadc5ca82a6ec269c3530d19aa741c94d5c64fc5da8",
+        "package/dist/i18n/cs.js": "6e2c93daba24c2e48dfa206bcf4f2f2a8a02713b856e404d2e4e4ecd8309ca2f",
+        "package/dist/i18n/cs.mjs": "c73fba18797d62d7b2581e67fe7340c35fe84510b2250ff1ecaad253d9cabbac",
+        "package/dist/i18n/es.js": "f4133ac6ea06b69a474b33c4a1809a4066e2376bb9464a3f3aa8330f01f1944a",
+        "package/dist/i18n/es.mjs": "1390bca3def2be115e811de337df0a0c3f63998e51359f283023246245c552a7",
+        "package/dist/i18n/fa.js": "8d3ef2e0f0cc0ea480c2167b6fcb87cdf444e90759c3519e8daa139fec576da4",
+        "package/dist/i18n/fa.mjs": "ab441e8a2d79043b29ceca87c783bf06874bb9d3a149c1604bc167eb481be2a9",
+        "package/dist/i18n/fr.js": "89dc4194a6c0a962b9ce756b52c90401c1acf3b159f265f3bc0d7d6d7d987f03",
+        "package/dist/i18n/fr.mjs": "99491878430fb7b6f2b7bf93da0588a831704b412e01116f23ba1d9d45863816",
+        "package/dist/i18n/id.js": "4c6dc86db741bcc2857df55a9d037e82e91d375fa6fd22e0562809ff621b92db",
+        "package/dist/i18n/id.mjs": "383e5803a6b6686c6de4e867770241de75b6f517dcca2bdedc6f2004bf6e1fb3",
+        "package/dist/i18n/pl.js": "3a38828b1c3d719c0aca9906cf6a46c23555a8411f8d57645f0e0ce8147dc664",
+        "package/dist/i18n/pl.mjs": "079ed96732979035297af387c64a7b99519b5a43107fb86735a654ea4fe8e9b5",
+        "package/dist/i18n/ru.js": "62fac9dddb302eb16382e6e9301fc4b2c66f5f69d4a358a26b67026a5fa4e787",
+        "package/dist/i18n/ru.mjs": "a893aeaee1d79409db72e324fbff200e3864f33ed168f04d91d25f7cf2efa765",
+        "package/dist/i18n/tr.js": "1492c36b069a7d73db4f3913bd18085faff7afd8b3c158138fe264e31600e38c",
+        "package/dist/i18n/tr.mjs": "a90478cac078836b76c2a98261907610fee07f3e4b28671b8e7dbf533778f918",
+        "package/dist/i18n/vi.js": "c7216ef7e608a79b7e2c479a07bf310d4ab79577947ac4a62d676faaced0e9cf",
+        "package/dist/i18n/vi.mjs": "66270fdfa0b5da396322d1769169b7df37a030ba15ac18eb30bd87b3af8074ec",
+        "package/dist/i18n/zh-tw.js": "11c49857d6d40a5ffd224ffa59c9026e71621b345f63c5a086326db80a22371a",
+        "package/dist/i18n/zh-tw.mjs": "a38e630cb96de96c15d824686aec750e25cf6c8ada01285a292442a81566314f"
+      }
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "archive": "artplayer-plugin-chapter.tgz",
+      "sha256": "9c0a399b4b48db3f30bef69bfedd24245e9328f39151b1e1f670c4d357f4fb05",
+      "changedSinceInitialRun": [],
+      "runtime": {
+        "package/dist/artplayer-plugin-chapter.js": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+        "package/dist/artplayer-plugin-chapter.legacy.js": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef",
+        "package/dist/artplayer-plugin-chapter.mjs": "754fbcfc60add74d6b6ad3bc8db253df3eb14ace13ac8a5439be0592bd5512d0"
+      }
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "archive": "artplayer-plugin-ambilight.tgz",
+      "sha256": "a72d5805ca34ebcad615cfd155bafdbe8ddbdeb03e10a154142f8927be80f3b7",
+      "changedSinceInitialRun": [
+        "package/ARCHITECTURE.md"
+      ],
+      "runtime": {
+        "package/dist/artplayer-plugin-ambilight.js": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+        "package/dist/artplayer-plugin-ambilight.legacy.js": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d",
+        "package/dist/artplayer-plugin-ambilight.mjs": "ef126959819c4973da27dbb1e60ccccc54386c23f8c7750ce1ba4d38f306aaaa"
+      }
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "archive": "artplayer-proxy-canvas.tgz",
+      "sha256": "09936e35e18188cab011f933d8063cac5e0f491a1960353ca9d5c65b9b42b65d",
+      "changedSinceInitialRun": [],
+      "runtime": {
+        "package/dist/artplayer-proxy-canvas.js": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73",
+        "package/dist/artplayer-proxy-canvas.legacy.js": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97",
+        "package/dist/artplayer-proxy-canvas.mjs": "66ca7271f52545a8796f563f2d5ca04581bed8d60d218463923325acf5b73ccf"
+      }
+    }
+  ],
+  "runtimeTypeScope": [
+    "artplayer",
+    "artplayer-plugin-chapter"
+  ],
+  "additionalBrowserPackages": [
+    "artplayer-plugin-ambilight",
+    "artplayer-proxy-canvas"
+  ],
+  "runtimeChecks": 36,
+  "legacyTypeModes": 5,
+  "preciseTypeModes": 8,
+  "sourceInputs": [
+    {
+      "path": "scripts/package-check.mjs",
+      "sha256": "d55266708fd2f6d23743daaf0a54c6543b8c2987503eb1fd54a05bbb11420a1a"
+    },
+    {
+      "path": "scripts/installed-artifacts.mjs",
+      "sha256": "0b1c85a48117551c7a3f06f5df8426fea19e302f874dd6ca2e44418dfed92b3b"
+    },
+    {
+      "path": "scripts/performance-artifacts.mjs",
+      "sha256": "4e9b9b3149b710eed20a1513f8bc1e13772ebcf14d84424b780addccdace8519"
+    },
+    {
+      "path": "test/helpers/ambilight.js",
+      "sha256": "56cd57e6cc52a4ef233492c45d9a51d16713e9fb40de123df1619395d0fb1723"
+    },
+    {
+      "path": "test/helpers/canvas.js",
+      "sha256": "fb1e86db48e098aa5cb0469241f814ddfaed2c35151f58028bcda19d8feed14a"
+    },
+    {
+      "path": "test/browser/ambilight-proxy.spec.js",
+      "sha256": "9ef43bb84ef4440bfa4257ec3998018a71e857d7bcb61c415923a8c0b2291e20"
+    },
+    {
+      "path": "test/browser/ambilight-lifecycle.spec.js",
+      "sha256": "321693a24d33f0c7aee02fd4137b55175386562a645ba138e15c3a51d6348d2c"
+    },
+    {
+      "path": "test/browser/canvas-lifecycle.spec.js",
+      "sha256": "5c50ad4f11d1df91c4247dc24c07edd2c9540e128e00fd07ee096406174512a7"
+    },
+    {
+      "path": ".github/workflows/nodejs.yml",
+      "sha256": "5e7d3cbaee3d96e9088b53205657614d8386a528a1a2fd9cc0687c90b4e7dfd3"
+    },
+    {
+      "path": "refactor/scripts/ci-workflow.mjs",
+      "sha256": "35148f6c9b75f3a4ee0fd20fd13211acddd45ca2f187f1a5c2581ce903796521"
+    },
+    {
+      "path": "refactor/scripts/ci-workflow.test.mjs",
+      "sha256": "923718fcc4897088ed92554cf4db5b95b82b8e1099db9c8b897806a87b08095a"
+    },
+    {
+      "path": "test/package-check.test.js",
+      "sha256": "e4e2010a00c6b6319ad36340a656e9d5f8821d76a30e87df6de7375a54cc2f35"
+    },
+    {
+      "path": "test/performance-report.test.js",
+      "sha256": "0304a90a07a86b2f71bde01ae28bf535ec7b9922cd463e16e066cea47a9af1d9"
+    }
+  ],
+  "browserRuns": [
+    {
+      "path": "refactor/.cache/ambilight05-installed-main-initial-browser/report.json",
+      "sha256": "bde43cc3bc56c2ff7ff128a85364e5d2f83fdc1a6dc5ae4bf869f78537b5281f",
+      "stats": {
+        "startTime": "2026-09-14T09:37:03.054Z",
+        "duration": 92475.65999999999,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "path": "refactor/.cache/ambilight05-installed-legacy-browser/report.json",
+      "sha256": "7f8ffd2ddee4ecd026a674161f5055e367ffed2681f9a7a06b806a3a4ec9c797",
+      "stats": {
+        "startTime": "2026-09-14T09:40:52.738Z",
+        "duration": 93430.18999999999,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight ready starts native sampling and destruction releases only its frames and view",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight recovers from native cross-origin taint after a same-origin source switch",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: candidate canvas paints native pixels, resizes and switches media",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: candidate paused seek draws the new video frame without restarting RAF",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: candidate destroy inside callback leaves no media or native RAF and escaped play is inert",
+          "status": "expected"
+        }
+      ]
+    },
+    {
+      "path": "refactor/.cache/ambilight05-installed-main-final-browser/report.json",
+      "sha256": "606ac1f446d62c379bd37aff2ef2e23804ffc59572ec59ad6e8462a43e77bf13",
+      "stats": {
+        "startTime": "2026-09-14T09:43:17.253Z",
+        "duration": 18682.41,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "browser": "chromium",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "chromium",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "firefox",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published-5.1.7: historical core has no proxy option and retains native Ambilight playback",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "published: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        },
+        {
+          "browser": "webkit",
+          "title": "candidate: Ambilight samples all nine canvas proxy regions after output resizing",
+          "status": "expected"
+        }
+      ]
+    }
+  ],
+  "unit": {
+    "ambilight": 49,
+    "canvas": 57,
+    "packageAndPerformance": 10,
+    "failures": 0,
+    "ciWorkflow": 32
+  },
+  "maps": [
+    {
+      "path": "refactor/.cache/packages/run-IIEOt4/browser-artifacts.json",
+      "sha256": "8a62e2910193654b510c948aece932b3328966650b27b997e20c80776909b36b"
+    },
+    {
+      "path": "refactor/.cache/packages/run-IIEOt4/browser-artifacts-legacy.json",
+      "sha256": "9eca95c02a0abb16cb9397b71ab71ca4c7080865c791eb7730a3a48cebd1d42d"
+    }
+  ],
+  "limits": [
+    "Only the Ambilight ARCHITECTURE.md changed between the two installations; runtime files are byte-identical.",
+    "36 runtime and 13 type mode groups are core/chapter consumers, not whole-ecosystem consumer acceptance.",
+    "Nine-color Canvas palette is painted through the public post-processing callback, not inferred from natural video frames.",
+    "Physical mobile devices, full package distribution, Canvas Document PiP/subtitle combinations and remote CI remain open."
+  ],
+  "checks": {
+    "strictToolchain": "passed",
+    "rootLint": {
+      "errors": 0,
+      "warnings": 1
+    },
+    "ciConfiguration": "passed",
+    "engineeringLog": "refactor/.cache/ambilight05-final-engineering.log"
+  }
+}

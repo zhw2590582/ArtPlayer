@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
@@ -6,12 +7,19 @@ import vm from 'node:vm'
 import { build, transform } from 'esbuild'
 import { verifyAmbilightContract } from '../../refactor/scripts/ambilight-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
+import { verifyInstalledArtifacts } from '../../scripts/installed-artifacts.mjs'
 import { getEntryFile } from '../../scripts/projects.js'
 
 export async function ambilightCandidate() {
+  const root = fileURLToPath(new URL('../../', import.meta.url))
+  if (process.env.ARTPLAYER_BROWSER_ARTIFACTS) {
+    assert.notEqual(process.env.ARTPLAYER_AMBILIGHT_BASELINE, '1', 'Installed candidate cannot use the frozen workspace')
+    const { inputs } = verifyInstalledArtifacts(root, process.env.ARTPLAYER_BROWSER_ARTIFACTS, ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight'])
+    const input = inputs.find(item => item.name === 'artplayer-plugin-ambilight')
+    return { name: 'candidate-installed', source: fs.readFileSync(input.file, 'utf8'), format: 'artifact', provenance: input }
+  }
   if (process.env.ARTPLAYER_AMBILIGHT_BASELINE === '1')
     return (await ambilightHistorical()).find(item => item.name === 'frozen-workspace')
-  const root = fileURLToPath(new URL('../../', import.meta.url))
   const result = await build({ entryPoints: [getEntryFile(path.join(root, 'packages/artplayer-plugin-ambilight'))], bundle: true, write: false, platform: 'browser', format: 'cjs', target: 'es2020' })
   return { name: 'candidate-source', source: result.outputFiles[0].text, format: 'artifact' }
 }

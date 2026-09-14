@@ -89,5 +89,15 @@ resized output geometry. Browser tests play real video with the actual workspace
 proxy and paint a uniform nine-color palette through its public post-processing
 callback; getImageData is native. Actual core 5.1.7 has no proxy option and uses
 VIDEO, so its case checks that capability boundary and native playback. Only 5.4.0
-and candidate cases validate the canvas proxy combination. These tests do not
-establish that the unrefactored proxy's own async draw loop is terminally safe.
+and candidate cases validate the canvas proxy combination. The combination now
+observes both native RAF owners and verifies that no proxy callback runs after
+destroy. Canvas-specific tests additionally cover paused seeks, source switching,
+native pixels and destruction inside the post-processing callback.
+
+For installed-package verification run
+`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas`,
+set `ARTPLAYER_BROWSER_ARTIFACTS` to its `browser-artifacts.json`, then run the
+Ambilight lifecycle/proxy and Canvas lifecycle browser suites. Helpers verify the
+installed hashes and current package/build inputs; an explicit artifact map never
+falls back to a source build. This supplements source tests. It does not replace
+physical mobile devices, npm entrypoint/type matrices or the remaining 05/06 gates.

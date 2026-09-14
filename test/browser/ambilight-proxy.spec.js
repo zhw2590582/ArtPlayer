@@ -11,8 +11,20 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
   const scenario = core === 'published-5.1.7' ? 'historical core has no proxy option and retains native Ambilight playback' : 'Ambilight samples all nine canvas proxy regions after output resizing'
   test(`${core}: ${scenario}`, async ({ page }, testInfo) => {
     await page.goto(`/test/player.html?core=${core}`)
-    for (const [name, source] of [['ambilightFactory', implementation.source], ['canvasProxy', proxy]])
-      await page.addScriptTag({ content: `(() => { const module = { exports: {} }; const exports = module.exports; ${source}; window.${name} = module.exports.default || module.exports; })();` })
+    for (const [name, source] of [['ambilightFactory', implementation.source], ['canvasProxy', proxy]]) {
+      await page.addScriptTag({ content: `(() => {
+        const pending = new Set();
+        const requestAnimationFrame = callback => {
+          const id = window.requestAnimationFrame(time => { pending.delete(id); callback(time); });
+          pending.add(id); return id;
+        };
+        const cancelAnimationFrame = id => { pending.delete(id); window.cancelAnimationFrame(id); };
+        const module = { exports: {} }; const exports = module.exports;
+        ${source};
+        window.${name} = module.exports.default || module.exports;
+        (window.combinationFrames ||= {})['${name}'] = pending;
+      })();` })
+    }
     await page.evaluate(() => {
       window.palette = ['rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(255, 255, 0)', 'rgb(0, 255, 255)', 'rgb(255, 0, 255)', 'rgb(120, 0, 0)', 'rgb(0, 120, 0)', 'rgb(0, 0, 120)']
       window.drawCount = 0
@@ -61,8 +73,14 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
     expect(dimensions.canvas).not.toEqual(dimensions.video)
     await testInfo.attach('ambilight-proxy-inputs', { contentType: 'application/json', body: JSON.stringify({ core, dimensions, plugin: hash(implementation.source), proxy: hash(proxySource), media: '/test/pattern.mp4', scope: 'real video decode and proxy post-processing callback paints a nine-cell palette using native Canvas' }) })
     await expect.poll(() => page.evaluate(() => [...document.querySelectorAll('.artplayer-plugin-ambilight > div')].map(node => node.style.backgroundColor))).toEqual(await page.evaluate(() => window.palette))
-    await page.evaluate(() => window.art.destroy())
+    const drawsAtDestroy = await page.evaluate(async () => {
+      window.art.destroy()
+      const draws = window.drawCount
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+      return draws
+    })
     expect(await page.locator('.artplayer-plugin-ambilight').count()).toBe(0)
+    expect(await page.evaluate(() => ({ draws: window.drawCount, pluginFrames: window.combinationFrames.ambilightFactory.size, proxyFrames: window.combinationFrames.canvasProxy.size }))).toEqual({ draws: drawsAtDestroy, pluginFrames: 0, proxyFrames: 0 })
   })
 }
 

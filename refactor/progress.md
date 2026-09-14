@@ -1,5 +1,21 @@
 # 进度与证据
 
+## PKG-AMBILIGHT-05 已安装产物组合检查点（仍doing）
+
+隔离构建/打包流程显式纳入 Ambilight/Canvas，仓库外离线安装与冻结重装后校验
+全部文件；加载器指定 map 时校验安装摘要和源码/构建输入，拒绝缺包或源码 fallback。
+现代首轮45项、增强销毁检查后现代9项、legacy45项三引擎回归全部通过；覆盖实际
+播放/取色、尺寸变化、跨域恢复、暂停寻址、切源与销毁。组合额外验证插件/代理两
+个 RAF 队列均归零且无后续绘制。49+57+10项专项/工程测试、工具链与lint通过。
+CI在Node/框架消费者后准备额外浏览器安装，新增顺序/不可跳过校验；另32项CI回归
+通过。性能检查保持core/chapter两包范围，不向其他插件自动扩张性能基线。
+两次安装仅 Ambilight 架构文档变化，运行时文件一致；36 runtime、5旧+8精确类型
+组只属于 core/chapter，报告已明确范围，额外包模式禁止误用严格 release 准入。
+见[变更](changes/2026-09-14-PKG-AMBILIGHT-05-installed-combination.md)与
+[证据](baselines/ambilight-installed-validation.json)。256项：187 done、19 doing、50 todo。
+Ambilight移动真机、Canvas字幕/Document PiP/真机、完整分发与远端CI仍未完成；
+本检查点不关闭其他任务，不推送/部署/发布。下一步继续剩余组合与分包消费者验收。
+
 ## SITE-VCONSOLE-01 站点控制台生命周期修复完成
 
 冻结 vConsole 3.15.0 原始 bundle，以严格 TS 和六个唯一构建替换点修复日志 RAF、

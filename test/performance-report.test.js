@@ -6,6 +6,7 @@ import process from 'node:process'
 import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { hash } from '../refactor/scripts/releases.mjs'
+import { verifyInstalledArtifacts } from '../scripts/installed-artifacts.mjs'
 import { verifyPerformanceArtifacts } from '../scripts/performance-artifacts.mjs'
 import { performanceHtml, performanceScript, waitForObservation } from '../scripts/performance-fixture.mjs'
 import { validatePairedPerformance } from '../scripts/performance-report.mjs'
@@ -128,7 +129,7 @@ test('performance refuses stale sources, build tools and altered installed bundl
     write(path.join(root, file), content)
     write(path.join(snapshot, file), content)
   }
-  const names = ['artplayer', 'artplayer-plugin-chapter']
+  const names = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight']
   const packages = names.map((name) => {
     const entry = `packages/${name}/src/index.ts`
     write(path.join(root, entry), 'export default 1\n')
@@ -144,6 +145,13 @@ test('performance refuses stale sources, build tools and altered installed bundl
   write(map, JSON.stringify(Object.fromEntries(names.map(name => [name, `artifacts/${name}/dist/${name}.js`]))))
   write(path.join(output, 'report.json'), JSON.stringify({ task: 'ENG-07', knownTypeBlockers: 0, node: process.versions.node, packages }))
   assert.equal(verifyPerformanceArtifacts(root, map).inputs.length, 2)
+  assert.equal(verifyPerformanceArtifacts(root, map).packages.length, 2)
+  assert.equal(verifyInstalledArtifacts(root, map, names).inputs.length, 3)
+  assert.throws(() => verifyInstalledArtifacts(root, map, [...names, 'artplayer-proxy-canvas']), /Missing installed package/)
+  const pluginSource = path.join(root, 'packages/artplayer-plugin-ambilight/src/index.ts')
+  write(pluginSource, 'export default 2\n')
+  assert.throws(() => verifyInstalledArtifacts(root, map, names), /Stale package source/)
+  write(pluginSource, 'export default 1\n')
   const source = path.join(root, 'packages/artplayer/src/index.ts')
   write(source, 'export default 2\n')
   assert.throws(() => verifyPerformanceArtifacts(root, map), /Stale package source/)
@@ -158,5 +166,5 @@ test('performance refuses stale sources, build tools and altered installed bundl
   assert.throws(() => verifyPerformanceArtifacts(root, map), /Stale library build inputs/)
   fs.unlinkSync(path.join(snapshot, 'scripts/library/removed.ts'))
   write(path.join(output, 'artifacts/artplayer/dist/artplayer.js'), 'changed bundle\n')
-  assert.throws(() => verifyPerformanceArtifacts(root, map), /Installed performance artifact changed/)
+  assert.throws(() => verifyPerformanceArtifacts(root, map), /Installed browser artifact changed/)
 })

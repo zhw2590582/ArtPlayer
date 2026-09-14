@@ -1584,13 +1584,15 @@
         "PKG-CANVAS-04",
         "PKG-FACTORY-01"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "M",
       "deliverable": "原生 video、canvas proxy 的能力边界及销毁无帧循环",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
       "evidence": [
         "changes/2026-09-12-PKG-AMBILIGHT-PROXY-01-sampling.md",
-        "ambilight-validation.md"
+        "ambilight-validation.md",
+        "changes/2026-09-14-PKG-AMBILIGHT-05-installed-combination.md",
+        "baselines/ambilight-installed-validation.json"
       ]
     },
     {
