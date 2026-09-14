@@ -2150,7 +2150,8 @@
       ],
       "dependsOn": [
         "PKG-HLS-05",
-        "ENG-07"
+        "ENG-07",
+        "PKG-HLS-PACK-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -5523,6 +5524,26 @@
         "baselines/danmuku-combined-load-validation.json",
         "changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md",
         "baselines/danmuku-mask-load-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-HLS-PACK-01",
+      "phase": "5 包迁移：artplayer-plugin-hls-control",
+      "title": "排除发布包内的实现 TypeScript 配置",
+      "scope": [
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "PKG-HLS-04",
+        "ENG-07"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "修正 npm 排除规则，真实打包核验公开入口与声明不变",
+      "acceptance": "旧归档复现 tsconfig 泄漏，新归档排除内部配置，全部历史 dist/types 保留且 JS/声明字节相同；正常 Yarn 打包与通用包校验通过",
+      "evidence": [
+        "changes/2026-09-15-PKG-HLS-PACK-01-config.md",
+        "baselines/hls-pack-config-validation.json"
       ]
     }
   ]

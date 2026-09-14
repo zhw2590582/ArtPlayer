@@ -134,3 +134,11 @@ it adds an evaluate and may change timing, so it is off by default. Direct ordin
 HTTP without ArtPlayer/plugin or a Worker observer still reproduced crashes with
 both reset-first and SDK-first teardown. A passing no-worker control does not
 replace worker acceptance. See the 2026-09-14 HTTP teardown checkpoint in refactor.
+
+## Package file boundary
+
+The package .npmignore excludes src and tsconfig.json. The implementation config
+extends the repository root and must not ship to consumers. PKG-HLS-PACK-01
+compares real Yarn archives before/after the exclusion: all distribution and
+declaration bytes must remain identical, with every historical entry retained.
+See ../../refactor/changes/2026-09-15-PKG-HLS-PACK-01-config.md.

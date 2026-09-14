@@ -1,0 +1,88 @@
+{
+  "task": "PKG-HLS-PACK-01",
+  "capturedAt": "2026-09-14T18:19:43.946Z",
+  "sourceHead": "2d45135873595ce18bdb8ea643da8c6e089ff6fc",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "before": {
+    "path": "refactor/.cache/packages/run-5SF5jI/artplayer-plugin-hls-control.tgz",
+    "sha256": "acde688170f089952c94399aa0caf1fcde6d4e0ad508de789364811340b4d7d4",
+    "files": [
+      "package/ARCHITECTURE.md",
+      "package/README.md",
+      "package/dist/artplayer-plugin-hls-control.js",
+      "package/dist/artplayer-plugin-hls-control.legacy.js",
+      "package/dist/artplayer-plugin-hls-control.mjs",
+      "package/package.json",
+      "package/tsconfig.json",
+      "package/types/artplayer-plugin-hls-control.d.cts",
+      "package/types/artplayer-plugin-hls-control.d.mts",
+      "package/types/artplayer-plugin-hls-control.d.ts"
+    ],
+    "rejected": "Implementation tsconfig leaked into package"
+  },
+  "interim": {
+    "path": "refactor/.cache/hls-pack-fix/artplayer-plugin-hls-control.tgz",
+    "sha256": "4657a8b8554ce262affbbd637a3f10ad4f8d085dce305d4a466520e4cc5d6c4d",
+    "rejected": "Source/dependencies leaked into package",
+    "reason": "Original ignore file had no final newline; first append joined src and tsconfig. Corrected with two explicit lines; interim archive retained."
+  },
+  "after": {
+    "path": "refactor/.cache/hls-pack-fix/artplayer-plugin-hls-control-fixed.tgz",
+    "sha256": "3358eb2dd4c46958b5bbc23c2a0a571266dcee905b594f1666c29f5f5b14bd93",
+    "files": [
+      "package/ARCHITECTURE.md",
+      "package/README.md",
+      "package/dist/artplayer-plugin-hls-control.js",
+      "package/dist/artplayer-plugin-hls-control.legacy.js",
+      "package/dist/artplayer-plugin-hls-control.mjs",
+      "package/package.json",
+      "package/types/artplayer-plugin-hls-control.d.cts",
+      "package/types/artplayer-plugin-hls-control.d.mts",
+      "package/types/artplayer-plugin-hls-control.d.ts"
+    ],
+    "passed": true
+  },
+  "removed": [
+    "package/tsconfig.json"
+  ],
+  "byteEqual": [
+    {
+      "file": "package/dist/artplayer-plugin-hls-control.js",
+      "sha256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6"
+    },
+    {
+      "file": "package/dist/artplayer-plugin-hls-control.legacy.js",
+      "sha256": "fd7be1c5bf8f994b61fc040ff96eb628fc442568d99f4b5fee4f611bac1d28c0"
+    },
+    {
+      "file": "package/dist/artplayer-plugin-hls-control.mjs",
+      "sha256": "64286498c1e90c3927236318383db193698a9dcbf39f91e93fc2b4ea2239e786"
+    },
+    {
+      "file": "package/types/artplayer-plugin-hls-control.d.cts",
+      "sha256": "ad4c3e7f7d2ba6b8371108bf08dfa13cccf78a1add846ba53cab8774c8fff0b6"
+    },
+    {
+      "file": "package/types/artplayer-plugin-hls-control.d.mts",
+      "sha256": "27a3a17a48f0bc92c3c50783be253730d87d01e9be627ab2726bdc552fecf1f3"
+    },
+    {
+      "file": "package/types/artplayer-plugin-hls-control.d.ts",
+      "sha256": "3bce772f8f7cb7b6421b2c2dc4a1ea22987f3f1483f1dca7ca4ab08f75cf7a9d"
+    }
+  ],
+  "manifestUnchanged": true,
+  "historicalFiles": [
+    "package/README.md",
+    "package/dist/artplayer-plugin-hls-control.js",
+    "package/dist/artplayer-plugin-hls-control.legacy.js",
+    "package/dist/artplayer-plugin-hls-control.mjs",
+    "package/package.json",
+    "package/types/artplayer-plugin-hls-control.d.ts"
+  ],
+  "limitations": [
+    "Normal Yarn pack on the same isolated source-build snapshot, replacing only ignore and architecture files. No playback or full release approval claim.",
+    "Architecture documentation changes intentionally; all dist/types and package.json bytes remain unchanged."
+  ]
+}

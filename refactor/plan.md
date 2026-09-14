@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 262 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 263 项，范围 22 个包及工作区/示例。
 
-状态：todo 44 / doing 22 / blocked 0 / done 196 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 44 / doing 22 / blocked 0 / done 197 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -26,7 +26,7 @@
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06, ENG-LINT-01, PKG-DANMUKU-MASK-LOAD-01 |
 | artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-SEEK-01, PKG-DASH-MENU-01, PKG-DASH-05, PKG-DASH-06 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
-| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06 |
+| artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06, PKG-HLS-PACK-01 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09, PKG-JASSUB-10 |
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06, PKG-VAST-07 |
@@ -208,7 +208,8 @@
 | PKG-HLS-04 | artplayer-plugin-hls-control<br>迁移自有源码和公开类型 | PKG-HLS-03, ENG-04, ENG-06, CORE-07 | HLS 能力适配类型、回调上下文和旧 getName 参数 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-HLS-SDK-01 | artplayer-plugin-hls-control<br>验证真实 SDK worker 与分组轨道组合 | PKG-HLS-04, CORE-22 | 固定历史及当前 SDK 归档、真实 worker/多音轨组、外部选择与重绑定浏览器证据 | 受支持桌面 MSE 引擎与新旧核心通过；无 worker 回退伪通过，设备缺口仍由 PKG-HLS-05 保持未完成 | H | doing |
 | PKG-HLS-05 | artplayer-plugin-hls-control<br>验证新旧核心和组合 | PKG-HLS-04, CORE-22, PKG-HLS-SDK-01 | 本地多码率 HLS、换成无轨道来源、旧核心和最终核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
-| PKG-HLS-06 | artplayer-plugin-hls-control<br>验证分发并同步文档 | PKG-HLS-05, ENG-07 | hls.control.js、依赖范围与回退记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-HLS-06 | artplayer-plugin-hls-control<br>验证分发并同步文档 | PKG-HLS-05, ENG-07, PKG-HLS-PACK-01 | hls.control.js、依赖范围与回退记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-HLS-PACK-01 | artplayer-plugin-hls-control<br>排除发布包内的实现 TypeScript 配置 | PKG-HLS-04, ENG-07 | 修正 npm 排除规则，真实打包核验公开入口与声明不变 | 旧归档复现 tsconfig 泄漏，新归档排除内部配置，全部历史 dist/types 保留且 JS/声明字节相同；正常 Yarn 打包与通用包校验通过 | M | done |
 
 ## 5 包迁移：artplayer-plugin-dash-control
 
@@ -689,3 +690,4 @@
 - PKG-CHAPTER-HOVER-01: [记录](changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md) [记录](baselines/chapter-hover-validation.json)
 - PKG-CANVAS-SUBTITLE-01: [记录](changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md) [记录](baselines/canvas-subtitles-validation.json)
 - PKG-DANMUKU-MASK-LOAD-01: [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md) [记录](baselines/danmuku-mask-load-validation.json)
+- PKG-HLS-PACK-01: [记录](changes/2026-09-15-PKG-HLS-PACK-01-config.md) [记录](baselines/hls-pack-config-validation.json)
