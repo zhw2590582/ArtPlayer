@@ -29,6 +29,10 @@ export function verifyPerformanceArtifacts(root, mapFile) {
     toolchain[file] = digest(path.join(root, file))
     assert.equal(digest(path.join(directory, 'build', file)), toolchain[file], `Stale build input: ${file}`)
   }
+  const libraryInputs = location => Object.fromEntries(walk(path.join(location, 'scripts/library')).filter(file => /\.(?:[cm]?[jt]s|json)$/.test(file)).sort().map(file => [path.relative(location, file).replaceAll('\\', '/'), digest(file)]))
+  const currentLibrary = libraryInputs(root)
+  assert.deepEqual(libraryInputs(path.join(directory, 'build')), currentLibrary, 'Stale library build inputs; rerun yarn test:package')
+  Object.assign(toolchain, currentLibrary)
   const inputs = []
   for (const name of ['artplayer', 'artplayer-plugin-chapter']) {
     const pkg = report.packages.find(pkg => pkg.name === name)

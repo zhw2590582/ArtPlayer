@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "checkJs": true
+  },
+  "include": ["library/**/*.ts", "build.js", "dev.js", "utils.js", "projects.js", "rebuild.js", "build-analysis.mjs"]
+}

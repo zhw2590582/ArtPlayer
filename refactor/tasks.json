@@ -4459,10 +4459,29 @@
         "SITE-03",
         "MOD-PLUGIN-01"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "dev/build/utils/create-plugin 的 TS 与可测 CLI，模板同时提供旧 API",
       "acceptance": "旧脚本入口保留、新插件类型/测试/示例齐全，Lerna 改动单独取证",
+      "evidence": [
+        "changes/2026-09-14-MOD-02-library-tooling.md",
+        "baselines/library-tooling-validation.json"
+      ]
+    },
+    {
+      "id": "MOD-DEV-01",
+      "phase": "7 工具链与性能",
+      "title": "修复开发服务器失败状态并明确资源生命周期",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "MOD-02"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "修复 Servor 占用端口却退出 0 的已复现问题；明确 HTTP/监听/热刷新连接与定时器的启动、失败和关闭责任",
+      "acceptance": "保持默认 8082、docs 页面、自动刷新和旧 dev 命令；端口冲突退出非零且不终止其他服务，连续启动/停止及编译错误恢复有实际验证；跨平台监听差异单独留证",
       "evidence": []
     },
     {
@@ -4512,7 +4531,8 @@
         "MOD-01",
         "MOD-02",
         "MOD-03",
-        "MOD-04"
+        "MOD-04",
+        "MOD-DEV-01"
       ],
       "status": "todo",
       "risk": "M",

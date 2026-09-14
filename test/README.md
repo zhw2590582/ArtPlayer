@@ -1,5 +1,10 @@
 # Tests and fixture ownership
 
+`yarn test:library` runs actual library builds, build-input freshness checks and the
+scaffold's generated consumers. The new build modules live in `scripts/library/`;
+`yarn typecheck:library` checks them and the retained JS/MJS entrypoints. Browser
+development/watch/error-recovery coverage is `browser/library-development.spec.js`.
+
 `yarn test:scaffold` covers old plugin-generator defects, exclusive writes and
 rollback, the historical CLI path, and actual generated package builds and type
 consumers. It runs in ignored fixtures without adding a workspace or real demo;

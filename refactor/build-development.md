@@ -4,8 +4,10 @@ MOD-PLUGIN-01 将 `yarn create:plugin` 的实现拆为严格 TS 渲染/文件写
 保留旧 JS 命令入口。生成 TS 工厂、CJS/ESM 声明、分发消费测试与维护文档；
 拒绝覆盖既有包/示例，失败时回退自己的写入并保留外部修改。
 运行 `yarn typecheck:scaffold` 与 `yarn test:scaffold`，具体限制和模块地图见
-[生成器维护指南](../scripts/plugin/README.md)。MOD-02 继续负责 dev/build/utils，
-本子任务不代表全部工程脚本已经迁移。
+[生成器维护指南](../scripts/plugin/README.md)。MOD-02 将剩余库构建/开发实现移到
+scripts/library 的严格 TS 模块，保留旧命令/模块入口；其模块地图与生命周期限制见
+[库工具维护指南](../scripts/library/README.md)。Servor 端口失败状态和关闭责任由
+MOD-DEV-01 继续处理，不因 TS 迁移而豁免。
 
 ENG-06 保留原来的 Vite 7.3.6、Terser、三种库产物及路径，增加选包参数和 TS 入口；未切换 bundler 或运行时依赖。固定工具链仍为 Node 24.21.0 / Yarn 1.22.22。
 
@@ -32,11 +34,12 @@ JS 包使用 src/index.js，TS 包使用 src/index.ts；必须恰有一个入口
 
 | 文件 | 职责与维护点 |
 | --- | --- |
-| scripts/projects.js | 库包清单、CLI 选包、旧 prompts 入口、JS/TS 入口唯一性；utils.js 继续转出 getProjects，保留原脚本调用 |
-| scripts/build.js | 三格式顺序构建、受限 dist 清理、banner、复制 docs/compiled；main=.js/es2020、legacy=.legacy.js/es2015、ESM=.mjs/es2020 |
-| scripts/dev.js | 8082 服务、docs/uncompiled/包名/index.js、首次成功打开浏览器、源目录监听及错误后的继续开发 |
-| scripts/rebuild.js | 合并构建期间的通知并串行重建，避免多个构建同时清空同一输出目录；失败后下一次请求仍可运行 |
-| scripts/utils.js | 共享 Vite 资源/worker/output 配置与历史全局名称；AMD 补丁依据实际 UMD 全局参数，不假定压缩变量名 |
+| scripts/projects.js | 兼容导出 library/projects.ts：库清单、CLI 选择和 JS/TS 唯一入口；保留原 prompts 交互 |
+| scripts/build.js | 命令门面调用 library/production.ts；顺序构建、dist 清理、docs/compiled 复制和分析；banner 独立为 library/banner.ts |
+| scripts/dev.js | 命令门面调用 library/development.ts；默认 8082、docs/uncompiled/包名/index.js、首次成功打开浏览器、源码监听和失败恢复 |
+| scripts/rebuild.js | 兼容导出 library/rebuild.ts；合并通知、串行构建、失败后的下一次请求 |
+| scripts/utils.js | 兼容导出 library/config.ts、names.ts 和 projects.ts；Vite/worker 配置与命名分离，AMD 补丁由 banner.ts 维护 |
+| scripts/build-analysis.mjs | 兼容导出 library/analysis.ts；分析文件位于 cache，不进入 dist |
 | types/assets.d.ts | Less inline、SVG URL 与 SVG raw 的字符串类型；特定 worker 类型边界随拥有该 worker 的包配置 |
 | refactor/fixtures/build/ | 同时使用 TS、相邻 JS、Less、SVG raw、TS inline worker 的独立构建夹具；不属于发布包 |
 | refactor/scripts/build.test.mjs | 真实 CLI 产物、错误不误清理、CJS/global/AMD/ESM、队列错误恢复；浏览器 worker/全库 AMD 使用 browser.html |

@@ -1,5 +1,23 @@
 # 进度与证据
 
+## MOD-02 库构建与开发脚本 TS 迁移完成
+
+旧 build/dev/utils/projects/rebuild/build-analysis 入口保留，实现拆为严格 TS
+模块，Vite 配置、banner/AMD、命名、包选择、队列和分析责任分离。63 个产物
+在同一来源/路径下用旧脚本与新脚本构建，SHA-256 全部相同；真实 dist/docs 未改。
+性能证据校验同步覆盖新的 TS 构建输入。默认8082保留，测试使用自有端口，未
+终止原有服务。输出目录提前创建，避免漏入 Servor 初始 Linux 目录枚举；远端
+Linux/macOS 实测仍待 CI。Windows 三浏览器验证真实 Worker、自动刷新、修改和
+编译失败恢复最终3项通过，测试启动参数/手动刷新竞态的失败报告另存。
+18项专项、522项baseline、50项CI回归通过；严格库/文档工具类型和工具链检查
+通过，lint 保留1条既有warning。详情见[记录](changes/2026-09-14-MOD-02-library-tooling.md)
+和[证据](baselines/library-tooling-validation.json)。没有新增依赖、Lerna变更或发布。
+另用隔离子进程复现 Servor4.0.2 端口占用却退出0，新增开放风险及 MOD-DEV-01
+作为下一任务处理启动失败和资源关闭责任，已接入最终工具链任务依赖。
+245项：172 done、16 doing、57 todo。MOD-02 完成不代表该服务器缺陷或完整
+重构完成。本地独立提交；VAST 默认行为选择仍待用户答复。
+
+
 ## MOD-PLUGIN-01 插件生成器与 TS 模板完成
 
 生成器拆为严格 TS 的模板渲染、文件写入和 CLI，保留 create.js 旧命令入口及

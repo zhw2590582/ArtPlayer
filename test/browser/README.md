@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`library-development.spec.js` starts the actual typed development runner on an
+isolated fixture port. It checks generated TS/Less/SVG/inline-worker assets,
+automatic reload on edits and recovery after a compiler error in all three
+engines. It owns and stops only its child server, never the user's port 8082
+session. This is development-tool validation, not media playback acceptance.
+
 `site-loading.spec.js` covers actual desktop/mobile loading, dependency order,
 failure/retry/AMD restoration, example priority, repeated Run and stale responses,
 plus Run Code and language routing. External analytics/ads are inert test routes;

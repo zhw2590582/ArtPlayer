@@ -1,0 +1,736 @@
+{
+  "task": "MOD-02",
+  "date": "2026-09-14",
+  "environment": {
+    "os": "Windows",
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "typescript": "5.9.3",
+    "browsers": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    }
+  },
+  "results": {
+    "library": {
+      "passed": 18,
+      "failed": 0
+    },
+    "ci": {
+      "passed": 50,
+      "failed": 0
+    },
+    "browser": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "report": "refactor/.cache/library-browser-final/report.json"
+    },
+    "strictTypes": "passed",
+    "docsTypes": "passed",
+    "toolchain": "passed",
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 1
+    },
+    "baseline": {
+      "passed": 522,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "wholeBuildComparison": {
+    "task": "MOD-02",
+    "baseline": "28c7abb2bb8dfb7c84acfc7c5ec05c5882623069",
+    "node": "v24.21.0",
+    "names": [
+      "artplayer",
+      "artplayer-plugin-ads",
+      "artplayer-plugin-ambilight",
+      "artplayer-plugin-asr",
+      "artplayer-plugin-audio-track",
+      "artplayer-plugin-auto-thumbnail",
+      "artplayer-plugin-chapter",
+      "artplayer-plugin-chromecast",
+      "artplayer-plugin-danmuku",
+      "artplayer-plugin-danmuku-mask",
+      "artplayer-plugin-dash-control",
+      "artplayer-plugin-document-pip",
+      "artplayer-plugin-hls-control",
+      "artplayer-plugin-jassub",
+      "artplayer-plugin-multiple-subtitles",
+      "artplayer-plugin-vast",
+      "artplayer-plugin-vtt-thumbnail",
+      "artplayer-proxy-canvas",
+      "artplayer-proxy-mediabunny",
+      "artplayer-tool-iframe",
+      "artplayer-tool-thumbnail"
+    ],
+    "before": [
+      {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+      },
+      {
+        "path": "packages/artplayer/dist/artplayer.legacy.js",
+        "sha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+      },
+      {
+        "path": "packages/artplayer/dist/artplayer.mjs",
+        "sha256": "432e2b0ad92009a09743e020bf7c928c8b8f18a52496622b16259ec9ab20059f"
+      },
+      {
+        "path": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js",
+        "sha256": "1429541242f49c4d558eda242a63b6e57a876c2dba06ce9f631d71d315028023"
+      },
+      {
+        "path": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.legacy.js",
+        "sha256": "4f64ac015e0850b71f51cf01d9fc6f238c95414730c71e91d1240c40e28499d8"
+      },
+      {
+        "path": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.mjs",
+        "sha256": "8ad7df8145b2514467cac0f733151619c36fa965e620df575c0779604372503f"
+      },
+      {
+        "path": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.js",
+        "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599"
+      },
+      {
+        "path": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.legacy.js",
+        "sha256": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d"
+      },
+      {
+        "path": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.mjs",
+        "sha256": "ef126959819c4973da27dbb1e60ccccc54386c23f8c7750ce1ba4d38f306aaaa"
+      },
+      {
+        "path": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+        "sha256": "06b386f6a4744801f4153944ed6e2bd37822a85e177aa2a0d800c30002ef87bf"
+      },
+      {
+        "path": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+        "sha256": "639ae9bdede0e26c8af0251b9c1ed12e7fba9e0b6b79cb0556290741040f9697"
+      },
+      {
+        "path": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.mjs",
+        "sha256": "1b7bac676d2c4976046b08fd7c1ec25724ff24952f5d93fc546e219466d975d8"
+      },
+      {
+        "path": "packages/artplayer-plugin-audio-track/dist/artplayer-plugin-audio-track.js",
+        "sha256": "23b10856628c5568f1aa7ad88e926c7da8d96edfadf6df872777062a78a4b4be"
+      },
+      {
+        "path": "packages/artplayer-plugin-audio-track/dist/artplayer-plugin-audio-track.legacy.js",
+        "sha256": "41b94e84e3d3729b9373cb13de2f64d5ea30b4c36627f38583bf4c3c9bc2160c"
+      },
+      {
+        "path": "packages/artplayer-plugin-audio-track/dist/artplayer-plugin-audio-track.mjs",
+        "sha256": "9caa5a6e11a2e777760dd2835426842a87d04fb081ea2e7d48c7229035fd89a9"
+      },
+      {
+        "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+        "sha256": "430ac17e9025d3cc6bf37bd83316db5067bf438b30c2727b43c3e5fc4910e1d0"
+      },
+      {
+        "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "sha256": "efb30986ffc6a28859ca37126af82824601f25f0a42f7ea2c75a41f3da2c50ef"
+      },
+      {
+        "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+        "sha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+      },
+      {
+        "path": "packages/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+        "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72"
+      },
+      {
+        "path": "packages/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.legacy.js",
+        "sha256": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef"
+      },
+      {
+        "path": "packages/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.mjs",
+        "sha256": "754fbcfc60add74d6b6ad3bc8db253df3eb14ace13ac8a5439be0592bd5512d0"
+      },
+      {
+        "path": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js",
+        "sha256": "80b12b3081086488c9d80f03979c336d4a6fdb44dca298e218dfeaaadb295d00"
+      },
+      {
+        "path": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js",
+        "sha256": "b21a30852403914a3bf3defc89aff11f2cc23b044ed68ccf667164b477f04172"
+      },
+      {
+        "path": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.mjs",
+        "sha256": "68d81fcab469f74fe9d9740842d989e10144f7ff28c7ade91ed22adee90f44d7"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+        "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+        "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+        "sha256": "356406cda2e3e47376a87c939b76fb7c55f86d7c3829127da625b01241c67a2f"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+        "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+        "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs",
+        "sha256": "51936576383129170125b33d2983858e0841ea507368970f6d154bc9d78583b1"
+      },
+      {
+        "path": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+        "sha256": "a594009be5c17406844f817c5a79930c6ed60add4a5ef0578783f163a1bae012"
+      },
+      {
+        "path": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js",
+        "sha256": "b00a837a99f7a7cccd415af335cbf0c68f1e4267fa7cfd8d91e945e3dc634151"
+      },
+      {
+        "path": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.mjs",
+        "sha256": "0c5a7e4d84e9641778e0a22ff9c78db9bd4ac2f08f51358519443046a528fb93"
+      },
+      {
+        "path": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.js",
+        "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+      },
+      {
+        "path": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.legacy.js",
+        "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+      },
+      {
+        "path": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.mjs",
+        "sha256": "541b4ad6e1cbadd9156ee1f317559c97b9fddae37668ef32046f1fa47c392ec2"
+      },
+      {
+        "path": "packages/artplayer-plugin-hls-control/dist/artplayer-plugin-hls-control.js",
+        "sha256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6"
+      },
+      {
+        "path": "packages/artplayer-plugin-hls-control/dist/artplayer-plugin-hls-control.legacy.js",
+        "sha256": "fd7be1c5bf8f994b61fc040ff96eb628fc442568d99f4b5fee4f611bac1d28c0"
+      },
+      {
+        "path": "packages/artplayer-plugin-hls-control/dist/artplayer-plugin-hls-control.mjs",
+        "sha256": "64286498c1e90c3927236318383db193698a9dcbf39f91e93fc2b4ea2239e786"
+      },
+      {
+        "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+        "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+      },
+      {
+        "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.legacy.js",
+        "sha256": "e19fea01316f78245e4508999bc441c483cfb47abfa6b5afbba529af3d05bfd8"
+      },
+      {
+        "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.mjs",
+        "sha256": "d5f9df0621de4b5a9a5a8a232e290f99a1d8a2eda1bc0f8a34a2cb530c95653e"
+      },
+      {
+        "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js",
+        "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+      },
+      {
+        "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+      },
+      {
+        "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs",
+        "sha256": "07e4f628b4038d7c250f6242c410ddb188148b4ed58bb592975532666412e3e2"
+      },
+      {
+        "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.js",
+        "sha256": "874803ec726f04649bb636c1376de9e038754310ab0016a22da44f189b7a5ce0"
+      },
+      {
+        "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.legacy.js",
+        "sha256": "8a4166838aae5d150dc1a18cc594fb038df425df42eff1944e0d095df060dbb9"
+      },
+      {
+        "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.mjs",
+        "sha256": "ffbab3a7cd6c1852c42a726acd0e0a5dbbb636dc9e8c2e8a084df962ff6ef860"
+      },
+      {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.js",
+        "sha256": "df70ccb5261fd988ba8c2c2d689ca58653bb5426242ffd1076569a1d225997a7"
+      },
+      {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "sha256": "732ade2c647281cf26446d6c7433e916f8189e2fdf2687127a56556c415544b1"
+      },
+      {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.mjs",
+        "sha256": "d35e28015df65e27da0fc01d06db07bad58e08d498b2d11fedfea35e6c4339c1"
+      },
+      {
+        "path": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.js",
+        "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73"
+      },
+      {
+        "path": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.legacy.js",
+        "sha256": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97"
+      },
+      {
+        "path": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.mjs",
+        "sha256": "66ca7271f52545a8796f563f2d5ca04581bed8d60d218463923325acf5b73ccf"
+      },
+      {
+        "path": "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb"
+      },
+      {
+        "path": "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.legacy.js",
+        "sha256": "2c523a4535ae71213d279b54abf3b1d164c81e3d8abe3d9c9906e9a9ac840c26"
+      },
+      {
+        "path": "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.mjs",
+        "sha256": "3126446aa6461b78e56855ac851a2abf5a12359c7354e5564af6efaa0903f3fa"
+      },
+      {
+        "path": "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.js",
+        "sha256": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6"
+      },
+      {
+        "path": "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.legacy.js",
+        "sha256": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a"
+      },
+      {
+        "path": "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.mjs",
+        "sha256": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83"
+      },
+      {
+        "path": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js",
+        "sha256": "ef72d277e817c2f7312c10815ee91a74dbb9334285476d14fae7f4449b3d2758"
+      },
+      {
+        "path": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.legacy.js",
+        "sha256": "f1d62e3cee7e060e7ecff4a21e7589e2befb2e405976efcdee73719857d0be03"
+      },
+      {
+        "path": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.mjs",
+        "sha256": "abdbc7c28bcccc1a8dee543f1bd784f850c147856fc148c3bf4b8ea863f3d6ea"
+      }
+    ],
+    "candidate": [
+      {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "6dc8ca6d6eb34aa8a056cbc31328efd634530b3c5c60f0014cb7ce719fabc335"
+      },
+      {
+        "path": "packages/artplayer/dist/artplayer.legacy.js",
+        "sha256": "80f74a8a39df4baf64cc00c65d21cd57c011bfcdead0da38eea077fbc67c5c04"
+      },
+      {
+        "path": "packages/artplayer/dist/artplayer.mjs",
+        "sha256": "432e2b0ad92009a09743e020bf7c928c8b8f18a52496622b16259ec9ab20059f"
+      },
+      {
+        "path": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.js",
+        "sha256": "1429541242f49c4d558eda242a63b6e57a876c2dba06ce9f631d71d315028023"
+      },
+      {
+        "path": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.legacy.js",
+        "sha256": "4f64ac015e0850b71f51cf01d9fc6f238c95414730c71e91d1240c40e28499d8"
+      },
+      {
+        "path": "packages/artplayer-plugin-ads/dist/artplayer-plugin-ads.mjs",
+        "sha256": "8ad7df8145b2514467cac0f733151619c36fa965e620df575c0779604372503f"
+      },
+      {
+        "path": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.js",
+        "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599"
+      },
+      {
+        "path": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.legacy.js",
+        "sha256": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d"
+      },
+      {
+        "path": "packages/artplayer-plugin-ambilight/dist/artplayer-plugin-ambilight.mjs",
+        "sha256": "ef126959819c4973da27dbb1e60ccccc54386c23f8c7750ce1ba4d38f306aaaa"
+      },
+      {
+        "path": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.js",
+        "sha256": "06b386f6a4744801f4153944ed6e2bd37822a85e177aa2a0d800c30002ef87bf"
+      },
+      {
+        "path": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.legacy.js",
+        "sha256": "639ae9bdede0e26c8af0251b9c1ed12e7fba9e0b6b79cb0556290741040f9697"
+      },
+      {
+        "path": "packages/artplayer-plugin-asr/dist/artplayer-plugin-asr.mjs",
+        "sha256": "1b7bac676d2c4976046b08fd7c1ec25724ff24952f5d93fc546e219466d975d8"
+      },
+      {
+        "path": "packages/artplayer-plugin-audio-track/dist/artplayer-plugin-audio-track.js",
+        "sha256": "23b10856628c5568f1aa7ad88e926c7da8d96edfadf6df872777062a78a4b4be"
+      },
+      {
+        "path": "packages/artplayer-plugin-audio-track/dist/artplayer-plugin-audio-track.legacy.js",
+        "sha256": "41b94e84e3d3729b9373cb13de2f64d5ea30b4c36627f38583bf4c3c9bc2160c"
+      },
+      {
+        "path": "packages/artplayer-plugin-audio-track/dist/artplayer-plugin-audio-track.mjs",
+        "sha256": "9caa5a6e11a2e777760dd2835426842a87d04fb081ea2e7d48c7229035fd89a9"
+      },
+      {
+        "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.js",
+        "sha256": "430ac17e9025d3cc6bf37bd83316db5067bf438b30c2727b43c3e5fc4910e1d0"
+      },
+      {
+        "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.legacy.js",
+        "sha256": "efb30986ffc6a28859ca37126af82824601f25f0a42f7ea2c75a41f3da2c50ef"
+      },
+      {
+        "path": "packages/artplayer-plugin-auto-thumbnail/dist/artplayer-plugin-auto-thumbnail.mjs",
+        "sha256": "6080dd90bde239515646899bdd8e71d17de24119523e4883025fbf39b1a6a302"
+      },
+      {
+        "path": "packages/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.js",
+        "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72"
+      },
+      {
+        "path": "packages/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.legacy.js",
+        "sha256": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef"
+      },
+      {
+        "path": "packages/artplayer-plugin-chapter/dist/artplayer-plugin-chapter.mjs",
+        "sha256": "754fbcfc60add74d6b6ad3bc8db253df3eb14ace13ac8a5439be0592bd5512d0"
+      },
+      {
+        "path": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.js",
+        "sha256": "80b12b3081086488c9d80f03979c336d4a6fdb44dca298e218dfeaaadb295d00"
+      },
+      {
+        "path": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.legacy.js",
+        "sha256": "b21a30852403914a3bf3defc89aff11f2cc23b044ed68ccf667164b477f04172"
+      },
+      {
+        "path": "packages/artplayer-plugin-chromecast/dist/artplayer-plugin-chromecast.mjs",
+        "sha256": "68d81fcab469f74fe9d9740842d989e10144f7ff28c7ade91ed22adee90f44d7"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js",
+        "sha256": "133b7412e1a468b34f4f7ab3779958259f13899e037833029931f02b0833d088"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.legacy.js",
+        "sha256": "9f0cb9969419a7d0c02d54790c423353b83f775acd95fbdbaeeb29a7fc42c816"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.mjs",
+        "sha256": "356406cda2e3e47376a87c939b76fb7c55f86d7c3829127da625b01241c67a2f"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.js",
+        "sha256": "406a8c28207d386cffe1e61dc79afd8a6a9d5cbd1dc8e1661b4febbf48182f55"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.legacy.js",
+        "sha256": "62d61dcedd3e90fa480589c2f1e3168c97635232c98ffe8c25c7918a2f3c66db"
+      },
+      {
+        "path": "packages/artplayer-plugin-danmuku-mask/dist/artplayer-plugin-danmuku-mask.mjs",
+        "sha256": "51936576383129170125b33d2983858e0841ea507368970f6d154bc9d78583b1"
+      },
+      {
+        "path": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.js",
+        "sha256": "a594009be5c17406844f817c5a79930c6ed60add4a5ef0578783f163a1bae012"
+      },
+      {
+        "path": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.legacy.js",
+        "sha256": "b00a837a99f7a7cccd415af335cbf0c68f1e4267fa7cfd8d91e945e3dc634151"
+      },
+      {
+        "path": "packages/artplayer-plugin-dash-control/dist/artplayer-plugin-dash-control.mjs",
+        "sha256": "0c5a7e4d84e9641778e0a22ff9c78db9bd4ac2f08f51358519443046a528fb93"
+      },
+      {
+        "path": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.js",
+        "sha256": "56440aad3ed06be55ec3a57d781f7de239e9aecf40a067e88f2cffcd01a86d6a"
+      },
+      {
+        "path": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.legacy.js",
+        "sha256": "67dd14de3cc16a04ae6c1938dcba61b1355f4a15e5fa06f62a41b18d14d4d356"
+      },
+      {
+        "path": "packages/artplayer-plugin-document-pip/dist/artplayer-plugin-document-pip.mjs",
+        "sha256": "541b4ad6e1cbadd9156ee1f317559c97b9fddae37668ef32046f1fa47c392ec2"
+      },
+      {
+        "path": "packages/artplayer-plugin-hls-control/dist/artplayer-plugin-hls-control.js",
+        "sha256": "8e163d4ab6734cbc45e7f539de7db644c7faf36d0318469a86d300bf6365cca6"
+      },
+      {
+        "path": "packages/artplayer-plugin-hls-control/dist/artplayer-plugin-hls-control.legacy.js",
+        "sha256": "fd7be1c5bf8f994b61fc040ff96eb628fc442568d99f4b5fee4f611bac1d28c0"
+      },
+      {
+        "path": "packages/artplayer-plugin-hls-control/dist/artplayer-plugin-hls-control.mjs",
+        "sha256": "64286498c1e90c3927236318383db193698a9dcbf39f91e93fc2b4ea2239e786"
+      },
+      {
+        "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.js",
+        "sha256": "fb8cd8b7b6fb57a7866f929cfe20f7f582c86af96101f23c572dd79b4912dc9f"
+      },
+      {
+        "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.legacy.js",
+        "sha256": "e19fea01316f78245e4508999bc441c483cfb47abfa6b5afbba529af3d05bfd8"
+      },
+      {
+        "path": "packages/artplayer-plugin-jassub/dist/artplayer-plugin-jassub.mjs",
+        "sha256": "d5f9df0621de4b5a9a5a8a232e290f99a1d8a2eda1bc0f8a34a2cb530c95653e"
+      },
+      {
+        "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js",
+        "sha256": "14f4de91201f6b2cd55ea22a042d456c7149e4a38c22bc2ee0107f8a5e417446"
+      },
+      {
+        "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js",
+        "sha256": "2059a43e4634b6c1a924a1cb451c2348356d6c20d26628b975b1d3545394d323"
+      },
+      {
+        "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs",
+        "sha256": "07e4f628b4038d7c250f6242c410ddb188148b4ed58bb592975532666412e3e2"
+      },
+      {
+        "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.js",
+        "sha256": "874803ec726f04649bb636c1376de9e038754310ab0016a22da44f189b7a5ce0"
+      },
+      {
+        "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.legacy.js",
+        "sha256": "8a4166838aae5d150dc1a18cc594fb038df425df42eff1944e0d095df060dbb9"
+      },
+      {
+        "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.mjs",
+        "sha256": "ffbab3a7cd6c1852c42a726acd0e0a5dbbb636dc9e8c2e8a084df962ff6ef860"
+      },
+      {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.js",
+        "sha256": "df70ccb5261fd988ba8c2c2d689ca58653bb5426242ffd1076569a1d225997a7"
+      },
+      {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+        "sha256": "732ade2c647281cf26446d6c7433e916f8189e2fdf2687127a56556c415544b1"
+      },
+      {
+        "path": "packages/artplayer-plugin-vtt-thumbnail/dist/artplayer-plugin-vtt-thumbnail.mjs",
+        "sha256": "d35e28015df65e27da0fc01d06db07bad58e08d498b2d11fedfea35e6c4339c1"
+      },
+      {
+        "path": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.js",
+        "sha256": "a901e5c5fc00a64a6c2ae9d4b2b846950412710ec9672d30640d40987d4f9e73"
+      },
+      {
+        "path": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.legacy.js",
+        "sha256": "052263fdd7ab657a0183d874a706c2cf82527233c5e60b58158caa0677718b97"
+      },
+      {
+        "path": "packages/artplayer-proxy-canvas/dist/artplayer-proxy-canvas.mjs",
+        "sha256": "66ca7271f52545a8796f563f2d5ca04581bed8d60d218463923325acf5b73ccf"
+      },
+      {
+        "path": "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.js",
+        "sha256": "23ce59f86e7159eedd4c371219c5ed58db83341e1f3fa3c67dcb8f1259e243cb"
+      },
+      {
+        "path": "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.legacy.js",
+        "sha256": "2c523a4535ae71213d279b54abf3b1d164c81e3d8abe3d9c9906e9a9ac840c26"
+      },
+      {
+        "path": "packages/artplayer-proxy-mediabunny/dist/artplayer-proxy-mediabunny.mjs",
+        "sha256": "3126446aa6461b78e56855ac851a2abf5a12359c7354e5564af6efaa0903f3fa"
+      },
+      {
+        "path": "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.js",
+        "sha256": "7408fceccb000e1b304abe30ac9bc364da7860c3896ad5aaa6af427804c237e6"
+      },
+      {
+        "path": "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.legacy.js",
+        "sha256": "4e8bd39cdc37e98bff9cd19b5e0c9453ebe5231264242fc1c573aa96edb5ea8a"
+      },
+      {
+        "path": "packages/artplayer-tool-iframe/dist/artplayer-tool-iframe.mjs",
+        "sha256": "ac4c5efa670c0429fc95bdab7902df60f5b5540f0dad9c7e65c2bd660796dc83"
+      },
+      {
+        "path": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js",
+        "sha256": "ef72d277e817c2f7312c10815ee91a74dbb9334285476d14fae7f4449b3d2758"
+      },
+      {
+        "path": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.legacy.js",
+        "sha256": "f1d62e3cee7e060e7ecff4a21e7589e2befb2e405976efcdee73719857d0be03"
+      },
+      {
+        "path": "packages/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.mjs",
+        "sha256": "abdbc7c28bcccc1a8dee543f1bd784f850c147856fc148c3bf4b8ea863f3d6ea"
+      }
+    ],
+    "differences": []
+  },
+  "servorPortDefect": {
+    "task": "MOD-DEV-01",
+    "node": "v24.21.0",
+    "servor": "4.0.2",
+    "occupiedPort": 12671,
+    "code": 0,
+    "signal": null,
+    "output": "[ERR] The port you have specified is already in use!\n",
+    "interpretation": "Historical upstream defect reproduction, not candidate success: an occupied requested port exits the entire process with status zero."
+  },
+  "sources": [
+    {
+      "path": "scripts/build.js",
+      "sha256": "ec716c545d6bd0a06fdf7b616a487e0cc7605212de5c413bc247efa6737d5870"
+    },
+    {
+      "path": "scripts/dev.js",
+      "sha256": "86b13818172c2ab9ed6792f32e14af1b194783292264ff4476bcbe0f54697176"
+    },
+    {
+      "path": "scripts/utils.js",
+      "sha256": "b42450026f5e8a621b59cd84f91d5c1d6915f4ec026ad2ee0980b06f16f6ae79"
+    },
+    {
+      "path": "scripts/projects.js",
+      "sha256": "3956faff0032ab5b91daa45f390a664ca246559621f95fd2f53cef8bb8b58bdf"
+    },
+    {
+      "path": "scripts/rebuild.js",
+      "sha256": "de8d73c482ac22c7c197910a755eb38cf9f3e4719c2daa9d994dd9122668fddf"
+    },
+    {
+      "path": "scripts/build-analysis.mjs",
+      "sha256": "b5e62d1fcd9fd9216f8849a15b5fc70bf0280d978b9992c0ff5302927884c15f"
+    },
+    {
+      "path": "scripts/tsconfig.library.json",
+      "sha256": "3f47bba61969a74be0285c67d19293ffb736ac9831a9ff78abac4789dcaf5e50"
+    },
+    {
+      "path": "scripts/performance-artifacts.mjs",
+      "sha256": "5749bc5d75d9d12fe73c281cfa12741cec29e3fd7032324eaa63c6670774e9c4"
+    },
+    {
+      "path": "test/performance-report.test.js",
+      "sha256": "3092854bea819b4436e00a9cc26615119ccaffef5f745d6c1459e1ed9a33422d"
+    },
+    {
+      "path": "test/browser/library-development.spec.js",
+      "sha256": "d2f606432618319815d588edda2bf01513db4154b5ddef0f4813ed5cdd80ff27"
+    },
+    {
+      "path": "refactor/scripts/build.test.mjs",
+      "sha256": "41942c147d63880169c9c7b032b395b511ca0573dc4ac09ba54e01338013b521"
+    },
+    {
+      "path": "refactor/scripts/library-build-comparison.mjs",
+      "sha256": "956e697d4d67a0417c71398f345d44144f8c3a9997f262c2b014c7a3ca5c0725"
+    },
+    {
+      "path": "refactor/scripts/servor-port-probe.mjs",
+      "sha256": "c3ae47466a575755b63c74fafd25a8fd8df160b36c2fe119cb7f5dfadfd26e2b"
+    },
+    {
+      "path": "scripts/library/analysis.ts",
+      "sha256": "68ce6b33d0257ccd34a2abc5a75a7a6e06420cd93eaa00501cc04e38d48ad78b"
+    },
+    {
+      "path": "scripts/library/banner.ts",
+      "sha256": "c07b9b033cf1e3ad68e9ce80c0f9e7955d24abe8ad291e01ad22b5303c9f9ec5"
+    },
+    {
+      "path": "scripts/library/config.ts",
+      "sha256": "57ce344e05e5373a9c243a37a223e2403c67b25541b4c77f5289a83a008b6a23"
+    },
+    {
+      "path": "scripts/library/development.ts",
+      "sha256": "7b6af5ef9bc985def5d604ae0dbc75faa57be907edfb8a06a5420f18462ba5b4"
+    },
+    {
+      "path": "scripts/library/names.ts",
+      "sha256": "3749777e71f2f471e0edb4a1104d2c650d09643f57149a42f1c135dc79b7b1b5"
+    },
+    {
+      "path": "scripts/library/production.ts",
+      "sha256": "f309ec71319d7d99f703bba3d11f3db53c1c240d6af9d0d5e6a5e36eb3b1bfeb"
+    },
+    {
+      "path": "scripts/library/projects.ts",
+      "sha256": "fc658271482a4f293c21d606ac87b2668dbc88e3028b345a622587ebc0d151ca"
+    },
+    {
+      "path": "scripts/library/rebuild.ts",
+      "sha256": "01cfc0f5f58263baa891e7c783349f1ff212a423a03a6805aecea568a482aec0"
+    },
+    {
+      "path": "scripts/library/vendor.d.ts",
+      "sha256": "c64b7a80155c6ffc95683a208de01ba5d8d4c7b8e673b2dc5a51479a467e9f6a"
+    }
+  ],
+  "logs": [
+    {
+      "path": "refactor/.cache/library-types.log",
+      "sha256": "258b10b22b662a74ceb797d7522c1fada9d3eb274e0b5d399297124213a6bb60"
+    },
+    {
+      "path": "refactor/.cache/library-docs-types.log",
+      "sha256": "a81eda6ec03482b64e1f2e445981950400f44c198f4a2807b4d8d0ce8a40e0c5"
+    },
+    {
+      "path": "refactor/.cache/library-final.log",
+      "sha256": "57ea9a6ad9a9dbe51021ed4e931a01eda245bf6075d2f96aa51361c7959d706f"
+    },
+    {
+      "path": "refactor/.cache/library-lint.log",
+      "sha256": "582d5ca5dd5743cc6c4ee0d79209e83ae092192fc08a4459108c9378da5977ca"
+    },
+    {
+      "path": "refactor/.cache/library-ci.log",
+      "sha256": "4f3da506e18e73d591b3639a45d58ff8d6d2dd85b10cdd6b9e6ea83e264e450d"
+    },
+    {
+      "path": "refactor/.cache/library-toolchain.log",
+      "sha256": "26a73433d38e21611f5fac5a5ee69f4fccbe6504ff8911e14804263ff971bcb2"
+    },
+    {
+      "path": "refactor/.cache/library-browser-initial.log",
+      "sha256": "5d89458936d534add82759a5d5c7c619573ca4926808b5ca9daf2862d4bfee16"
+    },
+    {
+      "path": "refactor/.cache/library-browser-reload-initial.log",
+      "sha256": "327d7313fff811981422a6b1006ec059571d3e2aabea1396076070657a4bd922"
+    },
+    {
+      "path": "refactor/.cache/library-browser-final.log",
+      "sha256": "f1ca8c33db2481eacfb8769dc2fbc304979b09d502042820aef6240752d4c795"
+    },
+    {
+      "path": "refactor/.cache/library-comparison.log",
+      "sha256": "3e3b74b295a44218b6266e0593af346a3686e3108db4b44822a25658faf44135"
+    },
+    {
+      "path": "refactor/.cache/servor-port-probe.log",
+      "sha256": "69d774eb3a5ce6a0b17e398d4fecd228054f2a42465703e9ddc7c1aefe261682"
+    },
+    {
+      "path": "refactor/.cache/library-baseline.log",
+      "sha256": "0379a619c3b1323b32ae74a95da757318a6dd9538fef586de987fb5d94644d78"
+    }
+  ],
+  "limitations": [
+    "Windows browser evidence; remote OS matrices remain pending",
+    "No library media playback or npm publication claims",
+    "Servor occupied-port exit0 remains open in MOD-DEV-01",
+    "No new dependencies, Lerna changes or real dist/docs rebuild"
+  ]
+}

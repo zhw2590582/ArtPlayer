@@ -87,6 +87,7 @@ test('performance refuses stale sources, build tools and altered installed bundl
     'scripts/build.js': 'build fixture\n',
     'scripts/utils.js': 'utils fixture\n',
     'scripts/projects.js': 'projects fixture\n',
+    'scripts/library/config.ts': 'typed build fixture\n',
   }
   for (const [file, content] of Object.entries(toolchain)) {
     write(path.join(root, file), content)
@@ -115,6 +116,12 @@ test('performance refuses stale sources, build tools and altered installed bundl
   write(path.join(root, 'scripts/build.js'), 'changed compiler\n')
   assert.throws(() => verifyPerformanceArtifacts(root, map), /Stale build input/)
   write(path.join(root, 'scripts/build.js'), toolchain['scripts/build.js'])
+  write(path.join(root, 'scripts/library/config.ts'), 'changed TS config\n')
+  assert.throws(() => verifyPerformanceArtifacts(root, map), /Stale library build inputs/)
+  write(path.join(root, 'scripts/library/config.ts'), toolchain['scripts/library/config.ts'])
+  write(path.join(snapshot, 'scripts/library/removed.ts'), 'stale module\n')
+  assert.throws(() => verifyPerformanceArtifacts(root, map), /Stale library build inputs/)
+  fs.unlinkSync(path.join(snapshot, 'scripts/library/removed.ts'))
   write(path.join(output, 'artifacts/artplayer/dist/artplayer.js'), 'changed bundle\n')
   assert.throws(() => verifyPerformanceArtifacts(root, map), /Installed performance artifact changed/)
 })

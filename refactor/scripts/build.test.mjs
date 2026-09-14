@@ -75,6 +75,10 @@ test('Normal build CLI compiles TypeScript, JS, Less, SVG and inline worker into
     assert.equal(run([name]).status, 1)
     assert(fs.existsSync(path.join(dist, 'preserve.txt')))
     fs.unlinkSync(path.join(project, 'src/index.js'))
+    fs.writeFileSync(path.join(project, 'package.json'), JSON.stringify({ name, version: 1 }))
+    assert.equal(run([name]).status, 1, 'Malformed version must fail before dist is cleaned')
+    assert(fs.existsSync(path.join(dist, 'preserve.txt')))
+    fs.writeFileSync(path.join(project, 'package.json'), JSON.stringify({ name, version: '1.0.0' }))
     execFileSync(process.execPath, [path.join(root, 'scripts/build.js'), name], { cwd: directory, env: { ...process.env, NODE_ENV: 'production' }, encoding: 'utf8', timeout: 60000 })
     assert.deepEqual(fs.readdirSync(dist).sort(), [`${name}.js`, `${name}.legacy.js`, `${name}.mjs`])
     function check(factory) {

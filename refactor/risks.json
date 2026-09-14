@@ -5914,6 +5914,23 @@
         "test/plugin-scaffold.test.js"
       ],
       "resolutionRationale": "Frozen old generator reproduces overwrite and mismatched URL. Candidate refuses old or concurrent output, preserves external edits on rollback, generates matching dotted URLs and passes actual three-format package consumers and strict types."
+    },
+    {
+      "id": "DEV-SERVOR-PORT-01",
+      "title": "Servor exits the entire dev process with status zero when the requested port is occupied",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "MOD-DEV-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-MOD-02-library-tooling.md",
+        "refactor/scripts/servor-port-probe.mjs",
+        "refactor/baselines/library-tooling-validation.json"
+      ],
+      "compatibleResolution": "Preserve the default dev URL and CLI while reporting startup failures with nonzero status, without stopping another service. Define ownership of HTTP, watch and reload resources.",
+      "closureCriteria": "Real occupied-port and repeated startup/shutdown checks pass for the candidate; build, reload and error recovery remain compatible. Separate source-observed resource ownership limitations from reproduced leaks.",
+      "workspaceState": "Pinned Servor4.0.2 probe prints the occupied-port error and exits0. TS migration retains that upstream behavior; MOD-DEV-01 must resolve it before the final tooling decision. Servor has no exposed close handle; this is a source observation, not a measured leak."
     }
   ]
 }
