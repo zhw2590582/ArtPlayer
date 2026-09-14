@@ -24,6 +24,19 @@ test('Source invocation clears inherited artifact selection without changing cal
     assert(fs.existsSync(path.resolve('test/browser', file)))
 })
 
+test('Native VAST keeps its source default and rejects an invalid explicit installation before browser launch', () => {
+  const env = { ...process.env }
+  delete env.ARTPLAYER_BROWSER_ARTIFACTS
+  const command = 'const { default: config } = await import("./playwright.vast-native.config.js"); if (config.timeout !== 30000 || config.workers !== 1) throw new Error("Native execution policy changed");'
+  const source = spawnSync(process.execPath, ['--input-type=module', '-e', command], { encoding: 'utf8', env, windowsHide: true })
+  assert.equal(source.status, 0, source.stderr)
+  const missing = path.resolve('refactor/.cache/absent-vast-native-artifact-map.json')
+  assert(!fs.existsSync(missing))
+  const installed = spawnSync(process.execPath, ['--input-type=module', '-e', command], { encoding: 'utf8', env: { ...env, ARTPLAYER_BROWSER_ARTIFACTS: missing }, windowsHide: true })
+  assert.equal(installed.status, 1)
+  assert.match(installed.stderr, /ENOENT/)
+})
+
 test('Browser invocation rejects ambiguous scopes and output/configuration overrides', () => {
   assert.throws(() => browserInvocation('unknown', [], {}), /Choose/)
   assert.throws(() => browserInvocation('installed', [], {}), /require ARTPLAYER/)

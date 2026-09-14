@@ -1,14 +1,15 @@
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
-// eslint-disable-next-line antfu/no-top-level-await -- Bundle the real SDK once before test discovery.
-const code = await compilePackage('artplayer-plugin-vast', 'umd')
+// eslint-disable-next-line antfu/no-top-level-await -- Select the complete source or installed SDK bundle before discovery.
+const { code, provenance } = await browserCandidate('artplayer-plugin-vast')
 
 for (const compatibility of [undefined, 'workspace-1.2']) {
   test(`real IMA ${compatibility || 'npm-default'} recovers from empty VAST, recreates and destroys an active ad`, async ({ page }, testInfo) => {
     await page.goto('/test/player.html?core=candidate')
     await page.addScriptTag({ content: code })
+    await testInfo.attach('native-vast-inputs', { contentType: 'application/json', body: JSON.stringify({ provenance, sourceSha256: hash(code), compatibility: compatibility || 'npm-default', scope: 'Complete glomex bundle with real remote Google IMA; no SDK substitution.' }) })
     await page.evaluate(async (compatibility) => {
       window.createPlayer('/assets/sample/video.mp4')
       window.recoveryEvents = []
@@ -65,7 +66,7 @@ for (const compatibility of [undefined, 'workspace-1.2']) {
     expect(state.terminalInit).toBeNull()
     expect(state.events.filter(event => event.type === 'AdError')).toHaveLength(1)
     await expect(page.locator('[id^="art-"]')).toHaveCount(0)
-    await testInfo.attach('native-vast-recovery', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(code), compatibility: compatibility || 'npm-default', failure, ...state }) })
+    await testInfo.attach('native-vast-recovery', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(code), provenance, compatibility: compatibility || 'npm-default', failure, ...state }) })
     await testInfo.attach('native-vast-recovery.xml', { contentType: 'application/xml', body: await page.evaluate(() => window.recoveryXml) })
   })
 }

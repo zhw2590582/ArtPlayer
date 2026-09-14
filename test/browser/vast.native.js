@@ -1,11 +1,11 @@
 import fs from 'node:fs'
 import { hash, readMember } from '../../refactor/scripts/releases.mjs'
 import { verifyVastContract } from '../../refactor/scripts/vast-contract.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
-// eslint-disable-next-line antfu/no-top-level-await -- Compile the real bundled SDK before test discovery.
-const code = await compilePackage('artplayer-plugin-vast', 'umd')
+// eslint-disable-next-line antfu/no-top-level-await -- Select the complete source or installed SDK bundle before discovery.
+const { code, provenance } = await browserCandidate('artplayer-plugin-vast')
 // eslint-disable-next-line antfu/no-top-level-await -- Verify immutable published bytes before native test discovery.
 const contract = await verifyVastContract()
 const historicalCode = readMember(contract.archives.get('artplayer-plugin-vast@1.0.0'), 'package/dist/artplayer-plugin-vast.js').toString()
@@ -38,7 +38,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
     test(`real IMA ${core} / ${implementation} plays local VAST media and resumes content`, async ({ page }, testInfo) => {
       await page.goto(`/test/player.html?core=${core}`)
       await page.addScriptTag({ content: bundle })
-      await testInfo.attach('native-vast-inputs', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(bundle), sdk: historical ? 'immutable npm1.0.0 bundled SDK; real remote Google IMA' : '@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA', media: { file: mediaFile, sha256: hash(fs.readFileSync(mediaFile)), contentFile: 'docs/assets/sample/video.mp4', contentSha256: hash(fs.readFileSync('docs/assets/sample/video.mp4')) }, implementation, core, compatibility: compatibility || 'npm-default' }) })
+      await testInfo.attach('native-vast-inputs', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(bundle), provenance: historical ? { kind: 'published', name: 'artplayer-plugin-vast', version: '1.0.0' } : provenance, sdk: historical ? 'immutable npm1.0.0 bundled SDK; real remote Google IMA' : '@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA', media: { file: mediaFile, sha256: hash(fs.readFileSync(mediaFile)), contentFile: 'docs/assets/sample/video.mp4', contentSha256: hash(fs.readFileSync('docs/assets/sample/video.mp4')) }, implementation, core, compatibility: compatibility || 'npm-default' }) })
       await page.evaluate(({ compatibility, historical }) => {
         window.nativeVastHistorical = historical
         window.nativeVastEvents = []

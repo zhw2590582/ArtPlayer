@@ -109,7 +109,10 @@ Google的[AdsRequest接口](https://developers.google.com/interactive-media-ads/
 广告解码截图、主片播放位置及事件；远端SDK版本会变，结果仅代表对应运行环境。
 
 三核心固定为npm5.1.7、npm5.4.0、候选5.4.1；实际npm1.0.0插件完整bundle通过
-归档校验后直接加载，候选两种模式使用同一生产构建配置的内存bundle。历史插件的
+归档校验后直接加载，候选两种模式默认使用同一生产构建配置的内存bundle。
+设置 ARTPLAYER_BROWSER_ARTIFACTS 后改为核验并加载安装包；config 要求核心、
+Chapter、VAST 的安装和源码新鲜度证据，三个 native 文件都保留早期输入身份附件。
+历史插件的
 SDK清理由夹具在证据后显式补做，不能据DOM被核心移除就认为旧插件拥有SDK清理。
 源代码组合通过不等于最终tarball通过，也不等于iOS/Android物理设备通过。
 
@@ -125,3 +128,9 @@ SDK清理由夹具在证据后显式补做，不能据DOM被核心移除就认�
 最终5/6（另1项9000失败）、共享服务12/12及固定WebKit诊断3/3见
 [增补记录](changes/2026-09-14-PKG-VAST-05-skip-checkpoint.md)。媒体采样仅用于
 记录，未放宽原首帧断言；三次通过不能覆盖先前间歇失败。
+
+统一安装清单中的 `vast-package.spec.js` 只覆盖完整打包 glomex 的脚本加载、
+并发拒绝、重试请求和销毁边界。它通过网络拦截控制失败，迟到成功仅提供空的
+IMA readiness 哨兵；不会执行广告。原 `vast.spec.js` 继续替换 glomex 边界，
+不纳入完整安装 bundle 声明。真实广告仍必须单独执行上述 native 入口，并按
+实际 SDK/网络结果记录。见[安装检查点](changes/2026-09-15-CI-01-vast-installed.md)。

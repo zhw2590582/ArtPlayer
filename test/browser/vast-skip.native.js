@@ -1,16 +1,17 @@
 import fs from 'node:fs'
 import { hash } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 import { skippableVast } from './vast-fixture.mjs'
 
-// eslint-disable-next-line antfu/no-top-level-await -- Native SDK bundle is shared by test discovery.
-const code = await compilePackage('artplayer-plugin-vast', 'umd')
+// eslint-disable-next-line antfu/no-top-level-await -- Select the complete source or installed SDK bundle before discovery.
+const { code, provenance } = await browserCandidate('artplayer-plugin-vast')
 
 for (const compatibility of [undefined, 'workspace-1.2']) {
   test(`real IMA ${compatibility || 'npm-default'} requests playUrl and skips through the SDK button`, async ({ page }, testInfo) => {
     await page.goto('/test/player.html?core=candidate')
     await page.addScriptTag({ content: code })
+    await testInfo.attach('native-vast-inputs', { contentType: 'application/json', body: JSON.stringify({ provenance, sourceSha256: hash(code), compatibility: compatibility || 'npm-default', scope: 'Complete glomex bundle with real remote Google IMA; no SDK substitution.' }) })
     await page.evaluate(async (compatibility) => {
       window.createPlayer('/assets/sample/video.mp4')
       window.skipEvents = []
@@ -62,7 +63,7 @@ for (const compatibility of [undefined, 'workspace-1.2']) {
     const state = await page.evaluate(() => ({ events: window.skipEvents, time: window.art.currentTime, paused: window.art.template.$video.paused, imaVersion: window.google.ima.VERSION }))
     expect(state.paused).toBe(false)
     expect(state.events.filter(event => event.type === 'AdError' || event.type === 'AdComplete')).toEqual([])
-    await testInfo.attach('native-vast-skip', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(code), xmlSha256: hash(xml), mediaSha256: hash(fs.readFileSync('test/browser/media/pattern.mp4')), compatibility: compatibility || 'npm-default', beforeAd, ...state }) })
+    await testInfo.attach('native-vast-skip', { contentType: 'application/json', body: JSON.stringify({ sourceSha256: hash(code), provenance, xmlSha256: hash(xml), mediaSha256: hash(fs.readFileSync('test/browser/media/pattern.mp4')), compatibility: compatibility || 'npm-default', beforeAd, ...state }) })
     await page.evaluate(() => window.art.destroy())
     await expect(page.locator('[id^="art-"]')).toHaveCount(0)
   })

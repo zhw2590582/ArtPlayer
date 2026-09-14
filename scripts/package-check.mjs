@@ -116,6 +116,7 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     'artplayer-plugin-danmuku': async () => (await import('../refactor/scripts/danmuku-contract.mjs')).verifyDanmukuContract(),
     'artplayer-plugin-danmuku-mask': async () => (await import('../refactor/scripts/danmuku-mask-contract.mjs')).verifyDanmukuMaskContract(),
     'artplayer-tool-iframe': async () => (await import('../refactor/scripts/iframe-contract.mjs')).verifyIframeContract(),
+    'artplayer-plugin-vast': async () => (await import('../refactor/scripts/vast-contract.mjs')).verifyVastContract(),
     'artplayer-plugin-audio-track': async () => (await import('../refactor/scripts/audio-contract.mjs')).verifyAudioContract(),
     'artplayer-plugin-vtt-thumbnail': async () => (await import('../refactor/scripts/vtt-thumbnail-contract.mjs')).verifyVttThumbnailContract(),
     'artplayer-plugin-multiple-subtitles': async () => (await import('../refactor/scripts/multiple-subtitles-contract.mjs')).verifyMultipleSubtitlesContract(),

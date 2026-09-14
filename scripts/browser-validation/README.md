@@ -29,6 +29,14 @@ Iframe baseline/lifecycle-only/boundaries-only diagnostic flags. The separate
 history server still uses `iframeCandidate()` and may receive a core-only map;
 its source/explicit tool selection has not become installed-tool acceptance.
 
+VAST's installed entry is `vast-package.spec.js`: complete glomex bundle,
+controlled native SDK script failure/readiness, registration cleanup and actual
+main-content decoding. The original `vast.spec.js` substitutes the glomex boundary
+and remains source-only. Real Google IMA execution stays in `test:vast-native`;
+that separate config now accepts a verified core/Chapter/VAST installation map
+and all native candidate files record the installed identity before initialization.
+Loader tests cannot stand in for native advertising, devices or SDK availability.
+
 Ads media/lifecycle and UI files use `test/helpers/browser-candidate.js` to select
 the verified installed plugin whenever an artifact map is present. An additional
 ARTPLAYER_ADS_ARTIFACT override is rejected instead of mixing candidates. Missing,

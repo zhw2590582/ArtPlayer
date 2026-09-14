@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import assert from 'node:assert/strict'
 
 export type BrowserScope = 'source' | 'installed'
-export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast', 'artplayer-proxy-mediabunny', 'artplayer-plugin-jassub', 'artplayer-plugin-danmuku', 'artplayer-plugin-danmuku-mask', 'artplayer-tool-iframe']
+export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast', 'artplayer-proxy-mediabunny', 'artplayer-plugin-jassub', 'artplayer-plugin-danmuku', 'artplayer-plugin-danmuku-mask', 'artplayer-tool-iframe', 'artplayer-plugin-vast']
 export const installedTests = [
   'playback.spec.js',
   'lifecycle.spec.js',
@@ -76,6 +76,7 @@ export const installedTests = [
   'iframe-navigation.spec.js',
   'iframe-player.spec.js',
   'iframe-editor.spec.js',
+  'vast-package.spec.js',
 ]
 
 export function browserInvocation(scope: string, args: string[], environment: NodeJS.ProcessEnv) {

@@ -134,3 +134,29 @@ countdown already has an accessible skip name; visibility alone is insufficient.
 The local XML server permits only IMA origins on that fixture route. Native SDK
 timeouts remain failures even when a late ad subsequently plays or skips correctly.
 Physical device validation remains05 and full distribution06.
+
+## Complete installed bundles
+
+The shared `yarn test:package --browser` roster includes VAST. Its checked
+archive retains the real npm 1.0.0 dist/type paths; the same-name contract also
+verifies the frozen SDK archives. Generic package runtime/type fixtures still
+cover core/chapter only. Use the separate VAST type consumers for VAST claims.
+
+`vast-package.spec.js` uses `browserCandidate()` to select a normal source build
+or the verified installed UMD, including the actual glomex implementation. It
+holds/aborts native SDK script requests to verify concurrent load rejection,
+fresh attempts and listener cleanup. A second case destroys the host before
+fulfilling the script with an inert readiness sentinel, which intentionally has
+no IMA player APIs: late construction or callbacks must not run. Main content
+still decodes after SDK failure. These are loader/lifetime tests, not Google IMA
+ad playback; `vast.spec.js` remains a separate controlled SDK boundary suite.
+
+`yarn test:vast-native` defaults to the existing source build. With
+`ARTPLAYER_BROWSER_ARTIFACTS` set, its config requires verified core, Chapter and
+VAST installations, and all three native test files load the complete installed
+bundle. They preserve real remote IMA, published plugin controls, timeouts and
+zero retries. Input provenance is attached before SDK initialization, including
+for tests that fail before ad playback. This optional integration run stays
+outside normal PR checks. See the
+[installed VAST record](../../refactor/changes/2026-09-15-CI-01-vast-installed.md)
+for actual results and the remaining external SDK/device/distribution gates.

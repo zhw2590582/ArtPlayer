@@ -1,5 +1,9 @@
 # PR 检查和 Pages 操作说明
 
+最新统一安装清单含二十包。VAST 的完整 glomex 加载边界进入普通 installed
+范围；真实 IMA 仍由独立 test:vast-native 按显式安装 map 验证，本地 39/39
+通过不表示远端 CI 已覆盖真实广告。见[记录](changes/2026-09-15-CI-01-vast-installed.md)。
+
 浏览器CI现在分别执行 `yarn test:browser:source` 和
 `yarn test:browser:installed`。前者清除继承的安装map并保留全部spec；后者要求已
 核验的统一包清单，执行明确列出的 installed 子集；清单维护在

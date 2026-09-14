@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "task": "CI-01",
+  "date": "2026-09-15",
+  "sourceHead": "ce67eaa73ec177b23de9a4c7e27ba99fdf458ae9",
+  "candidate": "Working tree included in the accompanying CI-01 complete VAST bundle checkpoint; code fingerprints normalize LF",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "inputs": [
+    {
+      "file": "scripts/package-check.mjs",
+      "sha256LF": "61529f6d109d6581ead9f32883b4082a02cd00c9bc6c396b1339a8c30530de09"
+    },
+    {
+      "file": "scripts/browser-validation/scope.ts",
+      "sha256LF": "746f751b2e1c40f7f2f5a8aafd40ff9c47066fc5716984d2feeda167ecfc41fc"
+    },
+    {
+      "file": "playwright.vast-native.config.js",
+      "sha256LF": "c1b8f0db85602adc6eda12460af1b0740ad380abceb59d565f12bbbf39ed7135"
+    },
+    {
+      "file": "test/browser-validation.test.js",
+      "sha256LF": "08b2772f18adc640adce948d00e9de64cb18e5e4f4135286ec62971521f2331f"
+    },
+    {
+      "file": "test/browser/vast-package.spec.js",
+      "sha256LF": "60fad56473db0b3c7bc062342ced578d9176ab0f449c871dc5a2a54b001c9888"
+    },
+    {
+      "file": "test/browser/vast.native.js",
+      "sha256LF": "9141ecf01a3c8474225c750f3024f2bbd1222bc6fa0b6446d8fa183680d294a5"
+    },
+    {
+      "file": "test/browser/vast-recovery.native.js",
+      "sha256LF": "4c1969596742b72b04ad505175073bed5802ac1420922128fd0e1ddcceb11804"
+    },
+    {
+      "file": "test/browser/vast-skip.native.js",
+      "sha256LF": "cfad59626989094aa92e40d4282d410c4596bf21dd2c908923992a9414b2fb4e"
+    }
+  ],
+  "packages": {
+    "directory": "refactor/.cache/packages/run-yqnfgx",
+    "reportSha256": "ea83dc2b4e3f66a247e1e700a4115ec0231e97ab2984c74593aef10c1e49f463",
+    "count": 20,
+    "names": [
+      "artplayer",
+      "artplayer-plugin-chapter",
+      "artplayer-plugin-ambilight",
+      "artplayer-proxy-canvas",
+      "artplayer-plugin-document-pip",
+      "artplayer-plugin-ads",
+      "artplayer-plugin-audio-track",
+      "artplayer-plugin-vtt-thumbnail",
+      "artplayer-plugin-multiple-subtitles",
+      "artplayer-plugin-hls-control",
+      "artplayer-plugin-dash-control",
+      "artplayer-plugin-auto-thumbnail",
+      "artplayer-plugin-asr",
+      "artplayer-plugin-chromecast",
+      "artplayer-proxy-mediabunny",
+      "artplayer-plugin-jassub",
+      "artplayer-plugin-danmuku",
+      "artplayer-plugin-danmuku-mask",
+      "artplayer-tool-iframe",
+      "artplayer-plugin-vast"
+    ],
+    "vast": {
+      "name": "artplayer-plugin-vast",
+      "version": "1.2.0",
+      "archive": "artplayer-plugin-vast.tgz",
+      "sha256": "e765c2809cec4494d62811c9d2cd96ea8a3091e4cc75162ece31586b95f5f2d7",
+      "files": {
+        "package/ARCHITECTURE.md": "918c8f66ed6010c0b2fb8ca70ccc62101fcc126962829347eb3718242375d0f3",
+        "package/README.md": "7ec086f19c899e315efcb136e037a02d951b0395d5f0ce239817be87ea4ab4e6",
+        "package/dist/artplayer-plugin-vast.js": "cebaf6a44f80079841205498c4f855ba4e5c804ae7958c06eadda524d728e079",
+        "package/dist/artplayer-plugin-vast.legacy.js": "8ebb4ebdd4c0fc5ddc467d5ee15b18ab7e5c078c15bbfd37dc33aa89eac1de92",
+        "package/dist/artplayer-plugin-vast.mjs": "a63e6e8b27032ea690fe740e9ec0a98646346f1fcd3622740f1f5363f234a72b",
+        "package/package.json": "d359f65c20ca85939a15d4502fdafd6258401aa4a3e421314e1275fe7102826e",
+        "package/types/artplayer-plugin-vast.d.ts": "51257361f482f026a9b5ba84ca85d320d9e1457a34d0d259ac3c7b46c4fbd29c",
+        "package/types/runtime-api.d.ts": "4634b65f2d1bbd6973a40390f3217251b69fc5167198a8409d9fed48500e106d",
+        "package/types/runtime.d.cts": "cead9984e0e2644e67cc687380ed40aed0d561b9d6f9636bea3b98d71522b13e",
+        "package/types/runtime.d.mts": "5abf25cba3dfaaea2652c0d3721f58ad243eb4d3a2fef80f5d27eb978973b586",
+        "package/types/runtime.d.ts": "cead9984e0e2644e67cc687380ed40aed0d561b9d6f9636bea3b98d71522b13e"
+      }
+    },
+    "wallSeconds": 113.47,
+    "exitCode": 0,
+    "genericConsumerScope": [
+      "artplayer",
+      "artplayer-plugin-chapter"
+    ]
+  },
+  "collection": {
+    "directory": "refactor/.cache/ci01-vast-collection-report",
+    "reportSha256": "98f1803d4c78173a843e35f3be2889253469fb7bdbcce9f02da93e23849b0b5a",
+    "count": 2442,
+    "files": 73,
+    "collectionOnly": true
+  },
+  "source": {
+    "directory": "refactor/.cache/ci01-vast-source-report",
+    "reportSha256": "a2e75d564fbd87c467aef377e5c486e5db983633ee816f8575dcf4797607e8ea",
+    "invocation": {
+      "scope": "source",
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "vast-package.spec.js",
+        "--workers=2"
+      ],
+      "node": "24.21.0",
+      "artifactMap": null,
+      "installedPackages": 0
+    },
+    "result": {
+      "scope": "source",
+      "exitCode": 0,
+      "signal": null,
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "vast-package.spec.js",
+        "--workers=2"
+      ]
+    },
+    "stats": {
+      "startTime": "2026-09-14T20:39:43.739Z",
+      "duration": 25485.434999999998,
+      "expected": 36,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "counts": {
+      "chromium/vast-package.spec.js": {
+        "expected": 12,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "firefox/vast-package.spec.js": {
+        "expected": 12,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "webkit/vast-package.spec.js": {
+        "expected": 12,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "browserVersions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "sdkVersions": [],
+    "identityCounts": {
+      "chromium/source-build": 12,
+      "firefox/source-build": 12,
+      "webkit/source-build": 12
+    },
+    "failures": [],
+    "invocationSha256": "28d87cf83591b7927e472c05ddd2422b4a7f93d2af69845b6b53cbbe1768d2d7"
+  },
+  "installed": {
+    "directory": "refactor/.cache/ci01-vast-installed-report",
+    "reportSha256": "a0b7608243bee0371a0d0de83fba648c10fa6b0ee5eb3a06debde84016973b42",
+    "invocation": {
+      "scope": "installed",
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "vast-package.spec.js",
+        "--workers=2"
+      ],
+      "node": "24.21.0",
+      "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-yqnfgx\\browser-artifacts.json",
+      "installedPackages": 20
+    },
+    "result": {
+      "scope": "installed",
+      "exitCode": 0,
+      "signal": null,
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "vast-package.spec.js",
+        "--workers=2"
+      ]
+    },
+    "stats": {
+      "startTime": "2026-09-14T20:42:41.950Z",
+      "duration": 23818.322999999997,
+      "expected": 36,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "counts": {
+      "chromium/vast-package.spec.js": {
+        "expected": 12,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "firefox/vast-package.spec.js": {
+        "expected": 12,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "webkit/vast-package.spec.js": {
+        "expected": 12,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "browserVersions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "sdkVersions": [],
+    "identityCounts": {
+      "chromium/installed": 12,
+      "firefox/installed": 12,
+      "webkit/installed": 12
+    },
+    "failures": [],
+    "invocationSha256": "4284fe5664b42cc83055f595a22f0ccb452fe9a44981bcc2f79430f5d7816dfc"
+  },
+  "native": {
+    "directory": "refactor/.cache/ci01-vast-native-report",
+    "reportSha256": "e65f83cc260088fcb62f9b05795991c7734b74e5d05ad3d0cc190f15461dc788",
+    "invocation": {
+      "scope": "installed-native",
+      "command": "yarn test:vast-native",
+      "head": "ce67eaa73ec177b23de9a4c7e27ba99fdf458ae9",
+      "startedAt": "2026-09-14T20:44:01.4909743Z",
+      "artifactMap": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-yqnfgx\\browser-artifacts.json"
+    },
+    "result": {
+      "exitCode": 0,
+      "finishedAt": "2026-09-14T20:48:44.1700556Z"
+    },
+    "stats": {
+      "startTime": "2026-09-14T20:44:02.273Z",
+      "duration": 281695.31499999994,
+      "expected": 39,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "counts": {
+      "chromium/vast-recovery.native.js": {
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "firefox/vast-recovery.native.js": {
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "webkit/vast-recovery.native.js": {
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "chromium/vast-skip.native.js": {
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "firefox/vast-skip.native.js": {
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "webkit/vast-skip.native.js": {
+        "expected": 2,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "chromium/vast.native.js": {
+        "expected": 9,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "firefox/vast.native.js": {
+        "expected": 9,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "webkit/vast.native.js": {
+        "expected": 9,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "browserVersions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "sdkVersions": [
+      "3.789.0"
+    ],
+    "identityCounts": {
+      "chromium/installed": 10,
+      "firefox/installed": 10,
+      "webkit/installed": 10,
+      "chromium/published": 3,
+      "firefox/published": 3,
+      "webkit/published": 3
+    },
+    "failures": []
+  },
+  "verification": {
+    "tests": {
+      "passed": 94,
+      "failed": 0,
+      "durationMs": 3676.2619,
+      "log": "refactor/.cache/ci01-vast-tests.log",
+      "logSha256": "aeae1681eef5ab7b20fead22cf3f8a15cc0ebf84025735555abc1cd8b1a2e542"
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-vast-lint-complete.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "libraryTypes": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-vast-library-types.log",
+      "logSha256": "647c339f0e832948a0fc7393cfeb4ff4e677c8df7b449abbdf3f519523fd782c"
+    },
+    "docsTypes": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-vast-docs-types.log",
+      "logSha256": "6dc9f3b0cbfb35e5b93dc8c9ec04cd2d64146a65c7f581614bcb289777b56795"
+    },
+    "ci": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-vast-ci.log",
+      "logSha256": "ae8f7eb4d69bd9bdded1bfd024dbc81778a9f5746ea59e8348416ee5f4117fd8"
+    },
+    "toolchain": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-vast-toolchain.log",
+      "logSha256": "e826888421079163997eb19d528152df86b03b7d0507877e099e569b461814fb"
+    },
+    "impact": {
+      "exitCode": 0,
+      "log": "refactor/.cache/ci01-vast-impact.log",
+      "logSha256": "4aaebfd09336848065473b9db6e05b17da44d5810422144e0a5ac7341155089d"
+    }
+  },
+  "limitations": [
+    "The PR loader suite uses the complete glomex bundle but controls network failure/readiness. Its sentinel has no IMA player API and is not advertising playback.",
+    "The original vast.spec.js continues to substitute glomex and is not represented as installed complete-bundle coverage.",
+    "Only the separate native run uses the real remote IMA SDK. Current successful runs do not close earlier intermittent SDK9000 or historical WebKit first-frame failures.",
+    "Published plugin controls retain frozen npm1.0.0 bytes; their existing fixture explicitly cleans up SDK resources after observation.",
+    "Generic pack runtime/type consumers remain core/chapter only. VAST root/legacy/runtime installed type compatibility was separately verified in PKG-VAST-04.",
+    "No physical-device evidence, remote CI run, full ecosystem acceptance, publication, or closure of CI-01/PKG-VAST-05."
+  ]
+}
