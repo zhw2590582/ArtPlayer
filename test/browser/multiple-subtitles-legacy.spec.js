@@ -69,7 +69,7 @@ for (const core of ['published-5.1.2', 'published-5.1.7']) {
     await expect(page.locator('.art-subtitle-c')).toHaveText('C')
     await seek(4.5)
     await expect(page.locator('.art-subtitle-a, .art-subtitle-b, .art-subtitle-c')).toHaveCount(0)
-    await testInfo.attach('legacy-captions', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(candidate.code), thirdFormat, state, scope: 'Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals' }) })
+    await testInfo.attach('legacy-captions', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(candidate.code), provenance: candidate.provenance, thirdFormat, state, scope: 'Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals' }) })
     await page.evaluate(() => window.art.destroy())
   })
 }

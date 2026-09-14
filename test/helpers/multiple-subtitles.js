@@ -1,15 +1,14 @@
-import fs from 'node:fs'
 import process from 'node:process'
 import vm from 'node:vm'
 import { transform } from 'esbuild'
 import { verifyMultipleSubtitlesContract } from '../../refactor/scripts/multiple-subtitles-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from './load.js'
+import { browserCandidate } from './browser-candidate.js'
 
 export const subtitleVtt = text => `WEBVTT\n\n00:00.000 --> 00:02.000\n${text}\n`
 
 export async function multipleSubtitlesCandidate() {
-  return { name: 'candidate', version: 'candidate', code: process.env.ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-multiple-subtitles', 'umd') }
+  return { name: 'candidate', version: 'candidate', ...await browserCandidate('artplayer-plugin-multiple-subtitles', process.env.ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT) }
 }
 
 export async function multipleSubtitlesHistorical() {

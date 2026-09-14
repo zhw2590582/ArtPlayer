@@ -32,7 +32,7 @@ async function prepare(page, core, implementation, browser, testInfo) {
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
   if (['1', 'events'].includes(process.env.ARTPLAYER_SOURCE_SEEK_TRACE))
     await installSeekDiagnostics(page, process.env.ARTPLAYER_SOURCE_SEEK_TRACE === '1')
-  await testInfo.attach('multiple-combination-inputs', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation.name, pluginSha256: hash(implementation.code), browser: browser.version(), traceMode: process.env.ARTPLAYER_SOURCE_SEEK_TRACE || 'off', sourceRestoration: process.env.ARTPLAYER_SOURCE_RESTORE_EVENT === '1' ? 'native-event-control' : 'promise-and-seeking-property', scope: 'Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim' }) })
+  await testInfo.attach('multiple-combination-inputs', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation.name, pluginSha256: hash(implementation.code), provenance: implementation.provenance, browser: browser.version(), traceMode: process.env.ARTPLAYER_SOURCE_SEEK_TRACE || 'off', sourceRestoration: process.env.ARTPLAYER_SOURCE_RESTORE_EVENT === '1' ? 'native-event-control' : 'promise-and-seeking-property', scope: 'Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim' }) })
 }
 
 async function seek(page, time) {

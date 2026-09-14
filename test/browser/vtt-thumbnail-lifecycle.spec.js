@@ -43,7 +43,7 @@ for (const core of ['published', 'candidate']) {
     await testInfo.attach('selected-sprite', { body: await preview.screenshot(), contentType: 'image/png' })
     await page.evaluate(() => window.art.destroy(false))
     await expect(preview).toHaveCount(0)
-    await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), pixels }), contentType: 'application/json' })
+    await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), provenance: implementation.provenance, pixels }), contentType: 'application/json' })
   })
 
   test(`VTT native ${core} core: malformed sprite rejects before mounting and a corrected registration recovers`, async ({ page }, testInfo) => {
@@ -69,7 +69,7 @@ for (const core of ['published', 'candidate']) {
     await expect(page.locator('.art-control-vtt-thumbnail')).toHaveCount(1)
     await page.evaluate(() => window.art.destroy(false))
     await expect(page.locator('.art-control-vtt-thumbnail')).toHaveCount(0)
-    await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), recoveredAfter: error }), contentType: 'application/json' })
+    await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), provenance: implementation.provenance, recoveredAfter: error }), contentType: 'application/json' })
   })
 
   test(`VTT native ${core} core: destroy aborts a pending native fetch and settles registration`, async ({ page }, testInfo) => {
@@ -111,7 +111,7 @@ for (const core of ['published', 'candidate']) {
       await page.evaluate(() => window.vttPending)
       await expect(page.locator('.art-control-vtt-thumbnail')).toHaveCount(0)
       expect(await page.evaluate(() => window.vttResult)).toEqual({ name: 'artplayerPluginVttThumbnail' })
-      await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), nativeAbort: true }), contentType: 'application/json' })
+      await testInfo.attach('vtt-candidate', { body: JSON.stringify({ core, implementation: hash(implementation.code), provenance: implementation.provenance, nativeAbort: true }), contentType: 'application/json' })
     }
     finally { release() }
   })

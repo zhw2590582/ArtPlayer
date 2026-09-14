@@ -35,7 +35,7 @@ for (const core of ['published', 'candidate']) {
     await expect.poll(() => page.locator('.art-subtitle-a').textContent()).toBe(literal)
     await page.evaluate(() => window.art.plugins.multipleSubtitles.reset())
     await expect(page.locator('.art-subtitle-b b')).toHaveText('bold & safe')
-    await testInfo.attach('entities.json', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(implementation.code), native, literal, scope: 'Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only' }) })
+    await testInfo.attach('entities.json', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(implementation.code), provenance: implementation.provenance, native, literal, scope: 'Actual native VTT and HTML caption display, playback, selection/reset; desktop browser engines only' }) })
     await page.evaluate(() => window.art.destroy(false))
     expect(errors).toEqual([])
   })

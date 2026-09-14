@@ -89,3 +89,15 @@ The package .npmignore excludes the implementation tsconfig along with src. Yarn
 retain all six declaration files and every historical dist/type path. Audio-04 verified these
 files and identical JavaScript bytes to Audio-03; isolated installed consumers and the 8082
 demo still belong to Audio-06. See refactor/baselines/audio-types-validation.json for evidence.
+
+## Installed browser coverage
+
+audio-fixture.js records the selected published or candidate input. The older test label "source audio" means the candidate slot; consult audio-inputs.selected for its actual origin. Native WAV capability controls remain separate from decoded AAC acceptance.
+
+The shared `yarn test:browser:installed` roster includes this package after preparing
+the nine-package tarballs with `yarn test:package --include=...`; use the exact command
+in ../../scripts/browser-validation/README.md. Attachments identify candidate file,
+archive and source hashes. Missing or stale maps fail without source fallback.
+Without a map, source and deliberate artifact checks retain their existing behavior.
+This is desktop main-entry coverage, not all module forms, physical devices or
+release readiness. See ../../refactor/changes/2026-09-15-CI-01-subtitles-installed.md.

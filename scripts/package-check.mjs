@@ -77,6 +77,9 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     'artplayer-proxy-canvas': async () => (await import('../refactor/scripts/canvas-contract.mjs')).verifyCanvasContract(),
     'artplayer-plugin-document-pip': async () => (await import('../refactor/scripts/dpip-contract.mjs')).verifyDpipContract(),
     'artplayer-plugin-ads': async () => (await import('../refactor/scripts/ads-contract.mjs')).verifyAdsContract(),
+    'artplayer-plugin-audio-track': async () => (await import('../refactor/scripts/audio-contract.mjs')).verifyAudioContract(),
+    'artplayer-plugin-vtt-thumbnail': async () => (await import('../refactor/scripts/vtt-thumbnail-contract.mjs')).verifyVttThumbnailContract(),
+    'artplayer-plugin-multiple-subtitles': async () => (await import('../refactor/scripts/multiple-subtitles-contract.mjs')).verifyMultipleSubtitlesContract(),
   }
   assert(new Set(include).size === include.length, 'Duplicate additional package')
   const historicalFiles = new Map()

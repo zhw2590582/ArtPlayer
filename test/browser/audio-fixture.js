@@ -3,7 +3,7 @@ import { Buffer } from 'node:buffer'
 import fs from 'node:fs'
 import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from '../helpers/load.js'
+import { browserCandidate } from '../helpers/browser-candidate.js'
 import { expect, test } from './fixtures.js'
 
 export function useAudioFixture() {
@@ -32,14 +32,14 @@ export function useAudioFixture() {
   test.beforeAll(async () => {
     assert.equal(hash(tone), toneManifest.sha256)
     assert.equal(tone.length, toneManifest.bytes)
-    assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Audio source tests cannot represent installed artifacts')
     const { release } = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/audio-track-release.json', import.meta.url)))
     const member = 'package/dist/artplayer-plugin-audio-track.js'
     const bytes = readMember(await ensureArchive(release), member)
     assert.equal(hash(bytes), release.files[member])
     publishedCode = bytes.toString()
-    sourceCode = process.env.ARTPLAYER_AUDIO_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_AUDIO_ARTIFACT, 'utf8') : await compilePackage(release.name, 'umd')
-    evidence = { release, sourceSHA256: hash(sourceCode), candidate: process.env.ARTPLAYER_AUDIO_ARTIFACT || 'workspace source build', audio: { sha256: hash(tone), bytes: tone.length, format: 'AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4' }, wav: { sha256: hash(wav), bytes: wav.length, format: 'PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz' }, scope: 'Source or explicit artifact browser checks; no physical device or installed package acceptance' }
+    const candidate = await browserCandidate(release.name, process.env.ARTPLAYER_AUDIO_ARTIFACT)
+    sourceCode = candidate.code
+    evidence = { release, sourceSHA256: hash(sourceCode), candidate: candidate.provenance, audio: { sha256: hash(tone), bytes: tone.length, format: 'AAC mono 48000 Hz, 16 seconds, 440 Hz tone in MP4' }, wav: { sha256: hash(wav), bytes: wav.length, format: 'PCM16LE mono 16000 Hz, 16 seconds, integer square wave 200 Hz' }, scope: 'Desktop browser media checks; candidate provenance identifies installed, source or explicit artifact. No physical device acceptance.' }
   })
 
   test.afterEach(async ({ page }, testInfo) => {
@@ -53,7 +53,7 @@ export function useAudioFixture() {
   })
 
   async function openAudio(page, core, plugin, testInfo, url = '/test/audio-tone.m4a?source=first') {
-    await testInfo.attach('audio-inputs', { contentType: 'application/json', body: JSON.stringify(evidence) })
+    await testInfo.attach('audio-inputs', { contentType: 'application/json', body: JSON.stringify({ ...evidence, core, plugin, selected: plugin === 'published' ? { kind: 'published', sha256: hash(publishedCode) } : evidence.candidate }) })
     await page.goto(`/test/player.html?core=${core}`)
     await page.addScriptTag({ content: plugin === 'published' ? publishedCode : sourceCode })
     await page.evaluate((url) => {

@@ -32,7 +32,7 @@ async function install(page, core, implementation, testInfo) {
   await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
   await testInfo.attach('vtt-combination-inputs', {
     contentType: 'application/json',
-    body: JSON.stringify({ core, implementation: implementation.name, sha256: hash(implementation.code), cueFormat: /^published-1\.0\./.test(implementation.name) ? 'historical compact arrow; ordinary-space failures retained separately' : 'standard spaced arrow', mobile: 'desktop unless test declares an emulated user agent; no physical-device inference' }),
+    body: JSON.stringify({ core, implementation: implementation.name, sha256: hash(implementation.code), provenance: implementation.provenance, cueFormat: /^published-1\.0\./.test(implementation.name) ? 'historical compact arrow; ordinary-space failures retained separately' : 'standard spaced arrow', mobile: 'desktop unless test declares an emulated user agent; no physical-device inference' }),
   })
   return () => requests
 }
@@ -157,7 +157,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
     })
     expect(state.error).toContain('Can\'t add an existing [thumbnails] to the [control]')
     expect(state.sameReservedControl).toBe(true)
-    await testInfo.attach('vtt-historical-conflict', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation.name, sha256: hash(implementation.code), state, scope: 'Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression' }) })
+    await testInfo.attach('vtt-historical-conflict', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation.name, sha256: hash(implementation.code), provenance: implementation.provenance, state, scope: 'Existing incompatibility, not successful old-plugin/new-core acceptance and not a newly introduced refactor regression' }) })
   })
 }
 

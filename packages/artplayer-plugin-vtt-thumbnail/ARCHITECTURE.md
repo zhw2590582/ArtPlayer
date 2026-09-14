@@ -159,3 +159,15 @@ still target source and must not be described as tests of an installed tarball.
 See ../../refactor/changes/2026-09-13-PKG-VTT-THUMB-04-module-forms.md,
 ../../refactor/baselines/vtt-thumbnail-contract.md and the task 03 change record for
 historical evidence and outstanding acceptance work.
+
+## Installed browser coverage
+
+vttThumbnailCandidate uses browser-candidate.js for verified installed bytes. An installed map rejects ARTPLAYER_VTT_THUMBNAIL_BASELINE and ARTPLAYER_VTT_THUMBNAIL_ARTIFACT overrides. Frozen published control inputs and their cue-format differences remain explicit.
+
+The shared `yarn test:browser:installed` roster includes this package after preparing
+the nine-package tarballs with `yarn test:package --include=...`; use the exact command
+in ../../scripts/browser-validation/README.md. Attachments identify candidate file,
+archive and source hashes. Missing or stale maps fail without source fallback.
+Without a map, source and deliberate artifact checks retain their existing behavior.
+This is desktop main-entry coverage, not all module forms, physical devices or
+release readiness. See ../../refactor/changes/2026-09-15-CI-01-subtitles-installed.md.

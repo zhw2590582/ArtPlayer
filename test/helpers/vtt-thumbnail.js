@@ -1,15 +1,17 @@
-import fs from 'node:fs'
+import assert from 'node:assert/strict'
 import process from 'node:process'
 import vm from 'node:vm'
 import { transform } from 'esbuild'
 import { readMember } from '../../refactor/scripts/releases.mjs'
 import { verifyVttThumbnailContract } from '../../refactor/scripts/vtt-thumbnail-contract.mjs'
-import { compilePackage } from './load.js'
+import { browserCandidate } from './browser-candidate.js'
 
 export async function vttThumbnailCandidate() {
-  if (process.env.ARTPLAYER_VTT_THUMBNAIL_BASELINE === '1')
+  if (process.env.ARTPLAYER_VTT_THUMBNAIL_BASELINE === '1') {
+    assert(!process.env.ARTPLAYER_BROWSER_ARTIFACTS, 'Installed VTT thumbnail checks cannot use the frozen workspace')
     return (await vttThumbnailHistorical()).find(item => item.name === 'frozen-workspace-js')
-  return { name: 'candidate', profile: 'current', code: process.env.ARTPLAYER_VTT_THUMBNAIL_ARTIFACT ? fs.readFileSync(process.env.ARTPLAYER_VTT_THUMBNAIL_ARTIFACT, 'utf8') : await compilePackage('artplayer-plugin-vtt-thumbnail', 'umd') }
+  }
+  return { name: 'candidate', profile: 'current', ...await browserCandidate('artplayer-plugin-vtt-thumbnail', process.env.ARTPLAYER_VTT_THUMBNAIL_ARTIFACT) }
 }
 
 export async function vttThumbnailHistorical() {

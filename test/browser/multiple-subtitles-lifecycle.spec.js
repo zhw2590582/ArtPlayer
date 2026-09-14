@@ -40,7 +40,7 @@ async function prepare(page, core) {
 async function evidence(page, testInfo, core, observation) {
   const probe = await page.evaluate(() => ({ ...window.multipleProbe, signal: window.multipleProbe.signal ? { aborted: window.multipleProbe.signal.aborted } : null }))
   expect(probe.errors).toEqual([])
-  await testInfo.attach('multiple-subtitles-lifecycle', { body: JSON.stringify({ core, implementation: { name: implementation.name, sha256: hash(implementation.code) }, observation, probe }), contentType: 'application/json' })
+  await testInfo.attach('multiple-subtitles-lifecycle', { body: JSON.stringify({ core, implementation: { name: implementation.name, sha256: hash(implementation.code), provenance: implementation.provenance }, observation, probe }), contentType: 'application/json' })
 }
 
 for (const core of ['published', 'candidate']) {

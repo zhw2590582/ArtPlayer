@@ -75,7 +75,7 @@ for (const core of ['published-5.3.0', 'published', 'candidate']) {
           await expect(page.locator('.art-subtitle-caption')).toHaveText('Caption')
         outcomes.push({ round, settled, firstSeek, landed, afterSettledSeek: await page.evaluate(() => window.switchState()) })
       }
-      await testInfo.attach('source-seek-order', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation?.name || 'none', pluginSha256: implementation ? hash(implementation.code) : null, browser: browser.version(), outcomes, trace: await page.evaluate(() => window.switchTrace), scope: 'Three real source changes with immediate versus settled seek; old misses are recorded, candidate must honor every first seek' }) })
+      await testInfo.attach('source-seek-order', { contentType: 'application/json', body: JSON.stringify({ core, plugin: implementation?.name || 'none', pluginSha256: implementation ? hash(implementation.code) : null, provenance: implementation?.provenance, browser: browser.version(), outcomes, trace: await page.evaluate(() => window.switchTrace), scope: 'Three real source changes with immediate versus settled seek; old misses are recorded, candidate must honor every first seek' }) })
       if (core === 'candidate')
         expect(outcomes.every(item => item.landed)).toBe(true)
       await page.evaluate(() => window.art.destroy())

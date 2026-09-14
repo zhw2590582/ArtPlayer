@@ -8,6 +8,7 @@ const ass = '[Events]\r\nDialogue: 0,0:00:01.25,0:00:03.75,Default,,0,0,0,,æ¼¢å­
 
 for (const core of ['published-5.1.2', 'published-5.1.7', 'published-5.3.0', 'published', 'candidate']) {
   test(`Multiple subtitles ASS / ${core}: encoded multiline cues, overlapping translation and selection`, async ({ page, browser }, testInfo) => {
+    await testInfo.attach('ass-inputs', { contentType: 'application/json', body: JSON.stringify({ core, sha256: hash(candidate.code), provenance: candidate.provenance }) })
     await page.route('**/test/ass-data.bin', route => route.fulfill({ contentType: 'application/octet-stream', body: Buffer.from(ass, 'utf16le') }))
     await page.route('**/test/ass-translation.vtt', route => route.fulfill({ contentType: 'text/vtt', body: 'WEBVTT\n\n00:02.000 --> 00:04.000\nTranslation\n' }))
     await page.goto(`/test/player.html?core=${core}`)
@@ -47,12 +48,12 @@ for (const core of ['published-5.1.2', 'published-5.1.7', 'published-5.3.0', 'pu
     await page.evaluate(() => window.art.plugins.multipleSubtitles.reset())
     await expect(page.locator('.art-subtitle-ass b')).toBeVisible()
     await seek(5)
-    await expect(page.locator('.art-subtitle-ass')).toHaveText('Later cue')
+    await expect(page.locator('.art-subtitle-ass')).toHaveText(['Later cue'])
     await expect(page.locator('.art-subtitle-translation')).toHaveCount(0)
     await seek(7.5)
     await expect(page.locator('.art-subtitle-ass, .art-subtitle-translation')).toHaveCount(0)
     const rawHostOutput = await page.evaluate(ass => window.Artplayer.utils.assToVtt(ass), ass)
-    await testInfo.attach('ass-conversion', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(candidate.code), sourceSha256: hash(Buffer.from(ass, 'utf16le')), rawHostOutput, native, scope: 'Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged.' }) })
+    await testInfo.attach('ass-conversion', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(candidate.code), provenance: candidate.provenance, sourceSha256: hash(Buffer.from(ass, 'utf16le')), rawHostOutput, native, scope: 'Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged.' }) })
     await page.evaluate(() => window.art.destroy())
   })
 }

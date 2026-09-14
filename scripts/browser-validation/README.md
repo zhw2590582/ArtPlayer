@@ -14,8 +14,8 @@ also retains explicit historical and committed-artifact cases; its name does not
 promise that every dependency is rebuilt from current source in every test.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
-`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads`.
-Both launcher and config validate the selected six packages' installed hashes
+`yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip,artplayer-plugin-ads,artplayer-plugin-audio-track,artplayer-plugin-vtt-thumbnail,artplayer-plugin-multiple-subtitles`.
+Both launcher and config validate the selected nine packages' installed hashes
 and source/build freshness. `scope.ts` lists the currently supported installed
 test files. This is a growing installed subset, not full ecosystem acceptance.
 Source checks remain complete when the installed list grows.
@@ -63,3 +63,14 @@ keeps the job failed. Both report directories upload with always(). Node/runtime
 and framework consumers keep their earlier fixed two-package scope. Full matrix
 timing, remote cancellation behavior and runner execution remain CI-01/CI-04
 acceptance items; local configuration checks do not establish those results.
+
+The Audio Track, VTT Thumbnail and Multiple Subtitles expansion adds 12 files.
+Each candidate loader selects verified installed bytes when a map is present and
+rejects a conflicting explicit artifact; VTT also rejects its frozen baseline flag.
+Candidate attachments carry the file, archive and source identities. Audio retains
+its historical "source audio" test label for the candidate slot; audio-inputs.selected
+is the actual origin. Native WAV capability and old-host defect observations must
+not be counted as successful feature acceptance. Shared Node/type consumers retain
+the core/chapter scope. See ../../refactor/changes/2026-09-15-CI-01-subtitles-installed.md
+for the executed subset and results; extending collection does not revalidate the
+previous Chapter failure or establish a green complete matrix.

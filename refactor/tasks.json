@@ -764,7 +764,9 @@
         "changes/2026-09-14-CI-01-source-chromium.md",
         "baselines/ci-source-chromium-validation.json",
         "changes/2026-09-15-CI-01-ads-installed.md",
-        "baselines/ci-ads-installed-validation.json"
+        "baselines/ci-ads-installed-validation.json",
+        "changes/2026-09-15-CI-01-subtitles-installed.md",
+        "baselines/ci-subtitles-installed-validation.json"
       ]
     },
     {
