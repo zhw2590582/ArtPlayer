@@ -1,5 +1,19 @@
 # 进度与证据
 
+## REL-08 逐包发布准入台账完成
+
+建立22包历史分发、独立major目标、能力/回退和候选证据登记。新增纯模型及只读
+文件/归档CLI，按实际依赖和共享输入计算指纹，核验tarball/站点完整输出及底层报告
+字节。旧done和历史报告不自动变成当前候选证据；设备替身、许可缺口、未决风险、
+缺失远端CI或三轮复盘都会阻止相应批次。站点不隐含新增npm发布，改名iframe和
+旧tarball缺失的Thumbnail工具明确区分。30项反向/文件回归、CI脚本50项、定向lint
+通过；HLS单包strict预检按预期退出1，当前22包都blocked且无候选绑定。
+见[维护说明](release-ledger.md)、[变更](changes/2026-09-14-REL-08-release-ledger.md)和[证据](baselines/release-ledger-validation.json)。
+已加入ci:check结构检查，test:baseline自动发现测试，strict发布预检与普通检查分开。
+253项：182 done、17 doing、54 todo。没有改包版本/依赖/公开API，也没有发布。
+下一步回到包的剩余源码与真实环境验收；REL-01/09/02、REL-04及CI-03可按台账逐步
+补真实候选、回退和流程证据，不能用当前历史报告填造pass。VAST选择仍待回复。
+
 ## PKG-HLS-SDK-01 普通HTTP销毁诊断检查点（仍未完成）
 
 直接原生video、Hls1.5.17、Firefox155.0、普通HTTP且无ArtPlayer/插件/Worker观察器，

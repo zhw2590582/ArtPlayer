@@ -4585,9 +4585,14 @@
       "scope": [
         "workspace"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "H",
-      "evidence": [],
+      "evidence": [
+        "changes/2026-09-14-REL-08-release-ledger.md",
+        "baselines/release-ledger-validation.json",
+        "release-ledger.md",
+        "release-ledger.json"
+      ],
       "id": "REL-08",
       "phase": "8 发布验收",
       "title": "提前建立逐包发布准入台账",

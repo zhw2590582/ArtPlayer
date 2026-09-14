@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "libraryGates": [
+    "build",
+    "runtime",
+    "types",
+    "combinations",
+    "browser",
+    "devices",
+    "licenses",
+    "rollback",
+    "remote-ci",
+    "review-01",
+    "review-02",
+    "review-03"
+  ],
+  "siteGates": [
+    "build",
+    "site-urls",
+    "site-assets",
+    "editor",
+    "devices",
+    "licenses",
+    "rollback",
+    "remote-ci",
+    "review-01",
+    "review-02",
+    "review-03"
+  ],
+  "sharedTasks": [
+    "CI-01",
+    "CI-03",
+    "CI-04",
+    "REL-01",
+    "REL-09",
+    "REL-02",
+    "REL-03",
+    "REL-04",
+    "REVIEW-01",
+    "REVIEW-02",
+    "REVIEW-03"
+  ],
+  "packages": [
+    {
+      "name": "artplayer",
+      "targetVersion": "6.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/releases.json",
+        "selector": "releases.0",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "apple-safari-media",
+        "android-media",
+        "native-fullscreen-pip"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/releases.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "targetVersion": "3.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/ads-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "ad-skip-content-restore"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/ads-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/ambilight-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "canvas-cors-background"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/ambilight-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "targetVersion": "3.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/asr-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "audio-context-input-lifecycle"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/asr-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/audio-track-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "separate-audio-source-switch"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/audio-track-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/auto-thumbnail-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "native-first-frame-jpeg"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/auto-thumbnail-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/releases.json",
+        "selector": "releases.1",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "touch-fullscreen-thumbnails"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/releases.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/chromecast-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "cast-receiver-session"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/chromecast-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "targetVersion": "6.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/danmuku-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "mask-fullscreen-pip"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/danmuku-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/danmuku-mask-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "real-model-gpu-cleanup"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/danmuku-mask-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/dash-control-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "real-dash-sdk-tracks"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/dash-control-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/dpip-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "document-pip-native-window"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/dpip-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/hls-control-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "native-hls-and-worker"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/hls-control-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/jassub-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "real-worker-wasm-hybrid"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/jassub-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/multiple-subtitles-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "subtitle-offset-fullscreen"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/multiple-subtitles-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/vast-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "google-ima-ad-content-restore"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/vast-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/vtt-thumbnail-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "touch-fullscreen-chapter"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/vtt-thumbnail-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/canvas-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "canvas-subtitle-document-pip"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/canvas-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "targetVersion": "2.0.0",
+      "distribution": "npm",
+      "history": {
+        "file": "refactor/baselines/mb-release.json",
+        "selector": "release",
+        "rationale": "Frozen npm tarball provenance; not a new registry availability observation."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "webcodecs-hls-audio-video"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/mb-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "targetVersion": "2.0.0",
+      "distribution": "renamed-npm",
+      "history": {
+        "file": "refactor/baselines/iframe-release.json",
+        "selector": "release",
+        "publishedName": "artplayer-plugin-iframe",
+        "rationale": "Frozen published predecessor and documented rename commit; candidate keeps current workspace name. Registry target availability still requires REL-01."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "cross-origin-bfcache-device"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/iframe-release.json",
+        "strategy": "Keep the frozen previous package integrity and tested consumer lock; publish a forward fix without overwriting npm versions. REL-04 rehearsal must cover any package rename."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-tool-thumbnail",
+      "targetVersion": "5.0.0",
+      "distribution": "recovered-npm",
+      "history": {
+        "file": "refactor/baselines/thumbnail-release.json",
+        "selector": "recovered",
+        "rationale": "Recovered CDN/Git bytes only; original registry tarball and complete archive unavailable. Not an intact rollback artifact."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "native-file-decode-encode"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/thumbnail-release.json",
+        "strategy": "Original tarball is unavailable. Resolve a complete rollback alternative and migration scope under REL-04 before release."
+      },
+      "candidate": null,
+      "evidence": {}
+    },
+    {
+      "name": "artplayer-vitepress",
+      "targetVersion": "2.0.0",
+      "distribution": "site",
+      "history": {
+        "file": "refactor/baselines/site-provenance.json",
+        "rationale": "Existing docs/site build and URL distribution. No npm publication is inferred."
+      },
+      "extraRequirements": [
+        "apple-safari-device",
+        "android-chrome-device",
+        "mobile-editor-and-site"
+      ],
+      "rollback": {
+        "basis": "refactor/baselines/site-provenance.json",
+        "strategy": "Restore the previously verified Pages artifact and old URL map; rehearsal evidence required."
+      },
+      "candidate": null,
+      "evidence": {}
+    }
+  ]
+}

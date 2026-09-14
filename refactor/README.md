@@ -28,6 +28,7 @@
 | [已落实的测试可靠性规则](test-reliability.md) | 历史失败、候选回归、设备缺口、精确异常及等待/重试的执行规则 |
 | [docs 页面与编辑器测试](docs-browser-testing.md) | 复用已有 HTML、加载版本、隔离状态和补强文档 smoke |
 | [多轮复盘与 npm 准入](release-reviews.md) | Chrome 验证分工、三轮全局复盘、问题闭环和候选发布门槛 |
+| [逐包发布准入台账](release-ledger.md) | 22包候选/证据绑定、源码和产物指纹、任务风险/许可阻断及严格预检 |
 | [工具链与发布](toolchain-release.md) | TypeScript、Bun、构建、版本管理和发布回退 |
 | [已实现的开发环境](toolchain-setup.md) | Node/Yarn 固定版本、锁文件、安装命令和实际验证范围 |
 | [全包大版本策略](version-policy.md) | 每包分别升级一个 major 的目标清单、兼容要求和版本落地步骤 |
