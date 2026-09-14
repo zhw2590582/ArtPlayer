@@ -611,7 +611,7 @@
 - PKG-DANMUKU-05: [记录](changes/2026-09-13-PKG-DANMUKU-05-resources.md) [记录](baselines/danmuku-resources-validation.json)
 - PKG-DANMUKU-06: [记录](changes/2026-09-13-PKG-DANMUKU-06-types.md) [记录](baselines/danmuku-types-validation.json)
 - PKG-DANMUKU-07: [记录](changes/2026-09-13-PKG-DANMUKU-07-stability.md) [记录](baselines/danmuku-stability-validation.json) [记录](danmuku-stability.md)
-- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json)
+- PKG-DANMUKU-08: [记录](changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md) [记录](baselines/danmuku-combination-checkpoint.json) [记录](changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md) [记录](baselines/danmuku-fullscreen-validation.json) [记录](baselines/danmuku-old-core-load-validation.json)
 - PKG-CANVAS-01: [记录](changes/2026-09-12-PKG-CANVAS-01-contract.md) [记录](baselines/canvas-contract.md) [记录](baselines/canvas-release.json) [记录](canvas-validation.md) [记录](baselines/canvas-contract-validation.json)
 - PKG-CANVAS-02: [记录](changes/2026-09-12-PKG-CANVAS-02-tests.md) [记录](baselines/canvas-behavior-validation.json) [记录](canvas-validation.md)
 - PKG-CANVAS-03: [记录](changes/2026-09-12-PKG-CANVAS-03-lifecycle.md) [记录](baselines/canvas-lifecycle-validation.json) [记录](canvas-validation.md)

@@ -1,0 +1,2615 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DANMUKU-08",
+  "status": "partial",
+  "capturedAt": "2026-09-14T13:11:13.694Z",
+  "report": {
+    "file": "refactor/.cache/danmuku08-old-core-load-report/report.json",
+    "sha256": "8b7a112b40e198a3b07cb019360103f496a19a0bba4574ac45ec02ecef4aaa5a",
+    "stats": {
+      "startTime": "2026-09-14T13:06:23.381Z",
+      "duration": 277648.803,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "terminal": {
+      "scope": "source",
+      "exitCode": 0,
+      "signal": null,
+      "args": [
+        "test",
+        "--config=playwright.source.config.js",
+        "test/browser/danmuku-stability.spec.js",
+        "--grep",
+        "published core /",
+        "--workers=2"
+      ]
+    }
+  },
+  "priorCandidateCore": {
+    "file": "refactor/baselines/danmuku-stability-validation.json",
+    "sha256": "ad5d47e29a9c56f225daa3642e045f15bbd51799b46d01776825de7c18ba3e44",
+    "capturedAt": "2026-09-13T15:15:04.455Z",
+    "report": {
+      "file": "refactor/.cache/danmuku07-stability-final.json",
+      "sha256": "474aa2aa3b0fa8f5700307db9a05d2253e15ab3d90f7cd2a1434c1b5ff131bc8"
+    }
+  },
+  "loads": [
+    {
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "published",
+      "rowsPerSecond": 2,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.396066,
+          "startWall": 674.8999999761581,
+          "endWall": 14824.599999964237,
+          "time": 14.49932,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 4,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 845,
+            "median": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000109,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.49932,
+          "startWall": 14834.899999976158,
+          "endWall": 29034.899999976158,
+          "time": 28.647302,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 5,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 848,
+            "median": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.647302,
+          "startWall": 29043.299999952316,
+          "endWall": 43221.299999952316,
+          "time": 42.780747,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 6,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 846,
+            "median": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2541,
+          "median": 16.69999999999709,
+          "p95": 16.700000000004366,
+          "max": 83.39999999999964,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 75,
+          "replies": 75,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 6,
+      "reuses": 69,
+      "visibleCount": 72,
+      "recycledCount": 72,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2538,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 66.70000000000073
+          },
+          "framesMediaSeconds": {
+            "count": 2538,
+            "p50": 0.016670000000004848,
+            "p95": 0.018145000000000522,
+            "max": 0.05940100000000115
+          },
+          "samplingWallMs": {
+            "count": 2607,
+            "p50": 16.69999998807907,
+            "p95": 17.80000001192093,
+            "max": 83.90000003576279
+          },
+          "samplingMediaSeconds": {
+            "count": 2607,
+            "p50": 0.016633999999999816,
+            "p95": 0.018132999999999733,
+            "max": 0.0597139999999996
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 24,
+            "nodes": 4,
+            "framesWallMs": {
+              "count": 846,
+              "p50": 16.699999999999818,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000109
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 24,
+            "nodes": 5,
+            "framesWallMs": {
+              "count": 846,
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000291
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 24,
+            "nodes": 6,
+            "framesWallMs": {
+              "count": 846,
+              "p50": 16.69999999999709,
+              "p95": 16.799999999995634,
+              "max": 16.80000000000291
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "published",
+      "rowsPerSecond": 20,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.387278,
+          "startWall": 611.6999999880791,
+          "endWall": 14795.399999976158,
+          "time": 14.5286,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 847,
+            "median": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "max": 16.80000000000109,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.5286,
+          "startWall": 14814.099999964237,
+          "endWall": 28977.099999964237,
+          "time": 28.654217,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 23,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 846,
+            "median": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.654217,
+          "startWall": 28993.899999976158,
+          "endWall": 43130.30000001192,
+          "time": 42.746851,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 844,
+            "median": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2539,
+          "median": 16.69999999999709,
+          "p95": 16.799999999995634,
+          "max": 83.29999999999927,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 723,
+          "replies": 723,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 24,
+      "reuses": 699,
+      "visibleCount": 720,
+      "recycledCount": 720,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2536,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 83.40000000000146
+          },
+          "framesMediaSeconds": {
+            "count": 2536,
+            "p50": 0.016664000000002233,
+            "p95": 0.018217999999997403,
+            "max": 0.07596999999999987
+          },
+          "samplingWallMs": {
+            "count": 2603,
+            "p50": 16.600000023841858,
+            "p95": 17.80000001192093,
+            "max": 99.30000001192093
+          },
+          "samplingMediaSeconds": {
+            "count": 2603,
+            "p50": 0.016636000000005424,
+            "p95": 0.018202999999999747,
+            "max": 0.07654499999999942
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 240,
+            "nodes": 22,
+            "framesWallMs": {
+              "count": 845,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000109
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 240,
+            "nodes": 23,
+            "framesWallMs": {
+              "count": 846,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000291
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 240,
+            "nodes": 24,
+            "framesWallMs": {
+              "count": 845,
+              "p50": 16.69999999999709,
+              "p95": 16.700000000004366,
+              "max": 16.80000000000291
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "candidate",
+      "rowsPerSecond": 2,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.383037,
+          "startWall": 669.0999999642372,
+          "endWall": 14869.899999976158,
+          "time": 14.549167,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 848,
+            "median": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "max": 16.80000000000109,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.549167,
+          "startWall": 14883.199999988079,
+          "endWall": 29032.5,
+          "time": 28.658288,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 845,
+            "median": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.658288,
+          "startWall": 29043.099999964237,
+          "endWall": 43219.5,
+          "time": 42.780468,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 846,
+            "median": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2541,
+          "median": 16.69999999999709,
+          "p95": 16.700000000004366,
+          "max": 83.30000000000109,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 72,
+          "replies": 72,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 3,
+      "reuses": 69,
+      "visibleCount": 72,
+      "recycledCount": 72,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2539,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 66.70000000000073
+          },
+          "framesMediaSeconds": {
+            "count": 2539,
+            "p50": 0.016674000000001854,
+            "p95": 0.018076000000000647,
+            "max": 0.061954999999999316
+          },
+          "samplingWallMs": {
+            "count": 2536,
+            "p50": 16.69999998807907,
+            "p95": 17.899999976158142,
+            "max": 83.09999996423721
+          },
+          "samplingMediaSeconds": {
+            "count": 2536,
+            "p50": 0.016676000000000357,
+            "p95": 0.018077999999995598,
+            "max": 0.0623389999999997
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 847,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000109
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 845,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "max": 16.80000000000291
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 847,
+              "p50": 16.69999999999709,
+              "p95": 16.700000000004366,
+              "max": 16.80000000000291
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "chromium",
+      "browser": "153.0.8010.12",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "candidate",
+      "rowsPerSecond": 20,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.386325,
+          "startWall": 612.1000000238419,
+          "endWall": 14774.900000035763,
+          "time": 14.510204,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 846,
+            "median": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000109,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.510204,
+          "startWall": 14793.100000023842,
+          "endWall": 28963.200000047684,
+          "time": 28.635695,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 846,
+            "median": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.635695,
+          "startWall": 28980.100000023842,
+          "endWall": 43133.40000003576,
+          "time": 42.744427,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 21,
+          "pooled": 21,
+          "uniquePool": 21,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": {
+            "used": 10000000,
+            "total": 10000000
+          },
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 845,
+            "median": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "max": 16.80000000000291,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2539,
+          "median": 16.69999999999709,
+          "p95": 16.799999999995634,
+          "max": 83.39999999999964,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 720,
+          "replies": 720,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 21,
+      "reuses": 699,
+      "visibleCount": 720,
+      "recycledCount": 720,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2540,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "max": 83.40000000000146
+          },
+          "framesMediaSeconds": {
+            "count": 2540,
+            "p50": 0.01668199999999942,
+            "p95": 0.0182399999999987,
+            "max": 0.06178000000000239
+          },
+          "samplingWallMs": {
+            "count": 2537,
+            "p50": 16.69999998807907,
+            "p95": 17.80000001192093,
+            "max": 100.40000003576279
+          },
+          "samplingMediaSeconds": {
+            "count": 2537,
+            "p50": 0.016683999999997923,
+            "p95": 0.0182399999999987,
+            "max": 0.06213999999999942
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 240,
+            "nodes": 21,
+            "framesWallMs": {
+              "count": 847,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000109
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 240,
+            "nodes": 21,
+            "framesWallMs": {
+              "count": 847,
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "max": 16.80000000000291
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 240,
+            "nodes": 21,
+            "framesWallMs": {
+              "count": 846,
+              "p50": 16.69999999999709,
+              "p95": 16.799999999995634,
+              "max": 16.80000000000291
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "firefox",
+      "browser": "155.0",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "published",
+      "rowsPerSecond": 2,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.174442,
+          "startWall": 867,
+          "endWall": 15272,
+          "time": 14.415827,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 4,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 853,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 18.82000000000062,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.415827,
+          "startWall": 15285,
+          "endWall": 29519,
+          "time": 28.603541,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 5,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 848,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 21.31999999999971,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.603541,
+          "startWall": 29530,
+          "endWall": 43743,
+          "time": 42.735574,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 6,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 847,
+            "median": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 23.760000000002037,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2550,
+          "median": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 102,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 75,
+          "replies": 75,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 6,
+      "reuses": 69,
+      "visibleCount": 72,
+      "recycledCount": 72,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2551,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 100
+          },
+          "framesMediaSeconds": {
+            "count": 2551,
+            "p50": 0,
+            "p95": 0.041733000000000686,
+            "max": 0.04536300000000182
+          },
+          "samplingWallMs": {
+            "count": 2624,
+            "p50": 17,
+            "p95": 18,
+            "max": 101
+          },
+          "samplingMediaSeconds": {
+            "count": 2624,
+            "p50": 0,
+            "p95": 0.041701999999999906,
+            "max": 0.04536300000000182
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 24,
+            "nodes": 4,
+            "framesWallMs": {
+              "count": 848,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 21.579999999999927
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 24,
+            "nodes": 5,
+            "framesWallMs": {
+              "count": 852,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 20.720000000001164
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 24,
+            "nodes": 6,
+            "framesWallMs": {
+              "count": 851,
+              "p50": 16.660000000003492,
+              "p95": 16.68000000000029,
+              "max": 19.81999999999971
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "firefox",
+      "browser": "155.0",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "published",
+      "rowsPerSecond": 20,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.42283,
+          "startWall": 758,
+          "endWall": 15141,
+          "time": 14.734858,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 23,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 857,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 29.240000000000236,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.734858,
+          "startWall": 15160,
+          "endWall": 29380,
+          "time": 28.881762,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 846,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 28.460000000002765,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.881762,
+          "startWall": 29397,
+          "endWall": 43624,
+          "time": 43.024992,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 25,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 848,
+            "median": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 21.959999999999127,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2553,
+          "median": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 116.68000000000029,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 723,
+          "replies": 723,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 25,
+      "reuses": 698,
+      "visibleCount": 720,
+      "recycledCount": 720,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2557,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 116.67999999999665
+          },
+          "framesMediaSeconds": {
+            "count": 2557,
+            "p50": 0,
+            "p95": 0.04180399999999995,
+            "max": 0.04524600000000012
+          },
+          "samplingWallMs": {
+            "count": 2631,
+            "p50": 17,
+            "p95": 18,
+            "max": 116
+          },
+          "samplingMediaSeconds": {
+            "count": 2631,
+            "p50": 0,
+            "p95": 0.04177699999999618,
+            "max": 0.04524600000000012
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 240,
+            "nodes": 23,
+            "framesWallMs": {
+              "count": 856,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 20.699999999999818
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 240,
+            "nodes": 24,
+            "framesWallMs": {
+              "count": 850,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 20.979999999999563
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 240,
+            "nodes": 24,
+            "framesWallMs": {
+              "count": 851,
+              "p50": 16.660000000003492,
+              "p95": 16.68000000000029,
+              "max": 18.860000000000582
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "firefox",
+      "browser": "155.0",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "candidate",
+      "rowsPerSecond": 2,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.178512,
+          "startWall": 884,
+          "endWall": 15150,
+          "time": 14.329136,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 848,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 19,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.329136,
+          "startWall": 15165,
+          "endWall": 29428,
+          "time": 28.519722,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 850,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 20.68000000000029,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.519722,
+          "startWall": 29441,
+          "endWall": 43676,
+          "time": 42.669225,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 848,
+            "median": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 24.239999999997963,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2548,
+          "median": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 100,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 72,
+          "replies": 72,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 3,
+      "reuses": 69,
+      "visibleCount": 72,
+      "recycledCount": 72,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2548,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 100
+          },
+          "framesMediaSeconds": {
+            "count": 2548,
+            "p50": 0,
+            "p95": 0.041519000000000084,
+            "max": 0.04606899999999925
+          },
+          "samplingWallMs": {
+            "count": 2548,
+            "p50": 17,
+            "p95": 18,
+            "max": 99
+          },
+          "samplingMediaSeconds": {
+            "count": 2548,
+            "p50": 0,
+            "p95": 0.041519000000000084,
+            "max": 0.04606899999999925
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 850,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 21.699999999999818
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 850,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 21.260000000002037
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 848,
+              "p50": 16.660000000003492,
+              "p95": 16.68000000000029,
+              "max": 18.720000000001164
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "firefox",
+      "browser": "155.0",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "candidate",
+      "rowsPerSecond": 20,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.41955,
+          "startWall": 745,
+          "endWall": 15104,
+          "time": 14.753634,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 856,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 18.76000000000022,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 14.753634,
+          "startWall": 15127,
+          "endWall": 29334,
+          "time": 28.86254,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 847,
+            "median": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 25.360000000000582,
+            "over50ms": 0
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 28.86254,
+          "startWall": 29355,
+          "endWall": 43597,
+          "time": 43.057862,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 849,
+            "median": 16.660000000003492,
+            "p95": 16.68000000000029,
+            "max": 20.68000000000029,
+            "over50ms": 0
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 2554,
+          "median": 16.659999999999854,
+          "p95": 16.68000000000029,
+          "max": 100,
+          "over50ms": 2
+        }
+      },
+      "workers": [
+        {
+          "posts": 720,
+          "replies": 720,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 22,
+      "reuses": 698,
+      "visibleCount": 720,
+      "recycledCount": 720,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 2550,
+            "p50": 16.659999999999854,
+            "p95": 16.68000000000029,
+            "max": 116.66000000000167
+          },
+          "framesMediaSeconds": {
+            "count": 2550,
+            "p50": 0,
+            "p95": 0.04198500000000038,
+            "max": 0.04544299999999879
+          },
+          "samplingWallMs": {
+            "count": 2550,
+            "p50": 17,
+            "p95": 18,
+            "max": 117
+          },
+          "samplingMediaSeconds": {
+            "count": 2550,
+            "p50": 0,
+            "p95": 0.04198500000000038,
+            "max": 0.04544299999999879
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 240,
+            "nodes": 21,
+            "framesWallMs": {
+              "count": 851,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 21.0600000000004
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 240,
+            "nodes": 22,
+            "framesWallMs": {
+              "count": 850,
+              "p50": 16.659999999999854,
+              "p95": 16.68000000000029,
+              "max": 20.92000000000189
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 240,
+            "nodes": 22,
+            "framesWallMs": {
+              "count": 849,
+              "p50": 16.660000000003492,
+              "p95": 16.68000000000029,
+              "max": 19
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "webkit",
+      "browser": "26.6",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "published",
+      "rowsPerSecond": 2,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.3188125,
+          "startWall": 1290,
+          "endWall": 16171,
+          "time": 15.0222915,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 4,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 367,
+            "median": 43,
+            "p95": 61,
+            "max": 101,
+            "over50ms": 32
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.0222915,
+          "startWall": 16211,
+          "endWall": 31136,
+          "time": 29.589458,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 5,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 362,
+            "median": 44,
+            "p95": 61,
+            "max": 79,
+            "over50ms": 33
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.589458,
+          "startWall": 31152,
+          "endWall": 46190,
+          "time": 44.2458628,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 6,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 344,
+            "median": 45,
+            "p95": 62,
+            "max": 77,
+            "over50ms": 46
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 1075,
+          "median": 45,
+          "p95": 62,
+          "max": 512,
+          "over50ms": 113
+        }
+      },
+      "workers": [
+        {
+          "posts": 75,
+          "replies": 75,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 6,
+      "reuses": 69,
+      "visibleCount": 72,
+      "recycledCount": 72,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 1091,
+            "p50": 45,
+            "p95": 61,
+            "max": 365
+          },
+          "framesMediaSeconds": {
+            "count": 1091,
+            "p50": 0.045083300000001714,
+            "p95": 0.060958299999999355,
+            "max": 0.07760420000000323
+          },
+          "samplingWallMs": {
+            "count": 1120,
+            "p50": 45,
+            "p95": 61,
+            "max": 365
+          },
+          "samplingMediaSeconds": {
+            "count": 1120,
+            "p50": 0.04497920000000022,
+            "p95": 0.06087510000000007,
+            "max": 0.07762500000000472
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 24,
+            "nodes": 4,
+            "framesWallMs": {
+              "count": 358,
+              "p50": 45,
+              "p95": 61,
+              "max": 64
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 24,
+            "nodes": 5,
+            "framesWallMs": {
+              "count": 363,
+              "p50": 45,
+              "p95": 61,
+              "max": 76
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 24,
+            "nodes": 6,
+            "framesWallMs": {
+              "count": 370,
+              "p50": 45,
+              "p95": 49,
+              "max": 78
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "webkit",
+      "browser": "26.6",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "published",
+      "rowsPerSecond": 20,
+      "sha256": "7c8749288711ef97e80b6f9f00981170aa73f62a8ae25d6d663749a4aef62a8f",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.3808125,
+          "startWall": 1202,
+          "endWall": 16169,
+          "time": 15.082104,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 23,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 219,
+            "median": 76,
+            "p95": 79,
+            "max": 94,
+            "over50ms": 172
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.082104,
+          "startWall": 16189,
+          "endWall": 31084,
+          "time": 29.659708,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 24,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 224,
+            "median": 76,
+            "p95": 79,
+            "max": 93,
+            "over50ms": 167
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.659708,
+          "startWall": 31128,
+          "endWall": 46171,
+          "time": 44.351842,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 25,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 221,
+            "median": 76,
+            "p95": 79,
+            "max": 109,
+            "over50ms": 169
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 666,
+          "median": 76,
+          "p95": 79,
+          "max": 411,
+          "over50ms": 510
+        }
+      },
+      "workers": [
+        {
+          "posts": 723,
+          "replies": 723,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 25,
+      "reuses": 698,
+      "visibleCount": 720,
+      "recycledCount": 720,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 659,
+            "p50": 77,
+            "p95": 79,
+            "max": 414
+          },
+          "framesMediaSeconds": {
+            "count": 659,
+            "p50": 0.07675000000000054,
+            "p95": 0.07889580000000151,
+            "max": 0.09408340000000237
+          },
+          "samplingWallMs": {
+            "count": 689,
+            "p50": 77,
+            "p95": 79,
+            "max": 414
+          },
+          "samplingMediaSeconds": {
+            "count": 689,
+            "p50": 0.07662499999999994,
+            "p95": 0.0788542000000021,
+            "max": 0.0940833000000012
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 240,
+            "nodes": 23,
+            "framesWallMs": {
+              "count": 220,
+              "p50": 77,
+              "p95": 79,
+              "max": 93
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 240,
+            "nodes": 24,
+            "framesWallMs": {
+              "count": 219,
+              "p50": 77,
+              "p95": 79,
+              "max": 93
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 240,
+            "nodes": 25,
+            "framesWallMs": {
+              "count": 220,
+              "p50": 77,
+              "p95": 79,
+              "max": 94
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "webkit",
+      "browser": "26.6",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "candidate",
+      "rowsPerSecond": 2,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.259125,
+          "startWall": 1199,
+          "endWall": 16157,
+          "time": 15.0650207,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 24,
+          "states": {
+            "wait": 24,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 24,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 372,
+            "median": 32,
+            "p95": 61,
+            "max": 108,
+            "over50ms": 26
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.0650207,
+          "startWall": 16213,
+          "endWall": 31202,
+          "time": 29.8125205,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 48,
+          "states": {
+            "wait": 48,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 48,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 368,
+            "median": 45,
+            "p95": 61,
+            "max": 76,
+            "over50ms": 29
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.8125205,
+          "startWall": 31244,
+          "endWall": 46118,
+          "time": 44.3341962,
+          "decodedWidth": 640,
+          "visibleCount": 24,
+          "uniqueVisible": 24,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 72,
+          "states": {
+            "wait": 72,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 3,
+          "pooled": 3,
+          "uniquePool": 3,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 72,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 24,
+          "framesWallMs": {
+            "count": 349,
+            "median": 45,
+            "p95": 61,
+            "max": 93,
+            "over50ms": 40
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 1091,
+          "median": 45,
+          "p95": 61,
+          "max": 420,
+          "over50ms": 97
+        }
+      },
+      "workers": [
+        {
+          "posts": 72,
+          "replies": 72,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 3,
+      "reuses": 69,
+      "visibleCount": 72,
+      "recycledCount": 72,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 1089,
+            "p50": 45,
+            "p95": 61,
+            "max": 337
+          },
+          "framesMediaSeconds": {
+            "count": 1089,
+            "p50": 0.045125000000000526,
+            "p95": 0.06106250000000024,
+            "max": 0.06364589999999737
+          },
+          "samplingWallMs": {
+            "count": 1089,
+            "p50": 45,
+            "p95": 61,
+            "max": 338
+          },
+          "samplingMediaSeconds": {
+            "count": 1089,
+            "p50": 0.045125000000000526,
+            "p95": 0.061062499999998465,
+            "max": 0.06362500000000182
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 363,
+              "p50": 45,
+              "p95": 61,
+              "max": 64
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 361,
+              "p50": 45,
+              "p95": 61,
+              "max": 64
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 24,
+            "nodes": 3,
+            "framesWallMs": {
+              "count": 365,
+              "p50": 45,
+              "p95": 61,
+              "max": 63
+            }
+          }
+        ]
+      }
+    },
+    {
+      "engine": "webkit",
+      "browser": "26.6",
+      "core": "published",
+      "coreInput": {
+        "source": {
+          "kind": "npm-release",
+          "version": "5.4.0",
+          "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+          "member": "package/dist/artplayer.js"
+        },
+        "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+        "bytes": 134037
+      },
+      "implementation": "candidate",
+      "rowsPerSecond": 20,
+      "sha256": "e8193aa8fae3329b3a8e435fc450726d9305e258dddea043ff3114f058516a66",
+      "cycles": [
+        {
+          "cycle": 0,
+          "base": 0.2365624,
+          "startWall": 1158,
+          "endWall": 16085,
+          "time": 15.0097915,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 240,
+          "states": {
+            "wait": 240,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 240,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 222,
+            "median": 76,
+            "p95": 79,
+            "max": 92,
+            "over50ms": 171
+          }
+        },
+        {
+          "cycle": 1,
+          "base": 15.0097915,
+          "startWall": 16149,
+          "endWall": 31157,
+          "time": 29.6823539,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 480,
+          "states": {
+            "wait": 480,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 480,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 226,
+            "median": 76,
+            "p95": 79,
+            "max": 92,
+            "over50ms": 168
+          }
+        },
+        {
+          "cycle": 2,
+          "base": 29.6823539,
+          "startWall": 31214,
+          "endWall": 46211,
+          "time": 44.3654045,
+          "decodedWidth": 640,
+          "visibleCount": 240,
+          "uniqueVisible": 240,
+          "missedSampling": [],
+          "sampledNotVisible": [],
+          "queue": 720,
+          "states": {
+            "wait": 720,
+            "ready": 0,
+            "emit": 0,
+            "stop": 0
+          },
+          "nodes": 22,
+          "pooled": 22,
+          "uniquePool": 22,
+          "referenced": 0,
+          "distinctReferences": 0,
+          "uniqueStateMembers": 720,
+          "validStateMembers": true,
+          "heap": null,
+          "scheduledRows": 240,
+          "framesWallMs": {
+            "count": 219,
+            "median": 76,
+            "p95": 78,
+            "max": 92,
+            "over50ms": 172
+          }
+        }
+      ],
+      "sampleGapsIncludingLifecyclePauses": {
+        "framesWallMs": {
+          "count": 669,
+          "median": 76,
+          "p95": 79,
+          "max": 442,
+          "over50ms": 513
+        }
+      },
+      "workers": [
+        {
+          "posts": 720,
+          "replies": 720,
+          "terminated": 1,
+          "errors": []
+        }
+      ],
+      "allocations": 22,
+      "reuses": 698,
+      "visibleCount": 720,
+      "recycledCount": 720,
+      "destroyed": true,
+      "retainedPlayerRoots": 0,
+      "priorCandidateCore": {
+        "sampleGapsIncludingLifecyclePauses": {
+          "framesWallMs": {
+            "count": 656,
+            "p50": 77,
+            "p95": 80,
+            "max": 428
+          },
+          "framesMediaSeconds": {
+            "count": 656,
+            "p50": 0.07679170000000024,
+            "p95": 0.07935409999999621,
+            "max": 0.10902089999999998
+          },
+          "samplingWallMs": {
+            "count": 656,
+            "p50": 77,
+            "p95": 80,
+            "max": 429
+          },
+          "samplingMediaSeconds": {
+            "count": 656,
+            "p50": 0.07679170000000024,
+            "p95": 0.07958329999999947,
+            "max": 0.10904169999999969
+          }
+        },
+        "cycles": [
+          {
+            "cycle": 0,
+            "visibleCount": 240,
+            "nodes": 22,
+            "framesWallMs": {
+              "count": 217,
+              "p50": 77,
+              "p95": 80,
+              "max": 109
+            }
+          },
+          {
+            "cycle": 1,
+            "visibleCount": 240,
+            "nodes": 22,
+            "framesWallMs": {
+              "count": 220,
+              "p50": 77,
+              "p95": 79,
+              "max": 93
+            }
+          },
+          {
+            "cycle": 2,
+            "visibleCount": 240,
+            "nodes": 22,
+            "framesWallMs": {
+              "count": 219,
+              "p50": 77,
+              "p95": 79,
+              "max": 95
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "These are bounded normal-player loads on frozen core 5.4.0, not full Mask/PiP/fullscreen concurrent-load evidence.",
+    "Prior candidate-core runs use identical plugin bytes but were not simultaneous or randomized; frame intervals are observations rather than a causal performance claim.",
+    "Optional unforced heap readings are not a leak proof."
+  ]
+}

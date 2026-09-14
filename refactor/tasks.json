@@ -3562,7 +3562,10 @@
       "acceptance": "性能无未解释退化，反复装卸无累计资源",
       "evidence": [
         "changes/2026-09-14-PKG-DANMUKU-08-native-combinations.md",
-        "baselines/danmuku-combination-checkpoint.json"
+        "baselines/danmuku-combination-checkpoint.json",
+        "changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md",
+        "baselines/danmuku-fullscreen-validation.json",
+        "baselines/danmuku-old-core-load-validation.json"
       ]
     },
     {

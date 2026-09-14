@@ -219,7 +219,16 @@ row. CPU-block observations remain diagnostic, not no-loss acceptance. Both it a
 `danmuku-lifetime.spec.js` accept the same artifact override. The latter verifies
 the full visible lifetime after a controlled delay to an actual Worker request.
 
-`danmuku-stability.spec.js` runs three native 14-second media cycles at 2 or 20
+`danmuku-fullscreen.spec.js` covers old/current core and plugin combinations in
+native document and CSS web fullscreen, with three fresh player lifetimes each.
+It checks timestamp-delivered visible text, layout restoration, Worker/DOM cleanup
+and instance-local event sequences. Frozen-core post-destroy listeners are an
+explicit historical observation, never a waiver for the candidate. Native exit
+must deliver its event before teardown; hidden measurement nodes are not visible
+rows. `ARTPLAYER_DANMUKU_ARTIFACT` selects a real candidate main/legacy input.
+
+`danmuku-stability.spec.js` covers old/current core and plugin combinations and
+runs three native 14-second media cycles at 2 or 20
 rows per second, appending through the public load(rows) contract. The candidate
 must deliver and recycle every row once, preserve state membership and reuse
 actual node identities. Its 90-second per-case deadline budgets the 42 seconds

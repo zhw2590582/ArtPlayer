@@ -12,8 +12,24 @@ the corresponding built formats; both loaded hashes appear in each attachment.
 The actual Mask/model combination in `danmuku-mask-native.spec.js` now compiles
 both plugins from source by default. `ARTPLAYER_MASK_ARTIFACT` and
 `ARTPLAYER_DANMUKU_ARTIFACT` override them independently and fail on missing files.
-Do not substitute a stale dist file for source checks. Full old-plugin/core,
-OS fullscreen, installation, performance and device acceptance remain task 08/09.
+Do not substitute a stale dist file for source checks. Installation, remaining
+old-plugin combinations, combined-load performance and devices remain task 08/09.
+
+`danmuku-fullscreen.spec.js` tests all old/current core and plugin pairs in real
+document and CSS web fullscreen, with three fresh player lifetimes per case.
+Each lifetime must show a timestamp-delivered row, restore layout and release its
+Worker and DOM; the candidate also has no pending scheduler frame or operation.
+The published renderer has a hidden measurement node with the same text: locate
+the visible node, rather than assuming text uniquely identifies a render node.
+Wait for the native exit event before destroying the player; fullscreenElement
+can clear before the event is dispatched. Instance-local event records expose
+the frozen core's known BASE-LIFE-18 listeners after destroy, without attributing
+their events to a new player. The candidate must receive no later events.
+
+`danmuku-stability.spec.js` now includes both core versions. Use its core-prefixed
+test titles to select a matrix subset and retain the core field in observations.
+The three 14-second cycles and per-row assertions remain the same; this does not
+turn the bounded load test into a full-screen/model/PiP performance benchmark.
 
 The compatibility reference is the actual npm 5.3.0 package. Its archive,
 historical declarations, earlier exports and failure evidence are indexed in

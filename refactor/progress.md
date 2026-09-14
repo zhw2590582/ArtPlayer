@@ -1,5 +1,24 @@
 # 进度与证据
 
+## PKG-DANMUKU-08 全屏生命周期与旧核心负载检查点（仍 doing）
+
+三引擎/新旧核心/新旧弹幕的网页及原生document全屏源码24项通过，候选main与
+legacy各12项通过。每项三个完整播放器生命周期，按媒体时间显示行，核验宽度
+恢复、设置/热力图、Worker终止及候选scheduler清空。冻结旧核心销毁后监听器
+残留按已有BASE-LIFE-18独立记录，新核心不接受这项历史差异。
+
+首轮3/5与三引擎首轮20/4失败均保留：分别修正隐藏同名测量节点的测试定位、
+跨实例全局事件记录污染，以及WebKit退出事件晚于fullscreenElement清空的等待。
+没有修改生产运行时/声明、扩大旧超时或重试。新增旧核心持续负载12项通过；
+候选完整处理72/720行、分配3/21–22节点，Worker及DOM清理通过。同插件哈希下
+与07候选核心帧间隔P95接近；不是Mask/PiP组合负载或物理设备性能证明。
+
+见[变更](changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md)、
+[全屏证据](baselines/danmuku-fullscreen-validation.json)和
+[旧核心负载](baselines/danmuku-old-core-load-validation.json)。261项仍192 done、
+21 doing、48 todo；08接续完整旧插件组合及组合负载，09最终安装分发。
+本检查点独立本地提交，随后核验提交审计；没有push/部署/发布。
+
 ## PKG-DANMUKU-08 原生画中画与真实 Mask 组合检查点（仍 doing）
 
 新增新旧核心中的两次原生Document PiP开窗，按媒体时间显示弹幕，检查图层/热力图
