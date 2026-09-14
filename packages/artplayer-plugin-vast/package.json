@@ -44,10 +44,6 @@
   "types": "./types/artplayer-plugin-vast.d.ts",
   "legacy": "./dist/artplayer-plugin-vast.legacy.js",
   "browserslist": "last 1 Chrome version",
-  "dependencies": {
-    "@alugha/ima": "2.1.0",
-    "@glomex/vast-ima-player": "^1.21.2"
-  },
   "typesVersions": {
     "*": {
       "legacy": [
@@ -57,5 +53,9 @@
         "types/runtime.d.ts"
       ]
     }
+  },
+  "dependencies": {
+    "@alugha/ima": "2.1.0",
+    "@glomex/vast-ima-player": "^1.21.2"
   }
 }

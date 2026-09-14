@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "task": "ENG-LINT-02",
+  "baseCommit": "d2f4261aa719a21a8d0dbe042d4d22e307786093",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "commands": [
+    {
+      "name": "build:ts",
+      "log": "refactor/.cache/eng-lint02-generate.log",
+      "exitCode": 0,
+      "seconds": 9.06,
+      "logSha256": "bc4340fb8a83101d1be97b55a78dda62617cbe4161eacc38c295e6acc1cb74c4"
+    },
+    {
+      "name": "check:editor-types",
+      "log": "refactor/.cache/eng-lint02-editor-check.log",
+      "exitCode": 0,
+      "seconds": 9.47,
+      "logSha256": "210e8fd473d069331331141ec53515edd90f40fa995d402b090a68f3c4aee193"
+    },
+    {
+      "name": "lint",
+      "log": "refactor/.cache/eng-lint02-lint.log",
+      "exitCode": 0,
+      "seconds": 13.1,
+      "errors": 0,
+      "warnings": 0,
+      "logSha256": "cccd079780223122fd33f320e6103514b5280db7e51496a020340c0542812900"
+    }
+  ],
+  "checks": [
+    "strict docs-tools TypeScript",
+    "strict toolchain",
+    "risk register"
+  ],
+  "manifest": {
+    "path": "packages/artplayer-plugin-vast/package.json",
+    "deepEqual": true,
+    "allNestedKeyOrderingUnchanged": true,
+    "newSha256Lf": "5b19f43dc951e25c8aa6c3fb72161c0d52a11ce74b79fdec920f04b1cb7eb042"
+  },
+  "declaration": {
+    "path": "docs/assets/ts/artplayer.d.ts",
+    "onlyLintCommentChanged": true,
+    "sha256Lf": "6b038ad9084766023baaa037e6abcd9edde2a3c40b8b9b1dfc5e45c20be7b7ba"
+  },
+  "limits": [
+    "Metadata bytes change; next VAST npm candidate must be repacked",
+    "No runtime behavior change, no additional browser playback run",
+    "No push or publication"
+  ]
+}

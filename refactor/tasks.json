@@ -4952,7 +4952,8 @@
       ],
       "dependsOn": [
         "REL-06",
-        "ENG-LINT-01"
+        "ENG-LINT-01",
+        "ENG-LINT-02"
       ],
       "status": "todo",
       "risk": "L",
@@ -5570,6 +5571,29 @@
       "evidence": [
         "changes/2026-09-15-PKG-HLS-PACK-01-config.md",
         "baselines/hls-pack-config-validation.json"
+      ]
+    },
+    {
+      "id": "ENG-LINT-02",
+      "phase": "2 工程基础",
+      "title": "修复 VAST 清单与生成声明的 lint 遗留",
+      "scope": [
+        "artplayer-plugin-vast",
+        "artplayer",
+        "artplayer-vitepress",
+        "workspace"
+      ],
+      "dependsOn": [
+        "PKG-VAST-04",
+        "SITE-02"
+      ],
+      "status": "done",
+      "risk": "L",
+      "deliverable": "仅整理 VAST 顶层元数据键顺序，并从声明生成源移除无效 lint 禁用项；保留入口与类型语义",
+      "acceptance": "全仓只读 lint 零错误零警告；VAST 元数据和嵌套条件键顺序不变；生成声明除注释外逐字一致，生成/只读检查通过",
+      "evidence": [
+        "changes/2026-09-15-ENG-LINT-02-clean-checks.md",
+        "baselines/eng-lint02-validation.json"
       ]
     }
   ]

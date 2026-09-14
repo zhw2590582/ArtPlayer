@@ -1,5 +1,5 @@
 // Generated from packages/artplayer/public/artplayer.ts by yarn build:ts. Do not edit.
-/* eslint-disable ts/no-redeclare, ts/no-namespace -- UMD constructor and named types share the global export. */
+/* eslint-disable ts/no-redeclare -- UMD constructor and named types share the global export. */
 declare namespace ArtplayerDefinitions {
   export interface ComponentInput extends Omit<ComponentOption, 'html'> {
     html?: string | HTMLElement | number

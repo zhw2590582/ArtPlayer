@@ -69,7 +69,7 @@ export function asGlobalDeclaration(code: string, globalName: string) {
     factory.createNamespaceExportDeclaration(factory.createIdentifier(globalName)),
   ]
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed })
-  return `// Generated from packages/artplayer/public/artplayer.ts by yarn build:ts. Do not edit.\n/* eslint-disable ts/no-redeclare, ts/no-namespace -- UMD constructor and named types share the global export. */\n${printer.printFile(factory.updateSourceFile(source, statements))}`
+  return `// Generated from packages/artplayer/public/artplayer.ts by yarn build:ts. Do not edit.\n/* eslint-disable ts/no-redeclare -- UMD constructor and named types share the global export. */\n${printer.printFile(factory.updateSourceFile(source, statements))}`
 }
 
 export function generateCoreEditorDeclaration() {

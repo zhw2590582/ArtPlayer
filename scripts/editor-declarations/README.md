@@ -21,6 +21,9 @@ without writing. Unknown/duplicate selections fail before generating or writing.
 Orchestration depends on conversion and validation; conversion does not write.
 Public package declarations remain the source of truth. Do not hand-edit
 `docs/assets/ts/*.d.ts`.
+The core header suppresses only `ts/no-redeclare` for its global constructor/type
+merge. Ambient namespaces are already allowed; adding `ts/no-namespace` there
+creates an unused-disable warning in the generated output.
 
 The editor URL list is generated in
 `packages/artplayer-vitepress/browser/editor-libraries.ts`, then imported by the

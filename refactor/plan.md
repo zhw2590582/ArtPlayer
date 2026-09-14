@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 263 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 264 项，范围 22 个包及工作区/示例。
 
-状态：todo 44 / doing 22 / blocked 0 / done 197 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 44 / doing 22 / blocked 0 / done 198 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -14,7 +14,7 @@
 
 | 包 | 基线版本 | 任务 |
 | --- | --- | --- |
-| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09 |
+| artplayer | 5.4.1 | CORE-01, CORE-02, CORE-03, CORE-04, CORE-05, CORE-06, CORE-07, CORE-08, CORE-09, CORE-10, CORE-11, CORE-12, CORE-13, CORE-14, CORE-15, CORE-16, CORE-17, CORE-18, CORE-19, CORE-20, CORE-21, CORE-23, CORE-22, CORE-24, SITE-BUILD-01, CORE-25, ENG-12, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09, ENG-LINT-02 |
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 |
@@ -29,13 +29,13 @@
 | artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06, PKG-HLS-PACK-01 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09, PKG-JASSUB-10 |
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 |
-| artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06, PKG-VAST-07 |
+| artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06, PKG-VAST-07, ENG-LINT-02 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
 | artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01, PKG-CANVAS-SUBTITLE-01 |
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
-| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01 |
+| artplayer-vitepress | 1.1.0 | SITE-01, SITE-SMOKE-01, SITE-02, SITE-LOAD-01, SITE-AI-DOCS-01, SITE-BUILD-01, SITE-03, SITE-04, SITE-05, SITE-06, SITE-07, SITE-VCONSOLE-01, ENG-LINT-02 |
 
 ## 0 规划
 
@@ -435,7 +435,7 @@
 | REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | doing |
 | REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
 | REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致 | H | todo |
-| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06, ENG-LINT-01 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
+| REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06, ENG-LINT-01, ENG-LINT-02 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
 
 ## 8.1 多轮复盘
 
@@ -463,6 +463,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | ENG-LINT-01 | artplayer-plugin-danmuku-mask, workspace<br>修复 Mask manifest 排序并恢复全仓 lint | PKG-MASK-04 | 仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变 | 根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口 | L | done |
 | ENG-13 | workspace<br>保证性能资源探针的最小观察时长 | ENG-08 | 性能页面按实测时钟补足既有350ms观察窗口，保留冻结基线和原校验门槛；时钟边界测试和实际安装包配对证据 | 349ms仍被拒绝；早到定时器补足观察、正常超时保留实际值；冻结计时样本逻辑未变，三浏览器实际350ms观察及资源校验通过 | M | done |
+| ENG-LINT-02 | artplayer-plugin-vast, artplayer, artplayer-vitepress, workspace<br>修复 VAST 清单与生成声明的 lint 遗留 | PKG-VAST-04, SITE-02 | 仅整理 VAST 顶层元数据键顺序，并从声明生成源移除无效 lint 禁用项；保留入口与类型语义 | 全仓只读 lint 零错误零警告；VAST 元数据和嵌套条件键顺序不变；生成声明除注释外逐字一致，生成/只读检查通过 | L | done |
 
 ## 5 包组合：Danmuku / Mask
 
@@ -691,3 +692,4 @@
 - PKG-CANVAS-SUBTITLE-01: [记录](changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md) [记录](baselines/canvas-subtitles-validation.json)
 - PKG-DANMUKU-MASK-LOAD-01: [记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md) [记录](baselines/danmuku-combined-load-validation.json) [记录](changes/2026-09-14-PKG-DANMUKU-MASK-LOAD-01-scheduling.md) [记录](baselines/danmuku-mask-load-validation.json)
 - PKG-HLS-PACK-01: [记录](changes/2026-09-15-PKG-HLS-PACK-01-config.md) [记录](baselines/hls-pack-config-validation.json)
+- ENG-LINT-02: [记录](changes/2026-09-15-ENG-LINT-02-clean-checks.md) [记录](baselines/eng-lint02-validation.json)
