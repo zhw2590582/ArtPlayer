@@ -250,6 +250,14 @@ with a missed narrow timestamp window. A passing post-ready combination is not
 proof of startup losslessness, private GPU/WASM closure, OS fullscreen or devices.
 See refactor/changes/2026-09-14-PKG-MASK-05-native-checkpoint.md for exact limits.
 
+Its combination cases now include frozen/current Danmuku and a bounded 120-row
+load while the actual model continues. `danmuku-combination-load.js` observes
+real media/RAF and cleans up its test listeners; it does not seed eligible rows.
+Candidate completeness failures remain failing under PKG-DANMUKU-MASK-LOAD-01.
+`danmuku-dpip.spec.js` also includes two-window load cases and both plugin versions.
+Frozen-plugin retained DOM, candidate cleanup and unsupported API outcomes remain
+distinct; the old plugin's observed loss is not complete-delivery acceptance.
+
 `jassub-native.spec.js` runs actual published JASSUB 1.1.0, its native Worker,
 fixed local WASM/font and authored ASS cues with offscreenRender=false. It checks
 real canvas pixels before/after seek, CSS web fullscreen and normal destruction.

@@ -2764,7 +2764,8 @@
       ],
       "dependsOn": [
         "PKG-MASK-05",
-        "ENG-07"
+        "ENG-07",
+        "PKG-DANMUKU-MASK-LOAD-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -3565,7 +3566,9 @@
         "baselines/danmuku-combination-checkpoint.json",
         "changes/2026-09-14-PKG-DANMUKU-08-fullscreen-lifetimes.md",
         "baselines/danmuku-fullscreen-validation.json",
-        "baselines/danmuku-old-core-load-validation.json"
+        "baselines/danmuku-old-core-load-validation.json",
+        "changes/2026-09-14-PKG-DANMUKU-08-combined-load.md",
+        "baselines/danmuku-combined-load-validation.json"
       ]
     },
     {
@@ -3577,7 +3580,8 @@
       ],
       "dependsOn": [
         "PKG-DANMUKU-08",
-        "ENG-07"
+        "ENG-07",
+        "PKG-DANMUKU-MASK-LOAD-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -5464,6 +5468,28 @@
       "evidence": [
         "changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md",
         "baselines/canvas-subtitles-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-DANMUKU-MASK-LOAD-01",
+      "phase": "5 包组合：Danmuku / Mask",
+      "title": "修复真实Mask组合下的弹幕未采样与放置积压",
+      "scope": [
+        "artplayer-plugin-danmuku",
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "dependsOn": [
+        "PKG-DANMUKU-12",
+        "PKG-MASK-04",
+        "CORE-22"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "分阶段性能/采样诊断、兼容实现修复及新旧核心/产物回归",
+      "acceptance": "关闭真实模型组合5项密集负载失败和1项负载前漏显，保持回调顺序、显示寿命与生命周期取消；不能以降低负载或关闭模型制造通过",
+      "evidence": [
+        "changes/2026-09-14-PKG-DANMUKU-08-combined-load.md",
+        "baselines/danmuku-combined-load-validation.json"
       ]
     }
   ]

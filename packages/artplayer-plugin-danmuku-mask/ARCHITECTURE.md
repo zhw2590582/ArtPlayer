@@ -1,5 +1,12 @@
 # Danmuku Mask maintenance map
 
+The native combination suite includes both frozen/current Danmuku with three core
+versions and a bounded 20 rows/s load after model readiness. Model output must
+continue during that load. Current Chromium/WebKit delivery failures block the
+combination gate under PKG-DANMUKU-MASK-LOAD-01; Firefox passes do not close them.
+See `refactor/changes/2026-09-14-PKG-DANMUKU-08-combined-load.md` for exact source
+inputs, historical observations and the still-unproven performance cause.
+
 The compatibility baseline is the actual npm 1.1.0 package and the earlier
 1.0.0 export shape. Sources and historical failure probes are recorded in
 `refactor/baselines/danmuku-mask-contract.md`, `danmuku-mask-release.json` and

@@ -1,11 +1,14 @@
 # Danmuku maintenance map
 
-`test/browser/danmuku-dpip.spec.js` exercises the candidate with old/current cores
+`test/browser/danmuku-dpip.spec.js` exercises frozen/current plugins with old/current cores
 in two sequential native Document PiP windows. It checks timestamp-delivered text,
 adopted layer and heatmap nodes, stylesheet layout, one surviving track Worker,
 close/native-close/destroy cleanup, and no retained scheduling operation. Native
 API absence is reported separately; it does not simulate a popup or count as
-playback evidence. This is not a background-throttling or device benchmark.
+playback evidence. Frozen 5.3.0 retains renderer/Setting nodes on destroy(false);
+its explicit historical outcome is not candidate cleanup acceptance. The load
+case runs 120 timestamped rows in each of two windows, observing native RAF in
+the player's owning window. This is not a background-throttling or device benchmark.
 Set `ARTPLAYER_DANMUKU_ARTIFACT` and `ARTPLAYER_DPIP_ARTIFACT` together to check
 the corresponding built formats; both loaded hashes appear in each attachment.
 
@@ -14,6 +17,12 @@ both plugins from source by default. `ARTPLAYER_MASK_ARTIFACT` and
 `ARTPLAYER_DANMUKU_ARTIFACT` override them independently and fail on missing files.
 Do not substitute a stale dist file for source checks. Installation, remaining
 old-plugin combinations, combined-load performance and devices remain task 08/09.
+
+The actual Mask combination now also tests frozen 5.3.0 and a 20 rows/s post-model
+load. `test/helpers/danmuku-combination-load.js` owns only test RAF/listeners and
+retains observations after failed assertions. Candidate complete delivery remains
+mandatory. Chromium/WebKit failures are tracked by DANMUKU-MASK-LOAD-01 and
+PKG-DANMUKU-MASK-LOAD-01; ordinary playback or Firefox passes cannot close them.
 
 `danmuku-fullscreen.spec.js` tests all old/current core and plugin pairs in real
 document and CSS web fullscreen, with three fresh player lifetimes per case.

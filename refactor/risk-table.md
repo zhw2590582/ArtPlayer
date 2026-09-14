@@ -275,3 +275,4 @@
 | CANVAS-SUBTITLE-01 | resolved / 已复现 | Canvas底层video缺初始字幕轨道且普通Canvas挂载不能加载原生字幕 | PKG-CANVAS-SUBTITLE-01, PKG-CANVAS-05 |
 | DPIP-INSTALLED-PROVENANCE-01 | resolved / 已复现 | Document PiP测试加载器忽略显式安装map并回退到源码 | PKG-CANVAS-05, CI-01 |
 | DASH-MENU-01 | resolved / 已复现 | SDK 5.2.1 播放中设置质量选项在点击时变为不可见 | PKG-DASH-MENU-01, PKG-DASH-05, REVIEW-02 |
+| DANMUKU-MASK-LOAD-01 | open / 已复现 | 真实Mask模型运行时弹幕存在未采样窗口及串行放置积压 | PKG-DANMUKU-MASK-LOAD-01, PKG-DANMUKU-08, PKG-MASK-05 |

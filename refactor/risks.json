@@ -6294,6 +6294,26 @@
         "test/dash-events.test.js"
       ],
       "resolutionRationale": "原trace显示设置仍打开但导航退回根面板；真实SDK刷新在四组核心/SDK组合复现相同失败。修复后源码92、main设置32、legacy完整候选92通过，新旧核心/两SDK/两引擎覆盖质量及音轨，原失败与未加force/延长超时的回归均保留。Node446验证三格式及重入/销毁边界；DASH其他SDK/设备/发布风险仍独立开放。"
+    },
+    {
+      "id": "DANMUKU-MASK-LOAD-01",
+      "title": "真实Mask模型运行时弹幕存在未采样窗口及串行放置积压",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-MASK-LOAD-01",
+        "PKG-DANMUKU-08",
+        "PKG-MASK-05"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-DANMUKU-08-combined-load.md",
+        "refactor/baselines/danmuku-combined-load-validation.json",
+        "test/browser/danmuku-mask-native.spec.js",
+        "test/helpers/danmuku-combination-load.js"
+      ],
+      "compatibleResolution": "分析真实模型/绘制/Worker往返成本和未采样、待放置行，保持公共readys与回调顺序、显示寿命及生命周期取消；用独立回归验证兼容修复。",
+      "closureCriteria": "原始失败保留并有可解释修复；真实模型下120行完整交付、无活动引用积压，新旧核心和main/legacy以及暂停/seek/hide/destroy回归通过；不降低负载、停模型或扩大等待伪造结果。",
+      "workspaceState": "源码18项12通过6失败：5项候选密集负载不完整，1项Chromium beta核心负载前行未显示。旧插件同环境也漏显，尚未证明是重构回归或定位单一瓶颈。Firefox候选和原生PiP负载通过。"
     }
   ]
 }

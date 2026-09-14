@@ -1,5 +1,26 @@
 # 进度与证据
 
+## PKG-DANMUKU-08 旧插件组合与真实负载：新增必须修复项
+
+扩展PiP/Mask测试加载校验后的npm弹幕5.3.0及候选源码。普通PiP矩阵36项退出0：
+24原生播放（12候选清理、12旧插件残留观察），12WebKit API不可用；新load矩阵
+12项退出0：8原生（4候选/4旧插件）、4不可用。候选每个原生用例在两个窗口
+各完整显示/回收120行，Worker终止。旧插件destroy(false)残留renderer/Setting的
+12个首轮失败单独保留，并有明确历史outcome；候选零残留要求不变。
+
+真实Mask模型保持运行并施加20条/秒负载，18项12通过6失败（退出1）：候选
+5项负载显示不完整，另1项Chromium beta核心负载前行未显示。Firefox候选3项
+完整交付；旧插件在Chromium/WebKit也漏显，尚不能认定重构回归或单一根因。
+完整的行、帧间隔、输入哈希和原失败报告见
+[记录](changes/2026-09-14-PKG-DANMUKU-08-combined-load.md)及
+[证据](baselines/danmuku-combined-load-validation.json)。没有降低负载、扩大等待或
+关闭模型把该失败改为通过。原先只含稀疏行的Mask通过报告不能关闭新增负载要求。
+
+新增PKG-DANMUKU-MASK-LOAD-01及DANMUKU-MASK-LOAD-01，接续区分未采样与已采样
+放置积压，分析真实模型/绘制/Worker往返成本后兼容修复。08/Mask05保持doing，
+09/Mask06显式依赖修复。262项：192 done、21 doing、49 todo。专项lint和任务/风险
+校验通过；浏览器仍有上述6失败。本检查点独立本地提交并核验审计；无push/发布。
+
 ## PKG-DANMUKU-08 全屏生命周期与旧核心负载检查点（仍 doing）
 
 三引擎/新旧核心/新旧弹幕的网页及原生document全屏源码24项通过，候选main与
