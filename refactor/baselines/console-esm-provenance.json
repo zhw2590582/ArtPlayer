@@ -1,0 +1,1151 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "recordedAt": "2026-09-14T22:53:36.502Z",
+  "archives": [
+    {
+      "id": "%40emotion%2Fcore-10.3.0",
+      "name": "@emotion/core",
+      "version": "10.3.0",
+      "tarball": "https://registry.npmjs.org/@emotion/core/-/core-10.3.0.tgz",
+      "integrity": "sha512-C4+RI1gNycUbfg2Zojt3lcVQVWocMLK4jiwl5tO/Z5I3zyGmG+oKJl6+/uPtQeUDPN7WXHN8TQ7bqc+dnljZ0w==",
+      "sha256": "402cd652fcd3fac786a58036f1fd913b3fbeb284f885cc31ef775d01bee04185",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-core-10.3.0-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fcss-10.0.27",
+      "name": "@emotion/css",
+      "version": "10.0.27",
+      "tarball": "https://registry.npmjs.org/@emotion/css/-/css-10.0.27.tgz",
+      "integrity": "sha512-6wZjsvYeBhyZQYNrGoR5yPMYbMBNEnanDrqmsqS1mzDm1cOTu12shvl2j4QHNS36UaTE0USIJawCH9C8oW34Zw==",
+      "sha256": "67a42af2515d0ed64cc4be6a1938cb925f2a38ca9f961bbd69ac3479e7218811",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-css-10.0.27-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fcache-10.0.29",
+      "name": "@emotion/cache",
+      "version": "10.0.29",
+      "tarball": "https://registry.npmjs.org/@emotion/cache/-/cache-10.0.29.tgz",
+      "integrity": "sha512-fU2VtSVlHiF27empSbxi1O2JFdNWZO+2NFHfwO0pxgTep6Xa3uGb+3pVKfLww2l/IBGLNEZl5Xf/++A4wAYDYQ==",
+      "sha256": "8d6ee0f24e2d265e0f29cfc1f4cd6d33bc91f573d83450cb8b929729104be926",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-cache-10.0.29-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fstyled-10.0.27",
+      "name": "@emotion/styled",
+      "version": "10.0.27",
+      "tarball": "https://registry.npmjs.org/@emotion/styled/-/styled-10.0.27.tgz",
+      "integrity": "sha512-iK/8Sh7+NLJzyp9a5+vIQIXTYxfT4yB/OJbjzQanB2RZpvmzBQOHZWhpAMZWYEKRNNbsD6WfBw5sVWkb6WzS/Q==",
+      "sha256": "10987004b2d4665e555663eca6c0e88bacac360bfcf0bb6d1dc2093e9b6aa115",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-styled-10.0.27-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fstyled-base-10.3.0",
+      "name": "@emotion/styled-base",
+      "version": "10.3.0",
+      "tarball": "https://registry.npmjs.org/@emotion/styled-base/-/styled-base-10.3.0.tgz",
+      "integrity": "sha512-PBRqsVKR7QRNkmfH78hTSSwHWcwDpecH9W6heujWAcyp2wdz/64PP73s7fWS1dIPm8/Exc8JAzYS8dEWXjv60w==",
+      "sha256": "53e75ca58bdce04278a00f3132cd456b53786ec5c2c69244603ca9fc33a0edfb",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-styled-base-10.3.0-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "emotion-theming-10.3.0",
+      "name": "emotion-theming",
+      "version": "10.3.0",
+      "tarball": "https://registry.npmjs.org/emotion-theming/-/emotion-theming-10.3.0.tgz",
+      "integrity": "sha512-mXiD2Oj7N9b6+h/dC6oLf9hwxbtKHQjoIqtodEyL8CpkN4F3V4IK/BT4D0C7zSs4BBFOu4UlPJbvvBLa88SGEA==",
+      "sha256": "3679830ab103d29afc9fa2627b459a01c1facd6d3c43f228c562f4a2926cdf68",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-theming-10.3.0-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "styled-components-5.3.3",
+      "name": "styled-components",
+      "version": "5.3.3",
+      "tarball": "https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.tgz",
+      "integrity": "sha512-++4iHwBM7ZN+x6DtPPWkCI4vdtwumQ+inA/DdAsqYd4SVgUKJie5vXyzotA00ttcFdQkCng7zc6grwlfIfw+lw==",
+      "sha256": "92333c71a4d4779c1bbc19475b401272aa0fdb063614d6ba09f5d2d078c9d1d9",
+      "license": "MIT",
+      "notices": []
+    },
+    {
+      "id": "%40babel%2Fruntime-7.16.3",
+      "name": "@babel/runtime",
+      "version": "7.16.3",
+      "tarball": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.16.3.tgz",
+      "integrity": "sha512-WBwekcqacdY2e9AF/Q7WLFUWmdJGJTkbjqTjoMDgXkVZ3ZRUvOPsLb5KdwISoQVsbP+DQzVZW4Zhci0DvpbNTQ==",
+      "sha256": "3f2850e43d2e8aa9a993a94348a1469a294301859731a29a7050adcd2113fffe",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/babel-runtime-7.16.3-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fsheet-0.9.4",
+      "name": "@emotion/sheet",
+      "version": "0.9.4",
+      "tarball": "https://registry.npmjs.org/@emotion/sheet/-/sheet-0.9.4.tgz",
+      "integrity": "sha512-zM9PFmgVSqBw4zL101Q0HrBVTGmpAxFZH/pYx/cjJT5advXguvcgjHFTCaIO3enL/xr89vK2bh0Mfyj9aa0ANA==",
+      "sha256": "2739b06468c10170e9c62c4fc2738a5f6db422d286374f6950c30388e44c532b",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-sheet-0.9.4-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fstylis-0.8.5",
+      "name": "@emotion/stylis",
+      "version": "0.8.5",
+      "tarball": "https://registry.npmjs.org/@emotion/stylis/-/stylis-0.8.5.tgz",
+      "integrity": "sha512-h6KtPihKFn3T9fuIrwvXXUOwlx3rfUvfZIcP5a6rh8Y7zjE3O06hT5Ss4S/YI1AYhuZ1kjaE/5EaOOI2NqSylQ==",
+      "sha256": "028cf6c41832ce26c2aff09dd9ee8732d381040391d1efad60f3a107563161f1",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-stylis-0.8.5-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fweak-memoize-0.2.5",
+      "name": "@emotion/weak-memoize",
+      "version": "0.2.5",
+      "tarball": "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz",
+      "integrity": "sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==",
+      "sha256": "fe369d97a03db2f4c0d8f629672936d5615d356da75c550d3b18f7da01767571",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-weak-memoize-0.2.5-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Futils-0.11.3",
+      "name": "@emotion/utils",
+      "version": "0.11.3",
+      "tarball": "https://registry.npmjs.org/@emotion/utils/-/utils-0.11.3.tgz",
+      "integrity": "sha512-0o4l6pZC+hI88+bzuaX/6BgOvQVhbt2PfmxauVaYOGgbsAw14wdKyvMCZXnsnsHys94iadcF+RG/wZyx6+ZZBw==",
+      "sha256": "6bb2bb7caaa634b5a2e8cb30b8542df11ee9a5db9a9a7f6d098cab170d424408",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-utils-0.11.3-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fhash-0.8.0",
+      "name": "@emotion/hash",
+      "version": "0.8.0",
+      "tarball": "https://registry.npmjs.org/@emotion/hash/-/hash-0.8.0.tgz",
+      "integrity": "sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==",
+      "sha256": "7fbf83c41bbfe4cc9725b92881897d587d457e43acbdffab23a4ebf290a52535",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-hash-0.8.0-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Funitless-0.7.5",
+      "name": "@emotion/unitless",
+      "version": "0.7.5",
+      "tarball": "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz",
+      "integrity": "sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==",
+      "sha256": "9e56d94d91666411e8c87e5ad8e85a63a0f93539d45666fe799bddda9c88ca64",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-unitless-0.7.5-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fmemoize-0.7.4",
+      "name": "@emotion/memoize",
+      "version": "0.7.4",
+      "tarball": "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.7.4.tgz",
+      "integrity": "sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==",
+      "sha256": "970ad3fd74f33c266f12fd4921fde5af98578a6d83a496753dac938ef3bb801b",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-memoize-0.7.4-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fserialize-0.11.16",
+      "name": "@emotion/serialize",
+      "version": "0.11.16",
+      "tarball": "https://registry.npmjs.org/@emotion/serialize/-/serialize-0.11.16.tgz",
+      "integrity": "sha512-G3J4o8by0VRrO+PFeSc3js2myYNOXVJ3Ya+RGVxnshRYgsvErfAOglKAiy1Eo1vhzxqtUvjCyS5gtewzkmvSSg==",
+      "sha256": "8a1f5215544b836bbc5638cc74ab8afa527b212732696985c70ef9ae82a9713e",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-serialize-0.11.16-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "%40emotion%2Fis-prop-valid-0.8.8",
+      "name": "@emotion/is-prop-valid",
+      "version": "0.8.8",
+      "tarball": "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz",
+      "integrity": "sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==",
+      "sha256": "e28adbb900f002ac4ffe00a2b43b8b79b28c656f645ebe82eac8ea137731fc1d",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/emotion-is-prop-valid-0.8.8-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+        }
+      ]
+    },
+    {
+      "id": "react-inspector-5.1.1",
+      "name": "react-inspector",
+      "version": "5.1.1",
+      "tarball": "https://registry.npmjs.org/react-inspector/-/react-inspector-5.1.1.tgz",
+      "integrity": "sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg==",
+      "sha256": "32ee9b557916512af54b30c3519a0e982db08afab5f9fc0b00d62c5507286218",
+      "license": "MIT",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-esm/react-inspector-5.1.1-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "62d1c62e4b7eaee1a57e4a27b5cf6f2c0dc554b88326fc40bc512f150b340deb"
+        }
+      ]
+    }
+  ],
+  "babel": {
+    "archive": {
+      "name": "@babel/standalone",
+      "version": "7.16.4",
+      "tarball": "https://registry.npmjs.org/@babel/standalone/-/standalone-7.16.4.tgz",
+      "integrity": "sha512-FDRLwjeQfPm5jaHNuB+vwNyGCp24Ah3kEsbLzKmh0eSru+QCr4DmjgbRPoz71AwXLVtXU+l/i7MlVlIj5XO7Gw==",
+      "sha256": "6f87c5846fede95f65ef0e9b94a95a286e24b9effba2356d8887a461bf19557e"
+    },
+    "member": "package/babel.min.js",
+    "sha256": "28be860d27a8008e77d2a8fafce4806495f91b21e5fe0591c12fe65e944258c8",
+    "version": "7.16.4"
+  },
+  "compilerOptions": {
+    "warnings": true,
+    "safari10": true,
+    "mangle": {
+      "toplevel": true
+    },
+    "output": {
+      "comments": false
+    }
+  },
+  "parcel": {
+    "archive": {
+      "name": "parcel-bundler",
+      "version": "1.12.5",
+      "tarball": "https://registry.npmjs.org/parcel-bundler/-/parcel-bundler-1.12.5.tgz",
+      "integrity": "sha512-hpku8mW67U6PXQIenW6NBbphBOMb8XzW6B9r093DUhYj5GN2FUB/CXCiz5hKoPYUsusZ35BpProH8AUF9bh5IQ==",
+      "sha256": "2999bb924723fe5d33dea65361c5d235e79912f778b712f30382eb4e9d156406"
+    },
+    "prelude": {
+      "member": "package/src/builtins/prelude.min.js",
+      "sha256": "5f09f4b6487cf967331eacd37cb811159d6c2c5451b4f11f419376fc37967b7a"
+    },
+    "footer": "},{},[\"Focm\"], null)\n//# sourceMappingURL=/index.js.map",
+    "notices": [
+      {
+        "source": "refactor/baselines/site-vendor/console-esm/parcel-bundler-1.12.5-LICENSE.txt",
+        "member": "package/LICENSE",
+        "sha256": "5cfba9d5711264d45a2431a53c79f597cef12720cc7c764db2602daa92d0bd2a"
+      }
+    ],
+    "recipeMembers": [
+      {
+        "member": "package/src/utils/getExisting.js",
+        "sha256": "5e9f208a9808f98385a884c6bf8c6f53aae187d2d6548b9f0d11e8883f99615b"
+      },
+      {
+        "member": "package/src/assets/JSAsset.js",
+        "sha256": "5ebc2ff4a726a328a3a368b601765af07ee2e99c0d5c93d2bc06ab9dd862875a"
+      },
+      {
+        "member": "package/src/visitors/globals.js",
+        "sha256": "50054dc62e81bf29301eeff27a1791759d14fee7b5ab7ee7e7b0a4a8561b9191"
+      },
+      {
+        "member": "package/src/visitors/env.js",
+        "sha256": "266ac5ff8d6f1b34dba2b10a6c7ae788c1b109527b23758a112983367e3f50ee"
+      },
+      {
+        "member": "package/src/packagers/JSPackager.js",
+        "sha256": "839ff86a412392152c463e5939bd53395657bab71de17ed4bcb1a7f5ab2cbc27"
+      }
+    ]
+  },
+  "roots": [
+    "wdCp",
+    "gcCv",
+    "kqnl",
+    "IX9o",
+    "TJBs",
+    "pufF",
+    "tFSs",
+    "L2AO",
+    "WW8m",
+    "y4hN",
+    "cYce",
+    "faen",
+    "uxSu",
+    "tMFb",
+    "P6FR",
+    "VvAy",
+    "qy56",
+    "AoFs",
+    "vL6w",
+    "MaOu",
+    "wvgy",
+    "R69H",
+    "m5O0",
+    "kuYm"
+  ],
+  "sources": [
+    {
+      "id": "wdCp",
+      "archive": "%40emotion%2Fcore-10.3.0",
+      "member": "package/dist/core.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "a1de2b73f0ceb1d98bd38dbecc24fd31b368b2749600cde12882575116c76542",
+      "generatedSha256": "0e125de2d060b1f69147134614af16f8864cc12ce6d8c6aeba8f957383ca5207",
+      "bodySha256": "0e125de2d060b1f69147134614af16f8864cc12ce6d8c6aeba8f957383ca5207"
+    },
+    {
+      "id": "aEp8",
+      "archive": "%40emotion%2Fcore-10.3.0",
+      "member": "package/dist/emotion-element-04d85134.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "53080078bb52d63ea5eac5d171725c42dea475c15fd3130c36b7432d0d397739",
+      "generatedSha256": "a48ebf6f68307689cbdbd0a2f7cd871eccc2cbe50e5bbc6e08035ab6acd425ff",
+      "bodySha256": "a48ebf6f68307689cbdbd0a2f7cd871eccc2cbe50e5bbc6e08035ab6acd425ff"
+    },
+    {
+      "id": "gcCv",
+      "archive": "%40emotion%2Fcss-10.0.27",
+      "member": "package/dist/css.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "1e2772c93aed96eb0d77f4f1822a1581aa9ccb82f97905c6ad12e0ed2268750b",
+      "generatedSha256": "79bfe2bfad18d9157fa85698375b0bddd3c3d98adb3996807ac1d560fa40b6df",
+      "bodySha256": "79bfe2bfad18d9157fa85698375b0bddd3c3d98adb3996807ac1d560fa40b6df"
+    },
+    {
+      "id": "kqnl",
+      "archive": "%40emotion%2Fcache-10.0.29",
+      "member": "package/dist/cache.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "7df64362f28f43e9af8dda5dc5edc2b3c4ecb094101f7c723bc9ef03f40767f0",
+      "generatedSha256": "57da1045740c68f4fa9b2b753fbdcc0da0d4089208818eb31f8c0ad2f45d3f51",
+      "bodySha256": "57da1045740c68f4fa9b2b753fbdcc0da0d4089208818eb31f8c0ad2f45d3f51"
+    },
+    {
+      "id": "IX9o",
+      "archive": "%40emotion%2Fstyled-10.0.27",
+      "member": "package/dist/styled.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "2d571e25d23024bcafb0a9b13d7abe110dd39697f9c83a1f4b884511599aeefb",
+      "generatedSha256": "b407e7a07ccdbe1b375fdee84ae82a5ed2dfac3957f03621ea20402a2cf02258",
+      "bodySha256": "b407e7a07ccdbe1b375fdee84ae82a5ed2dfac3957f03621ea20402a2cf02258"
+    },
+    {
+      "id": "TJBs",
+      "archive": "%40emotion%2Fstyled-base-10.3.0",
+      "member": "package/dist/styled-base.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "16b9c7172b09d0d81edd7d707f3e14affbe6e9d171173b6cf6f804467ca819de",
+      "generatedSha256": "7eba5466827489a985200cadda4b54c93139d20fb55af7d5fe4a46f4cbf4448a",
+      "bodySha256": "7eba5466827489a985200cadda4b54c93139d20fb55af7d5fe4a46f4cbf4448a"
+    },
+    {
+      "id": "pufF",
+      "archive": "emotion-theming-10.3.0",
+      "member": "package/dist/emotion-theming.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "f870035f160346f5efb621ce2bda8fd8f1ad67886010f6a8b89cfc68544f44a5",
+      "generatedSha256": "4ba1f4fcb82b0add26b88b7876d2dd8599446b175c120fa6e748fa50c8f3d031",
+      "bodySha256": "4ba1f4fcb82b0add26b88b7876d2dd8599446b175c120fa6e748fa50c8f3d031"
+    },
+    {
+      "id": "tFSs",
+      "archive": "styled-components-5.3.3",
+      "member": "package/dist/styled-components.browser.esm.js",
+      "stages": [
+        [
+          "transform-typeof-symbol"
+        ],
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production",
+        "REACT_APP_SC_ATTR": null,
+        "SC_ATTR": null,
+        "REACT_APP_SC_DISABLE_SPEEDY": null,
+        "SC_DISABLE_SPEEDY": null
+      },
+      "prefix": "var process = require(\"process\");\n",
+      "sourceSha256": "f47c75771be803c949deb31621ddf506dea0e958c254a12998bd097beaf8d0f4",
+      "generatedSha256": "b3d98e39a73f3f962f8015feb480fa85fb86e422bfa3eb74d4e1a3ddeeb2c20f",
+      "bodySha256": "b3d98e39a73f3f962f8015feb480fa85fb86e422bfa3eb74d4e1a3ddeeb2c20f"
+    },
+    {
+      "id": "L2AO",
+      "archive": "%40babel%2Fruntime-7.16.3",
+      "member": "package/helpers/esm/defineProperty.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "ef7896d1bcbe9141e9b3c010322fe0b74d743437eb2cdb951930d4a16bf734aa",
+      "generatedSha256": "b255ed03afdb6c0b8e54d09bc3718db58a164e222c9b3bb7a537399d8e2597a1",
+      "bodySha256": "b255ed03afdb6c0b8e54d09bc3718db58a164e222c9b3bb7a537399d8e2597a1"
+    },
+    {
+      "id": "WW8m",
+      "archive": "%40babel%2Fruntime-7.16.3",
+      "member": "package/helpers/esm/inheritsLoose.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "560ef637e0cee8a729084bfc113b9e143238c2a2f6e52cf44ce168f738765737",
+      "generatedSha256": "0324052b67b74a076d4c9a975fe96c686f7dce09f3f4bad51c0c82b4de5b7265",
+      "bodySha256": "0324052b67b74a076d4c9a975fe96c686f7dce09f3f4bad51c0c82b4de5b7265"
+    },
+    {
+      "id": "G3Sv",
+      "archive": "%40babel%2Fruntime-7.16.3",
+      "member": "package/helpers/esm/setPrototypeOf.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "2ba947b9a4f68ef7d44dafba2e2ed1d2370a380ec726c981b209b208ef965424",
+      "generatedSha256": "ba8e94e1ff43e63e990f095e064d8210de59285f87bf0e589a2ba44235a29564",
+      "bodySha256": "ba8e94e1ff43e63e990f095e064d8210de59285f87bf0e589a2ba44235a29564"
+    },
+    {
+      "id": "y4hN",
+      "archive": "%40babel%2Fruntime-7.16.3",
+      "member": "package/helpers/inheritsLoose.js",
+      "stages": [],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "4e47469faaebec1be858b959d0201e2db44a988a7499b18928aa4a1b0f4a7d55",
+      "generatedSha256": "9f375f22d18b4809fde9f76080c6364af2ff36fd671bec666dd4ab12262da95b",
+      "bodySha256": "9f375f22d18b4809fde9f76080c6364af2ff36fd671bec666dd4ab12262da95b"
+    },
+    {
+      "id": "n0d5",
+      "archive": "%40babel%2Fruntime-7.16.3",
+      "member": "package/helpers/setPrototypeOf.js",
+      "stages": [],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "b10b6329c749d28c5a0fd8be51fef42f3af43b6d44387ea70dbae722e9576094",
+      "generatedSha256": "dd1c27306903219814aa71eed511a7b7078eff6599d074da381659b1395c6dfa",
+      "bodySha256": "dd1c27306903219814aa71eed511a7b7078eff6599d074da381659b1395c6dfa"
+    },
+    {
+      "id": "cYce",
+      "archive": "%40babel%2Fruntime-7.16.3",
+      "member": "package/helpers/esm/extends.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "1fbab4b2ca3ae9fc2d803ebb6e67f5a0d9036285e4c4909f884264bc718e7053",
+      "generatedSha256": "93f54338a8912dbf5a3a8246fa9f54c9d66a30cba18d6abce3c330fc5d319021",
+      "bodySha256": "93f54338a8912dbf5a3a8246fa9f54c9d66a30cba18d6abce3c330fc5d319021"
+    },
+    {
+      "id": "faen",
+      "archive": "%40emotion%2Fsheet-0.9.4",
+      "member": "package/dist/sheet.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "709d6f0b84577b3a79a90b48d010edc1764a4fcc631aa659be0d33d6a9b500ca",
+      "generatedSha256": "81ea897203a1e9dbaa8efb5ff148acc22baf6f005270bc40d19bba52f1fa2de9",
+      "bodySha256": "81ea897203a1e9dbaa8efb5ff148acc22baf6f005270bc40d19bba52f1fa2de9"
+    },
+    {
+      "id": "uxSu",
+      "archive": "%40emotion%2Fstylis-0.8.5",
+      "member": "package/dist/stylis.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "d5a7e088d496138b7d09ea3466b0b5f59224076394f4c3a2f62ff9e1c56d57ef",
+      "generatedSha256": "e42bbdbb36cb4cc888f0ebed42c34f5b18cf481136ceef6ae7e56d9cf5826ad6",
+      "bodySha256": "e42bbdbb36cb4cc888f0ebed42c34f5b18cf481136ceef6ae7e56d9cf5826ad6"
+    },
+    {
+      "id": "tMFb",
+      "archive": "%40emotion%2Fweak-memoize-0.2.5",
+      "member": "package/dist/weak-memoize.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "e20d029d0cab2a478c2fa896bb8f237e5f2c4b66e0633d24a580415f463ebd20",
+      "generatedSha256": "e70b009e15a5b2efe9ca310bc9f7bb5b37dd16ac2d2af8967f4aa6c3facddb2c",
+      "bodySha256": "e70b009e15a5b2efe9ca310bc9f7bb5b37dd16ac2d2af8967f4aa6c3facddb2c"
+    },
+    {
+      "id": "P6FR",
+      "archive": "%40emotion%2Futils-0.11.3",
+      "member": "package/dist/utils.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "9024bdc60794e85184b9ba3ac9f715bdff5168c98e9a1e89392c8a590c0b0987",
+      "generatedSha256": "76e7c41de6692d8503ee993cc790046d262801f4a6afb8ea9cf8f58938f55b8a",
+      "bodySha256": "76e7c41de6692d8503ee993cc790046d262801f4a6afb8ea9cf8f58938f55b8a"
+    },
+    {
+      "id": "VvAy",
+      "archive": "%40emotion%2Fhash-0.8.0",
+      "member": "package/dist/hash.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "3f6d63bdf3241054ccac29fa5bad7ca228bb889a51214e22224a8fe8c6d3573d",
+      "generatedSha256": "26aaca29ad5963f5b771d897650b4514211bcbc00b38497eb28343a9dd68340f",
+      "bodySha256": "26aaca29ad5963f5b771d897650b4514211bcbc00b38497eb28343a9dd68340f"
+    },
+    {
+      "id": "qy56",
+      "archive": "%40emotion%2Funitless-0.7.5",
+      "member": "package/dist/unitless.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "9c697e1a3d9b323569d0795eb66c30ce8f150f7a5a01030cdd7d7bcc8fa28860",
+      "generatedSha256": "a29b1f527f55e4471f21ca7866372086625e3ca89257d25ea50d13e7143ae387",
+      "bodySha256": "a29b1f527f55e4471f21ca7866372086625e3ca89257d25ea50d13e7143ae387"
+    },
+    {
+      "id": "AoFs",
+      "archive": "%40emotion%2Fmemoize-0.7.4",
+      "member": "package/dist/memoize.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "b7a6c1c015ab982a3b255c82b987e05bd698fc1aab2e42697ac2ad34635ddf19",
+      "generatedSha256": "120a80e14f3e89e9feb94bf695e7e667baf895a54cfb489a8f09cf6651fef084",
+      "bodySha256": "120a80e14f3e89e9feb94bf695e7e667baf895a54cfb489a8f09cf6651fef084"
+    },
+    {
+      "id": "vL6w",
+      "archive": "%40emotion%2Fserialize-0.11.16",
+      "member": "package/dist/serialize.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "877417be97126fa45fa90fc10afd1788722441f484fd26de75756b9f35eb3c3a",
+      "generatedSha256": "290e2f8389e560092b50ec7866c4ccf1141e04b7d3692b49ddf16c514837e0e2",
+      "bodySha256": "290e2f8389e560092b50ec7866c4ccf1141e04b7d3692b49ddf16c514837e0e2"
+    },
+    {
+      "id": "MaOu",
+      "archive": "%40emotion%2Fserialize-0.11.16",
+      "member": "package/dist/serialize.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "877417be97126fa45fa90fc10afd1788722441f484fd26de75756b9f35eb3c3a",
+      "generatedSha256": "290e2f8389e560092b50ec7866c4ccf1141e04b7d3692b49ddf16c514837e0e2",
+      "bodySha256": "290e2f8389e560092b50ec7866c4ccf1141e04b7d3692b49ddf16c514837e0e2"
+    },
+    {
+      "id": "wvgy",
+      "archive": "%40emotion%2Fserialize-0.11.16",
+      "member": "package/dist/serialize.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "877417be97126fa45fa90fc10afd1788722441f484fd26de75756b9f35eb3c3a",
+      "generatedSha256": "290e2f8389e560092b50ec7866c4ccf1141e04b7d3692b49ddf16c514837e0e2",
+      "bodySha256": "290e2f8389e560092b50ec7866c4ccf1141e04b7d3692b49ddf16c514837e0e2"
+    },
+    {
+      "id": "R69H",
+      "archive": "%40emotion%2Fis-prop-valid-0.8.8",
+      "member": "package/dist/is-prop-valid.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "70f3bbe8d95013c88113a7dfb4f7540d58d8999e5da4e036ee2f4fc2b82c9fd8",
+      "generatedSha256": "4a5e9335f2e98a8f24481d8f264a90d338ff84bc29f07ee455c6d4e7dd4094b4",
+      "bodySha256": "4a5e9335f2e98a8f24481d8f264a90d338ff84bc29f07ee455c6d4e7dd4094b4"
+    },
+    {
+      "id": "m5O0",
+      "archive": "%40emotion%2Fis-prop-valid-0.8.8",
+      "member": "package/dist/is-prop-valid.browser.esm.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "",
+      "sourceSha256": "70f3bbe8d95013c88113a7dfb4f7540d58d8999e5da4e036ee2f4fc2b82c9fd8",
+      "generatedSha256": "4a5e9335f2e98a8f24481d8f264a90d338ff84bc29f07ee455c6d4e7dd4094b4",
+      "bodySha256": "4a5e9335f2e98a8f24481d8f264a90d338ff84bc29f07ee455c6d4e7dd4094b4"
+    },
+    {
+      "id": "kuYm",
+      "archive": "react-inspector-5.1.1",
+      "member": "package/dist/es/react-inspector.js",
+      "stages": [
+        [
+          "transform-modules-commonjs"
+        ]
+      ],
+      "environment": {
+        "NODE_ENV": "production"
+      },
+      "prefix": "var define;\n",
+      "sourceSha256": "51043399d9bf760579fe423740a13141f8fb1a9d3f55fa2dce249665c5ce5cdb",
+      "generatedSha256": "3441c86f31ec4a36c74ca09e49dcf057ea74a72054d5f43d2d99d3af3f879753",
+      "bodySha256": "3441c86f31ec4a36c74ca09e49dcf057ea74a72054d5f43d2d99d3af3f879753"
+    }
+  ],
+  "external": [
+    {
+      "from": "wdCp",
+      "dependency": "@babel/runtime/helpers/esm/inheritsLoose",
+      "id": "WW8m"
+    },
+    {
+      "from": "wdCp",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "wdCp",
+      "dependency": "@emotion/cache",
+      "id": "kqnl"
+    },
+    {
+      "from": "aEp8",
+      "dependency": "@babel/runtime/helpers/inheritsLoose",
+      "id": "y4hN"
+    },
+    {
+      "from": "aEp8",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "aEp8",
+      "dependency": "@emotion/cache",
+      "id": "kqnl"
+    },
+    {
+      "from": "aEp8",
+      "dependency": "@emotion/utils",
+      "id": "P6FR"
+    },
+    {
+      "from": "aEp8",
+      "dependency": "@emotion/serialize",
+      "id": "vL6w"
+    },
+    {
+      "from": "wdCp",
+      "dependency": "@emotion/utils",
+      "id": "P6FR"
+    },
+    {
+      "from": "wdCp",
+      "dependency": "@emotion/serialize",
+      "id": "vL6w"
+    },
+    {
+      "from": "wdCp",
+      "dependency": "@emotion/sheet",
+      "id": "faen"
+    },
+    {
+      "from": "wdCp",
+      "dependency": "@emotion/css",
+      "id": "gcCv"
+    },
+    {
+      "from": "gcCv",
+      "dependency": "@emotion/serialize",
+      "id": "MaOu"
+    },
+    {
+      "from": "kqnl",
+      "dependency": "@emotion/sheet",
+      "id": "faen"
+    },
+    {
+      "from": "kqnl",
+      "dependency": "@emotion/stylis",
+      "id": "uxSu"
+    },
+    {
+      "from": "kqnl",
+      "dependency": "@emotion/weak-memoize",
+      "id": "tMFb"
+    },
+    {
+      "from": "IX9o",
+      "dependency": "@emotion/styled-base",
+      "id": "TJBs"
+    },
+    {
+      "from": "TJBs",
+      "dependency": "@babel/runtime/helpers/esm/defineProperty",
+      "id": "L2AO"
+    },
+    {
+      "from": "TJBs",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "TJBs",
+      "dependency": "@emotion/is-prop-valid",
+      "id": "R69H"
+    },
+    {
+      "from": "TJBs",
+      "dependency": "@emotion/core",
+      "id": "wdCp"
+    },
+    {
+      "from": "TJBs",
+      "dependency": "@emotion/utils",
+      "id": "P6FR"
+    },
+    {
+      "from": "TJBs",
+      "dependency": "@emotion/serialize",
+      "id": "wvgy"
+    },
+    {
+      "from": "pufF",
+      "dependency": "@babel/runtime/helpers/esm/defineProperty",
+      "id": "L2AO"
+    },
+    {
+      "from": "pufF",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "pufF",
+      "dependency": "@emotion/core",
+      "id": "wdCp"
+    },
+    {
+      "from": "pufF",
+      "dependency": "@emotion/weak-memoize",
+      "id": "tMFb"
+    },
+    {
+      "from": "pufF",
+      "dependency": "@babel/runtime/helpers/esm/extends",
+      "id": "cYce"
+    },
+    {
+      "from": "pufF",
+      "dependency": "hoist-non-react-statics",
+      "id": "QDWH"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "react-is",
+      "id": "H1RQ"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "shallowequal",
+      "id": "NKxe"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "@emotion/stylis",
+      "id": "uxSu"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "@emotion/unitless",
+      "id": "qy56"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "@emotion/is-prop-valid",
+      "id": "m5O0"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "hoist-non-react-statics",
+      "id": "LCQI"
+    },
+    {
+      "from": "tFSs",
+      "dependency": "process",
+      "id": "KIG8"
+    },
+    {
+      "from": "vL6w",
+      "dependency": "@emotion/hash",
+      "id": "VvAy"
+    },
+    {
+      "from": "vL6w",
+      "dependency": "@emotion/unitless",
+      "id": "qy56"
+    },
+    {
+      "from": "vL6w",
+      "dependency": "@emotion/memoize",
+      "id": "AoFs"
+    },
+    {
+      "from": "MaOu",
+      "dependency": "@emotion/hash",
+      "id": "VvAy"
+    },
+    {
+      "from": "MaOu",
+      "dependency": "@emotion/unitless",
+      "id": "qy56"
+    },
+    {
+      "from": "MaOu",
+      "dependency": "@emotion/memoize",
+      "id": "AoFs"
+    },
+    {
+      "from": "wvgy",
+      "dependency": "@emotion/hash",
+      "id": "VvAy"
+    },
+    {
+      "from": "wvgy",
+      "dependency": "@emotion/unitless",
+      "id": "qy56"
+    },
+    {
+      "from": "wvgy",
+      "dependency": "@emotion/memoize",
+      "id": "AoFs"
+    },
+    {
+      "from": "R69H",
+      "dependency": "@emotion/memoize",
+      "id": "AoFs"
+    },
+    {
+      "from": "m5O0",
+      "dependency": "@emotion/memoize",
+      "id": "AoFs"
+    },
+    {
+      "from": "kuYm",
+      "dependency": "react",
+      "id": "n8MK"
+    },
+    {
+      "from": "kuYm",
+      "dependency": "prop-types",
+      "id": "MaFS"
+    },
+    {
+      "from": "kuYm",
+      "dependency": "is-dom",
+      "id": "ibbm"
+    }
+  ],
+  "unresolvedModules": [],
+  "limits": [
+    "All 100 vendor bodies and the Parcel loader reproduce exactly, but this does not recover the original full lockfile or uniquely installed versions.",
+    "Fixed source transforms reproduce historical stages, explicit production/undefined environment and globals injection.",
+    "Complete embedded component notices and publication clearance remain separate."
+  ],
+  "supplementalNotices": [
+    {
+      "repository": "https://github.com/styled-components/styled-components",
+      "tag": "v5.3.3",
+      "commit": "9b3457036cfedf1d5336f654f3171657630a9fd8",
+      "url": "https://raw.githubusercontent.com/styled-components/styled-components/9b3457036cfedf1d5336f654f3171657630a9fd8/LICENSE",
+      "source": "refactor/baselines/site-vendor/console-esm/styled-components-5.3.3-UPSTREAM-LICENSE.txt",
+      "sha256": "5b893305a717230e5b0024ff5ca3eec1dc05ba600c9b140730488d97ce56f1e6",
+      "reason": "The npm 5.3.3 tarball omits LICENSE; preserve the root license at its matching immutable upstream tag commit.",
+      "apiUrl": "https://api.github.com/repos/styled-components/styled-components/contents/LICENSE?ref=9b3457036cfedf1d5336f654f3171657630a9fd8",
+      "gitBlobSha": "56d8d866b67bd7d02657b6bbf17cfa4170bf81f3"
+    }
+  ],
+  "validation": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "groups": {
+      "consoleFeed": 32,
+      "commonjs": 41,
+      "esm": 27
+    },
+    "total": 100,
+    "parcelPreludeAndInvocation": true,
+    "packageEdges": true,
+    "offline": {
+      "exitCode": 0,
+      "log": "refactor/.cache/console-esm-offline.log"
+    },
+    "fetch": {
+      "exitCode": 0,
+      "log": "refactor/.cache/console-esm-final-fetch-api.log",
+      "supplementalSource": "GitHub Contents API at immutable commit"
+    },
+    "failedFetchLogs": [
+      "refactor/.cache/console-esm-final-fetch.log",
+      "refactor/.cache/console-esm-final-fetch-second.log"
+    ],
+    "failureScope": "Both ECONNRESET; only second has URL evidence locating the supplemental raw GitHub request.",
+    "tests": {
+      "passed": 13,
+      "failed": 0,
+      "log": "refactor/.cache/console-esm-tests.log"
+    },
+    "strictTypes": "scripts/tsconfig.docs.json",
+    "scopedLint": true,
+    "generatedConsoleUnchanged": true,
+    "completeLicenseClosure": false
+  }
+}

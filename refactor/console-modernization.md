@@ -7,7 +7,7 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
 
 - 原文件最后修改于提交 5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c，2021-11-30。
 - 340,306 字节，102 个 Parcel 模块；所有静态依赖表条目都指向该 bundle 内的模块。
-- Focm 是自有安装入口，W5CS 是自有 React 控制台视图，其余模块须继续溯源。
+- Focm 是自有安装入口，W5CS 是自有 React 控制台视图；其余 100 模块现已精确重建。
 - 实际全局包括 React、ReactDOM、consoleLog 和 parcelRequire。React/ReactDOM
   均为 17.0.2，styled-components bundle 声明版本 5.3.3。
 - console-feed 的 32 个模块现已用官方 3.2.2 归档精确重建，见
@@ -16,6 +16,9 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
 - React/ReactDOM、scheduler、react-is、Linkify 等 13 个官方归档又精确重建 41 个
   模块，累计 73/100；其成员/许可原文、环境变换和剩余 27 个 ID 见
   [CommonJS 来源](baselines/console-commonjs-provenance.json)。仍不代表完整许可闭环。
+- 最后 27 个模块和 Parcel prelude/invocation 也已精确匹配，见
+  [ESM 来源](baselines/console-esm-provenance.json)。三份记录共覆盖全部 100 个
+  第三方模块和跨包依赖。原始锁未找回；内嵌代码署名及完整 notices 仍待验收。
 - 原末尾指向不存在的 /index.js.map。原始 bundle 和模块指纹见
   [冻结来源](baselines/site-console-inventory.json)。
 

@@ -7,7 +7,8 @@ import process from 'node:process'
 import test from 'node:test'
 import ts from 'typescript'
 import { generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
-import { hash, parcelModules, verifyArchive, verifyModules } from '../scripts/site-vendor/console/provenance.ts'
+import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from '../scripts/site-vendor/console/provenance.ts'
+import { reconstructModule, verifyPrelude } from '../scripts/site-vendor/console/reconstruction.ts'
 import { errorArgument } from '../scripts/site-vendor/console/runtime/errors.ts'
 import { css } from '../scripts/site-vendor/console/runtime/style.ts'
 import { createSubscriptions } from '../scripts/site-vendor/console/runtime/subscriptions.ts'
@@ -234,4 +235,42 @@ test('Console provenance verifies multiple archive roots without merging their r
   assert.throws(() => verifyModules(modules, sources, external, read, code => code, { ...options, roots: ['m6b6', 'm6b6'] }), /Invalid source roots/)
   modules.get('m6b6').dependencies = { './index': 'react' }
   assert.throws(() => verifyModules(modules, sources, [], read, code => code, options), /Relative dependency changed archives/)
+})
+
+test('Console reconstruction retains separate Babel stages and explicit environment and global boundaries', () => {
+  const calls = []
+  const babel = { transform(source, { plugins }) {
+    calls.push({ source, plugins })
+    return { code: `${source}|${plugins.join(',')}` }
+  } }
+  const item = { stages: [['transform-typeof-symbol'], ['transform-modules-commonjs']], environment: { NODE_ENV: 'production', SC_ATTR: null }, prefix: 'var define;\n' }
+  const source = 'process.env.NODE_ENV;process.env.SC_ATTR'
+  const result = reconstructModule(source, item, babel, value => `minified(${value})`)
+  assert.equal(calls.length, 2)
+  assert.equal(calls[1].source, `${source}|transform-typeof-symbol`)
+  assert.equal(result, 'var define;\nminified(var define;\n"production";undefined|transform-typeof-symbol|transform-modules-commonjs)')
+  assert.throws(() => reconstructModule(source, { ...item, stages: [['unreviewed-plugin']] }, babel, String), /Unexpected historical transform/)
+  assert.throws(() => reconstructModule(source, { ...item, environment: { UNREVIEWED: 'value' } }, babel, String), /Unexpected historical environment/)
+  assert.throws(() => reconstructModule(source, { ...item, prefix: 'unreviewed-global' }, babel, String), /Unexpected Parcel global/)
+})
+
+test('Console provenance verifies exact Parcel prelude and invocation instead of accepting any wrapper', () => {
+  const prelude = 'loader=function(){};\n'
+  const bundle = 'loader=function(){}({modules},{},["Focm"], null)'
+  verifyPrelude(bundle, prelude, '},{},["Focm"], null)')
+  assert.throws(() => verifyPrelude(bundle.replace('function()', 'function(changed)'), prelude, '},{},["Focm"], null)'), /prelude differs/)
+  assert.throws(() => verifyPrelude(bundle.replace('Focm', 'other'), prelude, '},{},["Focm"], null)'), /invocation/)
+})
+
+test('Console provenance verifies named and scoped subpath imports against the identified package', () => {
+  const modules = new Map([
+    ['parent', { id: 'parent', dependencies: { '@babel/runtime/helpers/esm/extends': 'helper', 'react': 'react' } }],
+    ['helper', { id: 'helper', dependencies: {} }],
+    ['react', { id: 'react', dependencies: {} }],
+  ])
+  const owners = [{ id: 'parent', packageName: 'consumer' }, { id: 'helper', packageName: '@babel/runtime' }, { id: 'react', packageName: 'react' }]
+  verifyPackageEdges(modules, owners)
+  assert.throws(() => verifyPackageEdges(modules, owners.slice(0, 2)), /Wrong package/)
+  assert.throws(() => verifyPackageEdges(modules, [...owners, owners[0]]), /Duplicate package ownership/)
+  assert.throws(() => verifyPackageEdges(modules, owners.map(owner => ({ ...owner, packageName: owner.id }))), /Wrong package/)
 })

@@ -64,8 +64,9 @@ Historical browser cases intentionally reproduce frozen defects; candidate cases
 prove their repairs independently. Unit tests check shared ownership, failed
 installation, callback errors, object identity, exact CSS and vendor preservation.
 No new dependency is required. Existing esbuild 0.27.7 and TypeScript 5.9.3 provide
-generation and structural parsing. Full console dependency provenance and notices
-remain SITE-07 / VENDOR-08; this build does not close them. See
+generation and structural parsing. All vendor module bodies now have exact
+reconstruction evidence; full embedded attribution and notices remain
+SITE-07 / VENDOR-08. See
 `refactor/console-modernization.md` for contracts and evidence.
 
 ## Historical source reconstruction
@@ -76,8 +77,9 @@ Their rebuilt bodies exactly match the frozen bundle. The separate
 `console-commonjs-provenance.json` adds 41 exact modules from 13 official archives:
 React/ReactDOM, scheduler, object-assign, react-is, prop-types, shallowequal,
 process, hoist-non-react-statics, is-dom/is-object/is-window and linkifyjs.
-The 27 remaining vendor modules and Parcel wrapper need further provenance; this does not establish a
-unique original installed version or recover its missing lockfile.
+`console-esm-provenance.json` adds the final 27 modules from 18 archives and the
+Parcel 1.12.5 prelude/invocation. All 100 vendor bodies match; this does not
+establish unique original installed versions or recover the missing lockfile.
 
 ```sh
 node scripts/site-vendor/console/reproduce.ts --fetch
@@ -85,23 +87,34 @@ node scripts/site-vendor/console/reproduce.ts
 yarn test:site-console
 ```
 
-The first command downloads 15 pinned npm archives into the dedicated ignored
+The first command downloads 35 pinned npm archives into the dedicated ignored
 `refactor/.cache/console-feed-reproduction/` directory. The second uses that cache
 offline. Both verify SHA-512 SRI, archive SHA-256, source member fingerprints,
-compiler bytes, original notice bytes and exact output of all 73 identified
-modules. They load Terser 3.17.0 as a historical build
-tool with the already installed source-map 0.6.1; they do not install dependencies,
-change Yarn or execute the archived console-feed runtime. Canonical Node is required.
+compiler bytes, original notice bytes and exact output of all 100 identified
+modules. They load Terser 3.17.0 with the installed source-map 0.6.1, and the
+self-contained Babel 7.16.4 archive. They do not install dependencies, change Yarn
+or execute the archived runtime libraries. Canonical Node is required.
 The minification recipe is recovered from Parcel 1.12.5's archive; this proves a
 reproducing transform, not that the original author used precisely that Parcel
 version. `provenance.ts` separately verifies complete traversal, relative source
 mapping and external dependency boundaries. Missing, unreachable, duplicate or
 changed evidence fails instead of silently shrinking the comparison. Multiple
 package roots are explicit, relative edges must stay in the same archive, and
-the remaining module IDs are checked as a complete list. Production entrypoints
+all module IDs are covered once. Named/scoped imports must resolve to the
+identified package. Production entrypoints
 use the pinned-source process.env.NODE_ENV substitution. The process shim's
 single process.browser assignment is removed following Parcel's original visitor;
 this is checked against exact source/output bytes, not a general JS rewrite.
+
+`reconstruction.ts` owns the ordered Babel stages, explicit historical environment
+and Parcel global injection. Most ESM inputs need only CommonJS conversion.
+Styled-components needs a separate earlier typeof-symbol pass; combining the
+passes also changes newly generated interop helpers and fails exact comparison.
+Parcel adds globals before minification and again before final output. Preserve
+that sequence, including the observed process/define declarations. Compiler
+options are cloned per module because historical Terser mutates them.
+`reproduce.ts` orchestrates archives, hashes and all three source groups; normal
+site builds continue using the frozen verified vendor boundary.
 
 The archived LICENSE is preserved verbatim with its Facebook attribution under
 `refactor/baselines/site-vendor/console-feed-3.2.2-LICENSE.txt`. Do not rewrite it
@@ -110,5 +123,12 @@ open, including the bundled replicator and remaining dependencies.
 The other 13 archives' LICENSE texts are also frozen under
 `refactor/baselines/site-vendor/console-commonjs/`, with exact bytes preserved by
 Git attributes. They are source evidence; complete site notice delivery still
-requires the remaining component review. React-inspector 5.1.1's CJS file did
-not match; its ESM conversion remains an investigation, not an accepted source.
+requires the remaining component review. The final ESM and Parcel texts live in
+`refactor/baselines/site-vendor/console-esm/`. React-inspector 5.1.1's ESM member
+is an exact match after historical conversion; its CJS member was a failed
+candidate. Styled-components 5.3.3 omits LICENSE in npm; the supplemental original
+comes from fixed upstream commit 9b3457036cfedf1d5336f654f3171657630a9fd8.
+The fetch command verifies that immutable upstream text through GitHub's Contents
+API too (the raw URL had connection resets); both URLs and the blob ID are
+recorded, and decoded content must match the same hash. Offline mode checks
+the frozen bytes. Full embedded-component attribution remains open.

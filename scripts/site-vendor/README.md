@@ -57,8 +57,9 @@ output through PowerShell text redirection. No dependency installation is needed
 
 The desktop console's owned TS entry/view and lifecycle now build through
 `build:console` / `check:console`; see [console maintenance](console/README.md).
-Its other 100 Parcel modules remain frozen pending full provenance and notices.
+Its other 100 Parcel modules remain frozen and now reproduce exactly from fixed
+archives, including the Parcel loader. Full embedded attribution/notices remain open.
 
 Follow-up: finish Monaco's broader bundled-component notice audit, the console
-vendor provenance and remaining fonts/media. Do not upgrade these assets
+embedded attribution/notices and remaining fonts/media. Do not upgrade these assets
 without verifying globals, AMD/worker paths, CSS, consoleLog and user interaction.

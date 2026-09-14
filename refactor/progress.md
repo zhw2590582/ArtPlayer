@@ -1,5 +1,12 @@
 # 进度与证据
 
+## SITE-07 控制台 100/100 源码与 Parcel 加载器匹配
+
+最后27模块使用固定归档与分阶段 Babel 转换精确重建，全部100模块、跨包边与
+Parcel prelude/invocation通过；单元13/13。补齐新增许可原文与 styled-components
+固定上游 LICENSE，见[记录](changes/2026-09-15-SITE-07-console-esm.md)。原锁未恢复，
+内嵌署名与完整 notices 分发仍待核查。SITE-07 doing，仍199/265，运行时和锁不变。
+
 ## SITE-07 控制台来源扩大到 73/100 模块
 
 新增 13 个官方归档、41 个精确模块及许可原文；联网准备和离线复现均为73/73。

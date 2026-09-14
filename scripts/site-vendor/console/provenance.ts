@@ -84,3 +84,16 @@ export function verifyModules<S extends Source>(modules: Map<string, Module>, so
   assert.deepEqual(dependencies, external, 'External dependency boundary changed')
   return visited.size
 }
+
+export function verifyPackageEdges(modules: Map<string, Module>, owners: { id: string, packageName: string }[]) {
+  const packages = new Map(owners.map(owner => [owner.id, owner.packageName]))
+  assert.equal(packages.size, owners.length, 'Duplicate package ownership')
+  for (const owner of owners) {
+    const module = modules.get(owner.id)
+    assert(module, `Unknown owned module: ${owner.id}`)
+    for (const [request, child] of Object.entries(module.dependencies)) {
+      const expected = request.startsWith('.') ? owner.packageName : request.split('/').slice(0, request.startsWith('@') ? 2 : 1).join('/')
+      assert.equal(packages.get(child), expected, `Wrong package for ${owner.id} -> ${request}`)
+    }
+  }
+}
