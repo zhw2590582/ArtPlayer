@@ -122,4 +122,10 @@ runtime consumers and editor generation in TS5.9.3/4.3.5. `yarn build:ts artplay
 regenerates the root-compatible editor global. Frozen workspace editor tests continue to
 exercise the SDK declaration bundler; they are labelled historical. Public migration
 is documented in [the accepted type decision](../../refactor/vast-type-decision.md).
-Actual IMA/media/device validation remains05 and full distribution06.
+`yarn test:vast-native` separately loads the real remote Google IMA SDK with local
+VAST XML and video assets. It runs outside the default PR suite because SDK/network
+availability is an explicit environment gate. No SDK boundary is substituted.
+Reports include bundle/media hashes, XML, SDK/browser versions, event order, decoded
+ad frames and resumed content state. See the validation record for actual results;
+adding this command does not establish device or final distribution acceptance.
+Physical device validation remains05 and full distribution06.

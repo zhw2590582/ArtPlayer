@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`yarn test:vast-native` is the explicit external Google IMA suite; it is separate
+from default `*.spec.js` PR checks. It uses local VAST/media inputs and real SDK
+loading, playback, content restoration and destruction. See
+[VAST validation](../../refactor/vast-validation.md) for reports and outstanding
+network/device failures; the current matrix is not fully passing.
+
 `canvas-dpip.spec.js` tests actual native windows with the Canvas video and subtitle
 track, continued playback, paused cue seeking and close/native-close/destroy.
 Chromium/Firefox native outcomes and WebKit API-unavailable outcomes must be

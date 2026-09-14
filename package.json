@@ -150,7 +150,8 @@
     "test:browser:source": "node scripts/browser-check.mjs source",
     "test:browser:installed": "node scripts/browser-check.mjs installed",
     "test:vast-types": "node --test refactor/scripts/vast-types.test.mjs",
-    "test:vast-types-package": "node refactor/scripts/vast-package-types.mjs"
+    "test:vast-types-package": "node refactor/scripts/vast-package-types.mjs",
+    "test:vast-native": "playwright test --config playwright.vast-native.config.js"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

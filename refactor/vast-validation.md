@@ -94,3 +94,26 @@ VAST-LIFE-01由源码观察提升为受控运行复现，问题如下：
 
 只有实际VAST外部脚本持续因VPN无法加载时，可按用户授权记录并跳过该网络验证；
 它不豁免类型、生命周期或其他包。本次未用该例外。05/06和SDK-07继续开放。
+
+## 真实 Google IMA 专项入口
+
+固定工具链运行 `yarn test:vast-native`；可使用 `--project=chromium` 缩小复现。
+`playwright.vast-native.config.js` 复用8084隔离服务、单worker、零重试，输出
+`refactor/.cache/vast-native/`。此目录在进程终止后归档，再开始下一轮。`.native.js`
+命名避免在默认PR受控测试中隐式请求远端SDK；后续CI/发布环境需明确执行此命令。
+
+测试保留实际Glomex打包代码，由其正常加载Google IMA；手写本地VAST响应仅指定
+测试广告媒体和本地跟踪图片，不替换AdsLoader、AdsManager、事件或媒体实现。
+Google的[AdsRequest接口](https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/reference/interface/google.ima.AdsRequestInterface)
+提供adsResponse作为广告输入。每项附件记录真实执行的输入、SDK版本、浏览器版本、
+广告解码截图、主片播放位置及事件；远端SDK版本会变，结果仅代表对应运行环境。
+
+三核心固定为npm5.1.7、npm5.4.0、候选5.4.1；实际npm1.0.0插件完整bundle通过
+归档校验后直接加载，候选两种模式使用同一生产构建配置的内存bundle。历史插件的
+SDK清理由夹具在证据后显式补做，不能据DOM被核心移除就认为旧插件拥有SDK清理。
+源代码组合通过不等于最终tarball通过，也不等于iOS/Android物理设备通过。
+
+`vast-recovery.native.js`补充候选核心两模式的真实303错误恢复、显式会话重建及
+广告播放中核心销毁。当前结果见[05检查点](changes/2026-09-14-PKG-VAST-05-native-checkpoint.md)：
+最终组合22/27，恢复6/6；SDK超时/迟到、旧插件首帧及真机未关闭。独立入口失败应
+保留为失败，不能用默认受控套件通过抵消，也不能为稳定CI添加宽泛skip。

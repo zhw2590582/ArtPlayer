@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-VAST-05 真实 IMA 桌面验证检查点，仍进行中
+
+新增独立`test:vast-native`，真实远端IMA3.789.0与本地广告媒体，不替换SDK。
+两模式Chromium前贴片2通过；首轮27组合23通过4失败，修正夹具后的27组合22通过
+5失败；另外三引擎错误303恢复、会话重建及活动广告销毁6通过。完整失败均保留，
+没有放宽断言/SDK超时或重复直到全绿。候选最终18项中17通过，历史9项中5通过。
+
+iab真实示例主片解码播放正常，IMA主脚本200，但bridge文档被ERR_BLOCKED_BY_CLIENT
+拦截，广告播放不计通过，也不推断VPN原因。物理设备、playUrl/skip、SDK迟到/超时
+及WebKit历史首帧仍需验证，05/SDK-07/LIFE保持开放；262项为195 done、21 doing、
+46 todo。详见[检查点](changes/2026-09-14-PKG-VAST-05-native-checkpoint.md)和
+[逐例证据](baselines/vast-native-validation.json)。本地检查点提交不代表完成或发布。
+
 ## PKG-VAST-04 公开类型协调及安装消费者完成
 
 用户单独确认保留npm1.0.0根类型、工作区TS用法迁移/runtime。根/legacy声明原文

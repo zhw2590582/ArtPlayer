@@ -1,0 +1,2717 @@
+{
+  "task": "PKG-VAST-05",
+  "date": "2026-09-14T15:34:14.068Z",
+  "sourceCommit": "e5c73fa620d7d3bae4cf7e1e5f96b321e0178f44",
+  "status": "doing",
+  "sourceChanges": false,
+  "vpnExceptionUsed": false,
+  "nativeSdk": true,
+  "physicalDevicesVerified": false,
+  "reports": [
+    {
+      "label": "preroll-probe",
+      "path": "refactor/.cache/vast05-native-first-report/report.json",
+      "sha256": "f1d5165f4ab514e837951a428c3b4610fa7c3f633bacdb5a7b140122d8dbd814",
+      "log": "refactor/.cache/vast05-native-first.log",
+      "stats": {
+        "startTime": "2026-09-14T15:13:07.114Z",
+        "duration": 24157.284,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        }
+      ]
+    },
+    {
+      "label": "initial-matrix",
+      "path": "refactor/.cache/vast05-native-matrix-report/report.json",
+      "sha256": "e69862596a4b59bc8b73bc3721e7f0e28081c1a4e707542b91fce6ecac82261a",
+      "log": "refactor/.cache/vast05-native-matrix.log",
+      "stats": {
+        "startTime": "2026-09-14T15:21:39.283Z",
+        "duration": 315382.842,
+        "expected": 23,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA published-5.1.7 / npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.897374,
+            "time": 2.776723,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.681354
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.904602,
+            "time": 4.881502,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.156485
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published-5.1.7",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\n  78 |       await expect(page.locator('[id^=\"art-\"]')).toBeVisible()\n  79 |       const decodedAd = await page.evaluate(() => [...document.querySelectorAll('video')].map(video => ({ src: video.currentSrc, width: video.videoWidth, height: video.videoHeight, time: video.currentTime })).filter(video => video.src.includes('/assets/vast/linear-video.mp4')))\n> 80 |       expect(decodedAd.some(video => video.width > 0 && video.height > 0)).toBe(true)\n     |                                                                            ^\n  81 |       expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)\n  82 |       await testInfo.attach('native-vast-ad.png', { contentType: 'image/png', body: await page.screenshot() })\n  83 |       await expect.poll(() => page.evaluate(() => window.nativeVastEvents.some(event => event.type === 'AdComplete'))).toBe(true)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:80:76"
+          ]
+        },
+        {
+          "title": "real IMA published / npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 6983.799999952316,
+              "contentTime": 5.957516,
+              "contentPaused": false,
+              "error": {
+                "code": 9000,
+                "message": "No adsManagerLoadedEvent within 5000ms."
+              }
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 13\n\n- Array []\n+ Array [\n+   Object {\n+     \"at\": 6983.799999952316,\n+     \"contentPaused\": false,\n+     \"contentTime\": 5.957516,\n+     \"error\": Object {\n+       \"code\": 9000,\n+       \"message\": \"No adsManagerLoadedEvent within 5000ms.\",\n+       \"vastCode\": undefined,\n+     },\n+     \"type\": \"AdError\",\n+   },\n+ ]\n\n  85 |       await expect(page.locator('[id^=\"art-\"]')).toBeHidden()\n  86 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(beforeAd + 0.2)\n> 87 |       expect(await page.evaluate(() => window.nativeVastEvents.filter(event => event.type === 'AdError'))).toEqual([])\n     |                                                                                                            ^\n  88 |       const resumed = await page.evaluate(() => ({ time: window.art.currentTime, paused: window.art.template.$video.paused, width: window.art.template.$video.videoWidth, events: window.nativeVastEvents }))\n  89 |       expect(resumed.paused).toBe(false)\n  90 |       expect(resumed.width).toBeGreaterThan(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:87:108"
+          ]
+        },
+        {
+          "title": "real IMA published / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.897208,
+            "time": 2.765664,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.004736
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.907591,
+            "time": 2.824634,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.723093
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.91135,
+            "time": 2.866513,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.913665
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.896495,
+            "time": 4.83376,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.709939
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "candidate",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.897708,
+            "time": 3.86561,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.434095
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / npm-default plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.86901,
+            "time": 1.919814,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.042307
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.908315,
+            "time": 4.961703,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.000021
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published-5.1.7",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.867686,
+            "time": 3.893953,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.73809
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / npm-default plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 8121,
+              "contentTime": 5.943896,
+              "contentPaused": false,
+              "error": {
+                "code": 9000,
+                "message": "No adsManagerLoadedEvent within 5000ms."
+              }
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 13\n\n- Array []\n+ Array [\n+   Object {\n+     \"at\": 8121,\n+     \"contentPaused\": false,\n+     \"contentTime\": 5.943896,\n+     \"error\": Object {\n+       \"code\": 9000,\n+       \"message\": \"No adsManagerLoadedEvent within 5000ms.\",\n+       \"vastCode\": undefined,\n+     },\n+     \"type\": \"AdError\",\n+   },\n+ ]\n\n  85 |       await expect(page.locator('[id^=\"art-\"]')).toBeHidden()\n  86 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(beforeAd + 0.2)\n> 87 |       expect(await page.evaluate(() => window.nativeVastEvents.filter(event => event.type === 'AdError'))).toEqual([])\n     |                                                                                                            ^\n  88 |       const resumed = await page.evaluate(() => ({ time: window.art.currentTime, paused: window.art.template.$video.paused, width: window.art.template.$video.videoWidth, events: window.nativeVastEvents }))\n  89 |       expect(resumed.paused).toBe(false)\n  90 |       expect(resumed.width).toBeGreaterThan(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:87:108"
+          ]
+        },
+        {
+          "title": "real IMA published / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.909597,
+            "time": 5.041666,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.527236
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.908554,
+            "time": 1.902568,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.124256
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / npm-default plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.90797,
+            "time": 5.999999,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.779049
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.909382,
+            "time": 6.134017,
+            "paused": false,
+            "width": 320,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.94065
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "candidate",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 9146,
+              "contentTime": 5.958332,
+              "contentPaused": false,
+              "error": {
+                "code": 9000,
+                "message": "No adsManagerLoadedEvent within 5000ms."
+              }
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 13\n\n- Array []\n+ Array [\n+   Object {\n+     \"at\": 9146,\n+     \"contentPaused\": false,\n+     \"contentTime\": 5.958332,\n+     \"error\": Object {\n+       \"code\": 9000,\n+       \"message\": \"No adsManagerLoadedEvent within 5000ms.\",\n+       \"vastCode\": undefined,\n+     },\n+     \"type\": \"AdError\",\n+   },\n+ ]\n\n  85 |       await expect(page.locator('[id^=\"art-\"]')).toBeHidden()\n  86 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(beforeAd + 0.2)\n> 87 |       expect(await page.evaluate(() => window.nativeVastEvents.filter(event => event.type === 'AdError'))).toEqual([])\n     |                                                                                                            ^\n  88 |       const resumed = await page.evaluate(() => ({ time: window.art.currentTime, paused: window.art.template.$video.paused, width: window.art.template.$video.videoWidth, events: window.nativeVastEvents }))\n  89 |       expect(resumed.paused).toBe(false)\n  90 |       expect(resumed.width).toBeGreaterThan(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:87:108"
+          ]
+        },
+        {
+          "title": "real IMA published-5.1.7 / npm-default plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 1.0304101,
+            "time": 2.380182,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.3523536
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9141934,
+            "time": 2.250795,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.1451665
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published-5.1.7",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 1.0341836,
+            "time": 2.3719817,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.3378745
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / npm-default plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 1.015981,
+            "time": 2.3183036,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.4530201
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.99099,
+            "time": 2.3244034,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.2849579
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9739866,
+            "time": 5.4267348,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.4561451
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / npm-default plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9745353,
+            "time": 2.3783896,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.4513118
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "npm-default",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 1.0019655,
+            "time": 2.6032765,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.3312287
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "workspace-1.2",
+            "core": "candidate",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 1.0534144,
+            "time": 2.354392,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.3161037
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591"
+            },
+            "implementation": "published-1.0.0",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        }
+      ]
+    },
+    {
+      "label": "recovery",
+      "path": "refactor/.cache/vast05-native-recovery-report/report.json",
+      "sha256": "7ed66a523ab5139b6802ada8e8e1668deb420de29daa396555b7a420b0c6300d",
+      "log": "refactor/.cache/vast05-native-recovery.log",
+      "stats": {
+        "startTime": "2026-09-14T15:27:27.856Z",
+        "duration": 51781.987,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA npm-default recovers from empty VAST, recreates and destroys an active ad",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 7084.600000023842,
+              "time": 2.92128,
+              "paused": false,
+              "code": 303,
+              "message": "No Ads VAST response after one or more Wrappers"
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "recovery": {
+            "oldConnected": false,
+            "activeConnected": false,
+            "container": null,
+            "terminalInit": null
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA workspace-1.2 recovers from empty VAST, recreates and destroys an active ad",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 4870.400000035763,
+              "time": 3.877603,
+              "paused": false,
+              "code": 303,
+              "message": "No Ads VAST response after one or more Wrappers"
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "recovery": {
+            "oldConnected": false,
+            "activeConnected": false,
+            "container": null,
+            "terminalInit": null
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA npm-default recovers from empty VAST, recreates and destroys an active ad",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 9579,
+              "time": 5.105752,
+              "paused": false,
+              "code": 303,
+              "message": "No Ads VAST response after one or more Wrappers"
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "recovery": {
+            "oldConnected": false,
+            "activeConnected": false,
+            "container": null,
+            "terminalInit": null
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA workspace-1.2 recovers from empty VAST, recreates and destroys an active ad",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 7018,
+              "time": 3.117498,
+              "paused": false,
+              "code": 303,
+              "message": "No Ads VAST response after one or more Wrappers"
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "recovery": {
+            "oldConnected": false,
+            "activeConnected": false,
+            "container": null,
+            "terminalInit": null
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA npm-default recovers from empty VAST, recreates and destroys an active ad",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 2909,
+              "time": 1.5242293,
+              "paused": false,
+              "code": 303,
+              "message": "No Ads VAST response after one or more Wrappers"
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "recovery": {
+            "oldConnected": false,
+            "activeConnected": false,
+            "container": null,
+            "terminalInit": null
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA workspace-1.2 recovers from empty VAST, recreates and destroys an active ad",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 2428,
+              "time": 1.5236252,
+              "paused": false,
+              "code": 303,
+              "message": "No Ads VAST response after one or more Wrappers"
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "recovery": {
+            "oldConnected": false,
+            "activeConnected": false,
+            "container": null,
+            "terminalInit": null
+          },
+          "failures": []
+        }
+      ]
+    },
+    {
+      "label": "final-matrix",
+      "path": "refactor/.cache/vast05-native-final-report/report.json",
+      "sha256": "2bd4ad38f94e3e049b1a90ddd593c5d8c5a2d19afa98140aa4be09953807dee8",
+      "log": "refactor/.cache/vast05-native-matrix-final.log",
+      "stats": {
+        "startTime": "2026-09-14T15:28:56.120Z",
+        "duration": 303085.342,
+        "expected": 22,
+        "skipped": 0,
+        "unexpected": 5,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "real IMA published-5.1.7 / npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.853235,
+            "time": 2.784407,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.96896
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.865628,
+            "time": 2.841791,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.40451
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published-5.1.7",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.866214,
+            "time": 3.820738,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.648334
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.854443,
+            "time": 5.877028,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.927872
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.869022,
+            "time": 2.818159,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.053054
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.84804,
+            "time": 1.763653,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.196356
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / npm-default plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.86013,
+            "time": 2.816695,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.365087
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.856434,
+            "time": 5.810493,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.684688
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "candidate",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "chromium",
+          "browserVersion": "153.0.8010.12",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.84931,
+            "time": 4.891783,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.30101
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / npm-default plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.912643,
+            "time": 2.984949,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.162108
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.909023,
+            "time": 5.012808,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.974626
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published-5.1.7",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [],
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).not.toBe(expected) // Object.is equality\n\nExpected: not \"pending\"\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  60 |         })\n  61 |       }, { compatibility, historical })\n> 62 |       await expect.poll(() => page.evaluate(() => window.nativeVastRegistration)).not.toBe('pending')\n     |                                                                                       ^\n  63 |       expect(await page.evaluate(() => window.nativeVastRegistration)).toBe('ready')\n  64 |       await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)\n  65 |       await page.locator('#play').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:62:87"
+          ]
+        },
+        {
+          "title": "real IMA published / npm-default plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 8456,
+              "contentTime": 5.956163,
+              "contentPaused": false,
+              "error": {
+                "code": 9000,
+                "message": "No adsManagerLoadedEvent within 5000ms."
+              }
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  -  1\n+ Received  + 13\n\n- Array []\n+ Array [\n+   Object {\n+     \"at\": 8456,\n+     \"contentPaused\": false,\n+     \"contentTime\": 5.956163,\n+     \"error\": Object {\n+       \"code\": 9000,\n+       \"message\": \"No adsManagerLoadedEvent within 5000ms.\",\n+       \"vastCode\": undefined,\n+     },\n+     \"type\": \"AdError\",\n+   },\n+ ]\n\n  91 |       await expect(page.locator('[id^=\"art-\"]')).toBeHidden()\n  92 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(beforeAd + 0.2)\n> 93 |       expect(await page.evaluate(() => window.nativeVastEvents.filter(event => event.type === 'AdError'))).toEqual([])\n     |                                                                                                            ^\n  94 |       const resumed = await page.evaluate(() => ({ time: window.art.currentTime, paused: window.art.template.$video.paused, width: window.art.template.$video.videoWidth, events: window.nativeVastEvents }))\n  95 |       expect(resumed.paused).toBe(false)\n  96 |       expect(resumed.width).toBeGreaterThan(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:93:108"
+          ]
+        },
+        {
+          "title": "real IMA published / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.876017,
+            "time": 6.025975,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.2425
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "failed",
+          "coreVersion": "5.4.0",
+          "registration": "pending",
+          "adErrors": [],
+          "events": [],
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).not.toBe(expected) // Object.is equality\n\nExpected: not \"pending\"\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  60 |         })\n  61 |       }, { compatibility, historical })\n> 62 |       await expect.poll(() => page.evaluate(() => window.nativeVastRegistration)).not.toBe('pending')\n     |                                                                                       ^\n  63 |       expect(await page.evaluate(() => window.nativeVastRegistration)).toBe('ready')\n  64 |       await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)\n  65 |       await page.locator('#play').click()\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:62:87"
+          ]
+        },
+        {
+          "title": "real IMA candidate / npm-default plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.911674,
+            "time": 1.961297,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.161427
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.910985,
+            "time": 4.98142,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 1280,
+                "height": 720,
+                "time": 0.202045
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "candidate",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "firefox",
+          "browserVersion": "155.0",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [
+            {
+              "type": "AdError",
+              "at": 7170,
+              "contentTime": 5.965294,
+              "contentPaused": false,
+              "error": {
+                "code": 9000,
+                "message": "No adsManagerLoadedEvent within 5000ms."
+              }
+            }
+          ],
+          "events": [
+            "AdError",
+            "MediaResumed",
+            "AdContentPauseRequested",
+            "AdStarted"
+          ],
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  80 |       await testInfo.attach('native-vast-response.xml', { contentType: 'application/xml', body: await page.evaluate(() => window.nativeVastXml) })\n  81 |       await page.locator('#play').click()\n> 82 |       await expect.poll(() => page.evaluate(() => window.nativeVastEvents.some(event => event.type === 'AdStarted'))).toBe(true)\n     |                                                                                                                       ^\n  83 |       await expect(page.locator('[id^=\"art-\"]')).toBeVisible()\n  84 |       await expect.poll(() => page.evaluate(() => [...document.querySelectorAll('video')].some(video => video.currentSrc.includes('/assets/vast/linear-video.mp4') && video.videoWidth > 0 && video.videoHeight > 0 && video.currentTime > 0))).toBe(true)\n  85 |       const decodedAd = await page.evaluate(() => [...document.querySelectorAll('video')].map(video => ({ src: video.currentSrc, width: video.videoWidth, height: video.videoHeight, time: video.currentTime })).filter(video => video.src.includes('/assets/vast/linear-video.mp4')))\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:82:119"
+          ]
+        },
+        {
+          "title": "real IMA published-5.1.7 / npm-default plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 1.0288126,
+            "time": 2.4805628,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.3623745
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9384167,
+            "time": 2.3601878,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.238708
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published-5.1.7",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published-5.1.7 / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.1.7",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9122084,
+            "time": 3.3623755,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.8189154
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published-5.1.7",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / npm-default plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9974792,
+            "time": 2.0946669,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.119729
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9799584,
+            "time": 1.9602294,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.1246873
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "published",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA published / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.0",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9783126,
+            "time": 2.613417,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.3901661
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "published",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / npm-default plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9186875,
+            "time": 1.8972086,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.1316248
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "npm-default",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / workspace-1.2 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "passed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "resumed": {
+            "beforeAd": 0.9802917,
+            "time": 2.4788753,
+            "paused": false,
+            "width": 640,
+            "decodedAd": [
+              {
+                "src": "http://127.0.0.1:8084/assets/vast/linear-video.mp4",
+                "width": 640,
+                "height": 360,
+                "time": 0.4932284
+              }
+            ]
+          },
+          "input": {
+            "sourceSha256": "d934b7735b59d6689b0481c60ea673c9ea282e6697322a669b5fef9b0ad61d34",
+            "sdk": "@glomex/vast-ima-player@1.21.2 bundled; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "workspace-1.2",
+            "core": "candidate",
+            "compatibility": "workspace-1.2"
+          },
+          "failures": []
+        },
+        {
+          "title": "real IMA candidate / published-1.0.0 plays local VAST media and resumes content",
+          "browser": "webkit",
+          "browserVersion": "26.6",
+          "status": "failed",
+          "imaVersion": "3.789.0",
+          "coreVersion": "5.4.1",
+          "registration": "ready",
+          "adErrors": [],
+          "events": [
+            "AdContentPauseRequested",
+            "AdStarted",
+            "AdComplete",
+            "MediaResumed",
+            "AdContentResumeRequested",
+            "AdAllAdsCompleted"
+          ],
+          "input": {
+            "sourceSha256": "bf3429ca7650fdedc03a7e3e92abc192c4eac87a97c0895e3a0f82921aa361d0",
+            "sdk": "immutable npm1.0.0 bundled SDK; real remote Google IMA",
+            "media": {
+              "file": "docs/assets/vast/linear-video.mp4",
+              "sha256": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+              "contentFile": "docs/assets/sample/video.mp4",
+              "contentSha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+            },
+            "implementation": "published-1.0.0",
+            "core": "candidate",
+            "compatibility": "npm-default"
+          },
+          "failures": [
+            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  82 |       await expect.poll(() => page.evaluate(() => window.nativeVastEvents.some(event => event.type === 'AdStarted'))).toBe(true)\n  83 |       await expect(page.locator('[id^=\"art-\"]')).toBeVisible()\n> 84 |       await expect.poll(() => page.evaluate(() => [...document.querySelectorAll('video')].some(video => video.currentSrc.includes('/assets/vast/linear-video.mp4') && video.videoWidth > 0 && video.videoHeight > 0 && video.currentTime > 0))).toBe(true)\n     |                                                                                                                                                                                                                                                 ^\n  85 |       const decodedAd = await page.evaluate(() => [...document.querySelectorAll('video')].map(video => ({ src: video.currentSrc, width: video.videoWidth, height: video.videoHeight, time: video.currentTime })).filter(video => video.src.includes('/assets/vast/linear-video.mp4')))\n  86 |       expect(decodedAd.some(video => video.width > 0 && video.height > 0)).toBe(true)\n  87 |       expect(await page.evaluate(() => window.art.template.$video.paused)).toBe(true)\n    at D:\\github\\ArtPlayer\\test\\browser\\vast.native.js:84:241"
+          ]
+        }
+      ]
+    }
+  ],
+  "files": {
+    "test/browser/vast.native.js": "8d9cebabf6e9f0d45e272fb7752c1db24cb71eca2a30f4bb6dee117bd45f0a6f",
+    "test/browser/vast-recovery.native.js": "83267bc848acadf99daf0289161c6d3abfd1fb51d657b9ac2bcd87a91463e693",
+    "playwright.vast-native.config.js": "3e41ec927e5a6f0f0f08908f918e205428bdbd1f5b7d45e068d7f9b20e3de831",
+    "docs/assets/vast/linear-video.mp4": "ea5399b4ff701a7f69f09b6197593067bac1adfaa416fc693021a593472c3591",
+    "docs/assets/sample/video.mp4": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+    "packages/artplayer-plugin-vast/src/index.ts": "4221668a9e96cc7feef0f98f6276261c174431ef24b9b8c81d0f5d84261a6cd1",
+    "packages/artplayer-plugin-vast/src/session.ts": "08ad97deaa386d26034711e17fba001f326c842960efb83cb858db3a2bd09e48",
+    "packages/artplayer-plugin-vast/src/sdk.ts": "aaff7c1e4a31ff99261b045648663caa46f66b5a25ad129e5fc929facaf1ff89",
+    "packages/artplayer-plugin-vast/src/view.ts": "15e5b186bdcb8f9f60379e726eedec4b31ca61df27efe1891effccb1e56db491",
+    "packages/artplayer-plugin-vast/src/types.ts": "b97b291d14bddf7fcc307b173f28677935f34bfa6e99ceb46a2bdef6cf335c5b"
+  },
+  "iab": {
+    "browser": "Codex in-app browser",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "exactBrowserVersion": "unavailable: Browser.getVersion unsupported",
+    "url": "http://localhost:8082/?libs=./compiled/artplayer-plugin-vast.js&example=vast",
+    "imaVersion": "3.789.0",
+    "coreVersion": "5.4.1",
+    "mainVideo": {
+      "width": 640,
+      "observedTime": 29.745651,
+      "paused": false
+    },
+    "script": {
+      "url": "https://imasdk.googleapis.com/js/sdkloader/ima3.js",
+      "status": 200
+    },
+    "blockedBridge": {
+      "url": "http://imasdk.googleapis.com/js/core/bridge3.789.0_en.html",
+      "error": "net::ERR_BLOCKED_BY_CLIENT",
+      "type": "Document"
+    },
+    "limitation": "CDP event buffer reported truncated=true. Bridge request and failure IDs matched; do not infer all network activity or VPN root cause. No ad playback accepted; tab paused then closed."
+  },
+  "remaining": [
+    "Resolve or precisely qualify native SDK loading/9000 late-manager failures; no timeout widening/retry-to-green.",
+    "Physical iOS/Android ad/content lifecycle evidence.",
+    "Native skip and playUrl coverage plus full package/distribution task06.",
+    "Remote CI and release reviews remain separately gated."
+  ]
+}

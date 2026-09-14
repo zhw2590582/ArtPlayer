@@ -3134,11 +3134,14 @@
         "PKG-VAST-04",
         "CORE-22"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
-      "deliverable": "官方测试广告或受控 SDK 环境，错误后主视频状态恢复；核验真实5.1.7/5.4.1/候选核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收",
+      "deliverable": "真实IMA广告播放、错误后主视频恢复、会话重建与销毁；核验npm5.1.7/npm5.4.0/候选5.4.1核心，VAST VPN外部脚本例外逐项记录，不将受控SDK当作实际IMA验收",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-VAST-05-native-checkpoint.md",
+        "baselines/vast-native-validation.json"
+      ]
     },
     {
       "id": "PKG-VAST-06",

@@ -56,7 +56,7 @@ Node10 是 TS 模块解析模式名，不代表支持 Node.js 10。现代 es2020
 | artplayer-plugin-hls-control / 1.1.0 | hls.js 清晰度/音轨自动手动切换；主/子列表与拓扑变化 | 1.5.17 在 Chromium/Firefox 本地双档位/音轨基线通过；Windows WebKit 无 MSE，14 播放用例 skipped；Safari/native/worker 仍待验，见 hls-validation.md | PKG-HLS-01/02/05/06、EX-03 |
 | artplayer-plugin-jassub / 1.1.0 | ASS、worker/WASM/font 加载、切源/销毁；短 ASS+明确来源字体 | 内嵌资源哈希已有；版本对应、跨源/worker 限制、实际渲染待 | PKG-JASSUB-01/02/05/06 |
 | artplayer-plugin-multiple-subtitles / 1.2.0 | VTT 合并/排序/解析错误、URL 回收；双语言/空/坏 VTT | parser 来源头已观察；特有行为和浏览器字幕待 | PKG-MULTI-SUB-01/02/05/06 |
-| artplayer-plugin-vast / 1.2.0 | Glomex/Google IMA、广告错误/恢复、重复初始化；供应商测试广告标签 | 依赖版本已记录；实际 IMA 网络/广告流程待，PR 用受控 adapter | PKG-VAST-01/02/05/06 |
+| artplayer-plugin-vast / npm1.0.0、工作区1.2.0未发布 | Glomex/Google IMA、广告错误/恢复、重复初始化；本地VAST与真实IMA3.789.0 | 三引擎最终27组合22通过5失败，错误恢复/重建/活动广告销毁6通过；iab桥接文档被拦截、主片正常。物理设备及SDK/历史失败仍待，详见vast-native-validation.json | PKG-VAST-01/02/05/06 |
 | artplayer-plugin-vtt-thumbnail / 1.1.0 | WebVTT 时间和 sprite xywh、图片失败/跨源；本地 VTT+sprite | 05 检查点已有五核心桌面像素/Chapter/原生和网页全屏、切源及模拟触摸；1.0.1 控件重名历史失败和真机/分发仍开放，见 vtt-thumbnail-combinations.json | PKG-VTT-THUMB-01/02/05/06 |
 | artplayer-proxy-canvas / 1.1.0 | video-like 属性/事件、Canvas 绘制、seek/销毁；MP4 | shim 与实际媒体顺序、跨源/移动待 | PKG-CANVAS-01/02/05/06 |
 | artplayer-proxy-mediabunny / 1.2.0 | Mediabunny 1.56.1 当前解析；WebCodecs/AudioContext、HLS/轨道拓扑、AV 同步 | 库依赖不等于 codec 可用；准确 codec/profile、设备能力、长播放待 | PKG-MB-01/02/07/08/09/10 |
