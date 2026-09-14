@@ -944,7 +944,7 @@
       "name": "console",
       "version": "legacy-vendor-with-TS-adapter",
       "tarball": "https://github.com/zhw2590582/ArtPlayer/blob/5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c/docs/assets/js/console.js",
-      "review": "The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance.",
+      "review": "The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance. Modified replicator and Emotion/Stylis copies retain upstream author licenses; the original Emotion online Closure stage is not claimed to be reproducible. MurmurHash credits include Gary Court and Austin Appleby.",
       "roots": [
         "docs/assets/js/console.js"
       ],
@@ -1145,6 +1145,26 @@
           "source": "refactor/baselines/site-vendor/console-embedded/simple-html-tokenizer-04799f4-LICENSE.txt",
           "target": "docs/licenses/console/simple-html-tokenizer/LICENSE",
           "sha256": "c41881de2a9f2200936648343500524be154eb79f649582f9582dd251b051b11"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/replicator-1.0.1-LICENSE.txt",
+          "target": "docs/licenses/console/replicator/LICENSE",
+          "sha256": "52f634086a97b3861a35afff7acf703ddbd5add8e617f6a1f540ae2f2c621284"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/stylis-3.5.4-LICENSE.txt",
+          "target": "docs/licenses/console/stylis/LICENSE",
+          "sha256": "045109dfd0547aa898408d08593e1adc41e9705519ba8a20baff89e7c6c52e91"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/gary-readme.txt",
+          "target": "docs/licenses/console/murmurhash-js/README.md",
+          "sha256": "73b67c593a2a0d6395bfe90d3bad32556ed5e7ce71883062efebc643d4e4b7b4"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/murmurhash2-public-domain.txt",
+          "target": "docs/licenses/console/murmurhash2/PUBLIC-DOMAIN.txt",
+          "sha256": "50e13b0a1963f0b382255d2425df245dbdfd209201621e8c157687caedbbb949"
         }
       ],
       "components": [
@@ -1564,6 +1584,50 @@
           ],
           "notices": [
             "docs/licenses/console/simple-html-tokenizer/LICENSE"
+          ]
+        },
+        {
+          "name": "replicator (console-feed fork)",
+          "version": "modified; upstream 1.0.x license",
+          "tarball": "https://registry.npmjs.org/replicator/-/replicator-1.0.1.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/replicator/LICENSE"
+          ]
+        },
+        {
+          "name": "stylis (Emotion fork)",
+          "version": "3.5.4-derived",
+          "tarball": "https://registry.npmjs.org/stylis/-/stylis-3.5.4.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/stylis/LICENSE"
+          ]
+        },
+        {
+          "name": "murmurhash-js (Gary Court)",
+          "version": "license commit 23dc2e7",
+          "tarball": "https://github.com/garycourt/murmurhash-js/blob/23dc2e7008582ca3ef69d8623f02bba4c8dd05e5/README.md",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/murmurhash-js/README.md"
+          ]
+        },
+        {
+          "name": "murmurhash2 (Austin Appleby)",
+          "version": "61a0530",
+          "tarball": "https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/murmurhash2/PUBLIC-DOMAIN.txt"
           ]
         }
       ]

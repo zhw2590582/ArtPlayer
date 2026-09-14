@@ -163,11 +163,28 @@ tokenizer members exactly reproduce with the self-contained Babel 6.26.0 compile
 and es2015 loose preset. Archive, compiler, source and output bytes are checked.
 The Git archive's SHA-512 is a measured fingerprint, not an npm registry SRI;
 the recorded immutable URL and dependency string retain its actual provenance.
-These three licenses are included in the 38 console notice outputs. The normal
+These three licenses are included in the console notice outputs. The normal
 site build still executes only the owned TS build; historical reproduction now
-fetches 39 archives only when explicitly run with `--fetch`.
+fetches 42 archives and fixed Git sources only when explicitly run with `--fetch`.
 
-This is partial embedded review. Remaining follow-ups are replicator, Emotion
-stylis/hash/cache and the Component Stack Overflow reference. Source-map names and
-comment links alone are leads, not proof of complete notice coverage. Do not close
-VENDOR-08 solely because all Parcel modules reproduce.
+`attribution.ts` verifies immutable Git content against SHA-256 and Git blob SHA-1,
+and compares compiled forks with the archived runtime before its single terminal
+inline source map. `console-derived-attribution.json` pins the console-feed
+replicator TS revision and TypeScript 4.1.2 ES3/CommonJS/LF compiler options. The
+fork's runtime matches exactly; it is not a verbatim npm replicator release.
+Ivan Nikulin's original MIT notice is retained from the 1.0.x source family.
+Historical compiler extraction permits 16 MiB because this fixed compiler member
+is 9,002,076 bytes; it is not an installed workspace dependency.
+
+Emotion's Stylis source matches its fixed tag commit and declares Stylis 3.5.4.
+The original build recipe modifies Stylis and uses an unversioned online Closure
+service. We preserve that recipe and the matching generated source without claiming
+to rerun the earlier service. Sultan Tarimo's MIT notice covers the upstream
+attribution, including the separately identified rule-sheet reference in cache.
+Gary Court's original README/MIT text and Austin Appleby's public-domain header
+are preserved for the two explicit MurmurHash source references. Original sources
+and excerpts are hashed; attribution is never inferred from the outer Emotion MIT.
+
+There are now 42 console notice outputs. Remaining follow-ups are the Component
+Stack Overflow reference and final embedded-source review. Do not close VENDOR-08
+solely because all Parcel modules reproduce.

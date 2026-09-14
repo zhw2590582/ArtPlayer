@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "archives": [
+    {
+      "id": "replicator-1.0.1",
+      "name": "replicator",
+      "version": "1.0.1",
+      "tarball": "https://registry.npmjs.org/replicator/-/replicator-1.0.1.tgz",
+      "integrity": "sha512-BwkUVdSQ08mGLa1OoP8thQ0zTUcxplGNZ1p0rsaSEL7xc4N3v5kkR/WFLjikkdjQPjp+67p24QOerWwIj2oN4g==",
+      "sha256": "2baede665f8f4899b7196251e39c775ee0111872f04afef08ab5e2e6ada70925",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/replicator-1.0.1-LICENSE.txt",
+          "member": "package/LICENSE",
+          "sha256": "52f634086a97b3861a35afff7acf703ddbd5add8e617f6a1f540ae2f2c621284"
+        }
+      ]
+    },
+    {
+      "id": "stylis-3.5.4",
+      "name": "stylis",
+      "version": "3.5.4",
+      "tarball": "https://registry.npmjs.org/stylis/-/stylis-3.5.4.tgz",
+      "integrity": "sha512-8/3pSmthWM7lsPBKv7NXkzn2Uc9W7NotcwGNpJaa3k7WMM1XDCA4MgT5k/8BIexd5ydZdboXtU90XH9Ec4Bv/Q==",
+      "sha256": "8e378e277ef50bd5282045dfac95019e66986d7d3819205a9e99c93220e3e950",
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/stylis-3.5.4-LICENSE.txt",
+          "member": "package/LICENSE.md",
+          "sha256": "045109dfd0547aa898408d08593e1adc41e9705519ba8a20baff89e7c6c52e91"
+        }
+      ]
+    }
+  ],
+  "compiler": {
+    "archive": {
+      "id": "typescript-4.1.2",
+      "name": "typescript",
+      "version": "4.1.2",
+      "tarball": "https://registry.npmjs.org/typescript/-/typescript-4.1.2.tgz",
+      "integrity": "sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==",
+      "sha256": "383b18630fc00016cb7bde65f111e79d43fccb8c025faf33d7a3a07a5abdf026"
+    },
+    "member": "package/lib/typescript.js",
+    "sha256": "7fb17b02f99364980c5f8540175309b09932f8fad41dcc7e9429d335535604e0",
+    "version": "4.1.2",
+    "options": {
+      "target": 0,
+      "module": 1,
+      "newLine": 1
+    }
+  },
+  "remotes": [
+    {
+      "id": "replicator-source",
+      "source": "refactor/baselines/site-vendor/console-attribution/replicator-source.txt",
+      "sha256": "2bf53776cfd80aaf6365d4419ab910ca282db649fc942ac285765748db6f875e",
+      "gitBlobSha": "7399074f5c003120d17d9bb48e6b0832434d64dc",
+      "apiUrl": "https://api.github.com/repos/samdenty/console-feed/contents/src/Transform/replicator/index.ts?ref=de41ef2662019c645a652199d9bdbbfc71419f5e",
+      "url": "https://github.com/samdenty/console-feed/blob/de41ef2662019c645a652199d9bdbbfc71419f5e/src/Transform/replicator/index.ts"
+    },
+    {
+      "id": "emotion-build",
+      "source": "refactor/baselines/site-vendor/console-attribution/emotion-build.txt",
+      "sha256": "7d9a3d176b6da384d729d45f7e36dec6cd6effb85cd19d486f4f50af5cf2925f",
+      "gitBlobSha": "fdd877e14000329ff556ca2f1aa7fc44c724060d",
+      "apiUrl": "https://api.github.com/repos/emotion-js/emotion/git/blobs/fdd877e14000329ff556ca2f1aa7fc44c724060d",
+      "url": "https://github.com/emotion-js/emotion/blob/6dd425bd1b8db7ab5144cca81b592639a68af2cb/packages/stylis/build.js"
+    },
+    {
+      "id": "emotion-stylis-source",
+      "source": "refactor/baselines/site-vendor/console-attribution/emotion-stylis-source.txt",
+      "sha256": "2d49f50cb973b395bb30ca1d03955599e6220dd347d57ae38324afe8c734506a",
+      "gitBlobSha": "c6b56ec79517a0dce4b84eceb15acb4730e04101",
+      "apiUrl": "https://api.github.com/repos/emotion-js/emotion/git/blobs/c6b56ec79517a0dce4b84eceb15acb4730e04101",
+      "url": "https://github.com/emotion-js/emotion/blob/6dd425bd1b8db7ab5144cca81b592639a68af2cb/packages/stylis/src/stylis.min.js"
+    },
+    {
+      "id": "gary-readme",
+      "source": "refactor/baselines/site-vendor/console-attribution/gary-readme.txt",
+      "sha256": "73b67c593a2a0d6395bfe90d3bad32556ed5e7ce71883062efebc643d4e4b7b4",
+      "gitBlobSha": "567ae1bca393a150e129cec8d60230a7b88e77c7",
+      "apiUrl": "https://api.github.com/repos/garycourt/murmurhash-js/contents/README.md?ref=23dc2e7008582ca3ef69d8623f02bba4c8dd05e5",
+      "url": "https://github.com/garycourt/murmurhash-js/blob/23dc2e7008582ca3ef69d8623f02bba4c8dd05e5/README.md"
+    },
+    {
+      "id": "smhasher",
+      "source": "refactor/baselines/site-vendor/console-attribution/smhasher.txt",
+      "sha256": "8cdec1fed73de41e4ee91ab78fe5ba76110582263064dcdcc0b770a25c0573f3",
+      "gitBlobSha": "cd1e53a9b92620d2656eae423017f81be1fb3ad1",
+      "apiUrl": "https://api.github.com/repos/aappleby/smhasher/contents/src/MurmurHash2.cpp?ref=61a0530f28277f2e850bfc39600ce61d02b518de",
+      "url": "https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp"
+    }
+  ],
+  "replicator": {
+    "source": "replicator-source",
+    "target": {
+      "archive": "console-feed-3.2.2",
+      "member": "package/lib/Transform/replicator/index.js",
+      "sha256": "33ea546afdd46833594d7cdccbfc45dc654b8e9fa737d9ee5d940b6f164dba6b"
+    },
+    "upstream": {
+      "archive": "replicator-1.0.1",
+      "member": "package/index.js",
+      "sha256": "7b0f488ae3581c23d252ac5c73fd6ae35884d876bfd8e186d23bbfa5847430d7"
+    },
+    "scope": "Modified fork of the replicator 1.0.x source family; the MIT notice is taken from 1.0.1, not a claim that npm 1.0.1 is installed or identical. The fixed console-feed TS revision compiles to the exact runtime before the original inline source map."
+  },
+  "stylis": {
+    "source": "emotion-stylis-source",
+    "target": {
+      "archive": "%40emotion%2Fstylis-0.8.5",
+      "member": "package/src/stylis.min.js",
+      "sha256": "2d49f50cb973b395bb30ca1d03955599e6220dd347d57ae38324afe8c734506a"
+    },
+    "dependency": {
+      "archive": "%40emotion%2Fstylis-0.8.5",
+      "member": "package/package.json",
+      "sha256": "1da8e474cb88a0070baa42cec78a3704dea0889c4decdb38d4e7b7489c83c8b0"
+    },
+    "dependencyVersion": "3.5.4",
+    "recipe": "emotion-build",
+    "scope": "Fixed tag commit source matches npm source exactly. Its original recipe modifies Stylis and calls an unversioned online Closure compiler; this earlier compiler stage was not rerun."
+  },
+  "hash": {
+    "source": "smhasher",
+    "notice": {
+      "archive": "aappleby/smhasher@61a0530f28277f2e850bfc39600ce61d02b518de",
+      "member": "src/MurmurHash2.cpp",
+      "memberSha256": "8cdec1fed73de41e4ee91ab78fe5ba76110582263064dcdcc0b770a25c0573f3",
+      "sourceSha256": "8cdec1fed73de41e4ee91ab78fe5ba76110582263064dcdcc0b770a25c0573f3",
+      "start": "// MurmurHash2 was written by Austin Appleby, and is placed in the public",
+      "end": "// domain. The author hereby disclaims copyright to this source code.\n",
+      "source": "refactor/baselines/site-vendor/console-attribution/murmurhash2-public-domain.txt",
+      "sha256": "50e13b0a1963f0b382255d2425df245dbdfd209201621e8c157687caedbbb949"
+    },
+    "reference": {
+      "archive": "%40emotion%2Fhash-0.8.0",
+      "member": "package/dist/hash.browser.esm.js",
+      "sha256": "3f6d63bdf3241054ccac29fa5bad7ca228bb889a51214e22224a8fe8c6d3573d"
+    },
+    "references": [
+      "https://github.com/garycourt/murmurhash-js",
+      "61a0530f28277f2e850bfc39600ce61d02b518de"
+    ]
+  },
+  "cache": {
+    "reference": {
+      "archive": "%40emotion%2Fcache-10.0.29",
+      "member": "package/dist/cache.browser.esm.js",
+      "sha256": "7df64362f28f43e9af8dda5dc5edc2b3c4ecb094101f7c723bc9ef03f40767f0"
+    },
+    "upstreamUrl": "https://github.com/thysultan/stylis.js/tree/master/plugins/rule-sheet",
+    "notice": "docs/licenses/console/stylis-rule-sheet/LICENSE"
+  },
+  "limitations": [
+    "No replacement or execution of archived runtime libraries.",
+    "Replicator is a modified fork; neither a unique npm fork base nor the entire original install lock is claimed.",
+    "Emotion historical online Closure service was not re-executed; its published source is pinned to the matching upstream tag commit.",
+    "Stack Overflow attribution and final remaining embedded-source review stay open."
+  ]
+}

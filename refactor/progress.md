@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 修改版 replicator 与 Emotion 署名
+
+固定TS源码重现replicator运行代码，Emotion Stylis发布源码匹配Git tag；补齐
+Ivan Nikulin、Sultan Tarimo、Gary Court和Austin Appleby的许可/声明。单元24/24，
+联网/离线复现及三引擎实际交付3/3通过。
+见[记录](changes/2026-09-15-SITE-07-console-derived-attribution.md)。不声称重跑旧
+Closure服务或恢复完整原锁。控制台剩Stack Overflow引用及最终清查，其他站点
+资产继续待审；VENDOR-08 open、SITE-07 doing，仍199/265，运行时和锁未改。
+
 ## SITE-07 三项内嵌依赖来源与许可
 
 react-inspector中的Babel16文件、regenerator1文件及tokenizer7文件已逐字节

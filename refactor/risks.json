@@ -699,11 +699,15 @@
         "refactor/baselines/console-embedded-sources.json",
         "refactor/baselines/console-embedded-validation.json",
         "refactor/changes/2026-09-15-SITE-07-console-embedded-sources.md",
-        "scripts/site-vendor/console/embedded-sources.ts"
+        "scripts/site-vendor/console/embedded-sources.ts",
+        "refactor/baselines/console-derived-attribution.json",
+        "refactor/baselines/console-derived-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-derived-attribution.md",
+        "scripts/site-vendor/console/attribution.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "All 100 vendor module bodies and Parcel loader exactly reproduce from fixed archives. Additionally all 17 react-inspector external source-map members and seven tokenizer files match pinned upstream sources. Public console notices cover 38 entries; all 56 site notice files passed byte-for-byte HTTP checks in three engines. Remaining embedded attribution is tracked in console-embedded-notices.json. Original full lockfile is not recovered; runtime unchanged."
+      "workspaceState": "All 100 vendor modules and Parcel loader reproduce. Embedded inspector/tokenizer sources match; fixed replicator TS fork reproduces its archived runtime and Emotion Stylis source matches the immutable tag. Additional upstream author notices bring console notices to 42; all 60 site notice files passed HTTP byte checks in three engines. Stack Overflow attribution and final embedded review remain open. Original Closure service and full historical lockfile are not claimed; runtime unchanged."
     },
     {
       "id": "SDK-01",

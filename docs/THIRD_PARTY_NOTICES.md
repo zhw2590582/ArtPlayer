@@ -80,7 +80,7 @@ Source: https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz
 
 Source: https://github.com/zhw2590582/ArtPlayer/blob/5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c/docs/assets/js/console.js
 
-The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance.
+The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance. Modified replicator and Emotion/Stylis copies retain upstream author licenses; the original Emotion online Closure stage is not claimed to be reproducible. MurmurHash credits include Gary Court and Austin Appleby.
 
 Included component: console-feed 3.2.2
 
@@ -234,6 +234,22 @@ Included component: simple-html-tokenizer git-04799f4638ec5ed903a4e5aa6e832269fa
 
 Source: https://api.github.com/repos/nfrasser/simple-html-tokenizer/tarball/04799f4638ec5ed903a4e5aa6e832269fa59be6b
 
+Included component: replicator (console-feed fork) modified; upstream 1.0.x license
+
+Source: https://registry.npmjs.org/replicator/-/replicator-1.0.1.tgz
+
+Included component: stylis (Emotion fork) 3.5.4-derived
+
+Source: https://registry.npmjs.org/stylis/-/stylis-3.5.4.tgz
+
+Included component: murmurhash-js (Gary Court) license commit 23dc2e7
+
+Source: https://github.com/garycourt/murmurhash-js/blob/23dc2e7008582ca3ef69d8623f02bba4c8dd05e5/README.md
+
+Included component: murmurhash2 (Austin Appleby) 61a0530
+
+Source: https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp
+
 - licenses/console/console-feed/console-feed-3.2.2-LICENSE
 - licenses/console/react/react-17.0.2-LICENSE
 - licenses/console/react-dom/react-dom-17.0.2-LICENSE
@@ -272,3 +288,7 @@ Source: https://api.github.com/repos/nfrasser/simple-html-tokenizer/tarball/0479
 - licenses/console/react-inspector-babel/LICENSE
 - licenses/console/regenerator-runtime/LICENSE
 - licenses/console/simple-html-tokenizer/LICENSE
+- licenses/console/replicator/LICENSE
+- licenses/console/stylis/LICENSE
+- licenses/console/murmurhash-js/README.md
+- licenses/console/murmurhash2/PUBLIC-DOMAIN.txt

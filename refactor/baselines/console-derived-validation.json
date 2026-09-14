@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-14T23:49:08.277Z",
+  "baseCommit": "d2a83f8a69c7a5d9a8bf30c9b370e573034f2000",
+  "node": "v24.21.0",
+  "sourceFingerprint": {
+    "manifestSha256": "c0238bf1acb77ddf931c4b8702a1dc4d3ea341b525c23c78e000fff0d8109fec",
+    "sourceRecordSha256": "d8d5237cf261177b571b07eec17acb11f7b3905a98a2aa0675b366b8d21d7b12",
+    "consoleSha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678"
+  },
+  "unit": {
+    "passed": 24,
+    "failed": 0,
+    "log": "refactor/.cache/console-derived-tests.log"
+  },
+  "reproduction": {
+    "archives": 42,
+    "exactModules": 100,
+    "embeddedNotices": 2,
+    "mappedMembers": 17,
+    "transformedMembers": 7,
+    "derivedGitSources": 5,
+    "replicatorFork": true,
+    "emotionStylisSource": true,
+    "offlineLog": "refactor/.cache/console-derived-reproduce.log",
+    "fetchLog": "refactor/.cache/console-derived-fetch.log",
+    "licenseClosure": false
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "b902b3ac4e6f83a825112dda5f6ef815326c268893264c08d17bf2b44bb08cf0",
+    "tests": [
+      {
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ],
+    "noticeFilesPerEngine": 60
+  },
+  "checks": [
+    "Strict docs-tools TypeScript",
+    "Scoped source/test/maintenance ESLint",
+    "Read-only console and site-notice generation checks"
+  ],
+  "remaining": [
+    "Component Stack Overflow attribution and final embedded-source review",
+    "Other site asset provenance tasks"
+  ],
+  "limits": [
+    "Replicator is a modified source-family fork, not an unmodified npm 1.0.1 installation.",
+    "Original Emotion online Closure compiler stage was not rerun; its generated source matches the immutable tag commit.",
+    "No claim of the unique original full dependency lockfile.",
+    "HTTPS integrations isolated; Windows local-page evidence does not replace physical-device or remote-publish validation.",
+    "No runtime or lockfile changes, pushes, deployments or publications."
+  ]
+}

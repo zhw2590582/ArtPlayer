@@ -1,3 +1,4 @@
+import type { GitSource } from './attribution.ts'
 import type { EmbeddedNotice } from './embedded-notices.ts'
 import type { Member, SourceMapRecord, TransformedSource } from './embedded-sources.ts'
 import type { Archive, External, Source } from './provenance.ts'
@@ -10,6 +11,7 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { decodeGitSource, verifyForkOutput, verifyGitSource } from './attribution.ts'
 import { extractNotice } from './embedded-notices.ts'
 import { verifyMappedSources, verifyTransformedSources } from './embedded-sources.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from './provenance.ts'
@@ -46,12 +48,23 @@ interface EmbeddedProvenance {
   tokenizer: { dependency: Member, value: string, sources: TransformedSource[] }
 }
 interface HistoricalBabel { version: string, transform: (source: string, options: EmbeddedProvenance['compiler']['options']) => { code: string } }
+interface DerivedProvenance {
+  archives: (Archive & { id: string, notices: Notice[] })[]
+  compiler: { archive: Archive, member: string, sha256: string, version: string, options: { target: number, module: number, newLine: number } }
+  remotes: (GitSource & { id: string })[]
+  replicator: { source: string, target: Member, upstream: Member }
+  stylis: { source: string, target: Member, dependency: Member, dependencyVersion: string, recipe: string }
+  hash: { source: string, notice: EmbeddedNotice, reference: Member, references: string[] }
+  cache: { reference: Member, upstreamUrl: string, notice: string }
+}
+interface HistoricalTypeScript { version: string, transpileModule: (source: string, options: { compilerOptions: DerivedProvenance['compiler']['options'] }) => { outputText: string } }
 
 const root = fileURLToPath(new URL('../../../', import.meta.url))
 const record: Provenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-feed-provenance.json'), 'utf8'))
 const common: SourceGroup<CommonSource> = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-commonjs-provenance.json'), 'utf8'))
 const esm: EsmProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-esm-provenance.json'), 'utf8'))
 const embeddedSources: EmbeddedProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-embedded-sources.json'), 'utf8'))
+const derived: DerivedProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-derived-attribution.json'), 'utf8'))
 assert(process.argv.slice(2).every(arg => arg === '--fetch'), 'Use reproduce.ts [--fetch]')
 assert.equal(process.version, `v${fs.readFileSync(path.join(root, '.node-version'), 'utf8').trim()}`, 'Use canonical Node')
 const cacheRoot = fs.realpathSync(path.join(root, 'refactor/.cache'))
@@ -70,7 +83,7 @@ async function download(url: string) {
     throw error
   }
 }
-const allArchives = [record.archive, record.compiler.archive, ...common.archives, ...esm.archives, esm.babel.archive, esm.parcel.archive, ...embeddedSources.archives, embeddedSources.compiler.archive]
+const allArchives = [record.archive, record.compiler.archive, ...common.archives, ...esm.archives, esm.babel.archive, esm.parcel.archive, ...embeddedSources.archives, embeddedSources.compiler.archive, ...derived.archives, derived.compiler.archive]
 const allArchiveIds = new Set(allArchives.map(archive => `${encodeURIComponent(archive.name)}-${archive.version}`))
 assert.equal(allArchiveIds.size, allArchives.length, 'Duplicate reproduction archive')
 for (const archive of allArchives) {
@@ -82,7 +95,7 @@ for (const archive of allArchives) {
   }
   verifyArchive(fs.readFileSync(target), archive)
 }
-const readMember = (name: string, member: string) => execFileSync('tar', ['-xOzf', path.join(cache, name), member], { maxBuffer: 8 * 1024 * 1024 })
+const readMember = (name: string, member: string) => execFileSync('tar', ['-xOzf', path.join(cache, name), member], { maxBuffer: 16 * 1024 * 1024 })
 const compilerBytes = readMember('terser-3.17.0.tgz', record.compiler.member)
 assert.equal(hash(compilerBytes), record.compiler.sha256, 'Compiler member changed')
 const compilerPath = path.join(cache, 'terser.cjs')
@@ -195,7 +208,7 @@ function readEmbedded(source: Member) {
   assert(allArchiveIds.has(source.archive), 'Unknown embedded source archive')
   return readMember(`${source.archive}.tgz`, source.member)
 }
-for (const archive of embeddedSources.archives) {
+for (const archive of [...embeddedSources.archives, ...derived.archives]) {
   assert.equal(archive.id, `${encodeURIComponent(archive.name)}-${archive.version}`, 'Embedded archive ID differs')
   for (const notice of archive.notices) {
     assert.equal(hash(readMember(`${archive.id}.tgz`, notice.member)), notice.sha256, 'Embedded upstream license changed')
@@ -220,4 +233,46 @@ assert.equal(legacyBabel.version, compiler.version, 'Embedded compiler version c
 assert.deepEqual(compiler.options, { presets: [['es2015', { loose: true }]] }, 'Embedded compiler options changed')
 const transformedCount = verifyTransformedSources(tokenizer.sources, readEmbedded, source => legacyBabel.transform(source, compiler.options).code)
 assert.equal(transformedCount, 7, 'Incomplete tokenizer scope')
-console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, embeddedMappedSources: mappedCount, embeddedTransformedSources: transformedCount, unresolved: 0, licenseClosure: false }))
+const gitSources = new Map<string, Buffer>()
+assert.equal(derived.remotes.length, 5, 'Incomplete derived Git source scope')
+for (const source of derived.remotes) {
+  assert(!gitSources.has(source.id), 'Duplicate derived Git source')
+  const bytes = fs.readFileSync(path.join(root, source.source))
+  verifyGitSource(bytes, source)
+  if (process.argv.includes('--fetch'))
+    decodeGitSource(await download(source.apiUrl), source)
+  gitSources.set(source.id, bytes)
+}
+function gitSource(id: string): Buffer {
+  const bytes = gitSources.get(id)
+  assert(bytes, `Missing derived Git source: ${id}`)
+  return bytes
+}
+function derivedMember(member: Member): Buffer {
+  const bytes = readEmbedded(member)
+  assert.equal(hash(bytes), member.sha256, 'Derived source member changed')
+  return bytes
+}
+const tsCompiler = derived.compiler
+const tsBytes = readMember(`${tsCompiler.archive.name}-${tsCompiler.archive.version}.tgz`, tsCompiler.member)
+assert.equal(hash(tsBytes), tsCompiler.sha256, 'Historical TypeScript compiler changed')
+const tsPath = path.join(cache, 'typescript4.cjs')
+fs.writeFileSync(tsPath, tsBytes)
+const historicalTs = require(tsPath) as HistoricalTypeScript
+assert.equal(historicalTs.version, tsCompiler.version, 'Historical TypeScript version changed')
+assert.deepEqual(tsCompiler.options, { target: 0, module: 1, newLine: 1 }, 'Historical TypeScript options changed')
+const fork = historicalTs.transpileModule(gitSource(derived.replicator.source).toString('utf8'), { compilerOptions: tsCompiler.options }).outputText
+verifyForkOutput(fork, derivedMember(derived.replicator.target).toString('utf8'))
+derivedMember(derived.replicator.upstream)
+assert(gitSource(derived.stylis.source).equals(derivedMember(derived.stylis.target)), 'Emotion Git/npm source differs')
+const stylisPackage: { devDependencies: { stylis: string } } = JSON.parse(derivedMember(derived.stylis.dependency).toString('utf8'))
+assert.equal(stylisPackage.devDependencies.stylis, derived.stylis.dependencyVersion, 'Emotion Stylis dependency changed')
+assert(gitSource(derived.stylis.recipe).toString('utf8').includes('https://closure-compiler.appspot.com/compile'), 'Historical Closure recipe changed')
+const murmurSource = derivedMember(derived.hash.reference).toString('utf8')
+for (const reference of derived.hash.references)
+  assert(murmurSource.includes(reference), 'MurmurHash source attribution changed')
+const publicDomain = extractNotice(gitSource(derived.hash.source), derived.hash.notice)
+assert.equal(fs.readFileSync(path.join(root, derived.hash.notice.source), 'utf8'), publicDomain, 'Public domain notice changed')
+assert(derivedMember(derived.cache.reference).toString('utf8').includes(derived.cache.upstreamUrl), 'Rule-sheet source attribution changed')
+assert(fs.readFileSync(path.join(root, derived.cache.notice), 'utf8').includes('Copyright (c) 2016 Sultan Tarimo'), 'Rule-sheet attribution missing')
+console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, embeddedMappedSources: mappedCount, embeddedTransformedSources: transformedCount, derivedGitSources: gitSources.size, replicatorFork: true, emotionStylisSource: true, unresolved: 0, licenseClosure: false }))

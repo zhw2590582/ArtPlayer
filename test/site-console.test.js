@@ -6,6 +6,7 @@ import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- Native console subscription and frozen build boundaries.
 import test from 'node:test'
 import ts from 'typescript'
+import { decodeGitSource, verifyForkOutput, verifyGitSource } from '../scripts/site-vendor/console/attribution.ts'
 import { generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
 import { extractNotice } from '../scripts/site-vendor/console/embedded-notices.ts'
 import { verifyMappedSources, verifyTransformedSources } from '../scripts/site-vendor/console/embedded-sources.ts'
@@ -14,6 +15,28 @@ import { reconstructModule, verifyPrelude } from '../scripts/site-vendor/console
 import { errorArgument } from '../scripts/site-vendor/console/runtime/errors.ts'
 import { css } from '../scripts/site-vendor/console/runtime/style.ts'
 import { createSubscriptions } from '../scripts/site-vendor/console/runtime/subscriptions.ts'
+
+test('Immutable Git attribution verifies original blob identity and rejects altered API content', () => {
+  const record = JSON.parse(fs.readFileSync('refactor/baselines/console-derived-attribution.json', 'utf8'))
+  const source = record.remotes.find(source => source.id === 'gary-readme')
+  const bytes = fs.readFileSync(source.source)
+  const response = Buffer.from(JSON.stringify({ encoding: 'base64', content: bytes.toString('base64') }))
+  assert.deepEqual(decodeGitSource(response, source), bytes)
+  assert.throws(() => verifyGitSource(bytes, { ...source, gitBlobSha: '0'.repeat(40) }), /blob identity/)
+  assert.throws(() => verifyGitSource(Buffer.from('shortened license'), source), /content changed/)
+  assert.throws(() => decodeGitSource(Buffer.from(JSON.stringify({ encoding: 'utf8', content: bytes.toString() })), source), /encoding/)
+  assert.throws(() => decodeGitSource(Buffer.from('{"encoding":"base64"}'), source), /Missing Git/)
+})
+
+test('Fork reproduction permits only the pinned terminal source map and exact runtime bytes', () => {
+  const code = 'var value = 1;\n'
+  const trailer = '//# sourceMappingURL=data:application/json;base64,e30='
+  verifyForkOutput(code, code + trailer)
+  assert.throws(() => verifyForkOutput(code, code), /one terminal/)
+  assert.throws(() => verifyForkOutput(code, code + trailer + trailer), /one terminal/)
+  assert.throws(() => verifyForkOutput(code, `${code + trailer}\nrun()`), /trailer/)
+  assert.throws(() => verifyForkOutput('var value = 2;\n', code + trailer), /runtime differs/)
+})
 
 test('Embedded source maps reject omitted dependencies and content from a different release', () => {
   const upstream = Buffer.from('export const value = 1;\n')

@@ -28,3 +28,4 @@ refactor/baselines/site-vendor/console-commonjs/** -text whitespace=-trailing-sp
 refactor/baselines/site-vendor/console-esm/** -text whitespace=-trailing-space,cr-at-eol
 refactor/baselines/site-vendor/console-embedded/** -text whitespace=-trailing-space,cr-at-eol
 docs/licenses/console/** -text whitespace=-trailing-space,cr-at-eol
+refactor/baselines/site-vendor/console-attribution/** -text whitespace=-trailing-space,cr-at-eol
