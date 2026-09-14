@@ -1,5 +1,16 @@
 # 进度与证据
 
+## PKG-VAST-07 旧default调用兼容完成
+
+VAST入口增加default自身别名，恢复旧require(...).default调用并保留现有直接调用。
+四格式测试在旧产物全部失败，实际main+ESM、legacy+ESM各4项通过；完整VAST65项、
+三浏览器117项、CI脚本30项通过。浏览器SDK为受控替身，主视频和DOM为真实核心；
+旧缺陷观察仍单列。严格TS和定向lint通过，三格式及docs产物已重建，未修改公开声明。
+见[变更](changes/2026-09-14-PKG-VAST-07-default-alias.md)和[证据](baselines/vast-alias-validation.json)。253项：181 done、17 doing、55 todo。
+VAST已拆成5个TS模块，但03/04仍未完成；初始化冲突已向用户提出具体选择，等待回复。
+原namespace反射、准确声明、真实IMA和最终分发仍未验收。下一步收到选择后继续VAST
+初始化兼容；等待期间转向HLS SDK或其他不依赖该决定的剩余包任务。
+
 ## PKG-AUTO-THUMB-11 抽帧清理异常修复完成
 
 事件属性清除现在与定时器、原生帧回调取消分别执行，单个异常不截断剩余清理。

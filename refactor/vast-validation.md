@@ -14,6 +14,14 @@
 
 ## 文件与执行
 
+PKG-VAST-07补回工厂`.default`自身别名，不改变初始化决策。当前`yarn test:vast`
+65项通过；实际main/legacy加ESM各4项导出通过。117项三浏览器检查通过，其中候选
+异步注册场景使用`.default`，其他场景保留直接调用。浏览器仍替换SDK边界，实际
+打包SDK只做无广告的导出/已销毁宿主验证。详见
+[变更](changes/2026-09-14-PKG-VAST-07-default-alias.md)。
+
+- `test/vast-exports.test.js`：源码构建或环境变量指定的实际main/legacy/ESM导出。
+  保持现有callable，不宣称复刻旧namespace对象的反射形状；新文件纳入test:vast/test:unit。
 - `test/helpers/vast-sdk.js`：可在Node和浏览器使用的SDK记录器，控制加载、构造、
   监听、请求、销毁失败和晚到事件；不实现IMA、广告请求或主片暂停恢复。
 - `test/helpers/vast.js`：只在精确的`@glomex/vast-ima-player`导入边界替换SDK。

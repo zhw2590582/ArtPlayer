@@ -3,7 +3,7 @@ import type { Callback, Result } from './types'
 import { loadImaSdk } from './sdk'
 import { createSession } from './session'
 
-export default function artplayerPluginVast(callback?: Callback) {
+function artplayerPluginVast(callback?: Callback) {
   return async (art: Artplayer): Promise<Result> => {
     let disposed = false
     let session: ReturnType<typeof createSession> | undefined
@@ -46,3 +46,7 @@ export default function artplayerPluginVast(callback?: Callback) {
     }
   }
 }
+
+artplayerPluginVast.default = artplayerPluginVast
+
+export default artplayerPluginVast

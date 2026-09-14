@@ -1,0 +1,3445 @@
+{
+  "task": "PKG-VAST-07",
+  "date": "2026-09-14",
+  "baselineCommit": "eb6402fdca910fd39d329d0c26222c4359915150",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "sourceRed": {
+    "log": {
+      "path": "refactor/.cache/vast-alias-red-final.log",
+      "sha256": "7e77f8ec3dc221e0027ddf4e4c9412c4bae963909e54ecb7ec0f4dcf1935b4fd"
+    },
+    "pass": 0,
+    "fail": 4,
+    "scope": "SDK-controlled source alias and three UMD format assertions"
+  },
+  "artifactRed": {
+    "files": [
+      {
+        "path": "refactor/.cache/vast-alias-before.js",
+        "sha256": "874803ec726f04649bb636c1376de9e038754310ab0016a22da44f189b7a5ce0"
+      },
+      {
+        "path": "refactor/.cache/vast-alias-before.mjs",
+        "sha256": "7650fb0d42e8bb7049d201859187d28f69b1868ac7e25539a7575ee50ae1b2d7"
+      }
+    ],
+    "log": {
+      "path": "refactor/.cache/vast-alias-artifact-red.log",
+      "sha256": "bdf180fcd479929a792ef08280c388cc1e17e7cfb42f9fe9038f2cd287821294"
+    },
+    "pass": 0,
+    "fail": 4
+  },
+  "checks": [
+    {
+      "log": {
+        "path": "refactor/.cache/vast-alias-suite-final.log",
+        "sha256": "38d61f9cf125550b3ca28cdcb4a456432ab2c22e01bb2b8dbd46d6e1f324f813"
+      },
+      "pass": 65,
+      "fail": 0,
+      "exitCode": 0
+    },
+    {
+      "log": {
+        "path": "refactor/.cache/vast-alias-js.log",
+        "sha256": "b3cfb41aa72d2a03ac57fa7610675522550b1052ce69ca4c8218afdb9499d243"
+      },
+      "pass": 4,
+      "fail": 0,
+      "exitCode": 0
+    },
+    {
+      "log": {
+        "path": "refactor/.cache/vast-alias-legacy.js.log",
+        "sha256": "515b4eb0d056af25efc863e09375f49afab386a2405f207866cf865131551f64"
+      },
+      "pass": 4,
+      "fail": 0,
+      "exitCode": 0
+    },
+    {
+      "log": {
+        "path": "refactor/.cache/vast-alias-ci-tests.log",
+        "sha256": "a7ba351bc03ec6b04b7e8eaf4650b3e597702ef4b2f39f7e4e7290a42dea669a"
+      },
+      "pass": 30,
+      "fail": 0,
+      "exitCode": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "packages/artplayer-plugin-vast/src/index.ts",
+      "sha256": "5033125ea915fec546a5a4cc51bc76942fdd641e7305b57cd926b660fc92a0db"
+    },
+    {
+      "path": "test/vast.test.js",
+      "sha256": "99b39c186b0fc56ba67600a93cba586d505931d0e4eb80d6a5d3d5610749305e"
+    },
+    {
+      "path": "test/vast-exports.test.js",
+      "sha256": "437fe773065d071afcecfe58c139a67b5b7b259baee1d44235e2f1b2bfc5f41c"
+    },
+    {
+      "path": "test/browser/vast.spec.js",
+      "sha256": "4603624ae3eef01ecf29d736d5f5003d974f9082bf0922253c544e09cc5d61e5"
+    },
+    {
+      "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.js",
+      "sha256": "01e440caf7a7cddc46bd3827d98a1ba455df929b977a2e28b066707e92acfd1e"
+    },
+    {
+      "path": "docs/compiled/artplayer-plugin-vast.js",
+      "sha256": "01e440caf7a7cddc46bd3827d98a1ba455df929b977a2e28b066707e92acfd1e"
+    },
+    {
+      "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.legacy.js",
+      "sha256": "244579226a0e2dc83dfd80deb5ee94a69acd01eacb20a0d460b76b981d41ea0a"
+    },
+    {
+      "path": "docs/compiled/artplayer-plugin-vast.legacy.js",
+      "sha256": "244579226a0e2dc83dfd80deb5ee94a69acd01eacb20a0d460b76b981d41ea0a"
+    },
+    {
+      "path": "packages/artplayer-plugin-vast/dist/artplayer-plugin-vast.mjs",
+      "sha256": "33ce5fdf9cc1868c5bcf2eb2ec28475d8b3292f80b6730e201d8720ef767e3ee"
+    },
+    {
+      "path": "docs/compiled/artplayer-plugin-vast.mjs",
+      "sha256": "33ce5fdf9cc1868c5bcf2eb2ec28475d8b3292f80b6730e201d8720ef767e3ee"
+    }
+  ],
+  "types": "Strict package noEmit passed",
+  "lint": "Targeted source, Node and browser lint passed",
+  "build": {
+    "path": "refactor/.cache/vast-alias-build.log",
+    "sha256": "5a38a4dd90524cc7a7a46322f906380bc392110f459fb6076734dae1cb17a5c7"
+  },
+  "browser": {
+    "report": {
+      "path": "refactor/.cache/vast-alias-browser/report.json",
+      "sha256": "92dd53895de4917335e18e9a54f66ceb2b3a1b23b2ada713741e1912758fe8ce"
+    },
+    "stats": {
+      "startTime": "2026-09-14T06:27:00.861Z",
+      "duration": 49117.226,
+      "expected": 117,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0",
+      "webkit": "26.6"
+    },
+    "cases": [
+      {
+        "title": "published-5.1.7 / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "candidate / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "chromium",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "candidate / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "firefox",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published-5.1.7 / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published-5.1.7",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.1.7"
+        }
+      },
+      {
+        "title": "published / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "published / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "published",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.0"
+        }
+      },
+      {
+        "title": "candidate / source: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate suppresses late SDK initialization after real core destruction",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate isolates stale events and terminates recreated ads on core destroy",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/one.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "block"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/two.xml"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / source: candidate callback rejection cleans allocated SDK and DOM without destroying the core",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "source",
+          "sha256": "0473e5e326b7aa715da73a073a457c1b8cb09c2ed183269681a85316a0391bef",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / published-1.0.0-source historical: late SDK after destroy allocates into the detached player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "published-1.0.0-source",
+          "sha256": "2d41a516b07abf90d92d84ff6e4ea6873bb2d4ebfd00d4d21f0935aed372ee03",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: async SDK and callback gate real core registration and preserve requests",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/test/ad-tag.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: SDK rejection stays observable and core can still play content",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0: real overlay follows SDK events and explicit cleanup supports inactive recreation",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": false,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/first.xml"
+                },
+                {
+                  "adsResponse": "<VAST/>"
+                }
+              ],
+              "destroyCalls": 1,
+              "connected": false,
+              "display": "none"
+            },
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/new-session.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": true,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      },
+      {
+        "title": "candidate / frozen-workspace-1.2.0 historical: late SDK after destroy allocates into the detached player",
+        "project": "webkit",
+        "status": "passed",
+        "retry": 0,
+        "inputs": {
+          "core": "candidate",
+          "implementation": "frozen-workspace-1.2.0",
+          "sha256": "ac391200c572c8e68431212e6b5f102956f959196ad98da54fa2f42b4d8888bf",
+          "sdk": "controlled wrapper recorder, no IMA execution"
+        },
+        "state": {
+          "destroyed": true,
+          "callbackCalls": 1,
+          "players": [
+            {
+              "requests": [
+                {
+                  "adTagUrl": "/late.xml"
+                }
+              ],
+              "destroyCalls": 0,
+              "connected": false,
+              "display": "none"
+            }
+          ],
+          "coreVersion": "5.4.1"
+        }
+      }
+    ]
+  },
+  "scope": "Callable .default self-reference. Native browser core/media with SDK substitution; actual built SDK export tests stop at destroyed-host registration. No IMA loading/ad playback, namespace reflection equivalence or type reconciliation claim.",
+  "remaining": [
+    "VAST-CONTEXT-01",
+    "VAST-TYPE-01",
+    "VAST-DIST-01",
+    "PKG-VAST-03",
+    "PKG-VAST-04",
+    "PKG-VAST-05",
+    "PKG-VAST-06"
+  ]
+}

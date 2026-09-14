@@ -3301,16 +3301,21 @@
       "status": "open",
       "owners": [
         "PKG-VAST-04",
-        "PKG-VAST-06"
+        "PKG-VAST-06",
+        "PKG-VAST-07"
       ],
       "evidence": [
         "refactor/baselines/vast-contract.md",
         "refactor/baselines/vast-release.json",
         "refactor/changes/2026-09-12-PKG-VAST-01-contract.md",
-        "refactor/baselines/vast-contract-validation.json"
+        "refactor/baselines/vast-contract-validation.json",
+        "refactor/changes/2026-09-14-PKG-VAST-07-default-alias.md",
+        "refactor/baselines/vast-alias-validation.json",
+        "test/vast-exports.test.js"
       ],
       "compatibleResolution": "Preserve require(pkg).default alongside callable factory, script global and current ESM/legacy paths.",
-      "closureCriteria": "Real packed main/legacy/ESM, historical deep imports, export= consumers and local demo/editor all pass with immutable published comparisons."
+      "closureCriteria": "Real packed main/legacy/ESM, historical deep imports, export= consumers and local demo/editor all pass with immutable published comparisons.",
+      "workspaceState": "Task07 restores historical JavaScript .default calls using a callable self-alias. Final four-format tests fail on pre-change main/ESM and pass produced main+ESM and legacy+ESM.65 Node and117 controlled-SDK browser checks pass. Old namespace reflection shape, public declarations, deep paths and installed distribution remain04/06; this risk stays open."
     },
     {
       "id": "AMBILIGHT-LIFE-01",

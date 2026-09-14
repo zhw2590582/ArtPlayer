@@ -98,15 +98,15 @@ function w(t2, i2) {
   return t2;
 }
 var m = {};
-m.CustomEvent = "function" == typeof CustomEvent ? CustomEvent : function(t2) {
+m.CustomEvent = "function" == typeof CustomEvent ? CustomEvent : (function(t2) {
   return i2[t2] = new i2("").constructor[t2], i2;
   function i2(t3, i3) {
     i3 || (i3 = {});
     var e2 = document.createEvent("CustomEvent");
     return e2.initCustomEvent(t3, !!i3.bubbles, !!i3.cancelable, i3.detail), e2;
   }
-}("prototype");
-var p, y, O = m.CustomEvent, j = b("mediaElement"), g = b("currentTime"), A = b("enabled"), k = function() {
+})("prototype");
+var p, y, O = m.CustomEvent, j = b("mediaElement"), g = b("currentTime"), A = b("enabled"), k = (function() {
   function t2(t3) {
     Object.defineProperty(this, j, { writable: true, value: void 0 }), Object.defineProperty(this, g, { writable: true, value: void 0 }), Object.defineProperty(this, A, { writable: true, value: void 0 }), this.seeking = void 0, w(this, j)[j] = t3, w(this, g)[g] = 0, w(this, A)[A] = false, this.seeking = false, this.t = this.t.bind(this), this.i = this.i.bind(this), this.h = this.h.bind(this), this.enable();
   }
@@ -151,7 +151,7 @@ var p, y, O = m.CustomEvent, j = b("mediaElement"), g = b("currentTime"), A = b(
     var t3;
     return null == (t3 = w(this, j)[j]) ? void 0 : t3.volume;
   } }]), t2;
-}(), C = function() {
+})(), C = (function() {
   function t2() {
     this.delegate = document.createDocumentFragment();
   }
@@ -163,23 +163,23 @@ var p, y, O = m.CustomEvent, j = b("mediaElement"), g = b("currentTime"), A = b(
   }, i2.removeEventListener = function() {
     return this.delegate.removeEventListener.apply(this.delegate, [].slice.call(arguments));
   }, t2;
-}(), P = ["abort", "canplay", "canplaythrough", "durationchange", "emptied", "ended", "error", "loadeddata", "loadedmetadata", "loadstart", "pause", "play", "playing", "progress", "ratechange", "seeked", "seeking", "stalled", "suspend", "timeupdate", "volumechange", "waiting"];
-!function(t2) {
+})(), P = ["abort", "canplay", "canplaythrough", "durationchange", "emptied", "ended", "error", "loadeddata", "loadedmetadata", "loadstart", "pause", "play", "playing", "progress", "ratechange", "seeked", "seeking", "stalled", "suspend", "timeupdate", "volumechange", "waiting"];
+!(function(t2) {
   t2.MEDIA_START = "MediaStart", t2.MEDIA_IMPRESSION = "MediaImpression", t2.MEDIA_STOP = "MediaStop", t2.MEDIA_CUE_POINTS_CHANGE = "MediaCuePointsChange", t2.MEDIA_RESUMED = "MediaResumed";
-}(p || (p = {})), function(t2) {
+})(p || (p = {})), (function(t2) {
   t2.AD_ERROR = "AdError", t2.AD_BUFFERING = "AdBuffering", t2.LOADED = "AdLoaded", t2.IMPRESSION = "AdImpression", t2.STARTED = "AdStarted", t2.FIRST_QUARTILE = "AdFirstQuartile", t2.MIDPOINT = "AdMidpoint", t2.THIRD_QUARTILE = "AdThirdQuartile", t2.AD_PROGRESS = "AdProgress", t2.COMPLETE = "AdComplete", t2.CLICK = "AdClick", t2.PAUSED = "AdPaused", t2.RESUMED = "AdResumed", t2.SKIPPED = "AdSkipped", t2.SKIPPABLE_STATE_CHANGED = "AdSkippableStateChanged", t2.VOLUME_CHANGED = "AdVolumeChanged", t2.VOLUME_MUTED = "AdMuted", t2.AD_METADATA = "AdMetadata", t2.AD_BREAK_READY = "AdBreakReady", t2.CONTENT_PAUSE_REQUESTED = "AdContentPauseRequested", t2.CONTENT_RESUME_REQUESTED = "AdContentResumeRequested", t2.ALL_ADS_COMPLETED = "AdAllAdsCompleted", t2.DURATION_CHANGE = "AdDurationChange", t2.INTERACTION = "AdInteraction", t2.LINEAR_CHANGED = "AdLinearChanged", t2.LOG = "AdLog", t2.USER_CLOSE = "AdUserClose", t2.AD_CAN_PLAY = "AdCanPlay", t2.EXPANDED_CHANGED = "AdExpandedChanged", t2.VIEWABLE_IMPRESSION = "AdViewableImpression";
-}(y || (y = {}));
+})(y || (y = {}));
 var R = h({}, y, p), E = function() {
   this.disableCustomPlaybackForIOS10Plus = false, this.autoResize = true, this.clickTrackingElement = void 0;
-}, T = function(t2) {
+}, T = (function(t2) {
   function i2() {
     var i3;
     return (i3 = t2.call.apply(t2, [this].concat([].slice.call(arguments))) || this).errorCode = void 0, i3.innerError = void 0, i3.type = void 0, i3.vastErrorCode = void 0, i3;
   }
   return r(i2, t2), i2;
-}(d(Error));
+})(d(Error));
 T.ERROR_CODE_ADS_MANAGER_LOADED_TIMEOUT = 9e3, T.ERROR_CODE_REQUEST_ADS_TIMEOUT = 9001;
-var S = b("mediaElement"), M = b("adElement"), x = b("customPlayhead"), I = b("adsRenderingSettings"), B = b("ima"), L = b("adDisplayContainer"), D = b("adsManager"), W = b("width"), _ = b("height"), q = b("adsLoader"), F = b("playerOptions"), N = b("resizeObserver"), V = b("currentAd"), G = b("loadedAd"), Q = b("mediaStartTriggered"), U = b("mediaImpressionTriggered"), z = b("mediaInActivation"), Z = b("customPlaybackTimeAdjustedOnEnded"), $ = b("cuePoints"), H = b("adCurrentTime"), J = b("adDuration"), K = b("startAdCallback"), X = b("adsManagerLoadedTimeout"), Y = b("requestAdsTimeout"), tt = b("wasExternallyPaused"), it = b("lastNonZeroAdVolume"), et = b("activatePromise"), nt = function(t2) {
+var S = b("mediaElement"), M = b("adElement"), x = b("customPlayhead"), I = b("adsRenderingSettings"), B = b("ima"), L = b("adDisplayContainer"), D = b("adsManager"), W = b("width"), _ = b("height"), q = b("adsLoader"), F = b("playerOptions"), N = b("resizeObserver"), V = b("currentAd"), G = b("loadedAd"), Q = b("mediaStartTriggered"), U = b("mediaImpressionTriggered"), z = b("mediaInActivation"), Z = b("customPlaybackTimeAdjustedOnEnded"), $ = b("cuePoints"), H = b("adCurrentTime"), J = b("adDuration"), K = b("startAdCallback"), X = b("adsManagerLoadedTimeout"), Y = b("requestAdsTimeout"), tt = b("wasExternallyPaused"), it = b("lastNonZeroAdVolume"), et = b("activatePromise"), nt = (function(t2) {
   function i2(i3, e3, n2, s2, h2) {
     var r2;
     void 0 === s2 && (s2 = new i3.AdsRenderingSettings()), void 0 === h2 && (h2 = new E()), r2 = t2.call(this) || this, Object.defineProperty(l(r2), S, { writable: true, value: void 0 }), Object.defineProperty(l(r2), M, { writable: true, value: void 0 }), Object.defineProperty(l(r2), x, { writable: true, value: void 0 }), Object.defineProperty(l(r2), I, { writable: true, value: void 0 }), Object.defineProperty(l(r2), B, { writable: true, value: void 0 }), Object.defineProperty(l(r2), L, { writable: true, value: void 0 }), Object.defineProperty(l(r2), D, { writable: true, value: void 0 }), Object.defineProperty(l(r2), W, { writable: true, value: void 0 }), Object.defineProperty(l(r2), _, { writable: true, value: void 0 }), Object.defineProperty(l(r2), q, { writable: true, value: void 0 }), Object.defineProperty(l(r2), F, { writable: true, value: void 0 }), Object.defineProperty(l(r2), N, { writable: true, value: void 0 }), Object.defineProperty(l(r2), V, { writable: true, value: void 0 }), Object.defineProperty(l(r2), G, { writable: true, value: void 0 }), Object.defineProperty(l(r2), Q, { writable: true, value: false }), Object.defineProperty(l(r2), U, { writable: true, value: false }), Object.defineProperty(l(r2), z, { writable: true, value: false }), Object.defineProperty(l(r2), Z, { writable: true, value: false }), Object.defineProperty(l(r2), $, { writable: true, value: [] }), Object.defineProperty(l(r2), H, { writable: true, value: void 0 }), Object.defineProperty(l(r2), J, { writable: true, value: void 0 }), Object.defineProperty(l(r2), K, { writable: true, value: void 0 }), Object.defineProperty(l(r2), X, { writable: true, value: void 0 }), Object.defineProperty(l(r2), Y, { writable: true, value: void 0 }), Object.defineProperty(l(r2), tt, { writable: true, value: false }), Object.defineProperty(l(r2), it, { writable: true, value: 1 }), Object.defineProperty(l(r2), et, { writable: true, value: Promise.resolve() }), w(l(r2), S)[S] = e3, w(l(r2), M)[M] = n2, w(l(r2), B)[B] = i3, w(l(r2), F)[F] = h2, w(l(r2), I)[I] = s2, w(l(r2), I)[I].restoreCustomPlaybackStateOnAdBreakComplete = true, h2.disableCustomPlaybackForIOS10Plus && !w(l(r2), S)[S].hasAttribute("playsinline") && w(l(r2), S)[S].setAttribute("playsinline", ""), w(l(r2), B)[B].settings.setDisableCustomPlaybackForIOS10Plus(h2.disableCustomPlaybackForIOS10Plus), w(l(r2), x)[x] = new k(w(l(r2), S)[S]), r2.o = r2.o.bind(l(r2)), P.forEach(function(t3) {
@@ -373,16 +373,16 @@ var S = b("mediaElement"), M = b("adElement"), x = b("customPlayhead"), I = b("a
       w(t3, U)[U] = false, w(t3, Q)[Q] = false, w(t3, Z)[Z] = false, t3.dispatchEvent(new O(R.MEDIA_STOP));
     }, 1);
   }, e2.v = function(t3) {
-    for (var i3, e3 = function(t4, i4) {
+    for (var i3, e3 = (function(t4, i4) {
       var e4 = "undefined" != typeof Symbol && t4[Symbol.iterator] || t4["@@iterator"];
       if (e4) return (e4 = e4.call(t4)).next.bind(e4);
-      if (Array.isArray(t4) || (e4 = function(t5, i5) {
+      if (Array.isArray(t4) || (e4 = (function(t5, i5) {
         if (t5) {
           if ("string" == typeof t5) return f(t5, i5);
           var e5 = Object.prototype.toString.call(t5).slice(8, -1);
           return "Object" === e5 && t5.constructor && (e5 = t5.constructor.name), "Map" === e5 || "Set" === e5 ? Array.from(t5) : "Arguments" === e5 || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e5) ? f(t5, i5) : void 0;
         }
-      }(t4))) {
+      })(t4))) {
         e4 && (t4 = e4);
         var n3 = 0;
         return function() {
@@ -390,7 +390,7 @@ var S = b("mediaElement"), M = b("adElement"), x = b("customPlayhead"), I = b("a
         };
       }
       throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }(t3); !(i3 = e3()).done; ) {
+    })(t3); !(i3 = e3()).done; ) {
       var n2 = i3.value;
       n2.contentBoxSize && 1 === n2.contentBoxSize.length ? (w(this, W)[W] = n2.contentBoxSize[0].inlineSize, w(this, _)[_] = n2.contentBoxSize[0].blockSize) : n2.contentBoxSize && n2.contentBoxSize.inlineSize ? (w(this, W)[W] = n2.contentBoxSize.inlineSize, w(this, _)[_] = n2.contentBoxSize.blockSize) : (w(this, W)[W] = n2.contentRect.width, w(this, _)[_] = n2.contentRect.height);
     }
@@ -435,7 +435,7 @@ var S = b("mediaElement"), M = b("adElement"), x = b("customPlayhead"), I = b("a
   } }, { key: "cuePoints", get: function() {
     return [].concat(w(this, $)[$]);
   } }]), i2;
-}(C);
+})(C);
 function createRequest(ima, field, value, config) {
   const request = new ima.AdsRequest();
   request[field] = value;
@@ -647,6 +647,7 @@ function artplayerPluginVast(callback) {
     }
   };
 }
+artplayerPluginVast.default = artplayerPluginVast;
 export {
   artplayerPluginVast as default
 };

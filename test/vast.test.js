@@ -5,6 +5,30 @@ import { deferred, vastEnvironment, vastImplementations } from './helpers/vast.j
 
 const implementations = await vastImplementations()
 
+test('VAST source default alias preserves deferred registration, requests and cleanup', async () => {
+  const env = vastEnvironment(implementations.find(item => item.name === 'source'), { deferLoad: true })
+  const host = env.host()
+  assert.equal(env.factory.default, env.factory)
+  const gate = deferred()
+  const started = deferred()
+  const pending = env.factory.default(async (context) => {
+    started.resolve(context)
+    await gate.promise
+    context.playUrl('/alias.xml')
+  })(host.art)
+  assert.equal(typeof pending.then, 'function')
+  assert.equal(env.state.players.length, 0)
+  env.resolveLoad()
+  await started.promise
+  gate.resolve()
+  const result = await pending
+  assert.equal(result.name, 'artplayerPluginVast')
+  assert.equal(env.state.players[0].requests[0].adTagUrl, '/alias.xml')
+  host.art.destroy()
+  assert.equal(host.parent.children.length, 0)
+  assert.equal(env.state.players[0].destroyCalls, 1)
+})
+
 for (const implementation of implementations) {
   const { name, published } = implementation
   test(`${name}: SDK resolution precedes callback and result waits for callback completion`, async () => {

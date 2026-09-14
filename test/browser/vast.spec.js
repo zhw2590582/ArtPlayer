@@ -47,13 +47,16 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
     const label = `${core} / ${implementation.name}`
     test(`${label}: async SDK and callback gate real core registration and preserve requests`, async ({ page }, testInfo) => {
       await setup(page, core, implementation, testInfo, true)
-      await page.evaluate(() => {
+      await page.evaluate((useDefault) => {
         window.vastCalls = 0
         window.vastDone = false
         const gate = new Promise((resolve) => {
           window.finishVastCallback = resolve
         })
-        window.vastRegistration = window.art.plugins.add(window.artplayerPluginVast(async (context) => {
+        const factory = window.artplayerPluginVast
+        if (useDefault && factory.default !== factory)
+          throw new Error('Historical default calls must share the direct factory')
+        window.vastRegistration = window.art.plugins.add((useDefault ? factory.default : factory)(async (context) => {
           window.vastContext = context
           window.vastCalls++
           await gate
@@ -62,7 +65,7 @@ for (const core of ['published-5.1.7', 'published', 'candidate']) {
         })).then(() => {
           window.vastDone = true
         })
-      })
+      }, !implementation.historical)
       expect(await page.evaluate(() => ({ calls: window.vastCalls, players: window.vastSdk.state.players.length, registered: Object.hasOwn(window.art.plugins, 'artplayerPluginVast') }))).toEqual({ calls: 0, players: 0, registered: false })
       await page.evaluate(() => window.vastSdk.resolveLoad())
       await expect.poll(() => page.evaluate(() => window.vastCalls)).toBe(1)

@@ -3050,7 +3050,8 @@
         "PKG-VAST-03",
         "ENG-04",
         "ENG-06",
-        "CORE-07"
+        "CORE-07",
+        "PKG-VAST-07"
       ],
       "status": "todo",
       "risk": "H",
@@ -5243,6 +5244,26 @@
       "evidence": [
         "changes/2026-09-14-PKG-AUTO-THUMB-11-handler-cleanup.md",
         "baselines/auto-thumbnail-handler-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-VAST-07",
+      "phase": "5 包迁移：artplayer-plugin-vast",
+      "title": "恢复旧发布VAST工厂default调用入口",
+      "scope": [
+        "artplayer-plugin-vast"
+      ],
+      "dependsOn": [
+        "PKG-VAST-01",
+        "PKG-VAST-02"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "保留当前直接工厂并增加default自身别名，验证四类分发调用及异步注册，初始化决策独立保留",
+      "acceptance": "旧产物default用例失败，新源码/实际main/legacy/ESM通过；真实核心三浏览器控制SDK注册验证、模块文档/构建/测试入口同步；不冒充namespace反射、声明和IMA验收",
+      "evidence": [
+        "changes/2026-09-14-PKG-VAST-07-default-alias.md",
+        "baselines/vast-alias-validation.json"
       ]
     }
   ]

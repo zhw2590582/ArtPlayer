@@ -7,6 +7,8 @@ initialization conflict remains open; this checkpoint is not release acceptance.
 
 - `src/index.ts` owns the core destroy subscription before SDK loading begins,
   awaits SDK loading and the user callback, and preserves original rejection values.
+  Its writable `.default` self-reference retains historical CommonJS default calls
+  alongside the current direct factory. It does not wrap registration or load IMA.
 - `src/sdk.ts` is the only runtime Glomex import boundary. It also constructs IMA
   requests, preserving own/inherited configuration fields and primary-field overrides.
 - `src/session.ts` owns one current SDK/container pair, the four ad-event subscriptions,
@@ -50,7 +52,9 @@ it finishes. SDK content pause/resume behavior is not duplicated in this wrapper
 
 The checkpoint retains the workspace callback order, lazy initialization, mutable
 settings/options identities, default flags, void request methods, and asynchronous
-outer attachment. The historical namespace export, `id`/`$container` aliases, eager
+outer attachment. The old `require(...).default(...)` call is restored, while the
+current callable export remains callable. This does not recreate the old namespace
+object's reflection shape. The `id`/`$container` aliases, eager
 published initialization and contradictory public return types are not yet reconciled.
 See [the explicit decision](../../refactor/vast-compatibility-decision.md).
 
@@ -69,6 +73,13 @@ Run `yarn test:vast`, `yarn typecheck`, `yarn build artplayer-plugin-vast`, and
 browser wrapper tests substitute only the Glomex SDK boundary. They cover current and
 frozen historical sources, real core5.1.7/5.4.1/candidate registration, real DOM and
 main-video decoding; they do not certify Google IMA ads or final npm distribution.
+
+`test/vast-exports.test.js` exercises bundled CommonJS/global/AMD and native ESM
+import, using an already destroyed host to verify registration without loading ads.
+Set `ARTPLAYER_VAST_ARTIFACT` and `ARTPLAYER_VAST_ESM_ARTIFACT` to test actual build
+files; otherwise it builds source via the repository helper. The live alias path
+uses the controlled SDK in `test/vast.test.js` and the browser registration case.
+Public alias declarations and complete installed entry validation remain04/06.
 
 For state or cleanup changes start in session, for callback timing in entry, and for
 SDK request fields in sdk. Keep Node candidate assertions, historical observations,
