@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 262 项，范围 22 个包及工作区/示例。
 
-状态：todo 46 / doing 21 / blocked 0 / done 195 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 45 / doing 22 / blocked 0 / done 195 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -431,7 +431,7 @@
 | REL-09 | workspace<br>落实全包下一 major 版本及依赖元数据 | REL-01, DOC-11 | 22 包版本目标落实、适用锁文件/依赖范围/示例/变更日志同步，核实 registry 版本占用 | 版本与 policy 一致，旧核心支持保留；必要拆子任务各自提交，候选构建前完成，不执行 publish | H | todo |
 | REL-02 | workspace<br>生成候选 tarball 并验证新旧组合 | REL-01, CORE-22, ENG-07, REL-09 | 各候选本地 tarball/integrity 与新旧核心/插件消费者验证报告，外部门槛单独标注 | 隔离安装和可自动化组合通过；设备结论不伪造，最终发布绑定同一候选内容；在目标 major 版本确定后构建 pack，不在测试后改版本 | H | todo |
 | REL-03 | workspace<br>完成真机、外部 SDK 与压力验收 | REL-02, EX-03, SITE-06, MOD-05 | Safari/移动/PiP/Cast/IMA/模型/长播放完整报告 | 包集成与全项目真机/SDK/压力结论齐全才完成本汇总；独立批次先建立自己的完整门槛子任务 | H | todo |
-| REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | todo |
+| REL-04 | workspace<br>提前演练回退与主线修复同步 | REL-08, ENG-07 | 分包旧版本/tag/依赖回退方案与 master 差异 | 隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物 | H | doing |
 | REL-05 | workspace<br>经授权发布候选并收集反馈 | REL-03, REL-04, REVIEW-03 | 候选 tag、完整产物 integrity、反馈与复现记录 | 实际发布授权/操作/版本可追溯；本计划不自动执行发布 | H | todo |
 | REL-06 | workspace<br>经授权分批正式发布 | REL-05 | 正式分包版本/tag/站点文档及兼容公告 | 候选验收通过，安装/浏览器复核和回退入口就绪；候选反馈修复须独立建任务并复验三轮受影响结论，正式内容与最终验证产物一致 | H | todo |
 | REL-07 | workspace<br>关闭重构里程碑并维护后续队列 | REL-06, ENG-LINT-01 | 最终任务/设计/证据归档和维护指南 | 全范围任务有结论、无未解释兼容缺口；遗留项有明确后续责任 | L | todo |
@@ -658,6 +658,7 @@
 - MOD-DEV-01: [记录](changes/2026-09-14-MOD-DEV-01-dev-server.md) [记录](baselines/dev-server-validation.json)
 - MOD-03: [记录](changes/2026-09-14-MOD-03-slider-updates.md) [记录](baselines/slider-updates-validation.json) [记录](changes/2026-09-14-MOD-03-performance-acceptance.md) [记录](baselines/core-performance-validation.json)
 - REL-08: [记录](changes/2026-09-14-REL-08-release-ledger.md) [记录](baselines/release-ledger-validation.json) [记录](release-ledger.md) [记录](release-ledger.json)
+- REL-04: [记录](changes/2026-09-15-REL-04-consumer-checkpoint.md) [记录](rollback-rehearsal.md) [记录](baselines/rollback-consumer-validation.json)
 - PKG-FACTORY-01: [记录](baselines/factory-assignment-gaps.json) [记录](baselines/factory-compatibility-proposals.json) [记录](factory-compatibility-decision.md) [记录](changes/2026-09-12-PKG-FACTORY-01-decision.md) [记录](type-compatibility-policy.md) [记录](baselines/factory-compatibility-validation.json) [记录](changes/2026-09-13-PKG-FACTORY-01-compatible-types.md)
 - CORE-25: [记录](changes/2026-09-13-CORE-25-defaults-ssr.md) [记录](baselines/defaults-ssr-validation.json)
 - ENG-12: [记录](changes/2026-09-13-ENG-12-library-public.md) [记录](baselines/library-public-validation.json)

@@ -4798,11 +4798,15 @@
         "REL-08",
         "ENG-07"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "分包旧版本/tag/依赖回退方案与 master 差异",
       "acceptance": "隔离包演练可回退，主线修复同步流程可执行；正式每批再核对其实际回退产物",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-15-REL-04-consumer-checkpoint.md",
+        "rollback-rehearsal.md",
+        "baselines/rollback-consumer-validation.json"
+      ]
     },
     {
       "id": "REVIEW-01",

@@ -1,5 +1,13 @@
 # Installed package checks
 
+For independent core/plugin rollback, run `yarn test:package` then
+`yarn test:rollback`. The seven-step rehearsal restores frozen consumer locks,
+checks complete installed file inventories and runtime entrypoints, and saves
+verified installation copies. `yarn test:rollback:browser` validates a selected
+step through `ARTPLAYER_BROWSER_ARTIFACTS`. See
+[rollback maintenance](../../refactor/rollback-rehearsal.md) for report paths,
+browser scope and the remaining package-specific release gates.
+
 Run `yarn test:package` with the pinned Node and Yarn after a frozen install. The
 default consumer scope is core and chapter. For Ambilight/Canvas/Document PiP browser work,
 run `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip`.
