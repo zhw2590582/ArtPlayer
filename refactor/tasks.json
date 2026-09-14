@@ -760,7 +760,9 @@
         "changes/2026-09-13-CI-01-node-consumers.md",
         "baselines/node-consumer-validation.json",
         "changes/2026-09-14-CI-01-installed-full.md",
-        "baselines/ci-installed-full-validation.json"
+        "baselines/ci-installed-full-validation.json",
+        "changes/2026-09-14-CI-01-source-chromium.md",
+        "baselines/ci-source-chromium-validation.json"
       ]
     },
     {

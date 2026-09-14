@@ -3063,7 +3063,9 @@
         "refactor/changes/2026-09-12-PKG-DASH-05-sdk-checkpoint.md",
         "refactor/changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md",
         "refactor/baselines/dash-seek-diagnosis.json",
-        "test/browser/dash-buffer-observer.js"
+        "test/browser/dash-buffer-observer.js",
+        "refactor/changes/2026-09-14-CI-01-source-chromium.md",
+        "refactor/baselines/ci-source-chromium-validation.json"
       ],
       "compatibleResolution": "已用原生 SDK、SourceBuffer/调度指标和 SDK 5 空裁剪刷新的一行诊断回植确认根因。兼容处置尚未落地；不在核心伪造 timeupdate、不偏移 seek、不强制所有旧用户升级 SDK，也不将诊断补丁计为正式上游通过。",
       "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。"

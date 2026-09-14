@@ -1,0 +1,1384 @@
+{
+  "task": "CI-01",
+  "status": "doing",
+  "sourceHead": "fc566f14d50ac19cfe02f5f0375a168699a91c99",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "browsers": [
+      "153.0.8010.12"
+    ],
+    "remoteCI": false,
+    "physicalDevices": false
+  },
+  "directory": "refactor/.cache/ci-source-chromium-full-report",
+  "reportSha256": "3ff5c5d0ad8041dadc1d82e55fa7123334e55c8c7663d2b640b153b69e2a65d8",
+  "invocation": {
+    "scope": "source",
+    "args": [
+      "test",
+      "--config=playwright.source.config.js",
+      "--project=chromium",
+      "--workers=2"
+    ],
+    "node": "24.21.0",
+    "artifactMap": null,
+    "inputs": []
+  },
+  "result": {
+    "scope": "source",
+    "exitCode": 1,
+    "signal": null,
+    "args": [
+      "test",
+      "--config=playwright.source.config.js",
+      "--project=chromium",
+      "--workers=2"
+    ]
+  },
+  "stats": {
+    "startTime": "2026-09-14T11:15:05.935Z",
+    "duration": 839637.343,
+    "expected": 1480,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "groups": [
+    {
+      "file": "accessibility-contextmenu.spec.js",
+      "expected": 13,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4793
+    },
+    {
+      "file": "accessibility-controls.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2447
+    },
+    {
+      "file": "accessibility-info.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1737
+    },
+    {
+      "file": "accessibility-integration.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1794
+    },
+    {
+      "file": "accessibility-lock.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1767
+    },
+    {
+      "file": "accessibility-mini.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1824
+    },
+    {
+      "file": "accessibility-selector.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3867
+    },
+    {
+      "file": "accessibility-setting.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4053
+    },
+    {
+      "file": "accessibility-slider.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1811
+    },
+    {
+      "file": "accessibility.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3495
+    },
+    {
+      "file": "ads-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1204
+    },
+    {
+      "file": "ads-ui.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10499
+    },
+    {
+      "file": "ads.spec.js",
+      "expected": 48,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 112302
+    },
+    {
+      "file": "ambilight-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2280
+    },
+    {
+      "file": "ambilight-proxy.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1016
+    },
+    {
+      "file": "ambilight.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7395
+    },
+    {
+      "file": "asr-audio-track.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 13434
+    },
+    {
+      "file": "asr-audio.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 13860
+    },
+    {
+      "file": "asr-capture-cors.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11209
+    },
+    {
+      "file": "asr-cors.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 23191
+    },
+    {
+      "file": "asr-fallback.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 23520
+    },
+    {
+      "file": "asr-playback.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 23138
+    },
+    {
+      "file": "audio-buffering.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 41341
+    },
+    {
+      "file": "audio-combinations.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 17533
+    },
+    {
+      "file": "audio-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 956
+    },
+    {
+      "file": "audio-track.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 19921
+    },
+    {
+      "file": "auto-playback.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3422
+    },
+    {
+      "file": "auto-thumbnail-lifecycle.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2479
+    },
+    {
+      "file": "auto-thumbnail-pixels.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 644
+    },
+    {
+      "file": "auto-thumbnail.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1701
+    },
+    {
+      "file": "builtin-layers.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3102
+    },
+    {
+      "file": "canvas-dpip.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5941
+    },
+    {
+      "file": "canvas-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3116
+    },
+    {
+      "file": "canvas-subtitles.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 983
+    },
+    {
+      "file": "canvas.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7605
+    },
+    {
+      "file": "chapter-combinations.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 25699
+    },
+    {
+      "file": "chapter-hover.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3478
+    },
+    {
+      "file": "chapter.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3807
+    },
+    {
+      "file": "chromecast-lifecycle.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6835
+    },
+    {
+      "file": "components.spec.js",
+      "expected": 31,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7582
+    },
+    {
+      "file": "danmuku-baseline.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 37660
+    },
+    {
+      "file": "danmuku-heatmap-density.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14117
+    },
+    {
+      "file": "danmuku-input.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2191
+    },
+    {
+      "file": "danmuku-lifetime.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 25099
+    },
+    {
+      "file": "danmuku-load-baseline.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 10993
+    },
+    {
+      "file": "danmuku-mask-boundary.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1424
+    },
+    {
+      "file": "danmuku-mask-native.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 77402
+    },
+    {
+      "file": "danmuku-resources.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 9743
+    },
+    {
+      "file": "danmuku-scheduler.spec.js",
+      "expected": 22,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 45100
+    },
+    {
+      "file": "danmuku-stability.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 173897
+    },
+    {
+      "file": "danmuku-timing-diagnostic.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14174
+    },
+    {
+      "file": "dash-control.spec.js",
+      "expected": 28,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 26108
+    },
+    {
+      "file": "dash-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 914
+    },
+    {
+      "file": "dash-sdk.spec.js",
+      "expected": 37,
+      "unexpected": 1,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 118362
+    },
+    {
+      "file": "declarations.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 771
+    },
+    {
+      "file": "display-mini.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3710
+    },
+    {
+      "file": "display-native.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4508
+    },
+    {
+      "file": "display-orientation.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2640
+    },
+    {
+      "file": "display-pip-webkit.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1216
+    },
+    {
+      "file": "display-pip.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2499
+    },
+    {
+      "file": "display-sizing.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1872
+    },
+    {
+      "file": "display-video-fullscreen.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1051
+    },
+    {
+      "file": "display-web.spec.js",
+      "expected": 22,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3997
+    },
+    {
+      "file": "docs-smoke.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6125
+    },
+    {
+      "file": "document-site.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6061
+    },
+    {
+      "file": "dom-boundaries.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 448
+    },
+    {
+      "file": "dpip-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1844
+    },
+    {
+      "file": "dpip-native.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11269
+    },
+    {
+      "file": "dpip.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6545
+    },
+    {
+      "file": "editor-declarations.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1265
+    },
+    {
+      "file": "editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1103
+    },
+    {
+      "file": "emitter.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 317
+    },
+    {
+      "file": "event-scheduling.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2454
+    },
+    {
+      "file": "fast-forward.spec.js",
+      "expected": 11,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4443
+    },
+    {
+      "file": "gesture.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6823
+    },
+    {
+      "file": "global-events.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1120
+    },
+    {
+      "file": "hls-control.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 35727
+    },
+    {
+      "file": "hls-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1013
+    },
+    {
+      "file": "hls-sdk.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 44545
+    },
+    {
+      "file": "hotkey.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3341
+    },
+    {
+      "file": "iframe-boundaries.spec.js",
+      "expected": 20,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6454
+    },
+    {
+      "file": "iframe-editor.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2108
+    },
+    {
+      "file": "iframe-navigation.spec.js",
+      "expected": 39,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 20350
+    },
+    {
+      "file": "iframe-player.spec.js",
+      "expected": 24,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 36090
+    },
+    {
+      "file": "iframe.spec.js",
+      "expected": 58,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 24596
+    },
+    {
+      "file": "initialization.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1942
+    },
+    {
+      "file": "input-closeout.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1628
+    },
+    {
+      "file": "jassub-hybrid.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1252
+    },
+    {
+      "file": "jassub-lifecycle.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3325
+    },
+    {
+      "file": "jassub-native.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5018
+    },
+    {
+      "file": "jassub-platform.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2111
+    },
+    {
+      "file": "jassub-render-failure.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 669
+    },
+    {
+      "file": "library-development.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5245
+    },
+    {
+      "file": "lifecycle.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1632
+    },
+    {
+      "file": "listener-registry.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2101
+    },
+    {
+      "file": "media-events.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1942
+    },
+    {
+      "file": "media-gate-native.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 16114
+    },
+    {
+      "file": "media-hosts.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 817
+    },
+    {
+      "file": "mediabunny-audio.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6048
+    },
+    {
+      "file": "mediabunny-capability.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 5062
+    },
+    {
+      "file": "mediabunny-dpip.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 12978
+    },
+    {
+      "file": "mediabunny-entry.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1207
+    },
+    {
+      "file": "mediabunny-hls.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8325
+    },
+    {
+      "file": "mediabunny-inputs.spec.js",
+      "expected": 18,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 15352
+    },
+    {
+      "file": "mediabunny-load.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2698
+    },
+    {
+      "file": "mediabunny-shim.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 712
+    },
+    {
+      "file": "mediabunny-video.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2777
+    },
+    {
+      "file": "mediabunny.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2189
+    },
+    {
+      "file": "multiple-subtitles-ass.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2918
+    },
+    {
+      "file": "multiple-subtitles-combinations.spec.js",
+      "expected": 19,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 11989
+    },
+    {
+      "file": "multiple-subtitles-entities.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1030
+    },
+    {
+      "file": "multiple-subtitles-history.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1931
+    },
+    {
+      "file": "multiple-subtitles-legacy.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1402
+    },
+    {
+      "file": "multiple-subtitles-lifecycle.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4773
+    },
+    {
+      "file": "multiple-subtitles-switch.spec.js",
+      "expected": 9,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7559
+    },
+    {
+      "file": "notice.spec.js",
+      "expected": 13,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2863
+    },
+    {
+      "file": "options.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1734
+    },
+    {
+      "file": "playback-properties.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 740
+    },
+    {
+      "file": "playback.spec.js",
+      "expected": 4,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3692
+    },
+    {
+      "file": "plugins.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 879
+    },
+    {
+      "file": "pointer-events.spec.js",
+      "expected": 10,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2080
+    },
+    {
+      "file": "progress-quality.spec.js",
+      "expected": 14,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6205
+    },
+    {
+      "file": "prompt-components.spec.js",
+      "expected": 15,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2892
+    },
+    {
+      "file": "resource-scope.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 195
+    },
+    {
+      "file": "runtime-types.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 840
+    },
+    {
+      "file": "screenshot.spec.js",
+      "expected": 13,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6415
+    },
+    {
+      "file": "setting-interaction.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2390
+    },
+    {
+      "file": "setting-ownership.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1223
+    },
+    {
+      "file": "setting-update.spec.js",
+      "expected": 16,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2703
+    },
+    {
+      "file": "setting.spec.js",
+      "expected": 29,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8147
+    },
+    {
+      "file": "site-editor.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 8562
+    },
+    {
+      "file": "site-loading.spec.js",
+      "expected": 7,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3352
+    },
+    {
+      "file": "site-vendor.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1169
+    },
+    {
+      "file": "slider-updates.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 4752
+    },
+    {
+      "file": "source-intent.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 6272
+    },
+    {
+      "file": "source.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 3112
+    },
+    {
+      "file": "storage-performance.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1940
+    },
+    {
+      "file": "subtitle-lifecycle.spec.js",
+      "expected": 27,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 7012
+    },
+    {
+      "file": "subtitle-offset-native.spec.js",
+      "expected": 3,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 685
+    },
+    {
+      "file": "subtitle-offset.spec.js",
+      "expected": 2,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1925
+    },
+    {
+      "file": "template-resources.spec.js",
+      "expected": 12,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2415
+    },
+    {
+      "file": "thumbnail-editor-types.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 896
+    },
+    {
+      "file": "thumbnail-emitter.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 158
+    },
+    {
+      "file": "thumbnail-input.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 204
+    },
+    {
+      "file": "thumbnail-native.spec.js",
+      "expected": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 189
+    },
+    {
+      "file": "thumbnail-tool.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 13424
+    },
+    {
+      "file": "thumbnails.spec.js",
+      "expected": 8,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2429
+    },
+    {
+      "file": "utils.spec.js",
+      "expected": 5,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1009
+    },
+    {
+      "file": "vast.spec.js",
+      "expected": 39,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 14059
+    },
+    {
+      "file": "vconsole-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 1241
+    },
+    {
+      "file": "vtt-thumbnail-combinations.spec.js",
+      "expected": 17,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 15536
+    },
+    {
+      "file": "vtt-thumbnail-lifecycle.spec.js",
+      "expected": 6,
+      "unexpected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "durationMs": 2052
+    }
+  ],
+  "failures": [
+    {
+      "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+      "file": "dash-sdk.spec.js",
+      "line": 212,
+      "status": "unexpected",
+      "results": [
+        {
+          "status": "failed",
+          "duration": 11360,
+          "errors": [
+            {
+              "location": {
+                "file": "D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js",
+                "column": 82,
+                "line": 285
+              },
+              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  283 |     })\n  284 |     await page.locator('#play').click()\n> 285 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  286 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  287 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  288 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:285:82"
+            }
+          ],
+          "files": [
+            {
+              "name": "screenshot",
+              "file": "refactor/.cache/ci-source-chromium-full-report/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/test-failed-1.png",
+              "sha256": "fc59193858bbfaa3f6e66d63643c0491e462849e234e5af3e1d037ea8c48ad63"
+            },
+            {
+              "name": "error-context",
+              "file": "refactor/.cache/ci-source-chromium-full-report/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/error-context.md",
+              "sha256": "eb1e0d68efb8e86073a8ca43177f9dacb973c6c0c6703db0f93a4d116c058d33"
+            },
+            {
+              "name": "trace",
+              "file": "refactor/.cache/ci-source-chromium-full-report/results/dash-sdk-dash-js-4-5-2-nat-cf307-used-seek-without-ArtPlayer-chromium/trace.zip",
+              "sha256": "6f147141ba0f64518e3201ede8dcb58e0e926477ed7f01b12b00314b207dda57"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "skips": [],
+  "capabilities": [
+    {
+      "title": "MediaBunny candidate-source: published core decoder capability video-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "controlled-unsupported-track-rejected-before-readiness"
+    },
+    {
+      "title": "MediaBunny candidate-source: published core decoder capability audio-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "controlled-unsupported-track-rejected-before-readiness"
+    },
+    {
+      "title": "MediaBunny candidate-source: published core decoder capability mixed-video-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "native-partial-decoder-playback-with-controlled-unsupported-track"
+    },
+    {
+      "title": "MediaBunny candidate-source: published core decoder capability mixed-audio-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "native-partial-decoder-playback-with-controlled-unsupported-track"
+    },
+    {
+      "title": "MediaBunny candidate-source: published core decoder capability replacement",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "controlled-unsupported-track-rejected-before-readiness"
+    },
+    {
+      "title": "MediaBunny candidate-source: candidate core decoder capability video-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "controlled-unsupported-track-rejected-before-readiness"
+    },
+    {
+      "title": "MediaBunny candidate-source: candidate core decoder capability audio-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "controlled-unsupported-track-rejected-before-readiness"
+    },
+    {
+      "title": "MediaBunny candidate-source: candidate core decoder capability mixed-video-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "native-partial-decoder-playback-with-controlled-unsupported-track"
+    },
+    {
+      "title": "MediaBunny candidate-source: candidate core decoder capability mixed-audio-unsupported",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "native-partial-decoder-playback-with-controlled-unsupported-track"
+    },
+    {
+      "title": "MediaBunny candidate-source: candidate core decoder capability replacement",
+      "file": "mediabunny-capability.spec.js",
+      "attachment": "mediabunny-capability",
+      "outcome": "controlled-unsupported-track-rejected-before-readiness"
+    },
+    {
+      "title": "MediaBunny published-1.0.0: native hls input and seek baseline",
+      "file": "mediabunny-inputs.spec.js",
+      "attachment": "mediabunny-native-input",
+      "outcome": "historical-unsupported-hls-control"
+    }
+  ],
+  "suiteErrors": [],
+  "limitations": [
+    "Complete Chromium source collection only; no Firefox or WebKit full-source execution in this report.",
+    "Source scope includes explicit historical, controlled API and committed artifact cases; not every passing case represents a new production path or native capability.",
+    "API unavailable outcomes and skips retain distinct records; they do not prove playback support.",
+    "Native model/SDK and published-package baselines retain their explicit historical differences.",
+    "Actual Actions OS matrix, physical devices and release readiness remain unverified."
+  ]
+}

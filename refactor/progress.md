@@ -1,5 +1,17 @@
 # 进度与证据
 
+## CI-01 Chromium 完整源码范围回归检查点
+
+固定fc566f14d源码、Node24.21.0/Yarn1.22.22，完整152文件1481项，双worker运行
+839.637秒：1480通过、1失败、0跳过/重试，最终退出1。唯一失败为dash.js4.5.2
+不接ArtPlayer的原生对照，在稳定暂停seek=6后停滞；与DASH-SEEK-01根因一致，
+补充复现证据但风险仍open。没有诊断补丁/合成事件/改变目标或覆盖原始失败。
+见[变更](changes/2026-09-14-CI-01-source-chromium.md)和
+[证据](baselines/ci-source-chromium-validation.json)。source包含历史/受控/已有
+产物对照，不把通过总数当原生能力总数。其他引擎完整source、远端Actions、
+设备仍未验收；下一步继续DASH兼容处置及候选输入来源审查。259项状态不变：
+190 done、20 doing、49 todo。没有生产代码/依赖修改、push、部署或发布。
+
 ## CI-01 五包安装范围完整回归检查点
 
 HEAD 37ebb7a03 上执行无文件/项目过滤的 installed suite，双worker三引擎，

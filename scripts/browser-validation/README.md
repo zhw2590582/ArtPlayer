@@ -5,6 +5,13 @@ three-engine configuration. The launcher clears only ARTPLAYER_BROWSER_ARTIFACTS
 from the child environment, so an installed-core map inherited from CI cannot
 mislabel source/explicit-vendor SDK tests. The caller's environment is untouched.
 Other deliberate fixture switches retain their existing meaning.
+The complete Chromium source collection at the recorded checkpoint executed
+1,481 cases in 152 files: 1,480 passed and the original dash.js 4.5.2 native seek
+control failed with exit 1. See
+`../../refactor/baselines/ci-source-chromium-validation.json`; this is evidence of
+the open DASH-SEEK-01 issue, not a green full CI or all-engine result. Source scope
+also retains explicit historical and committed-artifact cases; its name does not
+promise that every dependency is rebuilt from current source in every test.
 
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
 `yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas,artplayer-plugin-document-pip`.
