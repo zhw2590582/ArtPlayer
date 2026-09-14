@@ -97,3 +97,12 @@ controlled SDK lifecycle file with actual core DOM/local media; it does not run
 a Cast receiver. VAST controlled tests externalize and replace a dependency, so
 they are not advertised as installed bundle coverage. Its real IMA suite retains
 its independent gate. See ../../refactor/changes/2026-09-15-CI-01-asr-cast-installed.md.
+
+MediaBunny adds ten files using the installed proxy and its bundled SDK; native
+Document PiP combinations also record the verified PiP package identity. The
+runner rejects ARTPLAYER_MB_BROWSER_CANDIDATE=1 in installed mode, retaining
+historical controls, and the loader rejects frozen-workspace/artifact overrides.
+Available-input attachments list possible inputs; per-observation provenance
+identifies the selected one. Native media/decoding, controlled races, API absence
+and physical/long-run verification remain separate. See
+../../refactor/changes/2026-09-15-CI-01-mediabunny-installed.md for actual results.

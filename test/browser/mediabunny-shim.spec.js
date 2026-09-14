@@ -3,6 +3,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 for (const scenario of ['callback', 'destroy', 'independent']) {
   test(`MediaBunny ${implementation.name}: native synthetic RAF ${scenario}`, async ({ page }, testInfo) => {
     await page.goto('/test/player.html?core=published')
@@ -44,6 +49,6 @@ for (const scenario of ['callback', 'destroy', 'independent']) {
     expect(result.idType).toBe('number')
     expect(result.listeners).toBe(0)
     expect(result.calls).toEqual(scenario === 'callback' ? [{ owner: 'first', time: 'number', mediaTime: 0, presentedFrames: 0 }] : scenario === 'independent' ? [{ owner: 'second' }] : [])
-    await testInfo.attach('mediabunny-shim-frames', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), scenario, result, scope: 'Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed.' }) })
+    await testInfo.attach('mediabunny-shim-frames', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), scenario, result, scope: 'Real browser requestAnimationFrame and actual proxy instances; synthetic metadata is preserved, no decoding or video frame accuracy is claimed.' }) })
   })
 }

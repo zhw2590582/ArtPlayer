@@ -3,6 +3,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 for (const scenario of ['pause-frame', 'seek-source', 'seek-newer', 'timeupdate-pause', 'seek-pool']) {
   test(`MediaBunny ${implementation.name}: native video ownership ${scenario}`, async ({ page, browserName }, testInfo) => {
     await page.goto('/test/player.html?core=published')
@@ -212,7 +217,7 @@ for (const scenario of ['pause-frame', 'seek-source', 'seek-newer', 'timeupdate-
       expect(state.frames).toBe(0)
       await expect.poll(() => page.evaluate(() => window.mbCleanupContext?.state || 'not-created')).toMatch(/^(?:closed|not-created)$/)
       state.audioContext = await page.evaluate(() => window.mbCleanupContext?.state || 'not-created')
-      await testInfo.attach('mediabunny-video-ownership', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), scenario, outcome, result, state, scope: 'Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec.' }) })
+      await testInfo.attach('mediabunny-video-ownership', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), scenario, outcome, result, state, scope: 'Actual SDK MP4 decoding and browser clock/RAF; frame delivery or two raw VideoSample deliveries before CanvasSink conversion control interleaving. Source/seek ownership, pause and timeupdate reentry verified; not long-run AV sync or a mock codec.' }) })
     }
   })
 }

@@ -6,6 +6,11 @@ import { tracklessMp4 } from '../helpers/trackless-mp4.js'
 import { expect, test } from './fixtures.js'
 
 const implementations = await mbBrowserImplementations()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify(implementations.map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
 const hls = new Map(Object.entries(manifest.files).map(([name, expected]) => {
   const bytes = fs.readFileSync(new URL(`./media/hls/${name}`, import.meta.url))
@@ -237,7 +242,7 @@ for (const implementation of implementations) {
         await expect.poll(() => page.evaluate(() => window.mbContext?.state || 'not-created')).toMatch(/^(?:closed|not-created)$/)
         expect(await page.evaluate(() => window.mbPendingFrames.size)).toBe(0)
         const cleanup = await page.evaluate(() => ({ audioContext: window.mbContext?.state || 'not-created', pendingFrames: window.mbPendingFrames.size, streamCancelled: window.mbStreamCancelled || false }))
-        await testInfo.attach('mediabunny-native-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), input, capabilities, outcome, state, cleanup, hlsManifest: input === 'hls' ? manifest : null, tracklessFixture: input === 'trackless' ? { parentSha256: hash(pattern), sha256: hash(trackless) } : null, scope: 'Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance.' }) })
+        await testInfo.attach('mediabunny-native-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), input, capabilities, outcome, state, cleanup, hlsManifest: input === 'hls' ? manifest : null, tracklessFixture: input === 'trackless' ? { parentSha256: hash(pattern), sha256: hash(trackless) } : null, scope: 'Identified proxy with native browser media and controlled ArtPlayer host using actual core utilities/config; frame timestamps sampled against the SDK audio clock, not acoustic/long-run AV-sync acceptance. Cleanup checks settled playback, not pending-operation races. Candidate trackless rejection is checked separately before decoder setup; this is not full release acceptance.' }) })
       }
     })
   }

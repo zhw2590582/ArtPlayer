@@ -5,6 +5,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
 const media = new Map(Object.entries(manifest.files).map(([name, expected]) => {
   const bytes = fs.readFileSync(new URL(`./media/hls/${name}`, import.meta.url))
@@ -196,7 +201,7 @@ for (const core of ['published', 'candidate']) {
           return { events: window.mbEvents, errors: window.mbErrors, writes: window.mbWrites, error: window.mbCanvas.error, destroyed: window.mbCanvas.engine.destroyed }
         })
         await expect.poll(() => page.evaluate(() => window.mbContext?.state || 'not-created')).toMatch(/^(?:closed|not-created)$/)
-        await testInfo.attach('mediabunny-hls-ui', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), core, scenario, capabilities, outcome, result, state, scope: 'Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Not installed-package or long-run/device acceptance.' }) })
+        await testInfo.attach('mediabunny-hls-ui', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), core, scenario, capabilities, outcome, result, state, scope: 'Actual old/candidate core, SDK HLS parsing and native decoding; rendered control/settings clicks, topology and controlled state/query delays. Input provenance identifies source or installed bundle; not long-run/device acceptance.' }) })
       }
     })
   }

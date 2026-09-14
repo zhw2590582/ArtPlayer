@@ -5,6 +5,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
 const hls = new Map(Object.entries(manifest.files).map(([name, expected]) => {
   const bytes = fs.readFileSync(new URL(`./media/hls/${name}`, import.meta.url))
@@ -111,7 +116,7 @@ for (const core of ['published', 'candidate']) {
       }
       finally {
         await page.evaluate(() => window.art?.destroy(false))
-        await testInfo.attach('mediabunny-capability', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), core, scenario, capabilities, outcome, result, scope: 'Actual SDK parsing, Canvas, Web Audio and two cores. canDecode=false is deliberately controlled for selected tracks; partial cases play the remaining native decoder. Windows WebKit missing APIs is a separate control, not playback.' }) })
+        await testInfo.attach('mediabunny-capability', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), core, scenario, capabilities, outcome, result, scope: 'Actual SDK parsing, Canvas, Web Audio and two cores. canDecode=false is deliberately controlled for selected tracks; partial cases play the remaining native decoder. Windows WebKit missing APIs is a separate control, not playback.' }) })
       }
     })
   }

@@ -315,3 +315,20 @@ races using the actual new/old cores and SDK with controlled query ordering. PKG
 validation. PKG-MB-10 owns the demo, installed package and MPL/source notice gate.
 Windows WebKit without WebCodecs/Web Audio is recorded as a capability failure,
 not successful playback or a claim about all Safari installations.
+
+## Installed browser validation
+
+Run `yarn test:package --browser`, then pass its browser-artifacts.json as
+ARTPLAYER_BROWSER_ARTIFACTS to `yarn test:browser:installed mediabunny`. The shared
+roster includes this proxy and Document PiP. All ten MediaBunny browser files use
+the verified installed UMD, including its bundled SDK; they never silently rebuild
+a candidate when an installed map exists. Baseline and artifact overrides are
+rejected in installed mode; its runner also rejects the candidate-only flag so
+historical controls stay present. Source mode retains these explicit diagnostics.
+
+Available-input attachments are an inventory, not proof that every listed input
+ran. Each observation identifies the selected implementation and its provenance;
+PiP combinations identify both packages. Local MP4/WebM/HLS fixtures remain test
+media, not npm assets. Actual decoding, controlled races/unsupported decoder
+branches, missing browser APIs and physical device evidence stay distinct. This
+CI coverage does not close PKG-MB-09/10 or establish long-run/acoustic acceptance.

@@ -3,6 +3,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 for (const ending of ['destroy', 'source', 'timeout']) {
   test(`MediaBunny ${implementation.name}: native pending stream cancelled by ${ending}`, async ({ page }, testInfo) => {
     await page.goto('/test/player.html?core=published')
@@ -57,7 +62,7 @@ for (const ending of ['destroy', 'source', 'timeout']) {
         await expect.poll(() => page.evaluate(() => window.mbReplacement.locked)).toBe(true)
       await page.evaluate(() => window.mbHost.emit('destroy'))
       await expect.poll(() => page.evaluate(() => window.mbCancelled)).toEqual(ending === 'source' ? ['old', 'new'] : ['old'])
-      await testInfo.attach('mediabunny-load-cancellation', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), ending, state, cancellations: await page.evaluate(() => window.mbCancelled), scope: 'Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup.' }) })
+      await testInfo.attach('mediabunny-load-cancellation', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), ending, state, cancellations: await page.evaluate(() => window.mbCancelled), scope: 'Real browser ReadableStream and actual SDK Input disposal before first media bytes; real timeout; controlled ArtPlayer host; does not assert decoder, late frame or audio-node cleanup.' }) })
     }
     finally {
       await page.evaluate(() => window.mbHost.emit('destroy'))

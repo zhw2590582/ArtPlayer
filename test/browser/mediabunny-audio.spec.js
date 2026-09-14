@@ -5,6 +5,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
 const hls = new Map(Object.entries(manifest.files).map(([name, expected]) => {
   const bytes = fs.readFileSync(new URL(`./media/hls/${name}`, import.meta.url))
@@ -248,7 +253,7 @@ for (const scenario of ['playback', 'buffer-pause', 'buffer-rate', 'resume-pause
         expect(await page.evaluate(() => window.mbCanvas.engine.audio.queuedNodes.size)).toBe(0)
       }
       const state = await page.evaluate(() => ({ context: window.mbContext?.state, nodes: window.mbNodes.map(record => ({ stops: record.stops, disconnects: record.disconnects, starts: record.starts })), error: window.mbCanvas.error, events: window.mbEvents }))
-      await testInfo.attach('mediabunny-audio', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), scenario, capabilities, outcome, result, state, scope: 'Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09.' }) })
+      await testInfo.attach('mediabunny-audio', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), scenario, capabilities, outcome, result, state, scope: 'Native AudioContext, BufferSourceNodes and SDK decode. Delayed resume/buffer delivery is controlled. AV samples compare decoded canvas timestamps to the audio clock over short 1x/2x playback; acoustic output, long-run drift and physical devices remain MB-09.' }) })
     }
   })
 }

@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import assert from 'node:assert/strict'
 
 export type BrowserScope = 'source' | 'installed'
-export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast']
+export const installedPackages = ['artplayer', 'artplayer-plugin-chapter', 'artplayer-plugin-ambilight', 'artplayer-proxy-canvas', 'artplayer-plugin-document-pip', 'artplayer-plugin-ads', 'artplayer-plugin-audio-track', 'artplayer-plugin-vtt-thumbnail', 'artplayer-plugin-multiple-subtitles', 'artplayer-plugin-hls-control', 'artplayer-plugin-dash-control', 'artplayer-plugin-auto-thumbnail', 'artplayer-plugin-asr', 'artplayer-plugin-chromecast', 'artplayer-proxy-mediabunny']
 export const installedTests = [
   'playback.spec.js',
   'lifecycle.spec.js',
@@ -43,6 +43,16 @@ export const installedTests = [
   'asr-capture-cors.spec.js',
   'asr-audio-track.spec.js',
   'chromecast-lifecycle.spec.js',
+  'mediabunny-audio.spec.js',
+  'mediabunny-capability.spec.js',
+  'mediabunny-dpip.spec.js',
+  'mediabunny-entry.spec.js',
+  'mediabunny-hls.spec.js',
+  'mediabunny-inputs.spec.js',
+  'mediabunny-load.spec.js',
+  'mediabunny-shim.spec.js',
+  'mediabunny-video.spec.js',
+  'mediabunny.spec.js',
 ]
 
 export function browserInvocation(scope: string, args: string[], environment: NodeJS.ProcessEnv) {
@@ -54,6 +64,7 @@ export function browserInvocation(scope: string, args: string[], environment: No
   }
   else {
     assert(env.ARTPLAYER_BROWSER_ARTIFACTS, 'Installed browser checks require ARTPLAYER_BROWSER_ARTIFACTS')
+    assert(env.ARTPLAYER_MB_BROWSER_CANDIDATE !== '1', 'Installed browser checks must retain MediaBunny historical controls')
     assert(!env.ARTPLAYER_DASH_DIAGNOSTIC_SDK || env.ARTPLAYER_DASH_DIAGNOSTIC_SDK === 'none', 'Installed browser checks require the unchanged DASH SDK')
     assert(!['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'].some(name => env[name] === '1'), 'Installed browser checks cannot use DASH recovery diagnostics')
   }

@@ -13,6 +13,7 @@ import { autoThumbnailCandidate } from './helpers/auto-thumbnail.js'
 import { browserCandidate } from './helpers/browser-candidate.js'
 import { canvasCandidate } from './helpers/canvas.js'
 import { dpipCandidate } from './helpers/dpip.js'
+import { mbCandidate } from './helpers/mediabunny.js'
 import { multipleSubtitlesCandidate } from './helpers/multiple-subtitles.js'
 import { vttThumbnailCandidate } from './helpers/vtt-thumbnail.js'
 
@@ -32,6 +33,7 @@ test('Additional browser packages cannot be mistaken for full release consumer a
 test('Explicit installed plugin maps never fall back to source or frozen workspace', async () => {
   const keys = ['ARTPLAYER_BROWSER_ARTIFACTS', 'ARTPLAYER_AMBILIGHT_BASELINE', 'ARTPLAYER_CANVAS_BASELINE', 'ARTPLAYER_DPIP_BASELINE', 'ARTPLAYER_DPIP_ARTIFACT', 'ARTPLAYER_VTT_THUMBNAIL_BASELINE', 'ARTPLAYER_VTT_THUMBNAIL_ARTIFACT', 'ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT']
   keys.push('ARTPLAYER_AUTO_THUMBNAIL_BASELINE', 'ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT')
+  keys.push('ARTPLAYER_MB_BASELINE', 'ARTPLAYER_MB_ARTIFACT')
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   try {
     process.env.ARTPLAYER_BROWSER_ARTIFACTS = path.resolve('refactor/.cache/absent-installed-plugin-map.json')
@@ -45,6 +47,14 @@ test('Explicit installed plugin maps never fall back to source or frozen workspa
     delete process.env.ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT
     delete process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE
     delete process.env.ARTPLAYER_AUTO_THUMBNAIL_ARTIFACT
+    delete process.env.ARTPLAYER_MB_BASELINE
+    delete process.env.ARTPLAYER_MB_ARTIFACT
+    await assert.rejects(mbCandidate(), { code: 'ENOENT' })
+    process.env.ARTPLAYER_MB_BASELINE = '1'
+    await assert.rejects(mbCandidate(), /cannot use the frozen workspace/)
+    delete process.env.ARTPLAYER_MB_BASELINE
+    process.env.ARTPLAYER_MB_ARTIFACT = 'override.js'
+    await assert.rejects(mbCandidate(), /cannot override artplayer-proxy-mediabunny artifact/)
     await assert.rejects(autoThumbnailCandidate(), { code: 'ENOENT' })
     process.env.ARTPLAYER_AUTO_THUMBNAIL_BASELINE = '1'
     await assert.rejects(autoThumbnailCandidate(), /cannot use the frozen workspace/)

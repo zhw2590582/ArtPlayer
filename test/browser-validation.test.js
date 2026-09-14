@@ -33,6 +33,9 @@ test('Browser invocation rejects ambiguous scopes and output/configuration overr
 
 test('Installed validation rejects diagnostic SDK substitutions and recovery probes', () => {
   const base = { ARTPLAYER_BROWSER_ARTIFACTS: '/installed/map.json' }
+  const candidateOnly = { ...base, ARTPLAYER_MB_BROWSER_CANDIDATE: '1' }
+  assert.throws(() => browserInvocation('installed', [], candidateOnly), /retain MediaBunny historical controls/)
+  assert.equal(browserInvocation('source', [], candidateOnly).env.ARTPLAYER_MB_BROWSER_CANDIDATE, '1')
   for (const mode of ['upstream4', 'bufferlevel4']) {
     const env = { ...base, ARTPLAYER_DASH_DIAGNOSTIC_SDK: mode }
     assert.throws(() => browserInvocation('installed', [], env), /unchanged DASH SDK/)

@@ -4,6 +4,10 @@ import { expect, test } from './fixtures.js'
 
 const implementations = await mbBrowserImplementations()
 
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify(implementations.map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 for (const implementation of implementations) {
   test(`MediaBunny ${implementation.name}: native MP4 playback or exact Windows WebKit capability failure`, async ({ page, browserName }, testInfo) => {
     await page.goto('/test/player.html?core=published')
@@ -65,7 +69,7 @@ for (const implementation of implementations) {
         const canvas = window.art.video
         return { events: window.mbEvents, actions: window.mbActions, ready: window.art.isReady, dimensions: [canvas.width, canvas.height, canvas.videoWidth, canvas.videoHeight], paused: canvas.paused, currentTime: canvas.currentTime, error: canvas.error, readyState: canvas.readyState, audioState: canvas.engine?.audio?.audioContext?.state }
       })
-      await testInfo.attach('mediabunny-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), capabilities, outcome, state, scope: 'Identified published or candidate proxy with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No HLS or long-run AV-sync acceptance.' }) })
+      await testInfo.attach('mediabunny-input', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), capabilities, outcome, state, scope: 'Identified published or candidate proxy with actual core5.4.0; native MP4 pixels/clock or explicitly unsupported Windows WebKit APIs. No HLS or long-run AV-sync acceptance.' }) })
       await page.evaluate(() => window.art.destroy(false))
     }
   })

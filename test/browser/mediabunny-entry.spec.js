@@ -3,6 +3,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 for (const core of ['published', 'candidate']) {
   for (const scenario of ['native-cleanup', 'replacement']) {
     test(`MediaBunny ${implementation.name}: ${core} core native Canvas entry ${scenario}`, async ({ page }, testInfo) => {
@@ -66,7 +71,7 @@ for (const core of ['published', 'candidate']) {
       }, scenario)
       expect(result.before).toEqual({ identity: true, context: true, width: 640, clickCount: 1, source: null, attribute: 'native-only.mp4', volume: 0.35, style: '100%', maybe: 'maybe' })
       expect(result.cleanup).toEqual({ released: [true, true, true], destroyed: true, styleAfter: '43px', alias: true })
-      await testInfo.attach('mediabunny-entry', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, sha256: hash(implementation.code), core, scenario, result, scope: 'Actual browser Canvas descriptors and published/candidate core lifecycle. Empty source deliberately excludes decoding; existing media suites cover playback separately.' }) })
+      await testInfo.attach('mediabunny-entry', { contentType: 'application/json', body: JSON.stringify({ implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), core, scenario, result, scope: 'Actual browser Canvas descriptors and published/candidate core lifecycle. Empty source deliberately excludes decoding; existing media suites cover playback separately.' }) })
     })
   }
 }

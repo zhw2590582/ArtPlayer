@@ -1,16 +1,18 @@
-import fs from 'node:fs'
+import assert from 'node:assert/strict'
 import process from 'node:process'
 import vm from 'node:vm'
 import { verifyMbContract } from '../../refactor/scripts/mb-contract.mjs'
 import { readMember } from '../../refactor/scripts/releases.mjs'
-import { compilePackage } from './load.js'
+import { browserCandidate } from './browser-candidate.js'
 
 export async function mbCandidate() {
+  if (process.env.ARTPLAYER_BROWSER_ARTIFACTS)
+    assert.notEqual(process.env.ARTPLAYER_MB_BASELINE, '1', 'Installed candidate cannot use the frozen workspace')
   if (process.env.ARTPLAYER_MB_BASELINE === '1')
     return (await mbHistorical()).find(item => item.name === 'frozen-workspace')
-  if (process.env.ARTPLAYER_MB_ARTIFACT)
-    return { name: 'candidate-artifact', code: fs.readFileSync(process.env.ARTPLAYER_MB_ARTIFACT, 'utf8') }
-  return { name: 'candidate-source', code: await compilePackage('artplayer-proxy-mediabunny', 'umd') }
+  const candidate = await browserCandidate('artplayer-proxy-mediabunny', process.env.ARTPLAYER_MB_ARTIFACT)
+  const suffix = { 'installed': 'installed', 'explicit-artifact': 'artifact', 'source-build': 'source' }[candidate.provenance.kind]
+  return { name: `candidate-${suffix}`, ...candidate }
 }
 
 export async function mbBrowserImplementations() {

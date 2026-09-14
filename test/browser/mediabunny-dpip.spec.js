@@ -6,6 +6,11 @@ import { mbCandidate } from '../helpers/mediabunny.js'
 import { expect, test } from './fixtures.js'
 
 const implementation = await mbCandidate()
+
+test.beforeEach(async ({ browserName }, testInfo) => {
+  await testInfo.attach('mediabunny-available-inputs', { contentType: 'application/json', body: JSON.stringify([implementation].map(item => ({ browserName, name: item.name, sha256: hash(item.code), provenance: item.provenance || { kind: item.name } }))) })
+})
+
 const dpip = await dpipCandidate()
 const manifest = JSON.parse(fs.readFileSync(new URL('./media/hls/manifest.json', import.meta.url)))
 const hls = new Map(Object.entries(manifest.files).map(([name, expected]) => {
@@ -25,7 +30,7 @@ for (const core of ['published', 'candidate']) {
         await page.goto(`/test/player.html?core=${core}`)
         const supported = await page.evaluate(() => typeof window.documentPictureInPicture?.requestWindow === 'function')
         if (!supported) {
-          await testInfo.attach('mediabunny-dpip', { contentType: 'application/json', body: JSON.stringify({ core, media, ending, implementation: implementation.name, sha256: hash(implementation.code), dpipSha256: hash(dpip.code), outcome: 'native-document-pip-unavailable', browserName, supported }) })
+          await testInfo.attach('mediabunny-dpip', { contentType: 'application/json', body: JSON.stringify({ core, media, ending, implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), dpipSha256: hash(dpip.code), dpipProvenance: dpip.provenance || { kind: dpip.name, sha256: hash(dpip.code) }, outcome: 'native-document-pip-unavailable', browserName, supported }) })
           return
         }
         for (const [code, global] of [[implementation.code, 'mbFactory'], [dpip.code, 'dpipFactory']]) {
@@ -98,7 +103,7 @@ for (const core of ['published', 'candidate']) {
           }
           result = await page.evaluate(() => ({ events: window.mbPipEvents, placeholders: document.querySelectorAll('.artplayer-document-pip-placeholder').length, nativeWindowClosed: !window.documentPictureInPicture.window || window.documentPictureInPicture.window.closed }))
           expect(result).toEqual({ events: ending === 'destroy' ? [true] : [true, false], placeholders: 0, nativeWindowClosed: true })
-          await testInfo.attach('mediabunny-dpip', { contentType: 'application/json', body: JSON.stringify({ core, media, ending, implementation: implementation.name, sha256: hash(implementation.code), dpipSha256: hash(dpip.code), outcome: 'native-document-pip-canvas-playback', before, result, scope: 'Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP.' }) })
+          await testInfo.attach('mediabunny-dpip', { contentType: 'application/json', body: JSON.stringify({ core, media, ending, implementation: implementation.name, provenance: implementation.provenance, sha256: hash(implementation.code), dpipSha256: hash(dpip.code), dpipProvenance: dpip.provenance || { kind: dpip.name, sha256: hash(dpip.code) }, outcome: 'native-document-pip-canvas-playback', before, result, scope: 'Actual requestWindow from a click, no iframe or API replacement; native Canvas decoding and window lifecycle. HLS includes native audio, and close cases change quality/audio inside PiP.' }) })
         }
         finally {
           await page.evaluate(() => {

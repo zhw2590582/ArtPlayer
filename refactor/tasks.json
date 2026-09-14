@@ -770,7 +770,9 @@
         "changes/2026-09-15-CI-01-adaptive-installed.md",
         "baselines/ci-adaptive-installed-validation.json",
         "changes/2026-09-15-CI-01-asr-cast-installed.md",
-        "baselines/ci-asr-cast-installed-validation.json"
+        "baselines/ci-asr-cast-installed-validation.json",
+        "changes/2026-09-15-CI-01-mediabunny-installed.md",
+        "baselines/ci-mediabunny-installed-validation.json"
       ]
     },
     {
