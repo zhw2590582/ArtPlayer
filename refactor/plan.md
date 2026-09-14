@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 258 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 259 项，范围 22 个包及工作区/示例。
 
-状态：todo 50 / doing 19 / blocked 0 / done 189 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 50 / doing 19 / blocked 0 / done 190 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -31,7 +31,7 @@
 | artplayer-plugin-multiple-subtitles | 1.2.0 | PKG-MULTI-SUB-01, PKG-MULTI-SUB-02, PKG-MULTI-SUB-03, PKG-MULTI-SUB-04, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08, PKG-MULTI-SUB-05, PKG-MULTI-SUB-06, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 |
 | artplayer-plugin-vast | 1.2.0 | PKG-VAST-01, PKG-VAST-02, PKG-VAST-03, PKG-VAST-04, PKG-VAST-05, PKG-VAST-06, PKG-VAST-07 |
 | artplayer-plugin-vtt-thumbnail | 1.1.0 | PKG-VTT-THUMB-01, PKG-VTT-THUMB-02, PKG-VTT-THUMB-03, PKG-VTT-THUMB-04, PKG-VTT-THUMB-05, PKG-VTT-THUMB-06 |
-| artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01 |
+| artplayer-proxy-canvas | 1.1.0 | PKG-AMBILIGHT-PROXY-01, PKG-CANVAS-01, PKG-CANVAS-02, PKG-CANVAS-03, PKG-CANVAS-04, PKG-CANVAS-05, PKG-CANVAS-06, PKG-FACTORY-01, PKG-CANVAS-SUBTITLE-01 |
 | artplayer-proxy-mediabunny | 1.2.0 | PKG-MB-01, PKG-MB-02, PKG-MB-03, PKG-MB-04, PKG-MB-05, PKG-MB-06, PKG-MB-07, PKG-MB-08, PKG-MB-09, PKG-MB-10 |
 | artplayer-tool-iframe | 1.1.0 | PKG-IFRAME-01, PKG-IFRAME-02, PKG-IFRAME-03, PKG-IFRAME-04, PKG-IFRAME-05, PKG-IFRAME-06 |
 | artplayer-tool-thumbnail | 4.4.0 | PKG-TOOL-THUMB-01, PKG-TOOL-THUMB-02, PKG-TOOL-THUMB-03, PKG-TOOL-THUMB-04, PKG-TOOL-THUMB-05, PKG-TOOL-THUMB-06 |
@@ -347,8 +347,9 @@
 | PKG-CANVAS-02 | artplayer-proxy-canvas<br>建立特有行为与错误测试 | PKG-CANVAS-01, ENG-03, ENG-05 | ready/loadeddata/canplay、play/seek、回调、resize 与销毁 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-CANVAS-03 | artplayer-proxy-canvas<br>整理内部职责与资源 | PKG-CANVAS-02, CORE-06, CORE-11, CORE-16 | video adapter/原 canvas 方法/RAF 绘制/事件订阅分离 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-CANVAS-04 | artplayer-proxy-canvas<br>迁移自有源码和公开类型 | PKG-CANVAS-03, ENG-04, ENG-06, CORE-07 | canvas 与媒体能力的精确组合类型，保持 Result | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04, PKG-FACTORY-01 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-CANVAS-05 | artplayer-proxy-canvas<br>验证新旧核心和组合 | PKG-CANVAS-04, CORE-22, PKG-DPIP-04, PKG-FACTORY-01, PKG-CANVAS-SUBTITLE-01 | 真实 video/canvas 绘制、字幕和 document PiP 恢复 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
 | PKG-CANVAS-06 | artplayer-proxy-canvas<br>验证分发并同步文档 | PKG-CANVAS-05, ENG-07 | canvas.js、三种产物、调用兼容与资源证据 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-CANVAS-SUBTITLE-01 | artplayer-proxy-canvas<br>修复 Canvas 代理原生字幕轨道挂载 | PKG-CANVAS-04 | 初始字幕能力、原生轨道挂载与资源生命周期适配及新旧核心回归 | 复现旧字幕 cues 为空；新旧核心加载、寻址、切换、销毁通过；普通 Canvas 节点行为和分发入口保持兼容 | M | done |
 
 ## 5 包迁移：artplayer-proxy-mediabunny
 
@@ -670,3 +671,4 @@
 - SITE-VCONSOLE-01: [记录](changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md) [记录](baselines/vconsole-lifecycle-validation.json)
 - CI-BROWSER-01: [记录](changes/2026-09-14-CI-BROWSER-01-scopes.md) [记录](baselines/browser-scope-validation.json)
 - PKG-CHAPTER-HOVER-01: [记录](changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md) [记录](baselines/chapter-hover-validation.json)
+- PKG-CANVAS-SUBTITLE-01: [记录](changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md) [记录](baselines/canvas-subtitles-validation.json)

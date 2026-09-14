@@ -75,6 +75,24 @@ export async function canvasEnvironment(implementation, settings = {}) {
     paused: true,
     muted: false,
     style: {},
+    children: [],
+    textTracks: [],
+    appendChild(node) {
+      node.parentNode?.removeChild(node)
+      this.children.push(node)
+      node.parentNode = this
+      if (node.nodeName === 'TRACK')
+        this.textTracks.push(node.track)
+      return node
+    },
+    removeChild(node) {
+      this.children.splice(this.children.indexOf(node), 1)
+      const index = this.textTracks.indexOf(node.track)
+      if (index >= 0)
+        this.textTracks.splice(index, 1)
+      node.parentNode = null
+      return node
+    },
     play(...args) {
       calls.push({ name: 'play', receiver: this, args })
       this.paused = false
@@ -111,7 +129,11 @@ export async function canvasEnvironment(implementation, settings = {}) {
     },
   }
   const art = {
-    constructor: { config: { events: ['loadedmetadata', 'play', 'pause', 'seeked', 'error'] }, utils: { createElement: tag => tag === 'canvas' ? canvas : video } },
+    constructor: { config: { events: ['loadedmetadata', 'play', 'pause', 'seeked', 'error'] }, utils: { createElement: (tag) => {
+      if (tag === 'track')
+        return { nodeName: 'TRACK', nodeType: 1, namespaceURI: 'http://www.w3.org/1999/xhtml', track: { mode: 'disabled', cues: [], activeCues: [] }, remove() { this.parentNode?.removeChild(this) } }
+      return tag === 'canvas' ? canvas : video
+    } } },
     option: { autoSize: false },
     template: { $player: player },
     isDestroy: false,

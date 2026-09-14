@@ -5,6 +5,7 @@ import { hasDimensions, resizeCanvas } from './geometry'
 import { ownMedia } from './media'
 import { createRenderer } from './renderer'
 import { createFrameScheduler } from './scheduler'
+import { forwardSubtitleTrack } from './subtitles'
 
 function artplayerProxyCanvas(callback?: DrawCallback) {
   return (art: Artplayer): HTMLCanvasElement => {
@@ -67,6 +68,7 @@ function artplayerProxyCanvas(callback?: DrawCallback) {
     }
 
     try {
+      forwardSubtitleTrack(canvas, video, constructor.utils.createElement('track'), active)
       listen('destroy', destroy)
       listen('video:loadedmetadata', () => {
         if (hasDimensions(video)) {

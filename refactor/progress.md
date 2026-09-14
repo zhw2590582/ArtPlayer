@@ -1,5 +1,20 @@
 # 进度与证据
 
+## PKG-CANVAS-SUBTITLE-01 原生字幕轨道修复完成
+
+新旧核心三引擎复现 Canvas 字幕为空。先前说明需修正：初始失败中的 $track
+仍在旧模板的 detached video；底层 video 没有初始轨道，核心能力检查直接返回。
+仅路由 appendChild 的尝试仍六项失败；增加无 URL metadata 占位轨道并在首次
+真实轨道插入时替换后，原生字幕正常加载。模块、普通 Canvas 路径、失败回滚、
+销毁边界与包内文档一起更新。实际 npm 1.1.0 对照六项失败，保留旧红新绿。
+源码扩展24通过，安装main/legacy各33通过，最终定向6通过；Node58、安装类型17、
+风险/runner6、严格TS/lint/工具链通过。示例更新且内置浏览器实际显示双语字幕。
+见[变更](changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md)与
+[证据](baselines/canvas-subtitles-validation.json)。259项：190 done、19 doing、50 todo。
+Canvas-05/06及Document PiP/真机未关闭；Auto Thumbnail原生首帧仍待另一后端或
+准确解码路径证据。本机WSL无已安装发行版，未安装系统环境或更改原像素门槛。
+没有push/部署/发布；本任务独立提交后必须通过提交审计再开始下一任务。
+
 ## PKG-CHAPTER-HOVER-01 全屏悬停测试同步完成
 
 原始 installed 224/1 失败保持归档。受控原生进度条移动实验确认立即读取坐标

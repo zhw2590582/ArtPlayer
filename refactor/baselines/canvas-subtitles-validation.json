@@ -1,0 +1,1140 @@
+{
+  "task": "PKG-CANVAS-SUBTITLE-01",
+  "date": "2026-09-14",
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "conclusion": "The backing video lacks the initial track required by the core synchronous subtitle capability check. Adding only appendChild routing is insufficient. An empty native metadata track plus routing real HTML tracks enables native cues without changing core consumers.",
+  "scope": "Actual Canvas and native video/text tracks; old core 5.4.0 and current core, source and verified installed main/legacy, subtitle replacement/seek/cleanup and normal Canvas nodes. No mocked media or cues.",
+  "runs": [
+    {
+      "directory": "refactor/.cache/canvas-subtitles-red-report",
+      "sha256": "62c48389ba2643bb405a18477e317bcf917b97420ba547d5612c49722dab08ab",
+      "stats": {
+        "startTime": "2026-09-14T10:32:01.024Z",
+        "duration": 30681.715999999997,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "0d4ef6ac8df37aa33b6b1bf338f0b8135c709b9840533c9fa9b350deb707e1a1",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.164713
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "0d4ef6ac8df37aa33b6b1bf338f0b8135c709b9840533c9fa9b350deb707e1a1",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.163537
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "0d4ef6ac8df37aa33b6b1bf338f0b8135c709b9840533c9fa9b350deb707e1a1",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.414475
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "0d4ef6ac8df37aa33b6b1bf338f0b8135c709b9840533c9fa9b350deb707e1a1",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.458332
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "0d4ef6ac8df37aa33b6b1bf338f0b8135c709b9840533c9fa9b350deb707e1a1",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.2701148
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "0d4ef6ac8df37aa33b6b1bf338f0b8135c709b9840533c9fa9b350deb707e1a1",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.3426509
+        }
+      ],
+      "failures": [
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "firefox",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "firefox",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "webkit",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "webkit",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-route-only-report",
+      "sha256": "3dd69fb9040c626fa32eeeea2f0c897f0ef7dacd6cc615604c818752532c7edd",
+      "stats": {
+        "startTime": "2026-09-14T10:33:26.462Z",
+        "duration": 31060.009,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "1a5d1c6ed13540b496b7489cfd79e48c2d8f5ab61c48f19494b2936ec7cef7c4",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.164371
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "1a5d1c6ed13540b496b7489cfd79e48c2d8f5ab61c48f19494b2936ec7cef7c4",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.164517
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "1a5d1c6ed13540b496b7489cfd79e48c2d8f5ab61c48f19494b2936ec7cef7c4",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.169545
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "1a5d1c6ed13540b496b7489cfd79e48c2d8f5ab61c48f19494b2936ec7cef7c4",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.455228
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "1a5d1c6ed13540b496b7489cfd79e48c2d8f5ab61c48f19494b2936ec7cef7c4",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.3036606
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "1a5d1c6ed13540b496b7489cfd79e48c2d8f5ab61c48f19494b2936ec7cef7c4",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "backingTracks": 0,
+          "text": "",
+          "time": 0.2724968
+        }
+      ],
+      "failures": [
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "firefox",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "firefox",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "webkit",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "webkit",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  20 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  21 |       await page.click('#pause')\n> 22 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  23 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  24 |       await page.evaluate(() => window.art.currentTime = 3)\n  25 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:22:85"
+          ]
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-bootstrap-report",
+      "sha256": "e8d4bf023079013683aac571558d96130894b3c383d1948713d46d83fdb3124d",
+      "stats": {
+        "startTime": "2026-09-14T10:35:20.365Z",
+        "duration": 10304.928,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "c7038f9e2317fbf24679cb5734f89141d167218352b6ea00981cd6b0a81f6b18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 2,
+          "backingTracks": 1,
+          "text": "\n                                Later caption\n                            ",
+          "time": 3
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "c7038f9e2317fbf24679cb5734f89141d167218352b6ea00981cd6b0a81f6b18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 2,
+          "backingTracks": 1,
+          "text": "\n                                Later caption\n                            ",
+          "time": 3
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "c7038f9e2317fbf24679cb5734f89141d167218352b6ea00981cd6b0a81f6b18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 2,
+          "backingTracks": 1,
+          "text": "\n                                Later caption\n                            ",
+          "time": 3
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "c7038f9e2317fbf24679cb5734f89141d167218352b6ea00981cd6b0a81f6b18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 2,
+          "backingTracks": 1,
+          "text": "\n                                Later caption\n                            ",
+          "time": 3
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "c7038f9e2317fbf24679cb5734f89141d167218352b6ea00981cd6b0a81f6b18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 2,
+          "backingTracks": 1,
+          "text": "\n                                Later caption\n                            ",
+          "time": 3.0013372
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "c7038f9e2317fbf24679cb5734f89141d167218352b6ea00981cd6b0a81f6b18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 2,
+          "backingTracks": 1,
+          "text": "\n                                Later caption\n                            ",
+          "time": 3.0014898
+        }
+      ],
+      "failures": [],
+      "inputs": []
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-expanded-report",
+      "sha256": "400de980fdb957296f27f54042955bc77bcc7fb2d7c70401fd7854c427f94a6a",
+      "stats": {
+        "startTime": "2026-09-14T10:37:14.903Z",
+        "duration": 23013.584000000003,
+        "expected": 24,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "test/browser/canvas-lifecycle.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "84cc55ac620ac5f240119e57cf473b09e197e8e74e012774645d18be9d06472c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "84cc55ac620ac5f240119e57cf473b09e197e8e74e012774645d18be9d06472c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "84cc55ac620ac5f240119e57cf473b09e197e8e74e012774645d18be9d06472c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "84cc55ac620ac5f240119e57cf473b09e197e8e74e012774645d18be9d06472c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-source",
+          "sha256": "84cc55ac620ac5f240119e57cf473b09e197e8e74e012774645d18be9d06472c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0022403
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-source",
+          "sha256": "84cc55ac620ac5f240119e57cf473b09e197e8e74e012774645d18be9d06472c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0018386
+        }
+      ],
+      "failures": [],
+      "inputs": []
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-installed-main-report",
+      "sha256": "43287d7984312bdecc2002db2d97d0e1b02f1968f547feb63c41afff26034164",
+      "stats": {
+        "startTime": "2026-09-14T10:40:33.147Z",
+        "duration": 34399.632999999994,
+        "expected": 33,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "test/browser/canvas-lifecycle.spec.js",
+          "test/browser/ambilight-proxy.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0029913
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.001549
+        }
+      ],
+      "failures": [],
+      "inputs": [
+        {
+          "name": "artplayer",
+          "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+          "member": "package/dist/artplayer.js",
+          "archiveSha256": "b84d2bdfe1d6d625743d274923b8bd21e20d7d180c9c628ded6d61d37a894e2a"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "archiveSha256": "1f6ea40e9a328e3014325e1d88c584a513213cdb1c7d446e5ca4f15efd4dd6a9"
+        },
+        {
+          "name": "artplayer-plugin-ambilight",
+          "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+          "member": "package/dist/artplayer-plugin-ambilight.js",
+          "archiveSha256": "9d5950a513b8fc45090d6c80395622ddbfec2394b2863d788ddbdefce7699ebf"
+        },
+        {
+          "name": "artplayer-proxy-canvas",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "member": "package/dist/artplayer-proxy-canvas.js",
+          "archiveSha256": "128ed15493791a351a5d37882b94e0db3fc444b58c9d194d70756c4f0c99727e"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-installed-legacy-report",
+      "sha256": "b907e4e1f4968e0029ba4e5ee16b3e0a419bcf216211f4fdbfc304abc8f8378c",
+      "stats": {
+        "startTime": "2026-09-14T10:41:35.371Z",
+        "duration": 34319.648,
+        "expected": 33,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "test/browser/canvas-lifecycle.spec.js",
+          "test/browser/ambilight-proxy.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0017797
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0014418
+        }
+      ],
+      "failures": [],
+      "inputs": [
+        {
+          "name": "artplayer",
+          "sha256": "9bde35a6d64234cae15300e37b03204c075ef26126058f48bb3bf97d6e002449",
+          "member": "package/dist/artplayer.legacy.js",
+          "archiveSha256": "b84d2bdfe1d6d625743d274923b8bd21e20d7d180c9c628ded6d61d37a894e2a"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "sha256": "dade919ed044cbf46ac16e505f538f86a86edccf177da2e14d79d111559d4bef",
+          "member": "package/dist/artplayer-plugin-chapter.legacy.js",
+          "archiveSha256": "1f6ea40e9a328e3014325e1d88c584a513213cdb1c7d446e5ca4f15efd4dd6a9"
+        },
+        {
+          "name": "artplayer-plugin-ambilight",
+          "sha256": "c3ed1a54e44a0202811d70378cb19edf87b1ebd010d05fe96ebe64d0b4301d5d",
+          "member": "package/dist/artplayer-plugin-ambilight.legacy.js",
+          "archiveSha256": "9d5950a513b8fc45090d6c80395622ddbfec2394b2863d788ddbdefce7699ebf"
+        },
+        {
+          "name": "artplayer-proxy-canvas",
+          "sha256": "069092ba27b48b7a54affc9c3095b6032c063b1f61c15fcb3249130ea18b9326",
+          "member": "package/dist/artplayer-proxy-canvas.legacy.js",
+          "archiveSha256": "128ed15493791a351a5d37882b94e0db3fc444b58c9d194d70756c4f0c99727e"
+        }
+      ]
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-published-red-report",
+      "sha256": "b9fb5e8a92456e1c8b27f2a83d64c619a9755eddfc887c9eedd24afd21d2fe80",
+      "stats": {
+        "startTime": "2026-09-14T10:47:20.368Z",
+        "duration": 34959.439999999995,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "published-1.1.0",
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "text": "",
+          "time": 0.17707
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "published-1.1.0",
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "text": "",
+          "time": 0.177045
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "published-1.1.0",
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "text": "",
+          "time": 0.172173
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "published-1.1.0",
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "text": "",
+          "time": 0.174608
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "published-1.1.0",
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "text": "",
+          "time": 0.3123099
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "published-1.1.0",
+          "sha256": "ef489570e13f402f1a60eb256ce3900a0021a3d05699c2ba15adfaaeff184d4c",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 3,
+          "cues": 0,
+          "text": "",
+          "time": 0.3491449
+        }
+      ],
+      "failures": [
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  29 |       await page.click('#pause')\n> 30 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  31 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  32 |       await page.evaluate(() => window.art.currentTime = 3)\n  33 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:30:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "chromium",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  29 |       await page.click('#pause')\n> 30 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  31 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  32 |       await page.evaluate(() => window.art.currentTime = 3)\n  33 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:30:85"
+          ]
+        },
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "firefox",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  29 |       await page.click('#pause')\n> 30 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  31 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  32 |       await page.evaluate(() => window.art.currentTime = 3)\n  33 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:30:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "firefox",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  29 |       await page.click('#pause')\n> 30 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  31 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  32 |       await page.evaluate(() => window.art.currentTime = 3)\n  33 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:30:85"
+          ]
+        },
+        {
+          "title": "published: canvas proxy loads and seeks native subtitle cues",
+          "browser": "webkit",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  29 |       await page.click('#pause')\n> 30 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  31 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  32 |       await page.evaluate(() => window.art.currentTime = 3)\n  33 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:30:85"
+          ]
+        },
+        {
+          "title": "candidate: canvas proxy loads and seeks native subtitle cues",
+          "browser": "webkit",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  28 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(0.1)\n  29 |       await page.click('#pause')\n> 30 |       await expect.poll(() => page.evaluate(() => window.art.subtitle.cues.length)).toBe(2)\n     |                                                                                     ^\n  31 |       await expect(page.locator('.art-subtitle')).toHaveText('Opening caption')\n  32 |       await page.evaluate(() => window.art.currentTime = 3)\n  33 |       await expect(page.locator('.art-subtitle')).toHaveText('Later caption')\n    at D:\\github\\ArtPlayer\\test\\browser\\canvas-subtitles.spec.js:30:85"
+          ]
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "directory": "refactor/.cache/canvas-subtitles-final-report",
+      "sha256": "2b586ee30c47f26c47af3a45dcbc97630c347639ce7ae58135aeff7300bbac81",
+      "stats": {
+        "startTime": "2026-09-14T10:48:32.636Z",
+        "duration": 10780.748,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "result": {
+        "scope": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.installed.config.js",
+          "test/browser/canvas-subtitles.spec.js",
+          "--workers=2"
+        ]
+      },
+      "browsers": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0",
+        "webkit": "26.6"
+      },
+      "observations": [
+        {
+          "browser": "chromium",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "chromium",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "firefox",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4
+        },
+        {
+          "browser": "webkit",
+          "core": "published",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0007267
+        },
+        {
+          "browser": "webkit",
+          "core": "candidate",
+          "implementation": "candidate-installed",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "renderer": "CANVAS",
+          "trackParent": "VIDEO",
+          "trackState": 2,
+          "cues": 1,
+          "backingTracks": 1,
+          "text": "\n                                Replacement caption\n                            ",
+          "time": 4.0020694
+        }
+      ],
+      "failures": [],
+      "inputs": [
+        {
+          "name": "artplayer",
+          "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+          "member": "package/dist/artplayer.js",
+          "archiveSha256": "b84d2bdfe1d6d625743d274923b8bd21e20d7d180c9c628ded6d61d37a894e2a"
+        },
+        {
+          "name": "artplayer-plugin-chapter",
+          "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+          "member": "package/dist/artplayer-plugin-chapter.js",
+          "archiveSha256": "1f6ea40e9a328e3014325e1d88c584a513213cdb1c7d446e5ca4f15efd4dd6a9"
+        },
+        {
+          "name": "artplayer-plugin-ambilight",
+          "sha256": "21ee5227f26cfff6e82ee6932f6eafc9741fa3be0ec2f5252a47b53ceea14599",
+          "member": "package/dist/artplayer-plugin-ambilight.js",
+          "archiveSha256": "9d5950a513b8fc45090d6c80395622ddbfec2394b2863d788ddbdefce7699ebf"
+        },
+        {
+          "name": "artplayer-proxy-canvas",
+          "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18",
+          "member": "package/dist/artplayer-proxy-canvas.js",
+          "archiveSha256": "128ed15493791a351a5d37882b94e0db3fc444b58c9d194d70756c4f0c99727e"
+        }
+      ]
+    }
+  ],
+  "package": {
+    "directory": "refactor/.cache/packages/run-j8Po5Y",
+    "reportSha256": "aa9f90e4e73ed9aef60465fdab3e83db6b483979e0e644eed5abce403b283bb8",
+    "runtimeChecksScope": "36 core/chapter checks only; additional Canvas/Ambilight build/pack/install bytes verified separately"
+  },
+  "types": {
+    "directory": "refactor/.cache/canvas-package-types-189k1I",
+    "reportSha256": "9b39556e9bb546349eda3f26214273363a2fff63c01a7692ae9cf07f8e333e31",
+    "cases": 17
+  },
+  "checks": {
+    "canvasUnit": 58,
+    "runnerAndRisks": 6,
+    "strictCanvasTypes": true,
+    "targetedLint": true,
+    "rootLint": "0 errors; 1 existing docs/assets/ts/artplayer.d.ts warning",
+    "demoSyntax": true,
+    "toolchain": true
+  },
+  "demo": {
+    "url": "http://localhost:8082/?libs=./compiled/artplayer-proxy-canvas.js&example=canvas",
+    "browser": "Codex in-app browser",
+    "userAgentEngine": "Chrome/152.0.0.0",
+    "exactBrowserBuild": null,
+    "coreDisplayedVersion": "5.4.1",
+    "canvasCount": 1,
+    "nativeTrackCount": 1,
+    "cues": 34,
+    "playback": "Native currentTime 12.11811, paused false; canvas video image visually confirmed.",
+    "captions": "Fresh UI play showed 星星降落的日子 / 星が降った日 at 00:01; AX and screenshot confirmed both lines.",
+    "limits": [
+      "Browser.getVersion and content export unsupported by in-app backend; screenshot is in the conversation, not a separately hashed file.",
+      "Initial text locator did not match the aria-named play control; AX click succeeded.",
+      "Direct diagnostic native seek returned time 0; it is not claimed as successful demo seeking. Native seek acceptance is in the committed installed tests.",
+      "Temporary tab closed after testing; no permanent injected page code."
+    ],
+    "proxyFile": {
+      "file": "docs/compiled/artplayer-proxy-canvas.js",
+      "sha256": "f572ea536107b7823452c5a99447b69e9226a3582c79dda95a4248cca819ec18"
+    }
+  },
+  "remaining": [
+    "Canvas-05 Document PiP and physical devices",
+    "Canvas-06 full distribution/release acceptance",
+    "Auto-thumbnail native first-frame problem unchanged",
+    "No remote CI, push, deployment or npm publication"
+  ]
+}

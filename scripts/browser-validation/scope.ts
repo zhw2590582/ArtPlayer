@@ -13,6 +13,7 @@ export const installedTests = [
   'ambilight-lifecycle.spec.js',
   'ambilight-proxy.spec.js',
   'canvas-lifecycle.spec.js',
+  'canvas-subtitles.spec.js',
 ]
 
 export function browserInvocation(scope: string, args: string[], environment: NodeJS.ProcessEnv) {

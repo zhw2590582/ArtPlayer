@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`canvas-subtitles.spec.js` covers native track bootstrap/load/seek/replacement and
+cleanup on old/new cores, including ordinary Canvas child operations. It is part
+of both browser scopes. `ARTPLAYER_CANVAS_SUBTITLE_BASELINE=1.1.0` runs the exact
+published proxy as a failing historical control; it cannot be combined with an
+installed candidate map. This is a real media/track test, not a simulated cue list.
+
 Chapter pointer geometry is shared by `chapter-hover.ts` and the combination
 suite. It awaits locator actionability with `hover({ trial: true })` before
 reading coordinates; `art.fullscreen` can become true while controls still move.

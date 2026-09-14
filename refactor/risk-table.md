@@ -272,3 +272,4 @@
 | ENG-PERF-OBS-01 | resolved / 已复现 | A nominal 350 ms resource observation can record only 349 ms and fail the required minimum | ENG-13 |
 | VCONSOLE-LIFECYCLE-01 | resolved / 已复现 | vConsole delayed log, panel and scroller work outlives its owner | SITE-07, SITE-05, SITE-VCONSOLE-01 |
 | CHAPTER-FULLSCREEN-GEOMETRY-01 | resolved / 已复现 | Chromium 原生全屏后章节 hover 标题曾出现后又隐藏 | PKG-CHAPTER-05, PKG-CHAPTER-HOVER-01 |
+| CANVAS-SUBTITLE-01 | resolved / 已复现 | Canvas底层video缺初始字幕轨道且普通Canvas挂载不能加载原生字幕 | PKG-CANVAS-SUBTITLE-01, PKG-CANVAS-05 |

@@ -22,6 +22,7 @@ callback remains optional and function-valued.
 | --- | --- |
 | index.ts | Host event subscriptions, deferred media forwarding, initialization rollback and terminal disposal |
 | adapter.ts | Preserve native canvas methods; forward only video properties absent from canvas; guard escaped media actions after disposal |
+| subtitles.ts | Supply the initial native metadata track and route the core's actual HTML track insertion into the backing video |
 | media.ts | Connect the backing video before playback and release its source, stream reference and DOM node |
 | geometry.ts | Finite intrinsic dimensions and aspect-fit canvas/padding calculations |
 | renderer.ts | Decoded-frame eligibility, bitmap acquisition/close, callback and draw/error notification order |
@@ -33,7 +34,18 @@ private core implementation modules.
 
 ## State and event order
 
-Canvas methods keep their receiver and win over same-named video methods. Media properties
+Canvas methods keep their receiver and win over same-named video methods for
+ordinary Canvas content. `appendChild` has one intentional
+subtitle-specific adaptation: active HTML track elements attach to the backing video,
+where native loading and cuechange work. Other nodes still attach to the Canvas.
+The initial empty metadata track makes the old core's synchronous textTracks[0]
+capability check succeed; it is removed before the first actual track is appended.
+The core owns actual track replacement/removal and subtitle URLs. After destruction,
+escaped appendChild cannot attach more tracks to the unloaded private video.
+This fixes the formerly empty subtitle path; a working track's parent is now VIDEO.
+The initialization is inside the same rollback boundary as host registration.
+
+Media properties
 remain live enumerable/configurable descriptors. Assigning src/srcObject or invoking load
 invalidates pending frames; the returned canvas and callback arguments keep their identities.
 The video is connected before play with absolute positioning, transparent opacity, no focus
@@ -89,4 +101,8 @@ through the semantic generator; the editor root stays plain, with an explicit
 artplayerProxyCanvas.RuntimeFactory assertion for code needing the runtime self alias.
 Broader installed artifact contents/deep paths and 8082 demos remain 06.
 Real Safari/mobile/device scope remains 05; Windows Playwright WebKit is not a device claim.
+`canvas-subtitles.spec.js` exercises native VTT load, paused seeking, replacement,
+single-track ownership, ordinary Canvas child insertion/removal and escaped insertion
+after destroy on old/new cores. It also belongs to the installed browser scope;
+keep its bytes and native engine provenance with the lifecycle report.
 See `refactor/canvas-validation.md` and the task evidence for actual outcomes and limitations.

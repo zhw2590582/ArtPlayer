@@ -3635,7 +3635,8 @@
         "PKG-CANVAS-04",
         "CORE-22",
         "PKG-DPIP-04",
-        "PKG-FACTORY-01"
+        "PKG-FACTORY-01",
+        "PKG-CANVAS-SUBTITLE-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -5388,6 +5389,25 @@
       "evidence": [
         "changes/2026-09-14-PKG-CHAPTER-HOVER-01-geometry.md",
         "baselines/chapter-hover-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-CANVAS-SUBTITLE-01",
+      "phase": "5 包迁移：artplayer-proxy-canvas",
+      "title": "修复 Canvas 代理原生字幕轨道挂载",
+      "scope": [
+        "artplayer-proxy-canvas"
+      ],
+      "dependsOn": [
+        "PKG-CANVAS-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "初始字幕能力、原生轨道挂载与资源生命周期适配及新旧核心回归",
+      "acceptance": "复现旧字幕 cues 为空；新旧核心加载、寻址、切换、销毁通过；普通 Canvas 节点行为和分发入口保持兼容",
+      "evidence": [
+        "changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md",
+        "baselines/canvas-subtitles-validation.json"
       ]
     }
   ]

@@ -5,6 +5,22 @@ import { canvasCandidate, canvasEnvironment, canvasHistorical } from './helpers/
 
 const implementation = await canvasCandidate()
 const listenerCount = env => [...env.listeners.values()].reduce((count, set) => count + set.size, 0)
+
+test('Canvas rolls back private media when initial subtitle track insertion fails', async () => {
+  const env = await canvasEnvironment(implementation)
+  const failure = new Error('Initial track insertion failed')
+  env.video.appendChild = () => {
+    throw failure
+  }
+  assert.throws(() => env.factory()(env.art), error => error === failure)
+  assert.equal(listenerCount(env), 0)
+  assert.equal(env.timers.size, 0)
+  assert.equal(env.frames.size, 0)
+  assert.equal(env.video.parentNode, undefined)
+  assert.equal(env.video.src, undefined)
+  assert.equal(env.video.paused, true)
+  assert.deepEqual([env.canvas.width, env.canvas.height], [0, 0])
+})
 function deferred() {
   let resolve, reject
   const promise = new Promise((yes, no) => {

@@ -53,6 +53,12 @@ Runtime falsy callback arguments retain historical behavior; declarations accept
 optional function, matching the published types. Implementation and test guidance is in
 [ARCHITECTURE.md](ARCHITECTURE.md).
 
+The standard ArtPlayer `subtitle` option uses native subtitle tracks on the backing
+video. HTML track elements passed to the active proxy's `appendChild` are attached
+there so captions can load and follow playback; ordinary Canvas content keeps its
+normal parent. The initial metadata track is replaced by the first actual subtitle.
+This repairs the previously empty subtitle path without changing subtitle options.
+
 ### Older TypeScript consumers
 
 The 1.0.0 declaration used `export =` and required a callback; 1.1.0 changed to

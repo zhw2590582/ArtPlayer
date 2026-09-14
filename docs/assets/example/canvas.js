@@ -20,6 +20,9 @@ const art = new Artplayer({
   miniProgressBar: true,
   autoPlayback: true,
   autoOrientation: true,
+  subtitle: {
+    url: '/assets/sample/subtitle.srt',
+  },
   thumbnails: {
     url: '/assets/sample/thumbnails.png',
     number: 60,

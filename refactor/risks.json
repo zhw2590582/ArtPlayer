@@ -6218,6 +6218,29 @@
         "test/browser/chapter-hover.spec.js"
       ],
       "resolutionRationale": "The immediate bounding-box read permits stale pointer coordinates while progress transforms move. Initial hit-test control gives 4 failures/2 passes before and 6 passes after waiting for locator stability. WebKit hit tests disagree with the final rectangle, so additional explicit bounds assertions were added: baseline 6 failures, stable main/legacy 6 passes each. Complete main/legacy chapter combination suites retain title, opacity, thumbnails and fullscreen assertions (66 passes each). This closes the identified test synchronization race, not all possible production fullscreen defects or CHAPTER-TIMING-01. Original 224/1 failure remains archived; its exact scheduler cannot be replayed."
+    },
+    {
+      "id": "CANVAS-SUBTITLE-01",
+      "title": "Canvas底层video缺初始字幕轨道且普通Canvas挂载不能加载原生字幕",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-CANVAS-SUBTITLE-01",
+        "PKG-CANVAS-05"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md",
+        "test/browser/canvas-subtitles.spec.js"
+      ],
+      "compatibleResolution": "适配原生track能力和插入，同时保留普通Canvas操作；不得要求旧核心消费者更改调用。",
+      "closureCriteria": "新旧核心三引擎字幕加载/寻址/切换/清理、普通节点与分发回归，有旧红新绿证据。",
+      "workspaceState": "Native subtitle bootstrap and track insertion are isolated in subtitles.ts. Old/new core source and installed main/legacy pass real subtitle load/seek/replacement/cleanup and normal Canvas-node checks. Public declaration shape is unchanged.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-CANVAS-SUBTITLE-01-track.md",
+        "refactor/baselines/canvas-subtitles-validation.json",
+        "test/browser/canvas-subtitles.spec.js"
+      ],
+      "resolutionRationale": "Initial candidate and routing-only controls each fail all six subtitle cases. Bootstrap + insertion adaptation passes; npm 1.1.0 independently fails all six. Expanded native source tests pass 24; installed main and legacy pass 33 each; final six pass after adding baseline selection. Captions also visibly render in the local demo. This fixes subtitle capability/insertion only; broader Canvas integration remains open."
     }
   ]
 }
