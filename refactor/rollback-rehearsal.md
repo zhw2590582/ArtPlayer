@@ -109,7 +109,9 @@ HEAD...origin/master` 及修复 SHA，再审查每个上游 diff。找出迁移�
 本次再次 fetch 后 master 仍无新增提交；真实仓库没有需要应用的修复。冻结起点和
 当前差分记录在[后续检查点证据](baselines/rollback-workflows-validation.json)。
 
-Thumbnail 的完整旧 npm tarball 缺失、文档站的真实部署恢复继续受原有发布门槛
-约束，REL-04 保持 doing，继续准备完整回退替代产物/站点恢复证据。正式每批需要
+文档站的固定旧快照已通过[完整本地恢复](changes/2026-09-15-REL-04-pages-recovery.md)，
+包括全部 538 个文件、12 条 HTTP 路径和六项播放检查。Thumbnail 的完整旧 npm
+tarball 缺失、文档站的真实远端部署恢复继续受原有发布门槛约束；REL-04 保持 doing，
+继续准备 Thumbnail 的完整回退替代方案。正式每批需要
 重新绑定实际 next-major 候选及旧包产物并重跑对应验证。
 不执行 npm tag 修改、unpublish、推送或部署，不把本演练当作这些动作的授权。

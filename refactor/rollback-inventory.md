@@ -28,7 +28,7 @@
 | artplayer-proxy-mediabunny | 2.0.0 | artplayer-proxy-mediabunny@1.2.0 | mediabunny@^1.43.1 | archive-verified-batch-rehearsal-required |
 | artplayer-tool-iframe | 2.0.0 | artplayer-plugin-iframe@1.0.0 | 无声明 | archive-verified-batch-rehearsal-required |
 | artplayer-tool-thumbnail | 5.0.0 | 完整旧产物尚缺 | 见原有门槛 | complete-rollback-artifact-required |
-| artplayer-vitepress | 2.0.0 | 已验证 Pages 产物 | 见原有门槛 | previous-deployment-artifact-required |
+| artplayer-vitepress | 2.0.0 | 已验证 Pages 产物 | 见原有门槛 | local-restore-verified-remote-gate-open |
 
 每包优先恢复升级前已验证的应用代码、package.json 和 yarn.lock，再执行 `yarn install --frozen-lockfile`；
 离线恢复还需保存所需 tarball/依赖缓存。单独把版本改回去并重新解析依赖，不能替代已测试锁文件。

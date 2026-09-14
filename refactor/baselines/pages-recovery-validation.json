@@ -1,0 +1,388 @@
+{
+  "task": "REL-04",
+  "status": "local-restoration-verified-remote-gate-open",
+  "capturedAt": "2026-09-14T16:41:26.414Z",
+  "source": "d0c33f6258b49eec1937e139789b73a4440cb2e2",
+  "node": "24.21.0",
+  "localRestorationPassed": true,
+  "remoteRestorationVerified": false,
+  "archive": {
+    "path": "refactor/.cache/pages-recovery/run-485vhu/canonical.zip",
+    "commit": "a6d2b81d05c68c8c78cbe62ca0b06761c983f8b8",
+    "command": [
+      "git",
+      "-c",
+      "core.autocrlf=false",
+      "-c",
+      "core.eol=lf",
+      "archive",
+      "--format=zip",
+      "--output=D:\\github\\ArtPlayer\\refactor\\.cache\\pages-recovery\\run-485vhu\\canonical.zip",
+      "a6d2b81d05c68c8c78cbe62ca0b06761c983f8b8"
+    ],
+    "bytes": 213337919,
+    "sha256": "692e190df068d584f460a7c29e5b0a9e565a0a793579ade532f36788731f5faf"
+  },
+  "files": {
+    "count": 538,
+    "inventory": "refactor/baselines/pages-recovery-files.json",
+    "sha256": "84cfc7674950cc639d435062e464a2d6b3aca89274adeb9c475070c1c3ca9aa3",
+    "everyFileMatchesGitBlob": true
+  },
+  "rehearsal": {
+    "command": "node scripts/pages-recovery.mjs",
+    "report": "refactor/.cache/pages-recovery/run-485vhu/report.json",
+    "sha256": "65513d6c321ea471ab0213825cf4e1831a2d0fd05d7c2468b959da0b284c8d03",
+    "simulatedChanges": [
+      "modified compiled/artplayer.js",
+      "changed CNAME",
+      "deleted iframe.html",
+      "added candidate-only.txt"
+    ],
+    "failedSnapshotRetained": true
+  },
+  "browser": {
+    "command": "node test/pages-recovery-browser.mjs",
+    "report": "refactor/.cache/pages-recovery/run-485vhu/browser.json",
+    "sha256": "59eb442a0f91d925579ceccf0f3884f75e78dca43bc2154c15e492ccfcabc588",
+    "task": "REL-04",
+    "restoredReportSha256": "65513d6c321ea471ab0213825cf4e1831a2d0fd05d7c2468b959da0b284c8d03",
+    "platform": "win32",
+    "reports": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "format": "umd",
+        "passed": true,
+        "state": {
+          "version": "5.4.1",
+          "width": 640,
+          "height": 360,
+          "time": 3,
+          "error": 0
+        },
+        "inputs": {
+          "core": {
+            "bytes": 134697,
+            "sha256": "b57c083c13b1d16166f4796ce12378975255298c25ee4c32454e365866b8c732"
+          },
+          "chapter": {
+            "bytes": 4973,
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+          },
+          "media": {
+            "bytes": 5818706,
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "format": "esm",
+        "passed": true,
+        "state": {
+          "version": "5.4.1",
+          "width": 640,
+          "height": 360,
+          "time": 3,
+          "error": 0
+        },
+        "inputs": {
+          "core": {
+            "bytes": 209954,
+            "sha256": "9546e5aa58bfbf43d10a6dc348e86303dd58300566031a55d4984372f30658e1"
+          },
+          "chapter": {
+            "bytes": 7721,
+            "sha256": "61342a069b84e0731d44a2464d0dfe637d1514d0037c740371fc866c516d2209"
+          },
+          "media": {
+            "bytes": 5818706,
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "format": "umd",
+        "passed": true,
+        "state": {
+          "version": "5.4.1",
+          "width": 640,
+          "height": 360,
+          "time": 3,
+          "error": 0
+        },
+        "inputs": {
+          "core": {
+            "bytes": 134697,
+            "sha256": "b57c083c13b1d16166f4796ce12378975255298c25ee4c32454e365866b8c732"
+          },
+          "chapter": {
+            "bytes": 4973,
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+          },
+          "media": {
+            "bytes": 5818706,
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "format": "esm",
+        "passed": true,
+        "state": {
+          "version": "5.4.1",
+          "width": 640,
+          "height": 360,
+          "time": 3,
+          "error": 0
+        },
+        "inputs": {
+          "core": {
+            "bytes": 209954,
+            "sha256": "9546e5aa58bfbf43d10a6dc348e86303dd58300566031a55d4984372f30658e1"
+          },
+          "chapter": {
+            "bytes": 7721,
+            "sha256": "61342a069b84e0731d44a2464d0dfe637d1514d0037c740371fc866c516d2209"
+          },
+          "media": {
+            "bytes": 5818706,
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "format": "umd",
+        "passed": true,
+        "state": {
+          "version": "5.4.1",
+          "width": 640,
+          "height": 360,
+          "time": 3,
+          "error": 0
+        },
+        "inputs": {
+          "core": {
+            "bytes": 134697,
+            "sha256": "b57c083c13b1d16166f4796ce12378975255298c25ee4c32454e365866b8c732"
+          },
+          "chapter": {
+            "bytes": 4973,
+            "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0"
+          },
+          "media": {
+            "bytes": 5818706,
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "format": "esm",
+        "passed": true,
+        "state": {
+          "version": "5.4.1",
+          "width": 640,
+          "height": 360,
+          "time": 3,
+          "error": 0
+        },
+        "inputs": {
+          "core": {
+            "bytes": 209954,
+            "sha256": "9546e5aa58bfbf43d10a6dc348e86303dd58300566031a55d4984372f30658e1"
+          },
+          "chapter": {
+            "bytes": 7721,
+            "sha256": "61342a069b84e0731d44a2464d0dfe637d1514d0037c740371fc866c516d2209"
+          },
+          "media": {
+            "bytes": 5818706,
+            "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980"
+          }
+        }
+      }
+    ],
+    "urls": [
+      {
+        "file": "index.html",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "sha256": "bd2e7e32efce80725b70f2054c4d9c95465de567118f245924f2e6d17567ff23"
+      },
+      {
+        "file": "mobile.html",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "sha256": "f6cf85608023ee57750af773908d4c8ecd95c1065b1aa587e28e2361b2cee7fd"
+      },
+      {
+        "file": "iframe.html",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "sha256": "bc262262c66ad32459b7c91ae22a97217414dd5b18cbf68fe105c2269456f879"
+      },
+      {
+        "file": "esm.html",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "sha256": "bf9eaaf69b7705d53edab101fade2ce467dd63bb2830a89d4bc4cda44667ff3c"
+      },
+      {
+        "file": "document/index.html",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "sha256": "39d893cd5af7f00b569d89a0766f3b3b851c06e0915e7c9d8f22ea2ce54ea11b"
+      },
+      {
+        "file": "document/en/index.html",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "sha256": "def18b4f9bee5e8013174b5599859824aae6eff491fb49e56c46ecb23bc2f5bf"
+      },
+      {
+        "file": "compiled/artplayer.js",
+        "status": 200,
+        "contentType": "text/javascript",
+        "sha256": "b57c083c13b1d16166f4796ce12378975255298c25ee4c32454e365866b8c732"
+      },
+      {
+        "file": "uncompiled/artplayer/index.js",
+        "status": 200,
+        "contentType": "text/javascript",
+        "sha256": "a7b9baf492208d8b9b8f56644389b90d23f74df204139ea619efdd667da5ea83"
+      },
+      {
+        "file": "compiled/artplayer-tool-thumbnail.js",
+        "status": 200,
+        "contentType": "text/javascript",
+        "sha256": "f77419cc62eeaa45c0413f4b04d169f78178fd539443cbf7b1e5db4ad4c95c98"
+      },
+      {
+        "file": "assets/example/tool.thumbnail.js",
+        "status": 200,
+        "contentType": "text/javascript",
+        "sha256": "ef830a5f499e14c09d51aa31aaa0a194ea1f910b27f14ef97c0ca8f67d529a54"
+      },
+      {
+        "file": "CNAME",
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "sha256": "7b7010e42fc4642ea0cdfcb1b68cd2a6d9248a812876bc0d58d48ebb15952c84"
+      },
+      {
+        "file": ".nojekyll",
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "failures": [],
+    "cancellations": [
+      {
+        "pathname": "/assets/sample/video.mp4",
+        "range": "bytes=0-",
+        "code": "ERR_STREAM_PREMATURE_CLOSE",
+        "aborted": true,
+        "responseDestroyed": true,
+        "responseFinished": false
+      },
+      {
+        "pathname": "/assets/sample/video.mp4",
+        "range": "bytes=0-",
+        "code": "ERR_STREAM_PREMATURE_CLOSE",
+        "aborted": true,
+        "responseDestroyed": true,
+        "responseFinished": false
+      },
+      {
+        "pathname": "/assets/sample/video.mp4",
+        "range": "bytes=0-",
+        "code": "ERR_STREAM_PREMATURE_CLOSE",
+        "aborted": true,
+        "responseDestroyed": true,
+        "responseFinished": false
+      },
+      {
+        "pathname": "/assets/sample/video.mp4",
+        "range": "bytes=0-",
+        "code": "ERR_STREAM_PREMATURE_CLOSE",
+        "aborted": true,
+        "responseDestroyed": true,
+        "responseFinished": false
+      },
+      {
+        "pathname": "/assets/sample/video.mp4",
+        "range": "bytes=0-",
+        "code": "ERR_STREAM_PREMATURE_CLOSE",
+        "aborted": true,
+        "responseDestroyed": true,
+        "responseFinished": false
+      }
+    ],
+    "limitations": [
+      "Controlled probe loads actual restored scripts/media; not the complete editor or iframe UI.",
+      "No remote Pages source/domain/deployment was changed.",
+      "Thumbnail route bytes verified; extraction and missing historical npm archive are separate gates."
+    ]
+  },
+  "previousArchive": {
+    "path": "refactor/.cache/ci02-gh-pages-a6d2b81.zip",
+    "sha256": "e5b949d3db666da647425ef499e94873bb802d645a8bb98eb22db0193ca2c529",
+    "bytes": 213358750,
+    "commit": "a6d2b81d05c68c8c78cbe62ca0b06761c983f8b8",
+    "method": "git archive --format=zip of locally available commit; no remote writes",
+    "strictGitBlobCheckPassed": false,
+    "changedFiles": 403,
+    "allDifferencesCrlfOnly": true,
+    "example": {
+      "file": "CNAME",
+      "bytes": 22,
+      "expectedBytes": 21,
+      "crlfOnly": true
+    },
+    "completeDifferences": "refactor/.cache/rel04-pages-old-archive-differences.json",
+    "exactSingleFileControl": "git -c core.autocrlf=false -c core.eol=lf archive of the same CNAME produces the exact 21-byte Git blob"
+  },
+  "retainedFailures": [
+    {
+      "report": "refactor/.cache/pages-recovery/run-pbolez/report.json",
+      "log": "refactor/.cache/rel04-pages-recovery.log",
+      "result": "Original ZIP CNAME size 22 versus Git blob 21; not counted as restoration pass"
+    },
+    {
+      "report": "refactor/.cache/pages-recovery/run-485vhu/browser-first.json",
+      "log": "refactor/.cache/rel04-pages-recovery-browser.log",
+      "result": "Six playback cases passed, but five premature stream-close events caused overall failure. Final check retains cancellations only for the exact media path with request.aborted=true and ERR_STREAM_PREMATURE_CLOSE."
+    }
+  ],
+  "engineering": {
+    "status": "passed",
+    "log": "refactor/.cache/rel04-pages-engineering.log",
+    "exitCode": 0,
+    "commands": [
+      "scoped ESLint for recovery scripts/test and inventory generator",
+      "node --test test/pages-artifact.test.js test/pages-recovery.test.js",
+      "node node_modules/typescript/bin/tsc -p scripts/tsconfig.library.json --noEmit",
+      "yarn check:rollback-inventory",
+      "yarn check:toolchain --strict",
+      "node refactor/scripts/plan.mjs --check",
+      "git diff --check"
+    ]
+  },
+  "limitations": [
+    "Local complete old gh-pages Git snapshot recovery, not a remote Pages rollback.",
+    "12 HTTP route checks and six controlled playback pages are not full historical editor, iframe or SDK/device acceptance.",
+    "Restored Thumbnail 4.4.0 website runtime is not the missing original npm 3.5.31 tarball; package rollback alternative remains open.",
+    "Formal publication batches must preserve and revalidate their actual pre-upgrade artifact and final candidate."
+  ]
+}

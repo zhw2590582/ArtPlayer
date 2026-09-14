@@ -47,6 +47,17 @@ CI-02交付本地配置与预检；CI-04负责实际远端运行和配置切换�
 
 ## 恢复
 
+REL-04 已完成[本地完整恢复演练](changes/2026-09-15-REL-04-pages-recovery.md)：
+固定旧 gh-pages 提交的 538 个文件逐一匹配 Git blob，模拟脚本/域名损坏、文件缺失
+和新版遗留后恢复成功，12 条 HTTP 路径与六项三引擎播放通过。
+
+之前的 CI-02 ZIP 受本机换行配置影响，有 403 处 CRLF 文本转换；其原始记录保持
+不变，但不能用于声称 Git blob 字节完全一致。今后使用命令级
+`git -c core.autocrlf=false -c core.eol=lf archive` 并核对全部文件，而不是修改
+全局配置或在核验时忽略换行。新 canonical ZIP 路径和哈希见
+[机器证据](baselines/pages-recovery-validation.json)，与报告一起保存。
+该本地演练不代替以下远端恢复流程和 CI-04 门槛。
+
 发生故障先禁用启用变量，避免新部署进入队列；不要取消已经开始的写入或自动force push。
 保存失败run/部署/请求证据，并重新读取当前source和分支SHA。
 

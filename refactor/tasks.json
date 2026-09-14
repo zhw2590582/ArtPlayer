@@ -4808,7 +4808,9 @@
         "baselines/rollback-consumer-validation.json",
         "changes/2026-09-15-REL-04-workflows-checkpoint.md",
         "rollback-inventory.md",
-        "baselines/rollback-workflows-validation.json"
+        "baselines/rollback-workflows-validation.json",
+        "changes/2026-09-15-REL-04-pages-recovery.md",
+        "baselines/pages-recovery-validation.json"
       ]
     },
     {

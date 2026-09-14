@@ -41,3 +41,27 @@ Failed staging builds keep their report once the output directory exists. Earlie
 preflight failures stay in the CI log. Reports are uploaded even on failure; staged
 files are uploaded for deployment only after preparation and browser checks pass.
 See `refactor/pages-deployment.md` for remote state, activation and recovery.
+
+## Complete historical snapshot recovery
+
+`yarn test:rollback:pages` validates the CI-02 saved ZIP identity and fixed
+gh-pages Git objects, creates a new ZIP with command-local `core.autocrlf=false`
+and `core.eol=lf`, and verifies all extracted paths, sizes and Git blob IDs.
+The initial ZIP used Windows line conversion; its 403 changed text files remain
+recorded as a failed exact-Git-byte recovery, not silently normalized.
+
+`recovery.ts` rejects stale or extra files before replacement. The command
+damages only an isolated copy, restores it from a fully validated prepared
+directory, and keeps the failed copy. All outputs stay in
+`refactor/.cache/pages-recovery/run-*`; there is no recursive cleanup or remote
+mutation. Both the saved CI-02 ZIP and its Git commit must be available before
+this explicit rehearsal can run. Preserve the canonical ZIP with its report for
+future recovery; publishing a new candidate requires a fresh pre-upgrade snapshot.
+
+`yarn test:rollback:pages:browser` accepts the latest successful recovery only,
+rechecks every restored Git blob, then serves original HTML without dev reload
+injection. It verifies 12 route bodies and runs six UMD/ESM playback cases in
+Chromium/Firefox/WebKit using restored scripts and media. Aborted transfers are
+retained separately only for the exact sample media path and native aborted
+request condition. This is local snapshot playback evidence, not a complete
+editor, iframe, Thumbnail extraction, external SDK or remote deployment check.

@@ -16,7 +16,10 @@ for (const pkg of ledger.packages) {
   const current = read(`packages/${pkg.name}/package.json`)
   const row = { name: pkg.name, targetVersion: pkg.targetVersion, distribution: pkg.distribution, history: pkg.history, currentDependencies: current.dependencies || {}, currentPeers: current.peerDependencies || {}, currentOptionalDependencies: current.optionalDependencies || {} }
   if (pkg.distribution === 'site') {
-    rows.push({ ...row, restore: 'Previously verified Pages artifact, exact source SHA and URL map; npm rollback does not apply.', status: 'previous-deployment-artifact-required', evidence: 'refactor/pages-deployment.md' })
+    const recovery = read('refactor/baselines/pages-recovery-validation.json')
+    assert.equal(recovery.localRestorationPassed, true)
+    assert.equal(recovery.remoteRestorationVerified, false)
+    rows.push({ ...row, restore: 'Preserve the canonical old Pages ZIP and its Git-blob report; local recovery verified, remote deployment restoration still requires its own gate. npm rollback does not apply.', status: 'local-restore-verified-remote-gate-open', evidence: 'refactor/baselines/pages-recovery-validation.json', localRecovery: { commit: recovery.archive.commit, archiveSha256: recovery.archive.sha256, files: recovery.files.count } })
     continue
   }
   if (pkg.distribution === 'recovered-npm') {

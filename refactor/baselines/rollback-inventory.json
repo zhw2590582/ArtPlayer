@@ -639,9 +639,14 @@
       "currentDependencies": {},
       "currentPeers": {},
       "currentOptionalDependencies": {},
-      "restore": "Previously verified Pages artifact, exact source SHA and URL map; npm rollback does not apply.",
-      "status": "previous-deployment-artifact-required",
-      "evidence": "refactor/pages-deployment.md"
+      "restore": "Preserve the canonical old Pages ZIP and its Git-blob report; local recovery verified, remote deployment restoration still requires its own gate. npm rollback does not apply.",
+      "status": "local-restore-verified-remote-gate-open",
+      "evidence": "refactor/baselines/pages-recovery-validation.json",
+      "localRecovery": {
+        "commit": "a6d2b81d05c68c8c78cbe62ca0b06761c983f8b8",
+        "archiveSha256": "692e190df068d584f460a7c29e5b0a9e565a0a793579ade532f36788731f5faf",
+        "files": 538
+      }
     }
   ]
 }
