@@ -1,5 +1,12 @@
 # 进度与证据
 
+## SITE-07 三项内嵌依赖来源与许可
+
+react-inspector中的Babel16文件、regenerator1文件及tokenizer7文件已逐字节
+核实；新增三份许可，见[记录](changes/2026-09-15-SITE-07-console-embedded-sources.md)。
+单元22/22，联网/离线完整复现通过。剩replicator、Emotion、Stack Overflow等
+内嵌来源继续审查，VENDOR-08 open、SITE-07 doing，仍199/265；运行时与锁不变。
+
 ## SITE-07 控制台许可实际分发
 
 32个包与Parcel许可、Chromium及Stylis两份内嵌完整许可已接入生成流程，新增35份

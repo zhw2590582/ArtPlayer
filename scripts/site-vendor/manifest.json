@@ -944,7 +944,7 @@
       "name": "console",
       "version": "legacy-vendor-with-TS-adapter",
       "tarball": "https://github.com/zhw2590582/ArtPlayer/blob/5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c/docs/assets/js/console.js",
-      "review": "The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Package license texts and two embedded license headers below are preserved verbatim. Embedded attribution review is still incomplete; this inventory is not publication clearance.",
+      "review": "The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance.",
       "roots": [
         "docs/assets/js/console.js"
       ],
@@ -1130,6 +1130,21 @@
           "source": "refactor/baselines/site-vendor/console-embedded/stylis-rule-sheet-LICENSE.txt",
           "target": "docs/licenses/console/stylis-rule-sheet/LICENSE",
           "sha256": "99a75da65634b772687781c054ffe679569c1770c398f96427677899fe0ca8d7"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-embedded/babel-runtime-7.13.10-LICENSE.txt",
+          "target": "docs/licenses/console/react-inspector-babel/LICENSE",
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-embedded/regenerator-runtime-0.13.7-LICENSE.txt",
+          "target": "docs/licenses/console/regenerator-runtime/LICENSE",
+          "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-embedded/simple-html-tokenizer-04799f4-LICENSE.txt",
+          "target": "docs/licenses/console/simple-html-tokenizer/LICENSE",
+          "sha256": "c41881de2a9f2200936648343500524be154eb79f649582f9582dd251b051b11"
         }
       ],
       "components": [
@@ -1516,6 +1531,39 @@
           ],
           "notices": [
             "docs/licenses/console/stylis-rule-sheet/LICENSE"
+          ]
+        },
+        {
+          "name": "@babel/runtime (react-inspector embedded)",
+          "version": "7.13.10",
+          "tarball": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.13.10.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/react-inspector-babel/LICENSE"
+          ]
+        },
+        {
+          "name": "regenerator-runtime",
+          "version": "0.13.7",
+          "tarball": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/regenerator-runtime/LICENSE"
+          ]
+        },
+        {
+          "name": "simple-html-tokenizer",
+          "version": "git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "tarball": "https://api.github.com/repos/nfrasser/simple-html-tokenizer/tarball/04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/simple-html-tokenizer/LICENSE"
           ]
         }
       ]

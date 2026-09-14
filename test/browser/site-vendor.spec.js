@@ -31,6 +31,9 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   expect(await index.text()).toContain('Included component: @vscode/codicons 0.0.26')
   expect(await index.text()).toContain('Included component: console-feed 3.2.2')
   expect(await index.text()).toContain('Included component: chromium-string-utils')
+  expect(await index.text()).toContain('Included component: @babel/runtime (react-inspector embedded) 7.13.10')
+  expect(await index.text()).toContain('Included component: regenerator-runtime 0.13.7')
+  expect(await index.text()).toContain('Included component: simple-html-tokenizer git-04799f4638ec5ed903a4e5aa6e832269fa59be6b')
   expect(await index.text()).toContain('Embedded attribution review is still incomplete')
   await page.evaluate(() => {
     window.vConsole.destroy()

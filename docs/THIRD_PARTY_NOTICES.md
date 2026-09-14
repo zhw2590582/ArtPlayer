@@ -80,7 +80,7 @@ Source: https://registry.npmjs.org/@vscode/codicons/-/codicons-0.0.26.tgz
 
 Source: https://github.com/zhw2590582/ArtPlayer/blob/5d6b2f22bc75213ac97cff0bcffa4a1ce2bc786c/docs/assets/js/console.js
 
-The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Package license texts and two embedded license headers below are preserved verbatim. Embedded attribution review is still incomplete; this inventory is not publication clearance.
+The 100 third-party Parcel modules and loader have exact source reproduction. The two owned adapter modules are built from TypeScript. Preserved notices also cover two embedded license headers, all 17 react-inspector external source-map members, and all seven HTML tokenizer sources from its fixed Git dependency. Embedded attribution review is still incomplete; this inventory is not publication clearance.
 
 Included component: console-feed 3.2.2
 
@@ -222,6 +222,18 @@ Included component: stylis-rule-sheet embedded in styled-components-5.3.3
 
 Source: https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.tgz
 
+Included component: @babel/runtime (react-inspector embedded) 7.13.10
+
+Source: https://registry.npmjs.org/@babel/runtime/-/runtime-7.13.10.tgz
+
+Included component: regenerator-runtime 0.13.7
+
+Source: https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz
+
+Included component: simple-html-tokenizer git-04799f4638ec5ed903a4e5aa6e832269fa59be6b
+
+Source: https://api.github.com/repos/nfrasser/simple-html-tokenizer/tarball/04799f4638ec5ed903a4e5aa6e832269fa59be6b
+
 - licenses/console/console-feed/console-feed-3.2.2-LICENSE
 - licenses/console/react/react-17.0.2-LICENSE
 - licenses/console/react-dom/react-dom-17.0.2-LICENSE
@@ -257,3 +269,6 @@ Source: https://registry.npmjs.org/styled-components/-/styled-components-5.3.3.t
 - licenses/console/parcel-bundler/parcel-bundler-1.12.5-LICENSE
 - licenses/console/chromium-string-utils/LICENSE
 - licenses/console/stylis-rule-sheet/LICENSE
+- licenses/console/react-inspector-babel/LICENSE
+- licenses/console/regenerator-runtime/LICENSE
+- licenses/console/simple-html-tokenizer/LICENSE

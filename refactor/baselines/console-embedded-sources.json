@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "archives": [
+    {
+      "id": "%40babel%2Fruntime-7.13.10",
+      "name": "@babel/runtime",
+      "version": "7.13.10",
+      "tarball": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.13.10.tgz",
+      "integrity": "sha512-4QPkjJq6Ns3V/RgpEahRk+AGfL0eO6RHHtTWoNNr5mO49G6B5+X6d6THgWEAvTrznU5xYpbAlVKRYcsCgh/Akw==",
+      "sha256": "19797609e1814e3d5a68f6859db1150ae979995ff0dfc9aca3d2e037df58e814",
+      "notices": [
+        {
+          "member": "package/LICENSE",
+          "source": "refactor/baselines/site-vendor/console-embedded/babel-runtime-7.13.10-LICENSE.txt",
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+        }
+      ]
+    },
+    {
+      "id": "regenerator-runtime-0.13.7",
+      "name": "regenerator-runtime",
+      "version": "0.13.7",
+      "tarball": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz",
+      "integrity": "sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==",
+      "sha256": "b5cd4cf6502afafd8464fe159b1af0d8db0301d71952de4a54d00394f7d2a14e",
+      "notices": [
+        {
+          "member": "package/LICENSE",
+          "source": "refactor/baselines/site-vendor/console-embedded/regenerator-runtime-0.13.7-LICENSE.txt",
+          "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+        }
+      ]
+    },
+    {
+      "id": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+      "name": "simple-html-tokenizer",
+      "version": "git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+      "tarball": "https://api.github.com/repos/nfrasser/simple-html-tokenizer/tarball/04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+      "integrity": "sha512-ycOYAm+pFzyErUKFvtkB7ntoiQ+aq4He+ZrT6McOGCDqyKCiNxEpARv6z7pBZXpVR5LPuxnt5hibOGICXl5HVw==",
+      "sha256": "c597f7785650bf1068acad7fee70bbaa4c55017ce3e073b6f4c1f25dd9da6eea",
+      "commit": "04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+      "integritySource": "Locally measured SHA-512/SHA-256 of the archive at the exact Git dependency commit in linkifyjs 2.1.9; not npm registry SRI.",
+      "notices": [
+        {
+          "member": "nfrasser-simple-html-tokenizer-04799f4/LICENSE",
+          "source": "refactor/baselines/site-vendor/console-embedded/simple-html-tokenizer-04799f4-LICENSE.txt",
+          "sha256": "c41881de2a9f2200936648343500524be154eb79f649582f9582dd251b051b11"
+        }
+      ]
+    }
+  ],
+  "compiler": {
+    "archive": {
+      "id": "babel-standalone-6.26.0",
+      "name": "babel-standalone",
+      "version": "6.26.0",
+      "tarball": "https://registry.npmjs.org/babel-standalone/-/babel-standalone-6.26.0.tgz",
+      "integrity": "sha512-zT4CJM9TK6uEaPf7+nKVO/yPYNlk5G9Aa4+iYwmn7J4D9eezb62eQ3bSUybK/AcPHU2VkfFuIDKbvwQOOj+Zyw==",
+      "sha256": "a91ea22e279d85269582896b1dc2c3519d20778919dc3721652dc79de24ccca8"
+    },
+    "member": "package/babel.min.js",
+    "sha256": "16264c935ce04deba3cdfffebe899664667daf4d3ec671af3a05e88f4268d630",
+    "version": "6.26.0",
+    "options": {
+      "presets": [
+        [
+          "es2015",
+          {
+            "loose": true
+          }
+        ]
+      ]
+    }
+  },
+  "sourceMaps": [
+    {
+      "source": {
+        "archive": "react-inspector-5.1.1",
+        "member": "package/dist/es/react-inspector.js.map",
+        "sha256": "92b60e8482e52d5247bcf97d180701f53b320ebecffc3d78a5d67beae3f279a3"
+      },
+      "externalPrefix": "../../node_modules/",
+      "sources": [
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/extends.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/extends.js",
+            "sha256": "02a07f0d08b2ab260ef5a04bcc4aaf412b7c6a3ae653fcd865cb6225aea4ff9a"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/objectWithoutPropertiesLoose.js",
+            "sha256": "0abc21ffb41814bc74ca92535592db1226c800dcead3edaab5eee9b5b084000b"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/objectWithoutProperties.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/objectWithoutProperties.js",
+            "sha256": "92744c7cf8c55dd284aeec8ec7141bf2eb747a8128c2773b63ab30deb34f9adc"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/arrayWithHoles.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/arrayWithHoles.js",
+            "sha256": "430249ac5055b67aec593cd990238683fa20d0bfe632c2901d83a4ab3e59044e"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/iterableToArrayLimit.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/iterableToArrayLimit.js",
+            "sha256": "2a955d4fbce0b609f30b563a56be9cbd184e2e2c9f19f215a9da4f0f6df2d990"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/arrayLikeToArray.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/arrayLikeToArray.js",
+            "sha256": "d753748855dcc78b6cb565b7eaa7ba4d19dccf22a797fc3b20315d77c6b7f339"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/unsupportedIterableToArray.js",
+            "sha256": "823ac36c880f97e0ab343b666363dafc5c5ba653613ae509530f481caacb0747"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/nonIterableRest.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/nonIterableRest.js",
+            "sha256": "54686eeb5ec02f1f55440a380ed39e52a45e56c3685ebf47b1b36db31ca84f30"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/slicedToArray.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/slicedToArray.js",
+            "sha256": "eb359972ab03c433d01a85ed7e7d0a4c5bd26e5c87d56cc4f9413cfb4b8aa368"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/typeof.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/typeof.js",
+            "sha256": "4f974e1b2d593668b64d573e458cd7d789cb1be1e23272bbc230b2a654fe69f4"
+          }
+        },
+        {
+          "path": "../../node_modules/regenerator-runtime/runtime.js",
+          "upstream": {
+            "archive": "regenerator-runtime-0.13.7",
+            "member": "package/runtime.js",
+            "sha256": "2d81987ea861c76c2a855617075f9298f6cd09c32be95d730011a19255a4ef4d"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/regenerator/index.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/regenerator/index.js",
+            "sha256": "70482fcb02ddf80fb8e8b9e7547d9c0328ebff0baea1ac8f3765fd0972aeed94"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/arrayWithoutHoles.js",
+            "sha256": "60b51d971d357fe4f0eab05a2bcbf6f392b51853d4ea93c3a139d276c6c2ca90"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/iterableToArray.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/iterableToArray.js",
+            "sha256": "8c7d880e0d9f0535ad7cdd986df6c1dd1284651efe1b618ed1863877d9fa5767"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/nonIterableSpread.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/nonIterableSpread.js",
+            "sha256": "9500aa1aee50ce5ea8594263d82311ab8f48ff50db7a681a1ae40e82d20376d2"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/toConsumableArray.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/toConsumableArray.js",
+            "sha256": "fa8e9eb0aafb0d63d8dae3b966cfedb1cf7102a4833facc3422dba1b2cf686de"
+          }
+        },
+        {
+          "path": "../../node_modules/@babel/runtime/helpers/defineProperty.js",
+          "upstream": {
+            "archive": "%40babel%2Fruntime-7.13.10",
+            "member": "package/helpers/defineProperty.js",
+            "sha256": "26989e9a8f63bf988d4788071e939235b2126ab96970bd9249c8a216011759ed"
+          }
+        }
+      ]
+    }
+  ],
+  "tokenizer": {
+    "dependency": {
+      "archive": "linkifyjs-2.1.9",
+      "member": "package/package.json",
+      "sha256": "25a59be5a38b3bf4e8257ac802c239fcef0f84dc7f1ddee84ac58ff6c0bb1b2b"
+    },
+    "value": "git+https://github.com/nfrasser/simple-html-tokenizer.git#04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+    "sources": [
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/entity-parser.js",
+          "sha256": "6ef5badc8960148ec8b2e2b08a8877b91b081b9d4b0fb00512473d5213c16a89"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/entity-parser.js",
+          "sha256": "60d9d369600dd7802a3c9ca343fec67030b1cce3f79625d441194c69bd5315c8"
+        }
+      },
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/evented-tokenizer.js",
+          "sha256": "22adbef1bcbdeda2619e9b5fb1d1705b788d6950118a8d12990afba9b2ca5896"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/evented-tokenizer.js",
+          "sha256": "103bae96d698a2a97187d88a2b0316a62c06abea732050ef5cb8871daae2c188"
+        }
+      },
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/html5-named-char-refs.js",
+          "sha256": "3b149f4fb8a80f45c8d11e6719ae6125cb7078ae0f6125e8cf28debcc8f92a8f"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/html5-named-char-refs.js",
+          "sha256": "1cda52628c0fe26f52159ecfccd27a0f9ec1810c09707977d17647941e5433dc"
+        }
+      },
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/index.js",
+          "sha256": "5cf11452b324b6675523134da45227ed49e40b96a39a8fa83103c4d86f6dfba9"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/index.js",
+          "sha256": "fe32f7187a8519203552c9ef34ec38a9ca8f48f4c2636c32018b1c1e5ad05d9a"
+        }
+      },
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/tokenize.js",
+          "sha256": "4cd3e81688f5400bb7bf6b7a117eb52abb06bbf81d99c6a3f9dddd5b7c2179a8"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/tokenize.js",
+          "sha256": "f2835e77b8f3bce4300c80206862b22b26a92ccb26b3aac2b3c4f281ca0c3534"
+        }
+      },
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/tokenizer.js",
+          "sha256": "b93c93d7706833a1900170334f38860dda35c347e9e79efd71ac2c711fe7d9bf"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/tokenizer.js",
+          "sha256": "6ea4c5117afcc6bbc4ce6b1c55a06a58c994e1807fa1235ca342b71107516734"
+        }
+      },
+      {
+        "source": {
+          "archive": "simple-html-tokenizer-git-04799f4638ec5ed903a4e5aa6e832269fa59be6b",
+          "member": "nfrasser-simple-html-tokenizer-04799f4/lib/simple-html-tokenizer/utils.js",
+          "sha256": "61c17e67cbcc658463e8a18f8b34680315a85ab0708339c01ef74fce079bc936"
+        },
+        "target": {
+          "archive": "linkifyjs-2.1.9",
+          "member": "package/lib/simple-html-tokenizer/utils.js",
+          "sha256": "87a1125b20e60ffe32ecbb40b7605668a0be7e24e56eac112847f34b4169677a"
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Exact source matches establish reproducible embedded content, not the unique original full dependency lockfile.",
+    "Babel 7.11.2/7.12.5 and 7.14.8/7.16.3 were nonmatching candidates; all 16 embedded Babel members match 7.13.10.",
+    "Other embedded attribution gates remain open in console-embedded-notices.json."
+  ]
+}

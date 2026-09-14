@@ -8,11 +8,47 @@ import test from 'node:test'
 import ts from 'typescript'
 import { generateConsole, moduleRanges, obsoleteMap, upstreamSha256 } from '../scripts/site-vendor/console/build.ts'
 import { extractNotice } from '../scripts/site-vendor/console/embedded-notices.ts'
+import { verifyMappedSources, verifyTransformedSources } from '../scripts/site-vendor/console/embedded-sources.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from '../scripts/site-vendor/console/provenance.ts'
 import { reconstructModule, verifyPrelude } from '../scripts/site-vendor/console/reconstruction.ts'
 import { errorArgument } from '../scripts/site-vendor/console/runtime/errors.ts'
 import { css } from '../scripts/site-vendor/console/runtime/style.ts'
 import { createSubscriptions } from '../scripts/site-vendor/console/runtime/subscriptions.ts'
+
+test('Embedded source maps reject omitted dependencies and content from a different release', () => {
+  const upstream = Buffer.from('export const value = 1;\n')
+  const map = { sources: ['../../src/owned.js', '../../node_modules/library/index.js'], sourcesContent: ['owned', upstream.toString()] }
+  let mapBytes = Buffer.from(JSON.stringify(map))
+  const record = { source: { archive: 'parent', member: 'index.js.map', sha256: hash(mapBytes) }, externalPrefix: '../../node_modules/', sources: [{ path: map.sources[1], upstream: { archive: 'library', member: 'index.js', sha256: hash(upstream) } }] }
+  const read = member => member.archive === 'parent' ? mapBytes : upstream
+  assert.equal(verifyMappedSources(record, read), 1)
+  assert.throws(() => verifyMappedSources({ ...record, sources: [] }, read), /Empty embedded/)
+  assert.throws(() => verifyMappedSources({ ...record, sources: [...record.sources, ...record.sources] }, read), /Duplicate/)
+  const changed = Buffer.from('export const value = 2;\n')
+  const otherVersion = structuredClone(record)
+  otherVersion.sources[0].upstream.sha256 = hash(changed)
+  assert.throws(() => verifyMappedSources(otherVersion, member => member.archive === 'parent' ? mapBytes : changed), /content differs/)
+  for (const changedMap of [
+    { ...map, sources: [...map.sources, '../../node_modules/hidden/index.js'], sourcesContent: [...map.sourcesContent, 'hidden'] },
+    { ...map, sourcesContent: ['owned', null] },
+  ]) {
+    mapBytes = Buffer.from(JSON.stringify(changedMap))
+    assert.throws(() => verifyMappedSources({ ...record, source: { ...record.source, sha256: hash(mapBytes) } }, read), /inventory changed|content differs/)
+  }
+})
+
+test('Embedded transforms compare exact target bytes and reject duplicate or altered evidence', () => {
+  const input = Buffer.from('export const value = 1;')
+  const output = Buffer.from('exports.value = 1;')
+  const source = { archive: 'upstream', member: 'index.js', sha256: hash(input) }
+  const target = { archive: 'consumer', member: 'index.js', sha256: hash(output) }
+  const read = member => member.archive === 'upstream' ? input : output
+  const transform = () => output.toString()
+  assert.equal(verifyTransformedSources([{ source, target }], read, transform), 1)
+  assert.throws(() => verifyTransformedSources([{ source, target }], read, () => `${output}\n`), /transform differs/)
+  assert.throws(() => verifyTransformedSources([{ source: { ...source, sha256: hash('changed') }, target }], read, transform), /member changed/)
+  assert.throws(() => verifyTransformedSources([{ source, target }, { source, target }], read, transform), /Duplicate/)
+})
 
 test('Embedded notices retain exact headers and reject missing or changed mapped sources', () => {
   const source = '// Copyright owner\n// Full permission and disclaimer.\nconst value = 1;'

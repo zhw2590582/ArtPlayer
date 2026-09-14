@@ -695,11 +695,15 @@
         "refactor/baselines/console-notices-validation.json",
         "refactor/changes/2026-09-15-SITE-07-console-notices.md",
         "scripts/site-vendor/console/embedded-notices.ts",
-        "docs/THIRD_PARTY_NOTICES.md"
+        "docs/THIRD_PARTY_NOTICES.md",
+        "refactor/baselines/console-embedded-sources.json",
+        "refactor/baselines/console-embedded-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-embedded-sources.md",
+        "scripts/site-vendor/console/embedded-sources.ts"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "All 100 vendor module bodies and Parcel loader exactly reproduce from fixed archives. Public notices now deliver 32 package licenses, the Parcel license, and exact Chromium/Sultan Tarimo embedded headers; all 53 site notice files passed byte-for-byte HTTP checks in three engines. Remaining embedded attribution is explicitly tracked in console-embedded-notices.json. Original full lockfile is not recovered; runtime unchanged."
+      "workspaceState": "All 100 vendor module bodies and Parcel loader exactly reproduce from fixed archives. Additionally all 17 react-inspector external source-map members and seven tokenizer files match pinned upstream sources. Public console notices cover 38 entries; all 56 site notice files passed byte-for-byte HTTP checks in three engines. Remaining embedded attribution is tracked in console-embedded-notices.json. Original full lockfile is not recovered; runtime unchanged."
     },
     {
       "id": "SDK-01",

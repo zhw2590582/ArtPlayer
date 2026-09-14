@@ -28,13 +28,13 @@
     "status": "partial",
     "confirmed": [
       "Chromium copyright and full BSD conditions in console-feed source",
-      "Sultan Tarimo MIT header in styled-components embedded rule-sheet source"
+      "Sultan Tarimo MIT header in styled-components embedded rule-sheet source",
+      "All seven linkifyjs simple-html-tokenizer files exactly reproduce from its fixed Git dependency with Babel 6.26.0; Yehuda Katz license preserved.",
+      "All 17 react-inspector external source-map members exactly match Babel runtime 7.13.10 and regenerator-runtime 0.13.7; both licenses preserved."
     ],
     "pending": [
       "console-feed replicator upstream attribution",
-      "linkifyjs simple-html-tokenizer attribution",
       "Emotion stylis/hash and cache rule-sheet attribution",
-      "react-inspector embedded Babel/regenerator source and notices",
       "console-feed Component Stack Overflow attribution and any additional embedded sources"
     ]
   }

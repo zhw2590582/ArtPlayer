@@ -150,8 +150,24 @@ comes from console-feed string-utils, and Sultan Tarimo's MIT header comes from
 styled-components' rule-sheet source map. Both are independently attributed in
 the public index and protected by the notice CLI's omission checks.
 
-This is partial embedded review. The record lists replicator, simple-html-tokenizer,
-Emotion stylis/hash/cache, the Component Stack Overflow reference, and Babel/
-regenerator inside react-inspector as follow-ups. Source-map names and comment
-links are leads, not proof of a particular upstream version or complete notice
-coverage. Do not close VENDOR-08 solely because all Parcel modules reproduce.
+`embedded-sources.ts` verifies dependency source-map inventories and exact source
+transforms. Its record is `refactor/baselines/console-embedded-sources.json`.
+All 16 Babel members embedded in react-inspector match runtime 7.13.10; its single
+regenerator member matches runtime 0.13.7. The consumer map and each source member
+are hashed, and the checker rejects omitted or extra external map sources. These
+versions identify matching source content; the original full lock is not recovered.
+
+Linkifyjs 2.1.9 pins simple-html-tokenizer to Git commit
+04799f4638ec5ed903a4e5aa6e832269fa59be6b in its published package manifest. All seven
+tokenizer members exactly reproduce with the self-contained Babel 6.26.0 compiler
+and es2015 loose preset. Archive, compiler, source and output bytes are checked.
+The Git archive's SHA-512 is a measured fingerprint, not an npm registry SRI;
+the recorded immutable URL and dependency string retain its actual provenance.
+These three licenses are included in the 38 console notice outputs. The normal
+site build still executes only the owned TS build; historical reproduction now
+fetches 39 archives only when explicitly run with `--fetch`.
+
+This is partial embedded review. Remaining follow-ups are replicator, Emotion
+stylis/hash/cache and the Component Stack Overflow reference. Source-map names and
+comment links alone are leads, not proof of complete notice coverage. Do not close
+VENDOR-08 solely because all Parcel modules reproduce.

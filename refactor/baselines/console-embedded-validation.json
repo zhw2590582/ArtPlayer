@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-14T23:33:29.867Z",
+  "baseCommit": "199021c8a95c3de2a0bc2d3eaa3d65dc32a438df",
+  "node": "v24.21.0",
+  "sourceFingerprint": {
+    "manifestSha256": "be1e37845cd3f4dced3eaccfea8a232cb42a629346642cf0b77cc712eee20205",
+    "sourceRecordSha256": "6dc92b6f05c8f4daeef4920980c00dabf82dc1617b8d4560d99dc8a9d2c3efcf",
+    "consoleSha256": "5644af7bb35bb6d0bcfa7eeae9a21b406ac4fc1b499a6c797a6534c7d33f0678"
+  },
+  "unit": {
+    "passed": 22,
+    "failed": 0,
+    "log": "refactor/.cache/console-embedded-tests.log"
+  },
+  "reproduction": {
+    "archives": 39,
+    "exactModules": 100,
+    "embeddedNotices": 2,
+    "mappedMembers": 17,
+    "transformedMembers": 7,
+    "offlineLog": "refactor/.cache/console-embedded-reproduce.log",
+    "fetchLog": "refactor/.cache/console-embedded-fetch.log",
+    "licenseClosure": false
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "59d219a7f50742e202ad9594d29066a8bad2dec03b13fe1d9be09607e072b33c",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ],
+    "noticeFilesPerEngine": 56
+  },
+  "checks": [
+    "Strict docs-tools TypeScript",
+    "Scoped source/test/documentation ESLint after top-level function correction",
+    "Read-only console and site-notice generation checks"
+  ],
+  "remaining": [
+    "replicator origin and notice",
+    "Emotion stylis/hash/cache attribution",
+    "Component Stack Overflow attribution",
+    "Other site asset provenance tasks"
+  ],
+  "limits": [
+    "Observed source matches are not proof of the unique original dependency lockfile.",
+    "Git archive integrity is measured from the immutable Git dependency URL, not npm registry-provided SRI.",
+    "HTTPS integrations isolated; this is Windows local-page evidence, not physical-device or remote-publish validation.",
+    "No runtime or lockfile changes, pushes, deployments or publications."
+  ]
+}

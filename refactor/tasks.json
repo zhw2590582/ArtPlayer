@@ -4497,7 +4497,10 @@
         "changes/2026-09-15-SITE-07-console-esm.md",
         "baselines/console-embedded-notices.json",
         "baselines/console-notices-validation.json",
-        "changes/2026-09-15-SITE-07-console-notices.md"
+        "changes/2026-09-15-SITE-07-console-notices.md",
+        "baselines/console-embedded-sources.json",
+        "baselines/console-embedded-validation.json",
+        "changes/2026-09-15-SITE-07-console-embedded-sources.md"
       ]
     },
     {

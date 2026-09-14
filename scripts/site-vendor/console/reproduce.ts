@@ -1,4 +1,5 @@
 import type { EmbeddedNotice } from './embedded-notices.ts'
+import type { Member, SourceMapRecord, TransformedSource } from './embedded-sources.ts'
 import type { Archive, External, Source } from './provenance.ts'
 import type { BabelRuntime, EsmSource } from './reconstruction.ts'
 import assert from 'node:assert/strict'
@@ -10,6 +11,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { extractNotice } from './embedded-notices.ts'
+import { verifyMappedSources, verifyTransformedSources } from './embedded-sources.ts'
 import { hash, parcelModules, verifyArchive, verifyModules, verifyPackageEdges } from './provenance.ts'
 import { reconstructModule, verifyPrelude } from './reconstruction.ts'
 
@@ -37,11 +39,19 @@ interface EsmProvenance extends SourceGroup<EsmSource> {
   parcel: { archive: Archive, prelude: { member: string, sha256: string }, footer: string, notices: Notice[], recipeMembers: { member: string, sha256: string }[] }
   supplementalNotices: { url: string, apiUrl?: string, source: string, sha256: string }[]
 }
+interface EmbeddedProvenance {
+  archives: (Archive & { id: string, notices: Notice[] })[]
+  compiler: { archive: Archive, member: string, sha256: string, version: string, options: { presets: [string, { loose: boolean }][] } }
+  sourceMaps: SourceMapRecord[]
+  tokenizer: { dependency: Member, value: string, sources: TransformedSource[] }
+}
+interface HistoricalBabel { version: string, transform: (source: string, options: EmbeddedProvenance['compiler']['options']) => { code: string } }
 
 const root = fileURLToPath(new URL('../../../', import.meta.url))
 const record: Provenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-feed-provenance.json'), 'utf8'))
 const common: SourceGroup<CommonSource> = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-commonjs-provenance.json'), 'utf8'))
 const esm: EsmProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-esm-provenance.json'), 'utf8'))
+const embeddedSources: EmbeddedProvenance = JSON.parse(fs.readFileSync(path.join(root, 'refactor/baselines/console-embedded-sources.json'), 'utf8'))
 assert(process.argv.slice(2).every(arg => arg === '--fetch'), 'Use reproduce.ts [--fetch]')
 assert.equal(process.version, `v${fs.readFileSync(path.join(root, '.node-version'), 'utf8').trim()}`, 'Use canonical Node')
 const cacheRoot = fs.realpathSync(path.join(root, 'refactor/.cache'))
@@ -60,7 +70,10 @@ async function download(url: string) {
     throw error
   }
 }
-for (const archive of [record.archive, record.compiler.archive, ...common.archives, ...esm.archives, esm.babel.archive, esm.parcel.archive]) {
+const allArchives = [record.archive, record.compiler.archive, ...common.archives, ...esm.archives, esm.babel.archive, esm.parcel.archive, ...embeddedSources.archives, embeddedSources.compiler.archive]
+const allArchiveIds = new Set(allArchives.map(archive => `${encodeURIComponent(archive.name)}-${archive.version}`))
+assert.equal(allArchiveIds.size, allArchives.length, 'Duplicate reproduction archive')
+for (const archive of allArchives) {
   const target = path.join(cache, `${encodeURIComponent(archive.name)}-${archive.version}.tgz`)
   if (process.argv.includes('--fetch')) {
     const bytes = await download(archive.tarball)
@@ -178,4 +191,33 @@ for (const notice of embedded.notices) {
   const text = extractNotice(readMember(`${notice.archive}.tgz`, notice.member), notice)
   assert.equal(fs.readFileSync(path.join(root, notice.source), 'utf8'), text, 'Frozen embedded notice changed')
 }
-console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, unresolved: 0, licenseClosure: false }))
+function readEmbedded(source: Member) {
+  assert(allArchiveIds.has(source.archive), 'Unknown embedded source archive')
+  return readMember(`${source.archive}.tgz`, source.member)
+}
+for (const archive of embeddedSources.archives) {
+  assert.equal(archive.id, `${encodeURIComponent(archive.name)}-${archive.version}`, 'Embedded archive ID differs')
+  for (const notice of archive.notices) {
+    assert.equal(hash(readMember(`${archive.id}.tgz`, notice.member)), notice.sha256, 'Embedded upstream license changed')
+    assert.equal(hash(fs.readFileSync(path.join(root, notice.source))), notice.sha256, 'Frozen embedded license changed')
+  }
+}
+assert.equal(embeddedSources.sourceMaps.length, 1, 'Incomplete embedded map scope')
+const mappedCount = embeddedSources.sourceMaps.reduce((total, source) => total + verifyMappedSources(source, readEmbedded), 0)
+assert.equal(mappedCount, 17, 'Incomplete react-inspector embedded scope')
+const tokenizer = embeddedSources.tokenizer
+const dependencyBytes = readEmbedded(tokenizer.dependency)
+assert.equal(hash(dependencyBytes), tokenizer.dependency.sha256, 'Tokenizer dependency manifest changed')
+const dependency: { devDependencies: Record<string, string> } = JSON.parse(dependencyBytes.toString('utf8'))
+assert.equal(dependency.devDependencies['simple-html-tokenizer'], tokenizer.value, 'Tokenizer Git dependency changed')
+const compiler = embeddedSources.compiler
+const legacyBytes = readMember(`${compiler.archive.name}-${compiler.archive.version}.tgz`, compiler.member)
+assert.equal(hash(legacyBytes), compiler.sha256, 'Embedded compiler changed')
+const legacyPath = path.join(cache, 'babel6.cjs')
+fs.writeFileSync(legacyPath, legacyBytes)
+const legacyBabel = require(legacyPath) as HistoricalBabel
+assert.equal(legacyBabel.version, compiler.version, 'Embedded compiler version changed')
+assert.deepEqual(compiler.options, { presets: [['es2015', { loose: true }]] }, 'Embedded compiler options changed')
+const transformedCount = verifyTransformedSources(tokenizer.sources, readEmbedded, source => legacyBabel.transform(source, compiler.options).code)
+assert.equal(transformedCount, 7, 'Incomplete tokenizer scope')
+console.log(JSON.stringify({ exactModules: identified.size, consoleFeed: count, commonjs: commonCount, esm: esmCount, parcelPrelude: true, packageEdges: true, embeddedNotices: embedded.notices.length, embeddedMappedSources: mappedCount, embeddedTransformedSources: transformedCount, unresolved: 0, licenseClosure: false }))
