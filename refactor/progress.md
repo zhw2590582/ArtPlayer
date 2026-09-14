@@ -1,5 +1,23 @@
 # 进度与证据
 
+## PKG-DASH-SEEK-01 暂停跳转缓冲指标修复完成
+
+仅在dash.js 4.5.2真实空缓冲且缓存指标陈旧时同步零值，恢复SDK自身下载调度。
+模块复用SDK事件订阅的所有权，检查版本、stream/video/metrics身份、暂停跳转、
+裁剪和重入边界；不替换SDK方法、不清缓冲、不改时间或发送合成媒体事件。
+修复前新旧核心两引擎严格跳转4失败；修复后源码8通过，最终main/legacy各8通过。
+源码和三格式Node414通过；最终含文档包离线安装/冻结重装、五组类型通过。
+严格TS、根lint和专项lint通过，根lint仍有1个既有warning。
+
+main定向SDK矩阵76通过；legacy75通过1失败，原报告保持：SDK5.2.1/旧核心下
+质量设置180p在点击过程中不可见。根因尚未确认，新增PKG-DASH-MENU-01及
+DASH-MENU-01接续处理，不靠force点击、扩大超时或重跑覆盖。裸4.5.2与旧插件
+原始停滞仍保留，DASH-SEEK-01/PKG-DASH-05/06及全局发布门槛保持开放。
+诊断getter无效和指标同步有效的反事实报告仍以失败退出，未混入验收通过数。
+见[变更](changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md)和
+[机器证据](baselines/dash-seek-recovery-validation.json)。261项：191 done、20 doing、
+50 todo。此任务独立本地提交并完成提交审计后，继续设置菜单失败调查；没有push或发布。
+
 ## CI-01 Chromium 完整源码范围回归检查点
 
 固定fc566f14d源码、Node24.21.0/Yarn1.22.22，完整152文件1481项，双worker运行

@@ -2240,6 +2240,44 @@
       ]
     },
     {
+      "id": "PKG-DASH-SEEK-01",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "修复 SDK 4.5.2 暂停跳转后的缓冲指标停滞",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-04"
+      ],
+      "status": "done",
+      "risk": "H",
+      "deliverable": "按版本和实测空缓冲限定的指标同步、生命周期守卫及真实 SDK 旧红新绿",
+      "acceptance": "新插件在新旧核心及 Chromium/Firefox 原位置回归通过；不修改 SDK 方法/配置、媒体时间或删除缓冲；旧 SDK 原生缺陷与旧插件限制独立记录，不宣称第三方本体已修复",
+      "evidence": [
+        "changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
+        "baselines/dash-seek-recovery-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-DASH-MENU-01",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "定位并修复 SDK 刷新期间设置选项不可见",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-SEEK-01"
+      ],
+      "status": "todo",
+      "risk": "H",
+      "deliverable": "真实 SDK 菜单点击失败根因、对应兼容修复及新旧核心回归",
+      "acceptance": "保留 legacy/旧核心/SDK5.2.1 的原失败；确定菜单在点击过程中不可见的原因；不靠 force 点击、扩大超时或重复运行覆盖问题；main/legacy 质量与音轨设置及 SDK 刷新组合通过",
+      "evidence": [
+        "changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
+        "baselines/dash-seek-recovery-validation.json"
+      ]
+    },
+    {
       "id": "PKG-DASH-05",
       "phase": "5 包迁移：artplayer-plugin-dash-control",
       "title": "验证新旧核心和组合",
@@ -2248,7 +2286,8 @@
       ],
       "dependsOn": [
         "PKG-DASH-04",
-        "CORE-22"
+        "CORE-22",
+        "PKG-DASH-SEEK-01"
       ],
       "status": "doing",
       "risk": "H",
@@ -2276,7 +2315,8 @@
       ],
       "dependsOn": [
         "PKG-DASH-05",
-        "ENG-07"
+        "ENG-07",
+        "PKG-DASH-MENU-01"
       ],
       "status": "todo",
       "risk": "H",

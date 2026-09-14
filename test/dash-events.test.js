@@ -20,6 +20,180 @@ function eventHost(version) {
   }, listenerCount: () => [...events.values()].reduce((sum, callbacks) => sum + callbacks.size, 0) }
 }
 
+function seekHost() {
+  const host = eventHost(4)
+  Object.assign(host.video, { currentTime: 6, seeking: true, dispatchEvent() {
+    assert.fail('Recovery must not dispatch native media events')
+  } })
+  const samples = []
+  const levels = { video: 3, audio: 5 }
+  const buffers = Object.fromEntries(['video', 'audio'].map(type => [type, {
+    end: type === 'video' ? 6 : 11,
+    pruning: false,
+    removals: [],
+    getRangeAt(time) { return this.end > time ? { end: this.end } : null },
+    getIsPruningInProgress() { return this.pruning },
+    getAllRangesWithSafetyFactor() { return this.removals },
+    clearBuffers() { assert.fail('Recovery must not clear buffers') },
+    pruneAllSafely() { assert.fail('Recovery must not prune buffers') },
+  }]))
+  const metrics = {
+    getCurrentBufferLevel(type) { return levels[type] },
+    addBufferLevel(type, at, level) {
+      assert(Number.isFinite(at.valueOf()))
+      samples.push({ type, level })
+      levels[type] = level
+    },
+  }
+  const state = { stream: { getProcessors: () => Object.entries(buffers).map(([type, buffer]) => ({ getType: () => type, getBufferController: () => buffer })) } }
+  Object.assign(host.dash, { getVersion: () => '4.5.2', getDashMetrics: () => metrics, getActiveStream: () => state.stream })
+  return { ...host, samples, levels, buffers, metrics, seekState: state }
+}
+
+for (const { name, factory } of candidates.filter(item => item.sdk === 4)) {
+  test(`DASH (${name}): seeking records only measured empty stale metrics without changing SDK methods or media`, () => {
+    const host = seekHost()
+    const getters = [host.metrics.getCurrentBufferLevel, host.buffers.video.getRangeAt]
+    const settings = JSON.stringify(host.state.settings)
+    factory(bothMenus())(host.art).update()
+    assert.equal(host.listenerCount(), 8)
+    host.fire('playbackSeeking')
+    host.fire('playbackSeeking')
+    assert.deepEqual(host.samples, [{ type: 'video', level: 0 }])
+    assert.equal(host.levels.audio, 5)
+    assert.equal(host.video.currentTime, 6)
+    assert.equal(JSON.stringify(host.state.settings), settings)
+    assert.deepEqual([host.metrics.getCurrentBufferLevel, host.buffers.video.getRangeAt], getters)
+  })
+
+  test(`DASH (${name}): recovery excludes other SDK versions and unavailable optional capabilities`, () => {
+    for (const version of ['5.2.1', '4.5.1', undefined]) {
+      const host = seekHost()
+      host.dash.getVersion = () => version
+      factory(bothMenus())(host.art).update()
+      assert.equal(host.listenerCount(), 7)
+      host.fire('playbackSeeking')
+      assert.equal(host.samples.length, 0)
+    }
+    const host = seekHost()
+    delete host.dash.getDashMetrics
+    factory(bothMenus())(host.art).update()
+    assert.equal(host.listenerCount(), 7)
+  })
+
+  test(`DASH (${name}): nonempty, pruning, unready and invalid seek measurements do not overwrite metrics`, () => {
+    const changes = [
+      h => h.video.seeking = false,
+      h => h.video.currentTime = Number.NaN,
+      h => h.levels.video = 0,
+      h => h.levels.video = Number.NaN,
+      h => h.levels.video = Number.POSITIVE_INFINITY,
+      h => h.buffers.video.end = 8,
+      h => h.buffers.video.getRangeAt = () => ({ end: Number.NaN }),
+      h => h.buffers.video.getRangeAt = () => undefined,
+      h => h.buffers.video.pruning = true,
+      h => h.buffers.video.pruning = undefined,
+      h => h.buffers.video.removals.push({ start: 0, end: 1 }),
+      h => delete h.buffers.video.getRangeAt,
+      h => h.seekState.stream = null,
+    ]
+    for (const change of changes) {
+      const host = seekHost()
+      factory(bothMenus())(host.art).update()
+      change(host)
+      host.fire('playbackSeeking')
+      assert.equal(host.samples.length, 0)
+    }
+  })
+
+  test(`DASH (${name}): escaped recovery callbacks are inert after SDK replacement or destruction`, () => {
+    const host = seekHost()
+    factory(bothMenus())(host.art).update()
+    const retained = [...host.events.get('playbackSeeking')][0]
+    host.art.dash = {}
+    retained()
+    host.art.dash = host.dash
+    host.art.destroy()
+    retained()
+    assert.equal(host.samples.length, 0)
+    assert.equal(host.listenerCount(), 0)
+  })
+
+  test(`DASH (${name}): stream teardown suspends recovery until the active stream is initialized`, async () => {
+    const host = seekHost()
+    factory(bothMenus())(host.art).update()
+    host.fire('streamTeardownComplete')
+    host.fire('playbackSeeking')
+    assert.equal(host.samples.length, 0)
+    host.fire('streamInitialized')
+    await flush()
+    host.fire('playbackSeeking')
+    assert.deepEqual(host.samples, [{ type: 'video', level: 0 }])
+  })
+
+  test(`DASH (${name}): reentrant metrics and destruction cannot write a second stream measurement`, () => {
+    const host = seekHost()
+    host.buffers.audio.end = 6
+    const add = host.metrics.addBufferLevel
+    host.metrics.addBufferLevel = (...args) => {
+      host.fire('playbackSeeking')
+      add(...args)
+      host.art.destroy()
+    }
+    factory(bothMenus())(host.art).update()
+    host.fire('playbackSeeking')
+    assert.deepEqual(host.samples, [{ type: 'video', level: 0 }])
+    assert.equal(host.listenerCount(), 0)
+  })
+
+  test(`DASH (${name}): source, video and time changes during measurement cancel the stale write`, () => {
+    for (const change of [h => h.seekState.stream = {}, h => h.state.video = {}, h => h.video.currentTime = 7, h => h.dash.getDashMetrics = () => null]) {
+      const host = seekHost()
+      host.buffers.video.getRangeAt = () => {
+        change(host)
+        return null
+      }
+      factory(bothMenus())(host.art).update()
+      host.fire('playbackSeeking')
+      assert.equal(host.samples.length, 0)
+    }
+  })
+
+  test(`DASH (${name}): metric errors keep menus and allow a later recovery attempt`, (t) => {
+    const host = seekHost()
+    const add = host.metrics.addBufferLevel
+    const failure = new Error('Metric write failed')
+    const warnings = []
+    t.mock.method(console, 'warn', (...args) => warnings.push(args))
+    host.metrics.addBufferLevel = () => {
+      throw failure
+    }
+    factory(bothMenus())(host.art).update()
+    host.fire('playbackSeeking')
+    assert.equal(warnings.length, 1)
+    assert.equal(warnings[0][1], failure)
+    assert.equal(host.controls.size + host.settings.size, 4)
+    assert.equal(host.listenerCount(), 8)
+    host.metrics.addBufferLevel = add
+    host.fire('playbackSeeking')
+    assert.equal(host.samples.length, 1)
+  })
+
+  test(`DASH (${name}): destruction from the final SDK media check prevents a late metric write`, () => {
+    const host = seekHost()
+    factory(bothMenus())(host.art).update()
+    let reads = 0
+    host.dash.getVideoElement = () => {
+      if (++reads === 2)
+        host.art.destroy()
+      return host.video
+    }
+    host.fire('playbackSeeking')
+    assert.equal(host.samples.length, 0)
+    assert.equal(host.listenerCount(), 0)
+  })
+}
+
 for (const { name, sdk, factory } of candidates) {
   test(`DASH ${sdk} (${name}): SDK events coalesce without interrupting synchronous selection`, async () => {
     const host = eventHost(sdk)

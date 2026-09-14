@@ -13,6 +13,7 @@ destroys it, changes its source, or adds a runtime dependency on dash.js.
 | `src/index.ts`                             | Deferred installation, media identity, update revisions, event subscription and cleanup |
 | `src/sdk.ts`                               | 4.x qualityIndex vs 5.x representation ID access and manual/Auto selection              |
 | `src/sdk-events.ts`                        | Owned SDK subscriptions, coalesced refresh, teardown and asynchronous errors             |
+| `src/seek-buffer.ts`                       | Exact SDK 4.5.2 empty-seek metric recovery and stale/reentrant measurement guards        |
 | `src/types.ts`                             | Narrow internal SDK, host, model and cleanup types                                        |
 | `src/mapping.ts`                           | Names, current item matching, duplicate labels and selector ordering                    |
 | `src/menu.ts`                              | Existing control/setting registries, menu ownership and guarded selection callbacks     |
@@ -22,7 +23,7 @@ destroys it, changes its source, or adds a runtime dependency on dash.js.
 Dependencies flow from the entry into mapping/menu, and from mapping into the SDK
 adapter. Mapping has no DOM dependency. Menu receives a model and validity callback;
 it does not choose SDK versions. The event observer receives active/refresh/reset
-callbacks and owns no DOM or ArtPlayer object. All six owned modules are checked with strict
+callbacks and owns no DOM or ArtPlayer object. All seven owned modules are checked with strict
 TypeScript, noUncheckedIndexedAccess, and skipLibCheck=false; there are no remaining
 owned JavaScript modules in this package.
 
@@ -154,7 +155,9 @@ external selection, source topology replacement, retained callbacks and SDK owne
 It also includes a native SDK control without an ArtPlayer instance. SDK 4.5.2
 paused-seek stalls reproduce independently: its empty buffer-clear path preserves
 stale buffer metrics and can prevent further scheduling. A diagnostic backport of
-the SDK 5 buffer-level refresh confirms the cause; no production workaround ships.
+the SDK 5 buffer-level refresh confirms the cause. The candidate now adds the
+bounded compatibility recovery described below; the original SDK and published
+plugin controls retain their historical failures.
 See the [diagnosis](../../refactor/changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md).
 The compatibility risk remains open. Unsupported MSE is
 recorded as a playback capability gap, not acceptance. SDK event tests also cover
@@ -166,3 +169,34 @@ Node10/old DOM diagnostics. The exact peer dependency closure is hash-pinned in
 `refactor/baselines/dash-type-dependencies.json`; no type shim or paths mapping is used.
 See [refactor validation](../../refactor/dash-validation.md) for baseline failures
 and [task plan](../../refactor/plan.md) for remaining type and release work.
+
+## SDK 4.5.2 paused seek recovery
+
+`seek-buffer.ts` creates a callback only for version 4.5.2 with the required SDK
+capabilities. The existing observer owns its `playbackSeeking` listener and applies
+the same SDK identity, teardown and destruction guards. Other SDK generations
+retain the original subscription set. No timer or asynchronous retry is added.
+
+The callback reads each active audio/video processor's range at the native media
+time. It records a zero metric only while seeking, with a positive stale cached
+level, no available forward buffer, no pruning in progress and no pending clear
+ranges for that target. It rechecks the active SDK, stream, metrics object, media
+identity and time before writing. A reentrancy guard and final active check prevent
+late writes during metrics callbacks or destruction. Metric failures warn without
+removing otherwise valid menus, and a later seek can try again.
+
+The SDK scheduler reads `DashMetrics.getCurrentBufferLevel`, rather than the buffer
+controller getter. Calling its existing `addBufferLevel` records an actual empty
+range measurement; it does not replace SDK methods or settings, set media time,
+dispatch DOM events, remove SourceBuffer data or reset the SDK. These are internal
+SDK capabilities, so the exact-version guard is deliberate. Reading returns
+seconds while metric storage uses milliseconds: only zero is written here.
+
+`dash-seek-diagnostics.js` contains separate page-only counterfactuals. The GETTER
+and METRICS diagnostic switches run after an original failure and leave that test
+failed; they cannot be combined with each other, the synthetic-event diagnostic
+or a patched SDK. The shared stable-pause browser flow tests both original native
+controls and strict candidate recovery with new/old core versions. Node tests
+cover invalid measurements, missing capabilities, SDK replacement, teardown,
+reentrancy, identity changes and error recovery. Standalone old SDK/old-plugin
+limitations, physical devices and full release acceptance remain separately tracked.

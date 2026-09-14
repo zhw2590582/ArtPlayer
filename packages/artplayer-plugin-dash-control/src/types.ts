@@ -5,7 +5,7 @@ export type Identifier = string | number
 export type Valid = () => boolean
 export type Cleanup = () => void
 export type EventName = 'ready' | 'restart' | 'destroy'
-export type SDKEventName = 'qualityChangeRequested' | 'qualityChangeRendered' | 'trackChangeRendered' | 'streamUpdated' | 'streamInitialized' | 'playbackTimeUpdated' | 'streamTeardownComplete'
+export type SDKEventName = 'qualityChangeRequested' | 'qualityChangeRendered' | 'trackChangeRendered' | 'streamUpdated' | 'streamInitialized' | 'playbackTimeUpdated' | 'playbackSeeking' | 'streamTeardownComplete'
 
 export interface QualityFields {
   height?: number

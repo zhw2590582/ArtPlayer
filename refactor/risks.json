@@ -3055,7 +3055,8 @@
       "status": "open",
       "owners": [
         "PKG-DASH-05",
-        "REVIEW-02"
+        "REVIEW-02",
+        "PKG-DASH-SEEK-01"
       ],
       "evidence": [
         "test/browser/dash-sdk.spec.js",
@@ -3065,9 +3066,11 @@
         "refactor/baselines/dash-seek-diagnosis.json",
         "test/browser/dash-buffer-observer.js",
         "refactor/changes/2026-09-14-CI-01-source-chromium.md",
-        "refactor/baselines/ci-source-chromium-validation.json"
+        "refactor/baselines/ci-source-chromium-validation.json",
+        "refactor/changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
+        "refactor/baselines/dash-seek-recovery-validation.json"
       ],
-      "compatibleResolution": "已用原生 SDK、SourceBuffer/调度指标和 SDK 5 空裁剪刷新的一行诊断回植确认根因。兼容处置尚未落地；不在核心伪造 timeupdate、不偏移 seek、不强制所有旧用户升级 SDK，也不将诊断补丁计为正式上游通过。",
+      "compatibleResolution": "PKG-DASH-SEEK-01 已在候选插件按精确版本和真实空缓冲同步 SDK 指标，新旧核心及两引擎严格跳转通过。裸 SDK 4.5.2 和冻结旧插件仍保留原始失败；不伪造媒体事件、不偏移 seek、不强制升级 SDK，完整组合及发布验收仍开放。",
       "closureCriteria": "原失败的新旧核心/插件组合有确定根因与对应修复/可验证环境边界；原生对照及原顺序、原目标回归成立，后续偶然通过不能关闭。"
     },
     {
@@ -6267,6 +6270,23 @@
         "refactor/scripts/ci-workflow.test.mjs"
       ],
       "resolutionRationale": "Old loader test reports missing expected rejection; updated loader rejects missing/stale maps and conflicting modes. Five-package isolated build/pack/install supplies main and legacy native PiP tests with package hashes. Local workflow mutation protects the required DPIP preparation; remote runs remain unverified."
+    },
+    {
+      "id": "DASH-MENU-01",
+      "title": "SDK 5.2.1 播放中设置质量选项在点击时变为不可见",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DASH-MENU-01",
+        "PKG-DASH-05",
+        "REVIEW-02"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md",
+        "refactor/baselines/dash-seek-recovery-validation.json"
+      ],
+      "compatibleResolution": "最终 legacy 定向矩阵复现：旧核心、新插件、Chromium 的180p选项先不稳定后不可见；保留点击失败与trace。SDK5.2.1不进入4.5.2指标修复分支，但菜单根因及历史来源尚未确定。",
+      "closureCriteria": "定位实际隐藏/刷新时序并提供可复现旧红新绿；新旧核心、main/legacy、质量/音轨、SDK刷新与销毁组合验证，不靠force点击或重跑覆盖失败。"
     }
   ]
 }

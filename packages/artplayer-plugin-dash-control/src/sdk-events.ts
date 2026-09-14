@@ -1,4 +1,5 @@
 import type { Cleanup, Dash, SDKEventName } from './types'
+import { createSeekRecovery } from './seek-buffer'
 
 interface Binding<Level extends object, Track extends object> {
   dash: Dash<Level, Track>
@@ -108,6 +109,9 @@ export function observeSDK<Level extends object, Track extends object>(options: 
           record.suspended = false
         schedule(record)
       }])
+      const recoverSeek = createSeekRecovery(dash, () => active(record) && !record.suspended)
+      if (recoverSeek)
+        entries.push(['playbackSeeking', recoverSeek])
       entries.push(['playbackTimeUpdated', () => {
         if (!active(record) || record.suspended)
           return

@@ -1,0 +1,990 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-DASH-SEEK-01",
+  "sourceHead": "442e1dcc961111b5f91de060d49b750f10a73e0d",
+  "scope": "Production compatibility repair for dash.js 4.5.2 stale metric scheduling after an empty-boundary seek. Not full DASH or release acceptance.",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32",
+    "remoteCI": false,
+    "physicalDevices": false
+  },
+  "source": [
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/seek-buffer.ts",
+      "sha256LF": "ed86e48fabeac02a13cb4e7b6bd41b04bc55e432ae1d995cc432917cfaf1c33f"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/sdk-events.ts",
+      "sha256LF": "97fdabfc6f1484ae0e95e2970ee88a6be1d71d52512db36ddf6407f3a7737570"
+    },
+    {
+      "file": "packages/artplayer-plugin-dash-control/src/types.ts",
+      "sha256LF": "f1a7aaf9c273054d9584432c5d7ce43e00b339091859bb1c926f12e63ed17b03"
+    },
+    {
+      "file": "test/dash-events.test.js",
+      "sha256LF": "4a952e59a0fd593188defe8c189248a26fbaccb1cf5ce74ae9461565ece0d9c4"
+    },
+    {
+      "file": "test/browser/dash-sdk.spec.js",
+      "sha256LF": "b633a650c46868c3d7bbd58d386e967f14b0b7bdf1b39a6b5d90b5edd089dbcc"
+    },
+    {
+      "file": "test/browser/dash-seek-diagnostics.js",
+      "sha256LF": "4020b044968343eae681889a647c33dd0810000150a0f6d0140e32baa58813f6"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "refactor/.cache/dash-package-types-tt3sEt/runtime/artplayer-plugin-dash-control.js",
+      "member": "package/dist/artplayer-plugin-dash-control.js",
+      "sha256": "a89652cb033d5d77d29d0084c36a5419d0a17b9a3e5a01269e4ab1d44dded55f",
+      "archiveSha256": "18b3df88479703e596bbf1d8fdca8fabe4ac73e34c34b73133b1749fbc0ef093"
+    },
+    {
+      "file": "refactor/.cache/dash-package-types-tt3sEt/runtime/artplayer-plugin-dash-control.legacy.js",
+      "member": "package/dist/artplayer-plugin-dash-control.legacy.js",
+      "sha256": "a21449b34ab4e7e81948117f7803123eb78e6dd63282d6a46f8c67fb7f4f2fc3",
+      "archiveSha256": "18b3df88479703e596bbf1d8fdca8fabe4ac73e34c34b73133b1749fbc0ef093"
+    },
+    {
+      "file": "refactor/.cache/dash-package-types-tt3sEt/runtime/artplayer-plugin-dash-control.mjs",
+      "member": "package/dist/artplayer-plugin-dash-control.mjs",
+      "sha256": "e07c946bf5626ef2a7dcfa6eb6b96ee63009205145ddafd73d8040f10144a6a7",
+      "archiveSha256": "18b3df88479703e596bbf1d8fdca8fabe4ac73e34c34b73133b1749fbc0ef093"
+    }
+  ],
+  "reports": [
+    {
+      "role": "Negative counterfactual; original assertion remains failed",
+      "directory": "refactor/.cache/dash-getter-probe-report",
+      "reportSha256": "d8887dc7c578238811e388daca8769e268c1e6b13a090ea934ea19a4f5914c17",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep",
+          "native SDK track switch",
+          "--workers=1"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T11:38:11.152Z",
+        "duration": 51182.368,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "cases": 4,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "011ea0e7ee2b15d29f9bd991a7a86644f9d72a02e7f0f330ebe26603a6714acd",
+          "candidate": "workspace source build",
+          "diagnostic": null
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidateSha256": "011ea0e7ee2b15d29f9bd991a7a86644f9d72a02e7f0f330ebe26603a6714acd",
+          "candidate": "workspace source build",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [],
+      "failures": [
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  323 |     })\n  324 |     await page.locator('#play').click()\n> 325 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  326 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  327 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  328 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:325:82"
+          ]
+        },
+        {
+          "project": "firefox",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  323 |     })\n  324 |     await page.locator('#play').click()\n> 325 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  326 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  327 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  328 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:325:82"
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-getter",
+          "advanced": false,
+          "records": [
+            {
+              "type": "video",
+              "reads": 0,
+              "adjusted": 0
+            },
+            {
+              "type": "audio",
+              "reads": 0,
+              "adjusted": 0
+            }
+          ],
+          "beforeTime": 6,
+          "attachmentSha256": "3cd75242d35548d2f5e8c0d21eec5cca01a37267f9e245aab9ca4cb978d005d7"
+        },
+        {
+          "project": "firefox",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-getter",
+          "advanced": false,
+          "records": [
+            {
+              "type": "video",
+              "reads": 0,
+              "adjusted": 0
+            },
+            {
+              "type": "audio",
+              "reads": 0,
+              "adjusted": 0
+            }
+          ],
+          "beforeTime": 6,
+          "attachmentSha256": "99c16984f7df69902ff3f7eee134a57167a331eff1ec817d438088d597bbdcf7"
+        }
+      ]
+    },
+    {
+      "role": "Four original failures recover after diagnostic metric write; not acceptance",
+      "directory": "refactor/.cache/dash-metric-repeat-report",
+      "reportSha256": "ca2c564e13f0310ccb88b678a5830c6a7e5b3eaa9e5a5637f6b58949209068f8",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep",
+          "dash.js 4.5.2: native SDK",
+          "--repeat-each=2",
+          "--workers=1"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T11:42:54.123Z",
+        "duration": 58608.347,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "cases": 4,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "011ea0e7ee2b15d29f9bd991a7a86644f9d72a02e7f0f330ebe26603a6714acd",
+          "candidate": "workspace source build",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [],
+      "failures": [
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  351 |     })\n  352 |     await page.locator('#play').click()\n> 353 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  354 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  355 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  356 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:353:82"
+          ]
+        },
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  351 |     })\n  352 |     await page.locator('#play').click()\n> 353 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  354 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  355 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  356 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:353:82"
+          ]
+        },
+        {
+          "project": "firefox",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  351 |     })\n  352 |     await page.locator('#play').click()\n> 353 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  354 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  355 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  356 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:353:82"
+          ]
+        },
+        {
+          "project": "firefox",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  351 |     })\n  352 |     await page.locator('#play').click()\n> 353 |     await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)\n      |                                                                                  ^\n  354 |     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')\n  355 |     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  356 |     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:353:82"
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-metric",
+          "advanced": true,
+          "records": [
+            {
+              "type": "video",
+              "cached": 2.807,
+              "corrected": 0,
+              "time": 6,
+              "range": null
+            }
+          ],
+          "settingsUnchanged": true,
+          "beforeTime": 6,
+          "afterMetricTime": 6,
+          "attachmentSha256": "ec72d9603c37207a2023543c9957918845ccfd14a6a8176079c28ca9a10ce83e"
+        },
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-metric",
+          "advanced": true,
+          "records": [
+            {
+              "type": "video",
+              "cached": 2.862,
+              "corrected": 0,
+              "time": 6,
+              "range": null
+            }
+          ],
+          "settingsUnchanged": true,
+          "beforeTime": 6,
+          "afterMetricTime": 6,
+          "attachmentSha256": "c15d4f2b1b4392398437b895b08a181020b2ffce700876919d8c7d5c73b8f710"
+        },
+        {
+          "project": "firefox",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-metric",
+          "advanced": true,
+          "records": [
+            {
+              "type": "video",
+              "cached": 2.788,
+              "corrected": 0,
+              "time": 6,
+              "range": null
+            }
+          ],
+          "settingsUnchanged": true,
+          "beforeTime": 6,
+          "afterMetricTime": 6,
+          "attachmentSha256": "646f6191a17f1982682f5f4e00c80a23e5c36c290e2a759f3571ad5af4354052"
+        },
+        {
+          "project": "firefox",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-metric",
+          "advanced": true,
+          "records": [
+            {
+              "type": "video",
+              "cached": 2.749,
+              "corrected": 0,
+              "time": 6,
+              "range": null
+            }
+          ],
+          "settingsUnchanged": true,
+          "beforeTime": 6,
+          "afterMetricTime": 6,
+          "attachmentSha256": "97b5bf72c3cc9c669b7e8755be94cfcdc88cd0be54a825f806f8e8780edfa2ac"
+        }
+      ]
+    },
+    {
+      "role": "Candidate before this repair, same strict boundary test",
+      "directory": "refactor/.cache/dash-seek-candidate-red-report",
+      "reportSha256": "3449fb4735082fa54660375cc99c42ecc2111a01f3877b10abae98865d84237b",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep",
+          "DASH 4.5.2: stable paused boundary",
+          "--workers=1"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T11:48:44.762Z",
+        "duration": 58998.359,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "cases": 4,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "011ea0e7ee2b15d29f9bd991a7a86644f9d72a02e7f0f330ebe26603a6714acd",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-before-seek-recovery.js",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "unexpected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "unexpected"
+        },
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "unexpected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "unexpected"
+        }
+      ],
+      "failures": [
+        {
+          "project": "chromium",
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  317 |   })\n  318 |   await page.locator('#play').click()\n> 319 |   await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(6.2)\n      |                                                                                                       ^\n  320 | }\n  321 |\n  322 | for (const core of ['published', 'candidate']) {\n    at seekAtEmptyBoundary (D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:319:103)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:326:7",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"The play() request was interrupted by a new load request. https://goo.gl/LdLk22\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)"
+          ]
+        },
+        {
+          "project": "chromium",
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  317 |   })\n  318 |   await page.locator('#play').click()\n> 319 |   await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(6.2)\n      |                                                                                                       ^\n  320 | }\n  321 |\n  322 | for (const core of ['published', 'candidate']) {\n    at seekAtEmptyBoundary (D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:319:103)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:326:7",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"The play() request was interrupted by a new load request. https://goo.gl/LdLk22\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)"
+          ]
+        },
+        {
+          "project": "firefox",
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  317 |   })\n  318 |   await page.locator('#play').click()\n> 319 |   await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(6.2)\n      |                                                                                                       ^\n  320 | }\n  321 |\n  322 | for (const core of ['published', 'candidate']) {\n    at seekAtEmptyBoundary (D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:319:103)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:326:7",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"The fetching process for the media resource was aborted by the user agent at the user's request.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)"
+          ]
+        },
+        {
+          "project": "firefox",
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  317 |   })\n  318 |   await page.locator('#play').click()\n> 319 |   await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(6.2)\n      |                                                                                                       ^\n  320 | }\n  321 |\n  322 | for (const core of ['published', 'candidate']) {\n    at seekAtEmptyBoundary (D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:319:103)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:326:7",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"The fetching process for the media resource was aborted by the user agent at the user's request.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)"
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "role": "Source repair strict boundary regression before final identity guard strengthening",
+      "directory": "refactor/.cache/dash-seek-source-green-report",
+      "reportSha256": "79a3622dea01bf6a60b9707da481926e5bab4dd5d63586f5c2cde8be4a920574",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep",
+          "stable paused boundary",
+          "--workers=1"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T11:50:29.292Z",
+        "duration": 48716.598000000005,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": 8,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "ef2025408d6df4df5ecd6c33b3c0313b239c8ae1b4bfbad8c6bb9c43f474e866",
+          "candidate": "workspace source build",
+          "diagnostic": null
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidateSha256": "ef2025408d6df4df5ecd6c33b3c0313b239c8ae1b4bfbad8c6bb9c43f474e866",
+          "candidate": "workspace source build",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        }
+      ],
+      "failures": [],
+      "diagnostics": []
+    },
+    {
+      "role": "Initial artifact, frozen published plugin failure retained",
+      "directory": "refactor/.cache/dash-seek-main-initial-sdk-report",
+      "reportSha256": "71e3c1538376369bc3ebfc909459c8ad51bbf3dd7f2a8458553ce49e78899b7c",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep-invert",
+          "native SDK track switch",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T11:57:49.211Z",
+        "duration": 142580.167,
+        "expected": 79,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": 80,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "0a7b4794473ee6f00d3504ca150448b198d7ca970e2e8efca1c236de6ed02d6b",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-57Y2kT\\runtime\\artplayer-plugin-dash-control.js",
+          "diagnostic": null
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidateSha256": "0a7b4794473ee6f00d3504ca150448b198d7ca970e2e8efca1c236de6ed02d6b",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-57Y2kT\\runtime\\artplayer-plugin-dash-control.js",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        }
+      ],
+      "failures": [
+        {
+          "project": "firefox",
+          "title": "candidate core / published DASH / 4.5.2: real MPD decoding and UI selection",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  270 |       })\n  271 |       await page.locator('#play').click()\n> 272 |       await expect.poll(() => page.evaluate(() => window.art.currentTime)).toBeGreaterThan(6.2)\n      |                                                                            ^\n  273 |       expect(await page.evaluate(() => window.sdkErrors)).toEqual([])\n  274 |       await testInfo.attach('dash-sdk-playing', { contentType: 'image/png', body: await page.screenshot() })\n  275 |     })\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:272:76",
+            "Error: Unhandled browser errors\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"The fetching process for the media resource was aborted by the user agent at the user's request.\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n   at fixtures.js:29\n\n  27 |         }).catch(() => null)\n  28 |     await testInfo.attach('browser-evidence', { contentType: 'application/json', body: JSON.stringify({ browser: browser.version(), platform: process.platform, manifest, state, errors, consoleErrors, failedRequests }, null, 2) })\n> 29 |     expect(errors, 'Unhandled browser errors').toEqual([])\n     |                                                ^\n  30 |   }, { auto: true }],\n  31 | })\n  32 |\n    at Object.base.extend.diagnostics.auto (D:\\github\\ArtPlayer\\test\\browser\\fixtures.js:29:48)"
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "role": "Final main runtime bytes; historical native SDK and old-plugin cases excluded only from this invocation",
+      "directory": "refactor/.cache/dash-seek-main-final-sdk-report",
+      "reportSha256": "0cb1b0abd5782bd5ea359c52a404caffb6345696b24c13ee2ed216a8f3e2e1f0",
+      "result": {
+        "scope": "source",
+        "exitCode": 0,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep-invert",
+          "native SDK track switch|published DASH / 4.5.2",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:03:38.248Z",
+        "duration": 124451.803,
+        "expected": 76,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": 76,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "a89652cb033d5d77d29d0084c36a5419d0a17b9a3e5a01269e4ab1d44dded55f",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-tt3sEt\\runtime\\artplayer-plugin-dash-control.js",
+          "diagnostic": null
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidateSha256": "a89652cb033d5d77d29d0084c36a5419d0a17b9a3e5a01269e4ab1d44dded55f",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-tt3sEt\\runtime\\artplayer-plugin-dash-control.js",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        }
+      ],
+      "failures": [],
+      "diagnostics": []
+    },
+    {
+      "role": "Final legacy runtime bytes; 75 pass and SDK 5.2.1 menu visibility failure retained",
+      "directory": "refactor/.cache/dash-seek-legacy-final-sdk-report",
+      "reportSha256": "74a3924972eeb7f3b22a3595bb1d5450088bba025cc83e022066fd3820989d8a",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--project=firefox",
+          "--grep-invert",
+          "native SDK track switch|published DASH / 4.5.2",
+          "--workers=2"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:09:50.376Z",
+        "duration": 142553.80599999998,
+        "expected": 75,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": 76,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:155.0) Gecko/20100101 Firefox/155.0"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "a21449b34ab4e7e81948117f7803123eb78e6dd63282d6a46f8c67fb7f4f2fc3",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-tt3sEt\\runtime\\artplayer-plugin-dash-control.legacy.js",
+          "diagnostic": null
+        },
+        {
+          "sdk": "5.2.1",
+          "sdkArchiveSha256": "4eacb0cc3525276666ca3f084611cdabb5a2264d128dfe0750fe106fbddd088f",
+          "sdkCodeMember": "package/dist/modern/umd/dash.all.min.js",
+          "candidateSha256": "a21449b34ab4e7e81948117f7803123eb78e6dd63282d6a46f8c67fb7f4f2fc3",
+          "candidate": "D:\\github\\ArtPlayer\\refactor\\.cache\\dash-package-types-tt3sEt\\runtime\\artplayer-plugin-dash-control.legacy.js",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "chromium",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "published core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 4.5.2: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        },
+        {
+          "title": "candidate core / candidate DASH 5.2.1: stable paused boundary seek preserves media and SDK ownership",
+          "project": "firefox",
+          "status": "expected"
+        }
+      ],
+      "failures": [
+        {
+          "project": "chromium",
+          "title": "published core / DASH 5.2.1: actual settings quality selection survives SDK refresh",
+          "status": "timedOut",
+          "errors": [
+            "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+            "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: /^180p$/ })\u001b[22m\n\u001b[2m    - locator resolved to <div class=\"art-setting-item-left-text\">180p</div>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not stable\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not visible\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    36 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not visible\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  339 |         await page.locator('.art-control-setting').click()\n  340 |         await page.locator(`[data-name=\"dash-${type}\"]`).click()\n> 341 |         await page.locator('.art-setting-panel.art-current .art-setting-item-left-text').filter({ hasText: new RegExp(`^${label}$`) }).click()\n      |                                                                                                                                        ^\n  342 |         if (type === 'quality') {\n  343 |           await expect.poll(() => page.evaluate(() => ({ height: window.art.video.videoHeight, auto: window.art.dash.getSettings().streaming.abr.autoSwitchBitrate.video }))).toEqual({ height: 180, auto: false })\n  344 |         }\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:341:136"
+          ]
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "role": "Extracted diagnostic helper, original bare-SDK assertion remains failed",
+      "directory": "refactor/.cache/dash-seek-metric-helper-final-report",
+      "reportSha256": "b3d4c238543f5949944be438761c8390dff27c17624dbd38761601b7ec16bfee",
+      "result": {
+        "scope": "source",
+        "exitCode": 1,
+        "signal": null,
+        "args": [
+          "test",
+          "--config=playwright.source.config.js",
+          "test/browser/dash-sdk.spec.js",
+          "--project=chromium",
+          "--grep",
+          "dash.js 4.5.2: native SDK track switch",
+          "--workers=1"
+        ]
+      },
+      "stats": {
+        "startTime": "2026-09-14T12:13:45.782Z",
+        "duration": 15693.702,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cases": 1,
+      "retries": 0,
+      "environment": [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"
+      ],
+      "inputs": [
+        {
+          "sdk": "4.5.2",
+          "sdkArchiveSha256": "9a0944c48deb0fd8f92b0eea436c5b0d0aea9237c7da0078c0310f1430d0a31f",
+          "sdkCodeMember": "package/dist/dash.all.min.js",
+          "candidateSha256": "b9c81fe7223b79775b5c2d3b9dbc79477b7e993201a8412fba81143df39972cf",
+          "candidate": "workspace source build",
+          "diagnostic": null
+        }
+      ],
+      "stableBoundaryCases": [],
+      "failures": [
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m6.2\u001b[39m\nReceived:   \u001b[31m6\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  269 |   })\n  270 |   await page.locator('#play').click()\n> 271 |   await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(6.2)\n      |                                                                                                       ^\n  272 | }\n  273 |\n  274 | for (const core of ['published', 'candidate']) {\n    at seekAtEmptyBoundary (D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:271:103)\n    at D:\\github\\ArtPlayer\\test\\browser\\dash-sdk.spec.js:323:5"
+          ]
+        }
+      ],
+      "diagnostics": [
+        {
+          "project": "chromium",
+          "title": "dash.js 4.5.2: native SDK track switch and paused seek without ArtPlayer",
+          "name": "diagnostic-buffer-metric",
+          "advanced": true,
+          "records": [
+            {
+              "type": "video",
+              "cached": 2.84,
+              "corrected": 0,
+              "time": 6,
+              "range": null
+            }
+          ],
+          "settingsUnchanged": true,
+          "beforeTime": 6,
+          "afterMetricTime": 6,
+          "attachmentSha256": "3dfdb05c65d93bff7281db436ad54e1be260198a201a44f3a87da0a127332ee0"
+        }
+      ]
+    }
+  ],
+  "packageTypes": {
+    "file": "refactor/.cache/dash-package-types-8CjCBf/report.json",
+    "sha256": "878e65e25a760ff76748b5006da94a4fa501618bc24f290234df1356818efd25",
+    "archives": [
+      {
+        "name": "artplayer",
+        "sha256": "d4a0cc5dcbe015e254b3bce64d505ee4e010792ab70414bcf8d0139d7c413b75"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "sha256": "5f3fa80f04392d6bbd8ed46d2e1a2fedcf742eeb907b07c40b6edb815079f44b"
+      }
+    ],
+    "matrix": [
+      {
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      },
+      {
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": 0,
+        "invalidRejected": 8
+      }
+    ],
+    "runtimeBytesMatchBrowserInputs": true,
+    "method": "Offline Yarn installation and frozen reinstallation outside workspace; all installed file hashes verified. Browser tests load extracted earlier tarball bytes identical to final packed runtime; not a full installed browser suite."
+  },
+  "node": {
+    "file": "refactor/.cache/dash-seek-artifact-node-final.log",
+    "sha256": "c4ca56f28948de13e8b374e704ef8dd8a5398ae29468fb4ea8cddccce6c32d88",
+    "passed": 414,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "source plus three extracted tarball formats and historical contracts"
+  },
+  "checks": {
+    "strictPackageTypeScript": "exit 0",
+    "rootLint": {
+      "file": "refactor/.cache/dash-seek-lint.log",
+      "sha256": "51b9b3f7ac85138eea089c5431e7b9bd60736814d6595a3dec9174e42baf7390",
+      "errors": 0,
+      "warnings": 1
+    },
+    "diagnosticGuards": {
+      "patchedSdkExitCode": 1,
+      "mixedExitCode": 1
+    }
+  },
+  "limitations": [
+    "DASH-SEEK-01 stays open for standalone SDK 4.5.2 and frozen published plugins",
+    "DASH-MENU-01 tracks legacy SDK 5.2.1 settings click visibility failure; no root-cause claim",
+    "Full CI source suite remains failing on the original native SDK control; no committed exclusions or expected-failure marks",
+    "WebKit, devices and final package/global release reviews are not completed by this repair"
+  ]
+}

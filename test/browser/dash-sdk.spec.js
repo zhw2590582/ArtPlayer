@@ -4,6 +4,7 @@ import process from 'node:process'
 import { ensureArchive, hash, readMember } from '../../refactor/scripts/releases.mjs'
 import { compilePackage } from '../helpers/load.js'
 import { observeDashBuffers } from './dash-buffer-observer.js'
+import { probeBufferGetter, probeBufferMetric } from './dash-seek-diagnostics.js'
 import { expect, test } from './fixtures.js'
 
 const sdks = new Map()
@@ -14,6 +15,9 @@ let mediaManifest
 let pluginRelease
 const diagnosticSDK = process.env.ARTPLAYER_DASH_DIAGNOSTIC_SDK || 'none'
 assert(['none', 'upstream4', 'bufferlevel4'].includes(diagnosticSDK), 'Unknown diagnostic SDK mode')
+const recoveryModes = ['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'].filter(name => process.env[name] === '1')
+assert(recoveryModes.length <= 1, 'Choose only one DASH recovery diagnostic')
+assert(!recoveryModes.length || diagnosticSDK === 'none', 'Recovery diagnostics require the unchanged published SDK')
 
 test.beforeAll(async () => {
   const baseline = JSON.parse(fs.readFileSync(new URL('../../refactor/baselines/dash-sdk.json', import.meta.url)))
@@ -80,6 +84,22 @@ test.afterEach(async ({ page }, testInfo) => {
     recovery.advanced = await page.waitForFunction(() => (window.art?.video || window.nativeVideo).currentTime > 6.2, null, { timeout: 3000 }).then(() => true, () => false)
     recovery.final = await page.evaluate(() => window.dashBuffers.snapshot())
     await testInfo.attach('diagnostic-synthetic-timeupdate', { contentType: 'application/json', body: JSON.stringify(recovery) })
+  }
+  if (process.env.ARTPLAYER_DASH_DIAGNOSE_GETTER === '1' && testInfo.status !== testInfo.expectedStatus && state.seeking && state.time === 6) {
+    const recovery = await page.evaluate(probeBufferGetter)
+    recovery.advanced = await page.waitForFunction(() => (window.art?.video || window.nativeVideo).currentTime > 6.2, null, { timeout: 3000 }).then(() => true, () => false)
+    recovery.final = await page.evaluate(() => {
+      for (const restore of window.dashGetterRestores)
+        restore()
+      return { state: window.dashBuffers.snapshot(), records: window.dashGetterRecords }
+    })
+    await testInfo.attach('diagnostic-buffer-getter', { contentType: 'application/json', body: JSON.stringify(recovery) })
+  }
+  if (process.env.ARTPLAYER_DASH_DIAGNOSE_METRICS === '1' && testInfo.status !== testInfo.expectedStatus && state.seeking && state.time === 6) {
+    const recovery = await page.evaluate(probeBufferMetric)
+    recovery.advanced = await page.waitForFunction(() => (window.art?.video || window.nativeVideo).currentTime > 6.2, null, { timeout: 3000 }).then(() => true, () => false)
+    recovery.final = await page.evaluate(() => window.dashBuffers.snapshot())
+    await testInfo.attach('diagnostic-buffer-metric', { contentType: 'application/json', body: JSON.stringify(recovery) })
   }
   if (!page.isClosed()) {
     await page.evaluate(() => {
@@ -208,6 +228,60 @@ for (const core of ['published', 'candidate']) {
   }
 }
 
+async function seekAtEmptyBoundary(page) {
+  await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).readyState)).toBeGreaterThanOrEqual(2)
+  await page.locator('#play').click()
+  await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(0.3)
+  await page.evaluate(() => {
+    const dash = (window.art?.dash || window.nativeDash)
+    dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: false } } } })
+    if (dash.setQualityFor)
+      dash.setQualityFor('video', 1)
+    else
+      dash.setRepresentationForTypeById('video', '1')
+  })
+  await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).videoHeight)).toBe(180)
+  // Match the failed integrated run: video data ends at the next seek target.
+  await expect.poll(() => page.evaluate(() => {
+    const video = (window.art?.video || window.nativeVideo)
+    return video.currentTime >= 2.8 && Math.abs(video.buffered.end(video.buffered.length - 1) - 6) < 0.0001
+  })).toBe(true)
+  await page.evaluate(() => {
+    const dash = (window.art?.dash || window.nativeDash)
+    dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } })
+    dash.setCurrentTrack(dash.getTracksFor('audio').find(track => track.lang === 'fr'))
+  })
+  await expect.poll(() => page.evaluate(() => (window.art?.dash || window.nativeDash).getCurrentTrackFor('audio').lang)).toBe('fr')
+  // The recorded integrated stall happened after the audio switch was rendered.
+  await expect.poll(() => page.evaluate(() => window.sdkEvents.some(event => event.name === 'TRACK_CHANGE_RENDERED' && event.mediaType === 'audio'))).toBe(true)
+  await page.locator('#pause').click()
+  // Observe a genuinely held pause: no clock/append events for half a second.
+  // This separates the seek from progress events still queued by the track switch.
+  await page.waitForFunction(() => (window.art?.video || window.nativeVideo).paused && performance.now() - window.dashBuffers.events.at(-1).at >= 500)
+  expect(await page.evaluate(() => (window.art?.video || window.nativeVideo).paused)).toBe(true)
+  await page.evaluate(() => {
+    window.dashBuffers.mark('before-seek')
+    if (window.art)
+      window.art.seek = 6
+    else
+      window.nativeVideo.currentTime = 6
+    window.dashBuffers.mark('assigned-seek')
+  })
+  await page.locator('#play').click()
+  await expect.poll(() => page.evaluate(() => (window.art?.video || window.nativeVideo).currentTime)).toBeGreaterThan(6.2)
+}
+
+for (const core of ['published', 'candidate']) {
+  for (const version of ['4.5.2', '5.2.1']) {
+    test(`${core} core / candidate DASH ${version}: stable paused boundary seek preserves media and SDK ownership`, async ({ page }, testInfo) => {
+      await openDash(page, version, core, 'candidate', testInfo)
+      await seekAtEmptyBoundary(page)
+      expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
+      expect(await page.evaluate(() => window.art.dash.getVideoElement() === window.art.video && window.sdkDestroyed === 0)).toBe(true)
+    })
+  }
+}
+
 for (const version of ['4.5.2', '5.2.1']) {
   test(`dash.js ${version}: native SDK track switch and paused seek without ArtPlayer`, async ({ page }, testInfo) => {
     const capability = await loadSDK(page, version, 'candidate', testInfo)
@@ -246,43 +320,7 @@ for (const version of ['4.5.2', '5.2.1']) {
       }
       document.querySelector('#pause').onclick = () => video.pause()
     })
-    await expect.poll(() => page.evaluate(() => window.nativeVideo.readyState)).toBeGreaterThanOrEqual(2)
-    await page.locator('#play').click()
-    await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(0.3)
-    await page.evaluate(() => {
-      const dash = window.nativeDash
-      dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: false } } } })
-      if (dash.setQualityFor)
-        dash.setQualityFor('video', 1)
-      else
-        dash.setRepresentationForTypeById('video', '1')
-    })
-    await expect.poll(() => page.evaluate(() => window.nativeVideo.videoHeight)).toBe(180)
-    // Match the failed integrated run: video data ends at the next seek target.
-    await expect.poll(() => page.evaluate(() => {
-      const video = window.nativeVideo
-      return video.currentTime >= 2.8 && Math.abs(video.buffered.end(video.buffered.length - 1) - 6) < 0.0001
-    })).toBe(true)
-    await page.evaluate(() => {
-      const dash = window.nativeDash
-      dash.updateSettings({ streaming: { abr: { autoSwitchBitrate: { video: true } } } })
-      dash.setCurrentTrack(dash.getTracksFor('audio').find(track => track.lang === 'fr'))
-    })
-    await expect.poll(() => page.evaluate(() => window.nativeDash.getCurrentTrackFor('audio').lang)).toBe('fr')
-    // The recorded integrated stall happened after the audio switch was rendered.
-    await expect.poll(() => page.evaluate(() => window.sdkEvents.some(event => event.name === 'TRACK_CHANGE_RENDERED' && event.mediaType === 'audio'))).toBe(true)
-    await page.locator('#pause').click()
-    // Observe a genuinely held pause: no clock/append events for half a second.
-    // This separates the seek from progress events still queued by the track switch.
-    await page.waitForFunction(() => window.nativeVideo.paused && performance.now() - window.dashBuffers.events.at(-1).at >= 500)
-    expect(await page.evaluate(() => window.nativeVideo.paused)).toBe(true)
-    await page.evaluate(() => {
-      window.dashBuffers.mark('before-seek')
-      window.nativeVideo.currentTime = 6
-      window.dashBuffers.mark('assigned-seek')
-    })
-    await page.locator('#play').click()
-    await expect.poll(() => page.evaluate(() => window.nativeVideo.currentTime)).toBeGreaterThan(6.2)
+    await seekAtEmptyBoundary(page)
     expect(await page.evaluate(() => window.nativePlay)).toBe('fulfilled')
     expect(await page.evaluate(() => window.sdkErrors)).toEqual([])
     expect(await page.evaluate(() => window.Artplayer.instances.length)).toBe(0)

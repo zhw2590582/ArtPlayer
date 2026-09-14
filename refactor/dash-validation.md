@@ -83,7 +83,19 @@ UMD 测试 VM 显式注入宿主 console，以检查原始错误身份；没有�
 ## 05 暂停 seek 诊断
 
 实际 SDK 4.5.2 在不创建 ArtPlayer 的稳定暂停用例中也会停滞，SDK 5.2.1 的对应用例通过。
-根因与空裁剪分支漏更新缓冲指标有关，DASH-SEEK-01 仍 open；没有发布兼容补丁。
-`dash-buffer-observer.js` 记录原生 SourceBuffer/SDK 指标，两个显式诊断环境变量只用于
+根因与空裁剪分支漏更新缓冲指标有关，DASH-SEEK-01 仍 open。PKG-DASH-SEEK-01
+已完成仅针对4.5.2的插件兼容处理；原始SDK本体及旧插件对照仍保留失败。
+`dash-buffer-observer.js` 记录原生 SourceBuffer/SDK 指标，原有显式诊断环境变量只用于
 失败后的合成事件和内存 SDK 补丁对照，不能用于正式验收。命令、证据、限制和回退见
 [seek 根因记录](changes/2026-09-12-PKG-DASH-05-seek-diagnosis.md)。
+
+新增GETTER/METRICS诊断由 `dash-seek-diagnostics.js` 承担，原断言失败后才执行，
+退出码仍失败。缓冲控制器getter替换未恢复调度；记录实际空缓冲指标后两引擎
+恢复。这些诊断不能混用或与修改后的SDK组合。正式实现 `src/seek-buffer.ts`
+不替换getter，在已有SDK事件订阅的生命周期内同步零指标，并检查旧SDK版本、
+真实目标范围、stream/media/metrics身份、清理与重入；生产及产物回归单独验收。
+
+见[修复及验证](changes/2026-09-14-PKG-DASH-SEEK-01-buffer-metrics.md)：旧候选严格
+跳转4失败，新源码8通过，最终main/legacy各8个严格跳转通过。main完整定向76通过；
+legacy同范围75通过、1个SDK5.2.1设置点击不可见失败，归PKG-DASH-MENU-01继续调查。
+不将局部跳转修复等同于DASH组合/分发验收全部完成。

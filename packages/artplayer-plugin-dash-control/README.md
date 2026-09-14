@@ -14,6 +14,10 @@ while paused (with no SDK event), call the existing synchronous
 `art.plugins.artplayerPluginDashControl.update()` to refresh immediately.
 The plugin removes only its own SDK listeners and never destroys your SDK instance.
 
+For dash.js 4.5.2, the plugin compensates for stale buffer metrics when a paused
+seek reaches an empty buffered range. Existing setup and seek calls remain the
+same. This targeted recovery retains the caller's SDK configuration and media time.
+
 ## TypeScript
 
 The formatter receives the original SDK object. For dash.js 5.2.1 types:
