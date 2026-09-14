@@ -4367,11 +4367,14 @@
         "refactor/changes/2026-09-13-PKG-MULTI-SUB-03-resources.md",
         "test/multiple-subtitles-lifecycle.test.js",
         "test/multiple-subtitles-merge.test.js",
-        "test/browser/multiple-subtitles-lifecycle.spec.js"
+        "test/browser/multiple-subtitles-lifecycle.spec.js",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
+        "refactor/baselines/multiple-subtitles-combinations-validation.json",
+        "test/browser/multiple-subtitles-combinations.spec.js"
       ],
       "compatibleResolution": "Keep historical merge profiles explicit and test real overlap/timing before choosing compatibility behavior.",
       "closureCriteria": "Unaligned lengths, overlap, sorting, names and real subtitle display across supported cores are verified.",
-      "workspaceState": "Candidate resource fixes and serialization parity are verified in task 03. This risk remains open for the complete supported-core/device coverage owned by task 05."
+      "workspaceState": "Native three-engine comparisons on cores5.1.2/5.1.7 show only first active cue displayed for actual plugin1.1.0/1.2.0/candidate; plugin1.0.0 index-merges both languages into one visible cue. Native tracks hold both languages and selecting either alone works. Compatible old-host overlap resolution and complete device coverage remain open."
     },
     {
       "id": "MULTI-SUB-LIFE-01",
@@ -5993,6 +5996,40 @@
         "refactor/baselines/multiple-subtitles-entities-validation.json"
       ],
       "resolutionRationale": "Historical regressions retain old output; corrected b/c/v/ruby and text cases plus actual b/literal-tag native/HTML display pass. Immutable trees, timestamps and lifecycle tests remain green."
+    },
+    {
+      "id": "MULTI-SUB-OFFSET-01",
+      "title": "Paused Firefox subtitle offset leaves out-of-time native cues active and captions visible",
+      "confirmation": "reproduced",
+      "workspaceState": "Two runs on Firefox155 with cores5.3.0/5.4.0/candidate: paused at1.5, subtitleOffset=1 changes start/end to2/4 but native activeCues and HTML still contain both captions after the assertion timeout. Candidate assertion remains failing. No production correction yet.",
+      "compatibleResolution": "Reduce native timing invalidation and ensure offset updates render the correct active captions without seeking media or changing public timing and event contracts.",
+      "closureCriteria": "Candidate paused positive/negative/reset offsets refresh correctly, transitions and lifecycle regressions pass; historical behavior and actual old-core compatibility are separately documented.",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
+        "refactor/baselines/multiple-subtitles-combinations-validation.json",
+        "test/browser/multiple-subtitles-combinations.spec.js"
+      ]
+    },
+    {
+      "id": "MULTI-SUB-SWITCH-01",
+      "title": "Intermittent WebKit core5.3.0 caption loss after selected-track source switch",
+      "confirmation": "unverified",
+      "workspaceState": "One Windows WebKit26.6 run lost Translation after switchUrl and seek1.5; diagnostic rerun passed without a production change. Root cause and reproducibility are unresolved; do not mark accepted or fixed.",
+      "compatibleResolution": "Inspect native track loading and source-switch ordering with deterministic state evidence; distinguish historical host failure from fixture ordering and candidate regression.",
+      "closureCriteria": "Root cause classified with targeted evidence, any required fix validated, and changed candidate/old-core combination rerun without hiding the original failure.",
+      "status": "open",
+      "owners": [
+        "PKG-MULTI-SUB-05"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
+        "refactor/baselines/multiple-subtitles-combinations-validation.json",
+        "test/browser/multiple-subtitles-combinations.spec.js"
+      ]
     }
   ]
 }

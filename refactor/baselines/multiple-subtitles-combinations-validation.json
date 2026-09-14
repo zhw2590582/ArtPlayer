@@ -1,0 +1,2803 @@
+{
+  "task": "PKG-MULTI-SUB-05",
+  "state": "doing",
+  "baselineCommit": "675b095b27e50832c4468096502e936422ea689a",
+  "recordedAt": "2026-09-14T04:29:05.819Z",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "sources": [
+    {
+      "path": "test/browser/server.mjs",
+      "sha256": "67c342b7a6d33e7d921c82e700a8cbd66e8168527438edf7116f4369b3e8af31"
+    },
+    {
+      "path": "test/browser/multiple-subtitles-combinations.spec.js",
+      "sha256": "4e6a615ad6ab7d155aa57e37144fc02fcf8fb2cde68be6c6d91a0f30f973ac72"
+    },
+    {
+      "path": "refactor/baselines/multiple-subtitles-cores.json",
+      "sha256": "08627af316841b345be97ce0e8d0aafefb9f50054b11af10f41044cc4f1adb29"
+    }
+  ],
+  "runs": [
+    {
+      "name": "initial",
+      "report": {
+        "path": "refactor/.cache/multi-combinations-initial-browser/report.json",
+        "sha256": "9f6644d0df51ed2ffd728ce4e821b36b7ef77eb00798ce12572a45de9fb41c96"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-combinations-chromium.log",
+        "sha256": "16791f837b303fd6dca2b22c85e88844924e7d86dde59d08cfc48823e68eef37"
+      },
+      "stats": {
+        "startTime": "2026-09-14T04:20:24.177Z",
+        "duration": 46928.744000000006,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 7,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'length')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:32)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'length')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:58)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'length')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:32)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'length')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:58)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        }
+      ]
+    },
+    {
+      "name": "corrected-fixture",
+      "report": {
+        "path": "refactor/.cache/multi-combinations-corrected-browser/report.json",
+        "sha256": "535eb48d3ec41d37252cc68b7fd7db9da7d451a8d95e1e86ba9a0c1bbd78953b"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-combinations-chromium-corrected.log",
+        "sha256": "6e160569da94d3cfe2d16f572ffea5b0ee98c1ae51a154a1d3e9ba62706ce138"
+      },
+      "stats": {
+        "startTime": "2026-09-14T04:22:04.649Z",
+        "duration": 31605.989,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"Translation\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"Translation\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        }
+      ]
+    },
+    {
+      "name": "all-engines",
+      "report": {
+        "path": "refactor/.cache/multi-combinations-all-browser/report.json",
+        "sha256": "f3ebe31419185df4bb3b36ae66423fa7834e86c7328e96495bceac4b43871c21"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-combinations-all.log",
+        "sha256": "848ac705d3355481014f9d603bb5a7466eef8286cce95f7aa1cecffe62155a60"
+      },
+      "stats": {
+        "startTime": "2026-09-14T04:23:37.955Z",
+        "duration": 84376.417,
+        "expected": 53,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "unresolvedCandidateGap": false,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "unresolvedCandidateGap": false,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "unresolvedCandidateGap": false,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "unresolvedCandidateGap": false,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "firefox",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.art-subtitle-b')\nExpected: \u001b[32m\"Translation\"\u001b[39m\nTimeout: 7000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.art-subtitle-b') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-b')\u001b[22m\n",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: destroying one player preserves another player's captions and URLs",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "unresolvedCandidateGap": false,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.2: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.2",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.2",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.2",
+              "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+            "bytes": 154583
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.2.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.1.0-main",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "published-1.0.0-main",
+            "state": {
+              "native": [
+                "FirstTranslation"
+              ],
+              "displayed": "FirstTranslation"
+            },
+            "simultaneousCaptionsAccepted": true,
+            "unresolvedCandidateGap": false,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.1.7: record single-active-cue overlap boundary",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.1.7",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "boundary": {
+            "core": "published-5.1.7",
+            "implementation": "candidate",
+            "state": {
+              "native": [
+                "First",
+                "Translation"
+              ],
+              "displayed": "First"
+            },
+            "simultaneousCaptionsAccepted": false,
+            "unresolvedCandidateGap": true,
+            "explanation": "1.0.0 combines by array index; 1.1.0 onward retains separately timed cues. Old core displays only its first active cue. Candidate gap remains open, even when this observation test passes."
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.1.7",
+              "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+            "bytes": 155940
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.2.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.2.0-main",
+            "pluginSha256": "c1cb0b511da88347165cc855185de9450a44835bb34bb802281ccdb854ef603c",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.1.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.1.0-main",
+            "pluginSha256": "df40c0728decb7e39779d0f22cad0a32d5586a66bfdb19bcfecffbecca083a83",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles published-1.0.0-main / candidate core: unchanged old factory and selection calls",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "published-1.0.0-main",
+            "pluginSha256": "89ba01b678b5ca5e5277482718f55f496317ca9416d0d7b3d46b5c306f399c42",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        }
+      ]
+    },
+    {
+      "name": "diagnostics",
+      "report": {
+        "path": "refactor/.cache/multi-combinations-diagnostics-browser/report.json",
+        "sha256": "ce11f74b21ee0e205719622fe34fcd9cd8ee282a4aec81defce8c898a1ac143e"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-combinations-diagnostics.log",
+        "sha256": "a99e978de1f0da2d5f3b08fbb6dec8fa9aa2462cc7e2ad3f0d6f5350dfa5c32c"
+      },
+      "stats": {
+        "startTime": "2026-09-14T04:26:20.749Z",
+        "duration": 32718.626,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": true,
+            "paused": true,
+            "time": 4.5,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "displayed": "Second"
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": true,
+            "paused": true,
+            "time": 0,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [],
+            "displayed": "\n                                Second\n                            "
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "chromium",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "153.0.8010.12",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": true,
+            "paused": true,
+            "time": 0,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [],
+            "displayed": "\n                                Second\n                            "
+          },
+          "browser": "153.0.8010.12",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    17 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": false,
+            "paused": true,
+            "time": 1.5,
+            "offset": 1,
+            "cues": [
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 5,
+                "end": 7,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              }
+            ],
+            "displayed": "FirstTranslation"
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": false,
+            "paused": true,
+            "time": 1.5,
+            "offset": 1,
+            "cues": [
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 5,
+                "end": 7,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              }
+            ],
+            "displayed": "\n                                First\n                            \n                                Translation\n                            "
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "firefox",
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.art-subtitle-a')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  7000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.art-subtitle-a') with timeout 7000ms\u001b[22m\n\u001b[2m  - waiting for locator('.art-subtitle-a')\u001b[22m\n\u001b[2m    18 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "155.0",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": false,
+            "paused": true,
+            "time": 1.5,
+            "offset": 1,
+            "cues": [
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 5,
+                "end": 7,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              }
+            ],
+            "displayed": "\n                                First\n                            \n                                Translation\n                            "
+          },
+          "browser": "155.0",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published-5.3.0: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published-5.3.0",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": true,
+            "paused": true,
+            "time": 4.5006146,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "displayed": "Second"
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.3.0",
+              "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+            "bytes": 159238
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / published: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "published",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": true,
+            "paused": true,
+            "time": 0,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [],
+            "displayed": "\n                                Second\n                            "
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "npm-release",
+              "version": "5.4.0",
+              "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+              "member": "package/dist/artplayer.js"
+            },
+            "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+            "bytes": 134037
+          }
+        },
+        {
+          "title": "Multiple subtitles candidate / candidate: timed VTT and SRT, offsets, fullscreen and source change",
+          "project": "webkit",
+          "status": "passed",
+          "inputs": {
+            "core": "candidate",
+            "plugin": "candidate",
+            "pluginSha256": "66664050ae97facbf56f2e885792beee2e3ff7400889d78951f46d207e0fe2d9",
+            "browser": "26.6",
+            "scope": "Desktop engines; 5.3.0 is adjacent stable, not the unavailable 5.3.1 release; no minimum-version or physical-device claim"
+          },
+          "finalState": {
+            "destroyed": true,
+            "paused": true,
+            "time": 0,
+            "offset": 0,
+            "cues": [
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-a\">First</div>"
+              },
+              {
+                "start": 1,
+                "end": 3,
+                "text": "<div class=\"art-subtitle-b\">Translation</div>"
+              },
+              {
+                "start": 4,
+                "end": 6,
+                "text": "<div class=\"art-subtitle-a\">Second</div>"
+              }
+            ],
+            "active": [],
+            "displayed": "\n                                Second\n                            "
+          },
+          "browser": "26.6",
+          "coreResource": {
+            "source": {
+              "kind": "workspace-build",
+              "entry": "packages\\artplayer\\src\\index.ts"
+            },
+            "sha256": "d9aeee649395b78eb30b38dcaefb3c19c731c21b08e356485bac7cda08ead242",
+            "bytes": 378117
+          }
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "path": "refactor/.cache/multi-combinations-lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/multi-combinations-ci.log",
+      "sha256": "9373aa219250dadd62469dc8720311f58a30a41b6ad13f39e1c6f85842ab2393",
+      "exitCode": 0
+    }
+  ],
+  "limits": [
+    "Full57 run includes24 boundary observation tests,18 of which confirm missing concurrent language rather than acceptance",
+    "Full57 run precedes formatting cleanup and final-state diagnostic hook; final9 rerun includes both",
+    "Candidate Firefox offset assertion remains failing; task05 incomplete",
+    "WebKit5.3.0 source-switch failure passed on rerun without production changes; root cause unresolved",
+    "No ASS, full encoding matrix, physical device, installed artifact or remote CI acceptance claimed"
+  ]
+}

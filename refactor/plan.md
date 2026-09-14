@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 247 项，范围 22 个包及工作区/示例。
 
-状态：todo 56 / doing 16 / blocked 0 / done 175 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 55 / doing 17 / blocked 0 / done 175 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -227,7 +227,7 @@
 | PKG-MULTI-SUB-04 | artplayer-plugin-multiple-subtitles<br>迁移自有源码和公开类型 | PKG-MULTI-SUB-03, ENG-04, ENG-06, CORE-07 | 准确 parser/cue/tree/result 类型与真实异步形状 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-MULTI-SUB-07 | artplayer-plugin-multiple-subtitles<br>修复字幕内嵌时间戳序列化 | PKG-MULTI-SUB-03 | 保留数字时间戳节点、修正无效 NaN 输出、明确旧/新字幕输出差异 | 旧九份实现可复现，候选有效内嵌时间戳及文字/CSS/原生字幕通过，公开工厂与选择接口不变 | H | done |
 | PKG-MULTI-SUB-08 | artplayer-plugin-multiple-subtitles<br>修复字幕实体解码与嵌套标签包装 | PKG-MULTI-SUB-04, PKG-MULTI-SUB-07 | 使用解析器既有实体表入口修复多余分号；保护字面文本并以兄弟节点包装标签，保留CSS钩子和时间戳 | 冻结旧实现复现、实体/双重编码/标签/选择重置回归、新旧核心真实字幕显示通过；vendor原文与来源校验不变，类型/分发兼容 | M | done |
-| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | todo |
+| PKG-MULTI-SUB-05 | artplayer-plugin-multiple-subtitles<br>验证新旧核心和组合 | PKG-MULTI-SUB-04, CORE-22, PKG-MULTI-SUB-07, PKG-MULTI-SUB-08 | 与核心字幕/偏移/全屏组合，旧名称调用不变 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 
 ## 5 包迁移：artplayer-plugin-jassub
@@ -554,6 +554,7 @@
 - PKG-MULTI-SUB-04: [记录](baselines/multiple-subtitles-runtime-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-runtime-types.md) [记录](baselines/multiple-subtitles-public-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-public-types.md) [记录](type-compatibility-policy.md) [记录](baselines/multiple-subtitles-approved-types.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-04-approved-types.md)
 - PKG-MULTI-SUB-07: [记录](baselines/multiple-subtitles-timestamps.json) [记录](changes/2026-09-13-PKG-MULTI-SUB-07-timestamps.md)
 - PKG-MULTI-SUB-08: [记录](changes/2026-09-14-PKG-MULTI-SUB-08-entities.md) [记录](baselines/multiple-subtitles-entities-validation.json)
+- PKG-MULTI-SUB-05: [记录](changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md) [记录](baselines/multiple-subtitles-combinations-validation.json) [记录](baselines/multiple-subtitles-cores.json)
 - PKG-JASSUB-01: [记录](baselines/jassub-release.json) [记录](baselines/jassub-vendor.json) [记录](baselines/jassub-font-metadata.json) [记录](baselines/jassub-contract.md) [记录](baselines/jassub-contract-validation.json) [记录](changes/2026-09-13-PKG-JASSUB-01-baseline.md) [记录](baselines/jassub-provenance.json) [记录](baselines/jassub-provenance-validation.json) [记录](changes/2026-09-14-PKG-JASSUB-01-provenance.md)
 - PKG-JASSUB-02: [记录](changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md) [记录](baselines/jassub-failures-validation.json)
 - PKG-JASSUB-03: [记录](changes/2026-09-14-PKG-JASSUB-03-registration.md) [记录](baselines/jassub-registration-validation.json)

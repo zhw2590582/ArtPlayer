@@ -84,6 +84,12 @@ const vttCoreMember = `package/${vttCore.manifest.main.replace(/^\.\//, '')}`
 const vttCoreBytes = readMember(await ensureArchive(vttCore), vttCoreMember)
 assert.equal(hash(vttCoreBytes), vttCore.files[vttCoreMember], 'Historical VTT core differs from frozen archive')
 add('/published-5.1.6/artplayer.js', vttCoreBytes, { kind: 'npm-release', version: vttCore.version, integrity: vttCore.integrity, member: vttCoreMember })
+for (const release of JSON.parse(fs.readFileSync(path.join(workspace, 'refactor/baselines/multiple-subtitles-cores.json'), 'utf8')).releases) {
+  const member = `package/${release.manifest.main.replace(/^\.\//, '')}`
+  const bytes = readMember(await ensureArchive(release), member)
+  assert.equal(hash(bytes), release.files[member], 'Historical multiple subtitles core differs from frozen release')
+  add(`/published-${release.version}/artplayer.js`, bytes, { kind: 'npm-release', version: release.version, integrity: release.integrity, member })
+}
 add('/test/audio-tone.m4a', fs.readFileSync(path.join(workspace, 'test/browser/media/audio-tone.m4a')), { kind: 'generated-media', file: 'test/browser/media/audio-tone.m4a' })
 add('/test/thumbnail-pattern.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/thumbnail-pattern.mp4')), { kind: 'generated-media', file: 'test/browser/media/thumbnail-pattern.mp4' })
 add('/test/auto-thumbnail-timeline.mp4', fs.readFileSync(path.join(workspace, 'test/browser/media/auto-thumbnail-timeline.mp4')), { kind: 'generated-media', file: 'test/browser/media/auto-thumbnail-timeline.mp4' })
@@ -170,7 +176,7 @@ const server = http.createServer((req, res) => {
     if (url.pathname === '/test/player.html') {
       const core = url.searchParams.get('core') || 'candidate'
       const chapter = url.searchParams.get('chapter') || 'candidate'
-      assert(['candidate', 'published', 'published-4.5.5', 'published-4.5.9', 'published-5.1.6', 'published-5.1.7', 'published-5.3.0', 'published-5.3.1-beta.1'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
+      assert(['candidate', 'published', 'published-4.5.5', 'published-4.5.9', 'published-5.1.2', 'published-5.1.6', 'published-5.1.7', 'published-5.3.0', 'published-5.3.1-beta.1'].includes(core) && ['candidate', 'published'].includes(chapter), 'Invalid test combination')
       const html = fs.readFileSync(path.join(workspace, 'test/browser/player.html'), 'utf8')
         .replace('__CORE__', core)
         .replace('__CHAPTER__', chapter)

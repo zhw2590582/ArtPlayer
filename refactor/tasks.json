@@ -2410,11 +2410,15 @@
         "PKG-MULTI-SUB-07",
         "PKG-MULTI-SUB-08"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "与核心字幕/偏移/全屏组合，旧名称调用不变",
       "acceptance": "最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md",
+        "baselines/multiple-subtitles-combinations-validation.json",
+        "baselines/multiple-subtitles-cores.json"
+      ]
     },
     {
       "id": "PKG-MULTI-SUB-06",

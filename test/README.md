@@ -210,3 +210,17 @@ ordering, library/compiler failures, FileReader settlement and storage denial.
 vendor assets for typed Run, Ctrl-S, imports, preferences, declaration failure,
 language readiness and model disposal. Console Error objects are inspected through
 their arguments: Firefox may serialize their display text as only `Error`.
+
+## Multiple subtitles core combinations
+
+`test/browser/multiple-subtitles-combinations.spec.js` uses verified old core and
+plugin bytes plus candidate source builds. It covers native caption timing,
+VTT/SRT selection, offsets/fullscreen/source changes and multi-instance URL
+ownership. Old1.0.0/1.1.0/1.2.0 factories run unchanged on the candidate core.
+Explicit single-active-cue probes record historical and candidate overlap defects;
+their passing assertions do not mean simultaneous captions are compatible.
+Paused Firefox offset checks remain failing pending a production fix, and the
+original WebKit source-switch failure is retained despite a passing rerun.
+See `refactor/changes/2026-09-14-PKG-MULTI-SUB-05-combinations.md` before changing
+expectations. Reports include native active cues and rendered text. The new frozen
+5.1.2 core route verifies archive integrity and member hashes before serving.

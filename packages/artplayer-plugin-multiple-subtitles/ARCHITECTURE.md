@@ -143,4 +143,15 @@ check both factory-assignment directions and accurate asynchronous runtime metho
 seven compiler modes, including classic CommonJS without interop. Removing suppression
 comments must reject all 16 invalid statements at their exact lines in every mode.
 Tasks 05/06 still own complete core/device combinations and demo acceptance.
+The task05 matrix in `test/browser/multiple-subtitles-combinations.spec.js` adds
+core5.1.2/5.1.7/5.3.0/5.4.0/candidate and actual plugin1.0.0/1.1.0/1.2.0.
+Read native `template.$track.track.cues` for old-core probes: older hosts do not
+provide the later `subtitle.cues` getter. Core5.1.2/5.1.7 only render their first
+active cue; the matrix explicitly records lost simultaneous languages for1.1.0+
+and candidate, while1.0.0's index-merged cue displays both. This remains an open
+compatibility issue, not an approved limitation. Firefox paused offset assertions
+currently fail on old and candidate cores; a WebKit5.3.0 source-switch failure is
+intermittent. See the task05 change and validation JSON for exact failed runs.
+The matrix is runnable with `yarn test:browser test/browser/multiple-subtitles-combinations.spec.js`;
+do not replace these failures with skips or count boundary observations as acceptance.
 See `../../refactor/baselines/multiple-subtitles-contract.md` for exact historical differences.
