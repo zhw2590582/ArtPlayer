@@ -267,4 +267,4 @@
 | MULTI-SUB-MARKUP-01 | resolved / 已复现 | Semantic cue nodes receive HTML wrappers inside their annotation fields | PKG-MULTI-SUB-08 |
 | MULTI-SUB-OFFSET-01 | resolved / 已复现 | Paused Firefox subtitle offset leaves out-of-time native cues active and captions visible | PKG-MULTI-SUB-05, CORE-SUBTITLE-OFFSET-01 |
 | MULTI-SUB-SWITCH-01 | open / 已复现 | Intermittent WebKit core5.3.0 caption loss after selected-track source switch | PKG-MULTI-SUB-05, PKG-MULTI-SUB-09 |
-| MULTI-SUB-ASS-01 | open / 已复现 | Published core5.1.2 ASS converter loses required VTT line breaks | PKG-MULTI-SUB-11 |
+| MULTI-SUB-ASS-01 | resolved / 已复现 | Published core5.1.2 ASS converter loses required VTT line breaks | PKG-MULTI-SUB-11 |

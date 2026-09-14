@@ -5212,11 +5212,14 @@
       "dependsOn": [
         "PKG-MULTI-SUB-10"
       ],
-      "status": "todo",
+      "status": "done",
       "risk": "M",
       "deliverable": "冻结5.1.2发布/源码转换差异，兼容转换适配与真实ASS字幕回归",
       "acceptance": "保持已有效转换行为，旧发布ASS缺陷有先红后绿与实际产物证据；不得将VTT替代夹具算作ASS通过",
-      "evidence": []
+      "evidence": [
+        "changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md",
+        "baselines/multiple-subtitles-ass-validation.json"
+      ]
     }
   ]
 }

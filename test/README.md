@@ -1,5 +1,12 @@
 # Tests and fixture ownership
 
+`test/multiple-subtitles-ass.test.js` verifies hashes of actual core5.1.2 main,
+legacy and source before comparing conversion behavior. It covers the collapsed
+main output, source-equivalent timings/text, valid/custom/empty passthrough and
+converter failure cleanup through the real candidate plugin. It runs in both
+`test:unit` and `test:multiple-subtitles`. This is native VTT conversion, not ASS
+layout/rendering acceptance for JASSUB.
+
 `test/multiple-subtitles-caption.test.js` checks the old-host view adapter with the
 actual plugin bundle: native order, original update identity/scalar event payload,
 escape changes, timestamp cleanup, modern-host isolation and destroy/registration

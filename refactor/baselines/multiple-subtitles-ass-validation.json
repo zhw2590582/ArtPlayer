@@ -1,0 +1,2875 @@
+{
+  "task": "PKG-MULTI-SUB-11",
+  "baselineCommit": "8ae2762a23188e3262a16fcb0e468fa7588f00b0",
+  "recordedAt": "2026-09-14T05:40:03.497Z",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "frozenHost": {
+    "archiveSha256": "cb06570fb55f28577e702b15e011f79293a1378b429b0acb542caeda49ab6c00",
+    "files": {
+      "package/dist/artplayer.js": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+      "package/dist/artplayer.legacy.js": "eedce04975dcf9a78a166ca3038d2b2bd06ce39696ce90f32ed39c8356132c4d",
+      "package/src/utils/subtitle.js": "2f932f5812f7cf9e5684d10da81c40f757de7fdfe0175da3b24da84c08befe1b"
+    },
+    "observation": "Only main collapses required line breaks. Actual legacy and source agree; parity and input verification are exercised by the Node test."
+  },
+  "sources": [
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/request.ts",
+      "sha256": "31d8af86664b7f58c31d478e36fb5598fa1afa3970a816d1a8f4d40a7a03b2d7"
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/src/ass-conversion.ts",
+      "sha256": "a8468971f6776925ad9d8897d07246a4c1a98ed30506c9558e5799d2ee8d0be4"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.js",
+      "sha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+      "docsCopy": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.js",
+        "sha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b"
+      },
+      "previousSha256": "df7db958a7b6e2b5afdcc655f72422f7698ab15118c884f6675bff39f8ec0591",
+      "gzip9Bytes": 9114,
+      "previousGzip9Bytes": 8876
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.legacy.js",
+      "sha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+      "docsCopy": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.legacy.js",
+        "sha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3"
+      },
+      "previousSha256": "506cc844c10b8836690acf94725ca405400b6efbc20505b79ad44d21d125a5f5",
+      "gzip9Bytes": 9445,
+      "previousGzip9Bytes": 9204
+    },
+    {
+      "path": "packages/artplayer-plugin-multiple-subtitles/dist/artplayer-plugin-multiple-subtitles.mjs",
+      "sha256": "4655b1aa785ece0bbdc4cdae970c775356a5c89f40444a0a0c9942ada8dd38fb",
+      "docsCopy": {
+        "path": "docs/compiled/artplayer-plugin-multiple-subtitles.mjs",
+        "sha256": "4655b1aa785ece0bbdc4cdae970c775356a5c89f40444a0a0c9942ada8dd38fb"
+      },
+      "previousSha256": "0b8866b82b81e58cfcd3535ae27f12da7ecf02e1bc55dbbbe0727ab09066ec5f",
+      "gzip9Bytes": 10964,
+      "previousGzip9Bytes": 10635
+    }
+  ],
+  "tests": [
+    {
+      "path": "test/multiple-subtitles-ass.test.js",
+      "sha256": "7cf2f82e1bffab2247f7456c0dfbf21568cec825f5632fc2c28b9259abc15038"
+    },
+    {
+      "path": "test/browser/multiple-subtitles-ass.spec.js",
+      "sha256": "d96d950c7b741517a06b3dc23a19662046bddd519b351a6f11b047434d05d84b"
+    },
+    {
+      "path": "test/browser/multiple-subtitles-legacy.spec.js",
+      "sha256": "c98c46135cff20cc56a7ba7ce990bb83f0e5cdc6bb324d8bc84f61fa44589c29"
+    }
+  ],
+  "runs": [
+    {
+      "name": "before-main",
+      "report": {
+        "path": "refactor/.cache/multi-ass-before-browser/report.json",
+        "sha256": "933fc92e3e96626f979fa424724eb2da4158870080e33491be83fc2fdb9ff725"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-ass-before-browser.log",
+        "sha256": "46b51da193f1547758174272df322a9fe935c34dcbb935df0773e9485558b9b4"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:31:17.497Z",
+        "duration": 10477.76,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+              "bytes": 378769
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "failed",
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m3\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate\n\n  24 |       await window.art.plugins.add(window.artplayerPluginMultipleSubtitles({ subtitles: [{ name: 'a', url: '/test/legacy-a.vtt' }, { name: 'b', url: '/test/legacy-b.srt' }, { name: 'c', url: `/test/legacy-c.${thirdFormat}` }] }))\n  25 |     }, thirdFormat)\n> 26 |     await expect.poll(() => page.evaluate(() => window.art.template.$track.track.cues?.length)).toBe(3)\n     |                                                                                                 ^\n  27 |     await page.evaluate(() => {\n  28 |       window.cueIdentities = Array.from(window.art.template.$track.track.cues)\n  29 |     })\n    at D:\\github\\ArtPlayer\\test\\browser\\multiple-subtitles-legacy.spec.js:26:97"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "source",
+      "report": {
+        "path": "refactor/.cache/multi-ass-source-browser/report.json",
+        "sha256": "9e8721ee636a6f720d897e4883579dad724d5c80e12f5ff5c0d1b7f62f8888f4"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-ass-source-browser.log",
+        "sha256": "ff6d98036b543e5ed048ea2d5d09335db57610c59819cc4c4375e700f5b1973f"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:33:45.745Z",
+        "duration": 29092.512000000002,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+              "bytes": 378769
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+              "bytes": 378769
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "workspace-build",
+                "entry": "packages\\artplayer\\src\\index.ts"
+              },
+              "sha256": "2b99c7fe675a0aa73b32ec955455db86e33d560c31882b146a30e6510b5690cc",
+              "bytes": 378769
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "6ea028e0ab36417f1ee8f6d114be89d0ff0eb2bde239347f3e951ead640d20b4",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        }
+      ]
+    },
+    {
+      "name": "main",
+      "report": {
+        "path": "refactor/.cache/multi-ass-main-browser/report.json",
+        "sha256": "13905f335e30e89fb070c8a09fbe5d567c25dd95ac591fe2ba1c619c51d51bc5"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-ass-main-browser.log",
+        "sha256": "6cb6aaaf328afd9db6c07b44d8d8793bb88fdbd07b00a2749c18bb839f774206"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:35:49.765Z",
+        "duration": 23154.222,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "artifact",
+                "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+              },
+              "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+              "bytes": 208931
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "artifact",
+                "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+              },
+              "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+              "bytes": 208931
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "artifact",
+                "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.js"
+              },
+              "sha256": "cab41b4a6b47dfacfc2d99b923273043b48f0ad93c3e808af0bfa84ffe1cf26e",
+              "bytes": 208931
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "103e5f75e6ce4b8b9f14b2b8caa983c97eb24da4536048135f90517b959dcf6b",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        }
+      ]
+    },
+    {
+      "name": "legacy",
+      "report": {
+        "path": "refactor/.cache/multi-ass-legacy-browser/report.json",
+        "sha256": "cb745560b8223a1b1a408985598a0dd8c5357477fa5004dcff675b7497433b93"
+      },
+      "log": {
+        "path": "refactor/.cache/multi-ass-legacy-browser.log",
+        "sha256": "66cdbd5116e8bb30e43bc35ef18118ccba1e64774aee5c1139ec00d52cc52d56"
+      },
+      "stats": {
+        "startTime": "2026-09-14T05:37:27.954Z",
+        "duration": 22820.602000000003,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "inputs": [
+        {
+          "project": "chromium",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "artifact",
+                "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+              },
+              "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+              "bytes": 213200
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "firefox",
+          "browser": "155.0",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "artifact",
+                "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+              },
+              "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+              "bytes": 213200
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        },
+        {
+          "project": "webkit",
+          "browser": "26.6",
+          "platform": "win32",
+          "cores": {
+            "/candidate/artplayer.js": {
+              "source": {
+                "kind": "artifact",
+                "file": "D:\\github\\ArtPlayer\\packages\\artplayer\\dist\\artplayer.legacy.js"
+              },
+              "sha256": "86c38e41d611cc48195db72f41ade863de3b13f4fba66e3fd2a335dfc3094c87",
+              "bytes": 213200
+            },
+            "/published/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.4.0",
+                "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+              "bytes": 134037
+            },
+            "/published-5.1.7/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.7",
+                "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+              "bytes": 155940
+            },
+            "/published-5.3.0/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.3.0",
+                "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+              "bytes": 159238
+            },
+            "/published-5.1.2/artplayer.js": {
+              "source": {
+                "kind": "npm-release",
+                "version": "5.1.2",
+                "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                "member": "package/dist/artplayer.js"
+              },
+              "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+              "bytes": 154583
+            }
+          },
+          "media": {
+            "source": {
+              "kind": "generated-media",
+              "file": "test/browser/media/pattern.mp4"
+            },
+            "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+            "bytes": 251538
+          }
+        }
+      ],
+      "tests": [
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "chromium",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "firefox",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.2: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.1.7: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published-5.3.0: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published-5.3.0",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT 1 00:00:01.250 --> 00:00:03.750 漢字 café, comma <b>bold</b>\nSecond line\n\n2 00:00:04.250 --> 00:00:06.750 Later cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / published: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "published",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles ASS / candidate: encoded multiline cues, overlapping translation and selection",
+          "project": "webkit",
+          "status": "passed",
+          "ass-conversion": {
+            "core": "candidate",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "sourceSha256": "91aeb65afe1a8193b21dfe6f37e6b16f1c3934af3f04677484a140b1c8d4a681",
+            "rawHostOutput": "WEBVTT\n\n1\n00:00:01.250 --> 00:00:03.750\n漢字 café, comma <b>bold</b>\nSecond line\n\n2\n00:00:04.250 --> 00:00:06.750\nLater cue",
+            "native": [
+              {
+                "start": 1.25,
+                "end": 3.75,
+                "text": "漢字 café, comma bold\nSecond line"
+              },
+              {
+                "start": 2,
+                "end": 4,
+                "text": "Translation"
+              },
+              {
+                "start": 4.25,
+                "end": 6.75,
+                "text": "Later cue"
+              }
+            ],
+            "scope": "Desktop native playback with UTF16 ASS, explicit type override, independently timed multiline/semantic captions, overlap, selection/reset and clearing; original core converter is unchanged."
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "chromium",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "153.0.8010.12",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "firefox",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "155.0",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.2: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.2",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        },
+        {
+          "title": "Multiple subtitles legacy host published-5.1.7: independently timed captions overlap and clear",
+          "project": "webkit",
+          "status": "passed",
+          "legacy-captions": {
+            "core": "published-5.1.7",
+            "browser": "26.6",
+            "pluginSha256": "01f27a9b7b5752334e9abe85324322d50b48508f6180b41f09d84a74ef3bddf3",
+            "thirdFormat": "ass",
+            "state": {
+              "sameUpdate": true,
+              "sameCues": true,
+              "times": [
+                [
+                  1,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2.25,
+                  2.75
+                ]
+              ],
+              "legacyPayload": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "firstText": "<div class=\"art-subtitle-a\"><b>A &amp; safe</b></div>",
+              "counts": [
+                1,
+                1,
+                1
+              ]
+            },
+            "scope": "Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals"
+          }
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "path": "refactor/.cache/multi-ass-before-initial-unit.log",
+      "sha256": "2d16f3cc21cc203fefa579ef97312aa94d97c87689b628e5784e107276accf9c"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-before-unit.log",
+      "sha256": "805a81dc9aa1cb20b2c0c75037e2cec17518fd042de565c09ba1f5744bff8f0f"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-tests.log",
+      "sha256": "ad5b64cb5a1c2ccd34291f74e39d7213f983e1d74ddeb9fb673f31dfa65e67ef"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-main-unit.log",
+      "sha256": "2606a93b4877b87dc342a93741ac517c054838ea3ef890e9556c244e22a72cc3"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-legacy-unit.log",
+      "sha256": "65db583973c33e906702f926ea215c52679691c22de5d7248e713bace0ad5ba9"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-lint.log",
+      "sha256": "ec8ab914ad0251dbe20d6c900d8a6fc96411f11583ddff74ac966396a9965ac5"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-build.log",
+      "sha256": "90f3f0279a611304ab75bae8867fecf06efd36f7d155ad7e0eb99bae44995efb"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-ci.log",
+      "sha256": "3aad0331b93bede3474c1d3bc9c7e2746ae76f4fe5cc3f012e22f025bee696d8"
+    },
+    {
+      "path": "refactor/.cache/multi-ass-final-checks.log",
+      "sha256": "01f40e1e66415642bc933a72935934c6da9de0422ef259665a5d8601fd853e1e",
+      "exitCode": 0
+    },
+    {
+      "path": "refactor/.cache/multi-ass-risk-closure-incomplete.log",
+      "sha256": "9a1e1593163b7ff29f92af566bebfd239b59ae7ce97b40cd46c39c49554a25c3",
+      "exitCode": 1
+    }
+  ],
+  "limits": [
+    "The initial raw HTML entity mismatch was a fixture issue; corrected frozen regression has6 main failures and7 legacy/baseline passes before the fix.",
+    "Full plugin315 pass; each targeted main/legacy file has15 checks, including frozen-host and private-adapter tests as well as actual plugin registration/selection.",
+    "Source/main/legacy each21 browser cases pass on three desktop engines. This does not establish physical-device or remote-CI acceptance.",
+    "Native VTT conversion of previously supported ASS Dialogue content; no new ASS layout or animation support.",
+    "Old WebKit source-seek issue remains open; package05/06 and release gates remain incomplete."
+  ],
+  "registryNote": "Initial closure validation rejected missing explicit resolutionEvidence/resolutionRationale. Both were supplied with actual test evidence; validator rules stayed unchanged and final checks passed."
+}

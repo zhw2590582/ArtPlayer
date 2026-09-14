@@ -1,4 +1,5 @@
 import type { Converters, Lifetime, TrackOption } from './types'
+import convertAss from './ass-conversion'
 
 export default async function loadVtt(option: TrackOption, { getExt, srtToVtt, assToVtt }: Converters, lifetime: Lifetime): Promise<string | void> {
   if (lifetime.closed)
@@ -21,7 +22,7 @@ export default async function loadVtt(option: TrackOption, { getExt, srtToVtt, a
     const text = new TextDecoder(option.encoding || 'utf-8').decode(buffer!)
     switch (option.type || getExt(option.url!)) {
       case 'srt': return srtToVtt(text)
-      case 'ass': return assToVtt(text)
+      case 'ass': return convertAss(text, assToVtt)
       case 'vtt': return text
       default: return ''
     }

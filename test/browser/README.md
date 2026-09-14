@@ -270,10 +270,16 @@ the earlier hidden-preview screenshot timeout remains in the checkpoint evidence
 `multiple-subtitles-legacy.spec.js` uses real 5.1.2/5.1.7 cores and the candidate
 plugin to check three independently timed captions, VTT/SRT, semantic HTML/CSS,
 the original update method and native cue identities, scalar event payloads,
-repeated updates, selection/reset and empty intervals. It uses ASS for the third
-track on5.1.7; the5.1.2 published converter's malformed VTT remains a separate
-task11 failure and is not covered by substituting a VTT fixture. Use
+repeated updates, selection/reset and empty intervals. It now uses ASS for the third
+track on both hosts: task11 repairs the exact5.1.2 main converter defect inside
+the plugin. Task10's historical VTT substitution was not ASS acceptance. Use
 `ARTPLAYER_MULTIPLE_SUBTITLES_ARTIFACT` for actual main/legacy package bytes.
 The combination suite retains explicit published1.1/1.2 overlap-loss observations
 while requiring candidate captions to contain both languages. A passing historical
 observation is not a compatibility pass.
+
+`multiple-subtitles-ass.spec.js` checks UTF16 decoding, explicit ASS type selection,
+multiline text/HTML, overlapping translation, selection/reset and empty intervals
+on5.1.2/5.1.7/5.3.0/5.4.0/candidate. The attachment records the unchanged original
+host converter output alongside actual native cues and browser/artifact hashes.
+It covers desktop video/track playback, not full ASS layout or physical devices.

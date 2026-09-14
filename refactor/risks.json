@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-14T05:23:17.398Z",
+  "updatedAt": "2026-09-14T05:41:02.580Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -6064,7 +6064,7 @@
       "id": "MULTI-SUB-ASS-01",
       "title": "Published core5.1.2 ASS converter loses required VTT line breaks",
       "confirmation": "reproduced",
-      "status": "open",
+      "status": "resolved",
       "owners": [
         "PKG-MULTI-SUB-11"
       ],
@@ -6072,11 +6072,20 @@
         "refactor/changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md",
         "refactor/baselines/multiple-subtitles-legacy-validation.json",
         "refactor/baselines/multiple-subtitles-cores.json",
-        "test/browser/multiple-subtitles-legacy.spec.js"
+        "test/browser/multiple-subtitles-legacy.spec.js",
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md",
+        "refactor/baselines/multiple-subtitles-ass-validation.json",
+        "test/multiple-subtitles-ass.test.js",
+        "test/browser/multiple-subtitles-ass.spec.js"
       ],
-      "workspaceState": "Initial three-engine regression gets only2/3 native cues on actual5.1.2 main. Tarball source assToVtt preserves newlines while published main collapses template line breaks to spaces.5.1.7 ASS renders. Current display regression uses VTT for third5.1.2 track and explicitly does not claim ASS acceptance.",
+      "workspaceState": "Task11 verifies actual5.1.2 main/legacy/source hashes and repairs only complete converter output matching collapsed main line breaks. Full plugin315 and actual-format targeted tests pass; source/main/legacy each21 native desktop cases pass across5 cores and3 engines. Both old-host third tracks now use ASS. Original host utils unchanged; valid/custom output and exceptions preserved. Full ASS layout and physical devices are not claimed.",
       "compatibleResolution": "Adapt malformed old conversion in the plugin while preserving valid existing converter output and public API.",
-      "closureCriteria": "Frozen actual-output reproduction, compatible conversion fix and real ASS display verified on old/current hosts and shippable formats."
+      "closureCriteria": "Frozen actual-output reproduction, compatible conversion fix and real ASS display verified on old/current hosts and shippable formats.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md",
+        "refactor/baselines/multiple-subtitles-ass-validation.json"
+      ],
+      "resolutionRationale": "Frozen main output fails before repair while same-version legacy/source remain correct. Exact-output repair preserves valid/custom output and exception ownership.315 package checks, actual main/legacy unit cases and source/main/legacy each21 native desktop cases prove this specific conversion defect fixed, without claiming full ASS layout, device or source-seek acceptance."
     }
   ]
 }

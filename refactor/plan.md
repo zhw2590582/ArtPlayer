@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 251 项，范围 22 个包及工作区/示例。
 
-状态：todo 56 / doing 17 / blocked 0 / done 178 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 55 / doing 17 / blocked 0 / done 179 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -232,7 +232,7 @@
 | PKG-MULTI-SUB-06 | artplayer-plugin-multiple-subtitles<br>验证分发并同步文档 | PKG-MULTI-SUB-05, ENG-07, CORE-SUBTITLE-OFFSET-01, PKG-MULTI-SUB-09, PKG-MULTI-SUB-10, PKG-MULTI-SUB-11 | multiple.subtitles.js、parser 来源许可及打包边界 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
 | PKG-MULTI-SUB-09 | artplayer-plugin-multiple-subtitles, artplayer<br>定位旧核心切源寻址与字幕显示边界 | PKG-MULTI-SUB-08, CORE-19 | 无插件及旧新插件对照、真实事件轨迹、原切源失败归因和组合测试顺序 | 保留旧核心立即寻址观察，候选首次寻址与正常字幕组合通过；不把原生时钟失败误归为字幕丢失 | M | done |
 | PKG-MULTI-SUB-10 | artplayer-plugin-multiple-subtitles<br>适配旧核心的多条活动字幕渲染 | PKG-MULTI-SUB-08, PKG-MULTI-SUB-09 | 独立旧宿主显示适配、原生异步字幕重叠回归和兼容边界说明 | 旧5.1.2/5.1.7复现先红后绿；保持原生cue对象/时间、旧事件标量和方法身份；多格式显示及清理通过，保留其他组合和设备缺口 | M | done |
-| PKG-MULTI-SUB-11 | artplayer-plugin-multiple-subtitles<br>处理旧发布核心 ASS 转换器丢失换行 | PKG-MULTI-SUB-10 | 冻结5.1.2发布/源码转换差异，兼容转换适配与真实ASS字幕回归 | 保持已有效转换行为，旧发布ASS缺陷有先红后绿与实际产物证据；不得将VTT替代夹具算作ASS通过 | M | todo |
+| PKG-MULTI-SUB-11 | artplayer-plugin-multiple-subtitles<br>处理旧发布核心 ASS 转换器丢失换行 | PKG-MULTI-SUB-10 | 冻结5.1.2发布/源码转换差异，兼容转换适配与真实ASS字幕回归 | 保持已有效转换行为，旧发布ASS缺陷有先红后绿与实际产物证据；不得将VTT替代夹具算作ASS通过 | M | done |
 
 ## 5 包迁移：artplayer-plugin-jassub
 
@@ -652,3 +652,4 @@
 - CORE-SUBTITLE-OFFSET-01: [记录](changes/2026-09-14-CORE-SUBTITLE-OFFSET-01-paused.md) [记录](baselines/subtitle-offset-validation.json)
 - PKG-MULTI-SUB-09: [记录](changes/2026-09-14-PKG-MULTI-SUB-09-switch-order.md) [记录](baselines/multiple-subtitles-switch-validation.json)
 - PKG-MULTI-SUB-10: [记录](changes/2026-09-14-PKG-MULTI-SUB-10-legacy-captions.md) [记录](baselines/multiple-subtitles-legacy-validation.json)
+- PKG-MULTI-SUB-11: [记录](changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md) [记录](baselines/multiple-subtitles-ass-validation.json)

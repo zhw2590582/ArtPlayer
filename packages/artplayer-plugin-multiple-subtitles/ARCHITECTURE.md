@@ -17,6 +17,12 @@ to npm 1.2.0; the runtime entry requires an option object but allows omitted `su
 - `src/index.ts` composes registration, named selection and the unchanged public result.
 - `src/request.ts` owns each fetch through byte decoding and delegates SRT/ASS conversion
   to the existing core utils. Failure aborts the request; registration failure closes siblings.
+- `src/ass-conversion.ts` calls the host ASS converter once. It repairs only output
+  exactly matching the collapsed-line format of core5.1.2 main. Reconstruction
+  retains that host's supported Dialogue fields, hundredth-second times and text
+  cleanup; complete-output equality protects custom converters. Valid conversion,
+  empty output and converter exceptions retain their original behavior. This
+  private fallback avoids depending on a newer core or patching its shared utils.
 - `src/merge.ts` parses metadata and serializes selected cues without mutating parsed trees.
   It depends only on the vendor parser, not the player or browser resource APIs.
 - `src/text.ts` supplies the vendor's existing entity-table option with both exact
@@ -160,8 +166,11 @@ active cue; the matrix explicitly records lost simultaneous languages for publis
 1.1.0/1.2.0, while1.0.0's index-merged cue displays both. Task10 adds the candidate
 view adapter without adopting index merging or altering independent cue timings.
 `multiple-subtitles-legacy.spec.js` checks asymmetric three-cue overlaps, HTML/CSS,
-selection/reset and clearing on both old cores. ASS is additionally exercised on
-5.1.7; published5.1.2's malformed ASS converter is separately tracked by task11.
+selection/reset and clearing on both old cores, now using ASS on both after task11.
+`multiple-subtitles-ass.spec.js` adds UTF16 input with an explicit type override,
+multiline text, semantic HTML and translation overlaps on five recorded cores.
+Task11's conversion repair leaves the original host utility untouched; it does
+not add ASS positioning, animation or styling beyond the existing VTT conversion.
 This adapter does not repair an old browser host's stale native active-cue list.
 CORE-SUBTITLE-OFFSET-01 corrects
 paused offsets in the candidate core; published Firefox hosts retain their exact

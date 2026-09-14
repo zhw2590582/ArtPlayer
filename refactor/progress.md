@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-MULTI-SUB-11 旧发布核心 ASS 转换适配完成
+
+实际5.1.2 tarball证明只有main转换器丢失模板换行，同版legacy与源码正确；新增
+ASS适配模块先调用宿主转换器一次，仅当完整输出匹配已复现损坏格式才补回结构换行。
+有效、自定义、空输出和异常保持原行为，不修改宿主utils、不依赖新核心、无新增依赖。
+冻结转换器回归修复前6失败/7通过，旧产物浏览器仅加载2/3字幕；修复后全插件315通过，
+实际main/legacy各15项定向测试通过。源码/main/legacy各21项三引擎播放通过，覆盖
+5.1.2/5.1.7/5.3.0/5.4.0/候选、UTF16、多行、语义HTML、独立时间与重叠翻译、选择重置。
+两个旧宿主第三轨现在都使用真实ASS。严格TS、37声明零漂移、lint与CI50通过，三格式及
+docs副本正常重建；关闭ASS风险。见[变更](changes/2026-09-14-PKG-MULTI-SUB-11-ass-conversion.md)
+和[验证索引](baselines/multiple-subtitles-ass-validation.json)。251项：179 done、17 doing、55 todo。
+不计作完整ASS排版、真机或远端CI验收。旧WebKit切源风险仍open；下一步继续task05
+剩余组合验收与切源诊断，随后推进分发及其他插件未完成任务。
+
 ## PKG-MULTI-SUB-10 旧核心多条字幕显示适配完成
 
 插件以activeCue/activeCues能力检测选择旧subtitleUpdate或现代subtitleAfterUpdate，

@@ -9,7 +9,6 @@ for (const core of ['published-5.1.2', 'published-5.1.7']) {
     await page.route('**/test/legacy-a.vtt', route => route.fulfill({ contentType: 'text/vtt', body: 'WEBVTT\n\n00:01.000 --> 00:03.000\n<b>A &amp; safe</b>\n' }))
     await page.route('**/test/legacy-b.srt', route => route.fulfill({ contentType: 'text/plain', body: '1\n00:00:02,000 --> 00:00:04,000\nB\n' }))
     await page.route('**/test/legacy-c.ass', route => route.fulfill({ contentType: 'text/plain', body: 'Dialogue: 0,0:00:02.25,0:00:02.75,Default,,0,0,0,,C' }))
-    await page.route('**/test/legacy-c.vtt', route => route.fulfill({ contentType: 'text/vtt', body: 'WEBVTT\n\n00:02.250 --> 00:02.750\nC\n' }))
     await page.goto(`/test/player.html?core=${core}`)
     await page.addScriptTag({ content: candidate.code })
     await page.addStyleTag({ content: '.art-subtitle-a { color: rgb(255, 0, 0); } .art-subtitle-b { color: rgb(0, 0, 255); }' })
@@ -20,7 +19,7 @@ for (const core of ['published-5.1.2', 'published-5.1.7']) {
       window.art.on('subtitleUpdate', text => window.legacyPayloads.push(text))
     })
     await expect.poll(() => page.evaluate(() => window.art.isReady)).toBe(true)
-    const thirdFormat = core === 'published-5.1.2' ? 'vtt' : 'ass'
+    const thirdFormat = 'ass'
     await page.evaluate(async (thirdFormat) => {
       await window.art.plugins.add(window.artplayerPluginMultipleSubtitles({ subtitles: [{ name: 'a', url: '/test/legacy-a.vtt' }, { name: 'b', url: '/test/legacy-b.srt' }, { name: 'c', url: `/test/legacy-c.${thirdFormat}` }] }))
     }, thirdFormat)
@@ -70,7 +69,7 @@ for (const core of ['published-5.1.2', 'published-5.1.7']) {
     await expect(page.locator('.art-subtitle-c')).toHaveText('C')
     await seek(4.5)
     await expect(page.locator('.art-subtitle-a, .art-subtitle-b, .art-subtitle-c')).toHaveCount(0)
-    await testInfo.attach('legacy-captions', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(candidate.code), thirdFormat, state, scope: 'Native VTT/SRT overlaps (ASS additionally on 5.1.7), semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals', limitation: '5.1.2 published ASS converter loses required VTT line breaks; tracked separately in PKG-MULTI-SUB-11.' }) })
+    await testInfo.attach('legacy-captions', { contentType: 'application/json', body: JSON.stringify({ core, browser: browser.version(), pluginSha256: hash(candidate.code), thirdFormat, state, scope: 'Native VTT/SRT/ASS overlaps on both old cores, semantic HTML/CSS, legacy scalar event payload, original host method and cue identities, repeated update/selection/reset/empty intervals' }) })
     await page.evaluate(() => window.art.destroy())
   })
 }

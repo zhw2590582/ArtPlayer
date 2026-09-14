@@ -1017,6 +1017,31 @@ function createRenderer(art, lifetime, unescape) {
     }
   };
 }
+function convertAss(text, converter) {
+  const converted = converter(text);
+  if (!/^WEBVTT \d+ \d+:/.test(converted))
+    return converted;
+  const cues = [];
+  for (const line of text.split(/\r?\n/)) {
+    const match = line.match(/Dialogue:\s\d,(\d+:\d{2}:\d{2}\.\d{2}),(\d+:\d{2}:\d{2}\.\d{2}),(?:[^,]*,){6}([\s\S]*)$/i);
+    if (!match)
+      continue;
+    const [, start = "", end = "", content = ""] = match;
+    cues.push({
+      start: `${start.replace(/^(\d):/, "0$1:")}0`,
+      end: `${end.replace(/^(\d):/, "0$1:")}0`,
+      text: content.replace(/\{[\s\S]*?\}/g, "").replace(/\\N/g, "\n").trim().split(/\r?\n/).map((line2) => line2.trim()).join("\n")
+    });
+  }
+  const collapsed = `WEBVTT ${cues.map((cue, index2) => `${index2 + 1} ${cue.start} --> ${cue.end} ${cue.text}`).join("\n\n")}`;
+  if (converted !== collapsed)
+    return converted;
+  return `WEBVTT
+
+${cues.map((cue, index2) => `${index2 + 1}
+${cue.start} --> ${cue.end}
+${cue.text}`).join("\n\n")}`;
+}
 async function loadVtt(option, { getExt, srtToVtt, assToVtt }, lifetime) {
   if (lifetime.closed)
     return;
@@ -1039,7 +1064,7 @@ async function loadVtt(option, { getExt, srtToVtt, assToVtt }, lifetime) {
       case "srt":
         return srtToVtt(text);
       case "ass":
-        return assToVtt(text);
+        return convertAss(text, assToVtt);
       case "vtt":
         return text;
       default:
