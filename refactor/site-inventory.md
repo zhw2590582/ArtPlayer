@@ -1,5 +1,11 @@
 # 文档站、示例与生成链清单
 
+SITE-07检查点已将Monaco LICENSE/ThirdPartyNotices和vConsole上游LICENSE原文加入
+站点分发，并建立固定文件清单/指纹及只读检查。进一步检查发现vConsole上游文件
+只有许可声明，缺其声称附带的MIT全文；不能把“已取得LICENSE”当成完整许可闭环。
+Monaco真实TS worker三引擎通过；vConsole销毁在WebKit出现未处理回调错误，继续登记。
+原始SITE-01清单及下面的历史未分发描述保留，当前入口见scripts/site-vendor/README.md。
+
 SITE-SMOKE-01 后续已将 build:test 拆为 TS 解析、生成和浏览器运行模块，新增
 确定性 examples.json 和 readonly check，替换 100ms done 为实例 ready/错误/清理。
 以下 SITE-01 的旧生成器问题属于历史发现；当前维护入口见

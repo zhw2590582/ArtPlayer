@@ -24,6 +24,8 @@
     "editor-types.mjs",
     "plugin-editor-types.mjs",
     "site-build/**/*.ts",
+    "site-vendor/**/*.ts",
+    "build-site-notices.mjs",
     "build-i18n.js",
     "build-docs.js",
     "../packages/artplayer-vitepress/build/**/*.ts"

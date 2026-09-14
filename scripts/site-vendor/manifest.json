@@ -1,0 +1,751 @@
+{
+  "schemaVersion": 1,
+  "scope": "Frozen source identities and verbatim upstream notice texts for Monaco/vConsole. This is not clearance of all bundled components, the console bundle, fonts, media or other site assets.",
+  "groups": [
+    {
+      "name": "vconsole",
+      "version": "3.15.0",
+      "tarball": "https://registry.npmjs.org/vconsole/-/vconsole-3.15.0.tgz",
+      "integrity": "sha512-8hq7wabPcRucSWQyN7/1tthMawP9JPvM95zgtMHpPknMMMCKj+abpoK7P7oKK4B0qw58C24Mdvo9+raUdpHyVQ==",
+      "archiveSha256": "7ebe6c7a51309a4c1627285c1e26326402874192aea54e7933bbc8b321c97538",
+      "roots": [
+        "docs/assets/js/vconsole.min.js"
+      ],
+      "files": [
+        {
+          "path": "docs/assets/js/vconsole.min.js",
+          "member": "package/dist/vconsole.min.js",
+          "upstreamSha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4",
+          "sha256": "671f47427e1e3048919147c765e9fb71e4ea40d79a8c2829089f499d3e9b9bf4",
+          "mode": "lf-text"
+        }
+      ],
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/vconsole-LICENSE.txt",
+          "target": "docs/licenses/vconsole/LICENSE",
+          "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+        }
+      ],
+      "review": "The 3.15.0 upstream LICENSE declares MIT but omits the promised full license text. The copied file preserves this upstream evidence; completeness and bundled dependency notices remain under review."
+    },
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "archiveSha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7",
+      "roots": [
+        "docs/assets/js/vs"
+      ],
+      "files": [
+        {
+          "path": "docs/assets/js/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+          "member": "package/min/vs/base/browser/ui/codicons/codicon/codicon.ttf",
+          "upstreamSha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c",
+          "sha256": "ff6b888d65cfd8077d49c6c704c1bfc8f2ce1ed71db9c583c63e0a49f046c79c",
+          "mode": "binary"
+        },
+        {
+          "path": "docs/assets/js/vs/base/worker/workerMain.js",
+          "member": "package/min/vs/base/worker/workerMain.js",
+          "upstreamSha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e",
+          "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/abap/abap.js",
+          "member": "package/min/vs/basic-languages/abap/abap.js",
+          "upstreamSha256": "49638217243bab4ed7d928d194bafe334abb614777440bf46f8636b9e5dfe0a4",
+          "sha256": "49638217243bab4ed7d928d194bafe334abb614777440bf46f8636b9e5dfe0a4",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/apex/apex.js",
+          "member": "package/min/vs/basic-languages/apex/apex.js",
+          "upstreamSha256": "034f340001e4c340b80e18abe45c990564931c4a061b4e74de86c012fb7d7a21",
+          "sha256": "034f340001e4c340b80e18abe45c990564931c4a061b4e74de86c012fb7d7a21",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/azcli/azcli.js",
+          "member": "package/min/vs/basic-languages/azcli/azcli.js",
+          "upstreamSha256": "be50c776891279c9717db0d48a20d6d99f07cb60d2d8d279422fa917826683cf",
+          "sha256": "be50c776891279c9717db0d48a20d6d99f07cb60d2d8d279422fa917826683cf",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/bat/bat.js",
+          "member": "package/min/vs/basic-languages/bat/bat.js",
+          "upstreamSha256": "3ec5d66f73ee7e7dc2b43db5999a768d1a54e933de9f507015fe7709a184adee",
+          "sha256": "3ec5d66f73ee7e7dc2b43db5999a768d1a54e933de9f507015fe7709a184adee",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/bicep/bicep.js",
+          "member": "package/min/vs/basic-languages/bicep/bicep.js",
+          "upstreamSha256": "59d02b8930e36e2cbc3e472e263f881a82d84da292a79faf1d379cb060a2d7e1",
+          "sha256": "59d02b8930e36e2cbc3e472e263f881a82d84da292a79faf1d379cb060a2d7e1",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/cameligo/cameligo.js",
+          "member": "package/min/vs/basic-languages/cameligo/cameligo.js",
+          "upstreamSha256": "f93cd405c71f97f26b4739f7f917b242e82a993ad42884422a43bf27d5b413e2",
+          "sha256": "f93cd405c71f97f26b4739f7f917b242e82a993ad42884422a43bf27d5b413e2",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/clojure/clojure.js",
+          "member": "package/min/vs/basic-languages/clojure/clojure.js",
+          "upstreamSha256": "9e99cf86bcfb25c1b33bac9e26e11e4646868fa753356c7d737cfb24b7b1e49c",
+          "sha256": "9e99cf86bcfb25c1b33bac9e26e11e4646868fa753356c7d737cfb24b7b1e49c",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/coffee/coffee.js",
+          "member": "package/min/vs/basic-languages/coffee/coffee.js",
+          "upstreamSha256": "90d6aae23c9f5e4f335df5cb57634fa0193a102629deb88b98f238b4025f0551",
+          "sha256": "90d6aae23c9f5e4f335df5cb57634fa0193a102629deb88b98f238b4025f0551",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/cpp/cpp.js",
+          "member": "package/min/vs/basic-languages/cpp/cpp.js",
+          "upstreamSha256": "ece3d119688eaf8a37fffae388118b12f8724ac2c3c8ff10d44caf2e91026424",
+          "sha256": "ece3d119688eaf8a37fffae388118b12f8724ac2c3c8ff10d44caf2e91026424",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/csharp/csharp.js",
+          "member": "package/min/vs/basic-languages/csharp/csharp.js",
+          "upstreamSha256": "d6367d0d67c0612cf37d25319e00cda2e4e38869a3c3200b1bfcd856cfe7fb4b",
+          "sha256": "d6367d0d67c0612cf37d25319e00cda2e4e38869a3c3200b1bfcd856cfe7fb4b",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/csp/csp.js",
+          "member": "package/min/vs/basic-languages/csp/csp.js",
+          "upstreamSha256": "01241c709a7dddc0b5cedffb6dcf913a5d95c826eb68e2c27f114640719af7df",
+          "sha256": "01241c709a7dddc0b5cedffb6dcf913a5d95c826eb68e2c27f114640719af7df",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/css/css.js",
+          "member": "package/min/vs/basic-languages/css/css.js",
+          "upstreamSha256": "1f8468a126f6bfdc43d49a75e0ae758de913ebf55e685165adb6d069a454de5c",
+          "sha256": "1f8468a126f6bfdc43d49a75e0ae758de913ebf55e685165adb6d069a454de5c",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/dart/dart.js",
+          "member": "package/min/vs/basic-languages/dart/dart.js",
+          "upstreamSha256": "6b410bbe17b8ebcaed969bdfcf8049df6fe863482756ae73d2aebb919630034c",
+          "sha256": "6b410bbe17b8ebcaed969bdfcf8049df6fe863482756ae73d2aebb919630034c",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/dockerfile/dockerfile.js",
+          "member": "package/min/vs/basic-languages/dockerfile/dockerfile.js",
+          "upstreamSha256": "315769a72a2877f8ddddf9497a2e7e259e8df51cc38232ddf76fbe4556c0d7cd",
+          "sha256": "315769a72a2877f8ddddf9497a2e7e259e8df51cc38232ddf76fbe4556c0d7cd",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/ecl/ecl.js",
+          "member": "package/min/vs/basic-languages/ecl/ecl.js",
+          "upstreamSha256": "fc412fe18e564cff17e9a0bcd5674ba15c49f4739417cf589ce1c546b21033a9",
+          "sha256": "fc412fe18e564cff17e9a0bcd5674ba15c49f4739417cf589ce1c546b21033a9",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/elixir/elixir.js",
+          "member": "package/min/vs/basic-languages/elixir/elixir.js",
+          "upstreamSha256": "130d310090d723f51111d573000a72aa26fe44c9d79e6d04d12524e6631cfb6b",
+          "sha256": "130d310090d723f51111d573000a72aa26fe44c9d79e6d04d12524e6631cfb6b",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/flow9/flow9.js",
+          "member": "package/min/vs/basic-languages/flow9/flow9.js",
+          "upstreamSha256": "fafd88d973aed314454cd7d842b270125553f7a7613bb068c3c799a21ac61b64",
+          "sha256": "fafd88d973aed314454cd7d842b270125553f7a7613bb068c3c799a21ac61b64",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/fsharp/fsharp.js",
+          "member": "package/min/vs/basic-languages/fsharp/fsharp.js",
+          "upstreamSha256": "32027afd4be75ddeca6c7beb9b52eda07d59afe3ea39a84f0696a6b3d074dcbf",
+          "sha256": "32027afd4be75ddeca6c7beb9b52eda07d59afe3ea39a84f0696a6b3d074dcbf",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/go/go.js",
+          "member": "package/min/vs/basic-languages/go/go.js",
+          "upstreamSha256": "c93466a4479ee8aa5e3ec70a89b469db1277b801d1551d40ad700d5abd367363",
+          "sha256": "c93466a4479ee8aa5e3ec70a89b469db1277b801d1551d40ad700d5abd367363",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/graphql/graphql.js",
+          "member": "package/min/vs/basic-languages/graphql/graphql.js",
+          "upstreamSha256": "60a8825e939ca81540eb6ac00b17867b3e55af97bff99a9fa40c422a4281bdcf",
+          "sha256": "60a8825e939ca81540eb6ac00b17867b3e55af97bff99a9fa40c422a4281bdcf",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/handlebars/handlebars.js",
+          "member": "package/min/vs/basic-languages/handlebars/handlebars.js",
+          "upstreamSha256": "5a174247aa64c7a064fc977365bb1c7161b4c97e559a6121773188c25df9d9a2",
+          "sha256": "5a174247aa64c7a064fc977365bb1c7161b4c97e559a6121773188c25df9d9a2",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/hcl/hcl.js",
+          "member": "package/min/vs/basic-languages/hcl/hcl.js",
+          "upstreamSha256": "6053e90b8aa918c9744f41dcb1c0e58229a4946f0968a39b00776c3893538f54",
+          "sha256": "6053e90b8aa918c9744f41dcb1c0e58229a4946f0968a39b00776c3893538f54",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/html/html.js",
+          "member": "package/min/vs/basic-languages/html/html.js",
+          "upstreamSha256": "6e7ae0ce7f07ec01c64db1368869715c115690e40fb5c183d5ced0d2716038bd",
+          "sha256": "6e7ae0ce7f07ec01c64db1368869715c115690e40fb5c183d5ced0d2716038bd",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/ini/ini.js",
+          "member": "package/min/vs/basic-languages/ini/ini.js",
+          "upstreamSha256": "ecdb5c36a38a8b68af6384789c380d0e28b5b3df86de9c3419d348e688b8810e",
+          "sha256": "ecdb5c36a38a8b68af6384789c380d0e28b5b3df86de9c3419d348e688b8810e",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/java/java.js",
+          "member": "package/min/vs/basic-languages/java/java.js",
+          "upstreamSha256": "8fd9c491b67dfa9ab831ed71a3973cc6ffc840f438f41114a794163672f4cf9c",
+          "sha256": "8fd9c491b67dfa9ab831ed71a3973cc6ffc840f438f41114a794163672f4cf9c",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/javascript/javascript.js",
+          "member": "package/min/vs/basic-languages/javascript/javascript.js",
+          "upstreamSha256": "bbd7fb1b714d347704eae4c74cb36c352876864f2103a69af3965f32c1c982c6",
+          "sha256": "bbd7fb1b714d347704eae4c74cb36c352876864f2103a69af3965f32c1c982c6",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/julia/julia.js",
+          "member": "package/min/vs/basic-languages/julia/julia.js",
+          "upstreamSha256": "ef3783cbb81cee25697c0bddc9476813b593fb64712c21bc60099c8109c748f0",
+          "sha256": "ef3783cbb81cee25697c0bddc9476813b593fb64712c21bc60099c8109c748f0",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/kotlin/kotlin.js",
+          "member": "package/min/vs/basic-languages/kotlin/kotlin.js",
+          "upstreamSha256": "31b082803acb08622aa2dd736dca42772f6a0d3224fdb7c0e9c3e1f17800ca32",
+          "sha256": "31b082803acb08622aa2dd736dca42772f6a0d3224fdb7c0e9c3e1f17800ca32",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/less/less.js",
+          "member": "package/min/vs/basic-languages/less/less.js",
+          "upstreamSha256": "5ba9296cc5c6a7699028ac6e263631eb9284f80bfbffe99a4429f6c85dfc0589",
+          "sha256": "5ba9296cc5c6a7699028ac6e263631eb9284f80bfbffe99a4429f6c85dfc0589",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/lexon/lexon.js",
+          "member": "package/min/vs/basic-languages/lexon/lexon.js",
+          "upstreamSha256": "2be27259788a7a4a6fb94a59150b47d169ef6e04933f76977e568c4cb0227f57",
+          "sha256": "2be27259788a7a4a6fb94a59150b47d169ef6e04933f76977e568c4cb0227f57",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/liquid/liquid.js",
+          "member": "package/min/vs/basic-languages/liquid/liquid.js",
+          "upstreamSha256": "f4454c09b7e66ab2ffd81451aef2f12c79c0011839e19bcdb0fce42928acce6b",
+          "sha256": "f4454c09b7e66ab2ffd81451aef2f12c79c0011839e19bcdb0fce42928acce6b",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/lua/lua.js",
+          "member": "package/min/vs/basic-languages/lua/lua.js",
+          "upstreamSha256": "f39154e727c8d3df5c70ecab1737c0a07df3011977288ba4adc7d25c8ef639b5",
+          "sha256": "f39154e727c8d3df5c70ecab1737c0a07df3011977288ba4adc7d25c8ef639b5",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/m3/m3.js",
+          "member": "package/min/vs/basic-languages/m3/m3.js",
+          "upstreamSha256": "a3b616444441f34b90b4e06a6a3a845f2804da67220c19721b9461140eb7f074",
+          "sha256": "a3b616444441f34b90b4e06a6a3a845f2804da67220c19721b9461140eb7f074",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/markdown/markdown.js",
+          "member": "package/min/vs/basic-languages/markdown/markdown.js",
+          "upstreamSha256": "47ae9f567af2e69e682d14703bf4ad5428708464edb3d30791f3255a2863a52e",
+          "sha256": "47ae9f567af2e69e682d14703bf4ad5428708464edb3d30791f3255a2863a52e",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/mips/mips.js",
+          "member": "package/min/vs/basic-languages/mips/mips.js",
+          "upstreamSha256": "fcc6104a8c7092794744a1472511cd348d585d1cba0421e61e5eb8e0c58af186",
+          "sha256": "fcc6104a8c7092794744a1472511cd348d585d1cba0421e61e5eb8e0c58af186",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/msdax/msdax.js",
+          "member": "package/min/vs/basic-languages/msdax/msdax.js",
+          "upstreamSha256": "f98e43f6600e629bfc354196006a02f9f9cc26480de064cc480e3bc885beb283",
+          "sha256": "f98e43f6600e629bfc354196006a02f9f9cc26480de064cc480e3bc885beb283",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/mysql/mysql.js",
+          "member": "package/min/vs/basic-languages/mysql/mysql.js",
+          "upstreamSha256": "1cafe5b6c81234fc6680a421dd6290ec590ce03b9e525eacb0936a78ab50aeae",
+          "sha256": "1cafe5b6c81234fc6680a421dd6290ec590ce03b9e525eacb0936a78ab50aeae",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/objective-c/objective-c.js",
+          "member": "package/min/vs/basic-languages/objective-c/objective-c.js",
+          "upstreamSha256": "7cfdb8b492b6f1c5a1d83fefc3bd349bb1acdd489516534aefacd553c2850e75",
+          "sha256": "7cfdb8b492b6f1c5a1d83fefc3bd349bb1acdd489516534aefacd553c2850e75",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pascal/pascal.js",
+          "member": "package/min/vs/basic-languages/pascal/pascal.js",
+          "upstreamSha256": "f2886264f5ad42d173ef18e8ea961f674090be7513f48af95dcef4eb1191cac3",
+          "sha256": "f2886264f5ad42d173ef18e8ea961f674090be7513f48af95dcef4eb1191cac3",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pascaligo/pascaligo.js",
+          "member": "package/min/vs/basic-languages/pascaligo/pascaligo.js",
+          "upstreamSha256": "3d3317429e0837f6960e33829a2c2fd62119ca1514ad735f62345da8fd1dd817",
+          "sha256": "3d3317429e0837f6960e33829a2c2fd62119ca1514ad735f62345da8fd1dd817",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/perl/perl.js",
+          "member": "package/min/vs/basic-languages/perl/perl.js",
+          "upstreamSha256": "317b527f0ade315a7cb066eac72672e5f2ba6d0c02c6014be052c32fb6566aed",
+          "sha256": "317b527f0ade315a7cb066eac72672e5f2ba6d0c02c6014be052c32fb6566aed",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pgsql/pgsql.js",
+          "member": "package/min/vs/basic-languages/pgsql/pgsql.js",
+          "upstreamSha256": "f58b4ab8529e311f7f98f690ed39e13de22f3ae29cc8916bf99c21ac86917970",
+          "sha256": "f58b4ab8529e311f7f98f690ed39e13de22f3ae29cc8916bf99c21ac86917970",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/php/php.js",
+          "member": "package/min/vs/basic-languages/php/php.js",
+          "upstreamSha256": "3d7d187fb2e3b959adfda7b7557ccda4b6f690f838babc525cabffbe0dda7dd0",
+          "sha256": "3d7d187fb2e3b959adfda7b7557ccda4b6f690f838babc525cabffbe0dda7dd0",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pla/pla.js",
+          "member": "package/min/vs/basic-languages/pla/pla.js",
+          "upstreamSha256": "6138b0b0a1be95370c00afe6eca5022ea10e8b0f11f1db9382163f28975373e6",
+          "sha256": "6138b0b0a1be95370c00afe6eca5022ea10e8b0f11f1db9382163f28975373e6",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/postiats/postiats.js",
+          "member": "package/min/vs/basic-languages/postiats/postiats.js",
+          "upstreamSha256": "5b18eac81236e88ffca2e67e527fa1d6fb42f53a4df42c1fbeb37312a9ec2fe4",
+          "sha256": "5b18eac81236e88ffca2e67e527fa1d6fb42f53a4df42c1fbeb37312a9ec2fe4",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/powerquery/powerquery.js",
+          "member": "package/min/vs/basic-languages/powerquery/powerquery.js",
+          "upstreamSha256": "fb9705793a687b03fe08605f19c3f1019d83cf06394a8381db541bda92e230d4",
+          "sha256": "fb9705793a687b03fe08605f19c3f1019d83cf06394a8381db541bda92e230d4",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/powershell/powershell.js",
+          "member": "package/min/vs/basic-languages/powershell/powershell.js",
+          "upstreamSha256": "b80339b4a8450fd3a5bb5bf3817fb1b67fe6202690fc1ce97ef22336bcd7053b",
+          "sha256": "b80339b4a8450fd3a5bb5bf3817fb1b67fe6202690fc1ce97ef22336bcd7053b",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/protobuf/protobuf.js",
+          "member": "package/min/vs/basic-languages/protobuf/protobuf.js",
+          "upstreamSha256": "18f13fbd6b421023eec480901e48354d249bc9c3dce9d0e0cc842cbab4393fd3",
+          "sha256": "18f13fbd6b421023eec480901e48354d249bc9c3dce9d0e0cc842cbab4393fd3",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/pug/pug.js",
+          "member": "package/min/vs/basic-languages/pug/pug.js",
+          "upstreamSha256": "dbce9bb879b84cf3bf8bd05643a4d3d2ae6ded03b4a9234a0e8d2ebfab6ade44",
+          "sha256": "dbce9bb879b84cf3bf8bd05643a4d3d2ae6ded03b4a9234a0e8d2ebfab6ade44",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/python/python.js",
+          "member": "package/min/vs/basic-languages/python/python.js",
+          "upstreamSha256": "b0c9cb9c96d3b289b4ee1bb6ca921e810d87ec2967ebaf8608d5570865ac6524",
+          "sha256": "b0c9cb9c96d3b289b4ee1bb6ca921e810d87ec2967ebaf8608d5570865ac6524",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/qsharp/qsharp.js",
+          "member": "package/min/vs/basic-languages/qsharp/qsharp.js",
+          "upstreamSha256": "6cf9e660e8082f7a8dff4e8041c58c5e9fed1e622e0301b359886a5148c15327",
+          "sha256": "6cf9e660e8082f7a8dff4e8041c58c5e9fed1e622e0301b359886a5148c15327",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/r/r.js",
+          "member": "package/min/vs/basic-languages/r/r.js",
+          "upstreamSha256": "889684005db07d8b2e8c6f17d54b7bbf1bd67ad948b0b9ca411c2e55ba3433dd",
+          "sha256": "889684005db07d8b2e8c6f17d54b7bbf1bd67ad948b0b9ca411c2e55ba3433dd",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/razor/razor.js",
+          "member": "package/min/vs/basic-languages/razor/razor.js",
+          "upstreamSha256": "da07ee116d392fbf97f5adc9d4f1fd46e5bbbe9765949c8cb9a6f6a4917ce6cb",
+          "sha256": "da07ee116d392fbf97f5adc9d4f1fd46e5bbbe9765949c8cb9a6f6a4917ce6cb",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/redis/redis.js",
+          "member": "package/min/vs/basic-languages/redis/redis.js",
+          "upstreamSha256": "286518ee6a7e76356149bebfbcdc19d2d30c19a5fa48d4bfcbf2f7a946783bd0",
+          "sha256": "286518ee6a7e76356149bebfbcdc19d2d30c19a5fa48d4bfcbf2f7a946783bd0",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/redshift/redshift.js",
+          "member": "package/min/vs/basic-languages/redshift/redshift.js",
+          "upstreamSha256": "8b865d41e76c227f3e1eb3bc74f8e9cf24627b449cc94164c803c1e515a9bbfd",
+          "sha256": "8b865d41e76c227f3e1eb3bc74f8e9cf24627b449cc94164c803c1e515a9bbfd",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/restructuredtext/restructuredtext.js",
+          "member": "package/min/vs/basic-languages/restructuredtext/restructuredtext.js",
+          "upstreamSha256": "32c72e9b8fa318289b628efee24bc5b573e3f74f8ab7dd544dead1b3545fc351",
+          "sha256": "32c72e9b8fa318289b628efee24bc5b573e3f74f8ab7dd544dead1b3545fc351",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/ruby/ruby.js",
+          "member": "package/min/vs/basic-languages/ruby/ruby.js",
+          "upstreamSha256": "93a9fbda62d9b4ef5537de37d7b4c77a89d8e2b0a2193dddac534ce98da47b5f",
+          "sha256": "93a9fbda62d9b4ef5537de37d7b4c77a89d8e2b0a2193dddac534ce98da47b5f",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/rust/rust.js",
+          "member": "package/min/vs/basic-languages/rust/rust.js",
+          "upstreamSha256": "6352c16af73494a44e09b5ccad8a61c0369933d94881fcf58a7e8a75a27315cf",
+          "sha256": "6352c16af73494a44e09b5ccad8a61c0369933d94881fcf58a7e8a75a27315cf",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sb/sb.js",
+          "member": "package/min/vs/basic-languages/sb/sb.js",
+          "upstreamSha256": "7323046d28f72e54b5abda684d4ec67d55b688a0b5e1d23ffe1d675c1c141b69",
+          "sha256": "7323046d28f72e54b5abda684d4ec67d55b688a0b5e1d23ffe1d675c1c141b69",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/scala/scala.js",
+          "member": "package/min/vs/basic-languages/scala/scala.js",
+          "upstreamSha256": "57309bc0e00edda2c4edb5fd255e042e1ef6ce8d51f51c7e822a74268e04f444",
+          "sha256": "57309bc0e00edda2c4edb5fd255e042e1ef6ce8d51f51c7e822a74268e04f444",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/scheme/scheme.js",
+          "member": "package/min/vs/basic-languages/scheme/scheme.js",
+          "upstreamSha256": "3fe89a5618aa1c4eafa5c65aad212fcf2ba34e302de73df7db0867ba01dbd866",
+          "sha256": "3fe89a5618aa1c4eafa5c65aad212fcf2ba34e302de73df7db0867ba01dbd866",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/scss/scss.js",
+          "member": "package/min/vs/basic-languages/scss/scss.js",
+          "upstreamSha256": "b01dfbdbd787642ed55a3ca7b0b89b2edb80e4aa486d89fee0ba748124dad4f9",
+          "sha256": "b01dfbdbd787642ed55a3ca7b0b89b2edb80e4aa486d89fee0ba748124dad4f9",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/shell/shell.js",
+          "member": "package/min/vs/basic-languages/shell/shell.js",
+          "upstreamSha256": "39063f662fa62eb543e5d8f9b792b31d14c484abafd9a67943dae52fc9f5ce36",
+          "sha256": "39063f662fa62eb543e5d8f9b792b31d14c484abafd9a67943dae52fc9f5ce36",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/solidity/solidity.js",
+          "member": "package/min/vs/basic-languages/solidity/solidity.js",
+          "upstreamSha256": "e25859bb2a1babe193f03028489c95296b1bfe98a92dcb450d4c539661b5a86d",
+          "sha256": "e25859bb2a1babe193f03028489c95296b1bfe98a92dcb450d4c539661b5a86d",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sophia/sophia.js",
+          "member": "package/min/vs/basic-languages/sophia/sophia.js",
+          "upstreamSha256": "4ba061aa0beb82ba64efeb6bd1128da0d3445ac8cfc26d3f4591c66df0fa4bb0",
+          "sha256": "4ba061aa0beb82ba64efeb6bd1128da0d3445ac8cfc26d3f4591c66df0fa4bb0",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sparql/sparql.js",
+          "member": "package/min/vs/basic-languages/sparql/sparql.js",
+          "upstreamSha256": "162783ddf2dd67384d379ebf485f6ed0cafd820e892e4d89e82c8ba8617390c4",
+          "sha256": "162783ddf2dd67384d379ebf485f6ed0cafd820e892e4d89e82c8ba8617390c4",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/sql/sql.js",
+          "member": "package/min/vs/basic-languages/sql/sql.js",
+          "upstreamSha256": "3b1decbf86cb0b163070cc144e826f104ba10468798b36e6d0e64257a35fd1f8",
+          "sha256": "3b1decbf86cb0b163070cc144e826f104ba10468798b36e6d0e64257a35fd1f8",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/st/st.js",
+          "member": "package/min/vs/basic-languages/st/st.js",
+          "upstreamSha256": "b3ac35684d5668c2d08105cec31f43e8d897e4ab94103d8bd64ac804d256c20c",
+          "sha256": "b3ac35684d5668c2d08105cec31f43e8d897e4ab94103d8bd64ac804d256c20c",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/swift/swift.js",
+          "member": "package/min/vs/basic-languages/swift/swift.js",
+          "upstreamSha256": "288a0ad2974e332bb873bacbb2a284f8f39cdc7d12b1fd5e3c46699147a63633",
+          "sha256": "288a0ad2974e332bb873bacbb2a284f8f39cdc7d12b1fd5e3c46699147a63633",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/systemverilog/systemverilog.js",
+          "member": "package/min/vs/basic-languages/systemverilog/systemverilog.js",
+          "upstreamSha256": "40b18f15d29e3201142eb02fd5cc5ad690b32386bbe5dc0a874fd68a2f176f41",
+          "sha256": "40b18f15d29e3201142eb02fd5cc5ad690b32386bbe5dc0a874fd68a2f176f41",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/tcl/tcl.js",
+          "member": "package/min/vs/basic-languages/tcl/tcl.js",
+          "upstreamSha256": "317b63a872ce538d4eef5dae701641670fd3f99dfc0439465d444b2992b69bea",
+          "sha256": "317b63a872ce538d4eef5dae701641670fd3f99dfc0439465d444b2992b69bea",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/twig/twig.js",
+          "member": "package/min/vs/basic-languages/twig/twig.js",
+          "upstreamSha256": "c3442379367d5ef43f1377a14e3c6a04ec451dabb05bed200571ea6dc328dfa0",
+          "sha256": "c3442379367d5ef43f1377a14e3c6a04ec451dabb05bed200571ea6dc328dfa0",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/typescript/typescript.js",
+          "member": "package/min/vs/basic-languages/typescript/typescript.js",
+          "upstreamSha256": "25dd318efd5aada375fdf391c488bd0b5ec0d665ba16e49f1e7968217ad01139",
+          "sha256": "25dd318efd5aada375fdf391c488bd0b5ec0d665ba16e49f1e7968217ad01139",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/vb/vb.js",
+          "member": "package/min/vs/basic-languages/vb/vb.js",
+          "upstreamSha256": "41d3d863c8b955c53eddb8724866a487d3632995114c77c0e9bc416227d148bf",
+          "sha256": "41d3d863c8b955c53eddb8724866a487d3632995114c77c0e9bc416227d148bf",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/xml/xml.js",
+          "member": "package/min/vs/basic-languages/xml/xml.js",
+          "upstreamSha256": "95ddef452d5ff87f5c9f807d56f3f74964727677b5a55baa13a0a4870e2ae850",
+          "sha256": "95ddef452d5ff87f5c9f807d56f3f74964727677b5a55baa13a0a4870e2ae850",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/basic-languages/yaml/yaml.js",
+          "member": "package/min/vs/basic-languages/yaml/yaml.js",
+          "upstreamSha256": "a6ffa854247873af58df3ad550bbdd474b2d8dbc1d1c730fce4e44dfcb5f9b62",
+          "sha256": "a6ffa854247873af58df3ad550bbdd474b2d8dbc1d1c730fce4e44dfcb5f9b62",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.css",
+          "member": "package/min/vs/editor/editor.main.css",
+          "upstreamSha256": "6240d544d93236ac40dd3bd1ee49afbd27cb43e056c24c04a0c2cb37f1fd4587",
+          "sha256": "6240d544d93236ac40dd3bd1ee49afbd27cb43e056c24c04a0c2cb37f1fd4587",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.js",
+          "member": "package/min/vs/editor/editor.main.js",
+          "upstreamSha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618",
+          "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.de.js",
+          "member": "package/min/vs/editor/editor.main.nls.de.js",
+          "upstreamSha256": "e31a518baf29ffce15a27ac80a6b5406ebf21c76657f3344f46c9ac0e6d0c202",
+          "sha256": "e31a518baf29ffce15a27ac80a6b5406ebf21c76657f3344f46c9ac0e6d0c202",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.es.js",
+          "member": "package/min/vs/editor/editor.main.nls.es.js",
+          "upstreamSha256": "f86887a1575bc71f035e92eb68b3d4e8c4e351d93f3b98520660933fed984007",
+          "sha256": "f86887a1575bc71f035e92eb68b3d4e8c4e351d93f3b98520660933fed984007",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.fr.js",
+          "member": "package/min/vs/editor/editor.main.nls.fr.js",
+          "upstreamSha256": "673214777e1ba3518abe1bbde8b5250cb18d65257054c8adf9cb5e1e49918d27",
+          "sha256": "673214777e1ba3518abe1bbde8b5250cb18d65257054c8adf9cb5e1e49918d27",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.it.js",
+          "member": "package/min/vs/editor/editor.main.nls.it.js",
+          "upstreamSha256": "66df8e46d4aa40b5393489efda7e8aee5ad5589fdf68fef03832e665f0aabc9c",
+          "sha256": "66df8e46d4aa40b5393489efda7e8aee5ad5589fdf68fef03832e665f0aabc9c",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.ja.js",
+          "member": "package/min/vs/editor/editor.main.nls.ja.js",
+          "upstreamSha256": "4688d4dfa1ddf91cbfa7005e1110b12f79315706e7d56463c96e8bc688a3d60d",
+          "sha256": "4688d4dfa1ddf91cbfa7005e1110b12f79315706e7d56463c96e8bc688a3d60d",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.js",
+          "member": "package/min/vs/editor/editor.main.nls.js",
+          "upstreamSha256": "4d4915b0ff284b77938d3be70b9000911554fc451263a7baa594d199ef170a0e",
+          "sha256": "4d4915b0ff284b77938d3be70b9000911554fc451263a7baa594d199ef170a0e",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.ko.js",
+          "member": "package/min/vs/editor/editor.main.nls.ko.js",
+          "upstreamSha256": "a6d39e2202fa271bfd5e04b83a5265bbe7ef73a945471c9e9fcb65ff8f1a8663",
+          "sha256": "a6d39e2202fa271bfd5e04b83a5265bbe7ef73a945471c9e9fcb65ff8f1a8663",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.ru.js",
+          "member": "package/min/vs/editor/editor.main.nls.ru.js",
+          "upstreamSha256": "345850b05cc97c0c1978df43ee996a32da7cd33ba1a85be3b6958884a8307040",
+          "sha256": "345850b05cc97c0c1978df43ee996a32da7cd33ba1a85be3b6958884a8307040",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.zh-cn.js",
+          "member": "package/min/vs/editor/editor.main.nls.zh-cn.js",
+          "upstreamSha256": "30ce784d1733d424e221009e097760b813e629d63579bddb62f7a4f229b9011f",
+          "sha256": "30ce784d1733d424e221009e097760b813e629d63579bddb62f7a4f229b9011f",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.nls.zh-tw.js",
+          "member": "package/min/vs/editor/editor.main.nls.zh-tw.js",
+          "upstreamSha256": "ab5c148283e9afd0577afb5e522e45c6c2b323a0a12215b71f92155fbf003b74",
+          "sha256": "ab5c148283e9afd0577afb5e522e45c6c2b323a0a12215b71f92155fbf003b74",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/css/cssMode.js",
+          "member": "package/min/vs/language/css/cssMode.js",
+          "upstreamSha256": "c0f3a99395d07b421ef75f6eb78389c6ef29477f6a05556f9b94e2bb918dd6c1",
+          "sha256": "c0f3a99395d07b421ef75f6eb78389c6ef29477f6a05556f9b94e2bb918dd6c1",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/css/cssWorker.js",
+          "member": "package/min/vs/language/css/cssWorker.js",
+          "upstreamSha256": "073e09f9301dcf147e40ef675e3f18d8cc29de9f49673ec8d17711569144552d",
+          "sha256": "073e09f9301dcf147e40ef675e3f18d8cc29de9f49673ec8d17711569144552d",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/html/htmlMode.js",
+          "member": "package/min/vs/language/html/htmlMode.js",
+          "upstreamSha256": "91f7b295ddc3b0b679c669b84865f3ace79fdd30bfcd814f2960c06f3e24d600",
+          "sha256": "91f7b295ddc3b0b679c669b84865f3ace79fdd30bfcd814f2960c06f3e24d600",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/html/htmlWorker.js",
+          "member": "package/min/vs/language/html/htmlWorker.js",
+          "upstreamSha256": "0b14f0af7ae7ab85732574fb384496dae3e85d28f953188cc842eec468a8a457",
+          "sha256": "0b14f0af7ae7ab85732574fb384496dae3e85d28f953188cc842eec468a8a457",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/json/jsonMode.js",
+          "member": "package/min/vs/language/json/jsonMode.js",
+          "upstreamSha256": "9abacb664dcd8564f28ef004465da0f4b3c551b2741424bf42e61c0a26e61adb",
+          "sha256": "9abacb664dcd8564f28ef004465da0f4b3c551b2741424bf42e61c0a26e61adb",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/json/jsonWorker.js",
+          "member": "package/min/vs/language/json/jsonWorker.js",
+          "upstreamSha256": "0eb929c56d44afddb3030c011913010311ce34e5eadb1129a3ce9cbafd4c771d",
+          "sha256": "0eb929c56d44afddb3030c011913010311ce34e5eadb1129a3ce9cbafd4c771d",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/typescript/tsMode.js",
+          "member": "package/min/vs/language/typescript/tsMode.js",
+          "upstreamSha256": "35d94edaf7982c8b59c95cda38c5ebffcf93479ee91a5c9820b9bf60719351c2",
+          "sha256": "35d94edaf7982c8b59c95cda38c5ebffcf93479ee91a5c9820b9bf60719351c2",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/language/typescript/tsWorker.js",
+          "member": "package/min/vs/language/typescript/tsWorker.js",
+          "upstreamSha256": "95d7d318d3b6076692705bda50f69ccf2981aae6b06f240de5ac642f32970bf4",
+          "sha256": "95d7d318d3b6076692705bda50f69ccf2981aae6b06f240de5ac642f32970bf4",
+          "mode": "lf-text"
+        },
+        {
+          "path": "docs/assets/js/vs/loader.js",
+          "member": "package/min/vs/loader.js",
+          "upstreamSha256": "be92515f6d2cbfc75cd240076246e8ccf6f698269c0402e367d2ee371655bbeb",
+          "sha256": "be92515f6d2cbfc75cd240076246e8ccf6f698269c0402e367d2ee371655bbeb",
+          "mode": "lf-text"
+        }
+      ],
+      "notices": [
+        {
+          "source": "refactor/baselines/site-vendor/monaco-editor-LICENSE.txt",
+          "target": "docs/licenses/monaco-editor/LICENSE",
+          "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-editor-ThirdPartyNotices.txt.txt",
+          "target": "docs/licenses/monaco-editor/ThirdPartyNotices.txt",
+          "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+        }
+      ],
+      "review": "The upstream Monaco LICENSE and ThirdPartyNotices are retained in full. The included codicon.ttf still needs matching Codicons version/attribution evidence; the Monaco package license alone does not close that font review."
+    }
+  ]
+}

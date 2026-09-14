@@ -1,5 +1,21 @@
 # 进度与证据
 
+## SITE-07 固定vendor来源与notice生成检查点（仍doing）
+
+新增Monaco0.30.1/vConsole3.15.0的100文件固定指纹、TS生成器和只读检查，三份上游
+原文与范围明确的索引随docs分发，运行时资产保持原字节。生成/校验接入CI，3项
+文件回归、严格docs-tools TS、lint与固定工具链通过。Monaco三引擎真实TS worker/
+Run检查通过，完整LICENSE/ThirdPartyNotices已分发；最终核对发现其中没有Codicons
+字体条目，其独立许可/版本归属仍缺证据，因此VENDOR-06也保持open。
+浏览器合计5通过1失败：WebKit在vConsole销毁后报log store update异常，新增
+VCONSOLE-LIFECYCLE-01保持open；上游源码的RAF/store删除路径是待验证原因，尚未修复。
+另发现vConsole npm和上游LICENSE未包含声称附带的MIT正文；索引明确不将原文复制
+当成完整许可证明，VENDOR-07、console bundle、字体/媒体仍open。见
+[检查点](changes/2026-09-14-SITE-07-vendor-notices.md)及[证据](baselines/site-notices-checkpoint.json)。
+255项：186 done、18 doing、51 todo。没有关闭SITE-07或发布门槛，没有部署/push/publish。
+下一步先隔离并修复vConsole销毁回调，再补完整许可/依赖原文和console bundle来源；
+缩略图工具/VAST的历史默认行为选择继续等待此前问题的回复，不把等待当作批准。
+
 ## CI-02 Pages产物预检与恢复流程完成
 
 生产构建后的独立暂存目录重新生成21个旧uncompiled入口，验证63个compiled/dist

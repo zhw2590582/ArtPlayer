@@ -13,3 +13,5 @@ refactor/baselines/thumbnail-vendor/* text eol=lf whitespace=-blank-at-eof
 refactor/baselines/multiple-subtitles-vendor/* text eol=lf whitespace=-blank-at-eof
 # Preserve upstream documentation-site license bytes, including final blank lines.
 refactor/baselines/site-vendor/*.txt text eol=lf whitespace=-blank-at-eof
+docs/licenses/** text eol=lf whitespace=-blank-at-eof
+docs/THIRD_PARTY_NOTICES.md text eol=lf

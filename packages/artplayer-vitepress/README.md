@@ -92,9 +92,15 @@ current rules and verified scope. Full site/search acceptance remains SITE-05.
 
 ## Delivery and remaining acceptance
 
+SITE-07 now checks frozen Monaco/vConsole files and generates verbatim upstream
+texts under `docs/licenses/` with `build:site-notices` / `check:site-notices`.
+See `scripts/site-vendor/README.md`: the vConsole upstream LICENSE is incomplete,
+and its WebKit destruction regression remains open. The notices index explicitly
+does not clear the console bundle, fonts, media or the rest of the site.
+
 `scripts/projects.js` excludes this workspace from the 21 library builds.
-VitePress emits the static site, and the Pages workflow deploys the validated
-repository `docs/` artifact. The manifest currently has neither library
+VitePress emits the static site; CI-02 stages `docs/`, refreshes old demo entries,
+and validates that separate Pages artifact before deployment. The manifest currently has neither library
 entrypoints nor `private: true`; that absence is not npm publication intent.
 REL-01 must explicitly classify its release handling. Its independent planned
 major still advances from 1.1.0 to 2.0.0 under the agreed version policy.

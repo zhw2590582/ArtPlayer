@@ -270,3 +270,4 @@
 | MULTI-SUB-ASS-01 | resolved / 已复现 | Published core5.1.2 ASS converter loses required VTT line breaks | PKG-MULTI-SUB-11 |
 | JASSUB-RENDER-RESOURCES-01 | resolved / 已复现 | Main-thread async rendering leaves received ImageBitmaps open when native canvas operations throw | PKG-JASSUB-10 |
 | ENG-PERF-OBS-01 | resolved / 已复现 | A nominal 350 ms resource observation can record only 349 ms and fail the required minimum | ENG-13 |
+| VCONSOLE-LIFECYCLE-01 | open / 已复现 | vConsole 3.15.0 mobile destruction can leave a callback updating a removed log store | SITE-07, SITE-05 |

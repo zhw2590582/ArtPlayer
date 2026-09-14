@@ -4,7 +4,7 @@
 
 基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 255 项，范围 22 个包及工作区/示例。
 
-状态：todo 52 / doing 17 / blocked 0 / done 186 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 51 / doing 18 / blocked 0 / done 186 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -399,7 +399,7 @@
 | SITE-04 | artplayer-vitepress<br>交叉核对逐包持续维护的文档 | CORE-21, SITE-03, PKG-CHAPTER-04, PKG-AMBILIGHT-04, PKG-AUDIO-04, PKG-AUTO-THUMB-04, PKG-VTT-THUMB-04, PKG-HLS-04, PKG-DASH-04, PKG-MULTI-SUB-04, PKG-JASSUB-04, PKG-MASK-04, PKG-ASR-04, PKG-ADS-04, PKG-VAST-04, PKG-CAST-04, PKG-DPIP-04, PKG-CANVAS-04, PKG-IFRAME-04, PKG-TOOL-THUMB-04, PKG-DANMUKU-06, PKG-MB-08 | 已随实现更新的中文/英文 API、包内实现地图、旧 JS 示例及已知能力限制的全包核对 | 未把缺环境的能力写成已验证，静态核对不等待设备任务；最终 demo 仍由 EX-03 验收；按 SITE-01 声明成员/候选标题清单逐项语义核对，补齐缺失的双语插件说明和 Danmuku 英文入口 | M | todo |
 | SITE-05 | artplayer-vitepress<br>构建文档站和验证链接/示例 | SITE-04, EX-01, EX-02, SITE-07 | VitePress 构建、链接与嵌入 demo 检查 | 文档构建、链接、嵌入路径与声明注入通过；真实完整 demo 保留 EX-03 独立门槛；核对 ENG-PM-01 登记的搜索 peer 范围和真实搜索行为 | M | todo |
 | SITE-06 | artplayer-vitepress<br>文档站交付验收 | SITE-05 | 维护指南和站点变更记录 | 未手改 generated 目录，旧 URL 可用、部署与检查分离 | M | todo |
-| SITE-07 | artplayer-vitepress, workspace<br>整理站点第三方资产与来源说明 | SITE-01 | Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices | 接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据 | H | todo |
+| SITE-07 | artplayer-vitepress, workspace<br>整理站点第三方资产与来源说明 | SITE-01 | Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices | 接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据 | H | doing |
 | EX-01 | example/react.js, workspace<br>验证 React 消费者与 TS | CORE-22, ENG-07 | React 挂载/卸载/重挂载、引用和插件样例 | 真实 tarball + TS 消费通过，保留既有 React 集成 API | M | done |
 | EX-02 | example/vue.js, workspace<br>验证 Vue 消费者与更新卸载 | CORE-22, ENG-07 | Vue 实例/ref、参数更新、卸载及插件样例 | 旧 JS 组件用法无需修改，重复挂载不泄漏 | M | done |
 | EX-03 | workspace<br>验证全部原生 demo 与外部播放集成 | EX-01, EX-02, PKG-CHAPTER-06, PKG-AMBILIGHT-06, PKG-AUDIO-06, PKG-AUTO-THUMB-06, PKG-VTT-THUMB-06, PKG-HLS-06, PKG-DASH-06, PKG-MULTI-SUB-06, PKG-JASSUB-06, PKG-MASK-06, PKG-ASR-06, PKG-ADS-06, PKG-VAST-06, PKG-CAST-06, PKG-DPIP-06, PKG-DANMUKU-09, PKG-CANVAS-06, PKG-MB-10, PKG-IFRAME-06, PKG-TOOL-THUMB-06 | 8082 全 demo、HLS/DASH/FLV/MPEGTS/WebTorrent 集成记录 | 旧 URL/参数/脚本加载保持；网络/SDK 限制明确，不静默跳过；覆盖编辑器重复 Run 和 ESM/i18n/mobile/iframe，记录实际候选脚本及状态隔离证据；依据 BASE-04 路径台账逐项消除 not-run，处理 BASE-DEMO-01 | H | todo |
@@ -632,7 +632,7 @@
 - SITE-AI-DOCS-01: [记录](changes/2026-09-14-SITE-AI-DOCS-01-documentation-pipeline.md) [记录](baselines/documentation-pipeline-validation.json)
 - SITE-BUILD-01: [记录](changes/2026-09-14-SITE-BUILD-01-staged-builds.md) [记录](baselines/site-build-validation.json)
 - SITE-03: [记录](changes/2026-09-14-SITE-03-desktop-editor.md) [记录](baselines/site-editor-validation.json)
-- SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json)
+- SITE-07: [记录](site-inventory.md) [记录](baselines/site-provenance.json) [记录](changes/2026-09-14-SITE-07-vendor-notices.md) [记录](baselines/site-notices-checkpoint.json)
 - EX-01: [记录](changes/2026-09-14-EX-01-react-consumer.md) [记录](baselines/react-consumer-validation.json) [记录](scripts/react-consumer.mjs)
 - EX-02: [记录](changes/2026-09-14-EX-02-vue-consumer.md) [记录](baselines/vue-consumer-validation.json) [记录](scripts/vue-consumer.mjs)
 - MOD-PLUGIN-01: [记录](changes/2026-09-14-MOD-PLUGIN-01-scaffold.md) [记录](baselines/scaffold-validation.json)

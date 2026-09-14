@@ -4364,13 +4364,15 @@
       "dependsOn": [
         "SITE-01"
       ],
-      "status": "todo",
+      "status": "doing",
       "risk": "H",
       "deliverable": "Monaco/vConsole/console bundle/字体和样本的冻结来源、可复现构建或替代与站点 notices",
       "acceptance": "接续 SITE-01 的字节与换行差异证据；完整许可随实际分发，consoleLog/global/CSS/worker 与旧 URL 兼容；缺字体/媒体使用依据明确处置；资产变更后执行编辑器/移动/字幕/示例回归，不以来源指纹替代授权或运行证据",
       "evidence": [
         "site-inventory.md",
-        "baselines/site-provenance.json"
+        "baselines/site-provenance.json",
+        "changes/2026-09-14-SITE-07-vendor-notices.md",
+        "baselines/site-notices-checkpoint.json"
       ]
     },
     {

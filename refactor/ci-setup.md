@@ -149,6 +149,11 @@ Yarn Classic 可执行文件，不再调用 npm。入口仍由 `ci:build` 按原
 
 ## SITE-03 编辑器来源与检查
 
+SITE-07检查点新增check:site-notices到ci:check、build:site-notices到ci:build，
+将固定Monaco/vConsole上游原文复制进docs/licenses；源文件指纹漂移会失败。
+新TS模块进入docs-tools类型和根lint，文件回归进入test:node。vConsole上游许可
+正文缺失及WebKit销毁异常仍开放；新浏览器回归保留失败，不代表整体CI现在已通过。
+
 common.js/bootstrap.js 由 browser 下的 TS 生成，源代码进入 typecheck:site-assets
 和根 lint，产物由 check:site-assets 比较；不再对生成 common.js 应用源码 lint。
 build:ts 生成声明 URL 清单后重建站点浏览器产物，check:editor-types 保持只读。
