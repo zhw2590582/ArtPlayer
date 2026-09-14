@@ -142,8 +142,12 @@ jobs:
         run: |
           yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas 2>&1 | tee refactor/.cache/ci/browser-packages.log
           node --input-type=module -e 'import fs from "node:fs"; const { output } = JSON.parse(fs.readFileSync("refactor/.cache/packages/latest.json")); fs.appendFileSync(process.env.GITHUB_ENV, `ARTPLAYER_BROWSER_ARTIFACTS=${output}/browser-artifacts.json\n`);'
+      - name: Run all source browser checks
+        if: ${{ !cancelled() }}
+        run: yarn test:browser:source 2>&1 | tee refactor/.cache/ci/browser-source.log
       - name: Run installed browser checks
-        run: yarn test:browser 2>&1 | tee refactor/.cache/ci/browser.log
+        if: ${{ !cancelled() }}
+        run: yarn test:browser:installed 2>&1 | tee refactor/.cache/ci/browser-installed.log
       - name: Verify iframe cached history and interrupted navigation
         run: yarn test:iframe-history 2>&1 | tee refactor/.cache/ci/iframe-history.log
       - name: Compare installed performance and verify resource cleanup
@@ -156,6 +160,8 @@ jobs:
           path: |
             refactor/.cache/ci/
             refactor/.cache/browser/
+            refactor/.cache/browser-source/
+            refactor/.cache/browser-installed/
             refactor/.cache/iframe-history/
             refactor/.cache/react-consumer-*/
             refactor/.cache/vue-consumer-*/

@@ -813,7 +813,8 @@
         "CI-01",
         "CI-02",
         "CI-03",
-        "SITE-06"
+        "SITE-06",
+        "CI-BROWSER-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -1452,7 +1453,8 @@
       ],
       "dependsOn": [
         "PKG-CHAPTER-05",
-        "ENG-07"
+        "ENG-07",
+        "PKG-CHAPTER-HOVER-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -5346,6 +5348,46 @@
       "evidence": [
         "changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md",
         "baselines/vconsole-lifecycle-validation.json"
+      ]
+    },
+    {
+      "id": "CI-BROWSER-01",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "分离源码与已安装产物浏览器验证范围",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-05",
+        "ENG-07"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "完整源码入口、明确已安装包子集、分开的报告目录与失败传播",
+      "acceptance": "混用输入旧红新绿；源码默认保留所有spec，已安装入口严格校验四包来源；两类报告都保留，源码失败不能误报全绿；不代表完整远端或全包验收",
+      "evidence": [
+        "changes/2026-09-14-CI-BROWSER-01-scopes.md",
+        "baselines/browser-scope-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-CHAPTER-HOVER-01",
+      "phase": "5 包迁移：artplayer-plugin-chapter",
+      "title": "定位并修复原生全屏章节悬停时序",
+      "scope": [
+        "artplayer-plugin-chapter"
+      ],
+      "dependsOn": [
+        "PKG-CHAPTER-04",
+        "CI-BROWSER-01"
+      ],
+      "status": "todo",
+      "risk": "M",
+      "deliverable": "原生全屏动态几何与指针时序复现、针对根因的修复和真实浏览器回归",
+      "acceptance": "解释 Chromium 旧核心+新章节的 opacity 失败；保留标题、缩略图和全屏退出断言，不以重试或扩大等待掩盖；区分测试同步与生产缺陷",
+      "evidence": [
+        "changes/2026-09-14-CI-BROWSER-01-scopes.md",
+        "baselines/browser-scope-validation.json"
       ]
     }
   ]

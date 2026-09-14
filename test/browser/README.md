@@ -1,5 +1,14 @@
 # Browser regression entry
 
+CI uses `yarn test:browser:source` for the complete source suite and
+`yarn test:browser:installed` for the reviewed installed-package subset. The source
+launcher clears inherited ARTPLAYER_BROWSER_ARTIFACTS; the installed launcher and
+config verify all required package hashes and build inputs. Reports live separately
+under browser-source/ and browser-installed/. See
+[scope maintenance](../../scripts/browser-validation/README.md) before adding an
+installed test or interpreting `--list` output as execution evidence. Existing
+`yarn test:browser` commands retain their ad hoc behavior and browser/ output.
+
 `library-development.spec.js` starts the actual JS dev CLI and typed runner on an
 atomically assigned fixture port. It checks generated TS/Less/SVG/inline-worker assets,
 automatic reload on edits and recovery after a compiler error in all three

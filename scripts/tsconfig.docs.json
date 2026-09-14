@@ -29,6 +29,7 @@
     "build-i18n.js",
     "build-docs.js",
     "../packages/artplayer-vitepress/build/**/*.ts",
-    "build-vconsole.mjs"
+    "build-vconsole.mjs",
+    "browser-validation/**/*.ts"
   ]
 }

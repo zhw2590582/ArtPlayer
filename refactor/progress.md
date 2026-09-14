@@ -1,5 +1,20 @@
 # 进度与证据
 
+## CI-BROWSER-01 源码/安装浏览器范围隔离完成
+
+复现全局安装map使HLS源码用例beforeAll直接失败；新source入口清除继承map后实际
+SDK检查通过。两个TS配置入口分别保留完整source与已核验四包installed子集，CLI
+保留真实退出码，报告目录分开；CI普通失败后继续收集另一范围，仍让job失败。
+collection为source149文件4413项、installed8文件225项；前者不是完整执行通过。
+installed实际224通过/1失败：Chromium旧核心+新Chapter原生全屏hover opacity。
+该失败码1、trace、截图与初期误报纠正均留档，新增CHAPTER-FULLSCREEN-GEOMETRY-01
+和PKG-CHAPTER-HOVER-01，不放宽断言。最终source/installed定向各3项通过；控制面/
+工作流/汇总50项、TS、lint、actionlint、固定工具链和冻结安装通过。
+见[变更](changes/2026-09-14-CI-BROWSER-01-scopes.md)与
+[证据](baselines/browser-scope-validation.json)。258项：188 done、19 doing、51 todo。
+CI-01仍需全量source耗时/分片及全包installed覆盖，CI-04远端/取消仍未完成；没有
+push/部署/发布。下一步处理Chapter原生全屏几何与hover同步的新复现。
+
 ## PKG-AMBILIGHT-05 已安装产物组合检查点（仍doing）
 
 隔离构建/打包流程显式纳入 Ambilight/Canvas，仓库外离线安装与冻结重装后校验

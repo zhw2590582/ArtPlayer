@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 256 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 258 项，范围 22 个包及工作区/示例。
 
-状态：todo 50 / doing 19 / blocked 0 / done 187 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 51 / doing 19 / blocked 0 / done 188 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -20,7 +20,7 @@
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09 |
 | artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11 |
-| artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06 |
+| artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06, PKG-CHAPTER-HOVER-01 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
 | artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12 |
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06, ENG-LINT-01 |
@@ -96,7 +96,8 @@
 | CI-01 | workspace<br>增强兼容矩阵、并发缓存与 CI 报告 | DOC-10, ENG-08, ENG-09, ENG-10 | OS/Node/TS/浏览器与影响范围矩阵、缓存、超时、汇总检查和 artifact 报告 | 固定安装、失败/取消不误报、核心影响全生态；检查只读，失败证据可追溯 | H | doing |
 | CI-02 | workspace<br>分离并改进 GitHub Pages 部署 | DOC-10, ENG-02, SITE-03 | Pages artifact 部署配置、旧路径/域名核对、预检和迁移恢复指南 | 部署只取受信任已验证产物；本地实现可验收，远端 source/环境和实际部署状态单独登记 | H | done |
 | CI-03 | workspace<br>建立 npm 分包候选与发布工作流 | DOC-10, CI-01, REL-08, REL-04 | 候选准备、精确 artifact 发布配置、OIDC 评估、版本/tag/registry 预检和部分失败恢复 | 不自动发布；明确逐包信任前置和 dry run 限制，不能重建未验证内容或重发冲突版本；按版本清单校验各包下一 major 和预发布/正式 tag，保留旧核心支持范围 | H | todo |
-| CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
+| CI-04 | workspace<br>验收 GitHub 流水线与远端发布准入 | CI-01, CI-02, CI-03, SITE-06, CI-BROWSER-01 | 静态/干净环境检查、真实 PR 正反例、候选 dry run、required checks/Pages/npm 必需配置状态及运维指南 | 必要 Actions 证据和远端配置核对齐全；缺失保持未完成，真实 publish/deploy 仍在授权发布步骤执行 | H | todo |
+| CI-BROWSER-01 | workspace<br>分离源码与已安装产物浏览器验证范围 | ENG-05, ENG-07 | 完整源码入口、明确已安装包子集、分开的报告目录与失败传播 | 混用输入旧红新绿；源码默认保留所有spec，已安装入口严格校验四包来源；两类报告都保留，源码失败不能误报全绿；不代表完整远端或全包验收 | M | done |
 
 ## 2.1 早期试点
 
@@ -144,7 +145,8 @@
 | PKG-CHAPTER-03 | artplayer-plugin-chapter<br>以 TypeScript 拆分内部职责与资源 | PKG-CHAPTER-02, ENG-07 | 以严格 TS 拆分区间计算、进度 DOM、事件生命周期与样式注入；公开声明消费在 04 闭环 | 不依赖新核心方法或大范围设置重构；旧 API/事件和资源通过，必要适配限包内 | M | done |
 | PKG-CHAPTER-04 | artplayer-plugin-chapter<br>迁移自有源码和公开类型 | PKG-CHAPTER-03, ENG-04, ENG-06 | 承接 03 的自有源码 TS 化，完善公开 Chapters/Option/Result 与 update 推导，关闭声明模块解析和旧消费差异 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；处理 BASE-TYPE-01/03，保持运行时和新旧 TS 模块解析消费 | M | done |
 | PKG-CHAPTER-05 | artplayer-plugin-chapter<br>验证新旧核心和组合 | PKG-CHAPTER-04, CORE-22 | chapter + quality/thumbnail、移动和全屏进度场景 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | M | doing |
-| PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+| PKG-CHAPTER-06 | artplayer-plugin-chapter<br>验证分发并同步文档 | PKG-CHAPTER-05, ENG-07, PKG-CHAPTER-HOVER-01 | chapter.js 示例、产物和变更记录 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | M | todo |
+| PKG-CHAPTER-HOVER-01 | artplayer-plugin-chapter<br>定位并修复原生全屏章节悬停时序 | PKG-CHAPTER-04, CI-BROWSER-01 | 原生全屏动态几何与指针时序复现、针对根因的修复和真实浏览器回归 | 解释 Chromium 旧核心+新章节的 opacity 失败；保留标题、缩略图和全屏退出断言，不以重试或扩大等待掩盖；区分测试同步与生产缺陷 | M | todo |
 
 ## 5 包迁移：artplayer-plugin-ambilight
 
@@ -666,3 +668,5 @@
 - PKG-JASSUB-10: [记录](changes/2026-09-14-PKG-JASSUB-10-render-resources.md) [记录](baselines/jassub-render-validation.json) [记录](baselines/jassub-render-patch.json)
 - ENG-13: [记录](changes/2026-09-14-ENG-13-observation-window.md) [记录](baselines/observation-window-validation.json)
 - SITE-VCONSOLE-01: [记录](changes/2026-09-14-SITE-VCONSOLE-01-lifecycle.md) [记录](baselines/vconsole-lifecycle-validation.json)
+- CI-BROWSER-01: [记录](changes/2026-09-14-CI-BROWSER-01-scopes.md) [记录](baselines/browser-scope-validation.json)
+- PKG-CHAPTER-HOVER-01: [记录](changes/2026-09-14-CI-BROWSER-01-scopes.md) [记录](baselines/browser-scope-validation.json)

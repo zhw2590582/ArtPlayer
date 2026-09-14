@@ -83,7 +83,7 @@ export function validateCIWorkflow(source) {
     assert(probe?.run === command && !Object.hasOwn(probe, 'if'), 'Run the installed consumer on the selected Node')
     consumerIndex = index + 1
   }
-  assert(browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser ')) > consumerIndex, 'Browser tools must run after canonical Node restoration')
+  assert(browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser:source ')) > consumerIndex, 'Browser tools must run after canonical Node restoration')
   const reactIndex = browser.steps.findIndex(step => step.run === 'yarn test:react-consumer 2>&1 | tee refactor/.cache/ci/react-consumer.log')
   assert(reactIndex > consumerIndex && !Object.hasOwn(browser.steps[reactIndex], 'if'), 'Run React installed consumers after restoring canonical Node')
   assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/react-consumer-*/')), 'Retain React consumer failure evidence')
@@ -91,9 +91,18 @@ export function validateCIWorkflow(source) {
   assert(vueIndex > consumerIndex && !Object.hasOwn(browser.steps[vueIndex], 'if'), 'Run Vue installed consumers after restoring canonical Node')
   assert(browser.steps.some(step => step.uses?.startsWith('actions/upload-artifact@') && step.if === 'always()' && step.with.path.split('\n').includes('refactor/.cache/vue-consumer-*/')), 'Retain Vue consumer failure evidence')
   const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --include=artplayer-plugin-ambilight,artplayer-proxy-canvas '))
-  const engineIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:browser '))
+  const sourceEngineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:source 2>&1 | tee refactor/.cache/ci/browser-source.log')
+  const engineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:installed 2>&1 | tee refactor/.cache/ci/browser-installed.log')
   assert(extraIndex > Math.max(consumerIndex, reactIndex, vueIndex) && extraIndex < engineIndex, 'Prepare installed Ambilight/Canvas after consumer probes and before browser checks')
   assert(!Object.hasOwn(browser.steps[extraIndex], 'if') && browser.steps[extraIndex].run.includes('GITHUB_ENV') && browser.steps[extraIndex].run.includes('ARTPLAYER_BROWSER_ARTIFACTS='), 'Always select the additional installed browser artifact map')
+  assert(sourceEngineIndex > extraIndex && sourceEngineIndex < engineIndex, 'Retain complete source checks before the additional installed suite')
+  for (const index of [sourceEngineIndex, engineIndex]) {
+    assert.equal(browser.steps[index].if, '${{ !cancelled() }}', 'Both browser scopes run after ordinary failures without masking the failed job')
+    assert(!browser.steps[index]['continue-on-error'], 'Browser scope failures must fail CI')
+  }
+  const browserUpload = browser.steps.find(step => step.uses?.startsWith('actions/upload-artifact@'))
+  for (const directory of ['refactor/.cache/browser-source/', 'refactor/.cache/browser-installed/'])
+    assert(browserUpload.if === 'always()' && browserUpload.with.path.split('\n').includes(directory), 'Retain independent source and installed reports even on failure')
   const pages = workflow.jobs.checks.steps.find(step => step.uses?.startsWith('actions/upload-pages-artifact@'))
   assert.equal(pages?.if, 'inputs.pages-artifact && github.ref == \'refs/heads/master\' && matrix.os == \'ubuntu-latest\'', 'Only one trusted matrix leg can prepare Pages')
   const prepareIndex = workflow.jobs.checks.steps.findIndex(step => step.id === 'pages')

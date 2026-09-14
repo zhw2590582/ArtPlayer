@@ -6193,6 +6193,24 @@
         "test/browser/vconsole-lifecycle.spec.js"
       ],
       "resolutionRationale": "Runtime lifecycle regression is fixed and old/native evidence retained. Original notices remain distributed; the distinct missing license body/dependency notices remain open under VENDOR-07 and SITE-07, without treating this runtime fix as clearance."
+    },
+    {
+      "id": "CHAPTER-FULLSCREEN-GEOMETRY-01",
+      "title": "Chromium 原生全屏后章节 hover 标题曾出现后又隐藏",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-CHAPTER-05",
+        "PKG-CHAPTER-HOVER-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-14-CI-BROWSER-01-scopes.md",
+        "refactor/baselines/browser-scope-validation.json",
+        "test/browser/chapter-combinations.spec.js"
+      ],
+      "compatibleResolution": "核对原生全屏布局/controls transition 与鼠标坐标的时序；根据实际根因修复测试同步或生产实现，保持旧接口。",
+      "closureCriteria": "保留原失败并取得可解释的旧红新绿/稳定真实浏览器证据，不用重试、延时扩大或移除 opacity 断言关闭。",
+      "workspaceState": "Installed 225-case run with two workers: 224 pass, published 5.4.0 core + candidate Chapter Chromium fullscreen case fails at hoverChapter opacity. Text assertion initially passes, opacity falls from 0.279 to 0 and title clears. Trace mouse=(640,665.9921875); screenshot is fullscreen1280x720. Geometry transition is a hypothesis; production defect versus test synchronization remains unverified."
     }
   ]
 }
