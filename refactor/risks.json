@@ -6131,6 +6131,29 @@
         "test/browser/jassub-render-failure.spec.js"
       ],
       "resolutionRationale": "Old exact main fails all four controlled disposal cases and all three native batch-disposal cases. Candidate full suite passes 201 cases; actual main/legacy runtime groups each pass 69 cases and each has 12 native failure/recovery/playback cases. The fix changes only async bitmap release on main-thread render and retains exceptions and synchronous buffers."
+    },
+    {
+      "id": "ENG-PERF-OBS-01",
+      "title": "A nominal 350 ms resource observation can record only 349 ms and fail the required minimum",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "ENG-13"
+      ],
+      "evidence": [
+        "refactor/baselines/observation-window-validation.json",
+        "refactor/changes/2026-09-14-ENG-13-observation-window.md",
+        "test/performance-report.test.js"
+      ],
+      "compatibleResolution": "Wait for the remaining measured interval using the original probe timer, applying the same rule to both variants and retaining actual times and all frozen inputs.",
+      "closureCriteria": "349 ms remains rejected; simulated early callback is re-armed; native three-engine candidate resource probes meet at least 350 ms with no resource residue; frozen timing loops and existing thresholds remain unchanged.",
+      "workspaceState": "The old Firefox report records one 349 ms candidate window. The page adapter now enforces the measured minimum; 54 candidate and 54 published resource windows meet the observation minimum, with strict candidate cleanup passing.",
+      "resolutionEvidence": [
+        "refactor/baselines/observation-window-validation.json",
+        "refactor/changes/2026-09-14-ENG-13-observation-window.md",
+        "test/performance-report.test.js"
+      ],
+      "resolutionRationale": "The fix enforces an existing observation requirement rather than rounding failed values or relaxing a gate. Exact reverse-adaptation tests preserve the frozen body, deterministic clock tests cover early/overshooting/error paths, and the same installed candidate passes the full native paired protocol in all three engines. Performance review signals remain separate."
     }
   ]
 }

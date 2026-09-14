@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
-// Reuse the frozen BASE-06 measurement body; only adapt transport and bundle URLs.
+// Keep BASE-06 timing samples frozen; adapt delivery and enforce its actual observation minimum.
 const directory = fileURLToPath(new URL('../refactor/fixtures/', import.meta.url))
 function replaceOnce(source, before, after) {
   assert.equal(source.split(before).length, 2, `Performance fixture adapter drift: ${before}`)
@@ -10,8 +10,18 @@ function replaceOnce(source, before, after) {
 }
 
 export function performanceScript() {
-  const source = fs.readFileSync(`${directory}/performance.js`, 'utf8')
-  return replaceOnce(source, 'const response = await fetch(\'/reports/performance\', { method: \'POST\', headers: { \'Content-Type\': \'application/json\' }, body: JSON.stringify(report) })', 'window.artplayerPerformanceReport = report; const response = { ok: true }')
+  let source = fs.readFileSync(`${directory}/performance.js`, 'utf8')
+  source = replaceOnce(source, 'await probe.wait(350)', 'await waitForObservation(probe.wait, now, waitStarted, 350)')
+  source = replaceOnce(source, 'const response = await fetch(\'/reports/performance\', { method: \'POST\', headers: { \'Content-Type\': \'application/json\' }, body: JSON.stringify(report) })', 'window.artplayerPerformanceReport = report; const response = { ok: true }')
+  return `${waitForObservation.toString()}\n${source}`
+}
+
+export async function waitForObservation(wait, now, started, minimumMs) {
+  let remaining = minimumMs - (now() - started)
+  while (remaining > 0) {
+    await wait(remaining)
+    remaining = minimumMs - (now() - started)
+  }
 }
 
 export function performanceHtml(variant) {

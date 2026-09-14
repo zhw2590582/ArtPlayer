@@ -9,8 +9,9 @@ worker, no trace/video recording and the same media and viewport within a pair.
 Each engine runs three alternating published/candidate pairs. Each side retains
 one warm-up and five timed samples for both core and core + chapter, followed by
 separate instrumented resource probes. `scripts/performance-fixture.mjs` adapts
-only the frozen BASE-06 fixture's script URLs and report transport. Its original
-files remain unchanged and their existing baseline tests still run.
+the frozen BASE-06 fixture's script URLs, report transport and enforcement of its
+minimum observation window. The frozen files and all timed samples remain
+unchanged, and their existing baseline tests still run.
 
 The candidate must come from an isolated package installation. Artifact hashes,
 source snapshots, package inputs and build tools are checked before measurement;
@@ -28,3 +29,12 @@ A successful test proves the measurement contract and candidate resource cleanup
 approval. CORE-22 and release reviews must resolve the corresponding risks before
 publishing. These counters do not measure native heap/GPU memory, real mobile
 hardware or screen-reader behavior. See `refactor/coverage-performance.md`.
+
+## Observation window
+
+The current performance fixture adapter enforces the existing 350 ms teardown
+observation using the measured clock. It re-arms the probe's original timer if
+the nominal delay returns before that minimum, without rounding up reported
+time or relaxing validation. This applies equally to both variants and leaves
+the frozen BASE-06 fixture and all timed samples unchanged. See
+`test/performance-report.test.js` and `refactor/changes/2026-09-14-ENG-13-observation-window.md`.

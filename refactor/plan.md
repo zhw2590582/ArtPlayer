@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 254 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 255 项，范围 22 个包及工作区/示例。
 
-状态：todo 53 / doing 18 / blocked 0 / done 183 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 53 / doing 18 / blocked 0 / done 184 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -434,7 +434,7 @@
 
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
-| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
+| REVIEW-01 | workspace<br>第一轮全项目架构与兼容性复盘 | REL-02, CORE-22, SITE-04, DOC-08, MOD-01, MOD-02, MOD-03, CORE-25, ENG-13 | 22 包结构、类型、旧 API/路径、测试盲区和维护文档的逐包报告 | 本轮阻断项由独立修复任务关闭并复测；环境缺口转交下一轮，不宣称已发布就绪 | H | todo |
 | REVIEW-02 | workspace<br>第二轮真实浏览器与生态集成复盘 | REVIEW-01, REL-03 | Chrome 交互、自动浏览器、新旧组合、真机/SDK/性能/资源的全范围报告 | 所需环境证据齐全，前轮修复再次核对；本轮阻断项关闭，无关 mock 不替代真实验收 | H | todo |
 | REVIEW-03 | workspace<br>第三轮 npm 候选内容与发布准备复盘 | REVIEW-02, REL-04, CI-04 | 实际候选 integrity、干净安装构建/消费者、入口/许可/版本/tag/回退及前轮证据汇总 | 最终候选完整检查通过，发布阻断项为零；准备可审阅的批次报告，不自动执行 publish；逐包核对 major 目标，不能用大版本豁免旧 API 兼容 | H | todo |
 
@@ -455,6 +455,7 @@
 | ID | 范围 / 步骤 | 前置依赖 | 交付物 | 验收条件 | 风险 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- |
 | ENG-LINT-01 | artplayer-plugin-danmuku-mask, workspace<br>修复 Mask manifest 排序并恢复全仓 lint | PKG-MASK-04 | 仅调整 manifest 字段顺序，独立验证全仓只读 lint 与元数据语义不变 | 根 lint 通过；解析后的 manifest 深度相等；不改包版本、依赖或公开入口 | L | done |
+| ENG-13 | workspace<br>保证性能资源探针的最小观察时长 | ENG-08 | 性能页面按实测时钟补足既有350ms观察窗口，保留冻结基线和原校验门槛；时钟边界测试和实际安装包配对证据 | 349ms仍被拒绝；早到定时器补足观察、正常超时保留实际值；冻结计时样本逻辑未变，三浏览器实际350ms观察及资源校验通过 | M | done |
 
 ## 完成证据与阻塞
 
@@ -661,3 +662,4 @@
 - PKG-AUTO-THUMB-11: [记录](changes/2026-09-14-PKG-AUTO-THUMB-11-handler-cleanup.md) [记录](baselines/auto-thumbnail-handler-validation.json)
 - PKG-VAST-07: [记录](changes/2026-09-14-PKG-VAST-07-default-alias.md) [记录](baselines/vast-alias-validation.json)
 - PKG-JASSUB-10: [记录](changes/2026-09-14-PKG-JASSUB-10-render-resources.md) [记录](baselines/jassub-render-validation.json) [记录](baselines/jassub-render-patch.json)
+- ENG-13: [记录](changes/2026-09-14-ENG-13-observation-window.md) [记录](baselines/observation-window-validation.json)

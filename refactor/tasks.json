@@ -4733,7 +4733,8 @@
         "MOD-01",
         "MOD-02",
         "MOD-03",
-        "CORE-25"
+        "CORE-25",
+        "ENG-13"
       ],
       "status": "todo",
       "risk": "H",
@@ -5295,6 +5296,25 @@
         "changes/2026-09-14-PKG-JASSUB-10-render-resources.md",
         "baselines/jassub-render-validation.json",
         "baselines/jassub-render-patch.json"
+      ]
+    },
+    {
+      "id": "ENG-13",
+      "phase": "2 工程基础",
+      "title": "保证性能资源探针的最小观察时长",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "ENG-08"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "性能页面按实测时钟补足既有350ms观察窗口，保留冻结基线和原校验门槛；时钟边界测试和实际安装包配对证据",
+      "acceptance": "349ms仍被拒绝；早到定时器补足观察、正常超时保留实际值；冻结计时样本逻辑未变，三浏览器实际350ms观察及资源校验通过",
+      "evidence": [
+        "changes/2026-09-14-ENG-13-observation-window.md",
+        "baselines/observation-window-validation.json"
       ]
     }
   ]

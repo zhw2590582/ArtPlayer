@@ -7,7 +7,7 @@ import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { hash } from '../refactor/scripts/releases.mjs'
 import { verifyPerformanceArtifacts } from '../scripts/performance-artifacts.mjs'
-import { performanceHtml, performanceScript } from '../scripts/performance-fixture.mjs'
+import { performanceHtml, performanceScript, waitForObservation } from '../scripts/performance-fixture.mjs'
 import { validatePairedPerformance } from '../scripts/performance-report.mjs'
 
 const baseline = JSON.parse(fs.readFileSync(new URL('../refactor/baselines/performance.json', import.meta.url), 'utf8')).runs[0]
@@ -44,6 +44,7 @@ test('paired performance requires comparable cohorts, real playback and strict c
     report => report.runs[1].measurements.resources[0].after.timers.push({ kind: 'interval' }),
     report => report.runs[1].measurements.resources[0].after.lateCallbacks.push({ kind: 'timeout' }),
     report => report.runs[1].measurements.resources[0].after.lateResizeEvents++,
+    report => report.runs[1].measurements.resources[0].after.observedMs = 349,
   ]) {
     const report = fixture()
     mutate(report)
@@ -60,15 +61,49 @@ test('paired performance requires comparable cohorts, real playback and strict c
   assert(comparison.reviewRequired && comparison.groups.every(group => group.reviewSignals.some(signal => signal.metric === 'constructorMs')))
 })
 
-test('performance adapter changes only delivery while retaining the frozen measurement procedure', () => {
+test('performance adapter preserves frozen measurements except delivery and enforcing the observation minimum', () => {
   const frozen = fs.readFileSync(new URL('../refactor/fixtures/performance.js', import.meta.url), 'utf8')
   const adapted = performanceScript()
   const before = 'const response = await fetch(\'/reports/performance\', { method: \'POST\', headers: { \'Content-Type\': \'application/json\' }, body: JSON.stringify(report) })'
   const after = 'window.artplayerPerformanceReport = report; const response = { ok: true }'
-  assert.equal(adapted.replace(after, before), frozen)
+  const prefix = `${waitForObservation.toString()}\n`
+  assert(adapted.startsWith(prefix))
+  assert.equal(adapted.slice(prefix.length).replace(after, before).replace('await waitForObservation(probe.wait, now, waitStarted, 350)', 'await probe.wait(350)'), frozen)
   assert.match(performanceHtml('candidate'), /src="\/candidate\/artplayer.js"/)
   assert.match(performanceHtml('published'), /src="\/published\/artplayer-plugin-chapter.js"/)
   assert.throws(() => performanceHtml('../uncompiled'))
+})
+
+test('resource observation re-arms after an early timer without rounding up evidence', async () => {
+  let clock = 1000
+  const delays = []
+  await waitForObservation(async (delay) => {
+    delays.push(delay)
+    clock += delays.length === 1 ? 349 : 1
+  }, () => clock, 1000, 350)
+  assert.deepEqual(delays, [350, 1])
+  assert.equal(clock - 1000, 350)
+})
+
+test('resource observation retains overshoot and does not wait again after the minimum', async () => {
+  let clock = 1000
+  const delays = []
+  const wait = async (delay) => {
+    delays.push(delay)
+    clock += 364
+  }
+  await waitForObservation(wait, () => clock, 1000, 350)
+  assert.deepEqual(delays, [350])
+  assert.equal(clock - 1000, 364)
+  await waitForObservation(wait, () => clock, 1000, 350)
+  assert.deepEqual(delays, [350])
+})
+
+test('resource observation propagates timer failures rather than certifying an incomplete window', async () => {
+  const failure = new Error('timer unavailable')
+  await assert.rejects(waitForObservation(async () => {
+    throw failure
+  }, () => 0, 0, 350), error => error === failure)
 })
 
 test('performance refuses stale sources, build tools and altered installed bundles', () => {

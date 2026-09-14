@@ -50,6 +50,11 @@ Node CI 新增 Ubuntu/Windows 覆盖率 job，验证固定工具链并运行完�
 
 计时和体积触发审查不等于资源泄漏。候选资源检查严格要求销毁后无实例、DOM、proxy 监听器、RAF、剩余定时器和晚到回调，不以旧版 BASE-PERF-01 的残留作为容许值。计时阶段不装资源探针，资源探针清理自身计时器发生在记录之后。物理设备、GPU/浏览器原生内存仍不能靠这些计数证明无泄漏。
 
+ENG-13修复了名义350ms定时器返回后实测只有349ms的观察缺口。当前页面适配器
+使用同一单调时钟补足剩余时间，仍记录实际观察值；原350ms校验、冻结BASE-06
+夹具和计时循环不变。旧新双方使用相同等待规则，详见
+[观察窗口记录](changes/2026-09-14-ENG-13-observation-window.md)。
+
 先运行 `yarn test:package`，将 ARTPLAYER_BROWSER_ARTIFACTS 设为生成的 browser-artifacts.json，再执行 `yarn test:performance`。单独的 Playwright 配置按单 worker 运行三种引擎，关闭 trace/video，禁止与其他浏览器或重型构建任务同时计时。测试复用冻结 BASE-06 测量体，仅通过适配器修改脚本 URL 和报告提交方式，原始 fixture 不变。加载前检查包源码/声明来源、构建脚本、依赖和分发哈希，旧产物不能代替当前源码。
 
 scripts/performance-artifacts.mjs 管输入和压缩，performance-fixture.mjs 管冻结 fixture 适配，performance-report.mjs 管配对与资源门槛，performance-summary.mjs 输出审查表；test/performance/paired.spec.js 管真实浏览器执行，test/performance-report.test.js 覆盖不完整配对、换环境、假播放、资源残留、过期源码和改动产物等失败。共享的测量验证从原 performance.mjs 提取为函数，旧发布基线仍保留完整来源校验。
