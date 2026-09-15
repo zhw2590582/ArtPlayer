@@ -1061,7 +1061,7 @@
         "SITE-01"
       ],
       "sourceStatus": "Frozen original 340306-byte Parcel bundle e00bbf82bf08c452825690372ded39a9b60f4baf438f0e7ce8300e9bc4629c03 has 102 modules. SITE-CONSOLE-01 replaces only owned Focm/W5CS bodies and removes the missing map trailer. All 100 retained vendor bodies and Parcel loader exactly reproduce from 32 official runtime archives, Babel standalone 7.16.4, Terser 3.17.0 and Parcel 1.12.5 recipes; all package edges verified. This establishes exact source identities, not the original full lockfile or uniquely installed versions.",
-      "licenseStatus": "Generated public console notices now cover 43 components in 45 files, including embedded original-author notices and customStringify answer 48254637 revision 5 under CC BY-SA 4.0. The reviewed asset delta from 3136eb2402f642f25673b322b6c686405d9af9e0 is exclusively the attribution comment; see refactor/baselines/console-stackoverflow-validation.json. Final mixed-license review and shallowequal/react-pure-render attribution remain open; do not describe the complete bundle as MIT-only.",
+      "licenseStatus": "Generated console notices cover 44 components in 47 files, including react-pure-render origin attribution for shallowequal and Stack Overflow revision 5 under CC BY-SA 4.0. Source and author evidence is in refactor/baselines/console-derived-attribution.json and console-stackoverflow-provenance.json. Three-engine actual delivery is recorded in console-shallowequal-validation.json. Final embedded-source and mixed-license review remains open; never describe the entire bundle as MIT-only.",
       "upstreamSources": [
         "https://registry.npmjs.org/console-feed/-/console-feed-3.2.2.tgz",
         "https://registry.npmjs.org/terser/-/terser-3.17.0.tgz",

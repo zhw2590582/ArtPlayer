@@ -91,6 +91,22 @@
       "gitBlobSha": "cd1e53a9b92620d2656eae423017f81be1fb3ad1",
       "apiUrl": "https://api.github.com/repos/aappleby/smhasher/contents/src/MurmurHash2.cpp?ref=61a0530f28277f2e850bfc39600ce61d02b518de",
       "url": "https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp"
+    },
+    {
+      "id": "react-pure-render-source",
+      "source": "refactor/baselines/site-vendor/console-attribution/react-pure-render-source.txt",
+      "sha256": "f410448dcc6d47aa323c8de622fa57903c0aefecf63e87700adb2e7ccfea357b",
+      "gitBlobSha": "545e937745bd7d8ca27c8afe183aa6b32c4f2969",
+      "apiUrl": "https://api.github.com/repos/gaearon/react-pure-render/contents/src/shallowEqual.js?ref=729cdbd51df00068816376544738cc1fc4720cf2",
+      "url": "https://github.com/gaearon/react-pure-render/blob/729cdbd51df00068816376544738cc1fc4720cf2/src/shallowEqual.js"
+    },
+    {
+      "id": "react-pure-render-license",
+      "source": "refactor/baselines/site-vendor/console-attribution/react-pure-render-license.txt",
+      "sha256": "65a1f00f35ea469048896fbfec3c5faed7d3fe7c7e0be2a0478470b59d9e1439",
+      "gitBlobSha": "fb541aad5166efa50b6071d6fb63d99286d708a7",
+      "apiUrl": "https://api.github.com/repos/gaearon/react-pure-render/contents/LICENSE?ref=729cdbd51df00068816376544738cc1fc4720cf2",
+      "url": "https://github.com/gaearon/react-pure-render/blob/729cdbd51df00068816376544738cc1fc4720cf2/LICENSE"
     }
   ],
   "replicator": {
@@ -159,5 +175,20 @@
     "Replicator is a modified fork; neither a unique npm fork base nor the entire original install lock is claimed.",
     "Emotion historical online Closure service was not re-executed; its published source is pinned to the matching upstream tag commit.",
     "Stack Overflow attribution and final remaining embedded-source review stay open."
-  ]
+  ],
+  "shallow": {
+    "source": "react-pure-render-source",
+    "license": "react-pure-render-license",
+    "reference": {
+      "archive": "shallowequal-1.1.0",
+      "member": "package/README.md",
+      "sha256": "6e0194e17b560c9d68e29d457e3d0d273ddaf520e89309401d82ec12cccaccbb"
+    },
+    "target": {
+      "archive": "shallowequal-1.1.0",
+      "member": "package/index.js",
+      "sha256": "9b3e054c49fda8b75d8b79d6472c3116d3ac43347d6439ae07a9a4c105075f76"
+    },
+    "upstreamUrl": "https://github.com/gaearon/react-pure-render/"
+  }
 }

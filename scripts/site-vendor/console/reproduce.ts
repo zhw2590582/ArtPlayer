@@ -58,6 +58,7 @@ interface DerivedProvenance {
   stylis: { source: string, target: Member, dependency: Member, dependencyVersion: string, recipe: string }
   hash: { source: string, notice: EmbeddedNotice, reference: Member, references: string[] }
   cache: { reference: Member, upstreamUrl: string, notice: string }
+  shallow: { source: string, license: string, reference: Member, target: Member, upstreamUrl: string }
 }
 interface HistoricalTypeScript { version: string, transpileModule: (source: string, options: { compilerOptions: DerivedProvenance['compiler']['options'] }) => { outputText: string } }
 interface StackOverflowProvenance {
@@ -247,7 +248,7 @@ assert.deepEqual(compiler.options, { presets: [['es2015', { loose: true }]] }, '
 const transformedCount = verifyTransformedSources(tokenizer.sources, readEmbedded, source => legacyBabel.transform(source, compiler.options).code)
 assert.equal(transformedCount, 7, 'Incomplete tokenizer scope')
 const gitSources = new Map<string, Buffer>()
-assert.equal(derived.remotes.length, 5, 'Incomplete derived Git source scope')
+assert.equal(derived.remotes.length, 7, 'Incomplete derived Git source scope')
 for (const source of derived.remotes) {
   assert(!gitSources.has(source.id), 'Duplicate derived Git source')
   const bytes = fs.readFileSync(path.join(root, source.source))
@@ -288,6 +289,10 @@ const publicDomain = extractNotice(gitSource(derived.hash.source), derived.hash.
 assert.equal(fs.readFileSync(path.join(root, derived.hash.notice.source), 'utf8'), publicDomain, 'Public domain notice changed')
 assert(derivedMember(derived.cache.reference).toString('utf8').includes(derived.cache.upstreamUrl), 'Rule-sheet source attribution changed')
 assert(fs.readFileSync(path.join(root, derived.cache.notice), 'utf8').includes('Copyright (c) 2016 Sultan Tarimo'), 'Rule-sheet attribution missing')
+assert(derivedMember(derived.shallow.reference).toString('utf8').includes(derived.shallow.upstreamUrl), 'Shallowequal source attribution changed')
+assert(gitSource(derived.shallow.source).toString('utf8').startsWith('export default function shallowEqual('), 'Original shallowEqual source missing')
+assert(gitSource(derived.shallow.license).toString('utf8').includes('Copyright (c) 2015 Dan Abramov'), 'Original shallowEqual license missing')
+derivedMember(derived.shallow.target)
 const answerSnapshot = fs.readFileSync(path.join(root, stackOverflow.response.source))
 assert.equal(hash(answerSnapshot), stackOverflow.response.sha256, 'Frozen answer revision changed')
 const snippet = revisionSnippet(answerSnapshot, stackOverflow.revision)

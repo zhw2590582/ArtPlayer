@@ -197,8 +197,14 @@ minimal revision response, source and full license; the public attribution credi
 Alexander Mills and Rob W. A generated bundle comment retains the license and
 links even when the script is read separately from the site notice index.
 
-There are now 45 console notice outputs for 43 components. This includes a
+The shallowequal 1.1.0 README identifies react-pure-render as its code origin.
+The derived-attribution record freezes the original source and Dan Abramov MIT
+license at commit 729cdbd51df00068816376544738cc1fc4720cf2. These are verified with
+the same Git-content helper, alongside the published README and modified runtime
+member. Callback/context support and other changes prevent an exact-source claim;
+the public attribution explains that boundary and retains both authors' notices.
+
+There are now 47 console notice outputs for 44 components. This includes a
 CC BY-SA snippet; never describe the bundle as MIT-only. Final embedded-source
-and mixed-license distribution review remains open. The shallowequal 1.1.0 README
-explicitly identifies react-pure-render as its code origin; review that original
-notice before closing VENDOR-08. Exact Parcel module reproduction alone is insufficient.
+and mixed-license distribution review remains open. Exact Parcel module
+reproduction alone is insufficient to close VENDOR-08.

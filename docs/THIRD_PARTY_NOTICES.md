@@ -254,6 +254,10 @@ Included component: stackoverflow-custom-stringify answer 48254637 revision 5 (C
 
 Source: https://api.stackexchange.com/2.3/revisions/8FD5F52A-B16F-4C66-AB48-830EABB36CC0?site=stackoverflow&filter=withbody
 
+Included component: react-pure-render (shallowequal origin) source commit 729cdbd
+
+Source: https://github.com/gaearon/react-pure-render/blob/729cdbd51df00068816376544738cc1fc4720cf2/LICENSE
+
 - licenses/console/console-feed/console-feed-3.2.2-LICENSE
 - licenses/console/react/react-17.0.2-LICENSE
 - licenses/console/react-dom/react-dom-17.0.2-LICENSE
@@ -299,3 +303,5 @@ Source: https://api.stackexchange.com/2.3/revisions/8FD5F52A-B16F-4C66-AB48-830E
 - licenses/console/stackoverflow/LICENSE
 - licenses/console/stackoverflow/SOURCE.js
 - licenses/console/stackoverflow/ATTRIBUTION.md
+- licenses/console/react-pure-render/LICENSE
+- licenses/console/react-pure-render/ATTRIBUTION.md

@@ -33,11 +33,11 @@
       "All 17 react-inspector external source-map members exactly match Babel runtime 7.13.10 and regenerator-runtime 0.13.7; both licenses preserved.",
       "Modified replicator fork has fixed console-feed TS source matching the archived runtime, with Ivan Nikulin MIT attribution.",
       "Emotion Stylis pinned source and 3.5.4 dependency, rule-sheet source references, and MurmurHash references retain Sultan Tarimo, Gary Court and Austin Appleby notices; historical Closure stage not rerun.",
-      "customStringify exactly matches Stack Overflow revision 5 under CC BY-SA 4.0, with Alexander Mills and Rob W attribution, original snippet, full license and an emitted bundle comment."
+      "customStringify exactly matches Stack Overflow revision 5 under CC BY-SA 4.0, with Alexander Mills and Rob W attribution, original snippet, full license and an emitted bundle comment.",
+      "The shallowequal README source credit is verified; fixed react-pure-render source and Dan Abramov MIT license are retained, with explicit modified-source attribution."
     ],
     "pending": [
-      "Final embedded-source and mixed-license distribution review",
-      "shallowequal README identifies react-pure-render as its code origin; original notice review remains outstanding"
+      "Final embedded-source and mixed-license distribution review"
     ]
   }
 }

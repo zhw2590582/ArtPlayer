@@ -1,5 +1,13 @@
 # 进度与证据
 
+## SITE-07 shallowequal 原始署名
+
+已核对react-pure-render固定源码和Dan Abramov完整MIT许可，保留当前包作者署名，
+并说明修改版与原始实现的差别。单元25/25、完整联网复现和三引擎实际交付3/3通过。
+见[记录](changes/2026-09-15-SITE-07-console-shallowequal.md)。控制台47份、全站65份
+notice实际交付；运行代码不变。最终混合许可审查及其他站点资产仍待完成，
+VENDOR-08 open、SITE-07 doing，199/265不变。
+
 ## SITE-07 Stack Overflow 片段修订与署名
 
 customStringify已精确匹配2018-09-19第5次修订，补齐CC BY-SA4.0全文、作者及

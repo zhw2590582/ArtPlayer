@@ -23,7 +23,7 @@ files retain their exact upstream bytes, including final blank lines.
 `yarn check:site-notices`. The write command cannot bless altered vendor assets;
 review the new archive and license evidence before changing the manifest. The
 CLI prevents accidentally dropping any of the three groups, the ten reviewed
-Monaco/vConsole components, the 43 identified console components or their notice
+Monaco/vConsole components, the 44 identified console components or their notice
 count, and vConsole's original license, supplemental MIT body and attribution.
 Component references require their runtime assets and every notice before writing.
 Source notices
@@ -60,7 +60,7 @@ The desktop console's owned TS entry/view and lifecycle now build through
 `build:console` / `check:console`; see [console maintenance](console/README.md).
 Its other 100 Parcel modules remain frozen and now reproduce exactly from fixed
 archives, including the Parcel loader. Its package/loader licenses, two embedded
-headers, embedded dependency licenses and upstream author notices now ship as 45 files
+headers, embedded dependency licenses and upstream author notices now ship as 47 files
 under `docs/licenses/console/`. Full embedded
 attribution remains open; the generated index explicitly preserves that boundary.
 

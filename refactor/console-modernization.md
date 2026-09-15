@@ -23,7 +23,7 @@ SITE-07 冻结原始 bundle 和浏览器契约，SITE-CONSOLE-01 已实现自有
   [冻结来源](baselines/site-console-inventory.json)。
 - 当前产物另附Stack Overflow代码片段的CC BY-SA 4.0署名注释；只增加注释，
   不改变100个第三方模块或Parcel运行代码。见[修订来源](baselines/console-stackoverflow-provenance.json)。
-  站点分发45份控制台notice；最终混合许可/内嵌来源清查仍未关闭。
+  站点分发47份控制台notice，包含shallowequal原始作者署名；最终混合许可/内嵌来源清查仍未关闭。
 
 ## 必须保留或明确验证的契约
 

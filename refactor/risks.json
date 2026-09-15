@@ -707,11 +707,13 @@
         "refactor/baselines/console-stackoverflow-provenance.json",
         "refactor/baselines/console-stackoverflow-validation.json",
         "refactor/changes/2026-09-15-SITE-07-console-stackoverflow.md",
-        "scripts/site-vendor/console/stackoverflow.ts"
+        "scripts/site-vendor/console/stackoverflow.ts",
+        "refactor/baselines/console-shallowequal-validation.json",
+        "refactor/changes/2026-09-15-SITE-07-console-shallowequal.md"
       ],
       "compatibleResolution": "Keep separate from owned TS migration. Verify source/version/diff and license notices before replacement; preserve API/CSS/worker URLs and run owning package tests.",
       "closureCriteria": "固定上游版本/内容差异、完整组件许可与分发 notices，兼容测试通过；仅当前上游许可证名称不足以关闭。",
-      "workspaceState": "All vendor source reproduction remains verified. customStringify exactly matches Stack Overflow revision 5 under CC BY-SA 4.0; author credits, full license, source and emitted attribution comment are included. The bundle is not MIT-only. 45 console notices and all 63 site notices pass HTTP checks; 51 browser cases include 18 historical checks. Final mixed-license/source review and the newly identified shallowequal/react-pure-render origin remain open. Functional runtime unchanged."
+      "workspaceState": "All 100 vendor modules and Parcel remain reproducible. Embedded author notices include fixed Stack Overflow revision 5 (CC BY-SA 4.0) and the react-pure-render origin credited by shallowequal. Both Dan Abramov and Alberto Leal MIT notices are retained, without claiming identical source or a unique installed upstream version. 47 console and 65 total site notices pass three-engine HTTP checks. Functional runtime unchanged. Final embedded-source and mixed-license review remains open."
     },
     {
       "id": "SDK-01",

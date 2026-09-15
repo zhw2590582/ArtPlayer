@@ -1,0 +1,1266 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T00:17:31.784Z",
+  "baseCommit": "0503fe8aa8041da2636601296662b2a6d7a7d533",
+  "node": "v24.21.0",
+  "fingerprints": {
+    "console": "a5f1388175fd885c03dd21b35fff97dca0b548745588dfca3172579a96537163",
+    "delta": "No console runtime byte changes",
+    "manifest": "ba7494f05c8da7d5a9bc2c4a115404accda81424fea93e77996f1c3aae3e9222",
+    "sourceRecord": "773fdbdcc04206d85655ff6078191e45b194da8481ba9f540d8dc6a0241055d9"
+  },
+  "unit": {
+    "passed": 25,
+    "failed": 0,
+    "log": "refactor/.cache/console-shallowequal-tests.log"
+  },
+  "reproduction": {
+    "exactModules": 100,
+    "consoleFeed": 32,
+    "commonjs": 41,
+    "esm": 27,
+    "parcelPrelude": true,
+    "packageEdges": true,
+    "embeddedNotices": 2,
+    "embeddedMappedSources": 17,
+    "embeddedTransformedSources": 7,
+    "derivedGitSources": 7,
+    "replicatorFork": true,
+    "emotionStylisSource": true,
+    "stackOverflowRevision": 5,
+    "unresolved": 0,
+    "licenseClosure": false,
+    "archives": 42,
+    "log": "refactor/.cache/console-shallowequal-fetch.log"
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "221caecf02c6a0cfb1b91cd574fdd02d3414e78bf188d69e6a8624bcd2fe45f1",
+    "tests": [
+      {
+        "project": "chromium",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/babel-runtime/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/core-js/LICENSE",
+            "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+            "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/mutation-observer/LICENSE",
+            "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/svelte/LICENSE",
+            "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/style-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/css-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/webpack/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/MIT-LICENSE",
+            "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/ATTRIBUTION.md",
+            "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/console-feed/console-feed-3.2.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react/react-17.0.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-dom/react-dom-17.0.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/scheduler/scheduler-0.20.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/object-assign/object-assign-4.1.1-license",
+            "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-is/react-is-16.13.1-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/prop-types/prop-types-15.7.2-LICENSE",
+            "sha256": "f657f99d3fb9647db92628e96007aabb46e5f04f33e49999075aab8e250ca7ce"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/shallowequal/shallowequal-1.1.0-LICENSE",
+            "sha256": "709e45bb17277819ce27e9abe5dc8e56fe93081e54adb6e6385517f28aa11ac4"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/process/process-0.11.10-LICENSE",
+            "sha256": "59a400d04c5078579acc27ddd6452c1bdf763f9506e01364700935fbb1a7c91b"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/hoist-non-react-statics/hoist-non-react-statics-3.3.2-LICENSE.md",
+            "sha256": "eb32ff0ec52b6ea86e3d3e06c6ad1b68ee03798b6729af13919f6d5c14b368f3"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-dom/is-dom-1.1.0-LICENSE",
+            "sha256": "ba38703a10a53a91d4ff87bc1d930714104ead8d53f3f86936b7772c440be96f"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-object/is-object-1.0.2-LICENSE",
+            "sha256": "950429b35f82e225a613a0638e7933855a4ce05172bd36dc060093ba58793bbe"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-window/is-window-1.0.2-LICENSE",
+            "sha256": "6f19793f004670a8c873dde23d0f970eb32dd3bba8078980a42a4fb71cb1a048"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/linkifyjs/linkifyjs-2.1.9-LICENSE",
+            "sha256": "c66691e7e051cf0e1538a2c7d33f337b1dfe37bb0726724917dd1ceaf043a2df"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-core/emotion-core-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-css/emotion-css-10.0.27-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-cache/emotion-cache-10.0.29-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-styled/emotion-styled-10.0.27-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-styled-base/emotion-styled-base-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-theming/emotion-theming-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/styled-components/styled-components-5.3.3-UPSTREAM-LICENSE",
+            "sha256": "5b893305a717230e5b0024ff5ca3eec1dc05ba600c9b140730488d97ce56f1e6"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/babel-runtime/babel-runtime-7.16.3-LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-sheet/emotion-sheet-0.9.4-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-stylis/emotion-stylis-0.8.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-weak-memoize/emotion-weak-memoize-0.2.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-utils/emotion-utils-0.11.3-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-hash/emotion-hash-0.8.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-unitless/emotion-unitless-0.7.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-memoize/emotion-memoize-0.7.4-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-serialize/emotion-serialize-0.11.16-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-is-prop-valid/emotion-is-prop-valid-0.8.8-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-inspector/react-inspector-5.1.1-LICENSE",
+            "sha256": "62d1c62e4b7eaee1a57e4a27b5cf6f2c0dc554b88326fc40bc512f150b340deb"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/parcel-bundler/parcel-bundler-1.12.5-LICENSE",
+            "sha256": "5cfba9d5711264d45a2431a53c79f597cef12720cc7c764db2602daa92d0bd2a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/chromium-string-utils/LICENSE",
+            "sha256": "7a209dd1b94cabdb5ea9c6f9164b9546ffa5daaa671e7767d49510db055f5c51"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stylis-rule-sheet/LICENSE",
+            "sha256": "99a75da65634b772687781c054ffe679569c1770c398f96427677899fe0ca8d7"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-inspector-babel/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/simple-html-tokenizer/LICENSE",
+            "sha256": "c41881de2a9f2200936648343500524be154eb79f649582f9582dd251b051b11"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/replicator/LICENSE",
+            "sha256": "52f634086a97b3861a35afff7acf703ddbd5add8e617f6a1f540ae2f2c621284"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stylis/LICENSE",
+            "sha256": "045109dfd0547aa898408d08593e1adc41e9705519ba8a20baff89e7c6c52e91"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/murmurhash-js/README.md",
+            "sha256": "73b67c593a2a0d6395bfe90d3bad32556ed5e7ce71883062efebc643d4e4b7b4"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/murmurhash2/PUBLIC-DOMAIN.txt",
+            "sha256": "50e13b0a1963f0b382255d2425df245dbdfd209201621e8c157687caedbbb949"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/LICENSE",
+            "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/SOURCE.js",
+            "sha256": "966fdc4a37e65e90c2dc1f6ba9385e572c75ce4c0647d35f3ce566ed9ef7f6bb"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/ATTRIBUTION.md",
+            "sha256": "4ac7ae9b19a1201b6cfe6af1d35ec85d015a2de8fb1aac6b03796145e648a667"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-pure-render/LICENSE",
+            "sha256": "65a1f00f35ea469048896fbfec3c5faed7d3fe7c7e0be2a0478470b59d9e1439"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-pure-render/ATTRIBUTION.md",
+            "sha256": "9069fed07cc10fc36ef6b168ab0a75c3f1c882c077d5117b992f5c96d1eea0cc"
+          }
+        ],
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ]
+      },
+      {
+        "project": "firefox",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "155.0",
+        "platform": "win32",
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/babel-runtime/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/core-js/LICENSE",
+            "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+            "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/mutation-observer/LICENSE",
+            "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/svelte/LICENSE",
+            "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/style-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/css-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/webpack/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/MIT-LICENSE",
+            "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/ATTRIBUTION.md",
+            "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/console-feed/console-feed-3.2.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react/react-17.0.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-dom/react-dom-17.0.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/scheduler/scheduler-0.20.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/object-assign/object-assign-4.1.1-license",
+            "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-is/react-is-16.13.1-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/prop-types/prop-types-15.7.2-LICENSE",
+            "sha256": "f657f99d3fb9647db92628e96007aabb46e5f04f33e49999075aab8e250ca7ce"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/shallowequal/shallowequal-1.1.0-LICENSE",
+            "sha256": "709e45bb17277819ce27e9abe5dc8e56fe93081e54adb6e6385517f28aa11ac4"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/process/process-0.11.10-LICENSE",
+            "sha256": "59a400d04c5078579acc27ddd6452c1bdf763f9506e01364700935fbb1a7c91b"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/hoist-non-react-statics/hoist-non-react-statics-3.3.2-LICENSE.md",
+            "sha256": "eb32ff0ec52b6ea86e3d3e06c6ad1b68ee03798b6729af13919f6d5c14b368f3"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-dom/is-dom-1.1.0-LICENSE",
+            "sha256": "ba38703a10a53a91d4ff87bc1d930714104ead8d53f3f86936b7772c440be96f"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-object/is-object-1.0.2-LICENSE",
+            "sha256": "950429b35f82e225a613a0638e7933855a4ce05172bd36dc060093ba58793bbe"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-window/is-window-1.0.2-LICENSE",
+            "sha256": "6f19793f004670a8c873dde23d0f970eb32dd3bba8078980a42a4fb71cb1a048"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/linkifyjs/linkifyjs-2.1.9-LICENSE",
+            "sha256": "c66691e7e051cf0e1538a2c7d33f337b1dfe37bb0726724917dd1ceaf043a2df"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-core/emotion-core-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-css/emotion-css-10.0.27-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-cache/emotion-cache-10.0.29-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-styled/emotion-styled-10.0.27-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-styled-base/emotion-styled-base-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-theming/emotion-theming-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/styled-components/styled-components-5.3.3-UPSTREAM-LICENSE",
+            "sha256": "5b893305a717230e5b0024ff5ca3eec1dc05ba600c9b140730488d97ce56f1e6"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/babel-runtime/babel-runtime-7.16.3-LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-sheet/emotion-sheet-0.9.4-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-stylis/emotion-stylis-0.8.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-weak-memoize/emotion-weak-memoize-0.2.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-utils/emotion-utils-0.11.3-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-hash/emotion-hash-0.8.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-unitless/emotion-unitless-0.7.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-memoize/emotion-memoize-0.7.4-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-serialize/emotion-serialize-0.11.16-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-is-prop-valid/emotion-is-prop-valid-0.8.8-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-inspector/react-inspector-5.1.1-LICENSE",
+            "sha256": "62d1c62e4b7eaee1a57e4a27b5cf6f2c0dc554b88326fc40bc512f150b340deb"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/parcel-bundler/parcel-bundler-1.12.5-LICENSE",
+            "sha256": "5cfba9d5711264d45a2431a53c79f597cef12720cc7c764db2602daa92d0bd2a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/chromium-string-utils/LICENSE",
+            "sha256": "7a209dd1b94cabdb5ea9c6f9164b9546ffa5daaa671e7767d49510db055f5c51"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stylis-rule-sheet/LICENSE",
+            "sha256": "99a75da65634b772687781c054ffe679569c1770c398f96427677899fe0ca8d7"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-inspector-babel/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/simple-html-tokenizer/LICENSE",
+            "sha256": "c41881de2a9f2200936648343500524be154eb79f649582f9582dd251b051b11"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/replicator/LICENSE",
+            "sha256": "52f634086a97b3861a35afff7acf703ddbd5add8e617f6a1f540ae2f2c621284"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stylis/LICENSE",
+            "sha256": "045109dfd0547aa898408d08593e1adc41e9705519ba8a20baff89e7c6c52e91"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/murmurhash-js/README.md",
+            "sha256": "73b67c593a2a0d6395bfe90d3bad32556ed5e7ce71883062efebc643d4e4b7b4"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/murmurhash2/PUBLIC-DOMAIN.txt",
+            "sha256": "50e13b0a1963f0b382255d2425df245dbdfd209201621e8c157687caedbbb949"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/LICENSE",
+            "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/SOURCE.js",
+            "sha256": "966fdc4a37e65e90c2dc1f6ba9385e572c75ce4c0647d35f3ce566ed9ef7f6bb"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/ATTRIBUTION.md",
+            "sha256": "4ac7ae9b19a1201b6cfe6af1d35ec85d015a2de8fb1aac6b03796145e648a667"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-pure-render/LICENSE",
+            "sha256": "65a1f00f35ea469048896fbfec3c5faed7d3fe7c7e0be2a0478470b59d9e1439"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-pure-render/ATTRIBUTION.md",
+            "sha256": "9069fed07cc10fc36ef6b168ab0a75c3f1c882c077d5117b992f5c96d1eea0cc"
+          }
+        ],
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      },
+      {
+        "project": "webkit",
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "status": "passed",
+        "retry": 0,
+        "browser": "26.6",
+        "platform": "win32",
+        "notices": [
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/LICENSE",
+            "sha256": "272588ba6d7c09d6c3bedf3601e37b2ede6d4539d28a9052fcc3038df99cf683"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/babel-runtime/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/core-js/LICENSE",
+            "sha256": "e1dad265f157187a8b0290f57b3c6807d94c322ffbcdf75ab82b638eb52b1789"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/copy-text-to-clipboard/LICENSE",
+            "sha256": "5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/mutation-observer/LICENSE",
+            "sha256": "1e6f3f536e6e589b5c807d144c60b583bc10d78f7ae6cfba4c0baba4a72a8179"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/svelte/LICENSE",
+            "sha256": "1b790e7defe7121ad9a2e065df61d45f3e4080ffc6a0f79b4a46941bcd70be56"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/style-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/css-loader/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/webpack/LICENSE",
+            "sha256": "9068a8782d2fb4c6e432cfa25334efa56f722822180570802bf86e71b6003b1e"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/MIT-LICENSE",
+            "sha256": "dda328fe74b6a80e515d24827d1f15bdefcf2db82c3bcb9e490032b98dd46217"
+          },
+          {
+            "component": "vconsole",
+            "version": "3.15.0",
+            "url": "http://127.0.0.1:8084/licenses/vconsole/ATTRIBUTION.md",
+            "sha256": "72e1b273fc12248f5d120f33cdaab54f0421f31cfc2b3e99edd130fb32a6cfc3"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/LICENSE",
+            "sha256": "33e4ff1a06ef62ba21788ea162564ee8165269a24a9ce6ef301837447eab0ac6"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE",
+            "sha256": "d6239afa918961b465b07bf7411cbe34ff6685854f58553db7966f4881a0211f"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/LICENSE-CODE",
+            "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/README.md",
+            "sha256": "3d53172e204bcbf282c360fe58bf0697de97ddd27c964a6e48823fb4f7cd6689"
+          },
+          {
+            "component": "monaco-editor",
+            "version": "0.30.1",
+            "url": "http://127.0.0.1:8084/licenses/monaco-editor/codicons/ATTRIBUTION.md",
+            "sha256": "ac4a57ce60aebaec1796b715d075273c4fd849853cd943fb92790c61ad038a5f"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/console-feed/console-feed-3.2.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react/react-17.0.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-dom/react-dom-17.0.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/scheduler/scheduler-0.20.2-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/object-assign/object-assign-4.1.1-license",
+            "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-is/react-is-16.13.1-LICENSE",
+            "sha256": "52412d7bc7ce4157ea628bbaacb8829e0a9cb3c58f57f99176126bc8cf2bfc85"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/prop-types/prop-types-15.7.2-LICENSE",
+            "sha256": "f657f99d3fb9647db92628e96007aabb46e5f04f33e49999075aab8e250ca7ce"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/shallowequal/shallowequal-1.1.0-LICENSE",
+            "sha256": "709e45bb17277819ce27e9abe5dc8e56fe93081e54adb6e6385517f28aa11ac4"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/process/process-0.11.10-LICENSE",
+            "sha256": "59a400d04c5078579acc27ddd6452c1bdf763f9506e01364700935fbb1a7c91b"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/hoist-non-react-statics/hoist-non-react-statics-3.3.2-LICENSE.md",
+            "sha256": "eb32ff0ec52b6ea86e3d3e06c6ad1b68ee03798b6729af13919f6d5c14b368f3"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-dom/is-dom-1.1.0-LICENSE",
+            "sha256": "ba38703a10a53a91d4ff87bc1d930714104ead8d53f3f86936b7772c440be96f"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-object/is-object-1.0.2-LICENSE",
+            "sha256": "950429b35f82e225a613a0638e7933855a4ce05172bd36dc060093ba58793bbe"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/is-window/is-window-1.0.2-LICENSE",
+            "sha256": "6f19793f004670a8c873dde23d0f970eb32dd3bba8078980a42a4fb71cb1a048"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/linkifyjs/linkifyjs-2.1.9-LICENSE",
+            "sha256": "c66691e7e051cf0e1538a2c7d33f337b1dfe37bb0726724917dd1ceaf043a2df"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-core/emotion-core-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-css/emotion-css-10.0.27-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-cache/emotion-cache-10.0.29-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-styled/emotion-styled-10.0.27-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-styled-base/emotion-styled-base-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-theming/emotion-theming-10.3.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/styled-components/styled-components-5.3.3-UPSTREAM-LICENSE",
+            "sha256": "5b893305a717230e5b0024ff5ca3eec1dc05ba600c9b140730488d97ce56f1e6"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/babel-runtime/babel-runtime-7.16.3-LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-sheet/emotion-sheet-0.9.4-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-stylis/emotion-stylis-0.8.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-weak-memoize/emotion-weak-memoize-0.2.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-utils/emotion-utils-0.11.3-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-hash/emotion-hash-0.8.0-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-unitless/emotion-unitless-0.7.5-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-memoize/emotion-memoize-0.7.4-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-serialize/emotion-serialize-0.11.16-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/emotion-is-prop-valid/emotion-is-prop-valid-0.8.8-LICENSE",
+            "sha256": "6e8d23763cf7cb707ad8f6677aa502ebeca1dda447e6d6e57f6549c1625b9c4a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-inspector/react-inspector-5.1.1-LICENSE",
+            "sha256": "62d1c62e4b7eaee1a57e4a27b5cf6f2c0dc554b88326fc40bc512f150b340deb"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/parcel-bundler/parcel-bundler-1.12.5-LICENSE",
+            "sha256": "5cfba9d5711264d45a2431a53c79f597cef12720cc7c764db2602daa92d0bd2a"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/chromium-string-utils/LICENSE",
+            "sha256": "7a209dd1b94cabdb5ea9c6f9164b9546ffa5daaa671e7767d49510db055f5c51"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stylis-rule-sheet/LICENSE",
+            "sha256": "99a75da65634b772687781c054ffe679569c1770c398f96427677899fe0ca8d7"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-inspector-babel/LICENSE",
+            "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/regenerator-runtime/LICENSE",
+            "sha256": "51887a3d47051ac2fce1210562e5b9fe0830a8a8fabeb272c2d586eeb18a05fd"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/simple-html-tokenizer/LICENSE",
+            "sha256": "c41881de2a9f2200936648343500524be154eb79f649582f9582dd251b051b11"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/replicator/LICENSE",
+            "sha256": "52f634086a97b3861a35afff7acf703ddbd5add8e617f6a1f540ae2f2c621284"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stylis/LICENSE",
+            "sha256": "045109dfd0547aa898408d08593e1adc41e9705519ba8a20baff89e7c6c52e91"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/murmurhash-js/README.md",
+            "sha256": "73b67c593a2a0d6395bfe90d3bad32556ed5e7ce71883062efebc643d4e4b7b4"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/murmurhash2/PUBLIC-DOMAIN.txt",
+            "sha256": "50e13b0a1963f0b382255d2425df245dbdfd209201621e8c157687caedbbb949"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/LICENSE",
+            "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/SOURCE.js",
+            "sha256": "966fdc4a37e65e90c2dc1f6ba9385e572c75ce4c0647d35f3ce566ed9ef7f6bb"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/stackoverflow/ATTRIBUTION.md",
+            "sha256": "4ac7ae9b19a1201b6cfe6af1d35ec85d015a2de8fb1aac6b03796145e648a667"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-pure-render/LICENSE",
+            "sha256": "65a1f00f35ea469048896fbfec3c5faed7d3fe7c7e0be2a0478470b59d9e1439"
+          },
+          {
+            "component": "console",
+            "version": "legacy-vendor-with-TS-adapter",
+            "url": "http://127.0.0.1:8084/licenses/console/react-pure-render/ATTRIBUTION.md",
+            "sha256": "9069fed07cc10fc36ef6b168ab0a75c3f1c882c077d5117b992f5c96d1eea0cc"
+          }
+        ],
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": []
+      }
+    ]
+  },
+  "limits": [
+    "Original react-pure-render source identifies the credited origin; it does not reproduce the modified shallowequal source verbatim.",
+    "Final embedded-source and mixed-license review remains open.",
+    "Local Windows browser tests do not replace physical-device, external SDK or remote deployment evidence."
+  ]
+}

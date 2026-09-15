@@ -1180,6 +1180,16 @@
           "source": "refactor/baselines/site-vendor/console-stackoverflow/ATTRIBUTION.txt",
           "target": "docs/licenses/console/stackoverflow/ATTRIBUTION.md",
           "sha256": "4ac7ae9b19a1201b6cfe6af1d35ec85d015a2de8fb1aac6b03796145e648a667"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/react-pure-render-license.txt",
+          "target": "docs/licenses/console/react-pure-render/LICENSE",
+          "sha256": "65a1f00f35ea469048896fbfec3c5faed7d3fe7c7e0be2a0478470b59d9e1439"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/console-attribution/react-pure-render-ATTRIBUTION.txt",
+          "target": "docs/licenses/console/react-pure-render/ATTRIBUTION.md",
+          "sha256": "9069fed07cc10fc36ef6b168ab0a75c3f1c882c077d5117b992f5c96d1eea0cc"
         }
       ],
       "components": [
@@ -1656,6 +1666,18 @@
             "docs/licenses/console/stackoverflow/LICENSE",
             "docs/licenses/console/stackoverflow/SOURCE.js",
             "docs/licenses/console/stackoverflow/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "react-pure-render (shallowequal origin)",
+          "version": "source commit 729cdbd",
+          "tarball": "https://github.com/gaearon/react-pure-render/blob/729cdbd51df00068816376544738cc1fc4720cf2/LICENSE",
+          "assets": [
+            "docs/assets/js/console.js"
+          ],
+          "notices": [
+            "docs/licenses/console/react-pure-render/LICENSE",
+            "docs/licenses/console/react-pure-render/ATTRIBUTION.md"
           ]
         }
       ]
