@@ -46,6 +46,14 @@ reverified input freshness. See `refactor/baselines/ci-installed-firefox-validat
 The complete WebKit installed run remains pending; these passes do not close prior
 intermittent, physical-device, remote CI or final-major package gates.
 
+Windows WebKit 26.6 subsequently completed the same installed roster at `bb2c12df3`:
+694 passed, 13 failed, 138 capability skips, zero retries, 1214.860 seconds, exit 1.
+Failures are eight Audio cases, one Chapter quality-switch observation, one current
+Danmuku CPU-gap case and three published JASSUB controls; all three installed native
+JASSUB candidate/core cases pass. See `refactor/baselines/ci-installed-webkit-validation.json`.
+The complete three-engine installed runs now have separate results; the matrix is
+not green. The current Danmuku failure is tracked for repair, not an expected old defect.
+
 `yarn test:browser:installed` requires ARTPLAYER_BROWSER_ARTIFACTS from
 `yarn test:package --browser`.
 Both launcher and config validate the selected packages' installed hashes

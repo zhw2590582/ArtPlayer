@@ -1,5 +1,20 @@
 # 进度与证据
 
+## CI-01 完整 Windows WebKit 安装包回归
+
+固定bb2c12df3，复用5e0447fc5打包的20包run-cRduve；77文件/845项：694通过、
+13失败、138能力跳过、0重试，1214.860秒，退出1。运行输入未改，报告/trace已归档。
+Audio四视频分支trace确认在switchUrl等待超时，四音频分支可信waiting失败；
+Chapter轮询失败但后续含正确restart；候选弹幕CPU间隔后漏first/middle，新风险
+DANMUKU-INSTALLED-GAP-01保持open。旧JASSUB三项失败，安装候选三核心通过。
+
+见[记录](changes/2026-09-15-CI-01-installed-webkit.md)、[证据](baselines/ci-installed-webkit-validation.json)。58项ASR、48项DASH、32项HLS
+能力跳过不计播放通过。同一安装集三引擎现均有结果，但矩阵未全绿，CI-01继续doing。
+218 done、21 doing、43 todo不变，风险287项。用户已批准Thumbnail默认npm行为、
+工作区显式模式；下一步落实其源码、类型与测试，再处理已捕获的弹幕失败。
+实施完成后等待用户指导复盘，不自动进入三轮复盘，不推送或发布。
+
+
 ## DOC-REVIEW-01 用户主导复盘启动
 
 用户明确要求实施完成后先不要复盘，由用户指导启动。已同步根AGENTS、

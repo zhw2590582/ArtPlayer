@@ -3003,7 +3003,9 @@
         "refactor/changes/2026-09-15-PKG-AUDIO-05-prefix.md",
         "refactor/baselines/audio-prefix-validation.json",
         "refactor/changes/2026-09-15-CI-01-source-webkit.md",
-        "refactor/baselines/ci-source-webkit-validation.json"
+        "refactor/baselines/ci-source-webkit-validation.json",
+        "refactor/changes/2026-09-15-CI-01-installed-webkit.md",
+        "refactor/baselines/ci-installed-webkit-validation.json"
       ],
       "compatibleResolution": "保留真实 waiting 断言；使用独立原生对照和其他实际支持环境/输入继续验证，不将没有播放推进的诊断当成缓冲通过，也不凭此改变插件 API 或否定真实 Safari 支持。",
       "closureCriteria": "受影响的缓冲/恢复得到真实媒体证据；与原生能力和测试夹具差异分开，发布环境的剩余范围经显式处理。",
@@ -3047,7 +3049,9 @@
         "refactor/baselines/ci-ads-installed-validation.json",
         "refactor/changes/2026-09-15-CI-01-ads-installed.md",
         "refactor/changes/2026-09-15-PKG-CHAPTER-05-native-timing.md",
-        "refactor/baselines/chapter-native-timing-validation.json"
+        "refactor/baselines/chapter-native-timing-validation.json",
+        "refactor/changes/2026-09-15-CI-01-installed-webkit.md",
+        "refactor/baselines/ci-installed-webkit-validation.json"
       ],
       "compatibleResolution": "记录原生事件和绝对/相对时序，进一步区分媒体驱动耗时、夹具和核心源操作；未证明原因前不改核心、不扩大超时或重复到绿灯。",
       "closureCriteria": "确认先前超时的来源并有对应可靠回归；后续单次通过不足以关闭。",
@@ -5822,7 +5826,9 @@
         "refactor/changes/2026-09-14-PKG-JASSUB-02-failure-baseline.md",
         "refactor/baselines/jassub-failures-validation.json",
         "refactor/changes/2026-09-15-CI-01-source-webkit.md",
-        "refactor/baselines/ci-source-webkit-validation.json"
+        "refactor/baselines/ci-source-webkit-validation.json",
+        "refactor/changes/2026-09-15-CI-01-installed-webkit.md",
+        "refactor/baselines/ci-installed-webkit-validation.json"
       ],
       "compatibleResolution": "Investigate native frame delivery and establish a compatible capability response; explicit event-clock success is diagnostic only.",
       "closureCriteria": "Default native behavior is verified or an explicit reviewed environment limitation is recorded; no silent global fallback or substitution of diagnostic mode for default acceptance.",
@@ -6834,6 +6840,23 @@
         "refactor/baselines/jassub-source-selection-validation.json"
       ],
       "resolutionRationale": "Old collection omits three source cases. Twenty Node checks pass after correction; all nine source browser combinations render, seek and clean workers/canvases before host destruction. Three published WebKit failures remain visible; no production contract changed."
+    },
+    {
+      "id": "DANMUKU-INSTALLED-GAP-01",
+      "title": "Windows WebKit installed Danmuku candidate misses two rows after a native main-thread gap",
+      "confirmation": "reproduced",
+      "status": "open",
+      "owners": [
+        "PKG-DANMUKU-08"
+      ],
+      "evidence": [
+        "test/browser/danmuku-timing-diagnostic.spec.js",
+        "refactor/changes/2026-09-15-CI-01-installed-webkit.md",
+        "refactor/baselines/ci-installed-webkit-validation.json"
+      ],
+      "compatibleResolution": "Determine why the current installed candidate misses the first eligibility interval; preserve old API and timestamp semantics and add a deterministic source/installed regression. Do not treat the candidate failure as expected or lower assertions.",
+      "closureCriteria": "Explain captured800ms CPU gap, first empty readys sample and unprocessed first/middle rows; validate fix across source, installed formats and affected browsers while preserving existing sampling, seek, worker, lifecycle and load regressions.",
+      "workspaceState": "At bb2c12df3 with run-cRduve, first/middle remain wait and never enter beforeVisible; sentinel alone is visible. Chromium and Firefox complete runs pass this case. Root cause unproven and original13-failure WebKit report retained."
     }
   ]
 }

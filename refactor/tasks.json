@@ -796,7 +796,9 @@
         "changes/2026-09-15-CI-01-installed-chromium.md",
         "baselines/ci-installed-chromium-validation.json",
         "changes/2026-09-15-CI-01-installed-firefox.md",
-        "baselines/ci-installed-firefox-validation.json"
+        "baselines/ci-installed-firefox-validation.json",
+        "changes/2026-09-15-CI-01-installed-webkit.md",
+        "baselines/ci-installed-webkit-validation.json"
       ]
     },
     {
@@ -3653,7 +3655,9 @@
         "baselines/danmuku-fullscreen-validation.json",
         "baselines/danmuku-old-core-load-validation.json",
         "changes/2026-09-14-PKG-DANMUKU-08-combined-load.md",
-        "baselines/danmuku-combined-load-validation.json"
+        "baselines/danmuku-combined-load-validation.json",
+        "changes/2026-09-15-CI-01-installed-webkit.md",
+        "baselines/ci-installed-webkit-validation.json"
       ]
     },
     {

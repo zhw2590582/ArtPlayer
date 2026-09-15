@@ -1,5 +1,12 @@
 # PR 检查和 Pages 操作说明
 
+同一20包安装映射的Windows WebKit26.6完整运行现已结束：bb2c12df3执行77文件/845项，
+694通过、13失败、138能力跳过、0重试，1214.860秒。失败包括8项Audio、1项Chapter、
+1项候选弹幕CPU间隔漏发和3项旧JASSUB；候选JASSUB三核心通过。见
+[记录](changes/2026-09-15-CI-01-installed-webkit.md)及
+[完整证据](baselines/ci-installed-webkit-validation.json)。三引擎均已执行但矩阵未全绿，
+CI-01仍进行中；不要把下列较早检查点的“待执行”当作当前状态。
+
 同一run-cRduve安装映射随后在b3344a7c6执行完整Firefox155.0：77文件/845项，
 844通过、1个裸DASH4.5.2暂停seek失败、0跳过/重试，1043.223秒，退出1。
 执行HEAD与打包HEAD分别记录，启动时再次验证指纹；没有重新打包或修改测试。
