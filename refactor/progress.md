@@ -1,5 +1,20 @@
 # 进度与证据
 
+## CI-TYPES-01 安装后的 Audio/HLS 类型验证
+
+共享严格编译器模块已接入真实 tarball 消费：Audio 的12条和HLS的8条负例，
+在五模式中逐条报错，完整正例均通过。记录实际安装声明路径和夹具SHA-256，
+拒绝仓库外链接逃逸、缺声明和any放宽。新模块及两包维护文档同步。
+
+最终20包build/pack/离线安装/冻结重装通过，128.94秒；原核心/Chapter的36项
+运行时、5旧类型和8精确类型模式通过。新增3项隔离测试、6项打包回归、77项CI
+测试、严格TS与定向lint通过。见[记录](changes/2026-09-15-CI-TYPES-01-installed-consumers.md)
+及[证据](baselines/installed-plugin-types-validation.json)。
+
+本次不扩大已验收运行时范围，不代表20包全类型/浏览器/设备或远端CI通过。
+CI-04保留原依赖并追加本子项；214 done、21 doing、43 todo，共278。
+没有改公开接口、包版本、依赖和锁文件；无推送、部署或发布。
+
 ## SITE-ROUTES-01 路径增量台账及完整本地CI
 
 完整ci:check复现最后基线集合1项失败：九个新增指南HTML没有进入历史demo路径台账。

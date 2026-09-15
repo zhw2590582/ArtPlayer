@@ -44,6 +44,14 @@ mute the main video. Destroying ArtPlayer releases the plugin's audio and subscr
 retained plugin updates become inert. See [ARCHITECTURE.md](ARCHITECTURE.md) for module
 ownership, compatibility decisions and regression commands.
 
+Installed declaration regression: run
+`yarn test:package --include=artplayer-plugin-audio-track` from the repository root.
+This builds and installs tarballs outside the repository, then checks root,
+legacy and `/runtime` calls from `test/types/audio-track.ts` in five compiler
+modes, including every invalid call. See
+[consumer maintenance](../../scripts/consumers/README.md); media synchronization
+and browser validation remain separate.
+
 ## License
 
 MIT © Harvey Zhao

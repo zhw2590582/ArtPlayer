@@ -13,6 +13,7 @@
     "checkJs": true
   },
   "include": [
+    "consumers/**/*.ts",
     "docs-smoke/**/*.ts",
     "build-test.js",
     "build-ts.js",

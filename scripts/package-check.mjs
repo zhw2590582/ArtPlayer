@@ -6,6 +6,7 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import { ensureArchive, hash, readMember } from '../refactor/scripts/releases.mjs'
 import { installedPackages } from './browser-validation/scope.ts'
+import { installedPluginTypes } from './consumers/packages.ts'
 import { consumerDirectory, names as defaultNames, readJson, removeConsumer, run, runtimeConsumer, typeConsumers, workspace, writeJson } from './package-consumer.mjs'
 
 export function packageOptions(args) {
@@ -179,15 +180,20 @@ export async function checkPackages({ release = false, include = [] } = {}) {
     assert.deepEqual(runtime.observations.api, oldRuntime.observations.api, 'Published API shape/defaults changed')
     const types = typeConsumers(installed)
     const preciseTypes = typeConsumers(installed, { precise: true })
+    const pluginTypes = installedPluginTypes(installed, include)
     const source = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: workspace, encoding: 'utf8' }).trim()
     const publishedPackages = baseline.releases.map(({ name, version, files }) => ({ name, version, files }))
     const report = { task: 'ENG-07', capturedAt: new Date().toISOString(), source, toolchain: { yarn: '1.22.22', yarnPath: yarn }, node: process.versions.node, packages, runtimeScope: defaultNames, typeScope: defaultNames, additionalBrowserPackages: include, runtime, publishedPackages, publishedRuntime: oldRuntime, types, preciseTypes, knownRuntimeBlockers: runtime.observations.defaultsWithoutNavigator.resolved ? 0 : 1, knownTypeBlockers: [...types, ...preciseTypes].reduce((sum, result) => sum + result.diagnostics.length, 0) }
+    report.additionalTypeScope = pluginTypes.map(result => result.name)
+    report.pluginTypes = pluginTypes
     writeJson(path.join(output, 'report.json'), report)
     writeJson(path.join(output, 'browser-artifacts.json'), artifacts)
     writeJson(path.join(parent, 'latest.json'), { output: path.relative(workspace, output).replaceAll('\\', '/') })
     console.log(`Installed tarball contracts passed: ${runtime.checks.length} runtime checks; ${types.filter(t => !t.diagnostics.length).length}/${types.length} legacy type modes; ${preciseTypes.filter(t => !t.diagnostics.length).length}/${preciseTypes.length} precise type modes. Report: ${output}`)
     if (include.length)
       console.log(`Runtime/type fixture scope: ${defaultNames.join(', ')}. Additional packages require their own consumer and browser acceptance: ${include.join(', ')}.`)
+    if (pluginTypes.length)
+      console.log(`Additional installed type fixtures passed: ${pluginTypes.map(result => result.name).join(', ')}; five compiler modes with checked negative statements per package. Runtime/browser acceptance remains separate.`)
     if (release) {
       assert.equal(report.knownTypeBlockers, 0, 'Known type blockers remain; this candidate is not release-ready')
       assert.equal(report.knownRuntimeBlockers, 0, 'Known runtime blockers remain; this candidate is not release-ready')

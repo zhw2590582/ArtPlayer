@@ -1,0 +1,918 @@
+{
+  "task": "CI-TYPES-01",
+  "baselineCommit": "210484c443077da389e048afb76a229f2b1e56bc",
+  "environment": {
+    "node": "24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "scope": "Installed Audio/HLS type fixtures; twenty-package build/pack/install preparation. No additional runtime or browser acceptance.",
+  "output": "refactor/.cache/packages/run-5UdGXT",
+  "reportSha256": "e45e27a2a6b7841b6a34370d5b13062d2873532a0932b0346207fae5cd56f834",
+  "packages": [
+    {
+      "name": "artplayer",
+      "version": "5.4.1",
+      "archive": "artplayer.tgz",
+      "sha256": "c70d0696a6225768145850bebd9542bc1a8f13217eb43350bfcfc45ea0687b16"
+    },
+    {
+      "name": "artplayer-plugin-chapter",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-chapter.tgz",
+      "sha256": "787da05cedcea0102f2cb85661b4ef03eb2e232d781e86fe1ea9f2d705795d62"
+    },
+    {
+      "name": "artplayer-plugin-ambilight",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-ambilight.tgz",
+      "sha256": "001bd46ab0908b66b852a372de5e5516a55c7d4a099ece68a501b0daa1f36b6c"
+    },
+    {
+      "name": "artplayer-proxy-canvas",
+      "version": "1.1.0",
+      "archive": "artplayer-proxy-canvas.tgz",
+      "sha256": "2f76422a469b574e1e56a68291ca1fdca908b08e4d879fecdbff56d29f83d65b"
+    },
+    {
+      "name": "artplayer-plugin-document-pip",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-document-pip.tgz",
+      "sha256": "073023d0e0f9dacafe9104642320a5dbd936e9e12ebd91954745cb51f8f73122"
+    },
+    {
+      "name": "artplayer-plugin-ads",
+      "version": "2.1.0",
+      "archive": "artplayer-plugin-ads.tgz",
+      "sha256": "95763685a2695151cd3b1df7438c1f96e15b0245fa5473ea10bf81d6323df116"
+    },
+    {
+      "name": "artplayer-plugin-audio-track",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-audio-track.tgz",
+      "sha256": "a444570cf69b3803414b5dccfd7ae3eaddeded35984eebff40010f95d98b647b"
+    },
+    {
+      "name": "artplayer-plugin-vtt-thumbnail",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-vtt-thumbnail.tgz",
+      "sha256": "c5f8db5e0bea6fa620f1031b95c115e037a4a515d4b253ea0e411dacf88c0943"
+    },
+    {
+      "name": "artplayer-plugin-multiple-subtitles",
+      "version": "1.2.0",
+      "archive": "artplayer-plugin-multiple-subtitles.tgz",
+      "sha256": "df91ebc6e78994b8ce600d80b2182f77e187a753e48c10c857573bf1d6a7e666"
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-hls-control.tgz",
+      "sha256": "b8fde8519ca7780dd421e5394d6bbee154abc1b092549bb08668af0d0bb1b946"
+    },
+    {
+      "name": "artplayer-plugin-dash-control",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-dash-control.tgz",
+      "sha256": "e897c61ca757c46260a860a866bbbe7e10a95d6de67ffedc4ae03b1f70f614e8"
+    },
+    {
+      "name": "artplayer-plugin-auto-thumbnail",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-auto-thumbnail.tgz",
+      "sha256": "ebca33069c114dc634751dbeed8e909d702abc0924abc5ef9437f8250f46ece0"
+    },
+    {
+      "name": "artplayer-plugin-asr",
+      "version": "2.1.0",
+      "archive": "artplayer-plugin-asr.tgz",
+      "sha256": "d6d75fbd6422d5128d87f8272638a71c4b4ee87d70625dd4b7ca40b038ea14fb"
+    },
+    {
+      "name": "artplayer-plugin-chromecast",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-chromecast.tgz",
+      "sha256": "7317c9a5914099e107fc0d2cdf75c2709fb3f1b05bcd53d719a082ca66c58969"
+    },
+    {
+      "name": "artplayer-proxy-mediabunny",
+      "version": "1.2.0",
+      "archive": "artplayer-proxy-mediabunny.tgz",
+      "sha256": "7bde410f07334ab85b4ecc0714d106c132a6826698dc7ed13b3e55c21a2206fd"
+    },
+    {
+      "name": "artplayer-plugin-jassub",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-jassub.tgz",
+      "sha256": "6bec955a04295e142ea337dd715aebc3d1f6e9b2f53fd2bcfbf49d16c22c7ba2"
+    },
+    {
+      "name": "artplayer-plugin-danmuku",
+      "version": "5.3.0",
+      "archive": "artplayer-plugin-danmuku.tgz",
+      "sha256": "93a4226126eac6ae0e298078b3f700a002ccdac53c63379d624a52c64d24e7ff"
+    },
+    {
+      "name": "artplayer-plugin-danmuku-mask",
+      "version": "1.1.0",
+      "archive": "artplayer-plugin-danmuku-mask.tgz",
+      "sha256": "623ef4d889db28a69230b7a4f109cdce5550e2d5a4b758be5c4d609dd6b12b37"
+    },
+    {
+      "name": "artplayer-tool-iframe",
+      "version": "1.1.0",
+      "archive": "artplayer-tool-iframe.tgz",
+      "sha256": "ef1ad7cf60b8e08bfedb66ccdc452e55ecde0b2bb2a1c964b3c1ea088928ac8f"
+    },
+    {
+      "name": "artplayer-plugin-vast",
+      "version": "1.2.0",
+      "archive": "artplayer-plugin-vast.tgz",
+      "sha256": "87420c2069f5f50740b75d23c7aba72870899b94d4472d90f33b816ef16e2e14"
+    }
+  ],
+  "additionalTypeScope": [
+    "artplayer-plugin-audio-track",
+    "artplayer-plugin-hls-control"
+  ],
+  "pluginTypes": [
+    {
+      "name": "artplayer-plugin-audio-track",
+      "fixture": "test/types/audio-track.ts",
+      "fixtureSha256": "d9c01d2d4cb9ce28da599440f71cafe7b87c8c9521eb4d0c2ce1168ba3d2fde4",
+      "modes": [
+        {
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.ts"
+          ],
+          "negativeStatements": 12,
+          "negativeDiagnostics": [
+            {
+              "code": 2554,
+              "line": 40
+            },
+            {
+              "code": 2345,
+              "line": 42
+            },
+            {
+              "code": 2322,
+              "line": 44
+            },
+            {
+              "code": 2554,
+              "line": 46
+            },
+            {
+              "code": 2322,
+              "line": 48
+            },
+            {
+              "code": 2322,
+              "line": 50
+            },
+            {
+              "code": 2322,
+              "line": 52
+            },
+            {
+              "code": 2322,
+              "line": 54
+            },
+            {
+              "code": 2322,
+              "line": 56
+            },
+            {
+              "code": 2322,
+              "line": 58
+            },
+            {
+              "code": 2353,
+              "line": 60
+            },
+            {
+              "code": 2322,
+              "line": 62
+            }
+          ]
+        },
+        {
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer/types/artplayer.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.cts"
+          ],
+          "negativeStatements": 12,
+          "negativeDiagnostics": [
+            {
+              "code": 2554,
+              "line": 40
+            },
+            {
+              "code": 2345,
+              "line": 42
+            },
+            {
+              "code": 2322,
+              "line": 44
+            },
+            {
+              "code": 2554,
+              "line": 46
+            },
+            {
+              "code": 2322,
+              "line": 48
+            },
+            {
+              "code": 2322,
+              "line": 50
+            },
+            {
+              "code": 2322,
+              "line": 52
+            },
+            {
+              "code": 2322,
+              "line": 54
+            },
+            {
+              "code": 2322,
+              "line": 56
+            },
+            {
+              "code": 2322,
+              "line": 58
+            },
+            {
+              "code": 2353,
+              "line": 60
+            },
+            {
+              "code": 2322,
+              "line": 62
+            }
+          ]
+        },
+        {
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer/types/artplayer.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.mts",
+            "node_modules/artplayer/types/artplayer.d.mts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.mts"
+          ],
+          "negativeStatements": 12,
+          "negativeDiagnostics": [
+            {
+              "code": 2554,
+              "line": 40
+            },
+            {
+              "code": 2345,
+              "line": 42
+            },
+            {
+              "code": 2322,
+              "line": 44
+            },
+            {
+              "code": 2554,
+              "line": 46
+            },
+            {
+              "code": 2322,
+              "line": 48
+            },
+            {
+              "code": 2322,
+              "line": 50
+            },
+            {
+              "code": 2322,
+              "line": 52
+            },
+            {
+              "code": 2322,
+              "line": 54
+            },
+            {
+              "code": 2322,
+              "line": 56
+            },
+            {
+              "code": 2322,
+              "line": 58
+            },
+            {
+              "code": 2353,
+              "line": 60
+            },
+            {
+              "code": 2322,
+              "line": 62
+            }
+          ]
+        },
+        {
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer/types/artplayer.d.cts",
+            "node_modules/artplayer/types/artplayer.d.mts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.mts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.cts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.mts"
+          ],
+          "negativeStatements": 12,
+          "negativeDiagnostics": [
+            {
+              "code": 2554,
+              "line": 40
+            },
+            {
+              "code": 2345,
+              "line": 42
+            },
+            {
+              "code": 2322,
+              "line": 44
+            },
+            {
+              "code": 2554,
+              "line": 46
+            },
+            {
+              "code": 2322,
+              "line": 48
+            },
+            {
+              "code": 2322,
+              "line": 50
+            },
+            {
+              "code": 2322,
+              "line": 52
+            },
+            {
+              "code": 2322,
+              "line": 54
+            },
+            {
+              "code": 2322,
+              "line": 56
+            },
+            {
+              "code": 2322,
+              "line": 58
+            },
+            {
+              "code": 2353,
+              "line": 60
+            },
+            {
+              "code": 2322,
+              "line": 62
+            }
+          ]
+        },
+        {
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/artplayer-plugin-audio-track.d.ts",
+            "node_modules/artplayer-plugin-audio-track/types/runtime/index.d.ts"
+          ],
+          "negativeStatements": 12,
+          "negativeDiagnostics": [
+            {
+              "code": 2554,
+              "line": 40
+            },
+            {
+              "code": 2345,
+              "line": 42
+            },
+            {
+              "code": 2322,
+              "line": 44
+            },
+            {
+              "code": 2554,
+              "line": 46
+            },
+            {
+              "code": 2322,
+              "line": 48
+            },
+            {
+              "code": 2322,
+              "line": 50
+            },
+            {
+              "code": 2322,
+              "line": 52
+            },
+            {
+              "code": 2322,
+              "line": 54
+            },
+            {
+              "code": 2322,
+              "line": 56
+            },
+            {
+              "code": 2322,
+              "line": 58
+            },
+            {
+              "code": 2345,
+              "line": 60
+            },
+            {
+              "code": 2322,
+              "line": 62
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "artplayer-plugin-hls-control",
+      "fixture": "test/types/hls-control.ts",
+      "fixtureSha256": "3bbdeae926b6a5aad6e5b7c34a21babbc7784007c49d65acc44dac0962ba2b61",
+      "modes": [
+        {
+          "compiler": "5.9.3",
+          "mode": "node10-commonjs",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts"
+          ],
+          "negativeStatements": 8,
+          "negativeDiagnostics": [
+            {
+              "code": 2322,
+              "line": 28
+            },
+            {
+              "code": 2554,
+              "line": 30
+            },
+            {
+              "code": 2322,
+              "line": 32
+            },
+            {
+              "code": 2769,
+              "line": 34
+            },
+            {
+              "code": 2769,
+              "line": 36
+            },
+            {
+              "code": 2769,
+              "line": 38
+            },
+            {
+              "code": 2769,
+              "line": 40
+            },
+            {
+              "code": 2339,
+              "line": 42
+            }
+          ]
+        },
+        {
+          "compiler": "5.9.3",
+          "mode": "nodenext-cjs",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer/types/artplayer.d.cts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.cts"
+          ],
+          "negativeStatements": 8,
+          "negativeDiagnostics": [
+            {
+              "code": 2322,
+              "line": 28
+            },
+            {
+              "code": 2554,
+              "line": 30
+            },
+            {
+              "code": 2322,
+              "line": 32
+            },
+            {
+              "code": 2769,
+              "line": 34
+            },
+            {
+              "code": 2769,
+              "line": 36
+            },
+            {
+              "code": 2769,
+              "line": 38
+            },
+            {
+              "code": 2769,
+              "line": 40
+            },
+            {
+              "code": 2339,
+              "line": 42
+            }
+          ]
+        },
+        {
+          "compiler": "5.9.3",
+          "mode": "nodenext-esm",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer/types/artplayer.d.cts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.cts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.mts",
+            "node_modules/artplayer/types/artplayer.d.mts"
+          ],
+          "negativeStatements": 8,
+          "negativeDiagnostics": [
+            {
+              "code": 2322,
+              "line": 28
+            },
+            {
+              "code": 2554,
+              "line": 30
+            },
+            {
+              "code": 2322,
+              "line": 32
+            },
+            {
+              "code": 2769,
+              "line": 34
+            },
+            {
+              "code": 2769,
+              "line": 36
+            },
+            {
+              "code": 2769,
+              "line": 38
+            },
+            {
+              "code": 2769,
+              "line": 40
+            },
+            {
+              "code": 2339,
+              "line": 42
+            }
+          ]
+        },
+        {
+          "compiler": "5.9.3",
+          "mode": "bundler-esm",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer/types/artplayer.d.cts",
+            "node_modules/artplayer/types/artplayer.d.mts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.cts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.mts"
+          ],
+          "negativeStatements": 8,
+          "negativeDiagnostics": [
+            {
+              "code": 2322,
+              "line": 28
+            },
+            {
+              "code": 2554,
+              "line": 30
+            },
+            {
+              "code": 2322,
+              "line": 32
+            },
+            {
+              "code": 2769,
+              "line": 34
+            },
+            {
+              "code": 2769,
+              "line": 36
+            },
+            {
+              "code": 2769,
+              "line": 38
+            },
+            {
+              "code": 2769,
+              "line": 40
+            },
+            {
+              "code": 2339,
+              "line": 42
+            }
+          ]
+        },
+        {
+          "compiler": "4.3.5",
+          "mode": "node10-commonjs",
+          "declarations": [
+            "node_modules/artplayer/types/component.d.ts",
+            "node_modules/artplayer/types/config.d.ts",
+            "node_modules/artplayer/types/emitter.d.ts",
+            "node_modules/artplayer/types/cssVar.d.ts",
+            "node_modules/artplayer/types/i18n.d.ts",
+            "node_modules/artplayer/types/icons.d.ts",
+            "node_modules/artplayer/types/plugin.d.ts",
+            "node_modules/artplayer/types/quality.d.ts",
+            "node_modules/artplayer/types/setting.d.ts",
+            "node_modules/artplayer/types/subtitle.d.ts",
+            "node_modules/artplayer/types/option.d.ts",
+            "node_modules/artplayer/types/player.d.ts",
+            "node_modules/artplayer/types/events.d.ts",
+            "node_modules/artplayer/types/playback.d.ts",
+            "node_modules/artplayer/types/template.d.ts",
+            "node_modules/artplayer/types/utils.d.ts",
+            "node_modules/artplayer/types/artplayer.d.ts",
+            "node_modules/artplayer-plugin-hls-control/types/artplayer-plugin-hls-control.d.ts"
+          ],
+          "negativeStatements": 8,
+          "negativeDiagnostics": [
+            {
+              "code": 2322,
+              "line": 28
+            },
+            {
+              "code": 2554,
+              "line": 30
+            },
+            {
+              "code": 2322,
+              "line": 32
+            },
+            {
+              "code": 2769,
+              "line": 34
+            },
+            {
+              "code": 2769,
+              "line": 36
+            },
+            {
+              "code": 2769,
+              "line": 38
+            },
+            {
+              "code": 2769,
+              "line": 40
+            },
+            {
+              "code": 2339,
+              "line": 42
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "originalChecks": {
+    "runtime": 36,
+    "legacyModes": 5,
+    "preciseModes": 8,
+    "knownTypeBlockers": 0,
+    "knownRuntimeBlockers": 0
+  },
+  "validation": [
+    {
+      "command": "yarn test:package --browser",
+      "exitCode": 0,
+      "seconds": 128.94
+    },
+    {
+      "command": "node --test test/installed-types.test.js",
+      "exitCode": 0,
+      "passed": 3
+    },
+    {
+      "command": "node --test test/package-check.test.js",
+      "exitCode": 0,
+      "passed": 6
+    },
+    {
+      "command": "yarn test:ci",
+      "exitCode": 0,
+      "passed": 77
+    },
+    {
+      "command": "node node_modules/typescript/bin/tsc -p scripts/tsconfig.docs.json --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js scripts/consumers scripts/package-check.mjs test/installed-types.test.js",
+      "exitCode": 0
+    }
+  ],
+  "logs": [
+    {
+      "path": "refactor/.cache/ci-types-package.log",
+      "sha256": "e2976d0ff636f06c75e6618d1bed451785cb19ac793df4dd02467d85f7d243e2"
+    },
+    {
+      "path": "refactor/.cache/ci-types-package-final.log",
+      "sha256": "8f8197b4ab77c9889e6d7ee22280e089ca24fa326fd5b4e4e9b0ceb0746218c7"
+    },
+    {
+      "path": "refactor/.cache/installed-types-tests.log",
+      "sha256": "2e1fa29014c38cd9e38a6c801a14901993c655dd4cd0ec583e3da68dd8486757"
+    },
+    {
+      "path": "refactor/.cache/ci-types-package-tests.log",
+      "sha256": "7e11837cc7fe5c942a1ccb963eea06694e8f66d31941fcc587c71cda72ac7b63"
+    },
+    {
+      "path": "refactor/.cache/ci-types-ci-tests.log",
+      "sha256": "26ec64ccd8e36a40761c9a8397845b9ea3ad2ab64cd7d7e1c34b44806bd82b43"
+    }
+  ],
+  "inputs": {
+    "scripts/consumers/types.ts": "7ab794eab8bd429dac2e359a2be8c71e54b1e96498af734e20d2bbc7ab620d7c",
+    "scripts/consumers/packages.ts": "0e3366031f76c0db36cf880ff593377a8e223cb0273a9b439d0146b564c3d178",
+    "scripts/package-check.mjs": "cf19bbfd6010965e40495a9943f0d6fe9e024d110e22234490f16e7e3d461ac4",
+    "test/installed-types.test.js": "f16737913edf403e399552ca54cb2edfd032e8bfa193cffd273a67d041e3bd9f",
+    "test/types/audio-track.ts": "d9c01d2d4cb9ce28da599440f71cafe7b87c8c9521eb4d0c2ce1168ba3d2fde4",
+    "test/types/hls-control.ts": "3bbdeae926b6a5aad6e5b7c34a21babbc7784007c49d65acc44dac0962ba2b61"
+  }
+}

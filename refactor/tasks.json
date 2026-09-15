@@ -843,7 +843,8 @@
         "CI-02",
         "CI-03",
         "SITE-06",
-        "CI-BROWSER-01"
+        "CI-BROWSER-01",
+        "CI-TYPES-01"
       ],
       "status": "todo",
       "risk": "H",
@@ -5970,6 +5971,29 @@
       "evidence": [
         "changes/2026-09-15-SITE-ROUTES-01-html-inventory.md",
         "baselines/site-routes-validation.json"
+      ]
+    },
+    {
+      "id": "CI-TYPES-01",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "接入 Audio/HLS 安装后严格类型消费者",
+      "scope": [
+        "workspace",
+        "artplayer-plugin-audio-track",
+        "artplayer-plugin-hls-control"
+      ],
+      "dependsOn": [
+        "ENG-07",
+        "PKG-AUDIO-04",
+        "PKG-HLS-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "共享隔离编译器模块、真实 tarball 的五模式正反例和声明路径证据",
+      "acceptance": "旧/新编译器所有正例通过，每条无效调用实际报错；仓库外声明解析、缺声明/any/逃逸负例有效；保留独立运行时和浏览器验收",
+      "evidence": [
+        "changes/2026-09-15-CI-TYPES-01-installed-consumers.md",
+        "baselines/installed-plugin-types-validation.json"
       ]
     }
   ]

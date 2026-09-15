@@ -19,12 +19,19 @@ browser scope and the remaining package-specific release gates.
 Run `yarn test:package` with the pinned Node and Yarn after a frozen install. The
 default consumer scope is core and chapter. For the shared installed browser scope,
 run `yarn test:package --browser`.
-These four additional packages have reviewed published contracts and use the same
+The additional packages have reviewed published contracts and use the same
 source snapshot/build/pack/offline-install/frozen-reinstall pipeline. Installed
 files are copied only after archive hash checks. The report explicitly separates
 the core/chapter runtime/type scope from the additional browser package scope;
 `--release` rejects additional packages until complete consumer coverage exists.
 Other packages need a reviewed contract and their own consumers before inclusion.
+
+Audio Track and HLS Control also run their complete `test/types/` fixtures against
+the installed tarballs in five compiler modes, with every invalid call checked
+again after removing error directives. `additionalTypeScope` and `pluginTypes`
+record this separately from the original core/chapter checks. Other additional
+packages still need their dedicated type consumers; no extra runtime scope is
+implied. See [compiler module maintenance](../../scripts/consumers/README.md).
 
 `scripts/package-check.mjs` copies source into an ignored build snapshot, rebuilds
 all three formats and core languages using repository scripts, and runs Yarn pack.

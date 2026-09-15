@@ -56,8 +56,10 @@ GitHub PR读取事件里的base SHA，push读取before SHA；初次push的全零
 
 - `test:package`当前实际只有core/chapter；脚本读取其names数组核对策略，变更范围
   后必须更新声明。其余19个库包完整安装消费仍缺证据，不能因识别为affected而过关。
-  `--browser` 已单独覆盖十八包安装产物及明确列出的浏览器子集，不扩张这个通用
-  Node/类型消费者列表，也不等于十八包全部类型/设备/SDK 组合通过。
+  `--browser` 已单独准备二十包安装产物及明确列出的浏览器子集，不扩张这个通用
+  Node 消费者列表，也不等于二十包全部类型/设备/SDK 组合通过。Audio/HLS 的额外
+  五模式安装类型验证由 CI-TYPES-01 接入，报告单列 additionalTypeScope；其余包
+  的专用类型检查仍保留，不能因此关闭十九包完整安装消费的缺口。
 - 覆盖率范围从实际coverage-policy读取；浏览器/性能命令运行已有用例，不代表所有
   包、真实设备、远程SDK已验收。
 - ENG-COVERAGE-01继续把契约、支持版本、测试ID、候选/报告及任务逐项连接；
