@@ -2,14 +2,15 @@
 
 测试保护真实 npm 1.1.0 的既有调用契约，以及重构前工作区的 SDK 5.x 稳定 ID 修正。
 版本来源见 [发布契约](baselines/dash-control-contract.md)。02 建立基线，03 改造运行行为，
-04 已把五个自有模块迁移为严格 TS 并补齐公开类型与编辑器生成；05 新增第六个 SDK 事件模块。
+04 把五个自有模块迁移为严格 TS 并补齐公开类型与编辑器生成；后续增加 SDK 事件、
+4.5.2 seek 恢复和清理调度，当前八个自有模块均为严格 TS。
 实际模块地图与生命周期规则见 [包内架构](../packages/artplayer-plugin-dash-control/ARCHITECTURE.md)。
 
 ## 可重跑的测试
 
-- `yarn test:dash-control`：原有 118 项与两代 SDK 各 13 项事件/清理/重入回归，共 144 项。
+- `yarn test:dash-control`：当前 167 项，覆盖历史契约、两代 SDK、事件/清理/重入及原始异常。
   该脚本和 `test:unit` 都保留旧测试，完整 CI 自动执行。
-- `yarn test:browser test/browser/dash-control.spec.js --trace on`：84 项，两个核心、发布插件 SDK 4/
+- `yarn test:browser test/browser/dash-control.spec.js --trace on`：96 项，两个核心、发布插件 SDK 4/
   候选插件 SDK 4/5、两类菜单、两种选择及候选清理、Chromium/Firefox/WebKit。
   浏览器套件串行运行，避免共享端口和报告覆盖。
 - `yarn ci:check`：工具链、计划、lint、声明漂移、严格类型和 Node/基线测试。
@@ -19,6 +20,8 @@
   TS 4.3.5/5.9.3、五种模块模式、八条非法用法及实际 npm 旧声明的消费者对照。
 - `yarn test:dash-types-package`：Yarn 打包核心/DASH、工作区外离线安装与冻结锁重装，
   检查五种模式、CommonJS callable/命名空间、每模式八条非法调用，并拒绝解析回工作区。
+  报告中的 `installedArtifacts` 保留已逐文件核对 tarball 哈希的安装副本，供后续
+  `ARTPLAYER_TEST_DASH` 和 `ARTPLAYER_DASH_ARTIFACT` 运行时验证。
 - `yarn test:browser test/browser/dash-sdk.spec.js --trace on`：真实 npm dash.js 4.5.2/5.2.1，
   本地多画质/多音轨 MPD，新旧核心/插件、外部同步 update、自动事件刷新、同 SDK 换源、
   formatter 错误恢复、实际设置点击和 SDK 原生对照。目前完整定义 114 项。

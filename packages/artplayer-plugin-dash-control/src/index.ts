@@ -2,6 +2,7 @@ import type Artplayer from 'artplayer'
 import type { AudioTrack, Option, QualityLevel, Result } from '../types/artplayer-plugin-dash-control'
 import type { AudioItem, Cleanup, EventName, Host, QualityItem, Valid } from './types'
 import $audio from './audio.svg?raw'
+import { runCleanups } from './cleanup'
 import { audioModel, qualityModel } from './mapping'
 import { createMenu } from './menu'
 import $quality from './quality.svg?raw'
@@ -39,19 +40,7 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
     })
 
     function clear(current: Valid = () => true): void {
-      let failure: unknown
-      for (const cleanup of [quality.clear, audio.clear]) {
-        if (!current())
-          break
-        try {
-          cleanup()
-        }
-        catch (error) {
-          failure ||= error
-        }
-      }
-      if (failure)
-        throw failure
+      runCleanups([quality.clear, audio.clear], current)
     }
 
     function update(): void {
@@ -101,18 +90,8 @@ export default function artplayerPluginDashControl<Level extends object = Qualit
         return
       closed = true
       revision++
-      let failure: unknown
       const actions = [observer.release, clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))]
-      for (const action of actions) {
-        try {
-          action()
-        }
-        catch (error) {
-          failure ||= error
-        }
-      }
-      if (failure)
-        throw failure
+      runCleanups(actions)
     }
 
     try {

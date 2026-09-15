@@ -6629,6 +6629,30 @@
         "refactor/baselines/thumbnail-cleanup-errors-validation.json"
       ],
       "resolutionRationale": "Frozen historical destroy contracts preserve all seven falsy values; the prepatch candidate fails exception propagation and first-value ownership. Fixed source and rebuilt main/legacy pass cleanup/resource and actual browser DOM regressions. Installed artifact and type checks pass; historical defaults and WebKit media capability gaps remain outside this narrowly resolved regression."
+    },
+    {
+      "id": "DASH-CLEANUP-01",
+      "title": "DASH 菜单和 SDK 清理吞掉 falsy 异常或丢失首个错误",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-DASH-CLEANUP-01",
+        "PKG-DASH-05"
+      ],
+      "evidence": [
+        "test/dash-cleanup-errors.test.js",
+        "test/browser/dash-control.spec.js",
+        "refactor/changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md",
+        "refactor/baselines/dash-cleanup-errors-validation.json"
+      ],
+      "compatibleResolution": "共用独立失败标记的清理调度，保存并传播第一个原始值，同时完成剩余资源释放，保留重入/SDK归属及异步警告策略。",
+      "closureCriteria": "七种falsy值首错身份、兄弟资源释放、重入/销毁专项、真实控件回调、三格式安装和真实SDK回归有证据；设备能力缺口单独保留。",
+      "workspaceState": "Prepatch: six source failures and four valid Chromium failures; fixed source 167 pass, installed three formats plus source/historical 470 pass. Browser reports distinguish controlled DOM, actual SDK and Windows WebKit MSE skips.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md",
+        "refactor/baselines/dash-cleanup-errors-validation.json"
+      ],
+      "resolutionRationale": "Corrected public beforeUnmount input reproduces swallowed values against the prepatch artifact. Separate threw and Object.is assertions cover all seven values. Rebuilt and independently installed artifacts pass lifecycle/DOM/SDK regressions; public declarations are unchanged. This resolves the cleanup defect only, not full package device/release acceptance."
     }
   ]
 }

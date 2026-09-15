@@ -38,6 +38,11 @@ async function main() {
       assert.equal(fs.realpathSync(root), root, 'Installed package is a workspace link')
       for (const [member, expected] of Object.entries(pkg.files))
         assert.equal(hash(fs.readFileSync(path.join(root, member.slice(8)))), expected, `Installed bytes differ: ${member}`)
+      const retained = path.join(output, 'installed-artifacts', pkg.name)
+      fs.cpSync(root, retained, { recursive: true })
+      for (const [member, expected] of Object.entries(pkg.files))
+        assert.equal(hash(fs.readFileSync(path.join(retained, member.slice(8)))), expected, `Retained installed bytes differ: ${member}`)
+      pkg.installedArtifacts = retained
     }
     const matrix = []
     for (const [compiler, mode] of [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]) {

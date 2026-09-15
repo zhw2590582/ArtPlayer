@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 268 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 269 项，范围 22 个包及工作区/示例。
 
-状态：todo 43 / doing 21 / blocked 0 / done 204 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 43 / doing 21 / blocked 0 / done 205 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -24,7 +24,7 @@
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
 | artplayer-plugin-danmuku | 5.3.0 | PKG-DANMUKU-01, PKG-DANMUKU-02, PKG-DANMUKU-03, PKG-DANMUKU-04, PKG-DANMUKU-05, PKG-DANMUKU-06, PKG-DANMUKU-07, PKG-DANMUKU-08, PKG-DANMUKU-09, PKG-DANMUKU-10, PKG-DANMUKU-11, PKG-DANMUKU-12, PKG-DANMUKU-MASK-LOAD-01 |
 | artplayer-plugin-danmuku-mask | 1.1.0 | PKG-MASK-01, PKG-MASK-02, PKG-MASK-03, PKG-MASK-04, PKG-MASK-05, PKG-MASK-06, ENG-LINT-01, PKG-DANMUKU-MASK-LOAD-01 |
-| artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-SEEK-01, PKG-DASH-MENU-01, PKG-DASH-05, PKG-DASH-06 |
+| artplayer-plugin-dash-control | 1.1.0 | PKG-DASH-01, PKG-DASH-02, PKG-DASH-03, PKG-DASH-04, PKG-DASH-SEEK-01, PKG-DASH-MENU-01, PKG-DASH-05, PKG-DASH-06, PKG-DASH-CLEANUP-01 |
 | artplayer-plugin-document-pip | 1.1.0 | PKG-DPIP-01, PKG-DPIP-02, PKG-DPIP-03, PKG-DPIP-04, PKG-DPIP-05, PKG-DPIP-06 |
 | artplayer-plugin-hls-control | 1.1.0 | PKG-HLS-01, PKG-HLS-02, PKG-HLS-03, PKG-HLS-04, PKG-HLS-SDK-01, PKG-HLS-05, PKG-HLS-06, PKG-HLS-PACK-01 |
 | artplayer-plugin-jassub | 1.1.0 | PKG-JASSUB-01, PKG-JASSUB-02, PKG-JASSUB-03, PKG-JASSUB-04, PKG-JASSUB-05, PKG-JASSUB-06, PKG-JASSUB-07, PKG-JASSUB-08, PKG-JASSUB-09, PKG-JASSUB-10 |
@@ -222,8 +222,9 @@
 | PKG-DASH-04 | artplayer-plugin-dash-control<br>迁移自有源码和公开类型 | PKG-DASH-03, ENG-04, ENG-06, CORE-07 | dash.js adapter、selector 和回调类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
 | PKG-DASH-SEEK-01 | artplayer-plugin-dash-control<br>修复 SDK 4.5.2 暂停跳转后的缓冲指标停滞 | PKG-DASH-04 | 按版本和实测空缓冲限定的指标同步、生命周期守卫及真实 SDK 旧红新绿 | 新插件在新旧核心及 Chromium/Firefox 原位置回归通过；不修改 SDK 方法/配置、媒体时间或删除缓冲；旧 SDK 原生缺陷与旧插件限制独立记录，不宣称第三方本体已修复 | H | done |
 | PKG-DASH-MENU-01 | artplayer-plugin-dash-control<br>定位并修复 SDK 刷新期间设置选项不可见 | PKG-DASH-SEEK-01 | 真实 SDK 菜单点击失败根因、对应兼容修复及新旧核心回归 | 保留 legacy/旧核心/SDK5.2.1 的原失败；确定菜单在点击过程中不可见的原因；不靠 force 点击、扩大超时或重复运行覆盖问题；main/legacy 质量与音轨设置及 SDK 刷新组合通过 | H | done |
-| PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22, PKG-DASH-SEEK-01 | 固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
+| PKG-DASH-05 | artplayer-plugin-dash-control<br>验证新旧核心和组合 | PKG-DASH-04, CORE-22, PKG-DASH-SEEK-01, PKG-DASH-CLEANUP-01 | 固定 dash.js 4.5.2/5.2.1 与本地 DASH 实际清晰度/音轨、高亮、Auto 和换源组合 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-DASH-06 | artplayer-plugin-dash-control<br>验证分发并同步文档 | PKG-DASH-05, ENG-07, PKG-DASH-MENU-01 | dash.control.js、支持的 dash.js 版本与产物 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-DASH-CLEANUP-01 | artplayer-plugin-dash-control<br>保留菜单和SDK清理的首个原始异常 | PKG-DASH-04 | 集中DASH清理调度与首错传播，保留重入保护；falsy异常、真实控件beforeUnmount、分发及文档验证 | 七种falsy值不被吞掉或后续错误覆盖；后续资源释放和生命周期回归通过，不更改公开API、SDK归属或异步刷新边界 | M | done |
 
 ## 5 包迁移：artplayer-plugin-multiple-subtitles
 
@@ -702,3 +703,4 @@
 - SITE-CONSOLE-01: [记录](console-modernization.md) [记录](changes/2026-09-15-SITE-CONSOLE-01-typescript.md) [记录](baselines/site-console01-validation.json)
 - PKG-AUTO-THUMB-12: [记录](changes/2026-09-15-PKG-AUTO-THUMB-12-metadata.md) [记录](baselines/auto-thumbnail-metadata-validation.json)
 - PKG-TOOL-THUMB-07: [记录](changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md) [记录](baselines/thumbnail-cleanup-errors-validation.json)
+- PKG-DASH-CLEANUP-01: [记录](changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md) [记录](baselines/dash-cleanup-errors-validation.json)

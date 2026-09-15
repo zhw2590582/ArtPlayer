@@ -1,4 +1,5 @@
 import type { Cleanup, DisplayConfig, Label, MenuHost, MenuModel, SelectorItem, Valid } from './types'
+import { runCleanups } from './cleanup'
 
 export function createMenu<Item extends SelectorItem>(art: MenuHost, name: string, icon: string) {
   let current: object | undefined
@@ -18,17 +19,7 @@ export function createMenu<Item extends SelectorItem>(art: MenuHost, name: strin
 
   function clear(): void {
     current = undefined
-    let failure: unknown
-    for (const [surface, callback] of [...owned]) {
-      try {
-        remove(surface, callback)
-      }
-      catch (error) {
-        failure ||= error
-      }
-    }
-    if (failure)
-      throw failure
+    runCleanups([...owned].map(([surface, callback]) => () => remove(surface, callback)))
   }
 
   function update(config: DisplayConfig, model: MenuModel<Item> | null, active: Valid): void {

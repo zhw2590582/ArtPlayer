@@ -2328,7 +2328,8 @@
       "dependsOn": [
         "PKG-DASH-04",
         "CORE-22",
-        "PKG-DASH-SEEK-01"
+        "PKG-DASH-SEEK-01",
+        "PKG-DASH-CLEANUP-01"
       ],
       "status": "doing",
       "risk": "H",
@@ -5765,6 +5766,25 @@
       "evidence": [
         "changes/2026-09-15-PKG-TOOL-THUMB-07-cleanup-errors.md",
         "baselines/thumbnail-cleanup-errors-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-DASH-CLEANUP-01",
+      "phase": "5 包迁移：artplayer-plugin-dash-control",
+      "title": "保留菜单和SDK清理的首个原始异常",
+      "scope": [
+        "artplayer-plugin-dash-control"
+      ],
+      "dependsOn": [
+        "PKG-DASH-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "集中DASH清理调度与首错传播，保留重入保护；falsy异常、真实控件beforeUnmount、分发及文档验证",
+      "acceptance": "七种falsy值不被吞掉或后续错误覆盖；后续资源释放和生命周期回归通过，不更改公开API、SDK归属或异步刷新边界",
+      "evidence": [
+        "changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md",
+        "baselines/dash-cleanup-errors-validation.json"
       ]
     }
   ]

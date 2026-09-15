@@ -1,4 +1,5 @@
 import type { Cleanup, Dash, SDKEventName } from './types'
+import { runCleanups } from './cleanup'
 import { createSeekRecovery } from './seek-buffer'
 
 interface Binding<Level extends object, Track extends object> {
@@ -27,17 +28,7 @@ export function observeSDK<Level extends object, Track extends object>(options: 
       return
     binding = undefined
     record.epoch++
-    let failure: unknown
-    for (const [name, callback] of record.callbacks.splice(0)) {
-      try {
-        record.off.call(record.dash, name, callback)
-      }
-      catch (error) {
-        failure ||= error
-      }
-    }
-    if (failure)
-      throw failure
+    runCleanups(record.callbacks.splice(0).map(([name, callback]) => () => record.off.call(record.dash, name, callback)))
   }
 
   function fail(record: Binding<Level, Track>, error: unknown): void {

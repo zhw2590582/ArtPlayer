@@ -26,6 +26,7 @@ while each submenu is open and then select another option through normal clicks.
 | `src/index.ts`                             | Deferred installation, media identity, update revisions, event subscription and cleanup |
 | `src/sdk.ts`                               | 4.x qualityIndex vs 5.x representation ID access and manual/Auto selection              |
 | `src/sdk-events.ts`                        | Owned SDK subscriptions, coalesced refresh, teardown and asynchronous errors             |
+| `src/cleanup.ts`                           | Ordered cleanup, revision guards and first thrown value preservation                    |
 | `src/seek-buffer.ts`                       | Exact SDK 4.5.2 empty-seek metric recovery and stale/reentrant measurement guards        |
 | `src/types.ts`                             | Narrow internal SDK, host, model and cleanup types                                        |
 | `src/mapping.ts`                           | Names, current item matching, duplicate labels and selector ordering                    |
@@ -36,7 +37,7 @@ while each submenu is open and then select another option through normal clicks.
 Dependencies flow from the entry into mapping/menu, and from mapping into the SDK
 adapter. Mapping has no DOM dependency. Menu receives a model and validity callback;
 it does not choose SDK versions. The event observer receives active/refresh/reset
-callbacks and owns no DOM or ArtPlayer object. All seven owned modules are checked with strict
+callbacks and owns no DOM or ArtPlayer object. All eight owned modules are checked with strict
 TypeScript, noUncheckedIndexedAccess, and skipLibCheck=false; there are no remaining
 owned JavaScript modules in this package.
 
@@ -98,6 +99,22 @@ or destroy an SDK to handle a plugin rendering failure.
 
 ## Types and compatibility
 
+`cleanup.ts` is shared by menu removal, SDK unsubscription and entry teardown.
+It records whether an action threw separately from the thrown value, so `undefined`,
+`null`, `false`, zero (including negative zero), empty strings and `NaN` propagate
+unchanged. Remaining owned cleanup actions still run; a newer update revision stops
+stale menu cleanup before the next action. Later failures cannot replace the first.
+This does not change the observer's asynchronous warning policy or make the caller's
+SDK plugin-owned. A caller's throwing `beforeUnmount` can prevent that particular
+core control from being removed; the plugin releases its sibling surfaces and
+propagates the original error rather than bypassing the core callback contract.
+
+`test/dash-cleanup-errors.test.js` covers both SDK method generations, all seven
+values, secondary errors, complete unsubscription and repeated destruction. The
+browser regression uses public control updates with fresh selector items: core
+selector items acquire non-configurable DOM references and must not be reused as
+new input objects. It exercises actual old/new core `beforeUnmount` callbacks.
+
 `src/types.ts` describes the narrow SDK and registry surfaces, menu models, event
 names, labels, and cleanup callbacks. SDK keys may be absent in malformed external
 data; the internal types retain that possibility instead of asserting every value
@@ -155,8 +172,11 @@ legacy fixture is checked against the actual published declaration and candidate
 `test:dash-types-package` packs the current core and DASH with Yarn, installs the
 tarballs offline outside the workspace, repeats a frozen install and checks all
 public type modes without resolving any workspace source. It also verifies that
-implementation files/config do not leak into the archive. This is type acceptance;
-the full installed runtime and SDK release matrix still belongs to PKG-DASH-06/05.
+implementation files/config do not leak into the archive. This is type acceptance.
+Verified installed files are retained under the report's `installed-artifacts/`
+directory for subsequent runtime/browser checks; every retained file is checked
+against its tarball hash before the temporary outside-workspace consumer is removed.
+The full installed runtime and SDK release matrix still belongs to PKG-DASH-06/05.
 `dash-control.spec.js` tests exercise real old/new core DOM, menu clicks, native MP4 and cleanup,
 with controlled SDK methods. They do not load dash.js or test MPD/ABR decoding.
 PKG-DASH-05 must verify pinned dash.js 4.5.2 and 5.2.1 with real adaptive media and

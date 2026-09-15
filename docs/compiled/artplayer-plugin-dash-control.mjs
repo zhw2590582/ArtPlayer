@@ -5,6 +5,24 @@
  * Released under the MIT License.
  */
 const $audio = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="18"><path fill="#fff" d="M256 80C149.9 80 62.4 159.4 49.6 262c9.4-3.8 19.6-6 30.4-6c26.5 0 48 21.5 48 48l0 128c0 26.5-21.5 48-48 48c-44.2 0-80-35.8-80-80l0-16 0-48 0-48C0 146.6 114.6 32 256 32s256 114.6 256 256l0 48 0 48 0 16c0 44.2-35.8 80-80 80c-26.5 0-48-21.5-48-48l0-128c0-26.5 21.5-48 48-48c10.8 0 21 2.1 30.4 6C449.6 159.4 362.1 80 256 80z"/></svg>';
+function runCleanups(actions, current = () => true) {
+  let failed = false;
+  let failure;
+  for (const action of actions) {
+    if (!current())
+      break;
+    try {
+      action();
+    } catch (error) {
+      if (!failed) {
+        failed = true;
+        failure = error;
+      }
+    }
+  }
+  if (failed)
+    throw failure;
+}
 function qualityAdapter(dash) {
   const modern = typeof dash.getRepresentationsByType === "function";
   return {
@@ -120,16 +138,7 @@ function createMenu(art, name, icon) {
   }
   function clear() {
     current = void 0;
-    let failure;
-    for (const [surface, callback] of [...owned]) {
-      try {
-        remove(surface, callback);
-      } catch (error) {
-        failure || (failure = error);
-      }
-    }
-    if (failure)
-      throw failure;
+    runCleanups([...owned].map(([surface, callback]) => () => remove(surface, callback)));
   }
   function update(config, model, active) {
     if (!model) {
@@ -248,16 +257,7 @@ function observeSDK(options) {
       return;
     binding = void 0;
     record.epoch++;
-    let failure;
-    for (const [name, callback] of record.callbacks.splice(0)) {
-      try {
-        record.off.call(record.dash, name, callback);
-      } catch (error) {
-        failure || (failure = error);
-      }
-    }
-    if (failure)
-      throw failure;
+    runCleanups(record.callbacks.splice(0).map(([name, callback]) => () => record.off.call(record.dash, name, callback)));
   }
   function fail(record, error) {
     if (binding === record) {
@@ -398,18 +398,7 @@ function artplayerPluginDashControl(option = {}) {
       }
     });
     function clear(current = () => true) {
-      let failure;
-      for (const cleanup of [quality.clear, audio.clear]) {
-        if (!current())
-          break;
-        try {
-          cleanup();
-        } catch (error) {
-          failure || (failure = error);
-        }
-      }
-      if (failure)
-        throw failure;
+      runCleanups([quality.clear, audio.clear], current);
     }
     function update() {
       if (closed || art.isDestroy)
@@ -455,17 +444,8 @@ function artplayerPluginDashControl(option = {}) {
         return;
       closed = true;
       revision++;
-      let failure;
       const actions = [observer.release, clear, ...subscriptions.splice(0).map(([name, callback]) => () => art.off(name, callback))];
-      for (const action of actions) {
-        try {
-          action();
-        } catch (error) {
-          failure || (failure = error);
-        }
-      }
-      if (failure)
-        throw failure;
+      runCleanups(actions);
     }
     try {
       const entries = [["ready", update], ["restart", update], ["destroy", destroy]];

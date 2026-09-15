@@ -99,6 +99,65 @@ async function openDash(page, core, plugin, sdk, testInfo) {
   await expect(page.locator('.art-control-dash-audio .art-selector-value')).toHaveText('en')
 }
 for (const core of ['published', 'candidate']) {
+  for (const sdk of [4, 5]) {
+    test(`${core} core + candidate DASH SDK ${sdk}: falsy unmount errors preserve identity and release sibling menus`, async ({ page }, testInfo) => {
+      await openDash(page, core, 'candidate', sdk, testInfo)
+      const result = await page.evaluate((sdk) => {
+        const art = window.art
+        const plugin = art.plugins.artplayerPluginDashControl
+        const method = sdk === 4 ? 'getBitrateInfoListFor' : 'getRepresentationsByType'
+        const original = art.dash[method]
+        const results = []
+        for (const failure of [undefined, null, false, 0, -0, '', Number.NaN]) {
+          let armed = false
+          art.controls.update({ name: 'dash-quality', selector: art.controls.cache.get('dash-quality').option.selector.map(item => ({ ...item })), beforeUnmount() {
+            if (armed)
+              throw failure
+          } })
+          armed = true
+          art.dash[method] = () => []
+          let threw = false
+          let same = false
+          try {
+            plugin.update()
+          }
+          catch (error) {
+            threw = true
+            same = Object.is(error, failure)
+          }
+          results.push({ threw, same, audioRemoved: !art.controls['dash-audio'], settingsRemoved: !art.setting.find('dash-quality') && !art.setting.find('dash-audio') })
+          armed = false
+          art.dash[method] = original
+          if (art.controls['dash-quality'])
+            art.controls.remove('dash-quality')
+          plugin.update()
+        }
+        let armed = false
+        art.controls.update({ name: 'dash-quality', selector: art.controls.cache.get('dash-quality').option.selector.map(item => ({ ...item })), beforeUnmount() {
+          if (armed)
+            // eslint-disable-next-line no-throw-literal -- Verify the public callback's primitive exception identity.
+            throw 0
+        } })
+        armed = true
+        let destroyThrew = false
+        let destroySame = false
+        try {
+          art.destroy(false)
+        }
+        catch (error) {
+          destroyThrew = true
+          destroySame = Object.is(error, 0)
+        }
+        const siblingRemoved = !art.controls['dash-audio']
+        armed = false
+        if (art.controls['dash-quality'])
+          art.controls.remove('dash-quality')
+        return { results, destroyThrew, destroySame, siblingRemoved }
+      }, sdk)
+      await testInfo.attach('dash-cleanup-errors', { contentType: 'application/json', body: JSON.stringify({ result, scope: 'Real core beforeUnmount callbacks and native DOM; controlled SDK topology, no adaptive playback claim.' }) })
+      expect(result).toEqual({ results: Array.from({ length: 7 }, () => ({ threw: true, same: true, audioRemoved: true, settingsRemoved: true })), destroyThrew: true, destroySame: true, siblingRemoved: true })
+    })
+  }
   for (const [plugin, sdk] of [['published', 4], ['candidate', 4], ['candidate', 5]]) {
     for (const surface of ['control', 'setting']) {
       for (const type of ['quality', 'audio']) {

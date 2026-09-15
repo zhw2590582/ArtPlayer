@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-DASH-CLEANUP-01 清理异常与职责归一
+
+四处清理循环改为私有 cleanup.ts，保留首个原始异常值、剩余资源释放和重入保护。
+未修复源码6失败，修正测试输入后的未修复产物4项Chromium失败；首轮输入复用
+导致的4项setup失败单独保留。修复后源码167通过，安装三格式与历史/源码共470通过。
+
+source: 12通过/0跳过；main: 96通过/0跳过；legacy: 72通过/0跳过；sdk-main: 24通过/12跳过；sdk-legacy: 24通过/12跳过。
+受控SDK的DOM验证与真实dash.js 4.5.2/5.2.1播放/换源/异步恢复分开记录；
+Windows WebKit MSE缺失的跳过不计实际播放。5组隔离类型正例和40预期负例成立，
+三格式、文档副本与安装文件字节一致。详见[记录](changes/2026-09-15-PKG-DASH-CLEANUP-01-errors.md)和[证据](baselines/dash-cleanup-errors-validation.json)。
+
+任务完成，DASH-05继续doing；205 done、21 doing、43 todo，共269项。
+无新依赖、公开类型、版本或锁文件修改；本轮没有推送、部署或发布。
+
 ## PKG-TOOL-THUMB-07 清理异常传播修复
 
 修复cleanupAll吞掉destroy监听器抛出的falsy值、或被后续异常覆盖的兼容回归。
