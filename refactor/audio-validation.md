@@ -1,5 +1,16 @@
 # Audio Track 行为与媒体测试
 
+## PKG-AUDIO-BUFFER-01：断流测试的等待顺序
+
+`audio-buffering.spec.js`不再先等待switchUrl完成才检查/放行网络，改为记录其
+pending/fulfilled/rejected状态，放行后明确要求成功。新增完整MP4元数据但扣住
+全部编码帧的回归：旧等待方式20秒超时，修正后的新旧核心/插件三浏览器12项通过。
+仅1字节的初版夹具曾触发Firefox媒体错误，失败保留；最终按ftyp/moov结构发出
+1605字节。此回归验证测试可继续放行网络，不代替真实缓冲断言。
+原断流矩阵仍16通过、Windows WebKit8失败，全部到达native-starvation阶段，
+没有放宽trusted waiting、双时钟恢复或同步检查。详见[记录](changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md)
+与[证据](baselines/audio-buffer-order-validation.json)。Audio-05和AUDIO-BUFFER-01继续开放。
+
 ## PKG-AUDIO-03 候选修复
 
 音频状态已从核心事件接入拆出，源码 44 项、加入三种产物共 89 项 Node 通过。

@@ -2,9 +2,9 @@
 
 > 由 tasks.json 生成。请修改数据后运行 `node refactor/scripts/plan.mjs --write`，不要手改本表。
 
-基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 284 项，范围 22 个包及工作区/示例。
+基线：`40fcda6a37d0049d42e49c1e64e70d4fd9ba5f7f`。总任务 285 项，范围 22 个包及工作区/示例。
 
-状态：todo 41 / doing 20 / blocked 0 / done 223 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
+状态：todo 41 / doing 20 / blocked 0 / done 224 / deferred 0。风险 L/M/H 表示兼容风险，不表示工期。
 
 前置依赖是启动条件；验收是完成条件。任务可以继续拆分，但不能复用或悄悄删除旧 ID。
 
@@ -18,7 +18,7 @@
 | artplayer-plugin-ads | 2.1.0 | PKG-ADS-01, PKG-ADS-02, PKG-ADS-03, PKG-ADS-04, PKG-ADS-05, PKG-ADS-06 |
 | artplayer-plugin-ambilight | 1.1.0 | PKG-AMBILIGHT-01, PKG-AMBILIGHT-02, PKG-AMBILIGHT-03, PKG-AMBILIGHT-04, PKG-AMBILIGHT-PROXY-01, PKG-AMBILIGHT-05, PKG-AMBILIGHT-06, PKG-FACTORY-01 |
 | artplayer-plugin-asr | 2.1.0 | PKG-ASR-01, PKG-ASR-02, PKG-ASR-03, PKG-ASR-04, PKG-ASR-05, PKG-ASR-06, PKG-ASR-07, PKG-ASR-08, PKG-ASR-09, PKG-ASR-10 |
-| artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06, SITE-AUDIO-01, CI-TYPES-01 |
+| artplayer-plugin-audio-track | 1.1.0 | PKG-AUDIO-01, PKG-AUDIO-02, PKG-AUDIO-03, PKG-AUDIO-04, PKG-AUDIO-05, PKG-AUDIO-06, SITE-AUDIO-01, CI-TYPES-01, PKG-AUDIO-BUFFER-01 |
 | artplayer-plugin-auto-thumbnail | 1.1.0 | PKG-AUTO-THUMB-01, PKG-AUTO-THUMB-02, PKG-AUTO-THUMB-03, PKG-AUTO-THUMB-04, PKG-AUTO-THUMB-05, PKG-AUTO-THUMB-06, PKG-AUTO-THUMB-07, PKG-AUTO-THUMB-08, PKG-AUTO-THUMB-09, PKG-AUTO-THUMB-10, PKG-AUTO-THUMB-11, PKG-AUTO-THUMB-12, PKG-AUTO-THUMB-13 |
 | artplayer-plugin-chapter | 1.1.0 | PILOT-01, PKG-CHAPTER-01, PKG-CHAPTER-02, PKG-CHAPTER-03, PKG-CHAPTER-04, PKG-CHAPTER-05, PKG-CHAPTER-06, PKG-CHAPTER-HOVER-01 |
 | artplayer-plugin-chromecast | 1.1.0 | PKG-CAST-01, PKG-CAST-02, PKG-CAST-03, PKG-CAST-04, PKG-CAST-05, PKG-CAST-06 |
@@ -174,8 +174,9 @@
 | PKG-AUDIO-02 | artplayer-plugin-audio-track<br>建立特有行为与错误测试 | PKG-AUDIO-01, ENG-03, ENG-05 | 偏移、倍率、seek、waiting/playing、加载错误和 autoplay 拒绝 | 旧版本行为可重跑，成功/失败/切源/销毁有必要断言 | H | done |
 | PKG-AUDIO-03 | artplayer-plugin-audio-track<br>整理内部职责与资源 | PKG-AUDIO-02, CORE-10 | 外部 audio 的同步策略、监听与源更新生命周期 | 结构变化和缺陷修复分开记录；原 API/事件/资源生命周期通过 | H | done |
 | PKG-AUDIO-04 | artplayer-plugin-audio-track<br>迁移自有源码和公开类型 | PKG-AUDIO-03, ENG-04, ENG-06, CORE-07 | Option/Result/audio、update 输入和事件类型 | 严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容 | H | done |
-| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22, CORE-24 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
+| PKG-AUDIO-05 | artplayer-plugin-audio-track<br>验证新旧核心和组合 | PKG-AUDIO-04, CORE-22, CORE-24, PKG-AUDIO-BUFFER-01 | 主视频切源和缓冲恢复，多实例独立音频、旧核心 | 最终核心与原支持范围核心分别通过；设备/SDK 缺证据不能标完成 | H | doing |
 | PKG-AUDIO-06 | artplayer-plugin-audio-track<br>验证分发并同步文档 | PKG-AUDIO-05, ENG-07 | audio.track.js 示例与运行返回值一致的声明 | tarball 入口/资源、类型、8082 demo 和 README 一致，有回退记录 | H | todo |
+| PKG-AUDIO-BUFFER-01 | artplayer-plugin-audio-track<br>修正断流测试的切源等待顺序 | PKG-AUDIO-04, CORE-22 | 网络扣留时独立观察切源Promise；完整元数据扣帧回归与阶段诊断 | 旧顺序复现死等，三浏览器新旧组合可放行并验证恢复；保留真实缓冲失败，不以本项关闭Audio-05或设备门槛 | M | done |
 
 ## 5 包迁移：artplayer-plugin-auto-thumbnail
 
@@ -746,3 +747,4 @@
 - DOC-REVIEW-01: [记录](changes/2026-09-15-DOC-REVIEW-01-user-guidance.md) [记录](release-reviews.md) [记录](ai-workflow.md)
 - PKG-DANMUKU-START-01: [记录](baselines/ci-installed-webkit-validation.json) [记录](changes/2026-09-16-PKG-DANMUKU-START-01-first-sample.md) [记录](baselines/danmuku-start-validation.json)
 - CI-NPM-02: [记录](changes/2026-09-16-CI-NPM-02-verify-bundle.md) [记录](baselines/npm-bundle-verification.json)
+- PKG-AUDIO-BUFFER-01: [记录](changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md) [记录](baselines/audio-buffer-order-validation.json)

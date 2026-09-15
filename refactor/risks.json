@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "task": "BASE-07",
   "sourceCommit": "e01f39ff",
-  "updatedAt": "2026-09-14T07:23:15.393Z",
+  "updatedAt": "2026-09-15T17:18:32.442Z",
   "note": "Open means closure evidence is outstanding; source-observed and unverified are not reproduced runtime bugs. A source issue already mitigated in the workspace still requires candidate regression evidence. No accepted-with-scope item is implied by baseline task completion.",
   "items": [
     {
@@ -3005,9 +3005,11 @@
         "refactor/changes/2026-09-15-CI-01-source-webkit.md",
         "refactor/baselines/ci-source-webkit-validation.json",
         "refactor/changes/2026-09-15-CI-01-installed-webkit.md",
-        "refactor/baselines/ci-installed-webkit-validation.json"
+        "refactor/baselines/ci-installed-webkit-validation.json",
+        "refactor/changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md",
+        "refactor/baselines/audio-buffer-order-validation.json"
       ],
-      "compatibleResolution": "保留真实 waiting 断言；使用独立原生对照和其他实际支持环境/输入继续验证，不将没有播放推进的诊断当成缓冲通过，也不凭此改变插件 API 或否定真实 Safari 支持。",
+      "compatibleResolution": "保留真实 waiting 断言；使用独立原生对照和其他实际支持环境/输入继续验证，不将没有播放推进的诊断当成缓冲通过，也不凭此改变插件 API 或否定真实 Safari 支持。 PKG-AUDIO-BUFFER-01已修正测试等待顺序；独立切源放行12项通过，原WebKit真实缓冲8项仍失败，本风险不关闭。",
       "closureCriteria": "受影响的缓冲/恢复得到真实媒体证据；与原生能力和测试夹具差异分开，发布环境的剩余范围经显式处理。",
       "workspaceState": "CI-01 九包安装扩展的首轮 336 项中，Windows WebKit 八项新旧音频受限媒体组合继续失败。七项未观察到目标可信 waiting，一项受限视频路径耗尽整体时间并在最终状态读取中报页面关闭。其他引擎均通过；保留原始失败，不以销毁后状态反推初始解码错误，不推断新的共同底层原因。 Same-file prefix controls now show Windows WebKit can start before releasing the tail with larger prefixes (video188653/audio65536), but four committed native diagnostics still record no trusted waiting. Default three-engine diagnostics retain Chromium/Firefox8 progression+waiting and WebKit4 no progression/no waiting. Before-release request copies distinguish held bytes from final sent counters; no production fix or waiver. Complete WebKit source run ae56937d3: all eight initial dual-clock assertions pass, then all eight fail the original trusted waiting/time>0.3 assertion at line30. Seven record no waiting; one has only a trusted time0 event. Held prefixes remain96KiB/32KiB. Recovery assertions are not reached; no production fix or waiver."
     },

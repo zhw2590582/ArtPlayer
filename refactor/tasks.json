@@ -1756,7 +1756,8 @@
       "dependsOn": [
         "PKG-AUDIO-04",
         "CORE-22",
-        "CORE-24"
+        "CORE-24",
+        "PKG-AUDIO-BUFFER-01"
       ],
       "status": "doing",
       "risk": "H",
@@ -6158,6 +6159,26 @@
       "evidence": [
         "changes/2026-09-16-CI-NPM-02-verify-bundle.md",
         "baselines/npm-bundle-verification.json"
+      ]
+    },
+    {
+      "id": "PKG-AUDIO-BUFFER-01",
+      "phase": "5 包迁移：artplayer-plugin-audio-track",
+      "title": "修正断流测试的切源等待顺序",
+      "scope": [
+        "artplayer-plugin-audio-track"
+      ],
+      "dependsOn": [
+        "PKG-AUDIO-04",
+        "CORE-22"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "网络扣留时独立观察切源Promise；完整元数据扣帧回归与阶段诊断",
+      "acceptance": "旧顺序复现死等，三浏览器新旧组合可放行并验证恢复；保留真实缓冲失败，不以本项关闭Audio-05或设备门槛",
+      "evidence": [
+        "changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md",
+        "baselines/audio-buffer-order-validation.json"
       ]
     }
   ]

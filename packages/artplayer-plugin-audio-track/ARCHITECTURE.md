@@ -65,6 +65,14 @@ source failure recovery, and old/native pause/end plus corrected candidate clean
 See refactor/audio-validation.md for failed baseline probes, Windows WebKit WAV/size limits,
 physical-device gaps and the remaining 05/06 combination/distribution gates.
 
+`audio-buffering.spec.js` observes switchUrl's Promise independently while its real
+HTTP response is held, and requires fulfillment after release. Never await that
+Promise before allowing the test to release the network. A separate regression
+sends complete MP4 format/metadata boxes while withholding frames to exercise this
+ordering; it does not replace the existing trusted waiting and playback recovery
+assertions. Phase/switch/media attachments distinguish a pending switch from the
+Windows WebKit native buffering gap, which remains open.
+
 The bilingual VitePress audio-track guides explain the actual deferred update,
 strict drift threshold, URL truthiness and shared mute behavior. Keep their Run Code
 source identical to docs/assets/example/audio.track.js. document-audio.spec.js

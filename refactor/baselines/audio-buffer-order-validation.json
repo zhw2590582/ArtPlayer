@@ -1,0 +1,5118 @@
+{
+  "schemaVersion": 1,
+  "task": "PKG-AUDIO-BUFFER-01",
+  "verifiedAt": "2026-09-15T17:16:20.451Z",
+  "startedFrom": "6f7fd7931d03d0581fb4dd5405021f9f34d5c48d",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "inputs": [
+    {
+      "path": "test/browser/audio-buffering.spec.js",
+      "sha256": "0deea1832fcec43fb4acef8ac82580f9f35363a38a513d73902ae68be1bf59d6"
+    },
+    {
+      "path": "test/browser/audio-fixture.js",
+      "sha256": "4623be9d2c6df678a859d06d7bc713d125572d0698dcd4249612e4d4d7693c28"
+    },
+    {
+      "path": "test/helpers/media-gate.js",
+      "sha256": "b9bc0e8550739902ed4d94674b53d6c5b35795cd25ddf3e567ed22eed591f385"
+    },
+    {
+      "path": "test/browser/media/pattern.mp4",
+      "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233"
+    },
+    {
+      "path": "test/browser/media/audio-tone.m4a",
+      "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56"
+    }
+  ],
+  "before": {
+    "report": {
+      "path": "refactor/.cache/audio-buffer-order-before/report.json",
+      "sha256": "ad2b0afd658768782bc9bb647b47bb3688100194026c9900b5929501a194b5f5"
+    },
+    "archive": "refactor/.cache/audio-buffer-order-before",
+    "stats": {
+      "startTime": "2026-09-15T17:04:20.228Z",
+      "duration": 11734.457,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8487,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ]
+  },
+  "oneByteDeadlock": {
+    "report": {
+      "path": "refactor/.cache/audio-held-switch-before/report.json",
+      "sha256": "b614ba299370d43df4e18773e7e2dae5994e97aab0ee1bfd520cf01cea1388d5"
+    },
+    "archive": "refactor/.cache/audio-held-switch-before",
+    "stats": {
+      "startTime": "2026-09-15T17:08:15.212Z",
+      "duration": 23672.197,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "timedOut",
+        "durationMs": 20205,
+        "error": "Test timeout of 20000ms exceeded.",
+        "phase": "begin-switch",
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ]
+  },
+  "intermediate": {
+    "report": {
+      "path": "refactor/.cache/audio-buffer-order-after/report.json",
+      "sha256": "ab9eedc1eceed4d0f4915ed61d6eb08a3d3b0575d02854c439a0ad70ff767983"
+    },
+    "archive": "refactor/.cache/audio-buffer-order-after",
+    "stats": {
+      "startTime": "2026-09-15T17:05:45.142Z",
+      "duration": 90705.88699999999,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 8,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5395,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 674.8999999761581,
+          "settledAt": 687.3999999761581
+        },
+        "video": {
+          "time": 3.472292,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.433187,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.058339,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.058339
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5328,
+        "phase": "complete",
+        "video": {
+          "time": 4.849775,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.807616,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520179,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.572018
+          },
+          {
+            "trusted": true,
+            "time": 3.717158,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.717373
+          },
+          {
+            "trusted": true,
+            "time": 4.774548,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.774729
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5243,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 621.3000000119209,
+          "settledAt": 630.9000000357628
+        },
+        "video": {
+          "time": 3.459903,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.436298,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.043885,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.043885
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5267,
+        "phase": "complete",
+        "video": {
+          "time": 4.806169,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.786307,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.52019,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.573059
+          },
+          {
+            "trusted": true,
+            "time": 3.709932,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.710136
+          },
+          {
+            "trusted": true,
+            "time": 4.77073,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.770904
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5404,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 694.5,
+          "settledAt": 707
+        },
+        "video": {
+          "time": 3.472963,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.435818,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=98304-",
+            "start": 98304,
+            "end": 251537,
+            "sent": 153234,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.056098,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.056098
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5335,
+        "phase": "complete",
+        "video": {
+          "time": 4.841305,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.799145,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520126,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.572928
+          },
+          {
+            "trusted": true,
+            "time": 3.717128,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.717343
+          },
+          {
+            "trusted": true,
+            "time": 4.774518,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.774699
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5255,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 641.5999999642372,
+          "settledAt": 649.3999999761581
+        },
+        "video": {
+          "time": 3.463303,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.424018,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=98304-",
+            "start": 98304,
+            "end": 251537,
+            "sent": 153234,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.058269,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.058269
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5292,
+        "phase": "complete",
+        "video": {
+          "time": 4.815589,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.781575,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520115,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.571816
+          },
+          {
+            "trusted": true,
+            "time": 3.710102,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.710442
+          },
+          {
+            "trusted": true,
+            "time": 4.768895,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.769076
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6646,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1064,
+          "settledAt": 1084
+        },
+        "video": {
+          "time": 3.500743,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.50818,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.088691,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.088691
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5349,
+        "phase": "complete",
+        "video": {
+          "time": 4.758001,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.75801,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.458769,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.46006
+          },
+          {
+            "trusted": true,
+            "time": 4.758001,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.758001
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5442,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 715,
+          "settledAt": 729
+        },
+        "video": {
+          "time": 3.498976,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.502444,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.091787,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.091787
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5563,
+        "phase": "complete",
+        "video": {
+          "time": 4.871169,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.868941,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.487658,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.488445
+          },
+          {
+            "trusted": true,
+            "time": 4.78841,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.78841
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6609,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1066,
+          "settledAt": 1084
+        },
+        "video": {
+          "time": 3.499999,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.505249,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.090104,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.090104
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5547,
+        "phase": "complete",
+        "video": {
+          "time": 4.848259,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.848599,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.469572,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.471145
+          },
+          {
+            "trusted": true,
+            "time": 4.808158,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.808158
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5512,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 743,
+          "settledAt": 760
+        },
+        "video": {
+          "time": 3.519148,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.526627,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.113773,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.113773
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5491,
+        "phase": "complete",
+        "video": {
+          "time": 4.766561,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.726205,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.458614,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.458332
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8718,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1671,
+          "settledAt": 1939
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.0359373,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8881,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.1260624,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0343655,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8635,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1628,
+          "settledAt": 1913
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 5.9918749,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8859,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.0014302,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.776101,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8666,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1604,
+          "settledAt": 1900
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.0174165,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9127,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.0861517,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0328709,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8530,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1461,
+          "settledAt": 1756
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.0604164,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8920,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.0759763,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0583174,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ]
+  },
+  "oneByteMatrix": {
+    "report": {
+      "path": "refactor/.cache/audio-buffer-order-final/report.json",
+      "sha256": "3c0f3397bff1f3b284af3d839b048ca7643ac921265acc6225348c6323769556"
+    },
+    "archive": "refactor/.cache/audio-buffer-order-final",
+    "stats": {
+      "startTime": "2026-09-15T17:09:12.227Z",
+      "duration": 113636.60800000001,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 12,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "published core + published audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1348,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 669.1999999880791,
+          "settledAt": 690.6000000238419
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5260,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 633.9000000357628,
+          "settledAt": 641.7000000476837
+        },
+        "video": {
+          "time": 3.481268,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.44259,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.058539,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.058539
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5399,
+        "phase": "complete",
+        "video": {
+          "time": 4.902567,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.861999,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520104,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.567244
+          },
+          {
+            "trusted": true,
+            "time": 3.706284,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.706466
+          },
+          {
+            "trusted": true,
+            "time": 4.768989,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.769842
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1195,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 629.5,
+          "settledAt": 643.6999999880791
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5177,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 608.1000000238419,
+          "settledAt": 615.8000000119209
+        },
+        "video": {
+          "time": 3.447884,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.421466,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.046244,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.046244
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5284,
+        "phase": "complete",
+        "video": {
+          "time": 4.829319,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.787348,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520091,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.572721
+          },
+          {
+            "trusted": true,
+            "time": 3.719659,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.719852
+          },
+          {
+            "trusted": true,
+            "time": 4.77371,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.773861
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1338,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 682.8000000119209,
+          "settledAt": 706.1000000238419
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=65536-",
+            "start": 65536,
+            "end": 251537,
+            "sent": 186002,
+            "wasHeld": false,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5258,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 631.3999999761581,
+          "settledAt": 640
+        },
+        "video": {
+          "time": 3.460888,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.427658,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=98304-",
+            "start": 98304,
+            "end": 251537,
+            "sent": 153234,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.052447,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.052447
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5415,
+        "phase": "complete",
+        "video": {
+          "time": 4.899088,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.857075,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520129,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.564586
+          },
+          {
+            "trusted": true,
+            "time": 3.70659,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.706909
+          },
+          {
+            "trusted": true,
+            "time": 4.76731,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.768104
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1322,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 621.8999999761581,
+          "settledAt": 636.8999999761581
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=65536-",
+            "start": 65536,
+            "end": 251537,
+            "sent": 186002,
+            "wasHeld": false,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5228,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 618.1000000238419,
+          "settledAt": 626.4000000357628
+        },
+        "video": {
+          "time": 3.463853,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.437187,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=98304-",
+            "start": 98304,
+            "end": 251537,
+            "sent": 153234,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.045467,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.045467
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5320,
+        "phase": "complete",
+        "video": {
+          "time": 4.8409,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.799491,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520094,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.573281
+          },
+          {
+            "trusted": true,
+            "time": 3.720923,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.721186
+          },
+          {
+            "trusted": true,
+            "time": 4.777407,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.778493
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "failed",
+        "durationMs": 2083,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"pending\"\nReceived: \"rejected\"",
+        "phase": "held-request",
+        "switch": {
+          "status": "rejected",
+          "startedAt": 1093,
+          "error": "[object Event]",
+          "settledAt": 1107
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6550,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1064,
+          "settledAt": 1082
+        },
+        "video": {
+          "time": 3.493939,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.500608,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.089734,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.089734
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5351,
+        "phase": "complete",
+        "video": {
+          "time": 4.755758,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.715324,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.462305,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.463106
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "failed",
+        "durationMs": 1061,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"pending\"\nReceived: \"rejected\"",
+        "phase": "held-request",
+        "switch": {
+          "status": "rejected",
+          "startedAt": 741,
+          "error": "[object Event]",
+          "settledAt": 747
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6491,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 999,
+          "settledAt": 1019
+        },
+        "video": {
+          "time": 3.488731,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.490329,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.083822,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.083822
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5554,
+        "phase": "complete",
+        "video": {
+          "time": 4.860968,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.858932,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.485747,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.486046
+          },
+          {
+            "trusted": true,
+            "time": 4.77841,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.77841
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "failed",
+        "durationMs": 2130,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"pending\"\nReceived: \"rejected\"",
+        "phase": "held-request",
+        "switch": {
+          "status": "rejected",
+          "startedAt": 1091,
+          "error": "[object Event]",
+          "settledAt": 1101
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6606,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1066,
+          "settledAt": 1087
+        },
+        "video": {
+          "time": 3.489504,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.493752,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.084457,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.084457
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5592,
+        "phase": "complete",
+        "video": {
+          "time": 4.870417,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.867951,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.493249,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.493691
+          },
+          {
+            "trusted": true,
+            "time": 4.787317,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.787317
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "failed",
+        "durationMs": 8009,
+        "error": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "held-request",
+        "switch": {
+          "status": "rejected",
+          "startedAt": 718,
+          "error": "[object Event]",
+          "settledAt": 726
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6323,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 981,
+          "settledAt": 1001
+        },
+        "video": {
+          "time": 3.508877,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.515531,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.104714,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.104714
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5651,
+        "phase": "complete",
+        "video": {
+          "time": 4.874999,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.872577,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.458196,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.458332
+          },
+          {
+            "trusted": true,
+            "time": 4.791666,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.791666
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3201,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1580,
+          "settledAt": 1946
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8189,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "pending",
+          "startedAt": 1266
+        },
+        "video": {
+          "time": 0,
+          "paused": true,
+          "readyState": 2,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 0.3828744,
+          "paused": true,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9018,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.1300552,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0428527,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3118,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1549,
+          "settledAt": 1851
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8327,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "pending",
+          "startedAt": 1363
+        },
+        "video": {
+          "time": 0,
+          "paused": true,
+          "readyState": 2,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 0,
+          "paused": true,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9116,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.1497204,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0433545,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 2984,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1465,
+          "settledAt": 1784
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8500,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1491,
+          "settledAt": 1809
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.0495623,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9044,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.2113846,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0696768,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3242,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1674,
+          "settledAt": 2022
+        },
+        "limit": 1,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8477,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1526,
+          "settledAt": 1843
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 5.9970415,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8942,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 6.9909619,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.8273659,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ]
+  },
+  "matchedBefore": {
+    "report": {
+      "path": "refactor/.cache/audio-held-switch-matched-before/report.json",
+      "sha256": "82725ae9bfe92d5ee58fe0026e324bac58ee20600c562b569db8338ac67a5af6"
+    },
+    "archive": "refactor/.cache/audio-held-switch-matched-before",
+    "stats": {
+      "startTime": "2026-09-15T17:14:31.577Z",
+      "duration": 23649.425,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "timedOut",
+        "durationMs": 20199,
+        "error": "Test timeout of 20000ms exceeded.",
+        "phase": "begin-switch",
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 1605,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ]
+  },
+  "finalHeldSwitch": {
+    "report": {
+      "path": "refactor/.cache/audio-held-switch-metadata/report.json",
+      "sha256": "eef0f2bbf8390f9f0ecaf0b3b3f918595098af69fb1f2808fbc95afc49f08a2e"
+    },
+    "archive": "refactor/.cache/audio-held-switch-metadata",
+    "stats": {
+      "startTime": "2026-09-15T17:13:10.970Z",
+      "duration": 20208.417999999998,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "rows": [
+      {
+        "title": "published core + published audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1370,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 700.8000000119209,
+          "settledAt": 717
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1255,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 656,
+          "settledAt": 678.2000000476837
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1361,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 668.6999999880791,
+          "settledAt": 687.1999999880791
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=65536-",
+            "start": 65536,
+            "end": 251537,
+            "sent": 186002,
+            "wasHeld": false,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 1266,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 669.8999999761581,
+          "settledAt": 687.6000000238419
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=65536-",
+            "start": 65536,
+            "end": 251537,
+            "sent": 186002,
+            "wasHeld": false,
+            "closed": true
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 2435,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1047,
+          "settledAt": 1071
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 1677,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 723,
+          "settledAt": 846
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 2734,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1045,
+          "settledAt": 1174
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 1656,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 721,
+          "settledAt": 852
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3152,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1463,
+          "settledAt": 1790
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3181,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1519,
+          "settledAt": 1923
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3151,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1482,
+          "settledAt": 1875
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: held switch can release before its Promise settles",
+        "project": "webkit",
+        "status": "passed",
+        "durationMs": 3117,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1549,
+          "settledAt": 1968
+        },
+        "limit": 1605,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ]
+  },
+  "finalStarvation": {
+    "report": {
+      "path": "refactor/.cache/audio-buffer-order-final/report.json",
+      "sha256": "3c0f3397bff1f3b284af3d839b048ca7643ac921265acc6225348c6323769556"
+    },
+    "rows": [
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5260,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 633.9000000357628,
+          "settledAt": 641.7000000476837
+        },
+        "video": {
+          "time": 3.481268,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.44259,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.058539,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.058539
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5399,
+        "phase": "complete",
+        "video": {
+          "time": 4.902567,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.861999,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520104,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.567244
+          },
+          {
+            "trusted": true,
+            "time": 3.706284,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.706466
+          },
+          {
+            "trusted": true,
+            "time": 4.768989,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.769842
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5177,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 608.1000000238419,
+          "settledAt": 615.8000000119209
+        },
+        "video": {
+          "time": 3.447884,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.421466,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.046244,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.046244
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5284,
+        "phase": "complete",
+        "video": {
+          "time": 4.829319,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.787348,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520091,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.572721
+          },
+          {
+            "trusted": true,
+            "time": 3.719659,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.719852
+          },
+          {
+            "trusted": true,
+            "time": 4.77371,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.773861
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5258,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 631.3999999761581,
+          "settledAt": 640
+        },
+        "video": {
+          "time": 3.460888,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.427658,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=98304-",
+            "start": 98304,
+            "end": 251537,
+            "sent": 153234,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.052447,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.052447
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5415,
+        "phase": "complete",
+        "video": {
+          "time": 4.899088,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.857075,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520129,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.564586
+          },
+          {
+            "trusted": true,
+            "time": 3.70659,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.706909
+          },
+          {
+            "trusted": true,
+            "time": 4.76731,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.768104
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5228,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 618.1000000238419,
+          "settledAt": 626.4000000357628
+        },
+        "video": {
+          "time": 3.463853,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.437187,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": true
+          },
+          {
+            "method": "GET",
+            "range": "bytes=98304-",
+            "start": 98304,
+            "end": 251537,
+            "sent": 153234,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.045467,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.045467
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "chromium",
+        "status": "passed",
+        "durationMs": 5320,
+        "phase": "complete",
+        "video": {
+          "time": 4.8409,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.799491,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.520094,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.573281
+          },
+          {
+            "trusted": true,
+            "time": 3.720923,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 3.721186
+          },
+          {
+            "trusted": true,
+            "time": 4.777407,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.778493
+          }
+        ],
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6550,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1064,
+          "settledAt": 1082
+        },
+        "video": {
+          "time": 3.493939,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.500608,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.089734,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.089734
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5351,
+        "phase": "complete",
+        "video": {
+          "time": 4.755758,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.715324,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.462305,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.463106
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6491,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 999,
+          "settledAt": 1019
+        },
+        "video": {
+          "time": 3.488731,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.490329,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 0,
+            "readyState": 1,
+            "audioPaused": true,
+            "videoTime": 0
+          },
+          {
+            "trusted": true,
+            "time": 3.083822,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.083822
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5554,
+        "phase": "complete",
+        "video": {
+          "time": 4.860968,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.858932,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.485747,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.486046
+          },
+          {
+            "trusted": true,
+            "time": 4.77841,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.77841
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6606,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1066,
+          "settledAt": 1087
+        },
+        "video": {
+          "time": 3.489504,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.493752,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.084457,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.084457
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5592,
+        "phase": "complete",
+        "video": {
+          "time": 4.870417,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.867951,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.493249,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.493691
+          },
+          {
+            "trusted": true,
+            "time": 4.787317,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.787317
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 6323,
+        "phase": "complete",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 981,
+          "settledAt": 1001
+        },
+        "video": {
+          "time": 3.508877,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 3.515531,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 251538,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.104714,
+            "readyState": 2,
+            "audioPaused": true,
+            "videoTime": 3.104714
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "firefox",
+        "status": "passed",
+        "durationMs": 5651,
+        "phase": "complete",
+        "video": {
+          "time": 4.874999,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 4.872577,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 132436,
+            "wasHeld": true,
+            "closed": true
+          }
+        ],
+        "waitingEvents": [
+          {
+            "trusted": true,
+            "time": 3.458196,
+            "readyState": 2,
+            "audioPaused": false,
+            "videoTime": 3.458332
+          },
+          {
+            "trusted": true,
+            "time": 4.791666,
+            "readyState": 1,
+            "audioPaused": false,
+            "videoTime": 4.791666
+          }
+        ],
+        "browser": "155.0",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + published audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8189,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "pending",
+          "startedAt": 1266
+        },
+        "video": {
+          "time": 0,
+          "paused": true,
+          "readyState": 2,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 0.3828744,
+          "paused": true,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + published audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9018,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.1300552,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0428527,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "published core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8327,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "pending",
+          "startedAt": 1363
+        },
+        "video": {
+          "time": 0,
+          "paused": true,
+          "readyState": 2,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 0,
+          "paused": true,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "published core + source audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9116,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.1497204,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0433545,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "published",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8500,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1491,
+          "settledAt": 1809
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.0495623,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + published audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 9044,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 7.2113846,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 7.0696768,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "published",
+        "selectedPlugin": {
+          "kind": "published",
+          "sha256": "473f39f1d750f0722cca7e857c12c3c978ebe3c3b2352e325f1248318e508683"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real video starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8477,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "switch": {
+          "status": "fulfilled",
+          "startedAt": 1526,
+          "settledAt": 1843
+        },
+        "video": {
+          "time": 0,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 5.9970415,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "limit": 98304,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 251537,
+            "sent": 98304,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      },
+      {
+        "title": "candidate core + source audio: real audio starvation resumes after network release",
+        "project": "webkit",
+        "status": "failed",
+        "durationMs": 8942,
+        "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false\n\nCall Log:\n- Timeout 7000ms exceeded while waiting on the predicate",
+        "phase": "native-starvation",
+        "video": {
+          "time": 6.9909619,
+          "paused": false,
+          "readyState": 4,
+          "ended": false,
+          "error": null
+        },
+        "audio": {
+          "time": 6.8273659,
+          "paused": false,
+          "readyState": 3,
+          "ended": false,
+          "error": null
+        },
+        "limit": 32768,
+        "requests": [
+          {
+            "method": "GET",
+            "range": "bytes=0-",
+            "start": 0,
+            "end": 132435,
+            "sent": 32768,
+            "wasHeld": true,
+            "closed": false
+          }
+        ],
+        "waitingEvents": [],
+        "browser": "26.6",
+        "platform": "win32",
+        "core": "candidate",
+        "plugin": "source",
+        "selectedPlugin": {
+          "kind": "source-build",
+          "file": null,
+          "sha256": "c4b37388ecf38c4c33dc172895d2d76d1ffca2587628c01b11b38cfe1852c713"
+        }
+      }
+    ],
+    "note": "The original 24 starvation cases and their shared switch helper are unchanged by the final metadata-only held-switch fixture correction. These are two separate runs, not a claim of one fully green 36-case suite."
+  },
+  "checks": {
+    "gateTests": {
+      "command": "node --test test/media-gate.test.js",
+      "exitCode": 0,
+      "pass": 3,
+      "durationMs": 161.9328,
+      "log": {
+        "path": "refactor/.cache/audio-buffer-order-gate-tests.log",
+        "sha256": "94f00463cba5f7b5b7e9d9ea3a063a134a31eb2f041c84f712af0adec0c35ddf"
+      }
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js test/browser/audio-buffering.spec.js",
+      "exitCode": 0
+    }
+  },
+  "result": {
+    "heldSwitchPass": 12,
+    "starvationPass": 16,
+    "starvationFail": 8,
+    "retries": 0,
+    "skipped": 0,
+    "knownFailure": "AUDIO-BUFFER-01",
+    "runtimeChanged": false,
+    "installedArtifactsVerified": false,
+    "physicalDeviceEvidence": false,
+    "fullAudioAcceptance": false,
+    "publicationAuthorized": false
+  }
+}

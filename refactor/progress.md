@@ -1,5 +1,15 @@
 # 进度与证据
 
+## PKG-AUDIO-BUFFER-01 断流测试等待顺序修复
+
+修正switchUrl与网络放行互相等待的问题；完整MP4元数据/无编码帧的回归用旧顺序
+复现20秒死等，修正后新旧核心/插件三浏览器12项通过，HTTP gate单测3项和lint通过。
+原真实断流矩阵仍16通过、Windows WebKit8失败，未放宽断言或修改生产行为。
+初版1字节夹具导致Firefox错误的失败报告也保留；最终按媒体结构发送完整元数据。
+见[记录](changes/2026-09-16-PKG-AUDIO-BUFFER-01-order.md)和[证据](baselines/audio-buffer-order-validation.json)。
+本子项done，Audio-05/06与AUDIO-BUFFER-01保持未完成；224 done、20 doing、41 todo，
+共285项。没有复盘、推送、部署或发布。
+
 ## CI-NPM-02 下载候选内容核验
 
 新增`release:verify-bundle`，以独立提供的源码SHA、manifest摘要、包批次/tag
