@@ -1,0 +1,617 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "5bf1a36183550a0e48a31b6d2317a3c6c4ed578d",
+  "capturedAt": "2026-09-15T23:09:40.298Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "plugin",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/plugin.md",
+          "sha256": "e2c105b14b05f727e5accadaeb5eef522063d6233365167b1775039b25536a19"
+        },
+        "html": {
+          "path": "docs/document/advanced/plugin.html",
+          "sha256": "151272d2535e6cd51c2427efc95052d773acdadaf78b78a3fdedb00638b79f3e"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-plugin-registry/zh-plugin-0.mts",
+            "sha256": "c6b93b562744efcffb95b142212efac9c893ea5c0d5068e288b3d6ec890a1566"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/plugin.md:53",
+            "sha256": "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00"
+          },
+          {
+            "id": "advanced/plugin.md:80",
+            "sha256": "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6"
+          },
+          {
+            "id": "advanced/plugin.md:108",
+            "sha256": "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/plugin.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/plugin.html#%E7%BC%96%E5%86%99%E6%8F%92%E4%BB%B6",
+          "/document/advanced/plugin.html#plugin-contract",
+          "/document/advanced/plugin.html#plugin-types",
+          "/document/advanced/plugin.html#%E7%A4%BA%E4%BE%8B"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "plugin",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+          "sha256": "73b8b156a4bed3812c84b196c215b2012bae5c522e523153378f5ef2a43e40ec"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/plugin.html",
+          "sha256": "4c858500ca4807ff9cab02972747cf9864badff967017730542104fc189ebdd6"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-plugin-registry/en-plugin-0.mts",
+            "sha256": "c6b93b562744efcffb95b142212efac9c893ea5c0d5068e288b3d6ec890a1566"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/plugin.md:53",
+            "sha256": "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00"
+          },
+          {
+            "id": "en/advanced/plugin.md:80",
+            "sha256": "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6"
+          },
+          {
+            "id": "en/advanced/plugin.md:108",
+            "sha256": "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/plugin.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/plugin.html#writing-plugins",
+          "/document/en/advanced/plugin.html#plugin-contract",
+          "/document/en/advanced/plugin.html#plugin-types",
+          "/document/en/advanced/plugin.html#examples"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "plugin",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00",
+          "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6",
+          "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-plugin-registry/chromium-zh-plugin.png",
+          "sha256": "eb1ee6bc520fb212acdf724a04c1d8deb8155b463900d52ed0863ce4fd8a8947"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "plugin",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00",
+          "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6",
+          "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-plugin-registry/chromium-en-plugin.png",
+          "sha256": "b16ce7073569e71e7a0206c20cc8c6e200c55cb18b98a312d55aad99779a7566"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "plugin",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00",
+          "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6",
+          "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-plugin-registry/firefox-zh-plugin.png",
+          "sha256": "c8489c51d47561b3dc19baab3d12b7b1873450953d3ca1b1396a32c617eae807"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "plugin",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00",
+          "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6",
+          "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-plugin-registry/firefox-en-plugin.png",
+          "sha256": "3f021313eba8e8f6802bb7fbc1a1d5d6e52743198fc49c4c81f589dca6c82397"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "plugin",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00",
+          "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6",
+          "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-plugin-registry/webkit-zh-plugin.png",
+          "sha256": "bd9248a6aa3025332e4ea2fb27bdd173db74362c1f882973261d7606c264c1a5"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "plugin",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "6baa9d36bf736990a515b7c860eb10d7d9915f1cdbb50cdf855da1056e04ce00",
+          "044c3ae166eaff8dc16702023c13b14c780c05ee25ae6302a291faa368100ad6",
+          "af33f5596cc5a3cf5f7cf36e989feb98cf540b7963d0170cb65753d1c6a1fc33"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-plugin-registry/webkit-en-plugin.png",
+          "sha256": "4e56b46ab2b5a5528b86fe25237cd5121949bfad1decab2fe45de4fbb05a7e5a"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "constructor receiver and argument",
+          "constructor array starts in order without waiting",
+          "constructor factory sees no assigned registry",
+          "native ready does not wait for async plugin",
+          "constructor async result registered after fulfillment",
+          "post-construction receiver and argument",
+          "sync add returns registry",
+          "result object is not cloned",
+          "result descriptor immutable and nonenumerable",
+          "duplicate throws and consumes id",
+          "synchronous failure propagated",
+          "async add returns promise and result initially absent",
+          "async fulfillment returns registry",
+          "anonymous fallback uses completion counter",
+          "ordinary thenable stored synchronously",
+          "foreign Promise stored synchronously",
+          "next returns registry",
+          "next neither invokes factory nor advances id",
+          "async rejection propagated",
+          "late fulfillment returns registry without publishing",
+          "destroy event cleanup runs; result destroy is not automatic",
+          "new add after destroy throws before factory",
+          "player DOM and instances cleaned"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "constructor receiver and argument",
+          "constructor array starts in order without waiting",
+          "constructor factory sees no assigned registry",
+          "native ready does not wait for async plugin",
+          "constructor async result registered after fulfillment",
+          "post-construction receiver and argument",
+          "sync add returns registry",
+          "result object is not cloned",
+          "result descriptor immutable and nonenumerable",
+          "duplicate throws and consumes id",
+          "synchronous failure propagated",
+          "async add returns promise and result initially absent",
+          "async fulfillment returns registry",
+          "anonymous fallback uses completion counter",
+          "ordinary thenable stored synchronously",
+          "foreign Promise stored synchronously",
+          "next returns registry",
+          "next neither invokes factory nor advances id",
+          "async rejection propagated",
+          "late fulfillment returns registry without publishing",
+          "destroy event cleanup runs; result destroy is not automatic",
+          "new add after destroy throws before factory",
+          "player DOM and instances cleaned"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "constructor receiver and argument",
+          "constructor array starts in order without waiting",
+          "constructor factory sees no assigned registry",
+          "native ready does not wait for async plugin",
+          "constructor async result registered after fulfillment",
+          "post-construction receiver and argument",
+          "sync add returns registry",
+          "result object is not cloned",
+          "result descriptor immutable and nonenumerable",
+          "duplicate throws and consumes id",
+          "synchronous failure propagated",
+          "async add returns promise and result initially absent",
+          "async fulfillment returns registry",
+          "anonymous fallback uses completion counter",
+          "ordinary thenable stored synchronously",
+          "foreign Promise stored synchronously",
+          "next returns registry",
+          "next neither invokes factory nor advances id",
+          "async rejection propagated",
+          "late fulfillment returns registry without publishing",
+          "destroy event cleanup runs; result destroy is not automatic",
+          "new add after destroy throws before factory",
+          "player DOM and instances cleaned"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-qQwwPA/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "96962a69a4faaecd986387efadb54c5623a23f2c",
+        "inputFingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "integrity": "sha512-+2+VWecKb9CbI3wTCs0sV7au8SNShyXahpwDAmGgZhDr22wbdv51QZnLnkPwgMgfNpVuTbsZ6A26Lpj3eY7NbQ=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "addedRecords": 7,
+    "totalRecords": 331,
+    "remainingInventoryRecords": 632,
+    "previousGroups": "All previous source and guide hashes verified unchanged."
+  },
+  "tests": {
+    "count": 27,
+    "pass": 27,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1325.7797,
+    "suites": [
+      "plugins",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 11.3,
+    "yarnSeconds": 13.34,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "visualInspection": "chromium-zh-plugin.png",
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-V4Ll8W/report.json",
+      "sha256": "95de2420e98e372c68bae6a51832688f075358957180d3a2c8d0ea6101727b59"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "f580b888bb9664b4dd30d900152a7b20560a49adc176ad9782103f7fe89be848",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "55236854b94ac7b0dd91b4107dcb60e97ac6f1a5e8b6b8a9dcb63bba66c6509a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "f88a6a2f1c5548389cae293614f648d72077ed03a7be6c81ad017a1155a839a3",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "7fa3ca9577b53f3bb90e2c23fec9e6e70fbbb0c089ccae2923084b9059bcbdf9",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "0c73b970872fe56df1c669e5badfa91f9cd7ec3c73070a9852cfea076cc8923f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "9ced9b18e4b260ccbcf6ac016b32ec0852040cb5c0f57be72718a03d40d598bf",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "f1dd73097e43df504f686f18a6ca30bcb1f57ab74d3cc62909db20505c994072",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "d6d79d4b47afaefa66d32c5b1709f412ed9d32c636462723918c268a6601e631",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "3d32a4c6d94d9eaa31cd982ec43ae2b710a4c923e5076f357ba4c902be48d729",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "ceb17cbb235a42438c28df15ddf830d104a749b58515333c43da2b18534b166c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "6716002b92bb12b54d17772d87a560bb9e863da35abfa37988907d54e02cdf74",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "a3a56ecc218c8e180621d1bc00684950cca4ada8d483334b0cb91fd783c10831",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "00a07f33277bae211a553e9fb2e924ade219513135bc54921886f4518dd27964",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "cc9304759ff3cdd84767eee38fcbb9cf70e234f2449946536fd1da972cde679f",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "43825f602514c9e6a0bd8f0a270a54a03d1cb76f821b99d1e736d0150dafc190",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "3503e145a591a406105eb953f9ac75c8373992c9f3f1f23b713de65c85a3bb3d",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "b7932e08a086cfe16ed5e78872e274fb897931d0653dbf7ac61a19b404ddec85",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "a0a8efb762e823fe4dd8c8de9601f74ac873ade8c6953a7e5305297608c71a12",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "9fd7e62c56ae78866267cdd5650dc4e4af4aad76dd6ff8466b68908bc25d661c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "00dc477ad56d12cfa6cd0d1e071e80f4120afed23f44af0393e23e5dac516a3b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "78bf5be3b2b5656a0b95ce2ce3cf1a635b6df609361a840b8298476f65af9d52",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-plugin-registry-validate.mjs",
+      "sha256": "397d6a95b105cf7302775e622352c05ac635ca996ecaaade163c4f2205eab670"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry-probe.js",
+      "sha256": "943147988df2d9dd5d8ad3340c9fdb93fd07b89c5b2f5913fb8a65e3e3a7f024"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry/report.json",
+      "sha256": "a0e596f5fd275b9fe401eee1d6fc3ecdf2ddaebe77865c1464309f1041e7251a"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry-build.log",
+      "sha256": "691c700265dc320fc0552e5ba44a7d83b867ba9c9aef9ec5ca33640259f83ee8"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry-llm.log",
+      "sha256": "fca1f217f409d5cd155e30080a46d0dbbc21e6c0fed063618de74b3a4e6c495f"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry-tests.log",
+      "sha256": "9a564a6a65e0546c089b6ef0e2a50e9bcd23b6c98664c7974059558f6b157304"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry-validate.log",
+      "sha256": "41e10f5d8604cddb6d6a85843616f638f40f0ff3d16749ecd74eec3d35f002d8"
+    },
+    {
+      "path": "refactor/.cache/site04-plugin-registry-ledger.log",
+      "sha256": "c30af1f960c80daabd462beae94da6cbc2394a71407fd2dc706de2ca10821246"
+    }
+  ]
+}

@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "1311e2d331a2cbd3ed9a563d6a3dc3acf792034b5983027771b1dbbccbe8858e"
+    "sha256": "503c389f66788737851288e0b2879dd73dfc630f9ce4f0474b49a2ba6bcb32e1"
   },
-  "reviewedAt": "2026-09-15T22:51:07.856Z",
+  "reviewedAt": "2026-09-15T23:09:40.297Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 324,
-    "unreviewedRecords": 639
+    "reviewedRecords": 331,
+    "unreviewedRecords": 632
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -2915,6 +2915,135 @@
         }
       ],
       "evidence": "baselines/site04-setting.json"
+    },
+    {
+      "id": "plugin-registry",
+      "status": "semantic-reviewed",
+      "conclusion": "Factory host/receiver and construction-phase registry absence; synchronous versus same-realm Promise returns, ready independence and rejection ownership; exact naming precedence, completion counter, immutable nonenumerable result descriptors, next boundary and reserved names; pending/late destruction behavior and plugin-owned cleanup; root legacy Promise declaration versus runtime inference and augmentation. This covers the registry, not built-in plugin behavior or all constructor options.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.plugins@213",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "plugins",
+          "line": 213
+        },
+        {
+          "id": "packages/artplayer/public/plugin.ts#Plugins.add@8",
+          "file": "packages/artplayer/public/plugin.ts",
+          "declaration": "Plugins",
+          "name": "add",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.plugins@96",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "plugins",
+          "line": 96
+        },
+        {
+          "id": "packages/artplayer/public/runtime/plugin.ts#Plugins.art@9",
+          "file": "packages/artplayer/public/runtime/plugin.ts",
+          "declaration": "Plugins",
+          "name": "art",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/runtime/plugin.ts#Plugins.id@10",
+          "file": "packages/artplayer/public/runtime/plugin.ts",
+          "declaration": "Plugins",
+          "name": "id",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/runtime/plugin.ts#Plugins.add@11",
+          "file": "packages/artplayer/public/runtime/plugin.ts",
+          "declaration": "Plugins",
+          "name": "add",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/runtime/plugin.ts#Plugins.next@12",
+          "file": "packages/artplayer/public/runtime/plugin.ts",
+          "declaration": "Plugins",
+          "name": "next",
+          "line": 12
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/index.ts",
+          "sha256": "20cfe3738b3ce7e11b69721a5f0bdad9db77807417d8e421397a40dfade4c047"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/index.ts",
+          "sha256": "4c97f354769bbcb338263f321876a90745a87a9af2d267e216bd3d9d007f268a"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/registration.ts",
+          "sha256": "9891686c32aeaa33c48ca500cf30ab24ffbb0835c6248769b4c645a5ff20129b"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/builtins.ts",
+          "sha256": "4631c9775732982dfdc87e16b1bd6b41a350be36fb27e0a9132c11a85b0c016d"
+        },
+        {
+          "path": "packages/artplayer/src/plugins/types.ts",
+          "sha256": "6823098d5ec1bf053f60ddfdd36bfcd3f06f3b528cc5dd30fd676a1318dac590"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/instance.ts",
+          "sha256": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8"
+        },
+        {
+          "path": "packages/artplayer/src/utils/property.ts",
+          "sha256": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/construction.ts",
+          "sha256": "24cc5cda1f614314db382271a9b0d5583b781894cfdf6c548700b1b5270467ee"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/plugin.ts",
+          "sha256": "2a57e148fda00ee687da5036b890b0f611cb94bb403a1ed52602179060259d35"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/plugin.ts",
+          "sha256": "9ad482f2a77914a91450419680b8af6b314b926f0831c2f7f6d7c466690f95c9"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/plugin.md",
+          "sha256": "e2c105b14b05f727e5accadaeb5eef522063d6233365167b1775039b25536a19",
+          "anchor": "plugin-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/plugin.md",
+          "sha256": "e2c105b14b05f727e5accadaeb5eef522063d6233365167b1775039b25536a19",
+          "anchor": "plugin-types"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+          "sha256": "73b8b156a4bed3812c84b196c215b2012bae5c522e523153378f5ef2a43e40ec",
+          "anchor": "plugin-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/plugin.md",
+          "sha256": "73b8b156a4bed3812c84b196c215b2012bae5c522e523153378f5ef2a43e40ec",
+          "anchor": "plugin-types"
+        }
+      ],
+      "evidence": "baselines/site04-plugin-registry.json"
     }
   ]
 }
