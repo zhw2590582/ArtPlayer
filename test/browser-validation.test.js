@@ -70,6 +70,67 @@ test('Installed validation rejects diagnostic SDK substitutions and recovery pro
   assert.equal(browserInvocation('installed', [], { ...base, ARTPLAYER_DASH_DIAGNOSTIC_SDK: 'none' }).env.ARTPLAYER_DASH_DIAGNOSTIC_SDK, 'none')
 })
 
+const renderingDiagnostics = [
+  ['ARTPLAYER_JASSUB_CUSTOM_CANVAS', 'true'],
+  ['ARTPLAYER_JASSUB_ON_DEMAND', 'false'],
+  ['ARTPLAYER_JASSUB_OFFSCREEN', 'default'],
+  ['ARTPLAYER_JASSUB_READBACK_FRAME', 'true'],
+  ['ARTPLAYER_JASSUB_ASYNC_RENDER', 'false'],
+  ['ARTPLAYER_JASSUB_SCREENSHOT', 'true'],
+  ['ARTPLAYER_JASSUB_CONTROL_BITMAP', 'true'],
+  ['ARTPLAYER_JASSUB_CONTROL_IDLE_READBACK', 'true'],
+  ['ARTPLAYER_JASSUB_CONTROL_SINGLE_FLIGHT', 'true'],
+  ['ARTPLAYER_SOURCE_RESTORE_EVENT', '1'],
+]
+
+for (const [name, value] of renderingDiagnostics) {
+  test(`Installed validation rejects inherited rendering substitutions: ${name}`, () => {
+    const env = { ARTPLAYER_BROWSER_ARTIFACTS: '/installed/map.json', [name]: value }
+    assert.throws(() => browserInvocation('installed', [], env), error => error.message.includes(name))
+    assert.equal(browserInvocation('source', [], env).env[name], value)
+    assert.equal(env[name], value)
+  })
+}
+
+test('Installed rendering checks preserve explicit inactive switches and source tracing', () => {
+  const env = {
+    ARTPLAYER_BROWSER_ARTIFACTS: '/installed/map.json',
+    ARTPLAYER_JASSUB_CUSTOM_CANVAS: 'false',
+    ARTPLAYER_JASSUB_ON_DEMAND: 'true',
+    ARTPLAYER_JASSUB_OFFSCREEN: 'false',
+    ARTPLAYER_JASSUB_READBACK_FRAME: 'false',
+    ARTPLAYER_JASSUB_ASYNC_RENDER: 'true',
+    ARTPLAYER_JASSUB_SCREENSHOT: 'false',
+    ARTPLAYER_JASSUB_CONTROL_BITMAP: 'false',
+    ARTPLAYER_JASSUB_CONTROL_IDLE_READBACK: 'false',
+    ARTPLAYER_JASSUB_CONTROL_SINGLE_FLIGHT: 'false',
+    ARTPLAYER_SOURCE_RESTORE_EVENT: '0',
+    ARTPLAYER_SOURCE_SEEK_TRACE: 'events',
+  }
+  assert.deepEqual(browserInvocation('installed', [], env).env, { ...env, ARTPLAYER_BROWSER_SCOPE: 'installed' })
+})
+
+test('Direct installed configuration rejects diagnostics before checking artifact files', () => {
+  const missing = path.resolve('refactor/.cache/absent-diagnostic-artifact-map.json')
+  assert(!fs.existsSync(missing))
+  for (const [name, value] of [
+    ['ARTPLAYER_JASSUB_SCREENSHOT', 'true'],
+    ['ARTPLAYER_SOURCE_RESTORE_EVENT', '1'],
+    ['ARTPLAYER_DASH_DIAGNOSTIC_SDK', 'upstream4'],
+    ['ARTPLAYER_MB_BROWSER_CANDIDATE', '1'],
+  ]) {
+    const run = spawnSync(process.execPath, ['--input-type=module', '-e', 'await import("./playwright.installed.config.js")'], {
+      encoding: 'utf8',
+      windowsHide: true,
+      timeout: 10000,
+      env: { ...process.env, ARTPLAYER_BROWSER_ARTIFACTS: missing, [name]: value },
+    })
+    assert.equal(run.status, 1, run.stderr)
+    assert(!run.stderr.includes('ENOENT'), run.stderr)
+    assert.match(run.stderr, /Installed|unchanged|historical/)
+  }
+})
+
 for (const code of [0, 17]) {
   test(`Browser runner preserves actual child exit ${code} and source input identity`, () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'artplayer-browser-runner-'))

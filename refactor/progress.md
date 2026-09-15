@@ -1,5 +1,19 @@
 # 进度与证据
 
+## CI-01 安装验收环境策略修复
+
+原入口允许十个渲染/恢复诊断替换，直接installed配置还绕开部分既有策略。
+现由共用校验保护入口和配置；原11项回归失败，最终18项入口测试与77项CI
+工程测试通过，明确停用值和普通诊断命令保持可用。
+
+旧安装map因DASH源码过期被拒绝，正常重新构建/pack/安装20包；Chromium
+真实安装JASSUB生命周期4项通过。消费者仍仅验证core/chapter的36运行时、
+5旧类型与8精确类型模式，不能扩大成全包验收。见[记录](changes/2026-09-15-CI-01-rendering-policy.md)和[证据](baselines/ci-rendering-policy-validation.json)。
+
+CI-BROWSER-MODE-01在明确列出的入口/开关范围内关闭，CI-01仍进行中，
+任务计数不变。没有生产API、版本或依赖修改，无推送或远端运行。
+
+
 ## PKG-JASSUB-09 原生调用阻塞证据
 
 单个未确认绘制任务仍复现Firefox停顿；精确计时显示createImageBitmap约10秒后

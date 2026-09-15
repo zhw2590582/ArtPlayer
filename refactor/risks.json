@@ -6712,6 +6712,27 @@
         "refactor/baselines/dash-docs-validation.json"
       ],
       "resolutionRationale": "Tests execute the actual example and both guides enforce byte-equivalent code. Replaced and final SDKs each receive one destroy call, unsupported setup creates no SDK or plugin, nullable language formatting retains existing language labels and numeric ID zero. This closes the example defects only; complete package/device/DRM acceptance remains separate."
+    },
+    {
+      "id": "CI-BROWSER-MODE-01",
+      "title": "Installed browser validation can inherit rendering substitutions and direct config loading bypasses launcher diagnostic policy",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "CI-01"
+      ],
+      "evidence": [
+        "refactor/changes/2026-09-15-CI-01-rendering-policy.md",
+        "refactor/baselines/ci-rendering-policy-validation.json",
+        "test/browser-validation.test.js"
+      ],
+      "compatibleResolution": "Share environment validation between launcher and installed config; reject active JASSUB fixture modes and subtitle restoration replacement while retaining explicit ad hoc/source diagnostics and inactive values.",
+      "closureCriteria": "Old/new negative cases reject substitutions before artifact access through both entries, while standard installed tests execute verified actual tarballs and source diagnostics remain usable.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-CI-01-rendering-policy.md",
+        "refactor/baselines/ci-rendering-policy-validation.json"
+      ],
+      "resolutionRationale": "Eleven new regression failures against the old implementation become passing; final eighteen entry tests and seventy-seven CI tests pass. Fresh twenty-package preparation and four actual installed Chromium lifecycle cases verify the normal path. Scope excludes future unreviewed flags and full CI acceptance."
     }
   ]
 }

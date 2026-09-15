@@ -198,3 +198,10 @@ build:ts 生成声明 URL 清单后重建站点浏览器产物，check:editor-ty
 消费者拆分，见[拆分记录](changes/2026-09-15-CI-01-browser-matrix.md)。60 分钟预算
 尚未经过完整远端验证；保留完整用例和失败报告，后续依据各组合实测数据决定是否
 还需按文件分片。不能从本地子集通过推断整个工作流可在预算内完成。
+
+安装范围的环境策略现由入口和 Playwright installed 配置共同校验。JASSUB 的
+渲染/截图/队列替换及 Multiple Subtitles 的原生事件恢复对照不能继承进入标准
+安装验收；MediaBunny/Iframe/Mask/DASH 既有规则也不能通过直接载入配置绕开。
+普通 source/ad hoc 诊断保持可用，明确停用的环境值不被误拒绝。详见
+[CI-01 环境策略记录](changes/2026-09-15-CI-01-rendering-policy.md)。这只是本地
+测试入口修复，不代表原有浏览器失败、远端工作流或发布门槛已关闭。

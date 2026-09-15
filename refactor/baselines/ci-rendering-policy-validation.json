@@ -1,0 +1,3058 @@
+{
+  "task": "CI-01",
+  "status": "doing",
+  "baselineCommit": "eba8c29fa78c8040204bab3dc9773500842a2ddd",
+  "productionChanges": false,
+  "node": "24.21.0",
+  "yarn": "1.22.22",
+  "oldTests": {
+    "pass": 6,
+    "fail": 11
+  },
+  "finalTests": {
+    "pass": 18,
+    "fail": 0
+  },
+  "ciTests": {
+    "pass": 77,
+    "fail": 0
+  },
+  "files": [
+    {
+      "path": "scripts/browser-validation/scope.ts",
+      "sha256": "5c12d98cd331436121b4787a0df1a608f6289e810a6040de9349dbfd9928b3ae"
+    },
+    {
+      "path": "playwright.installed.config.js",
+      "sha256": "2c232c32abe7fa2760faeab78984a908abc8f6655b9819d25be66a9f5dc7f5a1"
+    },
+    {
+      "path": "test/browser-validation.test.js",
+      "sha256": "4d7dd11de261fc0457193b8add7a33520f339e8400d737122764723fd4c43743"
+    },
+    {
+      "path": "scripts/browser-check.mjs",
+      "sha256": "4c1dbfb6dc05cf4842ce6568181dcc76e076003ee268e5fe00aff0a771010811"
+    }
+  ],
+  "logs": [
+    {
+      "path": "refactor/.cache/ci-rendering-policy-before.log",
+      "sha256": "d9cf15a747e4435eb9481c0f53ac851527a8a5531f8ab344ca47996c810f5682"
+    },
+    {
+      "path": "refactor/.cache/ci-rendering-policy-after.log",
+      "sha256": "bef6c905314fdb0f5d9e5b2f17afad1daa829be87b02080f5cbe97666185dec2"
+    },
+    {
+      "path": "refactor/.cache/ci-rendering-policy-final.log",
+      "sha256": "c3142e963226652c9d096d5aface97a96053ef8fa53634dcf85237e8be69e44d"
+    },
+    {
+      "path": "refactor/.cache/ci-rendering-policy-ci.log",
+      "sha256": "6aca44fef819e34690c94d97202fd18e27057a00c9f39f61f1faca0b2f39c1fe"
+    },
+    {
+      "path": "refactor/.cache/ci-rendering-policy-package.log",
+      "sha256": "8c67d9bd51098c5ad1ab3b6a91e79b10965c0d97e6f46a7260f08b68c048593e"
+    },
+    {
+      "path": "refactor/.cache/ci-rendering-policy-browser.log",
+      "sha256": "a92009c63ae97109aa4ea98430b3b53a5bece4dc07ee1068b1fad227b63f213c"
+    }
+  ],
+  "package": {
+    "directory": "refactor/.cache/packages/run-uRbTbe",
+    "count": 20,
+    "report": {
+      "path": "refactor/.cache/packages/run-uRbTbe/report.json",
+      "sha256": "5d0298514f238d2179846df26af444a3c762d4980ea54e6d878102f12a955873"
+    },
+    "map": {
+      "path": "refactor/.cache/packages/run-uRbTbe/browser-artifacts.json",
+      "sha256": "bf0ca0fdfd6f1aa336f7abe65e4bb2225b959ff1dfd15c8902438bbf2f3a967b"
+    },
+    "runtimeScope": [
+      "artplayer",
+      "artplayer-plugin-chapter"
+    ],
+    "typeScope": [
+      "artplayer",
+      "artplayer-plugin-chapter"
+    ],
+    "archives": [
+      {
+        "name": "artplayer",
+        "archive": "artplayer.tgz",
+        "sha256": "2c849b53d1056015d2e4a463c4502b52a724ecdf077aa61f1d6006f2ebec8660"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "archive": "artplayer-plugin-chapter.tgz",
+        "sha256": "4ba03e76b4c8ed0e5bea3036f4856f662a45241a14c55b3aae12bbadd48301fa"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "archive": "artplayer-plugin-ambilight.tgz",
+        "sha256": "15c136903025ac05350a05d3464af98f5335563bc2ec2a1fbdb4d881d722b7c5"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "archive": "artplayer-proxy-canvas.tgz",
+        "sha256": "130fb562b9129393f8d82b95fa7f34580eef978cd4462f2a96c97643e867e3f9"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "archive": "artplayer-plugin-document-pip.tgz",
+        "sha256": "5b24dac61f6e3e32d7e4a5bfcb3ef0262b31720a84f63eb1427b65160a56103f"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "archive": "artplayer-plugin-ads.tgz",
+        "sha256": "4ef720d36c233a857f66549b8ec77697d83f997a367fdba4db49d3d59173aa9a"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "archive": "artplayer-plugin-audio-track.tgz",
+        "sha256": "94269e3412842265cac84d2cc915a1bc2281c6b76182b199c487fc14a344219f"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "archive": "artplayer-plugin-vtt-thumbnail.tgz",
+        "sha256": "e9e60aa14e19aee49829c52b81e3e3efe9e22e431e8279234da0c78be0dd17af"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "archive": "artplayer-plugin-multiple-subtitles.tgz",
+        "sha256": "9cedc8bd18c3ffa74e3fde5bbe38c1d212e3e7955dd6933350ce41c8c7fc57b5"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "archive": "artplayer-plugin-hls-control.tgz",
+        "sha256": "0a33d9e1de6e3ffe806896d983103c733992b7be3316ec48c8e3581c2f25fe4f"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "archive": "artplayer-plugin-dash-control.tgz",
+        "sha256": "cbbbc1754826ee7a16c7fa1889cddd23f1488979868861a770b19165575e9919"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "archive": "artplayer-plugin-auto-thumbnail.tgz",
+        "sha256": "93b2e2ee6bfe200842e9b22e9ee1cafa0ea78814a7b4bd52820294dfac27f29d"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "archive": "artplayer-plugin-asr.tgz",
+        "sha256": "bbb53748501a06498005fd84bccf644cf46a5512d7ed784436b7f8080432ae1a"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "archive": "artplayer-plugin-chromecast.tgz",
+        "sha256": "2bb1b9babf2af89fff857a162c98a3ce71ccf126d7ba8bc2272742fbaf0f7fa2"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "archive": "artplayer-proxy-mediabunny.tgz",
+        "sha256": "abede3eb081f978728dc7304dd616ba08a36652c05ca59b56fb1c715570d40ed"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "archive": "artplayer-plugin-jassub.tgz",
+        "sha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "archive": "artplayer-plugin-danmuku.tgz",
+        "sha256": "630b16e6d52ba3b260e751e128150c013c7141b204f2bc3a3de2a58dc1ecbe63"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "archive": "artplayer-plugin-danmuku-mask.tgz",
+        "sha256": "d5ac7c6761b86bcdc2b20bf69968947d8fe0f04d6c522401f0b5a506f2f8392a"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "archive": "artplayer-tool-iframe.tgz",
+        "sha256": "602f31ecb934ad52449a8e23b69a0510696755020b8f8f0982678188a5f3ac9e"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "archive": "artplayer-plugin-vast.tgz",
+        "sha256": "d74276fb4991e4ec7cde545191d4a1724f5372ff97b6349820c92d5e8aa8f9a7"
+      }
+    ]
+  },
+  "browser": {
+    "report": {
+      "path": "refactor/.cache/ci-rendering-policy-installed/report.json",
+      "sha256": "f54dd5de46f5dce3f88e935eec425742ec1e1e597bdc77b95203c4c1955dd52d"
+    },
+    "invocation": {
+      "path": "refactor/.cache/ci-rendering-policy-installed/invocation.json",
+      "sha256": "c63f67df935768e52cc948f9f78e951a10177488409d5e1f55fd00801dcf1c13"
+    },
+    "result": {
+      "scope": "installed",
+      "exitCode": 0,
+      "signal": null,
+      "args": [
+        "test",
+        "--config=playwright.installed.config.js",
+        "jassub-lifecycle.spec.js",
+        "--project=chromium",
+        "--workers=1"
+      ]
+    },
+    "stats": {
+      "startTime": "2026-09-15T10:33:16.622Z",
+      "duration": 5644.143,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "JASSUB actual video replacement and repeated destruction, onDemandRender=true",
+        "project": "chromium",
+        "status": "passed",
+        "duration": 1047,
+        "attachments": [
+          {
+            "name": "jassub-selected-input",
+            "data": {
+              "browserName": "chromium",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              }
+            }
+          },
+          {
+            "name": "jassub-native-lifecycle",
+            "data": {
+              "artifact": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              },
+              "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+              "onDemandRender": true,
+              "state": {
+                "parentMatches": true,
+                "originalContainerCount": 0,
+                "time": 9.001573,
+                "event": {
+                  "Start": 0,
+                  "Duration": 30000,
+                  "ReadOrder": 0,
+                  "Layer": 0,
+                  "Style": 1,
+                  "MarginL": 0,
+                  "MarginR": 0,
+                  "MarginV": 0,
+                  "Name": "",
+                  "Text": "Native lifecycle subtitle",
+                  "Effect": ""
+                },
+                "terminated": 1,
+                "ownedContainers": 0,
+                "replacementPreserved": true,
+                "errors": [],
+                "sent": [
+                  {
+                    "target": "init"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "demand",
+                    "time": 9
+                  },
+                  {
+                    "target": "getColorSpace"
+                  },
+                  {
+                    "target": "getEvents"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "browser-evidence",
+            "data": {
+              "browser": "153.0.8010.12",
+              "platform": "win32",
+              "manifest": {
+                "kind": "artplayer-browser-test",
+                "resources": {
+                  "/assets/@mediapipe/selfie_segmentation/README.md": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\README.md",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/README.md",
+                      "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                      "baselineSha256": "9dad28188ae54ea420e3d29c23360b040a0dfb88954b99a3e456b8a8c93cf2a1",
+                      "normalizedLF": true
+                    },
+                    "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                    "bytes": 389
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/index.d.ts": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\index.d.ts",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/index.d.ts",
+                      "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                      "baselineSha256": "46152cccb63a9249503f7b8f49dbc3cfbd2a2994eda2c9f0db32a2998e1879a9",
+                      "normalizedLF": true
+                    },
+                    "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                    "bytes": 2883
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/package.json": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\package.json",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/package.json",
+                      "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                      "baselineSha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+                      "normalizedLF": true
+                    },
+                    "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                    "bytes": 761
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.binarypb",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+                      "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "baselineSha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "normalizedLF": false
+                    },
+                    "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                    "bytes": 362
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js",
+                      "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "baselineSha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "normalizedLF": false
+                    },
+                    "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                    "bytes": 44542
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+                      "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "baselineSha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "normalizedLF": false
+                    },
+                    "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                    "bytes": 249024
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_landscape.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite",
+                      "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "baselineSha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "normalizedLF": false
+                    },
+                    "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                    "bytes": 249792
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.data",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data",
+                      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "normalizedLF": false
+                    },
+                    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "bytes": 0
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+                      "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "baselineSha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "normalizedLF": false
+                    },
+                    "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                    "bytes": 276493
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "baselineSha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "normalizedLF": false
+                    },
+                    "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                    "bytes": 5694839
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js",
+                      "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "baselineSha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "normalizedLF": false
+                    },
+                    "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                    "bytes": 276488
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm",
+                      "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "baselineSha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "normalizedLF": false
+                    },
+                    "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                    "bytes": 5587523
+                  },
+                  "/assets/jassub/jassub-worker.js": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.js",
+                      "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+                      "member": "package/worker/jassub-worker.js",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                    "bytes": 31069
+                  },
+                  "/assets/jassub/jassub-worker.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.wasm",
+                      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm",
+                      "member": "package/worker/jassub-worker.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                    "bytes": 1969100
+                  },
+                  "/assets/jassub/jassub-worker-modern.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker-modern.wasm",
+                      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
+                      "member": "package/worker/jassub-worker-modern.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                    "bytes": 2037191
+                  },
+                  "/assets/jassub/default.woff2": {
+                    "source": {
+                      "kind": "local-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\jassub\\default.woff2",
+                      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                      "baseline": "docs/assets/jassub/default.woff2",
+                      "member": null,
+                      "archiveSha256": null
+                    },
+                    "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                    "bytes": 145972
+                  },
+                  "/candidate/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943
+                  },
+                  "/compiled/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/uncompiled/artplayer/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/candidate/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197
+                  },
+                  "/compiled/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/uncompiled/artplayer-plugin-chapter/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/published/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.4.0",
+                      "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                    "bytes": 134037
+                  },
+                  "/published/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "1.1.0",
+                      "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                      "member": "package/dist/artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                    "bytes": 4973
+                  },
+                  "/test/pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.mp4"
+                    },
+                    "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                    "bytes": 251538
+                  },
+                  "/test/pattern.webm": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.webm"
+                    },
+                    "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                    "bytes": 162073
+                  },
+                  "/published-4.5.5/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.5",
+                      "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                    "bytes": 153582
+                  },
+                  "/published-5.1.7/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.7",
+                      "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                    "bytes": 155940
+                  },
+                  "/published-4.5.9/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.9",
+                      "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                    "bytes": 156408
+                  },
+                  "/published-5.3.0/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.0",
+                      "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                    "bytes": 159238
+                  },
+                  "/published-5.1.6/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.6",
+                      "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                    "bytes": 155714
+                  },
+                  "/published-5.1.2/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.2",
+                      "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                    "bytes": 154583
+                  },
+                  "/test/audio-tone.m4a": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/audio-tone.m4a"
+                    },
+                    "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                    "bytes": 132436
+                  },
+                  "/test/thumbnail-pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/thumbnail-pattern.mp4"
+                    },
+                    "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                    "bytes": 752916
+                  },
+                  "/test/auto-thumbnail-timeline.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                    },
+                    "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                    "bytes": 8602
+                  },
+                  "/test/vast-skippable.xml": {
+                    "source": {
+                      "kind": "local-vast-fixture",
+                      "file": "test/browser/vast-fixture.mjs"
+                    },
+                    "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+                    "bytes": 760
+                  },
+                  "/test/declaration-cues.vtt": {
+                    "source": {
+                      "kind": "test-subtitles",
+                      "file": "test/browser/media/declaration-cues.vtt"
+                    },
+                    "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                    "bytes": 54
+                  },
+                  "/test/thumbnail-grid.svg": {
+                    "source": {
+                      "kind": "test-thumbnail-grid",
+                      "file": "test/browser/media/thumbnail-grid.svg"
+                    },
+                    "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                    "bytes": 14969
+                  },
+                  "/test/legacy-safe-area.js": {
+                    "source": {
+                      "kind": "frozen-own-source",
+                      "file": "test/helpers/legacy-safe-area.js",
+                      "commit": "ccf77c4e"
+                    },
+                    "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                    "bytes": 795
+                  },
+                  "/test/iframe-boundary-child.html": {
+                    "source": {
+                      "kind": "iframe-fixture",
+                      "file": "test/browser/iframe-boundary-child.html"
+                    },
+                    "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                    "bytes": 1451
+                  },
+                  "/published-5.3.1-beta.1/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.1-beta.1",
+                      "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                    "bytes": 159458
+                  },
+                  "/assets/sample/video.mp4": {
+                    "source": {
+                      "kind": "docs-media",
+                      "file": "docs/assets/sample/video.mp4"
+                    },
+                    "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                    "bytes": 5818706
+                  },
+                  "/test/performance.js": {
+                    "source": {
+                      "kind": "adapted-baseline-fixture",
+                      "file": "refactor/fixtures/performance.js"
+                    },
+                    "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                    "bytes": 9251
+                  }
+                }
+              },
+              "state": {
+                "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                "events": [
+                  "video:loadedmetadata",
+                  "ready",
+                  "destroy"
+                ],
+                "media": {
+                  "source": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "width": 0,
+                  "height": 0,
+                  "duration": null,
+                  "currentTime": 0
+                }
+              },
+              "errors": [],
+              "consoleErrors": [],
+              "failedRequests": [
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "title": "JASSUB actual video replacement and repeated destruction, onDemandRender=false",
+        "project": "chromium",
+        "status": "passed",
+        "duration": 1002,
+        "attachments": [
+          {
+            "name": "jassub-selected-input",
+            "data": {
+              "browserName": "chromium",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              }
+            }
+          },
+          {
+            "name": "jassub-native-lifecycle",
+            "data": {
+              "artifact": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              },
+              "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+              "onDemandRender": false,
+              "state": {
+                "parentMatches": true,
+                "originalContainerCount": 0,
+                "time": 9.005034,
+                "event": {
+                  "Start": 0,
+                  "Duration": 30000,
+                  "ReadOrder": 0,
+                  "Layer": 0,
+                  "Style": 1,
+                  "MarginL": 0,
+                  "MarginR": 0,
+                  "MarginV": 0,
+                  "Name": "",
+                  "Text": "Native lifecycle subtitle",
+                  "Effect": ""
+                },
+                "terminated": 1,
+                "ownedContainers": 0,
+                "replacementPreserved": true,
+                "errors": [],
+                "sent": [
+                  {
+                    "target": "init"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "video"
+                  },
+                  {
+                    "target": "video"
+                  },
+                  {
+                    "target": "canvas"
+                  },
+                  {
+                    "target": "video"
+                  },
+                  {
+                    "target": "video"
+                  },
+                  {
+                    "target": "video",
+                    "rate": 1.5
+                  },
+                  {
+                    "target": "video"
+                  },
+                  {
+                    "target": "getColorSpace"
+                  },
+                  {
+                    "target": "getEvents"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "browser-evidence",
+            "data": {
+              "browser": "153.0.8010.12",
+              "platform": "win32",
+              "manifest": {
+                "kind": "artplayer-browser-test",
+                "resources": {
+                  "/assets/@mediapipe/selfie_segmentation/README.md": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\README.md",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/README.md",
+                      "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                      "baselineSha256": "9dad28188ae54ea420e3d29c23360b040a0dfb88954b99a3e456b8a8c93cf2a1",
+                      "normalizedLF": true
+                    },
+                    "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                    "bytes": 389
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/index.d.ts": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\index.d.ts",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/index.d.ts",
+                      "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                      "baselineSha256": "46152cccb63a9249503f7b8f49dbc3cfbd2a2994eda2c9f0db32a2998e1879a9",
+                      "normalizedLF": true
+                    },
+                    "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                    "bytes": 2883
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/package.json": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\package.json",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/package.json",
+                      "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                      "baselineSha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+                      "normalizedLF": true
+                    },
+                    "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                    "bytes": 761
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.binarypb",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+                      "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "baselineSha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "normalizedLF": false
+                    },
+                    "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                    "bytes": 362
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js",
+                      "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "baselineSha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "normalizedLF": false
+                    },
+                    "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                    "bytes": 44542
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+                      "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "baselineSha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "normalizedLF": false
+                    },
+                    "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                    "bytes": 249024
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_landscape.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite",
+                      "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "baselineSha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "normalizedLF": false
+                    },
+                    "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                    "bytes": 249792
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.data",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data",
+                      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "normalizedLF": false
+                    },
+                    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "bytes": 0
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+                      "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "baselineSha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "normalizedLF": false
+                    },
+                    "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                    "bytes": 276493
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "baselineSha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "normalizedLF": false
+                    },
+                    "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                    "bytes": 5694839
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js",
+                      "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "baselineSha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "normalizedLF": false
+                    },
+                    "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                    "bytes": 276488
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm",
+                      "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "baselineSha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "normalizedLF": false
+                    },
+                    "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                    "bytes": 5587523
+                  },
+                  "/assets/jassub/jassub-worker.js": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.js",
+                      "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+                      "member": "package/worker/jassub-worker.js",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                    "bytes": 31069
+                  },
+                  "/assets/jassub/jassub-worker.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.wasm",
+                      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm",
+                      "member": "package/worker/jassub-worker.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                    "bytes": 1969100
+                  },
+                  "/assets/jassub/jassub-worker-modern.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker-modern.wasm",
+                      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
+                      "member": "package/worker/jassub-worker-modern.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                    "bytes": 2037191
+                  },
+                  "/assets/jassub/default.woff2": {
+                    "source": {
+                      "kind": "local-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\jassub\\default.woff2",
+                      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                      "baseline": "docs/assets/jassub/default.woff2",
+                      "member": null,
+                      "archiveSha256": null
+                    },
+                    "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                    "bytes": 145972
+                  },
+                  "/candidate/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943
+                  },
+                  "/compiled/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/uncompiled/artplayer/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/candidate/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197
+                  },
+                  "/compiled/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/uncompiled/artplayer-plugin-chapter/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/published/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.4.0",
+                      "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                    "bytes": 134037
+                  },
+                  "/published/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "1.1.0",
+                      "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                      "member": "package/dist/artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                    "bytes": 4973
+                  },
+                  "/test/pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.mp4"
+                    },
+                    "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                    "bytes": 251538
+                  },
+                  "/test/pattern.webm": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.webm"
+                    },
+                    "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                    "bytes": 162073
+                  },
+                  "/published-4.5.5/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.5",
+                      "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                    "bytes": 153582
+                  },
+                  "/published-5.1.7/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.7",
+                      "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                    "bytes": 155940
+                  },
+                  "/published-4.5.9/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.9",
+                      "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                    "bytes": 156408
+                  },
+                  "/published-5.3.0/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.0",
+                      "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                    "bytes": 159238
+                  },
+                  "/published-5.1.6/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.6",
+                      "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                    "bytes": 155714
+                  },
+                  "/published-5.1.2/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.2",
+                      "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                    "bytes": 154583
+                  },
+                  "/test/audio-tone.m4a": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/audio-tone.m4a"
+                    },
+                    "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                    "bytes": 132436
+                  },
+                  "/test/thumbnail-pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/thumbnail-pattern.mp4"
+                    },
+                    "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                    "bytes": 752916
+                  },
+                  "/test/auto-thumbnail-timeline.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                    },
+                    "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                    "bytes": 8602
+                  },
+                  "/test/vast-skippable.xml": {
+                    "source": {
+                      "kind": "local-vast-fixture",
+                      "file": "test/browser/vast-fixture.mjs"
+                    },
+                    "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+                    "bytes": 760
+                  },
+                  "/test/declaration-cues.vtt": {
+                    "source": {
+                      "kind": "test-subtitles",
+                      "file": "test/browser/media/declaration-cues.vtt"
+                    },
+                    "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                    "bytes": 54
+                  },
+                  "/test/thumbnail-grid.svg": {
+                    "source": {
+                      "kind": "test-thumbnail-grid",
+                      "file": "test/browser/media/thumbnail-grid.svg"
+                    },
+                    "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                    "bytes": 14969
+                  },
+                  "/test/legacy-safe-area.js": {
+                    "source": {
+                      "kind": "frozen-own-source",
+                      "file": "test/helpers/legacy-safe-area.js",
+                      "commit": "ccf77c4e"
+                    },
+                    "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                    "bytes": 795
+                  },
+                  "/test/iframe-boundary-child.html": {
+                    "source": {
+                      "kind": "iframe-fixture",
+                      "file": "test/browser/iframe-boundary-child.html"
+                    },
+                    "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                    "bytes": 1451
+                  },
+                  "/published-5.3.1-beta.1/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.1-beta.1",
+                      "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                    "bytes": 159458
+                  },
+                  "/assets/sample/video.mp4": {
+                    "source": {
+                      "kind": "docs-media",
+                      "file": "docs/assets/sample/video.mp4"
+                    },
+                    "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                    "bytes": 5818706
+                  },
+                  "/test/performance.js": {
+                    "source": {
+                      "kind": "adapted-baseline-fixture",
+                      "file": "refactor/fixtures/performance.js"
+                    },
+                    "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                    "bytes": 9251
+                  }
+                }
+              },
+              "state": {
+                "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                "events": [
+                  "video:loadedmetadata",
+                  "ready",
+                  "destroy"
+                ],
+                "media": {
+                  "source": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "width": 0,
+                  "height": 0,
+                  "duration": null,
+                  "currentTime": 0
+                }
+              },
+              "errors": [],
+              "consoleErrors": [],
+              "failedRequests": [
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "title": "JASSUB actual invalid Worker URL construction releases the newly created canvas and media listeners",
+        "project": "chromium",
+        "status": "passed",
+        "duration": 564,
+        "attachments": [
+          {
+            "name": "jassub-selected-input",
+            "data": {
+              "browserName": "chromium",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              }
+            }
+          },
+          {
+            "name": "jassub-native-construction-failure",
+            "data": {
+              "artifact": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              },
+              "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+              "state": {
+                "error": {
+                  "name": "SyntaxError",
+                  "message": "Failed to construct 'Worker': 'http://[' is not a valid URL."
+                },
+                "activeListeners": 0,
+                "ownedContainers": 0
+              }
+            }
+          },
+          {
+            "name": "browser-evidence",
+            "data": {
+              "browser": "153.0.8010.12",
+              "platform": "win32",
+              "manifest": {
+                "kind": "artplayer-browser-test",
+                "resources": {
+                  "/assets/@mediapipe/selfie_segmentation/README.md": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\README.md",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/README.md",
+                      "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                      "baselineSha256": "9dad28188ae54ea420e3d29c23360b040a0dfb88954b99a3e456b8a8c93cf2a1",
+                      "normalizedLF": true
+                    },
+                    "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                    "bytes": 389
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/index.d.ts": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\index.d.ts",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/index.d.ts",
+                      "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                      "baselineSha256": "46152cccb63a9249503f7b8f49dbc3cfbd2a2994eda2c9f0db32a2998e1879a9",
+                      "normalizedLF": true
+                    },
+                    "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                    "bytes": 2883
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/package.json": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\package.json",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/package.json",
+                      "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                      "baselineSha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+                      "normalizedLF": true
+                    },
+                    "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                    "bytes": 761
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.binarypb",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+                      "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "baselineSha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "normalizedLF": false
+                    },
+                    "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                    "bytes": 362
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js",
+                      "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "baselineSha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "normalizedLF": false
+                    },
+                    "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                    "bytes": 44542
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+                      "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "baselineSha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "normalizedLF": false
+                    },
+                    "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                    "bytes": 249024
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_landscape.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite",
+                      "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "baselineSha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "normalizedLF": false
+                    },
+                    "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                    "bytes": 249792
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.data",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data",
+                      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "normalizedLF": false
+                    },
+                    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "bytes": 0
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+                      "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "baselineSha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "normalizedLF": false
+                    },
+                    "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                    "bytes": 276493
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "baselineSha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "normalizedLF": false
+                    },
+                    "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                    "bytes": 5694839
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js",
+                      "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "baselineSha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "normalizedLF": false
+                    },
+                    "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                    "bytes": 276488
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm",
+                      "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "baselineSha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "normalizedLF": false
+                    },
+                    "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                    "bytes": 5587523
+                  },
+                  "/assets/jassub/jassub-worker.js": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.js",
+                      "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+                      "member": "package/worker/jassub-worker.js",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                    "bytes": 31069
+                  },
+                  "/assets/jassub/jassub-worker.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.wasm",
+                      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm",
+                      "member": "package/worker/jassub-worker.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                    "bytes": 1969100
+                  },
+                  "/assets/jassub/jassub-worker-modern.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker-modern.wasm",
+                      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
+                      "member": "package/worker/jassub-worker-modern.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                    "bytes": 2037191
+                  },
+                  "/assets/jassub/default.woff2": {
+                    "source": {
+                      "kind": "local-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\jassub\\default.woff2",
+                      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                      "baseline": "docs/assets/jassub/default.woff2",
+                      "member": null,
+                      "archiveSha256": null
+                    },
+                    "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                    "bytes": 145972
+                  },
+                  "/candidate/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943
+                  },
+                  "/compiled/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/uncompiled/artplayer/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/candidate/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197
+                  },
+                  "/compiled/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/uncompiled/artplayer-plugin-chapter/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/published/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.4.0",
+                      "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                    "bytes": 134037
+                  },
+                  "/published/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "1.1.0",
+                      "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                      "member": "package/dist/artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                    "bytes": 4973
+                  },
+                  "/test/pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.mp4"
+                    },
+                    "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                    "bytes": 251538
+                  },
+                  "/test/pattern.webm": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.webm"
+                    },
+                    "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                    "bytes": 162073
+                  },
+                  "/published-4.5.5/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.5",
+                      "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                    "bytes": 153582
+                  },
+                  "/published-5.1.7/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.7",
+                      "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                    "bytes": 155940
+                  },
+                  "/published-4.5.9/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.9",
+                      "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                    "bytes": 156408
+                  },
+                  "/published-5.3.0/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.0",
+                      "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                    "bytes": 159238
+                  },
+                  "/published-5.1.6/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.6",
+                      "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                    "bytes": 155714
+                  },
+                  "/published-5.1.2/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.2",
+                      "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                    "bytes": 154583
+                  },
+                  "/test/audio-tone.m4a": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/audio-tone.m4a"
+                    },
+                    "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                    "bytes": 132436
+                  },
+                  "/test/thumbnail-pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/thumbnail-pattern.mp4"
+                    },
+                    "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                    "bytes": 752916
+                  },
+                  "/test/auto-thumbnail-timeline.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                    },
+                    "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                    "bytes": 8602
+                  },
+                  "/test/vast-skippable.xml": {
+                    "source": {
+                      "kind": "local-vast-fixture",
+                      "file": "test/browser/vast-fixture.mjs"
+                    },
+                    "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+                    "bytes": 760
+                  },
+                  "/test/declaration-cues.vtt": {
+                    "source": {
+                      "kind": "test-subtitles",
+                      "file": "test/browser/media/declaration-cues.vtt"
+                    },
+                    "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                    "bytes": 54
+                  },
+                  "/test/thumbnail-grid.svg": {
+                    "source": {
+                      "kind": "test-thumbnail-grid",
+                      "file": "test/browser/media/thumbnail-grid.svg"
+                    },
+                    "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                    "bytes": 14969
+                  },
+                  "/test/legacy-safe-area.js": {
+                    "source": {
+                      "kind": "frozen-own-source",
+                      "file": "test/helpers/legacy-safe-area.js",
+                      "commit": "ccf77c4e"
+                    },
+                    "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                    "bytes": 795
+                  },
+                  "/test/iframe-boundary-child.html": {
+                    "source": {
+                      "kind": "iframe-fixture",
+                      "file": "test/browser/iframe-boundary-child.html"
+                    },
+                    "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                    "bytes": 1451
+                  },
+                  "/published-5.3.1-beta.1/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.1-beta.1",
+                      "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                    "bytes": 159458
+                  },
+                  "/assets/sample/video.mp4": {
+                    "source": {
+                      "kind": "docs-media",
+                      "file": "docs/assets/sample/video.mp4"
+                    },
+                    "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                    "bytes": 5818706
+                  },
+                  "/test/performance.js": {
+                    "source": {
+                      "kind": "adapted-baseline-fixture",
+                      "file": "refactor/fixtures/performance.js"
+                    },
+                    "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                    "bytes": 9251
+                  }
+                }
+              },
+              "state": {
+                "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                "events": [
+                  "video:loadedmetadata",
+                  "ready",
+                  "destroy"
+                ],
+                "media": null
+              },
+              "errors": [],
+              "consoleErrors": [],
+              "failedRequests": [
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "title": "JASSUB native asynchronous CSP Worker error reaches a pending query and explicit destruction cleans up",
+        "project": "chromium",
+        "status": "passed",
+        "duration": 341,
+        "attachments": [
+          {
+            "name": "jassub-selected-input",
+            "data": {
+              "browserName": "chromium",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              }
+            }
+          },
+          {
+            "name": "jassub-native-worker-error",
+            "data": {
+              "artifact": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+              "provenance": {
+                "kind": "installed",
+                "name": "artplayer-plugin-jassub",
+                "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\dist\\artplayer-plugin-jassub.js",
+                "member": "package/dist/artplayer-plugin-jassub.js",
+                "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+                "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1",
+                "sourceHashes": {
+                  "src/index.ts": "3e210671548168ee919812091186edb43c9ae0f8f5ddb9b610379080d7c4388f",
+                  "src/jassub.es.d.ts": "6f5ac9310757525d81da2b2c3c9b8f1f397eb5e42d22f925cbf514df0af99d58",
+                  "src/jassub.es.js": "ebabca473edfbe7f9768dba25b2c2403f2c9c5dec64292fa008d8eb758e32696",
+                  "src/registration.ts": "cc45b907d9e2a84e68246ccdf8a11ef03d3ca69bf5f8a3182efddcd766283f72",
+                  "worker/jassub-worker-modern.wasm": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                  "worker/jassub-worker.js": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                  "worker/jassub-worker.wasm": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                  "package.json": "e5098c03fb59c920ba28318348ffa5573e162d38293d0ac39c4fd74f9ee70c9b",
+                  "tsconfig.json": "ba709141dbff3861beb4ab9509b861b663a2a94c653c1e3f2b75ca6d3227d5bb"
+                }
+              },
+              "sha256": "6dc1e7a9e2172c4983c99b2e16c969a974039e6fe9a48b94817dd0a7a30fa995",
+              "state": {
+                "outcome": {
+                  "errorIsNativeEvent": true,
+                  "trusted": true,
+                  "sameNativeError": true,
+                  "type": "error",
+                  "rowsAbsent": true
+                },
+                "calls": 1,
+                "terminated": 1,
+                "ownedContainers": 0
+              }
+            }
+          },
+          {
+            "name": "browser-evidence",
+            "data": {
+              "browser": "153.0.8010.12",
+              "platform": "win32",
+              "manifest": {
+                "kind": "artplayer-browser-test",
+                "resources": {
+                  "/assets/@mediapipe/selfie_segmentation/README.md": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\README.md",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/README.md",
+                      "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                      "baselineSha256": "9dad28188ae54ea420e3d29c23360b040a0dfb88954b99a3e456b8a8c93cf2a1",
+                      "normalizedLF": true
+                    },
+                    "sha256": "454445fb86946504e5f9e43ca9fd2650ebaa77b50328f0cfd4a953f04a12601d",
+                    "bytes": 389
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/index.d.ts": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\index.d.ts",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/index.d.ts",
+                      "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                      "baselineSha256": "46152cccb63a9249503f7b8f49dbc3cfbd2a2994eda2c9f0db32a2998e1879a9",
+                      "normalizedLF": true
+                    },
+                    "sha256": "393aa65640587d87aa0f2c755e502f021f334bd26ea1c8084d5fce24b861f370",
+                    "bytes": 2883
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/package.json": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\package.json",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/package.json",
+                      "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                      "baselineSha256": "b514e7146be2fbceee0a4a6e8a3895d2df36e552338aad8045a38a12c1c8eff8",
+                      "normalizedLF": true
+                    },
+                    "sha256": "70645155414da90c0cc43b66af10abbd83f3db7ebc459e8e56d2fbf1dbdf0a3d",
+                    "bytes": 761
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.binarypb",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.binarypb",
+                      "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "baselineSha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                      "normalizedLF": false
+                    },
+                    "sha256": "0007be42c754f111063c0121bba7104880b7c56277d3a9681cdcb17709236aee",
+                    "bytes": 362
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.js",
+                      "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "baselineSha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                      "normalizedLF": false
+                    },
+                    "sha256": "a4720d2d2374ec9df3510461ff186a4af427fb5bd402375e135875a991467da3",
+                    "bytes": 44542
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation.tflite",
+                      "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "baselineSha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                      "normalizedLF": false
+                    },
+                    "sha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+                    "bytes": 249024
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_landscape.tflite",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_landscape.tflite",
+                      "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "baselineSha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                      "normalizedLF": false
+                    },
+                    "sha256": "4aafe6223bb8dac6fac8ca8ed56852870a33051ef3f6238822d282a109962894",
+                    "bytes": 249792
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.data",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.data",
+                      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "baselineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                      "normalizedLF": false
+                    },
+                    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "bytes": 0
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.js",
+                      "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "baselineSha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                      "normalizedLF": false
+                    },
+                    "sha256": "9406e7e30843bdca189689d4bea413f3e468f71e381560e583ef12792d26d46a",
+                    "bytes": 276493
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_simd_wasm_bin.wasm",
+                      "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "baselineSha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                      "normalizedLF": false
+                    },
+                    "sha256": "d93e73677ef1fe791ff5407083c0f9ced6d6050a705bd6c20823fc05919d8dc4",
+                    "bytes": 5694839
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.js",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.js",
+                      "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "baselineSha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                      "normalizedLF": false
+                    },
+                    "sha256": "ed59858c14c9db26d34abbf0afa9017e5c6583a6ad63dae63d2fe42e19abfea5",
+                    "bytes": 276488
+                  },
+                  "/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm": {
+                    "source": {
+                      "kind": "local-model-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\@mediapipe\\selfie_segmentation\\selfie_segmentation_solution_wasm_bin.wasm",
+                      "relativeFile": "docs/assets/@mediapipe/selfie_segmentation/selfie_segmentation_solution_wasm_bin.wasm",
+                      "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "baselineSha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                      "normalizedLF": false
+                    },
+                    "sha256": "37665276fd8e38589a28b07ddec805266efb1b7a1a52fd36667ef11dff43a847",
+                    "bytes": 5587523
+                  },
+                  "/assets/jassub/jassub-worker.js": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.js",
+                      "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.js",
+                      "member": "package/worker/jassub-worker.js",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "0fb9a83f96fc39426e733a94f3e7fe4e37099324c08328450ba032b653e85707",
+                    "bytes": 31069
+                  },
+                  "/assets/jassub/jassub-worker.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker.wasm",
+                      "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker.wasm",
+                      "member": "package/worker/jassub-worker.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "73880d99ba9260ac39fc4476491cf254ca784c76f3af2fb03f3f9be8065ad3c0",
+                    "bytes": 1969100
+                  },
+                  "/assets/jassub/jassub-worker-modern.wasm": {
+                    "source": {
+                      "kind": "installed-resource",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-jassub\\worker\\jassub-worker-modern.wasm",
+                      "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                      "baseline": "packages/artplayer-plugin-jassub/worker/jassub-worker-modern.wasm",
+                      "member": "package/worker/jassub-worker-modern.wasm",
+                      "archiveSha256": "d0c98362d56e4186f10b146308fc60a634df4f4a1748dad3c6c1a7450ed2c6c1"
+                    },
+                    "sha256": "8a8b37463713d1f2ddbc1fbb8a35889d9565e5a6670851758b46b2216d8e513c",
+                    "bytes": 2037191
+                  },
+                  "/assets/jassub/default.woff2": {
+                    "source": {
+                      "kind": "local-resource",
+                      "file": "D:\\github\\ArtPlayer\\docs\\assets\\jassub\\default.woff2",
+                      "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                      "baseline": "docs/assets/jassub/default.woff2",
+                      "member": null,
+                      "archiveSha256": null
+                    },
+                    "sha256": "886929903707c5bb28b07cd2eed69921b3d5ef5c49c73a0dd1e187ebf6546a4c",
+                    "bytes": 145972
+                  },
+                  "/candidate/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943
+                  },
+                  "/compiled/artplayer.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/uncompiled/artplayer/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer\\dist\\artplayer.js"
+                    },
+                    "sha256": "9148a369636f814b03e6a1ed2a7db222a31b159f93e8a94d52c5a9dde2dfe6a6",
+                    "bytes": 208943,
+                    "aliasOf": "/candidate/artplayer.js"
+                  },
+                  "/candidate/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197
+                  },
+                  "/compiled/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/uncompiled/artplayer-plugin-chapter/index.js": {
+                    "source": {
+                      "kind": "artifact",
+                      "file": "D:\\github\\ArtPlayer\\refactor\\.cache\\packages\\run-uRbTbe\\artifacts\\artplayer-plugin-chapter\\dist\\artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "179c3ea90ddc85da27b46f000110e32d464dfa5c8c394e98316dc1b75d6f2a72",
+                    "bytes": 5197,
+                    "aliasOf": "/candidate/artplayer-plugin-chapter.js"
+                  },
+                  "/published/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.4.0",
+                      "integrity": "sha512-2B+plbx8N2yNsjK4nJU3+EOG8TULm1LRZk/QPkWRAMEX2Ee/MSnZG/WJYz8kcoZxZuLKcQ3uXifqLuPxZOH29A==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "f1db1fa3406aa6d41baa7c554749429a8e79f99d56a794bde23345eb9c07573f",
+                    "bytes": 134037
+                  },
+                  "/published/artplayer-plugin-chapter.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "1.1.0",
+                      "integrity": "sha512-ji66Lr2K2S+OjFMuMby3yq+pefWlOC51Sbpop/DIr2N6w3F0smrF+YZbshN1Dy8/Tx1TYpT7N6WkkZWy5Jix1w==",
+                      "member": "package/dist/artplayer-plugin-chapter.js"
+                    },
+                    "sha256": "c2aaee11bf1db765433b01d9f8dd3978e41fa4d39655db00ebd03fc0be3e35e0",
+                    "bytes": 4973
+                  },
+                  "/test/pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.mp4"
+                    },
+                    "sha256": "0ad1d7ad286aec6e0fa9e27fc1e487e7277df2e603e30040fb942365763d0233",
+                    "bytes": 251538
+                  },
+                  "/test/pattern.webm": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/pattern.webm"
+                    },
+                    "sha256": "9d3c2b3dec9581a599de2d6732992ef7846790e0d1368e6e131bd339b39e984f",
+                    "bytes": 162073
+                  },
+                  "/published-4.5.5/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.5",
+                      "integrity": "sha512-HeAKbe3od9ZgFQVSBCg5FlixJsefDEBC8txVG19yZgvzlcJuiurxPlasap+GHuex/ftG+jmSXnTRtuNrTki2Kw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3467e626ca29d2f7884e75eb75b8b90de74a25761ffa2e272576c9b5a98fa0a4",
+                    "bytes": 153582
+                  },
+                  "/published-5.1.7/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.7",
+                      "integrity": "sha512-N/QdNlTwsIHUsWOHMPj0pq97v3qmgXZHfhy1q7I+8YN3/XakJiJJyVJgGaeBjU+y/fUIrzBhwpBaX+NFwK9/qw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "484ccc3f22446ec6fd0dd8b8a5602c740b601d55097a1ae043262d92aab35357",
+                    "bytes": 155940
+                  },
+                  "/published-4.5.9/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "4.5.9",
+                      "integrity": "sha512-x5JzGdXkw4GFdztvPkVnm8TOWrGDcvGKKMPb9wuP6UfyftlLM3UQctmmalfAMnQSxugJwq2Kb9ix9OG2SgbJJA==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "09a9f09e3a64a02ca7c27af710d7254f886f0bfb09fd54bf3a728ce863e5a497",
+                    "bytes": 156408
+                  },
+                  "/published-5.3.0/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.0",
+                      "integrity": "sha512-yExO39MpEg4P+bxgChxx1eJfiUPE4q1QQRLCmqGhlsj+ANuaoEkR8hF93LdI5ZyrAcIbJkuEndxEiUoKobifDw==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "54ffaf7598b910d5a88d2d2eec1aa6faa806583915b99b892dd32129c53e421a",
+                    "bytes": 159238
+                  },
+                  "/published-5.1.6/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.6",
+                      "integrity": "sha512-cqnVVLKCKWCryKl6Pmop50/Di9IQwOeNNQs5qWGzJDPiM0qTC7Q/Enusa+8JQid8p09fvp4Vc32ViSSYutdEeQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "6a7b1f3007ecda9f399e6cff606490dd745c495e19ce10e864a401ff09996172",
+                    "bytes": 155714
+                  },
+                  "/published-5.1.2/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.1.2",
+                      "integrity": "sha512-eIWlxiP2ghgftaZWIGnclkOpXGFZTOf5xrm6sGZCGx5A8wGbTHRSMe+ZiyPFpbNhBVupi/QObSjX/FcD+YbS1Q==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "3dfd035b4cde34c9d9dd1b303f95bfbb42bde105bcb3e5671a8d375a719290b1",
+                    "bytes": 154583
+                  },
+                  "/test/audio-tone.m4a": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/audio-tone.m4a"
+                    },
+                    "sha256": "83e6672b880b5d1c97093b1e26bdc40221c0b279615f40e99dbf9d2ade7b4d56",
+                    "bytes": 132436
+                  },
+                  "/test/thumbnail-pattern.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/thumbnail-pattern.mp4"
+                    },
+                    "sha256": "4c977be04d97f6ac1342ac4959b8e61678f390d88a088430e4d0200137a03d1c",
+                    "bytes": 752916
+                  },
+                  "/test/auto-thumbnail-timeline.mp4": {
+                    "source": {
+                      "kind": "generated-media",
+                      "file": "test/browser/media/auto-thumbnail-timeline.mp4"
+                    },
+                    "sha256": "10370156cffada462d3ea00aae0caadd62752369cd6538cc55248b3ddd7bf994",
+                    "bytes": 8602
+                  },
+                  "/test/vast-skippable.xml": {
+                    "source": {
+                      "kind": "local-vast-fixture",
+                      "file": "test/browser/vast-fixture.mjs"
+                    },
+                    "sha256": "f810be089e762ea77c08a1f736781fa8f07f5746bab6ec59819bd03d36a46baf",
+                    "bytes": 760
+                  },
+                  "/test/declaration-cues.vtt": {
+                    "source": {
+                      "kind": "test-subtitles",
+                      "file": "test/browser/media/declaration-cues.vtt"
+                    },
+                    "sha256": "5d149d4e641ce41cbb83376835c03daf1fb89f3b9f568fa59e064d51e2b57704",
+                    "bytes": 54
+                  },
+                  "/test/thumbnail-grid.svg": {
+                    "source": {
+                      "kind": "test-thumbnail-grid",
+                      "file": "test/browser/media/thumbnail-grid.svg"
+                    },
+                    "sha256": "bb3f1ec9895d37def77ca4b192d3cd73577a2668558cc99de1588f511d65d3e6",
+                    "bytes": 14969
+                  },
+                  "/test/legacy-safe-area.js": {
+                    "source": {
+                      "kind": "frozen-own-source",
+                      "file": "test/helpers/legacy-safe-area.js",
+                      "commit": "ccf77c4e"
+                    },
+                    "sha256": "ce0368618ef6363b78271b8bcc7973abd0478e797cc464ddd912929e6dfa501a",
+                    "bytes": 795
+                  },
+                  "/test/iframe-boundary-child.html": {
+                    "source": {
+                      "kind": "iframe-fixture",
+                      "file": "test/browser/iframe-boundary-child.html"
+                    },
+                    "sha256": "4721de185f606de7d576e71395127257e476765455e2a947ded79df4ebed901a",
+                    "bytes": 1451
+                  },
+                  "/published-5.3.1-beta.1/artplayer.js": {
+                    "source": {
+                      "kind": "npm-release",
+                      "version": "5.3.1-beta.1",
+                      "integrity": "sha512-btjbQwXPl86U/Apja0WrCUF+AXLPacI60eUGAeJTx3EMuUKrVaOFrmWrIeeyMUi5aIzMSXM++tQjlSMJVnmhuQ==",
+                      "member": "package/dist/artplayer.js"
+                    },
+                    "sha256": "e91e64228c57bb97300c709789d5557ab07b133cab307267b4a2a4df3083c861",
+                    "bytes": 159458
+                  },
+                  "/assets/sample/video.mp4": {
+                    "source": {
+                      "kind": "docs-media",
+                      "file": "docs/assets/sample/video.mp4"
+                    },
+                    "sha256": "30a2de667ba267b6bc605edcee1c4bd728c048ed76f500ea0e73d1f1a6f8f980",
+                    "bytes": 5818706
+                  },
+                  "/test/performance.js": {
+                    "source": {
+                      "kind": "adapted-baseline-fixture",
+                      "file": "refactor/fixtures/performance.js"
+                    },
+                    "sha256": "c5a8a8611db004aadd6c3b82c61b8ae242319c1a12e73bf784c1da06fcebed72",
+                    "bytes": 9251
+                  }
+                }
+              },
+              "state": {
+                "url": "http://127.0.0.1:8084/test/player.html?core=candidate",
+                "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+                "events": [
+                  "video:loadedmetadata",
+                  "ready",
+                  "destroy"
+                ],
+                "media": {
+                  "source": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "width": 0,
+                  "height": 0,
+                  "duration": null,
+                  "currentTime": 0
+                }
+              },
+              "errors": [],
+              "consoleErrors": [
+                "Creating a worker from 'http://127.0.0.1:8084/assets/jassub/jassub-worker.js' violates the following Content Security Policy directive: \"worker-src 'none'\". The action has been blocked.",
+                "Error: [object Event]\n    at e._error (<anonymous>:7:16415)\n    at _worker.onerror (<anonymous>:7:4573)"
+              ],
+              "failedRequests": [
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                },
+                {
+                  "url": "http://127.0.0.1:8084/assets/sample/steve-jobs.mp4",
+                  "resourceType": "media",
+                  "failure": {
+                    "errorText": "net::ERR_ABORTED"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "limitation": "Four actual installed Chromium lifecycle cases only; no complete package, all-browser, remote workflow or release acceptance. Old stale map rejected due to changed DASH source, then all 20 browser packages rebuilt. Root lock/dependencies unchanged. Alternate source/ad hoc diagnostics remain intentional."
+}

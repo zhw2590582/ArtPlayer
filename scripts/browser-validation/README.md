@@ -58,6 +58,21 @@ local reports before rerunning the same scope. Invocation JSON records arguments
 and artifact identity; result JSON records the child's actual exit. Preflight
 errors occur before starting Playwright and remain in the terminal/CI tee log.
 Listing tests with `--list` is collection evidence only, not playback validation.
+`verifyInstalledBrowserEnvironment()` in `scope.ts` runs in both the launcher
+and the installed Playwright config, before reading installed artifacts. Direct
+config loading therefore cannot bypass the launcher's existing MediaBunny,
+Iframe, Mask or DASH execution-policy checks. Both paths also reject active
+JASSUB fixture substitutions (custom canvas, on-demand/offscreen/async selection,
+rAF/screenshot observation, bitmap/idle/single-flight controls) and Multiple
+Subtitles' native-event restoration control. Explicit inactive values remain
+valid; source tracing that does not replace the restoration condition remains
+available. This protects the standard test contract, not the player's public
+runtime configuration. The existing native JASSUB test keeps its explicit
+main-thread setting, and hybrid still selects actual browser capability.
+For deliberate alternate scheduling/rendering, use `yarn test:browser` with
+explicit input selection or the source launcher; do not label that run as the
+standard installed scope. No environment variable is silently cleared to turn a
+diagnostic run into an apparent normal result.
 The complete five-package installed main subset was run on Windows with two
 workers: 255 successful cases across 11 files and three engines, including six
 unsupported WebKit Document PiP capability records. See

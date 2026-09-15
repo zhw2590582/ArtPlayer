@@ -396,6 +396,10 @@ host has exhibited a roughly ten-second stall despite a green eventual-pixel
 result; a single outstanding task does not eliminate the Firefox issue. These
 timings identify API boundaries, not a native stack or the underlying cause.
 See [the native-call record](../../refactor/changes/2026-09-15-PKG-JASSUB-09-native-call.md).
+These JASSUB rendering/scheduling switches are deliberately rejected by the
+standard installed-scope launcher and config. Use the ad hoc browser command
+shown in the diagnostic records, with an explicitly selected input, to retain
+the distinction between controlled experiments and unchanged installed tests.
 
 `ARTPLAYER_JASSUB_SCREENSHOT=true` adds a separate observation path to the native
 JASSUB spec. `jassub-display.js` decodes a clipped composited page PNG using the

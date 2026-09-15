@@ -782,7 +782,9 @@
         "changes/2026-09-15-CI-01-iframe-installed.md",
         "baselines/ci-iframe-installed-validation.json",
         "changes/2026-09-15-CI-01-vast-installed.md",
-        "baselines/ci-vast-installed-validation.json"
+        "baselines/ci-vast-installed-validation.json",
+        "changes/2026-09-15-CI-01-rendering-policy.md",
+        "baselines/ci-rendering-policy-validation.json"
       ]
     },
     {

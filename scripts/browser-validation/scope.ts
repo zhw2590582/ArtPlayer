@@ -90,14 +90,32 @@ export function browserInvocation(scope: string, args: string[], environment: No
     delete env.ARTPLAYER_BROWSER_ARTIFACTS
   }
   else {
-    assert(env.ARTPLAYER_BROWSER_ARTIFACTS, 'Installed browser checks require ARTPLAYER_BROWSER_ARTIFACTS')
-    assert(env.ARTPLAYER_MB_BROWSER_CANDIDATE !== '1', 'Installed browser checks must retain MediaBunny historical controls')
-    assert(env.ARTPLAYER_MASK_PROFILE !== '1', 'Installed browser checks cannot enable Mask CPU profiling')
-    assert(!['ARTPLAYER_IFRAME_BASELINE', 'ARTPLAYER_IFRAME_LIFECYCLE_ONLY', 'ARTPLAYER_IFRAME_BOUNDARIES_ONLY'].some(name => env[name] === '1'), 'Installed browser checks must retain Iframe candidate and historical controls')
-    assert(!env.ARTPLAYER_DASH_DIAGNOSTIC_SDK || env.ARTPLAYER_DASH_DIAGNOSTIC_SDK === 'none', 'Installed browser checks require the unchanged DASH SDK')
-    assert(!['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'].some(name => env[name] === '1'), 'Installed browser checks cannot use DASH recovery diagnostics')
+    verifyInstalledBrowserEnvironment(env)
   }
   return { scope, env, args: ['test', `--config=playwright.${scope}.config.js`, ...args], directory: `refactor/.cache/browser-${scope}` }
+}
+
+export function verifyInstalledBrowserEnvironment(env: NodeJS.ProcessEnv) {
+  assert(env.ARTPLAYER_BROWSER_ARTIFACTS, 'Installed browser checks require ARTPLAYER_BROWSER_ARTIFACTS')
+  assert(env.ARTPLAYER_MB_BROWSER_CANDIDATE !== '1', 'Installed browser checks must retain MediaBunny historical controls')
+  assert(env.ARTPLAYER_MASK_PROFILE !== '1', 'Installed browser checks cannot enable Mask CPU profiling')
+  assert(!['ARTPLAYER_IFRAME_BASELINE', 'ARTPLAYER_IFRAME_LIFECYCLE_ONLY', 'ARTPLAYER_IFRAME_BOUNDARIES_ONLY'].some(name => env[name] === '1'), 'Installed browser checks must retain Iframe candidate and historical controls')
+  assert(!env.ARTPLAYER_DASH_DIAGNOSTIC_SDK || env.ARTPLAYER_DASH_DIAGNOSTIC_SDK === 'none', 'Installed browser checks require the unchanged DASH SDK')
+  assert(!['ARTPLAYER_DASH_DIAGNOSE_STALL', 'ARTPLAYER_DASH_DIAGNOSE_GETTER', 'ARTPLAYER_DASH_DIAGNOSE_METRICS'].some(name => env[name] === '1'), 'Installed browser checks cannot use DASH recovery diagnostics')
+  for (const [name, active] of [
+    ['ARTPLAYER_JASSUB_CUSTOM_CANVAS', 'true'],
+    ['ARTPLAYER_JASSUB_ON_DEMAND', 'false'],
+    ['ARTPLAYER_JASSUB_OFFSCREEN', 'default'],
+    ['ARTPLAYER_JASSUB_READBACK_FRAME', 'true'],
+    ['ARTPLAYER_JASSUB_ASYNC_RENDER', 'false'],
+    ['ARTPLAYER_JASSUB_SCREENSHOT', 'true'],
+    ['ARTPLAYER_JASSUB_CONTROL_BITMAP', 'true'],
+    ['ARTPLAYER_JASSUB_CONTROL_IDLE_READBACK', 'true'],
+    ['ARTPLAYER_JASSUB_CONTROL_SINGLE_FLIGHT', 'true'],
+    ['ARTPLAYER_SOURCE_RESTORE_EVENT', '1'],
+  ] as const) {
+    assert(env[name] !== active, `Installed browser checks cannot use ${name}=${active}; use an explicit diagnostic browser run`)
+  }
 }
 
 export function browserScopeConfig(scope: BrowserScope): PlaywrightTestConfig {
