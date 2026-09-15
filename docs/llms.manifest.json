@@ -63,6 +63,10 @@
       "sha256Lf": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
+      "sha256Lf": "92c0969b9ef1726a59f325b2f6d7d78cc42db688cadc9400f7061270262a9769"
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/start/i18n.md",
       "sha256Lf": "1551bf939aab1ee942d8480df891640109d18aa9adc016adf1d075bee5ef1de9"
     },
@@ -283,5 +287,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "ddb04cf3fc115d09fe87350d7d39097e5b67b4e17918ccd10b7b1bedf8d670fa"
+  "outputSha256Lf": "95acc15ff00744f6a03d8de4170dae370c06952a4c2d0463b0ab3408176bea27"
 }

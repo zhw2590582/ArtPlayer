@@ -100,5 +100,16 @@ for (const language of ['zh', 'en']) {
     expect(audioTarget.searchParams.get('code')).toContain('artplayerPluginAudioTrack({')
     expect(failedAssets).toEqual([])
     await audioExample.close()
+    await page.locator(`.VPSidebar a[href="${prefix}/plugin/vtt-thumbnail.html"]`).click()
+    await expect(page.locator('h1')).toContainText(language === 'en' ? 'VTT Thumbnail' : 'VTT 缩略图')
+    const vttPopup = context.waitForEvent('page')
+    await page.locator('.run-code, [classname="run-code"]').first().click()
+    const vttExample = await vttPopup
+    await vttExample.waitForLoadState('domcontentloaded')
+    const vttTarget = new URL(vttExample.url())
+    expect(vttTarget.searchParams.get('libs')).toBe('./uncompiled/artplayer-plugin-vtt-thumbnail/index.js')
+    expect(vttTarget.searchParams.get('code')).toContain('artplayerPluginVttThumbnail({')
+    expect(failedAssets).toEqual([])
+    await vttExample.close()
   })
 }

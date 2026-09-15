@@ -67,3 +67,7 @@ desktop tests and emulated touch checks do not certify physical mobile devices.
 ## License
 
 MIT © Harvey Zhao
+
+## Usage guides
+
+See the [Chinese guide](../artplayer-vitepress/docs/plugin/vtt-thumbnail.md) and [English guide](../artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md) for sprite format, whole-second inclusive boundaries, asynchronous registration, error handling and accurate runtime types. Both retain the original editor example; branch-only behavior is marked as unpublished.

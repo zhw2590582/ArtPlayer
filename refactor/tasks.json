@@ -4514,7 +4514,8 @@
         "SITE-DANMUKU-01",
         "SITE-HLS-01",
         "SITE-DASH-01",
-        "SITE-AUDIO-01"
+        "SITE-AUDIO-01",
+        "SITE-VTT-01"
       ],
       "status": "todo",
       "risk": "M",
@@ -5903,6 +5904,27 @@
       "evidence": [
         "changes/2026-09-15-SITE-AUDIO-01-guides.md",
         "baselines/audio-docs-validation.json"
+      ]
+    },
+    {
+      "id": "SITE-VTT-01",
+      "phase": "6 文档与示例",
+      "title": "补齐VTT缩略图双语指南和裁剪验证",
+      "scope": [
+        "artplayer-plugin-vtt-thumbnail",
+        "artplayer-vitepress"
+      ],
+      "dependsOn": [
+        "SITE-03",
+        "PKG-VTT-THUMB-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "VTT格式、异步注册、样式/时间边界与类型兼容的双语指南及原样示例浏览器证据",
+      "acceptance": "对照源码和历史类型；原样demo配受控媒体在新旧核心三浏览器验证实际裁剪像素、空档及销毁；保留旧URL及原包验收门槛",
+      "evidence": [
+        "changes/2026-09-15-SITE-VTT-01-guides.md",
+        "baselines/vtt-docs-validation.json"
       ]
     }
   ]

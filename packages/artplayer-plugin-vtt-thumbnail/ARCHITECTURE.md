@@ -171,3 +171,7 @@ archive and source hashes. Missing or stale maps fail without source fallback.
 Without a map, source and deliberate artifact checks retain their existing behavior.
 This is desktop main-entry coverage, not all module forms, physical devices or
 release readiness. See ../../refactor/changes/2026-09-15-CI-01-subtitles-installed.md.
+
+## Documentation regression
+
+The bilingual VitePress vtt-thumbnail guides must track parseVtt.ts, preview.ts and the asynchronous registration boundary. The plugin has no update/reload method; changing the main video does not change its VTT index. document-vtt.spec.js executes the original demo with local VTT/SVG fixtures and the unchanged demo video, verifies real screenshot crop pixels, shared-boundary selection, gaps and teardown on both cores. Exact boundary input uses public setBar with a MouseEvent, while region selection uses real mouse movement. Run yarn test:browser document-vtt.spec.js document-site.spec.js --workers=1 after rebuilding docs. This local dist guide test is separate from installed package and physical touch acceptance.

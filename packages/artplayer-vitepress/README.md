@@ -14,16 +14,24 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/hls-control.md`, `docs/en/plugin/hls-control.md` | HLS SDK setup, menus, lifecycle and types | `/document/plugin/hls-control.html`, `/document/en/plugin/hls-control.html` |
 | `docs/plugin/dash-control.md`, `docs/en/plugin/dash-control.md` | DASH SDK generations, menus, lifecycle and types | `/document/plugin/dash-control.html`, `/document/en/plugin/dash-control.html` |
 | `docs/plugin/audio-track.md`, `docs/en/plugin/audio-track.md` | Separate audio synchronization, ownership and update types | `/document/plugin/audio-track.html`, `/document/en/plugin/audio-track.html` |
+| `docs/plugin/vtt-thumbnail.md`, `docs/en/plugin/vtt-thumbnail.md` | Sprite index format, timing boundaries, asynchronous registration and types | `/document/plugin/vtt-thumbnail.html`, `/document/en/plugin/vtt-thumbnail.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
 | `docs/public/style.css` | Documentation presentation | Copied into the built site |
 
 Edit Markdown and public sources here. Do not edit the generated repository
-`docs/document/`. The current inventory contains 34 Markdown pages: 17 Chinese
-and 17 English. Danmuku, HLS, DASH and Audio Track have dedicated guides and navigation in both languages. Other plugins currently
+`docs/document/`. The current inventory contains 36 Markdown pages: 18 Chinese
+and 18 English. Danmuku, HLS, DASH, Audio Track and VTT Thumbnail have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
+
+VTT Thumbnail guides preserve the original vtt.thumbnail demo. The document-vtt
+suite checks actual screenshot crop pixels, a shared time boundary, a gap and
+cleanup using the original video, controlled VTT/SVG resources and real progress
+hover on both cores. The exact endpoint uses public setBar with a MouseEvent to
+avoid pointer pixel rounding while satisfying the core's event contract.
+This does not establish physical touch or full playback acceptance.
 
 Audio Track guide examples match the actual audio.track demo. The dedicated
 document-audio browser suite substitutes local Range-served media, then checks
