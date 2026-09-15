@@ -18,6 +18,13 @@ tasks.json 维护。SITE-01 的 963 条核心声明成员包含继承、重载�
 描述成播放控制或保证帧率。两包原有实现地图已经描述这些行为，因此没有为了加
 站点导航而改动包内实现、声明或分发文件。
 
+Auto Thumbnail 和 Multiple Subtitles 的本次核对：
+
+| 包 | 对照源码与声明 | 双语指南覆盖 | 保留边界 |
+| --- | --- | --- | --- |
+| Auto Thumbnail | [入口](../packages/artplayer-plugin-auto-thumbnail/src/index.ts)、options.ts、extraction.ts、session.ts、video.ts、根/runtime 声明、README/ARCHITECTURE；核心 thumbnailsMix/layout | [中文](../packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md)：url/width/number/scale/忽略height；name；异步注册；Option/Result/Factory/RuntimeFactory | truthy默认值、十列与时间公式、渐进JPEG、原对象延后读取、独立解码/CORS、分阶段超时/清理、无完成API；Windows WebKit首帧未解决。维护说明的版本句改为区分初始迁移和当前major准备 |
+| Multiple Subtitles | [入口](../packages/artplayer-plugin-multiple-subtitles/src/index.ts)、request.ts、merge.ts、render.ts、lifetime.ts、根/runtime 声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md)：五个TrackOption字段、subtitles、multipleSubtitles.name/tracks/reset、全部根及runtime命名类型 | 并发下载/延后元数据、未调用onParser、未知名称同步错误、空选择/原序reset、共享escape和URL归属、整cue显示、取消结算；注册不等待宿主加载，无自动菜单/重下载，根按npm1.2形状 |
+
 ## 接续范围
 
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；

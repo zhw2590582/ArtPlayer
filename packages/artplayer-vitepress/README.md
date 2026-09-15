@@ -19,6 +19,8 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/ambilight.md`, `docs/en/plugin/ambilight.md` | Sampling options, start/stop ownership, pixel access and compatible type entries | `/document/plugin/ambilight.html`, `/document/en/plugin/ambilight.html` |
 | `docs/plugin/document-pip.md`, `docs/en/plugin/document-pip.md` | Window ownership, video fallback, events and compatible async type views | `/document/plugin/document-pip.html`, `/document/en/plugin/document-pip.html` |
 | `docs/plugin/asr.md`, `docs/en/plugin/asr.md` | PCM/WAV callbacks, subtitle rendering, audio routing, lifecycle and runtime types | `/document/plugin/asr.html`, `/document/en/plugin/asr.html` |
+| `docs/plugin/auto-thumbnail.md`, `docs/en/plugin/auto-thumbnail.md` | Progressive JPEG extraction, limits, decoder ownership and asynchronous runtime types | `/document/plugin/auto-thumbnail.html`, `/document/en/plugin/auto-thumbnail.html` |
+| `docs/plugin/multiple-subtitles.md`, `docs/en/plugin/multiple-subtitles.md` | Track loading, selection, shared subtitle configuration and compatible type views | `/document/plugin/multiple-subtitles.html`, `/document/en/plugin/multiple-subtitles.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
@@ -32,10 +34,18 @@ and run `node refactor/scripts/demos.mjs --check`. Preserve the frozen BASE-04
 inventory. Also refresh and check the current site inventory; the two inventories
 serve different purposes. Neither path check replaces browser navigation tests.
 
-The generated site lives in `docs/document/`. The current inventory contains 44 Markdown pages: 22 Chinese
-and 22 English. Danmuku, HLS, DASH, Audio Track, VTT Thumbnail, Chapter, Ambilight, Document PiP and ASR have dedicated guides and navigation in both languages. Other plugins currently
+The generated site lives in `docs/document/`. The current inventory contains 48 Markdown pages: 24 Chinese
+and 24 English. Danmuku, HLS, DASH, Audio Track, VTT Thumbnail, Chapter, Ambilight, Document PiP, ASR, Auto Thumbnail and Multiple Subtitles have dedicated guides and navigation in both languages. Other plugins currently
 use their package README, architecture notes and linked editor examples;
 navigation links alone are not complete API documentation.
+
+Auto Thumbnail and Multiple Subtitles preserve their original runnable examples.
+Both registrars are asynchronous, but their Promises cover different work: Auto
+Thumbnail installs subscriptions before extraction, while Multiple Subtitles
+downloads and merges tracks without waiting for host subtitle loading. Their
+guides explain these boundaries, retained historical declarations and opt-in
+runtime types. Navigation verification does not prove decoded thumbnail pixels
+or native subtitle display; keep those package-specific checks separate.
 
 Document PiP keeps its required root factory and void historical result types;
 the guide explains the accurate opt-in views without inventing a runtime subpath.

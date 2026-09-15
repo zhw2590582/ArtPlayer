@@ -234,7 +234,8 @@ fixtures and historical CommonJS alias. Task04's migration acceptance is recorde
 in `refactor/changes/2026-09-15-PKG-AUTO-THUMB-04-migration.md`; unresolved runtime
 behavior remains with task03. Task05 requires both and verifies old/final cores and actual
 devices; task06 covers installed package entries and the real demo/editor. The
-package version remains unchanged. Use
+initial migration left the version unchanged; release preparation now sets the
+next major in package.json. Use
 `refactor/baselines/auto-thumbnail-contract.md` and `auto-thumbnail-failures.md` as
 the historical evidence map; do not regenerate those baselines from this source.
 

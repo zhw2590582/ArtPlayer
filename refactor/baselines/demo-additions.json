@@ -37,6 +37,14 @@
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
     },
     {
+      "source": "docs/document/en/plugin/auto-thumbnail.html",
+      "route": "/document/en/plugin/auto-thumbnail.html",
+      "introducedAfter": "94adb77fd677f34c171ed1812cbda9512dc5e168",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; navigation and type checks do not complete native media or device acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
       "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
@@ -77,6 +85,14 @@
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
     },
     {
+      "source": "docs/document/en/plugin/multiple-subtitles.html",
+      "route": "/document/en/plugin/multiple-subtitles.html",
+      "introducedAfter": "94adb77fd677f34c171ed1812cbda9512dc5e168",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; navigation and type checks do not complete native media or device acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
       "introducedBy": "9ba3c82f99e6bad0e858f6c2e1d8624dfb725c8c",
@@ -109,6 +125,14 @@
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
     },
     {
+      "source": "docs/document/plugin/auto-thumbnail.html",
+      "route": "/document/plugin/auto-thumbnail.html",
+      "introducedAfter": "94adb77fd677f34c171ed1812cbda9512dc5e168",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; navigation and type checks do not complete native media or device acceptance."
+    },
+    {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
       "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
@@ -139,6 +163,14 @@
       "owner": "SITE-HLS-01",
       "finalDemoOwner": "EX-03",
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/multiple-subtitles.html",
+      "route": "/document/plugin/multiple-subtitles.html",
+      "introducedAfter": "94adb77fd677f34c171ed1812cbda9512dc5e168",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Generated bilingual guide; navigation and type checks do not complete native media or device acceptance."
     },
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",

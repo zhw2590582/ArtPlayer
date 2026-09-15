@@ -1,5 +1,16 @@
 # 进度与证据
 
+## SITE-04 Auto Thumbnail/Multiple Subtitles双语指南
+
+补齐四份指南、原始示例和本地导航，覆盖渐进截图、异步注册、字幕选择、共享配置、
+资源归属及根/runtime类型差异。四份TS片段、每页33个链接、三浏览器12组导航和
+17项工具测试通过；构建、LLM和清单检查通过。当前48 Markdown/57 HTML。
+Auto Thumbnail维护说明修正版升级描述后，该包旧candidate的build指纹正确过期；
+其余20库build仍有效，接下来REL-02需从提交输入重新准备该包候选。见
+[记录](changes/2026-09-16-SITE-04-auto-multi-guides.md)和
+[证据](baselines/site04-auto-multi-guides.json)。SITE-04继续doing、224/22/39不变，
+不将导航视作真实截图/字幕播放，也不启动用户保留的正式复盘。
+
 ## SITE-04 Document PiP/ASR双语指南
 
 补齐四份指南、本地导航与原样Run Code示例。说明PiP异步/只读实际行为与旧类型、

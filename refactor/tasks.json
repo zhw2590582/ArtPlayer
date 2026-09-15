@@ -4560,7 +4560,9 @@
         "changes/2026-09-16-SITE-04-chapter-ambilight-guides.md",
         "baselines/site04-chapter-ambilight-guides.json",
         "changes/2026-09-16-SITE-04-dpip-asr-guides.md",
-        "baselines/site04-dpip-asr-guides.json"
+        "baselines/site04-dpip-asr-guides.json",
+        "changes/2026-09-16-SITE-04-auto-multi-guides.md",
+        "baselines/site04-auto-multi-guides.json"
       ]
     },
     {
