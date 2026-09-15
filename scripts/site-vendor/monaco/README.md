@@ -370,3 +370,39 @@ yarn test:browser test/browser/editor-path.spec.js test/browser/site-vendor.spec
 Full original core TypeScript compilation, WinJS/Unicode/other embedded origins
 and the overall SITE-07 acceptance remain separate. A path-module proof is not
 an exhaustive claim about every Node API or the rest of Monaco.
+
+## WinJS-derived DOM declarations
+
+`dom-origins.ts` identifies six complete top-level declaration blocks in fixed
+VS Code `dom.ts`. `reproduce-dom-origins.ts` verifies those exact blocks in the
+original editor source map and checks that the shipped editor still equals the
+fixed npm archive. AST declaration boundaries reject same-named strings, missing
+blocks and duplicate declarations. This is not compilation of the full DOM module.
+
+The source explicitly attributes helpers to WinJS but does not identify the copied
+version. The record keeps `originalWinjsVersion: null`. A fixed WinJS 4.4.5 source
+and its complete Microsoft MIT terms provide a reproducible comparison, not an
+assertion that Monaco incorporates that exact unmodified release. The generated
+core-dom attribution explains CSS/pixel, position and typed-helper adaptations.
+Do not replace this distinction with a guessed version during later maintenance.
+
+The ordinary notice build binds the reference license and attribution to the
+editor asset; it rejects omitted terms or a changed source/asset relationship.
+The site now carries 88 notice files plus its index. Frozen source and delivered
+terms preserve original bytes through Git attributes. No dependencies or editor
+runtime bytes changed; the verifier uses the existing TypeScript parser.
+
+```sh
+yarn verify:monaco-dom-origins --fetch
+yarn verify:monaco-dom-origins
+yarn build:site-notices
+yarn check:site-notices
+yarn test:browser editor-dom.spec.js site-vendor.spec.js --workers=1
+```
+
+The browser test calls the actual shipped editor's dimension/position helpers
+with borders, padding, margins and nested scrolling, comparing page offsets with
+native geometry. The site test checks all notice HTTP bytes, relative links and
+real mobile-page playback. Unicode/other embedded sources, unknown original
+WinJS version, complete original core compilation and SITE-07 acceptance remain
+open. Source comments and this bounded proof are not full provenance clearance.

@@ -9,11 +9,33 @@ import process from 'node:process'
 import test from 'node:test'
 import { verifyConsoleNoticeSources } from '../scripts/site-vendor/console/notices.ts'
 import { verifyMonacoCoreNotices } from '../scripts/site-vendor/monaco/core-origins.ts'
+import { domOriginFragments, verifyMonacoDomNotices } from '../scripts/site-vendor/monaco/dom-origins.ts'
 import { verifyMonacoPathNotices } from '../scripts/site-vendor/monaco/node-path.ts'
 import { verifyMonacoLanguageNoticeArchives, verifyMonacoLanguageNotices } from '../scripts/site-vendor/monaco/notices.ts'
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
+
+test('WinJS-derived DOM helpers keep reference terms without claiming an exact original version', () => {
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  assert.doesNotThrow(() => verifyMonacoDomNotices(process.cwd(), original))
+  const missingAsset = structuredClone(original)
+  missingAsset.groups.find(group => group.name === 'monaco-editor').components.find(item => item.name.startsWith('WinJS-derived')).assets = []
+  assert.throws(() => verifyMonacoDomNotices(process.cwd(), missingAsset), /DOM notice binding/)
+  const missingTerms = structuredClone(original)
+  const group = missingTerms.groups.find(group => group.name === 'monaco-editor')
+  group.notices = group.notices.filter(item => !item.target.endsWith('core-dom/LICENSE.txt'))
+  assert.throws(() => verifyMonacoDomNotices(process.cwd(), missingTerms), /DOM notice/)
+})
+
+test('DOM origin declarations reject duplicate or missing blocks and ignore same-named strings', () => {
+  const source = fs.readFileSync('refactor/baselines/site-vendor/monaco-dom/vscode-dom.txt', 'utf8')
+  const fragments = domOriginFragments(source)
+  assert.equal(fragments.size, 6)
+  assert.deepEqual(domOriginFragments(`${source}\nconst label = 'getTotalWidth';`), fragments)
+  assert.throws(() => domOriginFragments(`${source}\n${fragments.get('getTotalWidth')}`), /Repeated DOM/)
+  assert.throws(() => domOriginFragments(source.replace(fragments.get('SizeUtils'), 'const SizeUtils = "same name";')), /Missing or reordered/)
+})
 
 test('Node path attribution covers both editor and worker and keeps the original terms', () => {
   const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))

@@ -26,6 +26,7 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
     { path: '/licenses/monaco-editor/language-services/ATTRIBUTION.md', count: 12 },
     { path: '/licenses/monaco-editor/core-origins/ATTRIBUTION.md', count: 3 },
     { path: '/licenses/monaco-editor/core-path/ATTRIBUTION.md', count: 1 },
+    { path: '/licenses/monaco-editor/core-dom/ATTRIBUTION.md', count: 1 },
   ]) {
     const attribution = await request.get(path)
     expect(attribution.status()).toBe(200)

@@ -1,5 +1,11 @@
 # 进度与证据
 
+## SITE-07 Monaco DOM 改编来源与通知绑定
+
+六段 DOM 声明与固定 VS Code 源码及原始 source map 精确对应，当前 editor.main.js 与原 npm 归档相同。新增 WinJS 4.4.5 固定参考源码/完整 MIT 条款和明确的未知原始改编版本说明；普通构建交付 88 份 notice 加索引。30/30 单测、类型/lint、联网/离线复验和三浏览器尺寸/滚动位置/移动实播/通知 HTTP 6/6 通过。见[记录](changes/2026-09-15-SITE-07-monaco-dom.md)和[证据](baselines/monaco-dom-origins-validation.json)。
+
+新增验证脚本仅用已有 TypeScript parser，无依赖/锁或运行资产变化。原始 WinJS 改编版本、Unicode/其他内嵌来源、完整 core 编译及 SITE-07 其他交付仍开放，VENDOR-06 不关闭。202/266 done、21 doing、43 todo 不变；接续其余来源和实际插件验收，未推送/部署/发布。
+
 ## PKG-AUDIO-05 同文件前缀与原生缓冲检查点
 
 仅改变同一 MP4/AAC 的 HTTP 放行前缀，Windows WebKit 能起播，但四项较大前缀诊断仍没有可信 waiting。默认三引擎 12 项诊断通过，实际 progressed/waiting 为 Chromium/Firefox 8/8、WebKit 0/4；诊断退出成功不算缓冲验收。新增参数只影响 native spec，放行前请求字节/媒体状态独立保存，恢复失败也保留观察。原插件集成断言、超时和运行字节均未改。见[检查点](changes/2026-09-15-PKG-AUDIO-05-prefix.md)及[证据](baselines/audio-prefix-validation.json)。

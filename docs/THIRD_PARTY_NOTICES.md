@@ -121,6 +121,10 @@ Included component: nodejs path (Monaco core) 14.16.0
 
 Source: https://github.com/nodejs/node/blob/bd60e93357a118204ea238d94e7a9e4209d93062/lib/path.js
 
+Included component: WinJS-derived DOM helpers (Monaco core) unversioned adaptation; reference WinJS 4.4.5
+
+Source: https://github.com/winjs/winjs/tree/4329b1133b243d9ded3b5a1f98d096ee8e80e889
+
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
 - licenses/monaco-editor/codicons/LICENSE
@@ -148,6 +152,8 @@ Source: https://github.com/nodejs/node/blob/bd60e93357a118204ea238d94e7a9e4209d9
 - licenses/monaco-editor/core-origins/marked-vscode-license.txt
 - licenses/monaco-editor/core-origins/ATTRIBUTION.md
 - licenses/monaco-editor/core-path/ATTRIBUTION.md
+- licenses/monaco-editor/core-dom/LICENSE.txt
+- licenses/monaco-editor/core-dom/ATTRIBUTION.md
 
 ## console legacy-vendor-with-TS-adapter
 

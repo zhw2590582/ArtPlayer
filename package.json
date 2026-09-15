@@ -173,7 +173,8 @@
     "verify:monaco-core-build": "node scripts/site-vendor/monaco/reproduce-core-build.ts",
     "verify:monaco-contributions": "node scripts/site-vendor/monaco/reproduce-contributions.ts",
     "verify:monaco-css": "node scripts/site-vendor/monaco/reproduce-css.ts",
-    "verify:monaco-node-path": "node scripts/site-vendor/monaco/reproduce-node-path.ts"
+    "verify:monaco-node-path": "node scripts/site-vendor/monaco/reproduce-node-path.ts",
+    "verify:monaco-dom-origins": "node scripts/site-vendor/monaco/reproduce-dom-origins.ts"
   },
   "browserslist": "last 1 Chrome version",
   "devDependencies": {

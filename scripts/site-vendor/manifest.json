@@ -1025,6 +1025,16 @@
           "source": "refactor/baselines/site-vendor/monaco-node-path/ATTRIBUTION.md.txt",
           "target": "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md",
           "sha256": "40583c701c0bcbd8e10935652a0a8b02e2073b0ef040fb7be7b939c437d8b8dc"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-dom/winjs-license.txt",
+          "target": "docs/licenses/monaco-editor/core-dom/LICENSE.txt",
+          "sha256": "13217bb585c27ee298f49c7aec2ef74578bc0d644880906a89d2c3ccec5d647e"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-dom/ATTRIBUTION.md.txt",
+          "target": "docs/licenses/monaco-editor/core-dom/ATTRIBUTION.md",
+          "sha256": "0858d19261742809cecd7174a0a06b2b0013a4b9560b78aede1edd3dd350da21"
         }
       ],
       "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
@@ -1216,6 +1226,18 @@
           "notices": [
             "docs/licenses/monaco-editor/ThirdPartyNotices.txt",
             "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "WinJS-derived DOM helpers (Monaco core)",
+          "version": "unversioned adaptation; reference WinJS 4.4.5",
+          "tarball": "https://github.com/winjs/winjs/tree/4329b1133b243d9ded3b5a1f98d096ee8e80e889",
+          "assets": [
+            "docs/assets/js/vs/editor/editor.main.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/core-dom/LICENSE.txt",
+            "docs/licenses/monaco-editor/core-dom/ATTRIBUTION.md"
           ]
         }
       ]

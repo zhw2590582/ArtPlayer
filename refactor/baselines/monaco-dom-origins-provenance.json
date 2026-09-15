@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "monaco-editor-core",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor-core/-/monaco-editor-core-0.30.1.tgz",
+      "integrity": "sha512-WNxfchYafMZXVfysqg/ESW4MtOpYLPaIKrzudNlgwYvfYID+O/nwSZI5X+KxW84roVzHsNgFGyOOesfHFZwYUA==",
+      "sha256": "a3b004061373a7f6217eba6399f1a1de31970bee2eee693aada289035198c5ec"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-dom/winjs-elements.txt",
+      "sha256": "170254869783ef61cbad53294cc32ffded8d0a74272df3dc29dd3c2b63345ad4",
+      "gitBlobSha": "6abc27ccf155118eef70d51c653b0ebee03a4008",
+      "apiUrl": "https://api.github.com/repos/winjs/winjs/contents/src/js/WinJS/Utilities/_ElementUtilities.js?ref=4329b1133b243d9ded3b5a1f98d096ee8e80e889"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-dom/winjs-license.txt",
+      "sha256": "13217bb585c27ee298f49c7aec2ef74578bc0d644880906a89d2c3ccec5d647e",
+      "gitBlobSha": "baf9dc11a362fe41cb5981195b7981c895df1278",
+      "apiUrl": "https://api.github.com/repos/winjs/winjs/contents/License.txt?ref=4329b1133b243d9ded3b5a1f98d096ee8e80e889"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-dom/vscode-dom.txt",
+      "sha256": "a195debeedbf20f58cb5f0fd2306867030eb0fa00cc9f5302b5abf3c425bf73c",
+      "gitBlobSha": "6148eb300923a1ce56a7b9d91c8a534000c5626f",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/browser/dom.ts?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    }
+  ],
+  "vscodeSource": "refactor/baselines/site-vendor/monaco-dom/vscode-dom.txt",
+  "winjsSource": "refactor/baselines/site-vendor/monaco-dom/winjs-elements.txt",
+  "originalWinjsVersion": null,
+  "map": {
+    "archive": "monaco-editor-core-0.30.1",
+    "member": "package/dev/vs/editor/editor.main.js.map",
+    "sha256": "22a1b5ff5f423adc4575004d2ae0ae231ba59516e6aa9c2fabe8a006c2730316",
+    "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/dom.ts"
+  },
+  "fragments": [
+    {
+      "name": "SizeUtils",
+      "sha256": "e6f713ff2be5cd6d17e451879bddfe80a284612765c8beb63ffd6d9868b43aae"
+    },
+    {
+      "name": "getTopLeftOffset",
+      "sha256": "96fae7b3098e5d64d3fa935c32d53ba27df415e0c7e7547cf859311dc114ec9b"
+    },
+    {
+      "name": "getTotalWidth",
+      "sha256": "e2e6c899f46a2823ae10d40a63570338906f6e8c224c70e920f613b616872896"
+    },
+    {
+      "name": "getContentWidth",
+      "sha256": "5beab28852e52e549478637b41d1a23af4499278073b6e6d5bc260c05d5b087e"
+    },
+    {
+      "name": "getContentHeight",
+      "sha256": "1cc472cf950fb7fe5e2eb7a00e75b7ae3542f98e8eeb3939a309db2c7857678c"
+    },
+    {
+      "name": "getTotalHeight",
+      "sha256": "e48172f26d39b0695c2897f05cfb02a0defce160354965083ff1de607484784b"
+    }
+  ],
+  "shipped": {
+    "archive": "monaco-editor-0.30.1",
+    "member": "package/min/vs/editor/editor.main.js",
+    "target": "docs/assets/js/vs/editor/editor.main.js",
+    "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+  },
+  "component": {
+    "name": "WinJS-derived DOM helpers (Monaco core)",
+    "version": "unversioned adaptation; reference WinJS 4.4.5",
+    "tarball": "https://github.com/winjs/winjs/tree/4329b1133b243d9ded3b5a1f98d096ee8e80e889",
+    "assets": [
+      "docs/assets/js/vs/editor/editor.main.js"
+    ],
+    "notices": [
+      "docs/licenses/monaco-editor/core-dom/LICENSE.txt",
+      "docs/licenses/monaco-editor/core-dom/ATTRIBUTION.md"
+    ]
+  },
+  "notices": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-dom/winjs-license.txt",
+      "target": "docs/licenses/monaco-editor/core-dom/LICENSE.txt",
+      "sha256": "13217bb585c27ee298f49c7aec2ef74578bc0d644880906a89d2c3ccec5d647e"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-dom/ATTRIBUTION.md.txt",
+      "target": "docs/licenses/monaco-editor/core-dom/ATTRIBUTION.md",
+      "sha256": "0858d19261742809cecd7174a0a06b2b0013a4b9560b78aede1edd3dd350da21"
+    }
+  ]
+}

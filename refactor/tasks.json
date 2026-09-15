@@ -4556,7 +4556,9 @@
         "changes/2026-09-15-SITE-07-monaco-css.md",
         "baselines/monaco-node-path-provenance.json",
         "baselines/monaco-node-path-validation.json",
-        "changes/2026-09-15-SITE-07-monaco-node-path.md"
+        "changes/2026-09-15-SITE-07-monaco-node-path.md",
+        "changes/2026-09-15-SITE-07-monaco-dom.md",
+        "baselines/monaco-dom-origins-validation.json"
       ]
     },
     {
