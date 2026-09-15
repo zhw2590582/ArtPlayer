@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 Monaco 核心压缩与编辑操作
+
+固定 esbuild 0.12.6 精确复现 13 个 core JS 产物，loader 源码/版本头及 css/nls
+loader 来源匹配；两个 map 登记 584 条目、549 个不同准备源码。十语言真实编辑/
+撤销重做/查找/销毁 30/30，diff worker 3/3，单元 20/20、类型/lint、联网/离线
+来源检查通过。见[记录](changes/2026-09-15-SITE-07-monaco-core-build.md)。完整原始
+TS 编译与余下内嵌来源未被这些检查替代，SITE-07/VENDOR-06 开放、199/265。
+后续 core 贡献装配/CSS/已定位来源边界；Thumbnail 默认策略仍待答。
+
 ## SITE-07 Monaco Markdown 来源与遗漏许可
 
 核实 DOMPurify 2.3.1 / marked 3.0.2 的固定来源及完整模块适配，发现并补齐

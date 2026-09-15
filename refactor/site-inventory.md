@@ -1,5 +1,10 @@
 # 文档站、示例与生成链清单
 
+核心分发后续：13 个 core JavaScript 压缩产物已通过固定 esbuild 0.12.6 精确
+复现，loader 与 css/nls loader 固定源码匹配；十种语言编辑/查找和核心 diff
+worker 三引擎 33/33 通过。两个 source map 的 549 份不同准备源码已登记，
+后续来源边界与完整编译限制见[记录](changes/2026-09-15-SITE-07-monaco-core-build.md)。
+
 当前补充：Monaco 四种 mode 与 76 种基础语言的完整产物复现、三引擎语法验证
 已完成。核心 Markdown 内嵌 DOMPurify 2.3.1 / marked 3.0.2 的固定来源和模块
 适配已匹配；补齐四份说明后站点共交付 85 份 notice。核心其余源码与内嵌来源

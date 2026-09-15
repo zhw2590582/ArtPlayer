@@ -1,0 +1,1010 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T03:01:24.794Z",
+  "baseCommit": "244695e7262902c59b522b0a72543f787a442afd",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "refactor/baselines/monaco-core-build-provenance.json": "a2f5adc5d2fe2862f06cf74ca8571d189e69a5df268032c6816eb3ada30b8d9d",
+    "refactor/baselines/monaco-core-locales.json": "e70c26befad9fdc46602cf8b257b3d05e8a7f1db119d67f1b4aeaf612b36a487",
+    "scripts/site-vendor/monaco/core-build.ts": "c25772084b14bebc48a39f7741bab2c2dafff709c2a7f46b9793989c87441f80",
+    "scripts/site-vendor/monaco/reproduce-core-build.ts": "a800c7d4a6a5535f3867a87772981b4185fe58ff7a6be93a8f2623749a098cdf",
+    "test/browser/editor-core.spec.js": "bde011e5fe1c5b64e4ed1ee7181909e8125eef8ce953b79346207729800c0118"
+  },
+  "reproduction": {
+    "result": {
+      "host": "win32-x64",
+      "archives": 4,
+      "gitSources": 7,
+      "outputs": [
+        {
+          "relative": "vs/editor/editor.main.js",
+          "exactMinification": true,
+          "appendedContributions": true,
+          "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.de.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "e31a518baf29ffce15a27ac80a6b5406ebf21c76657f3344f46c9ac0e6d0c202"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.es.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "f86887a1575bc71f035e92eb68b3d4e8c4e351d93f3b98520660933fed984007"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.fr.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "673214777e1ba3518abe1bbde8b5250cb18d65257054c8adf9cb5e1e49918d27"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.it.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "66df8e46d4aa40b5393489efda7e8aee5ad5589fdf68fef03832e665f0aabc9c"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.ja.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "4688d4dfa1ddf91cbfa7005e1110b12f79315706e7d56463c96e8bc688a3d60d"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "4d4915b0ff284b77938d3be70b9000911554fc451263a7baa594d199ef170a0e"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.ko.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "a6d39e2202fa271bfd5e04b83a5265bbe7ef73a945471c9e9fcb65ff8f1a8663"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.ru.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "345850b05cc97c0c1978df43ee996a32da7cd33ba1a85be3b6958884a8307040"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.zh-cn.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "30ce784d1733d424e221009e097760b813e629d63579bddb62f7a4f229b9011f"
+        },
+        {
+          "relative": "vs/editor/editor.main.nls.zh-tw.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "ab5c148283e9afd0577afb5e522e45c6c2b323a0a12215b71f92155fbf003b74"
+        },
+        {
+          "relative": "vs/loader.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "be92515f6d2cbfc75cd240076246e8ccf6f698269c0402e367d2ee371655bbeb"
+        },
+        {
+          "relative": "vs/base/worker/workerMain.js",
+          "exactMinification": true,
+          "appendedContributions": false,
+          "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+        }
+      ],
+      "mappedInstances": 584,
+      "uniqueMappedSources": 549,
+      "completeTypeScriptBuild": false,
+      "remainingEmbeddedOriginsReviewed": false
+    },
+    "offline": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-core-build-offline.log"
+    },
+    "network": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-core-build-network.log"
+    }
+  },
+  "unit": {
+    "passed": 20,
+    "log": "refactor/.cache/monaco-core-build-unit.log"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "log": "refactor/.cache/monaco-core-build-types.log"
+  },
+  "lint": {
+    "exitCode": 0,
+    "log": "refactor/.cache/monaco-core-build-lint.log"
+  },
+  "browser": [
+    {
+      "report": "refactor/.cache/monaco-core-locales-report.json",
+      "sha256": "87b22ce6d569b863398636b8aab205ef410c9e9f988115835e867feae23f3629",
+      "stats": {
+        "startTime": "2026-09-15T02:52:05.520Z",
+        "duration": 32286.459,
+        "expected": 30,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "docs Monaco core editing and localized find: en",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "en",
+              "find": "Find",
+              "next": "Next Match",
+              "close": "Close",
+              "member": "package/dev/vs/editor/editor.main.nls.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: de",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "de",
+              "find": "Suchen",
+              "next": "Nächste Übereinstimmung",
+              "close": "Schließen",
+              "member": "package/dev/vs/editor/editor.main.nls.de.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.de.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: es",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "es",
+              "find": "Buscar",
+              "next": "Coincidencia siguiente",
+              "close": "Cerrar",
+              "member": "package/dev/vs/editor/editor.main.nls.es.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.es.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: fr",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "fr",
+              "find": "Rechercher",
+              "next": "Correspondance suivante",
+              "close": "Fermer",
+              "member": "package/dev/vs/editor/editor.main.nls.fr.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.fr.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: it",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "it",
+              "find": "Trova",
+              "next": "Risultato successivo",
+              "close": "Chiudi",
+              "member": "package/dev/vs/editor/editor.main.nls.it.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.it.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ja",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ja",
+              "find": "検索",
+              "next": "次の一致項目",
+              "close": "閉じる",
+              "member": "package/dev/vs/editor/editor.main.nls.ja.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ja.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ko",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ko",
+              "find": "찾기",
+              "next": "다음 검색 결과",
+              "close": "닫기",
+              "member": "package/dev/vs/editor/editor.main.nls.ko.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ko.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ru",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ru",
+              "find": "Найти",
+              "next": "Следующее совпадение",
+              "close": "Закрыть",
+              "member": "package/dev/vs/editor/editor.main.nls.ru.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ru.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: zh-cn",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "zh-cn",
+              "find": "查找",
+              "next": "下一个匹配项",
+              "close": "关闭",
+              "member": "package/dev/vs/editor/editor.main.nls.zh-cn.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.zh-cn.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: zh-tw",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "zh-tw",
+              "find": "尋找",
+              "next": "下一個相符項目",
+              "close": "關閉",
+              "member": "package/dev/vs/editor/editor.main.nls.zh-tw.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.zh-tw.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: en",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "en",
+              "find": "Find",
+              "next": "Next Match",
+              "close": "Close",
+              "member": "package/dev/vs/editor/editor.main.nls.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: de",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "de",
+              "find": "Suchen",
+              "next": "Nächste Übereinstimmung",
+              "close": "Schließen",
+              "member": "package/dev/vs/editor/editor.main.nls.de.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.de.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: es",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "es",
+              "find": "Buscar",
+              "next": "Coincidencia siguiente",
+              "close": "Cerrar",
+              "member": "package/dev/vs/editor/editor.main.nls.es.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.es.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: fr",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "fr",
+              "find": "Rechercher",
+              "next": "Correspondance suivante",
+              "close": "Fermer",
+              "member": "package/dev/vs/editor/editor.main.nls.fr.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.fr.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: it",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "it",
+              "find": "Trova",
+              "next": "Risultato successivo",
+              "close": "Chiudi",
+              "member": "package/dev/vs/editor/editor.main.nls.it.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.it.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ja",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ja",
+              "find": "検索",
+              "next": "次の一致項目",
+              "close": "閉じる",
+              "member": "package/dev/vs/editor/editor.main.nls.ja.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ja.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ko",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ko",
+              "find": "찾기",
+              "next": "다음 검색 결과",
+              "close": "닫기",
+              "member": "package/dev/vs/editor/editor.main.nls.ko.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ko.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ru",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ru",
+              "find": "Найти",
+              "next": "Следующее совпадение",
+              "close": "Закрыть",
+              "member": "package/dev/vs/editor/editor.main.nls.ru.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ru.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: zh-cn",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "zh-cn",
+              "find": "查找",
+              "next": "下一个匹配项",
+              "close": "关闭",
+              "member": "package/dev/vs/editor/editor.main.nls.zh-cn.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.zh-cn.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: zh-tw",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "zh-tw",
+              "find": "尋找",
+              "next": "下一個相符項目",
+              "close": "關閉",
+              "member": "package/dev/vs/editor/editor.main.nls.zh-tw.js"
+            },
+            "modifier": "Control",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.zh-tw.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: en",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "en",
+              "find": "Find",
+              "next": "Next Match",
+              "close": "Close",
+              "member": "package/dev/vs/editor/editor.main.nls.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: de",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "de",
+              "find": "Suchen",
+              "next": "Nächste Übereinstimmung",
+              "close": "Schließen",
+              "member": "package/dev/vs/editor/editor.main.nls.de.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.de.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: es",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "es",
+              "find": "Buscar",
+              "next": "Coincidencia siguiente",
+              "close": "Cerrar",
+              "member": "package/dev/vs/editor/editor.main.nls.es.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.es.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: fr",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "fr",
+              "find": "Rechercher",
+              "next": "Correspondance suivante",
+              "close": "Fermer",
+              "member": "package/dev/vs/editor/editor.main.nls.fr.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.fr.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: it",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "it",
+              "find": "Trova",
+              "next": "Risultato successivo",
+              "close": "Chiudi",
+              "member": "package/dev/vs/editor/editor.main.nls.it.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.it.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ja",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ja",
+              "find": "検索",
+              "next": "次の一致項目",
+              "close": "閉じる",
+              "member": "package/dev/vs/editor/editor.main.nls.ja.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ja.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ko",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ko",
+              "find": "찾기",
+              "next": "다음 검색 결과",
+              "close": "닫기",
+              "member": "package/dev/vs/editor/editor.main.nls.ko.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ko.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: ru",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "ru",
+              "find": "Найти",
+              "next": "Следующее совпадение",
+              "close": "Закрыть",
+              "member": "package/dev/vs/editor/editor.main.nls.ru.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.ru.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: zh-cn",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "zh-cn",
+              "find": "查找",
+              "next": "下一个匹配项",
+              "close": "关闭",
+              "member": "package/dev/vs/editor/editor.main.nls.zh-cn.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.zh-cn.js",
+                "status": 200
+              }
+            ]
+          }
+        },
+        {
+          "title": "docs Monaco core editing and localized find: zh-tw",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "editing": {
+            "locale": {
+              "locale": "zh-tw",
+              "find": "尋找",
+              "next": "下一個相符項目",
+              "close": "關閉",
+              "member": "package/dev/vs/editor/editor.main.nls.zh-tw.js"
+            },
+            "modifier": "Meta",
+            "responses": [
+              {
+                "url": "http://127.0.0.1:8084/assets/js/vs/editor/editor.main.nls.zh-tw.js",
+                "status": 200
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "report": "refactor/.cache/browser/report.json",
+      "sha256": "6720d40cacaffddfc5faacbee47e3981713892181f3982ef3415557575c0a6b1",
+      "stats": {
+        "startTime": "2026-09-15T02:53:49.959Z",
+        "duration": 9096.72,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "title": "docs Monaco core diff worker computes changes and updates after edits",
+          "project": "chromium",
+          "status": "passed",
+          "browser": "153.0.8010.12",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "worker": {
+            "workers": [
+              "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#editorWorkerService"
+            ],
+            "initialChangedLines": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "finalChanges": []
+          }
+        },
+        {
+          "title": "docs Monaco core diff worker computes changes and updates after edits",
+          "project": "firefox",
+          "status": "passed",
+          "browser": "155.0",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "worker": {
+            "workers": [
+              "/assets/js/vs/base/worker/workerMain.js#editorWorkerService"
+            ],
+            "initialChangedLines": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "finalChanges": []
+          }
+        },
+        {
+          "title": "docs Monaco core diff worker computes changes and updates after edits",
+          "project": "webkit",
+          "status": "passed",
+          "browser": "26.6",
+          "platform": "win32",
+          "errors": [],
+          "consoleErrors": [],
+          "failedRequests": [],
+          "worker": {
+            "workers": [
+              "http://127.0.0.1:8084/assets/js/vs/base/worker/workerMain.js#editorWorkerService"
+            ],
+            "initialChangedLines": [
+              2,
+              2,
+              2,
+              2
+            ],
+            "finalChanges": []
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Linux executable archive is pinned; runtime execution verified only on Windows x64.",
+    "Prepared source-map inventory does not reconstruct the complete upstream TypeScript compilation.",
+    "Appended editor contributions, CSS and other embedded origins remain outside this minification proof.",
+    "This batch does not change runtime assets/notices or provide playback, physical device, external SDK, remote CI or publication evidence.",
+    "Thumbnail default policy remains pending."
+  ]
+}

@@ -1,0 +1,3279 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "829382514cb1065f5ebb90f436e1c6103e153953",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "monaco-editor-core",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor-core/-/monaco-editor-core-0.30.1.tgz",
+      "integrity": "sha512-WNxfchYafMZXVfysqg/ESW4MtOpYLPaIKrzudNlgwYvfYID+O/nwSZI5X+KxW84roVzHsNgFGyOOesfHFZwYUA==",
+      "sha256": "a3b004061373a7f6217eba6399f1a1de31970bee2eee693aada289035198c5ec"
+    },
+    {
+      "name": "esbuild",
+      "version": "0.12.6",
+      "tarball": "https://registry.npmjs.org/esbuild/-/esbuild-0.12.6.tgz",
+      "integrity": "sha512-RDvVLvAjsq/kIZJoneMiUOH7EE7t2QaW7T3Q7EdQij14+bZbDq5sndb0tTanmHIFSqZVMBMMyqzVHkS3dJobeA==",
+      "sha256": "6aebed2a1d2413ae7273f1a025d976f5b8b33eab2efb2fc9ee4698563c356b1e"
+    },
+    {
+      "name": "esbuild-windows-64",
+      "version": "0.12.6",
+      "tarball": "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.12.6.tgz",
+      "integrity": "sha512-V2blDpI9z2DfkjPBsXxxKI2czRlc5AMdppFHrDx7QcgtRgtPvaaJs3tNBxIipgnYZD4/l7Ua5WJvTe742rvKSQ==",
+      "sha256": "d40f2dcb8ad2882b9cf016e5829b616087f329df61e6fb57ca792fea3afc2151"
+    },
+    {
+      "name": "esbuild-linux-64",
+      "version": "0.12.6",
+      "tarball": "https://registry.npmjs.org/esbuild-linux-64/-/esbuild-linux-64-0.12.6.tgz",
+      "integrity": "sha512-OBAl/ne69FVtJl+p73FylquNy8KvfvAgTM7u697ngCACL66xsEHKhStpJEj4GjBn1oOZytx2w+0hdfjYlH2N+Q==",
+      "sha256": "57b1519e726c26c76b3fbdb9adc14b6b850f46540339ab0037a869e2641110d8"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/build-gulpfile.editor.js.txt",
+      "sha256": "d3413f097c19ab22c275f35e7708424bd18c7a4fb7782905d5ab021ef5524167",
+      "gitBlobSha": "39b26b2f64610f649dc3010f97cf58a020034492",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/build/gulpfile.editor.js?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/build-lib-optimize.ts.txt",
+      "sha256": "13fa654c711dd3090ae793ba7419c9d8cdfea9cee122c330940a419050ff8f04",
+      "gitBlobSha": "96b4e854f6f1a39e30957999585f5d7cd7bb7c81",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/build/lib/optimize.ts?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/build-yarn.lock.txt",
+      "sha256": "b152f4c68acd54ceb0fd36594b75940e46edf2a9f611192ec8dbe1dc892fea34",
+      "gitBlobSha": "d47575a580143a4154737075bbaf0a0397e9d855",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/build/yarn.lock?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/build-package.json.txt",
+      "sha256": "01478f766147feb0e5415497e4b45d862f2f5272d29488cfd93b6b592d9a4f6b",
+      "gitBlobSha": "1d69f4e0a968d3f3c586001762f9b146784327c1",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/build/package.json?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/src-vs-loader.js.txt",
+      "sha256": "f3adc83a1262756425b21df5ed866ef337cfce80b971a2dcf2e2255899503b73",
+      "gitBlobSha": "d66392e23a05258bbe718b1ef9394f6c727f7f49",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/loader.js?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/src-vs-css.js.txt",
+      "sha256": "b9f4a74a0039d0920ad58b226621670450c92ccd7737fb7712dde4c387151aa2",
+      "gitBlobSha": "a719c310ec3d30aae59e7d4b3e8053e248cdd467",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/css.js?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-build/src-vs-nls.js.txt",
+      "sha256": "e569d3b65a1778d20c8bb5761f547c99452182cb742e26100d3ef71c936b4a3b",
+      "gitBlobSha": "f969d159f4afc7e84ab38349ecfeb8391ea38499",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/nls.js?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    }
+  ],
+  "binaries": {
+    "win32-x64": {
+      "archive": "esbuild-windows-64-0.12.6",
+      "member": "package/esbuild.exe",
+      "sha256": "1dc73793371ffbfea564e91d0dd0438fbe00f4e6ef9dc6e8f94704b345be7cb3"
+    },
+    "linux-x64": {
+      "archive": "esbuild-linux-64-0.12.6",
+      "member": "package/bin/esbuild",
+      "sha256": "5207e6a3d05c49aaf437bd949891f4f831b8000c1d64f64fafb527c64f10edc9"
+    }
+  },
+  "files": [
+    {
+      "relative": "vs/editor/editor.main.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.js",
+        "sha256": "483348c3a73e86f201bc0df26ceee2c3ef610fe56c344993410fc093bac228a7"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.js",
+        "sha256": "829b80acaafd97ed55fc008c4e937e60b1e197568c653fc9c391beb283abfc19"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.js",
+        "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+      },
+      "appendedContributions": true
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.de.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.de.js",
+        "sha256": "7ea5b49b2f01e254c33c68d49c0045621caec164152db5e7b03151494467e70f"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.de.js",
+        "sha256": "e31a518baf29ffce15a27ac80a6b5406ebf21c76657f3344f46c9ac0e6d0c202"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.de.js",
+        "sha256": "e31a518baf29ffce15a27ac80a6b5406ebf21c76657f3344f46c9ac0e6d0c202"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.es.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.es.js",
+        "sha256": "35d3917eb4c099237135531a6f60503d8d1a3c416333b0a08e1054ed3343ce45"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.es.js",
+        "sha256": "f86887a1575bc71f035e92eb68b3d4e8c4e351d93f3b98520660933fed984007"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.es.js",
+        "sha256": "f86887a1575bc71f035e92eb68b3d4e8c4e351d93f3b98520660933fed984007"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.fr.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.fr.js",
+        "sha256": "dd08b65713106d91287d377678a25736eb7154b35bf5b1f906d4b3a49f715158"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.fr.js",
+        "sha256": "673214777e1ba3518abe1bbde8b5250cb18d65257054c8adf9cb5e1e49918d27"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.fr.js",
+        "sha256": "673214777e1ba3518abe1bbde8b5250cb18d65257054c8adf9cb5e1e49918d27"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.it.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.it.js",
+        "sha256": "fc2d5e7cd194f0e98b89ed94b46543cbdfb3aeb14e419ed6283d5c338aca1669"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.it.js",
+        "sha256": "66df8e46d4aa40b5393489efda7e8aee5ad5589fdf68fef03832e665f0aabc9c"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.it.js",
+        "sha256": "66df8e46d4aa40b5393489efda7e8aee5ad5589fdf68fef03832e665f0aabc9c"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.ja.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.ja.js",
+        "sha256": "ae3ccef2cfa934944dd391c5475f1d5f442f9e882494d7c3fbbcdaa37c9c2526"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.ja.js",
+        "sha256": "4688d4dfa1ddf91cbfa7005e1110b12f79315706e7d56463c96e8bc688a3d60d"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.ja.js",
+        "sha256": "4688d4dfa1ddf91cbfa7005e1110b12f79315706e7d56463c96e8bc688a3d60d"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.js",
+        "sha256": "6cfc3a1eb580b65b40591bac545b7b4df18d32c77243aeaa6b8a891e40dc277c"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.js",
+        "sha256": "4d4915b0ff284b77938d3be70b9000911554fc451263a7baa594d199ef170a0e"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.js",
+        "sha256": "4d4915b0ff284b77938d3be70b9000911554fc451263a7baa594d199ef170a0e"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.ko.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.ko.js",
+        "sha256": "f65e7fd7a202d0617df11f3dd353ed9acd750ab9f8b5e8b4ce5fcc0ee3c92660"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.ko.js",
+        "sha256": "a6d39e2202fa271bfd5e04b83a5265bbe7ef73a945471c9e9fcb65ff8f1a8663"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.ko.js",
+        "sha256": "a6d39e2202fa271bfd5e04b83a5265bbe7ef73a945471c9e9fcb65ff8f1a8663"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.ru.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.ru.js",
+        "sha256": "09f1609f23efc3afeaa6501f2c0399e64a97ad7e62ff4080f00e5689a57c7a83"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.ru.js",
+        "sha256": "345850b05cc97c0c1978df43ee996a32da7cd33ba1a85be3b6958884a8307040"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.ru.js",
+        "sha256": "345850b05cc97c0c1978df43ee996a32da7cd33ba1a85be3b6958884a8307040"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.zh-cn.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.zh-cn.js",
+        "sha256": "493cdd5fb242b2a4afef30f096cb7530fcce5a369421447a479d7fd23379e724"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.zh-cn.js",
+        "sha256": "30ce784d1733d424e221009e097760b813e629d63579bddb62f7a4f229b9011f"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.zh-cn.js",
+        "sha256": "30ce784d1733d424e221009e097760b813e629d63579bddb62f7a4f229b9011f"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/editor/editor.main.nls.zh-tw.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.nls.zh-tw.js",
+        "sha256": "b0e7a0a975886e8e7dce2216ab575c9238782e54c1cd946041807fef320640a5"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/editor/editor.main.nls.zh-tw.js",
+        "sha256": "ab5c148283e9afd0577afb5e522e45c6c2b323a0a12215b71f92155fbf003b74"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.nls.zh-tw.js",
+        "sha256": "ab5c148283e9afd0577afb5e522e45c6c2b323a0a12215b71f92155fbf003b74"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/loader.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/loader.js",
+        "sha256": "fd23505d4b693fe55d2a0d0a4c05c40b6048ac7af0411ab86ab42074cf1aefcb"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/loader.js",
+        "sha256": "be92515f6d2cbfc75cd240076246e8ccf6f698269c0402e367d2ee371655bbeb"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/loader.js",
+        "sha256": "be92515f6d2cbfc75cd240076246e8ccf6f698269c0402e367d2ee371655bbeb"
+      },
+      "appendedContributions": false
+    },
+    {
+      "relative": "vs/base/worker/workerMain.js",
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/base/worker/workerMain.js",
+        "sha256": "016d569eb0ae9ba9865bc9c9be1da9fe88f722622c60828c4fa93b73245e2a42"
+      },
+      "minified": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/min/vs/base/worker/workerMain.js",
+        "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+      },
+      "target": {
+        "path": "docs/assets/js/vs/base/worker/workerMain.js",
+        "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+      },
+      "appendedContributions": false
+    }
+  ],
+  "sourceMaps": [
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/dev/vs/editor/editor.main.js.map",
+      "sha256": "22a1b5ff5f423adc4575004d2ae0ae231ba59516e6aa9c2fabe8a006c2730316",
+      "sources": [
+        {
+          "source": "fake",
+          "sha256": "b5c5288671c346b0e66fbc2d2f55ea3310d832749156c1e930b46e616a38ac7e",
+          "bytes": 14
+        },
+        {
+          "source": "vs/css.js",
+          "sha256": "b9f4a74a0039d0920ad58b226621670450c92ccd7737fb7712dde4c387151aa2",
+          "bytes": 5694
+        },
+        {
+          "source": "vs/nls.js",
+          "sha256": "e569d3b65a1778d20c8bb5761f547c99452182cb742e26100d3ef71c936b4a3b",
+          "bytes": 6935
+        },
+        {
+          "source": "vs/base/browser/dompurify/dompurify.js",
+          "sha256": "f43053d408d3e5423526dd4c8e30732887ced1379bf83f8c5a6519e9f966ce01",
+          "bytes": 52931
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/fastDomNode.ts",
+          "sha256": "7aaea20171c2e506a5e5bb77e25309caea322b218e35a92824f8568aff91cf70",
+          "bytes": 6507
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/iframe.ts",
+          "sha256": "bfc1e91fe6c4e67aba0bf957727c5108c47e5a87e5b95c7816125c517a282e60",
+          "bytes": 3679
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/list.ts",
+          "sha256": "5e95fb65d9c0f77f83946db2b3f7bc997c4a03c86610106b4724903c13ad7561",
+          "bytes": 3457
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/splice.ts",
+          "sha256": "c776a947e0e1ae321dcbdca5c4e99531223d25f274292335ace273d7ccb020e2",
+          "bytes": 674
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/scrollbarState.ts",
+          "sha256": "f3cc8772ec057b3b55be2b69f1e502bbb43b9886c102d94fe107ca9fe6c29608",
+          "bytes": 8091
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/tree.ts",
+          "sha256": "6cfb0e38c5bf24f5eea6c162a94224acc58d334e12f9150a426f905dbcfa1261",
+          "bytes": 5300
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/arrays.ts",
+          "sha256": "5110dde430dd8ede4431c2a00a09baa05726d03c74df49a5e8813857cd3759a5",
+          "bytes": 10739
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/assert.ts",
+          "sha256": "640356d5ce0553d30dd9dd63a59e0218d70093ea1f97f0305d9f233271cf32d9",
+          "bytes": 633
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/buffer.ts",
+          "sha256": "9c8b2edec866fa188cf119456f2e7e9b9fb63c94b8aa6e9e0241b6c663403a58",
+          "bytes": 2060
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/collections.ts",
+          "sha256": "f56f385f54017a67be41c386efe3967fd99e54ca23c9200c63d5ce08809fdb09",
+          "bytes": 1838
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/color.ts",
+          "sha256": "1ff04885015f86253393d38516bec808faeedfd510eb703ae65d2c6db61ba7dc",
+          "bytes": 14683
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/decorators.ts",
+          "sha256": "81735cfa7e38fac5a266858188ed9a0608020fd37f22b4a93d1aab9b15572f0d",
+          "bytes": 815
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/diff/diffChange.ts",
+          "sha256": "9efcc35d063dc81f2d269515d9f3d5bf80e7b67df36a6ea5ab0e81b9b516fdf4",
+          "bytes": 1795
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/errors.ts",
+          "sha256": "da1dd4bc1b87b99aae84940cfb7496c4a8d237daa94f264fc774f3ab5009249a",
+          "bytes": 2720
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/functional.ts",
+          "sha256": "b08337430483f05e25f48087386b703295825f45fb1715d1ad8d266689d82aaa",
+          "bytes": 646
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/idGenerator.ts",
+          "sha256": "e862ee5185320ae452d89a513282ce30c4276952a51c85d7c6dfdc8d93223d0c",
+          "bytes": 644
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/iterator.ts",
+          "sha256": "30824feac80a5593754c06df1a5de86e38284961b238ea0c1ac854f138fa06fd",
+          "bytes": 4521
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/keyCodes.ts",
+          "sha256": "8067feea16ace4c45fab93144c468d932f5a37e866e8e2202c7f7c6bdd2e39c5",
+          "bytes": 33279
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/keybindings.ts",
+          "sha256": "6dae28f2298a1f87452fe834165aaa7c97f86da0460418b399bd4005da269ee3",
+          "bytes": 7184
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/lazy.ts",
+          "sha256": "0e05b52c1b1c074b3bc8a5fa6affe5a874c4527b78d2f11f1e058af85867181b",
+          "bytes": 1261
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/lifecycle.ts",
+          "sha256": "38b6c7e7e77cd01d32dcef620aebd3e842a480a69f8be01c534388d3627a0436",
+          "bytes": 8373
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/linkedList.ts",
+          "sha256": "c252db7bd55b6d871c7248199dda7b74b4f661880b88338255f6e946d7b06f16",
+          "bytes": 3092
+        },
+        {
+          "source": "vs/base/common/marked/marked.js",
+          "sha256": "56de14e59f6997712ce9af2135427ad495ebd88bd579b601690eae83c8bac56f",
+          "bytes": 95547
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/navigator.ts",
+          "sha256": "ef25055112d81b7dde475fee05771307db45c3ef12d6a2e7b17282612ed58840",
+          "bytes": 1124
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/history.ts",
+          "sha256": "95b5b64c03f9d33c26e55c17c94c183fb341afd3ac654b71d9808a6369f991e3",
+          "bytes": 2220
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/numbers.ts",
+          "sha256": "77ac0c5e168eb350539c79edd094bbc9013694042370eaf1d77f0cb1b3fb05d0",
+          "bytes": 712
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/platform.ts",
+          "sha256": "c03386432bdacbc3e771cad5d85f04b227bb594db4d75e36fc6e78c5ca18f83c",
+          "bytes": 5925
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/process.ts",
+          "sha256": "fdb1776fcf6afe0b7080b39df1293bb9c5421f750ea18c95736c112f29c34d3e",
+          "bytes": 2408
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/path.ts",
+          "sha256": "eb31f91cc8509484cba743140ec773e4cd4c7abb4f798e780e8684c433b78cb6",
+          "bytes": 41001
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/range.ts",
+          "sha256": "ae0e7b39dbfbaacaca009ed76128fd4fca1e19f2640c1e663dcc4daf7cff0624",
+          "bytes": 1521
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/rangeMap.ts",
+          "sha256": "ae81df4ac08e4ffc6a6768e325c27d002a9b9030785f3149510248b59f71d7c9",
+          "bytes": 4348
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/stopwatch.ts",
+          "sha256": "ea44cf6c046a7aae4c40e5c8822d34ec6494712e129ccca5b3af14aafc895e6c",
+          "bytes": 1209
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/event.ts",
+          "sha256": "aba96ddd3db76b1c884115f363d7ad32364f08c22dc592315d8ee8032fce36ad",
+          "bytes": 20969
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/browser.ts",
+          "sha256": "f96075b288ea2febd9446b6c817286627d3d6af1483674009d2ff719f8c5f736",
+          "bytes": 2691
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/canIUse.ts",
+          "sha256": "1b105a28f4d16875a1796e5a5b30c7660d765bee2abecbf11ea92239bceee7ed",
+          "bytes": 1654
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/event.ts",
+          "sha256": "af4e4dcdb420427c5f35be718cf38798c3d4ceefbb4f43506e16989435cc58e9",
+          "bytes": 1834
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/keyboardEvent.ts",
+          "sha256": "db01cf1ee49af6ca5b2e1090c4d48d6d5c065b2389ad580c6e2f2769aa221046",
+          "bytes": 5025
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/mouseEvent.ts",
+          "sha256": "290c40c81c81e6d97f8a78db7b0e94bf97c71f2aecfe32e5c9dd5345d9ecd1af",
+          "bytes": 5715
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/cancellation.ts",
+          "sha256": "cc8f8c4fe4049dee47f7764888eb44263cda6843e3d3b533407150d1657fd15e",
+          "bytes": 3887
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/async.ts",
+          "sha256": "9803ae4e4cd710b2c17a91b677721412d43d6b07766e8bee507016f994f89328",
+          "bytes": 15817
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/scrollbarVisibilityController.ts",
+          "sha256": "d66f5bb9a46d8a7eb9f335d099c7e7ffd76893a488aa802346a244d2135302ee",
+          "bytes": 3480
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/codicons.ts",
+          "sha256": "c8d13f234aca3e55ed223fc543a6a5bea9ca976c6a506294f1cd84934898a61d",
+          "bytes": 43521
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/treeIcons.ts",
+          "sha256": "d0967bc1af7fdaa7e6e128411472e86eb762609e175d7eb7f1a775f2a7a7d2bc",
+          "bytes": 940
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/comparers.ts",
+          "sha256": "ce533b9e177f6d6631cb20e5349d6e818058c86e68aea8966390a45bc10c0e93",
+          "bytes": 3135
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/scrollable.ts",
+          "sha256": "1dee767705553a0ef02e197a8f2f35008c012ec6b8236b1c8cba62abfebc74dd",
+          "bytes": 14831
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/strings.ts",
+          "sha256": "00ad269678d18a1e9f81cf6437396b7c3294febe45ce9a679205ac9593c72ecd",
+          "bytes": 50218
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/extpath.ts",
+          "sha256": "b10dee07cc2fd9d7490a4ba976415fdc3de81a32b158f10a38a94be4782ce844",
+          "bytes": 3159
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/hash.ts",
+          "sha256": "5777b3e99ba6137dc2f387d77e93ec7c3f9eefed96523d3411dc28b0eccc27b2",
+          "bytes": 9122
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/diff/diff.ts",
+          "sha256": "8e62a6b9fd2fd399660fc2b5dc951c86ae6bef38c34fcefa729a847131b344fc",
+          "bytes": 47850
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/indexTreeModel.ts",
+          "sha256": "fc0491cbd8735f5ad2a3f44ecea7e35d4a78c1d3ff5b7f96dca2ddb6225bd4e0",
+          "bytes": 24615
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/objectTreeModel.ts",
+          "sha256": "42e80fd896ce9a2ed26e36e24c617551f75de4d97807f78fc0bb438fb7f8935d",
+          "bytes": 8053
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/compressedObjectTreeModel.ts",
+          "sha256": "92f0407bcb793cb6eb997f4af74facd03ac6c70491a57e91156e7257ddf99aae",
+          "bytes": 17563
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/map.ts",
+          "sha256": "10b82dabcc13d498b9a5b15f28b1b49793359e455c38af7386bb5f9af730fa9e",
+          "bytes": 26732
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/filters.ts",
+          "sha256": "b1ae0c9588fd55b47f4ad4109b255b42f546cfea1ca3583c26664a0864855248",
+          "bytes": 25712
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/fuzzyScorer.ts",
+          "sha256": "0b2a7b7d79acf6db3e6be4e2aa66d9f1a42c50e26ef7f04d80956748e0be4a18",
+          "bytes": 7407
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/glob.ts",
+          "sha256": "b2197a18e1639f2ed24da652aa43d634f2e143066aeaa3e757c7c8defe8791cd",
+          "bytes": 20627
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/iconLabels.ts",
+          "sha256": "a747147a0cb68e497520e01d6eaf2f4752ae4e5ca568e2c4298282b490c3ffd9",
+          "bytes": 5233
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/htmlContent.ts",
+          "sha256": "359d91ad80a88799bf816a963b70e04309cee97ef261eca9756dcabaa52a92e0",
+          "bytes": 4313
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/search.ts",
+          "sha256": "f339ce49f38d9df937cf6ac864fa434f3e310a54d5590bad78a128acad78b1a9",
+          "bytes": 2452
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/severity.ts",
+          "sha256": "0cc496a9f8f04cf542221cb4fe7e937ad3b72e70ecf944a357a21e5569ed88be",
+          "bytes": 1400
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/types.ts",
+          "sha256": "1f1a52274eb15532c102b7677c7e1a13f24ba4229c1e42262fbaa45276d00f9c",
+          "bytes": 4789
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/objects.ts",
+          "sha256": "3d60709b3f0444640a3ac75520b120c74a0136ff8053f91fd0477d6769fece13",
+          "bytes": 4179
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/uint.ts",
+          "sha256": "0b1102ade974b21bd46bd789027c2dd7959366202e9b87287b13be0a8cf3b05a",
+          "bytes": 1583
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/uri.ts",
+          "sha256": "d6233db5fdff8ac7149d8697677ea3f411245d8ec625c360045b9808aa7a040d",
+          "bytes": 20653
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/marshalling.ts",
+          "sha256": "dff321cbbac2d88a30e2605c3bd718b1e39342ed442681c2f7ae0e1abcbcc4dc",
+          "bytes": 1808
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/network.ts",
+          "sha256": "4eca4b9ab59039c23f8102edf7f5d69adb65b0c7adba5f9083d8c697d1f4fd58",
+          "bytes": 5617
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/dom.ts",
+          "sha256": "1368a4f2d6c13983411cfb1afbc3c394255694830f578ceac43cbdeac8de937c",
+          "bytes": 36941
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/formattedTextRenderer.ts",
+          "sha256": "e391e77abc97ab0f7fe9147d4b20bf3fbf160657ce1daa32c4ce27aad83bafda",
+          "bytes": 6037
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/globalMouseMoveMonitor.ts",
+          "sha256": "2e206a874b06aaba3a3753fc7149732cbecc29dbdcbc098e2a2d223da04f86a1",
+          "bytes": 4658
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/touch.ts",
+          "sha256": "577d0f6123ce20e4c92059bd9c2a3113e04da10304e86fd707999e7838b822de",
+          "bytes": 10434
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/iconLabel/iconLabels.ts",
+          "sha256": "5a800156c7f0c076e244135a87604b428acd80aebea13a288291d6d58281380f",
+          "bytes": 1375
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/highlightedlabel/highlightedLabel.ts",
+          "sha256": "a99e634e3023fd6eebc1a45a4547aae919eaa9f8778d0e5555464550fae350e8",
+          "bytes": 3288
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/rowCache.ts",
+          "sha256": "15a5c72d7b990a20a3e4e8385c360099347eac3d6fec938df5c02ec4aa673817",
+          "bytes": 2551
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/widget.ts",
+          "sha256": "5fdfcb0f51136f2eaa6c875949819c7bb7d68ea9e3e38f9d2b06498554b1b0f6",
+          "bytes": 2687
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/scrollbarArrow.ts",
+          "sha256": "da9ba35b268af4a15ae9c3d67f8368480c3071cf009e6e3129db646a22037d06",
+          "bytes": 3701
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/abstractScrollbar.ts",
+          "sha256": "cd599831b23daa5b8e6b6b3d4ac08b41585c8ec163e6d09b2ac45eec3ab6ba3e",
+          "bytes": 10408
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/horizontalScrollbar.ts",
+          "sha256": "a5fedcc4a2bedea4e0bcf50c506db86c46c9f2c57ad46e21063e3a279df7f643",
+          "bytes": 4729
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/verticalScrollbar.ts",
+          "sha256": "a7f7a95e5a67917a568356306450adb532d1e0d97602b93eac05d990a0808463",
+          "bytes": 4723
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/resources.ts",
+          "sha256": "0d259b256df736a693d30b2473047f605db83cee29d0ce5c4466f5cbf7be20d8",
+          "bytes": 5206
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/markdownRenderer.ts",
+          "sha256": "4ccf84a6d9c45b37ab84f862b302ac0967c514db52a2904168d171eeb7328f6a",
+          "bytes": 11922
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/labels.ts",
+          "sha256": "be53d9387ea2d42866c12ef2e0dca6f8cea74dfae4fa00373a53a1337fab320c",
+          "bytes": 1472
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/mime.ts",
+          "sha256": "bd3e43b910ea1f38079c647a43c477b9dda2685500ba8a6cbc2a8566a11613ed",
+          "bytes": 7913
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/dnd.ts",
+          "sha256": "80336f0bd6ade7b486efe645286638ba9477432a7159c3ad9e14814a41122c9a",
+          "bytes": 963
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/uuid.ts",
+          "sha256": "f0049b90ff4c79c60d21f1d008bd4799dc9ca210be5e58afb0314eba656815d7",
+          "bytes": 1597
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/worker/simpleWorker.ts",
+          "sha256": "35c467ca24561b5002da61f64c35048f56cf9b9ef43ddf78ffbfb810d00d247a",
+          "bytes": 17330
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/parts/quickinput/common/quickInput.ts",
+          "sha256": "f9cc8024d5cff54f203009c32651aff2475d0388aafc5069bcd2ebe3c1d93d4a",
+          "bytes": 6264
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/parts/storage/common/storage.ts",
+          "sha256": "026fc4c559a3e4448ed82e93ba2f073e0beee806d4cfd2bafcaa8b94659aadb0",
+          "bytes": 7115
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/worker/defaultWorkerFactory.ts",
+          "sha256": "db4bc65b7509dfa0ce9147fe9ad58b45608dd231a72d62eab08c777f7c98109b",
+          "bytes": 4978
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/aria/aria.ts",
+          "sha256": "bfb9e53db690a0ef81009d678df70b3ae17a9f3a1d483d771293877a6c3a7272",
+          "bytes": 3143
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/button/button.ts",
+          "sha256": "e6996faecc13a74c4938997870677abf9a9c032fcde99b739cc0335c3be7087e",
+          "bytes": 6821
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/checkbox/checkbox.ts",
+          "sha256": "8c479e19a976ebde4e2a8ba6528a6077f8264221aa674aee652e5ed4b3390e6a",
+          "bytes": 4664
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/codicons/codiconStyles.ts",
+          "sha256": "92e2bb63c17fd1cf282c0f0317bed32de2a9348b768a11111dab4acd92fd7f51",
+          "bytes": 687
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/contextview/contextview.ts",
+          "sha256": "83036efe41b265e0c666a94d55ec0233d6169bdf81a920459c8eeaa1cfe94a57",
+          "bytes": 13875
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/countBadge/countBadge.ts",
+          "sha256": "808a0fa0a5b06ba9a3f9608e9253796577f14ea474af8d15629c25d2336af5af",
+          "bytes": 2959
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/mouseCursor/mouseCursor.ts",
+          "sha256": "76ed55edd60c69d42f3f7c9e00be1925580dd2f37728f3092d3d5ad70691964c",
+          "bytes": 461
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/progressbar/progressbar.ts",
+          "sha256": "e0c79ebf5a5b917962bfc2340e8cd991902f6171b46ab8105f5a451d6969983f",
+          "bytes": 3806
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/sash/sash.ts",
+          "sha256": "8fe731bf7616d0fa570cade5adb602b80c3c4d90523b4f2494b5e80839e49bc5",
+          "bytes": 16475
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/scrollbar/scrollableElement.ts",
+          "sha256": "7d42e97009b154fca69c545f8629a9b3726339f04cbdf025e689a5d887685105",
+          "bytes": 23186
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/hover/hoverWidget.ts",
+          "sha256": "fc524a8e93eb01a6182063915aa4fc8cf310b392e35d77563f1db9ddaada7be3",
+          "bytes": 3090
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/listView.ts",
+          "sha256": "f4ccec762a17ea59805c5b3411431c4aaa6d7a9943c703633fdccf2c5ea4e59a",
+          "bytes": 42221
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/listWidget.ts",
+          "sha256": "7ff0a92b31ffe86e6eece258c58ce53fa0d5f522656036d17159afaaa79bb71a",
+          "bytes": 55505
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/list/listPaging.ts",
+          "sha256": "bbf195ab2412934ea3125818099dac78b6371628135d624bc341fcdc07465bee",
+          "bytes": 5671
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/splitview/splitview.ts",
+          "sha256": "ce838d6384bfa8ec12453e766f3b5a84a686230e869640252dfc2bd515cd231c",
+          "bytes": 30864
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/table/tableWidget.ts",
+          "sha256": "8b4af88b1f6946ce995af063b2562e9a4dc908b28bd2869e87164a1b4c0dd62d",
+          "bytes": 8393
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/parts/quickinput/browser/quickInputUtils.ts",
+          "sha256": "62bc695ef225d72d89bd3a9c68da184daf3daa43039fc371ab1acdf43d2151a3",
+          "bytes": 1277
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/config/elementSizeObserver.ts",
+          "sha256": "ff6f49a8c4f74dbb1a3b945f0d430aee5d533ee47fb1aa3530da600f93759496",
+          "bytes": 3599
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/editorDom.ts",
+          "sha256": "1822eec0e669ab061ce594fe6fbc8fcd618e98a43a916153e03ce2e5568b28c4",
+          "bytes": 7691
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/services/abstractCodeEditorService.ts",
+          "sha256": "4691bd98227f9026e09c0ce7fd8ee29fec7850c7c30298e7a319156ee1c1f970",
+          "bytes": 4319
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/minimap/minimapCharSheet.ts",
+          "sha256": "b879857381c13a9103f026c74327c146e930c7411a4fc5fa0f186f3a347f55ac",
+          "bytes": 1376
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/minimap/minimapCharRenderer.ts",
+          "sha256": "56d55e292ab8b28fb3fa9d279a4738901a0cd6968ac465caade41aaf7ae5545d",
+          "bytes": 4260
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/minimap/minimapPreBaked.ts",
+          "sha256": "ce85099ba02ae71aa78616a671373a0faa36b61baa8ea0537929fa139bd2ebf0",
+          "bytes": 3345
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/minimap/minimapCharRendererFactory.ts",
+          "sha256": "31cfe2b01643f913dda9f3b165ffc08ee19a7b3cf52f6998330d1bff32d66e7f",
+          "bytes": 6580
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/config/editorZoom.ts",
+          "sha256": "03dbe9ebe7022b94213ba5a1be4959bd7987db4c9a57261e39bde480acee5880",
+          "bytes": 1118
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/config/fontInfo.ts",
+          "sha256": "ab17b0e7776fe7304c0bd29be86b5fa023a040349861a30bde84236222fe56ce",
+          "bytes": 6795
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorColumns.ts",
+          "sha256": "d1e5572101431095413db654ba012c229cb4dfac1f17b1aadd110c989f317359",
+          "bytes": 7123
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/characterClassifier.ts",
+          "sha256": "22a948cefcfde25f01ebd9e0c93f181a9177c8067139045f8771fb5817d72cb8",
+          "bytes": 2082
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/wordCharacterClassifier.ts",
+          "sha256": "def0bd2df22dd410c4e67bb3f8f51fd097fb7e54cd92bb073c340bc52c3dc863",
+          "bytes": 1415
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/position.ts",
+          "sha256": "5e374598c6560e35d533cf718a91c889a0e68662999c053379582a5664d2b05b",
+          "bytes": 4261
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/range.ts",
+          "sha256": "b32a1591bab807cf00f7413baf11f22df551fa0d7a70bf0ec688bd70cee698da",
+          "bytes": 13901
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/textAreaState.ts",
+          "sha256": "fefe5ccbf3dab46b8e55c866626f9816fef19060df033886c0ca991a75d8e5f8",
+          "bytes": 14438
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/widget/diffNavigator.ts",
+          "sha256": "4a36968b8073aeadfaf92c2b2b67f997ce292cf2e0c7d32435ed4b564272eb95",
+          "bytes": 5974
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/editOperation.ts",
+          "sha256": "b2629bc0225a92c97cb8871a83a218fb93af398ab46fa2f5e60d0ea5cd605bc5",
+          "bytes": 1256
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/commands/trimTrailingWhitespaceCommand.ts",
+          "sha256": "d506f6bb3bb85bc219e6a69e28b9b894e5cb3f8381d5c2847fee1780a7d7da88",
+          "bytes": 3593
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/rgba.ts",
+          "sha256": "e665e696b838464a1a7cd011f3b696ba66f98feea61b2c49785496cd12ee4919",
+          "bytes": 1296
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/selection.ts",
+          "sha256": "f57568b27835b9fa032142e39262ee5d21f7d79c4543828e3143c2d2c561277e",
+          "bytes": 6059
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/textAreaInput.ts",
+          "sha256": "9fba2406db17e28e93b283547096f630ac23d0a2596ed1b6c1c0dba0aef39b0b",
+          "bytes": 28485
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/commands/replaceCommand.ts",
+          "sha256": "ec3dfec5447d8eb2417aa50811327c96a8478591173b2a36143f6563c8642bed",
+          "bytes": 5231
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/commands/surroundSelectionCommand.ts",
+          "sha256": "d0c32ea2e631bfde5e0b88f67b0412623f4c3e65b2bb514828ae5608c4445a2d",
+          "bytes": 2006
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/stringBuilder.ts",
+          "sha256": "9d1b9b1cb9820401b4feac3e03285f8ae2487e7ac2ca51968264b2a7bc555a71",
+          "bytes": 5623
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/viewLayer.ts",
+          "sha256": "7d018bf31d471f222291095fb3ae7890157c8616f03b7b4d7fed195b28d786f2",
+          "bytes": 19029
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/token.ts",
+          "sha256": "760dc9963ea2d0ab0a27f60621ca88c675ed8d50249e6e5c73df09dcdcca1f88",
+          "bytes": 1492
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/diff/diffComputer.ts",
+          "sha256": "a58b56a4255910176e28e28ddf10dc7dc13b8b22175fcf3a833d3f18414f96c2",
+          "bytes": 20349
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/editorAction.ts",
+          "sha256": "317e54cff5c9b97a419ce27767330e39b7f2529cde3880806648522edc628bea",
+          "bytes": 1438
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/editorCommon.ts",
+          "sha256": "df00f0c40d3c0803c26be2b16774bc705f78abeff863f2ade129950de6575497",
+          "bytes": 17712
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/editorBrowser.ts",
+          "sha256": "026cdca464bfafa5e4c2066130ef7799df6e51df8702dedfad464f8e46e7d497",
+          "bytes": 29124
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model.ts",
+          "sha256": "4d547e0d0f3ab8436bf7b0d048a05449c5a9b8461969997762e987c0b28592eb",
+          "bytes": 44037
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/bracketPairs.ts",
+          "sha256": "f44460a13862276b807339122d9ac9f91fd8e3bc59e88ae0450443681b849da2",
+          "bytes": 1499
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/length.ts",
+          "sha256": "6c3095de9a3d0df1d9ca519566691d356d7596427a9caa6e2154701cc7782420",
+          "bytes": 5408
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/beforeEditPositionMapper.ts",
+          "sha256": "5c7b7bef975a1b20d28d0e94dbd99f5a09a59d71649572d82ff53a9f9943731f",
+          "bytes": 4440
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/nodeReader.ts",
+          "sha256": "10c9c504c9dcb154b44d6d7b9c25eb2d2a2ebe9803bd5485e3b829143317af57",
+          "bytes": 4294
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/smallImmutableSet.ts",
+          "sha256": "035dc98cb7bd88e1e936f216ef725022b13dc32a357ea14f2ae04550ade2095e",
+          "bytes": 3618
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/ast.ts",
+          "sha256": "bb6a28b435888c12006f02f64d0120e609a039538c889400139974ef7f8354b6",
+          "bytes": 17867
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/concat23Trees.ts",
+          "sha256": "b95db389b836fe02baed3e7e1513d667a58e3bdcac2b20498dc51217315773a9",
+          "bytes": 6526
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/parser.ts",
+          "sha256": "6af334514784fb9f1e4dfffde76d03eceb6fef30bf5341c725da2ce0b34568a7",
+          "bytes": 4701
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/indentationGuesser.ts",
+          "sha256": "3536f419278daef133b126eb0f3bc79987e2e8267abf6b7418e6a6254e91aef6",
+          "bytes": 7229
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/intervalTree.ts",
+          "sha256": "f6f6e3e0f1264c7f073055da94df6ed640522b7e33bbc7447b0efae71b6d4d10",
+          "bytes": 32749
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/pieceTreeTextBuffer/rbTreeBase.ts",
+          "sha256": "1cff7d923b240a2b10c395d13e3501569a1d2c7ed2e6f9c73693081b62cf637a",
+          "bytes": 9272
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/textChange.ts",
+          "sha256": "e80bf871c8fc26bbcd5514c524425f641eaa74e2eba236631b4b36cbf7d57996",
+          "bytes": 9333
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/textModelEvents.ts",
+          "sha256": "5efce36d7d9da81d91e9ee7e8a7c17bc54a46a8541ac88f8bcc729d7456a3dbd",
+          "bytes": 10279
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/textModelSearch.ts",
+          "sha256": "b640b5e11a67a9f9c1cd4d13f5b620f2353ce7b8263ed9eabb373dbf55589d16",
+          "bytes": 20405
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/pieceTreeTextBuffer/pieceTreeBase.ts",
+          "sha256": "bc737d9ecb9d7b591b03d8784391df42bf1f206efff3e84f31e99dbd69ca8d89",
+          "bytes": 56323
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/wordHelper.ts",
+          "sha256": "19d8cfbc99ddd61e26ac798fa750cd6cdc178bd88214e30a63636fadbd24195e",
+          "bytes": 3877
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/languageConfiguration.ts",
+          "sha256": "0f819c62be62611ae67e9b7bcd29995f8a5cd43d9b6eb6ebcf36c8fc8efa7aa9",
+          "bytes": 10572
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/languageSelector.ts",
+          "sha256": "f55db729d97b9e4030bc88f97d0b71292fa5fffaa975fcaef9b880c56022ccbc",
+          "bytes": 3085
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/linkComputer.ts",
+          "sha256": "1a6baff9d48246b9727664880c915f63f376e36ba91da766684d481bfe4a508f",
+          "bytes": 10876
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/nullMode.ts",
+          "sha256": "6271bf2f08286b3104c5b8d41d670e696fd33063f0a770e33064f13f841e4366",
+          "bytes": 1650
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports.ts",
+          "sha256": "9e28c8dfd104cfeab790594a9db48e1159e29ce3f4d311539e07bd1d8d231676",
+          "bytes": 3039
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/characterPair.ts",
+          "sha256": "2f60f99033453ae5f917027c5f2886d164bd3158f0012ae7edcb3fd10a732dca",
+          "bytes": 3610
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/indentRules.ts",
+          "sha256": "d9842a62c1e8e51bf8158d36d06b96cd04b92ac1f8f601cc59b9ca01aeff10f6",
+          "bytes": 2669
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/inplaceReplaceSupport.ts",
+          "sha256": "032c127e2b89176392f0cf8bebdc434fd7674509b30ff642be3c2471ed5c08a8",
+          "bytes": 2811
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/onEnter.ts",
+          "sha256": "b6c0518b006f0bb81687d00b603826bd91274b047d93c0634dd89bc89be1c370",
+          "bytes": 3929
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/richEditBrackets.ts",
+          "sha256": "430b852c415fc4a34deef2ca39b17f94f57c1af1baaabd45a47fc3996781062b",
+          "bytes": 15705
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/electricCharacter.ts",
+          "sha256": "268884888807c8fb8d4f87dda043458081d58d2b0d0e0379a787434435532a8c",
+          "bytes": 2571
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/tokenization.ts",
+          "sha256": "272a00e3325de525eeeaabf2042f8c1fcc9c8f9682655b11a8a875922be9e6f7",
+          "bytes": 10245
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/tokenizationRegistry.ts",
+          "sha256": "c954f1f470657e1b96266254c11abc0f7dc765f8ff1ec81ee78455f781732798",
+          "bytes": 2952
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/semanticTokensDto.ts",
+          "sha256": "2747563f00af2b9a4c732cbffe43b60f3f8f8e83f937eb5c0ccc9efd4f9b61ad",
+          "bytes": 2866
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/standalone/standaloneEnums.ts",
+          "sha256": "b8fcde669f4ee5fde715f498a45ed325140f632176b30a554afebe0775330352",
+          "bytes": 16660
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/standalone/standaloneBase.ts",
+          "sha256": "7e918fb8c35b8a80040c5c1c330ffa9330aa8f5a95d0c84366340651f5b96269",
+          "bytes": 1840
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/view/overviewZoneManager.ts",
+          "sha256": "56c9958148bccc3510e0857f9123a6abc42277b404792a6ff63f1fd9ae5ad2e3",
+          "bytes": 5904
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/view/renderingContext.ts",
+          "sha256": "d56ed789c54d717c193ca6d65aaaccfd5953b38e61949560694e312c89603fae",
+          "bytes": 4637
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/lines/rangeUtil.ts",
+          "sha256": "18aa03faef0a47ae01c20c131417577c70dd2323f05921365d196ca434d43509",
+          "bytes": 5286
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/view/viewContext.ts",
+          "sha256": "c2b2e6b1f17a9d39d20882d0ce3ddc3d7658f6d0243be1d3fb912540ef894976",
+          "bytes": 1857
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/view/viewEvents.ts",
+          "sha256": "ec720d14342f9ac1ab6cb646a892c3ddc22e9c57446a900e450f9675b7314022",
+          "bytes": 7867
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewLayout/lineDecorations.ts",
+          "sha256": "14579ecfcf216ce44631b257d0995cedccd2c76bc15d0df338f12dcd645bc4ac",
+          "bytes": 7778
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewLayout/linesLayout.ts",
+          "sha256": "7fbca2c800e736da2b8768d9530d0b689967239233f5c6056559bc0ad99481da",
+          "bytes": 28971
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewLayout/viewLineRenderer.ts",
+          "sha256": "47023fbb4092c48062a34c73aa762a1fb7f484966c83257e6562097a2462aa20",
+          "bytes": 37101
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewLayout/viewLinesViewportData.ts",
+          "sha256": "507655b69d17fb17bb9e6e02d1aa252651693d98b57a62f280aa47694a3bed3e",
+          "bytes": 3428
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/prefixSumComputer.ts",
+          "sha256": "fef681c1fc7456d7ba8773df40ab1a464a3a38954461939ceea6cec2cf000919",
+          "bytes": 4730
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/mirrorTextModel.ts",
+          "sha256": "dd41654638ddc024e1649deb81684d01498177954bce29902f143f1a249d3d6f",
+          "bytes": 5306
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/editorSimpleWorker.ts",
+          "sha256": "72dcded1387bad52cdc2a2afebe1e021246a5effcb18df87301fce0e5cb60d87",
+          "bytes": 18695
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/viewEventHandler.ts",
+          "sha256": "b56150f347fd2181bb360da898f29695c6900d879404a04b28ca659e26108021",
+          "bytes": 5559
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/dynamicViewOverlay.ts",
+          "sha256": "a1ef00cc123dd1a43501b21700dfa322308618dd9a2cc0a9ca7f744c98912612",
+          "bytes": 721
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/viewPart.ts",
+          "sha256": "a3f874cd063a33199310f20da5bb664cbed4103c94142382aeeb4f030df81032",
+          "bytes": 2234
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/contentWidgets/contentWidgets.ts",
+          "sha256": "a494ff1835318bcba411139edc3661508dbba374b438742a1c544b4a509ac3cf",
+          "bytes": 19248
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/decorations/decorations.ts",
+          "sha256": "13bc7d215d607dfe2b8ac812ad68c67777bd2c896ddcf7e976d2e641a35c13dd",
+          "bytes": 8468
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/glyphMargin/glyphMargin.ts",
+          "sha256": "b113a7c5ac27995f0ec3d337c6f33a5c54ff7399b03bc7ee0f4fd44c6fc9ea02",
+          "bytes": 6656
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/linesDecorations/linesDecorations.ts",
+          "sha256": "145e661fcb5650a7b04e56d33082243b0794e0afe610af25ff8c6fd0f0967a08",
+          "bytes": 4457
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/margin/margin.ts",
+          "sha256": "52f837f4ee30e90a1ae2dcbd5772fce3961c86830a558ac56f2036983c4eae1f",
+          "bytes": 3585
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/marginDecorations/marginDecorations.ts",
+          "sha256": "d0dda9f252339a0116912ca423cf0faf5db83b7c37c58b0f655e3d1b4f5a687f",
+          "bytes": 3422
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/overlayWidgets/overlayWidgets.ts",
+          "sha256": "2ca2f5e8bc54d64a640752d3af5f54e783d75371444dd02ddaf22ce27b57e8af",
+          "bytes": 5167
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/overviewRuler/overviewRuler.ts",
+          "sha256": "a685aecdcae9c63eb8d1dcc96cef9487cda677bfff0cab970ac050428aaff776",
+          "bytes": 5561
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/viewZones/viewZones.ts",
+          "sha256": "ac0895cfd2d9a5871b27af2487d72660417dcf7f0703ff5269704a8357066b3b",
+          "bytes": 13730
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/viewModel.ts",
+          "sha256": "7b277dffa2ba6fda8eeb7e9f21247b531610e186081c1ea1d0dc023b0a27eb4c",
+          "bytes": 20617
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/monospaceLineBreaksComputer.ts",
+          "sha256": "8a29bfdefe2a9d2e6291224656f203e15e29ef97f4efd4b8843ca788da3e5316",
+          "bytes": 20593
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/viewModelEventDispatcher.ts",
+          "sha256": "1b3dfe9fa4be41fabdfec792f596e9768a3e3e0a2337555310cf767ebd837bba",
+          "bytes": 11791
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewLayout/viewLayout.ts",
+          "sha256": "bf8c662c3695dd0e81e0f923090dc581b9f68a29f629fdd81e410db4b1b2be53",
+          "bytes": 16017
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/caretOperations/moveCaretCommand.ts",
+          "sha256": "57a6a2f4b780681161ad6f703ecc92c971fc6a746777a5c10d6cc8ea411c8e2a",
+          "bytes": 2487
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/types.ts",
+          "sha256": "a3851ea3776596023dfc60b4bdff4de483ea554394197cbc6ae008455219d437",
+          "bytes": 5215
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/colorPicker/colorPickerModel.ts",
+          "sha256": "6ec89e29f5c220c258e94e5f3aa74d6cafab681e340a29084981b8df94f9229f",
+          "bytes": 2588
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/dnd/dragAndDropCommand.ts",
+          "sha256": "ff3becf13011b726e7eef6827b53bd70cc080efc091329fdd2ed0624eafa08ab",
+          "bytes": 4734
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/replaceAllCommand.ts",
+          "sha256": "5e552c184f7539d176ccebeb5b41abf562dbf49c72fb5b542c8cfceafc128094",
+          "bytes": 2577
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/replacePattern.ts",
+          "sha256": "8bd8abe3eee42aa64bea39bf11d86b6a4df7c3a057223fda9fb19aa490b77b83",
+          "bytes": 9603
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/foldingRanges.ts",
+          "sha256": "741347c16f84eff930ec041f7b2ff03e3ddb7848998025985af1491b1e9859b9",
+          "bytes": 5901
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/foldingModel.ts",
+          "sha256": "17bc87ed789d4a76f493eea3588694b31e610c455243796d0813e5ba27fbead6",
+          "bytes": 20897
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/hiddenRangeModel.ts",
+          "sha256": "2995de4409cd36e30719375dad53e405d9eb53d212f3fd922c8a4a483ff1da9e",
+          "bytes": 5228
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/syntaxRangeProvider.ts",
+          "sha256": "11827aca13fb49abc90f75f43acd11c5e2e40950b91cbcdcd66ee38ff304f274",
+          "bytes": 6322
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/intializingRangeProvider.ts",
+          "sha256": "f695446caacf2988640ce0324d8d52d0a589e4330abda520aee6e3624047a1eb",
+          "bytes": 2442
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/format/formattingEdit.ts",
+          "sha256": "0bde07cb3d30df8b44b27b8c6b2debf3f607e7e318f2fde6d2e5d5a262e681f4",
+          "bytes": 2247
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/link/clickLinkGesture.ts",
+          "sha256": "937c32e397997d6037927bf42fd94f619ce91b53144c9398d1551aa60ef23f89",
+          "bytes": 8917
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/hoverOperation.ts",
+          "sha256": "e0f385f74dab017f160805d759888446b737a085f1e136c9add44e905eff2dd8",
+          "bytes": 6301
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/hoverTypes.ts",
+          "sha256": "ca81fa05d3fbeb84f6d3f1238639b35bc12c27d8b4d838e513e248cf2672d5e1",
+          "bytes": 3370
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inPlaceReplace/inPlaceReplaceCommand.ts",
+          "sha256": "c4daa1bd551d68a03ed4a4eb8f06b85d0b48201ebaf201487068b22e1a755e99",
+          "bytes": 1838
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/indentation/indentUtils.ts",
+          "sha256": "5b3a3b8ee5a05c0fc9185d98a24d1efc10af301c386ad2e52136609b18d9d4b5",
+          "bytes": 991
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/consts.ts",
+          "sha256": "9f153b1a740a13063f2999dec274e0ef46591cbd4112145074f375b44a6cd89c",
+          "bytes": 428
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/ghostText.ts",
+          "sha256": "e36798d151029bd3c0b5ed4925ded200e8d5dee13dac01d4546c41c8dabf1d77",
+          "bytes": 3685
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/inlineCompletionToGhostText.ts",
+          "sha256": "848de09f4102343722b4051484586b4dbc95cc7326d0951638814934adc89d4c",
+          "bytes": 7804
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/utils.ts",
+          "sha256": "d32525ef9b96e7295442b70331451d14e23178029783899d99c2c65ea964fb21",
+          "bytes": 1163
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/linesOperations/copyLinesCommand.ts",
+          "sha256": "07d433ad65fa4a958c242f40562f81e8fbe2900949eb341333e32b702c7d253c",
+          "bytes": 3522
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/linesOperations/sortLinesCommand.ts",
+          "sha256": "956849d8d471d44a7b374fd0f47218437f38c892dde863033be61ac833da172d",
+          "bytes": 3438
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/smartSelect/bracketSelections.ts",
+          "sha256": "0f18ebaea0b0eeaa8a363295f4f2f2c92b0615ec6da45827d9f11fe29dc1551d",
+          "bytes": 5367
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/smartSelect/wordSelections.ts",
+          "sha256": "21842868a1da7a61f795b7fd45200e93829f572309df46fa5afff77d9f6efea3",
+          "bytes": 3051
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/snippet/snippetParser.ts",
+          "sha256": "e3f08676ad94eeaa50931319680947563b9731004fc5d437edb43d7a88cf325b",
+          "bytes": 24035
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/completionModel.ts",
+          "sha256": "4c73df350134a395aefab32b829b25360cbe6d27ca5be5a9ddc409694445dc5a",
+          "bytes": 9289
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/resizable.ts",
+          "sha256": "08a34d11de2baae1c99df1f07a26a64a15b5ec731021bafc33691275c61e8e9c",
+          "bytes": 6639
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestCommitCharacters.ts",
+          "sha256": "1d6f08ae697a9e87c7c03b6c702f5f718fca6ef5aab8b7d478924098f5bb34eb",
+          "bytes": 2308
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestOvertypingCapturer.ts",
+          "sha256": "ff59db5425a5ed931403a4674ff4be5aea0400188a3ff3d043a07948d786dd47",
+          "bytes": 2275
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/wordDistance.ts",
+          "sha256": "36311f1c3e9fd624426ffccf3c6fe440b9bee3838462dda92b78b7a96131ebd3",
+          "bytes": 2823
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/common/monarch/monarchCommon.ts",
+          "sha256": "8cc52c29eac9e8b1751b952b28f65b7d7899d3d8aa218d19cbbcfd49803f623e",
+          "bytes": 5651
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/common/monarch/monarchCompile.ts",
+          "sha256": "223432775a558c0df32b0c482d7ed172ca1aa1700e666433c0888630e2349194",
+          "bytes": 18338
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/findinput/findInputCheckboxes.ts",
+          "sha256": "ab85e8fdbd32ef1b24c40ffa55e837c053af96c5c71348680a440d46d6d72107",
+          "bytes": 2336
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/iconLabel/iconLabelHover.ts",
+          "sha256": "5be112d35bffc2201a0ee48cbf8c6b1c794a812bc59809ce4c4e9dab7a7df819",
+          "bytes": 7050
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/iconLabel/iconLabel.ts",
+          "sha256": "00c149da3075642fb32850a8a73e2e4b9bb4f6e350442ed28b02d461f3909c1f",
+          "bytes": 10041
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/abstractTree.ts",
+          "sha256": "6c3ae0256f7fbb605d833b50e9c890e4cd6d24c02bfe212855f94dcc0939ce86",
+          "bytes": 52379
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/dataTree.ts",
+          "sha256": "b231a534a0a5ccb0366f3e7b921133479b99edcdf43bca02f5e06dd8567221e2",
+          "bytes": 1741
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/objectTree.ts",
+          "sha256": "92bf2c0b5eaaa61f1f6b3aa0ddd66bc052ff8a697439b6c551cf53b62ee43bd1",
+          "bytes": 9669
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/tree/asyncDataTree.ts",
+          "sha256": "66425544f3b7c88701d074c2cda53ca9a2471049d9418b52f2156a5c029e80f9",
+          "bytes": 40534
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/actions.ts",
+          "sha256": "387364d5e7ede4684f404fb2ef7a6da77c06759e4e3fcb15201790ec87399ce0",
+          "bytes": 5821
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/actionbar/actionViewItems.ts",
+          "sha256": "31fe06c7b568cfc2cdf6645cfea15335d6ecac264cd5874d43d0599fcdc7b6bb",
+          "bytes": 9729
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/actionbar/actionbar.ts",
+          "sha256": "827c0c5004f957e32ed5b9802e2cb41328558cf44260b7e1311ca795a237b78c",
+          "bytes": 14111
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/dropdown/dropdown.ts",
+          "sha256": "867af77bd20d18a741769158d3b4d8398be55d7558d553e1828012bb6f2aa961",
+          "bytes": 6221
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/dropdown/dropdownActionViewItem.ts",
+          "sha256": "91f07e13785c35f2537553108874069def343cc0a781899780895fc04ee53d7a",
+          "bytes": 5195
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/inputbox/inputBox.ts",
+          "sha256": "091f7804270fa661945116e0c33d855f32edde837addf6974cd239bca12fc3d0",
+          "bytes": 24039
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/findinput/findInput.ts",
+          "sha256": "1ffd9e27b118128803cc6388587315c3181486c9f1e85763d256905c2dc986c7",
+          "bytes": 15254
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/findinput/replaceInput.ts",
+          "sha256": "2755fd356973b8e370959124a34e5274e7b6782b793fba817b59451af887e514",
+          "bytes": 12759
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/menu/menu.ts",
+          "sha256": "c78af0820d820630240bf6c62ad0e33cd71f530030fad0f36262eee005262199",
+          "bytes": 40528
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/parts/quickinput/browser/quickInputBox.ts",
+          "sha256": "c747b9e9783f0e1f51e6e01dae57b762dd1c97ca877692d9c278c72ee92fe445",
+          "bytes": 3412
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/errorMessage.ts",
+          "sha256": "eef06f2e49b01fd3a82ef6326b2dfb7806dfec994bc6967641e827c02da27ded",
+          "bytes": 2753
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/keybindingLabels.ts",
+          "sha256": "59ee32e795363909423b7a2494411c823b390cb48bae206440219de627def690",
+          "bytes": 5828
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/browser/ui/keybindingLabel/keybindingLabel.ts",
+          "sha256": "e2c48863e6eff3adc7e5aeea97fcb3a0531c23ac50ed40d9c99380d9f10a0dd1",
+          "bytes": 6323
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/parts/quickinput/browser/quickInputList.ts",
+          "sha256": "2a05fc3f014a2f6303296e23bdf1f0460f21adfe6d82110d1da5c07aecda87a9",
+          "bytes": 23926
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/parts/quickinput/browser/quickInput.ts",
+          "sha256": "5a6258e60173a1ceefd225ebbf0634441914de65a6bf4a77834595fa038b07b0",
+          "bytes": 51328
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/widget/inlineDiffMargin.ts",
+          "sha256": "430324b3305e23b8731ce7e4a84056097cd8312d77ff723a3a1b4a3d516528ed",
+          "bytes": 8515
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/config/editorOptions.ts",
+          "sha256": "13a30583960ba1ff7d12902038daee54053ff4589e56af9575a3ce7dbd68cf29",
+          "bytes": 170201
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/config/charWidthReader.ts",
+          "sha256": "f55594965b6612322ff2aeabc56f07d04d7aba2cc79fdc8169b3a628b958bb93",
+          "bytes": 5239
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/viewModelDecorations.ts",
+          "sha256": "d9fbe8bb94ae0b5fbf1566262e4c8ca482a1a9efcf5a614f747dea1a7fe52ac6",
+          "bytes": 7329
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/editStack.ts",
+          "sha256": "755c06369f5117c77b7df55c10d49deb356e6b03d0d47dfcbb73ead8799703a5",
+          "bytes": 15252
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/standaloneStrings.ts",
+          "sha256": "99508dd04afc2c04d9a935781c2dfd327ac62e0622327be0904fc44abe66d05a",
+          "bytes": 5055
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/referencesModel.ts",
+          "sha256": "b13fe4e86af4bb455281d3378f5aaee708a22c7de6c4180e967151a1b16f5b6c",
+          "bytes": 8977
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/browser/historyWidgetKeybindingHint.ts",
+          "sha256": "8ed6c40730710b913952f6a0166e83765c1d9ca38774793148fa35151608cf03",
+          "bytes": 725
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/clipboard/browser/clipboardService.ts",
+          "sha256": "d7c67676f28918948f13f10230256b1113dd28fdda9cfa60223495c83c523e3d",
+          "bytes": 2309
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/editor/common/editor.ts",
+          "sha256": "8a8ea7df1c3aa65e5bb528dbcf33592b9e8bef12133a910f730fe9efa8689722",
+          "bytes": 3811
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/extensions/common/extensions.ts",
+          "sha256": "12507368a06cbe176da913cffb51dd29dfd895355ef79b1a0c6123632c46545a",
+          "bytes": 1211
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/files/common/files.ts",
+          "sha256": "0665eb2cbe977af7d49c31ff748839a7cd1882ef49cfafd790ab8cc200416278",
+          "bytes": 105
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/instantiation/common/descriptors.ts",
+          "sha256": "d3e1477ae307743dc9de2de25fcdec648fc1cdafce3aa577df1a30ed44fef1ca",
+          "bytes": 3661
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/instantiation/common/extensions.ts",
+          "sha256": "ba35c377fb23dbc32ab15fce593c6b5bbd089dc5e81220362b37c30f7f396516",
+          "bytes": 1435
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/instantiation/common/graph.ts",
+          "sha256": "c51b1bf62960a3e9d18ce471fa73f8925182b6703d4bba3ef66deadcb1bc977c",
+          "bytes": 2481
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/instantiation/common/instantiation.ts",
+          "sha256": "543c2415c9dafba957824ee06e66d66491db793be005b192290befef54cbee88",
+          "bytes": 5708
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/services/bulkEditService.ts",
+          "sha256": "ddb559143ec0fcfdbf34d9d8f5857dfcdfb805e9686bbdfea82e26c6d705a74c",
+          "bytes": 2591
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/services/codeEditorService.ts",
+          "sha256": "f6f26a5376e8f730baa855fa3d6a6843621eb1a2e689feae7ed7a31290885ff4",
+          "bytes": 2086
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/editorWorkerService.ts",
+          "sha256": "ca297abd56a160693e4b4753082648edaf59e13c08499c3bf63658e4a0f4f893",
+          "bytes": 1585
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/markersDecorationService.ts",
+          "sha256": "2fedc81e032a47006a96518256c4863ff33bf72b4887b6d6bdd50b8822191017",
+          "bytes": 865
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/modeService.ts",
+          "sha256": "4af9ce8c5b3e3050c24f84aecf22aadd404719fdc9b7577f716b96971aeecc2c",
+          "bytes": 1774
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/modelService.ts",
+          "sha256": "291ba1c83e78e7f21790e4ca375139365421244fe24aed4b4374d43631309406",
+          "bytes": 1977
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/languageFeatureRegistry.ts",
+          "sha256": "c0473e4e2c7dc1db11ac4d8d779e06c0f0588a7aca5e759cf6f265645f1650e3",
+          "bytes": 5832
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes.ts",
+          "sha256": "ca8ad54c6e4f2ba0c5937cc6a098fd6739da1f7aa2acb3b7b9bf526b831599f6",
+          "bytes": 45687
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/lineTokens.ts",
+          "sha256": "5bd409cb876eea60f5bb040c971d3099c4d75700b6e4c8946e2a3f1516c29aa4",
+          "bytes": 9120
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/tokenizer.ts",
+          "sha256": "0a454de2ac983e09da128eec8229d94cf58cfa391b07f73ff42f3f2437f52dbc",
+          "bytes": 11989
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/impl/brackets.ts",
+          "sha256": "0dc292df1ff8764f51b7be7ad43fc14094654e5188b8f213d1716c74e97e24a0",
+          "bytes": 4833
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/bracketPairsImpl.ts",
+          "sha256": "2d6c49f57857e9368d2c76a6d22d911d4f1dd75ac27b2c005a30995390b9c7fc",
+          "bytes": 13032
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/tokensStore.ts",
+          "sha256": "6dcf4b62bce162678020a400bea1518cd1d3e1d82f035700399a6a182cd3726b",
+          "bytes": 40313
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/pieceTreeTextBuffer/pieceTreeTextBuffer.ts",
+          "sha256": "ae67a9ec3d854a35d2aa9f43159dd4c59b25d11b972235087a9907f205aad696",
+          "bytes": 19204
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/pieceTreeTextBuffer/pieceTreeTextBufferBuilder.ts",
+          "sha256": "f7b2ee3c43447e51eb8a26943f15165612f544e6685b824f9a9fd34bf59c4d5a",
+          "bytes": 5893
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/textModelTokens.ts",
+          "sha256": "114d6d63d73031048d470ea712cdbc3a3a818ef68a96b0d012622f1bd1161d9e",
+          "bytes": 13827
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/textToHtmlTokenizer.ts",
+          "sha256": "03e81c5a90f9d981f34e4d312811d0f7dab114aad1163e3ec322426c02a3b58e",
+          "bytes": 4922
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/resolverService.ts",
+          "sha256": "f4ac694d2f6d824537cf55e5d3a22f88df6203c55b810e73d0531ef40388eac7",
+          "bytes": 1381
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/textResourceConfigurationService.ts",
+          "sha256": "b4b6bbda6d60dbd35997363386786a85d9509fd5c794a23bba2e34fbd9ea3ead",
+          "bytes": 1928
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/minimapTokensColorTracker.ts",
+          "sha256": "be4a572267f8cf089ff5cdae6e929bf098f05b9ff9d0df09171a169bcf48a2f5",
+          "bytes": 2255
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/documentSymbols/outlineModel.ts",
+          "sha256": "22992d128f6664df8c4869a9d7566e7467c1bc5b1e298836d79182446892ea45",
+          "bytes": 8561
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/common/monarch/monarchLexer.ts",
+          "sha256": "28cbe8b8d2f28feaaa7bca24db78f4e4aaf836b1c69501209bc552d9433c4ab0",
+          "bytes": 30261
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/colorizer.ts",
+          "sha256": "41d9fc4250bb11aeae57aa3760218a4e6f97ee9209e4b67a6505a9009bbaeeb1",
+          "bytes": 8295
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/common/standaloneThemeService.ts",
+          "sha256": "af99d85439e5f4631b0ed63f9647a041b7fbe270b73537533c0ffec1a5501f7a",
+          "bytes": 1516
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/clipboard/common/clipboardService.ts",
+          "sha256": "ee422f72acae8d3eb039e21388a3cc58b681dbc812e0ae68b6a6847c96bf26cf",
+          "bytes": 661
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/commands/common/commands.ts",
+          "sha256": "377957e716786355d3117041ca5b2a2a4f83fc8afbc1a3b2d3a2c54ece80e1e5",
+          "bytes": 4303
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/getSemanticTokens.ts",
+          "sha256": "9410afdf27948dd3c2b3bc1cca13a5e8f12a990ec3e36efecd6c21aafe34c4a8",
+          "bytes": 8475
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codelens/codelens.ts",
+          "sha256": "223c761676a7cb5646bb99a39b16aa07cedcccaf2e48a81bbecbb7779889ed09",
+          "bytes": 3909
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/colorPicker/color.ts",
+          "sha256": "ecaa999a3083eb6b7256d867ac4187fcea79669e7b5c7ef9bafba08a1552eee2",
+          "bytes": 3539
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/documentSymbols/documentSymbols.ts",
+          "sha256": "d5fe9cdeb96b4d972dcadf7d5be7ea2985b9d4adf2238f503cf4f96f243d1950",
+          "bytes": 1753
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/links/getLinks.ts",
+          "sha256": "ccf31cc02aa6b4aa911866f32c1b32e70d13adadc64e854fe7576c43bdea787f",
+          "bytes": 4998
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextkey/common/contextkey.ts",
+          "sha256": "cc007b3f1ec259c965f08dc079e609c9306db4d46436b7c161cb498b0c382589",
+          "bytes": 40276
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/editorContextKeys.ts",
+          "sha256": "d953f4bc0c3ecbe5a46a65cb15ad30330dba27ebc10aa4e12e2958877cef4124",
+          "bytes": 7706
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/parameterHints/provideSignatureHelp.ts",
+          "sha256": "34716989785d9ef721b7c41488b483d0ab6aa289bc8affae2afbec079f523b24",
+          "bytes": 2474
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/parameterHints/parameterHintsModel.ts",
+          "sha256": "ac841b4ceda0fba2c0b679e20abdf0456bb402f817ade42518210dfce32092b6",
+          "bytes": 10023
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestAlternatives.ts",
+          "sha256": "cfbfad05f5306b28f354d4c7522f17a070683f7db10c5b83f709fd398c70cad1",
+          "bytes": 2990
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/wordContextKey.ts",
+          "sha256": "88a9158628b902df4df029c3556c01287ed03c79e00a0f7cd8b63a6cc7c8e2ec",
+          "bytes": 2359
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/accessibility/common/accessibility.ts",
+          "sha256": "b1e082693df9b253839cfae64a3b3a44b75ead97628e339414eb2d23d4f7fb1b",
+          "bytes": 1190
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextkey/common/contextkeys.ts",
+          "sha256": "b26c1df82126a0f76b40115f8ec333d441403721da16bfe0e17cf57dfe2d88d9",
+          "bytes": 718
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextview/browser/contextView.ts",
+          "sha256": "360cbfe6322a85902a7695b695f66f325176d46b8333acc383f6bec84218aa41",
+          "bytes": 1647
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/dialogs/common/dialogs.ts",
+          "sha256": "33465af6011364caf867445b6bc39351a510841b065cf3f369abd2b34b2b4a4a",
+          "bytes": 1716
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/instantiation/common/serviceCollection.ts",
+          "sha256": "4309514824813e983c16cb4bc9058913cf528a9edd22ba901940a46d84ad3479",
+          "bytes": 1102
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/instantiation/common/instantiationService.ts",
+          "sha256": "08228871add6e7a0d964b3d016065778d4f55222b8ad9b632ea54f25016b7361",
+          "bytes": 11332
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/abstractKeybindingService.ts",
+          "sha256": "0c0b7e6733fbb3b2ee43a0a8794c95a9a80766f5a7e69f2d17099b0ba0090b0c",
+          "bytes": 11762
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/baseResolvedKeybinding.ts",
+          "sha256": "d8a64eccdfdde4f7daad018c22f5bd6795c1edc95cafff66f7aef495b0136c6c",
+          "bytes": 2941
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/keybinding.ts",
+          "sha256": "23558035d616e5787db50e666521b1467276173a2928d0bc2f1ba45b4f604c3e",
+          "bytes": 2357
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/keybindingResolver.ts",
+          "sha256": "76c8bf0ab8cef39f435388fab4fd50fe5c0fabfbc5263a461332b9b2836d2287",
+          "bytes": 9455
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/resolvedKeybindingItem.ts",
+          "sha256": "d91f518f71d3aabc9dc70928329f54129c52a1c1128562bcd1aaf6d4c27d018f",
+          "bytes": 2275
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/usLayoutResolvedKeybinding.ts",
+          "sha256": "6e2a0acea1f7b138e76f8961ce56ad577f244ebfbc474ee5f1f6d05d21e29a2f",
+          "bytes": 6793
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/label/common/label.ts",
+          "sha256": "95e82a15c87f8df2c402c80679115756b89e3e98c6ea2c80b2d6b4a6a4be46ee",
+          "bytes": 810
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/layout/browser/layoutService.ts",
+          "sha256": "282602593dcc26c402fb712773c79016290afb8c83fd26c324cfc773f28bfb13",
+          "bytes": 1222
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextview/browser/contextViewService.ts",
+          "sha256": "77f517cf2ff20566142cc71654673d12bd98219453a26d531b177fb26693a53b",
+          "bytes": 2438
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/log/common/log.ts",
+          "sha256": "16d13b80ba8f4222fd5e5f13bbe64f9834e97e1b58fc963765d32fc921da08ab",
+          "bytes": 2695
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/markers/common/markers.ts",
+          "sha256": "f5156c7ad57a0a87934741fb14c884716a5f1428db145884faa3350997bd4941",
+          "bytes": 5230
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoError/markerNavigationService.ts",
+          "sha256": "2a2918976300e1588eb718b7976343c1c920fd086193b3c5e6a2c246a524b183",
+          "bytes": 6460
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/markers/common/markerService.ts",
+          "sha256": "2aadf4eaeb3ec6ae39373e617e8b63800877d986f22615a8e01f9bb38b417e39",
+          "bytes": 7924
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/notification/common/notification.ts",
+          "sha256": "7058cdffda550749f4fa8b258ed740a0888ec095d85223bc39e0a04b5406ece4",
+          "bytes": 2392
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/opener/common/opener.ts",
+          "sha256": "da09288fa5f15d92853745ae175dea3e829a5a7335874a75fa3cdd0b77f7450e",
+          "bytes": 4374
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/services/openerService.ts",
+          "sha256": "e564c4b86b9dce9b44a0649a2f931ce5d5836d4440e3255c325501776fdfe26e",
+          "bytes": 8284
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/progress/common/progress.ts",
+          "sha256": "71086dbfd6f142bbc336eb16333cf591b3db0d89933d6535c16a927a7ee862be",
+          "bytes": 1287
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/browser/pickerQuickAccess.ts",
+          "sha256": "1de672a25832120f9010295fe2cf68aedce3eb7861b47a0da4d14131946a05e0",
+          "bytes": 11225
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/common/quickInput.ts",
+          "sha256": "40099ddb17932407aa8f981113c5f0738c02f31270e30b73393ac17ab830920a",
+          "bytes": 1950
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/registry/common/platform.ts",
+          "sha256": "73d64adcdb3aaccfe4efe21516b7746f6ec0245ebe0a523d2c21a8fd2c99bc8f",
+          "bytes": 1313
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/jsonschemas/common/jsonContributionRegistry.ts",
+          "sha256": "087600c30f23c2d1d19c2286d3b3219ca7644ec789d41fe4ef46cc819b65f7e9",
+          "bytes": 1753
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/configuration/common/configurationRegistry.ts",
+          "sha256": "e4272da0b83f92d9536d4bcc63a1b5cfd76ea2b883a859960e21799eed2bc070",
+          "bytes": 13105
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/config/commonEditorConfig.ts",
+          "sha256": "b1dd1f27a8b538748866a3b7f1b490cde50a00522e0d425f532eba95ed0a702f",
+          "bytes": 23821
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/config/configuration.ts",
+          "sha256": "dfc8088fd82406c110a5cb9ece9e3d7028815ecb685884cbd5db7fc358020a2b",
+          "bytes": 13030
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/core/markdownRenderer.ts",
+          "sha256": "8671884e7760ae2138647750e881e0419d078c0b00ec95b7a42ab3fe78e8b4b3",
+          "bytes": 4609
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/domLineBreaksComputer.ts",
+          "sha256": "39775b2c39237a530808f2b327af58cdf8cd321ae53c6efa48d79033caa86335",
+          "bytes": 12512
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/viewOverlays.ts",
+          "sha256": "a4a6bdfa008ede84295b595c080e67c9904adf2a2714866ccc30eb68f522b552",
+          "bytes": 9339
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/viewCursors/viewCursor.ts",
+          "sha256": "4f3cbec9648d71d80f44aa242292c2a147da85b07f8503521ff01e3831024e85",
+          "bytes": 8077
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/modesGlyphHover.ts",
+          "sha256": "b642dd022a7171f91af4521cc348415b55b2e4e10b1d62b92064a228b48b8f11",
+          "bytes": 7573
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestWidgetDetails.ts",
+          "sha256": "867cf1580762721015be0c38e284da5d0fa8736b1d12d5fd685bb61cdbb65256",
+          "bytes": 14872
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/configuration/common/configuration.ts",
+          "sha256": "e7eaff70098018737a18b5440efc611811deae525ec87c13c513acb28e8236fb",
+          "bytes": 5169
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/languageConfigurationRegistry.ts",
+          "sha256": "20d4ae5f2d48acaf736215b75954d84addfd6b84ef59145d272c624c41f9d809",
+          "bytes": 35128
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/modesRegistry.ts",
+          "sha256": "8ccf5d5bb2c5ba75e5ad5e7f3deb5a8b2bdaf50f853a792cb2f1cb58c0967afa",
+          "bytes": 2605
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/editorWorkerServiceImpl.ts",
+          "sha256": "aada30bd4e94ec5a3b5d36a8dda2adb34b8e8159772f561fe8586748dfc0ce5e",
+          "bytes": 17958
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/getIconClasses.ts",
+          "sha256": "352a14c3e0e3ba87c7b61c55eeffa010cccd5e6445261049262c4288e03807d2",
+          "bytes": 3613
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/languagesRegistry.ts",
+          "sha256": "d3c6df35f1c6174d4df26a96939f29b5607a7190e4481e80d2e5ad391862594c",
+          "bytes": 9878
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/modeServiceImpl.ts",
+          "sha256": "aa84f965a098ec0658f76031e2256d424972ec2267193b14f6c2300c43dfd225",
+          "bytes": 5337
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/webWorker.ts",
+          "sha256": "09dbf0977917dc2a3eb9ca5f9aa9d5e0398be998261481af789cef2c0d4402e2",
+          "bytes": 4437
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/comment/blockCommentCommand.ts",
+          "sha256": "a7afeed178bc80943dc7e3b80b3498462517cdc3dd68a03f3a3cc17134ee6dce",
+          "bytes": 7748
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/comment/lineCommentCommand.ts",
+          "sha256": "66b2bf4bd016488fb67f483a0d391867525c2e5493332801f979088d5305d837",
+          "bytes": 16394
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/accessibility/browser/accessibilityService.ts",
+          "sha256": "939a1c35d3eb3664ab9c9b3f97b2daed8846111df40dfe2b89e00b31f147d9ea",
+          "bytes": 1962
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/configuration/common/configurationModels.ts",
+          "sha256": "a983e269992f1733d9646dee21b9e1e52e05998628b6d766535588c25b28866d",
+          "bytes": 15057
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextkey/browser/contextKeyService.ts",
+          "sha256": "5a899a9cb6b876c7eb38535f522f45bd9aabb17a088b29f0e4a283eba68ec4d5",
+          "bytes": 14002
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/keybinding/common/keybindingsRegistry.ts",
+          "sha256": "7325874746957cf140a1211d12c2616fcc94c399db762cdcefeec21ccc026a08",
+          "bytes": 6117
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/common/quickAccess.ts",
+          "sha256": "73e06c18969c6a35db3231a9856bba469a497b1726ff3a6f7c456a328f243f9e",
+          "bytes": 6161
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/browser/helpQuickAccess.ts",
+          "sha256": "dbce220ccc1a76d2eef101126d0a45eb9851f47b03da77be831b0f2093840357",
+          "bytes": 3559
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/quickAccess/standaloneHelpQuickAccess.ts",
+          "sha256": "26bbf4b89ca5d191aecd7759aa9c1612f012d8361ca543817b36d0d40cc17b64",
+          "bytes": 899
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/browser/quickAccess.ts",
+          "sha256": "5dc8a0bc916a1fff6ce8462f8ff0db36f6ecb2cd5bdcf1adf0cf6d07fb358b2d",
+          "bytes": 8972
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/storage/common/storage.ts",
+          "sha256": "b77c1b7e18d6ee13a00c706f4023e0f73cc42a4f11b74739e8c29d0ec1f8f249",
+          "bytes": 10341
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codelens/codeLensCache.ts",
+          "sha256": "254bf326367cd50ad151cc16791d50ca1b5ba5871d1449cd503a5f55a50e9c33",
+          "bytes": 4275
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestMemory.ts",
+          "sha256": "f7b96cae9787cf3d734f2f7f7eaaf1c13accbb16cd60fda5b92d3fa34d8fcc59",
+          "bytes": 8962
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/telemetry/common/telemetry.ts",
+          "sha256": "b715956fefb26403b0c152df82e82e840760c656e04459ca1dda8c92d32285fe",
+          "bytes": 910
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/browser/commandsQuickAccess.ts",
+          "sha256": "722353917cb05a7d06e8b7217b507c8a4cfc75903a0cee96c571055b41b7735b",
+          "bytes": 11134
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/quickAccess/commandsQuickAccess.ts",
+          "sha256": "ffb4b59694eba5e1d185971701ce2e57ba067da3aea94f915de745f2124f3e79",
+          "bytes": 2137
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/theme/common/colorRegistry.ts",
+          "sha256": "3c1035e9907d9e12f6cd4ec4e66b75d983a280b4c44b83c0f156fa2d30f031de",
+          "bytes": 48641
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/theme/common/styler.ts",
+          "sha256": "774dbe4ecfca7060d93ae799550adfb4692797ec32c9bfcadcb2c7015898d6a6",
+          "bytes": 4936
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextview/browser/contextMenuHandler.ts",
+          "sha256": "5eb46154a82816e0afc33658bfc93132dc8c027ffffd2697d31c245c0c7e2df5",
+          "bytes": 5917
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/theme/common/theme.ts",
+          "sha256": "8877b9a8a93f72f312419b9fd5a336a87bc5a95b4946b0b275fcf60cee37554a",
+          "bytes": 497
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/lines/viewLine.ts",
+          "sha256": "f639402c46b9635299192ed2919ec3622f2a621604fbb0b9c855ad938a41e2d1",
+          "bytes": 25739
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/lines/viewLines.ts",
+          "sha256": "ad59180de852b9c2d069a7f21ba5db5f23b1e08fb335fb0f7a766033ae8a24e5",
+          "bytes": 31511
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/theme/common/themeService.ts",
+          "sha256": "ff5ae6c8d9a808b76949abd3eee3ef63f9f8386b6719c085a6d8e5d3a297cc8b",
+          "bytes": 6568
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/services/codeEditorServiceImpl.ts",
+          "sha256": "edfd37260bae87a87f9ffed8e6f8b4e9798701cbe45cb68ab03d3c94084dd868",
+          "bytes": 23030
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.ts",
+          "sha256": "c3bc818c309b3cc94c1dc6447ab5c474921b4b1213c32f3b63eb98a301c10d4e",
+          "bytes": 9448
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/minimap/minimap.ts",
+          "sha256": "66efa24cf7340d8b7dca4138b83bf524a0d9440770b9ac19e294e44dcadb7db9",
+          "bytes": 72544
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/scrollDecoration/scrollDecoration.ts",
+          "sha256": "f6ceb38a998dcd2f74cb45416b990447e06e9f396455f9553a9764a9788c3711",
+          "bytes": 3513
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/selections/selections.ts",
+          "sha256": "2e480666c2dc2ceea6cb11047c66146d61d8ba1d2b03c3176faad5f9e2d2ec65",
+          "bytes": 16620
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/semanticTokensProviderStyling.ts",
+          "sha256": "c10a64dc2cb738204a97dfa742bdf16b48b7d06788cd96bcba92067f1a21d7fb",
+          "bytes": 12103
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/view/editorColorRegistry.ts",
+          "sha256": "f02e24eb8039c6b1178ceae6ec0b04e1f9a970ae9da2eebe90086bc8230a7338",
+          "bytes": 16427
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/currentLineHighlight/currentLineHighlight.ts",
+          "sha256": "a0914d96ab3171b39dffe1a5148357e2df3e2b1448fc5266f75202934312e7ab",
+          "bytes": 8969
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/lineNumbers/lineNumbers.ts",
+          "sha256": "9c1e5f202b8868166c04c2f67f8e1c4b20c1999da81b47eb1c808e84a5017816",
+          "bytes": 7406
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/textAreaHandler.ts",
+          "sha256": "1783ed3ac2777815179f1d97c5f43b819a044e87fb140c47bac3e65005f982b5",
+          "bytes": 25370
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/overviewRuler/decorationsOverviewRuler.ts",
+          "sha256": "e5c980e953f3ecedd63758f2818375f64ed060a04a4c4fbfbf2097303b72cf4b",
+          "bytes": 14414
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/rulers/rulers.ts",
+          "sha256": "060690f495cfbbf2695359e5bdc4906e623b1b4232727a6470afb309c7e01eba",
+          "bytes": 3897
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/viewCursors/viewCursors.ts",
+          "sha256": "5db1861c9f85fdd9348561b261125eae0a7c858881c59c0d6920ca54f8852b8e",
+          "bytes": 12603
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/bracketPairs/colorizedBracketPairsDecorationProvider.ts",
+          "sha256": "4dab43b405f2ee72c280d1ba9e3100a138eae62b27af4d1232a434714b07ad3e",
+          "bytes": 4465
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/markerDecorationsServiceImpl.ts",
+          "sha256": "2c23a2794c1ecbc3bf2e8a03c1b8ef6445a40dae0fa1c38e56c4a7ac2f342010",
+          "bytes": 7722
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/colorPicker/colorPickerWidget.ts",
+          "sha256": "87c2884aee23f807a53baafe346b2338b8e2d821ce43c67c93117013b8eb363a",
+          "bytes": 12637
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/peek/referencesTree.ts",
+          "sha256": "f3729c01ff79179204bacff4b7cd58d45d52ad33b5912b3792af91499f7aa6e3",
+          "bytes": 7627
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/quickAccess/editorNavigationQuickAccess.ts",
+          "sha256": "de68b0658c9511b00e18564ed3967d47d56b6194e843a5db3674f8a0bf486777",
+          "bytes": 7991
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/quickAccess/gotoLineQuickAccess.ts",
+          "sha256": "c71d35d1e5f820a7ce4883bd81710dda0b8478b73d69cda88af99f512d8bd27e",
+          "bytes": 5993
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/quickAccess/gotoSymbolQuickAccess.ts",
+          "sha256": "697ccc94f8a7734443a113997f7930c4fc4423111e50e3c98eeb37e8a2c29462",
+          "bytes": 17564
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/rename/renameInputField.ts",
+          "sha256": "3b8e23a7d71a9cda7e0c0aafc42a61db0d5e8b2800a243057a6993148042166c",
+          "bytes": 8240
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/symbolIcons/symbolIcons.ts",
+          "sha256": "735ef91412f4756f53b75248360190f7e7feed8758dbfa693f8c765871ddfdc5",
+          "bytes": 18013
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/standaloneCodeServiceImpl.ts",
+          "sha256": "2cdf786bc8a9bff51c224b6b93df7dbd8949d4dffa654048cd0e1fa963983afa",
+          "bytes": 3619
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/common/themes.ts",
+          "sha256": "cde72989f8c1f3297647cb15b411497be542365203081bd4bdd915c1c35f5708",
+          "bytes": 8546
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/actions/common/actions.ts",
+          "sha256": "8445197d5d602a2730ca11d10d694e69ee92fb7b4d373e97c0b9741ebe4264a2",
+          "bytes": 10694
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/editorExtensions.ts",
+          "sha256": "b15b1b1fee2569ba5f7a883d34a0747bf8080018bab5d95d24962412441c0685",
+          "bytes": 19602
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/core/keybindingCancellation.ts",
+          "sha256": "c724965400c442b69fc1020382011e82e470c33a3f51e69f105d921ab04f6714",
+          "bytes": 3605
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/core/editorState.ts",
+          "sha256": "8f124ad708c730a99ba51218090421316983639a511f71227f24d55d604d6ff7",
+          "bytes": 6312
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/services/markerDecorations.ts",
+          "sha256": "197d359939687d21a5d191e0a42195fd6dbb8baed7e21d23a1803fd97c68ed65",
+          "bytes": 1163
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/anchorSelect/anchorSelect.ts",
+          "sha256": "1cc8f6db87b145a2398a7cc48c66c328abb5058be55b6976b86df31934372785",
+          "bytes": 6508
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/caretOperations/caretOperations.ts",
+          "sha256": "89b2e172b9e3afbcf65a2e36778cfd50daa6eeb6145a7c94ff56fae18c04ce1c",
+          "bytes": 2035
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/clipboard/clipboard.ts",
+          "sha256": "9e72196ef830d2f4735c565e538ca3455b36c3dd6fa988b91a678dca71c1937d",
+          "bytes": 10118
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/codeAction.ts",
+          "sha256": "9173ee2f5fb7dce37be3ee26bee4f20e8aaa4832f1f3f5fe4830652d6da58d3c",
+          "bytes": 8867
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/codeActionMenu.ts",
+          "sha256": "b2d92347db3a0269f906fb1c4c91810e35d03a9d925ae655da0ec466da8a225e",
+          "bytes": 8478
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/codeActionModel.ts",
+          "sha256": "e6135e270eab13976a382d5b9dfda8e121052cf9b1dae68499d94a411bc7daf2",
+          "bytes": 8834
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/comment/comment.ts",
+          "sha256": "663f9ac8b15cf1a319ab19a85920c096806a339cddd67c15aa37efd93bce9ea7",
+          "bytes": 5754
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/contextmenu/contextmenu.ts",
+          "sha256": "b1630de5740154e587f552706234864ca4fc83abb83f79e41f995427e1f471c2",
+          "bytes": 10118
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/cursorUndo/cursorUndo.ts",
+          "sha256": "f8721cb8418536eecf2b16a78ca6ec5384c4a023050ccef6166bdfb9fdf7dd43",
+          "bytes": 5134
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/fontZoom/fontZoom.ts",
+          "sha256": "210ec6c0fcdf31a6084c035a902f88e5ca288a1052efa7747ce8a23054248d20",
+          "bytes": 1891
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/format/format.ts",
+          "sha256": "9a6d12e359da03a6ee48f47789eec4c80266816d201114dd31f2c8f36d40a3ee",
+          "bytes": 16800
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/format/formatActions.ts",
+          "sha256": "e568e2689928965593df85c70b85fab24ef28c13c8915fc6cfffce83a20643e4",
+          "bytes": 10152
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/goToSymbol.ts",
+          "sha256": "122a603eb522735490293daeb69ebbfea8094aab0693cab35b100d1da5f56e33",
+          "bytes": 5053
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/symbolNavigation.ts",
+          "sha256": "ac33fb243a5a9fda6dd86b3948fec745ca0a5543ac614f44e091c34057201327",
+          "bytes": 7384
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/getHover.ts",
+          "sha256": "b81b6fa0c47fcabea41dedc5474fb3c6964624f4df9c9099a61fe148d93b9ee6",
+          "bytes": 1663
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/markdownHoverParticipant.ts",
+          "sha256": "134406e0122231362ebc2e091daf613d1ca0e481d4095c333057c03a68a35e31",
+          "bytes": 6041
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlayHints/inlayHintsController.ts",
+          "sha256": "c82c71baedcae4cc4624743717cfe6001c0a829a79102741cbf5d5884af4c0bd",
+          "bytes": 13431
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/message/messageController.ts",
+          "sha256": "34de4311e394d0c7ca50c55a16b80b7464a9838aa9fa8d1b2437d26678a4ae91",
+          "bytes": 7976
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/rename/rename.ts",
+          "sha256": "4b67172eefb21ba9bb8616c50520b0571cbb8f31accead43e8913b1ddff0ef8d",
+          "bytes": 14227
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/smartSelect/smartSelect.ts",
+          "sha256": "81a221939800c1cfa858949a59c2bb919d52fa6a86714d8691ffee61f4fe7ae7",
+          "bytes": 10887
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggest.ts",
+          "sha256": "756c42f675c99e3e346c76f9310074cbd74879588917350c8f2b5b5ef32f5594",
+          "bytes": 15769
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/toggleTabFocusMode/toggleTabFocusMode.ts",
+          "sha256": "bcb73d24aca73b9e4b329ea89ddaf31eaa19daec8a885ff186ced5154fa2a57f",
+          "bytes": 1935
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/tokenization/tokenization.ts",
+          "sha256": "754285b16c9c5cf205674b6b3c98dc75e9f8a0e655c2f2c0f80a2ef161fa9201",
+          "bytes": 1255
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/unusualLineTerminators/unusualLineTerminators.ts",
+          "sha256": "c679e9b144cfa684f5dd8a7723974de4f5ca832da02bb53fd6a2cd9c1b2a1c38",
+          "bytes": 4222
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/accessibilityHelp/accessibilityHelp.ts",
+          "sha256": "793da6bb0e0dd78f5f975420e8bea2b660e685bd3269418bf606c24bcfe2e28e",
+          "bytes": 12869
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.ts",
+          "sha256": "0f3380d0d3b7e7ef8f2f2c9ec29868d5b6a77631abada80622cffdb67f63aca6",
+          "bytes": 2894
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/inspectTokens/inspectTokens.ts",
+          "sha256": "f239cff3b5924e8fd8ccf83a7b7ee89736a719f4ffe1826858ff898b274f5c74",
+          "bytes": 12267
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/quickAccess/standaloneCommandsQuickAccess.ts",
+          "sha256": "84305368dbef85a801aa8a1ec47ca147765b3d952dd4d642505c0ac4434512af",
+          "bytes": 3525
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/quickAccess/standaloneGotoLineQuickAccess.ts",
+          "sha256": "1e8e2752f029f84d66c906047a3fbd854b07923c62add76fea7ba5f2f0f45d2f",
+          "bytes": 2552
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/quickAccess/standaloneGotoSymbolQuickAccess.ts",
+          "sha256": "62209d057ef121421a8d60ef58628da6c67f236b1896b286e0091bb4f44d68e2",
+          "bytes": 3170
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/toggleHighContrast/toggleHighContrast.ts",
+          "sha256": "f4b8f0415dc47e96bb856ec8fb5a8735498366cb1baf3d8693bacecd04e71af3",
+          "bytes": 1533
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/actions/browser/menuEntryActionViewItem.ts",
+          "sha256": "9ace68a77d76f445533a852b1e93b031ffde10cb32dd3dba68e14f0bf399d6ff",
+          "bytes": 16887
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestWidgetStatus.ts",
+          "sha256": "fbbd3a6b3f6252befba2906ccc81a6f4cbf4300301cd82f9f9c868209aa5a1d5",
+          "bytes": 3364
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/actions/common/menuService.ts",
+          "sha256": "18dedef6a2dd1fde42c2bcc0ca40f4b21ee17bbcc3e24b5abc3375a288c05edb",
+          "bytes": 7421
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/browser/contextScopedHistoryWidget.ts",
+          "sha256": "6b11aa87dc9072888d6b62687436cd5d20fd607487e24ffaa5ce2f8c0c3db6a1",
+          "bytes": 5819
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/contextview/browser/contextMenuService.ts",
+          "sha256": "057c3e000e06d8176e064d0bd933040b6dc006e9fe156fc2b44c0bd46eb60d5a",
+          "bytes": 1951
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/list/browser/listService.ts",
+          "sha256": "18151ebbf238d01a99859d9d93ec2e8f00e4cd457f00faf7311a150770746582",
+          "bytes": 55380
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/quickinput/browser/quickInput.ts",
+          "sha256": "856c2996493146c4f828e7bc348207b974a8a98577f21bd57f00a2aa087f7de1",
+          "bytes": 7772
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/quickInput/standaloneQuickInputServiceImpl.ts",
+          "sha256": "ff0df6049d75c3b483a0b5bfe61f6d12e362360ec2d2fcc50099c075ddee313f",
+          "bytes": 5680
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/severityIcon/common/severityIcon.ts",
+          "sha256": "bcf1738a8536d84a58623545624ccb199ab9660056f37205e3dc5a43e7605ab0",
+          "bytes": 2752
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/theme/common/iconRegistry.ts",
+          "sha256": "e9b548e0d8fcc3c3d3e5cf52be1227e2ed9f0972a2f3e04e9f9364ff35967ef1",
+          "bytes": 7179
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/widget/diffReview.ts",
+          "sha256": "fda8c9712e892f0f5cb1b8c3f6b4553004ee906be7ae9cbd754c0e64f41770f2",
+          "bytes": 30963
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/parameterHints/parameterHintsWidget.ts",
+          "sha256": "2aad6f4ab68c0f9c0fffef77bd7a02a0f16273e82de585042b201fa4bfc82c90",
+          "bytes": 15616
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/parameterHints/parameterHints.ts",
+          "sha256": "685d2ace76fc23466ba61f1b40d02bb6cbadcfe920ac21d059e139dace3aa23c",
+          "bytes": 4491
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestWidgetRenderer.ts",
+          "sha256": "8992aee8f1db81679cfe2357dd43df7fcbbfd35726239298dbf0a2e550e93968",
+          "bytes": 10199
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/theme/browser/iconsStyleSheet.ts",
+          "sha256": "e7ec4f4cfe6d73db17a4b878e19b4505824980bfea765a9645cf298590425d37",
+          "bytes": 2369
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/standaloneThemeServiceImpl.ts",
+          "sha256": "3b02da8278b5e3905d7afe555d9dca53bc1232389321c86c0f2ab586546fd09c",
+          "bytes": 12021
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/undoRedo/common/undoRedo.ts",
+          "sha256": "35b45190ea0010876f7cb00bcdc3f4a89f9ae1d848fadb1b818275974efb89b8",
+          "bytes": 4518
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/textModel.ts",
+          "sha256": "bdcb4eecf9732ec93b051c1869827b618b1289a1687326aeed7470cecb0c6f61",
+          "bytes": 138173
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/viewParts/indentGuides/indentGuides.ts",
+          "sha256": "3f30ebedd58084deeebdb1fce52c4e4b3ed37f881a0ae75f86b99643197851fe",
+          "bytes": 13588
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorCommon.ts",
+          "sha256": "5b68a832e4fbddd05efd8ac75086c9318db5484d791977c26da5db39ae543297",
+          "bytes": 14838
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/commands/shiftCommand.ts",
+          "sha256": "5dfb1172879eaefed91ec5ed29a98f777c57e601411006d90f94dec017489bdc",
+          "bytes": 10738
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorAtomicMoveOperations.ts",
+          "sha256": "446f913e627ac6891642d597f07a11ba6831608b2ede42fc5517e6969f70b69b",
+          "bytes": 5472
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/mouseTarget.ts",
+          "sha256": "79ed1bba85e27f4ce7bd37e526a5250bfad661128d6732bb5921b4885fcd5202",
+          "bytes": 42512
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/mouseHandler.ts",
+          "sha256": "19e2bd46c7d29941c44eac32ad881a334d1a1448e1164d2d455abf23754a1194",
+          "bytes": 22952
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/pointerHandler.ts",
+          "sha256": "b89ec704265415774f54d47fed474f0b320a04228d1a7b91df10bee35d6db70e",
+          "bytes": 6217
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/viewUserInputEvents.ts",
+          "sha256": "053bbc9e6b56069eca7d0997f314a270c6462579a2f67dc658fa7dc568a5c006",
+          "bytes": 5087
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorColumnSelection.ts",
+          "sha256": "ddaea5abf03b67dc2abf4247d26eab3bf60b1878de0f9c77f791361707fbc763",
+          "bytes": 5854
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorMoveOperations.ts",
+          "sha256": "cc84eb07cb02c93805510d021802a1534aa6445dda6c4dcd1bb8aee471e30297",
+          "bytes": 15158
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorDeleteOperations.ts",
+          "sha256": "999bc8479f9ba4094f6ae93b1886faf1225a485c6dc150a588113a14ae238196",
+          "bytes": 10237
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorTypeOperations.ts",
+          "sha256": "ec260479f7a8aebe580fff3ee94e41d68694f535a1cf67b8ae7e1f9ecaa166a2",
+          "bytes": 40763
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorWordOperations.ts",
+          "sha256": "cca50671724b4346e1560d904657dc1d66a7a162be2347f4b763c507991bf2cf",
+          "bytes": 30476
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorMoveCommands.ts",
+          "sha256": "db8784fd28110c8853bd7fcde0582514d58cd20c5565b33080a527b89383abbf",
+          "bytes": 32987
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/controller/coreCommands.ts",
+          "sha256": "8e638df833aa8d82f58b20b2b93b56c04ac66f256756c5dcced684da004b2506",
+          "bytes": 59818
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/viewController.ts",
+          "sha256": "689c9fa47ae48f8a1dca063c6e7618f380257b0839c7e4fd14418eda27c77f94",
+          "bytes": 10852
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/view/viewImpl.ts",
+          "sha256": "c8d0a33ca2635de76ee0f235931b85adabd0f9a109ea34df41ef0202d012cd6b",
+          "bytes": 21994
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/oneCursor.ts",
+          "sha256": "58387383396c4c42df43a7e34f30a034db4f63668802f2804714e9454bf654b6",
+          "bytes": 7212
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursorCollection.ts",
+          "sha256": "023cdd15617bd6710599bc756fc9eea5fe1cef969ed959e1afd5e4097bdc4fcf",
+          "bytes": 10366
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/controller/cursor.ts",
+          "sha256": "91298970f63f163efdfadc511c2fdb79df1cfbb90b49b2bfd60834987000ff76",
+          "bytes": 38682
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/modelServiceImpl.ts",
+          "sha256": "3ffd7d1ebb289fd6f723a1ea6db32a3f71250a625189f0b64bf98a440ccf7e69",
+          "bytes": 34340
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/splitLinesCollection.ts",
+          "sha256": "6adb73ff7ad24231a63ed65d21bd61aebb419f96a7e9e3da23ffe850f36d497b",
+          "bytes": 70650
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/viewModelImpl.ts",
+          "sha256": "8bac1a1e175144d537347f52703b8cf0c958d3ea84ca5b84f004c195ef0eec01",
+          "bytes": 47599
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/widget/codeEditorWidget.ts",
+          "sha256": "49473709ed3c1f82275540cfcfa37b6e967e0944ee8c00fad5c34ecd95ed587c",
+          "bytes": 77500
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/widget/diffEditorWidget.ts",
+          "sha256": "222f909cd43db60b60bc2722e2557a4090e602f48008a6bd72875d2203e6448d",
+          "bytes": 99515
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/browser/widget/embeddedCodeEditorWidget.ts",
+          "sha256": "edf60991777638356af9af167f81def9bcb42dbb56e8cb83d84ae1e8edfcd362",
+          "bytes": 2880
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/bracketMatching/bracketMatching.ts",
+          "sha256": "92fd3f8624c8f7467c32d2c59aea2ac630dfa4d24790394cd2bc244160f1c5c9",
+          "bytes": 13569
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/caretOperations/transpose.ts",
+          "sha256": "601b4575485d6789864f3e026819b06e5abe82d6d6b449786bf7291872605a78",
+          "bytes": 3082
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/lightBulbWidget.ts",
+          "sha256": "5fe2578161bfff3dc27a56eb8c94dc8b19a35e084f9a32cc5bc82263b12eb8e0",
+          "bytes": 9216
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/codeActionUi.ts",
+          "sha256": "7e634581dd2417eb76796646143be0de95ec35b7887ffc84d3ef827c752d1997",
+          "bytes": 6003
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/codeActionCommands.ts",
+          "sha256": "dd0368977c0ce031fb8981692b713615e207a8e7225ed53cc3184c4fbed4e333",
+          "bytes": 16307
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codeAction/codeActionContributions.ts",
+          "sha256": "ffb4976a9bef840f6a1aceb7ca475b679acc1f086cdefc36861805cfb33d8643",
+          "bytes": 1033
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codelens/codelensWidget.ts",
+          "sha256": "81fc2e05b8362a9d088267ab11166c85b0877db40cdcfbbfdc90007fb8d7fdc2",
+          "bytes": 11336
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/codelens/codelensController.ts",
+          "sha256": "72803f92fcf1f461a739f3b60f929b4043511a1886c29cb12168264342b192d3",
+          "bytes": 18243
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/colorPicker/colorDetector.ts",
+          "sha256": "f1b78535021cf1d21adfbc87d8c2ed46d22a59c49e790552a1045fbdaf0cf1da",
+          "bytes": 8343
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/dnd/dnd.ts",
+          "sha256": "da7472b830060761d4ef4c77e508c97e7e2f223b43ce62c0478dcff0f0478f54",
+          "bytes": 8964
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/findDecorations.ts",
+          "sha256": "c91b327f049b205d8369b0b30b576d7c0251f069b78c4765dd79389a5e3b076c",
+          "bytes": 12409
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/findModel.ts",
+          "sha256": "43dcb1f0f262561560d7f56277df7096a5698f25444493fe70778494aa811a7a",
+          "bytes": 21308
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/findOptionsWidget.ts",
+          "sha256": "20f3e4e54b7f39855bfb39f00e887803bca528e23ff820626e7a614af0f822cb",
+          "bytes": 7657
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/findState.ts",
+          "sha256": "d32d67514a4b24988cbe058f1960f5613e5dd29c06239c8d5ca6e29564dbee53",
+          "bytes": 10001
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/findWidget.ts",
+          "sha256": "059fbee14e8a8c2f14fa04fd181ed30b2d3f1516bfe497faa7f3ff77dbb5329a",
+          "bytes": 51383
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/find/findController.ts",
+          "sha256": "eaa75e0cb550d66f198e6491cf1664ea30cc341aeb86798eab69ada353acfde1",
+          "bytes": 30465
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/foldingDecorations.ts",
+          "sha256": "46f3fb6994283482eb18f9f04c1d631bf54bb891c9f23b8ad030f471d008c28f",
+          "bytes": 4016
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/indentRangeProvider.ts",
+          "sha256": "d555d0110071c87865b977ee6aa8e2125b1cc071419212d6b2dcf994baaddada",
+          "bytes": 6702
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/folding/folding.ts",
+          "sha256": "32c408825211b3cab768c7374159c492a335f0fb64502515251d7b0265165af9",
+          "bytes": 39722
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/colorHoverParticipant.ts",
+          "sha256": "e91d3c29d5ea21ad9b66c95433e8bb2b5194c00ad04189e25996539275f7967c",
+          "bytes": 6670
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inPlaceReplace/inPlaceReplace.ts",
+          "sha256": "3f8e5e1350d8b0100151cefd37a3cb2965a74d37772a62c16d742198bd7a87be",
+          "bytes": 6887
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/indentation/indentation.ts",
+          "sha256": "58e869737aae2d0afe7384a7f6d38673996323c3d9be5e5ae679dc0d5eb7874a",
+          "bytes": 23774
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/ghostTextWidget.ts",
+          "sha256": "e3c87ec4857e99869cd0c3fce00ed8a99faac9de8d397462b785d8f387487abf",
+          "bytes": 17808
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/inlineCompletionsModel.ts",
+          "sha256": "b4e82f59ec0101d84b73b13522da6d670ca670884ca55d335c8c661f272e95bd",
+          "bytes": 19430
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/linesOperations/moveLinesCommand.ts",
+          "sha256": "b0f51659d929551d68a3deefe1c7fe3bf9ec70d3615369031b2eb9c0c65aac7c",
+          "bytes": 16959
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/linesOperations/linesOperations.ts",
+          "sha256": "1309c09892c474196db79dfc1ee5c4a457e062d3d060aa245c70facf320c5593",
+          "bytes": 36931
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/linkedEditing/linkedEditing.ts",
+          "sha256": "fe782a0e183e674592f4276607da726680b572422dd70e24fce4086266ea5923",
+          "bytes": 16540
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/links/links.ts",
+          "sha256": "0e1ad02d8b45e3e9687010a7b91aa25053b802ced1f45f5d75279a739af9bc06",
+          "bytes": 14981
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/multicursor/multicursor.ts",
+          "sha256": "351130f74f3736cd024916a8cd82fdc725e92b41adde5057f1a896df93e689cf",
+          "bytes": 37344
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestWidget.ts",
+          "sha256": "f14573d1c531a829a24358c459d63a827311fae69b96e378bf0a8868b70b2f7f",
+          "bytes": 36031
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/viewportSemanticTokens/viewportSemanticTokens.ts",
+          "sha256": "a6c093a32ffef222a52b55672f4a35c8fd81d4fc800cb8143e7e1c9b165413a2",
+          "bytes": 5088
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/wordHighlighter/wordHighlighter.ts",
+          "sha256": "5fea328c53805605f0d7b4f2fee0bd6130beca4987174964eda646b48c8d0550",
+          "bytes": 24894
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/wordOperations/wordOperations.ts",
+          "sha256": "00d9701f7707e3c0f3c293232594647d76d80a128f093dd5197ae11c7083df3a",
+          "bytes": 17534
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/wordPartOperations/wordPartOperations.ts",
+          "sha256": "9595e9ccb8cc52ff1a06b457ef2195d083694b7947f9acdfcc4f5e584d2e270a",
+          "bytes": 5634
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/zoneWidget/zoneWidget.ts",
+          "sha256": "2709c0563ad05b5f6161397432c075f87d3fd41c04d49dabe1983bab68af6ce7",
+          "bytes": 15185
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/peekView/peekView.ts",
+          "sha256": "db9b0d4d76d5dcd3864b484aabd9892152962d94940be5e90689bdf9d27e82c3",
+          "bytes": 13554
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoError/gotoErrorWidget.ts",
+          "sha256": "b39584bdf0fd6e7f9e989af94181a2d9ddfdfb19a56c8bf1c67f7ace5afa7336",
+          "bytes": 17728
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoError/gotoError.ts",
+          "sha256": "30ef17fe5c986bc7d81a66c6d40726b09cead23454261b1df4457cd1099489ba",
+          "bytes": 10686
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/peek/referencesWidget.ts",
+          "sha256": "8a5963f8f892ae357dc50abd586adf0a49d853d16204f31efd9ef503309fac11",
+          "bytes": 22028
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/peek/referencesController.ts",
+          "sha256": "371342da41fa8f3881ba2c6823c2c262e2959b08e5661ca111434e83b2a9ba3a",
+          "bytes": 14489
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/goToCommands.ts",
+          "sha256": "b824007d9f89e75e4b61bc33f0d44e72460acfbe95bfcb7c38e06bfb795c4fa8",
+          "bytes": 29231
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/gotoSymbol/link/goToDefinitionAtPosition.ts",
+          "sha256": "f4239c54ac8e79780935071c9f33fd88f2144b4211754f3a5b37425a416635ba",
+          "bytes": 14472
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/markerHoverParticipant.ts",
+          "sha256": "f24b197a67fa28aa4a8edcba109bc4a247a74d075467e0a645bdbd11420c55e6",
+          "bytes": 11229
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/referenceSearch/standaloneReferenceSearch.ts",
+          "sha256": "9a460ae942022d46fea8f68f5d9ecd1abdad5d0704b18c1a1bd8f5ffea90410a",
+          "bytes": 1845
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/undoRedo/common/undoRedoService.ts",
+          "sha256": "179a30f27f87b310db2e67a139c1cd5a61a78c3d7e515683d5bcc5a307a45e63",
+          "bytes": 46047
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/workspace/common/workspace.ts",
+          "sha256": "4e606ea4b0f912a671a8e952ccc74ff13c51b435b9f6279cb4c01c9152cc5b66",
+          "bytes": 3470
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/simpleServices.ts",
+          "sha256": "da7f17eb3baa3f2da554ac22165b18ad9e053435d6d8f0ccc7edc924a38f2308",
+          "bytes": 21197
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/standaloneCodeEditor.ts",
+          "sha256": "93e3ab2a27baf3725c042bc25debe293e5131b2e58a05b6ab7037dd570a4231a",
+          "bytes": 23569
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/standaloneServices.ts",
+          "sha256": "75bb00953fe2ab68fbf9dce76d0815bdcc5628180f00e9b3f70162ce9a67bbe7",
+          "bytes": 13400
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/standaloneEditor.ts",
+          "sha256": "cb262247261f3a238d1134f49f204df8be37f1ece767094fa27132db1046c1e4",
+          "bytes": 15620
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/standalone/browser/standaloneLanguages.ts",
+          "sha256": "a78c13428feca1eb0061f29a2ee8a71160eec778146043e1ad2872df8d582c13",
+          "bytes": 25806
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/editor.api.ts",
+          "sha256": "7a9411126c5b2f3f34990d1e67fd523d07743c7f58fb9d0bfee6d3f7c4f53c2e",
+          "bytes": 2680
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/platform/workspaces/common/workspaces.ts",
+          "sha256": "f3e85a335fd26e619457fd17bc298ca26f7e4420930d82b26cce8e16ed25ea1f",
+          "bytes": 1810
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/snippet/snippetVariables.ts",
+          "sha256": "8bad108d6a1772bdb7639e84c61fcd179ab285db305e72823dc43f562a3d6ae1",
+          "bytes": 12338
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/snippet/snippetSession.ts",
+          "sha256": "ae6ed488b6a97ee24bdeb1f0e80972dfa13f3861758557808d3d53212073492e",
+          "bytes": 26367
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/snippet/snippetController2.ts",
+          "sha256": "7ec970cb8cc43c19b7e72565291679dce2e047503f8fccfde273e29758ed8094",
+          "bytes": 9553
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestModel.ts",
+          "sha256": "715a72e3b4030a980847bda5903a7e0cf97e76610bb82427479775b4c962e2a0",
+          "bytes": 26099
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/suggest/suggestController.ts",
+          "sha256": "1316bb59ddd8858408edf3e852518225ef9c4379d879547c603f4eca99e35fab",
+          "bytes": 32544
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/suggestWidgetInlineCompletionProvider.ts",
+          "sha256": "3d130d70c6219f2b5a44830d38baa69909a91a2b23fc9b29b33b03bd738a0105",
+          "bytes": 8240
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/suggestWidgetPreviewModel.ts",
+          "sha256": "3d539f14662d15bee3ce970a24b78143fde6ebce0bb0daa581947889ea470a90",
+          "bytes": 6162
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/ghostTextModel.ts",
+          "sha256": "b4974a3c2185df79084b941773001b817461bfd2989c7089904f5c109cb5ee3b",
+          "bytes": 5784
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/ghostTextController.ts",
+          "sha256": "0a1584c01da72f22e4b07276a93756fad0b2ac31a9392b1bfdf05dae5867e506",
+          "bytes": 11410
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/inlineCompletions/inlineCompletionsHoverParticipant.ts",
+          "sha256": "8832da68c6dc737605632f4a9e09e31b0099141208f2bb1b66ea1863d7450963",
+          "bytes": 7831
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/modesContentHover.ts",
+          "sha256": "37b9a46274b5ec8d07631a32bf589819b2413fc6f31c6e1f284fbd8795642dea",
+          "bytes": 20775
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/hover/hover.ts",
+          "sha256": "ed43cd55a04cf92ef2e96eeeefa4659668b130244e1dd22bc97feb9821632f7c",
+          "bytes": 13357
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/contrib/colorPicker/colorContributions.ts",
+          "sha256": "6957621ec6e53560dd7c0b945c500a42e3758d419aef71e27f1aa543bfd90994",
+          "bytes": 2208
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/editor.all.ts",
+          "sha256": "767bf52dca57dcbc7f4f32c56d5f0acac08339e1878d4a0980bfac834ea3f1c6",
+          "bytes": 3060
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/editor.main.ts",
+          "sha256": "5947b9b5e567dd6aa0fe6a9ed18f3f11f880ad40a559f986b9474d8a97519f5d",
+          "bytes": 1118
+        }
+      ]
+    },
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/dev/vs/base/worker/workerMain.js.map",
+      "sha256": "9514f89d67e5baa44ddc6817edf75e675fb2371f5489bddcdb20386a72b4ef67",
+      "sources": [
+        {
+          "source": "fake",
+          "sha256": "b5c5288671c346b0e66fbc2d2f55ea3310d832749156c1e930b46e616a38ac7e",
+          "bytes": 14
+        },
+        {
+          "source": "vs/loader.js",
+          "sha256": "f3adc83a1262756425b21df5ed866ef337cfce80b971a2dcf2e2255899503b73",
+          "bytes": 91765
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/diff/diffChange.ts",
+          "sha256": "9efcc35d063dc81f2d269515d9f3d5bf80e7b67df36a6ea5ab0e81b9b516fdf4",
+          "bytes": 1795
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/errors.ts",
+          "sha256": "da1dd4bc1b87b99aae84940cfb7496c4a8d237daa94f264fc774f3ab5009249a",
+          "bytes": 2720
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/functional.ts",
+          "sha256": "b08337430483f05e25f48087386b703295825f45fb1715d1ad8d266689d82aaa",
+          "bytes": 646
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/iterator.ts",
+          "sha256": "30824feac80a5593754c06df1a5de86e38284961b238ea0c1ac854f138fa06fd",
+          "bytes": 4521
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/keyCodes.ts",
+          "sha256": "8067feea16ace4c45fab93144c468d932f5a37e866e8e2202c7f7c6bdd2e39c5",
+          "bytes": 33279
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/lifecycle.ts",
+          "sha256": "38b6c7e7e77cd01d32dcef620aebd3e842a480a69f8be01c534388d3627a0436",
+          "bytes": 8373
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/linkedList.ts",
+          "sha256": "c252db7bd55b6d871c7248199dda7b74b4f661880b88338255f6e946d7b06f16",
+          "bytes": 3092
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/platform.ts",
+          "sha256": "c03386432bdacbc3e771cad5d85f04b227bb594db4d75e36fc6e78c5ca18f83c",
+          "bytes": 5925
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/process.ts",
+          "sha256": "fdb1776fcf6afe0b7080b39df1293bb9c5421f750ea18c95736c112f29c34d3e",
+          "bytes": 2408
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/path.ts",
+          "sha256": "eb31f91cc8509484cba743140ec773e4cd4c7abb4f798e780e8684c433b78cb6",
+          "bytes": 41001
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/stopwatch.ts",
+          "sha256": "ea44cf6c046a7aae4c40e5c8822d34ec6494712e129ccca5b3af14aafc895e6c",
+          "bytes": 1209
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/event.ts",
+          "sha256": "aba96ddd3db76b1c884115f363d7ad32364f08c22dc592315d8ee8032fce36ad",
+          "bytes": 20969
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/cancellation.ts",
+          "sha256": "cc8f8c4fe4049dee47f7764888eb44263cda6843e3d3b533407150d1657fd15e",
+          "bytes": 3887
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/strings.ts",
+          "sha256": "00ad269678d18a1e9f81cf6437396b7c3294febe45ce9a679205ac9593c72ecd",
+          "bytes": 50218
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/hash.ts",
+          "sha256": "5777b3e99ba6137dc2f387d77e93ec7c3f9eefed96523d3411dc28b0eccc27b2",
+          "bytes": 9122
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/diff/diff.ts",
+          "sha256": "8e62a6b9fd2fd399660fc2b5dc951c86ae6bef38c34fcefa729a847131b344fc",
+          "bytes": 47850
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/types.ts",
+          "sha256": "1f1a52274eb15532c102b7677c7e1a13f24ba4229c1e42262fbaa45276d00f9c",
+          "bytes": 4789
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/uint.ts",
+          "sha256": "0b1102ade974b21bd46bd789027c2dd7959366202e9b87287b13be0a8cf3b05a",
+          "bytes": 1583
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/uri.ts",
+          "sha256": "d6233db5fdff8ac7149d8697677ea3f411245d8ec625c360045b9808aa7a040d",
+          "bytes": 20653
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/common/worker/simpleWorker.ts",
+          "sha256": "35c467ca24561b5002da61f64c35048f56cf9b9ef43ddf78ffbfb810d00d247a",
+          "bytes": 17330
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/characterClassifier.ts",
+          "sha256": "22a948cefcfde25f01ebd9e0c93f181a9177c8067139045f8771fb5817d72cb8",
+          "bytes": 2082
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/position.ts",
+          "sha256": "5e374598c6560e35d533cf718a91c889a0e68662999c053379582a5664d2b05b",
+          "bytes": 4261
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/range.ts",
+          "sha256": "b32a1591bab807cf00f7413baf11f22df551fa0d7a70bf0ec688bd70cee698da",
+          "bytes": 13901
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/selection.ts",
+          "sha256": "f57568b27835b9fa032142e39262ee5d21f7d79c4543828e3143c2d2c561277e",
+          "bytes": 6059
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/core/token.ts",
+          "sha256": "760dc9963ea2d0ab0a27f60621ca88c675ed8d50249e6e5c73df09dcdcca1f88",
+          "bytes": 1492
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/diff/diffComputer.ts",
+          "sha256": "a58b56a4255910176e28e28ddf10dc7dc13b8b22175fcf3a833d3f18414f96c2",
+          "bytes": 20349
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/wordHelper.ts",
+          "sha256": "19d8cfbc99ddd61e26ac798fa750cd6cdc178bd88214e30a63636fadbd24195e",
+          "bytes": 3877
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/linkComputer.ts",
+          "sha256": "1a6baff9d48246b9727664880c915f63f376e36ba91da766684d481bfe4a508f",
+          "bytes": 10876
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/modes/supports/inplaceReplaceSupport.ts",
+          "sha256": "032c127e2b89176392f0cf8bebdc434fd7674509b30ff642be3c2471ed5c08a8",
+          "bytes": 2811
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/standalone/standaloneEnums.ts",
+          "sha256": "b8fcde669f4ee5fde715f498a45ed325140f632176b30a554afebe0775330352",
+          "bytes": 16660
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/standalone/standaloneBase.ts",
+          "sha256": "7e918fb8c35b8a80040c5c1c330ffa9330aa8f5a95d0c84366340651f5b96269",
+          "bytes": 1840
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/viewModel/prefixSumComputer.ts",
+          "sha256": "fef681c1fc7456d7ba8773df40ab1a464a3a38954461939ceea6cec2cf000919",
+          "bytes": 4730
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/model/mirrorTextModel.ts",
+          "sha256": "dd41654638ddc024e1649deb81684d01498177954bce29902f143f1a249d3d6f",
+          "bytes": 5306
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/editor/common/services/editorSimpleWorker.ts",
+          "sha256": "72dcded1387bad52cdc2a2afebe1e021246a5effcb18df87301fce0e5cb60d87",
+          "bytes": 18695
+        },
+        {
+          "source": "file:///Users/alex/src/vscode/out-editor-src/vs/base/worker/workerMain.ts",
+          "sha256": "077cc43984a89bc250b7a54dcf1841f5cc9cd7ddae5479abe65e2091191c956f",
+          "bytes": 3549
+        }
+      ]
+    }
+  ],
+  "locales": {
+    "path": "refactor/baselines/monaco-core-locales.json",
+    "sha256": "e70c26befad9fdc46602cf8b257b3d05e8a7f1db119d67f1b4aeaf612b36a487"
+  },
+  "limits": [
+    "Prepared source-map inputs are not a complete upstream TypeScript build.",
+    "Editor language-registration suffix, CSS and remaining embedded origins are outside this minifier proof.",
+    "Linux executable archive is pinned but execution is only verified on Windows x64 in this batch."
+  ]
+}

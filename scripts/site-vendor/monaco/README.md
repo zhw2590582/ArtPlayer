@@ -195,3 +195,45 @@ temporary sanitizer hooks. The site test checks every delivered notice byte and
 relative attribution link while exercising mobile playback/logging/disposal.
 Neither is an exhaustive sanitizer audit. Loader, other core modules, localization,
 and further embedded-origin details remain under SITE-07/VENDOR-06.
+
+## Core minification, loader and locales
+
+`reproduce-core-build.ts` verifies all 13 JavaScript outputs in monaco-editor-core
+0.30.1: editor, worker, loader, English and nine translations. The fixed VS Code
+recipe and lock identify esbuild 0.12.6. The selected executable is read from a
+SHA-512/SHA-256-verified archive and run directly in an ignored cache, without
+install scripts or root dependency changes. Windows/Linux x64 archives are pinned;
+only Windows execution has been validated. Other hosts fail explicitly.
+
+The historical build's node platform/esnext target/minify options reproduce every
+complete output, including the exact extra newline and relative source-map comment.
+Twelve files copy directly into the site; editor.main has the previously verified
+entry rename and core prefix before appended language registrations. This command
+does not claim to reconstruct those registrations or CSS. The loader's full source
+and release header match fixed Git; css/nls loader sources match their map entries.
+
+`core-build.ts` contains static NLS parsing, source-map inventory and map-comment
+assembly. The NLS parser accepts the archived trailing commas but rejects computed
+values, duplicate keys and extra statements without evaluating downloaded code.
+Two archived maps contain 584 prepared-source entries, 549 different names, with
+content hashes and byte lengths. They are prepared build inputs, not proof of a
+complete original VS Code TypeScript compilation or license review.
+
+```sh
+yarn verify:monaco-core-build --fetch
+yarn verify:monaco-core-build
+yarn test:browser test/browser/editor-core.spec.js --workers=1
+```
+
+Ten locales each exercise actual keyboard edits, undo/redo, localized find UI,
+next-match navigation and model disposal in all engines. The test waits for the
+new selected range after changing the query, not a fixed delay or an old cursor
+position. A separate diff-editor test requires a real worker, checks changed lines,
+updates the input to equality, and disposes both models.
+
+Remaining origin review can start from the map inventory: `dom.ts` references WinJS;
+`strings.ts` names unicode-utils generators; `color.ts` references HSL formulas;
+marked names a Stack Overflow snippet; `path.ts` identifies Node 14.16.0 while the
+older supplied notice links a different commit. Reference comments alone do not
+establish copied expression or a missing license; inspect actual boundaries and
+original terms before deciding. Core registration assembly and CSS remain separate.

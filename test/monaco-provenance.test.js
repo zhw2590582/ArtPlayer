@@ -4,9 +4,26 @@ import test from 'node:test'
 import ts from 'typescript'
 import { extractBasicFixtures } from '../scripts/site-vendor/monaco/basic-fixtures.ts'
 import { emitAmd } from '../scripts/site-vendor/monaco/compiler.ts'
+import { inventoryCoreMap, readCoreNls, restoreCoreMapComment } from '../scripts/site-vendor/monaco/core-build.ts'
 import { adaptCoreOrigin } from '../scripts/site-vendor/monaco/core-origins.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
+
+test('Core NLS extraction accepts historical trailing commas without evaluating expressions', () => {
+  assert.deepEqual(readCoreNls('define("nls", { "find": ["Find", "查找",], });'), { id: 'nls', messages: { find: ['Find', '查找'] } })
+  assert.throws(() => readCoreNls('define("nls", { "find": [translate()], });'), /literal translation text/)
+  assert.throws(() => readCoreNls('define("nls", { "find": [], "find": [] });'), /Repeated translation/)
+  assert.throws(() => readCoreNls('run(); define("nls", {});'), /one NLS registration/)
+})
+
+test('Core source inventories and map comments reject incomplete or ambiguous evidence', () => {
+  assert.equal(inventoryCoreMap({ sources: ['test'], sourcesContent: ['查找'] })[0].bytes, 6)
+  assert.throws(() => inventoryCoreMap({ sources: ['a'], sourcesContent: [] }), /Missing mapped/)
+  assert.throws(() => inventoryCoreMap({ sources: ['a', 'a'], sourcesContent: ['', ''] }), /Repeated mapped/)
+  assert.equal(restoreCoreMapComment('code;\n', 'vs/loader.js'), 'code;\n\n//# sourceMappingURL=../../min-maps/vs/loader.js.map')
+  assert.throws(() => restoreCoreMapComment('code;', 'vs/loader.js'), /newline/)
+  assert.throws(() => restoreCoreMapComment('code;\n', 'vs/../outside.js'), /output path/)
+})
 
 test('Core origin adaptation rejects duplicate boundaries and preserves replacement bytes', () => {
   const edits = [{ before: 'export default purify;', after: 'define(factory); // $&' }]

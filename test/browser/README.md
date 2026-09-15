@@ -1,5 +1,11 @@
 # Browser regression entry
 
+`editor-core.spec.js` checks editing, keyboard undo/redo, find navigation and disposal
+for all ten bundled locales. Names come from statically parsed frozen NLS inputs;
+each localized bundle must load over HTTP. A separate case requires the real core
+diff worker to compute and clear changes after input updates. On Windows the ten
+locale cases and worker case pass in Chromium/Firefox/WebKit (33 cases total).
+
 `editor-markdown.spec.js` runs the bundled DOMPurify/marked renderer, verifies
 formatting, selected filtering and temporary-hook cleanup. `site-vendor.spec.js`
 also checks all 85 notice files and the core-origin attribution links over HTTP.

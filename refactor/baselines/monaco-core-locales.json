@@ -1,0 +1,72 @@
+[
+  {
+    "locale": "en",
+    "find": "Find",
+    "next": "Next Match",
+    "close": "Close",
+    "member": "package/dev/vs/editor/editor.main.nls.js"
+  },
+  {
+    "locale": "de",
+    "find": "Suchen",
+    "next": "Nächste Übereinstimmung",
+    "close": "Schließen",
+    "member": "package/dev/vs/editor/editor.main.nls.de.js"
+  },
+  {
+    "locale": "es",
+    "find": "Buscar",
+    "next": "Coincidencia siguiente",
+    "close": "Cerrar",
+    "member": "package/dev/vs/editor/editor.main.nls.es.js"
+  },
+  {
+    "locale": "fr",
+    "find": "Rechercher",
+    "next": "Correspondance suivante",
+    "close": "Fermer",
+    "member": "package/dev/vs/editor/editor.main.nls.fr.js"
+  },
+  {
+    "locale": "it",
+    "find": "Trova",
+    "next": "Risultato successivo",
+    "close": "Chiudi",
+    "member": "package/dev/vs/editor/editor.main.nls.it.js"
+  },
+  {
+    "locale": "ja",
+    "find": "検索",
+    "next": "次の一致項目",
+    "close": "閉じる",
+    "member": "package/dev/vs/editor/editor.main.nls.ja.js"
+  },
+  {
+    "locale": "ko",
+    "find": "찾기",
+    "next": "다음 검색 결과",
+    "close": "닫기",
+    "member": "package/dev/vs/editor/editor.main.nls.ko.js"
+  },
+  {
+    "locale": "ru",
+    "find": "Найти",
+    "next": "Следующее совпадение",
+    "close": "Закрыть",
+    "member": "package/dev/vs/editor/editor.main.nls.ru.js"
+  },
+  {
+    "locale": "zh-cn",
+    "find": "查找",
+    "next": "下一个匹配项",
+    "close": "关闭",
+    "member": "package/dev/vs/editor/editor.main.nls.zh-cn.js"
+  },
+  {
+    "locale": "zh-tw",
+    "find": "尋找",
+    "next": "下一個相符項目",
+    "close": "關閉",
+    "member": "package/dev/vs/editor/editor.main.nls.zh-tw.js"
+  }
+]
