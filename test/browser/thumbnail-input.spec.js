@@ -12,7 +12,7 @@ test('Thumbnail input ownership replaces real DOM listeners and generated inputs
   await page.addScriptTag({ content: implementation.code })
   await page.evaluate(() => {
     window.inputEvents = []
-    window.inputTool = new window.ArtplayerToolThumbnail({ fileInput: document.querySelector('#first') })
+    window.inputTool = new window.ArtplayerToolThumbnail({ fileInput: document.querySelector('#first'), compatibility: 'workspace-4.4' })
     window.firstInput = window.inputTool.option.fileInput
     window.inputTool.on('file', file => window.inputEvents.push(file.name))
     window.inputTool.setup({ fileInput: document.querySelector('#first') })

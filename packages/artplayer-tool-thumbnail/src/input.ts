@@ -1,7 +1,7 @@
 import type ArtplayerToolThumbnail from './index'
 import type { InputOptions } from './types'
 import { cancellation, stateFor } from './lifecycle'
-import { clamp } from './utils'
+import { normalizePolicy } from './policy'
 
 type Registration = readonly [name: string, callback: EventListener]
 interface InputRecord {
@@ -62,11 +62,7 @@ export function setupInput(tool: ArtplayerToolThumbnail, patch: InputOptions) {
   const option = Object.assign({}, tool.option, patch)
   const target = option.fileInput!
   tool.errorHandle(target instanceof Element, 'The \'fileInput\' is not a Element')
-  for (const name of ['number', 'width', 'column', 'begin', 'end'])
-    tool.errorHandle(typeof option[name] === 'number', `The '${name}' is not a number`)
-  option.number = clamp(option.number, 10, 1000)
-  option.width = clamp(option.width, 10, 1000)
-  option.column = clamp(option.column, 1, 1000)
+  normalizePolicy(option, (condition, message) => tool.errorHandle(condition, message))
   if (!current())
     throw cancellation('input setup superseded')
 

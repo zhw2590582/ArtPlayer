@@ -6,9 +6,9 @@ import vm from 'node:vm'
 import { thumbnailCandidate, thumbnailEnvironment, thumbnailHistorical } from './helpers/thumbnail.js'
 
 const candidate = await thumbnailCandidate()
-function create(implementation) {
+function create(implementation, option = {}) {
   const env = thumbnailEnvironment(implementation)
-  return { ...env, tool: new env.Factory({ fileInput: new env.Element('input') }) }
+  return { ...env, tool: new env.Factory({ fileInput: new env.Element('input'), ...option }) }
 }
 const referenceModule = { exports: {} }
 vm.runInNewContext(fs.readFileSync(new URL('../refactor/baselines/thumbnail-vendor/tiny-emitter-2.1.0.txt', import.meta.url), 'utf8'), { module: referenceModule })
@@ -39,7 +39,8 @@ test('Thumbnail typed facade preserves descriptors, lazy fields, default class a
   assert.equal(tool.option.custom, metadata)
   assert.equal(tool.option.width, 21.5)
   assert.notEqual(Factory.DEFAULTS, Factory.DEFAULTS)
-  assert.deepEqual(Object.keys(Factory.DEFAULTS), Object.keys(baseline.Factory.DEFAULTS))
+  const published = thumbnailEnvironment(thumbnailHistorical().find(item => item.legacy))
+  assert.deepEqual(Object.keys(Factory.DEFAULTS), Object.keys(published.Factory.DEFAULTS))
   assert(Number.isNaN(Factory.DEFAULTS.end))
   tool.destroy()
 })
@@ -132,7 +133,7 @@ test('Thumbnail typed facade retains synchronous validation, option mutation and
 
 test('Thumbnail error event preserves arbitrary thrown message values and Promise rejection identity', async () => {
   for (const failure of [{ message: 7 }, { message: { detail: 'failure' } }, 3, null]) {
-    const { tool } = create(candidate)
+    const { tool } = create(candidate, { compatibility: 'workspace-4.4' })
     tool.setup({ number: 10 })
     tool.file = { name: 'sample.mp4' }
     tool.video.duration = 100

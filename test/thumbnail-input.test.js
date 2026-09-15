@@ -7,7 +7,7 @@ const implementation = await thumbnailCandidate()
 function setup(wrapper = false) {
   const env = thumbnailEnvironment(implementation)
   const target = new env.Element(wrapper ? 'div' : 'input')
-  const instance = new env.Factory({ fileInput: target, number: 10, width: 20, height: 30, column: 3 })
+  const instance = new env.Factory({ fileInput: target, number: 10, width: 20, height: 30, column: 3, compatibility: 'workspace-4.4' })
   return { ...env, target, instance }
 }
 
@@ -17,7 +17,7 @@ test('Thumbnail input ownership preserves class methods, constructor fields and 
   assert.equal(exported.default, undefined)
   assert.deepEqual(Object.keys(instance), ['processing', 'option', 'video', 'duration', 'inputChange', 'ondrop'])
   assert.deepEqual(Object.getOwnPropertyNames(Factory.prototype), ['constructor', 'ondrop', 'setup', 'inputChange', 'loadVideo', 'start', 'creatScreenshotDate', 'creatCanvas', 'download', 'errorHandle', 'destroy'])
-  assert.deepEqual(Object.keys(Factory.DEFAULTS), ['number', 'width', 'height', 'column', 'begin', 'end'])
+  assert.deepEqual(Object.keys(Factory.DEFAULTS), ['delay', 'number', 'width', 'height', 'column', 'begin', 'end'])
   assert.equal(instance.setup({ custom: 7 }), instance)
   assert.equal(instance.option.custom, 7)
   instance.destroy()

@@ -27,7 +27,12 @@ async function capabilityControl(page, testInfo, lifecycle) {
   return true
 }
 
-const implementations = [...thumbnailHistorical(), { ...await thumbnailCandidate(), inputOwnership: true, lifecycle: true }]
+const candidate = await thumbnailCandidate()
+const implementations = [
+  ...thumbnailHistorical(),
+  { ...candidate, inputOwnership: true, lifecycle: true, publishedPolicy: true },
+  { ...candidate, name: `${candidate.name}-workspace-policy`, inputOwnership: true, lifecycle: true, compatibility: 'workspace-4.4' },
+]
 for (const implementation of implementations) {
   test.describe(`Thumbnail tool ${implementation.name}`, () => {
     test.beforeEach(async ({ page }, testInfo) => {
@@ -61,7 +66,7 @@ for (const implementation of implementations) {
         }
         URL.revokeObjectURL(blobUrl)
       })
-      await page.evaluate(() => {
+      await page.evaluate((compatibility) => {
         window.created = []
         window.revoked = []
         const create = URL.createObjectURL.bind(URL)
@@ -75,11 +80,11 @@ for (const implementation of implementations) {
           revoked.push(url)
           revoke(url)
         }
-        window.tool = new ArtplayerToolThumbnail({ fileInput: document.querySelector('#input'), number: 10, width: 80, height: 30, column: 3, begin: 0, end: 20 })
+        window.tool = new ArtplayerToolThumbnail({ fileInput: document.querySelector('#input'), number: 10, width: 80, height: 30, column: 3, begin: 0, end: 20, compatibility })
         window.observed = []
         for (const event of ['file', 'video', 'canvas', 'update', 'done', 'error', 'destroy'])
-          tool.on(event, (...args) => observed.push({ event, progress: event === 'update' ? args[1] : null, processing: tool.processing }))
-      })
+          tool.on(event, (...args) => observed.push({ event, at: performance.now(), progress: event === 'update' ? args[1] : null, processing: tool.processing }))
+      }, implementation.compatibility)
       await testInfo.attach('thumbnail-runtime', { contentType: 'application/json', body: JSON.stringify({ name: implementation.name, sha256: hash(implementation.code), recoveredIndividualFile: implementation.legacy, originalNpmArchive: false, media: path.relative(process.cwd(), sample) }) })
     })
 
@@ -117,12 +122,20 @@ for (const implementation of implementations) {
         return { width: image.width, height: image.height, sourceWidth, sourceHeight, cellHeight: tool.option.height, mime: blob.type, bytes: blob.size, nonBlack, initialEvents, events: observed, first, second, created, revoked, connected: tool.video.isConnected, retiredReadyState: tool.video.readyState, retiredSrc: tool.video.getAttribute('src') }
       })
       expect(result.width).toBe(240)
-      expect(result.cellHeight).toBe(implementation.legacy ? 30 : result.sourceHeight / result.sourceWidth * 80)
+      expect(result.cellHeight).toBe(implementation.legacy || implementation.publishedPolicy ? 30 : result.sourceHeight / result.sourceWidth * 80)
       expect(result.height).toBe(Math.trunc(result.cellHeight * 4 + 30))
       expect(result.mime).toBe('image/png')
       expect(result.bytes).toBeGreaterThan(100)
       expect(result.nonBlack).toBeGreaterThan(100)
       expect(result.initialEvents.filter(item => item.event === 'update').map(item => item.progress)).toEqual(Array.from({ length: 10 }, (_, i) => (i + 1) / 10))
+      if (implementation.publishedPolicy) {
+        const events = result.initialEvents
+        expect(events.find(item => item.event === 'video').at - events.find(item => item.event === 'file').at).toBeGreaterThanOrEqual(298)
+        const frames = events.filter(item => item.event === 'canvas' || item.event === 'update')
+        for (let index = 1; index < frames.length; index++)
+          expect(frames[index].at - frames[index - 1].at).toBeGreaterThanOrEqual(298)
+        expect(events.find(item => item.event === 'done').at - frames.at(-1).at).toBeGreaterThanOrEqual(598)
+      }
       expect(result.events.filter(item => item.event === 'done')).toHaveLength(2)
       expect(result.first).not.toBe(result.second)
       expect([...result.created].sort()).toEqual([...result.revoked].sort())
@@ -177,7 +190,7 @@ for (const implementation of implementations) {
       expect(result.revoked).toEqual(implementation.lifecycle ? result.created : [result.created[1]])
       expect(result.revoked.includes(failed.first)).toBe(!!implementation.lifecycle)
       expect(result.repeated).toBe(implementation.inputOwnership ? undefined : 'NotFoundError')
-      expect(result.value === '').toBe(!implementation.legacy)
+      expect(result.value === '').toBe(!(implementation.legacy || implementation.publishedPolicy))
       await testInfo.attach('thumbnail-media-failure', { contentType: 'application/json', body: JSON.stringify({ failed, result }) })
     })
 
@@ -255,6 +268,8 @@ for (const implementation of implementations) {
           })
         })
         await expect.poll(() => page.evaluate(() => typeof window.releaseFirst)).toBe('function')
+        // Published policy retains the value; selecting the same file need not fire change.
+        await page.locator('#input').setInputFiles([])
         await page.locator('#input').setInputFiles(sample)
         const result = await page.evaluate(async () => {
           const source = tool.videoUrl

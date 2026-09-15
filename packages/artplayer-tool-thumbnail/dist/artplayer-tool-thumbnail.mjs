@@ -160,12 +160,39 @@ function releaseMedia(tool) {
     ...[...thumbnails].map((url) => () => revoke(state.thumbnailUrls, url))
   ]);
 }
+function getFileName(name) {
+  const nameArray = name.split(".");
+  nameArray.pop();
+  return nameArray.join(".");
+}
+function clamp(num, a, b) {
+  return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+}
+function thumbnailPolicy(option) {
+  const workspace = option.compatibility === "workspace-4.4";
+  return { delay: workspace ? null : option.delay, aspectHeight: workspace, resetInput: workspace };
+}
+function normalizePolicy(option, validate) {
+  validate(option.compatibility === void 0 || option.compatibility === "published-3.5" || option.compatibility === "workspace-4.4", "The compatibility option must be published-3.5 or workspace-4.4");
+  const workspace = thumbnailPolicy(option).aspectHeight;
+  const fields = workspace ? ["number", "width", "column", "begin", "end"] : ["delay", "number", "width", "height", "column", "begin", "end"];
+  for (const name of fields)
+    validate(typeof option[name] === "number", `The '${name}' is not a number`);
+  option.number = clamp(option.number, 10, 1e3);
+  option.width = clamp(option.width, 10, 1e3);
+  option.column = clamp(option.column, 1, 1e3);
+  if (!workspace) {
+    option.delay = clamp(Number(option.delay), 10, 1e3);
+    option.height = clamp(option.height, 10, 1e3);
+  }
+}
 function loadSource(tool, file) {
   const state = stateFor(tool);
   if (!file || state.closed)
     return;
   const initialEpoch = state.epoch;
   const video = tool.video;
+  const { delay } = thumbnailPolicy(tool.option);
   const support = video.canPlayType(file.type);
   tool.errorHandle(support === "maybe" || support === "probably", `Playback of this file format is not supported: ${file.type}`);
   if (state.closed || state.epoch !== initialEpoch)
@@ -187,11 +214,15 @@ function loadSource(tool, file) {
   state.sourceListeners = listeners;
   let pendingCleanup = () => {
   };
+  let notificationTimer;
+  const cancelNotification = () => clearTimeout(notificationTimer);
+  listeners.push(cancelNotification);
   let reported = false;
   const error = () => {
     if (!current() || reported || video.currentSrc && video.currentSrc !== url)
       return;
     reported = true;
+    cancelNotification();
     state.loading = false;
     const failure = new Error(`Unable to load video: media error ${video.error?.code || 0}`);
     if (state.job)
@@ -238,8 +269,19 @@ function loadSource(tool, file) {
       if (previous !== url)
         revoke(state.sourceUrls, previous);
     }
-    if (current())
-      tool.emit("video", video);
+    if (current() && !reported) {
+      if (delay !== null) {
+        notificationTimer = setTimeout(() => {
+          cancelNotification();
+          if (current() && !reported)
+            tool.emit("video", video);
+        }, delay);
+        if (!current() || reported)
+          cancelNotification();
+      } else {
+        tool.emit("video", video);
+      }
+    }
   } catch (error2) {
     if (current()) {
       state.loading = false;
@@ -270,18 +312,11 @@ function replaceThumbnail(tool, blob, live) {
   }
   return live() ? url : null;
 }
-function getFileName(name) {
-  const nameArray = name.split(".");
-  nameArray.pop();
-  return nameArray.join(".");
-}
-function clamp(num, a, b) {
-  return Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
-}
 function prepare(tool, job) {
   const { video } = job;
   const { width, number, begin, end } = tool.option;
-  const height = video.videoHeight / video.videoWidth * width;
+  const policy = thumbnailPolicy(tool.option);
+  const height = policy.aspectHeight ? video.videoHeight / video.videoWidth * width : tool.option.height;
   const guard = (condition, message) => {
     try {
       tool.errorHandle(condition, message);
@@ -305,7 +340,7 @@ function prepare(tool, job) {
   const canvas = tool.creatCanvas();
   const context = canvas.getContext("2d");
   tool.emit("canvas", canvas);
-  return { width, height, number, points, canvas, context };
+  return { width, height, number, points, canvas, context, delay: policy.delay };
 }
 function createJob(tool, state) {
   let epoch = state.epoch;
@@ -381,15 +416,19 @@ function createJob(tool, state) {
       if (!live())
         return;
       if (index === plan.points.length) {
-        complete();
+        if (plan.delay !== null)
+          timer = setTimeout(complete, Number(plan.delay) * 2);
+        else
+          complete();
         return;
       }
       const point = plan.points[index];
       let drawing = false;
       let encoded = false;
+      let delayElapsed = plan.delay === null;
       const previous = video.oncanplay;
       const draw = () => {
-        if (!live() || drawing || video.seeking || video.readyState !== void 0 && video.readyState < 2)
+        if (!live() || !delayElapsed || drawing || video.seeking || video.readyState !== void 0 && video.readyState < 2)
           return;
         drawing = true;
         try {
@@ -427,8 +466,16 @@ function createJob(tool, state) {
         video.oncanplay = draw;
         video.addEventListener("seeked", draw);
         video.currentTime = point.time;
-        if (video.readyState >= 2 && !video.seeking)
+        if (plan.delay !== null) {
+          timer = setTimeout(() => {
+            delayElapsed = true;
+            draw();
+          }, plan.delay);
+          if (!live())
+            clearTimeout(timer);
+        } else if (video.readyState >= 2 && !video.seeking) {
           Promise.resolve().then(draw);
+        }
       } catch (error) {
         fail(error);
       }
@@ -552,11 +599,7 @@ function setupInput(tool, patch) {
   const option = Object.assign({}, tool.option, patch);
   const target = option.fileInput;
   tool.errorHandle(target instanceof Element, "The 'fileInput' is not a Element");
-  for (const name of ["number", "width", "column", "begin", "end"])
-    tool.errorHandle(typeof option[name] === "number", `The '${name}' is not a number`);
-  option.number = clamp(option.number, 10, 1e3);
-  option.width = clamp(option.width, 10, 1e3);
-  option.column = clamp(option.column, 1, 1e3);
+  normalizePolicy(option, (condition, message) => tool.errorHandle(condition, message));
   if (!current())
     throw cancellation("input setup superseded");
   const previous = inputs.get(tool);
@@ -681,6 +724,7 @@ class ArtplayerToolThumbnail extends Emitter {
   }
   static get DEFAULTS() {
     return {
+      delay: 300,
       number: 60,
       width: 160,
       height: 90,
@@ -723,9 +767,11 @@ class ArtplayerToolThumbnail extends Emitter {
   inputChange(event) {
     if (stateFor(this).closed)
       return;
+    const { resetInput } = thumbnailPolicy(this.option);
     const file = this.option.fileInput.files[0];
     this.loadVideo(file);
-    event.target.value = "";
+    if (resetInput)
+      event.target.value = "";
   }
   loadVideo(file) {
     loadSource(this, file);

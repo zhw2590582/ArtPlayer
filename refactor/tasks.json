@@ -4238,7 +4238,7 @@
         "CORE-07",
         "PKG-TOOL-THUMB-07"
       ],
-      "status": "doing",
+      "status": "done",
       "risk": "H",
       "deliverable": "补齐真实 API 声明，自有 emitter/utils TS 化",
       "acceptance": "严格类型检查、旧消费样例通过；声明路径/导出和同步异步兼容；为 BASE-DIST-01 提供兼容入口/声明及消费者验证",
@@ -4250,7 +4250,9 @@
         "changes/2026-09-13-PKG-TOOL-THUMB-04-emitter.md",
         "baselines/thumbnail-emitter-validation.json",
         "thumbnail-compatibility-decision.md",
-        "changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md"
+        "changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md",
+        "changes/2026-09-15-PKG-TOOL-THUMB-04-approved-policy.md",
+        "baselines/thumbnail-policy-validation.json"
       ]
     },
     {

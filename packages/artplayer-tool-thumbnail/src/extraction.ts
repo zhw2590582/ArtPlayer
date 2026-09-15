@@ -1,13 +1,15 @@
 import type ArtplayerToolThumbnail from './index'
 import type { Cleanup, ExtractionJob, LifecycleState } from './types'
 import { cancellation, cleanupAll, stateFor } from './lifecycle'
+import { thumbnailPolicy } from './policy'
 import { replaceThumbnail } from './source'
 import { clamp } from './utils'
 
 function prepare(tool: ArtplayerToolThumbnail, job: ExtractionJob) {
   const { video } = job
   const { width, number, begin, end } = tool.option
-  const height = (video.videoHeight / video.videoWidth) * width
+  const policy = thumbnailPolicy(tool.option)
+  const height = policy.aspectHeight ? (video.videoHeight / video.videoWidth) * width : tool.option.height
   const guard = (condition: unknown, message: string) => {
     try {
       tool.errorHandle(condition, message)
@@ -32,7 +34,7 @@ function prepare(tool: ArtplayerToolThumbnail, job: ExtractionJob) {
   const canvas = tool.creatCanvas()
   const context = canvas.getContext('2d')!
   tool.emit('canvas', canvas)
-  return { width, height, number, points, canvas, context }
+  return { width, height, number, points, canvas, context, delay: policy.delay }
 }
 
 function createJob(tool: ArtplayerToolThumbnail, state: LifecycleState) {
@@ -112,15 +114,19 @@ function createJob(tool: ArtplayerToolThumbnail, state: LifecycleState) {
       if (!live())
         return
       if (index === plan.points.length) {
-        complete()
+        if (plan.delay !== null)
+          timer = setTimeout(complete, Number(plan.delay) * 2)
+        else
+          complete()
         return
       }
       const point = plan.points[index]!
       let drawing = false
       let encoded = false
+      let delayElapsed = plan.delay === null
       const previous = video.oncanplay
       const draw = () => {
-        if (!live() || drawing || video.seeking || (video.readyState !== undefined && video.readyState < 2))
+        if (!live() || !delayElapsed || drawing || video.seeking || (video.readyState !== undefined && video.readyState < 2))
           return
         drawing = true
         try {
@@ -160,8 +166,17 @@ function createJob(tool: ArtplayerToolThumbnail, state: LifecycleState) {
         video.oncanplay = draw
         video.addEventListener('seeked', draw)
         video.currentTime = point.time
-        if (video.readyState >= 2 && !video.seeking)
+        if (plan.delay !== null) {
+          timer = setTimeout(() => {
+            delayElapsed = true
+            draw()
+          }, plan.delay)
+          if (!live())
+            clearTimeout(timer)
+        }
+        else if (video.readyState >= 2 && !video.seeking) {
           Promise.resolve().then(draw)
+        }
       }
       catch (error) {
         fail(error)

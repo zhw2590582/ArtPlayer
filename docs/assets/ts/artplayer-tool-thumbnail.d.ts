@@ -2,7 +2,7 @@
 /** Extract PNG thumbnail sheets from a locally selected video file. */
 declare class ArtplayerToolThumbnail {
   constructor(option?: ArtplayerToolThumbnail.Option)
-  static readonly DEFAULTS: ArtplayerToolThumbnail.SheetOptions
+  static readonly DEFAULTS: ArtplayerToolThumbnail.DefaultOptions
   static ondragover(event: DragEvent): void
   static creatVideo(): HTMLVideoElement
   processing: boolean
@@ -39,13 +39,22 @@ declare namespace ArtplayerToolThumbnail {
     begin: number
     end: number
   }
+  type Compatibility = 'published-3.5' | 'workspace-4.4'
+  interface DefaultOptions extends SheetOptions {
+    delay: number
+  }
   /** fileInput must be a file input or an Element wrapper when constructing. */
   interface Option extends Partial<SheetOptions> {
     fileInput?: Element
+    compatibility?: Compatibility
+    /** Published mode delay in milliseconds, clamped to 10-1000. */
+    delay?: number
     [name: string]: unknown
   }
   interface ResolvedOption extends SheetOptions {
     fileInput: HTMLInputElement
+    compatibility?: Compatibility
+    delay?: number
     [name: string]: unknown
   }
   interface ScreenshotPoint {

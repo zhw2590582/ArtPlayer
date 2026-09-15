@@ -3,6 +3,7 @@ import Emitter from './emitter'
 import { startExtraction } from './extraction'
 import { connectInput, releaseInput, setupInput } from './input'
 import { cleanupAll, closeState, releaseMedia, stateFor } from './lifecycle'
+import { thumbnailPolicy } from './policy'
 import { createSheet, downloadSheet, screenshotPoints } from './sheet'
 import { loadSource } from './source'
 
@@ -46,6 +47,7 @@ export default class ArtplayerToolThumbnail extends Emitter<ThumbnailEvents> {
 
   static get DEFAULTS() {
     return {
+      delay: 300,
       number: 60,
       width: 160,
       height: 90,
@@ -94,9 +96,11 @@ export default class ArtplayerToolThumbnail extends Emitter<ThumbnailEvents> {
   inputChange(event: Event) {
     if (stateFor(this).closed)
       return
+    const { resetInput } = thumbnailPolicy(this.option)
     const file = this.option.fileInput.files![0]
     this.loadVideo(file)
-    ;(event.target as HTMLInputElement).value = ''
+    if (resetInput)
+      (event.target as HTMLInputElement).value = ''
   }
 
   loadVideo(file?: File | null) {

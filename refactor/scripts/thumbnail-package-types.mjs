@@ -6,8 +6,8 @@ import ts from 'typescript'
 import compat from 'typescript-compat'
 import { checkFiles, packedFiles } from '../../scripts/package-check.mjs'
 import { consumerDirectory, removeConsumer, run, workspace, writeJson } from '../../scripts/package-consumer.mjs'
-import { verifyThumbnailContract } from './thumbnail-contract.mjs'
 import { hash, readMember } from './releases.mjs'
+import { verifyThumbnailContract } from './thumbnail-contract.mjs'
 
 async function main() {
   assert.equal(process.env.npm_config_user_agent?.split(' ')[0], 'yarn/1.22.22', 'Use yarn test:thumbnail-types-package')
@@ -20,7 +20,8 @@ async function main() {
   fs.mkdirSync(frozen)
   const prefix = 'packages/artplayer-tool-thumbnail/'
   for (const [file, text] of contract.source) {
-    if (!file.startsWith(prefix)) continue
+    if (!file.startsWith(prefix))
+      continue
     const target = path.join(frozen, file.slice(prefix.length))
     fs.mkdirSync(path.dirname(target), { recursive: true })
     fs.writeFileSync(target, text)
@@ -74,7 +75,8 @@ ${label === 'candidate' ? `const legacy = require('${pkg.name}/legacy'); assert.
       fs.writeFileSync(path.join(output, `${label}-runtime.log`), observation)
       runtime.push({ package: label, ...JSON.parse(observation.trim()) })
       const modes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
-      if (label === 'candidate') modes.push([ts, 'nodenext-cjs-no-interop'], [compat, 'node10-commonjs-no-interop'])
+      if (label === 'candidate')
+        modes.push([ts, 'nodenext-cjs-no-interop'], [compat, 'node10-commonjs-no-interop'])
       for (const [compiler, mode] of modes) {
         const next = mode.startsWith('nodenext')
         const noInterop = mode.endsWith('no-interop')
@@ -92,15 +94,19 @@ ${label === 'candidate' ? `const legacy = require('${pkg.name}/legacy'); assert.
         }
         const diagnostics = compile(source)
         writeJson(path.join(output, `${label}-${compiler.version}-${mode}.json`), diagnostics)
-        if (label === 'candidate') assert.deepEqual(diagnostics, [], `${compiler.version} ${mode}`)
+        if (label === 'candidate') {
+          assert.deepEqual(diagnostics, [], `${compiler.version} ${mode}`)
+        }
         else {
           assert.deepEqual(diagnostics.map(item => item.code), [mode === 'node10-commonjs' ? 2307 : 7016], 'Only the exact frozen missing entry/declaration diagnostic is expected')
         }
         const negative = label === 'candidate' ? compile(source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')) : []
-        if (label === 'candidate') assert.equal(negative.length, noInterop ? 1 : 10)
+        if (label === 'candidate')
+          assert.equal(negative.length, noInterop ? 1 : 12)
         matrix.push({ package: label, compiler: compiler.version, mode, diagnostics, negative })
       }
-      if (label === 'candidate') fs.cpSync(installed, path.join(output, 'installed-artifacts'), { recursive: true })
+      if (label === 'candidate')
+        fs.cpSync(installed, path.join(output, 'installed-artifacts'), { recursive: true })
     }
     finally { removeConsumer(consumer) }
   }

@@ -16,7 +16,8 @@ function observe(promise) {
 }
 function setup(ready = true) {
   const env = thumbnailEnvironment(implementation)
-  env.instance = new env.Factory({ fileInput: new env.Element('input'), number: 10, width: 40, column: 3 })
+  // These lifecycle fixtures retain the explicitly selected workspace timing.
+  env.instance = new env.Factory({ fileInput: new env.Element('input'), number: 10, width: 40, column: 3, compatibility: 'workspace-4.4' })
   env.instance.loadVideo({ name: 'first.mp4', type: 'video/mp4' })
   if (ready) {
     env.instance.video.duration = 100
@@ -409,7 +410,7 @@ test('Thumbnail URL creation reentrant load preserves the newer source and revok
 
 test('Thumbnail start before the first file retains its legacy wait-for-selection behavior', async () => {
   const env = thumbnailEnvironment(implementation)
-  env.instance = new env.Factory({ fileInput: new env.Element('input'), number: 10 })
+  env.instance = new env.Factory({ fileInput: new env.Element('input'), number: 10, compatibility: 'workspace-4.4' })
   const state = observe(env.instance.start())
   env.instance.loadVideo({ name: 'first.mp4', type: 'video/mp4' })
   env.instance.video.duration = 100

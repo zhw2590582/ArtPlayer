@@ -1,4 +1,4 @@
-import type { EventArgs, Option, ScreenshotPoint } from 'artplayer-tool-thumbnail'
+import type { Compatibility, DefaultOptions, EventArgs, Option, ScreenshotPoint } from 'artplayer-tool-thumbnail'
 import Thumbnail from 'artplayer-tool-thumbnail'
 import Legacy from 'artplayer-tool-thumbnail/legacy'
 
@@ -32,8 +32,14 @@ tool.off('file').setup({ width: 100 }).download()
 tool.loadVideo(input.files?.[0])
 tool.loadVideo(null)
 const defaults: Thumbnail.SheetOptions = Thumbnail.DEFAULTS
+const publishedDefaults: DefaultOptions = Thumbnail.DEFAULTS
+const delay: number = publishedDefaults.delay
+const mode: Compatibility = 'workspace-4.4'
+tool.setup({ compatibility: mode, delay: undefined })
+legacy.setup({ compatibility: 'published-3.5', delay: 300, height: 25 })
+const sheet: Thumbnail.SheetOptions = { number: 10, width: 80, height: 25, column: 3, begin: 0, end: 20 }
 const end: void = tool.destroy()
-void [legacy, duration, file, url, pending, canvas, points, extension, defaults, end]
+void [legacy, duration, file, url, pending, canvas, points, extension, defaults, delay, sheet, end]
 
 // @ts-expect-error Numeric width is required.
 tool.setup({ width: '80' })
@@ -55,4 +61,8 @@ const earlyDensity: number = tool.density
 tool.on('error', (message: string) => message.length)
 // @ts-expect-error Built-in done does not carry a file.
 tool.emit('done', input.files?.[0])
+// @ts-expect-error Compatibility accepts only the two supported policies.
+tool.setup({ compatibility: 'latest' })
+// @ts-expect-error Published delay is a numeric option.
+tool.setup({ delay: '300' })
 void [wrongInput, wrongResult, WrongAlias, earlyDensity]

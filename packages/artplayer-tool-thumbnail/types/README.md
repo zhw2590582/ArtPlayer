@@ -4,13 +4,13 @@ The declaration describes the existing tool class, not an ArtPlayer plugin facto
 The previous workspace manifest pointed to a missing declaration. There is no
 recovered legacy declaration to claim as an exact TypeScript baseline.
 
-| Entry | Declaration | Runtime |
-| --- | --- | --- |
-| Root ESM import | artplayer-tool-thumbnail.d.mts | Default constructor in dist/artplayer-tool-thumbnail.mjs |
-| Root require | artplayer-tool-thumbnail.d.cts | Direct constructor in dist/artplayer-tool-thumbnail.js |
-| Older Node resolution / TS 4.3 | artplayer-tool-thumbnail.d.ts | main points to the direct CommonJS constructor |
-| artplayer-tool-thumbnail/legacy | d.cts or typesVersions fallback | Direct legacy constructor; native ESM gets its default |
-| Browser script / editor | Generated docs/assets/ts declaration | ArtplayerToolThumbnail global |
+| Entry                           | Declaration                          | Runtime                                                  |
+| ------------------------------- | ------------------------------------ | -------------------------------------------------------- |
+| Root ESM import                 | artplayer-tool-thumbnail.d.mts       | Default constructor in dist/artplayer-tool-thumbnail.mjs |
+| Root require                    | artplayer-tool-thumbnail.d.cts       | Direct constructor in dist/artplayer-tool-thumbnail.js   |
+| Older Node resolution / TS 4.3  | artplayer-tool-thumbnail.d.ts        | main points to the direct CommonJS constructor           |
+| artplayer-tool-thumbnail/legacy | d.cts or typesVersions fallback      | Direct legacy constructor; native ESM gets its default   |
+| Browser script / editor         | Generated docs/assets/ts declaration | ArtplayerToolThumbnail global                            |
 
 The d.ts file is the public source of truth. d.cts forwards its export assignment;
 d.mts exposes the default constructor and type-only named exports. No runtime
@@ -44,7 +44,7 @@ and source replacement/destroy reject with AbortError. Error events usually cont
 strings, but callback throws can supply any message value, so narrow unknown first.
 
 Source/declaration constructors are mutually checked in test/types/thumbnail-source.ts.
-Current and TS 4.3.5 consumers include ten invalid uses. Installed checks pack/install
+Current and TS 4.3.5 consumers include twelve invalid uses. Installed checks pack/install
 outside the workspace, offline with an unchanged frozen lock, verify every file
 and exercise native Node require/import without a DOM.
 
@@ -57,4 +57,9 @@ yarn test:browser test/browser/thumbnail-editor-types.spec.js
 
 build:ts selects package declaration entries rather than auxiliary types and emits
 the uppercase global. Actual file extraction, old-core composition and the full
-demo remain separate checks. The 3.5.31 versus 4.4.0 default policy remains pending.
+demo remain separate checks. The approved default is published 3.5.31;
+`compatibility: 'workspace-4.4'` opts into the previous workspace behavior.
+`Compatibility` names these two modes. `DefaultOptions` extends `SheetOptions`
+with the numeric static delay; existing `SheetOptions` literals need no new field.
+`Option.delay` is optional and numeric; workspace mode ignores it, including
+explicit undefined. The public resolved option therefore keeps delay optional.

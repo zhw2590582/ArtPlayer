@@ -1,6 +1,7 @@
 import type ArtplayerToolThumbnail from './index'
 import type { Cleanup } from './types'
 import { cleanupAll, revoke, stateFor } from './lifecycle'
+import { thumbnailPolicy } from './policy'
 
 export function loadSource(tool: ArtplayerToolThumbnail, file?: File | null) {
   const state = stateFor(tool)
@@ -8,6 +9,7 @@ export function loadSource(tool: ArtplayerToolThumbnail, file?: File | null) {
     return
   const initialEpoch = state.epoch
   const video = tool.video
+  const { delay } = thumbnailPolicy(tool.option)
   const support = video.canPlayType(file.type)
   tool.errorHandle(support === 'maybe' || support === 'probably', `Playback of this file format is not supported: ${file.type}`)
   if (state.closed || state.epoch !== initialEpoch)
@@ -28,11 +30,15 @@ export function loadSource(tool: ArtplayerToolThumbnail, file?: File | null) {
   const listeners: Cleanup[] = []
   state.sourceListeners = listeners
   let pendingCleanup = () => {}
+  let notificationTimer: ReturnType<typeof setTimeout> | undefined
+  const cancelNotification = () => clearTimeout(notificationTimer)
+  listeners.push(cancelNotification)
   let reported = false
   const error = () => {
     if (!current() || reported || (video.currentSrc && video.currentSrc !== url))
       return
     reported = true
+    cancelNotification()
     state.loading = false
     const failure = new Error(`Unable to load video: media error ${video.error?.code || 0}`)
     if (state.job)
@@ -79,8 +85,20 @@ export function loadSource(tool: ArtplayerToolThumbnail, file?: File | null) {
       if (previous !== url)
         revoke(state.sourceUrls, previous)
     }
-    if (current())
-      tool.emit('video', video)
+    if (current() && !reported) {
+      if (delay !== null) {
+        notificationTimer = setTimeout(() => {
+          cancelNotification()
+          if (current() && !reported)
+            tool.emit('video', video)
+        }, delay)
+        if (!current() || reported)
+          cancelNotification()
+      }
+      else {
+        tool.emit('video', video)
+      }
+    }
   }
   catch (error) {
     if (current()) {

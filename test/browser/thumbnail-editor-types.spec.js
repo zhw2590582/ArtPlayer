@@ -22,7 +22,9 @@ test('Monaco consumes Thumbnail global declarations and runs the actual typed co
     }))
     const model = api.editor.createModel(`
 const input = document.createElement('input'); input.type = 'file'; document.body.appendChild(input);
-const options: ArtplayerToolThumbnail.Option = { fileInput: input, number: 10 };
+const mode: ArtplayerToolThumbnail.Compatibility = 'workspace-4.4';
+const defaults: ArtplayerToolThumbnail.DefaultOptions = ArtplayerToolThumbnail.DEFAULTS;
+const options: ArtplayerToolThumbnail.Option = { fileInput: input, number: 10, compatibility: mode, delay: defaults.delay };
 const tool: ArtplayerToolThumbnail = new ArtplayerToolThumbnail(options);
 let last = 0;
 tool.on('custom', (value: number) => { last = value; });
@@ -32,7 +34,7 @@ const video: HTMLVideoElement = tool.video;
 tool.destroy(); tool.destroy(); input.remove();
 function mediaTypes(player: artplayerProxyMediabunny.MediaBunnyPlayer): number | undefined { return player.mediabunny?.currentTime; }
 `, 'typescript', api.Uri.parse('file:///thumbnail-consumer.ts'))
-    const invalid = api.editor.createModel("new ArtplayerToolThumbnail({ fileInput: '#input' });", 'typescript', api.Uri.parse('file:///thumbnail-invalid.ts'))
+    const invalid = api.editor.createModel('new ArtplayerToolThumbnail({ fileInput: \'#input\' });', 'typescript', api.Uri.parse('file:///thumbnail-invalid.ts'))
     try {
       const worker = await (await types.getTypeScriptWorker())(model.uri, invalid.uri)
       const syntax = await worker.getSyntacticDiagnostics(model.uri.toString())

@@ -2,11 +2,11 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 // eslint-disable-next-line test/no-import-node-test -- Public type and editor contract runner.
 import test from 'node:test'
+import { ESLint } from 'eslint'
 import ts from 'typescript'
 import compat from 'typescript-compat'
-import { ESLint } from 'eslint'
-import { checkConsumer } from '../../scripts/typecheck.mjs'
 import { checkPluginEditorDeclaration, generatePluginEditorDeclaration } from '../../scripts/plugin-editor-types.mjs'
+import { checkConsumer } from '../../scripts/typecheck.mjs'
 
 const modes = [[ts, 'node10-commonjs'], [ts, 'nodenext-cjs'], [ts, 'nodenext-esm'], [ts, 'bundler-esm'], [compat, 'node10-commonjs']]
 const invalid = source => source.replaceAll(/\/\/ @ts-expect-error[^\n]*\n/g, '')
@@ -15,7 +15,7 @@ test('Thumbnail public declarations check actual callbacks, custom events and in
   const source = fs.readFileSync('test/types/thumbnail.ts', 'utf8')
   for (const [compiler, mode] of modes) {
     assert.deepEqual(checkConsumer(compiler, mode, source), [], `${compiler.version} ${mode}`)
-    assert.equal(checkConsumer(compiler, mode, invalid(source)).length, 10, `${compiler.version} ${mode} negatives`)
+    assert.equal(checkConsumer(compiler, mode, invalid(source)).length, 12, `${compiler.version} ${mode} negatives`)
   }
   const commonjs = fs.readFileSync('test/types/thumbnail-commonjs.cts', 'utf8')
   for (const [compiler, mode] of [[ts, 'nodenext-cjs'], [compat, 'node10-commonjs']]) {
@@ -67,7 +67,7 @@ const bad = player.mediabunny?.levels;`
     assert.equal(checkPluginEditorDeclaration(code, core, invalid(consumer), compiler).length, 1)
   }
   assert.throws(() => generatePluginEditorDeclaration(source, 'artplayerProxyMediabunny'), /Unsupported editor type re-export/)
-  assert.throws(() => generatePluginEditorDeclaration(source, 'artplayerProxyMediabunny', { './media': media + '\nexport interface Extra {}' }), /explicitly cover/)
+  assert.throws(() => generatePluginEditorDeclaration(source, 'artplayerProxyMediabunny', { './media': `${media}\nexport interface Extra {}` }), /explicitly cover/)
   const common = fs.readFileSync('docs/assets/js/common.js', 'utf8')
   assert(common.includes('./assets/ts/artplayer-tool-thumbnail.d.ts'))
   assert(!common.includes('./assets/ts/media.d.ts'))

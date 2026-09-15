@@ -1,5 +1,18 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-04 Thumbnail 策略与源码迁移完成
+
+用户批准已落实：默认保留 npm 3.5.31，显式 workspace-4.4 保留未发布工作区行为。
+策略集中到 policy.ts，延迟由 source/job 各自管理；类型、迁移说明与构建产物同步。
+136 项 Node 测试、严格类型、隔离安装 12 编译器案例通过；安装 legacy 63 项通过。
+三引擎源码浏览器 90 项、安装 main 30 项通过，其中分别 23/10 项为 WebKit
+能力对照，不能算截图提取或真实 Safari 通过。首次同文件重选夹具失败已修正并归档。
+见[完成记录](changes/2026-09-15-PKG-TOOL-THUMB-04-approved-policy.md)、
+[证据](baselines/thumbnail-policy-validation.json)。04 done，THUMB-COMPAT-01 resolved；
+05/06、设备与整体发布门槛保留。当前 219 done、20 doing、43 todo，共282项。
+下一步修复已捕获的 DANMUKU-INSTALLED-GAP-01，并继续剩余实施/版本准备。
+实施完成后等待用户指导复盘；未启动复盘、推送或发布。
+
 ## CI-01 完整 Windows WebKit 安装包回归
 
 固定bb2c12df3，复用5e0447fc5打包的20包run-cRduve；77文件/845项：694通过、

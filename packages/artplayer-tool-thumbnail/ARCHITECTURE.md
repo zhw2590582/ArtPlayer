@@ -2,14 +2,13 @@
 
 The runtime responsibilities were separated under PKG-TOOL-THUMB-03 and are now
 strict TypeScript under PKG-TOOL-THUMB-04. Public declarations and isolated installed
-entrypoints now have checks; the historical default-policy decision and final
-integration/release gates remain open.
+entrypoints now have checks; final integration/release gates remain open.
 
-The pending choice is now specified in the
-[compatibility proposal](../../refactor/thumbnail-compatibility-decision.md):
+The user approved the
+[compatibility decision](../../refactor/thumbnail-compatibility-decision.md) on 2026-09-15:
 recovered 3.5.31 defaults versus opt-in workspace 4.4.0 behavior, including the
-class-level DEFAULTS boundary. It is not approved or implemented; do not infer
-permission from the approved VAST or other package decisions.
+class-level DEFAULTS boundary. The root constructor now defaults to the published
+policy; `compatibility: 'workspace-4.4'` selects the previous workspace behavior.
 
 | File | Responsibility |
 | --- | --- |
@@ -18,6 +17,7 @@ permission from the approved VAST or other package decisions.
 | src/source.ts | File loading, native metadata/error listeners and source/thumbnail Blob URLs |
 | src/extraction.ts | Owned metadata wait and serial frame job, callback/error completion and cancellation |
 | src/input.ts | Option validation/clamps, file-input wrapper creation, listener registration/replacement and release |
+| src/policy.ts | Approved mode selection and numeric normalization; no DOM or timer ownership |
 | src/sheet.ts | Midpoint grid, canvas/footer geometry, temporary download anchor |
 | src/emitter.ts | Typed local adaptation of tiny-emitter; preserves on/once/emit/off behavior |
 | src/utils.ts | Pure clamp and filename helpers; unused sleep/serial helpers removed |
@@ -30,8 +30,8 @@ Input/source use lifecycle state, extraction uses lifecycle/source, and sheet us
 only filename calculation. types.ts contains no imports or executable state.
 Input records live in a private WeakMap, so callers replacing `option` cannot
 lose ownership of generated inputs/listeners. Normal construction preserves the
-existing instance-field order and bound inputChange/ondrop methods. DEFAULTS,
-file/video event order, public method spelling and return values stay unchanged.
+existing instance-field order and bound inputChange/ondrop methods. Public method
+spelling and return values stay unchanged. DEFAULTS includes published delay: 300.
 
 Input setup validates options before changing DOM or committed options. A wrapper
 receives one owned input; repeated setup with that wrapper reuses it. Replacement
@@ -62,8 +62,9 @@ behavior, checks first-error identity across nested cleanup and verifies resourc
 
 ## Extraction and event ordering
 
-Loading emits file before assigning video.src, then video synchronously as in
-workspace 4.4.0. A source generation prevents an older file callback or URL creation
+Loading emits file before assigning video.src, then video after the configured
+delay in the default published policy, or synchronously in workspace mode.
+A source generation prevents an older file callback or URL creation
 hook from overwriting a nested newer load. Successful replacement revokes old
 source URLs. Native errors report once for their source; stale listeners cannot
 fail the latest job. Existing sheet URLs stay available until the next sheet frame
@@ -76,7 +77,15 @@ Preflight stays synchronous when metadata is ready. Canvas precedes processing=t
 updates observe true, done observes false and may start another job without old
 completion clearing the new state.
 
-Frames wait for readiness/seek, accept readiness/Blob callbacks once and restore
+Published mode keeps configured height (clamped to 10-1000), waits delay after each
+seek and delay * 2 after the last update before done. Delay defaults to 300 and is
+clamped to 10-1000. Workspace mode derives height from video aspect ratio, ignores
+delay and resets the selected input value; published mode retains that value.
+Source notifications and extraction waits own their timers separately, so replacement,
+error and destroy cancel both without late events. A null policy delay means no
+timer; NaN retains the historical asynchronous browser timer behavior.
+
+Frames wait for readiness/seek as well as any policy delay, accept readiness/Blob callbacks once and restore
 oncanplay only while still owning it. Seek/draw/encoding failures, null Blob and
 throwing callbacks settle the promise and detach job resources. Source replacement
 or destruction rejects with AbortError without an error event. The public promise
@@ -117,14 +126,16 @@ Safari/WebKit evidence in 05. The independent tool example is
 `test/thumbnail-lifecycle.test.js` covers jobs, source cancellation, native errors,
 callback failures, reentrancy and private resources. Browser tests hold real PNG
 callbacks and replace a selected file during encoding; only the latest job may
-complete. Continue published declarations and installed consumers in 04; preserve
-old tests and the default delay/height boundary. The [public type guide](types/README.md)
+complete. Preserve old tests and the approved delay/height boundary. The new
+`test/thumbnail-policy.test.js` covers both modes, owned delays and cancellation;
+browser extraction checks both policies against the frozen historical bundles.
+The [public type guide](types/README.md)
 documents declaration ownership, module entries, events and installed consumers.
 See [task plan](../../refactor/plan.md) and [risk ledger](../../refactor/risks.json).
 
 ## Type and provenance boundaries
 
-All eight executable source modules and the shared type module are checked with
+All nine executable source modules and the shared type module are checked with
 strict, noUncheckedIndexedAccess, noImplicitOverride, skipLibCheck=false and no
 ambient Node/test globals. Public fields use declare so TypeScript does not add
 early undefined properties or change constructor property order. File/URL/density

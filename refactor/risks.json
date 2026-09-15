@@ -4125,9 +4125,9 @@
         "PKG-TOOL-THUMB-04",
         "PKG-TOOL-THUMB-05"
       ],
-      "compatibleResolution": "Freeze both implementations and derive a concrete compatibility policy before changing defaults; no silent claim that identical calls have identical historical semantics.",
+      "compatibleResolution": "User approved published 3.5.31 default behavior and explicit workspace-4.4 mode, including class DEFAULTS. Implemented as an owned policy without restoring historical resource defects.",
       "closureCriteria": "Explicit documented compatibility decision, old/candidate tests and migration examples covering delay, height, input reset and readiness.",
-      "status": "open",
+      "status": "resolved",
       "evidence": [
         "refactor/baselines/thumbnail-contract.md",
         "refactor/baselines/thumbnail-release.json",
@@ -4139,9 +4139,17 @@
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md",
         "refactor/thumbnail-compatibility-decision.md",
-        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md"
+        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md",
+        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-04-approved-policy.md",
+        "refactor/baselines/thumbnail-policy-validation.json"
       ],
-      "workspaceState": "Concrete proposal prepared: recovered 3.5.31 runtime defaults and optional workspace-4.4 mode, explicitly including the class-level DEFAULTS difference, delay/height validation, event/frame timing and input reset. Frozen contract/behavior tests rerun 62/62. User choice remains pending; no mode/default change implemented or inferred from other package approvals."
+      "workspaceState": "Default fixed/clamped height and delay, delayed video/frame/done and retained input value implemented; explicit workspace mode keeps aspect height, no policy delays and input reset. Source and installed browser checks plus strict current/old types pass within documented Windows WebKit Blob capability limits. Package integration/distribution and physical devices remain separate gates.",
+      "resolutionEvidence": [
+        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-04-approved-policy.md",
+        "refactor/baselines/thumbnail-policy-validation.json",
+        "refactor/thumbnail-compatibility-decision.md"
+      ],
+      "resolutionRationale": "Explicit user approval and migration examples, frozen/default/workspace tests, source and installed real PNG checks on Chromium/Firefox, owned cancellation timing and declaration consumers close the conflicting-default policy. Windows WebKit native Blob limitation is recorded, not treated as successful extraction."
     },
     {
       "id": "THUMB-LIFE-01",

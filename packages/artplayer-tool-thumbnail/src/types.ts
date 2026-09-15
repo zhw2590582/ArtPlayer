@@ -9,11 +9,15 @@ export interface SheetOptions {
 
 export interface InputOptions extends Partial<SheetOptions> {
   fileInput?: Element
+  delay?: number
+  compatibility?: 'published-3.5' | 'workspace-4.4'
   [name: string]: unknown
 }
 
 export interface RuntimeOptions extends SheetOptions {
   fileInput: HTMLInputElement
+  delay?: number
+  compatibility?: 'published-3.5' | 'workspace-4.4'
   [name: string]: unknown
 }
 
