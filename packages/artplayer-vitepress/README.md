@@ -26,6 +26,8 @@ not a VitePress page. Keep both URL surfaces compatible.
 | `docs/plugin/jassub.md`, `docs/en/plugin/jassub.md` | Worker resources, ASS queries, actual method signatures, ownership and compatible declarations | `/document/plugin/jassub.html`, `/document/en/plugin/jassub.html` |
 | `docs/plugin/danmuku-mask.md`, `docs/en/plugin/danmuku-mask.md` | Segmentation configuration, start/stop, mask ownership and preserved type shape | `/document/plugin/danmuku-mask.html`, `/document/en/plugin/danmuku-mask.html` |
 | `docs/plugin/chromecast.md`, `docs/en/plugin/chromecast.md` | SDK loading, callbacks, shared sessions, receiver limitations and runtime types | `/document/plugin/chromecast.html`, `/document/en/plugin/chromecast.html` |
+| `docs/tool/iframe.md`, `docs/en/tool/iframe.md` | Parent/child setup, serialized requests, navigation cancellation, trust and type views | `/document/tool/iframe.html`, `/document/en/tool/iframe.html` |
+| `docs/tool/thumbnail.md`, `docs/en/tool/thumbnail.md` | Local file extraction, approved defaults, PNG sheets, events and URL ownership | `/document/tool/thumbnail.html`, `/document/en/tool/thumbnail.html` |
 | `docs/.vitepress/config.js` | Navigation, base URL, output path, page head | Repository `docs/document/` |
 | `docs/vite.config.ts` | Search plugin configuration | VitePress/Vite integration; real search acceptance remains pending |
 | `docs/public/main.js` | Run Code links and first-visit language redirect | Copied into the built site |
@@ -39,11 +41,19 @@ and run `node refactor/scripts/demos.mjs --check`. Preserve the frozen BASE-04
 inventory. Also refresh and check the current site inventory; the two inventories
 serve different purposes. Neither path check replaces browser navigation tests.
 
-The generated site lives in `docs/document/`. The current inventory contains 58 Markdown pages: 29 Chinese
-and 29 English. All 16 plugins have dedicated guides and navigation in both languages.
-The two proxies and two tools still need dedicated bilingual guides. Core member
+The generated site lives in `docs/document/`. The current inventory contains 62 Markdown pages: 31 Chinese
+and 31 English. All 16 plugins and both tools have dedicated guides and navigation in both languages.
+The two proxies still need dedicated bilingual guides. Core member
 mapping and the current cross-check of earlier guides remain in SITE-04;
 navigation links alone are not complete API documentation.
+
+Tools have their own navigation group. Iframe explains the required child inject
+step and serialized commit body, without treating the protocol as a sandbox or
+promising legacy document identity. Thumbnail explains published fixed-height
+defaults, explicit workspace mode, synchronous failures, density limits and owned
+Blob URLs. Original examples are retained; their navigation is not extraction or
+cross-window player acceptance. The thumbnail package's stale default-behavior
+sentence was corrected alongside these guides, requiring its candidate refresh.
 
 JASSUB documents actual resize argument order, query callbacks and resource
 ownership separately from preserved historical declarations. Danmuku Mask keeps

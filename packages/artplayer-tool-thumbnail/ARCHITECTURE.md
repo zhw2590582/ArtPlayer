@@ -95,8 +95,9 @@ arbitrary new metadata deadline; waiting can be cancelled by destroy/replacement
 
 Sheet extraction preserves fractional coordinates, historical `creat*` names,
 the 30-pixel footer and the filename algorithm. The temporary download anchor is
-removed even if click throws. Default aspect-derived height and synchronous video
-events currently match workspace 4.4.0; recovered 3.5.31 differs. See the frozen
+removed even if click throws. Aspect-derived height and synchronous video events
+apply only to explicit workspace-4.4 mode; the default preserves recovered
+3.5.31 fixed height and delays. See the frozen
 [contract](../../refactor/baselines/thumbnail-contract.md) before changing defaults.
 
 ## Validation and continuation

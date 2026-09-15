@@ -1,5 +1,16 @@
 # 进度与证据
 
+## SITE-04 Iframe/Thumbnail工具双语指南
+
+补齐四份工具指南、独立工具导航和原样示例；说明父子接入/消息执行、缩略图两种
+默认策略、类方法/事件/类型与资源边界。四份TS片段、每页40个链接、三浏览器12组
+导航及17项文档工具测试通过，构建/LLM/清单通过。当前62 Markdown/71 HTML。
+修正Thumbnail ARCHITECTURE残留的旧默认句，因此其旧candidate指纹已正确失效；
+20个其他库build有效，下一步REL-02从本次提交重新准备Thumbnail候选。
+见[记录](changes/2026-09-16-SITE-04-tools-guides.md)和
+[证据](baselines/site04-tools-guides.json)。SITE-04仍doing、224/22/39不变；两个proxy、
+核心语义及已有指南核对仍待完成，不进入用户保留的复盘，不计真实截图/播放器通过。
+
 ## SITE-04 JASSUB/弹幕遮罩/Chromecast双语指南
 
 补齐六份页面、本地导航和原样示例，16个插件现均有独立双语指南。说明JASSUB实际

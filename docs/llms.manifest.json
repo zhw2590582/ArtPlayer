@@ -119,6 +119,14 @@
       "sha256Lf": "72776482f31a3240462d72d56912b2e9f96583a12f36b6556abdf379ca1d3fdf"
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/tool/iframe.md",
+      "sha256Lf": "99cf8218094d869355db986c7812861ad9d9f98d8af4c31a520c323fc7f4df57"
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+      "sha256Lf": "71b121db9f8d525463d4472c2ba6866ea0fbf88e02fe17f9b2fbf87011b44ced"
+    },
+    {
       "file": "docs/assets/ts/artplayer-plugin-ads.d.ts",
       "sha256Lf": "bf128828d5b104fc844a4f134a02162e57472d8c927a50df7b3878f4c5ed7652"
     },
@@ -331,5 +339,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "70d21278ba12ace4feaf3f61df79b9f08a9e77fe1ac017434698fe71d3085c31"
+  "outputSha256Lf": "c1a5df41e5b60520e695a6bfc526b96204ceeafbf851a507345765d8cdf06588"
 }

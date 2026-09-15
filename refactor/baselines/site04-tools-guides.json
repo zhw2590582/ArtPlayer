@@ -1,0 +1,775 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "scope": "Four bilingual standalone-tool guides and correction of obsolete thumbnail default description",
+  "sourceBefore": "3aad294aa5eee5276afbd8b80330efb45a68d677",
+  "capturedAt": "2026-09-15T19:48:40.672Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "platform": "win32",
+    "static": [
+      {
+        "name": "iframe",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/tool/iframe.md",
+          "sha256": "7012ae1ba5b2da32a235aaa75cbb8c228290234ba95c34f55bf8b52455939fc5"
+        },
+        "html": {
+          "path": "docs/document/tool/iframe.html",
+          "sha256": "9d5742494558fca30730769df447fa42ee0fb3760f8da9811311d11032666937"
+        },
+        "example": {
+          "path": "docs/assets/example/iframe.js",
+          "sha256": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-tools/iframe-zh.mts",
+          "sha256": "350899fc5126ac25d3cec9e481957eb8a1c8c240264f716b21de752a6cd643c6"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/tool/iframe.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/tool/iframe.html#iframe-%E9%80%9A%E4%BF%A1%E5%B7%A5%E5%85%B7",
+          "/document/en/tool/iframe.html",
+          "/document/tool/iframe.html#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8F%8C%E7%AB%AF%E6%8E%A5%E5%85%A5",
+          "/document/tool/iframe.html#%E7%88%B6%E9%A1%B5%E9%9D%A2%E5%AE%9E%E4%BE%8B",
+          "/document/tool/iframe.html#commit-%E7%9A%84%E6%89%A7%E8%A1%8C%E6%96%B9%E5%BC%8F",
+          "/document/tool/iframe.html#%E5%AD%90%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8E%E4%BF%A1%E4%BB%BB%E8%BE%B9%E7%95%8C",
+          "/document/tool/iframe.html#%E5%AF%BC%E8%88%AA%E3%80%81%E6%B8%85%E7%90%86%E5%92%8C%E5%85%BC%E5%AE%B9%E7%B1%BB%E5%9E%8B"
+        ]
+      },
+      {
+        "name": "iframe",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/tool/iframe.md",
+          "sha256": "99cf8218094d869355db986c7812861ad9d9f98d8af4c31a520c323fc7f4df57"
+        },
+        "html": {
+          "path": "docs/document/en/tool/iframe.html",
+          "sha256": "a6b2c80b7548282ffcf0dff4085d7242ca52d61f57a6fecd01030faade70b628"
+        },
+        "example": {
+          "path": "docs/assets/example/iframe.js",
+          "sha256": "a2129e0ce772a58ae635fe1b784d65324155655cd2fc3c537ed511dffcb2be7a"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-tools/iframe-en.mts",
+          "sha256": "350899fc5126ac25d3cec9e481957eb8a1c8c240264f716b21de752a6cd643c6"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/tool/iframe.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/tool/iframe.html#iframe-communication-tool",
+          "/document/tool/iframe.html",
+          "/document/en/tool/iframe.html#install-and-connect-both-pages",
+          "/document/en/tool/iframe.html#parent-instance",
+          "/document/en/tool/iframe.html#how-commit-executes",
+          "/document/en/tool/iframe.html#child-statics-and-trust",
+          "/document/en/tool/iframe.html#navigation-cleanup-and-types"
+        ]
+      },
+      {
+        "name": "thumbnail",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/tool/thumbnail.md",
+          "sha256": "bda8789f49f4f0ad2da72c7e211ad5194c5b715a3d7006856ad8cda1b6b215f0"
+        },
+        "html": {
+          "path": "docs/document/tool/thumbnail.html",
+          "sha256": "406029fdda6a49d62845935013df742d1b558897c137420e00334d92c6ed96f6"
+        },
+        "example": {
+          "path": "docs/assets/example/tool.thumbnail.js",
+          "sha256": "ef830a5f499e14c09d51aa31aaa0a194ea1f910b27f14ef97c0ca8f67d529a54"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-tools/thumbnail-zh.mts",
+          "sha256": "2d04764f80ebe4f22d5a8e74868d4e8f2f7c04213aa213bd4813902b48e33617"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/tool/thumbnail.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/tool/thumbnail.html#%E6%9C%AC%E5%9C%B0%E8%A7%86%E9%A2%91%E7%BC%A9%E7%95%A5%E5%9B%BE%E5%B7%A5%E5%85%B7",
+          "/document/en/tool/thumbnail.html",
+          "/document/tool/thumbnail.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/tool/thumbnail.html#%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%BB%98%E8%AE%A4%E8%A1%8C%E4%B8%BA",
+          "/document/tool/thumbnail.html#%E6%96%B9%E6%B3%95%E3%80%81%E7%8A%B6%E6%80%81%E4%B8%8E%E8%BE%93%E5%87%BA",
+          "/document/tool/thumbnail.html#%E4%BA%8B%E4%BB%B6%E5%92%8C%E6%B8%85%E7%90%86",
+          "/document/tool/thumbnail.html#typescript"
+        ]
+      },
+      {
+        "name": "thumbnail",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/tool/thumbnail.md",
+          "sha256": "71b121db9f8d525463d4472c2ba6866ea0fbf88e02fe17f9b2fbf87011b44ced"
+        },
+        "html": {
+          "path": "docs/document/en/tool/thumbnail.html",
+          "sha256": "4a6318bd10ea736126d42f0e12c68d54a98d05ec23aacc7a526783c683bac7d7"
+        },
+        "example": {
+          "path": "docs/assets/example/tool.thumbnail.js",
+          "sha256": "ef830a5f499e14c09d51aa31aaa0a194ea1f910b27f14ef97c0ca8f67d529a54"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-tools/thumbnail-en.mts",
+          "sha256": "2d04764f80ebe4f22d5a8e74868d4e8f2f7c04213aa213bd4813902b48e33617"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/tool/thumbnail.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/tool/thumbnail.html#local-video-thumbnail-tool",
+          "/document/tool/thumbnail.html",
+          "/document/en/tool/thumbnail.html#install-and-example",
+          "/document/en/tool/thumbnail.html#options-and-defaults",
+          "/document/en/tool/thumbnail.html#methods-state-and-output",
+          "/document/en/tool/thumbnail.html#events-and-cleanup",
+          "/document/en/tool/thumbnail.html#typescript"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "tool/iframe.md",
+        "passed": true,
+        "errors": [],
+        "title": "Iframe 通信工具\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-iframe/index.js",
+          "codeSha256": "a3cbdd1b3a509bd3b6a668bdb84dc42d282910f5a92b6885e3329b2736e80241"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/chromium-iframe-zh.png",
+          "sha256": "160b62ebc0d16691b4fbdd38ad959bb6251b3c2ae7d9261c2f3e6c7f5f9287db"
+        },
+        "translation": "/document/en/tool/iframe.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/tool/iframe.md",
+        "passed": true,
+        "errors": [],
+        "title": "Iframe communication tool\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-iframe/index.js",
+          "codeSha256": "a3cbdd1b3a509bd3b6a668bdb84dc42d282910f5a92b6885e3329b2736e80241"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/chromium-iframe-en.png",
+          "sha256": "e181fe6d1168c3accceb22746bbd6a335630ed49efdcfd9bec61d8ab3c4d7a12"
+        },
+        "translation": "/document/tool/iframe.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "tool/thumbnail.md",
+        "passed": true,
+        "errors": [],
+        "title": "本地视频缩略图工具\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-thumbnail/index.js",
+          "codeSha256": "b91489bb69ba77fd1f6d4ffd6ed165e3c83a7c378183e5ab90ef24f3549e29cc"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/chromium-thumbnail-zh.png",
+          "sha256": "281dd3d055c26d50bb438173c3908e2a12a5e1d56d61d3857a606134e6bf0533"
+        },
+        "translation": "/document/en/tool/thumbnail.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/tool/thumbnail.md",
+        "passed": true,
+        "errors": [],
+        "title": "Local video thumbnail tool\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-thumbnail/index.js",
+          "codeSha256": "b91489bb69ba77fd1f6d4ffd6ed165e3c83a7c378183e5ab90ef24f3549e29cc"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/chromium-thumbnail-en.png",
+          "sha256": "955e2bf58e54795a11f8ccd3859d675bca53a6aa8288a10afd1d835670a32af3"
+        },
+        "translation": "/document/tool/thumbnail.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "tool/iframe.md",
+        "passed": true,
+        "errors": [],
+        "title": "Iframe 通信工具\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-iframe/index.js",
+          "codeSha256": "a3cbdd1b3a509bd3b6a668bdb84dc42d282910f5a92b6885e3329b2736e80241"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/firefox-iframe-zh.png",
+          "sha256": "bcd4d8e0d500cd748e30b4496c2a1ff5aa0bce29fa2ed9929a560687f5397db2"
+        },
+        "translation": "/document/en/tool/iframe.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/tool/iframe.md",
+        "passed": true,
+        "errors": [],
+        "title": "Iframe communication tool\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-iframe/index.js",
+          "codeSha256": "a3cbdd1b3a509bd3b6a668bdb84dc42d282910f5a92b6885e3329b2736e80241"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/firefox-iframe-en.png",
+          "sha256": "6cfd38c94603cf419303b5120b666d5264f0e73ff988e9b7d802cd347eb3afb0"
+        },
+        "translation": "/document/tool/iframe.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "tool/thumbnail.md",
+        "passed": true,
+        "errors": [],
+        "title": "本地视频缩略图工具\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-thumbnail/index.js",
+          "codeSha256": "b91489bb69ba77fd1f6d4ffd6ed165e3c83a7c378183e5ab90ef24f3549e29cc"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/firefox-thumbnail-zh.png",
+          "sha256": "a246eff260370c0fd945c346a7eaec81e0b411f14bf7d89adec8b1e0d86e5c70"
+        },
+        "translation": "/document/en/tool/thumbnail.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/tool/thumbnail.md",
+        "passed": true,
+        "errors": [],
+        "title": "Local video thumbnail tool\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-thumbnail/index.js",
+          "codeSha256": "b91489bb69ba77fd1f6d4ffd6ed165e3c83a7c378183e5ab90ef24f3549e29cc"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/firefox-thumbnail-en.png",
+          "sha256": "23f1db95b620380ffa5387989c5dab76fef19ad7914a845374d7bc8a656d14c7"
+        },
+        "translation": "/document/tool/thumbnail.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "tool/iframe.md",
+        "passed": true,
+        "errors": [],
+        "title": "Iframe 通信工具 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-iframe/index.js",
+          "codeSha256": "a3cbdd1b3a509bd3b6a668bdb84dc42d282910f5a92b6885e3329b2736e80241"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/webkit-iframe-zh.png",
+          "sha256": "9c4c6dbd078a29a9293aa85899b828c0bc33a6949472fada1f76837ff872f3a6"
+        },
+        "translation": "/document/en/tool/iframe.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/tool/iframe.md",
+        "passed": true,
+        "errors": [],
+        "title": "Iframe communication tool ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-iframe/index.js",
+          "codeSha256": "a3cbdd1b3a509bd3b6a668bdb84dc42d282910f5a92b6885e3329b2736e80241"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/webkit-iframe-en.png",
+          "sha256": "fbf3e0492c8253d8750a8ac35bfc9e7f589c735f8722072fc6e26255cd979eb6"
+        },
+        "translation": "/document/tool/iframe.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "tool/thumbnail.md",
+        "passed": true,
+        "errors": [],
+        "title": "本地视频缩略图工具 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-thumbnail/index.js",
+          "codeSha256": "b91489bb69ba77fd1f6d4ffd6ed165e3c83a7c378183e5ab90ef24f3549e29cc"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/webkit-thumbnail-zh.png",
+          "sha256": "405b9a062fbd5cae75f04fdbbd3195d3417c8467b780787fc5a3b72a30adde2e"
+        },
+        "translation": "/document/en/tool/thumbnail.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/tool/thumbnail.md",
+        "passed": true,
+        "errors": [],
+        "title": "Local video thumbnail tool ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-tool-thumbnail/index.js",
+          "codeSha256": "b91489bb69ba77fd1f6d4ffd6ed165e3c83a7c378183e5ab90ef24f3549e29cc"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-tools/webkit-thumbnail-en.png",
+          "sha256": "85cd359b02de6347a81240a510d30d8f50890e0a206d576a464d6e45da79eda8"
+        },
+        "translation": "/document/tool/thumbnail.html"
+      }
+    ],
+    "controls": [],
+    "complete": true,
+    "limitations": [
+      "Guide rendering/navigation and original-code forwarding only; popup editor response is isolated, not media playback.",
+      "Does not complete SITE-04 core/member coverage, SITE-05, EX-03 or physical-device validation."
+    ]
+  },
+  "tools": {
+    "tests": 17,
+    "pass": 17,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1195.3457,
+    "checksPassed": [
+      "build:llm",
+      "build:docs",
+      "check:llm",
+      "config eslint",
+      "site-inventory --write/--check",
+      "demos --check"
+    ],
+    "buildSeconds": 8.8,
+    "yarnBuildSeconds": 10.36
+  },
+  "resolvedBuildFailure": {
+    "artifact": {
+      "path": "refactor/.cache/site04-tools-build.log",
+      "sha256": "d49917790005a0f4b80328b0ed6e652f4203f163726043d3b84383c2ab068fca"
+    },
+    "reason": "Bare Promise<void> in both thumbnail Markdown tables was parsed as an unclosed Vue element; fixed with inline-code delimiters. Final build and all guide checks pass."
+  },
+  "inventory": {
+    "markdown": 62,
+    "html": 71,
+    "examples": 30,
+    "declarationMembers": 963,
+    "assets": 204
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-WmrRDp/report.json",
+      "sha256": "c895e0afc79bccef8c77355853711e1a1b41cf79487421b28a9bd47835c17ed5"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "431eb2caf41a434a8fdb516bf5d73b71df8b4d306530036ead7c1ee460076b81",
+        "build": {
+          "status": "blocked",
+          "errors": [
+            "Evidence input fingerprint is stale"
+          ]
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false,
+    "next": "REL-02 must refresh thumbnail5.0.0 from the committed corrected ARCHITECTURE.md; no stale candidate evidence is accepted."
+  },
+  "visualInspections": [
+    "chromium-thumbnail-zh.png"
+  ],
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-tools-validate.mjs",
+      "sha256": "b5fc0256e04cc4842d52bf465016367ab853015bb6a211c2cc27c2eb16c4a6a5"
+    },
+    {
+      "path": "refactor/.cache/site04-tools/report.json",
+      "sha256": "3e52a28492acce9cf483a51c42fee28106585b48ff5ae7c8e5c4b88c77d8a871"
+    },
+    {
+      "path": "refactor/.cache/site04-tools-validate.log",
+      "sha256": "d8c186cd8b0de4a2166beccb1a6c7e200b386707ea1c5442855081d60d7fcaa9"
+    },
+    {
+      "path": "refactor/.cache/site04-tools-tests.log",
+      "sha256": "52d674e7345161e082aea9b8cc0c9edfac8056ece6367e5120b67c9a0c5b4736"
+    },
+    {
+      "path": "refactor/.cache/site04-tools-final-build.log",
+      "sha256": "b55b2bbe23a0756251f9c2bf7865b50be9e617c7569081728027019de7e5819b"
+    },
+    {
+      "path": "refactor/.cache/site04-tools-final-llm.log",
+      "sha256": "428f076dae52f661b2abf2b0132235f5c996ccd1f4163bbe9d53e1b514755fe5"
+    },
+    {
+      "path": "refactor/.cache/site04-tools-ledger.log",
+      "sha256": "3288512d4dcd2de6a0e4a13f14161801aaa798b906a648d5685caa1664e517a2"
+    }
+  ],
+  "whitespace": {
+    "fullExit": 2,
+    "findings": [
+      {
+        "file": "docs/document/en/tool/iframe.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/tool/iframe.html",
+        "line": 99
+      },
+      {
+        "file": "docs/document/en/tool/thumbnail.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/tool/thumbnail.html",
+        "line": 109
+      },
+      {
+        "file": "docs/document/tool/iframe.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/tool/iframe.html",
+        "line": 99
+      },
+      {
+        "file": "docs/document/tool/thumbnail.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/tool/thumbnail.html",
+        "line": 109
+      }
+    ],
+    "remainingExit": 0,
+    "note": "Only blank VitePress template lines; generated HTML preserved and full check not reported as passing."
+  }
+}

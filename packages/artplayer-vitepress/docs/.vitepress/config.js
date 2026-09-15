@@ -69,7 +69,6 @@ const config = {
             { text: '🎉 弹幕库', link: '/plugin/danmuku' },
             { text: '弹幕遮罩', link: '/plugin/danmuku-mask' },
             { text: '视频广告', link: '/plugin/ads' },
-            { text: 'Iframe 控制', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe' },
             { text: 'HLS 控制', link: '/plugin/hls-control' },
             { text: 'DASH 控制', link: '/plugin/dash-control' },
             { text: 'VTT 缩略图', link: '/plugin/vtt-thumbnail' },
@@ -83,6 +82,14 @@ const config = {
             { text: '文档画中画', link: '/plugin/document-pip' },
             { text: '音频采集与识别字幕', link: '/plugin/asr' },
             { text: '独立音轨', link: '/plugin/audio-track' },
+          ],
+        },
+        {
+          text: '工具',
+          collapsible: true,
+          items: [
+            { text: 'Iframe 控制', link: '/tool/iframe' },
+            { text: '本地视频缩略图', link: '/tool/thumbnail' },
           ],
         },
         {
@@ -144,7 +151,6 @@ const config = {
             { text: 'Danmuku', link: '/en/plugin/danmuku' },
             { text: 'Danmuku Mask', link: '/en/plugin/danmuku-mask' },
             { text: 'Advertise', link: '/en/plugin/ads' },
-            { text: 'Iframe Control', link: 'https://artplayer.org/?libs=./uncompiled/artplayer-tool-iframe/index.js&example=iframe' },
             { text: 'HLS Control', link: '/en/plugin/hls-control' },
             { text: 'DASH Control', link: '/en/plugin/dash-control' },
             { text: 'VTT Thumbnail', link: '/en/plugin/vtt-thumbnail' },
@@ -158,6 +164,14 @@ const config = {
             { text: 'Document PIP', link: '/en/plugin/document-pip' },
             { text: 'Audio Capture and Subtitles', link: '/en/plugin/asr' },
             { text: 'Audio Track', link: '/en/plugin/audio-track' },
+          ],
+        },
+        {
+          text: 'Tools',
+          collapsible: true,
+          items: [
+            { text: 'Iframe Control', link: '/en/tool/iframe' },
+            { text: 'Local Video Thumbnails', link: '/en/tool/thumbnail' },
           ],
         },
         {

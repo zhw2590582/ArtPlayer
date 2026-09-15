@@ -40,13 +40,20 @@ JASSUB、弹幕遮罩和 Chromecast 的本次核对：
 | Danmuku Mask | [入口](../packages/artplayer-plugin-danmuku-mask/src/index.ts)、config.ts、controller.ts、output.ts、sdk.ts、根/legacy声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/danmuku-mask.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/danmuku-mask.md)：十项配置、name/start/stop、NodeNext类型提取、双插件示例 | truthy默认值、固定MediaPipe/general与忽略字段、start不保证首mask、stop等待关系、无人物保留mask、model失败与其他拒绝区别；无runtime/新事件；SDK私有GPU完成未证明 |
 | Chromecast | [入口](../packages/artplayer-plugin-chromecast/src/index.ts)、controller.ts、media.ts、sdk.ts、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/chromecast.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/chromecast.md)：四项设置/四回调、name/getCastState/isCasting、八个命名类型与旧根兼容 | options必填/活读取、首次点击加载、共享SDK/首URL、30秒ready期限、原始与标准状态、请求取消、绝对媒体URL/MIME、销毁不结束共享会话；有会话不等于接收端播放，真机仍独立验收 |
 
+两个工具包的本次核对：
+
+| 包 | 对照源码与声明 | 双语指南覆盖 | 保留边界 |
+| --- | --- | --- | --- |
+| Iframe | [入口](../packages/artplayer-tool-iframe/src/index.ts)、requests.ts、protocol.ts、connection.ts、navigation/child-session协议及ARCHITECTURE、公开声明、原始父子页面 | [中文](../packages/artplayer-vitepress/docs/tool/iframe.md) / [English](../packages/artplayer-vitepress/docs/en/tool/iframe.md)：构造两项、全部实例/静态方法与字段、12个命名类型、父子接入与完整原示例 | 函数体串行化/字面resolve/无闭包；200ms等待无默认timeout、忽略输入id、resove拼写、回调this、销毁拒绝但不移除iframe；窗口校验非origin白名单、旧peer导航限制；类型视图不验证数据，历史包/helper不是当前工具别名 |
+| Thumbnail tool | [入口](../packages/artplayer-tool-thumbnail/src/index.ts)、policy/input/source/extraction/sheet/lifecycle/emitter/utils、公开声明与types说明、README/ARCHITECTURE、已批准默认决策 | [中文](../packages/artplayer-vitepress/docs/tool/thumbnail.md) / [English](../packages/artplayer-vitepress/docs/en/tool/thumbnail.md)：九项配置、全部类方法/状态、八个事件、10个公开类型、PNG布局/下载与默认模式表 | fileInput运行时必需、number/秒<=1、同步抛错与Promise拒绝、video不保证metadata、creat历史拼写、30px页脚、URL归属、输入/任务销毁及旧声明缺失。维护文档一处旧默认句同步修正，需要REL-02候选更新 |
+
 ## 接续范围
 
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；
   必须记录对应文档及语义结论，不能仅按同名标题匹配标为通过。
 - 已有 Danmuku、HLS、DASH、Audio、VTT 双语指南：继承各 SITE-* 任务的证据，但
   仍需在本轮全包核对中检查其当前声明、示例和能力边界。
-- 16个插件现均有独立双语指南；两个 proxy、两个 tool：包内 README/ARCHITECTURE 不能替代缺失的
+- 16个插件和两个tool现均有独立双语指南；两个 proxy：包内 README/ARCHITECTURE 不能替代缺失的
   双语使用说明。按实际能力分组补入口，不机械复制维护文档。
 - SITE-05 和 EX-03 负责后续完整页面与实际 demo 验收；静态内容核对不等待真机，
   也不能据此关闭真机、外部 SDK、发布或复盘门槛。

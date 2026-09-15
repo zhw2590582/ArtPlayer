@@ -259,6 +259,38 @@
       "owner": "SITE-04",
       "finalDemoOwner": "EX-03",
       "note": "Bilingual guide with original runnable example; navigation validation is not SDK, rendering or physical-device acceptance."
+    },
+    {
+      "source": "docs/document/tool/iframe.html",
+      "route": "/document/tool/iframe.html",
+      "introducedAfter": "3aad294aa5eee5276afbd8b80330efb45a68d677",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual standalone tool guide, preserving original example; navigation is not cross-window player or thumbnail extraction acceptance."
+    },
+    {
+      "source": "docs/document/en/tool/iframe.html",
+      "route": "/document/en/tool/iframe.html",
+      "introducedAfter": "3aad294aa5eee5276afbd8b80330efb45a68d677",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual standalone tool guide, preserving original example; navigation is not cross-window player or thumbnail extraction acceptance."
+    },
+    {
+      "source": "docs/document/tool/thumbnail.html",
+      "route": "/document/tool/thumbnail.html",
+      "introducedAfter": "3aad294aa5eee5276afbd8b80330efb45a68d677",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual standalone tool guide, preserving original example; navigation is not cross-window player or thumbnail extraction acceptance."
+    },
+    {
+      "source": "docs/document/en/tool/thumbnail.html",
+      "route": "/document/en/tool/thumbnail.html",
+      "introducedAfter": "3aad294aa5eee5276afbd8b80330efb45a68d677",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual standalone tool guide, preserving original example; navigation is not cross-window player or thumbnail extraction acceptance."
     }
   ]
 }
