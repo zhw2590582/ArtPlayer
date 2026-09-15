@@ -1,5 +1,12 @@
 # PR 检查和 Pages 操作说明
 
+CI-TYPES-02 增加 `yarn test:ecosystem-types`：四包共享消费者加十七个独立
+类型检查命令覆盖全部二十一库包，先重建声明/分发/i18n，再逐包隔离安装验证。
+browser-consumers 在恢复标准 Node 并完成原消费步骤后执行；类型失败使作业失败，
+上传总报告和各包原始 JSON/log。维护入口见
+[消费者模块](../scripts/consumers/README.md)。这些类型结果不批准 Thumbnail
+尚未决策的默认运行时行为，也不代替真实播放、设备或远端流水线验收。
+
 最新统一安装清单含二十包。VAST 的完整 glomex 加载边界进入普通 installed
 范围；真实 IMA 仍由独立 test:vast-native 按显式安装 map 验证，本地 39/39
 通过不表示远端 CI 已覆盖真实广告。见[记录](changes/2026-09-15-CI-01-vast-installed.md)。

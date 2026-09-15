@@ -1,5 +1,12 @@
 # Installed package checks
 
+Run `yarn test:ecosystem-types` for the complete library type roster: the shared
+core/chapter/Audio/HLS consumer plus seventeen specialized package checks.
+It rebuilds packages first, preserves each historical declaration contract, and
+retains all package failures before returning a failing aggregate status. See
+[orchestrator ownership and reports](../../scripts/consumers/README.md).
+Type success does not approve unresolved runtime behavior or device gates.
+
 `historicalDistributionFiles()` in `scripts/package-check.mjs` distinguishes a
 same-name npm release from the Iframe package rename. Iframe verifies the real
 plugin archive plus the frozen tool workspace, then requires all four original

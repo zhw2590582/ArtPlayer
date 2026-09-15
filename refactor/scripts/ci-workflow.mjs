@@ -99,6 +99,7 @@ export function validateCIWorkflow(source) {
     ['test:vue-consumer', 'vue-consumer', 'vue-consumer-*/'],
     ['test:iframe-history', 'iframe-history', 'iframe-history/'],
     ['test:performance', 'performance', 'performance/'],
+    ['test:ecosystem-types', 'ecosystem-types', 'ecosystem-types/'],
   ]) {
     const index = consumers.steps.findIndex(step => step.run === `yarn ${command} 2>&1 | tee refactor/.cache/ci/${log}.log`)
     assert(index > consumerIndex && !Object.hasOwn(consumers.steps[index], 'if'), 'Run complete consumers after restoring canonical Node')
@@ -106,6 +107,8 @@ export function validateCIWorkflow(source) {
     assert(!browser.steps.some(step => step.run?.includes(`yarn ${command}`)), 'Do not repeat all-engine consumers in each playback leg')
     consumerIndex = index
   }
+  for (const suffix of ['*.json', '*.log'])
+    assert(consumerUpload.with.path.split('\n').includes(`refactor/.cache/*-package-types-*/${suffix}`), 'Retain specialized installed type evidence')
   const extraIndex = browser.steps.findIndex(step => step.run?.startsWith('yarn test:package --browser '))
   const sourceEngineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:source --project=${{ matrix.browser }} 2>&1 | tee refactor/.cache/ci/browser-source.log')
   const engineIndex = browser.steps.findIndex(step => step.run === 'yarn test:browser:installed --project=${{ matrix.browser }} 2>&1 | tee refactor/.cache/ci/browser-installed.log')

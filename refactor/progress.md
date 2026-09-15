@@ -1,5 +1,20 @@
 # 进度与证据
 
+## CI-TYPES-02 全生态安装类型门槛
+
+新增test:ecosystem-types，明确21库包无遗漏/重复。先重建声明、全部分发和i18n，
+再串行执行四包共享消费者及17个专用类型检查；真实18组全部通过，579.13秒。
+历史诊断、精确runtime入口和各包版本对比按原契约保留，没有放宽测试。
+
+CI消费者三OS增加必需步骤和原始报告上传；影响模型与CI校验保护第九项门槛。
+4项调度故障/清单测试、80项CI测试、完整lint、严格TS和工具链通过；重建无
+分发内容差异。见[记录](changes/2026-09-15-CI-TYPES-02-ecosystem.md)与
+[逐包证据](baselines/ecosystem-types-validation.json)。
+
+Auto Thumbnail首帧仍有独立原生WebKit失败证据，没有添加任意等待或声称修复；
+Thumbnail默认行为待决策及其他运行时/设备门槛保持。此次没有运行远端CI或
+完整浏览器矩阵，没有发布。215 done、21 doing、43 todo，共279。
+
 ## CI-TYPES-01 安装后的 Audio/HLS 类型验证
 
 共享严格编译器模块已接入真实 tarball 消费：Audio 的12条和HLS的8条负例，

@@ -112,6 +112,7 @@ export function readImpactModel(directory) {
     'checks yarn ci:check',
     'checks yarn ci:build',
     'browser-consumers yarn test:package',
+    'browser-consumers yarn test:ecosystem-types',
     'browser-smoke yarn test:package --browser',
     'browser-smoke yarn test:browser:source --project=${{ matrix.browser }}',
     'browser-smoke yarn test:browser:installed --project=${{ matrix.browser }}',

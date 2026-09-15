@@ -139,6 +139,8 @@ jobs:
         run: yarn test:iframe-history 2>&1 | tee refactor/.cache/ci/iframe-history.log
       - name: Compare installed performance and verify resource cleanup
         run: yarn test:performance 2>&1 | tee refactor/.cache/ci/performance.log
+      - name: Verify all installed library type contracts
+        run: yarn test:ecosystem-types 2>&1 | tee refactor/.cache/ci/ecosystem-types.log
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -150,6 +152,9 @@ jobs:
             refactor/.cache/react-consumer-*/
             refactor/.cache/vue-consumer-*/
             refactor/.cache/performance/
+            refactor/.cache/ecosystem-types/
+            refactor/.cache/*-package-types-*/*.json
+            refactor/.cache/*-package-types-*/*.log
             refactor/.cache/packages/latest.json
             refactor/.cache/packages/run-*/*.json
             refactor/.cache/packages/run-*/*.log

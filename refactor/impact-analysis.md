@@ -40,9 +40,9 @@ GitHub PR读取事件里的base SHA，push读取before SHA；初次push的全零
 
 ## CI门槛与能力边界
 
-八项必需调用不能从策略中漏掉：`ci:check`、`ci:build`、消费者 `test:package`、
+九项必需调用不能从策略中漏掉：`ci:check`、`ci:build`、消费者 `test:package`、
 播放作业 `test:package --browser`、`test:browser:source`、`test:browser:installed`、
-`test:coverage`、`test:performance`。两个浏览器范围只传当前矩阵的 `--project`，
+`test:coverage`、`test:performance`、`test:ecosystem-types`。两个浏览器范围只传当前矩阵的 `--project`，
 并使用固定 `!cancelled()` 条件在普通失败后继续采证；其余门槛保持无条件步骤。
 固定 yaml 2.8.2 解析实际 workflow，检查对应 job 必需执行、没有 continue-on-error、
 没有路径过滤，且 checkout 有完整历史。命令被移走、改成 echo 或更换执行条件会
@@ -60,6 +60,9 @@ GitHub PR读取事件里的base SHA，push读取before SHA；初次push的全零
   Node 消费者列表，也不等于二十包全部类型/设备/SDK 组合通过。Audio/HLS 的额外
   五模式安装类型验证由 CI-TYPES-01 接入，报告单列 additionalTypeScope；其余包
   的专用类型检查仍保留，不能因此关闭十九包完整安装消费的缺口。
+  CI-TYPES-02 将四包共享检查和十七个专用类型命令汇总为必需的
+  `test:ecosystem-types`，显式覆盖二十一库包；准备失败拒绝消费旧产物，
+  任一包失败使总命令失败。类型结果单独记录，不扩张上述通用 Node 验收范围。
 - 覆盖率范围从实际coverage-policy读取；浏览器/性能命令运行已有用例，不代表所有
   包、真实设备、远程SDK已验收。
 - ENG-COVERAGE-01继续把契约、支持版本、测试ID、候选/报告及任务逐项连接；

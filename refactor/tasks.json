@@ -844,7 +844,8 @@
         "CI-03",
         "SITE-06",
         "CI-BROWSER-01",
-        "CI-TYPES-01"
+        "CI-TYPES-01",
+        "CI-TYPES-02"
       ],
       "status": "todo",
       "risk": "H",
@@ -5994,6 +5995,26 @@
       "evidence": [
         "changes/2026-09-15-CI-TYPES-01-installed-consumers.md",
         "baselines/installed-plugin-types-validation.json"
+      ]
+    },
+    {
+      "id": "CI-TYPES-02",
+      "phase": "2.2 GitHub CI/CD",
+      "title": "将全部库包的独立安装类型验证接入CI",
+      "scope": [
+        "workspace"
+      ],
+      "dependsOn": [
+        "CI-TYPES-01",
+        "ENG-07"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "21库包完整检查清单、实际构建和隔离安装测试调度、失败证据汇总及必需CI门槛",
+      "acceptance": "不得漏包或用通用导入替代历史类型契约；准备失败不消费旧产物；记录每包实际结果并传播失败，保留运行时/设备/未决兼容门槛",
+      "evidence": [
+        "changes/2026-09-15-CI-TYPES-02-ecosystem.md",
+        "baselines/ecosystem-types-validation.json"
       ]
     }
   ]

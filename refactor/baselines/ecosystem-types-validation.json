@@ -1,0 +1,631 @@
+{
+  "task": "CI-TYPES-02",
+  "baselineCommit": "00c131bff130fad4ff03f90d7f02c124bc177cb5",
+  "environment": {
+    "node": "v24.21.0",
+    "yarn": "1.22.22",
+    "platform": "win32"
+  },
+  "command": "yarn test:ecosystem-types",
+  "exitCode": 0,
+  "seconds": 579.13,
+  "aggregateReport": "refactor/.cache/ecosystem-types/run-NPPwIw/report.json",
+  "aggregateSha256": "8ca0708e1ab8aba81a5e37275ea995cebcb3eb13a39b14b69d544c2c9b8e6252",
+  "packages": [
+    "artplayer",
+    "artplayer-plugin-ads",
+    "artplayer-plugin-ambilight",
+    "artplayer-plugin-asr",
+    "artplayer-plugin-audio-track",
+    "artplayer-plugin-auto-thumbnail",
+    "artplayer-plugin-chapter",
+    "artplayer-plugin-chromecast",
+    "artplayer-plugin-danmuku",
+    "artplayer-plugin-danmuku-mask",
+    "artplayer-plugin-dash-control",
+    "artplayer-plugin-document-pip",
+    "artplayer-plugin-hls-control",
+    "artplayer-plugin-jassub",
+    "artplayer-plugin-multiple-subtitles",
+    "artplayer-plugin-vast",
+    "artplayer-plugin-vtt-thumbnail",
+    "artplayer-proxy-canvas",
+    "artplayer-proxy-mediabunny",
+    "artplayer-tool-iframe",
+    "artplayer-tool-thumbnail"
+  ],
+  "results": [
+    {
+      "command": [
+        "build:types"
+      ],
+      "packages": [],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 4758,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/prepare-0.log",
+        "sha256": "79bf1fe2f501cc8b002a2a756d20d45a868d0484abe5fd4240b55e82339822c6"
+      }
+    },
+    {
+      "command": [
+        "build",
+        "all"
+      ],
+      "packages": [],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 41694,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/prepare-1.log",
+        "sha256": "a0dc92d79f844a45ca64cbf27a0a0c36b0cfee8db5d26fe3b73408c8f819bdb5"
+      }
+    },
+    {
+      "command": [
+        "build:i18n"
+      ],
+      "packages": [],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 993,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/prepare-2.log",
+        "sha256": "eeb53f950f80b68326d7612c4cb2476070e15bdd74dd731154642477c13256c6"
+      }
+    },
+    {
+      "command": [
+        "test:package",
+        "--include=artplayer-plugin-audio-track,artplayer-plugin-hls-control"
+      ],
+      "packages": [
+        "artplayer",
+        "artplayer-plugin-chapter",
+        "artplayer-plugin-audio-track",
+        "artplayer-plugin-hls-control"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 35692,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-package.log",
+        "sha256": "30282ff060bdcf0d174ee6d12bd0da3f0cd2a062c01c1b21cdebd615531c0726"
+      }
+    },
+    {
+      "command": [
+        "test:ads-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-ads"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 9381,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-ads-types-package.log",
+        "sha256": "355ebf54ffe2a4b915260bfd1071c233d2cfd7f7bf6f612b3b7e575485f7ff0f"
+      }
+    },
+    {
+      "command": [
+        "test:ambilight-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-ambilight"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 28370,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-ambilight-types-package.log",
+        "sha256": "c2ce904605747fd42c02cd4aab02e1050a94b8f482a2dcc31a9387a30232783d"
+      }
+    },
+    {
+      "command": [
+        "test:asr-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-asr"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 25925,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-asr-types-package.log",
+        "sha256": "87cdcdcab0511196d448c13214842da5511a66b3605719ab6093a7dc46ef0235"
+      }
+    },
+    {
+      "command": [
+        "test:auto-thumbnail-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 26710,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-auto-thumbnail-types-package.log",
+        "sha256": "a602097dbe7489915fc8881284e966543a207fec407eaba7d7a1ad2fa7563b42"
+      }
+    },
+    {
+      "command": [
+        "test:canvas-types-package"
+      ],
+      "packages": [
+        "artplayer-proxy-canvas"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 25716,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-canvas-types-package.log",
+        "sha256": "38d3a11a95c6f06dbbd34ff16b46fd267367aa9d47944101c45c3eca730d6bc8"
+      }
+    },
+    {
+      "command": [
+        "test:chromecast-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-chromecast"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 26983,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-chromecast-types-package.log",
+        "sha256": "07090017f97a95c522239a0e72826fc542370a84e738c6a18309b932faef75ed"
+      }
+    },
+    {
+      "command": [
+        "test:danmuku-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-danmuku"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 42308,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-danmuku-types-package.log",
+        "sha256": "b6ea2178fb074987aa992a1874a70d5cd3e304b7315fd42c40b3842b92d76b5e"
+      }
+    },
+    {
+      "command": [
+        "test:danmuku-mask-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 36319,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-danmuku-mask-types-package.log",
+        "sha256": "97d8163be9147cc4d7e60e542a885fd7946d1888c5a6d0e5e6eb0a787921bdb6"
+      }
+    },
+    {
+      "command": [
+        "test:dash-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-dash-control"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 9525,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-dash-types-package.log",
+        "sha256": "7e4fdaad5d56e1a4620082ae9f09cea34f9d6906cfe65168afe0064167657c54"
+      }
+    },
+    {
+      "command": [
+        "test:dpip-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-document-pip"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 23822,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-dpip-types-package.log",
+        "sha256": "755c6dc4ce2a7ebe9b3d91a3f280694cb41e5361238949dd4466a9f34d939c76"
+      }
+    },
+    {
+      "command": [
+        "test:iframe-types-package"
+      ],
+      "packages": [
+        "artplayer-tool-iframe"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 15444,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-iframe-types-package.log",
+        "sha256": "2de2e66ffdf92fc866d7fdcb072ce2e17a7f58a203d594ab5465233545522211"
+      }
+    },
+    {
+      "command": [
+        "test:jassub-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-jassub"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 66399,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-jassub-types-package.log",
+        "sha256": "4dc33ad76235d7f0eee97de5be04e212d1c6ec6b82a0079d5d85c4d1ad11fc23"
+      }
+    },
+    {
+      "command": [
+        "test:mediabunny-types-package"
+      ],
+      "packages": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 36646,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-mediabunny-types-package.log",
+        "sha256": "d85d7599393a537820ba540ccc3753aa5406dade9f6d57061c5038d9f84eb401"
+      }
+    },
+    {
+      "command": [
+        "test:multiple-subtitles-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 33383,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-multiple-subtitles-types-package.log",
+        "sha256": "53950e4474089f8a599919e20e6ad262942c6bfbb399537bdfe4d75a66658495"
+      }
+    },
+    {
+      "command": [
+        "test:thumbnail-types-package"
+      ],
+      "packages": [
+        "artplayer-tool-thumbnail"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 12524,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-thumbnail-types-package.log",
+        "sha256": "68b90cef4929bc5061e4a6c49a5eaa2ef9769c6347db8c59697c2eabdefe7732"
+      }
+    },
+    {
+      "command": [
+        "test:vast-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-vast"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 33901,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-vast-types-package.log",
+        "sha256": "650aa1d7548bb1353cab5068781d359772abe6adec82c5a00dcd6999d3a2a835"
+      }
+    },
+    {
+      "command": [
+        "test:vtt-thumbnail-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "outcome": {
+        "code": 0,
+        "signal": null,
+        "elapsedMs": 42444,
+        "log": "refactor/.cache/ecosystem-types/run-NPPwIw/test-vtt-thumbnail-types-package.log",
+        "sha256": "e4b21b6506f543a1b3550d50279aa093562f7fa19cf9b9c1ad885372c5be7732"
+      }
+    }
+  ],
+  "detailedReports": [
+    {
+      "command": [
+        "test:package",
+        "--include=artplayer-plugin-audio-track,artplayer-plugin-hls-control"
+      ],
+      "packages": [
+        "artplayer",
+        "artplayer-plugin-chapter",
+        "artplayer-plugin-audio-track",
+        "artplayer-plugin-hls-control"
+      ],
+      "report": "refactor/.cache/packages/run-A5vxPK/report.json",
+      "reportSha256": "e060e12c9cb37340a28a6d5b58f7591dfa0bb776231573174b3510a248db2ff4",
+      "matrixCases": null,
+      "scope": null
+    },
+    {
+      "command": [
+        "test:ads-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-ads"
+      ],
+      "report": "refactor/.cache/ads-package-types-nJB3n8/report.json",
+      "reportSha256": "d5079cad3a9603b7d217f097c80898188cf9351854053052837babc576a21998",
+      "matrixCases": 5,
+      "scope": "Packed current core and Ads, offline Yarn install and frozen reinstall outside workspace; five type modes and Node export identity. Historical scalar inference correction accepted with scope by maintainer; not complete media or distribution release validation."
+    },
+    {
+      "command": [
+        "test:ambilight-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-ambilight"
+      ],
+      "report": "refactor/.cache/ambilight-package-types-9qd1GZ/report.json",
+      "reportSha256": "b032daba8ef473ccd5ac623a440b6d0468918f67b3b593528dc97a929e62ed5e",
+      "matrixCases": 17,
+      "scope": "Two actual published plugins and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, full factory replacements and required root option; runtime optional calls and self alias. Published 1.1.0 NodeNext ESM namespace and four old direct-call diagnostics are retained. Published 1.0.0 export-assignment and required fields have documented migration. This is not proxy, device or complete distribution acceptance."
+    },
+    {
+      "command": [
+        "test:asr-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-asr"
+      ],
+      "report": "refactor/.cache/asr-package-types-gxEkbj/report.json",
+      "reportSha256": "90585c9248caf2c1828344fda412ec0fa2ad41e49f59cd7e1648acc401df0a1c",
+      "matrixCases": 17,
+      "scope": null
+    },
+    {
+      "command": [
+        "test:auto-thumbnail-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "report": "refactor/.cache/auto-thumbnail-package-types-2SiaVM/report.json",
+      "reportSha256": "1e8446f3552a10333fb8843c98da0947f777e70f894abb4d8aaabf220f33cad6",
+      "matrixCases": 10,
+      "scope": "Actual npm 1.1.0 and packed candidate installed outside the workspace. Root historical type shape and conditional runtime entry are checked with exact negative lines. Registration and module identities use installed artifacts; no native extraction or device acceptance is implied."
+    },
+    {
+      "command": [
+        "test:canvas-types-package"
+      ],
+      "packages": [
+        "artplayer-proxy-canvas"
+      ],
+      "report": "refactor/.cache/canvas-package-types-ofGZBs/report.json",
+      "reportSha256": "eca64c507424d94d09966e662a4a8ebdabb329d16fdaeb76e2b25e510f936810",
+      "matrixCases": 17,
+      "scope": "Two actual published proxies and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes and root/legacy/runtime contracts. Root preserves published 1.1.0 pure factory, optional Parameters, exact HTMLCanvasElement result and NodeNext ESM namespace shape. Runtime adds accurate self identity with CommonJS/ESM and old Node10 resolution. Published 1.0.0 required callback/export= differences and 1.1.0 direct NodeNext ESM errors remain recorded. No native media, device or complete distribution acceptance."
+    },
+    {
+      "command": [
+        "test:chromecast-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-chromecast"
+      ],
+      "report": "refactor/.cache/chromecast-package-types-QwWDt7/report.json",
+      "reportSha256": "4f5a829be2847f8c1d035e32307b74e335c71a33afe3de5d1dd20dfbbe677083",
+      "matrixCases": 17,
+      "scope": "Two actual published plugins and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, full factory replacements and required root argument. Runtime adds precise callbacks, asynchronous registration and self alias. Published 1.1.0 NodeNext ESM namespace and eight original direct-consumer diagnostics are retained. Published 1.0.0 export-assignment typing conflicts are recorded separately; both versions had four optional option fields. This is not real SDK, device or complete distribution acceptance."
+    },
+    {
+      "command": [
+        "test:danmuku-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-danmuku"
+      ],
+      "report": "refactor/.cache/danmuku-package-types-DwgaqW/report.json",
+      "reportSha256": "61d3f7d9e2a12d2d4d6cc7735752550ae18c47ff31e814abcf1b96605d38558d",
+      "matrixCases": 12,
+      "scope": "Actual npm 5.3.0 and packed candidate outside workspace; offline and frozen reinstall, exact installed bytes, unchanged root declaration, full factory replacement and extraction. Old synchronous emit and object points remain root typing only. Runtime types are checked separately. NodeNext root namespace failures are compared by exact codes and line positions. This is not real playback or complete publication acceptance."
+    },
+    {
+      "command": [
+        "test:danmuku-mask-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-danmuku-mask"
+      ],
+      "report": "refactor/.cache/danmuku-mask-package-types-fpF1fe/report.json",
+      "reportSha256": "999cb03078600fbcbb8ad0d46d1a2a804dc978c252e90f8481d4837563b0ddb3",
+      "matrixCases": 15,
+      "scope": "Actual published and candidate packages installed outside workspace, offline/frozen lock stability, byte checks, strict types and CJS/legacy registration. No model startup, native inference, ESM browser or GPU acceptance."
+    },
+    {
+      "command": [
+        "test:dash-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-dash-control"
+      ],
+      "report": "refactor/.cache/dash-package-types-0nHsFN/report.json",
+      "reportSha256": "9d51cdacbfc12043d9d00bf382b8e950e240e0e26444f4e42e8f4f7d8070e1b4",
+      "matrixCases": 5,
+      "scope": "Packed current core and DASH, offline Yarn install and frozen reinstall outside workspace; isolated public type acceptance only, not complete package runtime/SDK/media release validation."
+    },
+    {
+      "command": [
+        "test:dpip-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-document-pip"
+      ],
+      "report": "refactor/.cache/dpip-package-types-Oo6fcg/report.json",
+      "reportSha256": "8a95caf9a51d29ffe66f3eae5538111c588cad67cff21d3b94fae32f7fc5a5b1",
+      "matrixCases": 27,
+      "scope": "Four actual published packages and packed candidate installed outside workspace with packed candidate core; offline and frozen reinstall, exact bytes, compiler/default/import= contracts. Candidate keeps required Parameters and assignable void Result while offering opt-in AsyncResult. Published 1.0.0 missing runtime is an explicit negative control; historical NodeNext ESM diagnostics are retained. This is not native Document PiP or complete distribution/device acceptance."
+    },
+    {
+      "command": [
+        "test:iframe-types-package"
+      ],
+      "packages": [
+        "artplayer-tool-iframe"
+      ],
+      "report": "refactor/.cache/iframe-package-types-uFIFIy/report.json",
+      "reportSha256": "78b5eb30a3796fa2fd99a8aba2c8fd878091f526bbe5dd99a4e8ea81fa0f0b46",
+      "matrixCases": 16,
+      "scope": "Actual npm archive, frozen Git workspace pack and candidate Yarn tarball installed outside workspace; byte verification, offline/frozen lock and strict positive/negative consumers. Old npm CJS namespace and distinct helper are preserved observations, not claims the candidate provides old package-name/helper aliases. Native player and distribution migration remain 05/06."
+    },
+    {
+      "command": [
+        "test:jassub-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-jassub"
+      ],
+      "report": "refactor/.cache/jassub-package-types-wjwSXn/report.json",
+      "reportSha256": "5c4d2303e4814b713e88e6b04e32a1230fba101a7c511c77f7f00919d6ac3f96",
+      "matrixCases": 15,
+      "scope": "Actual npm 1.0.0/1.1.0 and Yarn-packed candidate/core installed outside workspace; offline installation and forced frozen reinstall with unchanged lock, strictly verified installed member hashes and non-link checks; root declaration text unchanged after CRLF normalization with both raw hashes recorded, exact old diagnostics, conditional accurate runtime declarations and Node lazy factory/legacy identity. Registrars are never invoked in Node; this is not browser Worker/WASM/font rendering or publication acceptance."
+    },
+    {
+      "command": [
+        "test:mediabunny-types-package"
+      ],
+      "packages": [
+        "artplayer-proxy-mediabunny"
+      ],
+      "report": "refactor/.cache/mb-package-types-5kkstS/report.json",
+      "reportSha256": "ffc4cf21d3924abb8cd50e3851993ae7eec2d58ef3199ac4b99112b301baa5e0",
+      "matrixCases": 17,
+      "scope": "Two frozen published packages and packed candidate with packed candidate core, installed outside workspace; offline/frozen reinstall, exact bytes, default/legacy CJS/ESM runtime and compiler matrices. Exact optional whole-factory assignments checked against actual historical declaration bytes. New shim types are opt-in, without SDK declaration leakage. Historical NodeNext ESM failures remain explicit negative controls. Not native decoding, old-core runtime combinations or full distribution/license acceptance."
+    },
+    {
+      "command": [
+        "test:multiple-subtitles-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-multiple-subtitles"
+      ],
+      "report": "refactor/.cache/multiple-subtitles-package-types-RvtowJ/report.json",
+      "reportSha256": "49b134ee83b4cc8cf175e1da44dea66faa0057e528ce5fd0fbc57e92bf727687",
+      "matrixCases": 22,
+      "scope": "Three actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline frozen reinstalls and byte identity verified. Latest npm 1.2.0 factory shape, synchronous result and NodeNext namespace retained under approved ADR-025; its eight old direct-consumer diagnostics are preserved. Earlier 1.0.0/1.1.0 export-assignment conflicts have documented runtime-entry migration. Runtime asynchronous result and CommonJS namespace types pass independently. Full device and distribution acceptance remains separate."
+    },
+    {
+      "command": [
+        "test:thumbnail-types-package"
+      ],
+      "packages": [
+        "artplayer-tool-thumbnail"
+      ],
+      "report": "refactor/.cache/thumbnail-package-types-5Keo7q/report.json",
+      "reportSha256": "e3d82ff8aee8d8a64a1641e14ef9fc7aa73912ef61b666a451b4749e8c56aeed",
+      "matrixCases": 12,
+      "scope": "Frozen Git input fixture and candidate Yarn pack installed outside workspace. The frozen fixture is not an original npm archive; no recovered 3.5.31 complete archive is claimed. Candidate root/legacy runtime, offline frozen install, all files and strict consumers verified."
+    },
+    {
+      "command": [
+        "test:vast-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-vast"
+      ],
+      "report": "refactor/.cache/vast-package-types-jEi1dC/report.json",
+      "reportSha256": "7b79b9c0b84ed553659eb48f7c1b504bc012efee42c6109090019d2cd7c4a35f",
+      "matrixCases": 14,
+      "scope": "Actual published and Yarn-packed candidate installed outside workspace; offline forced frozen reinstall, member hashes and declaration path isolation. No real IMA, live ad SDK registration, device or complete task06 distribution claim."
+    },
+    {
+      "command": [
+        "test:vtt-thumbnail-types-package"
+      ],
+      "packages": [
+        "artplayer-plugin-vtt-thumbnail"
+      ],
+      "report": "refactor/.cache/vtt-thumbnail-package-types-S9W8jG/report.json",
+      "reportSha256": "77e03e48a8c21a2975753e2174b0d23d59e0098eb117967bd693ebd6d6441e3a",
+      "matrixCases": 32,
+      "scope": "Five actual published packages in five compiler modes and packed candidate in seven modes, installed outside the workspace with packed core. Offline/frozen reinstall and byte identity are verified. Root preserves latest 1.1.0 factory and NodeNext ESM namespace, including plain module replacements. Historical raw direct-import diagnostics remain recorded. Direct/default import=require forms retain opposing 1.0.x and 1.1.0 evidence; the candidate follows 1.1.0 under approved type-compatibility-policy.md and documents earlier migration. Runtime describes Promise results, writable self identity and all named types with NodeNext and Node10 including no-interop consumers. Device and full distribution acceptance remain separate."
+    }
+  ],
+  "validation": {
+    "orchestratorTests": 4,
+    "ciTests": 80,
+    "strictDocsToolsTypes": "pass",
+    "fullLint": "pass",
+    "strictToolchain": "pass",
+    "distributionContentDiff": [],
+    "remoteCI": "not run",
+    "browserDeviceAcceptance": "not run"
+  },
+  "logs": [
+    {
+      "file": "refactor/.cache/ci-types-ecosystem.log",
+      "sha256": "5dfdfd46210e14054a605027842773e3d3238eeaf3e810c11393dca4942a2dd3"
+    },
+    {
+      "file": "refactor/.cache/ci-types-ecosystem-tests-final.log",
+      "sha256": "4b25accf1f99e46242a8ed3e470c95282211f4c54283f6d6b56c47cb7dcf2054"
+    },
+    {
+      "file": "refactor/.cache/ci-types-ecosystem-ci-tests.log",
+      "sha256": "a5b12b71a9c97aea1a829fa815701b10df6c9a7d0447e75609f43dbc1d93d0ae"
+    },
+    {
+      "file": "refactor/.cache/ci-types-ecosystem-lint.log",
+      "sha256": "674c9b4d9bff48ba4fea0a6f8318705d67140250ab0f6a2541475ca54d2bc1e3"
+    }
+  ],
+  "inputs": {
+    "scripts/consumers/ecosystem.ts": "3c57cd39f62fdf1e5adedceef8f8bd02ddd346435f2a666d6929be7afafdd37f",
+    "test/ecosystem-types.test.js": "28015fa57553fbf2f38b2388e86bdfe404aae731723f4be7c5f1792b85f4cc31",
+    ".github/workflows/nodejs.yml": "2968371759010d5702f2376e3af3d5ff2fbba221c60fe6750f0bd80043db4004",
+    "refactor/scripts/ci-workflow.mjs": "5446c09ed2dec24a33d7802463e22fea1f08148fb5c5ff14998af91497b0acd1",
+    "refactor/scripts/ci-workflow.test.mjs": "fb17a605c09d70cd3eabaa14061982340340205b2be9c89debcfc433d86dd3cd",
+    "refactor/scripts/impact-model.mjs": "19804ba83b2e02556cbb66c1e90d4a71e6604d01adadf4b886f7968c2915e4fe",
+    "refactor/impact-policy.json": "058078d60305a8609ae2b8ebbda3b2dc6cfec93342a7d1aa810b8a2d0be03110",
+    "scripts/package-check.mjs": "cf19bbfd6010965e40495a9943f0d6fe9e024d110e22234490f16e7e3d461ac4",
+    "refactor/scripts/ads-package-types.mjs": "846af87f5f7f0c84fcbccecd4b3dfd6e2c1946ce47dfe7122760fe5f25cf5b6a",
+    "refactor/scripts/ambilight-package-types.mjs": "cddd0c877f19a8c4a7ca92f0599788840ee45803ec8c94748ff2f928fa10a8d0",
+    "refactor/scripts/asr-package-types.mjs": "fd450cf4ed91adf162e88832aa3ad29baf6167dbca38e3a8542152908df537e0",
+    "refactor/scripts/auto-thumbnail-package-types.mjs": "ffea1e0599ecfc85b52a8c4e18afcd642455d636ce371456c6fe21c5dc198bf9",
+    "refactor/scripts/canvas-package-types.mjs": "e5c5c6e574357261ac8aa029e348397ed43f5761782ad221e9293b5f540848f1",
+    "refactor/scripts/chromecast-package-types.mjs": "1c5666d0e71e694a7845ab3229f1c7f5112f5098885da99586c808d13f659126",
+    "refactor/scripts/danmuku-package-types.mjs": "859e96e989896f09a6bc225f3cbc4d40540808369e13a99d71976d3b87e1012c",
+    "refactor/scripts/danmuku-mask-package-types.mjs": "9acdecc6dfc91624c24b8e9e4a91f036267e4536eae180d65c3d208cc17f154c",
+    "refactor/scripts/dash-package-types.mjs": "3c9663979ff640b0d2cdc7b68f67ad76636473722057bca59cfcf4511aec741a",
+    "refactor/scripts/dpip-package-types.mjs": "85ef013a770e609399d84fbaf8ec559fa1771d6c66d2f99514060d9fa2425fe2",
+    "refactor/scripts/iframe-package-types.mjs": "8dd0006f605752ffdbf51c58bf5ee4cca503dc6c3c1793a8b03dc14fc62d27ea",
+    "refactor/scripts/jassub-package-types.mjs": "58c7520cf7e05d26d6eabb5354fd3e103588b4e213e50c6405ff2e8b2d1446cd",
+    "refactor/scripts/mb-package-types.mjs": "2f8a5ca12ada786155621315af39c346db782f08852ab3dd4736a1bf6c002da0",
+    "refactor/scripts/multiple-subtitles-package-types.mjs": "8f8fdca94bd566d2f505950a646b0c25bb8eca49d3c839ca81a3712858c456b1",
+    "refactor/scripts/thumbnail-package-types.mjs": "27318713c7ba77b0a373c29a60f102fbb43629f787d508ee83d7f0720fbe8fe3",
+    "refactor/scripts/vast-package-types.mjs": "4d33091b82536cb4198efdee906fcc04afb7c52045057ab5917d9d4e2a20eaeb",
+    "refactor/scripts/vtt-thumbnail-package-types.mjs": "f6bc446fd8e496d7ab7f0be5c6b63d88a0e458938879aed0c1e6ae4d629b22ea"
+  },
+  "scope": "All 21 library installed type checkers executed after fresh builds, including exact expected historical diagnostics. No claim of all runtime, browser, SDK/device or release acceptance."
+}

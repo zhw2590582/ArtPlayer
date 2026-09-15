@@ -321,6 +321,11 @@
       "job": "coverage",
       "command": "yarn test:coverage",
       "scope": "Current coverage-policy packages and critical module thresholds only"
+    },
+    {
+      "job": "browser-consumers",
+      "command": "yarn test:ecosystem-types",
+      "scope": "Rebuild and execute explicit installed type contracts for all 21 libraries; preserve historical diagnostics and separate runtime/device gates"
     }
   ],
   "installedConsumerPackages": [

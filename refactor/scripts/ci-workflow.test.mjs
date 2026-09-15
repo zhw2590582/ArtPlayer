@@ -67,6 +67,12 @@ for (const [name, mutate] of [
   }],
   ['browser runtime not restored', w => w.jobs['browser-consumers'].steps.find(s => s.id === 'restore-canonical-node').with = { 'node-version': '22.12.0', 'package-manager-cache': false }],
   ['skipped React consumer', w => w.jobs['browser-consumers'].steps.find(s => s.run?.startsWith('yarn test:react-consumer')).if = 'false'],
+  ['skipped ecosystem types', w => w.jobs['browser-consumers'].steps.find(s => s.run?.startsWith('yarn test:ecosystem-types')).if = 'false'],
+  ['removed ecosystem types', w => w.jobs['browser-consumers'].steps = w.jobs['browser-consumers'].steps.filter(s => !s.run?.startsWith('yarn test:ecosystem-types'))],
+  ['missing specialized type evidence', (w) => {
+    const upload = w.jobs['browser-consumers'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@'))
+    upload.with.path = upload.with.path.replace('refactor/.cache/*-package-types-*/*.json', '')
+  }],
   ['removed React consumer', w => w.jobs['browser-consumers'].steps = w.jobs['browser-consumers'].steps.filter(s => !s.run?.startsWith('yarn test:react-consumer'))],
   ['missing React evidence', w => w.jobs['browser-consumers'].steps.find(s => s.uses?.startsWith('actions/upload-artifact@')).with.path = 'refactor/.cache/ci/'],
   ['skipped Vue consumer', w => w.jobs['browser-consumers'].steps.find(s => s.run?.startsWith('yarn test:vue-consumer')).if = 'false'],
