@@ -107,3 +107,5 @@ const art = new Artplayer({
 命名类型包括 `Option`、`UpdateOption`、旧 `Result`、`RuntimeResult` 与 `RuntimeFactory`。在线编辑器的全局默认类型也保留旧推导；选择精确更新类型时，可显式使用 `artplayerPluginAudioTrack as artplayerPluginAudioTrack.RuntimeFactory`。这不会创建第二份插件实现。
 
 真实桌面测试覆盖音频/视频播放、暂停、seek、更新和销毁；它们不证明所有移动设备、代理播放器、音频格式或长时间同步组合都通过。完整支持范围仍需结合对应浏览器的解码能力与项目验收记录。
+
+Windows WebKit 的 MP4/AAC 耗尽缓冲仍有原生媒体验证缺口：该复现中视频停滞不可靠地触发 waiting。换源顺序检查通过不代表这一独立问题已关闭。

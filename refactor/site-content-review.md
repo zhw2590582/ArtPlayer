@@ -54,12 +54,26 @@ JASSUB、弹幕遮罩和 Chromecast 的本次核对：
 | Canvas | [入口](../packages/artplayer-proxy-canvas/src/index.ts)、adapter/media/renderer/scheduler/geometry/subtitles、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/proxy/canvas.md) / [English](../packages/artplayer-vitepress/docs/en/proxy/canvas.md)：可选回调、Canvas返回/媒体转发、draw/error、尺寸/字幕/生命周期、六个类型 | Canvas原生成员优先、真实video回调、位图先释放再同步回调、无Promise回调等待、首帧特例、调用方stream tracks不停止；旧根/runtime分离，无额外公开控制对象或设备能力保证 |
 | Mediabunny | [入口](../packages/artplayer-proxy-mediabunny/src/index.ts)、VideoShim/canvas-bridge/entry-lifecycle、input/preflight/tracks/hls-state/hls-selection/m3u8菜单、coordinator/playback/readiness、shim-values/frames、公开声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/proxy/mediabunny.md) / [English](../packages/artplayer-vitepress/docs/en/proxy/mediabunny.md)：13项顶层配置、两组五项菜单配置、shim全部公开成员、HLS字段、合成帧字段、11个公开类型 | 字符串后缀HLS检测、Range独立错误路径、配对/实际选中、Auto不保证ABR、兼容字段空setter、SDK fetch不由crossOrigin控制、合成TimeRanges/RVFC、全部不可解码code4与部分播放、过期操作/终止资源；设备/长期/真实SDK证据独立 |
 
+原有五份生态指南的当前语义核对：
+
+| 包 | 对照源码与声明 | 双语指南覆盖 | 保留边界 |
+| --- | --- | --- | --- |
+| Danmuku | [入口](../packages/artplayer-plugin-danmuku/src/index.ts)、danmuku/config/input/queue、scheduler/renderer、setting/setting-send/setting-slider/setting-template、heatmap/geometry/sampling、根/runtime-shared 声明 | [中文](../packages/artplayer-vitepress/docs/plugin/danmuku.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/danmuku.md)：全部配置、注册结果、Owner额外成员、18个runtime类型、11个事件与热力图选项 | 直接/加载文本不trim、原对象填默认值、浅拷贝、id不去重、filter truthy与beforeEmit严格true、追加/替换/取消、节点复用、内部返回对象非完整卸载；icons供外部复用不替换内置图标，show滑块字段未读取；#958坐标兼容及设备门槛保留 |
+| HLS Control | [入口](../packages/artplayer-plugin-hls-control/src/index.ts)、mapping/menu/sdk-events、根与ESM/CJS声明、exports | [中文](../packages/artplayer-vitepress/docs/plugin/hls-control.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/hls-control.md)：两组配置、五个类型、name/update、泛型与末尾必填重载 | 外部SDK所有权、id/索引选择、标签去重、回调可选index、ready/restart与SDK刷新、无runtime/自引用；恢复可见Run Code，仍保留Firefox两个独立故障和MSE/真机边界 |
+| DASH Control | [入口](../packages/artplayer-plugin-dash-control/src/index.ts)、sdk/mapping/menu/sdk-events/seek-buffer、根与ESM/CJS声明、exports | [中文](../packages/artplayer-vitepress/docs/plugin/dash-control.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/dash-control.md)：两组配置、五个类型、name/update、4/5 SDK方法族、同步返回与末尾必填重载 | 异步刷新中捕获同步getter/formatter异常，不支持Promise getter；菜单导航保留、ID零值、唯一轨道匹配、ABR设置、4.5.2指标定向恢复；恢复可见Run Code，SDK/设备验收独立 |
+| Audio Track | [入口](../packages/artplayer-plugin-audio-track/src/index.ts)、track、根/runtime声明 | [中文](../packages/artplayer-vitepress/docs/plugin/audio-track.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/audio-track.md)：url/offset/sync、name/audio/update、五个命名类型 | 阈值严格大于、初始空URL、同URL/空更新不换源、更新offset不即时seek、元素身份与外部监听归属、主音频不自动静音、旧必填url与runtime局部更新；明确WebKit缓冲缺口与换源排序不是同一验收 |
+| VTT Thumbnail | [入口](../packages/artplayer-plugin-vtt-thumbnail/src/index.ts)、request/parseVtt/preview/lifetime、根/runtime声明 | [中文](../packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md)：vtt/style、四个类型、异步注册、URL/裁剪/取整/首命中/端点与DOM挂钩 | 输入URL为相对图像基准、桌面精确端点隐藏/移动端无新绘制、取消仍返回名称、注册非图像解码、无update/独立destroy；root旧同步声明和runtime准确Promise分离 |
+
+本次保持全部既有可运行代码片段不变，并逐一验证当前页面的转发内容；不是将
+早期播放报告重新标为当前发布验收。十份源码指南的TypeScript片段、链接和三浏览器
+页面检查见本批证据。核心963条仍单独待核对。
+
 ## 接续范围
 
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；
   必须记录对应文档及语义结论，不能仅按同名标题匹配标为通过。
-- 已有 Danmuku、HLS、DASH、Audio、VTT 双语指南：继承各 SITE-* 任务的证据，但
-  仍需在本轮全包核对中检查其当前声明、示例和能力边界。
+- Danmuku、HLS、DASH、Audio、VTT 的当前声明/源码语义已补核对；既有媒体报告
+  仍使用原候选和原环境，不用本轮页面验证覆盖SDK、解码或设备缺口。
 - 16个插件、两个tool、两个proxy现均有独立双语指南；新增页面的参数和限制已对照
   当前源码。包内维护地图与用户指南用途不同，继续维护二者的一致性。
 - SITE-05 和 EX-03 负责后续完整页面与实际 demo 验收；静态内容核对不等待真机，

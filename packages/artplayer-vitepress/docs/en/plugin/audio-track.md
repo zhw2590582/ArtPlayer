@@ -107,3 +107,5 @@ const art = new Artplayer({
 Named types include `Option`, `UpdateOption`, the old `Result`, `RuntimeResult` and `RuntimeFactory`. The online editor's default global retains legacy inference too. To select precise update typing, explicitly use `artplayerPluginAudioTrack as artplayerPluginAudioTrack.RuntimeFactory`. This does not create a second plugin implementation.
 
 Actual desktop tests cover audio/video playback, pause, seeking, updates and destruction. They do not establish support for every mobile device, proxy player, audio format or long-running synchronization combination. Check browser decoding capabilities and the project's validation records for the applicable scope.
+
+Windows WebKit MP4/AAC starvation remains an open native-media validation issue: a stalled video does not reliably emit waiting in that reproduction. Passing source-switch ordering checks does not close that separate case.

@@ -4570,7 +4570,9 @@
         "changes/2026-09-16-SITE-04-tools-guides.md",
         "baselines/site04-tools-guides.json",
         "changes/2026-09-16-SITE-04-proxies-guides.md",
-        "baselines/site04-proxies-guides.json"
+        "baselines/site04-proxies-guides.json",
+        "changes/2026-09-16-SITE-04-existing-guides.md",
+        "baselines/site04-existing-guides.json"
       ]
     },
     {

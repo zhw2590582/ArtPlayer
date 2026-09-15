@@ -52,7 +52,7 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 ## Comment structure
 
-Only `text` is required. Leading and trailing whitespace is removed; empty comments are ignored.
+Only `text` is required. Empty or whitespace-only comments are ignored. Direct `emit()` and loaded rows retain the original text, including surrounding spaces; only the input panel trims its submitted text.
 
 ```js
 ({
@@ -66,6 +66,8 @@ Only `text` is required. Leading and trailing whitespace is removed; empty comme
 ```
 
 Explicit `time: 0` is preserved. Negative times are clamped to zero. Other than 0, 1 and 2, comment modes are ignored.
+
+Normalization fills time, mode, color and style on the supplied object before calling `filter`. The queue then receives a shallow copy; its style object is still shared. Copy reusable inputs when these mutations matter. The optional string `id` becomes the displayed element's `data-id`; it does not deduplicate comments. Text is rendered through `textContent`, not as HTML.
 
 ## All options
 
@@ -105,7 +107,7 @@ The historical root declarations still require `danmuku`; existing TypeScript pr
 ```
 
 `OPACITY`, `FONT_SIZE`, `MARGIN` and `SPEED` override slider definitions with `min`, `max` and `steps`.
-Each step can contain `name`, `value`, `hide` and `show`; margin values are pairs such as `[10, '50%']`.
+Each step can contain `name`, `value`, `hide` and `show`. `hide` suppresses its label; the retained `show` field is not read by the renderer. Margin values are pairs such as `[10, '50%']`.
 `COLOR` replaces the palette with an array of CSS color strings; an empty array uses the built-in palette.
 
 ## Array, XML and asynchronous input
@@ -300,6 +302,10 @@ Use `$ref.textContent` when adding text in a `visible` handler.
 
 ## TypeScript
 
+The `/runtime` `Owner` type describes the internal return object for existing advanced integrations. Its `art`, `option`, `queue` and `states` are live objects; `readys` is the current candidate list. `speed`, `fontSize`, `marginTop/marginBottom` and `isRotate` are computed views. Do not mutate queue state to simulate public commands.
+
+Owner's additional `start/stop` methods control comment scheduling and emit their events; `continue/suspend` resume or pause existing displayed items; `update` schedules work. These methods synchronously return Owner and do not control video playback. `resize` adjusts displayed items, while `seek` cancels old display preparation and schedules again; both return `undefined`. Owner's `destroy` cleans scheduling, nodes and input tasks and emits its destroy event, but does not fully uninstall the settings panel and heatmap. Use `art.destroy()` for complete cleanup. These additional commands are absent from the registered result.
+
 The root and `/legacy` entrypoints keep the npm 5.3.0 declaration shapes for compatibility, including historical inaccuracies about return values.
 The current branch adds `/runtime` for accurate types while loading the same runtime factory:
 
@@ -316,4 +322,10 @@ art.on('artplayerPluginDanmuku:error', onError);
 ```
 
 The explicit `EventMap` describes payloads; it does not augment the core's historical event declarations automatically.
-The factory also exposes the existing `icons` object for customization. Package `README.md` and `ARCHITECTURE.md` describe module ownership, maintenance commands and remaining device/combination validation.
+The factory also exposes the existing `icons` object for customization.
+
+Root named types are `Mode`, `Danmuku`, `Slider`, `Danmu`, `Option` and `Result`. `/runtime` exposes `Mode`, `State`, `Margin`, `Point`, `Danmu`, `NormalizedDanmu`, `Item`, `Input`, `SliderStep`, `Slider`, `Heatmap`, `NormalizedOption`, `RuntimeOption`, `Owner`, `RuntimeResult`, `Icons`, `RuntimeFactory` and `EventMap`. `Item` adds `$state/$index/$ref/$restTime/$lastStartTime`; nodes are reused and `$ref` becomes null when recycled. A node received by a visible handler does not permanently belong to that comment.
+
+`icons` contains `$on/$off/$config/$style`, the three pairs `$mode_0_off/$mode_0_on` through `$mode_2_off/$mode_2_on`, and `$check_on/$check_off`. Applications can reuse these SVG strings in their own interfaces. The built-in panel reads bundled icons directly; changing the factory icons object does not replace its icons.
+
+Package `README.md` and `ARCHITECTURE.md` describe module ownership, maintenance commands and remaining device/combination validation.

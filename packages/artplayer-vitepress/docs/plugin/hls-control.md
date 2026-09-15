@@ -25,7 +25,7 @@ import artplayerPluginHlsControl from 'artplayer-plugin-hls-control';
 下面与[在线 HLS 示例](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control)使用同一份代码和站点容器。接入自己的应用时替换容器与视频地址。
 
 <div className="run-code" data-libs="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js
-./uncompiled/artplayer-plugin-hls-control/index.js"></div>
+./uncompiled/artplayer-plugin-hls-control/index.js">▶ Run Code</div>
 
 ```js
 // npm i hls.js
@@ -159,6 +159,8 @@ const plugin = hlsControl<Level, Track>({
 ```
 
 根入口导出 `Option`、`Config`、`QualityLevel`、`AudioTrack` 和 `Result` 类型，原根入口及 legacy 路径继续保留。声明不会假定每个 ArtPlayer 实例都有 Hls.js；请在应用的集成类型中描述 `art.hls`。
+
+注册结果只有固定的 `name: 'artplayerPluginHlsControl'` 和 `update()`。工厂普通调用允许省略配置；最后一个声明重载保留必填参数，因此 `Parameters<typeof hlsControl>[0]` 仍为 `Option`，不包含 `undefined`。本包没有 `/runtime` 子路径，也没有工厂 `.default` 自引用。
 
 ## 验证范围
 

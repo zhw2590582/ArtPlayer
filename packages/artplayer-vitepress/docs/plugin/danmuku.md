@@ -50,6 +50,8 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 
 每一个弹幕是一个对象，多个弹幕组成的数组就是弹幕库，通常只需要`text`就可以发送一个弹幕，其余都是非必要参数
 
+空文本或全空白文本会被忽略。直接 `emit()` 和加载数组保留文本两端的空格；只有输入面板会裁掉提交文本两端的空白。填入 time、mode、color、style 默认值会修改传入对象，然后才执行 `filter`；队列项是浅拷贝，style 对象仍共享。需要复用原数据时请先复制。可选的字符串 `id` 会写入显示节点的 `data-id`，不会用于去重。文本通过 `textContent` 显示，不作为 HTML 解析。
+
 ```js
 {
     text: '', // 弹幕文本
@@ -98,12 +100,14 @@ https://unpkg.com/artplayer-plugin-danmuku/dist/artplayer-plugin-danmuku.js
 ```
 
 `OPACITY`、`FONT_SIZE`、`MARGIN`、`SPEED` 可覆盖滑块的 `min`、`max`、`steps`。
-每个 step 可包含 `name`、`value`、`hide`、`show`；MARGIN 的 value 是上下边距数组。
+每个 step 可包含 `name`、`value`、`hide`、`show`；`hide` 隐藏标签，保留的 `show` 字段未被渲染器读取。MARGIN 的 value 是上下边距数组。
 `COLOR` 用 CSS 颜色字符串数组替换调色板，空数组使用内置调色板。
 
 ## 生命周期
 
 `filter` 同步执行，不应返回 Promise；`beforeEmit` 可异步，但只有严格返回 `true` 才发送。`beforeVisible` 可以异步。普通函数形式的这三个回调，其 `this` 都是当前配置对象。直接调用 `emit` 不执行 `beforeEmit`，需要业务校验时请在调用前完成。
+
+运行时 `filter` 接受同步 truthy 值，`beforeVisible` 接受异步结算后的 truthy 值；旧根声明将它们限制为布尔值。建议仍显式返回布尔值，尤其不要用返回 Promise 的 `filter` 进行异步校验。
 
 来自用户输入的弹幕: 
 
@@ -625,6 +629,10 @@ art.on('artplayerPluginDanmuku:loaded', drawPoints);
 
 ## TypeScript
 
+`/runtime` 的 `Owner` 描述上述内部返回对象，便于维护已有高级调用。其 `art`、`option`、`queue`、`states` 是实时对象；`readys` 是当前候选列表，`speed`、`fontSize`、`marginTop/marginBottom`、`isRotate` 是计算视图。不要直接修改队列状态来模拟公开命令。
+
+Owner 额外的 `start/stop` 控制弹幕调度并发出对应事件，`continue/suspend` 只恢复或暂停已有显示项，`update` 安排调度；这些方法同步返回 Owner，不控制视频播放。`resize` 调整显示项，`seek` 取消旧显示准备并重新调度，两者返回 `undefined`。Owner 的 `destroy` 清理调度、节点和输入任务，发出 destroy 事件，但不等于完整卸载设置面板和热力图；完整清理由 `art.destroy()` 驱动。注册结果没有这些额外命令。
+
 根入口和 `/legacy` 保留 npm 5.3.0 的历史声明形状，其中部分方法返回值与真实运行时不一致。
 当前分支新增 `/runtime` 提供准确类型，加载的仍是同一个运行时工厂；该入口尚未发布，不能从旧 CDN 版本导入。
 
@@ -641,4 +649,8 @@ art.on('artplayerPluginDanmuku:error', onError);
 ```
 
 `EventMap` 显式描述事件参数，不会自动扩展核心历史事件声明。工厂仍暴露 `icons` 对象供自定义图标。
+
+根入口命名类型为 `Mode`、`Danmuku`、`Slider`、`Danmu`、`Option`、`Result`。`/runtime` 提供 `Mode`、`State`、`Margin`、`Point`、`Danmu`、`NormalizedDanmu`、`Item`、`Input`、`SliderStep`、`Slider`、`Heatmap`、`NormalizedOption`、`RuntimeOption`、`Owner`、`RuntimeResult`、`Icons`、`RuntimeFactory`、`EventMap`。`Item` 带有 `$state/$index/$ref/$restTime/$lastStartTime`；节点会复用，回收后 `$ref` 为 null，不能将 visible 时取得的节点当作永久归属该弹幕。
+
+`icons` 包含 `$on/$off/$config/$style`、三个模式各自的 `$mode_0_off/$mode_0_on` 到 `$mode_2_off/$mode_2_on`，以及 `$check_on/$check_off`。这些 SVG 字符串可供应用自己的界面复用。内置面板直接读取打包的图标，修改工厂 icons 对象不会替换内置面板图标。
 包内 `README.md` 和 `ARCHITECTURE.md` 维护模块职责、验证命令及尚未完成的设备和组合验收。

@@ -25,7 +25,7 @@ For script tags, load ArtPlayer, dash.js and `dist/artplayer-plugin-dash-control
 The example matches the [online DASH example](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control). Replace the site's container and media URL in your application.
 
 <div className="run-code" data-libs="https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js
-./uncompiled/artplayer-plugin-dash-control/index.js"></div>
+./uncompiled/artplayer-plugin-dash-control/index.js">▶ Run Code</div>
 
 ```js
 // npm i dashjs
@@ -141,7 +141,7 @@ art.plugins.artplayerPluginDashControl.update();
 
 Automatic refresh preserves an open, plugin-owned quality or audio settings panel. Explicit `update()` keeps its existing rebuild behavior. Reserve `dash-quality` and `dash-audio` for the plugin's menu names.
 
-If an asynchronous SDK getter or formatter fails, the plugin warns, stops that observation and clears its menus. Fix the formatter/SDK state and call `update()` to recover. Explicit update and synchronous selection errors keep their normal throwing behavior.
+If a synchronous SDK getter or formatter throws during an asynchronous refresh scheduled by an SDK event, the plugin warns, stops that observation and clears its menus. Fix the formatter/SDK state and call `update()` to recover. Getters and formatters must return synchronously; the plugin does not await their Promises. Explicit update and synchronous selection errors keep their normal throwing behavior.
 
 ## SDK ownership and source switching
 
@@ -172,6 +172,8 @@ const plugin = dashControl<Level, Track>({
 ```
 
 `Option`, `Config`, `QualityLevel`, `AudioTrack` and `Result` are exported from the root. Root and legacy paths remain available. If using actual SDK declarations, dash.js 4.5.2 exposes `BitrateInfo` for quality; 5.2.1 uses `Representation`. Its declarations have different compiler/module-resolution requirements, so test your actual SDK and TypeScript combination. Describe the externally attached `art.dash` in your application's integration types.
+
+The registered result contains only the fixed `name: 'artplayerPluginDashControl'` and `update()`. Ordinary factory calls may omit the options, while the last declaration overload keeps its parameter required: `Parameters<typeof dashControl>[0]` remains `Option`, without `undefined`. This package has no `/runtime` subpath or factory `.default` self-alias.
 
 ## Validation scope
 

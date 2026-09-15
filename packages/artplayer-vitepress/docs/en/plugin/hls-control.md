@@ -25,7 +25,7 @@ For script tags, load ArtPlayer, Hls.js and the plugin's `dist/artplayer-plugin-
 The example uses the site's player container and the same source as the [online HLS example](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js%0A./uncompiled/artplayer-plugin-hls-control/index.js&example=hls.control). Replace the container and stream URL in your application.
 
 <div className="run-code" data-libs="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js
-./uncompiled/artplayer-plugin-hls-control/index.js"></div>
+./uncompiled/artplayer-plugin-hls-control/index.js">▶ Run Code</div>
 
 ```js
 // npm i hls.js
@@ -159,6 +159,8 @@ const plugin = hlsControl<Level, Track>({
 ```
 
 Public `Option`, `Config`, `QualityLevel`, `AudioTrack` and `Result` types are exported from the root entry. The root and legacy import paths remain available. The types do not pretend every ArtPlayer instance already owns an Hls.js engine; describe `art.hls` in your application's integration types.
+
+The registered result contains only the fixed `name: 'artplayerPluginHlsControl'` and `update()`. Ordinary factory calls may omit the options, while the last declaration overload keeps its parameter required: `Parameters<typeof hlsControl>[0]` remains `Option`, without `undefined`. This package has no `/runtime` subpath or factory `.default` self-alias.
 
 ## Validation scope
 

@@ -75,6 +75,8 @@ For historical compatibility, start and end times are rounded down to whole seco
 
 Desktop hover selects a cue using the progress percentage multiplied by the video duration. Gaps hide the preview, and previews near the edges are aligned inward. The mobile path responds to progress dragging with an input event and hides about 500ms after the last drag update. Desktop coverage does not establish real touch-device support.
 
+The selected position must be strictly inside the progress bar. Desktop progress at exactly 0 or 1 hides the preview. Those mobile endpoints do not draw a new preview, but an existing preview still hides on its timer. The plugin uses control name `vtt-thumbnail` and CSS class `art-control-thumbnails`; preserve these existing hooks.
+
 ## Asynchronous registration, errors and cleanup
 
 Registration fetches and parses the VTT and actually returns a Promise. Its success result contains only `name: 'artplayerPluginVttThumbnail'`. Installation through the constructor's plugins array is asynchronous; do not assume that the result is registered immediately after construction.

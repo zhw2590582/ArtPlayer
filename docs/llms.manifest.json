@@ -60,7 +60,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
-      "sha256Lf": "6bca6009903dcc933689f69b48cf8611a63057e74ea0e1d782fba644eada178f"
+      "sha256Lf": "18261b1051ace8d399844e3e6c887a36d224cde76b305f4a54c98e0bdb472c3c"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md",
@@ -80,11 +80,11 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/danmuku.md",
-      "sha256Lf": "a563349b064adac119dac943060ffc5bc82a8ccbd6e20d2d7b5a1e1cb4d66ba2"
+      "sha256Lf": "ddd9972d86649b7785070adc80af2dc4ce5fd2c760839b2e4ac6dc60bcd4ccb0"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/dash-control.md",
-      "sha256Lf": "0ccfc925832c7e0643d1e6a0927390742f4640a3ac2f1eeeed6b40df3409007b"
+      "sha256Lf": "99b81ae9bcaa685349dd29000c7383fd4c7648fdfc9e692d6f528681c0600502"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
@@ -92,7 +92,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
-      "sha256Lf": "c0271b386e44fcc47c9aad017b3b02f75bb3baec830bca9634edcb2060cd91d3"
+      "sha256Lf": "2b3e6ea43f5a319c968275dbf3479314e8c51da0fc5205cb5315682368fd09d7"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/jassub.md",
@@ -108,7 +108,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
-      "sha256Lf": "0c6a11dae51a13e13bb90cc6900c588529be57de638d1de2ce894a8ef9050e5a"
+      "sha256Lf": "555caaf6f4f70a04858a2bbb893d55fe51be313d088c290ef5872255323c6116"
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/proxy/canvas.md",
@@ -347,5 +347,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "67cbe1b66a5cc5691d4269d6ef7aad79c31ed5e7ca09f1986c2257eccad1cad4"
+  "outputSha256Lf": "d61044c4c29aa6a07b8b259cccf05b414f36f2fab86d792536e3e45c4d7ff0f5"
 }

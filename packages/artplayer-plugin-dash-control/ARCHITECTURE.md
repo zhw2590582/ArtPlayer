@@ -91,8 +91,10 @@ Replacing `art.dash` requires ready/restart or explicit update to bind the new S
 Release invalidates the record before calling the captured `off` method and attempts
 every owned removal. Reentrant replacement wins; caller listeners remain installed.
 
-An asynchronous SDK getter/formatter failure stops observation, clears owned menus,
-and warns with the original error. Restore the offending formatter/SDK state and
+During asynchronous SDK-event refresh, a synchronous getter/formatter exception
+stops observation and clears owned menus. Getters and formatters must return
+synchronously; their returned Promises are not awaited. The plugin warns with the
+original error. Restore the offending formatter/SDK state and
 call explicit `update()` to recover. Explicit update and synchronous menu errors keep
 their original throwing behavior. Never convert the public update API to a Promise
 or destroy an SDK to handle a plugin rendering failure.

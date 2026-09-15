@@ -25,7 +25,7 @@ import artplayerPluginDashControl from 'artplayer-plugin-dash-control';
 下面与[在线 DASH 示例](https://artplayer.org/?libs=https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js%0A./uncompiled/artplayer-plugin-dash-control/index.js&example=dash.control)使用相同代码。接入应用时替换站点容器和视频地址。
 
 <div className="run-code" data-libs="https://cdnjs.cloudflare.com/ajax/libs/dashjs/5.2.1/modern/umd/dash.all.min.js
-./uncompiled/artplayer-plugin-dash-control/index.js"></div>
+./uncompiled/artplayer-plugin-dash-control/index.js">▶ Run Code</div>
 
 ```js
 // npm i dashjs
@@ -141,7 +141,7 @@ art.plugins.artplayerPluginDashControl.update();
 
 自动刷新会保留已打开、由插件管理的画质或音轨设置子菜单；显式 `update()` 保留原有重建行为。插件使用 `dash-quality` 和 `dash-audio` 菜单名，其他菜单请避开这些名称。
 
-异步 SDK getter 或格式回调失败时，插件会输出警告、停止该观察并清除菜单；修正回调或 SDK 状态后调用 `update()` 恢复。显式更新和同步选择的错误仍按原语义抛出。
+SDK 事件触发的异步刷新中，若同步 SDK getter 或格式回调抛错，插件会输出警告、停止该观察并清除菜单；修正回调或 SDK 状态后调用 `update()` 恢复。getter 和格式回调必须同步返回，插件不会等待它们返回的 Promise。显式更新和同步选择的错误仍按原语义抛出。
 
 ## SDK 所有权与换源
 
@@ -172,6 +172,8 @@ const plugin = dashControl<Level, Track>({
 ```
 
 根入口导出 `Option`、`Config`、`QualityLevel`、`AudioTrack` 和 `Result`，原根入口与 legacy 路径继续保留。使用实际 SDK 声明时，dash.js 4.5.2 的画质类型为 `BitrateInfo`，5.2.1 使用 `Representation`；其编译器与模块解析要求不同，应验证实际 SDK/TypeScript 组合。在应用的集成类型中描述外部附加的 `art.dash`。
+
+注册结果只有固定的 `name: 'artplayerPluginDashControl'` 和 `update()`。工厂普通调用允许省略配置；最后一个声明重载保留必填参数，因此 `Parameters<typeof dashControl>[0]` 仍为 `Option`，不包含 `undefined`。本包没有 `/runtime` 子路径，也没有工厂 `.default` 自引用。
 
 ## 验证范围
 

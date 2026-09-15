@@ -186,7 +186,7 @@ const config = {
           ],
         },
         {
-          text: 'Proxys',
+          text: 'Proxies',
           collapsible: true,
           items: [
             { text: 'Canvas', link: '/en/proxy/canvas' },
