@@ -152,7 +152,7 @@
     },
     {
       "file": "docs/assets/ts/artplayer-tool-thumbnail.d.ts",
-      "sha256Lf": "9b72d10a1fe964d54fcf4774770074058ea739b4f734b52b8f4adebb37fc83e6"
+      "sha256Lf": "f2845ec0a890d001829dbca089ccc450f8e77817e497c5738f964c2920772f3f"
     },
     {
       "file": "docs/assets/ts/artplayer.d.ts",
@@ -287,5 +287,5 @@
       "sha256Lf": "967db6e5026a2fd3cc24d8a04e5c78859f543d0c0f6d4f9599c103e4e93c9b29"
     }
   ],
-  "outputSha256Lf": "95acc15ff00744f6a03d8de4170dae370c06952a4c2d0463b0ab3408176bea27"
+  "outputSha256Lf": "876007aa4a3a83186a2615b12ca2262c921e568ae0f4a67847da9b95a4572b26"
 }

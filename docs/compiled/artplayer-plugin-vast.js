@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-vast.js v1.2.0
+ * artplayer-plugin-vast.js v2.0.0
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.

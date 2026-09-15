@@ -1,0 +1,904 @@
+{
+  "schemaVersion": 1,
+  "task": "REL-09",
+  "verifiedAt": "2026-09-15T16:46:07.872Z",
+  "startedFrom": "69ad6fb17edcd3659856e40ac93411a29f093111",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "lockfile": {
+    "path": "yarn.lock",
+    "sha256": "aa33cfc38c7933ab53ce626a911fdafd7b14023e45f93ca37bf7f2f6a1d3ecce",
+    "changedFromHead": false,
+    "additionalTrackedLockfiles": false
+  },
+  "registry": {
+    "path": "refactor/baselines/version-registry-prepared-2026-09-16.json",
+    "sha256": "650eaa6270e23a4f1332acc186833e1ad714450a0f9902c364673ac47ddfdd5d"
+  },
+  "commands": [
+    {
+      "command": "yarn install --frozen-lockfile --offline --non-interactive",
+      "exitCode": 0,
+      "durationSeconds": 31.23,
+      "log": {
+        "path": "refactor/.cache/rel09-frozen-install.log",
+        "sha256": "85c0a638191a0fe7fa75147f8dc9d471a566389461f48faee17d19e2d6e36c76"
+      }
+    },
+    {
+      "command": "yarn check:toolchain --strict",
+      "exitCode": 0
+    },
+    {
+      "command": "yarn ci:build",
+      "exitCode": 0,
+      "durationSeconds": 63.01,
+      "importTests": {
+        "pass": 5,
+        "fail": 0
+      },
+      "log": {
+        "path": "refactor/.cache/rel09-ci-build.log",
+        "sha256": "189ef06cfe674230edd8ff729c0a66721935e5c99e5cf55ca29a65da21236676"
+      }
+    },
+    {
+      "command": "yarn ci:check",
+      "exitCode": 0,
+      "groups": [
+        {
+          "tests": 2952,
+          "pass": 2952,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "durationMs": 38456.8898
+        },
+        {
+          "tests": 180,
+          "pass": 180,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "durationMs": 26340.8869
+        },
+        {
+          "tests": 627,
+          "pass": 627,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "durationMs": 140192.6386
+        }
+      ],
+      "log": {
+        "path": "refactor/.cache/rel09-ci-check.log",
+        "sha256": "83b69377f51f1918ebbc763a15c923b2e6eaf91dab687177d9b50df1e436e0b0"
+      }
+    },
+    {
+      "command": "yarn test:react-consumer",
+      "exitCode": 0,
+      "durationSeconds": 34.29,
+      "log": {
+        "path": "refactor/.cache/rel09-react-consumer-final.log",
+        "sha256": "9891f20186ccaef32e67bfd07b92fe15308ae05a5fb089eca3e2c373cb2c54a5"
+      }
+    },
+    {
+      "command": "yarn test:vue-consumer",
+      "exitCode": 0,
+      "durationSeconds": 45.71,
+      "log": {
+        "path": "refactor/.cache/rel09-vue-consumer-final.log",
+        "sha256": "f037faca66f61079007678ca9202767be9000398dc12dd79eeef56cd8a4a1839"
+      }
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js refactor/scripts/react-consumer.mjs refactor/scripts/vue-consumer.mjs",
+      "exitCode": 0
+    }
+  ],
+  "packedVersions": {
+    "report": {
+      "path": "refactor/.cache/rel09-packs-NmKjMx/report.json",
+      "sha256": "2738299763fe599b9e290eaeded5466e0a884375a48d6428a84278531c4b75de"
+    },
+    "procedure": {
+      "path": "refactor/.cache/rel09-pack-validation.mjs",
+      "sha256": "e95d7c0285eb29e59f3e6d2dcc000688dbbe1c6ff3d4f5981e96f23f78831bcf"
+    },
+    "packages": [
+      {
+        "name": "artplayer",
+        "version": "6.0.0",
+        "archiveSha256": "36466dabee011a897c04fa2f8aad159ebd82b290f5ef48b8ad46836d4dd30659",
+        "changelogSha256": "1444e953d4d41afa3fabb4348c777a00e6b834492b0875a52d41a85cbaa83eb8",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer.js",
+            "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+          },
+          "legacy": {
+            "path": "dist/artplayer.legacy.js",
+            "sha256": "78f8973cf1863b778050140f03736e5d09fd262ffb338a1e2c57dd9b6317a684"
+          },
+          "module": {
+            "path": "dist/artplayer.mjs",
+            "sha256": "abbd13775eb45a7e9dbb1ef31ed3600dc7c12de396ec8ca522e890c12f58d6a7"
+          }
+        },
+        "files": 69
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "version": "3.0.0",
+        "archiveSha256": "9cd76ae1f347ec949e2b724e69e446b30bd4e10db5ae1f650769b57ff02306eb",
+        "changelogSha256": "35e674dd9274d1e0747cf52be576642a84a9f347a994a70141d9a8943c35d432",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-ads.js",
+            "sha256": "0f89f889667a34af6c246526ec2511d04c84a84dca9f2886d06cdb78f55f6061"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-ads.legacy.js",
+            "sha256": "29c038b3204d94ec073c5afb77ae404dc4a7dc9ea9c0fa4e00e7ed6b5ca8ca2a"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-ads.mjs",
+            "sha256": "58d7d31b020acd832238d1a439db3c8b3446cfadb0117e02b67d8a20a9476d4c"
+          }
+        },
+        "files": 13
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "version": "2.0.0",
+        "archiveSha256": "c56c9475306609cf3665f37c735d23ac355cb36e9cb3004f70543ae11aa9f562",
+        "changelogSha256": "ff23c1fdc964ee49565cb429b39ba96c4ba4bdb80d4a8d19abeb779c270110a8",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-ambilight.js",
+            "sha256": "158e099f514153cbb74accdc4d39fb1535efd7c4327311a8d9877f565083ad30"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-ambilight.legacy.js",
+            "sha256": "2d27124d910d2aacce80a0c124eeb873fea10d8e951e68074277e06612f0f421"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-ambilight.mjs",
+            "sha256": "ab66594ca3308025fcd842c8ba4c1b0bc0f0ad594ce7731d07a879beaf5b31dc"
+          }
+        },
+        "files": 11
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "version": "3.0.0",
+        "archiveSha256": "3a202f5f8aba8ea3550fb9268e78399364937637293b0e8e276ced702e33330b",
+        "changelogSha256": "1b771a0ff075c7dec5b0c846ab9524c3426ff75d8069b416c5dd08ba6ab05a50",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-asr.js",
+            "sha256": "9c67a929c605474299289a1235b36380e690199845856b2662e3868ad5328866"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-asr.legacy.js",
+            "sha256": "81077cd064710602b9ff637ca1de0ec2fc64e7428f59df08cc2c5107c60f830b"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-asr.mjs",
+            "sha256": "1b65897a656c3aac9c09e1ebf6465da523a7338f123c0fe8dfaf84fe12c30109"
+          }
+        },
+        "files": 11
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "version": "2.0.0",
+        "archiveSha256": "30c29f44f4e4d252b06d6f7ccacc8f197bec1f47c9bebad030749adfd78ea3a4",
+        "changelogSha256": "a09c9cc4a4fd7ae67d3b5cb0af547282ff55a04dc2c6f52c94ec92aa42f76fca",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-audio-track.js",
+            "sha256": "4f63f1040f0da7cfa5af993e107e0abbb53fa86cf3b66a8bde3fa9e48cc407b5"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-audio-track.legacy.js",
+            "sha256": "c3e9b2bc73043449589a4d7f5066b9ea0284be237092ef889b408235394938ec"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-audio-track.mjs",
+            "sha256": "16ed602d7b1c4b9bf7bafa5aee5acd45a25295ffd0b805d9453f8c0225ac18d4"
+          }
+        },
+        "files": 13
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "version": "2.0.0",
+        "archiveSha256": "5e5d091dbe1ea680899f16d175875a3c822fc8ecdf61724a8c7c26f794bea955",
+        "changelogSha256": "98d7270c85b530ed3edd7dc7c31e2b1beff40a124b72e576b325a3d60b25c609",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-auto-thumbnail.js",
+            "sha256": "186a64cc377e028570d9634d188595352433ad81778dd7cc7f617d4d37dafdb4"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-auto-thumbnail.legacy.js",
+            "sha256": "aa20044bc9ea842e4798d783cca81d8f3bf96433c1b42d0a3454dd5284454b66"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-auto-thumbnail.mjs",
+            "sha256": "72bac6db0a6b23bdfcc603ba5924a7e4418c04120d800068e906dad2833f14a2"
+          }
+        },
+        "files": 12
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "version": "2.0.0",
+        "archiveSha256": "bc703de53b37225db0845109e73704980b90dc7952dba6fe30329ec2c2ea5917",
+        "changelogSha256": "ddd2fdeb7cc25324f0f8095993e0ca484cab5b8eec2718b5a639bcf76e9d4a00",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-chapter.js",
+            "sha256": "0219643958932ad9eedb4ac1b4de5dab622c3750558ac18f23d617c05fd26cfa"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-chapter.legacy.js",
+            "sha256": "df32619b7092d8450195c0426bff77e48f89f584124ebdc9f1626e89bc99c248"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-chapter.mjs",
+            "sha256": "a926bad28a80691d6862ff8c294963b6c1664cdcdd06474f0e703c10be8ec8d5"
+          }
+        },
+        "files": 10
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "version": "2.0.0",
+        "archiveSha256": "ce758d97058e92983d50041881f180304339ad1f4f0586d01980becaefa1872a",
+        "changelogSha256": "abbd3a84553e83d9a2f2a62dfac85efb46b9c0cb897955af231c8fe99a80a4f6",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-chromecast.js",
+            "sha256": "af07fc1d768a90c444e9510bd60faf1878f63d30dec9ed6a8f91344afae6dc85"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-chromecast.legacy.js",
+            "sha256": "884c4f105faf8326c04d6e204180093112908dae388454ee0a44e03c6ca47992"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-chromecast.mjs",
+            "sha256": "e5724e1de64766dfc97a591dbef51af13ad74ddb3b957b911b06468f62338184"
+          }
+        },
+        "files": 11
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "version": "6.0.0",
+        "archiveSha256": "35eec7b71e928513b3ef5cf51913394952b928f671c75caca653e323d47b480b",
+        "changelogSha256": "eb3326d392f2556b654924d2b3e405070688da698a20015fe4dcc4f6a37fe728",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-danmuku.js",
+            "sha256": "fe55cf98d31c65c21c90762ac4fe332436e1a4da562c3ca40501bfca3a5685a1"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-danmuku.legacy.js",
+            "sha256": "b722255cf172f1e278dc1251e1350bcf895dbd75b9290f393c319a393466c929"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-danmuku.mjs",
+            "sha256": "d65a09d181e2572c9672cb6f0ddca05a9969cfa276c911c1d370fd97719a92b3"
+          }
+        },
+        "files": 12
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "version": "2.0.0",
+        "archiveSha256": "e88039cf66a7d3f5215bbaee4ab057a0bfd8a396431f3a7e8db71b45bd927411",
+        "changelogSha256": "172002b254b5718245eab9edf62b91c5f2b1fbe63a992208c7472bd448a4f967",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-danmuku-mask.js",
+            "sha256": "b0aab5fea7ba36d19fe7b14c6d4df7d97c6c4359e40d2821e883830b286110ec"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-danmuku-mask.legacy.js",
+            "sha256": "1f9941386e5ff3be04295e37877d990c558e39df61eaa7e661c7dc2e38dbacb8"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-danmuku-mask.mjs",
+            "sha256": "6bdb377e56f14dfb2ffaeaad4437499b20a1077c494ec6568f09fe8814300087"
+          }
+        },
+        "files": 9
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "version": "2.0.0",
+        "archiveSha256": "982add478246dbd1bed35c330cab2fa1be72a48c14d39de2e6d14e9d671e0207",
+        "changelogSha256": "680cde6a4112c0755db3b547305c512b7698b1bb757f1b0aa6e2317a400076dc",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-dash-control.js",
+            "sha256": "0758643c74555d9d3439fd4f16ec8d9d82acafb6297a3673b3d3f97c2b5208d4"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-dash-control.legacy.js",
+            "sha256": "fe0ff509089e20d596d0c4d70c2ddd3cdbb20722326b17ebbd2f979b187ffaef"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-dash-control.mjs",
+            "sha256": "bee86eb5b1555314c553309033725c515468ebe34f8b5046cc0043cab36bcda1"
+          }
+        },
+        "files": 10
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "version": "2.0.0",
+        "archiveSha256": "6c47e4498ace47363dd632967903a271f3f10556bddefc9d99d8d80285886f97",
+        "changelogSha256": "dac1aa0aa553023aceb20f52d198b25c1105c3735f4caee437cc4cccaad6eef8",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-document-pip.js",
+            "sha256": "ca239553684e2ea3a8ee4ad9c595d28627555fd6c225a015ec4f1a5c6ba2905e"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-document-pip.legacy.js",
+            "sha256": "cfa2ecfc9d89c66fc848008e605cb960371e1f2cb64584183be2992db5a4f1fb"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-document-pip.mjs",
+            "sha256": "8fb440a5b6c5399b1b39c5bd0243ba52016df52d6431e06b3a39efc044ab3806"
+          }
+        },
+        "files": 10
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "version": "2.0.0",
+        "archiveSha256": "fa22a8c2ce15c76395ea2b19b919585ce56231582c7955f799bd99c309c5a796",
+        "changelogSha256": "87417eff37486db9653f7992c9d36076e0288077da6234ba10090515e08c3a37",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-hls-control.js",
+            "sha256": "1b00e29272ad720cdcd7f2c30ad777bed07f4ea0dc385ef6035bc5e813942d30"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-hls-control.legacy.js",
+            "sha256": "32cb24386ad85d9d1806ef134a3d7db774537395d55528a746b9f5d7e1b9d86a"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-hls-control.mjs",
+            "sha256": "b216eb6d5701e5f084d8cd7ea61a6ddbb9488023fd4144342642ba316a7ed671"
+          }
+        },
+        "files": 10
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "version": "2.0.0",
+        "archiveSha256": "ba1ae91fdd1e43e8ab8181b2a4de306dad73f2a7ee8aa061ca417a7905ebffc9",
+        "changelogSha256": "af91fda10ead107aca4ed3324f3da308b064845ae59850e5f1cafe12912c9aa9",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-jassub.js",
+            "sha256": "f26ddb7733e6d3ca941e1567c9245a3a9eb4cfd2471029ab197eae207c78b4c3"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-jassub.legacy.js",
+            "sha256": "87b50c68361da3d57b490ac931682699a28b6a0defefecc14d8ce39a1820c9fd"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-jassub.mjs",
+            "sha256": "f1f33eda651516a3d51a37397fffd73fdfb57d5874566ac6a52af4a6279fe89e"
+          }
+        },
+        "files": 16
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "version": "2.0.0",
+        "archiveSha256": "382297a329cb750ffd0552717b7d59421e4aa11db7ea5ea801ee9d719ffa062e",
+        "changelogSha256": "e4f7d91b3508bc2d571eb4543793d350d79f9737bd8d7e8ef1c27b47f5109b8a",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-multiple-subtitles.js",
+            "sha256": "7322c9a344da5eee595e982ed9b8f898554362fc484938f6147178473c716139"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-multiple-subtitles.legacy.js",
+            "sha256": "ddc2f0d569083590621540d5df48f1f55fdb4d6be57a77555531ca094ccc42df"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-multiple-subtitles.mjs",
+            "sha256": "82fdc3658dc3f5bb665a1a634e270ae08a00a47ebfcab456f21edabe019cd049"
+          }
+        },
+        "files": 12
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "version": "2.0.0",
+        "archiveSha256": "49f90faba9f5e6509d49aa7b7fb37e7a6acabbf78173cd008732426b5e24366a",
+        "changelogSha256": "371a68aa4b892f3bdf9597fd35dc42900abb484b49df2d9ca90e971c26d998b7",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-vast.js",
+            "sha256": "73276e5c8f08bad1a2b7ca0a1c2e81234dbd0f10eb15ab34bdb845d04fe4b85f"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-vast.legacy.js",
+            "sha256": "f590eedeb3cfb0eb5d86f76ac98bb1ea306558999d14689ce83703b2368a5a75"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-vast.mjs",
+            "sha256": "3ce7383e4123c52aa189202a82233c8a8dcf68b8d20fe5fd9456f755101ee380"
+          }
+        },
+        "files": 12
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "version": "2.0.0",
+        "archiveSha256": "117f7feddc84bcd467c96dccde3a57c22f6b17609eb6f6faae3ab74493d3fdd0",
+        "changelogSha256": "f579f97ebf51cab26191c301d9f00035d68e04979215d22b2b03c6a00cbe7c8b",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-plugin-vtt-thumbnail.js",
+            "sha256": "d6a9882fdbde36e30cfa59f59d72f299f89522d85a1b06bdc206659c831bc1a0"
+          },
+          "legacy": {
+            "path": "dist/artplayer-plugin-vtt-thumbnail.legacy.js",
+            "sha256": "92539d993e2e2655da5d7ff5773e1d390fd869878b7d46fdc0d0e47c8b7b3bd9"
+          },
+          "module": {
+            "path": "dist/artplayer-plugin-vtt-thumbnail.mjs",
+            "sha256": "514217471dc1b2a1802f5e92fda9107577165442547011fbd8bdb981c03203c3"
+          }
+        },
+        "files": 13
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "version": "2.0.0",
+        "archiveSha256": "bfa575903b78adb9733004655c9a057b0d81e1c74b8db7300da267fedce439b9",
+        "changelogSha256": "8c9953292d8c1fe4bb05b3e088e2b67aa2ac959fdbcc42efc276f9a846725d81",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-proxy-canvas.js",
+            "sha256": "af1a30506cec0a3175b2fcc3a5243900426910c17e0a8cededce8eff4e6fb217"
+          },
+          "legacy": {
+            "path": "dist/artplayer-proxy-canvas.legacy.js",
+            "sha256": "17d32dc71098a299efd21a7befa31df3b849b5d3740c3b3f6ad652616126219e"
+          },
+          "module": {
+            "path": "dist/artplayer-proxy-canvas.mjs",
+            "sha256": "d4fa408cfb6979355fdffdcbd1655fa60803398af2614827ed16c2c41402ac5b"
+          }
+        },
+        "files": 13
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "version": "2.0.0",
+        "archiveSha256": "902f654653bdc8cfc171349592763c997d797fb31ae67a6e5ea3bc7c53e9db81",
+        "changelogSha256": "377735ae964f20f6c9050762812e544351a7b28c9e9a319b023dad6f4b037a20",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-proxy-mediabunny.js",
+            "sha256": "662598a27e1757692ce4bd560c376bc96520d172ed67427ec519bd269896fa92"
+          },
+          "legacy": {
+            "path": "dist/artplayer-proxy-mediabunny.legacy.js",
+            "sha256": "911711b1305b96b060e1bd73012cf1eb89b8f92982a44a8b0786bf29afbe16a0"
+          },
+          "module": {
+            "path": "dist/artplayer-proxy-mediabunny.mjs",
+            "sha256": "b63bcb5ca0f6f06f31540397696a1fdba66bfa4df84aad2d06f913f5c6227b8b"
+          }
+        },
+        "files": 10
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "version": "2.0.0",
+        "archiveSha256": "5508d1bbf9ba5da69ea97ee885167dcaadf2b08bd984f06289bc7a2d72016e79",
+        "changelogSha256": "30a8b02b756c8a8c7a6864f22653d1a5cc7dbf86e9c2c489de221b247ac82ad4",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-tool-iframe.js",
+            "sha256": "cb8b4ecffaf0168a3489943b293d9a82a6106e74341fe64d6dc887b47af8eb5b"
+          },
+          "legacy": {
+            "path": "dist/artplayer-tool-iframe.legacy.js",
+            "sha256": "0a2f4d60d25d67c388d187170bf7ea0ab3dc910ef4f50390b89010fc3ae2b2fc"
+          },
+          "module": {
+            "path": "dist/artplayer-tool-iframe.mjs",
+            "sha256": "71fff5dc0387c18e7e5d24dee18493a5c3806ae86bf0e26a4d1fc5f72bc5775b"
+          }
+        },
+        "files": 10
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "version": "5.0.0",
+        "archiveSha256": "8f78d1316c532efa7283f08001d3d595ed77596dcf2527aaebb232241a560eba",
+        "changelogSha256": "ed09dc3741bcf9ebe06842d709cad72bb6ffc55237feb53e2c763ff017376863",
+        "entries": {
+          "main": {
+            "path": "dist/artplayer-tool-thumbnail.js",
+            "sha256": "a254d9d66943bd302719edae040d6ee5e0a32f7c9f1ae0727be8cb6c5a335511"
+          },
+          "legacy": {
+            "path": "dist/artplayer-tool-thumbnail.legacy.js",
+            "sha256": "6dc0f7f84939a100d93a91943e077db5c2335a2671075d5687a104f797022609"
+          },
+          "module": {
+            "path": "dist/artplayer-tool-thumbnail.mjs",
+            "sha256": "4ba4a874a49b628bb8cdb09e53555c4ef2765694cee274a519bf509e1f661492"
+          }
+        },
+        "files": 12
+      }
+    ],
+    "siteVersion": "2.0.0",
+    "coreEsmRuntimeVersion": "6.0.0"
+  },
+  "consumers": [
+    {
+      "framework": "react",
+      "report": {
+        "path": "refactor/.cache/react-consumer-AKNaST/report.json",
+        "sha256": "088db947b50dd3ca39cf3f3faf7a67e0173d7cda34f2203ed49e90ccf01d7af4"
+      },
+      "types": {
+        "version": "5.9.3",
+        "diagnostics": []
+      },
+      "packages": [
+        {
+          "name": "artplayer",
+          "version": "6.0.0",
+          "sha256": "36466dabee011a897c04fa2f8aad159ebd82b290f5ef48b8ad46836d4dd30659"
+        },
+        {
+          "name": "artplayer-plugin-danmuku",
+          "version": "6.0.0",
+          "sha256": "35eec7b71e928513b3ef5cf51913394952b928f671c75caca653e323d47b480b"
+        },
+        {
+          "name": "artplayer-plugin-document-pip",
+          "version": "2.0.0",
+          "sha256": "6c47e4498ace47363dd632967903a271f3f10556bddefc9d99d8d80285886f97"
+        }
+      ],
+      "profiles": [
+        {
+          "mode": "development",
+          "engine": "chromium",
+          "version": "153.0.8010.12",
+          "checks": [
+            "strict-mode-and-plugin-registration",
+            "stable-props-retain-instance",
+            "callback-change-cleans-old-instance",
+            "option-change-cleans-old-instance",
+            "native-play-pause-seek-and-decoded-pixels",
+            "sibling-unmount-preserves-other-instance",
+            "optional-getInstance",
+            "unmount-cleans-recorded-instances-and-dom",
+            "remount-after-empty",
+            "callback-exception-cleanup-and-original-error",
+            "cleanup-error-preserves-primary-callback-error",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "development",
+          "engine": "firefox",
+          "version": "155.0",
+          "checks": [
+            "strict-mode-and-plugin-registration",
+            "stable-props-retain-instance",
+            "callback-change-cleans-old-instance",
+            "option-change-cleans-old-instance",
+            "native-play-pause-seek-and-decoded-pixels",
+            "sibling-unmount-preserves-other-instance",
+            "optional-getInstance",
+            "unmount-cleans-recorded-instances-and-dom",
+            "remount-after-empty",
+            "callback-exception-cleanup-and-original-error",
+            "cleanup-error-preserves-primary-callback-error",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "development",
+          "engine": "webkit",
+          "version": "26.6",
+          "checks": [
+            "strict-mode-and-plugin-registration",
+            "stable-props-retain-instance",
+            "callback-change-cleans-old-instance",
+            "option-change-cleans-old-instance",
+            "native-play-pause-seek-and-decoded-pixels",
+            "sibling-unmount-preserves-other-instance",
+            "optional-getInstance",
+            "unmount-cleans-recorded-instances-and-dom",
+            "remount-after-empty",
+            "callback-exception-cleanup-and-original-error",
+            "cleanup-error-preserves-primary-callback-error",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "production",
+          "engine": "chromium",
+          "version": "153.0.8010.12",
+          "checks": [
+            "strict-mode-and-plugin-registration",
+            "stable-props-retain-instance",
+            "callback-change-cleans-old-instance",
+            "option-change-cleans-old-instance",
+            "native-play-pause-seek-and-decoded-pixels",
+            "sibling-unmount-preserves-other-instance",
+            "optional-getInstance",
+            "unmount-cleans-recorded-instances-and-dom",
+            "remount-after-empty",
+            "callback-exception-cleanup-and-original-error",
+            "cleanup-error-preserves-primary-callback-error",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "production",
+          "engine": "firefox",
+          "version": "155.0",
+          "checks": [
+            "strict-mode-and-plugin-registration",
+            "stable-props-retain-instance",
+            "callback-change-cleans-old-instance",
+            "option-change-cleans-old-instance",
+            "native-play-pause-seek-and-decoded-pixels",
+            "sibling-unmount-preserves-other-instance",
+            "optional-getInstance",
+            "unmount-cleans-recorded-instances-and-dom",
+            "remount-after-empty",
+            "callback-exception-cleanup-and-original-error",
+            "cleanup-error-preserves-primary-callback-error",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "production",
+          "engine": "webkit",
+          "version": "26.6",
+          "checks": [
+            "strict-mode-and-plugin-registration",
+            "stable-props-retain-instance",
+            "callback-change-cleans-old-instance",
+            "option-change-cleans-old-instance",
+            "native-play-pause-seek-and-decoded-pixels",
+            "sibling-unmount-preserves-other-instance",
+            "optional-getInstance",
+            "unmount-cleans-recorded-instances-and-dom",
+            "remount-after-empty",
+            "callback-exception-cleanup-and-original-error",
+            "cleanup-error-preserves-primary-callback-error",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "framework": "vue",
+      "report": {
+        "path": "refactor/.cache/vue-consumer-w4ymgo/report.json",
+        "sha256": "86013059ebba4b0e17679d5cec27d519a9c2894ea3e0894fdaacd7cdd20bc958"
+      },
+      "types": {
+        "vueTsc": "3.3.11",
+        "typescript": "5.9.3",
+        "vue": "3.5.28",
+        "files": 90,
+        "isolated": true,
+        "negativeCases": 3
+      },
+      "packages": [
+        {
+          "name": "artplayer",
+          "version": "6.0.0",
+          "sha256": "36466dabee011a897c04fa2f8aad159ebd82b290f5ef48b8ad46836d4dd30659"
+        },
+        {
+          "name": "artplayer-plugin-danmuku",
+          "version": "6.0.0",
+          "sha256": "35eec7b71e928513b3ef5cf51913394952b928f671c75caca653e323d47b480b"
+        },
+        {
+          "name": "artplayer-plugin-document-pip",
+          "version": "2.0.0",
+          "sha256": "6c47e4498ace47363dd632967903a271f3f10556bddefc9d99d8d80285886f97"
+        }
+      ],
+      "profiles": [
+        {
+          "mode": "development",
+          "engine": "chromium",
+          "version": "153.0.8010.12",
+          "checks": [
+            "mount-event-closed-component-ref-and-plugin-registration",
+            "mutate-option-retains-mount-only-contract",
+            "replace-option-retains-mount-only-contract",
+            "native-play-pause-seek-and-decoded-pixels",
+            "instance-api-updates-source-without-remount",
+            "key-change-reconstructs-with-current-props",
+            "sibling-cleanup-retains-other-instance",
+            "optional-listener-and-unmount",
+            "cancel-before-mount-does-not-allocate",
+            "three-mount-unmount-cycles-clean-once",
+            "vue-captured-listener-error-retains-instance-until-unmount",
+            "listener-triggered-unmount-cleans-created-instance",
+            "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+            "plain-js-event-prop-usage-and-remount",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "development",
+          "engine": "firefox",
+          "version": "155.0",
+          "checks": [
+            "mount-event-closed-component-ref-and-plugin-registration",
+            "mutate-option-retains-mount-only-contract",
+            "replace-option-retains-mount-only-contract",
+            "native-play-pause-seek-and-decoded-pixels",
+            "instance-api-updates-source-without-remount",
+            "key-change-reconstructs-with-current-props",
+            "sibling-cleanup-retains-other-instance",
+            "optional-listener-and-unmount",
+            "cancel-before-mount-does-not-allocate",
+            "three-mount-unmount-cycles-clean-once",
+            "vue-captured-listener-error-retains-instance-until-unmount",
+            "listener-triggered-unmount-cleans-created-instance",
+            "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+            "plain-js-event-prop-usage-and-remount",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "development",
+          "engine": "webkit",
+          "version": "26.6",
+          "checks": [
+            "mount-event-closed-component-ref-and-plugin-registration",
+            "mutate-option-retains-mount-only-contract",
+            "replace-option-retains-mount-only-contract",
+            "native-play-pause-seek-and-decoded-pixels",
+            "instance-api-updates-source-without-remount",
+            "key-change-reconstructs-with-current-props",
+            "sibling-cleanup-retains-other-instance",
+            "optional-listener-and-unmount",
+            "cancel-before-mount-does-not-allocate",
+            "three-mount-unmount-cycles-clean-once",
+            "vue-captured-listener-error-retains-instance-until-unmount",
+            "listener-triggered-unmount-cleans-created-instance",
+            "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+            "plain-js-event-prop-usage-and-remount",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "production",
+          "engine": "chromium",
+          "version": "153.0.8010.12",
+          "checks": [
+            "mount-event-closed-component-ref-and-plugin-registration",
+            "mutate-option-retains-mount-only-contract",
+            "replace-option-retains-mount-only-contract",
+            "native-play-pause-seek-and-decoded-pixels",
+            "instance-api-updates-source-without-remount",
+            "key-change-reconstructs-with-current-props",
+            "sibling-cleanup-retains-other-instance",
+            "optional-listener-and-unmount",
+            "cancel-before-mount-does-not-allocate",
+            "three-mount-unmount-cycles-clean-once",
+            "vue-captured-listener-error-retains-instance-until-unmount",
+            "listener-triggered-unmount-cleans-created-instance",
+            "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+            "plain-js-event-prop-usage-and-remount",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "production",
+          "engine": "firefox",
+          "version": "155.0",
+          "checks": [
+            "mount-event-closed-component-ref-and-plugin-registration",
+            "mutate-option-retains-mount-only-contract",
+            "replace-option-retains-mount-only-contract",
+            "native-play-pause-seek-and-decoded-pixels",
+            "instance-api-updates-source-without-remount",
+            "key-change-reconstructs-with-current-props",
+            "sibling-cleanup-retains-other-instance",
+            "optional-listener-and-unmount",
+            "cancel-before-mount-does-not-allocate",
+            "three-mount-unmount-cycles-clean-once",
+            "vue-captured-listener-error-retains-instance-until-unmount",
+            "listener-triggered-unmount-cleans-created-instance",
+            "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+            "plain-js-event-prop-usage-and-remount",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        },
+        {
+          "mode": "production",
+          "engine": "webkit",
+          "version": "26.6",
+          "checks": [
+            "mount-event-closed-component-ref-and-plugin-registration",
+            "mutate-option-retains-mount-only-contract",
+            "replace-option-retains-mount-only-contract",
+            "native-play-pause-seek-and-decoded-pixels",
+            "instance-api-updates-source-without-remount",
+            "key-change-reconstructs-with-current-props",
+            "sibling-cleanup-retains-other-instance",
+            "optional-listener-and-unmount",
+            "cancel-before-mount-does-not-allocate",
+            "three-mount-unmount-cycles-clean-once",
+            "vue-captured-listener-error-retains-instance-until-unmount",
+            "listener-triggered-unmount-cleans-created-instance",
+            "keepalive-retains-on-deactivation-and-destroys-on-owner-unmount",
+            "plain-js-event-prop-usage-and-remount",
+            "original-app-entry-loads-media"
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "initialConsumerFailure": {
+    "cause": "Windows port 0 assigned 6566, rejected by Chromium before production page load",
+    "report": {
+      "path": "refactor/.cache/react-consumer-Jmwio4/report.json",
+      "sha256": "dcdf880e02c385f149f11a73defc957cb39513a2deab02e05ac706e152bef20e"
+    },
+    "log": {
+      "path": "refactor/.cache/rel09-react-consumer.log",
+      "sha256": "d3f45ec9aa0b501e787501459b44d99d4b6bfaa6e6d33da07f9a52e2ff51d010"
+    },
+    "fixedIn": [
+      "refactor/scripts/react-consumer.mjs",
+      "refactor/scripts/vue-consumer.mjs"
+    ]
+  },
+  "scope": {
+    "formalReviewsStarted": false,
+    "publicationAuthorized": false,
+    "remoteCiVerified": false,
+    "physicalDeviceEvidence": false,
+    "fullCandidateMatrixPassed": false,
+    "oldVersionEvidenceReusedAsNew": false
+  }
+}

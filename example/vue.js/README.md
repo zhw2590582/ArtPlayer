@@ -4,12 +4,19 @@ Run the example from the repository root with Node from .node-version and Yarn
 Classic 1.22.22. Use yarn install --frozen-lockfile and only the root yarn.lock.
 
 ```sh
+yarn build artplayer artplayer-plugin-danmuku artplayer-plugin-document-pip
 yarn dev:vue
 yarn typecheck:vue
 yarn lint:vue
 yarn build:vue
 yarn test:vue-consumer
 ```
+
+The example's three ArtPlayer dependencies use local `file:../../packages/...`
+references while the next major versions are unpublished. Build those packages
+first and run the example commands from the repository root. Keep only the root
+yarn.lock; external applications should select published versions. The isolated
+consumer checks still replace these inputs with actual packed artifacts.
 
 The build output is refactor/.cache/vue-example-dist.
 Rebuild changed library distributions with yarn build followed by the package name.

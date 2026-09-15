@@ -1,5 +1,20 @@
 # 进度与证据
 
+## REL-09 全包下一 major 版本落实
+
+22个workspace已设置各自下一major并新增unreleased CHANGELOG；核心/弹幕6.0.0、
+Ads/ASR3.0.0、Thumbnail工具5.0.0，其余17包2.0.0。两个私有示例消费本地包，
+根锁文件不变，已有外部依赖与旧核心支持范围保持。check:versions已接入CI。
+冻结安装、严格工具链、ci:build和ci:check通过，三组Node测试共3759项通过。
+21库tarball的版本/CHANGELOG/三个入口与docs复制产物逐一校验；React/Vue
+各6组隔离安装真实浏览器验证通过，tarball哈希与本次打包记录相同。
+React验证发现Windows随机端口6566被浏览器拒绝，已修复测试服务端口选择，
+保留失败证据并重跑两套消费者通过。见[记录](changes/2026-09-16-REL-09-major-versions.md)
+及[证据](baselines/major-version-preparation.json)。
+REL-09 done；222 done、20 doing、41 todo，共283项。完整新版本候选组合、
+设备/SDK、站点与远端流水线准入仍待完成。旧版本报告保留为历史依据，
+不等同新版本验证；没有推送、部署、发布，也没有启动由用户指导的正式复盘。
+
 ## REL-01 全包版本方案冻结
 
 22包下一major、变更日志范围、依赖/类型规则、示例计划与剩余准入已写入

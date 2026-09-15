@@ -76,7 +76,8 @@ try {
   for (const mode of ['development', 'production']) {
     const outDir = path.join(output, mode)
     await build({ root: consumer, configFile: false, plugins: [react()], mode, define: { 'process.env.NODE_ENV': JSON.stringify(mode) }, build: { outDir, emptyOutDir: false, rollupOptions: { input: { app: path.join(consumer, 'index.html'), harness: path.join(consumer, 'harness.html') } } } })
-    const server = await preview({ root: consumer, configFile: false, build: { outDir }, preview: { host: '127.0.0.1', port: 0, open: false } })
+    // Windows can assign browser-blocked ports (observed: 6566) for port 0.
+    const server = await preview({ root: consumer, configFile: false, build: { outDir }, preview: { host: '127.0.0.1', port: 4173, open: false } })
     const address = server.httpServer.address()
     const base = `http://127.0.0.1:${address.port}`
     try {

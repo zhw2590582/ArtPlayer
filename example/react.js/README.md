@@ -5,12 +5,19 @@ Run from the repository root with Node from .node-version and Yarn Classic
 yarn.lock in version control.
 
 ```sh
+yarn build artplayer artplayer-plugin-danmuku artplayer-plugin-document-pip
 yarn dev:react
 yarn typecheck:react
 yarn lint:react
 yarn build:react
 yarn test:react-consumer
 ```
+
+The example's three ArtPlayer dependencies use local `file:../../packages/...`
+references while the next major versions are unpublished. Run the commands above
+from the repository root; do not create a separate example lockfile. External
+applications should install their chosen published versions. Historical consumer
+fixtures remain separate from this current-workspace example.
 
 build:react writes to refactor/.cache/react-example-dist. It uses built
 workspace package entrypoints. Rebuild a changed library with `yarn build <package>` before testing its integration. The consumer test packs the current

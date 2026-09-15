@@ -70,7 +70,8 @@ try {
   for (const mode of ['development', 'production']) {
     const outDir = path.join(output, mode)
     await build({ root: consumer, configFile: false, plugins: [vue({ isProduction: mode === 'production' })], mode, define: { 'process.env.NODE_ENV': JSON.stringify(mode) }, build: { outDir, emptyOutDir: false, rollupOptions: { input: { app: path.join(consumer, 'index.html'), harness: path.join(consumer, 'harness.html'), legacy: path.join(consumer, 'legacy.html') } } } })
-    const server = await preview({ root: consumer, configFile: false, build: { outDir }, preview: { host: '127.0.0.1', port: 0, open: false } })
+    // Windows can assign browser-blocked ports for port 0; let Vite find availability.
+    const server = await preview({ root: consumer, configFile: false, build: { outDir }, preview: { host: '127.0.0.1', port: 4174, open: false } })
     const base = `http://127.0.0.1:${server.httpServer.address().port}`
     try {
       for (const [engine, type] of Object.entries({ chromium, firefox, webkit })) {

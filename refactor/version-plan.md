@@ -4,7 +4,7 @@
 
 ## 版本和候选编号
 
-REL-09 将22个 workspace manifest 设为各自下一 major 的正式数字版本，minor/patch 归零，不给根 private 管理包或两个 private 示例提升版本。本轮本地候选就是未上传的目标版本 tarball，不加 -rc 后缀；不能将此称为已经发布的预发布版本。
+REL-09 已将22个 workspace manifest 设为各自下一 major 的正式数字版本，minor/patch 归零，根 private 管理包和两个 private 示例版本保持原值。本轮本地候选就是未上传的目标版本 tarball，不加 -rc 后缀；不能将此称为已经发布的预发布版本。
 
 后续经用户授权公开候选时使用 next 标签，正式推广使用 latest；相同版本只能上传一次，标签推广应使用已验证的同一内容。next 标签不是版本隔离或发布授权，明确选择新版本的消费者仍可取得它。若公开后需要改内容，必须准备新版本并重新验证，不能覆盖或撤包后复用原版本。所有实际发布及标签操作仍等待三轮复盘和单独授权。
 
@@ -41,7 +41,7 @@ REL-09 将22个 workspace manifest 设为各自下一 major 的正式数字版�
 
 当前22包没有互相声明的 workspace dependencies/peerDependencies。保留已有外部依赖与版本范围，尤其不因核心升到6而新设只支持6的peer限制；声明中的核心类型引用和实际旧核心支持仍由各包测试验证。VitePress开发依赖、MediaBunny、Mask和VAST运行依赖保持现有范围。
 
-React/Vue示例各有三项已发布版本依赖：core、Danmuku和Document PiP。REL-09 将仓库内示例指向对应本地包（file:../../packages/<name>），使未发布新版本可以真实安装/构建；原始历史消费夹具保留，隔离tarball验证继续替换其测试来源。示例README同步先构建本地包的步骤；只维护根yarn.lock，不生成示例锁文件。新旧框架消费脚本需重新验证路径处理，不能认为修改package.json就已通过。
+React/Vue示例的core、Danmuku和Document PiP依赖已由REL-09指向对应本地包（file:../../packages/<name>），用于未发布新版本的仓库开发；原始历史消费夹具保留。隔离tarball验证分别打包实际产物并写入独立消费者依赖，避免工作区链接掩盖分发问题。示例README已同步先构建本地包的步骤；只维护根yarn.lock，不生成示例锁文件。验证记录随REL-09维护，修改package.json本身不代表消费验证通过。
 
 21个库分别核对原入口、exports/typesVersions、legacy、声明与资源，不机械统一为一种导出形状。核心声明继续从public/生成；已有/runtime入口和已批准的历史类型冲突说明保持。工具Thumbnail保留npm默认和显式workspace模式；VAST保留npm初始化与显式workspace模式；其他已接受的类型差异不借major升级扩大。
 
@@ -59,7 +59,7 @@ node refactor/scripts/version-plan.mjs --check
 node refactor/scripts/version-plan.mjs --prepared
 ```
 
-固定Node24.21.0/Yarn1.22.22。capture只读registry并写新的本地证据，不覆盖旧快照；遇到已使用目标、更高major或未知响应退出1。check验证方案与当前清单；prepared还要求22包目标版本、各包CHANGELOG和两个示例依赖全部落地，目前应失败。它们均不代替严格release:preflight，也不执行publish。
+固定Node24.21.0/Yarn1.22.22。capture只读registry并写新的本地证据，不覆盖旧快照；遇到已使用目标、更高major或未知响应退出1。check验证方案与当前清单；prepared还要求22包目标版本、各包CHANGELOG和两个示例依赖全部落地，现由yarn check:versions及ci:check持续执行。REL-01记录的prepared失败是升级前的历史对照。它们均不代替严格release:preflight，也不执行publish。
 
 ## 实施顺序与失效规则
 

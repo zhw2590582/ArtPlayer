@@ -1,5 +1,5 @@
 /*!
- * artplayer-plugin-multiple-subtitles.js v1.2.0
+ * artplayer-plugin-multiple-subtitles.js v2.0.0
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.

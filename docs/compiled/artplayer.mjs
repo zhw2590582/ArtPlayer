@@ -1,5 +1,5 @@
 /*!
- * artplayer.js v5.4.1
+ * artplayer.js v6.0.0
  * Github: https://github.com/zhw2590582/ArtPlayer
  * (c) 2017-2026 Harvey Zhao
  * Released under the MIT License.
@@ -220,7 +220,7 @@ function requireOptionValidator() {
 }
 var optionValidatorExports = requireOptionValidator();
 const validator = /* @__PURE__ */ getDefaultExportFromCjs(optionValidatorExports);
-const version$1 = "5.4.1";
+const version$1 = "6.0.0";
 function setStyleText(id2, style) {
   let $style = document.getElementById(id2);
   if (!$style) {
