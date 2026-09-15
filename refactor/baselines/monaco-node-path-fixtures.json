@@ -1,0 +1,275 @@
+[
+  {
+    "namespace": "posix",
+    "method": "normalize",
+    "args": [
+      "/foo//bar/../baz/"
+    ],
+    "expected": "/foo/baz/"
+  },
+  {
+    "namespace": "posix",
+    "method": "normalize",
+    "args": [
+      "../../a/./b"
+    ],
+    "expected": "../../a/b"
+  },
+  {
+    "namespace": "posix",
+    "method": "normalize",
+    "args": [
+      ""
+    ],
+    "expected": "."
+  },
+  {
+    "namespace": "posix",
+    "method": "basename",
+    "args": [
+      "/a/file.txt",
+      ".txt"
+    ],
+    "expected": "file"
+  },
+  {
+    "namespace": "posix",
+    "method": "basename",
+    "args": [
+      "/a/.profile"
+    ],
+    "expected": ".profile"
+  },
+  {
+    "namespace": "posix",
+    "method": "dirname",
+    "args": [
+      "/a/b/"
+    ],
+    "expected": "/a"
+  },
+  {
+    "namespace": "posix",
+    "method": "extname",
+    "args": [
+      "/a/.hidden"
+    ],
+    "expected": ""
+  },
+  {
+    "namespace": "posix",
+    "method": "extname",
+    "args": [
+      "/a/file.tar.gz"
+    ],
+    "expected": ".gz"
+  },
+  {
+    "namespace": "posix",
+    "method": "join",
+    "args": [
+      "",
+      "a",
+      "..",
+      "b"
+    ],
+    "expected": "b"
+  },
+  {
+    "namespace": "posix",
+    "method": "relative",
+    "args": [
+      "/a/b",
+      "/a/c/d"
+    ],
+    "expected": "../c/d"
+  },
+  {
+    "namespace": "posix",
+    "method": "resolve",
+    "args": [
+      "/a",
+      "../b"
+    ],
+    "expected": "/b"
+  },
+  {
+    "namespace": "posix",
+    "method": "parse",
+    "args": [
+      "/文件/report.txt"
+    ],
+    "expected": {
+      "root": "/",
+      "dir": "/文件",
+      "base": "report.txt",
+      "ext": ".txt",
+      "name": "report"
+    }
+  },
+  {
+    "namespace": "posix",
+    "method": "format",
+    "args": [
+      {
+        "root": "/",
+        "dir": "/a",
+        "base": "b.txt"
+      }
+    ],
+    "expected": "/a/b.txt"
+  },
+  {
+    "namespace": "posix",
+    "method": "isAbsolute",
+    "args": [
+      "../a"
+    ],
+    "expected": false
+  },
+  {
+    "namespace": "posix",
+    "method": "toNamespacedPath",
+    "args": [
+      "/a/b"
+    ],
+    "expected": "/a/b"
+  },
+  {
+    "namespace": "win32",
+    "method": "normalize",
+    "args": [
+      "C:\\foo\\..\\bar\\"
+    ],
+    "expected": "C:\\bar\\"
+  },
+  {
+    "namespace": "win32",
+    "method": "normalize",
+    "args": [
+      "\\\\server\\share\\a\\..\\b"
+    ],
+    "expected": "\\\\server\\share\\b"
+  },
+  {
+    "namespace": "win32",
+    "method": "normalize",
+    "args": [
+      ""
+    ],
+    "expected": "."
+  },
+  {
+    "namespace": "win32",
+    "method": "basename",
+    "args": [
+      "C:\\a\\file.txt",
+      ".txt"
+    ],
+    "expected": "file"
+  },
+  {
+    "namespace": "win32",
+    "method": "basename",
+    "args": [
+      "C:\\a\\.profile"
+    ],
+    "expected": ".profile"
+  },
+  {
+    "namespace": "win32",
+    "method": "dirname",
+    "args": [
+      "C:\\a\\b\\"
+    ],
+    "expected": "C:\\a"
+  },
+  {
+    "namespace": "win32",
+    "method": "extname",
+    "args": [
+      "C:\\a\\file.tar.gz"
+    ],
+    "expected": ".gz"
+  },
+  {
+    "namespace": "win32",
+    "method": "join",
+    "args": [
+      "\\\\server",
+      "share",
+      "a"
+    ],
+    "expected": "\\\\server\\share\\a"
+  },
+  {
+    "namespace": "win32",
+    "method": "join",
+    "args": [
+      "",
+      "",
+      "a"
+    ],
+    "expected": "a"
+  },
+  {
+    "namespace": "win32",
+    "method": "relative",
+    "args": [
+      "C:\\a\\b",
+      "C:\\a\\c"
+    ],
+    "expected": "..\\c"
+  },
+  {
+    "namespace": "win32",
+    "method": "resolve",
+    "args": [
+      "C:\\a",
+      "..\\b"
+    ],
+    "expected": "C:\\b"
+  },
+  {
+    "namespace": "win32",
+    "method": "parse",
+    "args": [
+      "C:\\文件\\report.txt"
+    ],
+    "expected": {
+      "root": "C:\\",
+      "dir": "C:\\文件",
+      "base": "report.txt",
+      "ext": ".txt",
+      "name": "report"
+    }
+  },
+  {
+    "namespace": "win32",
+    "method": "format",
+    "args": [
+      {
+        "root": "C:\\",
+        "dir": "C:\\a",
+        "base": "b.txt"
+      }
+    ],
+    "expected": "C:\\a\\b.txt"
+  },
+  {
+    "namespace": "win32",
+    "method": "isAbsolute",
+    "args": [
+      "C:a"
+    ],
+    "expected": false
+  },
+  {
+    "namespace": "win32",
+    "method": "toNamespacedPath",
+    "args": [
+      "C:\\a\\b"
+    ],
+    "expected": "\\\\?\\C:\\a\\b"
+  }
+]

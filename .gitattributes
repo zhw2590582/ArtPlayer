@@ -44,3 +44,6 @@ refactor/baselines/site-vendor/monaco-core-build/** -text whitespace=-trailing-s
 refactor/baselines/monaco-core-locales.json text eol=lf
 refactor/baselines/site-vendor/monaco-contributions/** -text whitespace=-trailing-space,cr-at-eol
 refactor/baselines/site-vendor/monaco-css-build/** -text whitespace=-trailing-space,cr-at-eol
+refactor/baselines/site-vendor/monaco-node-path/** -text whitespace=-trailing-space,cr-at-eol
+docs/licenses/monaco-editor/core-path/** -text whitespace=-trailing-space,cr-at-eol
+refactor/baselines/monaco-node-path-fixtures.json text eol=lf

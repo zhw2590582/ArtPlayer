@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "nodeCommit": "bd60e93357a118204ea238d94e7a9e4209d93062",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "monaco-editor-core",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor-core/-/monaco-editor-core-0.30.1.tgz",
+      "integrity": "sha512-WNxfchYafMZXVfysqg/ESW4MtOpYLPaIKrzudNlgwYvfYID+O/nwSZI5X+KxW84roVzHsNgFGyOOesfHFZwYUA==",
+      "sha256": "a3b004061373a7f6217eba6399f1a1de31970bee2eee693aada289035198c5ec"
+    },
+    {
+      "name": "typescript",
+      "version": "4.5.0-dev.20211021",
+      "tarball": "https://registry.yarnpkg.com/typescript/-/typescript-4.5.0-dev.20211021.tgz",
+      "integrity": "sha512-lZJTNSL8CBqgURSrVwCto8WEV1U0BUwoy+GTmINoRc/Sm2BcYiRpcq/OAiSg/1q/rvODousdOsHePfAZfwi0Qg==",
+      "sha256": "27cbe79009d92bcbcbbb7c5575fd8a0821d16eb26b410c249db018d49b10a693"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-node-path/node-path.js.txt",
+      "sha256": "ff755282e187b98ebb2f5381d3caf235cee94afb97d7d994007079a01694319e",
+      "gitBlobSha": "7532b795bf63f7190bb46946d2db69459bce08a7",
+      "apiUrl": "https://api.github.com/repos/nodejs/node/contents/lib/path.js?ref=bd60e93357a118204ea238d94e7a9e4209d93062"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-node-path/vscode-path.ts.txt",
+      "sha256": "d500777083482e1c9db549b44b0c8de6702fd1bdb4aab8f51ad2a3d670960676",
+      "gitBlobSha": "00d948acd88597642885d21ea1dac6e6a860949c",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/common/path.ts?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-css-build/yarn.lock.txt",
+      "sha256": "9f74da55701070e0d2203daf46b1552e12a95c0b7ee9bd10694fa2b61a47227a",
+      "gitBlobSha": "2b4d4ce38436144cd7b3405a1eef1a4cd7d53cac",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/yarn.lock?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    }
+  ],
+  "nodeSource": "refactor/baselines/site-vendor/monaco-node-path/node-path.js.txt",
+  "vscodeSource": "refactor/baselines/site-vendor/monaco-node-path/vscode-path.ts.txt",
+  "lockSource": "refactor/baselines/site-vendor/monaco-css-build/yarn.lock.txt",
+  "maps": [
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/min-maps/vs/editor/editor.main.js.map",
+      "sha256": "981ef3b9027387b50c8a035dbb14e66ce6ecbc6a3e617db423c585d0f434057f",
+      "source": "out-editor/vs/editor/file:/Users/alex/src/vscode/out-editor-src/vs/base/common/path.ts"
+    },
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/min-maps/vs/base/worker/workerMain.js.map",
+      "sha256": "824cd08c975e30bd9d8942051e8a38f9f852efb3a6c09984c25d845d0a5e36a5",
+      "source": "out-editor/vs/base/worker/file:/Users/alex/src/vscode/out-editor-src/vs/base/common/path.ts"
+    }
+  ],
+  "outputs": [
+    {
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/editor/editor.main.js",
+        "sha256": "483348c3a73e86f201bc0df26ceee2c3ef610fe56c344993410fc093bac228a7"
+      },
+      "signature": "define(__m[75/*vs/base/common/path*/], __M([0/*require*/,1/*exports*/,300/*vs/base/common/process*/]),",
+      "offset": 334819,
+      "target": {
+        "path": "docs/assets/js/vs/editor/editor.main.js",
+        "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+      },
+      "editor": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/min/vs/editor/editor.main.js",
+        "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+      }
+    },
+    {
+      "development": {
+        "archive": "monaco-editor-core-0.30.1",
+        "member": "package/dev/vs/base/worker/workerMain.js",
+        "sha256": "016d569eb0ae9ba9865bc9c9be1da9fe88f722622c60828c4fa93b73245e2a42"
+      },
+      "signature": "define(__m[20/*vs/base/common/path*/], __M([0/*require*/,1/*exports*/,19/*vs/base/common/process*/]),",
+      "offset": 159086,
+      "target": {
+        "path": "docs/assets/js/vs/base/worker/workerMain.js",
+        "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+      },
+      "editor": {
+        "archive": "monaco-editor-0.30.1",
+        "member": "package/min/vs/base/worker/workerMain.js",
+        "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+      }
+    }
+  ],
+  "component": {
+    "name": "nodejs path (Monaco core)",
+    "version": "14.16.0",
+    "tarball": "https://github.com/nodejs/node/blob/bd60e93357a118204ea238d94e7a9e4209d93062/lib/path.js",
+    "assets": [
+      "docs/assets/js/vs/editor/editor.main.js",
+      "docs/assets/js/vs/base/worker/workerMain.js"
+    ],
+    "notices": [
+      "docs/licenses/monaco-editor/ThirdPartyNotices.txt",
+      "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md"
+    ]
+  },
+  "legacyNotice": {
+    "source": "refactor/baselines/site-vendor/monaco-editor-ThirdPartyNotices.txt.txt",
+    "target": "docs/licenses/monaco-editor/ThirdPartyNotices.txt",
+    "sha256": "b23ab6e9a1a31ce6948a98b16a83474c999a384ece75643dd0affc83ea1724ef"
+  },
+  "attribution": {
+    "source": "refactor/baselines/site-vendor/monaco-node-path/ATTRIBUTION.md.txt",
+    "target": "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md",
+    "sha256": "40583c701c0bcbd8e10935652a0a8b02e2073b0ef040fb7be7b939c437d8b8dc"
+  },
+  "fixtures": {
+    "path": "refactor/baselines/monaco-node-path-fixtures.json",
+    "sha256": "9c3ad261603d231a093e98ed4a43f302c1aa722d696f97c129d9bf95fa083ccc"
+  },
+  "review": {
+    "classification": "Existing modified browser port; not an unmodified Node runtime",
+    "algorithms": [
+      "Windows join adds a typeof firstPart string guard",
+      "Both basename implementations share a loop index declared outside the loops"
+    ],
+    "environment": [
+      "Local process adapter and validation/Error subclass",
+      "Typed interfaces, explicit exports and platform aliases; Node legacy _makeLong omitted"
+    ],
+    "unmodifiedSemanticEquivalenceClaimed": false
+  }
+}

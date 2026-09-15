@@ -117,6 +117,10 @@ Included component: marked (Monaco core) 3.0.2
 
 Source: https://registry.npmjs.org/marked/-/marked-3.0.2.tgz
 
+Included component: nodejs path (Monaco core) 14.16.0
+
+Source: https://github.com/nodejs/node/blob/bd60e93357a118204ea238d94e7a9e4209d93062/lib/path.js
+
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
 - licenses/monaco-editor/codicons/LICENSE
@@ -143,6 +147,7 @@ Source: https://registry.npmjs.org/marked/-/marked-3.0.2.tgz
 - licenses/monaco-editor/core-origins/marked-LICENSE
 - licenses/monaco-editor/core-origins/marked-vscode-license.txt
 - licenses/monaco-editor/core-origins/ATTRIBUTION.md
+- licenses/monaco-editor/core-path/ATTRIBUTION.md
 
 ## console legacy-vendor-with-TS-adapter
 

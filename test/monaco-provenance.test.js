@@ -9,11 +9,24 @@ import { inventoryCoreMap, readCoreNls, restoreCoreMapComment } from '../scripts
 import { adaptCoreOrigin } from '../scripts/site-vendor/monaco/core-origins.ts'
 import { coreStyleOrder, prepareCoreStyles } from '../scripts/site-vendor/monaco/css.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
+import { nodePathResults, preparePathSource } from '../scripts/site-vendor/monaco/node-path.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
 
 const contributionGroups = ['typescript', 'css', 'json', 'html', 'languages'].map((name) => {
   const modulePrefix = name === 'languages' ? 'vs/basic-languages' : `vs/language/${name}`
   return { name: `monaco-${name}`, modulePrefix, contrib: `${modulePrefix}/monaco.contribution` }
+})
+
+test('Path source preparation removes only the six explicit unused top-level exports', () => {
+  const source = ['isAbsolute', 'join', 'format', 'parse', 'toNamespacedPath', 'delimiter'].map(name => `export const ${name} = (process.platform === 'win32' ? win32.${name} : posix.${name});\n`).join('')
+  assert.equal(preparePathSource(`${source}export const retained = 1;\n`), 'export const retained = 1;\n')
+  assert.throws(() => preparePathSource(source + source), /repeated unused path export/)
+  assert.throws(() => preparePathSource(source.replace('win32.join', 'win32.other')), /unused path export: join/)
+})
+
+test('Node reference path fixtures reject filesystem imports and environment-dependent cwd', () => {
+  assert.throws(() => nodePathResults('require("fs")', []), /Unexpected Node path import/)
+  assert.throws(() => nodePathResults('process.cwd()', []), /Non-deterministic path cwd/)
 })
 
 test('Core CSS inventory follows registration order instead of the module-name table order', () => {

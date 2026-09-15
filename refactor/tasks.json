@@ -4540,7 +4540,10 @@
         "changes/2026-09-15-SITE-07-monaco-contributions.md",
         "baselines/monaco-css-build-provenance.json",
         "baselines/monaco-css-build-validation.json",
-        "changes/2026-09-15-SITE-07-monaco-css.md"
+        "changes/2026-09-15-SITE-07-monaco-css.md",
+        "baselines/monaco-node-path-provenance.json",
+        "baselines/monaco-node-path-validation.json",
+        "changes/2026-09-15-SITE-07-monaco-node-path.md"
       ]
     },
     {

@@ -325,3 +325,48 @@ Browser checks cover light/dark theme colors, layout and resize, find-widget bou
 successful CSS/font requests, loaded codicon glyphs and model disposal in all three
 engines. The pinned light theme is intentionally #fffffe. Full original core TS
 compilation and further embedded-origin review remain separate open work.
+
+## Node path port and existing terms
+
+`node-path.ts` binds the Node path attribution to both editor.main and workerMain.
+The original site ThirdPartyNotices already contains the full Joyent/Node license
+text, identical to Node v14.16.0 and VS Code's retained source comment. Its older
+commit link is kept intact; a new core-path/ATTRIBUTION.md identifies the actual
+fixed Node source and VS Code port. The site now delivers 86 notice files plus
+its index. The ordinary notice build rejects a missing worker binding, original
+terms, source explanation, or mismatched ported license/version.
+
+`reproduce-node-path.ts` checks three archives and three fixed Git files. Six
+explicit unused top-level exports are removed from the VS Code source; the complete
+result equals both archived source-map entries. Their source keys contain different
+`out-editor/.../file:/...` prefixes, so the record uses the actual keys, not a guessed
+file URI. Historical TypeScript 4.5.0-dev.20211021 from VS Code's lock compiles the
+full path module into both development bundles with exact unique spans. It stays
+in a separate ignored compiler directory from Monaco's TypeScript 4.4.4 tools.
+The corresponding shipped minified assets are checked against their fixed archives;
+the complete core minifier was verified separately by reproduce-core-build.ts.
+
+This is a modified browser port, not an unmodified Node runtime. Besides types,
+parameter names and brace style, review identified a Windows join string guard,
+shared basename loop variables, local validation/Error handling, the process
+adapter, explicit exports and omission of Node's deprecated _makeLong alias.
+The new source note records these existing adaptations without changing behavior.
+
+Thirty deterministic valid calls are evaluated by the frozen Node v14.16.0 module
+and frozen as fixtures. The reference harness supplies character constants and
+string validation, rejects extra imports and cwd use, and does not emulate Node's
+error messages or per-drive environment. Browser tests execute the actual Monaco
+POSIX/Windows functions, compare those results, check platform alias selection,
+and retain the existing Error/ERR_INVALID_ARG_TYPE behavior.
+
+```sh
+yarn verify:monaco-node-path --fetch
+yarn verify:monaco-node-path
+yarn build:site-notices
+yarn check:site-notices
+yarn test:browser test/browser/editor-path.spec.js test/browser/site-vendor.spec.js --workers=1
+```
+
+Full original core TypeScript compilation, WinJS/Unicode/other embedded origins
+and the overall SITE-07 acceptance remain separate. A path-module proof is not
+an exhaustive claim about every Node API or the rest of Monaco.

@@ -9,10 +9,22 @@ import process from 'node:process'
 import test from 'node:test'
 import { verifyConsoleNoticeSources } from '../scripts/site-vendor/console/notices.ts'
 import { verifyMonacoCoreNotices } from '../scripts/site-vendor/monaco/core-origins.ts'
+import { verifyMonacoPathNotices } from '../scripts/site-vendor/monaco/node-path.ts'
 import { verifyMonacoLanguageNoticeArchives, verifyMonacoLanguageNotices } from '../scripts/site-vendor/monaco/notices.ts'
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
+
+test('Node path attribution covers both editor and worker and keeps the original terms', () => {
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  assert.doesNotThrow(() => verifyMonacoPathNotices(process.cwd(), original))
+  const missingWorker = structuredClone(original)
+  missingWorker.groups.find(group => group.name === 'monaco-editor').components.find(component => component.name === 'nodejs path (Monaco core)').assets.pop()
+  assert.throws(() => verifyMonacoPathNotices(process.cwd(), missingWorker), /Node path notice binding/)
+  const missingTerms = structuredClone(original)
+  missingTerms.groups.find(group => group.name === 'monaco-editor').notices = missingTerms.groups.find(group => group.name === 'monaco-editor').notices.filter(notice => !notice.target.endsWith('/ThirdPartyNotices.txt'))
+  assert.throws(() => verifyMonacoPathNotices(process.cwd(), missingTerms), /Missing Node path notice/)
+})
 
 test('Monaco core notices cannot replace DOMPurify terms with the Markdown parser license', () => {
   const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))

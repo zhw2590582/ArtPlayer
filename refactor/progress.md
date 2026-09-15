@@ -1,5 +1,16 @@
 # 进度与证据
 
+## SITE-07 Monaco Node 路径来源与完整模块
+
+核实 Node v14.16.0 固定源码及 VS Code 移植。原 notice 已含完整相同条款，新增
+准确来源说明；86 份 notice 加索引。6 个未用导出移除后匹配两份原 map，历史
+TS 4.5.0-dev 编译匹配主编辑器/worker 完整模块。28/28 单元、类型/lint、联网/
+离线复验及三引擎 30 路径用例/移动实播/notice 交付 6/6 通过；Chromium 一条
+媒体 ERR_ABORTED 保留记录，播放推进断言通过。见[记录](changes/2026-09-15-SITE-07-monaco-node-path.md)。
+其余内嵌来源、完整 core TS 编译与既有 CSS 发布换行定位限制继续开放。
+SITE-07/VENDOR-06 未完结，199/265；Thumbnail 默认策略仍待答。
+
+
 ## SITE-07 Monaco CSS 来源与样式回归
 
 68 份样式、3 个内联图片和字体按原配方恢复，81 个 Git 成员验证；显式记录

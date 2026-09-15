@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T04:12:40.550Z",
+  "baseCommit": "d2b2f76db84ba107751766935a79b78766b81c7d",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "refactor/baselines/monaco-node-path-provenance.json": "45872f22f226922a57dde70b9ad2d16c7844c6da0ffd7f6f5d23c1fdcfafa6fd",
+    "refactor/baselines/monaco-node-path-fixtures.json": "9c3ad261603d231a093e98ed4a43f302c1aa722d696f97c129d9bf95fa083ccc",
+    "scripts/site-vendor/monaco/node-path.ts": "dbcd863a436af83e9969b99bad600df8fc6d42f460ac5b03e3e9408cb11f4da8",
+    "scripts/site-vendor/monaco/reproduce-node-path.ts": "6ce26a15ddd3fdcdeb0deb62e5e2ef81aadf00c85c284e1204eeaf2b8d648c4c",
+    "scripts/site-vendor/manifest.json": "5ed425e4136a7fd59a4784cd52070dc9be21066f3ba4757778ce4da5d8a5ed7b",
+    "scripts/build-site-notices.mjs": "95576c1f36fbfcc1613813ae7cf101b871d0dd7a201a3edcbe26003d96e4da03",
+    "test/browser/editor-path.spec.js": "cae3cbfee45494e95924b3eb1d31de92bee9903d0ab381c578c162f2071b551d",
+    "test/browser/site-vendor.spec.js": "bd9abd585d446a2bbeefee7ed750f2e302cc84573b8a7ce45007d8933dc692bd",
+    "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md": "40583c701c0bcbd8e10935652a0a8b02e2073b0ef040fb7be7b939c437d8b8dc",
+    "docs/THIRD_PARTY_NOTICES.md": "048ba3ef9aea250c7683cafc8d0cb7d5b36a853d49b5e8ab406dc2b07c852e2d"
+  },
+  "reproduction": {
+    "result": {
+      "archives": 3,
+      "gitSources": 3,
+      "maps": 2,
+      "removedUnusedExports": 6,
+      "outputs": [
+        {
+          "path": "docs/assets/js/vs/editor/editor.main.js",
+          "offset": 334819,
+          "moduleBytes": 57628,
+          "exactModule": true,
+          "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+        },
+        {
+          "path": "docs/assets/js/vs/base/worker/workerMain.js",
+          "offset": 159086,
+          "moduleBytes": 57627,
+          "exactModule": true,
+          "sha256": "3ebdb68f45f9fed1c587901c9db42dd70e8a552421e330f39116fc7b078ba67e"
+        }
+      ],
+      "fixtures": 30,
+      "existingLicenseTextMatches": true,
+      "compiler": "4.5.0-dev.20211021",
+      "fullCoreTypeScriptBuild": false,
+      "unmodifiedNodeRuntimeClaimed": false
+    },
+    "offline": {
+      "exitCode": 0,
+      "logSha256": "5877aa1df3cfcd002b8c360546bbe15974e209317819cb35df5394916582670e"
+    },
+    "online": {
+      "exitCode": 0,
+      "logSha256": "5877aa1df3cfcd002b8c360546bbe15974e209317819cb35df5394916582670e"
+    }
+  },
+  "unit": {
+    "passed": 28,
+    "failed": 0,
+    "logSha256": "548fcbf988efb129c426c013ac2038992f103c274363b7bbcd422b395466dfc2"
+  },
+  "types": {
+    "exitCode": 0,
+    "logSha256": "975a28d6b24bd2efde60d6feb9a4731f84df8c04c367cf1d5a1de9453dc84262"
+  },
+  "lint": {
+    "exitCode": 0
+  },
+  "notices": {
+    "files": 86,
+    "outputs": 87
+  },
+  "browser": {
+    "command": "yarn test:browser test/browser/editor-path.spec.js test/browser/site-vendor.spec.js --workers=1",
+    "reportSha256": "35b5b4cd62c5e5993f3c0398ebc31c5871fc30b6ab1aebbd2ce41967dee06c8b",
+    "stats": {
+      "startTime": "2026-09-15T04:07:59.233Z",
+      "duration": 14093.269,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": [],
+    "tests": [
+      {
+        "title": "docs Monaco path port preserves frozen Node path results in both namespaces",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "path": {
+          "cases": 30,
+          "values": [
+            "/foo/baz/",
+            "../../a/b",
+            ".",
+            "file",
+            ".profile",
+            "/a",
+            "",
+            ".gz",
+            "b",
+            "../c/d",
+            "/b",
+            {
+              "root": "/",
+              "dir": "/文件",
+              "base": "report.txt",
+              "ext": ".txt",
+              "name": "report"
+            },
+            "/a/b.txt",
+            false,
+            "/a/b",
+            "C:\\bar\\",
+            "\\\\server\\share\\b",
+            ".",
+            "file",
+            ".profile",
+            "C:\\a",
+            ".gz",
+            "\\\\server\\share\\a",
+            "a",
+            "..\\c",
+            "C:\\b",
+            {
+              "root": "C:\\",
+              "dir": "C:\\文件",
+              "base": "report.txt",
+              "ext": ".txt",
+              "name": "report"
+            },
+            "C:\\a\\b.txt",
+            false,
+            "\\\\?\\C:\\a\\b"
+          ],
+          "namespace": "win32",
+          "alias": true,
+          "invalid": {
+            "name": "Error",
+            "code": "ERR_INVALID_ARG_TYPE"
+          }
+        }
+      },
+      {
+        "title": "docs Monaco path port preserves frozen Node path results in both namespaces",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "path": {
+          "cases": 30,
+          "values": [
+            "/foo/baz/",
+            "../../a/b",
+            ".",
+            "file",
+            ".profile",
+            "/a",
+            "",
+            ".gz",
+            "b",
+            "../c/d",
+            "/b",
+            {
+              "root": "/",
+              "dir": "/文件",
+              "base": "report.txt",
+              "ext": ".txt",
+              "name": "report"
+            },
+            "/a/b.txt",
+            false,
+            "/a/b",
+            "C:\\bar\\",
+            "\\\\server\\share\\b",
+            ".",
+            "file",
+            ".profile",
+            "C:\\a",
+            ".gz",
+            "\\\\server\\share\\a",
+            "a",
+            "..\\c",
+            "C:\\b",
+            {
+              "root": "C:\\",
+              "dir": "C:\\文件",
+              "base": "report.txt",
+              "ext": ".txt",
+              "name": "report"
+            },
+            "C:\\a\\b.txt",
+            false,
+            "\\\\?\\C:\\a\\b"
+          ],
+          "namespace": "win32",
+          "alias": true,
+          "invalid": {
+            "name": "Error",
+            "code": "ERR_INVALID_ARG_TYPE"
+          }
+        }
+      },
+      {
+        "title": "docs Monaco path port preserves frozen Node path results in both namespaces",
+        "project": "webkit",
+        "status": "passed",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "path": {
+          "cases": 30,
+          "values": [
+            "/foo/baz/",
+            "../../a/b",
+            ".",
+            "file",
+            ".profile",
+            "/a",
+            "",
+            ".gz",
+            "b",
+            "../c/d",
+            "/b",
+            {
+              "root": "/",
+              "dir": "/文件",
+              "base": "report.txt",
+              "ext": ".txt",
+              "name": "report"
+            },
+            "/a/b.txt",
+            false,
+            "/a/b",
+            "C:\\bar\\",
+            "\\\\server\\share\\b",
+            ".",
+            "file",
+            ".profile",
+            "C:\\a",
+            ".gz",
+            "\\\\server\\share\\a",
+            "a",
+            "..\\c",
+            "C:\\b",
+            {
+              "root": "C:\\",
+              "dir": "C:\\文件",
+              "base": "report.txt",
+              "ext": ".txt",
+              "name": "report"
+            },
+            "C:\\a\\b.txt",
+            false,
+            "\\\\?\\C:\\a\\b"
+          ],
+          "namespace": "posix",
+          "alias": true,
+          "invalid": {
+            "name": "Error",
+            "code": "ERR_INVALID_ARG_TYPE"
+          }
+        }
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ],
+        "notices": {
+          "count": 86,
+          "sha256": "fd92aad7f34fc1daf6d700a8ab48f818effbe2d8f85aa9a3c1fa008d3680bdb7"
+        }
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "notices": {
+          "count": 86,
+          "sha256": "fd92aad7f34fc1daf6d700a8ab48f818effbe2d8f85aa9a3c1fa008d3680bdb7"
+        }
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "webkit",
+        "status": "passed",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "notices": {
+          "count": 86,
+          "sha256": "fd92aad7f34fc1daf6d700a8ab48f818effbe2d8f85aa9a3c1fa008d3680bdb7"
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "The Node reference harness covers deterministic valid calls, not Node error formatting or cwd/drive behavior.",
+    "Full original core TypeScript compilation and remaining embedded origins are not closed by one module proof.",
+    "Chromium mobile playback passed its currentTime assertion but recorded one pattern.mp4 net::ERR_ABORTED request; that observation is retained.",
+    "Runtime assets are unchanged. No device, external SDK, remote CI or publication evidence is claimed.",
+    "The CSS publication newline-stage limitation and pending Thumbnail default policy remain recorded separately."
+  ],
+  "finalPathCorrection": {
+    "source": "refactor/baselines/site-vendor/monaco-node-path/ATTRIBUTION.md.txt",
+    "reason": "Frozen deployed text contains a site-relative link; it is not a repository Markdown document.",
+    "noticeCheckExitCode": 0,
+    "planCheckExitCode": 0,
+    "unit": {
+      "passed": 28,
+      "failed": 0,
+      "logSha256": "7b904dd4144c6e9638c8e269370fae60a91ccf8156eca13391b9c484585d8967"
+    },
+    "offline": {
+      "exitCode": 0,
+      "logSha256": "a04f121993cf78bc33a52d07a0b37617a329d5364470908060f742b36ff4b0a4"
+    }
+  }
+}

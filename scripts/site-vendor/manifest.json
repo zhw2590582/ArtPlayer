@@ -1020,6 +1020,11 @@
           "source": "refactor/baselines/site-vendor/monaco-core-origins/ATTRIBUTION.md",
           "target": "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md",
           "sha256": "3a0ab7f1036d6b1397bf94ff2700375b97db2db3bd576d195dc6d8a88e1a758e"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-node-path/ATTRIBUTION.md.txt",
+          "target": "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md",
+          "sha256": "40583c701c0bcbd8e10935652a0a8b02e2073b0ef040fb7be7b939c437d8b8dc"
         }
       ],
       "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
@@ -1198,6 +1203,19 @@
             "docs/licenses/monaco-editor/core-origins/marked-LICENSE",
             "docs/licenses/monaco-editor/core-origins/marked-vscode-license.txt",
             "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "nodejs path (Monaco core)",
+          "version": "14.16.0",
+          "tarball": "https://github.com/nodejs/node/blob/bd60e93357a118204ea238d94e7a9e4209d93062/lib/path.js",
+          "assets": [
+            "docs/assets/js/vs/editor/editor.main.js",
+            "docs/assets/js/vs/base/worker/workerMain.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/ThirdPartyNotices.txt",
+            "docs/licenses/monaco-editor/core-path/ATTRIBUTION.md"
           ]
         }
       ]

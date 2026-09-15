@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import process from 'node:process'
 import { verifyConsoleNoticeSources } from './site-vendor/console/notices.ts'
 import { verifyMonacoCoreNotices } from './site-vendor/monaco/core-origins.ts'
+import { verifyMonacoPathNotices } from './site-vendor/monaco/node-path.ts'
 import { verifyMonacoLanguageNotices } from './site-vendor/monaco/notices.ts'
 import { writeOrCheckNotices } from './site-vendor/notices.ts'
 
@@ -22,6 +23,7 @@ assert.deepEqual(manifest.groups.filter(group => group.name !== 'console').flatM
   'jsonc-parser',
   'marked (Monaco core)',
   'mutation-observer',
+  'nodejs path (Monaco core)',
   'regenerator-runtime',
   'style-loader',
   'svelte',
@@ -89,6 +91,7 @@ for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)
 verifyConsoleNoticeSources(process.cwd(), manifest)
 verifyMonacoCoreNotices(process.cwd(), manifest)
+verifyMonacoPathNotices(process.cwd(), manifest)
 verifyMonacoLanguageNotices(process.cwd(), manifest)
 const count = writeOrCheckNotices(process.cwd(), manifest, process.argv.includes('--check'))
 console.log(`Verified site notices: ${count} outputs; Monaco/vConsole/console inventories, embedded and other provenance gates remain open.`)
