@@ -5,6 +5,12 @@ strict TypeScript under PKG-TOOL-THUMB-04. Public declarations and isolated inst
 entrypoints now have checks; the historical default-policy decision and final
 integration/release gates remain open.
 
+The pending choice is now specified in the
+[compatibility proposal](../../refactor/thumbnail-compatibility-decision.md):
+recovered 3.5.31 defaults versus opt-in workspace 4.4.0 behavior, including the
+class-level DEFAULTS boundary. It is not approved or implemented; do not infer
+permission from the approved VAST or other package decisions.
+
 | File | Responsibility |
 | --- | --- |
 | src/index.ts | Public class, historical method names, construction and destruction entry |

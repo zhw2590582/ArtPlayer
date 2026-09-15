@@ -1,5 +1,13 @@
 # 进度与证据
 
+## PKG-TOOL-THUMB-04 默认兼容策略待选择
+
+重新核对恢复的 3.5.31 与工作区 4.4.0，历史契约/行为 62/62 通过。已将先前待答
+问题写成[具体提案](thumbnail-compatibility-decision.md)，包含 delay/height、事件/
+帧时序、input 重置和类级 DEFAULTS 的差异。方案未批准、未实施，04 仍 doing、
+THUMB-COMPAT-01 open；不从 VAST 等其他包的批准推断本工具授权。
+见[记录](changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md)。
+
 ## SITE-07 Monaco 语言服务许可交付
 
 七包九份原始许可、两个格式器源码署名和补充说明已加入站点；JSON glob 的 BSD

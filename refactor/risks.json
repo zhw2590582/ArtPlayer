@@ -4077,9 +4077,11 @@
         "test/thumbnail.test.js",
         "test/browser/thumbnail-tool.spec.js",
         "refactor/changes/2026-09-13-PKG-TOOL-THUMB-03-lifecycle.md",
-        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md"
+        "refactor/changes/2026-09-13-PKG-TOOL-THUMB-04-public-types.md",
+        "refactor/thumbnail-compatibility-decision.md",
+        "refactor/changes/2026-09-15-PKG-TOOL-THUMB-04-policy-proposal.md"
       ],
-      "workspaceState": "Explicit user question pending: prefer published 3.5.31 defaults with opt-in 4.4 behavior, or accept the documented old-version differences and retain 4.4 defaults. No answer inferred; runtime unchanged."
+      "workspaceState": "Concrete proposal prepared: recovered 3.5.31 runtime defaults and optional workspace-4.4 mode, explicitly including the class-level DEFAULTS difference, delay/height validation, event/frame timing and input reset. Frozen contract/behavior tests rerun 62/62. User choice remains pending; no mode/default change implemented or inferred from other package approvals."
     },
     {
       "id": "THUMB-LIFE-01",
