@@ -25,6 +25,13 @@ Auto Thumbnail 和 Multiple Subtitles 的本次核对：
 | Auto Thumbnail | [入口](../packages/artplayer-plugin-auto-thumbnail/src/index.ts)、options.ts、extraction.ts、session.ts、video.ts、根/runtime 声明、README/ARCHITECTURE；核心 thumbnailsMix/layout | [中文](../packages/artplayer-vitepress/docs/plugin/auto-thumbnail.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/auto-thumbnail.md)：url/width/number/scale/忽略height；name；异步注册；Option/Result/Factory/RuntimeFactory | truthy默认值、十列与时间公式、渐进JPEG、原对象延后读取、独立解码/CORS、分阶段超时/清理、无完成API；Windows WebKit首帧未解决。维护说明的版本句改为区分初始迁移和当前major准备 |
 | Multiple Subtitles | [入口](../packages/artplayer-plugin-multiple-subtitles/src/index.ts)、request.ts、merge.ts、render.ts、lifetime.ts、根/runtime 声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md)：五个TrackOption字段、subtitles、multipleSubtitles.name/tracks/reset、全部根及runtime命名类型 | 并发下载/延后元数据、未调用onParser、未知名称同步错误、空选择/原序reset、共享escape和URL归属、整cue显示、取消结算；注册不等待宿主加载，无自动菜单/重下载，根按npm1.2形状 |
 
+Ads 和 VAST 的本次核对：
+
+| 包 | 对照源码与声明 | 双语指南覆盖 | 保留边界 |
+| --- | --- | --- | --- |
+| Ads | [入口](../packages/artplayer-plugin-ads/src/index.ts)、options.ts、countdown.ts、view.ts、session.ts、根/runtime声明、README/ARCHITECTURE | [中文](../packages/artplayer-vitepress/docs/plugin/ads.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/ads.md)：七个配置及四项i18n、name/play/pause/skip、click/skip事件、十个公开类型 | video优先、可信HTML、浅合并、计时非视频时长、按钮限制不拦截直接skip、ready/首播/早调用/销毁、事件活配置、totalDuration推导修正和忽略source/type |
+| VAST | [入口](../packages/artplayer-plugin-vast/src/index.ts)、sdk.ts、session.ts、view.ts、根/runtime声明、README/ARCHITECTURE与两项已批准决策 | [中文](../packages/artplayer-vitepress/docs/plugin/vast.md) / [English](../packages/artplayer-vitepress/docs/en/plugin/vast.md)：回调/第二参数、全部context字段、init/playUrl/playRes、name/destroy、runtime命名类型及工作区别名 | npm默认回调前创建/数据快照，显式workspace惰性/getter/请求抑制/事件；config可覆盖主字段；注册等待回调非广告完成；session可重建/core终止；旧根类型与准确runtime分离，外部IMA仍单独验收 |
+
 ## 接续范围
 
 - 核心：依据 site-inventory.json 的 963 条成员逐项或按明确的共享声明分组核对；

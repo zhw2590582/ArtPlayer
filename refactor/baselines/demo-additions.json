@@ -13,6 +13,14 @@
   ],
   "pages": [
     {
+      "source": "docs/document/en/plugin/ads.html",
+      "route": "/document/en/plugin/ads.html",
+      "introducedAfter": "2305f9d7c7254741fb8b67e72e2753ee51ce6e85",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual guide with original example; navigation checks are not native ads/IMA or device acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
       "introducedAfter": "dba354f8cd752bc2f82f5299997fb1ff60b553b5",
@@ -93,12 +101,28 @@
       "note": "Generated bilingual guide; navigation and type checks do not complete native media or device acceptance."
     },
     {
+      "source": "docs/document/en/plugin/vast.html",
+      "route": "/document/en/plugin/vast.html",
+      "introducedAfter": "2305f9d7c7254741fb8b67e72e2753ee51ce6e85",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual guide with original example; navigation checks are not native ads/IMA or device acceptance."
+    },
+    {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
       "introducedBy": "9ba3c82f99e6bad0e858f6c2e1d8624dfb725c8c",
       "owner": "SITE-VTT-01",
       "finalDemoOwner": "EX-03",
       "note": "Generated guide. Guide-specific browser evidence belongs to the owner; this entry does not complete full demo/release acceptance."
+    },
+    {
+      "source": "docs/document/plugin/ads.html",
+      "route": "/document/plugin/ads.html",
+      "introducedAfter": "2305f9d7c7254741fb8b67e72e2753ee51ce6e85",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual guide with original example; navigation checks are not native ads/IMA or device acceptance."
     },
     {
       "source": "docs/document/plugin/ambilight.html",
@@ -171,6 +195,14 @@
       "owner": "SITE-04",
       "finalDemoOwner": "EX-03",
       "note": "Generated bilingual guide; navigation and type checks do not complete native media or device acceptance."
+    },
+    {
+      "source": "docs/document/plugin/vast.html",
+      "route": "/document/plugin/vast.html",
+      "introducedAfter": "2305f9d7c7254741fb8b67e72e2753ee51ce6e85",
+      "owner": "SITE-04",
+      "finalDemoOwner": "EX-03",
+      "note": "Bilingual guide with original example; navigation checks are not native ads/IMA or device acceptance."
     },
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",

@@ -4562,7 +4562,9 @@
         "changes/2026-09-16-SITE-04-dpip-asr-guides.md",
         "baselines/site04-dpip-asr-guides.json",
         "changes/2026-09-16-SITE-04-auto-multi-guides.md",
-        "baselines/site04-auto-multi-guides.json"
+        "baselines/site04-auto-multi-guides.json",
+        "changes/2026-09-16-SITE-04-ads-vast-guides.md",
+        "baselines/site04-ads-vast-guides.json"
       ]
     },
     {

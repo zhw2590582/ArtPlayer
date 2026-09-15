@@ -4,9 +4,9 @@
   "note": "Read-only source inventory. Heading matches are candidates, never semantic API coverage. Asset identity is not permission. No runtime, remote Pages or npm acceptance is implied.",
   "counts": {
     "packages": 22,
-    "markdown": 48,
+    "markdown": 52,
     "examples": 30,
-    "html": 57,
+    "html": 61,
     "declarationMembers": 963,
     "assets": 204
   },
@@ -1947,6 +1947,41 @@
       "translationOwner": null
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+      "sha256Lf": "d85cddf9838354f6aa66292da3523152992c67a95f0a99321873200a7a04fff9",
+      "language": "en",
+      "route": "/document/en/plugin/ads.html",
+      "headings": [
+        {
+          "text": "Video and HTML Ads",
+          "line": 1
+        },
+        {
+          "text": "Installation and example",
+          "line": 7
+        },
+        {
+          "text": "Options",
+          "line": 73
+        },
+        {
+          "text": "Methods and events",
+          "line": 98
+        },
+        {
+          "text": "Lifecycle and media",
+          "line": 117
+        },
+        {
+          "text": "TypeScript compatibility",
+          "line": 127
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/plugin/ads.md",
+      "translationOwner": null
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
       "sha256Lf": "d3362744c24d26e8d9c045cb73e54984cc47c9173b4612421b431bcfbde1b65c",
       "language": "en",
@@ -2349,6 +2384,41 @@
       "translationOwner": null
     },
     {
+      "file": "packages/artplayer-vitepress/docs/en/plugin/vast.md",
+      "sha256Lf": "ac320256a8d59b60d81d81ab0bfbe72215ed5c18097c43cd793b386049190d9a",
+      "language": "en",
+      "route": "/document/en/plugin/vast.html",
+      "headings": [
+        {
+          "text": "VAST Ads",
+          "line": 1
+        },
+        {
+          "text": "Installation and example",
+          "line": 7
+        },
+        {
+          "text": "Initialization compatibility",
+          "line": 49
+        },
+        {
+          "text": "Callback context",
+          "line": 63
+        },
+        {
+          "text": "Events and destruction",
+          "line": 84
+        },
+        {
+          "text": "TypeScript entries",
+          "line": 94
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/plugin/vast.md",
+      "translationOwner": null
+    },
+    {
       "file": "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
       "sha256Lf": "0c6a11dae51a13e13bb90cc6900c588529be57de638d1de2ce894a8ef9050e5a",
       "language": "en",
@@ -2706,6 +2776,41 @@
       ],
       "runCodeMarkers": 0,
       "translation": "packages/artplayer-vitepress/docs/en/index.md",
+      "translationOwner": null
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/ads.md",
+      "sha256Lf": "63faf6ef731a1b8c8d948fffe3770ff233c55a52442f60a280d7c14335f5781d",
+      "language": "zh",
+      "route": "/document/plugin/ads.html",
+      "headings": [
+        {
+          "text": "视频与 HTML 广告",
+          "line": 1
+        },
+        {
+          "text": "安装和示例",
+          "line": 7
+        },
+        {
+          "text": "配置",
+          "line": 73
+        },
+        {
+          "text": "方法和事件",
+          "line": 98
+        },
+        {
+          "text": "生命周期和媒体",
+          "line": 117
+        },
+        {
+          "text": "TypeScript 兼容",
+          "line": 127
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
       "translationOwner": null
     },
     {
@@ -3140,6 +3245,41 @@
       ],
       "runCodeMarkers": 1,
       "translation": "packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+      "translationOwner": null
+    },
+    {
+      "file": "packages/artplayer-vitepress/docs/plugin/vast.md",
+      "sha256Lf": "288cf08318a9cb4ea09e22b66689e5e7fd63dbf613d9779002caed2b2b46a561",
+      "language": "zh",
+      "route": "/document/plugin/vast.html",
+      "headings": [
+        {
+          "text": "VAST 广告",
+          "line": 1
+        },
+        {
+          "text": "安装和示例",
+          "line": 7
+        },
+        {
+          "text": "初始化兼容模式",
+          "line": 49
+        },
+        {
+          "text": "回调上下文",
+          "line": 63
+        },
+        {
+          "text": "广告事件与销毁",
+          "line": 84
+        },
+        {
+          "text": "TypeScript 入口",
+          "line": 94
+        }
+      ],
+      "runCodeMarkers": 1,
+      "translation": "packages/artplayer-vitepress/docs/en/plugin/vast.md",
       "translationOwner": null
     },
     {
@@ -4649,6 +4789,10 @@
           "line": 50
         },
         {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "line": 98
+        },
+        {
           "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
           "line": 57
         }
@@ -5318,6 +5462,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
           "line": 50
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "line": 98
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
@@ -11671,6 +11819,10 @@
           "line": 50
         },
         {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "line": 98
+        },
+        {
           "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
           "line": 57
         }
@@ -12566,6 +12718,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
           "line": 50
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "line": 98
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
@@ -15003,6 +15159,10 @@
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
           "line": 50
+        },
+        {
+          "file": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "line": 98
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
@@ -17710,6 +17870,7 @@
         "packages/artplayer-vitepress/docs/en/component/layers.md",
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
+        "packages/artplayer-vitepress/docs/en/plugin/ads.md",
         "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
         "packages/artplayer-vitepress/docs/en/plugin/asr.md",
         "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
@@ -17720,10 +17881,12 @@
         "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
         "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+        "packages/artplayer-vitepress/docs/en/plugin/vast.md",
         "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
+        "packages/artplayer-vitepress/docs/plugin/ads.md",
         "packages/artplayer-vitepress/docs/plugin/ambilight.md",
         "packages/artplayer-vitepress/docs/plugin/asr.md",
         "packages/artplayer-vitepress/docs/plugin/audio-track.md",
@@ -17734,6 +17897,7 @@
         "packages/artplayer-vitepress/docs/plugin/document-pip.md",
         "packages/artplayer-vitepress/docs/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+        "packages/artplayer-vitepress/docs/plugin/vast.md",
         "packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
         "packages/artplayer-vitepress/docs/start/i18n.md",
         "packages/artplayer-vitepress/docs/start/option.md"
@@ -17748,8 +17912,11 @@
       "examples": [
         "ads"
       ],
-      "sidebarMentionsPackage": true,
-      "dedicatedPages": [],
+      "sidebarMentionsPackage": false,
+      "dedicatedPages": [
+        "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+        "packages/artplayer-vitepress/docs/plugin/ads.md"
+      ],
       "contentReviewOwner": "SITE-04",
       "demoExecutionOwner": "EX-03"
     },
@@ -17947,8 +18114,11 @@
       "examples": [
         "vast"
       ],
-      "sidebarMentionsPackage": true,
-      "dedicatedPages": [],
+      "sidebarMentionsPackage": false,
+      "dedicatedPages": [
+        "packages/artplayer-vitepress/docs/en/plugin/vast.md",
+        "packages/artplayer-vitepress/docs/plugin/vast.md"
+      ],
       "contentReviewOwner": "SITE-04",
       "demoExecutionOwner": "EX-03"
     },
@@ -18043,6 +18213,7 @@
         "packages/artplayer-vitepress/docs/en/component/layers.md",
         "packages/artplayer-vitepress/docs/en/component/setting.md",
         "packages/artplayer-vitepress/docs/en/index.md",
+        "packages/artplayer-vitepress/docs/en/plugin/ads.md",
         "packages/artplayer-vitepress/docs/en/plugin/ambilight.md",
         "packages/artplayer-vitepress/docs/en/plugin/asr.md",
         "packages/artplayer-vitepress/docs/en/plugin/audio-track.md",
@@ -18053,10 +18224,12 @@
         "packages/artplayer-vitepress/docs/en/plugin/document-pip.md",
         "packages/artplayer-vitepress/docs/en/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/en/plugin/multiple-subtitles.md",
+        "packages/artplayer-vitepress/docs/en/plugin/vast.md",
         "packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md",
         "packages/artplayer-vitepress/docs/en/start/i18n.md",
         "packages/artplayer-vitepress/docs/en/start/option.md",
         "packages/artplayer-vitepress/docs/index.md",
+        "packages/artplayer-vitepress/docs/plugin/ads.md",
         "packages/artplayer-vitepress/docs/plugin/ambilight.md",
         "packages/artplayer-vitepress/docs/plugin/asr.md",
         "packages/artplayer-vitepress/docs/plugin/audio-track.md",
@@ -18067,6 +18240,7 @@
         "packages/artplayer-vitepress/docs/plugin/document-pip.md",
         "packages/artplayer-vitepress/docs/plugin/hls-control.md",
         "packages/artplayer-vitepress/docs/plugin/multiple-subtitles.md",
+        "packages/artplayer-vitepress/docs/plugin/vast.md",
         "packages/artplayer-vitepress/docs/plugin/vtt-thumbnail.md",
         "packages/artplayer-vitepress/docs/start/i18n.md",
         "packages/artplayer-vitepress/docs/start/option.md"
@@ -18514,10 +18688,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "ec53e7fb0bbfc5ceb539a30e5695e865695001971af3b1252ba978d6bfd45ff0",
+      "sha256Lf": "9d99869315009e75df1966c23d88c3b64bf3d1bd600a097e67c57649165837df",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18527,10 +18701,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "745713e5ce9d410bc0af1c888e7cca7be7030d1bb37163d6dddd25bd43b5a719",
+      "sha256Lf": "a3cb374c076eb4164b48f200a48957c81093e00598c69a7335f15166c8af66b5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18540,10 +18714,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "8be770ed89d28aa0558e8029248b632e1960279288fe8d924d48fd385749ebe7",
+      "sha256Lf": "4c5dbf3f35ac6df07e73f414799a7aca2aa134d17b3609c729ae804e07df73d3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18553,10 +18727,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "3c628be579d94dbd98825410bd899bd38608abc3ca474e3db720c313e864d14f",
+      "sha256Lf": "74ce5b6f1d17828e25bfe32187c1340a984ba3168207f5c8d142e4e80edf79e5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18566,10 +18740,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "1a7b34199a4b0101a9ac6b3f4b3e68bff24f51b0dbfb449b564501c3f5a292eb",
+      "sha256Lf": "3510850e24161a33f359b3d6d093117d76bf4960451fe2d4dfe1263ce9fc03bd",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18579,10 +18753,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "4e84734fac4dbce987ace077c7ef09ca8e445749dd117b012fca4548e3e000f7",
+      "sha256Lf": "5befdf420b8b644f460f935662d860ad49a7f48e1f2ffb9e74452d6d7a581f0a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18592,10 +18766,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "bd0690a30ac53b8d083d0b1e14bc137e921d16548b25df10749284f00f03a007",
+      "sha256Lf": "63e4feacdbc2d64744564a91c37a9ce7d8ea1d13a6c349b6bd889d4293e597c9",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18605,10 +18779,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "0fae8b077fe3917f0ee590ac1deb02c979a822c05d3e1caa19ff43cceae850ee",
+      "sha256Lf": "9bbad2885dd05451c8e36ee4e8e099f3e9cf006c7f13e204db7ccddfdfac1cf1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18618,10 +18792,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "860bd52569d69c85b807e4271539113ad82675ff17eac1046dc368ef60aa598c",
+      "sha256Lf": "17455f9fa0426b8921bf6b0ab2d0b260331fabdb8b7e1d4dff4000a9e3e43a01",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18631,10 +18805,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "f09d028468d8360cf0e41fe313a8d3b99c5ba00b79843cbc393af9b97bccce9d",
+      "sha256Lf": "5abec3974844d79109b75179053441ef718f61c79f555ba621f780fde2e95df9",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18644,10 +18818,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "8fc4c80051d0850d08b00249b4fcc692646a3ed13d2b25b1b4e7eb02a5c2e730",
+      "sha256Lf": "76db9b99607c84771135414b940381689002b963dfd5f003ff6a278a09734d22",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18657,10 +18831,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "39bdfbcead70cb63e65f3c66748e0c3e508864d4bcef60cb2c4b1596753b779b",
+      "sha256Lf": "76b6916f28a3157ff414a96450bf7e4c6cb07b152dc561be6b3ba2f00613c8de",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18670,10 +18844,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "8f6ebcf01e7873a3c54efe1e99551da51f1fa35ec302dd3b93a3a0878a25d026",
+      "sha256Lf": "72ade1ec6a376d7489e420a220ab015c2fb1869f4609c4ba73acf7f652b85997",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18683,10 +18857,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "87d136abd832e846f1d7d3fb819dddd9694e68a2599781a0881467569cbce299",
+      "sha256Lf": "73fcb33473dd7379a7863c96f5141c85dce52d587b9d8581d7f26193c62517fc",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18696,10 +18870,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "3c67bfde338dd3d12162a50f862c0140774c61ccaa75aa70440080fe96393d2d",
+      "sha256Lf": "68fa5e2e7aedd89742af78a141a0d8e1bece06e153742b31ac7b1fc3297f4f34",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18709,10 +18883,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "7f54efdf5454eebf0bbb2c5647db97f3e56b5ab9337ddbdcab9bba15be3bab93",
+      "sha256Lf": "48ca1f6e6f1cb084b4e5276d8a109b2ef8ef693ad9bef987b704f8dcb79e5777",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18722,10 +18896,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "e357db99203b00b585860cfd1b410c57ba05fa3a6f445e5655db7d0cbb5f8a51",
+      "sha256Lf": "e8c78c0324b1502af9330fe6df835df91834f3f50fccb67059c26d3e214e30cc",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18735,10 +18909,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "c5a161d9917dc5f8a0b9456e17ef4d0fb58e58d330b14113485b760c4507b4bf",
+      "sha256Lf": "c1b33c69e7d3220db11e89300fe06933db73a7041c4bf2fb3fb34a6b1b2b0158",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18748,10 +18922,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "8c0e2dedc4241aad09d94f22ce72dcfffe3430d8eceb94ec443324edef431962",
+      "sha256Lf": "ae3b44f9ad8e204c80dd685d2b0bf18b74edd377ffbaa51d6389b93cbeb82e26",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18761,10 +18935,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "6ace1c3bbaf2250498d513eb6f6fe16b61ef7c35e9b148145ebdf1e61f822491",
+      "sha256Lf": "61451c8708a2e818bfed9d89973bbc77e08148d7dcf84199cc21f6a2b5f1cc5b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18774,10 +18948,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "85e7fc90fe19fbca5427458ca3d03b2707736eb3acaf1a3b41007b0a92d8881e",
+      "sha256Lf": "dfaee062476d25a183eb3189f04bf68409a9f8990106299dc1bc7ecedc5ae55a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18787,10 +18961,23 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "ab93d7fc9b459d930478f05e9ff06a10207a6ce9e227bba8554514c0de2aeed2",
+      "sha256Lf": "fb23b8e120340062e8af6804648013470ee53b79241db9d1274e0becd9459fcb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/plugin/ads.html",
+      "route": "/document/en/plugin/ads.html",
+      "sha256Lf": "d01bce5bfb52b04544de573d64359f560361186e6b413c1d720108a6b0214fb6",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18800,10 +18987,10 @@
     {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
-      "sha256Lf": "839d65daf990f16a8eea425d90abb4e9890fc54f51f740a10c5f983d98afd820",
+      "sha256Lf": "337aa163ab3f623ecd77cf2120bcb78fe9061cc2c054a1399d638831e79bfbb6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18813,10 +19000,10 @@
     {
       "source": "docs/document/en/plugin/asr.html",
       "route": "/document/en/plugin/asr.html",
-      "sha256Lf": "b5955ace860237e847f0e2792553dd8625c98bbec62c5147555efc05b0958f7e",
+      "sha256Lf": "16b31c49e353f90a2d749b5cc8c1dd53c4cfb36702c7d30a410f45fc687d8ed5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18826,10 +19013,10 @@
     {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
-      "sha256Lf": "dec523ef5a3729b15e1900360bb4427164e5a2351c9823956626ba766b2e00ea",
+      "sha256Lf": "cb8d046cbec2c89a8649f026a2abf1a2387ff9b7b416593db8488910da35e7b5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18839,10 +19026,10 @@
     {
       "source": "docs/document/en/plugin/auto-thumbnail.html",
       "route": "/document/en/plugin/auto-thumbnail.html",
-      "sha256Lf": "dac78284ff9ab64f1b4fcec0c869e4112c93cfde75590efcf291757b1890a0be",
+      "sha256Lf": "9d60f191513da3a505388b4a85535dfb83bcfe1612f8ce93a59b58a2d66ba954",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18852,10 +19039,10 @@
     {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
-      "sha256Lf": "a01304d60d0cc2c1834bdb9649b775b969ad0af4840eade7538a0e30e3c08778",
+      "sha256Lf": "bd93b7c2da53264d3cf58d7c3abdb6a64526195e75d62a87da9fa606b8c08cf2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18865,10 +19052,10 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "b5f664de84d01212ec4c73fb9d9da919e35f50f175c00b88de1246cab59a3d93",
+      "sha256Lf": "e738e6cf8d27495e1f0ec590c98624ddf758c54a26cd04ecbb872568a9afe08e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18878,10 +19065,10 @@
     {
       "source": "docs/document/en/plugin/dash-control.html",
       "route": "/document/en/plugin/dash-control.html",
-      "sha256Lf": "da04f81b36147e31a53db98347088d4d3a3b98363454dc1bfc8ca4ae12c3788a",
+      "sha256Lf": "c174906d3d2eeadfcd7754b234b07bb9eb1576feadd77cdd49a800476c40f4a8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18891,10 +19078,10 @@
     {
       "source": "docs/document/en/plugin/document-pip.html",
       "route": "/document/en/plugin/document-pip.html",
-      "sha256Lf": "212d0abd1a3d45ac3623c4e2361228f5d0c240c1704f3fad63bea8e4ee748819",
+      "sha256Lf": "fbc1fe6a3b0e72e4aa195da9522a0bd52403c167ae9ffd6586dcadb00b7b31f2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18904,10 +19091,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "cbae91600fad9a30f1ecd45bedd5b26049730c540dbd510d64e51506803bfaff",
+      "sha256Lf": "9e538dfd14ddd271bb2743417a0c75f9e61935a551bdd108911a324c7cab41e5",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18917,10 +19104,23 @@
     {
       "source": "docs/document/en/plugin/multiple-subtitles.html",
       "route": "/document/en/plugin/multiple-subtitles.html",
-      "sha256Lf": "9ababc30ec28291f1ab969e6986e19671d1fb4329f03e4fd47388ac8d1941f78",
+      "sha256Lf": "6e85e559ba49c90f5d329a602eaa58665223e05d0be8e601699732c1ff82807c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/en/plugin/vast.html",
+      "route": "/document/en/plugin/vast.html",
+      "sha256Lf": "90851ec6db5bc145283e116062058f2ab64ba711a35366ce2dc212c2e8d8c799",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18930,10 +19130,10 @@
     {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
-      "sha256Lf": "5d3c2264ff554703c0cdb5a267936519c054586713c5cb57c3006f4e147cbe74",
+      "sha256Lf": "2c06d30dc1ae10b34e41f4ff174b3626320975b604201489fe4fe72d46abcf14",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18943,10 +19143,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "b437370167ce3239d5e60728fac747f72fb4245d68a3ae7bf28c35686aa70c6d",
+      "sha256Lf": "fa87e59056dd89304b539734f47a58c3e999cf248c0f1285b8a5470900a33279",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18956,10 +19156,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "b7739fb51bab82250384825b68256e243d88f90be571709e0835a9d71019a3e6",
+      "sha256Lf": "dfa63029c9d23bd4e8859b5a0ce575ad4d9f990021623228e3946f3a7941af91",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18969,10 +19169,23 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "ba0b9d920ea00e0016aabd0c8692fdfe049cce0f6cf52bb0113233a51a484fe2",
+      "sha256Lf": "c65f6abecce4873d43d515b5d813fcadaeebadcba441d449a813b4be96a62b9d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/plugin/ads.html",
+      "route": "/document/plugin/ads.html",
+      "sha256Lf": "beac9df3f210c4d5ca38a24d57afb303acca6923415409475b372e353fbcd8ad",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18982,10 +19195,10 @@
     {
       "source": "docs/document/plugin/ambilight.html",
       "route": "/document/plugin/ambilight.html",
-      "sha256Lf": "3942e84c0bd679b0bd5439f0e45b75f06b3268bf081a713fe7e658b3cf061020",
+      "sha256Lf": "70ed82111bfe6072edea40a05dd5d409115216193c7839e496e0ed03699da8b2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -18995,10 +19208,10 @@
     {
       "source": "docs/document/plugin/asr.html",
       "route": "/document/plugin/asr.html",
-      "sha256Lf": "754a3c213c622d7c4c489f0094c0266260a634c62f9e641db8968838c615e25a",
+      "sha256Lf": "299d0552e4e014085443bba5fc7a6b1bdb281def9a68d783ff7db915697ec3e4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19008,10 +19221,10 @@
     {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
-      "sha256Lf": "24a4828ac362bd99600416ac0cdb6650040a04b42be48a5c34b80209b2f57840",
+      "sha256Lf": "da816227abc07c5d8fbedae9d8bb9bbde116ee152d70ed2005e65c6bc22dd615",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19021,10 +19234,10 @@
     {
       "source": "docs/document/plugin/auto-thumbnail.html",
       "route": "/document/plugin/auto-thumbnail.html",
-      "sha256Lf": "b844bac57a08ce81cc0f6b9c54335f8a497c0280315b26dbc375bd08ad8da3d3",
+      "sha256Lf": "45bab406ac2cb7637bbb5b4df13ec56e5fec0f68af404aae61231f8e316094d2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19034,10 +19247,10 @@
     {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
-      "sha256Lf": "f1d902e8b2c5ea1409dd1fb605af3a563857610ac23a06b20a68b7f66a8294a0",
+      "sha256Lf": "9d2d10acfa76d2d968a74c81b5381bb0eed9816c51e84909faa7d639520d0bfb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19047,10 +19260,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "d9e575d24bf2612227cca41743bff02bcefb5e2ce85ce2991da74eaa3507da2f",
+      "sha256Lf": "55b963da69f3012434d6661151960964935f640ec9196fa25980925863320805",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19060,10 +19273,10 @@
     {
       "source": "docs/document/plugin/dash-control.html",
       "route": "/document/plugin/dash-control.html",
-      "sha256Lf": "758d290d5e99edde7046a7f30285d0b881b16ef6c568c2c29f63e37dcdd16af3",
+      "sha256Lf": "71069e83a791411600d84fa37d00a6321e77d7ab598c43d69dce53a1e1a6c264",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19073,10 +19286,10 @@
     {
       "source": "docs/document/plugin/document-pip.html",
       "route": "/document/plugin/document-pip.html",
-      "sha256Lf": "9dcff8b75ad571384794701f344a21a8c53c629dad89bfada93ee285eae70c13",
+      "sha256Lf": "afdf2a91b9f086e5490f8ed49501b91dff54041c7d48608db304d0a752add794",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19086,10 +19299,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "df92509866314ec382626267afe40705ba58decf87c45da06f2b6e197d7cc732",
+      "sha256Lf": "e987b030a7bcdbfed2201d117e01635ad3e305425a6b50473e982295996a5733",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19099,10 +19312,23 @@
     {
       "source": "docs/document/plugin/multiple-subtitles.html",
       "route": "/document/plugin/multiple-subtitles.html",
-      "sha256Lf": "f596f2e4664f4444822c2dbee761482f7363054dcbc4fa58ec192fa42252a98c",
+      "sha256Lf": "50306521945637409e03b598cbe7bfc16fbc00df1fb0e11afa0341d475cb21db",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
+        "/document/main.js",
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
+      ],
+      "status": "not-run",
+      "owner": "EX-03"
+    },
+    {
+      "source": "docs/document/plugin/vast.html",
+      "route": "/document/plugin/vast.html",
+      "sha256Lf": "25f0200664113c78da7730fcc8bfae3a9e80a911da32fc16d3d5c7ee571cfca4",
+      "kind": "generated-docs",
+      "scriptSources": [
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19112,10 +19338,10 @@
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",
       "route": "/document/plugin/vtt-thumbnail.html",
-      "sha256Lf": "8cc0b1206673f4a5f9300aafd44cf8fd900db4241bc7a66a92eb1512d0438240",
+      "sha256Lf": "2c979c20db400bb1a1874f20c1b21acdb60126d3ac1cda388cbd4399dda5f8d6",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19125,10 +19351,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "1c1ce0827ea370a0439f8b66d9b821943c923994d0f4df08edf1ffcb8e1d7c2d",
+      "sha256Lf": "07d8b94792134da9c23566eb1715a084d24c3b6291d2bf2328fb044c1db72087",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19138,10 +19364,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "a666719f4dd3c254a2e979d657c0c063874217d70662d2ce7ce57eaf8bef1cb2",
+      "sha256Lf": "b60d44470430f932c42fa1bb0ea460ca94076871a1cf89db8ed0119344a14951",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.BqohTHWP.js",
+        "/document/assets/app.B-YcWOZ8.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19272,6 +19498,7 @@
     ],
     "examplesRemoved": [],
     "htmlAdded": [
+      "docs/document/en/plugin/ads.html",
       "docs/document/en/plugin/ambilight.html",
       "docs/document/en/plugin/asr.html",
       "docs/document/en/plugin/audio-track.html",
@@ -19282,7 +19509,9 @@
       "docs/document/en/plugin/document-pip.html",
       "docs/document/en/plugin/hls-control.html",
       "docs/document/en/plugin/multiple-subtitles.html",
+      "docs/document/en/plugin/vast.html",
       "docs/document/en/plugin/vtt-thumbnail.html",
+      "docs/document/plugin/ads.html",
       "docs/document/plugin/ambilight.html",
       "docs/document/plugin/asr.html",
       "docs/document/plugin/audio-track.html",
@@ -19292,6 +19521,7 @@
       "docs/document/plugin/document-pip.html",
       "docs/document/plugin/hls-control.html",
       "docs/document/plugin/multiple-subtitles.html",
+      "docs/document/plugin/vast.html",
       "docs/document/plugin/vtt-thumbnail.html"
     ],
     "htmlRemoved": []
@@ -19459,7 +19689,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/public/main.js",
-      "sha256Lf": "8439e8f0363356933992d5fcb808b0b862549d1f028f043c5859c9e9cec684a6"
+      "sha256Lf": "6d6247df9de6fee9953a031693661fed71c6f16b5a3bfc7b01a711048ef43dea"
     },
     {
       "file": "packages/artplayer-vitepress/docs/vite.config.ts",
@@ -19467,7 +19697,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/.vitepress/config.js",
-      "sha256Lf": "228bb1439e9ef5dc8a844b345051cfd1cef8ec43db781075206bd48dac15b4a8"
+      "sha256Lf": "35d2c09c994447e905fb2f9b39f717f4f023f671020b35a9be32c945819500ee"
     },
     {
       "file": "scripts/build-site-assets.mjs",

@@ -1,0 +1,742 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "scope": "Four bilingual Ads/VAST guides, not full site or native ad/IMA acceptance",
+  "sourceBefore": "2305f9d7c7254741fb8b67e72e2753ee51ce6e85",
+  "capturedAt": "2026-09-15T19:14:27.878Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "platform": "win32",
+    "static": [
+      {
+        "name": "ads",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/ads.md",
+          "sha256": "63faf6ef731a1b8c8d948fffe3770ff233c55a52442f60a280d7c14335f5781d"
+        },
+        "html": {
+          "path": "docs/document/plugin/ads.html",
+          "sha256": "beac9df3f210c4d5ca38a24d57afb303acca6923415409475b372e353fbcd8ad"
+        },
+        "example": {
+          "path": "docs/assets/example/ads.js",
+          "sha256": "c84a97d2b1970c323a0c2538b846312bff38513e10de271fe5f239953da88cd3"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-ads-vast/ads-zh.mts",
+          "sha256": "85d716bcf29b23a0556ec9dadb613c77a3b25da48c24ae89f175f2da35b7e394"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/ads.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/ads.html#%E8%A7%86%E9%A2%91%E4%B8%8E-html-%E5%B9%BF%E5%91%8A",
+          "/document/en/plugin/ads.html",
+          "/document/plugin/ads.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/ads.html#%E9%85%8D%E7%BD%AE",
+          "/document/plugin/ads.html#%E6%96%B9%E6%B3%95%E5%92%8C%E4%BA%8B%E4%BB%B6",
+          "/document/plugin/ads.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E5%AA%92%E4%BD%93",
+          "/document/plugin/ads.html#typescript-%E5%85%BC%E5%AE%B9"
+        ]
+      },
+      {
+        "name": "ads",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/ads.md",
+          "sha256": "d85cddf9838354f6aa66292da3523152992c67a95f0a99321873200a7a04fff9"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/ads.html",
+          "sha256": "d01bce5bfb52b04544de573d64359f560361186e6b413c1d720108a6b0214fb6"
+        },
+        "example": {
+          "path": "docs/assets/example/ads.js",
+          "sha256": "c84a97d2b1970c323a0c2538b846312bff38513e10de271fe5f239953da88cd3"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-ads-vast/ads-en.mts",
+          "sha256": "85d716bcf29b23a0556ec9dadb613c77a3b25da48c24ae89f175f2da35b7e394"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/ads.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/ads.html#video-and-html-ads",
+          "/document/plugin/ads.html",
+          "/document/en/plugin/ads.html#installation-and-example",
+          "/document/en/plugin/ads.html#options",
+          "/document/en/plugin/ads.html#methods-and-events",
+          "/document/en/plugin/ads.html#lifecycle-and-media",
+          "/document/en/plugin/ads.html#typescript-compatibility"
+        ]
+      },
+      {
+        "name": "vast",
+        "language": "zh",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/plugin/vast.md",
+          "sha256": "288cf08318a9cb4ea09e22b66689e5e7fd63dbf613d9779002caed2b2b46a561"
+        },
+        "html": {
+          "path": "docs/document/plugin/vast.html",
+          "sha256": "25f0200664113c78da7730fcc8bfae3a9e80a911da32fc16d3d5c7ee571cfca4"
+        },
+        "example": {
+          "path": "docs/assets/example/vast.js",
+          "sha256": "ce93b48fabc2f1fd39fdaa8af3ae9f86a420c9aa65551e2e196d754070f36064"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-ads-vast/vast-zh.mts",
+          "sha256": "62829cd0fb93d25984310350927143e3cbb6e7b7226ab04a4b69fa110d29cb1b"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/plugin/vast.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/plugin/vast.html#vast-%E5%B9%BF%E5%91%8A",
+          "/document/en/plugin/vast.html",
+          "/document/plugin/vast.html#%E5%AE%89%E8%A3%85%E5%92%8C%E7%A4%BA%E4%BE%8B",
+          "/document/plugin/vast.html#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%BC%E5%AE%B9%E6%A8%A1%E5%BC%8F",
+          "/document/plugin/vast.html#%E5%9B%9E%E8%B0%83%E4%B8%8A%E4%B8%8B%E6%96%87",
+          "/document/plugin/vast.html#%E5%B9%BF%E5%91%8A%E4%BA%8B%E4%BB%B6%E4%B8%8E%E9%94%80%E6%AF%81",
+          "/document/plugin/vast.html#typescript-%E5%85%A5%E5%8F%A3"
+        ]
+      },
+      {
+        "name": "vast",
+        "language": "en",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/plugin/vast.md",
+          "sha256": "ac320256a8d59b60d81d81ab0bfbe72215ed5c18097c43cd793b386049190d9a"
+        },
+        "html": {
+          "path": "docs/document/en/plugin/vast.html",
+          "sha256": "90851ec6db5bc145283e116062058f2ab64ba711a35366ce2dc212c2e8d8c799"
+        },
+        "example": {
+          "path": "docs/assets/example/vast.js",
+          "sha256": "ce93b48fabc2f1fd39fdaa8af3ae9f86a420c9aa65551e2e196d754070f36064"
+        },
+        "typeFixture": {
+          "path": "refactor/.cache/site04-ads-vast/vast-en.mts",
+          "sha256": "62829cd0fb93d25984310350927143e3cbb6e7b7226ab04a4b69fa110d29cb1b"
+        },
+        "diagnostics": [],
+        "localLinks": [
+          "/document/en/plugin/vast.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/plugin/vast.html#vast-ads",
+          "/document/plugin/vast.html",
+          "/document/en/plugin/vast.html#installation-and-example",
+          "/document/en/plugin/vast.html#initialization-compatibility",
+          "/document/en/plugin/vast.html#callback-context",
+          "/document/en/plugin/vast.html#events-and-destruction",
+          "/document/en/plugin/vast.html#typescript-entries"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/ads.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频与 HTML 广告\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ads/index.js",
+          "codeSha256": "0aeb36077af7d37777670aaf380c8d93edb1582d6a628a1c7c282e46aee811ef"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/chromium-ads-zh.png",
+          "sha256": "f384e545d97aaf2638fbb710a3ab7b663b5f86ee795fb999a205e131feeda98c"
+        },
+        "translation": "/document/en/plugin/ads.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/ads.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video and HTML Ads\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ads/index.js",
+          "codeSha256": "0aeb36077af7d37777670aaf380c8d93edb1582d6a628a1c7c282e46aee811ef"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/chromium-ads-en.png",
+          "sha256": "a87dfb42defc7beed4a760bc3134bd10bf2c9e841fa3fb5494b5589a617c2b1a"
+        },
+        "translation": "/document/plugin/ads.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "plugin/vast.md",
+        "passed": true,
+        "errors": [],
+        "title": "VAST 广告\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-vast/index.js",
+          "codeSha256": "312a04665ed5d68f502475071e9f2ae4392c778284bcd6d53508b639ad3c6a4d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/chromium-vast-zh.png",
+          "sha256": "dd62049d6a0f51c7e618271da0a9bed496b5dd0ec166624ac552061660963c8a"
+        },
+        "translation": "/document/en/plugin/vast.html"
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "guide": "en/plugin/vast.md",
+        "passed": true,
+        "errors": [],
+        "title": "VAST Ads\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-vast/index.js",
+          "codeSha256": "312a04665ed5d68f502475071e9f2ae4392c778284bcd6d53508b639ad3c6a4d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/chromium-vast-en.png",
+          "sha256": "35809868df487fe2eb2c331ebe53776aa30c9cf570f9f19e42a062d90d7b0dd8"
+        },
+        "translation": "/document/plugin/vast.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/ads.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频与 HTML 广告\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ads/index.js",
+          "codeSha256": "0aeb36077af7d37777670aaf380c8d93edb1582d6a628a1c7c282e46aee811ef"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/firefox-ads-zh.png",
+          "sha256": "2bce16cd81654f98adb3af6173c6f5746abdcbc5860b38481b6bec94e4847d2f"
+        },
+        "translation": "/document/en/plugin/ads.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/ads.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video and HTML Ads\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ads/index.js",
+          "codeSha256": "0aeb36077af7d37777670aaf380c8d93edb1582d6a628a1c7c282e46aee811ef"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/firefox-ads-en.png",
+          "sha256": "92bede7bfbd23f196920a420a7b670c6afda8135df2d78402cabcc0bf9d0a449"
+        },
+        "translation": "/document/plugin/ads.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "plugin/vast.md",
+        "passed": true,
+        "errors": [],
+        "title": "VAST 广告\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-vast/index.js",
+          "codeSha256": "312a04665ed5d68f502475071e9f2ae4392c778284bcd6d53508b639ad3c6a4d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/firefox-vast-zh.png",
+          "sha256": "400161780610ee6199a471d89f3082e1c7727bce0ff573f49b35e89e4328fb42"
+        },
+        "translation": "/document/en/plugin/vast.html"
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "guide": "en/plugin/vast.md",
+        "passed": true,
+        "errors": [],
+        "title": "VAST Ads\n​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-vast/index.js",
+          "codeSha256": "312a04665ed5d68f502475071e9f2ae4392c778284bcd6d53508b639ad3c6a4d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/firefox-vast-en.png",
+          "sha256": "ef3c3b53347003f06d2af5b887206131adf8c1e4e931177ada98e6e6e53eff8b"
+        },
+        "translation": "/document/plugin/vast.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/ads.md",
+        "passed": true,
+        "errors": [],
+        "title": "视频与 HTML 广告 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ads/index.js",
+          "codeSha256": "0aeb36077af7d37777670aaf380c8d93edb1582d6a628a1c7c282e46aee811ef"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/webkit-ads-zh.png",
+          "sha256": "f01dd583760e9dbad285a4ae9f5a72f6cb276bf642f43bc0afc2c62916bdbcc1"
+        },
+        "translation": "/document/en/plugin/ads.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/ads.md",
+        "passed": true,
+        "errors": [],
+        "title": "Video and HTML Ads ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-ads/index.js",
+          "codeSha256": "0aeb36077af7d37777670aaf380c8d93edb1582d6a628a1c7c282e46aee811ef"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/webkit-ads-en.png",
+          "sha256": "90df7534abd43f2f944e3f324436c587491cb60afe71a70d751cceb0e7712ea2"
+        },
+        "translation": "/document/plugin/ads.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "plugin/vast.md",
+        "passed": true,
+        "errors": [],
+        "title": "VAST 广告 ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-vast/index.js",
+          "codeSha256": "312a04665ed5d68f502475071e9f2ae4392c778284bcd6d53508b639ad3c6a4d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/webkit-vast-zh.png",
+          "sha256": "02557d3e6bd6f56e5f52749baecf67d0ea7691a9d992ee2d80076eb7ab52a02a"
+        },
+        "translation": "/document/en/plugin/vast.html"
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "guide": "en/plugin/vast.md",
+        "passed": true,
+        "errors": [],
+        "title": "VAST Ads ​",
+        "popup": {
+          "origin": "http://localhost:8082",
+          "libs": "./uncompiled/artplayer-plugin-vast/index.js",
+          "codeSha256": "312a04665ed5d68f502475071e9f2ae4392c778284bcd6d53508b639ad3c6a4d"
+        },
+        "screenshot": {
+          "path": "refactor/.cache/site04-ads-vast/webkit-vast-en.png",
+          "sha256": "1f79671abd88eb21cc0f6bc779c8be7c2c32156cf97f7b49497197d05a1d56a6"
+        },
+        "translation": "/document/plugin/vast.html"
+      }
+    ],
+    "controls": [],
+    "complete": true,
+    "limitations": [
+      "Guide rendering/navigation and original-code forwarding only; popup editor response is isolated, not media playback.",
+      "Does not complete SITE-04 core/member coverage, SITE-05, EX-03 or physical-device validation."
+    ]
+  },
+  "tools": {
+    "tests": 17,
+    "pass": 17,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1294.8867,
+    "checksPassed": [
+      "build:llm",
+      "build:docs",
+      "check:llm",
+      "config eslint",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "inventory": {
+    "markdown": 52,
+    "html": 61,
+    "examples": 30,
+    "declarationMembers": 963,
+    "assets": 204
+  },
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-BhpUum/report.json",
+      "sha256": "55b479bdef8fe1f4236240b637965585720312d72c1e6f18449288f3efe55bb7"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "3130f6e7c49373a87b094582bcc9affbdf799c562ec688137bb96f3d7ed42157",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "b6403202698ea9beccee34f764727442c31ad806cb5b5e3b4f6e944f760acdb8",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "visualInspections": [
+    "chromium-vast-zh.png"
+  ],
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-ads-vast-validate.mjs",
+      "sha256": "96dc8beb23f695bba08076d983a107c5a71dd65f5bba486ff4499d7f08a14cec"
+    },
+    {
+      "path": "refactor/.cache/site04-ads-vast/report.json",
+      "sha256": "94ba1f1664d9d765fdaa151e3d9e0d247a92a8192ba9545d46bac14e8e658077"
+    },
+    {
+      "path": "refactor/.cache/site04-ads-vast-validate.log",
+      "sha256": "8f647a94fe14b920de3c916ac550464507476998abaac5f7217e0f9a027808a5"
+    },
+    {
+      "path": "refactor/.cache/site04-ads-vast-tools.log",
+      "sha256": "1de22ad218200c082e9e486b7104e7af2919e4300407134313cd2628963b2e25"
+    },
+    {
+      "path": "refactor/.cache/site04-ads-vast-build.log",
+      "sha256": "7f261d6e8fffa5aaa83eb909e593acfdae12b2173b71728771a82c5b8c54785f"
+    },
+    {
+      "path": "refactor/.cache/site04-ads-vast-llm.log",
+      "sha256": "7b8a780cc2bab0eb95eb645f451916a7ba3994d8493713697384598d2204a689"
+    },
+    {
+      "path": "refactor/.cache/site04-ads-vast-ledger.log",
+      "sha256": "21d7eef5bd6864c783722aff137436830270583ebc8dc4b7607eecbff76965b9"
+    }
+  ],
+  "whitespace": {
+    "fullExit": 2,
+    "findings": [
+      {
+        "file": "docs/document/en/plugin/ads.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/ads.html",
+        "line": 84
+      },
+      {
+        "file": "docs/document/en/plugin/vast.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/en/plugin/vast.html",
+        "line": 66
+      },
+      {
+        "file": "docs/document/plugin/ads.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/ads.html",
+        "line": 84
+      },
+      {
+        "file": "docs/document/plugin/vast.html",
+        "line": 11
+      },
+      {
+        "file": "docs/document/plugin/vast.html",
+        "line": 66
+      }
+    ],
+    "remainingExit": 0,
+    "note": "Only blank VitePress template lines. Generated HTML preserved; full check not reported as passing."
+  }
+}

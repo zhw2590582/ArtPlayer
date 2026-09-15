@@ -4571,6 +4571,155 @@ You need to modify it before importing the `Artplayer` dependency for it to take
 
 :::
 
+===== packages/artplayer-vitepress/docs/en/plugin/ads.md =====
+
+# Video and HTML Ads
+
+[简体中文](../../plugin/ads.md)
+
+Show one preroll when content first plays, using a separate video or HTML. The plugin supplies countdown, close, details, mute and fullscreen controls without IMA. Ad-tag requests belong to the separate [VAST plugin](./vast.md). This page describes the unreleased refactor branch; online examples and unpinned packages are not the current candidate.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-ads
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginAds from 'artplayer-plugin-ads';
+```
+
+For script usage, load ArtPlayer before `dist/artplayer-plugin-ads.js`; the global is `artplayerPluginAds`. The [original online example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-ads/index.js&example=ads) below supplies both video and HTML, so the video takes precedence.
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-ads/index.js">▶ Run Code</div>
+
+```js
+// npm i artplayer-plugin-ads
+// import artplayerPluginAds from 'artplayer-plugin-ads';
+
+const art = new Artplayer({
+  container: '.artplayer-app',
+  url: '/assets/sample/video.mp4',
+  autoSize: true,
+  fullscreen: true,
+  fullscreenWeb: true,
+  plugins: [
+    artplayerPluginAds({
+      // html广告，假如是视频广告则忽略该值
+      html: '<img src="/assets/sample/poster.jpg">',
+
+      // 视频广告的地址
+      video: '/assets/sample/test1.mp4',
+
+      // 广告跳转网址，为空则不跳转
+      url: 'http://artplayer.org',
+
+      // 必须观看的时长，期间不能被跳过，单位为秒
+      // 当该值大于或等于totalDuration时，不能提前关闭广告
+      // 当该值等于或小于0时，则随时都可以关闭广告
+      playDuration: 5,
+
+      // 广告总时长，单位为秒
+      totalDuration: 10,
+
+      // 多语言支持
+      i18n: {
+        close: '关闭广告',
+        countdown: '%s秒',
+        detail: '查看详情',
+        canBeClosed: '%s秒后可关闭广告',
+      },
+    }),
+  ],
+})
+
+// 广告被点击
+art.on('artplayerPluginAds:click', (ads) => {
+  console.info('广告被点击', ads)
+})
+
+// 广告被跳过
+art.on('artplayerPluginAds:skip', (ads) => {
+  console.info('广告被跳过', ads)
+})
+```
+
+## Options
+
+Options may be omitted or supplied as `{}` to use defaults.
+
+| Field | Type | Default | Meaning |
+| --- | --- | --- | --- |
+| `html` | `string` | `''` | Ad HTML, including images; not sanitized automatically, so supply trusted content |
+| `video` | `string` | `''` | Ad video URL; a nonempty value overrides html |
+| `url` | `string` | `''` | Destination opened from ad content or details; empty disables navigation and hides details |
+| `playDuration` | `number` | `5` | Countdown seconds before the close button is enabled; does not restrict programmatic skip |
+| `totalDuration` | `number` | `10` | Total countdown seconds, independent of the video duration |
+| `muted` | `boolean` | `false` | Initial ad-video mute state |
+| `i18n` | `Translations` | Below | Replaces the entire translations object; all four fields are required |
+
+| Translation | Default |
+| --- | --- |
+| `close` | `'关闭广告'` |
+| `countdown` | `'%s秒'` |
+| `detail` | `'查看详情'` |
+| `canBeClosed` | `'%s秒后可关闭广告'` |
+
+`%s` is replaced with the time value. Options are shallowly merged; partial i18n objects are not supported. Use numeric seconds: string durations are rejected without coercion. Historical workspace source/type fields are not runtime aliases for video/html; supply images through an img in html.
+
+Positive integer durations are recommended. With `playDuration <= 0`, the button allows immediate closure; with `playDuration >= totalDuration`, it is hidden. Counting advances once per timer execution and pauses while the document is hidden. It is not an exact measure of video currentTime or real elapsed time. The ad video loops; countdown completion or skip ends the ad.
+
+## Methods and events
+
+Registration is synchronous. The result is `art.plugins.artplayerPluginAds`, with the fixed name `artplayerPluginAds`.
+
+| Method | Runtime behavior |
+| --- | --- |
+| `pause()` | Pause only the countdown, leaving ad video playback unchanged |
+| `play()` | Resume only the countdown without adding duplicate timer chains |
+| `skip()` | Finish once, regardless of the button's playDuration restriction |
+
+All return `undefined` synchronously. Before initialization, play/pause do not start an ad. Early skip cancels the pending preroll and emits once without creating DOM or starting content. Repeated skip after completion is inert.
+
+| Player event | Payload and timing |
+| --- | --- |
+| `artplayerPluginAds:click` | The normalized options when ad content or available details are clicked; a nonempty url is opened first |
+| `artplayerPluginAds:skip` | The same normalized options on completion, including countdown expiry, programmatic skip or media failure; not solely a user-click signal |
+
+Event options remain live, not readonly snapshots. Listener mutations affect later reads, such as totalDuration. Opening the details destination remains subject to browser window policies.
+
+## Lifecycle and media
+
+Install through construction options. After ready, the first play or video:playing signal creates the overlay and pauses content. Late installation does not replay an earlier ready event. Video ads wait for their own metadata before counting and requesting playback; HTML ads start counting immediately.
+
+Ad media loading or playback failure completes the ad, and rejected internal play requests warn. Normal completion requests content playback, pauses the ad, hides the overlay and synchronously emits skip. A playback request does not guarantee the browser has started playing; direct application `art.play()` rejection behavior remains unchanged.
+
+The hidden overlay stays until player destruction. Destroy releases the ad source, listeners, timer and overlay, removing its own `art.template.$ads` even if player HTML is retained. There is no separate public destroy, reset or replay-ad API. Existing `artplayer-plugin-ads*` classes remain; the fullscreen control uses core fullscreen.
+
+The separate ad video must be loadable and decodable by the browser. Main-player SDKs and proxies do not automatically handle it. Native fullscreen, mobile playback policies and media behavior require target-environment validation; page navigation is not that evidence.
+
+## TypeScript compatibility
+
+The root and `/legacy` retain acceptance of the old erroneous `totalDuration: string` declaration, but runtime still rejects strings. The approved inference correction makes `Parameters<typeof ads>[0].totalDuration` read as `number | string | undefined`; historical source/type also become optional. Narrow those values or migrate to the accurate Option type.
+
+New code can select `/runtime`, which uses the same implementation:
+
+```ts
+import ads from 'artplayer-plugin-ads/runtime';
+import type { Option, Result } from 'artplayer-plugin-ads';
+
+const options: Option = { video: '/advertisement.mp4', totalDuration: 10 };
+const installAds = ads(options);
+
+function pauseCountdown(plugin: Result): void {
+  plugin.pause();
+}
+```
+
+Public types include Translations, Option, LegacyOption, WorkspaceOption, CompatOption, Result, Callable, Factory, RuntimeCallable and RuntimeFactory. Historical option types do not add runtime aliases. CommonJS supports the function and `.default(...)`; ESM uses the default export. The precise entry is not a second plugin implementation.
+
+
 ===== packages/artplayer-vitepress/docs/en/plugin/ambilight.md =====
 
 # Video ambilight
@@ -6103,6 +6252,126 @@ async function selectSubtitles(art: Artplayer): Promise<Result> {
 Root named types are `TrackOption`, `Option`, `RuntimeOption`, `LegacyResult`, `Result`, `Factory` and `RuntimeFactory`. Runtime exports TrackOption, RuntimeOption, Result and RuntimeFactory. RuntimeFactory also describes the writable `.default` self-alias; the historical Factory does not require it.
 
 The 1.0/1.1 export-assignment declarations conflict with 1.2's default-module shape; the approved policy retains 1.2 at the root. NodeNext ESM root types expose the factory at `root.default`; use runtime for accurate default calls. Classic CommonJS without interop can use runtime `import = require`; classic default imports need `esModuleInterop`. Historical JavaScript `.default(...)` calls remain supported; an old incorrect declaration does not establish a runtime call that never worked.
+
+
+===== packages/artplayer-vitepress/docs/en/plugin/vast.md =====
+
+# VAST Ads
+
+[简体中文](../../plugin/vast.md)
+
+Request and display ads through Glomex VAST IMA Player and Google IMA. Unlike the separate [Ads plugin](./ads.md), this accepts ad-tag URLs or VAST responses rather than managing a local countdown ad. SDK and ad resources must be reachable; network, VPN or blocking rules can prevent loading. This page describes the unreleased refactor branch, not proof that the online example validates the current candidate.
+
+## Installation and example
+
+```sh
+yarn add artplayer artplayer-plugin-vast
+```
+
+```js
+import Artplayer from 'artplayer';
+import artplayerPluginVast from 'artplayer-plugin-vast';
+```
+
+For script usage, load ArtPlayer before `dist/artplayer-plugin-vast.js`; the global is `artplayerPluginVast`. Its Glomex dependency loads IMA, so no separate custom loader is needed. This preserves the [original online example](https://artplayer.org/?libs=./uncompiled/artplayer-plugin-vast/index.js&example=vast); its external ad URL is not a local test fixture.
+
+<div className="run-code" data-libs="./uncompiled/artplayer-plugin-vast/index.js">▶ Run Code</div>
+
+```js
+// Depends on:
+// https://glomex.github.io/vast-ima-player/
+// https://developers.google.com/interactive-media-ads/docs/sdks/html5/client-side
+
+// Google's IMA SDK are blocked by your Ad blocker.
+// Please Turn Off Your Ad Blocker.
+
+// npm i artplayer-plugin-vast
+// import artplayerPluginVast from 'artplayer-plugin-vast';
+
+var art = new Artplayer({
+  container: '.artplayer-app',
+  url: '/assets/sample/video.mp4',
+  fullscreen: true,
+  fullscreenWeb: true,
+  plugins: [
+    artplayerPluginVast(({ playUrl, imaPlayer, ima }) => {
+      // Play the ad when the video is played
+      art.once('play', () => {
+        playUrl('https://artplayer.org/assets/vast/linear-ad.xml')
+      })
+    }),
+  ],
+})
+```
+
+## Initialization compatibility
+
+`artplayerPluginVast(callback?, options?)` returns an asynchronous registrar. It loads the SDK, creates the appropriate context and awaits the callback before resolving. A callback can return a Promise. Registration does not imply an ad was requested or played.
+
+| Behavior | Default npm mode | `{ compatibility: 'workspace-1.2' }` |
+| --- | --- | --- |
+| Callback entry | SDK player and container already allocated | Allocation waits for init/playUrl/playRes |
+| IMA settings | SDK defaults preserved | Preloading and restoration of custom playback state default to true |
+| Resource fields | Writable imaPlayer/id/$container data fields | Live readonly getters, null before allocation and after release |
+| Requests | Wrapper forwards every explicit request | New requests are suppressed during an active ad |
+| Container | SDK manages visibility with default styles | Black overlay, four ad events manage visibility and active state |
+
+This implements the approved decision: published npm1.0.0 calls retain their default behavior. Code relying on unpublished workspace1.2 lazy initialization must select it explicitly. The mode is captured once at factory creation; unknown values immediately throw TypeError before SDK loading.
+
+## Callback context
+
+| Field | Runtime purpose |
+| --- | --- |
+| `art` | Current ArtPlayer instance |
+| `ima` | Loaded IMA SDK |
+| `adsRenderingSettings` | IMA AdsRenderingSettings passed to a newly allocated SDK player |
+| `playerOptions` | Glomex PlayerOptions passed to a newly allocated SDK player |
+| `imaPlayer` | SDK player; already created in default mode, nullable in workspace mode |
+| `id` / `$container` | Container ID/element, with the mode-specific snapshot/null rules above |
+| `container` | Live readonly container getter in both modes, null before allocation or after release |
+| `init()` | Return or create the current SDK player; null after terminal disposal |
+| `playUrl(url, config?)` | Create an AdsRequest, set adTagUrl and request ads; returns void synchronously |
+| `playRes(response, config?)` | Create an AdsRequest, set adsResponse and request ads; returns void synchronously |
+
+The extra config fields retain historical for-in copying, including enumerable inherited fields. Copying follows the primary assignment, so config can override adTagUrl/adsResponse. Use application-controlled configuration. Request construction or SDK synchronous errors can throw; void does not signal success or provide an ad-completion Promise.
+
+To configure before SDK player allocation, select workspace mode and mutate the original settings/options objects before init or request methods. The default mode's first player already exists on callback entry; do not assume later option changes retroactively alter construction.
+
+Default imaPlayer/id/$container fields retain the last allocation after release, even though that SDK is destroyed and its container removed. They are not active resources. Explicit recreation updates them, and assigning these fields does not transfer internal ownership. In workspace mode, keep the context and read getters when needed rather than destructuring their initial null values.
+
+## Events and destruction
+
+Subscribe to SDK events on imaPlayer; they are not same-named ArtPlayer events. Workspace mode listens to `AdContentPauseRequested`, `AdContentResumeRequested`, `AdStarted` and `AdError` to update its overlay and active state, logging AdError details. Default mode does not add those workspace listeners. The SDK handles content pause/resume; the wrapper does not duplicate it.
+
+The result is named `artplayerPluginVast` and registered at `art.plugins.artplayerPluginVast`. Its synchronous `destroy()` releases the current session. While the core remains alive, retained context init/playUrl/playRes methods can create a new session. A recreated SDK player is a different object; reinstall your own SDK subscriptions on it.
+
+Core destruction makes this attachment terminal: late SDK completion cannot invoke the callback or allocate a container, init returns null and request methods become inert. It does not cancel a shared SDK script load for other instances. SDK loading or callback failure cleans up the attachment and preserves the original rejection value. Cleanup errors can be observable while remaining resources are still released. Plugin destroy and core destroy therefore have different restart semantics.
+
+Real ad playback depends on an available response, IMA, browser policies and devices. When SDK loading is blocked, mocks, guide navigation or continued main-content playback cannot count as successful ads. Validate those separately on the target network and device.
+
+## TypeScript entries
+
+The root and `/legacy` preserve npm1.0.0's required callback, any SDK fields and inaccurate synchronous name-only result. Plain historical replacement factories do not need a `.default` property. Registration has always been asynchronous. Use `/runtime` for accurate types, optional callback, the second parameter and destroy, with the same implementation:
+
+```ts
+import vast from 'artplayer-plugin-vast/runtime';
+import type { RuntimeResult } from 'artplayer-plugin-vast/runtime';
+
+const installPublished = vast(({ imaPlayer }) => {
+  imaPlayer.addEventListener('AdStarted', () => console.log('Ad started'));
+});
+
+const installWorkspace = vast((context) => {
+  context.playerOptions.autoResize = false;
+  context.init()?.addEventListener('AdStarted', () => console.log('Ad started'));
+}, { compatibility: 'workspace-1.2' });
+
+function releaseAd(result: RuntimeResult): void {
+  result.destroy();
+}
+```
+
+Runtime exports RequestConfig, CompatibilityOptions, Context, PublishedContext, WorkspaceContext, RuntimeContext, RuntimeCallback, RuntimeResult, Registration and RuntimeFactory, plus the historical workspace aliases ArtplayerPluginVastOption and ArtplayerPluginVastInstance. Those aliases describe the workspace callback and awaited result, respectively. CommonJS without interop can use runtime `import = require`, supporting both direct and `.default` calls. These types do not modify the old root declaration.
 
 
 ===== packages/artplayer-vitepress/docs/en/plugin/vtt-thumbnail.md =====

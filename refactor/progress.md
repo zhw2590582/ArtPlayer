@@ -1,5 +1,16 @@
 # 进度与证据
 
+## SITE-04 Ads/VAST双语指南
+
+补齐四份页面、本地导航和原样示例。Ads说明计时/媒体控制、skip与按钮限制、
+事件活配置和已批准的类型推导修正；VAST说明默认/工作区模式、完整context、
+请求覆盖及session/core销毁边界。四份TS示例、每页35个链接、三浏览器12组导航
+及17项工具测试通过；构建/LLM/清单通过。当前52 Markdown/61 HTML，21库build
+指纹仍有效。见[记录](changes/2026-09-16-SITE-04-ads-vast-guides.md)和
+[证据](baselines/site04-ads-vast-guides.json)。SITE-04保持doing，224/22/39不变；
+继续其余插件、proxy/tool及核心语义对应，不计外部IMA或真实广告播放通过，
+不启动用户保留的正式复盘。
+
 ## REL-02 Auto Thumbnail候选重新准备
 
 从3317230f2重建2.0.0并重新隔离安装，10组编译器消费通过；1469个相关输入在
