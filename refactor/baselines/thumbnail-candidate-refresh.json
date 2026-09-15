@@ -1,0 +1,545 @@
+{
+  "task": "REL-02",
+  "sourceCommit": "484a8c903c98b1ef7bcb8b345002d920132cb4d8",
+  "capturedAt": "2026-09-15T19:53:00.665Z",
+  "reason": "Replace candidate after correcting shipped ARCHITECTURE.md default-mode statement",
+  "toolchain": {
+    "node": "v24.21.0",
+    "canonicalNode": "24.21.0",
+    "packageManager": "yarn@1.22.22",
+    "observedUserAgent": "yarn/1.22.22 npm/? node/v24.21.0 win32 x64",
+    "declaredTools": {
+      "@antfu/eslint-config": "5.4.1",
+      "@playwright/test": "1.63.0",
+      "@types/markdown-it": "14.1.2",
+      "@types/node": "24.10.0",
+      "@types/react": "19.1.10",
+      "@types/react-dom": "19.1.7",
+      "@vitejs/plugin-react": "5.0.0",
+      "@vitejs/plugin-vue": "6.0.1",
+      "@vue/compiler-sfc": "3.5.28",
+      "@yarnpkg/lockfile": "1.1.0",
+      "c8": "12.0.0",
+      "cpy": "13.2.3",
+      "cross-env": "10.1.0",
+      "cross-spawn": "7.0.6",
+      "dotenv": "17.2.4",
+      "dts-bundle-generator": "9.5.1",
+      "esbuild": "0.27.7",
+      "eslint": "9.39.2",
+      "eslint-plugin-format": "2.0.1",
+      "glob": "13.0.6",
+      "lerna": "8.2.4",
+      "less": "4.5.1",
+      "linkedom": "0.18.13",
+      "monaco-editor": "0.30.1",
+      "mrmime": "2.0.1",
+      "pngjs": "7.0.0",
+      "prompts": "2.4.2",
+      "react": "19.1.1",
+      "react-dom": "19.1.1",
+      "semver": "7.7.4",
+      "servor": "4.0.2",
+      "svgo": "4.1.0",
+      "terser": "5.51.2",
+      "typescript": "5.9.3",
+      "typescript-compat": "npm:typescript@4.3.5",
+      "typescript-runtime-compat": "npm:typescript@5.1.6",
+      "vite": "7.3.6",
+      "vue": "3.5.28",
+      "vue-tsc": "3.3.11",
+      "yaml": "2.8.2"
+    },
+    "lock": {
+      "path": "yarn.lock",
+      "sha256": "aa33cfc38c7933ab53ce626a911fdafd7b14023e45f93ca37bf7f2f6a1d3ecce"
+    }
+  },
+  "previousCandidate": {
+    "kind": "npm-tarball",
+    "path": "refactor/.cache/thumbnail-package-types-3AozAr/candidate.tgz",
+    "version": "5.0.0",
+    "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+    "inputFingerprint": "b6403202698ea9beccee34f764727442c31ad806cb5b5e3b4f6e944f760acdb8",
+    "integrity": "sha512-NMeqORYyJOhxYgfULuZnznKUo3iQO3A3J6pGjRAGB05OA0SLOj4w8cDpG3vffwTZqCD6m+rdYCqJtYtBdriVxA=="
+  },
+  "previousBuild": {
+    "path": "refactor/baselines/major-candidate-build/artplayer-tool-thumbnail.json",
+    "sha256": "d23f16252447f32907456bda58507b2dfd88d041a403db352fc622f702238506"
+  },
+  "candidate": {
+    "kind": "npm-tarball",
+    "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate.tgz",
+    "version": "5.0.0",
+    "sourceCommit": "484a8c903c98b1ef7bcb8b345002d920132cb4d8",
+    "inputFingerprint": "431eb2caf41a434a8fdb516bf5d73b71df8b4d306530036ead7c1ee460076b81",
+    "integrity": "sha512-vIXcuB1oOQA6Wq18NTvkK7rmWRj/ldVRraZsfkAf0L+tKEzuCjaFTd2phL3Ah9/XCXLFu9DEAwFSJqQKQpHcGw=="
+  },
+  "unchangedInputFiles": 1472,
+  "archive": {
+    "sha256": "e516000e441d11fe0ea9d24e2e8c6254cd7537ddadeb7fc25dce73d3b3f5be7b",
+    "members": 12,
+    "changedMembers": [
+      "package/ARCHITECTURE.md"
+    ],
+    "files": {
+      "package/ARCHITECTURE.md": "ca508e5e7af101478c05c30e3023c6722b0725a552dd9edb189fb01df6f2aee4",
+      "package/CHANGELOG.md": "ed09dc3741bcf9ebe06842d709cad72bb6ffc55237feb53e2c763ff017376863",
+      "package/README.md": "959562ac29bd0162e22c30041da9c3c9bfc9039e20cd6f210fb26b597d7f1c74",
+      "package/THIRD_PARTY_NOTICES": "7bea0832808c3d37b5a79f2ed6c65ef2ebdf7dbcbba124c469ebb90e2ec7c013",
+      "package/dist/artplayer-tool-thumbnail.js": "a254d9d66943bd302719edae040d6ee5e0a32f7c9f1ae0727be8cb6c5a335511",
+      "package/dist/artplayer-tool-thumbnail.legacy.js": "6dc0f7f84939a100d93a91943e077db5c2335a2671075d5687a104f797022609",
+      "package/dist/artplayer-tool-thumbnail.mjs": "4ba4a874a49b628bb8cdb09e53555c4ef2765694cee274a519bf509e1f661492",
+      "package/package.json": "fd840291e1dd8ad7bb240a29f7059f78dd50d0d410cf51ecd6174e2544d5fda3",
+      "package/types/README.md": "dd0bf1f872feac29b4c10424bec22c66174848d30724f067e463763de2ccea62",
+      "package/types/artplayer-tool-thumbnail.d.cts": "f0573326178b57a6e22a08b53247eb15ef4d20a1652e40d0cae638ac7aaf8092",
+      "package/types/artplayer-tool-thumbnail.d.mts": "f7a2fea001883706400b250588363533605d3f3a075cef1e31ae973c22258cb3",
+      "package/types/artplayer-tool-thumbnail.d.ts": "3da1a6a68db16c173dfb688ccc49ed130de2f7fb4790f1888230f2fd4c5847ac"
+    },
+    "allMembersMatchFreshBuildAndInstalledCopy": true
+  },
+  "types": {
+    "matrix": [
+      {
+        "package": "workspace-fixture",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": [
+          {
+            "code": 2307,
+            "message": "Cannot find module 'artplayer-tool-thumbnail' or its corresponding type declarations."
+          }
+        ],
+        "negative": []
+      },
+      {
+        "package": "workspace-fixture",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": [
+          {
+            "code": 7016,
+            "message": "Could not find a declaration file for module 'artplayer-tool-thumbnail'. '<consumer>/node_modules/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/artplayer-tool-thumbnail` if it exists or add a new declaration (.d.ts) file containing `declare module 'artplayer-tool-thumbnail';`"
+          }
+        ],
+        "negative": []
+      },
+      {
+        "package": "workspace-fixture",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": [
+          {
+            "code": 7016,
+            "message": "Could not find a declaration file for module 'artplayer-tool-thumbnail'. '<consumer>/node_modules/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/artplayer-tool-thumbnail` if it exists or add a new declaration (.d.ts) file containing `declare module 'artplayer-tool-thumbnail';`"
+          }
+        ],
+        "negative": []
+      },
+      {
+        "package": "workspace-fixture",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": [
+          {
+            "code": 7016,
+            "message": "Could not find a declaration file for module 'artplayer-tool-thumbnail'. '<consumer>/node_modules/artplayer-tool-thumbnail/dist/artplayer-tool-thumbnail.js' implicitly has an 'any' type.\n  Try `npm i --save-dev @types/artplayer-tool-thumbnail` if it exists or add a new declaration (.d.ts) file containing `declare module 'artplayer-tool-thumbnail';`"
+          }
+        ],
+        "negative": []
+      },
+      {
+        "package": "workspace-fixture",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": [
+          {
+            "code": 2307,
+            "message": "Cannot find module 'artplayer-tool-thumbnail' or its corresponding type declarations."
+          }
+        ],
+        "negative": []
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'Element'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 2."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"latest\"' is not assignable to type 'Compatibility | undefined'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'Element'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 2."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"latest\"' is not assignable to type 'Compatibility | undefined'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-esm",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'Element'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 2."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"latest\"' is not assignable to type 'Compatibility | undefined'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "bundler-esm",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'Element'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'string' is not assignable to parameter of type 'File'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': disablePictureInPicture, height, onenterpictureinpicture, onleavepictureinpicture, and 376 more."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 2."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"latest\"' is not assignable to type 'Compatibility | undefined'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number | undefined'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'Element | undefined'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '\"video.mp4\"' is not assignable to parameter of type 'File | null | undefined'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type 'number' is not assignable to parameter of type 'string'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(value: HTMLVideoElement) => number' is not assignable to parameter of type '(this: unknown, file: File) => unknown'.\n  Types of parameters 'value' and 'file' are incompatible.\n    Type 'File' is missing the following properties from type 'HTMLVideoElement': height, playsInline, poster, videoHeight, and 285 more."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'Promise<void>' is not assignable to type 'Promise<string>'.\n  Type 'void' is not assignable to type 'string'."
+          },
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          },
+          {
+            "code": 2322,
+            "message": "Type 'number | undefined' is not assignable to type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+          },
+          {
+            "code": 2345,
+            "message": "Argument of type '(message: string) => number' is not assignable to parameter of type '(this: unknown, message: unknown) => unknown'.\n  Types of parameters 'message' and 'message' are incompatible.\n    Type 'unknown' is not assignable to type 'string'."
+          },
+          {
+            "code": 2554,
+            "message": "Expected 1 arguments, but got 2."
+          },
+          {
+            "code": 2322,
+            "message": "Type '\"latest\"' is not assignable to type 'Compatibility | undefined'."
+          },
+          {
+            "code": 2322,
+            "message": "Type 'string' is not assignable to type 'number | undefined'."
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "5.9.3",
+        "mode": "nodenext-cjs-no-interop",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          }
+        ]
+      },
+      {
+        "package": "candidate",
+        "compiler": "4.3.5",
+        "mode": "node10-commonjs-no-interop",
+        "diagnostics": [],
+        "negative": [
+          {
+            "code": 2551,
+            "message": "Property 'default' does not exist on type 'typeof ArtplayerToolThumbnail'. Did you mean 'DEFAULTS'?"
+          }
+        ]
+      }
+    ],
+    "runtime": [
+      {
+        "package": "workspace-fixture",
+        "commonjs": "function",
+        "esm": "ERR_MODULE_NOT_FOUND",
+        "typesMissing": true
+      },
+      {
+        "package": "candidate",
+        "commonjs": "function",
+        "esm": "function",
+        "legacy": "function",
+        "ssrImport": true
+      }
+    ],
+    "scope": "Frozen Git input fixture and candidate Yarn pack installed outside workspace. The frozen fixture is not an original npm archive; no recovered 3.5.31 complete archive is claimed. Candidate root/legacy runtime, offline frozen install, all files and strict consumers verified."
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/release-ledger-mDccFl/report.json",
+      "sha256": "18a019484cfe3b579710ed01d9e1c62ab19b8dfa403801b1e8bfaddd253dcd34"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-lAT9u7/report.json",
+      "sha256": "18a019484cfe3b579710ed01d9e1c62ab19b8dfa403801b1e8bfaddd253dcd34"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/report.json",
+      "sha256": "a30c8a32063b1a0cc03a25a94ecb3c8ea50cb11cfd41baecea987577e9e1e815"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate.tgz",
+      "sha256": "e516000e441d11fe0ea9d24e2e8c6254cd7537ddadeb7fc25dce73d3b3f5be7b"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-pack.log",
+      "sha256": "270b0ae7216b938fbc315ce43bd5481b1075a3f60650f8156674318602fafec3"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-install.log",
+      "sha256": "4c521407b611ee985c61c4c0210fefcb9f9898e4021f046597854faa9cb12dbd"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-frozen-install.log",
+      "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-yarn.lock",
+      "sha256": "41d9216dc7875ea90a305ead5d83cfb64f9cb72dbca7f83edd1b918a7e6296e8"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-runtime.log",
+      "sha256": "20c9ba9ff34a4110537ee3c3453fea73e9f8bd6e1072e4f8feb1df1d6b0055dd"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/workspace-fixture-runtime.log",
+      "sha256": "66a519bc12dceddb2216ae28314ba062d532312d5164f0a64a4522c889e38167"
+    },
+    {
+      "path": "refactor/.cache/rel02-thumbnail-refresh-build.log",
+      "sha256": "b8028d4370e2f5b9dd19efca662e347372c4870f085c156ea8f9e67ff08b4eab"
+    },
+    {
+      "path": "refactor/.cache/rel02-thumbnail-refresh-types.log",
+      "sha256": "ad267e70abcf8c6a4191a1d30aca2596f029dc0c0c0e229303916be9ad2f3b30"
+    },
+    {
+      "path": "refactor/.cache/record-rel02-thumbnail-refresh.mjs",
+      "sha256": "50712e0b10e8a046db329b310b5a9aded3ee8a8966214eef80518dd8a088cade"
+    }
+  ],
+  "limitations": [
+    "Only build gate registered; installed module/type checks do not replace runtime/media/device/rollback/review gates.",
+    "The historical workspace fixture is reconstructed from frozen Git, not a complete original npm archive. Its missing ESM/types are expected negative evidence.",
+    "No actual screenshot extraction rerun for this documentation-only archive change; Windows WebKit Blob and physical-device gaps remain.",
+    "Old archive, envelope and reports remain intact. No publication authorized."
+  ]
+}

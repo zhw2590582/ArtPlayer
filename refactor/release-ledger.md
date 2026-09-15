@@ -50,6 +50,13 @@ integrity、输入指纹不一致的 rollback 报告仍被拒绝，远端恢复�
 [更新记录](changes/2026-09-16-REL-02-auto-thumbnail-refresh.md)。其余20库候选不变，
 21库build指纹重新有效；旧共享浏览器安装映射不自动变成这个新候选的播放证据。
 
+2026-09-16：Thumbnail工具的随包默认行为说明修正后，从484a8c903重建5.0.0并
+隔离安装；七组候选类型消费通过，五组冻结工作区缺失声明保留为负面证据。
+1472个输入保持一致，12个归档成员只有ARCHITECTURE.md改变。新candidate/build
+绑定见[准备记录](baselines/thumbnail-candidate-refresh.json)及
+[检查](baselines/thumbnail-candidate-refresh-check.json)；21库build重新有效。
+旧npm完整归档、真实提取和设备验收缺口未因此关闭。
+
 初始candidate均为null，evidence为空。REL-02已登记21库的目标major候选及build
 封套，见[实际准备记录](changes/2026-09-16-REL-02-candidate-registration.md)；站点
 candidate仍为null，其他门槛未由这次构建代替。先完成目标版本准备和对应实际构建/pack，

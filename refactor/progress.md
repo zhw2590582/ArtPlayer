@@ -1,5 +1,16 @@
 # 进度与证据
 
+## REL-02 Thumbnail工具候选重新准备
+
+从484a8c903重建5.0.0并隔离安装。七组候选类型消费通过，五组冻结工作区缺失声明
+按预期复现；1472个相关输入保持一致，12个归档/安装成员全部匹配，只有随包
+ARCHITECTURE说明不同于旧候选。新build封套登记后21库指纹重新有效，旧证据保留。
+见[记录](changes/2026-09-16-REL-02-thumbnail-refresh.md)、
+[准备证据](baselines/thumbnail-candidate-refresh.json)和
+[台账检查](baselines/thumbnail-candidate-refresh-check.json)。未关闭旧npm完整归档、
+WebKit Blob/真机及其他发布缺口；REL-02仍doing，224/22/39不变。接续两个proxy
+指南与核心/已有内容核对，不进入用户保留的正式复盘。
+
 ## SITE-04 Iframe/Thumbnail工具双语指南
 
 补齐四份工具指南、独立工具导航和原样示例；说明父子接入/消息执行、缩略图两种

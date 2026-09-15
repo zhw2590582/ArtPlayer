@@ -5038,7 +5038,10 @@
         "baselines/major-candidate-preparation.json",
         "changes/2026-09-16-REL-02-auto-thumbnail-refresh.md",
         "baselines/auto-thumbnail-candidate-refresh.json",
-        "baselines/auto-thumbnail-candidate-refresh-check.json"
+        "baselines/auto-thumbnail-candidate-refresh-check.json",
+        "changes/2026-09-16-REL-02-thumbnail-refresh.md",
+        "baselines/thumbnail-candidate-refresh.json",
+        "baselines/thumbnail-candidate-refresh-check.json"
       ]
     },
     {

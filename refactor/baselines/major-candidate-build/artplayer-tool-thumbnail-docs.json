@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "package": "artplayer-tool-thumbnail",
+  "version": "5.0.0",
+  "gate": "build",
+  "candidateIntegrity": "sha512-vIXcuB1oOQA6Wq18NTvkK7rmWRj/ldVRraZsfkAf0L+tKEzuCjaFTd2phL3Ah9/XCXLFu9DEAwFSJqQKQpHcGw==",
+  "inputFingerprint": "431eb2caf41a434a8fdb516bf5d73b71df8b4d306530036ead7c1ee460076b81",
+  "result": "pass",
+  "checks": [
+    {
+      "id": "major-version-and-distribution-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "production-build-archive-members",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "isolated-install-and-frozen-lock",
+      "result": "pass",
+      "mode": "native"
+    },
+    {
+      "id": "unchanged-source-and-validation-inputs",
+      "result": "pass",
+      "mode": "native"
+    }
+  ],
+  "environment": [
+    {
+      "os": "Windows",
+      "node": "v24.21.0",
+      "yarn": "1.22.22",
+      "remote": false
+    }
+  ],
+  "command": "yarn build artplayer-tool-thumbnail && yarn test:thumbnail-types-package",
+  "reviewedBy": "Codex implementation verification; formal REVIEW-01/02/03 not started",
+  "artifacts": [
+    {
+      "path": "refactor/.cache/release-ledger-mDccFl/report.json",
+      "sha256": "18a019484cfe3b579710ed01d9e1c62ab19b8dfa403801b1e8bfaddd253dcd34"
+    },
+    {
+      "path": "refactor/.cache/release-ledger-lAT9u7/report.json",
+      "sha256": "18a019484cfe3b579710ed01d9e1c62ab19b8dfa403801b1e8bfaddd253dcd34"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/report.json",
+      "sha256": "a30c8a32063b1a0cc03a25a94ecb3c8ea50cb11cfd41baecea987577e9e1e815"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate.tgz",
+      "sha256": "e516000e441d11fe0ea9d24e2e8c6254cd7537ddadeb7fc25dce73d3b3f5be7b"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-pack.log",
+      "sha256": "270b0ae7216b938fbc315ce43bd5481b1075a3f60650f8156674318602fafec3"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-install.log",
+      "sha256": "4c521407b611ee985c61c4c0210fefcb9f9898e4021f046597854faa9cb12dbd"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-frozen-install.log",
+      "sha256": "6d8a95fad69ac94a55d176b472fc3a0f72783092e49b7e683156b6717510f4a8"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-yarn.lock",
+      "sha256": "41d9216dc7875ea90a305ead5d83cfb64f9cb72dbca7f83edd1b918a7e6296e8"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/candidate-runtime.log",
+      "sha256": "20c9ba9ff34a4110537ee3c3453fea73e9f8bd6e1072e4f8feb1df1d6b0055dd"
+    },
+    {
+      "path": "refactor/.cache/thumbnail-package-types-QihwDO/workspace-fixture-runtime.log",
+      "sha256": "66a519bc12dceddb2216ae28314ba062d532312d5164f0a64a4522c889e38167"
+    },
+    {
+      "path": "refactor/.cache/rel02-thumbnail-refresh-build.log",
+      "sha256": "b8028d4370e2f5b9dd19efca662e347372c4870f085c156ea8f9e67ff08b4eab"
+    },
+    {
+      "path": "refactor/.cache/rel02-thumbnail-refresh-types.log",
+      "sha256": "ad267e70abcf8c6a4191a1d30aca2596f029dc0c0c0e229303916be9ad2f3b30"
+    },
+    {
+      "path": "refactor/.cache/record-rel02-thumbnail-refresh.mjs",
+      "sha256": "50712e0b10e8a046db329b310b5a9aded3ee8a8966214eef80518dd8a088cade"
+    },
+    {
+      "path": "refactor/baselines/thumbnail-candidate-refresh.json",
+      "sha256": "f19f2514b7c86166736aa2ea81a8636ec948a087550b17da9ce51cfe0a46758f"
+    }
+  ]
+}
