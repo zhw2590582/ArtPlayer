@@ -529,6 +529,14 @@ The first immediate-pixel WebKit failure remains in the refactor evidence.
 This is native desktop media playback, not physical audibility or full devices.
 `document-site.spec.js` also checks generated guide links and Run Code parameters.
 
+## Auto-thumbnail delayed registration
+
+Auto-thumbnail's `auto-thumbnail-registration.spec.js` separately checks direct
+registrars delivered after real core destruction. It keeps the Promise/name
+contract, records zero subscriptions and verifies a late metadata event cannot
+allocate a hidden native video. It uses the source/artifact/installed resolver;
+this boundary test does not replace successful decoding or first-frame tests.
+
 ## VTT Thumbnail documentation examples
 
 yarn test:browser document-vtt.spec.js document-site.spec.js --workers=1 validates both generated guides and their Run Code destinations after yarn build:docs. The guide test requires the original demo verbatim, preserves the original demo video and substitutes local VTT/SVG resources, and inspects actual preview screenshot pixels with pngjs. It covers red/blue crops from real mouse hover, inclusive endpoint selection via public setBar with a MouseEvent, a gap, destroy and a late event on both cores. It loads local dist explicitly and records its hash; this does not replace the verified installed-artifact suite, physical touch tests or full playback acceptance.

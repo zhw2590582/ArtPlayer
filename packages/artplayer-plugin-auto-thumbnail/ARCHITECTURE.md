@@ -11,6 +11,11 @@ for video processing.
   read at each `video:loadedmetadata` event, including subsequent changes to the
   original options object. `restart` cancels the old decoder immediately. `destroy`
   closes the session and removes subscriptions. Partial registration is rolled back.
+  Before accessing host subscriptions, a truthy public `isDestroy` makes a delayed
+  registrar resolve with its unchanged name result and no resources. The internal
+  host flag is optional, preserving structural hosts without that property. Core
+  plugin-manager rejection policy is unchanged; this protects direct retained
+  registrars such as callbacks delivered after an asynchronous module load.
 - `src/options.ts` preserves truthy defaults and computes the ten-column layout.
   Coercible numeric JS inputs and fractional frame counts retain their previous
   behavior; raw option values are forwarded to the thumbnail configuration.
@@ -239,6 +244,15 @@ hold partial user thumbnail options; extraction publishes a complete sheet. Do n
 require the host's existing getter to have every generated-sheet field.
 
 ## Shared installed browser scope
+
+`test/auto-thumbnail-registration.test.js` covers destroyed hosts, unavailable
+destroyed-host members and successful extraction with false/absent flags. The
+`auto-thumbnail-registration.spec.js` browser regression installs a retained
+registrar after actual published/candidate core destruction, records subscriptions,
+and sends a late metadata event to prove no native video is allocated. It is in
+both the source collection and the installed roster; configuration alone does
+not prove a fresh installed run. Main/legacy regression evidence is tracked by
+PKG-AUTO-THUMB-13. This fix does not resolve AUTO-THUMB-PIXEL-01.
 
 autoThumbnailCandidate reads verified installed bytes through browser-candidate.js. Native video/JPEG lifecycle and pixel files retain their stub player host and exact presentation-callback/fallback limits. The historical file still loads its frozen old artifacts. Installed mode rejects frozen-workspace and explicit-artifact overrides. These are native extraction checks, not full core integration or first-frame acceptance on every engine.
 

@@ -286,3 +286,4 @@
 | HLS-EXAMPLE-01 | resolved / 已复现 | HLS示例换源累积销毁监听器且原生回退仍安装SDK控制插件 | SITE-HLS-01, EX-03 |
 | DASH-EXAMPLE-01 | resolved / 已复现 | DASH示例重复销毁SDK、无MSE仍注册插件且空语言回调抛错 | SITE-DASH-01, EX-03 |
 | CI-BROWSER-MODE-01 | resolved / 已复现 | Installed browser validation can inherit rendering substitutions and direct config loading bypasses launcher diagnostic policy | CI-01 |
+| AUTO-THUMB-REGISTRATION-01 | resolved / 已复现 | Delayed direct factory installation on a destroyed host retains subscriptions and can restart hidden decoding | PKG-AUTO-THUMB-13 |

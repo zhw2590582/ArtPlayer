@@ -1,5 +1,19 @@
 # 进度与证据
 
+## PKG-AUTO-THUMB-13 阻止销毁后迟到注册
+
+修复保留registrar在宿主销毁后仍新增三个监听器、迟到元数据创建隐藏视频的问题。
+入口检查公开isDestroy，保持Promise/name结果；内部标志可选，不影响旧结构宿主。
+旧Node两项失败，真实新旧核心Chromium两项失败；修复后源码193通过，main/legacy
+各88单元、各42三引擎浏览器通过。类型/lint/18入口测试通过，产物正常重建。
+
+AUTO-THUMB-REGISTRATION-01关闭；原首帧像素问题及03/05/06仍未完成。新用例进入
+Node脚本和installed名单，但未冒充新tarball安装验证，旧安装map需重新生成。
+见[记录](changes/2026-09-15-PKG-AUTO-THUMB-13-registration.md)和[证据](baselines/auto-thumbnail-registration-validation.json)。
+
+212 done、21 doing、43 todo，共276；无依赖/版本变更，无推送、部署或发布。
+
+
 ## SITE-VTT-01 缩略图双语指南与像素验证
 
 新增中英文指南与本地侧栏，覆盖索引格式、相对路径、整秒包含边界、异步注册、

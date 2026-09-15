@@ -34,6 +34,9 @@ The registrar has type `(art: Artplayer) => Promise<Result>`. It resolves with
 `{ name: 'artplayerPluginAutoThumbnail' }` after subscribing to player events,
 before extraction completes. Generated sheets arrive progressively through the
 player's thumbnails configuration. Awaiting registration does not wait for them.
+If an application invokes a retained registrar after the player is destroyed,
+it resolves with the same name without subscribing or allocating a decoder.
+This does not override the core's own `plugins.add()` destruction checks.
 The options object is required; use `{}` for defaults. `height` is accepted by
 the runtime type for historical callers but remains ignored: the video aspect
 ratio determines sheet height. Numeric strings retain their old JavaScript

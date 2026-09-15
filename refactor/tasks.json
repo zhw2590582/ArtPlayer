@@ -1888,7 +1888,8 @@
         "PKG-AUTO-THUMB-04",
         "CORE-22",
         "PKG-AUTO-THUMB-12",
-        "PKG-AUTO-THUMB-03"
+        "PKG-AUTO-THUMB-03",
+        "PKG-AUTO-THUMB-13"
       ],
       "status": "todo",
       "risk": "H",
@@ -5925,6 +5926,26 @@
       "evidence": [
         "changes/2026-09-15-SITE-VTT-01-guides.md",
         "baselines/vtt-docs-validation.json"
+      ]
+    },
+    {
+      "id": "PKG-AUTO-THUMB-13",
+      "phase": "5 包迁移：artplayer-plugin-auto-thumbnail",
+      "title": "阻止已销毁实例的迟到插件注册重新持有资源",
+      "scope": [
+        "artplayer-plugin-auto-thumbnail"
+      ],
+      "dependsOn": [
+        "PKG-AUTO-THUMB-02",
+        "PKG-AUTO-THUMB-04"
+      ],
+      "status": "done",
+      "risk": "M",
+      "deliverable": "入口检查公共销毁状态、保持异步名称结果；正常及无销毁标志的旧宿主兼容，源码/产物/真实核心回归",
+      "acceptance": "旧红新绿证明迟到注册零订阅且后续元数据不能创建隐藏视频；正常JPEG生成和清理不变，公开类型/入口不改，首帧问题保留",
+      "evidence": [
+        "changes/2026-09-15-PKG-AUTO-THUMB-13-registration.md",
+        "baselines/auto-thumbnail-registration-validation.json"
       ]
     }
   ]

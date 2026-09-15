@@ -6,6 +6,8 @@ import createSession, { cleanupAll } from './session'
 
 function artplayerPluginAutoThumbnail(option: ThumbnailOptions) {
   return async (art: ThumbnailHost): Promise<Result> => {
+    if (art.isDestroy)
+      return { name: 'artplayerPluginAutoThumbnail' }
     const report = (error: unknown) => console.warn('ArtPlayer auto-thumbnail failed:', error)
     const session = createSession((config) => {
       art.thumbnails = config

@@ -6733,6 +6733,27 @@
         "refactor/baselines/ci-rendering-policy-validation.json"
       ],
       "resolutionRationale": "Eleven new regression failures against the old implementation become passing; final eighteen entry tests and seventy-seven CI tests pass. Fresh twenty-package preparation and four actual installed Chromium lifecycle cases verify the normal path. Scope excludes future unreviewed flags and full CI acceptance."
+    },
+    {
+      "id": "AUTO-THUMB-REGISTRATION-01",
+      "title": "Delayed direct factory installation on a destroyed host retains subscriptions and can restart hidden decoding",
+      "confirmation": "reproduced",
+      "status": "resolved",
+      "owners": [
+        "PKG-AUTO-THUMB-13"
+      ],
+      "evidence": [
+        "test/auto-thumbnail-registration.test.js",
+        "test/browser/auto-thumbnail-registration.spec.js",
+        "refactor/changes/2026-09-15-PKG-AUTO-THUMB-13-registration.md",
+        "refactor/baselines/auto-thumbnail-registration-validation.json"
+      ],
+      "compatibleResolution": "Return the existing asynchronous name result before touching a destroyed host; retain live and structurally compatible hosts without isDestroy.",
+      "closureCriteria": "Prechange source and real-core browser failures plus fixed source, rebuilt main/legacy and normal extraction/type regressions; no change to full pixel/device gates.",
+      "resolutionEvidence": [
+        "refactor/baselines/auto-thumbnail-registration-validation.json"
+      ],
+      "resolutionRationale": "Two prechange Node failures and both real-core Chromium failures reproduce retained subscriptions and native video creation. Source193, main/legacy88 each and three-engine42 each pass after the entry guard; live/absent-flag hosts retain successful generation. Public types and first-frame/device gates remain unchanged."
     }
   ]
 }

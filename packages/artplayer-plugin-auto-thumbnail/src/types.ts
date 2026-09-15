@@ -29,6 +29,7 @@ export interface ExtractionJob {
 }
 
 export interface ThumbnailHost {
+  isDestroy?: boolean
   option: { url: string }
   // A host may already hold a partial user configuration; generated sheets are complete.
   thumbnails: { url: string } & Partial<SheetConfig>

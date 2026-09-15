@@ -402,6 +402,8 @@ function extract(job, config) {
 }
 function artplayerPluginAutoThumbnail(option) {
   return async (art) => {
+    if (art.isDestroy)
+      return { name: "artplayerPluginAutoThumbnail" };
     const report = (error) => console.warn("ArtPlayer auto-thumbnail failed:", error);
     const session = createSession((config) => {
       art.thumbnails = config;

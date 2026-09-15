@@ -35,6 +35,7 @@ export const installedTests = [
   'dash-sdk.spec.js',
   'auto-thumbnail.spec.js',
   'auto-thumbnail-lifecycle.spec.js',
+  'auto-thumbnail-registration.spec.js',
   'auto-thumbnail-pixels.spec.js',
   'asr-audio.spec.js',
   'asr-playback.spec.js',
