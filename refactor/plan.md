@@ -572,7 +572,7 @@
 - PKG-CHAPTER-02: [记录](changes/2026-09-10-PKG-CHAPTER-02-tests.md) [记录](baselines/chapter-validation.json)
 - PKG-CHAPTER-03: [记录](changes/2026-09-10-PKG-CHAPTER-03-typescript-modules.md) [记录](baselines/chapter-migration-validation.json)
 - PKG-CHAPTER-04: [记录](changes/2026-09-10-PKG-CHAPTER-04-public-types.md) [记录](baselines/chapter-types-validation.json)
-- PKG-CHAPTER-05: [记录](changes/2026-09-12-PKG-CHAPTER-05-combinations.md) [记录](baselines/chapter-combinations-checkpoint.json) [记录](changes/2026-09-14-PKG-CHAPTER-05-timing.md) [记录](baselines/chapter-timing-observations.json) [记录](changes/2026-09-15-PKG-CHAPTER-05-native-timing.md) [记录](baselines/chapter-native-timing-validation.json)
+- PKG-CHAPTER-05: [记录](changes/2026-09-12-PKG-CHAPTER-05-combinations.md) [记录](baselines/chapter-combinations-checkpoint.json) [记录](changes/2026-09-14-PKG-CHAPTER-05-timing.md) [记录](baselines/chapter-timing-observations.json) [记录](changes/2026-09-15-PKG-CHAPTER-05-native-timing.md) [记录](baselines/chapter-native-timing-validation.json) [记录](changes/2026-09-16-PKG-CHAPTER-05-major-timing.md) [记录](baselines/chapter-major-timing-validation.json)
 - PKG-AMBILIGHT-01: [记录](changes/2026-09-12-PKG-AMBILIGHT-01-contract.md) [记录](baselines/ambilight-contract.md) [记录](baselines/ambilight-release.json) [记录](baselines/ambilight-contract-validation.json)
 - PKG-AMBILIGHT-02: [记录](changes/2026-09-12-PKG-AMBILIGHT-02-tests.md) [记录](baselines/ambilight-behavior-validation.json) [记录](ambilight-validation.md)
 - PKG-AMBILIGHT-03: [记录](changes/2026-09-12-PKG-AMBILIGHT-03-lifecycle.md) [记录](ambilight-validation.md) [记录](baselines/ambilight-lifecycle-validation.json)

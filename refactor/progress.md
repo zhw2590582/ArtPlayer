@@ -1,5 +1,15 @@
 # 进度与证据
 
+## PKG-CHAPTER-05 当前major的时序失败仍可复现
+
+实际登记候选的清晰度切换矩阵11通过、1个Windows WebKit失败；失败组合为新核心+
+旧Chapter。本次关联事件与trace，确认restart在选择后619ms记录，后续读取却用时
+9989.901ms并返回正确列表，超过原7000ms等待窗口。原因尚不能定位到具体子系统，
+未修改核心、测试等待或重试策略。见[记录](changes/2026-09-16-PKG-CHAPTER-05-major-timing.md)
+与[证据](baselines/chapter-major-timing-validation.json)。风险继续open、05继续doing，
+候选build指纹仍有效。接下来推进其他可独立实施的文档/集成任务，不重复跑到绿灯。
+
+
 ## REL-02 登记21库实际候选与构建证据
 
 基于1b8188834重建并登记21库目标major tarball；校验1918个库输入、1041个构建
