@@ -4,8 +4,16 @@ import test from 'node:test'
 import ts from 'typescript'
 import { extractBasicFixtures } from '../scripts/site-vendor/monaco/basic-fixtures.ts'
 import { emitAmd } from '../scripts/site-vendor/monaco/compiler.ts'
+import { adaptCoreOrigin } from '../scripts/site-vendor/monaco/core-origins.ts'
 import { aliasModule, moduleIds, nameModule, verifyWorkerSources } from '../scripts/site-vendor/monaco/languages.ts'
 import { browserTypeScript, verifyTypeScriptSource } from '../scripts/site-vendor/monaco/typescript.ts'
+
+test('Core origin adaptation rejects duplicate boundaries and preserves replacement bytes', () => {
+  const edits = [{ before: 'export default purify;', after: 'define(factory); // $&' }]
+  assert.equal(adaptCoreOrigin('export default purify;', edits), 'define(factory); // $&')
+  assert.throws(() => adaptCoreOrigin('missing', edits), /boundary/)
+  assert.throws(() => adaptCoreOrigin('export default purify;export default purify;', edits), /boundary/)
+})
 
 test('Monaco fixture extraction retains generated cases and preprocessing but rejects extra imports', () => {
   const file = 'monaco-languages/src/scss/scss.test.ts'

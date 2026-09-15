@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "commit": "829382514cb1065f5ebb90f436e1c6103e153953",
+  "archives": [
+    {
+      "name": "monaco-editor",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.30.1.tgz",
+      "integrity": "sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==",
+      "sha256": "d7872ab742036036eca48cd54e43d751bede56742f0689bcf4049bcf701468c7"
+    },
+    {
+      "name": "monaco-editor-core",
+      "version": "0.30.1",
+      "tarball": "https://registry.npmjs.org/monaco-editor-core/-/monaco-editor-core-0.30.1.tgz",
+      "integrity": "sha512-WNxfchYafMZXVfysqg/ESW4MtOpYLPaIKrzudNlgwYvfYID+O/nwSZI5X+KxW84roVzHsNgFGyOOesfHFZwYUA==",
+      "sha256": "a3b004061373a7f6217eba6399f1a1de31970bee2eee693aada289035198c5ec"
+    },
+    {
+      "name": "dompurify",
+      "version": "2.3.1",
+      "tarball": "https://registry.npmjs.org/dompurify/-/dompurify-2.3.1.tgz",
+      "integrity": "sha512-xGWt+NHAQS+4tpgbOAI08yxW0Pr256Gu/FNE2frZVTbgrBUn8M7tz7/ktS/LZ2MHeGqz6topj0/xY+y8R5FBFw==",
+      "sha256": "ed6eb587561135a9f2860073bd81d9a25c8071d4567a338cbbd6baa3345b23db"
+    },
+    {
+      "name": "marked",
+      "version": "3.0.2",
+      "tarball": "https://registry.npmjs.org/marked/-/marked-3.0.2.tgz",
+      "integrity": "sha512-TMJQQ79Z0e3rJYazY0tIoMsFzteUGw9fB3FD+gzuIT3zLuG9L9ckIvUfF51apdJkcqc208jJN2KbtPbOvXtbjA==",
+      "sha256": "25d241753561b472915b4a233e0854b3ecf8d9202eab8a98d003afa1cb3537a1"
+    }
+  ],
+  "remotes": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-browser-dompurify-dompurify.js.txt",
+      "sha256": "e6a37eb4085ce5f00f61e5365731f39e4d9a4c88460bff1fdc1fb6b01a890c8a",
+      "gitBlobSha": "08e22e087aaf02f8cc312bfc8b8a0afdae27acb2",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/browser/dompurify/dompurify.js?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-browser-dompurify-cgmanifest.json.txt",
+      "sha256": "06ecacbd8f1e384c6093a2c4974da3de9294cc541a4d100ef26efe262e88db40",
+      "gitBlobSha": "eac506db4b671b0f0afc954fe352dbd4bb869b10",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/browser/dompurify/cgmanifest.json?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-browser-dompurify-dompurify.license.txt.txt",
+      "sha256": "125e902252d137a2ce6902726d340b9e4f76b7f0466794c9b68b3cbd955449ce",
+      "gitBlobSha": "484aa7365ed0dde11b296bf4e456f62c31d5991d",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/browser/dompurify/dompurify.license.txt?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-common-marked-marked.js.txt",
+      "sha256": "801d3dbd78c3f11356cde8fbed21ad002bde76680537e3768620f79b9f7521e0",
+      "gitBlobSha": "b7a725a1bcac3e402a386a72da2eeb2f55af2072",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/common/marked/marked.js?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-common-marked-cgmanifest.json.txt",
+      "sha256": "fc14925f671675a55ee33d9d86db456c65ecec2f6720848c47518e9cfc3e4637",
+      "gitBlobSha": "47100d82d7f4d9ee4eac675d1082fbd27a9eb480",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/common/marked/cgmanifest.json?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/marked-vscode-license.txt",
+      "sha256": "43624283832b560f19539ec6d5766b7281acd4a63ada62e494c4e63c7a849bdb",
+      "gitBlobSha": "3bbf4af73ca9b4f955aa11cb9990a789a0c01d82",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/common/marked/marked.license.txt?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-browser-markdownRenderer.ts.txt",
+      "sha256": "743ccdc11ea28a520f7b6fd2a3ad7ca65c9b6799a67f5e67f2ab72cb414bf3b5",
+      "gitBlobSha": "709959843525697eeafe094f124bc64da6a0d199",
+      "apiUrl": "https://api.github.com/repos/microsoft/vscode/contents/src/vs/base/browser/markdownRenderer.ts?ref=829382514cb1065f5ebb90f436e1c6103e153953"
+    }
+  ],
+  "members": [
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/dev/vs/editor/editor.main.js.map",
+      "sha256": "22a1b5ff5f423adc4575004d2ae0ae231ba59516e6aa9c2fabe8a006c2730316"
+    },
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/dev/vs/editor/editor.main.js",
+      "sha256": "483348c3a73e86f201bc0df26ceee2c3ef610fe56c344993410fc093bac228a7"
+    },
+    {
+      "archive": "monaco-editor-core-0.30.1",
+      "member": "package/min/vs/editor/editor.main.js",
+      "sha256": "829b80acaafd97ed55fc008c4e937e60b1e197568c653fc9c391beb283abfc19"
+    }
+  ],
+  "modules": [
+    {
+      "id": "vs/base/browser/dompurify/dompurify",
+      "archive": "dompurify-2.3.1",
+      "member": "package/dist/purify.es.js",
+      "sha256": "7b2bb6e42fcaae803c270660a5cc845c5e9a8d68313df56ea4d6fd53c0747974",
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-browser-dompurify-dompurify.js.txt",
+      "edits": [
+        {
+          "before": "export default purify;\n",
+          "after": "// ESM-comment-begin\ndefine(function () { return purify; });\n// ESM-comment-end\n\n// ESM-uncomment-begin\n// export default purify;\n// export const version = purify.version;\n// export const isSupported = purify.isSupported;\n// export const sanitize = purify.sanitize;\n// export const setConfig = purify.setConfig;\n// export const clearConfig = purify.clearConfig;\n// export const isValidAttribute = purify.isValidAttribute;\n// export const addHook = purify.addHook;\n// export const removeHook = purify.removeHook;\n// export const removeHooks = purify.removeHooks;\n// export const removeAllHooks = purify.removeAllHooks;\n// ESM-uncomment-end\n\n"
+        }
+      ],
+      "naming": {
+        "before": "define(function",
+        "after": "define(\"vs/base/browser/dompurify/dompurify\", function"
+      }
+    },
+    {
+      "id": "vs/base/common/marked/marked",
+      "archive": "marked-3.0.2",
+      "member": "package/lib/marked.js",
+      "sha256": "2cb738415c26e90029833739348b353b0e8d1f632a4a60da067d2894a98b7030",
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/src-vs-base-common-marked-marked.js.txt",
+      "edits": [
+        {
+          "before": "(function (global, factory) {",
+          "after": "// ESM-uncomment-begin\n// let __marked_exports;\n// (function() {\n//   function define(factory) {\n//     __marked_exports = factory();\n//   }\n//   define.amd = true;\n// ESM-uncomment-end\n\n (function (global, factory) {"
+        },
+        {
+          "before": "\n})));\n",
+          "after": "\n})));\n\n// ESM-uncomment-begin\n// })();\n// export var marked = __marked_exports;\n// export var Parser = __marked_exports.Parser;\n// export var parser = __marked_exports.parser;\n// export var Renderer = __marked_exports.Renderer;\n// export var TextRenderer = __marked_exports.TextRenderer;\n// export var Lexer = __marked_exports.Lexer;\n// export var lexer = __marked_exports.lexer;\n// export var Tokenizer = __marked_exports.Tokenizer;\n// export var Slugger = __marked_exports.Slugger;\n// export var parse = __marked_exports.parse;\n// ESM-uncomment-end\n"
+        }
+      ],
+      "naming": {
+        "before": "define(factory) :",
+        "after": "define(\"vs/base/common/marked/marked\", factory) :"
+      }
+    }
+  ],
+  "components": [
+    {
+      "name": "dompurify (Monaco core)",
+      "version": "2.3.1",
+      "tarball": "https://registry.npmjs.org/dompurify/-/dompurify-2.3.1.tgz",
+      "assets": [
+        "docs/assets/js/vs/editor/editor.main.js"
+      ],
+      "notices": [
+        "docs/licenses/monaco-editor/core-origins/DOMPurify-LICENSE",
+        "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md"
+      ]
+    },
+    {
+      "name": "marked (Monaco core)",
+      "version": "3.0.2",
+      "tarball": "https://registry.npmjs.org/marked/-/marked-3.0.2.tgz",
+      "assets": [
+        "docs/assets/js/vs/editor/editor.main.js"
+      ],
+      "notices": [
+        "docs/licenses/monaco-editor/core-origins/marked-LICENSE",
+        "docs/licenses/monaco-editor/core-origins/marked-vscode-license.txt",
+        "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md"
+      ]
+    }
+  ],
+  "notices": [
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/DOMPurify-LICENSE",
+      "target": "docs/licenses/monaco-editor/core-origins/DOMPurify-LICENSE",
+      "sha256": "8b6902e953e2eb2876412a4ba75291758b77e88e220962e3423af4d080db1a59",
+      "archive": "dompurify-2.3.1",
+      "member": "package/LICENSE"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/marked-LICENSE",
+      "target": "docs/licenses/monaco-editor/core-origins/marked-LICENSE",
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
+      "archive": "marked-3.0.2",
+      "member": "package/LICENSE.md"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/marked-vscode-license.txt",
+      "target": "docs/licenses/monaco-editor/core-origins/marked-vscode-license.txt",
+      "sha256": "43624283832b560f19539ec6d5766b7281acd4a63ada62e494c4e63c7a849bdb"
+    },
+    {
+      "source": "refactor/baselines/site-vendor/monaco-core-origins/ATTRIBUTION.md",
+      "target": "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md",
+      "sha256": "3a0ab7f1036d6b1397bf94ff2700375b97db2db3bd576d195dc6d8a88e1a758e"
+    }
+  ],
+  "target": {
+    "path": "docs/assets/js/vs/editor/editor.main.js",
+    "sha256": "05a50ed50bb013b6e7a82d25686186aa7bdff8b8209c7badab00e046b5e99618"
+  },
+  "limits": [
+    "Proof covers two embedded sources and the archived core prefix, not a complete core source build.",
+    "Remaining core/loader/localization and other embedded origins stay open."
+  ]
+}

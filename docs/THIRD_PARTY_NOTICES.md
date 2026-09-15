@@ -109,6 +109,14 @@ Included component: glob-to-regexp (Monaco JSON fork) embedded source in vscode-
 
 Source: https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-languageservice-4.1.9.tgz
 
+Included component: dompurify (Monaco core) 2.3.1
+
+Source: https://registry.npmjs.org/dompurify/-/dompurify-2.3.1.tgz
+
+Included component: marked (Monaco core) 3.0.2
+
+Source: https://registry.npmjs.org/marked/-/marked-3.0.2.tgz
+
 - licenses/monaco-editor/LICENSE
 - licenses/monaco-editor/ThirdPartyNotices.txt
 - licenses/monaco-editor/codicons/LICENSE
@@ -131,6 +139,10 @@ Source: https://registry.npmjs.org/vscode-json-languageservice/-/vscode-json-lan
 - licenses/monaco-editor/language-services/beautify-css-NOTICE.txt
 - licenses/monaco-editor/language-services/beautify-html-NOTICE.txt
 - licenses/monaco-editor/language-services/ATTRIBUTION.md
+- licenses/monaco-editor/core-origins/DOMPurify-LICENSE
+- licenses/monaco-editor/core-origins/marked-LICENSE
+- licenses/monaco-editor/core-origins/marked-vscode-license.txt
+- licenses/monaco-editor/core-origins/ATTRIBUTION.md
 
 ## console legacy-vendor-with-TS-adapter
 

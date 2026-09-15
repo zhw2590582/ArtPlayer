@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import process from 'node:process'
 import { verifyConsoleNoticeSources } from './site-vendor/console/notices.ts'
+import { verifyMonacoCoreNotices } from './site-vendor/monaco/core-origins.ts'
 import { verifyMonacoLanguageNotices } from './site-vendor/monaco/notices.ts'
 import { writeOrCheckNotices } from './site-vendor/notices.ts'
 
@@ -15,9 +16,11 @@ assert.deepEqual(manifest.groups.filter(group => group.name !== 'console').flatM
   'copy-text-to-clipboard',
   'core-js',
   'css-loader',
+  'dompurify (Monaco core)',
   'glob-to-regexp (Monaco JSON fork)',
   'js-beautify (Monaco HTML embedded)',
   'jsonc-parser',
+  'marked (Monaco core)',
   'mutation-observer',
   'regenerator-runtime',
   'style-loader',
@@ -85,6 +88,7 @@ assert.deepEqual(typeScriptNotices?.map(target => target.split('/').pop()).sort(
 for (const name of ['LICENSE', 'MIT-LICENSE', 'ATTRIBUTION.md'])
   assert(vconsoleNotices?.includes(`docs/licenses/vconsole/${name}`), `Missing vConsole notice: ${name}`)
 verifyConsoleNoticeSources(process.cwd(), manifest)
+verifyMonacoCoreNotices(process.cwd(), manifest)
 verifyMonacoLanguageNotices(process.cwd(), manifest)
 const count = writeOrCheckNotices(process.cwd(), manifest, process.argv.includes('--check'))
 console.log(`Verified site notices: ${count} outputs; Monaco/vConsole/console inventories, embedded and other provenance gates remain open.`)

@@ -1,5 +1,14 @@
 # 进度与证据
 
+## SITE-07 Monaco Markdown 来源与遗漏许可
+
+核实 DOMPurify 2.3.1 / marked 3.0.2 的固定来源及完整模块适配，发现并补齐
+原 Monaco notice 未列出的 DOMPurify 许可。新增四份说明后全站 85 份 notice；
+联网/离线来源验证、18/18 单元、严格类型/lint、三引擎 Markdown 与移动实播/
+通知交付 6/6 通过，见[记录](changes/2026-09-15-SITE-07-monaco-core-origins.md)。
+运行代码不变；其余 core/loader/翻译/内嵌来源仍需验证，SITE-07/VENDOR-06
+开放、199/265，Thumbnail 默认策略仍待答。
+
 ## SITE-07 Monaco 基础语言
 
 76 份语言源码与全部 76 个压缩文件精确复现，77 个模块实例；156 个归档成员有

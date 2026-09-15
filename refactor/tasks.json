@@ -4528,7 +4528,10 @@
         "changes/2026-09-15-SITE-07-monaco-modes.md",
         "baselines/monaco-basic-provenance.json",
         "baselines/monaco-basic-validation.json",
-        "changes/2026-09-15-SITE-07-monaco-basic.md"
+        "changes/2026-09-15-SITE-07-monaco-basic.md",
+        "baselines/monaco-core-origins-provenance.json",
+        "baselines/monaco-core-origins-validation.json",
+        "changes/2026-09-15-SITE-07-monaco-core-origins.md"
       ]
     },
     {

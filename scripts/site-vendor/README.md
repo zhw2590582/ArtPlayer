@@ -22,7 +22,7 @@ files retain their exact upstream bytes, including final blank lines.
 `../build-site-notices.mjs` provides `yarn build:site-notices` and read-only
 `yarn check:site-notices`. The write command cannot bless altered vendor assets;
 review the new archive and license evidence before changing the manifest. The
-CLI prevents accidentally dropping any of the three groups, the eleven reviewed
+CLI prevents accidentally dropping any of the three groups, the reviewed
 Monaco/vConsole components, the 44 identified console components or their notice
 count, and vConsole's original license, supplemental MIT body and attribution.
 Component references require their runtime assets and every notice before writing.
@@ -73,3 +73,9 @@ Monaco's actual TypeScript 4.4.4 worker now has a separate source proof and noti
 supplement; its original notice's 2.7.2 label is retained and explained. See
 [Monaco maintenance](monaco/README.md) for the fixed six source adaptations,
 minifier reconstruction, exact-byte checks and remaining component review scope.
+
+Monaco's core Markdown path additionally identifies DOMPurify 2.3.1 and marked
+3.0.2. Four supplemental files preserve DOMPurify's missing complete license,
+marked's original and legacy notices, and module-adaptation attribution. Their
+asset/source/notice bindings are checked before output writes; full source matching
+and real renderer/HTTP tests are documented in `monaco/README.md`.

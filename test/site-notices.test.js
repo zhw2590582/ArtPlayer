@@ -8,10 +8,28 @@ import process from 'node:process'
 // eslint-disable-next-line test/no-import-node-test -- Verify real notice bytes and failure-before-write behavior.
 import test from 'node:test'
 import { verifyConsoleNoticeSources } from '../scripts/site-vendor/console/notices.ts'
+import { verifyMonacoCoreNotices } from '../scripts/site-vendor/monaco/core-origins.ts'
 import { verifyMonacoLanguageNoticeArchives, verifyMonacoLanguageNotices } from '../scripts/site-vendor/monaco/notices.ts'
 import { generateNotices, writeOrCheckNotices } from '../scripts/site-vendor/notices.ts'
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
+
+test('Monaco core notices cannot replace DOMPurify terms with the Markdown parser license', () => {
+  const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
+  assert.doesNotThrow(() => verifyMonacoCoreNotices(process.cwd(), original))
+  const manifest = structuredClone(original)
+  const group = manifest.groups.find(group => group.name === 'monaco-editor')
+  group.components.find(item => item.name === 'dompurify (Monaco core)').notices = group.components.find(item => item.name === 'marked (Monaco core)').notices
+  assert.doesNotThrow(() => generateNotices(process.cwd(), manifest))
+  assert.throws(() => verifyMonacoCoreNotices(process.cwd(), manifest), /core notice binding/)
+  const record = JSON.parse(fs.readFileSync('refactor/baselines/monaco-core-origins-provenance.json', 'utf8'))
+  for (const notice of record.notices) {
+    const missing = structuredClone(original)
+    const group = missing.groups.find(group => group.name === 'monaco-editor')
+    group.notices = group.notices.filter(item => item.target !== notice.target)
+    assert.throws(() => verifyMonacoCoreNotices(process.cwd(), missing), /Monaco core notice/)
+  }
+})
 test('Monaco language notices bind full original terms to their actual worker sources', () => {
   const original = JSON.parse(fs.readFileSync('scripts/site-vendor/manifest.json', 'utf8'))
   assert.equal(verifyMonacoLanguageNotices(process.cwd(), original), 12)

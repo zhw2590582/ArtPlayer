@@ -162,3 +162,36 @@ language definitions and remaining upstream data/origin details stay
 under VENDOR-06. Revalidate editor-types and site-vendor tests when changing
 declarations or delivered notices. Whole-site, physical-device and remote release
 gates remain separate.
+
+## Core Markdown origins
+
+`core-origins.ts` keeps component/asset/license bindings separate from the full
+source reproducer. The ordinary notice build rejects missing or swapped DOMPurify
+and marked terms. `reproduce-core-origins.ts` verifies four npm archives and seven
+fixed VS Code Git files. The original component registrations identify DOMPurify
+2.3.1 and marked 3.0.2. Exact export/wrapper edits reproduce their Git sources;
+named AMD forms match complete source-map entries and development-bundle spans.
+The shipped editor matches the pinned Monaco archive and retains its core prefix
+and map suffix. This is not a full reconstruction of the core compiler pipeline.
+
+DOMPurify was missing from Monaco's supplied notice index. Its entire npm license
+is now delivered, including both upstream license alternatives. VS Code's copy
+differs by exactly one final newline; no body text is normalized or discarded.
+marked's complete npm license and older VS Code license are both retained with an
+explanation of the package versions and module adaptations. Four additional files
+bring the site total to 85 notices plus the generated index.
+
+```sh
+yarn verify:monaco-core-origins --fetch
+yarn verify:monaco-core-origins
+yarn build:site-notices
+yarn check:site-notices
+yarn test:browser test/browser/editor-markdown.spec.js test/browser/site-vendor.spec.js --workers=1
+```
+
+The Markdown test loads the actual bundled parser/sanitizer and renderer. It checks
+formatting, table cells, link targets, selected filtering behavior and removal of
+temporary sanitizer hooks. The site test checks every delivered notice byte and
+relative attribution link while exercising mobile playback/logging/disposal.
+Neither is an exhaustive sanitizer audit. Loader, other core modules, localization,
+and further embedded-origin details remain under SITE-07/VENDOR-06.

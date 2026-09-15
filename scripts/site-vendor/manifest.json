@@ -1000,6 +1000,26 @@
           "source": "refactor/baselines/site-vendor/monaco-language-notices/ATTRIBUTION.txt",
           "target": "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md",
           "sha256": "432cca135809edabcd9ccedd05576138b64b167445999005a6e1550132391d98"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-core-origins/DOMPurify-LICENSE",
+          "target": "docs/licenses/monaco-editor/core-origins/DOMPurify-LICENSE",
+          "sha256": "8b6902e953e2eb2876412a4ba75291758b77e88e220962e3423af4d080db1a59"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-core-origins/marked-LICENSE",
+          "target": "docs/licenses/monaco-editor/core-origins/marked-LICENSE",
+          "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-core-origins/marked-vscode-license.txt",
+          "target": "docs/licenses/monaco-editor/core-origins/marked-vscode-license.txt",
+          "sha256": "43624283832b560f19539ec6d5766b7281acd4a63ada62e494c4e63c7a849bdb"
+        },
+        {
+          "source": "refactor/baselines/site-vendor/monaco-core-origins/ATTRIBUTION.md",
+          "target": "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md",
+          "sha256": "3a0ab7f1036d6b1397bf94ff2700375b97db2db3bd576d195dc6d8a88e1a758e"
         }
       ],
       "review": "The complete upstream Monaco LICENSE/ThirdPartyNotices are retained. The unmodified bundled Codicons font exactly matches @vscode/codicons 0.0.26; its historical README, CC BY 4.0 content license, MIT code license and added attribution are distributed below. Other site assets remain subject to their separate provenance reviews.",
@@ -1153,6 +1173,31 @@
           "notices": [
             "docs/licenses/monaco-editor/language-services/vscode-json-languageservice/LICENSE.md",
             "docs/licenses/monaco-editor/language-services/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "dompurify (Monaco core)",
+          "version": "2.3.1",
+          "tarball": "https://registry.npmjs.org/dompurify/-/dompurify-2.3.1.tgz",
+          "assets": [
+            "docs/assets/js/vs/editor/editor.main.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/core-origins/DOMPurify-LICENSE",
+            "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md"
+          ]
+        },
+        {
+          "name": "marked (Monaco core)",
+          "version": "3.0.2",
+          "tarball": "https://registry.npmjs.org/marked/-/marked-3.0.2.tgz",
+          "assets": [
+            "docs/assets/js/vs/editor/editor.main.js"
+          ],
+          "notices": [
+            "docs/licenses/monaco-editor/core-origins/marked-LICENSE",
+            "docs/licenses/monaco-editor/core-origins/marked-vscode-license.txt",
+            "docs/licenses/monaco-editor/core-origins/ATTRIBUTION.md"
           ]
         }
       ]

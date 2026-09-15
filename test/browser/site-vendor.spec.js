@@ -24,6 +24,7 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   for (const { path, count } of [
     { path: '/licenses/console/react-pure-render/ATTRIBUTION.md', count: 2 },
     { path: '/licenses/monaco-editor/language-services/ATTRIBUTION.md', count: 12 },
+    { path: '/licenses/monaco-editor/core-origins/ATTRIBUTION.md', count: 3 },
   ]) {
     const attribution = await request.get(path)
     expect(attribution.status()).toBe(200)
@@ -41,6 +42,8 @@ test('mobile vConsole shows logs and upstream site notice texts are served uncha
   expect(index.status()).toBe(200)
   expect(await index.text()).toContain('Included component: @vscode/codicons 0.0.26')
   expect(await index.text()).toContain('Included component: typescript (Monaco worker) 4.4.4')
+  expect(await index.text()).toContain('Included component: dompurify (Monaco core) 2.3.1')
+  expect(await index.text()).toContain('Included component: marked (Monaco core) 3.0.2')
   expect(await index.text()).toContain('Included component: vscode-html-languageservice 4.1.1')
   expect(await index.text()).toContain('Included component: vscode-json-languageservice 4.1.9')
   expect(await index.text()).toContain('Included component: js-beautify (Monaco HTML embedded)')

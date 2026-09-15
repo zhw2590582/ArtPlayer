@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "task": "SITE-07",
+  "status": "checkpoint-incomplete",
+  "recordedAt": "2026-09-15T02:39:48.757Z",
+  "baseCommit": "426fee8faa7d4fe183fb3b5911d8b515f5f34bab",
+  "node": "v24.21.0",
+  "yarn": "1.22.22",
+  "fingerprints": {
+    "refactor/baselines/monaco-core-origins-provenance.json": "d5b86ae1d8351f5852c0ba6906213339e06c47816e100e1d16f2d71ae4a66973",
+    "scripts/site-vendor/manifest.json": "0df294c8b335fb43911612f72a9af235343b7a89753746b73f75055a2958ab1c",
+    "scripts/site-vendor/monaco/core-origins.ts": "455683490eb77b325e63db1fdb9f092379804f657b59f654558ac47e7ceba832",
+    "scripts/site-vendor/monaco/reproduce-core-origins.ts": "b28bdf05a502e9adfc45896302ec5334cbfcc8f8f8ae84e4a6e2d8cc53077e1a",
+    "test/browser/editor-markdown.spec.js": "5f672e9322bac4f85ba2396adfef7e5605c436a9eeb274f4e30228fa54088e6c",
+    "test/browser/site-vendor.spec.js": "4880a1b0d2afdc94a9f5f48679308ffb840e3410daabf00122779c86eb6b56b4"
+  },
+  "reproduction": {
+    "result": {
+      "archives": 4,
+      "gitSources": 7,
+      "modules": [
+        {
+          "id": "vs/base/browser/dompurify/dompurify",
+          "bytes": 52931,
+          "offset": 46157,
+          "exactNpmAdaptation": true,
+          "exactGitAndDevelopment": true
+        },
+        {
+          "id": "vs/base/common/marked/marked",
+          "bytes": 95547,
+          "offset": 225102,
+          "exactNpmAdaptation": true,
+          "exactGitAndDevelopment": true
+        }
+      ],
+      "notices": 4,
+      "archivedCorePrefix": true,
+      "completeCoreBuild": false,
+      "otherEmbeddedOriginsReviewed": false
+    },
+    "offline": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-core-origins-offline.log"
+    },
+    "network": {
+      "exitCode": 0,
+      "log": "refactor/.cache/monaco-core-origins-network.log"
+    }
+  },
+  "unit": {
+    "passed": 18,
+    "log": "refactor/.cache/monaco-core-origins-unit.log"
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "log": "refactor/.cache/monaco-core-origins-types.log"
+  },
+  "lint": {
+    "exitCode": 0,
+    "log": "refactor/.cache/monaco-core-origins-lint.log"
+  },
+  "notices": {
+    "files": 85,
+    "outputs": 86,
+    "generated": true,
+    "readOnlyCheck": true
+  },
+  "browser": {
+    "report": "refactor/.cache/browser/report.json",
+    "sha256": "46153e56b1ab9e6122191726b9313bb70382008569845d702962b037c638882b",
+    "stats": {
+      "startTime": "2026-09-15T02:35:58.801Z",
+      "duration": 14608.404,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "docs Monaco renders Markdown with its bundled parser and sanitizer",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "media": null,
+        "markdown": {
+          "version": "2.3.1",
+          "strong": "Player",
+          "code": "art.play()",
+          "cells": [
+            "play",
+            "Promise"
+          ],
+          "link": "https://artplayer.org/document/",
+          "text": "Player and art.play()\n\n\nAPI\nResult\n\n\n\nplay\nPromise\n\n\nDocssafe text",
+          "scripts": 0,
+          "handlers": 0,
+          "executed": false,
+          "afterDispose": "<div style=\"color:red\">next</div>"
+        }
+      },
+      {
+        "title": "docs Monaco renders Markdown with its bundled parser and sanitizer",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "media": null,
+        "markdown": {
+          "version": "2.3.1",
+          "strong": "Player",
+          "code": "art.play()",
+          "cells": [
+            "play",
+            "Promise"
+          ],
+          "link": "https://artplayer.org/document/",
+          "text": "Player and art.play()\n\n\nAPI\nResult\n\n\n\nplay\nPromise\n\n\nDocssafe text",
+          "scripts": 0,
+          "handlers": 0,
+          "executed": false,
+          "afterDispose": "<div style=\"color:red\">next</div>"
+        }
+      },
+      {
+        "title": "docs Monaco renders Markdown with its bundled parser and sanitizer",
+        "project": "webkit",
+        "status": "passed",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "media": null,
+        "markdown": {
+          "version": "2.3.1",
+          "strong": "Player",
+          "code": "art.play()",
+          "cells": [
+            "play",
+            "Promise"
+          ],
+          "link": "https://artplayer.org/document/",
+          "text": "Player and art.play()\n\n\nAPI\nResult\n\n\n\nplay\nPromise\n\n\nDocssafe text",
+          "scripts": 0,
+          "handlers": 0,
+          "executed": false,
+          "afterDispose": "<div style=\"color:red\">next</div>"
+        }
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "chromium",
+        "status": "passed",
+        "browser": "153.0.8010.12",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [
+          {
+            "url": "http://127.0.0.1:8084/test/pattern.mp4",
+            "resourceType": "media",
+            "failure": {
+              "errorText": "net::ERR_ABORTED"
+            }
+          }
+        ],
+        "media": null,
+        "noticeCount": 85
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "firefox",
+        "status": "passed",
+        "browser": "155.0",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "media": null,
+        "noticeCount": 85
+      },
+      {
+        "title": "mobile vConsole shows logs and upstream site notice texts are served unchanged",
+        "project": "webkit",
+        "status": "passed",
+        "browser": "26.6",
+        "platform": "win32",
+        "errors": [],
+        "consoleErrors": [],
+        "failedRequests": [],
+        "media": null,
+        "noticeCount": 85
+      }
+    ]
+  },
+  "limitations": [
+    "Only two complete embedded-source adaptations and the archived core distribution prefix are proven; the entire core compiler pipeline is not reconstructed.",
+    "Runtime assets and public APIs unchanged; broader embedded origins, loader and localization remain open.",
+    "Selected Markdown filtering tests are not an exhaustive sanitizer audit.",
+    "Physical devices, external SDKs, remote CI, global release reviews and publication are not verified here.",
+    "Thumbnail default policy remains pending."
+  ]
+}

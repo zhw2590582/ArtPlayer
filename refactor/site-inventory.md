@@ -1,14 +1,20 @@
 # 文档站、示例与生成链清单
 
+当前补充：Monaco 四种 mode 与 76 种基础语言的完整产物复现、三引擎语法验证
+已完成。核心 Markdown 内嵌 DOMPurify 2.3.1 / marked 3.0.2 的固定来源和模块
+适配已匹配；补齐四份说明后站点共交付 85 份 notice。核心其余源码与内嵌来源
+仍开放，见[记录](changes/2026-09-15-SITE-07-monaco-core-origins.md)。下文较早的
+未分发/未迁移描述保留为历史发现，不作为当前状态。
+
 2026-09-15 Monaco 后续：CSS/HTML/JSON 完整 worker 已由固定源码和压缩配方复现，
 七个依赖的九份原始许可、两个格式器署名和补充说明已实际交付。全站 81 份
 notice 的 HTTP 字节、链接及三引擎功能检查通过，见
 [记录](changes/2026-09-15-SITE-07-monaco-language-notices.md)。Monaco core/mode/
 语言定义及其余来源细节仍开放，不能按本检查点认为整个站点已可发布。
 
-console.js 后续已冻结 102 个模块和实际 React/ReactDOM/Parcel/返回组件契约；
-三个浏览器复现卸载回调、多容器丢日志和 Error 消息丢失。源码尚未替换，依赖许可
-仍开放；下一实现任务为 SITE-CONSOLE-01，见[迁移边界](console-modernization.md)。
+console.js 的 102 个模块基线发现了卸载回调、多容器丢日志和 Error 消息丢失。
+SITE-CONSOLE-01 已迁移自有 TS 入口和修复生命周期，100 个保留模块的来源与
+47 份说明也已核对，见[当前维护入口](../scripts/site-vendor/console/README.md)。
 
 2026-09-15后续：vConsole 3.15.0 已由固定源码/锁文件精确重建，补原始声明所引用的
 MIT 正文和九个运行时组件的完整通知；VENDOR-07 关闭。三引擎真实播放/日志/销毁及

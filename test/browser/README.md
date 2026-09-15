@@ -1,5 +1,10 @@
 # Browser regression entry
 
+`editor-markdown.spec.js` runs the bundled DOMPurify/marked renderer, verifies
+formatting, selected filtering and temporary-hook cleanup. `site-vendor.spec.js`
+also checks all 85 notice files and the core-origin attribution links over HTTP.
+These checks do not constitute exhaustive sanitizer or physical-device validation.
+
 `editor-modes.spec.js` exercises Monaco's actual automatic mode/provider registration
 through a real editor. It switches CSS/JSON/TypeScript/HTML models, checks diagnostic
 arrival/removal and document formatting, verifies all four mode bundle responses,
