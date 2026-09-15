@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "30c3e52e86b223ccb89184349a4931a49d4fbc716efc3689e4c3c81fb80d287d"
+    "sha256": "a19f81c07794bdaf2004c2a1e3031546fb1b91d644e84dd9d2c789827c2b45df"
   },
-  "reviewedAt": "2026-09-15T20:44:27.693Z",
+  "reviewedAt": "2026-09-15T20:59:37.308Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 81,
-    "unreviewedRecords": 882
+    "reviewedRecords": 172,
+    "unreviewedRecords": 791
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -118,16 +118,21 @@
       "docs": [
         {
           "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
-          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
           "anchor": "events"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
-          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
           "anchor": "events"
         }
       ],
-      "evidence": "baselines/site04-core-services.json"
+      "evidence": "baselines/site04-core-services.json",
+      "documentHashRevalidation": {
+        "sourceBefore": "a1488f11bb73f7b96a04fadbce072a24bf626e79",
+        "evidence": "baselines/site04-template-icons.json",
+        "reason": "Relevant service section is byte-identical after LF normalization; source hashes remain unchanged. Whole-guide hash changed for template/icon additions."
+      }
     },
     {
       "id": "storage",
@@ -212,16 +217,21 @@
       "docs": [
         {
           "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
-          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
           "anchor": "storage"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
-          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
           "anchor": "storage"
         }
       ],
-      "evidence": "baselines/site04-core-services.json"
+      "evidence": "baselines/site04-core-services.json",
+      "documentHashRevalidation": {
+        "sourceBefore": "a1488f11bb73f7b96a04fadbce072a24bf626e79",
+        "evidence": "baselines/site04-template-icons.json",
+        "reason": "Relevant service section is byte-identical after LF normalization; source hashes remain unchanged. Whole-guide hash changed for template/icon additions."
+      }
     },
     {
       "id": "i18n",
@@ -609,16 +619,21 @@
       "docs": [
         {
           "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
-          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
           "anchor": "i18n"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
-          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
           "anchor": "i18n"
         }
       ],
-      "evidence": "baselines/site04-core-services.json"
+      "evidence": "baselines/site04-core-services.json",
+      "documentHashRevalidation": {
+        "sourceBefore": "a1488f11bb73f7b96a04fadbce072a24bf626e79",
+        "evidence": "baselines/site04-template-icons.json",
+        "reason": "Relevant service section is byte-identical after LF normalization; source hashes remain unchanged. Whole-guide hash changed for template/icon additions."
+      }
     },
     {
       "id": "hotkey",
@@ -704,16 +719,21 @@
       "docs": [
         {
           "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
-          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
           "anchor": "hotkey"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
-          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
           "anchor": "hotkey"
         }
       ],
-      "evidence": "baselines/site04-core-services.json"
+      "evidence": "baselines/site04-core-services.json",
+      "documentHashRevalidation": {
+        "sourceBefore": "a1488f11bb73f7b96a04fadbce072a24bf626e79",
+        "evidence": "baselines/site04-template-icons.json",
+        "reason": "Relevant service section is byte-identical after LF normalization; source hashes remain unchanged. Whole-guide hash changed for template/icon additions."
+      }
     },
     {
       "id": "notice",
@@ -791,16 +811,800 @@
       "docs": [
         {
           "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
-          "sha256": "078115d9703b987d6d556a73b23696ac5e3c6a8f2156d27bb21845820d1e9c16",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
           "anchor": "notice"
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
-          "sha256": "8f7c31d21a50a56743ad38a7d9483bcc5e483faef8d05545f6237031b9188d1b",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
           "anchor": "notice"
         }
       ],
-      "evidence": "baselines/site04-core-services.json"
+      "evidence": "baselines/site04-core-services.json",
+      "documentHashRevalidation": {
+        "sourceBefore": "a1488f11bb73f7b96a04fadbce072a24bf626e79",
+        "evidence": "baselines/site04-template-icons.json",
+        "reason": "Relevant service section is byte-identical after LF normalization; source hashes remain unchanged. Whole-guide hash changed for template/icon additions."
+      }
+    },
+    {
+      "id": "template",
+      "status": "semantic-reviewed",
+      "conclusion": "Cached nodes and original-container descendant queries; bound query/media aliases; SSR reuse and nullable results; proxy video/track separation; optional mini node; initialization versus whole-player cleanup; static HTML versus the historical nonfunctional instance declaration.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.html@50",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "html",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.query@120",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "query",
+          "line": 120
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.video@122",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "video",
+          "line": 122
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.template@129",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "template",
+          "line": 129
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.template@79",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "template",
+          "line": 79
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.query@97",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "query",
+          "line": 97
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.video@99",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "video",
+          "line": 99
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.html@118",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "html",
+          "line": 118
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.art@5",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "art",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$container@6",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$container",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$player@7",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$player",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$video@8",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$video",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$track@9",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$track",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$poster@10",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$poster",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$subtitle@11",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$subtitle",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$danmuku@12",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$danmuku",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$bottom@13",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$bottom",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$progress@14",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$progress",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$controls@15",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$controls",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$controlsLeft@16",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$controlsLeft",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$controlsCenter@17",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$controlsCenter",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$controlsRight@18",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$controlsRight",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$layer@19",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$layer",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$loading@20",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$loading",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$notice@21",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$notice",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$noticeInner@22",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$noticeInner",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$mask@23",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$mask",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$state@24",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$state",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$setting@25",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$setting",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$info@26",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$info",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$infoPanel@27",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$infoPanel",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$infoClose@28",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$infoClose",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$contextmenu@29",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$contextmenu",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.$mini@30",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "$mini",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.query@31",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "query",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.init@32",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "init",
+          "line": 32
+        },
+        {
+          "id": "packages/artplayer/public/runtime/template.ts#Template.destroy@33",
+          "file": "packages/artplayer/public/runtime/template.ts",
+          "declaration": "Template",
+          "name": "destroy",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.html@2",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "html",
+          "line": 2
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$container@3",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$container",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$player@4",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$player",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$video@5",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$video",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$track@6",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$track",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$poster@7",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$poster",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$subtitle@8",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$subtitle",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$danmuku@9",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$danmuku",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$bottom@10",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$bottom",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$progress@11",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$progress",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$controls@12",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$controls",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$controlsLeft@13",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$controlsLeft",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$controlsCenter@14",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$controlsCenter",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$controlsRight@15",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$controlsRight",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$layer@16",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$layer",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$loading@17",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$loading",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$notice@18",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$notice",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$noticeInner@19",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$noticeInner",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$mask@20",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$mask",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$state@21",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$state",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$setting@22",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$setting",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$info@23",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$info",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$infoPanel@24",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$infoPanel",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$infoClose@25",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$infoClose",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/template.ts#Template.$contextmenu@26",
+          "file": "packages/artplayer/public/template.ts",
+          "declaration": "Template",
+          "name": "$contextmenu",
+          "line": 26
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/template.ts",
+          "sha256": "0ea9155b9292d4c528a464d3c97996ee5a1c9c4aabc2959a744989085db2251b"
+        },
+        {
+          "path": "packages/artplayer/src/template/nodes.ts",
+          "sha256": "1572746a636647e4d313cc8752d3a110ff81fddb390ad7b0feb6a0db0d42b9d4"
+        },
+        {
+          "path": "packages/artplayer/src/template/html.ts",
+          "sha256": "351c472bfd01fa5ba1a4e347ed31bd5faaf823d9b4c5cab1ce8c651e3b175021"
+        },
+        {
+          "path": "packages/artplayer/src/template/types.ts",
+          "sha256": "2bf906b4a209e17dae4d79225e758e2e53772e93f19f188d0131051ea2a0143a"
+        },
+        {
+          "path": "packages/artplayer/src/index.ts",
+          "sha256": "20cfe3738b3ce7e11b69721a5f0bdad9db77807417d8e421397a40dfade4c047"
+        },
+        {
+          "path": "packages/artplayer/src/dom/tree.ts",
+          "sha256": "3bc517ab9fa5317a1445156d53afb27182685eb3b4c0ac2ff41bbde55c9eecb6"
+        },
+        {
+          "path": "packages/artplayer/src/display/mini.ts",
+          "sha256": "a6fed598428bbf8d52931f21bb68b7560a3643d2576f7e7bfbae98b2f7cdd1e5"
+        },
+        {
+          "path": "packages/artplayer/src/display/mini-view.ts",
+          "sha256": "bbe69e4419ffc0f6c744cb730a51778f23c311a0fac157223bcf8d8bf0f3edc7"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/instance.ts",
+          "sha256": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/template-rollback.ts",
+          "sha256": "7a83da6739bcec1587b02f8157934988910d7f9103fe489a0d6f4f65290c3d77"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/template.ts",
+          "sha256": "da9975513a1938e7f386f4f65f718f0fc595164bfeac8f0cd99a3e97a54919a1"
+        },
+        {
+          "path": "packages/artplayer/public/template.ts",
+          "sha256": "68aed9e97d006d6be4fabb8504ca84dafab770b0925f4d6e7319e67c82f21b0d"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
+          "anchor": "template"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "60827510623121359fe7c44f6c03cee72d978217cc52948dde2a265f5e691edf",
+          "anchor": "html"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
+          "anchor": "template"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "611d4f548b3b21a3193033e3c27d01cf42bbb6742e69c57f36a5bb10f81c3daa",
+          "anchor": "html"
+        }
+      ],
+      "evidence": "baselines/site04-template-icons.json"
+    },
+    {
+      "id": "icons",
+      "status": "semantic-reviewed",
+      "conclusion": "All27 default names share fresh I wrappers, readonly nonenumerable getters, captured shallow input mapping, string HTML parsing, HTMLElement movement without cloning and absent ordinary custom names; root HTMLDivElement shape retained, runtime HTMLElement/undefined accurate.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.icons@157",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "icons",
+          "line": 157
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.loading@2",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "loading",
+          "line": 2
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.state@3",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "state",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.play@4",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "play",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.pause@5",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "pause",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.check@6",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "check",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.volume@7",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "volume",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.volumeClose@8",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "volumeClose",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.screenshot@9",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "screenshot",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.setting@10",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "setting",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.pip@11",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "pip",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.arrowLeft@12",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "arrowLeft",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.arrowRight@13",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "arrowRight",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.playbackRate@14",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "playbackRate",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.aspectRatio@15",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "aspectRatio",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.config@16",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "config",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.lock@17",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "lock",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.flip@18",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "flip",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.unlock@19",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "unlock",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.fullscreenOff@20",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "fullscreenOff",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.fullscreenOn@21",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "fullscreenOn",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.fullscreenWebOff@22",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "fullscreenWebOff",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.fullscreenWebOn@23",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "fullscreenWebOn",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.switchOn@24",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "switchOn",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.switchOff@25",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "switchOff",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.error@26",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "error",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.close@27",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "close",
+          "line": 27
+        },
+        {
+          "id": "packages/artplayer/public/icons.ts#Icons.airplay@28",
+          "file": "packages/artplayer/public/icons.ts",
+          "declaration": "Icons",
+          "name": "airplay",
+          "line": 28
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.icons@82",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "icons",
+          "line": 82
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/icons/index.ts",
+          "sha256": "7152126328f6e485ee92b6d924c34776518b4a3925b2887867b516f7523b15cc"
+        },
+        {
+          "path": "packages/artplayer/src/icons/defaults.ts",
+          "sha256": "31df862d754922fe5d68b20911c477d7c22893a6a67b5dcb1a48d3b437a0b23a"
+        },
+        {
+          "path": "packages/artplayer/src/dom/presentation.ts",
+          "sha256": "500bded394579dd8194778f73cc44d0724f0a59cb5400957491928534ed091c6"
+        },
+        {
+          "path": "packages/artplayer/src/dom/tree.ts",
+          "sha256": "3bc517ab9fa5317a1445156d53afb27182685eb3b4c0ac2ff41bbde55c9eecb6"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/template.ts",
+          "sha256": "da9975513a1938e7f386f4f65f718f0fc595164bfeac8f0cd99a3e97a54919a1"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/icons.ts",
+          "sha256": "0d8e8e52e52130dd4a29bab551dd7a2a954797e42e92a6e068c85d583e23e6a4"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800",
+          "anchor": "icons"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc",
+          "anchor": "icons"
+        }
+      ],
+      "evidence": "baselines/site04-template-icons.json"
     }
   ]
 }

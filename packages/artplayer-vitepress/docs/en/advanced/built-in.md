@@ -47,6 +47,41 @@ This is the definition of all `DOM` elements: [artplayer/types/template.d.ts](ht
 
 :::
 
+`$container` is the div supplied by the caller; `$player` is the generated player root inside it. They are different elements. These fields retain node references bound during initialization rather than performing a new query on every read:
+
+| Field | Default selector or source |
+| --- | --- |
+| `$container` | Supplied div container |
+| `$player` | `.art-video-player` |
+| `$video` | `.art-video` |
+| `$track` | `track` |
+| `$poster` | `.art-poster` |
+| `$subtitle` | `.art-subtitle` |
+| `$danmuku` | `.art-danmuku` |
+| `$bottom` | `.art-bottom` |
+| `$progress` | `.art-progress` |
+| `$controls` | `.art-controls` |
+| `$controlsLeft` | `.art-controls-left` |
+| `$controlsCenter` | `.art-controls-center` |
+| `$controlsRight` | `.art-controls-right` |
+| `$layer` | `.art-layers` |
+| `$loading` | `.art-loading` |
+| `$notice` | `.art-notice` |
+| `$noticeInner` | `.art-notice-inner` |
+| `$mask` | `.art-mask` |
+| `$state` | `.art-state` |
+| `$setting` | `.art-settings` |
+| `$info` | `.art-info` |
+| `$infoPanel` | `.art-info-panel` |
+| `$infoClose` | `.art-info-close` |
+| `$contextmenu` | `.art-contextmenus` |
+
+`art.query(selector)` and `art.template.query(selector)` are the same bound function and can be extracted for later calls. Queries always search descendants of the original $container, excluding the container itself. They do not follow player/media nodes moved outside it. Missing matches return null; invalid selectors retain querySelector errors. `art.video` returns the cached `template.$video`, which can be a canvas with a proxy. The original $track can become detached with a replaced video, so stored references need not remain connected inside the container.
+
+`template.art` references the player. Optional `$mini` can appear after creating a mini window; the default mini node is attached to document.body outside the original container. Do not rebuild the player by replacing these fields. `template.init()` initializes the template: ordinary mode replaces container HTML, then binds nodes and the proxy. Repeating it is not a supported interface-reset workflow. `template.destroy(removeHtml)` only handles template DOM: true empties the container, false adds art-destroy. Use `art.destroy(removeHtml?)` for complete resource cleanup.
+
+Read the template string from static `Artplayer.html`. The old root declaration's `art.template.html` is not an actual instance member and normally reads as undefined. `useSSR: true` preserves and queries supplied markup without filling missing nodes. Keep that markup complete and version-matched; instantiation still requires a browser. Runtime types retain nullable nodes while root types retain historical non-null shapes. A type assertion cannot repair incomplete SSR markup.
+
 ## `events`
 
 Manages all `DOM` events for the player. It essentially proxies `addEventListener` and `removeEventListener`. When using the following methods to handle events, the events will also be automatically destroyed when the player is destroyed.
@@ -156,6 +191,18 @@ console.info(art.icons.loading);
 [artplayer/types/icons.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts)
 
 :::
+
+These 27 default names share the same read behavior:
+
+```text
+loading, state, play, pause, check, volume, volumeClose, screenshot, setting, pip, arrowLeft, arrowRight, playbackRate, aspectRatio, config, lock, flip, unlock, fullscreenOff, fullscreenOn, fullscreenWebOff, fullscreenWebOn, switchOn, switchOff, error, close, airplay
+```
+
+Every read creates a new `<i class="art-icon art-icon-NAME">` wrapper, so two reads of `art.icons.play` are different objects. This is not a reference to the icon already mounted in a button; modifying a later wrapper does not change the existing button. Root declarations retain HTMLDivElement, although the wrapper is an i element; runtime types use HTMLElement.
+
+Supply constructor `icons` options to replace default content or add custom names. Strings are parsed as HTML and should contain trusted markup. An HTMLElement is moved into the new wrapper rather than cloned; a later read may move it out of its previous wrapper. Use strings or your own cloned elements when independent copies are needed.
+
+Names and values are shallow-copied at initialization. Later changes to `art.option.icons` do not replace that mapping or the rendered interface. Properties are read-only getters and are non-enumerable by default. An unconfigured ordinary custom name returns undefined; check it before appending.
 
 ## `i18n`
 
@@ -589,4 +636,22 @@ const visible: boolean = art.notice.show;
 art.notice.show = false;
 art.i18n.update({ en: { Play: 'Start' } });
 console.log(visible, art.i18n.get('Play'));
+```
+
+## TypeScript template and icon views
+
+The unpublished refactor's `artplayer/runtime` uses `Template<Host>`, `Icons` and media-capability types for nullable queries, unknown icons and proxy media. This example uses the same implementation as the root entry:
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({
+    container: '#player', url: '/video.mp4',
+    icons: { customMark: '<span aria-hidden="true">*</span>' },
+});
+const query = art.query;
+const player: HTMLDivElement | null = query('.art-video-player');
+const icon: HTMLElement | undefined = art.icons.customMark;
+if (player && icon) player.append(icon);
+console.log(Artplayer.html, art.video === art.template.$video);
 ```

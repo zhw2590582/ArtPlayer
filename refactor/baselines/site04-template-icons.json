@@ -1,0 +1,1278 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "a1488f11bb73f7b96a04fadbce072a24bf626e79",
+  "capturedAt": "2026-09-15T20:59:37.309Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "built-in",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+          "sha256": "a80bec28ca80291bc9e2c6d043544a5476dbca38a3f0fa14356c3755418f2800"
+        },
+        "html": {
+          "path": "docs/document/advanced/built-in.html",
+          "sha256": "77dec9c6f0d0cc3b45303db82ccaff0be1bfe4a96fcf4e7bc2563a518864a186"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-template-icons/zh-built-in-0.mts",
+            "sha256": "e2813bfdb0e54859385e00b5b4cbe0a3f6670fdc2dee15c93d8993b64dfc78a6"
+          },
+          {
+            "path": "refactor/.cache/site04-template-icons/zh-built-in-1.mts",
+            "sha256": "8845a21ecf86b0b0b08a0b0de4d2488fbde834fe795eedb7cd125e66f6a46eae"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "advanced/built-in.md:12",
+            "sha256": "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6"
+          },
+          {
+            "id": "advanced/built-in.md:33",
+            "sha256": "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937"
+          },
+          {
+            "id": "advanced/built-in.md:95",
+            "sha256": "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2"
+          },
+          {
+            "id": "advanced/built-in.md:138",
+            "sha256": "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905"
+          },
+          {
+            "id": "advanced/built-in.md:161",
+            "sha256": "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a"
+          },
+          {
+            "id": "advanced/built-in.md:181",
+            "sha256": "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+          },
+          {
+            "id": "advanced/built-in.md:217",
+            "sha256": "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc"
+          },
+          {
+            "id": "advanced/built-in.md:292",
+            "sha256": "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55"
+          },
+          {
+            "id": "advanced/built-in.md:325",
+            "sha256": "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece"
+          },
+          {
+            "id": "advanced/built-in.md:360",
+            "sha256": "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17"
+          },
+          {
+            "id": "advanced/built-in.md:396",
+            "sha256": "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f"
+          },
+          {
+            "id": "advanced/built-in.md:433",
+            "sha256": "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63"
+          },
+          {
+            "id": "advanced/built-in.md:456",
+            "sha256": "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37"
+          },
+          {
+            "id": "advanced/built-in.md:480",
+            "sha256": "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6"
+          },
+          {
+            "id": "advanced/built-in.md:503",
+            "sha256": "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c"
+          },
+          {
+            "id": "advanced/built-in.md:542",
+            "sha256": "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449"
+          },
+          {
+            "id": "advanced/built-in.md:568",
+            "sha256": "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627"
+          },
+          {
+            "id": "advanced/built-in.md:599",
+            "sha256": "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/built-in.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/built-in.html#%E9%AB%98%E7%BA%A7%E5%B1%9E%E6%80%A7",
+          "/document/advanced/built-in.html#option",
+          "/document/advanced/built-in.html#template",
+          "/document/advanced/built-in.html#events",
+          "/document/advanced/built-in.html#storage",
+          "/document/advanced/built-in.html#icons",
+          "/document/advanced/built-in.html#i18n",
+          "/document/advanced/built-in.html#notice",
+          "/document/advanced/built-in.html#layers",
+          "/document/advanced/built-in.html#controls",
+          "/document/advanced/built-in.html#contextmenu",
+          "/document/advanced/built-in.html#subtitle",
+          "/document/advanced/built-in.html#info",
+          "/document/advanced/built-in.html#loading",
+          "/document/advanced/built-in.html#hotkey",
+          "/document/advanced/built-in.html#mask",
+          "/document/advanced/built-in.html#setting",
+          "/document/advanced/built-in.html#plugins",
+          "/document/advanced/built-in.html#%E6%9C%8D%E5%8A%A1%E7%9A%84-typescript-%E8%A7%86%E5%9B%BE",
+          "/document/advanced/built-in.html#%E6%A8%A1%E6%9D%BF%E4%B8%8E%E5%9B%BE%E6%A0%87%E7%9A%84-typescript-%E8%A7%86%E5%9B%BE"
+        ]
+      },
+      {
+        "language": "zh",
+        "name": "class",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "60827510623121359fe7c44f6c03cee72d978217cc52948dde2a265f5e691edf"
+        },
+        "html": {
+          "path": "docs/document/advanced/class.html",
+          "sha256": "7c87e7c134153f9740f8fae0b038d8ad34077c54f214c8732740c9f6000c79e8"
+        },
+        "typeFixtures": [],
+        "snippets": [
+          {
+            "id": "advanced/class.md:12",
+            "sha256": "f6116dd700782b3a3abdd82af44d7ba67a81355012efdc0f18d73e1cab65f80d"
+          },
+          {
+            "id": "advanced/class.md:29",
+            "sha256": "4699bde73558d763e96a388404adaaff25d6a78051cf4937bde949bf5a80aa9d"
+          },
+          {
+            "id": "advanced/class.md:39",
+            "sha256": "85a4e9a47cd740b98bfa08b6747b26ce87aeadafc522fbb2d2f67a8ca448a471"
+          },
+          {
+            "id": "advanced/class.md:49",
+            "sha256": "cc3a5dae8a05a2f46cb882b095229e6d1f4937b2b0c476cb387e8d3bf6c63e5e"
+          },
+          {
+            "id": "advanced/class.md:59",
+            "sha256": "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+          },
+          {
+            "id": "advanced/class.md:69",
+            "sha256": "015b6d015ed056fbc4493875348a6067a8abd1e1fe65299210a6b7210808ae7f"
+          },
+          {
+            "id": "advanced/class.md:85",
+            "sha256": "84260b064bc33095f95a2e4ea2da71176821c749b03186a59b9c878f382aa082"
+          },
+          {
+            "id": "advanced/class.md:95",
+            "sha256": "e4c70c3d623e35cb18a7ad1fb8b7388442666d00bdf38f0732ee074460a1579a"
+          },
+          {
+            "id": "advanced/class.md:105",
+            "sha256": "717c32a8c00f52626868d840910b93a744f24d5bfe283434d2462510efbccbe3"
+          },
+          {
+            "id": "advanced/class.md:115",
+            "sha256": "4402e4041ca0d5e807aa334fd36b292296c0e65510b98811cfc41dfea9c125d4"
+          },
+          {
+            "id": "advanced/class.md:125",
+            "sha256": "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+          },
+          {
+            "id": "advanced/class.md:137",
+            "sha256": "479b94070bf574ba7e495d1a15e5bcd006e1fe8b04699d85af17faac9b64640a"
+          }
+        ],
+        "localLinks": [
+          "/document/advanced/class.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/advanced/class.html#%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7",
+          "/document/advanced/class.html#instances",
+          "/document/advanced/class.html#version",
+          "/document/advanced/class.html#env",
+          "/document/advanced/class.html#build",
+          "/document/advanced/class.html#config",
+          "/document/advanced/class.html#utils",
+          "/document/advanced/class.html#scheme",
+          "/document/advanced/class.html#emitter",
+          "/document/advanced/class.html#validator",
+          "/document/advanced/class.html#kindof",
+          "/document/advanced/class.html#html",
+          "/document/advanced/class.html#option"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "built-in",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+          "sha256": "d34b8ff8cbfce43aa727c35cf52d857952e33cc44eb619f5e5f748e09006bacc"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/built-in.html",
+          "sha256": "ff0fc12a8ffdf22348ed7e9d7e80dd3ac1d51057b633642716ffad34a2c00123"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-template-icons/en-built-in-0.mts",
+            "sha256": "e2813bfdb0e54859385e00b5b4cbe0a3f6670fdc2dee15c93d8993b64dfc78a6"
+          },
+          {
+            "path": "refactor/.cache/site04-template-icons/en-built-in-1.mts",
+            "sha256": "8845a21ecf86b0b0b08a0b0de4d2488fbde834fe795eedb7cd125e66f6a46eae"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/advanced/built-in.md:12",
+            "sha256": "087735467fd821c2f6b73050a9bf932f1cefa183e017391ad6e963e9e988b8d6"
+          },
+          {
+            "id": "en/advanced/built-in.md:33",
+            "sha256": "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937"
+          },
+          {
+            "id": "en/advanced/built-in.md:95",
+            "sha256": "8dcf8fe91915f7bad2fb1f47e49294cc703cfbe80b21b7155e1d7ebacef017b2"
+          },
+          {
+            "id": "en/advanced/built-in.md:138",
+            "sha256": "aed4de9f5ce94737018c9e169d9319e44da9468bf244a25dd484b64b71d6a905"
+          },
+          {
+            "id": "en/advanced/built-in.md:161",
+            "sha256": "78a8622566fb190dad9687fcd3366aeca1ce2c440f98db1b8a63d936dd44601a"
+          },
+          {
+            "id": "en/advanced/built-in.md:181",
+            "sha256": "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+          },
+          {
+            "id": "en/advanced/built-in.md:217",
+            "sha256": "9a1dabfbd2b43b4d7cc76c259c0e6da4fec0af51ffa87607ff2cf274e37ffebc"
+          },
+          {
+            "id": "en/advanced/built-in.md:292",
+            "sha256": "5622bd1dd05bd1b95b3dd4db0a0dd28387cba88bc1f6ad5da3a7451abdd9ec55"
+          },
+          {
+            "id": "en/advanced/built-in.md:325",
+            "sha256": "2429bccae4d847890c92fbad4ed2df3ffa6ba3172b7babe7e5081869542daece"
+          },
+          {
+            "id": "en/advanced/built-in.md:361",
+            "sha256": "97425833bd778311e3765b0f8c268cc15f38ab83e39727dbb35210060d332d17"
+          },
+          {
+            "id": "en/advanced/built-in.md:397",
+            "sha256": "3355c478c71f59548fd2be177f607fbcfb359b007067fcd9dc9524bb4cfc591f"
+          },
+          {
+            "id": "en/advanced/built-in.md:434",
+            "sha256": "c478d5976a42b468d48f6aa5594313b60d49a9daf007839c6ee2cd0881daeb63"
+          },
+          {
+            "id": "en/advanced/built-in.md:457",
+            "sha256": "2c8bd606ef43ceedd726f81b29260866558b12aedd7798e9955ba5c4ebb72b37"
+          },
+          {
+            "id": "en/advanced/built-in.md:481",
+            "sha256": "564713373d9c96b69e3c9f7ea82686ddb7b2ba8156ea6db8621c8e59d63c6ce6"
+          },
+          {
+            "id": "en/advanced/built-in.md:504",
+            "sha256": "48afe798b0202fd30467e8d148d082e7deb986db08da0c28ceffe1c440bd2d1c"
+          },
+          {
+            "id": "en/advanced/built-in.md:543",
+            "sha256": "c893a368edcb1a8320ff7ce682723294e900298f91022da0e49ee0ee9d41f449"
+          },
+          {
+            "id": "en/advanced/built-in.md:569",
+            "sha256": "b0e79e18d105f505cdc4a9cec236b96b39a916c4f2086e4c2e13b0d74e92c627"
+          },
+          {
+            "id": "en/advanced/built-in.md:600",
+            "sha256": "7ba346613aa1e0600f67a618b385c1b7b5bf06b136a67408c5d959490bf8f9dd"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/built-in.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/built-in.html#advanced-properties",
+          "/document/en/advanced/built-in.html#option",
+          "/document/en/advanced/built-in.html#template",
+          "/document/en/advanced/built-in.html#events",
+          "/document/en/advanced/built-in.html#storage",
+          "/document/en/advanced/built-in.html#icons",
+          "/document/en/advanced/built-in.html#i18n",
+          "/document/en/advanced/built-in.html#notice",
+          "/document/en/advanced/built-in.html#layers",
+          "/document/component/layers.html",
+          "/document/en/advanced/built-in.html#controls",
+          "/document/component/controls.html",
+          "/document/en/advanced/built-in.html#contextmenu",
+          "/document/component/contextmenu.html",
+          "/document/en/advanced/built-in.html#subtitle",
+          "/document/en/advanced/built-in.html#info",
+          "/document/en/advanced/built-in.html#loading",
+          "/document/en/advanced/built-in.html#hotkey",
+          "/document/en/advanced/built-in.html#mask",
+          "/document/en/advanced/built-in.html#setting",
+          "/document/component/setting.html",
+          "/document/en/advanced/built-in.html#plugins",
+          "/document/en/advanced/built-in.html#typescript-service-views",
+          "/document/en/advanced/built-in.html#typescript-template-and-icon-views"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "class",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "611d4f548b3b21a3193033e3c27d01cf42bbb6742e69c57f36a5bb10f81c3daa"
+        },
+        "html": {
+          "path": "docs/document/en/advanced/class.html",
+          "sha256": "ace033b9364465bf841dbf4f97a6d115bd85923377f88dbb1517d3a41fbc8724"
+        },
+        "typeFixtures": [],
+        "snippets": [
+          {
+            "id": "en/advanced/class.md:12",
+            "sha256": "f6116dd700782b3a3abdd82af44d7ba67a81355012efdc0f18d73e1cab65f80d"
+          },
+          {
+            "id": "en/advanced/class.md:29",
+            "sha256": "4699bde73558d763e96a388404adaaff25d6a78051cf4937bde949bf5a80aa9d"
+          },
+          {
+            "id": "en/advanced/class.md:39",
+            "sha256": "85a4e9a47cd740b98bfa08b6747b26ce87aeadafc522fbb2d2f67a8ca448a471"
+          },
+          {
+            "id": "en/advanced/class.md:49",
+            "sha256": "cc3a5dae8a05a2f46cb882b095229e6d1f4937b2b0c476cb387e8d3bf6c63e5e"
+          },
+          {
+            "id": "en/advanced/class.md:59",
+            "sha256": "7e5d31329eb55513625162d8044132caa33109972cf6bb61b1e44fe777d77005"
+          },
+          {
+            "id": "en/advanced/class.md:69",
+            "sha256": "015b6d015ed056fbc4493875348a6067a8abd1e1fe65299210a6b7210808ae7f"
+          },
+          {
+            "id": "en/advanced/class.md:85",
+            "sha256": "84260b064bc33095f95a2e4ea2da71176821c749b03186a59b9c878f382aa082"
+          },
+          {
+            "id": "en/advanced/class.md:95",
+            "sha256": "e4c70c3d623e35cb18a7ad1fb8b7388442666d00bdf38f0732ee074460a1579a"
+          },
+          {
+            "id": "en/advanced/class.md:105",
+            "sha256": "717c32a8c00f52626868d840910b93a744f24d5bfe283434d2462510efbccbe3"
+          },
+          {
+            "id": "en/advanced/class.md:115",
+            "sha256": "4402e4041ca0d5e807aa334fd36b292296c0e65510b98811cfc41dfea9c125d4"
+          },
+          {
+            "id": "en/advanced/class.md:125",
+            "sha256": "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+          },
+          {
+            "id": "en/advanced/class.md:137",
+            "sha256": "479b94070bf574ba7e495d1a15e5bcd006e1fe8b04699d85af17faac9b64640a"
+          }
+        ],
+        "localLinks": [
+          "/document/en/advanced/class.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/advanced/class.html#static-properties",
+          "/document/en/advanced/class.html#instances",
+          "/document/en/advanced/class.html#version",
+          "/document/en/advanced/class.html#env",
+          "/document/en/advanced/class.html#build",
+          "/document/en/advanced/class.html#config",
+          "/document/en/advanced/class.html#utils",
+          "/document/en/advanced/class.html#scheme",
+          "/document/en/advanced/class.html#emitter",
+          "/document/en/advanced/class.html#validator",
+          "/document/en/advanced/class.html#kindof",
+          "/document/en/advanced/class.html#html",
+          "/document/en/advanced/class.html#option"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/chromium-zh-built-in.png",
+          "sha256": "e5c649ba56d0882a5711083771dad71092e3e9511749a08798a77ed2f1f220b3"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/chromium-zh-class.png",
+          "sha256": "d77a4e3bb3bd70d1fadd9074f5579505cce3b7ef1637e706b8b427ff96c838db"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/chromium-en-built-in.png",
+          "sha256": "3f5264a75375875df1d81b6a0c492a5070257048e54255cdbc1e002bf84ff162"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/chromium-en-class.png",
+          "sha256": "37535e6337ccde37743575957e1a5b9dce334ffe9c448184f8e1b198bce33140"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/firefox-zh-built-in.png",
+          "sha256": "8583ac4ff0a422d7f68947fc9efad187408bd1ac7f7b02aa59d453744b51f922"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/firefox-zh-class.png",
+          "sha256": "cb76f609bd378b7ef737108c9c7d7de0632c86abe8958fd9b0e6d041b42a1160"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/firefox-en-built-in.png",
+          "sha256": "811ccbf3a5b47528e069678f08aa5a9e8f2ed4fd9036dcc676fd8bcff43b7fac"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/firefox-en-class.png",
+          "sha256": "1e27bd8efcd71d2e424a9d9a9202564d1fc228c5336db387285a39503b5c761d"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/webkit-zh-built-in.png",
+          "sha256": "8ecb582246963b4112e488a5a1dc0f7468f21611f1045ac06b2b1f27ddaf4314"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/webkit-zh-class.png",
+          "sha256": "c70ac015393e525e7d6eec411a8e5f443526616acc4fad9598c40351a4481e15"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "built-in",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "debeb79b856f191cba1b357ba3462342b1de2c93074d1bb5c161becc60506937",
+          "ecafa8f0bcab78ca1eceef2223e0d9e7adb3c2ca546cdf6733534f9d0a344bf4"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/webkit-en-built-in.png",
+          "sha256": "df003bfbcadb453be2b8f761e90b214b49601eb263c711ef7cef7845678b7c44"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "class",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "e66ec4191c93c9c3f81530d765fd68edf702c265448e5a2602a5f06e1bc5b91c"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-template-icons/webkit-en-class.png",
+          "sha256": "4fbecd14f6de7c3ffa422c87c6726831e4300537f5ba9d083b2f00db406a3e12"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "container and host identity",
+          "$player",
+          "$video",
+          "$track",
+          "$poster",
+          "$subtitle",
+          "$danmuku",
+          "$bottom",
+          "$progress",
+          "$controls",
+          "$controlsLeft",
+          "$controlsCenter",
+          "$controlsRight",
+          "$layer",
+          "$loading",
+          "$notice",
+          "$noticeInner",
+          "$mask",
+          "$state",
+          "$setting",
+          "$info",
+          "$infoPanel",
+          "$infoClose",
+          "$contextmenu",
+          "bound query and media aliases",
+          "descendants only and missing matches",
+          "invalid selector throws",
+          "static HTML and absent instance HTML",
+          "icon loading",
+          "icon state",
+          "icon play",
+          "icon pause",
+          "icon check",
+          "icon volume",
+          "icon volumeClose",
+          "icon screenshot",
+          "icon setting",
+          "icon pip",
+          "icon arrowLeft",
+          "icon arrowRight",
+          "icon playbackRate",
+          "icon aspectRatio",
+          "icon config",
+          "icon lock",
+          "icon flip",
+          "icon unlock",
+          "icon fullscreenOff",
+          "icon fullscreenOn",
+          "icon fullscreenWebOff",
+          "icon fullscreenWebOn",
+          "icon switchOn",
+          "icon switchOff",
+          "icon error",
+          "icon close",
+          "icon airplay",
+          "nonenumerable and missing icons",
+          "element moves without cloning",
+          "captured string content",
+          "query stays at original container",
+          "destroy false retains marked root",
+          "SSR reuses complete supplied markup",
+          "default destroy empties container",
+          "no registered probe instances remain"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "container and host identity",
+          "$player",
+          "$video",
+          "$track",
+          "$poster",
+          "$subtitle",
+          "$danmuku",
+          "$bottom",
+          "$progress",
+          "$controls",
+          "$controlsLeft",
+          "$controlsCenter",
+          "$controlsRight",
+          "$layer",
+          "$loading",
+          "$notice",
+          "$noticeInner",
+          "$mask",
+          "$state",
+          "$setting",
+          "$info",
+          "$infoPanel",
+          "$infoClose",
+          "$contextmenu",
+          "bound query and media aliases",
+          "descendants only and missing matches",
+          "invalid selector throws",
+          "static HTML and absent instance HTML",
+          "icon loading",
+          "icon state",
+          "icon play",
+          "icon pause",
+          "icon check",
+          "icon volume",
+          "icon volumeClose",
+          "icon screenshot",
+          "icon setting",
+          "icon pip",
+          "icon arrowLeft",
+          "icon arrowRight",
+          "icon playbackRate",
+          "icon aspectRatio",
+          "icon config",
+          "icon lock",
+          "icon flip",
+          "icon unlock",
+          "icon fullscreenOff",
+          "icon fullscreenOn",
+          "icon fullscreenWebOff",
+          "icon fullscreenWebOn",
+          "icon switchOn",
+          "icon switchOff",
+          "icon error",
+          "icon close",
+          "icon airplay",
+          "nonenumerable and missing icons",
+          "element moves without cloning",
+          "captured string content",
+          "query stays at original container",
+          "destroy false retains marked root",
+          "SSR reuses complete supplied markup",
+          "default destroy empties container",
+          "no registered probe instances remain"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "container and host identity",
+          "$player",
+          "$video",
+          "$track",
+          "$poster",
+          "$subtitle",
+          "$danmuku",
+          "$bottom",
+          "$progress",
+          "$controls",
+          "$controlsLeft",
+          "$controlsCenter",
+          "$controlsRight",
+          "$layer",
+          "$loading",
+          "$notice",
+          "$noticeInner",
+          "$mask",
+          "$state",
+          "$setting",
+          "$info",
+          "$infoPanel",
+          "$infoClose",
+          "$contextmenu",
+          "bound query and media aliases",
+          "descendants only and missing matches",
+          "invalid selector throws",
+          "static HTML and absent instance HTML",
+          "icon loading",
+          "icon state",
+          "icon play",
+          "icon pause",
+          "icon check",
+          "icon volume",
+          "icon volumeClose",
+          "icon screenshot",
+          "icon setting",
+          "icon pip",
+          "icon arrowLeft",
+          "icon arrowRight",
+          "icon playbackRate",
+          "icon aspectRatio",
+          "icon config",
+          "icon lock",
+          "icon flip",
+          "icon unlock",
+          "icon fullscreenOff",
+          "icon fullscreenOn",
+          "icon fullscreenWebOff",
+          "icon fullscreenWebOn",
+          "icon switchOn",
+          "icon switchOff",
+          "icon error",
+          "icon close",
+          "icon airplay",
+          "nonenumerable and missing icons",
+          "element moves without cloning",
+          "captured string content",
+          "query stays at original container",
+          "destroy false retains marked root",
+          "SSR reuses complete supplied markup",
+          "default destroy empties container",
+          "no registered probe instances remain"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "integrity": "sha512-b2Sl/KMnRriJH4/TKsksknoCmLtPDduL6t9RROlzInp6CC1YN4L7t4EYGl/kdmpcgzAJsH0Fz6k4YUFmrDaPQw=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "file": "refactor/core-content-review.json",
+    "addedRecords": 91,
+    "totalRecords": 172,
+    "remainingInventoryRecords": 791,
+    "unchangedSections": [
+      {
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "anchor": "events",
+        "sectionSha256": "30d58c1eab3d4687cf9729f057ec40e1b19f4c9db13b9cad68ed70696a7f8482"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "anchor": "events",
+        "sectionSha256": "e36e2deb06247bcc5535d60517f940c759ef3449231734d8c5734c11288f2574"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "anchor": "storage",
+        "sectionSha256": "08dbeb61bc164f14ed89197677f7a98ba2aa5bc0cc6a98c032852bab576e7c54"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "anchor": "storage",
+        "sectionSha256": "76477643e6142138570ed6e267d59167b9b5df703317aca3f34a2bac1c4b7cd1"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "anchor": "i18n",
+        "sectionSha256": "c52ba94974efeff364217b777f2a2b51dd7b75e0177234126dd72b799756d2ee"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "anchor": "i18n",
+        "sectionSha256": "82e72ef0b3117dd2ed4e070c6875a0e42146262addc3476f50281fc8c64de9a7"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "anchor": "hotkey",
+        "sectionSha256": "4add651b966464927ead2009cba4b44303beba22484351cb524da6ca7de33ef0"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "anchor": "hotkey",
+        "sectionSha256": "266b00877651685c421fc98cc5de2f3691ad92f73fec6c23532fb2a362807124"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/advanced/built-in.md",
+        "anchor": "notice",
+        "sectionSha256": "cc4cf534e15b06ee05d9f09055ef2c9712e38f361be10600ef126ff18094ecc4"
+      },
+      {
+        "path": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
+        "anchor": "notice",
+        "sectionSha256": "84734dd60f0489d8d39d5433d7dec35e04f3e18297ab4c7996182699f7ea3a7e"
+      }
+    ]
+  },
+  "tests": {
+    "count": 31,
+    "pass": 31,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1457.7521,
+    "suites": [
+      "template-resources",
+      "dom-boundaries",
+      "entry",
+      "display-mini",
+      "site-loading",
+      "documentation-pipeline"
+    ],
+    "earlierFailure": "Initial run before regenerating llms.txt:30 pass/1 stale-document-bundle failure. Regeneration followed by31 passing tests; failed log retained."
+  },
+  "build": {
+    "vitepressSeconds": 9.28,
+    "yarnSeconds": 10.9,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ]
+  },
+  "visualInspections": [
+    "chromium-zh-built-in.png",
+    "chromium-en-class.png"
+  ],
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-csMDvP/report.json",
+      "sha256": "91c8ffc842e7811b5d8590ad03f5fdea713a25de7b566e9c6b542330c036c072"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "3f289a02d0f401e796b61c48f1a774a152b3efb5eb8fe3c97f3b0163b2315a42",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "431eb2caf41a434a8fdb516bf5d73b71df8b4d306530036ead7c1ee460076b81",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-template-icons-validate.mjs",
+      "sha256": "37a8b196fb30a60d60eb22944d4b678d5472d941595c4deb427dfd2c07e86746"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons/report.json",
+      "sha256": "152488c3a2342c58f87b78e739aa742a05f53c76704a519055b6f12f5270b1e5"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-validate.log",
+      "sha256": "4c1bac809451fcec5df00aaff48556051045d2f57c99f6c0d9a3a467ddaf828c"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-tests.log",
+      "sha256": "1038d17f850e481e84692bfa75e8d0065f7231cb3b58e61f8aef913cc23b7141"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-tests-final.log",
+      "sha256": "4e8213b352b9908b55eb840d3991242186a00e01732407ec901171585b508903"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-build.log",
+      "sha256": "94aad5a5d6cb723b7c909f6053dbc314d19f8eae4f9a44516efdb2dbf10f6ca6"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-build-final.log",
+      "sha256": "48d7ef507630af3548c9a95904cc7a679803df90ca82019977539961b1b1e275"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-llm.log",
+      "sha256": "b002bb72d37f6178803a97de4e6bb636c8085cd8b008524b1a368c4dfa9b3959"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-inventory.log",
+      "sha256": "169be07a163f65cc208cda3973ca34be5363158ac310ef6155446dd5bd517870"
+    },
+    {
+      "path": "refactor/.cache/site04-template-icons-ledger.log",
+      "sha256": "28b410d54e5405b669c5aa7a52867a321a6e942a8f35a880fe15bdb71048757f"
+    }
+  ]
+}

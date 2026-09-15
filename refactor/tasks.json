@@ -4575,7 +4575,9 @@
         "baselines/site04-existing-guides.json",
         "core-content-review.json",
         "baselines/site04-core-services.json",
-        "changes/2026-09-16-SITE-04-core-services.md"
+        "changes/2026-09-16-SITE-04-core-services.md",
+        "baselines/site04-template-icons.json",
+        "changes/2026-09-16-SITE-04-template-icons.md"
       ]
     },
     {

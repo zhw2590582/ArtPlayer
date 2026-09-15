@@ -47,6 +47,41 @@ console.info(art.template.$video);
 
 :::
 
+`$container` 是调用方提供的 div；`$player` 是里面生成的播放器根节点，二者不是同一个元素。以下字段保存初始化时绑定的节点引用，不是每次读取时重新查询：
+
+| 字段 | 默认选择器或来源 |
+| --- | --- |
+| `$container` | 传入的 div 容器 |
+| `$player` | `.art-video-player` |
+| `$video` | `.art-video` |
+| `$track` | `track` |
+| `$poster` | `.art-poster` |
+| `$subtitle` | `.art-subtitle` |
+| `$danmuku` | `.art-danmuku` |
+| `$bottom` | `.art-bottom` |
+| `$progress` | `.art-progress` |
+| `$controls` | `.art-controls` |
+| `$controlsLeft` | `.art-controls-left` |
+| `$controlsCenter` | `.art-controls-center` |
+| `$controlsRight` | `.art-controls-right` |
+| `$layer` | `.art-layers` |
+| `$loading` | `.art-loading` |
+| `$notice` | `.art-notice` |
+| `$noticeInner` | `.art-notice-inner` |
+| `$mask` | `.art-mask` |
+| `$state` | `.art-state` |
+| `$setting` | `.art-settings` |
+| `$info` | `.art-info` |
+| `$infoPanel` | `.art-info-panel` |
+| `$infoClose` | `.art-info-close` |
+| `$contextmenu` | `.art-contextmenus` |
+
+`art.query(selector)` 与 `art.template.query(selector)` 是同一个已绑定函数，可以单独取出调用。查询范围始终是原始 $container 的后代；不会包含容器本身，也不会跟随移到容器外的播放器/媒体节点。找不到时返回 null，非法选择器沿用 querySelector 的异常。`art.video` 返回当前缓存的 `template.$video`，使用代理时可能是 canvas。原 $track 可能随被替换的视频一起脱离 DOM，不应假定所有引用始终连接在容器内。
+
+`template.art` 指回播放器；`$mini` 在创建迷你窗口后才可能存在，默认迷你节点挂在 document.body，不在原容器内。不要通过直接替换字段来重建播放器。`template.init()` 用于初始化：普通模式重写容器 HTML，再绑定节点和代理；重复调用不是受支持的重置界面流程。`template.destroy(removeHtml)` 只处理模板 DOM：true 清空容器内容，false 添加 art-destroy 类；完整资源清理请使用 `art.destroy(removeHtml?)`。
+
+模板字符串应从静态 `Artplayer.html` 读取。旧根声明中的 `art.template.html` 并非实际实例属性，读取通常为 undefined。`useSSR: true` 会保留并查询预先提供的结构，不会补齐缺失节点；模板应与当前播放器版本一致，浏览器端仍需完成实例化。runtime 类型保留可空节点，旧根类型仍保留历史的非空类型；类型断言不能修复不完整的 SSR 模板。
+
 ## `events`
 
 管理播放器所有的 `DOM` 事件，实质上是代理了 `addEventListener` 和 `removeEventListener`, 当使用以下方法来处理事件，播放器销毁时也会自动销毁该事件
@@ -156,6 +191,18 @@ console.info(art.icons.loading);
 [artplayer/types/icons.d.ts](https://github.com/zhw2590582/ArtPlayer/blob/master/packages/artplayer/types/icons.d.ts)
 
 :::
+
+下列27个默认名称共享相同读取行为：
+
+```text
+loading, state, play, pause, check, volume, volumeClose, screenshot, setting, pip, arrowLeft, arrowRight, playbackRate, aspectRatio, config, lock, flip, unlock, fullscreenOff, fullscreenOn, fullscreenWebOff, fullscreenWebOn, switchOn, switchOff, error, close, airplay
+```
+
+每次访问都会新建 `<i class="art-icon art-icon-NAME">` 包装节点，两个 `art.icons.play` 不是同一个对象。它不是已经挂到按钮上的图标引用；修改后来读取的包装节点不会修改现有按钮。旧根声明写作 HTMLDivElement，实际包装元素是 i；runtime 使用 HTMLElement。
+
+在构造选项 `icons` 中按名称覆盖默认内容，也可添加自定义名称。字符串作为 HTML 解析，应只使用可信内容；传入 HTMLElement 会把同一个元素移动到新包装内，不会克隆，多次读取可能将它从旧包装移走。需要多个独立副本时优先传入字符串或自行克隆后使用。
+
+名称和内容在初始化时浅拷贝保存；以后修改 `art.option.icons` 不会更换这份映射或已经渲染的界面。属性是只读 getter，默认不参与 Object.keys 枚举。未配置的普通自定义名称返回 undefined，请先检查再挂载。
 
 ## `i18n`
 
@@ -588,4 +635,22 @@ const visible: boolean = art.notice.show;
 art.notice.show = false;
 art.i18n.update({ en: { Play: 'Start' } });
 console.log(visible, art.i18n.get('Play'));
+```
+
+## 模板与图标的 TypeScript 视图
+
+当前未发布重构的 `artplayer/runtime` 使用 `Template<Host>`、`Icons` 和媒体能力类型描述可空查询、未知图标和代理媒体。下面与根入口运行的是同一实现：
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({
+    container: '#player', url: '/video.mp4',
+    icons: { customMark: '<span aria-hidden="true">*</span>' },
+});
+const query = art.query;
+const player: HTMLDivElement | null = query('.art-video-player');
+const icon: HTMLElement | undefined = art.icons.customMark;
+if (player && icon) player.append(icon);
+console.log(Artplayer.html, art.video === art.template.$video);
 ```

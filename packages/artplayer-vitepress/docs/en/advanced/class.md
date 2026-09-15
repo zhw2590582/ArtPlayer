@@ -125,6 +125,8 @@ Returns the `html` string required by the player.
 console.info(Artplayer.html);
 ```
 
+This is the current version's static base markup, including required classes and media/control nodes, not a snapshot of an instance's current DOM. When reusing preinserted markup through `useSSR: true`, keep its complete structure and version aligned. The option does not make construction work outside a browser. Actual template instances have no `html` member; the historical root type retains that member for compatibility, but it does not replace the static entry.
+
 ## `option`
 
 Returns the default options of the player.

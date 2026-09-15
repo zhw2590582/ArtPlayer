@@ -125,6 +125,8 @@ console.info(Artplayer.kindOf);
 console.info(Artplayer.html);
 ```
 
+这是当前版本的静态基础模板，包含播放器所需的 class 和媒体/控件节点，不是某个实例当前 DOM 的快照。通过 `useSSR: true` 复用预先插入的模板时，应保留完整结构并匹配版本；该选项不会让构造函数在无浏览器环境中运行。实际实例没有 `template.html` 属性，旧根类型为兼容保留的这个成员不能代替静态入口。
+
 ## `option`
 
 返回播放器的默认选项
