@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "a19f81c07794bdaf2004c2a1e3031546fb1b91d644e84dd9d2c789827c2b45df"
+    "sha256": "9fd886d897e4df9aacac7fb494dd3737fbc2bc935f7b6ec12964136a22570e2f"
   },
-  "reviewedAt": "2026-09-15T20:59:37.308Z",
+  "reviewedAt": "2026-09-15T21:13:25.985Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 172,
-    "unreviewedRecords": 791
+    "reviewedRecords": 245,
+    "unreviewedRecords": 718
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -1605,6 +1605,643 @@
         }
       ],
       "evidence": "baselines/site04-template-icons.json"
+    },
+    {
+      "id": "components",
+      "status": "semantic-reviewed",
+      "conclusion": "Layer/control/contextmenu managers, root/runtime shapes and numeric overloads; config mutation, names/aliases/order, node movement and callback receivers; shallow nontransactional replacement, returns, missing/disabled entries and hook failure; scoped cleanup versus destroy hook; selector flags, coercion, bindings, async generations and reuse; controls routing/state/init and mobile context-menu boundary.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.layers@174",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "layers",
+          "line": 174
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.controls@175",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "controls",
+          "line": 175
+        },
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.contextmenu@176",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "contextmenu",
+          "line": 176
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentInput.html@5",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentInput",
+          "name": "html",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Selector.default@12",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Selector",
+          "name": "default",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Selector.html@17",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Selector",
+          "name": "html",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Selector.value@22",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Selector",
+          "name": "value",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.id@34",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "id",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.name@39",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "name",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.$parent@44",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "$parent",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.show@49",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "show",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.show@54",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "show",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.toggle@59",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "toggle",
+          "line": 59
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.add@64",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "add",
+          "line": 64
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.remove@72",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "remove",
+          "line": 72
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#Component.update@77",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "Component",
+          "name": "update",
+          "line": 77
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.html@87",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "html",
+          "line": 87
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.disable@92",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "disable",
+          "line": 92
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.name@97",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "name",
+          "line": 97
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.index@102",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "index",
+          "line": 102
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.style@107",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "style",
+          "line": 107
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.click@112",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "click",
+          "line": 112
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.mounted@117",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "mounted",
+          "line": 117
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.beforeUnmount@122",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "beforeUnmount",
+          "line": 122
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.tooltip@127",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "tooltip",
+          "line": 127
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.position@132",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "position",
+          "line": 132
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.selector@137",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "selector",
+          "line": 137
+        },
+        {
+          "id": "packages/artplayer/public/component.ts#ComponentOption.onSelect@142",
+          "file": "packages/artplayer/public/component.ts",
+          "declaration": "ComponentOption",
+          "name": "onSelect",
+          "line": 142
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.layers@87",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "layers",
+          "line": 87
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.controls@88",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "controls",
+          "line": 88
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#Artplayer.contextmenu@89",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "Artplayer",
+          "name": "contextmenu",
+          "line": 89
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#SelectorItem.html@4",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "SelectorItem",
+          "name": "html",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#SelectorItem.value@5",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "SelectorItem",
+          "name": "value",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#SelectorItem.default@6",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "SelectorItem",
+          "name": "default",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#SelectorItem.$control_option@7",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "SelectorItem",
+          "name": "$control_option",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#SelectorItem.$control_item@8",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "SelectorItem",
+          "name": "$control_item",
+          "line": 8
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#SelectorItem.$control_value@9",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "SelectorItem",
+          "name": "$control_value",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.html@13",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "html",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.disable@14",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "disable",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.name@15",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "name",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.index@16",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "index",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.style@17",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "style",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.tooltip@18",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "tooltip",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.position@19",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "position",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.selector@20",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "selector",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.click@21",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "click",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.mounted@22",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "mounted",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.beforeUnmount@23",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "beforeUnmount",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentOption.onSelect@24",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentOption",
+          "name": "onSelect",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ControlOption.position@30",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ControlOption",
+          "name": "position",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentEntry.$ref@36",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentEntry",
+          "name": "$ref",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentEntry.events@37",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentEntry",
+          "name": "events",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#ComponentEntry.option@38",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "ComponentEntry",
+          "name": "option",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.id@42",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "id",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.art@43",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "art",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.name@44",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "name",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.$parent@45",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "$parent",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.cache@46",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "cache",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.show@47",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "show",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.toggle@48",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "toggle",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.add@49",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "add",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.remove@50",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "remove",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.update@51",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "update",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Component.selector@52",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Component",
+          "name": "selector",
+          "line": 52
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.isHover@56",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "isHover",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.timer@57",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "timer",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.setting@58",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "setting",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.thumbnails@59",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "thumbnails",
+          "line": 59
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.init@60",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "init",
+          "line": 60
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.add@61",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "add",
+          "line": 61
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.update@62",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "update",
+          "line": 62
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.check@63",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "check",
+          "line": 63
+        },
+        {
+          "id": "packages/artplayer/public/runtime/component.ts#Controls.selector@64",
+          "file": "packages/artplayer/public/runtime/component.ts",
+          "declaration": "Controls",
+          "name": "selector",
+          "line": 64
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/utils/component.ts",
+          "sha256": "c3fa96467e8b315d974a42a19591aa4a4a7514853db796135b2acbcdcb160ea3"
+        },
+        {
+          "path": "packages/artplayer/src/component/types.ts",
+          "sha256": "d7b0e7008b0f6c82e3e97ac43e0188598dca4f740a860e7a60b3b38a46f4565d"
+        },
+        {
+          "path": "packages/artplayer/src/component/dom.ts",
+          "sha256": "740f63e6e5942c444b9f05605880f8d56a77b066dbe5c4791da74f78cb96c668"
+        },
+        {
+          "path": "packages/artplayer/src/component/resources.ts",
+          "sha256": "ff158ef0db8ba13343ff6ba329713820cfe2f5c2c446a7873a6cfff782855edf"
+        },
+        {
+          "path": "packages/artplayer/src/component/focus.ts",
+          "sha256": "f4aff802711f6146c80e8c6bd90bc2cb406ccbdb581aef41f436ff5c03871ad3"
+        },
+        {
+          "path": "packages/artplayer/src/component/selection.ts",
+          "sha256": "1f0bd089415da28db862647ffd1a0b4af752576465fb616d4b97ae4f8dcae3a7"
+        },
+        {
+          "path": "packages/artplayer/src/control/index.ts",
+          "sha256": "0d8e5a281f2eeba06c4cc4ac5a042847df53db1a19fdf140efea17d6ab2c0b78"
+        },
+        {
+          "path": "packages/artplayer/src/control/builtins.ts",
+          "sha256": "2a0e12a9741713c92938e1d2009149bbbde498284aa85c63f270d02b27dc22b1"
+        },
+        {
+          "path": "packages/artplayer/src/control/selector.ts",
+          "sha256": "a6f0c564c674530da9a0e4ed8762c6dfb81fa89373d64313e1020550731441f6"
+        },
+        {
+          "path": "packages/artplayer/src/control/selector-keyboard.ts",
+          "sha256": "6a749f48b23cda62148298e648bb380a6067cc18c7be4258b9ec85c382a56165"
+        },
+        {
+          "path": "packages/artplayer/src/layer.ts",
+          "sha256": "4014268eed043d5dd7b925cdeef6245e357cda67192a1301c5612ef98cdbec12"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/index.ts",
+          "sha256": "7532165d162fa463f1fe3c538d6bda0f579b5907b05137382efeb0018719b011"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/keyboard.ts",
+          "sha256": "eaa1af6b1abf8947d957208a0535f1b34f6c88e95394efd56cae905ccdea564c"
+        },
+        {
+          "path": "packages/artplayer/src/contextmenu/position.ts",
+          "sha256": "851ed1a884a13fbe430be77e7f72ae46d8a719175647e058644834aabd27ac58"
+        },
+        {
+          "path": "packages/artplayer/src/scheme/index.ts",
+          "sha256": "dc4a3b5e08478cf72b46b0b59c023359ad5f79b891ea8a6a119ce24a5251821a"
+        },
+        {
+          "path": "packages/artplayer/src/dom/tree.ts",
+          "sha256": "3bc517ab9fa5317a1445156d53afb27182685eb3b4c0ac2ff41bbde55c9eecb6"
+        },
+        {
+          "path": "packages/artplayer/src/lifecycle/instance.ts",
+          "sha256": "3168f7db4271bae7a242e80798546b755ac15443e15dd9ebb7675f5a259299d8"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/component.ts",
+          "sha256": "aa1c43be67322781b4b355b143bc69d9f29d22e578e4974d6a13e957a7c0334f"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/component.ts",
+          "sha256": "840213299c942fe058eb5436977ceec066b9dccda24c55ae9f464b399c979e39"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/component/layers.md",
+          "sha256": "70c33c261db52675db4ee87258893abe6a735b6fc13c8918982753dce876a10f",
+          "anchor": "component-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/component/controls.md",
+          "sha256": "a6e6336216320f1be37980cc17c08c4d1e4e3eb95711dd30f54b29f210bd9b28",
+          "anchor": "control-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/component/contextmenu.md",
+          "sha256": "aa8721dff63d86684ece122f13a7cdd6e8bfa8de11ee9822de221858a79e395e",
+          "anchor": "contextmenu-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/component/layers.md",
+          "sha256": "62f73b48fac53397c9c2a3ce846db8cf3fc466383ba38a7ea3001c81e92b82d0",
+          "anchor": "component-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/component/controls.md",
+          "sha256": "b88bad51d3791f6ee2ef51b3f6005ce1a20707add9c4efc52418d0c97cfad800",
+          "anchor": "control-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/component/contextmenu.md",
+          "sha256": "a4f1bd30fe36283b2a07cdfc49306a41644367d98e5bb3eb849645aa8ae55bb8",
+          "anchor": "contextmenu-contract"
+        }
+      ],
+      "evidence": "baselines/site04-components.json"
     }
   ]
 }

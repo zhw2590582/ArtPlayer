@@ -3500,11 +3500,12 @@ art.on('ready', () => {
 | `disable` | `Boolean`           | Whether to disable the component     |
 | `name`    | `String`            | Unique component name for CSS class  |
 | `index`   | `Number`            | Component index for display priority |
-| `html`    | `String`, `Element` | DOM element of the component         |
+| `html`    | `String`, `Element`, `Number` | DOM element of the component         |
 | `style`   | `Object`            | Component style object               |
 | `click`   | `Function`          | Component click event                |
 | `mounted` | `Function`          | Triggered after component mount      |
-| `tooltip` | `String`            | Tooltip text for the component       |
+| `beforeUnmount` | `Function` | Hook before explicit remove/update |
+| `tooltip` | `String`, `Number`            | Tooltip text for the component       |
 
 ## Creation
 
@@ -3620,6 +3621,26 @@ art.on('ready', () => {
 });
 ```
 
+## Menu management and lifecycle {#contextmenu-contract}
+
+See [shared component behavior](./layers#component-contract) for options, callbacks, return values, name conflicts and update/cleanup rules. The parent is template.$contextmenu; the manager name is contextmenu, with art-contextmenu and art-contextmenu-NAME item classes. show/toggle control the whole menu, not individual availability. Clicking a custom entry does not automatically close it; set art.contextmenu.show = false in your callback when needed.
+
+Desktop initialization installs built-in/configured entries and handles the context-menu event, keyboard, outside clicks and player blur. Mobile does not automatically run that initialization. Direct add can still register entries, but does not install the complete desktop context-menu flow. Use add/update/remove rather than repeating initialization to refresh entries.
+
+## TypeScript menu example
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player', url: '/video.mp4' });
+const menu: HTMLDivElement | undefined = art.contextmenu.add({
+    name: 'custom-menu', html: 'Close menu',
+    click() { this.contextmenu.show = false; },
+});
+if (menu) art.contextmenu.remove('custom-menu');
+```
+
+
 ===== packages/artplayer-vitepress/docs/en/component/controls.md =====
 
 # Controls
@@ -3631,12 +3652,13 @@ art.on('ready', () => {
 | `disable`  | `Boolean`           | Whether to disable the control                   |
 | `name`     | `String`            | Unique name of the control, used for class marking |
 | `index`    | `Number`            | Control index, determines display priority       |
-| `html`     | `String`, `Element` | DOM element of the control                       |
+| `html`     | `String`, `Element`, `Number` | DOM element of the control                       |
 | `style`    | `Object`            | Style object for the control                     |
 | `click`    | `Function`          | Click event handler for the control              |
 | `mounted`  | `Function`          | Triggered after the control is mounted           |
-| `tooltip`  | `String`            | Tooltip text for the control                     |
-| `position` | `String`            | `left` or `right` - controls which side the control appears on |
+| `beforeUnmount` | `Function` | Hook before explicit remove/update |
+| `tooltip`  | `String`, `Number`            | Tooltip text for the control                     |
+| `position` | `String` | Required: top, left or right |
 | `selector` | `Array`             | Array of objects for selection list              |
 | `onSelect` | `Function`          | Function triggered when a selection list item is clicked |
 
@@ -3801,6 +3823,36 @@ art.on('ready', () => {
 });
 ```
 
+## Manager and selector behavior {#control-contract}
+
+See [shared component behavior](./layers#component-contract) for options, callbacks, shallow updates and cleanup. position must be top, left or right, using template.$progress, $controlsLeft or $controlsRight respectively. Missing/other values throw. $parent records the latest add position, not a shared parent for all controls. The manager name is control; classes are art-control/art-control-NAME. There is no center option.
+
+add/update return undefined. Obtain a node through mounted, cache.get(name)?.$ref or its known name property. setting and thumbnails are optional built-in node references, not the setting manager or thumbnail data. init installs built-in and configured entries; it is not a repeatable reset API and can fail on duplicate names. isHover tracks the pointer's relation to the bottom area. timer is the last-show timestamp, not a timer handle. Automatic hiding depends on playback timeupdate, CONTROL_HIDE_TIME, settings, input, pointer and keyboard focus; it is not an exact timer.
+
+selector creates a list only in left/right positions. Item html is display content, value is custom string/number data, and default is the selection flag; value does not automatically switch media. Initial button content comes from the control's html. Initial default flags mark list items without replacing the button label. List and subsequent button content use innerHTML: use trusted strings. Although historical types allow HTMLElement, this path does not move that element as ordinary component html does.
+
+A click first updates default flags, button content and highlighting, then calls onSelect(item, itemElement, event) with the player as this. Its return value, including a Promise result, becomes the button's new innerHTML. Undefined does not automatically fall back to the previous content; return the intended text or HTML. Async results update the label only while this selection is current and the entry remains active. Results from earlier selections or removed/replaced entries are ignored. Errors produce a warning and do not roll back the selected item.
+
+controls.check(item) updates selection using a bound item. No argument is a no-op; an arbitrary unbound object is not supported. Items receive readonly nonenumerable $control_option (original array), $control_item (list node) and $control_value (button-value node) accessors. One item object cannot belong to two active selectors at once; it can be reused after the old control releases it. controls.selector is a renderer requiring managed nodes and cleanup arrays; applications should use the selector option of add/update.
+
+## TypeScript control example
+
+```ts
+import Artplayer from 'artplayer/runtime';
+import type { SelectorItem } from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player', url: '/video.mp4' });
+const items: SelectorItem[] = [{ html: 'One', value: 1, default: true }, { html: 'Two', value: 2 }];
+const result: undefined = art.controls.add({
+    name: 'choices', position: 'right', html: 'Choose', selector: items,
+    async onSelect(item) { return String(item.html); },
+});
+art.controls.check(items[1]);
+console.log(result, art.controls.cache.get('choices')?.$ref);
+art.controls.remove('choices');
+```
+
+
 ===== packages/artplayer-vitepress/docs/en/component/layers.md =====
 
 # Layers
@@ -3812,11 +3864,12 @@ art.on('ready', () => {
 | `disable` | `Boolean`           | Whether to disable the component     |
 | `name`    | `String`            | Unique component name for CSS class  |
 | `index`   | `Number`            | Component index for display priority |
-| `html`    | `String`, `Element` | Component DOM element                |
+| `html`    | `String`, `Element`, `Number` | Component DOM element                |
 | `style`   | `Object`            | Component style object               |
 | `click`   | `Function`          | Component click event                |
 | `mounted` | `Function`          | Triggered after component mount      |
-| `tooltip` | `String`            | Component tooltip text               |
+| `beforeUnmount` | `Function` | Hook before explicit remove/update |
+| `tooltip` | `String`, `Number`            | Component tooltip text               |
 
 ## Creation
 
@@ -3950,6 +4003,41 @@ art.on('ready', () => {
     }, 3000);
 });
 ```
+
+## Shared component behavior {#component-contract}
+
+This section applies to layers, controls and contextmenu. The setting panel has its own API.
+
+- add accepts an option object or a synchronous (art) => option factory. The factory receives the player; do not rely on its this. A truthy disable skips creation, rather than disabling an existing node. Options are retained and may be mutated: falsy html, including numeric 0, is normalized to an empty string.
+- Names are unique within a manager. Duplicate add and remove of a missing name throw; update of a missing name calls add. Omitted names use the manager name and incrementing id. A name also becomes a node property on the manager: avoid existing members such as add, cache and show.
+- index inserts in ascending order within one parent. A new equal-index entry precedes the old one. Zero and omitted index use the incrementing id, rather than forcing first position. Different control positions have separate ordering.
+- html strings are parsed as HTML; use trusted content. An HTMLElement is moved rather than cloned. Nonzero numeric content is accepted. style assigns node styles directly; tooltip accepts strings or numbers, with falsy values omitted.
+- click receives the component manager and native event, not the individual node. Its this is the player; preventDefault runs before the callback, but stopPropagation is not automatic. mounted and beforeUnmount also receive the player as this and the node as their argument. Ordinary component callback results are ignored; Promises are not awaited.
+- mounted runs synchronously after insertion and cache/name registration. beforeUnmount runs before explicit remove or update removes the old node; if it throws, the old entry remains. Player destruction releases managed resources but does not call this hook for every entry. Own subscriptions and timers need a separate idempotent cleanup function connected to both the component hook and player destroy.
+- update shallow-merges into the original option object by name, then removes and adds the entry. It replaces DOM, reruns mounted and invalidates old node references. Nested objects such as style are not deeply merged. beforeUnmount sees the merged options, including a newly supplied hook. Failed replacement does not transactionally restore the old node.
+
+layers.add/update and contextmenu.add/update return the new HTMLDivElement, or possibly undefined when disabled or closing. controls.add/update retain their historical undefined result. add/remove/update are bound and can be extracted; toggle requires its manager receiver.
+
+show controls the manager's CSS state; toggle inverts it. Every show assignment emits layer, control or contextmenu, even if the boolean state is unchanged; it does not remove entries. art references the player, name is layer/control/contextmenu, $parent is the current insertion parent, and id is an incrementing counter. cache is a Map keyed by name, with $ref, an events cleanup array and the original option. Observe these fields rather than mutating them to bypass lifecycle methods.
+
+The layer parent is template.$layer; generated classes are art-layer and art-layer-NAME. Root types retain the historical Component/ComponentOption/Selector shapes, adding numeric content through ComponentInput overloads. The unpublished refactor's artplayer/runtime exports accurate Component, Controls, `ComponentInput<Host>` and callback/return types. Infer cache-entry shapes from the instance; the internal ComponentEntry declaration is not a named export of that entry.
+
+## TypeScript component example
+
+```ts
+import Artplayer from 'artplayer/runtime';
+
+const art = new Artplayer({ container: '#player', url: '/video.mp4' });
+const element: HTMLDivElement | undefined = art.layers.add({
+    name: 'counter', html: 1,
+    click(manager, event) { console.log(this === art, manager.name, event.type); },
+});
+if (element) {
+    art.layers.update({ name: 'counter', html: 2 });
+    art.layers.remove('counter');
+}
+```
+
 
 ===== packages/artplayer-vitepress/docs/en/component/setting.md =====
 

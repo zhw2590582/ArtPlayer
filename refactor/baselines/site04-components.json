@@ -1,0 +1,1243 @@
+{
+  "task": "SITE-04",
+  "taskStatus": "doing",
+  "sourceBefore": "5910c3f179bb63935d7c5e2905e76f0b11fc0a9d",
+  "capturedAt": "2026-09-15T21:13:25.986Z",
+  "validation": {
+    "task": "SITE-04",
+    "node": "v24.21.0",
+    "compiler": "5.9.3",
+    "static": [
+      {
+        "language": "zh",
+        "name": "layers",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/component/layers.md",
+          "sha256": "70c33c261db52675db4ee87258893abe6a735b6fc13c8918982753dce876a10f"
+        },
+        "html": {
+          "path": "docs/document/component/layers.html",
+          "sha256": "bb05c89b02245e60e4458e8667930730e5a7d5dd7426ed9370177a4996f6b809"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-components/zh-layers-0.mts",
+            "sha256": "ad84c7f9f8e5b937da2ef967800e4af85ced5a0a5cf5d8e416deb115e1ce176b"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "component/layers.md:22",
+            "sha256": "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8"
+          },
+          {
+            "id": "component/layers.md:55",
+            "sha256": "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb"
+          },
+          {
+            "id": "component/layers.md:87",
+            "sha256": "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a"
+          },
+          {
+            "id": "component/layers.md:117",
+            "sha256": "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+          }
+        ],
+        "localLinks": [
+          "/document/component/layers.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/component/layers.html#%E4%B8%9A%E5%8A%A1%E5%B1%82",
+          "/document/component/layers.html#%E9%85%8D%E7%BD%AE",
+          "/document/component/layers.html#%E5%88%9B%E5%BB%BA",
+          "/document/component/layers.html#%E6%B7%BB%E5%8A%A0",
+          "/document/component/layers.html#%E5%88%A0%E9%99%A4",
+          "/document/component/layers.html#%E6%9B%B4%E6%96%B0",
+          "/document/component/layers.html#component-contract",
+          "/document/component/layers.html#typescript-%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B"
+        ]
+      },
+      {
+        "language": "zh",
+        "name": "controls",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/component/controls.md",
+          "sha256": "a6e6336216320f1be37980cc17c08c4d1e4e3eb95711dd30f54b29f210bd9b28"
+        },
+        "html": {
+          "path": "docs/document/component/controls.html",
+          "sha256": "415c83bef8343de6420c45c1abae0f2c40c04fe4325634f1512a6f28fa41f218"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-components/zh-controls-0.mts",
+            "sha256": "9442748145ab9ac342a04a2df920e88477844e87b50c493cb2ee188dc3ecf7e5"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "component/controls.md:25",
+            "sha256": "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e"
+          },
+          {
+            "id": "component/controls.md:76",
+            "sha256": "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a"
+          },
+          {
+            "id": "component/controls.md:107",
+            "sha256": "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e"
+          },
+          {
+            "id": "component/controls.md:137",
+            "sha256": "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+          }
+        ],
+        "localLinks": [
+          "/document/component/controls.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/component/controls.html#%E6%8E%A7%E5%88%B6%E5%99%A8",
+          "/document/component/controls.html#%E9%85%8D%E7%BD%AE",
+          "/document/component/controls.html#%E5%88%9B%E5%BB%BA",
+          "/document/component/controls.html#%E6%B7%BB%E5%8A%A0",
+          "/document/component/controls.html#%E5%88%A0%E9%99%A4",
+          "/document/component/controls.html#%E6%9B%B4%E6%96%B0",
+          "/document/component/controls.html#control-contract",
+          "/document/component/layers.html#component-contract",
+          "/document/component/controls.html#typescript-%E6%8E%A7%E5%88%B6%E5%99%A8%E7%A4%BA%E4%BE%8B"
+        ]
+      },
+      {
+        "language": "zh",
+        "name": "contextmenu",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/component/contextmenu.md",
+          "sha256": "aa8721dff63d86684ece122f13a7cdd6e8bfa8de11ee9822de221858a79e395e"
+        },
+        "html": {
+          "path": "docs/document/component/contextmenu.html",
+          "sha256": "c09184cfac6cf2f64f8576396a71be8cef4e675085874327aec17c2c4a1e9c24"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-components/zh-contextmenu-0.mts",
+            "sha256": "52552c5d7ad9c7a8d44537e6b7993da4912909fbce65e5b9d15285934b65ab71"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "component/contextmenu.md:22",
+            "sha256": "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61"
+          },
+          {
+            "id": "component/contextmenu.md:48",
+            "sha256": "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875"
+          },
+          {
+            "id": "component/contextmenu.md:73",
+            "sha256": "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e"
+          },
+          {
+            "id": "component/contextmenu.md:103",
+            "sha256": "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+          }
+        ],
+        "localLinks": [
+          "/document/component/contextmenu.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/start/option.html",
+          "/document/start/i18n.html",
+          "/document/component/layers.html",
+          "/document/component/controls.html",
+          "/document/component/contextmenu.html",
+          "/document/component/setting.html",
+          "/document/advanced/property.html",
+          "/document/advanced/built-in.html",
+          "/document/advanced/class.html",
+          "/document/advanced/global.html",
+          "/document/advanced/event.html",
+          "/document/advanced/plugin.html",
+          "/document/plugin/danmuku.html",
+          "/document/plugin/danmuku-mask.html",
+          "/document/plugin/ads.html",
+          "/document/plugin/hls-control.html",
+          "/document/plugin/dash-control.html",
+          "/document/plugin/vtt-thumbnail.html",
+          "/document/plugin/auto-thumbnail.html",
+          "/document/plugin/multiple-subtitles.html",
+          "/document/plugin/jassub.html",
+          "/document/plugin/chromecast.html",
+          "/document/plugin/vast.html",
+          "/document/plugin/chapter.html",
+          "/document/plugin/ambilight.html",
+          "/document/plugin/document-pip.html",
+          "/document/plugin/asr.html",
+          "/document/plugin/audio-track.html",
+          "/document/tool/iframe.html",
+          "/document/tool/thumbnail.html",
+          "/document/proxy/canvas.html",
+          "/document/proxy/mediabunny.html",
+          "/document/component/contextmenu.html#%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95",
+          "/document/component/contextmenu.html#%E9%85%8D%E7%BD%AE",
+          "/document/component/contextmenu.html#%E5%88%9B%E5%BB%BA",
+          "/document/component/contextmenu.html#%E6%B7%BB%E5%8A%A0",
+          "/document/component/contextmenu.html#%E5%88%A0%E9%99%A4",
+          "/document/component/contextmenu.html#%E6%9B%B4%E6%96%B0",
+          "/document/component/contextmenu.html#contextmenu-contract",
+          "/document/component/layers.html#component-contract",
+          "/document/component/contextmenu.html#typescript-%E8%8F%9C%E5%8D%95%E7%A4%BA%E4%BE%8B"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "layers",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/component/layers.md",
+          "sha256": "62f73b48fac53397c9c2a3ce846db8cf3fc466383ba38a7ea3001c81e92b82d0"
+        },
+        "html": {
+          "path": "docs/document/en/component/layers.html",
+          "sha256": "58d3011901cbe883e31d4e2bd4ed5b9271a8ab99f2633d55683b9217ecd603db"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-components/en-layers-0.mts",
+            "sha256": "ad84c7f9f8e5b937da2ef967800e4af85ced5a0a5cf5d8e416deb115e1ce176b"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/component/layers.md:22",
+            "sha256": "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8"
+          },
+          {
+            "id": "en/component/layers.md:55",
+            "sha256": "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb"
+          },
+          {
+            "id": "en/component/layers.md:87",
+            "sha256": "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a"
+          },
+          {
+            "id": "en/component/layers.md:117",
+            "sha256": "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+          }
+        ],
+        "localLinks": [
+          "/document/en/component/layers.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/component/layers.html#layers",
+          "/document/en/component/layers.html#configuration",
+          "/document/en/component/layers.html#creation",
+          "/document/en/component/layers.html#addition",
+          "/document/en/component/layers.html#removal",
+          "/document/en/component/layers.html#update",
+          "/document/en/component/layers.html#component-contract",
+          "/document/en/component/layers.html#typescript-component-example"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "controls",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/component/controls.md",
+          "sha256": "b88bad51d3791f6ee2ef51b3f6005ce1a20707add9c4efc52418d0c97cfad800"
+        },
+        "html": {
+          "path": "docs/document/en/component/controls.html",
+          "sha256": "0abb7044d735d50c655e10aba4265f263ed3fe4a55c5036856a328389b46c743"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-components/en-controls-0.mts",
+            "sha256": "9442748145ab9ac342a04a2df920e88477844e87b50c493cb2ee188dc3ecf7e5"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/component/controls.md:25",
+            "sha256": "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e"
+          },
+          {
+            "id": "en/component/controls.md:76",
+            "sha256": "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a"
+          },
+          {
+            "id": "en/component/controls.md:107",
+            "sha256": "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e"
+          },
+          {
+            "id": "en/component/controls.md:137",
+            "sha256": "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+          }
+        ],
+        "localLinks": [
+          "/document/en/component/controls.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/component/controls.html#controls",
+          "/document/en/component/controls.html#configuration",
+          "/document/en/component/controls.html#creation",
+          "/document/en/component/controls.html#adding",
+          "/document/en/component/controls.html#removal",
+          "/document/en/component/controls.html#updating",
+          "/document/en/component/controls.html#control-contract",
+          "/document/en/component/layers.html#component-contract",
+          "/document/en/component/controls.html#typescript-control-example"
+        ]
+      },
+      {
+        "language": "en",
+        "name": "contextmenu",
+        "source": {
+          "path": "packages/artplayer-vitepress/docs/en/component/contextmenu.md",
+          "sha256": "a4f1bd30fe36283b2a07cdfc49306a41644367d98e5bb3eb849645aa8ae55bb8"
+        },
+        "html": {
+          "path": "docs/document/en/component/contextmenu.html",
+          "sha256": "3b3e433d6fc932de865363b150c22304e0c48d114d9561fe2d56da8b4534449d"
+        },
+        "typeFixtures": [
+          {
+            "path": "refactor/.cache/site04-components/en-contextmenu-0.mts",
+            "sha256": "52552c5d7ad9c7a8d44537e6b7993da4912909fbce65e5b9d15285934b65ab71"
+          }
+        ],
+        "snippets": [
+          {
+            "id": "en/component/contextmenu.md:22",
+            "sha256": "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61"
+          },
+          {
+            "id": "en/component/contextmenu.md:48",
+            "sha256": "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875"
+          },
+          {
+            "id": "en/component/contextmenu.md:73",
+            "sha256": "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e"
+          },
+          {
+            "id": "en/component/contextmenu.md:103",
+            "sha256": "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+          }
+        ],
+        "localLinks": [
+          "/document/en/component/contextmenu.html#VPContent",
+          "/document/",
+          "/document/en/",
+          "/document/en/start/option.html",
+          "/document/en/start/i18n.html",
+          "/document/en/component/layers.html",
+          "/document/en/component/controls.html",
+          "/document/en/component/contextmenu.html",
+          "/document/en/component/setting.html",
+          "/document/en/advanced/property.html",
+          "/document/en/advanced/built-in.html",
+          "/document/en/advanced/class.html",
+          "/document/en/advanced/global.html",
+          "/document/en/advanced/event.html",
+          "/document/en/advanced/plugin.html",
+          "/document/en/plugin/danmuku.html",
+          "/document/en/plugin/danmuku-mask.html",
+          "/document/en/plugin/ads.html",
+          "/document/en/plugin/hls-control.html",
+          "/document/en/plugin/dash-control.html",
+          "/document/en/plugin/vtt-thumbnail.html",
+          "/document/en/plugin/auto-thumbnail.html",
+          "/document/en/plugin/multiple-subtitles.html",
+          "/document/en/plugin/jassub.html",
+          "/document/en/plugin/chromecast.html",
+          "/document/en/plugin/vast.html",
+          "/document/en/plugin/chapter.html",
+          "/document/en/plugin/ambilight.html",
+          "/document/en/plugin/document-pip.html",
+          "/document/en/plugin/asr.html",
+          "/document/en/plugin/audio-track.html",
+          "/document/en/tool/iframe.html",
+          "/document/en/tool/thumbnail.html",
+          "/document/en/proxy/canvas.html",
+          "/document/en/proxy/mediabunny.html",
+          "/document/en/component/contextmenu.html#context-menu",
+          "/document/en/component/contextmenu.html#configuration",
+          "/document/en/component/contextmenu.html#creation",
+          "/document/en/component/contextmenu.html#addition",
+          "/document/en/component/contextmenu.html#deletion",
+          "/document/en/component/contextmenu.html#update",
+          "/document/en/component/contextmenu.html#contextmenu-contract",
+          "/document/en/component/layers.html#component-contract",
+          "/document/en/component/contextmenu.html#typescript-menu-example"
+        ]
+      }
+    ],
+    "browsers": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "layers",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8",
+          "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb",
+          "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a",
+          "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/chromium-zh-layers.png",
+          "sha256": "c5db8eca08f34e5a64c28fa04dffaef582f4c48cebf54c7b941b0bb4f0f71959"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "controls",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e",
+          "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a",
+          "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e",
+          "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/chromium-zh-controls.png",
+          "sha256": "94d63337561ce45894c3d82316fd9307f4d56a27a18be94ca788142b2fb83a34"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "zh",
+        "name": "contextmenu",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61",
+          "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875",
+          "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e",
+          "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/chromium-zh-contextmenu.png",
+          "sha256": "7a6e8e1f17ae91246b89c1fe4989ced215a815b4405927279348e69634c42cdf"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "layers",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8",
+          "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb",
+          "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a",
+          "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/chromium-en-layers.png",
+          "sha256": "bedd81e8a2137b1e7be1a036e4ad8035d8a3db7ce5cad9b533c186c8ad130b6f"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "controls",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e",
+          "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a",
+          "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e",
+          "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/chromium-en-controls.png",
+          "sha256": "2ea18667958ceba15594ba573e5b3668158aa6e50cdabb3097180c0d42f18824"
+        }
+      },
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "language": "en",
+        "name": "contextmenu",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61",
+          "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875",
+          "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e",
+          "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/chromium-en-contextmenu.png",
+          "sha256": "b27c01757a60e59afa70709110a22bcddc3fb2f42963f6e2b2ac40345324f8a3"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "layers",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8",
+          "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb",
+          "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a",
+          "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/firefox-zh-layers.png",
+          "sha256": "f31fe0352d8d7806beda3911492b874da15409c7f4908063deb9b7a333cb2d75"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "controls",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e",
+          "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a",
+          "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e",
+          "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/firefox-zh-controls.png",
+          "sha256": "641a406e4fe168dd815c082c89f750b868e93f724caa900317991f65ef0cfd74"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "zh",
+        "name": "contextmenu",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61",
+          "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875",
+          "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e",
+          "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/firefox-zh-contextmenu.png",
+          "sha256": "f396dfbd2cc60d2b3d10fb255b38f87e97f5c5717120971a1d3e68aa39aad60f"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "layers",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8",
+          "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb",
+          "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a",
+          "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/firefox-en-layers.png",
+          "sha256": "51abdc61fb16fa951d65e3c1768be60bd0b7964aa5f02748ab0de5ed19bb7e07"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "controls",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e",
+          "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a",
+          "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e",
+          "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/firefox-en-controls.png",
+          "sha256": "fe264da259df89fd75f584f14b5d53bbbb4580928e25c85f2017f64866a25c24"
+        }
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "language": "en",
+        "name": "contextmenu",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61",
+          "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875",
+          "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e",
+          "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/firefox-en-contextmenu.png",
+          "sha256": "e253bf7a3f53bd40502396fe4cd1ea6ce054a2d67d11e29996725099173a8f54"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "layers",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8",
+          "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb",
+          "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a",
+          "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/webkit-zh-layers.png",
+          "sha256": "84f1c47bc2cb0a3e056be67f67258572dc9716937740ec6ee772489058b7cf13"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "controls",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e",
+          "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a",
+          "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e",
+          "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/webkit-zh-controls.png",
+          "sha256": "887a4946ae7d2de88ffc6ec67761776b97a4c09008ff19a5b1292fb3ef0c3fb6"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "zh",
+        "name": "contextmenu",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61",
+          "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875",
+          "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e",
+          "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/webkit-zh-contextmenu.png",
+          "sha256": "447ed64098d785617df06aede699f71fd035c0be44a752ae96d48480fa6d1dfd"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "layers",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "4aff73775fd8b8ebbcc16bf736435151bdc2dec51c9c1fa6b805ea596c6874a8",
+          "0d535ca57632dfc7381f57b10d2a7d0e24e3d5c445a9cad2fa715646a76aaafb",
+          "283ab33f230f759731df28f1ca0de2f436bab8cd93f3398b350a66af49d96a7a",
+          "524b3f912583d3175ccc60ef68a98cb14e02c5513798d5b62b14cc20dde67c18"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/webkit-en-layers.png",
+          "sha256": "fdf0379ad3ddfd4fc5a33a51e263f27692f8e8551a1d1f0f9677a9fa2097d943"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "controls",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "7a3219799c7296fbb182feaed8422e9cf2578b8b46160b4a25b24f48d9c4d60e",
+          "901b9a0b425f9865530124f7a34b384fb5ec053d11cbc7962eaa16d05ccc884a",
+          "6c63b2e2708a38a1263db66ead948c581f80585e7bddbf46a904170174346b7e",
+          "e68b3e7897f22508bf9421ad9d9d15521cac407016b88e86c9638aeaab27080a"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/webkit-en-controls.png",
+          "sha256": "7f98fb0b1d0963eeac25ecaada4a351830a630e920001646e5d096f771c0775d"
+        }
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "language": "en",
+        "name": "contextmenu",
+        "passed": true,
+        "errors": [],
+        "forwarded": [
+          "67a56b193a241214ae6f7da42b7ff8025b8a5c31d7c988c7f268353bc3d4ab61",
+          "a07e9b39f616bee71f20b26faac67d1001ec2a83c7203827b72323132fd7e875",
+          "d32999b1ef82d97ac03af9e7970a0cf422277c9f67afc4cdd5356e11afa5250e",
+          "12786d8804cc0c3ca122e18fc59658b0ecdd360a7972bcea9be663008d9724e1"
+        ],
+        "screenshot": {
+          "path": "refactor/.cache/site04-components/webkit-en-contextmenu.png",
+          "sha256": "01c182cc6a5b34695505b13545f8160dcb5a3b39a2801106b4e179e4de9d3cb9"
+        }
+      }
+    ],
+    "dom": [
+      {
+        "engine": "chromium",
+        "version": "153.0.8010.12",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "layer add returns node and registers alias/cache",
+          "mounted and click receivers/arguments",
+          "duplicate add throws",
+          "update replaces DOM and retains original option object",
+          "update shallow replaces style",
+          "update uses merged new beforeUnmount hook",
+          "removed old node listener released",
+          "remove clears cache alias and node",
+          "missing remove throws",
+          "update absent adds node",
+          "disabled add returns undefined",
+          "zero HTML and index historical fallback",
+          "equal index inserts before previous",
+          "ordinary component html moves element",
+          "factory receives player",
+          "show emits unchanged assignments and toggle",
+          "throwing beforeUnmount retains entry",
+          "control position required",
+          "control top routing and return",
+          "control top update return",
+          "control left routing and return",
+          "control left update return",
+          "control right routing and return",
+          "control right update return",
+          "initial default does not replace label",
+          "selector accessor identity and descriptor",
+          "check updates flags and label",
+          "onSelect receiver/arguments 1",
+          "onSelect receiver/arguments 2",
+          "latest async selection wins",
+          "onSelect receiver/arguments 1",
+          "removed selector ignores late result",
+          "released selector objects can be reused",
+          "active selector item sharing rejected",
+          "context callback manager",
+          "context add returns node and click does not hide",
+          "context update replaces node",
+          "player destroy does not call beforeUnmount"
+        ]
+      },
+      {
+        "engine": "firefox",
+        "version": "155.0",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "layer add returns node and registers alias/cache",
+          "mounted and click receivers/arguments",
+          "duplicate add throws",
+          "update replaces DOM and retains original option object",
+          "update shallow replaces style",
+          "update uses merged new beforeUnmount hook",
+          "removed old node listener released",
+          "remove clears cache alias and node",
+          "missing remove throws",
+          "update absent adds node",
+          "disabled add returns undefined",
+          "zero HTML and index historical fallback",
+          "equal index inserts before previous",
+          "ordinary component html moves element",
+          "factory receives player",
+          "show emits unchanged assignments and toggle",
+          "throwing beforeUnmount retains entry",
+          "control position required",
+          "control top routing and return",
+          "control top update return",
+          "control left routing and return",
+          "control left update return",
+          "control right routing and return",
+          "control right update return",
+          "initial default does not replace label",
+          "selector accessor identity and descriptor",
+          "check updates flags and label",
+          "onSelect receiver/arguments 1",
+          "onSelect receiver/arguments 2",
+          "latest async selection wins",
+          "onSelect receiver/arguments 1",
+          "removed selector ignores late result",
+          "released selector objects can be reused",
+          "active selector item sharing rejected",
+          "context callback manager",
+          "context add returns node and click does not hide",
+          "context update replaces node",
+          "player destroy does not call beforeUnmount"
+        ]
+      },
+      {
+        "engine": "webkit",
+        "version": "26.6",
+        "passed": true,
+        "errors": [],
+        "checks": [
+          "layer add returns node and registers alias/cache",
+          "mounted and click receivers/arguments",
+          "duplicate add throws",
+          "update replaces DOM and retains original option object",
+          "update shallow replaces style",
+          "update uses merged new beforeUnmount hook",
+          "removed old node listener released",
+          "remove clears cache alias and node",
+          "missing remove throws",
+          "update absent adds node",
+          "disabled add returns undefined",
+          "zero HTML and index historical fallback",
+          "equal index inserts before previous",
+          "ordinary component html moves element",
+          "factory receives player",
+          "show emits unchanged assignments and toggle",
+          "throwing beforeUnmount retains entry",
+          "control position required",
+          "control top routing and return",
+          "control top update return",
+          "control left routing and return",
+          "control left update return",
+          "control right routing and return",
+          "control right update return",
+          "initial default does not replace label",
+          "selector accessor identity and descriptor",
+          "check updates flags and label",
+          "onSelect receiver/arguments 1",
+          "onSelect receiver/arguments 2",
+          "latest async selection wins",
+          "onSelect receiver/arguments 1",
+          "removed selector ignores late result",
+          "released selector objects can be reused",
+          "active selector item sharing rejected",
+          "context callback manager",
+          "context add returns node and click does not hide",
+          "context update replaces node",
+          "player destroy does not call beforeUnmount"
+        ]
+      }
+    ],
+    "complete": true,
+    "limitations": [
+      "Page navigation and DOM contracts only; no playback, codec, physical-device or release acceptance."
+    ],
+    "core": {
+      "artifact": {
+        "path": "packages/artplayer/dist/artplayer.js",
+        "sha256": "8a4caaa50a069875b3898a83765457b3c502700f4731d0c38988d6c463c3d20a"
+      },
+      "candidate": {
+        "kind": "npm-tarball",
+        "path": "refactor/.cache/packages/run-XvHA8v/artplayer.tgz",
+        "version": "6.0.0",
+        "sourceCommit": "1b8188834768605f312a5ed14dab52d75b9c880c",
+        "inputFingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "integrity": "sha512-b2Sl/KMnRriJH4/TKsksknoCmLtPDduL6t9RROlzInp6CC1YN4L7t4EYGl/kdmpcgzAJsH0Fz6k4YUFmrDaPQw=="
+      }
+    }
+  },
+  "semanticMapping": {
+    "file": "refactor/core-content-review.json",
+    "addedRecords": 73,
+    "totalRecords": 245,
+    "remainingInventoryRecords": 718,
+    "previousGroups": "All existing source and document hashes verified unchanged."
+  },
+  "tests": {
+    "count": 35,
+    "pass": 35,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 1253.4366,
+    "suites": [
+      "component-resources",
+      "accessibility-focus",
+      "accessibility-button",
+      "site-loading",
+      "documentation-pipeline"
+    ]
+  },
+  "build": {
+    "vitepressSeconds": 9.18,
+    "yarnSeconds": 10.77,
+    "checked": [
+      "build:docs",
+      "build:llm",
+      "check:llm",
+      "site-inventory --write/--check",
+      "demos --check"
+    ],
+    "retainedFailure": "First edited guide build failed because bare generic type syntax parsed as HTML. Fixed inline code formatting and clarified actual runtime named exports; complete build passes. An earlier ignored edit-helper fence syntax error occurred before it changed any guide."
+  },
+  "visualInspections": [
+    "chromium-zh-layers.png",
+    "chromium-en-controls.png"
+  ],
+  "ledger": {
+    "report": {
+      "path": "refactor/.cache/release-ledger-lq4xtG/report.json",
+      "sha256": "01c57aa478b0d487b204de3bb9214ad0445829998f1d519b543427a80a04e7ea"
+    },
+    "libraries": [
+      {
+        "name": "artplayer",
+        "fingerprint": "896b9f1f57feb447e9baef3b02c2c04e51b79eadef858b01a921e2b2146ff75a",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ads",
+        "fingerprint": "a7c85c3cbd5893306c50af3e5ab2ae900838633184e2b5509a7790a346e63277",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-ambilight",
+        "fingerprint": "58b3de027f6da9358927a032585af2db0b98ece514263062e61a26c0b0a60d69",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-asr",
+        "fingerprint": "e99563e05cf2fa5cb687bee25bbec5f663dadb39cd7a780ae506121a069f3288",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-audio-track",
+        "fingerprint": "68251599fb975857e5124b3a7804e2e7edbd9de6b3b22eef2882ae9cf38c3560",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-auto-thumbnail",
+        "fingerprint": "fa1ac932fb279f6de85856d98d649ea6b12b39c221a8e54d63d5a46d28ed25eb",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chapter",
+        "fingerprint": "4dcc9e5c4e127edbc17ab1e59e3fb973ac9733125cff744c3031b43b98476e02",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-chromecast",
+        "fingerprint": "e16de620bd4770b4ab717291af29d5a2f450025ae8bdf22815f6efd51e40056e",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku",
+        "fingerprint": "90d09ab98a1ca36575a5ed38332d518c03265bcd4ad95524170394b1e67209c0",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-danmuku-mask",
+        "fingerprint": "71b4367caed8ad8cbe4a171abb3bb4be3955c15dea4694255c1448c85d6dfb17",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-dash-control",
+        "fingerprint": "3f289a02d0f401e796b61c48f1a774a152b3efb5eb8fe3c97f3b0163b2315a42",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-document-pip",
+        "fingerprint": "3507d1d5e0de702173c25a2e5caddac6e245046d9cd1249728b76e6dea9b8b77",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-hls-control",
+        "fingerprint": "3210ec59c5b8440d584d509e214f4021a0a5117639a1e883d617e95e2ac9a49b",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-jassub",
+        "fingerprint": "e0391ecf1e2c9da0a622bb933a857f718bb370ecfb63ecc4b5e3ef1261e84371",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-multiple-subtitles",
+        "fingerprint": "d2b9e3f04560bcb5a5e6028166c7f92d23554290be6ae29fc632bf1eb82d1f87",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vast",
+        "fingerprint": "07e23e4b5ad201e2b33afd0f8b689161c6228d0c0e0621487e48b04457fef766",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-plugin-vtt-thumbnail",
+        "fingerprint": "4a7cbdb38d5d876a68bc74a3a785402a2989b3730638b0654c358275bcffc423",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-canvas",
+        "fingerprint": "3cad2e085d0cf960508f5ed75ed62731c245e741246659a0f882fd73f2ed5430",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-proxy-mediabunny",
+        "fingerprint": "adca4dc42d1a1bfe05ba81ebb397b607eb548ca6ec02856f1312dd41ea96a232",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-iframe",
+        "fingerprint": "a0808c48db68a5d433ebb983348cf28130552e5bea99c38a1335b90b4b302d3c",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      },
+      {
+        "name": "artplayer-tool-thumbnail",
+        "fingerprint": "431eb2caf41a434a8fdb516bf5d73b71df8b4d306530036ead7c1ee460076b81",
+        "build": {
+          "status": "evidence-recorded"
+        },
+        "status": "blocked"
+      }
+    ],
+    "publicationAuthorized": false
+  },
+  "attachments": [
+    {
+      "path": "refactor/.cache/site04-components-validate.mjs",
+      "sha256": "656a0a086d67ca934e0b1bb440956bff3360c54968068041719dfe9cee855101"
+    },
+    {
+      "path": "refactor/.cache/site04-components-probe.js",
+      "sha256": "6dec77f9bab733e5048d086273f96731b175fbfe829b8b9707dbed3e6298d453"
+    },
+    {
+      "path": "refactor/.cache/site04-components/report.json",
+      "sha256": "35f2c1f0f08a17db52a1556e4db95e4071ff111781fe2e79a06f6eabb985791a"
+    },
+    {
+      "path": "refactor/.cache/site04-components-validate.log",
+      "sha256": "723d5519e8356bc327c7fd90a6a327c765a3c9d6c8a3b1d42404f81062638653"
+    },
+    {
+      "path": "refactor/.cache/site04-components-tests.log",
+      "sha256": "9e32d76134f2884d3f692bd3b0252b8f50ff7ce8d2882a118da57d21a632e225"
+    },
+    {
+      "path": "refactor/.cache/site04-components-build-final.log",
+      "sha256": "a394d81e7925261e6fe401960a139c98afe99116e846194a498dc690dec77a3b"
+    },
+    {
+      "path": "refactor/.cache/site04-components-build-complete.log",
+      "sha256": "faf814f158b8b87e05171f057488d3fc13d7eefd2e460437b2534ed38c3abe14"
+    },
+    {
+      "path": "refactor/.cache/site04-components-llm-complete.log",
+      "sha256": "bb7b9d7d63f88e3f88fd6c83b493cc10c3662446df4cc79a14a3a5b0bb7e1e92"
+    },
+    {
+      "path": "refactor/.cache/site04-components-inventory.log",
+      "sha256": "169be07a163f65cc208cda3973ca34be5363158ac310ef6155446dd5bd517870"
+    },
+    {
+      "path": "refactor/.cache/site04-components-ledger.log",
+      "sha256": "bb84de34db2bcbbe0c101a6780066b3fa0405edae148e68263a63ec180f7ff8b"
+    }
+  ]
+}
