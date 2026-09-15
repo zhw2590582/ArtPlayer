@@ -112,7 +112,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-      "sha256Lf": "fe21be05a62d9de9645005aa02790e5fd7e3c3246441f0c22a1279b78581b6b9",
+      "sha256Lf": "3b36c40e62b61f9f1fc7f73b4a776bd6abac0c7fb0227fce04bc8408072f8805",
       "language": "zh",
       "route": "/document/advanced/class.html",
       "headings": [
@@ -145,28 +145,48 @@
           "line": 62
         },
         {
-          "text": "`scheme`",
+          "text": "环境与类型 {#utils-contract}",
           "line": 78
         },
         {
+          "text": "DOM 与样式 {#utils-dom}",
+          "line": 86
+        },
+        {
+          "text": "事件与测量 {#utils-measure}",
+          "line": 105
+        },
+        {
+          "text": "字幕、图片与文件 {#utils-resources}",
+          "line": 115
+        },
+        {
+          "text": "数据、错误与调度 {#utils-data}",
+          "line": 127
+        },
+        {
+          "text": "`scheme`",
+          "line": 164
+        },
+        {
           "text": "`Emitter`",
-          "line": 88
+          "line": 174
         },
         {
           "text": "`validator`",
-          "line": 98
+          "line": 184
         },
         {
           "text": "`kindOf`",
-          "line": 108
+          "line": 194
         },
         {
           "text": "`html`",
-          "line": 118
+          "line": 204
         },
         {
           "text": "`option`",
-          "line": 130
+          "line": 216
         }
       ],
       "runCodeMarkers": 12,
@@ -1110,7 +1130,7 @@
     },
     {
       "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-      "sha256Lf": "10fcd0380ec75f5ba6a2784e6d68b86ee797f8b4a1871f64856de684241c3f84",
+      "sha256Lf": "1b4754150147a338c56de9475dd90065b72279edac2d7a087b53afe017839e4e",
       "language": "en",
       "route": "/document/en/advanced/class.html",
       "headings": [
@@ -1143,28 +1163,48 @@
           "line": 62
         },
         {
-          "text": "`scheme`",
+          "text": "Environment and types {#utils-contract}",
           "line": 78
         },
         {
+          "text": "DOM and styles {#utils-dom}",
+          "line": 86
+        },
+        {
+          "text": "Events and measurement {#utils-measure}",
+          "line": 105
+        },
+        {
+          "text": "Subtitles, images, and files {#utils-resources}",
+          "line": 115
+        },
+        {
+          "text": "Data, errors, and scheduling {#utils-data}",
+          "line": 127
+        },
+        {
+          "text": "`scheme`",
+          "line": 164
+        },
+        {
           "text": "`Emitter`",
-          "line": 88
+          "line": 174
         },
         {
           "text": "`validator`",
-          "line": 98
+          "line": 184
         },
         {
           "text": "`kindOf`",
-          "line": 108
+          "line": 194
         },
         {
           "text": "`html`",
-          "line": 118
+          "line": 204
         },
         {
           "text": "`option`",
-          "line": 130
+          "line": 216
         }
       ],
       "runCodeMarkers": 12,
@@ -4317,11 +4357,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 78
+          "line": 164
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 78
+          "line": 164
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4334,11 +4374,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 88
+          "line": 174
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 88
+          "line": 174
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4351,11 +4391,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 98
+          "line": 184
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 98
+          "line": 184
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4368,11 +4408,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 108
+          "line": 194
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 108
+          "line": 194
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4385,11 +4425,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -4406,7 +4446,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -4414,7 +4454,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -5030,7 +5070,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -5038,7 +5078,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -5811,11 +5851,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5836,11 +5876,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -5960,11 +6000,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12128,11 +12168,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -12373,7 +12413,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -12381,7 +12421,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -13139,11 +13179,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 78
+          "line": 164
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 78
+          "line": 164
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13156,11 +13196,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 88
+          "line": 174
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 88
+          "line": 174
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13173,11 +13213,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 98
+          "line": 184
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 98
+          "line": 184
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13190,11 +13230,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 108
+          "line": 194
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 108
+          "line": 194
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13207,11 +13247,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13228,7 +13268,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -13236,7 +13276,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -13253,11 +13293,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13310,11 +13350,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -13478,7 +13518,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -13486,7 +13526,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -14506,11 +14546,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16238,11 +16278,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -16544,7 +16584,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -16552,7 +16592,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -16765,7 +16805,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/built-in.md",
@@ -16773,7 +16813,7 @@
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 130
+          "line": 216
         },
         {
           "file": "packages/artplayer-vitepress/docs/plugin/danmuku.md",
@@ -17679,11 +17719,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -17805,11 +17845,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -18044,11 +18084,11 @@
       "candidateHeadings": [
         {
           "file": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "line": 118
+          "line": 204
         },
         {
           "file": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "line": 118
+          "line": 204
         }
       ],
       "semanticReviewOwner": "SITE-04"
@@ -19548,10 +19588,10 @@
     {
       "source": "docs/document/404.html",
       "route": "/document/404.html",
-      "sha256Lf": "fac8a2a5152e965bffee5a88076b84f833a219b7f4255ce92d2a93b10e2355fb",
+      "sha256Lf": "f9f3333d4f78131d5caaeb8ad0e1398264b6a479e7f3227b800f362dac0ea521",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19561,10 +19601,10 @@
     {
       "source": "docs/document/advanced/built-in.html",
       "route": "/document/advanced/built-in.html",
-      "sha256Lf": "25794ecbe79571154672a3360d9dfb2c1fa48786b7537eb1cde78ebe3ea1ec41",
+      "sha256Lf": "92558aa00d9e5eaa09ec71837f785dce8fdf1ce48602fd54ab928254591cd3ce",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19574,10 +19614,10 @@
     {
       "source": "docs/document/advanced/class.html",
       "route": "/document/advanced/class.html",
-      "sha256Lf": "ab8387831c7e81f236a906036aca41de3326820a48f4efc6ac9bd521232e8149",
+      "sha256Lf": "fb32dbc11be42d36342b08a2a01f0413551a8f92e91c63a619deca5bd3007390",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19587,10 +19627,10 @@
     {
       "source": "docs/document/advanced/event.html",
       "route": "/document/advanced/event.html",
-      "sha256Lf": "a971cf94ded78e27714be45a4075d197d56b9a8e00c23cc8e99e6286bfbf3d9c",
+      "sha256Lf": "4e626ac4d5b7fa3876051031d1d559426fbe4c8b062c2aa634840a98a6a3b45e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19600,10 +19640,10 @@
     {
       "source": "docs/document/advanced/global.html",
       "route": "/document/advanced/global.html",
-      "sha256Lf": "0eeaa4b3d028d17da4e6db873bbd4debc3472fef120afff0fa2cb9b2948d7028",
+      "sha256Lf": "f98b5c91354c78f212a305df8d9160520a61930d5b967b280abc4f969146b1fc",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19613,10 +19653,10 @@
     {
       "source": "docs/document/advanced/plugin.html",
       "route": "/document/advanced/plugin.html",
-      "sha256Lf": "2cb79cc03928d639d3a30c908e62c9e793194b46acd4674406b9af77e6a95858",
+      "sha256Lf": "c7d313408dca114c053956d91306f124df0de4890779dc7faf6fff636a6469a3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19626,10 +19666,10 @@
     {
       "source": "docs/document/advanced/property.html",
       "route": "/document/advanced/property.html",
-      "sha256Lf": "243ddc18f8fd7bc72865e2d35d35d385ba8d0074711528c94036fea53dfea9f5",
+      "sha256Lf": "84941fe6103e65e9c93bdaa826c4b1ee179c7a06622f9955ecb083125152b540",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19639,10 +19679,10 @@
     {
       "source": "docs/document/component/contextmenu.html",
       "route": "/document/component/contextmenu.html",
-      "sha256Lf": "6674c11af21b611520b795b3b7a0acf3902f0bd853dbc27187ec9a8ba8712ce2",
+      "sha256Lf": "f8e324dc1cfdfc7cdce2e1ce4431d0ba49b8a3b4674cc40214b5b5e9461fed23",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19652,10 +19692,10 @@
     {
       "source": "docs/document/component/controls.html",
       "route": "/document/component/controls.html",
-      "sha256Lf": "9b50623f622a68fdad6cfa98db6baf67a0ed13fed2a3dc35332b208dd3bed57b",
+      "sha256Lf": "9a6d6f4355e54e4ad510645ed341eb3e07d6b9d0e797f2300f5893d37a21e321",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19665,10 +19705,10 @@
     {
       "source": "docs/document/component/layers.html",
       "route": "/document/component/layers.html",
-      "sha256Lf": "aa2ed92bb47a442e8949d9aefaa90aa8abcb7f137a16a4752ee24f5e1b131e8c",
+      "sha256Lf": "5a831b2c4b1657a23c06fc91d7db328e6194b6d69f8868b6b32b70bdf28a4b93",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19678,10 +19718,10 @@
     {
       "source": "docs/document/component/setting.html",
       "route": "/document/component/setting.html",
-      "sha256Lf": "f5f5f21fe70964d5be08d774653f87ee91385c0ec2085b40eb291a7271c7df30",
+      "sha256Lf": "857b432d70a614685fe8b672ac33d95e0ab47399e98b83f16744fdbbbe440a60",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19691,10 +19731,10 @@
     {
       "source": "docs/document/en/advanced/built-in.html",
       "route": "/document/en/advanced/built-in.html",
-      "sha256Lf": "c0d0bc59222d022e99ee2ed5e9281fd8f2fd3b227a554669bbd45a169396ff0d",
+      "sha256Lf": "8d3806b1b32bf623c3c9dd06686f09f6275095bd83efb13f0ae36ff1b307150b",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19704,10 +19744,10 @@
     {
       "source": "docs/document/en/advanced/class.html",
       "route": "/document/en/advanced/class.html",
-      "sha256Lf": "a6e99010924c0d1c3ee2d2a9b1194bb1a169aca89f1ffcea14fadf2939c1a8a5",
+      "sha256Lf": "70d8d136d4de3cfa6bc55e39a397982440a1354fa2fbfb600043eeb76ae2691f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19717,10 +19757,10 @@
     {
       "source": "docs/document/en/advanced/event.html",
       "route": "/document/en/advanced/event.html",
-      "sha256Lf": "f2e1192f6e96c3e48401854cccea9535fe3ef1aa47c0d88a5f8ab9758ea949f4",
+      "sha256Lf": "cae8977621117fd60544434c09708b71c7f56735740880d8b4bb7a57f63bd486",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19730,10 +19770,10 @@
     {
       "source": "docs/document/en/advanced/global.html",
       "route": "/document/en/advanced/global.html",
-      "sha256Lf": "f6d067102f8d986d41a0387246671a110a639ab9aed7ef17f1bccad8191a40f3",
+      "sha256Lf": "35fd1d148b42284410608880fbcf6d08ce7d9605068c19d940d47843a641ee63",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19743,10 +19783,10 @@
     {
       "source": "docs/document/en/advanced/plugin.html",
       "route": "/document/en/advanced/plugin.html",
-      "sha256Lf": "79854a1264faa3201eac740c3f1463981206f6ce01e5f2bb69611a9f05a9648e",
+      "sha256Lf": "6d66f38591dd258c6223f3cc312c9eae7d30827478f3020ce0cfb6c60646b5ab",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19756,10 +19796,10 @@
     {
       "source": "docs/document/en/advanced/property.html",
       "route": "/document/en/advanced/property.html",
-      "sha256Lf": "9dae940e74a1d7a9f917de7a3b5442ba0206f47572dbb7bda99702519969aaab",
+      "sha256Lf": "ff5b4921d4128ac798b0a79eda6b612508c562cd77f31716d7eba005255ff633",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19769,10 +19809,10 @@
     {
       "source": "docs/document/en/component/contextmenu.html",
       "route": "/document/en/component/contextmenu.html",
-      "sha256Lf": "f309950b0e60ba65b8edd4a2bb7d7a415c02f4df026a7793908c7c651aa8e05d",
+      "sha256Lf": "b191c0f2159013128942e554b78b4bd782d738da38c9719cb67293fec48419d4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19782,10 +19822,10 @@
     {
       "source": "docs/document/en/component/controls.html",
       "route": "/document/en/component/controls.html",
-      "sha256Lf": "cb55e93c7aab8a4ea2b53e77a6f9bde65a1e0c31ea5f98c7b221a07338cb6ea7",
+      "sha256Lf": "616282ccffae9fb96a4dc4524bb52369cc9522f5ce1a000f026deca71bd8f643",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19795,10 +19835,10 @@
     {
       "source": "docs/document/en/component/layers.html",
       "route": "/document/en/component/layers.html",
-      "sha256Lf": "cf1f95b961ece17757a17ccaa672eac7404b0d13fa33536939822dce3925ebb0",
+      "sha256Lf": "8312d15e418ee498cf68edcb6d32f7555e67a6020d75c481d53bc259e9a71a7f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19808,10 +19848,10 @@
     {
       "source": "docs/document/en/component/setting.html",
       "route": "/document/en/component/setting.html",
-      "sha256Lf": "acabfe609e54a285ee3845c42cc0e0464c667da942e2dade8939970160866278",
+      "sha256Lf": "59fe70481af00540004df2a88b5d7ca9fed2f42f662f4282293d5d8262b6e28e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19821,10 +19861,10 @@
     {
       "source": "docs/document/en/index.html",
       "route": "/document/en/",
-      "sha256Lf": "0adb780e9251e34b6397825aaf1094973383944dbc0872bdc128a2255cb44fd1",
+      "sha256Lf": "23e306f139405b487d6d6519ce1b559632b8cb10d9c1392a0f06c81f263eb1da",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19834,10 +19874,10 @@
     {
       "source": "docs/document/en/plugin/ads.html",
       "route": "/document/en/plugin/ads.html",
-      "sha256Lf": "ac006ceb72bdb2ee14825dce813bebd84c772a924532aefa7b92e2c97dda7778",
+      "sha256Lf": "045142f521f6d859526620e454cd15611722bc6f3a4d50d8d98a51aa8d962805",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19847,10 +19887,10 @@
     {
       "source": "docs/document/en/plugin/ambilight.html",
       "route": "/document/en/plugin/ambilight.html",
-      "sha256Lf": "da45e6124af9ccbc626990eabd47b4e2200f37ccd1e7d58f1d567cfa9ca1c310",
+      "sha256Lf": "cc4e6415dd447a3666fdb9cc0e064051396faa535cea905940977f56da69e727",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19860,10 +19900,10 @@
     {
       "source": "docs/document/en/plugin/asr.html",
       "route": "/document/en/plugin/asr.html",
-      "sha256Lf": "849f46d3f65578800a8afde44bc83b01c8738e89fa4bd52afbb989372d7c992d",
+      "sha256Lf": "5c00b21a3125993e8cb7e8170b8ac3726415f8941c5e738592d60c7e3390e39c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19873,10 +19913,10 @@
     {
       "source": "docs/document/en/plugin/audio-track.html",
       "route": "/document/en/plugin/audio-track.html",
-      "sha256Lf": "5290e3209233ac5d0c1fc98469f8980dc02a9807106f047ddbd5a9d56230df02",
+      "sha256Lf": "a9ccecea4a76f52663e7cae7f616ea684e95d870d9d61c9145e523d85d5f39df",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19886,10 +19926,10 @@
     {
       "source": "docs/document/en/plugin/auto-thumbnail.html",
       "route": "/document/en/plugin/auto-thumbnail.html",
-      "sha256Lf": "6d0186b844c7839c89a6f6edc7d638338e2ddac4e230224b2f78d482a7ea85d9",
+      "sha256Lf": "0f8b06a6b30a3d5971f90ef4cd1ccdb95865c52dc71e042d0b963911fc9f022e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19899,10 +19939,10 @@
     {
       "source": "docs/document/en/plugin/chapter.html",
       "route": "/document/en/plugin/chapter.html",
-      "sha256Lf": "3d636e6952427a1e80b065824ff27bd6f398a3eae647cc47c22787fba355c7c6",
+      "sha256Lf": "1246f2b4c68f7876394a783bba516b674e1d0144635bb9093d9998e5b0a9a28c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19912,10 +19952,10 @@
     {
       "source": "docs/document/en/plugin/chromecast.html",
       "route": "/document/en/plugin/chromecast.html",
-      "sha256Lf": "fe83837868f5aba3c9e5209aef08b431f5c2b7d6a657eea9d1974dc84d05e904",
+      "sha256Lf": "28951ed2469ce17ebafe28e60727a2d0dd613da75989acf6d59e894e115837c2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19925,10 +19965,10 @@
     {
       "source": "docs/document/en/plugin/danmuku-mask.html",
       "route": "/document/en/plugin/danmuku-mask.html",
-      "sha256Lf": "1fcd2e2de1119e180e965e5d4acbad478de85930a3617d4bf1c257ae52bbd6ad",
+      "sha256Lf": "fad5cf668c3dac148fe3317dc141083744c8682b3f16f0b0123502de1c7ccf69",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19938,10 +19978,10 @@
     {
       "source": "docs/document/en/plugin/danmuku.html",
       "route": "/document/en/plugin/danmuku.html",
-      "sha256Lf": "f13623da40debcf2996722e33e1cf8c2018cd0190ba780cbefb79a5f2645028e",
+      "sha256Lf": "02c55d97b91593115785b7357761546bc77b208e3b7f58a1153782207b1e986f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19951,10 +19991,10 @@
     {
       "source": "docs/document/en/plugin/dash-control.html",
       "route": "/document/en/plugin/dash-control.html",
-      "sha256Lf": "6507e38da7bc792803742b50e5a480ff19de910ede0bd26fbf1f55887dcc0662",
+      "sha256Lf": "9b2122e8dd3044bb55a0aa8a4c194034a3c37ed0c2d234089bf2e209275f3a6e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19964,10 +20004,10 @@
     {
       "source": "docs/document/en/plugin/document-pip.html",
       "route": "/document/en/plugin/document-pip.html",
-      "sha256Lf": "659c9093e3dcad563ca5a597a36ab6ec0c0a2d8859905935006f7b46a3848350",
+      "sha256Lf": "8242b2dfe2b441269baf4048303f86e21c955379cfd8b9811d060f6a8c673ea8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19977,10 +20017,10 @@
     {
       "source": "docs/document/en/plugin/hls-control.html",
       "route": "/document/en/plugin/hls-control.html",
-      "sha256Lf": "e08e00b20601e93953c542c0ca19cbd6233bf9c60c5ca47dcb8bb178c8eeb662",
+      "sha256Lf": "7aeb68d01eca25cc32b4494977768e65ea1312e5a5bd0b00b8c636831de2813e",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -19990,10 +20030,10 @@
     {
       "source": "docs/document/en/plugin/jassub.html",
       "route": "/document/en/plugin/jassub.html",
-      "sha256Lf": "b1f0884a12ed1237794f1ddc637fb7ecd5d23ac9096a4e16ab667320b84d7350",
+      "sha256Lf": "f5ea4489c3e17e9ada6ede8f7a08dad4f52d7e25f6307d1fc1f13becafd7bbf8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20003,10 +20043,10 @@
     {
       "source": "docs/document/en/plugin/multiple-subtitles.html",
       "route": "/document/en/plugin/multiple-subtitles.html",
-      "sha256Lf": "a029c48d5c69dc41bbd5fe260c10ff4177ddae0469290474440c3530b005844a",
+      "sha256Lf": "07fe6784bd981ece24cf0e1092d42330d4ac5f1ee02115107c783290c65ba1d4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20016,10 +20056,10 @@
     {
       "source": "docs/document/en/plugin/vast.html",
       "route": "/document/en/plugin/vast.html",
-      "sha256Lf": "59d55c612ffef0075911d407f2d7df10e84072943a09ef5686ed45182f6e1da5",
+      "sha256Lf": "a0dc5c56588520d26bf3c3c9bbf7f52c613b429e31d7bd96dee0b21d6060fe9a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20029,10 +20069,10 @@
     {
       "source": "docs/document/en/plugin/vtt-thumbnail.html",
       "route": "/document/en/plugin/vtt-thumbnail.html",
-      "sha256Lf": "0c4cbadaf866873a52655c81c3ecc27c4dcbf26a3529bb0a895e99f7121f0852",
+      "sha256Lf": "76a79866b0ba0a79dbf34d625d12e9ff6d3978772ac2294cb1810e85f3e42558",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20042,10 +20082,10 @@
     {
       "source": "docs/document/en/proxy/canvas.html",
       "route": "/document/en/proxy/canvas.html",
-      "sha256Lf": "a6655f9eba568b9e7bcc851a280d4f81e29774d916fd28bc4a9574a87345ba9a",
+      "sha256Lf": "3d8f24b03d2257c5a1765f5103854d159e06ae91e90c2473fc519e039a714dd2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20055,10 +20095,10 @@
     {
       "source": "docs/document/en/proxy/mediabunny.html",
       "route": "/document/en/proxy/mediabunny.html",
-      "sha256Lf": "a8a8fc0d5f3d9d204bd3b82047bf8cfbbc3523236151e5cbf5d52889765534a8",
+      "sha256Lf": "215d998162e020345bf1aa12e173eb1e283b3a2948d1d7e1e15114c74d9e2965",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20068,10 +20108,10 @@
     {
       "source": "docs/document/en/start/i18n.html",
       "route": "/document/en/start/i18n.html",
-      "sha256Lf": "e40f99e32420730df3f8d78f64dde294164ad299ef046a375af92ba46d876be3",
+      "sha256Lf": "f7c62c61dc13dd89770af2e8a9095594ffdb1c250d9f3294a970248dcccf59e4",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20081,10 +20121,10 @@
     {
       "source": "docs/document/en/start/option.html",
       "route": "/document/en/start/option.html",
-      "sha256Lf": "f555535cf0b119f2cb164ed2fe09a9ef10b87903158815fc4b44a83673f49854",
+      "sha256Lf": "ae12274bf65984e33bf3e198011b055d4c348a0f6925b66f444bfd047a9db968",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20094,10 +20134,10 @@
     {
       "source": "docs/document/en/tool/iframe.html",
       "route": "/document/en/tool/iframe.html",
-      "sha256Lf": "4992d2e38ad6c4a445d311655f3117d106089ed15f554b9a15a87ea2e2b0026b",
+      "sha256Lf": "5253a332b6c4e62fc0ba36ef3b699480f6aea98f40efebd40e81c0ec52725d78",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20107,10 +20147,10 @@
     {
       "source": "docs/document/en/tool/thumbnail.html",
       "route": "/document/en/tool/thumbnail.html",
-      "sha256Lf": "07b15b7ad0291645f01d7f6084832cd983dc1513114b68b0e0f4fb4e07176c85",
+      "sha256Lf": "a3712c04aa9fa4121b82927bd2edd574542e68cdbef41866e8f0a9bfb4fd6adb",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20120,10 +20160,10 @@
     {
       "source": "docs/document/index.html",
       "route": "/document/",
-      "sha256Lf": "be2e9009f4b0a947f933721eef470dd9d7e6275a1bda623c16d7198ae9310282",
+      "sha256Lf": "ecf891e8c0cac17a996d73a48e6ced7cecb5966156aba4875e5fd8f2f77c7efa",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20133,10 +20173,10 @@
     {
       "source": "docs/document/plugin/ads.html",
       "route": "/document/plugin/ads.html",
-      "sha256Lf": "2fe2b5bf11fb1807be11b60dd16e9eb6a83774dce160fed2dfe230660a1c8eff",
+      "sha256Lf": "09bb7024c735ce53e5bf8912a971c5a09609e2fbd5276e354f7103e1b0840816",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20146,10 +20186,10 @@
     {
       "source": "docs/document/plugin/ambilight.html",
       "route": "/document/plugin/ambilight.html",
-      "sha256Lf": "2070bcecace2d0c6a31a977c818d2c72e0091c44ddc0e19a9adfe0917f67c834",
+      "sha256Lf": "a0b48a55c9caa841d1b6a36f7790e4c1bde876733098cde7056841b2b808a9a8",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20159,10 +20199,10 @@
     {
       "source": "docs/document/plugin/asr.html",
       "route": "/document/plugin/asr.html",
-      "sha256Lf": "c679600094b1f20d9dbd06889b0251bd46a3d797f2b21d4a014408360502a1bf",
+      "sha256Lf": "5b41640fcb33fb34459bf91f470f17f49e1ee881cf09875683982f4d16382958",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20172,10 +20212,10 @@
     {
       "source": "docs/document/plugin/audio-track.html",
       "route": "/document/plugin/audio-track.html",
-      "sha256Lf": "73d6763a30c4dc0c7aa9db451a4b6bd4b8db3c8e26f609a64cec7d0b635ddbc9",
+      "sha256Lf": "ae1b204be174edc981ea04de5894e9a6025bde4014951bec5f3a3fae7a62ce78",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20185,10 +20225,10 @@
     {
       "source": "docs/document/plugin/auto-thumbnail.html",
       "route": "/document/plugin/auto-thumbnail.html",
-      "sha256Lf": "268b5ea0f81cf0a3636d6fd9d6d2b7d18c1d92f0462a3328ac6a0109fcd83537",
+      "sha256Lf": "85c25d7f5b4e51878f5aba472b04622018ae337cff02802d0c5e1c03f8fbe823",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20198,10 +20238,10 @@
     {
       "source": "docs/document/plugin/chapter.html",
       "route": "/document/plugin/chapter.html",
-      "sha256Lf": "86745468e5f62ca38ae386b88623ea8e82024521ca9ab116dfedc8b38df0550b",
+      "sha256Lf": "63346fb91ca89c9783d067249667f99d0fb3fbdf0d2f35763a746e4963affda2",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20211,10 +20251,10 @@
     {
       "source": "docs/document/plugin/chromecast.html",
       "route": "/document/plugin/chromecast.html",
-      "sha256Lf": "28c068d50950df3d964b3dfcb8fe36ef016ebe891d4b670fd7a8f010e4437a25",
+      "sha256Lf": "734e949eb345fafcefcf47df88e3ba0a7e22fe71c269965b62edfdecdff9aeff",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20224,10 +20264,10 @@
     {
       "source": "docs/document/plugin/danmuku-mask.html",
       "route": "/document/plugin/danmuku-mask.html",
-      "sha256Lf": "f6222384de08f11321e3253aeda5c7c4aa69e1beb2c1bfd33bd638f66951fa38",
+      "sha256Lf": "65fe68ffa3209d4f0bae66db09b6629ef65be6c175d2a4b583971948bda95128",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20237,10 +20277,10 @@
     {
       "source": "docs/document/plugin/danmuku.html",
       "route": "/document/plugin/danmuku.html",
-      "sha256Lf": "38bff426e5ed284f6054b076b98da6125155302828cae2e3ff5c767d777bd39d",
+      "sha256Lf": "e2351f78b1552b893980101b535e976ed2aea40c7fd1c8339be383d2757287de",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20250,10 +20290,10 @@
     {
       "source": "docs/document/plugin/dash-control.html",
       "route": "/document/plugin/dash-control.html",
-      "sha256Lf": "f92643710da23b339e00c7eee16860471d8139e4871fcaa57ba3e4dcfbe7b28f",
+      "sha256Lf": "72ca92e8bc59398f55435a5c43df5b47c0a5736667d8266c1364fbde2cfc5ea0",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20263,10 +20303,10 @@
     {
       "source": "docs/document/plugin/document-pip.html",
       "route": "/document/plugin/document-pip.html",
-      "sha256Lf": "6f2606255ac960ee46464de2f9258dad1642839ac47feb3cd8050dc2c77466d1",
+      "sha256Lf": "0f958b5c90b66fa06bfad2b518eeea89b96390cc32a5a57974891bfae37b9312",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20276,10 +20316,10 @@
     {
       "source": "docs/document/plugin/hls-control.html",
       "route": "/document/plugin/hls-control.html",
-      "sha256Lf": "1bcc921dc2cdf3f707d25d8aa5cba89378962cb1a0f40d6a70aa2b13b55eea04",
+      "sha256Lf": "a4f8f367f498562d08590475875a8d91c340d83fb22cf392380ccfbc35f2d1e1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20289,10 +20329,10 @@
     {
       "source": "docs/document/plugin/jassub.html",
       "route": "/document/plugin/jassub.html",
-      "sha256Lf": "b1a0902daf7ca4ce4bbdde38528b6b58a476e88b917f88bec824ebff82d02267",
+      "sha256Lf": "5b9ae5c00dd980044564c2f55924c3cf097a62663943e088fa4f12c10612c406",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20302,10 +20342,10 @@
     {
       "source": "docs/document/plugin/multiple-subtitles.html",
       "route": "/document/plugin/multiple-subtitles.html",
-      "sha256Lf": "94e69cc3d496baf2c431ff15a01cc68b65e78446b90841e8c6c5a55a3fffdeab",
+      "sha256Lf": "92a428fd4533304e716f20edf278b37cfcaa2aa779512c1d877a1758782aa00c",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20315,10 +20355,10 @@
     {
       "source": "docs/document/plugin/vast.html",
       "route": "/document/plugin/vast.html",
-      "sha256Lf": "400fcf3d11019509bf3918d4d5914a093065ce277445c0a3e5ea4b2d741e1609",
+      "sha256Lf": "dcfd09115751e86c8c77f76bd307574f19b47c75c053312bb743e2b318eb4bbe",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20328,10 +20368,10 @@
     {
       "source": "docs/document/plugin/vtt-thumbnail.html",
       "route": "/document/plugin/vtt-thumbnail.html",
-      "sha256Lf": "e106891230389c69850db217cc46a2778d3097fc8babfdae3eccfefa967be71b",
+      "sha256Lf": "6b9a42c14ff2e5b8b538baa80663e791ec49d511f0cbc523cc4d6683d86ec49d",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20341,10 +20381,10 @@
     {
       "source": "docs/document/proxy/canvas.html",
       "route": "/document/proxy/canvas.html",
-      "sha256Lf": "6308874d4dd736fb55acd9abc8e3c72e904db2dc354be6465f5248fd17384453",
+      "sha256Lf": "b4220b52f99e0709a9f1215753916347f938f80e123c3772edb8dd52f16f313f",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20354,10 +20394,10 @@
     {
       "source": "docs/document/proxy/mediabunny.html",
       "route": "/document/proxy/mediabunny.html",
-      "sha256Lf": "a7a8e13771d21ac565d7bad902fe0d4a2628d87e388adccbb5239bd58d49e3f2",
+      "sha256Lf": "ab96d91cf815263b8371cad229752036ce5abe448cf1da4b86e13a181622c85a",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20367,10 +20407,10 @@
     {
       "source": "docs/document/start/i18n.html",
       "route": "/document/start/i18n.html",
-      "sha256Lf": "2d730d5375219590170a2489e7a23089a2d29e4afbfece0af26b0afff728c5fe",
+      "sha256Lf": "5b4516db7efa932dff9d737451b0df2524916ddc253b9d912a92c28498875bc3",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20380,10 +20420,10 @@
     {
       "source": "docs/document/start/option.html",
       "route": "/document/start/option.html",
-      "sha256Lf": "da0a63b7d6c6b08e092954560645bc607a2e290a0b63c71840513239abe1514e",
+      "sha256Lf": "c119ffed8284decd642d2d16593c1ab0d3d216ad3b85777f6d896a474f743139",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20393,10 +20433,10 @@
     {
       "source": "docs/document/tool/iframe.html",
       "route": "/document/tool/iframe.html",
-      "sha256Lf": "f8c29ae9170d3c796cb17ac3897472f21145e48dd47667f2c4ab9df2aa527e07",
+      "sha256Lf": "bed67d33427173683ab48906708f6214ef79410129e163a3b3ec0db9e8d359aa",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],
@@ -20406,10 +20446,10 @@
     {
       "source": "docs/document/tool/thumbnail.html",
       "route": "/document/tool/thumbnail.html",
-      "sha256Lf": "a212dae390c95d6e1ec1d607ad8041dabd1f8e190b9af2327f9fe6684c92c055",
+      "sha256Lf": "c6cdddb1397ef5a5cc6ca9f87c48f141d1255a83b2d29997656d94c51223ccd1",
       "kind": "generated-docs",
       "scriptSources": [
-        "/document/assets/app.DBmuidjo.js",
+        "/document/assets/app.BkCzoTr1.js",
         "/document/main.js",
         "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8579453810848662"
       ],

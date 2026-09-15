@@ -3,13 +3,13 @@
   "task": "SITE-04",
   "inventory": {
     "path": "refactor/baselines/site-inventory.json",
-    "sha256": "ada7e484d1d751be99fb56a145a6578eb1642a5e3ef9c3ab54aa5e451fd5b2bb"
+    "sha256": "d2716e432d8c41620f75c7596cdd1562345eeb629dc8ffc33c5ae0f4374fdf6f"
   },
-  "reviewedAt": "2026-09-15T23:17:13.870Z",
+  "reviewedAt": "2026-09-15T23:27:14.203Z",
   "counts": {
     "inventoryRecords": 963,
-    "reviewedRecords": 358,
-    "unreviewedRecords": 605
+    "reviewedRecords": 463,
+    "unreviewedRecords": 500
   },
   "note": "Explicit declaration-record semantic mapping, including overload/getter/setter rows and root/runtime aliases. Counts are not overall API or release completion. Recheck affected groups if their source/document hashes drift. Other declarations and inline members are not implicitly covered.",
   "groups": [
@@ -1333,7 +1333,7 @@
         },
         {
           "path": "packages/artplayer-vitepress/docs/advanced/class.md",
-          "sha256": "60827510623121359fe7c44f6c03cee72d978217cc52948dde2a265f5e691edf",
+          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
           "anchor": "html"
         },
         {
@@ -1343,15 +1343,15 @@
         },
         {
           "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
-          "sha256": "611d4f548b3b21a3193033e3c27d01cf42bbb6742e69c57f36a5bb10f81c3daa",
+          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
           "anchor": "html"
         }
       ],
       "evidence": "baselines/site04-template-icons.json",
       "documentHashRevalidation": {
-        "sourceBefore": "de45f5b978a69aaae3b466325ac4dce35bd0dee2",
-        "evidence": "baselines/site04-subtitle.json",
-        "reason": "Whole-guide hash changed for subtitle section only. All content outside that section is byte-identical after LF normalization; source hashes remain unchanged."
+        "sourceBefore": "bd3f3c0689abda6b3f5a40ea30e68ff82e001e78",
+        "evidence": "baselines/site04-utils.json",
+        "reason": "Whole-guide hash changed for utils section only. All content outside it is byte-identical after LF normalization; source hashes remain unchanged."
       }
     },
     {
@@ -3355,6 +3355,887 @@
         }
       ],
       "evidence": "baselines/site04-subtitle.json"
+    },
+    {
+      "id": "utils",
+      "status": "semantic-reviewed",
+      "conclusion": "All50 utility members in root/runtime plus structural input helpers and constructor views: import-time UA heuristics; native DOM/string conversion, exact returns and failures; styles, event paths and measurements; subtitle conversions, caller-owned URLs/scaled images, download limitations; own descriptors/deep-merge reference and array rules, formatting/errors, catch duck typing, timer receivers/returns/reentry. Utility resources are not player-owned. No physical safe-area, cross-origin image or browser download completion claim.",
+      "records": [
+        {
+          "id": "packages/artplayer/public/artplayer.ts#Artplayer.utils@45",
+          "file": "packages/artplayer/public/artplayer.ts",
+          "declaration": "Artplayer",
+          "name": "utils",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/runtime.ts#ArtplayerConstructor.utils@113",
+          "file": "packages/artplayer/public/runtime.ts",
+          "declaration": "ArtplayerConstructor",
+          "name": "utils",
+          "line": 113
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#StyledElement.style@1",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "StyledElement",
+          "name": "style",
+          "line": 1
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#EventPathSource.target@3",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "EventPathSource",
+          "name": "target",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#EventPathSource.composedPath@4",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "EventPathSource",
+          "name": "composedPath",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.isBrowser@9",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "isBrowser",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.userAgent@10",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "userAgent",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.isMobile@11",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "isMobile",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.isSafari@12",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "isSafari",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.isIOS@13",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "isIOS",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.isIOS13@14",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "isIOS13",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.query@15",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "query",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.queryAll@16",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "queryAll",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.addClass@17",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "addClass",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.removeClass@18",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "removeClass",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.hasClass@19",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "hasClass",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.append@20",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "append",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.remove@21",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "remove",
+          "line": 21
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.replaceElement@22",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "replaceElement",
+          "line": 22
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.siblings@23",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "siblings",
+          "line": 23
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.inverseClass@24",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "inverseClass",
+          "line": 24
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.createElement@25",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "createElement",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.setStyle@29",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "setStyle",
+          "line": 29
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.setStyles@30",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "setStyles",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.getStyle@31",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "getStyle",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.setStyleText@36",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "setStyleText",
+          "line": 36
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.getRect@37",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "getRect",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.tooltip@38",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "tooltip",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.isInViewport@39",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "isInViewport",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.includeFromEvent@40",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "includeFromEvent",
+          "line": 40
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.getSafeAreaInsets@41",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "getSafeAreaInsets",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.srtToVtt@42",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "srtToVtt",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.vttToBlob@43",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "vttToBlob",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.assToVtt@44",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "assToVtt",
+          "line": 44
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.getExt@45",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "getExt",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.download@46",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "download",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.loadImg@47",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "loadImg",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.errorHandle@48",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "errorHandle",
+          "line": 48
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.silencePromise@49",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "silencePromise",
+          "line": 49
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.def@50",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "def",
+          "line": 50
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.has@51",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "has",
+          "line": 51
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.get@52",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "get",
+          "line": 52
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.mergeDeep@53",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "mergeDeep",
+          "line": 53
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.sleep@54",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "sleep",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.debounce@56",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "debounce",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.throttle@57",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "throttle",
+          "line": 57
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.clamp@58",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "clamp",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.secondToTime@59",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "secondToTime",
+          "line": 59
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.escape@60",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "escape",
+          "line": 60
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.unescape@61",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "unescape",
+          "line": 61
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.capitalize@62",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "capitalize",
+          "line": 62
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.ArtPlayerError@63",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "ArtPlayerError",
+          "line": 63
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.getIcon@64",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "getIcon",
+          "line": 64
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.getComposedPath@65",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "getComposedPath",
+          "line": 65
+        },
+        {
+          "id": "packages/artplayer/public/runtime/utils.ts#Utils.supportsFlex@66",
+          "file": "packages/artplayer/public/runtime/utils.ts",
+          "declaration": "Utils",
+          "name": "supportsFlex",
+          "line": 66
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.isBrowser@2",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "isBrowser",
+          "line": 2
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.userAgent@3",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "userAgent",
+          "line": 3
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.isMobile@4",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "isMobile",
+          "line": 4
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.isSafari@5",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "isSafari",
+          "line": 5
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.isIOS@6",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "isIOS",
+          "line": 6
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.isIOS13@7",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "isIOS13",
+          "line": 7
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.query@9",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "query",
+          "line": 9
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.queryAll@10",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "queryAll",
+          "line": 10
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.addClass@11",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "addClass",
+          "line": 11
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.removeClass@12",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "removeClass",
+          "line": 12
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.hasClass@13",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "hasClass",
+          "line": 13
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.append@14",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "append",
+          "line": 14
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.remove@15",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "remove",
+          "line": 15
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.replaceElement@16",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "replaceElement",
+          "line": 16
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.siblings@17",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "siblings",
+          "line": 17
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.inverseClass@18",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "inverseClass",
+          "line": 18
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.createElement@19",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "createElement",
+          "line": 19
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.setStyle@20",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "setStyle",
+          "line": 20
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.setStyles@25",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "setStyles",
+          "line": 25
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.getStyle@26",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "getStyle",
+          "line": 26
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.setStyleText@30",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "setStyleText",
+          "line": 30
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.getRect@31",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "getRect",
+          "line": 31
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.tooltip@32",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "tooltip",
+          "line": 32
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.isInViewport@33",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "isInViewport",
+          "line": 33
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.includeFromEvent@34",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "includeFromEvent",
+          "line": 34
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.getSafeAreaInsets@35",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "getSafeAreaInsets",
+          "line": 35
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.srtToVtt@37",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "srtToVtt",
+          "line": 37
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.vttToBlob@38",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "vttToBlob",
+          "line": 38
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.assToVtt@39",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "assToVtt",
+          "line": 39
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.getExt@41",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "getExt",
+          "line": 41
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.download@42",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "download",
+          "line": 42
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.loadImg@43",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "loadImg",
+          "line": 43
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.errorHandle@45",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "errorHandle",
+          "line": 45
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.silencePromise@46",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "silencePromise",
+          "line": 46
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.def@47",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "def",
+          "line": 47
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.has@52",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "has",
+          "line": 52
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.get@53",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "get",
+          "line": 53
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.mergeDeep@54",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "mergeDeep",
+          "line": 54
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.sleep@56",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "sleep",
+          "line": 56
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.debounce@58",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "debounce",
+          "line": 58
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.throttle@60",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "throttle",
+          "line": 60
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.clamp@62",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "clamp",
+          "line": 62
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.secondToTime@63",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "secondToTime",
+          "line": 63
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.escape@64",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "escape",
+          "line": 64
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.unescape@65",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "unescape",
+          "line": 65
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.capitalize@66",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "capitalize",
+          "line": 66
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.ArtPlayerError@68",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "ArtPlayerError",
+          "line": 68
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.getIcon@70",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "getIcon",
+          "line": 70
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.getComposedPath@71",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "getComposedPath",
+          "line": 71
+        },
+        {
+          "id": "packages/artplayer/public/utils.ts#Utils.supportsFlex@72",
+          "file": "packages/artplayer/public/utils.ts",
+          "declaration": "Utils",
+          "name": "supportsFlex",
+          "line": 72
+        }
+      ],
+      "sources": [
+        {
+          "path": "packages/artplayer/src/index.ts",
+          "sha256": "20cfe3738b3ce7e11b69721a5f0bdad9db77807417d8e421397a40dfade4c047"
+        },
+        {
+          "path": "packages/artplayer/src/utils/index.ts",
+          "sha256": "5211af833dddb2937d25dcc772740d62f9d5c5039ce5505bffff0796d4afd756"
+        },
+        {
+          "path": "packages/artplayer/src/utils/compatibility.ts",
+          "sha256": "1fd2a5b17ee3245712eda961d3c0a15caf3c428010112e48231890176ce1e5e2"
+        },
+        {
+          "path": "packages/artplayer/src/utils/dom.ts",
+          "sha256": "72f3539dabf296df37ab4cc7ade0c8ac9480f399987101589450c787e7d6719b"
+        },
+        {
+          "path": "packages/artplayer/src/utils/error.ts",
+          "sha256": "ba303c7d4e4228919088f9d608fa364596f5853ee646eda2008deee354866f38"
+        },
+        {
+          "path": "packages/artplayer/src/utils/file.ts",
+          "sha256": "ea71d7fc0e818d473bf5a596211ba9d571e4febdf1878014eadefa8d0a98d4cc"
+        },
+        {
+          "path": "packages/artplayer/src/utils/format.ts",
+          "sha256": "891df5b7542b713aef46bf2b93924f42e68eee574afd802db3e6c62ff2655ede"
+        },
+        {
+          "path": "packages/artplayer/src/utils/property.ts",
+          "sha256": "c737d4582a4382f4038d12dafdf8b43418e508c9b8b859b2f0cc17c20f370343"
+        },
+        {
+          "path": "packages/artplayer/src/utils/subtitle.ts",
+          "sha256": "f058851d11a418e321a8a498472b67fa535fec2c7b5d3df739b6b4f263d00337"
+        },
+        {
+          "path": "packages/artplayer/src/utils/time.ts",
+          "sha256": "b8ce3d50865f6c343e8e3ce9f5c87de565a87b4e9fbcbccbe7030e30e80b93fe"
+        },
+        {
+          "path": "packages/artplayer/src/dom/tree.ts",
+          "sha256": "3bc517ab9fa5317a1445156d53afb27182685eb3b4c0ac2ff41bbde55c9eecb6"
+        },
+        {
+          "path": "packages/artplayer/src/dom/styles.ts",
+          "sha256": "734e0a4e04d666417a18ac09ed6271ee7630c399d52d7f510a1c19fd6e7b3493"
+        },
+        {
+          "path": "packages/artplayer/src/dom/measure.ts",
+          "sha256": "84a599351d26a790c5a8f6e7d271486a0a68d5b58457d8ce754d540b54902b96"
+        },
+        {
+          "path": "packages/artplayer/src/dom/presentation.ts",
+          "sha256": "500bded394579dd8194778f73cc44d0724f0a59cb5400957491928534ed091c6"
+        },
+        {
+          "path": "packages/artplayer/src/dom/event-path.ts",
+          "sha256": "e952ea847a2e844a79c5c1b83035e03917e0294b80b1eb8af3b3bec0d2f7d333"
+        },
+        {
+          "path": "packages/artplayer/src/image/load.ts",
+          "sha256": "b4f1517243249d5fb017b89f993660e8b148906bbf28d08fe5c9f6d3a41e1e88"
+        },
+        {
+          "path": "packages/artplayer/src/style/inject.ts",
+          "sha256": "9cddbe51b5de0da74f27c045ab982b509c3854cc6b81eeb02a6b974914760a4d"
+        },
+        {
+          "path": "packages/artplayer/public/artplayer.ts",
+          "sha256": "26a42ac66811e70f68a8ebe62cbf304eb1993451b3e658961be98e7106162527"
+        },
+        {
+          "path": "packages/artplayer/public/runtime.ts",
+          "sha256": "ec4b1d56993eb482a77eb0f94b701047549d009e6ba6433f27e7d464fef30c2b"
+        },
+        {
+          "path": "packages/artplayer/public/runtime/utils.ts",
+          "sha256": "cab9916f5224a3b047812b9f759cc9cc62105662599744067a6955020ab36916"
+        },
+        {
+          "path": "packages/artplayer/public/utils.ts",
+          "sha256": "494ec447ab467a07ddd7a2c2abf778b3fce69fd28a09aaa8ced9759f8de2e3f6"
+        }
+      ],
+      "docs": [
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "anchor": "utils-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "anchor": "utils-dom"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "anchor": "utils-measure"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "anchor": "utils-resources"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/advanced/class.md",
+          "sha256": "ed2f823700ddac69a625514cb688fcb0124a2d42db51bac438c7e4cfca255c1d",
+          "anchor": "utils-data"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "anchor": "utils-contract"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "anchor": "utils-dom"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "anchor": "utils-measure"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "anchor": "utils-resources"
+        },
+        {
+          "path": "packages/artplayer-vitepress/docs/en/advanced/class.md",
+          "sha256": "9c34e8c1efa6eeb118072a41d7cae8b5f9a78dcfe33a3491b7ffb2fcc2aa9bbd",
+          "anchor": "utils-data"
+        }
+      ],
+      "evidence": "baselines/site04-utils.json"
     }
   ]
 }
